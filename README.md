@@ -9,6 +9,9 @@ This package aims to provide support, and with that we mean technical
 support, to the data wranglers trying to get data out of ODK’s new data
 warehouse, ODK Central.
 
+Note: this package is in early stages and not feature complete.
+Contributions and feedback are welcome\!
+
 ## Installation
 
 You can install ruODK from GitHub with:
@@ -92,3 +95,20 @@ data <- tibble::tibble(value=data_raw$value) %>%
       base_url, form_id, uuid, mudmap_photo)
   )
 ```
+
+## Contribute
+
+Contributions through issues and PRs are welcome\!
+
+## Acknowledgements
+
+The Department of Biodiversity, Conservation and Attractions (DBCA)
+respectfully acknowledges Aboriginal people as the traditional owners of
+the lands and waters it manages.
+
+One of the Department’s core missions is to conserve and protect the
+value of the land to the culture and heritage of Aboriginal people.
+
+This software was created both as a contribution to the ODK ecosystem
+and for the conservation of the biodiversity of Western Australia, and
+in doing so, caring for country.
