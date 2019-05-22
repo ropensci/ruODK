@@ -7,8 +7,7 @@
 #' @param pw The ODK Central password,,
 #'           default: Sys.getenv("ODKC_PW").
 #'           Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")
-#' @return A list of two named lists, DataServices and .attrs (Version).
-#'          DataServices contains the dataset definition.
+#' @return A list of two named lists, DataServices and .attrs (Version). DataServices contains the dataset definition.
 #' @importFrom XML xmlParse xmlToList
 #' @importFrom httr add_headers authenticate content GET
 #' @import magrittr

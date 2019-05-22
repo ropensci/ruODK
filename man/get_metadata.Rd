@@ -18,8 +18,7 @@ default: Sys.getenv("ODKC_PW").
 Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 }
 \value{
-A list of two named lists, DataServices and .attrs (Version).
-         DataServices contains the dataset definition.
+A list of two named lists, DataServices and .attrs (Version). DataServices contains the dataset definition.
 }
 \description{
 Retrieve metadata from an OData URL ending in .svc as list of lists

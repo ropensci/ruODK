@@ -18,8 +18,7 @@ default: Sys.getenv("ODKC_PW").
 Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 }
 \value{
-A list of two named lists, value and context.
-         using `tidyr::unnest_wider("element_name")`.
+A list of two named lists, value and context. `value` contains the submissions, which can be "rectangled" using `tidyr::unnest_wider("element_name")`. `context` is the URL of the metadata.
 }
 \description{
 Retrieve /Submissions from an OData URL ending in .svc as list of lists
