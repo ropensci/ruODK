@@ -75,8 +75,6 @@ of `unnest_wider`. The trailing `invisible` is a neutral element to allow
 trailing magrittr pipelines `%>%`.
 
 ```{r transform_data, message=T}
-pth <- "docs/articles/attachments"
-
 fq_data <- tibble::tibble(value=fq_raw$value) %>% 
   tidyr::unnest_wider(value) %>% 
   dplyr::rename(uuid=`__id`) %>% 
@@ -106,9 +104,9 @@ fq_data <- tibble::tibble(value=fq_raw$value) %>%
   dplyr::rename(
     longitude_c4=`...1`, latitude_c4=`...2`, altitude_c4=`...3` ) %>% 
   dplyr::mutate(
-    quadrat_photo = get_attachment(base_url, form_id, uuid, quadrat_photo, local_dir = pth),
-    morphological_type_photo = get_attachment(base_url, form_id, uuid, morphological_type_photo, local_dir = pth),
-    mudmap_photo = get_attachment(base_url, form_id, uuid, mudmap_photo, local_dir = pth)
+    quadrat_photo = get_attachment(base_url, form_id, uuid, quadrat_photo),
+    morphological_type_photo = get_attachment(base_url, form_id, uuid, morphological_type_photo),
+    mudmap_photo = get_attachment(base_url, form_id, uuid, mudmap_photo)
   ) %>% 
   invisible
 ```
