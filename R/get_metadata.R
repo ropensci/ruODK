@@ -13,10 +13,9 @@
 #' @import magrittr
 #' @export
 get_metadata <- function(
-  url,
-  un=Sys.getenv("ODKC_UN"),
-  pw=Sys.getenv("ODKC_PW")
-){
+                         url,
+                         un = Sys.getenv("ODKC_UN"),
+                         pw = Sys.getenv("ODKC_PW")) {
   . <- NULL
   glue::glue("{url}/$metadata") %>%
     httr::GET(

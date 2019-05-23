@@ -5,15 +5,28 @@ Version: 0.1.0
 Author: Florian Mayer, DBCA
 Authors@R: person(c("Florian", "W."), "Mayer", email="Florian.Mayer@dbca.wa.gov.au", role=c("aut", "cre"))
 Maintainer: Florian Mayer <Florian.Mayer@dbca.wa.gov.au>
-Description: Utilities to access data from ODK Central's OData service.
+Description: Utilities to access data from ODK Central's OData service, and to
+    transform them into a tidy format. The outcome should be similar to the
+    manual download from ODK Central, and the export from ODK Briefcase.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1.9000
+Depends:
+    R (>= 2.10)
 Imports:
     dplyr,
+    fs,
     glue,
     httr,
     magrittr,
+    purrr,
     XML
-
+Suggests: 
+    DT,
+    leaflet,
+    knitr,
+    rmarkdown,
+    tibble,
+    tidyr
+VignetteBuilder: knitr

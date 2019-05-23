@@ -1,0 +1,169 @@
+---
+title: "Example"
+author: "Florian Mayer"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(DT)
+library(leaflet)
+library(magrittr)
+library(tibble)
+library(tidyr)
+library(ruODK)
+```
+
+# Configure ruODK
+
+Set your ODK Central username (email) and password as R environment variables, 
+e.g. in your `~/.Rprofile`.
+
+```{r sys_config, eval=F}
+Sys.setenv(ODKC_UN="...@...")
+Sys.setenv(ODKC_PW=".......")
+```
+
+
+# Read data from ODK Central
+If we know our ODK Central URL, the project ID (a number) and the respective
+form ID (an alphanumeric string), we can infer the OData service URL.
+
+Alternatively, the OData service URL is shown in the form's "Submissions" tab >
+"Analyze via OData" on ODK Central.
+
+```{r odk_config}
+# ODK Central credentials
+if (file.exists("~/.Rprofile")) source("~/.Rprofile")
+
+# ODK Central
+odk_central <- "https://sandbox.central.opendatakit.org/"
+project_id <- 14
+form_id <- "build_Flora-Quadrat-0-2_1558575936"
+
+base_url <- glue::glue("{odk_central}v1/projects/{project_id}/forms/")
+data_url <- glue::glue("{base_url}{form_id}.svc")
+```
+
+In our example, the OData service URL is `r data_url`.
+
+```{r load_odata, eval=F}
+fq_meta <- get_metadata(data_url)
+fq_raw <- get_submissions(data_url)
+```
+
+The output of the above code is provided as data objects `fq_meta` and `fq_raw`.
+
+# Rectangle the data
+The nested list of lists must be transformed into a rectangular shape.
+This requires knowledge of the data structure, which can either be looked up
+from the metadata, or by stepwise unnesting the raw data, `fq_raw`.
+
+The vectorised function `get_attachment` downloads and links attachments like 
+photos and other media to a local, relative path.
+
+Feel free to run the code below and comment in or out lines to see the effect
+of `unnest_wider`. The trailing `invisible` is a neutral element to allow 
+trailing magrittr pipelines `%>%`.
+
+```{r transform_data, message=T}
+pth <- "docs/articles/attachments"
+
+fq_data <- tibble::tibble(value=fq_raw$value) %>% 
+  tidyr::unnest_wider(value) %>% 
+  dplyr::rename(uuid=`__id`) %>% 
+  tidyr::unnest_wider(`__system`) %>% 
+  tidyr::unnest_wider(meta) %>% 
+  tidyr::unnest_wider(location) %>% 
+  tidyr::unnest_wider(corner1) %>% 
+  tidyr::unnest_wider(coordinates) %>% 
+  dplyr::rename(longitude=`...1`, latitude=`...2`, altitude=`...3`) %>% 
+  dplyr::select(-"type") %>% 
+  tidyr::unnest_wider(habitat) %>%   
+  tidyr::unnest_wider(vegetation_structure) %>%   
+  tidyr::unnest_wider(perimeter) %>% 
+  tidyr::unnest_wider(corner2) %>% 
+  tidyr::unnest_wider(coordinates) %>%
+  dplyr::select(-"type") %>% 
+  dplyr::rename(
+    longitude_c2=`...1`, latitude_c2=`...2`, altitude_c2=`...3`) %>% 
+  tidyr::unnest_wider(corner3) %>% 
+  tidyr::unnest_wider(coordinates) %>%
+  dplyr::select(-"type") %>% 
+  dplyr::rename(
+    longitude_c3=`...1`, latitude_c3=`...2`, altitude_c3=`...3`) %>% 
+  tidyr::unnest_wider(corner4) %>% 
+  tidyr::unnest_wider(coordinates) %>%
+  dplyr::select(-"type") %>% 
+  dplyr::rename(
+    longitude_c4=`...1`, latitude_c4=`...2`, altitude_c4=`...3` ) %>% 
+  dplyr::mutate(
+    quadrat_photo = get_attachment(base_url, form_id, uuid, quadrat_photo, local_dir = pth),
+    morphological_type_photo = get_attachment(base_url, form_id, uuid, morphological_type_photo, local_dir = pth),
+    mudmap_photo = get_attachment(base_url, form_id, uuid, mudmap_photo, local_dir = pth)
+  ) %>% 
+  invisible
+```
+
+Note: A resized version of the photos in this example live in `docs/articles/attachments`.
+The resizing was done with imagemagick's `mogrify -resize 300x200 *.jpg`.
+
+# Visualise data
+
+## Datatable
+
+```{r vis_data}
+DT::datatable(fq_data)
+```
+
+## Map
+
+Constructing label and popup requires knowledge of the dataset structure.
+
+In absence of locally linked attachments (`get_attachment`), we reconstruct
+the attachment URL, which (until ODK Central allows anonymous media retrieval) 
+fails on the missing authentication.
+
+```{r map_data}
+leaflet::leaflet(width = 800, height = 600) %>%
+  leaflet::addProviderTiles("OpenStreetMap.Mapnik", group = "Place names") %>%
+  leaflet::addProviderTiles("Esri.WorldImagery", group = "Aerial") %>%
+  leaflet::clearBounds() %>% 
+  leaflet::addAwesomeMarkers(
+    data = fq_data,
+    lng = ~longitude, lat = ~latitude,
+    icon = leaflet::makeAwesomeIcon(text = "Q", markerColor = "red"),
+    label = ~glue::glue('{area_name} {encounter_start_datetime}'),
+    popup = ~glue::glue(
+      "<h3>{area_name}</h3>",
+      "Survey start {encounter_start_datetime}</br>",
+      "Reporter {reporter}</br>",
+      "Device {device_id}</br>",
+      "<h5>Site</h5>",
+      '<div><img src="{quadrat_photo}"',
+      ' height="150px" alt="Quadrat photo"></img></div>',
+      "<h5>Mudmap</h5>",
+      '<div><img src="{mudmap_photo}',
+      ' height="150px" alt="Mudmap"></img></div>',
+      "<h5>Habitat</h5>",
+      "Morphological type: {morphological_type}</br>",
+      '<div><img src="{morphological_type_photo}"',
+      'height="150px" alt="Morphological type"></img></div>',
+      "Veg class: {vegclass_placeholder}</br>"
+    ),
+    clusterOptions = leaflet::markerClusterOptions()
+  ) %>%
+  leaflet::addLayersControl(
+    baseGroups = c("Place names", "Aerial"),
+    options = leaflet::layersControlOptions(collapsed = FALSE)
+  )
+```
+

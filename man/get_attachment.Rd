@@ -6,7 +6,7 @@
 \usage{
 get_attachment(base_url, form_id, submission_uuid, attachment_filename,
   local_dir = "attachments", un = Sys.getenv("ODKC_UN"),
-  pw = Sys.getenv("ODKC_PW"))
+  pw = Sys.getenv("ODKC_PW"), verbose = FALSE)
 }
 \arguments{
 \item{base_url}{The ODK Central OData base url,
@@ -14,9 +14,9 @@ e.g. "https://sandbox.central.opendatakit.org/v1/projects/14/forms/"}
 
 \item{form_id}{The ODK form ID, e.g. "build_Flora-Quadrat-0-1_1558330379"}
 
-\item{submission_uuid}{The ODK submission UUID, an MD5 hash}
+\item{submission_uuid}{One or many ODK submission UUIDs, an MD5 hash}
 
-\item{attachment_filename}{The ODK form attachment filename,
+\item{attachment_filename}{One or many ODK form attachment filenames,
 e.g. "1558330537199.jpg"}
 
 \item{local_dir}{The local folder to save the downloaded files to,
@@ -29,10 +29,15 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")}
 \item{pw}{The ODK Central password,,
 default: Sys.getenv("ODKC_PW").
 Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
+
+\item{verbose}{Whether to display debug messages or not (default)}
 }
 \value{
-The relative file path for the downloaded attachment
+The relative file path for the downloaded attachment(s)
 }
 \description{
-Download attachments and return the local path
+This function is vectorised and can handle either one or many records.
+Parameters submission_uuid and attachment_filename accept single or exactly
+the same number of multiple values.
+The other parameters are automatically repeated.
 }

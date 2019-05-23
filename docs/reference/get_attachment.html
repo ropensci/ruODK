@@ -60,6 +60,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/example.html">Example</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -82,12 +94,15 @@
     </div>
 
     
-    <p>Download attachments and return the local path</p>
+    <p>This function is vectorised and can handle either one or many records.
+Parameters submission_uuid and attachment_filename accept single or exactly
+the same number of multiple values.
+The other parameters are automatically repeated.</p>
     
 
     <pre class="usage"><span class='fu'>get_attachment</span>(<span class='no'>base_url</span>, <span class='no'>form_id</span>, <span class='no'>submission_uuid</span>, <span class='no'>attachment_filename</span>,
   <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='st'>"attachments"</span>, <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"ODKC_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"ODKC_PW"</span>))</pre>
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"ODKC_PW"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -103,11 +118,11 @@ e.g. "https://sandbox.central.opendatakit.org/v1/projects/14/forms/"</p></td>
     </tr>
     <tr>
       <th>submission_uuid</th>
-      <td><p>The ODK submission UUID, an MD5 hash</p></td>
+      <td><p>One or many ODK submission UUIDs, an MD5 hash</p></td>
     </tr>
     <tr>
       <th>attachment_filename</th>
-      <td><p>The ODK form attachment filename,
+      <td><p>One or many ODK form attachment filenames,
 e.g. "1558330537199.jpg"</p></td>
     </tr>
     <tr>
@@ -127,11 +142,15 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")</p></td>
 default: Sys.getenv("ODKC_PW").
 Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Whether to display debug messages or not (default)</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The relative file path for the downloaded attachment</p>
+    <p>The relative file path for the downloaded attachment(s)</p>
     
 
   </div>

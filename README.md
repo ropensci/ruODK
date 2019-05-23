@@ -41,9 +41,11 @@ descriptions of the steps below.
   - Collect data for this form on ODK Collect.
   - Get the ODK Central OData service URL.
 
-A note on the included example forms: The `.odkbuild` versions can be
-loaded into [ODK Build](https://build.opendatakit.org/), while the
-`.xml` versions can be imported into ODK Central.
+A note on the [included example
+forms](https://github.com/dbca-wa/ruODK/tree/master/inst/extdata): The
+`.odkbuild` versions can be loaded into [ODK
+Build](https://build.opendatakit.org/), while the `.xml` versions can be
+imported into ODK Central.
 
 ### Configure ruODK
 
@@ -72,52 +74,24 @@ OData feed (such as location and altitude accuracy).
 An [example](https://rpubs.com/florian_mayer/flora_quadrats):
 
 ``` r
+# ODK Central credentials
 if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 
-base_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/"
-form_id <- "build_Flora-Quadrat-0-1_1558330379"
+# ODK Central
+odk_central <- "https://sandbox.central.opendatakit.org/"
+project_id <- 14
+form_id <- "build_Flora-Quadrat-0-2_1558575936"
+
+base_url <- glue::glue("{odk_central}v1/projects/{project_id}/forms/")
 data_url <- glue::glue("{base_url}{form_id}.svc")
 
+# Download from ODK Central
 metadata <- get_metadata(data_url)
-
 data_raw <- get_submissions(data_url)
-data <- tibble::tibble(value=data_raw$value) %>% 
-  tidyr::unnest_wider(value) %>% 
-  dplyr::rename(uuid=`__id`) %>% 
-  tidyr::unnest_wider(`__system`) %>% 
-  tidyr::unnest_wider(meta) %>% 
-  tidyr::unnest_wider(location) %>% 
-  tidyr::unnest_wider(corner1) %>% 
-  tidyr::unnest_wider(coordinates) %>% 
-  dplyr::rename(longitude=`...1`, latitude=`...2`, altitude=`...3`) %>% 
-  dplyr::select(-"type") %>% 
-  tidyr::unnest_wider(habitat) %>%   
-  tidyr::unnest_wider(vegetation_structure) %>%   
-  tidyr::unnest_wider(perimeter) %>% 
-  tidyr::unnest_wider(corner2) %>% 
-  tidyr::unnest_wider(coordinates) %>%
-  dplyr::select(-"type") %>% 
-  dplyr::rename(
-    longitude_c2=`...1`, latitude_c2=`...2`, altitude_c2=`...3`) %>% 
-  tidyr::unnest_wider(corner3) %>% 
-  tidyr::unnest_wider(coordinates) %>%
-  dplyr::select(-"type") %>% 
-  dplyr::rename(
-    longitude_c3=`...1`, latitude_c3=`...2`, altitude_c3=`...3`) %>% 
-  tidyr::unnest_wider(corner4) %>% 
-  tidyr::unnest_wider(coordinates) %>%
-  dplyr::select(-"type") %>% 
-  dplyr::rename(
-    longitude_c4=`...1`, latitude_c4=`...2`, altitude_c4=`...3`) %>%
-  dplyr::mutate(
-    quadrat_photo_local = dl_attachment(
-      base_url, form_id, uuid, quadrat_photo),
-    morphological_type_photo_local = dl_attachment(
-      base_url, form_id, uuid, morphological_type_photo),
-    mudmap_photo_local = dl_attachment(
-      base_url, form_id, uuid, mudmap_photo)
-  )
 ```
+
+See the vignette “Example” for a walk-through plus data tidying and
+visualisation.
 
 ## Contribute
 

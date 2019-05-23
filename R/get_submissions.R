@@ -13,10 +13,9 @@
 #' @export
 #' @return A list of two named lists, value and context. `value` contains the submissions, which can be "rectangled" using `tidyr::unnest_wider("element_name")`. `context` is the URL of the metadata.
 get_submissions <- function(
-  url,
-  un=Sys.getenv("ODKC_UN"),
-  pw=Sys.getenv("ODKC_PW")
-){
+                            url,
+                            un = Sys.getenv("ODKC_UN"),
+                            pw = Sys.getenv("ODKC_PW")) {
   . <- NULL
   glue::glue("{url}/Submissions") %>%
     httr::GET(
