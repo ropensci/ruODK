@@ -116,6 +116,12 @@ The resizing was done with imagemagick's `mogrify -resize 300x200 *.jpg`.
 
 # Visualise data
 
+## Metadata
+```{r view_metadata}
+listviewer::jsonedit(fq_meta)
+```
+
+
 ## Datatable
 
 ```{r vis_data}
