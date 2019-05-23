@@ -1,0 +1,528 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>Spotlighting 0.6</h:title>
+    <model>
+      <instance>
+        <data id="build_Spotlighting-0-6_1558576078">
+          <meta>
+            <instanceID/>
+          </meta>
+          <encounter_start_datetime/>
+          <reporter/>
+          <device_id/>
+          <animal_details>
+            <distance_to_animal_metres/>
+            <bearing_to_animal_degrees/>
+            <bearing_to_road_degrees/>
+            <animal_height_above_ground_estimate_metres/>
+            <species/>
+            <species_id_certainty>
+              very-certain
+            </species_id_certainty>
+            <number_of_individuals>
+              1
+            </number_of_individuals>
+          </animal_details>
+          <surroundings>
+            <tree_species/>
+            <tree_species_other/>
+            <substrate_under_animal/>
+            <site_type/>
+            <animal_activities/>
+          </surroundings>
+          <location_group>
+            <location/>
+            <gps_reference_point/>
+            <distance_odometer/>
+          </location_group>
+          <encounter_end_datetime/>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="English">
+          <text id="/data/animal_details:label">
+            <value>Animal details</value>
+          </text>
+          <text id="/data/animal_details/distance_to_animal_metres:label">
+            <value>Distance to animal [m]</value>
+          </text>
+          <text id="/data/animal_details/distance_to_animal_metres:hint">
+            <value></value>
+          </text>
+          <text id="/data/animal_details/bearing_to_animal_degrees:label">
+            <value>Bearing to animal [deg]</value>
+          </text>
+          <text id="/data/animal_details/bearing_to_animal_degrees:hint">
+            <value>Degrees</value>
+          </text>
+          <text id="/data/animal_details/bearing_to_road_degrees:label">
+            <value>Bearing to road [deg]</value>
+          </text>
+          <text id="/data/animal_details/bearing_to_road_degrees:hint">
+            <value>Degrees</value>
+          </text>
+          <text id="/data/animal_details/animal_height_above_ground_estimate_metres:label">
+            <value>Height above ground [m]</value>
+          </text>
+          <text id="/data/animal_details/animal_height_above_ground_estimate_metres:hint">
+            <value>Estimate to nearest metre</value>
+          </text>
+          <text id="/data/animal_details/species:label">
+            <value>Species</value>
+          </text>
+          <text id="/data/animal_details/species:requiredMsg">
+            <value>Must select species</value>
+          </text>
+          <text id="/data/animal_details/species:option0">
+            <value>Australian Owlet-nightjar</value>
+          </text>
+          <text id="/data/animal_details/species:option1">
+            <value>Barn Owl</value>
+          </text>
+          <text id="/data/animal_details/species:option2">
+            <value>Boobook Owl</value>
+          </text>
+          <text id="/data/animal_details/species:option3">
+            <value>Brush-tailed Phascogale, Wambenger</value>
+          </text>
+          <text id="/data/animal_details/species:option4">
+            <value>Cat</value>
+          </text>
+          <text id="/data/animal_details/species:option5">
+            <value>Chuditch, Western Quoll</value>
+          </text>
+          <text id="/data/animal_details/species:option6">
+            <value>Koomal, Common Brushtail Possum</value>
+          </text>
+          <text id="/data/animal_details/species:option7">
+            <value>Masked Owl</value>
+          </text>
+          <text id="/data/animal_details/species:option8">
+            <value>Ngwayir, Western Ringtail Possum</value>
+          </text>
+          <text id="/data/animal_details/species:option9">
+            <value>Quenda, Southern Brown Bandicoot</value>
+          </text>
+          <text id="/data/animal_details/species:option10">
+            <value>Quokka</value>
+          </text>
+          <text id="/data/animal_details/species:option11">
+            <value>Rabbit</value>
+          </text>
+          <text id="/data/animal_details/species:option12">
+            <value>Red Fox</value>
+          </text>
+          <text id="/data/animal_details/species:option13">
+            <value>Tammar Wallaby</value>
+          </text>
+          <text id="/data/animal_details/species:option14">
+            <value>Tawny Frogmouth</value>
+          </text>
+          <text id="/data/animal_details/species:option15">
+            <value>Western Brush Wallaby</value>
+          </text>
+          <text id="/data/animal_details/species:option16">
+            <value>Western Grey Kangaroo</value>
+          </text>
+          <text id="/data/animal_details/species:option17">
+            <value>Woylie, Brush-tailed Bettong</value>
+          </text>
+          <text id="/data/animal_details/species:option18">
+            <value>Other, specify</value>
+          </text>
+          <text id="/data/animal_details/species_id_certainty:label">
+            <value>Species ID certainty</value>
+          </text>
+          <text id="/data/animal_details/species_id_certainty:option0">
+            <value>Very certain</value>
+          </text>
+          <text id="/data/animal_details/species_id_certainty:option1">
+            <value>Moderately certain</value>
+          </text>
+          <text id="/data/animal_details/species_id_certainty:option2">
+            <value>Uncertain</value>
+          </text>
+          <text id="/data/animal_details/number_of_individuals:label">
+            <value>Number of individuals</value>
+          </text>
+          <text id="/data/surroundings:label">
+            <value>Substrate and surroundings</value>
+          </text>
+          <text id="/data/surroundings/tree_species:label">
+            <value>Tree species</value>
+          </text>
+          <text id="/data/surroundings/tree_species:hint">
+            <value>If animal on tree</value>
+          </text>
+          <text id="/data/surroundings/tree_species:option0">
+            <value>Jarrah</value>
+          </text>
+          <text id="/data/surroundings/tree_species:option1">
+            <value>Marri</value>
+          </text>
+          <text id="/data/surroundings/tree_species:option2">
+            <value>Banksia</value>
+          </text>
+          <text id="/data/surroundings/tree_species:option3">
+            <value>Gastrolobium</value>
+          </text>
+          <text id="/data/surroundings/tree_species:option4">
+            <value>Other, specify</value>
+          </text>
+          <text id="/data/surroundings/tree_species_other:label">
+            <value>Tree species</value>
+          </text>
+          <text id="/data/surroundings/tree_species_other:hint">
+            <value>If not in shortlist</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:label">
+            <value>Animal Position</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:hint">
+            <value>The substrate under the animal</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option0">
+            <value>Tree mature (&gt;40cm dbh)</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option1">
+            <value>Pole (15-40cm dbh, &gt;5m ht)</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option2">
+            <value>Tree sapling (&lt;15cm dbh)</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option3">
+            <value>Over mature tree</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option4">
+            <value>Ground bush</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option5">
+            <value>Ground form</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option6">
+            <value>Flying</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option7">
+            <value>Shrub tall (&gt;1.5m ht)</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option8">
+            <value>Shrub small (&lt;1.5m ht)</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option9">
+            <value>Log spoil or pile</value>
+          </text>
+          <text id="/data/surroundings/substrate_under_animal:option10">
+            <value>Log, stump, or fence post</value>
+          </text>
+          <text id="/data/surroundings/site_type:label">
+            <value>Site type</value>
+          </text>
+          <text id="/data/surroundings/site_type:hint">
+            <value></value>
+          </text>
+          <text id="/data/surroundings/site_type:option0">
+            <value>Unlogged / Control site</value>
+          </text>
+          <text id="/data/surroundings/site_type:option1">
+            <value>Gap</value>
+          </text>
+          <text id="/data/surroundings/site_type:option2">
+            <value>Shelterwood</value>
+          </text>
+          <text id="/data/surroundings/site_type:option3">
+            <value>80s harvested</value>
+          </text>
+          <text id="/data/surroundings/site_type:option4">
+            <value>Gap 2012</value>
+          </text>
+          <text id="/data/surroundings/site_type:option5">
+            <value>Shelterwood 2012</value>
+          </text>
+          <text id="/data/surroundings/animal_activities:label">
+            <value>Animal activities</value>
+          </text>
+          <text id="/data/surroundings/animal_activities:hint">
+            <value>Anything worth mentioning</value>
+          </text>
+          <text id="/data/location_group:label">
+            <value>Location</value>
+          </text>
+          <text id="/data/location_group/location:label">
+            <value>Location of observer</value>
+          </text>
+          <text id="/data/location_group/gps_reference_point:label">
+            <value>GPS reference point</value>
+          </text>
+          <text id="/data/location_group/distance_odometer:label">
+            <value>Distance Odometer</value>
+          </text>
+          <text id="/data/location_group/distance_odometer:hint">
+            <value>Metres driven since start</value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/encounter_start_datetime" type="dateTime" jr:preload="timestamp" jr:preloadParams="start"/>
+      <bind nodeset="/data/reporter" type="string" jr:preload="property" jr:preloadParams="username"/>
+      <bind nodeset="/data/device_id" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+      <bind nodeset="/data/animal_details/distance_to_animal_metres" type="decimal" constraint="(. &gt;= '0')" jr:constraintMsg="Value must be between 0 and anything"/>
+      <bind nodeset="/data/animal_details/bearing_to_animal_degrees" type="int"/>
+      <bind nodeset="/data/animal_details/bearing_to_road_degrees" type="int"/>
+      <bind nodeset="/data/animal_details/animal_height_above_ground_estimate_metres" type="decimal"/>
+      <bind nodeset="/data/animal_details/species" type="select1" required="true()" jr:requiredMsg="jr:itext('/data/animal_details/species:requiredMsg')"/>
+      <bind nodeset="/data/animal_details/species_id_certainty" type="select1"/>
+      <bind nodeset="/data/animal_details/number_of_individuals" type="int" constraint="(. &gt;= '0')" jr:constraintMsg="Value must be between 0 and anything"/>
+      <bind nodeset="/data/surroundings/tree_species" type="select1"/>
+      <bind nodeset="/data/surroundings/tree_species_other" type="string"/>
+      <bind nodeset="/data/surroundings/substrate_under_animal" type="select1"/>
+      <bind nodeset="/data/surroundings/site_type" type="select1"/>
+      <bind nodeset="/data/surroundings/animal_activities" type="string"/>
+      <bind nodeset="/data/location_group/location" type="geopoint" required="true()"/>
+      <bind nodeset="/data/location_group/gps_reference_point" type="string"/>
+      <bind nodeset="/data/location_group/distance_odometer" type="int"/>
+      <bind nodeset="/data/encounter_end_datetime" type="dateTime" jr:preload="timestamp" jr:preloadParams="end"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/animal_details" appearance="field-list">
+      <label ref="jr:itext('/data/animal_details:label')"/>
+      <input ref="/data/animal_details/distance_to_animal_metres">
+        <label ref="jr:itext('/data/animal_details/distance_to_animal_metres:label')"/>
+        <hint ref="jr:itext('/data/animal_details/distance_to_animal_metres:hint')"/>
+      </input>
+      <input ref="/data/animal_details/bearing_to_animal_degrees">
+        <label ref="jr:itext('/data/animal_details/bearing_to_animal_degrees:label')"/>
+        <hint ref="jr:itext('/data/animal_details/bearing_to_animal_degrees:hint')"/>
+      </input>
+      <input ref="/data/animal_details/bearing_to_road_degrees">
+        <label ref="jr:itext('/data/animal_details/bearing_to_road_degrees:label')"/>
+        <hint ref="jr:itext('/data/animal_details/bearing_to_road_degrees:hint')"/>
+      </input>
+      <input ref="/data/animal_details/animal_height_above_ground_estimate_metres">
+        <label ref="jr:itext('/data/animal_details/animal_height_above_ground_estimate_metres:label')"/>
+        <hint ref="jr:itext('/data/animal_details/animal_height_above_ground_estimate_metres:hint')"/>
+      </input>
+      <select1 ref="/data/animal_details/species">
+        <label ref="jr:itext('/data/animal_details/species:label')"/>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option0')"/>
+          <value>25544-australian-owlet-nightjar</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option1')"/>
+          <value>25762-barn-owl</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option2')"/>
+          <value>48016-boobook-owl</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option3')"/>
+          <value>48070-sw-brush-tailed-phascogale</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option4')"/>
+          <value>24041-cat</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option5')"/>
+          <value>24092-western-quoll-chuditch</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option6')"/>
+          <value>48144-common-brushtail-possum</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option7')"/>
+          <value>24855-masked-owl-southwest</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option8')"/>
+          <value>24166-western-ringtail-possum</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option9')"/>
+          <value>24153-southern-brown-bandicoot</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option10')"/>
+          <value>24145-quokka</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option11')"/>
+          <value>24085-rabbit</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option12')"/>
+          <value>24040-red-fox</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option13')"/>
+          <value>48024-tammar-wallaby</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option14')"/>
+          <value>24679-tawny-frogmouth</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option15')"/>
+          <value>48022-western-brush-wallaby</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option16')"/>
+          <value>24132-western-grey-kangaroo</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option17')"/>
+          <value>24162-brush-tailed-bettong</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species:option18')"/>
+          <value>0-other</value>
+        </item>
+      </select1>
+      <select1 ref="/data/animal_details/species_id_certainty">
+        <label ref="jr:itext('/data/animal_details/species_id_certainty:label')"/>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species_id_certainty:option0')"/>
+          <value>very-certain</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species_id_certainty:option1')"/>
+          <value>moderately-certain</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/animal_details/species_id_certainty:option2')"/>
+          <value>uncertain</value>
+        </item>
+      </select1>
+      <input ref="/data/animal_details/number_of_individuals">
+        <label ref="jr:itext('/data/animal_details/number_of_individuals:label')"/>
+      </input>
+    </group>
+    <group ref="/data/surroundings" appearance="field-list">
+      <label ref="jr:itext('/data/surroundings:label')"/>
+      <select1 ref="/data/surroundings/tree_species">
+        <label ref="jr:itext('/data/surroundings/tree_species:label')"/>
+        <hint ref="jr:itext('/data/surroundings/tree_species:hint')"/>
+        <item>
+          <label ref="jr:itext('/data/surroundings/tree_species:option0')"/>
+          <value>5708-jarrah</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/tree_species:option1')"/>
+          <value>17104-marri</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/tree_species:option2')"/>
+          <value>21316-banksia</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/tree_species:option3')"/>
+          <value>22431-gastrolobium</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/tree_species:option4')"/>
+          <value>0-other</value>
+        </item>
+      </select1>
+      <input ref="/data/surroundings/tree_species_other">
+        <label ref="jr:itext('/data/surroundings/tree_species_other:label')"/>
+        <hint ref="jr:itext('/data/surroundings/tree_species_other:hint')"/>
+      </input>
+      <select1 ref="/data/surroundings/substrate_under_animal">
+        <label ref="jr:itext('/data/surroundings/substrate_under_animal:label')"/>
+        <hint ref="jr:itext('/data/surroundings/substrate_under_animal:hint')"/>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option0')"/>
+          <value>tree-mature</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option1')"/>
+          <value>pole</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option2')"/>
+          <value>tree-sapling</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option3')"/>
+          <value>over-mature-tree</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option4')"/>
+          <value>ground-bush</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option5')"/>
+          <value>ground-form</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option6')"/>
+          <value>flying</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option7')"/>
+          <value>shrub-tall</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option8')"/>
+          <value>shrub-small</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option9')"/>
+          <value>log-spoil</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/substrate_under_animal:option10')"/>
+          <value>log-stump-post</value>
+        </item>
+      </select1>
+      <select1 ref="/data/surroundings/site_type">
+        <label ref="jr:itext('/data/surroundings/site_type:label')"/>
+        <hint ref="jr:itext('/data/surroundings/site_type:hint')"/>
+        <item>
+          <label ref="jr:itext('/data/surroundings/site_type:option0')"/>
+          <value>unlogged-control</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/site_type:option1')"/>
+          <value>gap</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/site_type:option2')"/>
+          <value>shelterwood</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/site_type:option3')"/>
+          <value>harvested-80s</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/site_type:option4')"/>
+          <value>gap-2012</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/surroundings/site_type:option5')"/>
+          <value>shelterwood-2012</value>
+        </item>
+      </select1>
+      <input ref="/data/surroundings/animal_activities">
+        <label ref="jr:itext('/data/surroundings/animal_activities:label')"/>
+        <hint ref="jr:itext('/data/surroundings/animal_activities:hint')"/>
+      </input>
+    </group>
+    <group ref="/data/location_group" appearance="field-list">
+      <label ref="jr:itext('/data/location_group:label')"/>
+      <input ref="/data/location_group/location">
+        <label ref="jr:itext('/data/location_group/location:label')"/>
+      </input>
+      <input ref="/data/location_group/gps_reference_point">
+        <label ref="jr:itext('/data/location_group/gps_reference_point:label')"/>
+      </input>
+      <input ref="/data/location_group/distance_odometer">
+        <label ref="jr:itext('/data/location_group/distance_odometer:label')"/>
+        <hint ref="jr:itext('/data/location_group/distance_odometer:hint')"/>
+      </input>
+    </group>
+  </h:body>
+</h:html>

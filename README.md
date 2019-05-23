@@ -25,12 +25,25 @@ remotes::install_github("dbca-wa/ruODK")
 
 ### Setup ODK Central
 
-  - Create an account on an ODK Central instance.
+The ODK Central [user
+manual](https://docs.opendatakit.org/central-using/) provides up-to-date
+descriptions of the steps below.
+
+  - [Create a web user
+    account](https://docs.opendatakit.org/central-users/#creating-a-web-user)
+    on an ODK Central instance. Your username will be an email address.
+  - Create a [project](https://docs.opendatakit.org/central-projects/)
+    and give the web user the relevant permissions.
   - Create a Xform, e.g. using ODK Build, or use the provided example
-    form
-  - Publish the Xform to ODK Central
-  - Collect data for this form on ODK Collect
+    forms.
+  - Publish the [form to ODK
+    Central](https://docs.opendatakit.org/central-forms/).
+  - Collect data for this form on ODK Collect.
   - Get the ODK Central OData service URL.
+
+A note on the included example forms: The `.odkbuild` versions can be
+loaded into [ODK Build](https://build.opendatakit.org/), while the
+`.xml` versions can be imported into ODK Central.
 
 ### Configure ruODK
 
@@ -45,6 +58,16 @@ Sys.setenv(ODKC_PW=".......")
 ```
 
 ### Use ruODK
+
+ruODK aims to provide the same access to your submissions via ODK
+Central’s OData service endpoints as MS Excel, MS PowerBI and Tableau.
+
+At the end of this step, we want to achieve the same outcome as the
+[manual download to
+CSV](https://docs.opendatakit.org/central-submissions/#downloading-submissions-as-csvs).
+
+Caveat: this is a work in progress. Some data doesn’t come through the
+OData feed (such as location and altitude accuracy).
 
 An [example](https://rpubs.com/florian_mayer/flora_quadrats):
 

@@ -1,0 +1,342 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>Flora Quadrat 0.2</h:title>
+    <model>
+      <instance>
+        <data id="build_Flora-Quadrat-0-2_1558575936">
+          <meta>
+            <instanceID/>
+          </meta>
+          <encounter_start_datetime/>
+          <reporter/>
+          <device_id/>
+          <location>
+            <area_name/>
+            <quadrat_photo/>
+            <corner1/>
+          </location>
+          <habitat>
+            <morphological_type/>
+            <morphological_type_photo/>
+          </habitat>
+          <vegetation_structure>
+            <vegclass_placeholder/>
+          </vegetation_structure>
+          <perimeter>
+            <corner2/>
+            <corner3/>
+            <corner4/>
+            <mudmap_photo/>
+          </perimeter>
+          <taxon_encounter jr:template="">
+            <canonical_name/>
+            <photo_in_situ/>
+            <taxon_encounter_location/>
+            <life_form/>
+            <voucher_specimen_barcode/>
+          </taxon_encounter>
+          <encounter_end_datetime/>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="English">
+          <text id="/data/location:label">
+            <value>Location</value>
+          </text>
+          <text id="/data/location/area_name:label">
+            <value>Quadrat name</value>
+          </text>
+          <text id="/data/location/area_name:hint">
+            <value></value>
+          </text>
+          <text id="/data/location/quadrat_photo:label">
+            <value>Quadrat Photo</value>
+          </text>
+          <text id="/data/location/quadrat_photo:hint">
+            <value>Capture a memorable overview</value>
+          </text>
+          <text id="/data/location/corner1:label">
+            <value>Corner 1</value>
+          </text>
+          <text id="/data/location/corner1:hint">
+            <value>First recorded corner of quadrat</value>
+          </text>
+          <text id="/data/habitat:label">
+            <value>Habitat</value>
+          </text>
+          <text id="/data/habitat/morphological_type:label">
+            <value>Morphological Type</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option0">
+            <value>Crest</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option1">
+            <value>Upper Slope</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option2">
+            <value>Mid Slope</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option3">
+            <value>Lower Slope</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option4">
+            <value>Flat</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option5">
+            <value>Open Depression</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option6">
+            <value>Closed Depression</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option7">
+            <value>Hill</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option8">
+            <value>Ridge</value>
+          </text>
+          <text id="/data/habitat/morphological_type_photo:label">
+            <value>Morphological Type Photo</value>
+          </text>
+          <text id="/data/habitat/morphological_type_photo:hint">
+            <value></value>
+          </text>
+          <text id="/data/vegetation_structure:label">
+            <value>Vegetation Structure</value>
+          </text>
+          <text id="/data/vegetation_structure/vegclass_placeholder:label">
+            <value>Vegetation Class placeholder</value>
+          </text>
+          <text id="/data/vegetation_structure/vegclass_placeholder:hint">
+            <value>Imagine fields for NVIS level III here</value>
+          </text>
+          <text id="/data/perimeter:label">
+            <value>Quadrat Perimeter</value>
+          </text>
+          <text id="/data/perimeter/corner2:label">
+            <value>Corner 2</value>
+          </text>
+          <text id="/data/perimeter/corner2:hint">
+            <value>Second recorded corner of quadrat</value>
+          </text>
+          <text id="/data/perimeter/corner3:label">
+            <value>Corner 3</value>
+          </text>
+          <text id="/data/perimeter/corner3:hint">
+            <value>Third recorded corner of quadrat</value>
+          </text>
+          <text id="/data/perimeter/corner4:label">
+            <value>Corner 4</value>
+          </text>
+          <text id="/data/perimeter/corner4:hint">
+            <value>Fourth recorded corner of quadrat</value>
+          </text>
+          <text id="/data/perimeter/mudmap_photo:label">
+            <value>Photo of mudmap</value>
+          </text>
+          <text id="/data/perimeter/mudmap_photo:hint">
+            <value>Hand-drawn mudmap if required</value>
+          </text>
+          <text id="/data/taxon_encounter:label">
+            <value>Plant Record</value>
+          </text>
+          <text id="/data/taxon_encounter/canonical_name:label">
+            <value>Taxon</value>
+          </text>
+          <text id="/data/taxon_encounter/photo_in_situ:label">
+            <value>Photo in situ</value>
+          </text>
+          <text id="/data/taxon_encounter/taxon_encounter_location:label">
+            <value>Plant location</value>
+          </text>
+          <text id="/data/taxon_encounter/taxon_encounter_location:hint">
+            <value>Optional</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:label">
+            <value>Life form</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option0">
+            <value>Tree</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option1">
+            <value>Shrub</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option2">
+            <value>Grass</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option3">
+            <value>Herb</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option4">
+            <value>Sedge</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option5">
+            <value>Aquatic</value>
+          </text>
+          <text id="/data/taxon_encounter/voucher_specimen_barcode:label">
+            <value>Voucher specimen barcode</value>
+          </text>
+          <text id="/data/taxon_encounter/voucher_specimen_barcode:hint">
+            <value></value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/encounter_start_datetime" type="dateTime" jr:preload="timestamp" jr:preloadParams="start"/>
+      <bind nodeset="/data/reporter" type="string" jr:preload="property" jr:preloadParams="username"/>
+      <bind nodeset="/data/device_id" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+      <bind nodeset="/data/location/area_name" type="string"/>
+      <bind nodeset="/data/location/quadrat_photo" type="binary"/>
+      <bind nodeset="/data/location/corner1" type="geopoint" required="true()"/>
+      <bind nodeset="/data/habitat/morphological_type" type="select1"/>
+      <bind nodeset="/data/habitat/morphological_type_photo" type="binary"/>
+      <bind nodeset="/data/vegetation_structure/vegclass_placeholder" type="string"/>
+      <bind nodeset="/data/perimeter/corner2" type="geopoint"/>
+      <bind nodeset="/data/perimeter/corner3" type="geopoint"/>
+      <bind nodeset="/data/perimeter/corner4" type="geopoint"/>
+      <bind nodeset="/data/perimeter/mudmap_photo" type="binary"/>
+      <bind nodeset="/data/taxon_encounter/canonical_name" type="string"/>
+      <bind nodeset="/data/taxon_encounter/photo_in_situ" type="binary"/>
+      <bind nodeset="/data/taxon_encounter/taxon_encounter_location" type="geopoint"/>
+      <bind nodeset="/data/taxon_encounter/life_form" type="select1"/>
+      <bind nodeset="/data/taxon_encounter/voucher_specimen_barcode" type="barcode"/>
+      <bind nodeset="/data/encounter_end_datetime" type="dateTime" jr:preload="timestamp" jr:preloadParams="end"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/location" appearance="field-list">
+      <label ref="jr:itext('/data/location:label')"/>
+      <input ref="/data/location/area_name">
+        <label ref="jr:itext('/data/location/area_name:label')"/>
+        <hint ref="jr:itext('/data/location/area_name:hint')"/>
+      </input>
+      <upload ref="/data/location/quadrat_photo" mediatype="image/*">
+        <label ref="jr:itext('/data/location/quadrat_photo:label')"/>
+        <hint ref="jr:itext('/data/location/quadrat_photo:hint')"/>
+      </upload>
+      <input ref="/data/location/corner1">
+        <label ref="jr:itext('/data/location/corner1:label')"/>
+        <hint ref="jr:itext('/data/location/corner1:hint')"/>
+      </input>
+    </group>
+    <group ref="/data/habitat" appearance="field-list">
+      <label ref="jr:itext('/data/habitat:label')"/>
+      <select1 ref="/data/habitat/morphological_type" appearance="horizontal">
+        <label ref="jr:itext('/data/habitat/morphological_type:label')"/>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option0')"/>
+          <value>crest</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option1')"/>
+          <value>upper-slope</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option2')"/>
+          <value>mid-slope</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option3')"/>
+          <value>lower-slope</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option4')"/>
+          <value>flat</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option5')"/>
+          <value>open-depression</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option6')"/>
+          <value>closed-depression</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option7')"/>
+          <value>hill</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option8')"/>
+          <value>ridge</value>
+        </item>
+      </select1>
+      <upload ref="/data/habitat/morphological_type_photo" mediatype="image/*">
+        <label ref="jr:itext('/data/habitat/morphological_type_photo:label')"/>
+        <hint ref="jr:itext('/data/habitat/morphological_type_photo:hint')"/>
+      </upload>
+    </group>
+    <group ref="/data/vegetation_structure" appearance="field-list">
+      <label ref="jr:itext('/data/vegetation_structure:label')"/>
+      <input ref="/data/vegetation_structure/vegclass_placeholder">
+        <label ref="jr:itext('/data/vegetation_structure/vegclass_placeholder:label')"/>
+        <hint ref="jr:itext('/data/vegetation_structure/vegclass_placeholder:hint')"/>
+      </input>
+    </group>
+    <group ref="/data/perimeter" appearance="field-list">
+      <label ref="jr:itext('/data/perimeter:label')"/>
+      <input ref="/data/perimeter/corner2">
+        <label ref="jr:itext('/data/perimeter/corner2:label')"/>
+        <hint ref="jr:itext('/data/perimeter/corner2:hint')"/>
+      </input>
+      <input ref="/data/perimeter/corner3">
+        <label ref="jr:itext('/data/perimeter/corner3:label')"/>
+        <hint ref="jr:itext('/data/perimeter/corner3:hint')"/>
+      </input>
+      <input ref="/data/perimeter/corner4">
+        <label ref="jr:itext('/data/perimeter/corner4:label')"/>
+        <hint ref="jr:itext('/data/perimeter/corner4:hint')"/>
+      </input>
+      <upload ref="/data/perimeter/mudmap_photo" mediatype="image/*">
+        <label ref="jr:itext('/data/perimeter/mudmap_photo:label')"/>
+        <hint ref="jr:itext('/data/perimeter/mudmap_photo:hint')"/>
+      </upload>
+    </group>
+    <group ref="/data/taxon_encounter">
+      <label ref="jr:itext('/data/taxon_encounter:label')"/>
+      <repeat nodeset="/data/taxon_encounter">
+        <group appearance="field-list">
+          <input ref="/data/taxon_encounter/canonical_name">
+            <label ref="jr:itext('/data/taxon_encounter/canonical_name:label')"/>
+          </input>
+          <upload ref="/data/taxon_encounter/photo_in_situ" mediatype="image/*">
+            <label ref="jr:itext('/data/taxon_encounter/photo_in_situ:label')"/>
+          </upload>
+          <input ref="/data/taxon_encounter/taxon_encounter_location">
+            <label ref="jr:itext('/data/taxon_encounter/taxon_encounter_location:label')"/>
+            <hint ref="jr:itext('/data/taxon_encounter/taxon_encounter_location:hint')"/>
+          </input>
+          <select1 ref="/data/taxon_encounter/life_form">
+            <label ref="jr:itext('/data/taxon_encounter/life_form:label')"/>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option0')"/>
+              <value>tree</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option1')"/>
+              <value>shrub</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option2')"/>
+              <value>grass</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option3')"/>
+              <value>herb</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option4')"/>
+              <value>sedge</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option5')"/>
+              <value>aquatic</value>
+            </item>
+          </select1>
+          <input ref="/data/taxon_encounter/voucher_specimen_barcode">
+            <label ref="jr:itext('/data/taxon_encounter/voucher_specimen_barcode:label')"/>
+            <hint ref="jr:itext('/data/taxon_encounter/voucher_specimen_barcode:hint')"/>
+          </input>
+        </group>
+      </repeat>
+    </group>
+  </h:body>
+</h:html>

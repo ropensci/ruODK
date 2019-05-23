@@ -77,13 +77,17 @@
 <div id="setup-odk-central" class="section level3">
 <h3 class="hasAnchor">
 <a href="#setup-odk-central" class="anchor"></a>Setup ODK Central</h3>
+<p>The ODK Central <a href="https://docs.opendatakit.org/central-using/">user manual</a> provides up-to-date descriptions of the steps below.</p>
 <ul>
-<li>Create an account on an ODK Central instance.</li>
-<li>Create a Xform, e.g. using ODK Build, or use the provided example form</li>
-<li>Publish the Xform to ODK Central</li>
-<li>Collect data for this form on ODK Collect</li>
+<li>
+<a href="https://docs.opendatakit.org/central-users/#creating-a-web-user">Create a web user account</a> on an ODK Central instance. Your username will be an email address.</li>
+<li>Create a <a href="https://docs.opendatakit.org/central-projects/">project</a> and give the web user the relevant permissions.</li>
+<li>Create a Xform, e.g. using ODK Build, or use the provided example forms.</li>
+<li>Publish the <a href="https://docs.opendatakit.org/central-forms/">form to ODK Central</a>.</li>
+<li>Collect data for this form on ODK Collect.</li>
 <li>Get the ODK Central OData service URL.</li>
 </ul>
+<p>A note on the included example forms: The <code>.odkbuild</code> versions can be loaded into <a href="https://build.opendatakit.org/">ODK Build</a>, while the <code>.xml</code> versions can be imported into ODK Central.</p>
 </div>
 <div id="configure-ruodk" class="section level3">
 <h3 class="hasAnchor">
@@ -97,6 +101,9 @@
 <div id="use-ruodk" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-ruodk" class="anchor"></a>Use ruODK</h3>
+<p>ruODK aims to provide the same access to your submissions via ODK Central’s OData service endpoints as MS Excel, MS PowerBI and Tableau.</p>
+<p>At the end of this step, we want to achieve the same outcome as the <a href="https://docs.opendatakit.org/central-submissions/#downloading-submissions-as-csvs">manual download to CSV</a>.</p>
+<p>Caveat: this is a work in progress. Some data doesn’t come through the OData feed (such as location and altitude accuracy).</p>
 <p>An <a href="https://rpubs.com/florian_mayer/flora_quadrats">example</a>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="cf">if</span> (<span class="kw">file.exists</span>(<span class="st">"~/.Rprofile"</span>)) <span class="kw">source</span>(<span class="st">"~/.Rprofile"</span>)</a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
