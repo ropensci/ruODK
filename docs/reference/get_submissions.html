@@ -97,7 +97,8 @@
     <p>Retrieve /Submissions from an OData URL ending in .svc as list of lists</p>
     
 
-    <pre class="usage"><span class='fu'>get_submissions</span>(<span class='no'>url</span>, <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"ODKC_PW"</span>))</pre>
+    <pre class="usage"><span class='fu'>get_submissions</span>(<span class='no'>url</span>, <span class='kw'>sub</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>, <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"ODKC_UN"</span>),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"ODKC_PW"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -105,6 +106,14 @@
     <tr>
       <th>url</th>
       <td><p>The OData URL, ending in .svc, no trailing slash</p></td>
+    </tr>
+    <tr>
+      <th>sub</th>
+      <td><p>The submission EntityType name,
+default: "Submissions" (the main form).
+Change to "Submissions.GROUP_NAME" for repeating form groups.
+The group name can be found in the metadata under
+DataServices.Schema.[EntityType].Name</p></td>
     </tr>
     <tr>
       <th>un</th>

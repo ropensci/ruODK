@@ -9,8 +9,8 @@ This package aims to provide support, and with that we mean technical
 support, to the data wranglers trying to get data out of ODK’s new data
 warehouse, ODK Central.
 
-Note: this package is in early stages and not feature complete.
-Contributions and feedback are welcome\!
+ODK Central OData API specs are
+[here](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
 
 ## Installation
 

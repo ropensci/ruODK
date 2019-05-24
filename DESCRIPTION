@@ -25,6 +25,7 @@ Imports:
 Suggests: 
     DT,
     leaflet,
+    listviewer,
     knitr,
     rmarkdown,
     tibble,
