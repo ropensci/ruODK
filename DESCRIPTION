@@ -1,34 +1,37 @@
-Package: ruODK
 Type: Package
+Package: ruODK
 Title: ODK Central OData Client
-Version: 0.2.0
-Author: Florian Mayer, DBCA
+Version: 0.2.1
 Authors@R: person(c("Florian", "W."), "Mayer", email="Florian.Mayer@dbca.wa.gov.au", role=c("aut", "cre"))
+Author: Florian Mayer, DBCA
 Maintainer: Florian Mayer <Florian.Mayer@dbca.wa.gov.au>
 Description: Utilities to access data from ODK Central's OData service, and to
     transform them into a tidy format. The outcome should be similar to the
     manual download from ODK Central, and the export from ODK Briefcase.
 License: GPL-3
+Depends: 
+    R (>= 3.1)
+Imports: 
+    dplyr (>= 0.8.1),
+    fs (>= 1.3.1),
+    glue (>= 1.3.1),
+    httr (>= 1.3.1),
+    magrittr (>= 1.5),
+    purrr (>= 0.3.2.9000),
+    stringr (>= 1.3.1),
+    tibble (>= 2.1.1.9000),
+    tidyr (>= 0.8.3.9000),
+    XML (>= 3.98.1.16),
+    rlang (>= 0.1.2)
+Suggests: 
+    covr (>= 3.0.1),
+    DT (>= 0.4),
+    knitr (>= 1.22),
+    leaflet (>= 2.0.2),
+    listviewer (>= 1.4.0),
+    rmarkdown (>= 1.12),
+    testthat (>= 2.0.0)
+VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1.9000
-Depends:
-    R (>= 2.10)
-Imports:
-    dplyr,
-    fs,
-    glue,
-    httr,
-    magrittr,
-    purrr,
-    stringr,
-    tibble,
-    tidyr,
-    XML
-Suggests: 
-    DT,
-    leaflet,
-    listviewer,
-    knitr,
-    rmarkdown
-VignetteBuilder: knitr
