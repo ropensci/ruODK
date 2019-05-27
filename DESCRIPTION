@@ -10,7 +10,7 @@ Description: Utilities to access data from ODK Central's OData service, and to
     manual download from ODK Central, and the export from ODK Briefcase.
 License: GPL-3
 Depends: 
-    R (>= 3.1)
+    R (>= 3.2)
 Imports: 
     dplyr (>= 0.8.1),
     fs (>= 1.3.1),
