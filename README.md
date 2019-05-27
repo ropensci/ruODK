@@ -87,7 +87,7 @@ data_url <- glue::glue("{base_url}{form_id}.svc")
 
 # Download from ODK Central
 metadata <- get_metadata(data_url)
-data_raw <- get_submissions(data_url)
+data <- data_url %>% get_submissions() %>% parse_submissions()
 ```
 
 See the vignette “Example” for a walk-through plus data tidying and

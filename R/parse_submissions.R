@@ -1,0 +1,46 @@
+listcol_names <- . %>%
+    dplyr::summarise_all(class) %>%
+    tidyr::gather(variable, class) %>%
+    dplyr::filter(class=="list") %>%
+    magrittr::extract2("variable")
+
+#' Recursively unnest_wide all list columns in a tibble.
+#'
+#' @param nested_tbl A nested tibble
+#' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,
+#'   default: "universal".
+#' @param debug Whether to print debug messages, default: FALSE.
+#' @importFrom glue glue
+#' @importFrom tidyr unnest_wider
+#' @export
+unnest_all <- function(nested_tbl, names_repair="universal", debug=FALSE){
+  for (colname in listcol_names(nested_tbl)){
+  # colname <- listcol_names(nested_tbl)[[1]]
+  if (!(colname %in% names(nested_tbl))){
+    if (debug) message(glue::glue("Skipping renamed column '{colname}'\n"))
+  } else{
+    if (debug) message(glue::glue("Unnesting column '{colname}'\n"))
+    nested_tbl <- tidyr::unnest_wider(nested_tbl, colname, names_repair=names_repair)
+  }
+  }
+  if (length(listcol_names(nested_tbl))>0){
+    if (debug) message("Found more nested columns, unnesting again.\n")
+    nested_tbl <- unnest_all(nested_tbl, names_repair=names_repair, debug=debug)
+  }
+  nested_tbl
+}
+
+#' Parse submissions into a tidy tibble and unnest all levels.
+#'
+#' @param data A nested list of lists as given by `ruODK::get_submissions`.
+#' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,
+#'   default: "universal".
+#' @param debug Whether to print debug messages, default: FALSE.
+#' @importFrom tibble as_tibble
+#' @export
+parse_submissions <- function(data, names_repair="universal", debug=FALSE){
+  . <- NULL
+  data %>%
+    tibble::as_tibble(.) %>%
+    unnest_all(names_repair=names_repair, debug=debug)
+}

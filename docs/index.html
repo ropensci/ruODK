@@ -130,7 +130,7 @@
 <a class="sourceLine" id="cb3-11" title="11"></a>
 <a class="sourceLine" id="cb3-12" title="12"><span class="co"># Download from ODK Central</span></a>
 <a class="sourceLine" id="cb3-13" title="13">metadata &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_metadata.html">get_metadata</a></span>(data_url)</a>
-<a class="sourceLine" id="cb3-14" title="14">data_raw &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_submissions.html">get_submissions</a></span>(data_url)</a></code></pre></div>
+<a class="sourceLine" id="cb3-14" title="14">data &lt;-<span class="st"> </span>data_url <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/get_submissions.html">get_submissions</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/parse_submissions.html">parse_submissions</a></span>()</a></code></pre></div>
 <p>See the vignette “Example” for a walk-through plus data tidying and visualisation.</p>
 </div>
 </div>

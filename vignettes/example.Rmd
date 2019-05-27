@@ -19,7 +19,7 @@ library(leaflet)
 library(listviewer)
 library(magrittr)
 library(tibble)
-library(tidyr)
+# library(tidyr)
 library(ruODK)
 ```
 
@@ -87,8 +87,14 @@ The output of the above code is provided as data objects `fq_raw`
 
 # Rectangle the data
 The nested list of lists must be transformed into a rectangular shape.
+A helper `ruODK::parse_submissions` recursively unnests list columns using
+(tidyr::unnest_wider). Unnamed columns, prominently lat/lon/alt coordinates,
+are named automatically to become unique. The result
+
+The unnesting could also be done manually by building up a pipeline, which
+stepwise unnests each list column.
 This requires knowledge of the data structure, which can either be looked up
-from the metadata, or by stepwise unnesting the raw data, `fq_raw`.
+from the metadata, or by inspecting the raw data, `fq_raw`.
 
 The repeated subgroup `taxon_encounter` is joined with the main observation
 to receive a (repeated) copy of the main observation's values 
@@ -97,66 +103,38 @@ to receive a (repeated) copy of the main observation's values
 The vectorised function `get_attachment` downloads and links attachments like 
 photos and other media to a local, relative path.
 
-Feel free to run the code below and comment in or out lines to see the effect
-of `unnest_wider`. The trailing `invisible` is a neutral element to allow 
-trailing magrittr pipelines `%>%`.
+The trailing `invisible` is a neutral operation to allow trailing magrittr 
+pipelines `%>%` while commenting individual lines of the pipelines in or out.
 
 ```{r transform_data, message=F}
-fq_data <- tibble::tibble(value=fq_raw$value) %>% 
-  tidyr::unnest_wider(value) %>% 
-  dplyr::rename(uuid=`__id`) %>% 
-  tidyr::unnest_wider(`__system`) %>% 
-  tidyr::unnest_wider(meta) %>% 
-  tidyr::unnest_wider(location) %>% 
-  tidyr::unnest_wider(corner1) %>% 
-  tidyr::unnest_wider(coordinates) %>% 
-  dplyr::rename(longitude=`...1`, latitude=`...2`, altitude=`...3`) %>% 
-  dplyr::select(-"type") %>% 
-  tidyr::unnest_wider(habitat) %>%   
-  tidyr::unnest_wider(vegetation_structure) %>%   
-  tidyr::unnest_wider(perimeter) %>% 
-  tidyr::unnest_wider(corner2) %>% 
-  tidyr::unnest_wider(coordinates) %>%
-  dplyr::select(-"type") %>% 
+fq_data <- fq_raw %>% parse_submissions(debug=T) %>% 
   dplyr::rename(
-    longitude_c2=`...1`, latitude_c2=`...2`, altitude_c2=`...3`) %>% 
-  tidyr::unnest_wider(corner3) %>% 
-  tidyr::unnest_wider(coordinates) %>%
-  dplyr::select(-"type") %>% 
-  dplyr::rename(
-    longitude_c3=`...1`, latitude_c3=`...2`, altitude_c3=`...3`) %>% 
-  tidyr::unnest_wider(corner4) %>% 
-  tidyr::unnest_wider(coordinates) %>%
-  dplyr::select(-"type") %>% 
-  dplyr::rename(
-    longitude_c4=`...1`, latitude_c4=`...2`, altitude_c4=`...3` ) %>% 
+    uuid=`.__id`,) %>% 
   dplyr::mutate(
-    quadrat_photo = get_attachment(base_url, form_id, uuid, quadrat_photo),
-    morphological_type_photo = get_attachment(base_url, form_id, uuid, morphological_type_photo),
-    mudmap_photo = get_attachment(base_url, form_id, uuid, mudmap_photo)
+    quadrat_photo = get_attachment
+    (base_url, form_id, uuid, quadrat_photo),
+    morphological_type_photo = get_attachment(
+      base_url, form_id, uuid, morphological_type_photo),
+    mudmap_photo = get_attachment(
+      base_url, form_id, uuid, mudmap_photo)
   ) %>% 
   invisible
 
-fq_data_tae <- tibble::tibble(value=fq_tae$value) %>% 
-  tidyr::unnest_wider(value) %>% 
+fq_data_tae <- fq_tae %>% 
+  parse_submissions(debug=T) %>% 
   dplyr::rename(
-    tae_uuid=`__id`,
-    uuid=`__Submissions-id`) %>% 
-  tidyr::unnest_wider(taxon_encounter_location) %>% 
-  tidyr::unnest_wider(coordinates) %>% 
-  dplyr::rename(
-    taxon_longitude=`...1`, 
-    taxon_latitude=`...2`, 
-    taxon_altitude=`...3`) %>% 
+    tae_uuid=`.__id`,
+    uuid=`.__Submissions.id`) %>%
   dplyr::mutate(
     photo_in_situ = get_attachment(
       base_url, form_id, uuid, photo_in_situ)) %>% 
-  dplyr::left_join(fq_data, by="uuid")
+  dplyr::left_join(fq_data, by="uuid") %>% 
   invisible
 ```
 
-Note: A resized version of the photos in this example live in `docs/articles/attachments`.
-The resizing was done with imagemagick's `mogrify -resize 300x200 *.jpg`.
+Note: A manually resized version of the original photos in this example live in `docs/articles/attachments`. The resizing was done with imagemagick:
+
+`find docs/articles/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {}\;`.
 
 # Visualise data
 
@@ -182,7 +160,7 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::clearBounds() %>% 
   leaflet::addAwesomeMarkers(
     data = fq_data,
-    lng = ~longitude, lat = ~latitude,
+    lng = ~...12, lat = ~...13,
     icon = leaflet::makeAwesomeIcon(text = "Q", markerColor = "red"),
     label = ~glue::glue('{area_name} {encounter_start_datetime}'),
     popup = ~glue::glue(
@@ -217,7 +195,7 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::clearBounds() %>% 
   leaflet::addAwesomeMarkers(
     data = fq_data_tae,
-    lng = ~taxon_longitude, lat = ~taxon_latitude,
+    lng = ~...6, lat = ~...7,
     icon = leaflet::makeAwesomeIcon(text = "T", markerColor = "green"),
     label = ~glue::glue('{canonical_name} {encounter_start_datetime}'),
     popup = ~glue::glue(
