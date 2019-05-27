@@ -3,7 +3,10 @@
 
 # ruODK
 
-[Code on GitHub](https://github.com/dbca-wa/ruODK)
+[ruODK on GitHub](https://github.com/dbca-wa/ruODK) [![Travis build
+status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
+[![Coverage
+status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
 
 Especially in these trying times, it is important to ask: “R U ODK?”
 
@@ -11,8 +14,9 @@ This package aims to provide support, and with that we mean technical
 support, to the data wranglers trying to get data out of ODK’s new data
 warehouse, ODK Central.
 
-ODK Central OData API specs are
-[here](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
+For reference, ODK Central OData API has a fantastic comprehensive,
+interactive
+[documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
 
 ## Installation
 
