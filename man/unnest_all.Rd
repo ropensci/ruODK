@@ -4,7 +4,7 @@
 \alias{unnest_all}
 \title{Recursively unnest_wide all list columns in a tibble.}
 \usage{
-unnest_all(nested_tbl, names_repair = "universal", debug = FALSE)
+unnest_all(nested_tbl, names_repair = "universal", verbose = FALSE)
 }
 \arguments{
 \item{nested_tbl}{A nested tibble}
@@ -12,7 +12,7 @@ unnest_all(nested_tbl, names_repair = "universal", debug = FALSE)
 \item{names_repair}{The argument `names_repair` for `tibble::unnest_wider`,
 default: "universal".}
 
-\item{debug}{Whether to print debug messages, default: FALSE.}
+\item{verbose}{Whether to print verbose messages, default: FALSE.}
 }
 \description{
 Recursively unnest_wide all list columns in a tibble.

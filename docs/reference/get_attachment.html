@@ -100,7 +100,7 @@ the same number of multiple values.
 The other parameters are automatically repeated.</p>
     
 
-    <pre class="usage"><span class='fu'>get_attachment</span>(<span class='no'>base_url</span>, <span class='no'>form_id</span>, <span class='no'>submission_uuid</span>, <span class='no'>attachment_filename</span>,
+    <pre class="usage"><span class='fu'>get_attachment</span>(<span class='no'>data_url</span>, <span class='no'>submission_uuid</span>, <span class='no'>attachment_filename</span>,
   <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='st'>"attachments"</span>, <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"ODKC_UN"</span>),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'>Sys.getenv</span>(<span class='st'>"ODKC_PW"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
@@ -108,13 +108,8 @@ The other parameters are automatically repeated.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>base_url</th>
-      <td><p>The ODK Central OData base url,
-e.g. "https://sandbox.central.opendatakit.org/v1/projects/14/forms/"</p></td>
-    </tr>
-    <tr>
-      <th>form_id</th>
-      <td><p>The ODK form ID, e.g. "build_Flora-Quadrat-0-1_1558330379"</p></td>
+      <th>data_url</th>
+      <td><p>The ODK Central OData url, including the ".svc"</p></td>
     </tr>
     <tr>
       <th>submission_uuid</th>

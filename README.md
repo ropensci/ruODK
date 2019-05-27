@@ -3,6 +3,8 @@
 
 # ruODK
 
+[Code on GitHub](https://github.com/dbca-wa/ruODK)
+
 Especially in these trying times, it is important to ask: “R U ODK?”
 
 This package aims to provide support, and with that we mean technical
@@ -78,19 +80,14 @@ An [example](https://rpubs.com/florian_mayer/flora_quadrats):
 if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 
 # ODK Central
-odk_central <- "https://sandbox.central.opendatakit.org/"
-project_id <- 14
-form_id <- "build_Flora-Quadrat-0-2_1558575936"
-
-base_url <- glue::glue("{odk_central}v1/projects/{project_id}/forms/")
-data_url <- glue::glue("{base_url}{form_id}.svc")
+data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
 
 # Download from ODK Central
 metadata <- get_metadata(data_url)
 data <- data_url %>% get_submissions() %>% parse_submissions()
 ```
 
-See the vignette “Example” for a walk-through plus data tidying and
+See `vignette("example")` for a walk-through with some data
 visualisation.
 
 ## Contribute

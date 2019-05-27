@@ -4,15 +4,12 @@
 \alias{get_attachment}
 \title{Download attachments and return the local path}
 \usage{
-get_attachment(base_url, form_id, submission_uuid, attachment_filename,
+get_attachment(data_url, submission_uuid, attachment_filename,
   local_dir = "attachments", un = Sys.getenv("ODKC_UN"),
   pw = Sys.getenv("ODKC_PW"), verbose = FALSE)
 }
 \arguments{
-\item{base_url}{The ODK Central OData base url,
-e.g. "https://sandbox.central.opendatakit.org/v1/projects/14/forms/"}
-
-\item{form_id}{The ODK form ID, e.g. "build_Flora-Quadrat-0-1_1558330379"}
+\item{data_url}{The ODK Central OData url, including the ".svc"}
 
 \item{submission_uuid}{One or many ODK submission UUIDs, an MD5 hash}
 

@@ -23,6 +23,14 @@ library(tibble)
 library(ruODK)
 ```
 
+This vignette demonstrates `ruODK`'s workflow to extract data from ODK Central's
+OData service endpoint, and to prepare the data and the media attachments for
+further analysis and visualisation.
+
+The demonstrated workflow is roughly equivalent to ODK Central's "Export all data",
+which downloads all submissions and all repeating subgroups as CSV spreadsheets,
+and all media attachments in a local subfolder "attachments".
+
 # Configure ruODK
 
 Set your ODK Central username (email) and password as R environment variables, 
@@ -45,13 +53,8 @@ Alternatively, the OData service URL is shown in the form's "Submissions" tab >
 # ODK Central credentials
 if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 
-# ODK Central
-odk_central <- "https://sandbox.central.opendatakit.org/"
-project_id <- 14
-form_id <- "build_Flora-Quadrat-0-2_1558575936"
-
-base_url <- glue::glue("{odk_central}v1/projects/{project_id}/forms/")
-data_url <- glue::glue("{base_url}{form_id}.svc")
+# ODK Central's OData URL
+data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
 
 data("fq_meta")
 data("fq_raw")
@@ -59,7 +62,7 @@ data("fq_tae")
 ```
 
 In our example, the OData service URL is `r data_url`.
-Let's first get the metadata to discover our data schema.
+Let's first get the metadata to review our data schema.
 
 ```{r load_ometadata, eval=F}
 fq_meta <- get_metadata(data_url)
@@ -86,15 +89,13 @@ The output of the above code is provided as data objects `fq_raw`
 `fq_tae` (repeated group "Taxon Encounter" within a Flora Quadrat).
 
 # Rectangle the data
-The nested list of lists must be transformed into a rectangular shape.
-A helper `ruODK::parse_submissions` recursively unnests list columns using
-(tidyr::unnest_wider). Unnamed columns, prominently lat/lon/alt coordinates,
-are named automatically to become unique. The result
-
-The unnesting could also be done manually by building up a pipeline, which
-stepwise unnests each list column.
-This requires knowledge of the data structure, which can either be looked up
-from the metadata, or by inspecting the raw data, `fq_raw`.
+The function `ruODK::get_submissions` returned the original XML response as a 
+nested list of lists.
+To analyse and visualise the data, this nested list of lists must be transformed 
+into a rectangular shape.
+The function `ruODK::parse_submissions` recursively unnests list columns using
+(tidyr::unnest_wider). Unnamed columns, notably the anonymous lat/lon/alt 
+coordinates, are named automatically to become unique.
 
 The repeated subgroup `taxon_encounter` is joined with the main observation
 to receive a (repeated) copy of the main observation's values 
@@ -106,35 +107,57 @@ photos and other media to a local, relative path.
 The trailing `invisible` is a neutral operation to allow trailing magrittr 
 pipelines `%>%` while commenting individual lines of the pipelines in or out.
 
-```{r transform_data, message=F}
-fq_data <- fq_raw %>% parse_submissions(debug=T) %>% 
+```{r transform_data}
+fq_data <- fq_raw %>% parse_submissions() %>% 
   dplyr::rename(
     uuid=`.__id`,) %>% 
   dplyr::mutate(
-    quadrat_photo = get_attachment
-    (base_url, form_id, uuid, quadrat_photo),
-    morphological_type_photo = get_attachment(
-      base_url, form_id, uuid, morphological_type_photo),
-    mudmap_photo = get_attachment(
-      base_url, form_id, uuid, mudmap_photo)
+    quadrat_photo = get_attachment(data_url, uuid, quadrat_photo),
+    morphological_type_photo = get_attachment(data_url, uuid, morphological_type_photo),
+    mudmap_photo = get_attachment(data_url, uuid, mudmap_photo)
   ) %>% 
   invisible
 
 fq_data_tae <- fq_tae %>% 
-  parse_submissions(debug=T) %>% 
+  parse_submissions() %>% 
   dplyr::rename(
     tae_uuid=`.__id`,
     uuid=`.__Submissions.id`) %>%
   dplyr::mutate(
-    photo_in_situ = get_attachment(
-      base_url, form_id, uuid, photo_in_situ)) %>% 
+    photo_in_situ = get_attachment(data_url, uuid, photo_in_situ)
+  ) %>% 
   dplyr::left_join(fq_data, by="uuid") %>% 
   invisible
 ```
 
-Note: A manually resized version of the original photos in this example live in `docs/articles/attachments`. The resizing was done with imagemagick:
+Note: A manually resized version of the original photos in this example live in
+the package source under 
+[`docs/articles/attachments`](https://github.com/dbca-wa/ruODK/tree/master/docs/articles/attachments). To minimise package size, they were resized with imagemagick:
+`find docs/articles/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} \;`.
 
-`find docs/articles/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {}\;`.
+## DIY rectangling
+The unnesting could also be done manually by building up a pipeline, which
+stepwise unnests each list column.
+This requires knowledge of the data structure, which can either be looked up
+from the metadata, or by inspecting the raw data, `fq_raw`.
+```{r rectangle_diy}
+fq_data_diy <- tibble::tibble(value=fq_raw$value) %>%
+  tidyr::unnest_wider(value) %>% 
+  # 1. find list columns:
+  tidyr::unnest_wider(`__system`) %>% 
+  tidyr::unnest_wider(meta) %>% 
+  # add more lines here to unnest other form groups
+  #
+  # 2. rename column names
+  dplyr::rename(
+    uuid=`__id`
+    # add more columns, e.g. 
+    # longitude=`...1`, latitude=`...2`, altitude=`...3`
+    ) %>%
+  # 3. handle media attachments
+  # dplyr::mutate(photo_field1 = get_attachment(data_url, uuid, photo_field1)) %>% 
+  invisible
+```
 
 # Visualise data
 
@@ -217,3 +240,12 @@ leaflet::leaflet(width = 800, height = 600) %>%
   )
 ```
 
+# Export
+The rectangled data can now be exported. e.g. to CSV.
+Note that all list columns must be either unnested or dropped before exporting to
+CSV.
+
+```{r export, eval=F}
+fq_data %>% readr::write_csv("flora_quadrats.csv")
+fq_data_tae %>% readr::write_csv("flora_quadrats_taxon_encounters.csv")
+```

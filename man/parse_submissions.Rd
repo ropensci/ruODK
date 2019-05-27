@@ -4,7 +4,7 @@
 \alias{parse_submissions}
 \title{Parse submissions into a tidy tibble and unnest all levels.}
 \usage{
-parse_submissions(data, names_repair = "universal", debug = FALSE)
+parse_submissions(data, names_repair = "universal", verbose = FALSE)
 }
 \arguments{
 \item{data}{A nested list of lists as given by `ruODK::get_submissions`.}
@@ -12,7 +12,7 @@ parse_submissions(data, names_repair = "universal", debug = FALSE)
 \item{names_repair}{The argument `names_repair` for `tibble::unnest_wider`,
 default: "universal".}
 
-\item{debug}{Whether to print debug messages, default: FALSE.}
+\item{verbose}{Whether to print verbose messages, default: FALSE.}
 }
 \description{
 Parse submissions into a tidy tibble and unnest all levels.

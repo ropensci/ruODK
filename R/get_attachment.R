@@ -5,9 +5,7 @@
 #' the same number of multiple values.
 #' The other parameters are automatically repeated.
 #'
-#' @param base_url The ODK Central OData base url,
-#'                 e.g. "https://sandbox.central.opendatakit.org/v1/projects/14/forms/"
-#' @param form_id The ODK form ID, e.g. "build_Flora-Quadrat-0-1_1558330379"
+#' @param data_url The ODK Central OData url, including the ".svc"
 #' @param submission_uuid One or many ODK submission UUIDs, an MD5 hash
 #' @param attachment_filename One or many ODK form attachment filenames,
 #'                            e.g. "1558330537199.jpg"
@@ -25,10 +23,9 @@
 #' @importFrom fs dir_create dir_exists path_expand
 #' @importFrom httr authenticate GET write_disk
 #' @importFrom purrr pmap
+#' @importFrom stringr str_remove_all
 #' @export
-get_attachment <- function(
-                           base_url,
-                           form_id,
+get_attachment <- function(data_url,
                            submission_uuid,
                            attachment_filename,
                            local_dir = "attachments",
@@ -37,14 +34,14 @@ get_attachment <- function(
                            verbose = FALSE) {
   # Create local destination dir attachments/uuid
   dest_dir <- fs::path(local_dir, submission_uuid)
-  if (verbose == TRUE) message(glue::glue("Using local directory: {dest_dir}\n\n"))
+  if (verbose == TRUE) message(glue::glue("Using local directory: {dest_dir}\n"))
   fs::dir_create(dest_dir)
 
   dest_file <- fs::path(dest_dir, attachment_filename)
 
   source_url <- glue::glue(
-    "{base_url}{form_id}/submissions/{submission_uuid}/",
-    "attachments/{attachment_filename}"
+    "{stringr::str_remove_all(data_url, '.svc')}/",
+    "submissions/{submission_uuid}/attachments/{attachment_filename}"
   )
 
   get_one_attachment <- function(pth, fn, src, un, pw) {
@@ -55,7 +52,7 @@ get_attachment <- function(
         httr::write_disk(pth, overwrite = T)
       )
     }
-    if (verbose == TRUE) message(glue::glue("Saved {pth}\n\n"))
+    if (verbose == TRUE) message(glue::glue("Saved {pth}\n"))
     return(pth %>% as.character())
   }
 
