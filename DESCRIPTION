@@ -22,6 +22,7 @@ Imports:
     tibble (>= 2.1),
     tidyr (>= 0.8.3.9000),
     XML (>= 3.98.1.16),
+    xml2 (>= 1.2.0),
     rlang (>= 0.1.2)
 Suggests: 
     covr (>= 3.0.1),
