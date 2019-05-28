@@ -27,6 +27,7 @@ Suggests:
     covr (>= 3.0.1),
     DT (>= 0.4),
     knitr (>= 1.22),
+    ggplot2 (>= 3.1.0),
     leaflet (>= 2.0.2),
     listviewer (>= 1.4.0),
     rmarkdown (>= 1.12),

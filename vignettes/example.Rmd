@@ -20,6 +20,9 @@ library(listviewer)
 library(magrittr)
 library(tibble)
 # library(tidyr)
+library(knitr)
+library(dplyr)
+library(ggplot2)
 library(ruODK)
 ```
 
@@ -97,20 +100,32 @@ The function `ruODK::parse_submissions` recursively unnests list columns using
 (tidyr::unnest_wider). Unnamed columns, notably the anonymous lat/lon/alt 
 coordinates, are named automatically to become unique.
 
-The repeated subgroup `taxon_encounter` is joined with the main observation
-to receive a (repeated) copy of the main observation's values 
-(such as observation time and habitat description).
+In this example, we clean up the output further by renaming some columns, notably
+we call the submission UUID `uuid`, and rename the main coordinates from 
+`...12` and `...13` to `longitude` and `latitude`.
 
 The vectorised function `get_attachment` downloads and links attachments like 
-photos and other media to a local, relative path.
+photos and other media to a local, relative path. This will take some time
+during the first run; once the files exist locally, the download will be skipped.
 
 The trailing `invisible` is a neutral operation to allow trailing magrittr 
 pipelines `%>%` while commenting individual lines of the pipelines in or out.
 
-```{r transform_data}
-fq_data <- fq_raw %>% parse_submissions() %>% 
+The repeated subgroup `taxon_encounter` is joined with the main observation
+to receive a (repeated) copy of the main observation's values 
+(such as observation time and habitat description).
+The join benefits from the manually renamed `uuid` columns in either tibble.
+
+For clarity, we enable verbose messages from `parse_submissions` 
+and preserve the message output in the code chunk options with `message=TRUE`.
+
+```{r transform_data, message=TRUE}
+fq_data <- fq_raw %>% parse_submissions(verbose=TRUE) %>% 
   dplyr::rename(
-    uuid=`.__id`,) %>% 
+    uuid=`.__id`,
+    longitude=`...12`,
+    latitude=`...13`
+    ) %>% 
   dplyr::mutate(
     quadrat_photo = get_attachment(data_url, uuid, quadrat_photo),
     morphological_type_photo = get_attachment(data_url, uuid, morphological_type_photo),
@@ -119,7 +134,7 @@ fq_data <- fq_raw %>% parse_submissions() %>%
   invisible
 
 fq_data_tae <- fq_tae %>% 
-  parse_submissions() %>% 
+  parse_submissions(verbose=TRUE) %>% 
   dplyr::rename(
     tae_uuid=`.__id`,
     uuid=`.__Submissions.id`) %>%
@@ -160,21 +175,21 @@ fq_data_diy <- tibble::tibble(value=fq_raw$value) %>%
 ```
 
 # Visualise data
+This section provides some examples of standard data visualisations.
 
 ## Datatable
+Package `DT` provides an interactive (and searchable) datatable.
 
 ```{r vis_data}
 DT::datatable(fq_data)
 DT::datatable(fq_data_tae)
+DT::datatable(head(fq_data_diy))
 ```
 
 ## Map
+Package `leaflet` provides interactive maps.
 
 Constructing label and popup requires knowledge of the dataset structure.
-
-In absence of locally linked attachments (`get_attachment`), we reconstruct
-the attachment URL, which (until ODK Central allows anonymous media retrieval) 
-fails on the missing authentication.
 
 ```{r map_data}
 leaflet::leaflet(width = 800, height = 600) %>%
@@ -183,7 +198,7 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::clearBounds() %>% 
   leaflet::addAwesomeMarkers(
     data = fq_data,
-    lng = ~...12, lat = ~...13,
+    lng = ~longitude, lat = ~latitude,
     icon = leaflet::makeAwesomeIcon(text = "Q", markerColor = "red"),
     label = ~glue::glue('{area_name} {encounter_start_datetime}'),
     popup = ~glue::glue(
@@ -238,6 +253,58 @@ leaflet::leaflet(width = 800, height = 600) %>%
     baseGroups = c("Place names", "Aerial"),
     options = leaflet::layersControlOptions(collapsed = FALSE)
   )
+```
+
+## Summarising data
+The data tibbles are now "tidy" for exploratory data analysis.
+See Hadley Wickam's 
+[R for Data Science](https://r4ds.had.co.nz/exploratory-data-analysis.html)
+for more background.
+
+```{r eda, fig.height=5, fig.width=7}
+# How many submissions per device?
+fq_data %>% 
+  dplyr::group_by(instanceID) %>% 
+  dplyr::tally() %>% 
+  knitr::kable()
+
+# How many species sightings per life form?
+fq_data_tae %>% 
+  dplyr::group_by(life_form) %>% 
+  dplyr::tally() %>% 
+  knitr::kable()
+
+# GGplot of a pivot table
+fq_data_tae %>% 
+  dplyr::group_by(life_form) %>% 
+  dplyr::tally() %>% 
+  ggplot2::ggplot(ggplot2::aes(x=life_form, y=n)) + 
+  ggplot2::labs(
+    title="Title", 
+    subtitle="Subtitle", 
+    x="Life form", 
+    y="Abundance") +
+  ggplot2::geom_point() + 
+  ggplot2::theme_classic()
+
+# GGplot with groups
+fq_data_tae %>% 
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x=encounter_start_datetime, 
+      y=canonical_name, 
+      colour=life_form,
+      shape=instanceID)) + 
+  ggplot2::labs(
+    title="Title", 
+    subtitle="Subtitle", 
+    x="Observation date", 
+    y="Species", 
+    colour="Life form",
+    shape="Data collection device") +
+  ggplot2::geom_point() + 
+  ggplot2::theme_classic() + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 # Export

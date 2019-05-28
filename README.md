@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ruODK
+# ruODK <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 
 [ruODK on GitHub](https://github.com/dbca-wa/ruODK) [![Travis build
 status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
