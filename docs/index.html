@@ -76,8 +76,8 @@
 </h1></div>
 
 <p>Especially in these trying times, it is important to ask: “R U ODK?”</p>
-<p>This package aims to provide support, and with that we mean technical support, to the data wranglers trying to get data out of ODK’s new data warehouse, ODK Central.</p>
-<p>For reference, ODK Central OData API has a fantastic comprehensive, interactive <a href="https://odkcentral.docs.apiary.io/#reference/odata-endpoints">documentation</a>.</p>
+<p>ODK Central provides data through an OData API, which has a comprehensive and interactive <a href="https://odkcentral.docs.apiary.io/#reference/odata-endpoints">documentation</a>.</p>
+<p>This package aims to provide an automatable, reproducible way to retrieve data from ODK Central’s OData API in the R ecosystem.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -88,9 +88,10 @@
 <div id="use" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use" class="anchor"></a>Use</h2>
-<div id="setup-odk-central" class="section level3">
+<div id="set-up-odk-central" class="section level3">
 <h3 class="hasAnchor">
-<a href="#setup-odk-central" class="anchor"></a>Setup ODK Central</h3>
+<a href="#set-up-odk-central" class="anchor"></a>Set up ODK Central</h3>
+<p>First, we need some data to play with!</p>
 <p>The ODK Central <a href="https://docs.opendatakit.org/central-using/">user manual</a> provides up-to-date descriptions of the steps below.</p>
 <ul>
 <li>
@@ -98,17 +99,18 @@
 <li>Create a <a href="https://docs.opendatakit.org/central-projects/">project</a> and give the web user the relevant permissions.</li>
 <li>Create a Xform, e.g. using ODK Build, or use the provided example forms.</li>
 <li>Publish the <a href="https://docs.opendatakit.org/central-forms/">form to ODK Central</a>.</li>
-<li>Collect data for this form on ODK Collect.</li>
-<li>Get the ODK Central OData service URL.</li>
+<li>Collect some data for this form on ODK Collect and let ODK Collect submit the finalised forms to ODK Central.</li>
+<li>Get the ODK Central OData service URL for the form.</li>
 </ul>
 <p>A note on the <a href="https://github.com/dbca-wa/ruODK/tree/master/inst/extdata">included example forms</a>: The <code>.odkbuild</code> versions can be loaded into <a href="https://build.opendatakit.org/">ODK Build</a>, while the <code>.xml</code> versions can be imported into ODK Central.</p>
 </div>
 <div id="configure-ruodk" class="section level3">
 <h3 class="hasAnchor">
 <a href="#configure-ruodk" class="anchor"></a>Configure ruODK</h3>
-<ul>
-<li>Set your ODK Central username (email) and password as R environment variables, e.g. in your <code>~/.Rprofile</code>. Example:</li>
-</ul>
+<p>For now, ODK Central supports BasicAuth (username and password).</p>
+<p>We could supply those credentials to each <code>ruODK</code> function call, but that’s cumbersome and not securely reproducible (the command would include the sensitive credentials).</p>
+<p>A better way is to set your ODK Central username (email) and password as R environment variables, e.g. in your <code>~/.Rprofile</code> (to set them per machine), or in a separate file (to set them per project).</p>
+<p><code>ruODK</code> functions default to use the R environment variables <code>ODKC_UN</code> and <code>ODKC_PW</code> for authentication.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">Sys.setenv</span>(<span class="dt">ODKC_UN=</span><span class="st">"...@..."</span>)</a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">Sys.setenv</span>(<span class="dt">ODKC_PW=</span><span class="st">"......."</span>)</a></code></pre></div>
 </div>
@@ -117,18 +119,19 @@
 <a href="#use-ruodk" class="anchor"></a>Use ruODK</h3>
 <p>ruODK aims to provide the same access to your submissions via ODK Central’s OData service endpoints as MS Excel, MS PowerBI and Tableau.</p>
 <p>At the end of this step, we want to achieve the same outcome as the <a href="https://docs.opendatakit.org/central-submissions/#downloading-submissions-as-csvs">manual download to CSV</a>.</p>
-<p>Caveat: this is a work in progress. Some data doesn’t come through the OData feed (such as location and altitude accuracy).</p>
-<p>An <a href="https://rpubs.com/florian_mayer/flora_quadrats">example</a>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># ODK Central credentials</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="cf">if</span> (<span class="kw">file.exists</span>(<span class="st">"~/.Rprofile"</span>)) <span class="kw">source</span>(<span class="st">"~/.Rprofile"</span>)</a>
-<a class="sourceLine" id="cb3-3" title="3"></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co"># ODK Central</span></a>
-<a class="sourceLine" id="cb3-5" title="5">data_url &lt;-<span class="st"> "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span></a>
-<a class="sourceLine" id="cb3-6" title="6"></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co"># Download from ODK Central</span></a>
-<a class="sourceLine" id="cb3-8" title="8">metadata &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_metadata.html">get_metadata</a></span>(data_url)</a>
-<a class="sourceLine" id="cb3-9" title="9">data &lt;-<span class="st"> </span>data_url <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/get_submissions.html">get_submissions</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/parse_submissions.html">parse_submissions</a></span>()</a></code></pre></div>
-<p>See <code><a href="articles/example.html">vignette("example")</a></code> for a walk-through with some data visualisation.</p>
+<p>A quick example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(ruODK)</a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co"># ODK Central credentials</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="cf">if</span> (<span class="kw">file.exists</span>(<span class="st">"~/.Rprofile"</span>)) <span class="kw">source</span>(<span class="st">"~/.Rprofile"</span>)</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co"># ODK Central OData service URL</span></a>
+<a class="sourceLine" id="cb3-7" title="7">data_url &lt;-<span class="st"> "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span></a>
+<a class="sourceLine" id="cb3-8" title="8"></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co"># Download from ODK Central</span></a>
+<a class="sourceLine" id="cb3-10" title="10">meta &lt;-<span class="st"> </span>data_url <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/get_metadata.html">get_metadata</a></span>()</a>
+<a class="sourceLine" id="cb3-11" title="11">data &lt;-<span class="st"> </span>data_url <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/get_submissions.html">get_submissions</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/parse_submissions.html">parse_submissions</a></span>()</a></code></pre></div>
+<p>A more detailed walk-through with some data visualisation examples is available in the <code><a href="articles/example.html">vignette("example")</a></code> or <a href="https://dbca-wa.github.io/ruODK/articles/example.html">here</a>.</p>
 </div>
 </div>
 <div id="contribute" class="section level2">
@@ -141,7 +144,7 @@
 <a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
 <p>The Department of Biodiversity, Conservation and Attractions (DBCA) respectfully acknowledges Aboriginal people as the traditional owners of the lands and waters it manages.</p>
 <p>One of the Department’s core missions is to conserve and protect the value of the land to the culture and heritage of Aboriginal people.</p>
-<p>This software was created both as a contribution to the ODK ecosystem and for the conservation of the biodiversity of Western Australia, and in doing so, caring for country.</p>
+<p>This software was created not only as a contribution to the ODK ecosystem, but also for the conservation of the biodiversity of Western Australia, and in doing so, caring for country.</p>
 </div>
 </div>
 </div>

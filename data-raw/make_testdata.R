@@ -6,7 +6,6 @@ fq_raw <- get_submissions(data_url)
 usethis::use_data(fq_meta, overwrite = T)
 usethis::use_data(fq_raw, overwrite = T)
 
-
 # Hex sticker
 # remotes::install_github("GuangchuangYu/hexSticker")
 library(hexSticker)
@@ -15,7 +14,9 @@ sysfonts::font_add_google("Knewave", "knewave")
 odklogo <- here::here("man", "figures", "odk.png")
 ruodklogo <- here::here("man", "figures", "ruODK.png")
 darkred <- "#a50b0b"
-hexSticker::sticker(odklogo, s_x=1, s_y=.75, s_width=0.7, s_height=0.7, # logo
-                    package="ruODK", p_size=36, p_family="knewave", p_color=darkred, # text
-                    h_fill="#d81c00", h_color=darkred, # bg
-                    filename=ruodklogo)
+hexSticker::sticker(odklogo,
+  s_x = 1, s_y = .75, s_width = 0.7, s_height = 0.7, # logo
+  package = "ruODK", p_size = 36, p_family = "knewave", p_color = darkred, # text
+  h_fill = "#d81c00", h_color = darkred, # bg
+  filename = ruodklogo
+)

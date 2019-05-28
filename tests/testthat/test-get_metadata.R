@@ -5,4 +5,3 @@ test_that("get_metadata works", {
   md <- get_metadata(data_url)
   expect_equal(class(md), "list")
 })
-

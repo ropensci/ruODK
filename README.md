@@ -10,13 +10,12 @@ status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](http
 
 Especially in these trying times, it is important to ask: “R U ODK?”
 
-This package aims to provide support, and with that we mean technical
-support, to the data wranglers trying to get data out of ODK’s new data
-warehouse, ODK Central.
-
-For reference, ODK Central OData API has a fantastic comprehensive,
-interactive
+ODK Central provides data through an OData API, which has a
+comprehensive and interactive
 [documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
+
+This package aims to provide an automatable, reproducible way to
+retrieve data from ODK Central’s OData API in the R ecosystem.
 
 ## Installation
 
@@ -29,7 +28,9 @@ remotes::install_github("dbca-wa/ruODK")
 
 ## Use
 
-### Setup ODK Central
+### Set up ODK Central
+
+First, we need some data to play with\!
 
 The ODK Central [user
 manual](https://docs.opendatakit.org/central-using/) provides up-to-date
@@ -44,8 +45,9 @@ descriptions of the steps below.
     forms.
   - Publish the [form to ODK
     Central](https://docs.opendatakit.org/central-forms/).
-  - Collect data for this form on ODK Collect.
-  - Get the ODK Central OData service URL.
+  - Collect some data for this form on ODK Collect and let ODK Collect
+    submit the finalised forms to ODK Central.
+  - Get the ODK Central OData service URL for the form.
 
 A note on the [included example
 forms](https://github.com/dbca-wa/ruODK/tree/master/inst/extdata): The
@@ -55,10 +57,18 @@ imported into ODK Central.
 
 ### Configure ruODK
 
-  - Set your ODK Central username (email) and password as R environment
-    variables, e.g. in your `~/.Rprofile`. Example:
+For now, ODK Central supports BasicAuth (username and password).
 
-<!-- end list -->
+We could supply those credentials to each `ruODK` function call, but
+that’s cumbersome and not securely reproducible (the command would
+include the sensitive credentials).
+
+A better way is to set your ODK Central username (email) and password as
+R environment variables, e.g. in your `~/.Rprofile` (to set them per
+machine), or in a separate file (to set them per project).
+
+`ruODK` functions default to use the R environment variables `ODKC_UN`
+and `ODKC_PW` for authentication.
 
 ``` r
 Sys.setenv(ODKC_UN="...@...")
@@ -74,25 +84,25 @@ At the end of this step, we want to achieve the same outcome as the
 [manual download to
 CSV](https://docs.opendatakit.org/central-submissions/#downloading-submissions-as-csvs).
 
-Caveat: this is a work in progress. Some data doesn’t come through the
-OData feed (such as location and altitude accuracy).
-
-An [example](https://rpubs.com/florian_mayer/flora_quadrats):
+A quick example:
 
 ``` r
+library(ruODK)
+
 # ODK Central credentials
 if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 
-# ODK Central
+# ODK Central OData service URL
 data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
 
 # Download from ODK Central
-metadata <- get_metadata(data_url)
+meta <- data_url %>% get_metadata()
 data <- data_url %>% get_submissions() %>% parse_submissions()
 ```
 
-See `vignette("example")` for a walk-through with some data
-visualisation.
+A more detailed walk-through with some data visualisation examples is
+available in the `vignette("example")` or
+[here](https://dbca-wa.github.io/ruODK/articles/example.html).
 
 ## Contribute
 
@@ -107,6 +117,6 @@ the lands and waters it manages.
 One of the Department’s core missions is to conserve and protect the
 value of the land to the culture and heritage of Aboriginal people.
 
-This software was created both as a contribution to the ODK ecosystem
-and for the conservation of the biodiversity of Western Australia, and
-in doing so, caring for country.
+This software was created not only as a contribution to the ODK
+ecosystem, but also for the conservation of the biodiversity of Western
+Australia, and in doing so, caring for country.
