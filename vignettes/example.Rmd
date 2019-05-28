@@ -108,6 +108,13 @@ The vectorised function `get_attachment` downloads and links attachments like
 photos and other media to a local, relative path. This will take some time
 during the first run; once the files exist locally, the download will be skipped.
 
+The date formats are parsed from ISO8601 timestamps into POSIXct objects with
+`lubridate::parse_date_time`. We use our local timezone (GMT+08) in this example.
+
+Other ODK forms will need to select their respective media attachment field names
+for `get_attachment`, and their respective date/datetime/time field names as well
+as their local timezone (if desired) for `lubridate`.
+
 The trailing `invisible` is a neutral operation to allow trailing magrittr 
 pipelines `%>%` while commenting individual lines of the pipelines in or out.
 
@@ -120,6 +127,9 @@ For clarity, we enable verbose messages from `parse_submissions`
 and preserve the message output in the code chunk options with `message=TRUE`.
 
 ```{r transform_data, message=TRUE}
+ord <- "YmdHMSz"
+tz <- "Australia/Perth"
+  
 fq_data <- fq_raw %>% parse_submissions(verbose=TRUE) %>% 
   dplyr::rename(
     uuid=`.__id`,
@@ -129,7 +139,10 @@ fq_data <- fq_raw %>% parse_submissions(verbose=TRUE) %>%
   dplyr::mutate(
     quadrat_photo = get_attachment(data_url, uuid, quadrat_photo),
     morphological_type_photo = get_attachment(data_url, uuid, morphological_type_photo),
-    mudmap_photo = get_attachment(data_url, uuid, mudmap_photo)
+    mudmap_photo = get_attachment(data_url, uuid, mudmap_photo),
+    submissionDate = lubridate::parse_date_time(submissionDate, orders=ord, tz = tz),
+    encounter_start_datetime = lubridate::parse_date_time(encounter_start_datetime, orders=ord, tz = tz),
+    encounter_end_datetime = lubridate::parse_date_time(encounter_end_datetime, orders=ord, tz = tz)
   ) %>% 
   invisible
 
