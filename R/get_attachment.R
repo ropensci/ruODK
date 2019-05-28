@@ -33,6 +33,7 @@ attachment_url <- function(data_url, uuid, fn) {
 #' @return The relative local path to the downloaded attachment or NA.
 #' @importFrom httr GET authenticate write_disk
 #' @importFrom fs file_exists
+#' @importFrom rlang warn
 #' @export
 get_one_attachment <- function(pth, fn, src,
                                un = Sys.getenv("ODKC_UN"),
@@ -42,7 +43,7 @@ get_one_attachment <- function(pth, fn, src,
     return(pth %>% as.character())
   }
   if (is.na(fn)) {
-    warn("Filename is NA, skipping download.")
+    rlang::warn("Filename is NA, skipping download.")
     return(NA)
   }
   httr::GET(src, httr::authenticate(un, pw), httr::write_disk(pth, overwrite = T))

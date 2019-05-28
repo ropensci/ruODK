@@ -14,6 +14,9 @@ default: "universal".}
 
 \item{verbose}{Whether to print verbose messages, default: FALSE.}
 }
+\value{
+The submissions as unnested tibble
+}
 \description{
 Parse submissions into a tidy tibble and unnest all levels.
 }

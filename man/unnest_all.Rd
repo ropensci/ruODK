@@ -14,6 +14,9 @@ default: "universal".}
 
 \item{verbose}{Whether to print verbose messages, default: FALSE.}
 }
+\value{
+The unnested tibble in wide format
+}
 \description{
 Recursively unnest_wide all list columns in a tibble.
 }

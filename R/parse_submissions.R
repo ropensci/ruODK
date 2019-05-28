@@ -1,9 +1,18 @@
 #' A functional to extract names of list columns from a tibble.
-listcol_names <- . %>%
+#'
+#' @param tbl A tibble, possibly with list columns
+#' @return A vector of list column names
+#' @importFrom dplyr summarise_all filter
+#' @importFrom tidyr gather
+#' @importFrom magrittr extract2
+listcol_names <- function(tbl) {
+  variable <- NULL
+  tbl %>%
   dplyr::summarise_all(class) %>%
   tidyr::gather(variable, class) %>%
   dplyr::filter(class == "list") %>%
   magrittr::extract2("variable")
+}
 
 #' Recursively unnest_wide all list columns in a tibble.
 #'
@@ -11,6 +20,7 @@ listcol_names <- . %>%
 #' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,
 #'   default: "universal".
 #' @param verbose Whether to print verbose messages, default: FALSE.
+#' @return The unnested tibble in wide format
 #' @importFrom glue glue
 #' @importFrom tidyr unnest_wider
 #' @export
@@ -37,6 +47,7 @@ unnest_all <- function(nested_tbl, names_repair = "universal", verbose = FALSE) 
 #' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,
 #'   default: "universal".
 #' @param verbose Whether to print verbose messages, default: FALSE.
+#' @return The submissions as unnested tibble
 #' @importFrom tibble as_tibble
 #' @export
 parse_submissions <- function(data, names_repair = "universal", verbose = FALSE) {

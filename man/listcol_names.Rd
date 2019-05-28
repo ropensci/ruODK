@@ -4,7 +4,13 @@
 \alias{listcol_names}
 \title{A functional to extract names of list columns from a tibble.}
 \usage{
-listcol_names(value)
+listcol_names(tbl)
+}
+\arguments{
+\item{tbl}{A tibble, possibly with list columns}
+}
+\value{
+A vector of list column names
 }
 \description{
 A functional to extract names of list columns from a tibble.
