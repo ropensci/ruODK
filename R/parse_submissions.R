@@ -1,3 +1,4 @@
+#' A functional to extract names of list columns from a tibble.
 listcol_names <- . %>%
   dplyr::summarise_all(class) %>%
   tidyr::gather(variable, class) %>%

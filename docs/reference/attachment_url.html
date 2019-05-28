@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ruODK</title>
+<title>Build the download URL for one or many submission UUIDs and filenames. — attachment_url • ruODK</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -88,106 +88,50 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.2.1</small>
-      </h1>
+    <h1>Build the download URL for one or many submission UUIDs and filenames.</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>This is a helper function used by `get_attachment`.
+This function is vectorised and accepts single values or vectors for uuid and fn.</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='fu'>attachment_url</span>(<span class='no'>data_url</span>, <span class='no'>uuid</span>, <span class='no'>fn</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data_url</th>
+      <td><p>The OData service URL as given by ODK Central.</p></td>
+    </tr>
+    <tr>
+      <th>uuid</th>
+      <td><p>The UUID of one form submission, or a vector of UUIDs.</p></td>
+    </tr>
+    <tr>
+      <th>fn</th>
+      <td><p>The attachment filename, as per ODK form submission, or a vector of
+attachment filenames.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="attachment_url.html">attachment_url</a></code> </p>
-          </td>
-          <td><p>Build the download URL for one or many submission UUIDs and filenames.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fq_meta.html">fq_meta</a></code> </p>
-          </td>
-          <td><p>Metadata for an ODK Central form.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fq_raw.html">fq_raw</a></code> </p>
-          </td>
-          <td><p>Submission data for an ODK Central form.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="fq_tae.html">fq_tae</a></code> </p>
-          </td>
-          <td><p>Submission data for a subgroup of an ODK Central form.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_attachment.html">get_attachment</a></code> </p>
-          </td>
-          <td><p>Download attachments and return the local path</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_metadata.html">get_metadata</a></code> </p>
-          </td>
-          <td><p>Retrieve metadata from an OData URL ending in .svc as list of lists</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_one_attachment.html">get_one_attachment</a></code> </p>
-          </td>
-          <td><p>Download one media attachment</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_submissions.html">get_submissions</a></code> </p>
-          </td>
-          <td><p>Retrieve /Submissions from an OData URL ending in .svc as list of lists</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="listcol_names.html">listcol_names</a></code> </p>
-          </td>
-          <td><p>A functional to extract names of list columns from a tibble.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="parse_submissions.html">parse_submissions</a></code> </p>
-          </td>
-          <td><p>Parse submissions into a tidy tibble and unnest all levels.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="unnest_all.html">unnest_all</a></code> </p>
-          </td>
-          <td><p>Recursively unnest_wide all list columns in a tibble.</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <p>The inferred download URL.</p>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
+
   </div>
 </div>
 

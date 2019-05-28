@@ -1,6 +1,6 @@
 ---
 title: "Example"
-author: "Florian Mayer"
+author: "Florian Mayer, DBCA"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

@@ -147,6 +147,14 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
 
     <p>The relative file path for the downloaded attachment(s)</p>
     
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The media attachments are downloaded into a folder named by the submission's
+uuid inside the given `local_dir`. E.g.:</p>
+<p>workdir/attachments/uuid:xxxxxxxxxx/filename1.jpg</p>
+<p>workdir/attachments/uuid:xxxxxxxxxx/filename2.jpg</p>
+<p>workdir/attachments/uuid:xxxxxxxxxx/filename3.jpg</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -155,6 +163,8 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>
