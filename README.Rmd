@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 # ruODK: An ODK Central OData client <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
-[ruODK on GitHub](https://github.com/dbca-wa/ruODK)
+[![GitHub release](https://img.shields.io/github/release/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK)
 [![Travis build status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
 [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
   

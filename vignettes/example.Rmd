@@ -35,6 +35,10 @@ The demonstrated workflow is roughly equivalent to ODK Central's "Export all dat
 which downloads all submissions and all repeating subgroups as CSV spreadsheets,
 and all media attachments in a local subfolder "attachments".
 
+An alternative pathway to getting data out of ODK Central is to use the REST API
+as documented (with live examples in multiple programming languages) at the
+[ODK Central API docs](https://odkcentral.docs.apiary.io/).
+
 # Configure ruODK
 
 Set your ODK Central username (email) and password as R environment variables, 

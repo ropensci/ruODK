@@ -1,3 +1,6 @@
+# ruODK 0.2.2
+* Added more test coverage.
+
 # ruODK 0.2.1
 * Added various `usethis` goodies, test stubs, badges.
 

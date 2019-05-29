@@ -4,7 +4,8 @@
 \alias{get_metadata}
 \title{Retrieve metadata from an OData URL ending in .svc as list of lists}
 \usage{
-get_metadata(url, un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
+get_metadata(url, un = Sys.getenv("ODKC_UN"),
+  pw = Sys.getenv("ODKC_PW"))
 }
 \arguments{
 \item{url}{The OData URL, ending in .svc, no trailing slash}
