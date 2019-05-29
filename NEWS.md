@@ -1,3 +1,6 @@
+# ruODK 0.2.3
+* Added a new form, Flora Quadrat 0.3 to inst/extdata.
+
 # ruODK 0.2.2
 * Added more test coverage.
 

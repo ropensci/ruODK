@@ -1,7 +1,7 @@
 Type: Package
 Package: ruODK
 Title: ODK Central OData Client
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: person(c("Florian", "W."), "Mayer", email="Florian.Mayer@dbca.wa.gov.au", role=c("aut", "cre"))
 Author: Florian Mayer, DBCA
 Maintainer: Florian Mayer <Florian.Mayer@dbca.wa.gov.au>
