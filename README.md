@@ -4,7 +4,7 @@
 # ruODK: An ODK Central OData client <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 
 [![GitHub
-release](https://img.shields.io/github/release/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK)
+issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues)
 [![Travis build
 status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
 [![Coverage
