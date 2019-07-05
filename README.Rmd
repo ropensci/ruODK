@@ -109,10 +109,11 @@ Contributions through issues and PRs are welcome!
 ## Release process
 
 ```{r, eval=F}
+styler::style_pkg()
+devtools::test()
 devtools::document(roclets = c('rd', 'collate', 'namespace'))
-# commit changes
-usethis::use_tidy_style()
-
+devtools::check()
+pkgdown::build_site()
 ```
 
 ## Acknowledgements

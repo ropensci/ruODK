@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -154,6 +154,15 @@
 <h2 class="hasAnchor">
 <a href="#contribute" class="anchor"></a>Contribute</h2>
 <p>Contributions through issues and PRs are welcome!</p>
+</div>
+<div id="release-process" class="section level2">
+<h2 class="hasAnchor">
+<a href="#release-process" class="anchor"></a>Release process</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">styler<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/styler/topics/style_pkg">style_pkg</a></span>()</a>
+<a class="sourceLine" id="cb4-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()</a>
+<a class="sourceLine" id="cb4-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/document">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'rd'</span>, <span class="st">'collate'</span>, <span class="st">'namespace'</span>))</a>
+<a class="sourceLine" id="cb4-4" title="4">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/check">check</a></span>()</a>
+<a class="sourceLine" id="cb4-5" title="5">pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</a></code></pre></div>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">

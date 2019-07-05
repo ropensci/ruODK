@@ -1,5 +1,7 @@
 # ruODK 0.3.0
 * Use tidyverse issue template
+* Started on REST API: `form_list`
+* Refactor URLs - build from project and form IDs
 
 # ruODK 0.2.4
 * Cleaned up logo, thanks to @issa-tseng for suggestions

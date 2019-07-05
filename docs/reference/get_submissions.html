@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -125,15 +125,20 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_submissions</span>(<span class='no'>url</span>, <span class='kw'>sub</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>, <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>),
+    <pre class="usage"><span class='fu'>get_submissions</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>sub</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>,
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>url</th>
-      <td><p>The OData URL, ending in .svc, no trailing slash</p></td>
+      <th>pid</th>
+      <td><p>The numeric ID of the project, e.g.: 2.</p></td>
+    </tr>
+    <tr>
+      <th>fid</th>
+      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
     </tr>
     <tr>
       <th>sub</th>
@@ -142,6 +147,10 @@ default: "Submissions" (the main form).
 Change to "Submissions.GROUP_NAME" for repeating form groups.
 The group name can be found in the metadata under
 DataServices.Schema.[EntityType].Name</p></td>
+    </tr>
+    <tr>
+      <th>url</th>
+      <td><p>The OData URL, ending in .svc, no trailing slash.</p></td>
     </tr>
     <tr>
       <th>un</th>
@@ -159,7 +168,10 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of two named lists, value and context. `value` contains the submissions, which can be "rectangled" using `tidyr::unnest_wider("element_name")`. `context` is the URL of the metadata.</p>
+    <p>A list of two named lists, value and context. `value` contains
+the submissions, which can be "rectangled" using
+`tidyr::unnest_wider("element_name")`.
+`context` is the URL of the metadata.</p>
     
 
   </div>

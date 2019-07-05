@@ -63,7 +63,11 @@ if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 
 # ODK Central's OData URL
 data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
-
+pid <- 14
+fid <- "build_Flora-Quadrat-0-2_1558575936"
+url <- "https://sandbox.central.opendatakit.org"
+un <- Sys.getenv("ODKC_TEST_UN")
+pw <- Sys.getenv("ODKC_TEST_PW")
 data("fq_meta")
 data("fq_raw")
 data("fq_tae")
@@ -73,7 +77,7 @@ In our example, the OData service URL is `r data_url`.
 Let's first get the metadata to review our data schema.
 
 ```{r load_ometadata, eval=F}
-fq_meta <- get_metadata(data_url)
+fq_meta <- get_metadata(pid, fid, url = url, un = un, pw = pw)
 ```
 
 Each downloadable table is an EntityType under DataServices.Schema.
@@ -88,8 +92,8 @@ listviewer::jsonedit(fq_meta)
 So let's download the form submissions and, separately, repeating form groups.
 
 ```{r load_odata, eval=F}
-fq_raw <- get_submissions(data_url)
-fq_tae <- get_submissions(data_url, sub="Submissions.taxon_encounter")
+fq_raw <- get_submissions(pid, fid, url = url, un = un, pw = pw)
+fq_tae <- get_submissions(pid, fid, url = url, un = un, pw = pw, sub="Submissions.taxon_encounter")
 ```
 
 The output of the above code is provided as data objects `fq_raw` 

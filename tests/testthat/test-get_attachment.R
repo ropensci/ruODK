@@ -1,8 +1,14 @@
 context("test-get_attachment.R")
 
 test_that("get_attachment works", {
-  data_url <- Sys.getenv("ODKC_TEST_URL")
-  fresh_raw <- get_submissions(data_url)
+  data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
+  fresh_raw <- get_submissions(
+    Sys.getenv("ODKC_TEST_PID"),
+    Sys.getenv("ODKC_TEST_FID"),
+    url = Sys.getenv("ODKC_TEST_URL"),
+    un = Sys.getenv("ODKC_TEST_UN"),
+    pw = Sys.getenv("ODKC_TEST_PW")
+  )
   fresh_parsed <- fresh_raw %>%
     parse_submissions() %>%
     dplyr::rename(uuid = `.__id`) %>%
@@ -12,7 +18,7 @@ test_that("get_attachment works", {
         local_dir = tempdir(), verbose = TRUE
       )
     )
-  testthat::expect_gte(nrow(fresh_parsed), 2) # submissions at the time of writing
+  testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value)) # submissions at the time of writing
   testthat::expect_true(fs::file_exists(fresh_parsed$quadrat_photo[[1]]))
 })
 

@@ -4,11 +4,15 @@
 \alias{get_metadata}
 \title{Retrieve metadata from an OData URL ending in .svc as list of lists}
 \usage{
-get_metadata(url, un = Sys.getenv("ODKC_UN"),
-  pw = Sys.getenv("ODKC_PW"))
+get_metadata(pid, fid, url = Sys.getenv("ODKC_URL"),
+  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
 }
 \arguments{
-\item{url}{The OData URL, ending in .svc, no trailing slash}
+\item{pid}{The numeric ID of the project, e.g.: 2.}
+
+\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
+
+\item{url}{The OData URL, ending in .svc, no trailing slash.}
 
 \item{un}{The ODK Central username (an email address),
 default: Sys.getenv("ODKC_UN").
@@ -19,7 +23,8 @@ default: Sys.getenv("ODKC_PW").
 Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 }
 \value{
-A list of two named lists, DataServices and .attrs (Version). DataServices contains the dataset definition.
+A list of two named lists, DataServices and .attrs (Version).
+        DataServices contains the dataset definition.
 }
 \description{
 Retrieve metadata from an OData URL ending in .svc as list of lists

@@ -50,6 +50,19 @@
 				};
 			}
 
+			// If retina option is set
+			if (provider.options.retina) {
+				// Check retina screen
+				if (options.detectRetina && L.Browser.retina) {
+					// The retina option will be active now
+					// But we need to prevent Leaflet retina mode
+					options.detectRetina = false;
+				} else {
+					// No retina, remove option
+					provider.options.retina = '';
+				}
+			}
+
 			// replace attribution placeholders with their values from toplevel provider attribution,
 			// recursively
 			var attributionReplacer = function (attr) {
@@ -100,8 +113,7 @@
 				CH: {
 					url: '//tile.osm.ch/switzerland/{z}/{x}/{y}.png',
 					options: {
-						maxZoom: 18,
-						bounds: [[45, 5], [48, 11]]
+						maxZoom: 18
 					}
 				},
 				France: {
@@ -118,7 +130,7 @@
 					}
 				},
 				BZH: {
-					url: '//tile.openstreetmap.bzh/br/{z}/{x}/{y}.png',
+					url: 'https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png',
 					options: {
 						attribution: '{attribution.OpenStreetMap}, Tiles courtesy of <a href="http://www.openstreetmap.bzh/" target="_blank">Breton OpenStreetMap Team</a>',
 						bounds: [[46.2, -5.5], [50, 0.7]]
@@ -134,10 +146,10 @@
 					'{attribution.OpenStreetMap}, <a href="http://www.openinframap.org/about.html">About OpenInfraMap</a>'
 			},
 			variants: {
-				Power: 'power',
-				Telecom: 'telecoms',
-				Petroleum: 'petroleum',
-				Water: 'water'
+				  Power:       'power' ,
+				  Telecom:     'telecoms' ,
+				  Petroleum:   'petroleum' ,
+				  Water:       'water'
 			}
 		},
 		OpenSeaMap: {
@@ -249,7 +261,7 @@
 			}
 		},
 		MapBox: {
-			url: 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}{r}.png?access_token={accessToken}',
+			url: 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
 			options: {
 				attribution:
 					'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; ' +
@@ -260,7 +272,7 @@
 			}
 		},
 		Stamen: {
-			url: '//stamen-tiles-{s}.a.ssl.fastly.net/{variant}/{z}/{x}/{y}{r}.{ext}',
+			url: '//stamen-tiles-{s}.a.ssl.fastly.net/{variant}/{z}/{x}/{y}.{ext}',
 			options: {
 				attribution:
 					'Map tiles by <a href="http://stamen.com">Stamen Design</a>, ' +
@@ -280,7 +292,6 @@
 				TonerLabels: 'toner-labels',
 				TonerLite: 'toner-lite',
 				Watercolor: {
-					url: '//stamen-tiles-{s}.a.ssl.fastly.net/{variant}/{z}/{x}/{y}.{ext}',
 					options: {
 						variant: 'watercolor',
 						minZoom: 1,
@@ -302,7 +313,6 @@
 					}
 				},
 				TopOSMRelief: {
-					url: '//stamen-tiles-{s}.a.ssl.fastly.net/{variant}/{z}/{x}/{y}.{ext}',
 					options: {
 						variant: 'toposm-color-relief',
 						ext: 'jpg',
@@ -465,10 +475,7 @@
 				normalNightMobile: 'normal.night.mobile',
 				normalNightGrey: 'normal.night.grey',
 				normalNightGreyMobile: 'normal.night.grey.mobile',
-				normalNightTransit: 'normal.night.transit',
-				normalNightTransitMobile: 'normal.night.transit.mobile',
-				redcuedDay: 'reduced.day',
-				redcuedNight: 'reduced.night',
+
 				basicMap: {
 					options: {
 						type: 'basetile'
@@ -497,18 +504,6 @@
 					options: {
 						base: 'aerial',
 						variant: 'hybrid.day.mobile'
-					}
-				},
-				hybridDayTransit: {
-					options: {
-						base: 'aerial',
-						variant: 'hybrid.day.transit'
-					}
-				},
-				hybridDayGrey: {
-					options: {
-						base: 'aerial',
-						variant: 'hybrid.grey.day'
 					}
 				},
 				pedestrianDay: 'pedestrian.day',
@@ -552,7 +547,7 @@
 			}
 		},
 		CartoDB: {
-			url: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/{variant}/{z}/{x}/{y}{r}.png',
+			url: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/{variant}/{z}/{x}/{y}.png',
 			options: {
 				attribution: '{attribution.OpenStreetMap} &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
 				subdomains: 'abcd',
@@ -565,11 +560,7 @@
 				PositronOnlyLabels: 'light_only_labels',
 				DarkMatter: 'dark_all',
 				DarkMatterNoLabels: 'dark_nolabels',
-				DarkMatterOnlyLabels: 'dark_only_labels',
-				Voyager: 'rastertiles/voyager',
-				VoyagerNoLabels: 'rastertiles/voyager_nolabels',
-				VoyagerOnlyLabels: 'rastertiles/voyager_only_labels',
-				VoyagerLabelsUnder: 'rastertiles/voyager_labels_under'
+				DarkMatterOnlyLabels: 'dark_only_labels'
 			}
 		},
 		HikeBike: {
@@ -739,61 +730,11 @@
 			}
 		},
 		Wikimedia: {
-			url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
+			url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png',
 			options: {
 				attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
 				minZoom: 1,
-				maxZoom: 19
-			}
-		},
-		GeoportailFrance: {
-			url: 'https://wxs.ign.fr/{apikey}/geoportail/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE={style}&TILEMATRIXSET=PM&FORMAT={format}&LAYER={variant}&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
-			options: {
-				attribution: '<a target="_blank" href="https://www.geoportail.gouv.fr/">Geoportail France</a>',
-				bounds: [[-75, -180], [81, 180]],
-				minZoom: 2,
-				maxZoom: 18,
-				// Get your own geoportail apikey here : http://professionnels.ign.fr/ign/contrats/
-				// NB : 'choisirgeoportail' is a demonstration key that comes with no guarantee
-				apikey: 'choisirgeoportail',
-				format: 'image/jpeg',
-				style : 'normal',
-				variant: 'GEOGRAPHICALGRIDSYSTEMS.MAPS.SCAN-EXPRESS.STANDARD'
-			},
-			variants: {
-				parcels: {
-					options : {
-						variant: 'CADASTRALPARCELS.PARCELS',
-						maxZoom: 20,
-						style : 'bdparcellaire',
-						format: 'image/png'
-					}
-				},
-				ignMaps: 'GEOGRAPHICALGRIDSYSTEMS.MAPS',
-				maps: 'GEOGRAPHICALGRIDSYSTEMS.MAPS.SCAN-EXPRESS.STANDARD',
-				orthos: {
-					options: {
-						maxZoom: 19,
-						variant: 'ORTHOIMAGERY.ORTHOPHOTOS'
-					}
-				}
-			}
-		},
-		OneMapSG: {
-			url: '//maps-{s}.onemap.sg/v3/{variant}/{z}/{x}/{y}.png',
-			options: {
-				variant: 'Default',
-				minZoom: 11,
-				maxZoom: 18,
-				bounds: [[1.56073, 104.11475], [1.16, 103.502]],
-				attribution: 'New OneMap | Map data &copy; contributors, <a href="http://SLA.gov.sg">Singapore Land Authority</a>'
-			},
-			variants: {
-				Default: 'Default',
-				Night: 'Night',
-				Original: 'Original',
-				Grey: 'Grey',
-				LandLot: 'LandLot'
+				maxZoom: 18
 			}
 		}
 	};

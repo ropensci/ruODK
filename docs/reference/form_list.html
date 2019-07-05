@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • ruODK</title>
+<title>List all forms. — form_list • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
+<meta property="og:title" content="List all forms. — form_list" />
 
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:description" content="See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,25 +114,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>List all forms.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/form_list.R'><code>R/form_list.R</code></a></small>
+    <div class="hidden name"><code>form_list.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
-        
+    <pre class="usage"><span class='fu'>form_list</span>(<span class='no'>pid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pid</th>
+      <td><p>The numeric ID of the project, e.g.: 3.</p></td>
+    </tr>
+    <tr>
+      <th>url</th>
+      <td><p>The OData URL, ending in .svc, no trailing slash.</p></td>
+    </tr>
+    <tr>
+      <th>un</th>
+      <td><p>The ODK Central username (an email address),
+default: Sys.getenv("ODKC_UN").
+Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")</p></td>
+    </tr>
+    <tr>
+      <th>pw</th>
+      <td><p>The ODK Central password,,
+default: Sys.getenv("ODKC_PW").
+Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A tibble with one row per form and all form metadata as columns.</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

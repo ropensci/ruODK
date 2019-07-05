@@ -4,17 +4,22 @@
 \alias{get_submissions}
 \title{Retrieve /Submissions from an OData URL ending in .svc as list of lists}
 \usage{
-get_submissions(url, sub = "Submissions", un = Sys.getenv("ODKC_UN"),
+get_submissions(pid, fid, sub = "Submissions",
+  url = Sys.getenv("ODKC_URL"), un = Sys.getenv("ODKC_UN"),
   pw = Sys.getenv("ODKC_PW"))
 }
 \arguments{
-\item{url}{The OData URL, ending in .svc, no trailing slash}
+\item{pid}{The numeric ID of the project, e.g.: 2.}
+
+\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
 
 \item{sub}{The submission EntityType name,
 default: "Submissions" (the main form).
 Change to "Submissions.GROUP_NAME" for repeating form groups.
 The group name can be found in the metadata under
 DataServices.Schema.[EntityType].Name}
+
+\item{url}{The OData URL, ending in .svc, no trailing slash.}
 
 \item{un}{The ODK Central username (an email address),
 default: Sys.getenv("ODKC_UN").
@@ -25,7 +30,10 @@ default: Sys.getenv("ODKC_PW").
 Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 }
 \value{
-A list of two named lists, value and context. `value` contains the submissions, which can be "rectangled" using `tidyr::unnest_wider("element_name")`. `context` is the URL of the metadata.
+A list of two named lists, value and context. `value` contains
+the submissions, which can be "rectangled" using
+`tidyr::unnest_wider("element_name")`.
+`context` is the URL of the metadata.
 }
 \description{
 Retrieve /Submissions from an OData URL ending in .svc as list of lists

@@ -11,3 +11,4 @@
 ^ISSUE_TEMPLATE\.md$
 ^SUPPORT\.md$
 ^\.github$
+^\man-roxygen$
