@@ -17,7 +17,7 @@ darkred <- "#a50b0b"
 # logo s_, text p_, bg h_
 hexSticker::sticker(odklogo,
   s_x = 1.2, s_y = 0.9, s_width = 0.7, s_height = 0.9,
-  package = "ru", p_x=0.45, p_y=1, p_size = 40, p_family = "knewave", p_color = "#ffaa77",
+  package = "ru", p_x = 0.45, p_y = 1, p_size = 40, p_family = "knewave", p_color = "#ffaa77",
   h_fill = "#d81c00", h_color = darkred,
   filename = ruodklogo
 )

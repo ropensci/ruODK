@@ -8,10 +8,10 @@
 listcol_names <- function(tbl) {
   variable <- NULL
   tbl %>%
-  dplyr::summarise_all(class) %>%
-  tidyr::gather(variable, class) %>%
-  dplyr::filter(class == "list") %>%
-  magrittr::extract2("variable")
+    dplyr::summarise_all(class) %>%
+    tidyr::gather(variable, class) %>%
+    dplyr::filter(class == "list") %>%
+    magrittr::extract2("variable")
 }
 
 #' Recursively unnest_wide all list columns in a tibble.

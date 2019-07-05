@@ -36,25 +36,35 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   src <- attachment_url(data_url, uuid, fn)
 
   # Happy path: get one attachment should work
-  testthat::expect_message(get_one_attachment(pth, fn, src, verbose=TRUE),
-                           glue::glue("Saved {pth}\n"))
-  fn_local <- get_one_attachment(pth, fn, src, verbose=TRUE)
+  testthat::expect_message(
+    get_one_attachment(pth, fn, src, verbose = TRUE),
+    glue::glue("Saved {pth}\n")
+  )
+  fn_local <- get_one_attachment(pth, fn, src, verbose = TRUE)
   testthat::expect_true(fs::file_exists(pth))
   testthat::expect_equal(fn_local, as.character(pth))
 
   # Happy, but faster: keep existing download
-  testthat::expect_message(get_one_attachment(pth, fn, src, verbose=TRUE),
-                           glue::glue("Keeping {pth}\n"))
+  testthat::expect_message(
+    get_one_attachment(pth, fn, src, verbose = TRUE),
+    glue::glue("Keeping {pth}\n")
+  )
 
   # Not happy, but tolerant: keep file at pth if exists
-  testthat::expect_message(get_one_attachment(pth, NA, src, verbose=TRUE),
-                           glue::glue("Keeping {pth}\n"))
-  testthat::expect_equal(get_one_attachment(pth, NA, src, verbose=TRUE),
-                         as.character(pth))
+  testthat::expect_message(
+    get_one_attachment(pth, NA, src, verbose = TRUE),
+    glue::glue("Keeping {pth}\n")
+  )
+  testthat::expect_equal(
+    get_one_attachment(pth, NA, src, verbose = TRUE),
+    as.character(pth)
+  )
 
   # Now make sure pth doesn't exist
-  pth <- fs::path(tempdir(), NA) %>% as.character
-  testthat::expect_message(get_one_attachment(pth, NA, src, verbose=TRUE),
-                           "Filename is NA, skipping download.")
-  testthat::expect_true(is.na(get_one_attachment(pth, NA, src, verbose=TRUE)))
+  pth <- fs::path(tempdir(), NA) %>% as.character()
+  testthat::expect_message(
+    get_one_attachment(pth, NA, src, verbose = TRUE),
+    "Filename is NA, skipping download."
+  )
+  testthat::expect_true(is.na(get_one_attachment(pth, NA, src, verbose = TRUE)))
 })
