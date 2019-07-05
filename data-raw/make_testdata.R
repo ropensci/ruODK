@@ -14,9 +14,10 @@ sysfonts::font_add_google("Knewave", "knewave")
 odklogo <- here::here("man", "figures", "odk.png")
 ruodklogo <- here::here("man", "figures", "ruODK.png")
 darkred <- "#a50b0b"
+# logo s_, text p_, bg h_
 hexSticker::sticker(odklogo,
-  s_x = 1, s_y = .75, s_width = 0.7, s_height = 0.7, # logo
-  package = "ruODK", p_size = 36, p_family = "knewave", p_color = darkred, # text
-  h_fill = "#d81c00", h_color = darkred, # bg
+  s_x = 1.2, s_y = 0.9, s_width = 0.7, s_height = 0.9,
+  package = "ru", p_x=0.45, p_y=1, p_size = 40, p_family = "knewave", p_color = "#ffaa77",
+  h_fill = "#d81c00", h_color = darkred,
   filename = ruodklogo
 )

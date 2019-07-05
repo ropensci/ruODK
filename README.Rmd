@@ -106,6 +106,15 @@ in the `vignette("example")` or
 ## Contribute
 Contributions through issues and PRs are welcome!
 
+## Release process
+
+```{r, eval=F}
+devtools::document(roclets = c('rd', 'collate', 'namespace'))
+# commit changes
+usethis::use_tidy_style()
+
+```
+
 ## Acknowledgements
 The Department of Biodiversity, Conservation and Attractions (DBCA) respectfully 
 acknowledges Aboriginal people as the traditional owners of the lands and waters 

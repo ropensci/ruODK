@@ -1,3 +1,9 @@
+# ruODK 0.3.0
+* Use tidyverse issue template
+
+# ruODK 0.2.4
+* Cleaned up logo, thanks to @issa-tseng for suggestions
+
 # ruODK 0.2.3
 * Added a new form, Flora Quadrat 0.3 to inst/extdata.
 
