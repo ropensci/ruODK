@@ -146,9 +146,9 @@ fq_data <- fq_raw %>% parse_submissions(verbose=TRUE) %>%
     latitude=`...13`
     ) %>% 
   dplyr::mutate(
-    quadrat_photo = get_attachment(data_url, uuid, quadrat_photo),
-    morphological_type_photo = get_attachment(data_url, uuid, morphological_type_photo),
-    mudmap_photo = get_attachment(data_url, uuid, mudmap_photo),
+    quadrat_photo = get_attachment(pid, fid, uuid, quadrat_photo, url = url),
+    morphological_type_photo = get_attachment(pid, fid, uuid, morphological_type_photo, url = url),
+    mudmap_photo = get_attachment(pid, fid, uuid, mudmap_photo, url = url),
     submissionDate = lubridate::parse_date_time(submissionDate, orders=ord, tz = tz),
     encounter_start_datetime = lubridate::parse_date_time(encounter_start_datetime, orders=ord, tz = tz),
     encounter_end_datetime = lubridate::parse_date_time(encounter_end_datetime, orders=ord, tz = tz)
@@ -161,7 +161,7 @@ fq_data_tae <- fq_tae %>%
     tae_uuid=`.__id`,
     uuid=`.__Submissions.id`) %>%
   dplyr::mutate(
-    photo_in_situ = get_attachment(data_url, uuid, photo_in_situ)
+    photo_in_situ = get_attachment(pid, fid, uuid, photo_in_situ, url = url)
   ) %>% 
   dplyr::left_join(fq_data, by="uuid") %>% 
   invisible

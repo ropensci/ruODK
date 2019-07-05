@@ -1,8 +1,20 @@
 # ODK Central example data
 if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
-fq_meta <- get_metadata(data_url)
-fq_raw <- get_submissions(data_url)
+fq_meta <- get_metadata(
+  Sys.getenv("ODKC_TEST_PID"),
+  Sys.getenv("ODKC_TEST_FID"),
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
+fq_raw <- get_submissions(
+  Sys.getenv("ODKC_TEST_PID"),
+  Sys.getenv("ODKC_TEST_FID"),
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
 usethis::use_data(fq_meta, overwrite = T)
 usethis::use_data(fq_raw, overwrite = T)
 

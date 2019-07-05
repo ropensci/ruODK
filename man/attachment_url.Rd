@@ -4,15 +4,19 @@
 \alias{attachment_url}
 \title{Build the download URL for one or many submission UUIDs and filenames.}
 \usage{
-attachment_url(data_url, uuid, fn)
+attachment_url(pid, fid, uuid, fn, url = Sys.getenv("ODKC_URL"))
 }
 \arguments{
-\item{data_url}{The OData service URL as given by ODK Central.}
+\item{pid}{The numeric ID of the project, e.g.: 2.}
+
+\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
 
 \item{uuid}{The UUID of one form submission, or a vector of UUIDs.}
 
 \item{fn}{The attachment filename, as per ODK form submission, or a vector of
 attachment filenames.}
+
+\item{url}{The OData URL, ending in .svc, no trailing slash.}
 }
 \value{
 The inferred download URL.

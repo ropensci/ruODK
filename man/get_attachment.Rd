@@ -4,12 +4,15 @@
 \alias{get_attachment}
 \title{Download attachments and return the local path}
 \usage{
-get_attachment(data_url, submission_uuid, attachment_filename,
-  local_dir = "attachments", un = Sys.getenv("ODKC_UN"),
-  pw = Sys.getenv("ODKC_PW"), verbose = FALSE)
+get_attachment(pid, fid, submission_uuid, attachment_filename,
+  local_dir = "attachments", url = Sys.getenv("ODKC_URL"),
+  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"),
+  verbose = FALSE)
 }
 \arguments{
-\item{data_url}{The ODK Central OData url, including the ".svc"}
+\item{pid}{The numeric ID of the project, e.g.: 2.}
+
+\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
 
 \item{submission_uuid}{One or many ODK submission UUIDs, an MD5 hash}
 
@@ -18,6 +21,8 @@ e.g. "1558330537199.jpg"}
 
 \item{local_dir}{The local folder to save the downloaded files to,
 default: "attachments"}
+
+\item{url}{The OData URL, ending in .svc, no trailing slash.}
 
 \item{un}{The ODK Central username (an email address),
 default: Sys.getenv("ODKC_UN").

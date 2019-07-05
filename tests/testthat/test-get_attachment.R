@@ -2,6 +2,9 @@ context("test-get_attachment.R")
 
 test_that("get_attachment works", {
   data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
+  pid <- 14
+  fid <- "build_Flora-Quadrat-0-2_1558575936"
+  url <- "https://sandbox.central.opendatakit.org"
   fresh_raw <- get_submissions(
     Sys.getenv("ODKC_TEST_PID"),
     Sys.getenv("ODKC_TEST_FID"),
@@ -14,8 +17,8 @@ test_that("get_attachment works", {
     dplyr::rename(uuid = `.__id`) %>%
     dplyr::mutate(
       quadrat_photo = get_attachment(
-        data_url, uuid, quadrat_photo,
-        local_dir = tempdir(), verbose = TRUE
+        pid, fid, uuid, quadrat_photo,
+        local_dir = tempdir(), url = url, verbose = TRUE
       )
     )
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value)) # submissions at the time of writing
@@ -26,9 +29,12 @@ test_that("attachment_url works", {
   data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
   uuid <- "uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12"
   fn <- "1558579592153.jpg"
+  pid <- 14
+  fid <- "build_Flora-Quadrat-0-2_1558575936"
+  url <- "https://sandbox.central.opendatakit.org"
 
   expected_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936/submissions/uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12/attachments/1558579592153.jpg"
-  calculated_url <- attachment_url(data_url, uuid, fn)
+  calculated_url <- ruODK:::attachment_url(pid, fid, uuid, fn, url)
 
   testthat::expect_equal(calculated_url, expected_url)
 })
@@ -37,9 +43,12 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
   uuid <- "uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12"
   fn <- "1558579592153.jpg"
+  pid <- 14
+  fid <- "build_Flora-Quadrat-0-2_1558575936"
+  url <- "https://sandbox.central.opendatakit.org"
 
   pth <- fs::path(tempdir(), fn)
-  src <- attachment_url(data_url, uuid, fn)
+  src <- ruODK:::attachment_url(pid, fid, uuid, fn, url)
 
   # Happy path: get one attachment should work
   testthat::expect_message(

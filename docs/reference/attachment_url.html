@@ -127,14 +127,18 @@ This function is vectorised and accepts single values or vectors for uuid and fn
     
     </div>
 
-    <pre class="usage"><span class='fu'>attachment_url</span>(<span class='no'>data_url</span>, <span class='no'>uuid</span>, <span class='no'>fn</span>)</pre>
+    <pre class="usage"><span class='fu'>attachment_url</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='no'>uuid</span>, <span class='no'>fn</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data_url</th>
-      <td><p>The OData service URL as given by ODK Central.</p></td>
+      <th>pid</th>
+      <td><p>The numeric ID of the project, e.g.: 2.</p></td>
+    </tr>
+    <tr>
+      <th>fid</th>
+      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
     </tr>
     <tr>
       <th>uuid</th>
@@ -144,6 +148,10 @@ This function is vectorised and accepts single values or vectors for uuid and fn
       <th>fn</th>
       <td><p>The attachment filename, as per ODK form submission, or a vector of
 attachment filenames.</p></td>
+    </tr>
+    <tr>
+      <th>url</th>
+      <td><p>The OData URL, ending in .svc, no trailing slash.</p></td>
     </tr>
     </table>
     
