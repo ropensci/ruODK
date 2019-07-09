@@ -12,14 +12,14 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# ruODK: An ODK Central OData/REST client <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
+# ruODK: ODK Central API wrapper <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 [![GitHub issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues)
 [![Travis build status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
 [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
   
 Especially in these trying times, it is important to ask: "R U ODK?"
 
-[ODK Central])(https://docs.opendatakit.org/central-intro/) an Open Data Kit server alternative like ODK Aggregate. 
+[ODK Central](https://docs.opendatakit.org/central-intro/) an Open Data Kit server alternative like ODK Aggregate. 
 It manages user accounts and permissions, stores form definitions, and allows data collection clients like 
 ODK Collect to connect to it for form download and submission upload.
 
@@ -30,8 +30,7 @@ ruODK aims:
 
 * To wrap all ODK Central API endpoints. This is a work in progress with focus on "getting the data out" first.
 * To provide working examples of interacting with the ODK Central API.
-* To provide convenience helpers for the day to day tasks when working with ODK Central in R.
-
+* To provide convenience helpers for the day to day tasks when working with ODK Central data in R.
 
 ## Installation
 
@@ -132,12 +131,10 @@ pkgdown::build_site()
 
 ## Acknowledgements
 The Department of Biodiversity, Conservation and Attractions (DBCA) respectfully 
-acknowledges Aboriginal people as the traditional owners of the lands and waters 
-it manages.
+acknowledges Aboriginal people as the traditional owners of the lands and waters it manages.
 
 One of the Department's core missions is to conserve and protect the value of 
 the land to the culture and heritage of Aboriginal people.
 
-This software was created not only as a contribution to the ODK ecosystem, 
-but also for the conservation of the biodiversity of Western Australia, and in 
-doing so, caring for country.
+This software was created both as a contribution to the ODK ecosystem and for 
+the conservation of the biodiversity of Western Australia, and in doing so, caring for country.
