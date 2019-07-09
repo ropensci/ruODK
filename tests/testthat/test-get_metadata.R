@@ -10,6 +10,7 @@ test_that("get_metadata works", {
   )
   testthat::expect_equal(class(md), "list")
   testthat::expect_equal(
-  md$DataServices$Schema$EntityContainer$.attrs[[1]],
-  Sys.getenv("ODKC_TEST_FID"))
+    attr(md$Edmx$DataServices$Schema$EntityContainer, "Name"),
+    Sys.getenv("ODKC_TEST_FID")
+  )
 })

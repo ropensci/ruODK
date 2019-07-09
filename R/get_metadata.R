@@ -5,8 +5,8 @@
 #' @template param-auth
 #' @return A list of two named lists, DataServices and .attrs (Version).
 #'         DataServices contains the dataset definition.
-#' @importFrom XML xmlParse xmlToList
 #' @importFrom httr add_headers authenticate content GET
+#' @importFrom xml2 as_list
 #' @import magrittr
 #' @export
 get_metadata <- function(pid,
@@ -21,6 +21,5 @@ get_metadata <- function(pid,
       httr::authenticate(un, pw)
     ) %>%
     httr::content(.) %>%
-    XML::xmlParse(.) %>%
-    XML::xmlToList(.)
+    xml2::as_list(.)
 }
