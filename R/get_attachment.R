@@ -11,8 +11,7 @@
 #' @param url The OData URL, ending in .svc, no trailing slash.
 #' @return The inferred download URL.
 attachment_url <- function(
-  pid, fid, uuid, fn, url = Sys.getenv("ODKC_URL")
-  ) {
+                           pid, fid, uuid, fn, url = Sys.getenv("ODKC_URL")) {
   glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions/{uuid}/attachments/{fn}")
 }
 

@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="ODK Central OData Client">
-<meta property="og:description" content="Utilities to access data from ODK Central's OData service, and to
+<meta property="og:description" content="Utilities to access data from ODK Central's API, and to
     transform them into a tidy format. The outcome should be similar to the
     manual download from ODK Central, and the export from ODK Briefcase.">
 <meta name="twitter:card" content="summary">
@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
       </span>
     </div>
 
@@ -86,14 +86,20 @@
     
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="ruodk-an-odk-central-odata-client" class="section level1">
+<div id="ruodk-an-odk-central-odatarest-client" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ruodk-an-odk-central-odata-client" class="anchor"></a>ruODK: An ODK Central OData client <img src="reference/figures/ruODK.png" align="right" alt="Are you ODK?" width="120">
+<a href="#ruodk-an-odk-central-odatarest-client" class="anchor"></a>ruODK: An ODK Central OData/REST client <img src="reference/figures/ruODK.png" align="right" alt="Are you ODK?" width="120">
 </h1></div>
 
 <p>Especially in these trying times, it is important to ask: “R U ODK?”</p>
-<p>ODK Central provides data through an OData API, which has a comprehensive and interactive <a href="https://odkcentral.docs.apiary.io/#reference/odata-endpoints">documentation</a>.</p>
-<p>This package aims to provide an automatable, reproducible way to retrieve data from ODK Central’s OData API in the R ecosystem.</p>
+<p>[ODK Central])(<a href="https://docs.opendatakit.org/central-intro/" class="uri">https://docs.opendatakit.org/central-intro/</a>) an Open Data Kit server alternative like ODK Aggregate. It manages user accounts and permissions, stores form definitions, and allows data collection clients like ODK Collect to connect to it for form download and submission upload.</p>
+<p>ODK Central’s API provides access to its data and functionality through both an OData and a RESTful API. It is accompanied by a comprehensive and interactive <a href="https://odkcentral.docs.apiary.io/#reference/odata-endpoints">documentation</a>.</p>
+<p>ruODK aims:</p>
+<ul>
+<li>To wrap all ODK Central API endpoints. This is a work in progress with focus on “getting the data out” first.</li>
+<li>To provide working examples of interacting with the ODK Central API.</li>
+<li>To provide convenience helpers for the day to day tasks when working with ODK Central in R.</li>
+</ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -123,12 +129,13 @@
 <div id="configure-ruodk" class="section level3">
 <h3 class="hasAnchor">
 <a href="#configure-ruodk" class="anchor"></a>Configure ruODK</h3>
-<p>For now, ODK Central supports BasicAuth (username and password).</p>
+<p>For now, ODK Central supports BasicAuth (username and password) and SessionAuth. ruODK supports only BasicAuth for now. Each ruODK function accepts the server base URL, username, and password, with defaults looking for R environment variables <code>ODKC_URL</code>, <code>ODKC_UN</code>, and <code>ODKC_PW</code>.</p>
 <p>We could supply those credentials to each <code>ruODK</code> function call, but that’s cumbersome and not securely reproducible (the command would include the sensitive credentials).</p>
-<p>A better way is to set your ODK Central username (email) and password as R environment variables, e.g. in your <code>~/.Rprofile</code> (to set them per machine), or in a separate file (to set them per project).</p>
-<p><code>ruODK</code> functions default to use the R environment variables <code>ODKC_UN</code> and <code>ODKC_PW</code> for authentication.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_UN=</span><span class="st">"...@..."</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_PW=</span><span class="st">"......."</span>)</a></code></pre></div>
+<p>A better way is to set your ODK Central URL, username (email), and password as R environment variables, e.g. in your <code>~/.Rprofile</code> (to set them per machine), or in a separate file outside of version control (to set them per project).</p>
+<p><code>ruODK</code> functions default to use the R environment variables <code>ODKC_URL</code>, <code>ODKC_UN</code>, and <code>ODKC_PW</code> for authentication.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_URL=</span><span class="st">"https://odkcentral.mydomain.com"</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_UN=</span><span class="st">"me@mail.com"</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_PW=</span><span class="st">"......."</span>)</a></code></pre></div>
 </div>
 <div id="use-ruodk" class="section level3">
 <h3 class="hasAnchor">
@@ -140,13 +147,15 @@
 <a class="sourceLine" id="cb3-2" title="2"></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="co"># ODK Central credentials</span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="cf">if</span> (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files">file.exists</a></span>(<span class="st">"~/.Rprofile"</span>)) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/source">source</a></span>(<span class="st">"~/.Rprofile"</span>)</a>
-<a class="sourceLine" id="cb3-5" title="5"></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co"># ODK Central OData service URL</span></a>
-<a class="sourceLine" id="cb3-7" title="7">data_url &lt;-<span class="st"> "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span></a>
-<a class="sourceLine" id="cb3-8" title="8"></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co"># Download from ODK Central</span></a>
-<a class="sourceLine" id="cb3-10" title="10">meta &lt;-<span class="st"> </span>data_url <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/get_metadata.html">get_metadata</a></span>()</a>
-<a class="sourceLine" id="cb3-11" title="11">data &lt;-<span class="st"> </span>data_url <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/get_submissions.html">get_submissions</a></span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/parse_submissions.html">parse_submissions</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co"># .RProfile sets ODKC_{URL, UN, PW}</span></a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co"># ODK Central OData service URL</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co"># "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span></a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="co"># Download from ODK Central</span></a>
+<a class="sourceLine" id="cb3-11" title="11">proj &lt;-<span class="st"> </span><span class="kw"><a href="reference/project_list.html">project_list</a></span>()</a>
+<a class="sourceLine" id="cb3-12" title="12">meta &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ruODK/topics/get_metadata">get_metadata</a></span>(<span class="dt">pid =</span> <span class="dv">1</span>, <span class="dt">fid =</span> <span class="st">"build_Turtle-Sighting-0-1_1559790020"</span>)</a>
+<a class="sourceLine" id="cb3-13" title="13">data &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ruODK/topics/get_submissions">get_submissions</a></span>(<span class="dt">pid =</span> <span class="dv">1</span>, <span class="dt">fid =</span> <span class="st">"build_Turtle-Sighting-0-1_1559790020"</span>) <span class="op">%&gt;%</span><span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ruODK/topics/parse_submissions">parse_submissions</a></span>()</a></code></pre></div>
 <p>A more detailed walk-through with some data visualisation examples is available in the <code><a href="articles/example.html">vignette("example")</a></code> or <a href="https://dbca-wa.github.io/ruODK/articles/example.html">here</a>.</p>
 </div>
 </div>

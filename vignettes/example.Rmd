@@ -73,7 +73,11 @@ data("fq_raw")
 data("fq_tae")
 ```
 
-In our example, the OData service URL is `r data_url`.
+In our example, the OData service URL is `r data_url`. 
+This URL contains the base URL (`r url`), the project ID (`r pid`), and the form ID (`r fid`).
+
+ruODK made the opinionated decision to use these components separately in its functions.
+
 Let's first get the metadata to review our data schema.
 
 ```{r load_ometadata, eval=F}
@@ -82,8 +86,8 @@ fq_meta <- get_metadata(pid, fid, url = url, un = un, pw = pw)
 
 Each downloadable table is an EntityType under DataServices.Schema.
 The main form is called "Submissions". 
-Repeating form groups, as in our example "taxon_encounter", are named "Submissions.taxon_encounter". The exact name is found under
-DataServices.Schema.EntityType[n].attrs.Name.
+Repeating form groups, in our example "taxon_encounter", are named "Submissions.taxon_encounter". 
+The exact name is found under DataServices.Schema.EntityType[n].attrs.Name.
 
 ```{r view_metadata}
 listviewer::jsonedit(fq_meta)

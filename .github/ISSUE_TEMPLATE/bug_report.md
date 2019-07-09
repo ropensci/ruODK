@@ -1,3 +1,12 @@
+---
+name: Bug report
+about: ruODK is doing something wrong
+title: ''
+labels: bug
+assignees: florianm
+
+---
+
 ## Problem
 <!-- Please briefly describe your problem and what output you expect. -->
 

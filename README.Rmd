@@ -12,18 +12,26 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# ruODK: An ODK Central OData client <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
+# ruODK: An ODK Central OData/REST client <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 [![GitHub issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues)
 [![Travis build status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
 [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
   
 Especially in these trying times, it is important to ask: "R U ODK?"
 
-ODK Central provides data through an OData API, which has a comprehensive and 
-interactive [documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
+[ODK Central])(https://docs.opendatakit.org/central-intro/) an Open Data Kit server alternative like ODK Aggregate. 
+It manages user accounts and permissions, stores form definitions, and allows data collection clients like 
+ODK Collect to connect to it for form download and submission upload.
 
-This package aims to provide an automatable, reproducible way to retrieve data
-from ODK Central's OData API in the R ecosystem.
+ODK Central's API provides access to its data and functionality through both an OData and a RESTful API. 
+It is accompanied by a comprehensive and interactive [documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
+
+ruODK aims:
+
+* To wrap all ODK Central API endpoints. This is a work in progress with focus on "getting the data out" first.
+* To provide working examples of interacting with the ODK Central API.
+* To provide convenience helpers for the day to day tasks when working with ODK Central in R.
+
 
 ## Installation
 
@@ -57,21 +65,25 @@ The `.odkbuild` versions can be loaded into [ODK Build](https://build.opendataki
 while the `.xml` versions can be imported into ODK Central.
 
 ### Configure ruODK
-For now, ODK Central supports BasicAuth (username and password).
+For now, ODK Central supports BasicAuth (username and password) and SessionAuth.
+ruODK supports only BasicAuth for now. 
+Each ruODK function accepts the server base URL, username, and password, with defaults
+looking for R environment variables `ODKC_URL`, `ODKC_UN`, and `ODKC_PW`.
 
 We could supply those credentials to each `ruODK` function call, but that's
 cumbersome and not securely reproducible (the command would include the sensitive 
 credentials).
 
-A better way is to set your ODK Central username (email) and password as 
+A better way is to set your ODK Central URL, username (email), and password as 
 R environment variables, e.g. in your `~/.Rprofile` (to set them per machine),
-or in a separate file (to set them per project).
+or in a separate file outside of version control (to set them per project).
 
-`ruODK` functions default to use the R environment variables `ODKC_UN` and `ODKC_PW`
-for authentication.
+`ruODK` functions default to use the R environment variables 
+`ODKC_URL`, `ODKC_UN`, and `ODKC_PW` for authentication.
   
 ```{r, eval=F}
-Sys.setenv(ODKC_UN="...@...")
+Sys.setenv(ODKC_URL="https://odkcentral.mydomain.com")
+Sys.setenv(ODKC_UN="me@mail.com")
 Sys.setenv(ODKC_PW=".......")
 ```
 
@@ -90,13 +102,15 @@ library(ruODK)
 
 # ODK Central credentials
 if (file.exists("~/.Rprofile")) source("~/.Rprofile")
+# .RProfile sets ODKC_{URL, UN, PW}
 
 # ODK Central OData service URL
-data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
+# "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
 
 # Download from ODK Central
-meta <- data_url %>% get_metadata()
-data <- data_url %>% get_submissions() %>% parse_submissions()
+proj <- project_list()
+meta <- ruODK::get_metadata(pid = 1, fid = "build_Turtle-Sighting-0-1_1559790020")
+data <- ruODK::get_submissions(pid = 1, fid = "build_Turtle-Sighting-0-1_1559790020") %>% ruODK::parse_submissions()
 ```
 
 A more detailed walk-through with some data visualisation examples is available
