@@ -1,7 +1,6 @@
 context("test-get_metadata.R")
 
 test_that("get_metadata works", {
-  library(xml2)
   md <- get_metadata(
     Sys.getenv("ODKC_TEST_PID"),
     Sys.getenv("ODKC_TEST_FID"),
