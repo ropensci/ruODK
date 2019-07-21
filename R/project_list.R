@@ -12,7 +12,6 @@
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime
-#' @import magrittr
 #' @export
 project_list <- function(url = Sys.getenv("ODKC_URL"),
                          un = Sys.getenv("ODKC_UN"),

@@ -10,7 +10,6 @@
 #' @template param-auth
 #' @importFrom glue glue
 #' @importFrom httr add_headers authenticate content GET
-#' @import magrittr
 #' @export
 #' @return A list of two named lists, value and context. `value` contains
 #' the submissions, which can be "rectangled" using

@@ -1,7 +1,8 @@
 #' Build the download URL for one or many submission UUIDs and filenames.
 #'
 #' This is a helper function used by `get_attachment`.
-#' This function is vectorised and accepts single values or vectors for uuid and fn.
+#' This function is vectorised and accepts single values or vectors for uuid and
+#' fn.
 #'
 #' @template param-pid
 #' @template param-fid
@@ -10,9 +11,12 @@
 #'           attachment filenames.
 #' @param url The OData URL, ending in .svc, no trailing slash.
 #' @return The inferred download URL.
-attachment_url <- function(
-                           pid, fid, uuid, fn, url = Sys.getenv("ODKC_URL")) {
-  glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions/{uuid}/attachments/{fn}")
+attachment_url <- function(pid, fid, uuid, fn,
+                           url = Sys.getenv("ODKC_URL")) {
+  glue::glue(
+    "{url}/v1/projects/{pid}/forms/{fid}/",
+    "submissions/{uuid}/attachments/{fn}"
+  )
 }
 
 #' Download one media attachment
@@ -44,7 +48,11 @@ get_one_attachment <- function(pth, fn, src,
     message("Filename is NA, skipping download.")
     return(NA)
   }
-  httr::GET(src, httr::authenticate(un, pw), httr::write_disk(pth, overwrite = T))
+  httr::GET(
+    src,
+    httr::authenticate(un, pw),
+    httr::write_disk(pth, overwrite = TRUE)
+  )
   if (verbose == TRUE) message(glue::glue("Saved {pth}\n"))
   return(pth %>% as.character())
 }
@@ -91,13 +99,21 @@ get_attachment <- function(pid,
                            pw = Sys.getenv("ODKC_PW"),
                            verbose = FALSE) {
   dest_dir <- fs::path(local_dir, submission_uuid)
-  if (verbose == TRUE) message(glue::glue("Using local directory: {dest_dir}\n"))
+  if (verbose == TRUE) {
+    message(glue::glue("Using local directory: {dest_dir}\n"))
+  }
   fs::dir_create(dest_dir)
 
   tibble::tibble(
     pth = fs::path(dest_dir, attachment_filename),
     fn = attachment_filename,
-    src = attachment_url(pid, fid, submission_uuid, attachment_filename, url = url),
+    src = attachment_url(
+      pid,
+      fid,
+      submission_uuid,
+      attachment_filename,
+      url = url
+    ),
     un = un,
     pw = pw,
     verbose = verbose

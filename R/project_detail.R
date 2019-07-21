@@ -9,15 +9,14 @@
 #' @param pid The numeric ID of the project, e.g.: 3.
 #' @template param-auth
 #' @return A tibble with exactly one row for the project and all project metadata
-#'         as columns as per ODK Central API docs.
-#'         Values differ to values returned by ODK Central API:
+#'   as columns as per ODK Central API docs.
+#'   Values differ to values returned by ODK Central API:
 #'
-#'         * archived: FALSE (if NULL) else TRUE
-#'         * dates: NA if NULL
+#'   * archived: FALSE (if NULL) else TRUE
+#'   * dates: NA if NULL
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime
-#' @import magrittr
 #' @export
 project_detail <- function(pid,
                            url = Sys.getenv("ODKC_URL"),
@@ -41,9 +40,21 @@ project_detail <- function(pid,
         forms = .$forms,
         appUsers = .$appUsers,
         createdAt = .$createdAt,
-        updatedAt = ifelse(is.null(.$updatedAt), NA, .$updatedAt),
-        lastSubmission = ifelse(is.null(.$lastSubmission), NA, .$lastSubmission),
-        archived = ifelse(is.null(.$archived), FALSE, TRUE),
+        updatedAt = ifelse(
+          is.null(.$updatedAt),
+          NA,
+          .$updatedAt
+        ),
+        lastSubmission = ifelse(
+          is.null(.$lastSubmission),
+          NA,
+          .$lastSubmission
+        ),
+        archived = ifelse(
+          is.null(.$archived),
+          FALSE,
+          TRUE
+        ),
         verbs = list(.$verbs)
       )
     }

@@ -24,19 +24,33 @@ listcol_names <- function(tbl) {
 #' @importFrom glue glue
 #' @importFrom tidyr unnest_wider
 #' @export
-unnest_all <- function(nested_tbl, names_repair = "universal", verbose = FALSE) {
+unnest_all <- function(nested_tbl,
+                       names_repair = "universal",
+                       verbose = FALSE) {
   for (colname in listcol_names(nested_tbl)) {
     # colname <- listcol_names(nested_tbl)[[1]]
     if (!(colname %in% names(nested_tbl))) {
-      if (verbose == TRUE) message(glue::glue("Skipping renamed column '{colname}'\n"))
+      if (verbose == TRUE) {
+        message(glue::glue("Skipping renamed column '{colname}'\n"))
+      }
     } else {
-      if (verbose == TRUE) message(glue::glue("Unnesting column '{colname}'\n"))
-      nested_tbl <- tidyr::unnest_wider(nested_tbl, colname, names_repair = names_repair)
+      if (verbose == TRUE) {
+        message(glue::glue("Unnesting column '{colname}'\n"))
+      }
+      nested_tbl <- tidyr::unnest_wider(
+        nested_tbl, colname,
+        names_repair = names_repair
+      )
     }
   }
   if (length(listcol_names(nested_tbl)) > 0) {
-    if (verbose == TRUE) message("Found more nested columns, unnesting again.\n")
-    nested_tbl <- unnest_all(nested_tbl, names_repair = names_repair, verbose = verbose)
+    if (verbose == TRUE) {
+      message("Found more nested columns, unnesting again.\n")
+    }
+    nested_tbl <- unnest_all(
+      nested_tbl,
+      names_repair = names_repair, verbose = verbose
+    )
   }
   nested_tbl
 }
@@ -50,7 +64,9 @@ unnest_all <- function(nested_tbl, names_repair = "universal", verbose = FALSE) 
 #' @return The submissions as unnested tibble
 #' @importFrom tibble as_tibble
 #' @export
-parse_submissions <- function(data, names_repair = "universal", verbose = FALSE) {
+parse_submissions <- function(data,
+                              names_repair = "universal",
+                              verbose = FALSE) {
   . <- NULL
   data %>%
     tibble::as_tibble(.) %>%

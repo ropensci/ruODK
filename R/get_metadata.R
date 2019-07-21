@@ -7,7 +7,6 @@
 #'         DataServices contains the dataset definition.
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom xml2 as_list
-#' @import magrittr
 #' @export
 get_metadata <- function(pid,
                          fid,

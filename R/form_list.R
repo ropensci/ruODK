@@ -9,7 +9,6 @@
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime
-#' @import magrittr
 #' @export
 form_list <- function(pid,
                       url = Sys.getenv("ODKC_URL"),
