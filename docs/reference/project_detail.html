@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List all projects. — project_list • ruODK</title>
+<title>List all details of one project. — project_detail • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="List all projects. — project_list" />
+<meta property="og:title" content="List all details of one project. — project_detail" />
 
-<meta property="og:description" content="See https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects" />
+<meta property="og:description" content="See https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,23 +114,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List all projects.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/project_list.R'><code>R/project_list.R</code></a></small>
-    <div class="hidden name"><code>project_list.Rd</code></div>
+    <h1>List all details of one project.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/project_detail.R'><code>R/project_detail.R</code></a></small>
+    <div class="hidden name"><code>project_detail.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>See https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects</p>
+    <p>See https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_list</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
+    <pre class="usage"><span class='fu'>project_detail</span>(<span class='no'>pid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pid</th>
+      <td><p>The numeric ID of the project, e.g.: 3.</p></td>
+    </tr>
     <tr>
       <th>url</th>
       <td><p>The OData URL, ending in .svc, no trailing slash.</p></td>
@@ -151,12 +155,15 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with one row per project and all project metadata
-        as columns as per ODK Central API docs.</p>
+    <p>A tibble with exactly one row for the project and all project metadata
+        as columns as per ODK Central API docs.
+        Values differ to values returned by ODK Central API:</p>
+<p>* archived: FALSE (if NULL) else TRUE
+        * dates: NA if NULL</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>While the API endpoint will return all projects,
+    <p>While the API endpoint will return all details for one project,
 `project_list` will fail with incorrect or missing authentication.</p>
     
 
