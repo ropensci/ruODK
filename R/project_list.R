@@ -3,7 +3,7 @@
 #'
 #' See https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects
 #'
-#' While the API endpoint will return all projects
+#' While the API endpoint will return all projects,
 #' `project_list` will fail with incorrect or missing authentication.
 #'
 #' @template param-auth

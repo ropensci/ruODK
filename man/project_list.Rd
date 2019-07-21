@@ -26,6 +26,6 @@ A tibble with one row per project and all project metadata
 See https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects
 }
 \details{
-While the API endpoint will return all projects
+While the API endpoint will return all projects,
 `project_list` will fail with incorrect or missing authentication.
 }
