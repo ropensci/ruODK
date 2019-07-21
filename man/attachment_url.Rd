@@ -23,5 +23,6 @@ The inferred download URL.
 }
 \description{
 This is a helper function used by `get_attachment`.
-This function is vectorised and accepts single values or vectors for uuid and fn.
+This function is vectorised and accepts single values or vectors for uuid and
+fn.
 }

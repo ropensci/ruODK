@@ -22,11 +22,11 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 }
 \value{
 A tibble with exactly one row for the project and all project metadata
-        as columns as per ODK Central API docs.
-        Values differ to values returned by ODK Central API:
+  as columns as per ODK Central API docs.
+  Values differ to values returned by ODK Central API:
 
-        * archived: FALSE (if NULL) else TRUE
-        * dates: NA if NULL
+  * archived: FALSE (if NULL) else TRUE
+  * dates: NA if NULL
 }
 \description{
 See https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details

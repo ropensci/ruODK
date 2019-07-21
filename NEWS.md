@@ -1,6 +1,9 @@
 # ruODK 0.3.0
 * Use tidyverse issue template
-* Started on REST API: `form_list`
+* Follow `goodpractice`
+* Started on REST API: `form_list`, `project_list`, `project_detail`. Naming
+  scheme is `object_verb`. For now, functions related to the OData endpoint
+  are named `verb_object`, maybe we should rename them to `odata_object_verb`.
 * Refactor URLs - build from project and form IDs
 
 # ruODK 0.2.4
