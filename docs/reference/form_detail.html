@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • ruODK</title>
+<title>Show details for one form. — form_detail • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,10 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Show details for one form. — form_detail" />
+
+<meta property="og:description" content="See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +50,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -117,93 +120,64 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Show details for one form.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/form_detail.R'><code>R/form_detail.R</code></a></small>
+    <div class="hidden name"><code>form_detail.Rd</code></div>
     </div>
 
-    <div id="ruodk-030" class="section level1">
-<h1 class="page-header">
-<a href="#ruodk-030" class="anchor"></a>ruODK 0.3.0</h1>
-<ul>
-<li>Use tidyverse issue template</li>
-<li>Follow <code>goodpractice</code>
-</li>
-<li>Created vignette “Setup”</li>
-<li>Add AppVeyor</li>
-<li>Refactor storage path of attachments to not contain “uuid:” (for Windows compat)</li>
-<li>Started on REST API: <code>project_list</code>, <code>project_detail</code>, <code>form_list</code>, <code>form_detail</code>. Naming scheme is <code>object_verb</code>.</li>
-<li>For now, functions related to the OData endpoint are named <code>verb_object</code>, maybe we should rename them to <code>odata_object_verb</code>.</li>
-<li>Refactor URLs - build from project and form IDs</li>
-</ul>
-</div>
-    <div id="ruodk-024" class="section level1">
-<h1 class="page-header">
-<a href="#ruodk-024" class="anchor"></a>ruODK 0.2.4</h1>
-<ul>
-<li>Cleaned up logo, thanks to <a href='https://github.com/issa-tseng'>@issa-tseng</a> for suggestions</li>
-</ul>
-</div>
-    <div id="ruodk-023" class="section level1">
-<h1 class="page-header">
-<a href="#ruodk-023" class="anchor"></a>ruODK 0.2.3</h1>
-<ul>
-<li>Added a new form, Flora Quadrat 0.3 to inst/extdata.</li>
-</ul>
-</div>
-    <div id="ruodk-022" class="section level1">
-<h1 class="page-header">
-<a href="#ruodk-022" class="anchor"></a>ruODK 0.2.2</h1>
-<ul>
-<li>Added more test coverage.</li>
-</ul>
-</div>
-    <div id="ruodk-021" class="section level1">
-<h1 class="page-header">
-<a href="#ruodk-021" class="anchor"></a>ruODK 0.2.1</h1>
-<ul>
-<li>Added various <code>usethis</code> goodies, test stubs, badges.</li>
-</ul>
-</div>
-    <div id="ruodk-020" class="section level1">
-<h1 class="page-header">
-<a href="#ruodk-020" class="anchor"></a>ruODK 0.2.0</h1>
-<ul>
-<li>Recursively unnests raw data into wide format. Manual post-processing is still required to rename (anonymous in ODK and auto-named through R) coordinates, and to handle attachments.</li>
-</ul>
-</div>
-    <div id="ruodk-010" class="section level1">
-<h1 class="page-header">
-<a href="#ruodk-010" class="anchor"></a>ruODK 0.1.0</h1>
-<ul>
-<li>Parses metadata, submissions, and handles attachments (retaining already downloaded attachments).</li>
-<li>Includes example forms as both <code>.xml</code> and <code>.odbbuild</code> in <code>inst/extdata</code>.</li>
-<li>Includes example data as retrieved from ODK Central.</li>
-<li>Includes vignette demonstrating tidying of retrieved data.</li>
-<li>Handles repeating groups.</li>
-</ul>
-<p>Roadmap:</p>
-<ul>
-<li>Handle paginated submissions.</li>
-<li>Retain already downloaded submissions.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    
+    <p>See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form</p>
+    
+    </div>
 
+    <pre class="usage"><span class='fu'>form_detail</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.getenv'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pid</th>
+      <td><p>The numeric ID of the project, e.g.: 2.</p></td>
+    </tr>
+    <tr>
+      <th>fid</th>
+      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
+    </tr>
+    <tr>
+      <th>url</th>
+      <td><p>The OData URL, ending in .svc, no trailing slash.</p></td>
+    </tr>
+    <tr>
+      <th>un</th>
+      <td><p>The ODK Central username (an email address),
+default: Sys.getenv("ODKC_UN").
+Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")</p></td>
+    </tr>
+    <tr>
+      <th>pw</th>
+      <td><p>The ODK Central password,,
+default: Sys.getenv("ODKC_PW").
+Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A tibble with one row and all form metadata as columns.</p>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#ruodk-030">0.3.0</a></li>
-        <li><a href="#ruodk-024">0.2.4</a></li>
-        <li><a href="#ruodk-023">0.2.3</a></li>
-        <li><a href="#ruodk-022">0.2.2</a></li>
-        <li><a href="#ruodk-021">0.2.1</a></li>
-        <li><a href="#ruodk-020">0.2.0</a></li>
-        <li><a href="#ruodk-010">0.1.0</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
+  </div>
 </div>
 
       <footer>

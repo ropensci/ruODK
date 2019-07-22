@@ -4,7 +4,7 @@ author: "Florian Mayer, DBCA"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{odata}
+  %\VignetteIndexEntry{restapi}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
