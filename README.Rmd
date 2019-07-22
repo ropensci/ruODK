@@ -135,10 +135,12 @@ pkgdown::build_site()
 
 ## Acknowledgements
 The Department of Biodiversity, Conservation and Attractions (DBCA) respectfully 
-acknowledges Aboriginal people as the traditional owners of the lands and waters it manages.
+acknowledges Aboriginal people as the traditional owners of the lands and waters 
+it manages.
 
 One of the Department's core missions is to conserve and protect the value of 
 the land to the culture and heritage of Aboriginal people.
 
 This software was created both as a contribution to the ODK ecosystem and for 
-the conservation of the biodiversity of Western Australia, and in doing so, caring for country.
+the conservation of the biodiversity of Western Australia, and in doing so, 
+caring for country.

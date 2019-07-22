@@ -1,0 +1,77 @@
+---
+title: "Getting data from the API"
+author: "Florian Mayer, DBCA"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{odata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ruODK)
+```
+
+# Scope
+This vignette provides a walk-through of the "getting data out" functions of
+the RESTful API endpoints which list and view details.
+This is useful to build ETL pipelines from ODK Central into other data warehouses,
+or to build automated and reproducible reporting. 
+
+The result will be similar to
+
+* browsing ODK Central and downloading submissions as zip archive,
+* viewing ODK Central data in MS PowerBI, MS Excel, or Tableau through the
+  OData service, or
+* viewing ODK Central data through ruODK's OData functions.
+
+Not implemented (yet) are the "managing ODK Central" functions which create, 
+update, and delete projects, forms, users, roles, and permissions. 
+We haven't yet found a strong use case to automate those functions - 
+ODK Central (driven by humans) does those jobs beautifully.
+
+# Setup ruODK
+See [`vignette("Setup", package = "ruODK")`](https://dbca-wa.github.io/ruODK/articles/setup.html) 
+for detailed options to configure `ruODK`.
+
+# Projects
+
+List projects.
+
+```{r project_list}
+p <- project_list()
+p %>% knitr::kable(.)
+```
+
+Inspect a project. Turtles are, not surprisingly, number 1. Of course they are.
+
+```{r project_details}
+pd <- project_detail(1)
+pd %>% knitr::kable(.)
+```
+
+# Forms
+
+```{r form_list}
+forms <- form_list(1)
+forms  %>% dplyr::select(-"xml") %>% knitr::kable(.)
+```
+
+```{r form_detail}
+form <- form_detail(1, forms$xmlFormId[[1]])
+form %>% dplyr::select(-"xml") %>% knitr::kable(.)
+```
+
+# Submissions
+Coming soon
+
+# Attachments
+Comin soon

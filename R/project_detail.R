@@ -42,12 +42,12 @@ project_detail <- function(pid,
         createdAt = .$createdAt,
         updatedAt = ifelse(
           is.null(.$updatedAt),
-          NA,
+          NA_character_,
           .$updatedAt
         ),
         lastSubmission = ifelse(
           is.null(.$lastSubmission),
-          NA,
+          NA_character_,
           .$lastSubmission
         ),
         archived = ifelse(
