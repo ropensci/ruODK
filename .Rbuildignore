@@ -12,3 +12,4 @@
 ^SUPPORT\.md$
 ^\.github$
 ^\man-roxygen$
+^appveyor\.yml$

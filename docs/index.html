@@ -93,6 +93,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ruodk-odk-central-api-wrapper" class="anchor"></a>ruODK: ODK Central API wrapper <img src="reference/figures/ruODK.png" align="right" alt="Are you ODK?" width="120">
 </h1></div>
+<!-- badges: start -->
 
 <p>Especially in these trying times, it is important to ask: “r u ODK?”</p>
 <p><a href="https://docs.opendatakit.org/central-intro/">ODK Central</a> an Open Data Kit server alternative like ODK Aggregate. It manages user accounts and permissions, stores form definitions, and allows data collection clients like ODK Collect to connect to it for form download and submission upload.</p>
@@ -118,11 +119,14 @@
 <ul>
 <li>
 <a href="https://docs.opendatakit.org/central-users/#creating-a-web-user">Create a web user account</a> on an ODK Central instance. Your username will be an email address.</li>
-<li>Create a <a href="https://docs.opendatakit.org/central-projects/">project</a> and give the web user the relevant permissions.</li>
+<li>
+<a href="https://docs.opendatakit.org/central-projects/">Create a project</a> and give the web user the relevant permissions.</li>
 <li>Create a Xform, e.g. using ODK Build, or use the provided example forms.</li>
-<li>Publish the <a href="https://docs.opendatakit.org/central-forms/">form to ODK Central</a>.</li>
+<li>
+<a href="https://docs.opendatakit.org/central-forms/">Publish the form</a> to ODK Central.</li>
 <li>Collect some data for this form on ODK Collect and let ODK Collect submit the finalised forms to ODK Central.</li>
-<li>Get the ODK Central OData service URL for the form.</li>
+<li>
+<a href="https://docs.opendatakit.org/central-submissions/#connecting-to-submission-data-over-odata">Get the ODK Central OData service URL</a> for the form.</li>
 </ul>
 <p>A note on the <a href="https://github.com/dbca-wa/ruODK/tree/master/inst/extdata">included example forms</a>: The <code>.odkbuild</code> versions can be loaded into <a href="https://build.opendatakit.org/">ODK Build</a>, while the <code>.xml</code> versions can be imported into ODK Central.</p>
 </div>
@@ -218,6 +222,7 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/dbca-wa/ruODK/issues"><img src="https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout" alt="GitHub issues"></a></li>
 <li><a href="https://travis-ci.org/dbca-wa/ruODK"><img src="https://travis-ci.org/dbca-wa/ruODK.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://ci.appveyor.com/project/dbca-wa/ruODK"><img src="https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
 <li><a href="https://codecov.io/github/dbca-wa/ruODK?branch=master"><img src="https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 </ul>
 </div>

@@ -1,3 +1,21 @@
+#' Strip the leading "uuid:" from a UUID hash.
+#'
+#' @param uuid A string which may contain any number of "uuid:"
+#' @return The string with every occurrence of "uuid:" deleted.
+#' @importFrom stringr str_replace
+strip_uuid <- function(uuid){
+  uuid %>% stringr::str_replace("uuid:", "")
+}
+
+#' Prepend a leading "uuid:" to any string, e.g. an md5 hash.
+#'
+#' @param md5hash A string, e.g. an md5 hash.
+#' @return The string with a prepended "uuid:"
+#' @importFrom glue glue
+prepend_uuid <- function(md5hash){
+  glue::glue("uuid:{md5hash}")
+}
+
 #' Build the download URL for one or many submission UUIDs and filenames.
 #'
 #' This is a helper function used by `get_attachment`.
@@ -98,7 +116,7 @@ get_attachment <- function(pid,
                            un = Sys.getenv("ODKC_UN"),
                            pw = Sys.getenv("ODKC_PW"),
                            verbose = FALSE) {
-  dest_dir <- fs::path(local_dir, submission_uuid)
+  dest_dir <- fs::path(local_dir, strip_uuid(submission_uuid))
   if (verbose == TRUE) {
     message(glue::glue("Using local directory: {dest_dir}\n"))
   }
