@@ -76,8 +76,9 @@ imported into ODK Central.
 
 ## Configure ruODK
 
-Read `vignette("Setup", package = "ruODK")` for detailed options to
-configure `ruODK`.
+Read [`vignette("Setup", package =
+"ruODK")`](https://dbca-wa.github.io/ruODK/articles/setup.html) for
+detailed options to configure `ruODK`.
 
 For a quick start, run the following chunk with your settings:
 
@@ -122,8 +123,8 @@ data <- ruODK::get_submissions(
 ```
 
 A more detailed walk-through with some data visualisation examples is
-available in the `vignette("example")` or
-[here](https://dbca-wa.github.io/ruODK/articles/example.html).
+available in the [`vignette("odata",
+package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata.html).
 
 ## Contribute
 
