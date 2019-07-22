@@ -2,6 +2,8 @@
 * Use tidyverse issue template
 * Follow `goodpractice`
 * Created vignette "Setup"
+* Add AppVeyor
+* Refactor storage path of attachments to not contain "uuid:" (for Windows compat)
 * Started on REST API: `form_list`, `project_list`, `project_detail`. Naming
   scheme is `object_verb`. For now, functions related to the OData endpoint
   are named `verb_object`, maybe we should rename them to `odata_object_verb`.

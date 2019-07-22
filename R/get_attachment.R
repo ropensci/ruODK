@@ -4,7 +4,8 @@
 #' @return The string with every occurrence of "uuid:" deleted.
 #' @importFrom stringr str_replace
 strip_uuid <- function(uuid){
-  uuid %>% stringr::str_replace("uuid:", "")
+  . <- NULL
+  uuid %>% stringr::str_replace_all(., pattern = "uuid:", replacement = "")
 }
 
 #' Prepend a leading "uuid:" to any string, e.g. an md5 hash.
@@ -13,7 +14,8 @@ strip_uuid <- function(uuid){
 #' @return The string with a prepended "uuid:"
 #' @importFrom glue glue
 prepend_uuid <- function(md5hash){
-  glue::glue("uuid:{md5hash}")
+  . <- NULL
+  glue::glue("uuid:{md5hash}") %>% as.character(.)
 }
 
 #' Build the download URL for one or many submission UUIDs and filenames.
