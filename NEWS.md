@@ -1,6 +1,7 @@
 # ruODK 0.3.0
 * Use tidyverse issue template
 * Follow `goodpractice`
+* Created vignette "Setup"
 * Started on REST API: `form_list`, `project_list`, `project_detail`. Naming
   scheme is `object_verb`. For now, functions related to the OData endpoint
   are named `verb_object`, maybe we should rename them to `odata_object_verb`.

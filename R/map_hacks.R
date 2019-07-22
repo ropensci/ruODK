@@ -1,7 +1,7 @@
 #' Map given function, handle null as NA and flatten_chr()
 #'
-#' @details Use this function to extract chr elements with NAs from a list of lists
-#' into a tibble.
+#' @details Use this function to extract chr elements with NAs
+#' from a list of lists into a tibble.
 #'
 #' @param .x An interable data object
 #' @param .f A function to map over the data
@@ -17,8 +17,8 @@ map_chr_hack <- function(.x, .f, ...) {
 
 #' Map given function, handle null as NA, flatten_chr() and convert to dttm
 #'
-#' @details Use this function to extract ISO timestamps with NAs from a list of lists
-#' into a tibble.
+#' @details Use this function to extract ISO timestamps with NAs
+#' from a list of lists into a tibble.
 #'
 #' @param .x An interable data object
 #' @param .f A function to map over the data

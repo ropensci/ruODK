@@ -17,8 +17,8 @@ map_chr_hack(.x, .f, ...)
 Map given function, handle null as NA and flatten_chr()
 }
 \details{
-Use this function to extract chr elements with NAs from a list of lists
-into a tibble.
+Use this function to extract chr elements with NAs
+from a list of lists into a tibble.
 }
 \author{
 Jennifer Bryan https://github.com/jennybc/

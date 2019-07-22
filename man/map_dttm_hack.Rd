@@ -17,6 +17,6 @@ map_dttm_hack(.x, .f, ...)
 Map given function, handle null as NA, flatten_chr() and convert to dttm
 }
 \details{
-Use this function to extract ISO timestamps with NAs from a list of lists
-into a tibble.
+Use this function to extract ISO timestamps with NAs
+from a list of lists into a tibble.
 }

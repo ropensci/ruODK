@@ -17,22 +17,26 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
 [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
   
-Especially in these trying times, it is important to ask: "R U ODK?"
+Especially in these trying times, it is important to ask: "r u ODK?"
 
-[ODK Central](https://docs.opendatakit.org/central-intro/) an Open Data Kit server alternative like ODK Aggregate. 
-It manages user accounts and permissions, stores form definitions, and allows data collection clients like 
-ODK Collect to connect to it for form download and submission upload.
+[ODK Central](https://docs.opendatakit.org/central-intro/) an Open Data Kit 
+server alternative like ODK Aggregate.  It manages user accounts and permissions, 
+stores form definitions, and allows data collection clients like ODK Collect to 
+connect to it for form download and submission upload.
 
-ODK Central's API provides access to its data and functionality through both an OData and a RESTful API. 
-It is accompanied by a comprehensive and interactive [documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
+ODK Central's API provides access to its data and functionality through both an 
+OData and a RESTful API.  It is accompanied by a comprehensive and interactive
+[documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
 
 ruODK aims:
 
-* To wrap all ODK Central API endpoints. This is a work in progress with focus on "getting the data out" first.
+* To wrap all ODK Central API endpoints. This is a work in progress with focus 
+  on "getting the data out" first.
 * To provide working examples of interacting with the ODK Central API.
-* To provide convenience helpers for the day to day tasks when working with ODK Central data in R.
+* To provide convenience helpers for the day to day tasks when working with 
+  ODK Central data in R.
 
-## Installation
+## Install
 
 You can install ruODK from GitHub with:
 
@@ -41,9 +45,7 @@ You can install ruODK from GitHub with:
 remotes::install_github("dbca-wa/ruODK")
 ```
 
-## Use
-
-### Set up ODK Central
+## ODK Central
 First, we need some data to play with!
 
 The ODK Central [user manual](https://docs.opendatakit.org/central-using/) 
@@ -51,42 +53,32 @@ provides up-to-date descriptions of the steps below.
 
 * [Create a web user account](https://docs.opendatakit.org/central-users/#creating-a-web-user) 
   on an ODK Central instance. Your username will be an email address.
-* Create a [project](https://docs.opendatakit.org/central-projects/) and give the
+* [Create a project](https://docs.opendatakit.org/central-projects/) and give the
   web user the relevant permissions.
 * Create a Xform, e.g. using ODK Build, or use the provided example forms.
-* Publish the [form to ODK Central](https://docs.opendatakit.org/central-forms/).
+* [Publish the form](https://docs.opendatakit.org/central-forms/) to ODK Central.
 * Collect some data for this form on ODK Collect and let ODK Collect submit the
   finalised forms to ODK Central.
-* Get the ODK Central OData service URL for the form.
+* [Get the ODK Central OData service URL](https://docs.opendatakit.org/central-submissions/#connecting-to-submission-data-over-odata) 
+  for the form.
 
 A note on the [included example forms](https://github.com/dbca-wa/ruODK/tree/master/inst/extdata): 
 The `.odkbuild` versions can be loaded into [ODK Build](https://build.opendatakit.org/), 
 while the `.xml` versions can be imported into ODK Central.
 
-### Configure ruODK
-For now, ODK Central supports BasicAuth (username and password) and SessionAuth.
-ruODK supports only BasicAuth for now. 
-Each ruODK function accepts the server base URL, username, and password, with defaults
-looking for R environment variables `ODKC_URL`, `ODKC_UN`, and `ODKC_PW`.
+## Configure ruODK
+Read `vignette("Setup", package = "ruODK")` for detailed options to configure 
+`ruODK`.
 
-We could supply those credentials to each `ruODK` function call, but that's
-cumbersome and not securely reproducible (the command would include the sensitive 
-credentials).
-
-A better way is to set your ODK Central URL, username (email), and password as 
-R environment variables, e.g. in your `~/.Rprofile` (to set them per machine),
-or in a separate file outside of version control (to set them per project).
-
-`ruODK` functions default to use the R environment variables 
-`ODKC_URL`, `ODKC_UN`, and `ODKC_PW` for authentication.
+For a quick start, run the following chunk with your settings:
   
 ```{r, eval=F}
-Sys.setenv(ODKC_URL="https://odkcentral.mydomain.com")
-Sys.setenv(ODKC_UN="me@mail.com")
-Sys.setenv(ODKC_PW=".......")
+Sys.setenv(ODKC_URL = "https://odkcentral.mydomain.com")
+Sys.setenv(ODKC_UN = "me@mail.com")
+Sys.setenv(ODKC_PW = ".......")
 ```
 
-### Use ruODK
+## Use ruODK
 
 ruODK aims to provide the same access to your submissions via ODK Central's 
 OData service endpoints as MS Excel, MS PowerBI and Tableau.
@@ -108,8 +100,15 @@ if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 
 # Download from ODK Central
 proj <- project_list()
-meta <- ruODK::get_metadata(pid = 1, fid = "build_Turtle-Sighting-0-1_1559790020")
-data <- ruODK::get_submissions(pid = 1, fid = "build_Turtle-Sighting-0-1_1559790020") %>% ruODK::parse_submissions()
+meta <- ruODK::get_metadata(
+  pid = 1,
+  fid = "build_Turtle-Sighting-0-1_1559790020"
+)
+data <- ruODK::get_submissions(
+  pid = 1,
+  fid = "build_Turtle-Sighting-0-1_1559790020"
+) %>%
+  ruODK::parse_submissions()
 ```
 
 A more detailed walk-through with some data visualisation examples is available
@@ -117,14 +116,17 @@ in the `vignette("example")` or
 [here](https://dbca-wa.github.io/ruODK/articles/example.html).
 
 ## Contribute
-Contributions through issues and PRs are welcome!
+Contributions through [issues](https://github.com/dbca-wa/ruODK/issues) 
+and PRs are welcome!
 
-## Release process
+## Release
+These steps prepare a new `ruODK` release.
 
 ```{r, eval=F}
 styler::style_pkg()
+goodpractice::goodpractice(quiet = FALSE)
 devtools::test()
-devtools::document(roclets = c('rd', 'collate', 'namespace'))
+devtools::document(roclets = c("rd", "collate", "namespace"))
 devtools::check()
 pkgdown::build_site()
 ```

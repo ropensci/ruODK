@@ -1,0 +1,83 @@
+---
+title: "Setup"
+author: "Florian Mayer, DBCA"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{setup}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}  
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ruODK)
+```
+
+
+# Configure ruODK
+Currently, ODK Central supports BasicAuth (username and password) and 
+SessionAuth. `ruODK` supports only BasicAuth.
+
+Each ruODK function accepts the server base URL, username, and password, with
+defaults looking for R environment variables 
+`ODKC_URL`, `ODKC_UN`, and `ODKC_PW`.
+
+There are three ways of providing those settings to each function call.
+
+## One-off: settings directly in function call
+
+We can supply those credentials to each `ruODK` function call, but that's
+cumbersome and not securely reproducible (the command would include the 
+sensitive  credentials).
+
+```{r, eval=FALSE}
+ruODK::project_list(
+  url="https://odkcentral.mydomain.com", 
+  un="me@mail.com", 
+  pw="......."
+)
+```
+
+
+An example use case are the `ruODK` tests, which require settings different from
+the settings used during development.
+
+## Per session: environment variables
+
+A better way is to set your ODK Central URL, username (email), and password as 
+R environment variables.
+
+`ruODK` functions default to use the R environment variables 
+`ODKC_URL`, `ODKC_UN`, and `ODKC_PW` for authentication.
+  
+```{r, eval=F}
+Sys.setenv(ODKC_URL="https://odkcentral.mydomain.com")
+Sys.setenv(ODKC_UN="me@mail.com")
+Sys.setenv(ODKC_PW=".......")
+```
+
+Now we can call `ruODK` functions without settings, and let `ruODK` fall back
+to the environment variables:
+
+```{r, eval=FALSE}
+ruODK::project_list()
+```
+
+
+## Per machine: set and forget
+Let's make those settings a permanent default.
+Place them in your `~/.Rprofile` to set them per machine,
+or in a separate file outside of version control to set them per project.
+
+Of course, there is a helper for editing `~/.Rprofile` in `usethis`.
+
+```{r, eval=FALSE}
+usethis::edit_r_profile()
+```

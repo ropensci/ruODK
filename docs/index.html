@@ -55,7 +55,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/example.html">Example</a>
+      <a href="articles/odata.html">OData</a>
+    </li>
+    <li>
+      <a href="articles/setup.html">Setup</a>
     </li>
   </ul>
 </li>
@@ -91,7 +94,7 @@
 <a href="#ruodk-odk-central-api-wrapper" class="anchor"></a>ruODK: ODK Central API wrapper <img src="reference/figures/ruODK.png" align="right" alt="Are you ODK?" width="120">
 </h1></div>
 
-<p>Especially in these trying times, it is important to ask: “R U ODK?”</p>
+<p>Especially in these trying times, it is important to ask: “r u ODK?”</p>
 <p><a href="https://docs.opendatakit.org/central-intro/">ODK Central</a> an Open Data Kit server alternative like ODK Aggregate. It manages user accounts and permissions, stores form definitions, and allows data collection clients like ODK Collect to connect to it for form download and submission upload.</p>
 <p>ODK Central’s API provides access to its data and functionality through both an OData and a RESTful API. It is accompanied by a comprehensive and interactive <a href="https://odkcentral.docs.apiary.io/#reference/odata-endpoints">documentation</a>.</p>
 <p>ruODK aims:</p>
@@ -100,19 +103,16 @@
 <li>To provide working examples of interacting with the ODK Central API.</li>
 <li>To provide convenience helpers for the day to day tasks when working with ODK Central data in R.</li>
 </ul>
-<div id="installation" class="section level2">
+<div id="install" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#install" class="anchor"></a>Install</h2>
 <p>You can install ruODK from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("remotes")</span></a>
 <a class="sourceLine" id="cb1-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"dbca-wa/ruODK"</span>)</a></code></pre></div>
 </div>
-<div id="use" class="section level2">
+<div id="odk-central" class="section level2">
 <h2 class="hasAnchor">
-<a href="#use" class="anchor"></a>Use</h2>
-<div id="set-up-odk-central" class="section level3">
-<h3 class="hasAnchor">
-<a href="#set-up-odk-central" class="anchor"></a>Set up ODK Central</h3>
+<a href="#odk-central" class="anchor"></a>ODK Central</h2>
 <p>First, we need some data to play with!</p>
 <p>The ODK Central <a href="https://docs.opendatakit.org/central-using/">user manual</a> provides up-to-date descriptions of the steps below.</p>
 <ul>
@@ -126,20 +126,18 @@
 </ul>
 <p>A note on the <a href="https://github.com/dbca-wa/ruODK/tree/master/inst/extdata">included example forms</a>: The <code>.odkbuild</code> versions can be loaded into <a href="https://build.opendatakit.org/">ODK Build</a>, while the <code>.xml</code> versions can be imported into ODK Central.</p>
 </div>
-<div id="configure-ruodk" class="section level3">
-<h3 class="hasAnchor">
-<a href="#configure-ruodk" class="anchor"></a>Configure ruODK</h3>
-<p>For now, ODK Central supports BasicAuth (username and password) and SessionAuth. ruODK supports only BasicAuth for now. Each ruODK function accepts the server base URL, username, and password, with defaults looking for R environment variables <code>ODKC_URL</code>, <code>ODKC_UN</code>, and <code>ODKC_PW</code>.</p>
-<p>We could supply those credentials to each <code>ruODK</code> function call, but that’s cumbersome and not securely reproducible (the command would include the sensitive credentials).</p>
-<p>A better way is to set your ODK Central URL, username (email), and password as R environment variables, e.g. in your <code>~/.Rprofile</code> (to set them per machine), or in a separate file outside of version control (to set them per project).</p>
-<p><code>ruODK</code> functions default to use the R environment variables <code>ODKC_URL</code>, <code>ODKC_UN</code>, and <code>ODKC_PW</code> for authentication.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_URL=</span><span class="st">"https://odkcentral.mydomain.com"</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_UN=</span><span class="st">"me@mail.com"</span>)</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_PW=</span><span class="st">"......."</span>)</a></code></pre></div>
+<div id="configure-ruodk" class="section level2">
+<h2 class="hasAnchor">
+<a href="#configure-ruodk" class="anchor"></a>Configure ruODK</h2>
+<p>Read <code>vignette("Setup", package = "ruODK")</code> for detailed options to configure <code>ruODK</code>.</p>
+<p>For a quick start, run the following chunk with your settings:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_URL =</span> <span class="st">"https://odkcentral.mydomain.com"</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_UN =</span> <span class="st">"me@mail.com"</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Sys.setenv">Sys.setenv</a></span>(<span class="dt">ODKC_PW =</span> <span class="st">"......."</span>)</a></code></pre></div>
 </div>
-<div id="use-ruodk" class="section level3">
-<h3 class="hasAnchor">
-<a href="#use-ruodk" class="anchor"></a>Use ruODK</h3>
+<div id="use-ruodk" class="section level2">
+<h2 class="hasAnchor">
+<a href="#use-ruodk" class="anchor"></a>Use ruODK</h2>
 <p>ruODK aims to provide the same access to your submissions via ODK Central’s OData service endpoints as MS Excel, MS PowerBI and Tableau.</p>
 <p>At the end of this step, we want to achieve the same outcome as the <a href="https://docs.opendatakit.org/central-submissions/#downloading-submissions-as-csvs">manual download to CSV</a>.</p>
 <p>A quick example:</p>
@@ -154,24 +152,32 @@
 <a class="sourceLine" id="cb3-9" title="9"></a>
 <a class="sourceLine" id="cb3-10" title="10"><span class="co"># Download from ODK Central</span></a>
 <a class="sourceLine" id="cb3-11" title="11">proj &lt;-<span class="st"> </span><span class="kw"><a href="reference/project_list.html">project_list</a></span>()</a>
-<a class="sourceLine" id="cb3-12" title="12">meta &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ruODK/topics/get_metadata">get_metadata</a></span>(<span class="dt">pid =</span> <span class="dv">1</span>, <span class="dt">fid =</span> <span class="st">"build_Turtle-Sighting-0-1_1559790020"</span>)</a>
-<a class="sourceLine" id="cb3-13" title="13">data &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ruODK/topics/get_submissions">get_submissions</a></span>(<span class="dt">pid =</span> <span class="dv">1</span>, <span class="dt">fid =</span> <span class="st">"build_Turtle-Sighting-0-1_1559790020"</span>) <span class="op">%&gt;%</span><span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ruODK/topics/parse_submissions">parse_submissions</a></span>()</a></code></pre></div>
-<p>A more detailed walk-through with some data visualisation examples is available in the <code><a href="articles/example.html">vignette("example")</a></code> or <a href="https://dbca-wa.github.io/ruODK/articles/example.html">here</a>.</p>
-</div>
+<a class="sourceLine" id="cb3-12" title="12">meta &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ruODK/topics/get_metadata">get_metadata</a></span>(</a>
+<a class="sourceLine" id="cb3-13" title="13">  <span class="dt">pid =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="dt">fid =</span> <span class="st">"build_Turtle-Sighting-0-1_1559790020"</span></a>
+<a class="sourceLine" id="cb3-15" title="15">)</a>
+<a class="sourceLine" id="cb3-16" title="16">data &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ruODK/topics/get_submissions">get_submissions</a></span>(</a>
+<a class="sourceLine" id="cb3-17" title="17">  <span class="dt">pid =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb3-18" title="18">  <span class="dt">fid =</span> <span class="st">"build_Turtle-Sighting-0-1_1559790020"</span></a>
+<a class="sourceLine" id="cb3-19" title="19">) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-20" title="20"><span class="st">  </span>ruODK<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ruODK/topics/parse_submissions">parse_submissions</a></span>()</a></code></pre></div>
+<p>A more detailed walk-through with some data visualisation examples is available in the <code>vignette("example")</code> or <a href="https://dbca-wa.github.io/ruODK/articles/example.html">here</a>.</p>
 </div>
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contribute" class="anchor"></a>Contribute</h2>
-<p>Contributions through issues and PRs are welcome!</p>
+<p>Contributions through <a href="https://github.com/dbca-wa/ruODK/issues">issues</a> and PRs are welcome!</p>
 </div>
-<div id="release-process" class="section level2">
+<div id="release" class="section level2">
 <h2 class="hasAnchor">
-<a href="#release-process" class="anchor"></a>Release process</h2>
+<a href="#release" class="anchor"></a>Release</h2>
+<p>These steps prepare a new <code>ruODK</code> release.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">styler<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/styler/topics/style_pkg">style_pkg</a></span>()</a>
-<a class="sourceLine" id="cb4-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()</a>
-<a class="sourceLine" id="cb4-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/document">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'rd'</span>, <span class="st">'collate'</span>, <span class="st">'namespace'</span>))</a>
-<a class="sourceLine" id="cb4-4" title="4">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/check">check</a></span>()</a>
-<a class="sourceLine" id="cb4-5" title="5">pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb4-2" title="2">goodpractice<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/goodpractice/topics/gp">goodpractice</a></span>(<span class="dt">quiet =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()</a>
+<a class="sourceLine" id="cb4-4" title="4">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/document">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"rd"</span>, <span class="st">"collate"</span>, <span class="st">"namespace"</span>))</a>
+<a class="sourceLine" id="cb4-5" title="5">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/check">check</a></span>()</a>
+<a class="sourceLine" id="cb4-6" title="6">pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</a></code></pre></div>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
@@ -203,7 +209,7 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Florian W. Mayer <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Florian W. Mayer <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/https://orcid.org/0000-0003-4269-4242" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
 </ul>
 </div>
 
