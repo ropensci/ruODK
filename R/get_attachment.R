@@ -2,8 +2,9 @@
 #'
 #' @param uuid A string which may contain any number of "uuid:"
 #' @return The string with every occurrence of "uuid:" deleted.
+#' @export
 #' @importFrom stringr str_replace
-strip_uuid <- function(uuid){
+strip_uuid <- function(uuid) {
   . <- NULL
   uuid %>% stringr::str_replace_all(., pattern = "uuid:", replacement = "")
 }
@@ -12,8 +13,9 @@ strip_uuid <- function(uuid){
 #'
 #' @param md5hash A string, e.g. an md5 hash.
 #' @return The string with a prepended "uuid:"
+#' @export
 #' @importFrom glue glue
-prepend_uuid <- function(md5hash){
+prepend_uuid <- function(md5hash) {
   . <- NULL
   glue::glue("uuid:{md5hash}") %>% as.character(.)
 }

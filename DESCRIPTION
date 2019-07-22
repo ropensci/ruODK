@@ -6,7 +6,8 @@ Authors@R:
     person(given = "Florian",
            family = "Mayer",
            role = c("aut", "cre"),
-           email = "Florian.Mayer@dbca.wa.gov.au")
+           email = "Florian.Mayer@dbca.wa.gov.au",
+           comment = c(ORCID = "0000-0003-4269-4242"))
 Author: Florian Mayer, DBCA
 Maintainer: Florian Mayer <Florian.Mayer@dbca.wa.gov.au>
 Description: Utilities to access data from ODK Central's API, and to
