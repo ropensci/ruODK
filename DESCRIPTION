@@ -1,6 +1,6 @@
 Type: Package
 Package: ruODK
-Title: ODK Central OData Client
+Title: ODK Central API Wrapper
 Version: 0.3.1
 Authors@R: 
     person(given = "Florian",
@@ -11,8 +11,10 @@ Authors@R:
 Author: Florian Mayer, DBCA
 Maintainer: Florian Mayer <Florian.Mayer@dbca.wa.gov.au>
 Description: Utilities to access data from ODK Central's API, and to
-    transform them into a tidy format. The outcome should be similar to the
-    manual download from ODK Central, and the export from ODK Briefcase.
+    transform them into a tidy format. 
+    ODK Central is OpenDataKit's clearinghouse for digitally captured data 
+    <https://docs.opendatakit.org/central-intro/>. 
+    ODK Central's API is documented at <https://odkcentral.docs.apiary.io/>.
 URL: https://github.com/dbca-wa/ruODK
 BugReports: https://github.com/dbca-wa/ruODK/issues
 License: GPL-3
@@ -44,6 +46,7 @@ Suggests:
 Remotes: github::tidyverse/tidyr
 VignetteBuilder: knitr
 Encoding: UTF-8
+Language: en_AU
 LazyData: true
 RoxygenNote: 6.1.1
 X-schema.org-keywords: database, open-data, opendatakit, odk, api, data, dataset

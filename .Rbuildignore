@@ -13,3 +13,4 @@
 ^\.github$
 ^\man-roxygen$
 ^appveyor\.yml$
+codemeta.json

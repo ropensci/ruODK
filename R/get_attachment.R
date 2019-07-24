@@ -89,11 +89,11 @@ get_one_attachment <- function(pth, fn, src,
 #' The media attachments are downloaded into a folder named by the submission's
 #' uuid inside the given `local_dir`. E.g.:
 #'
-#' workdir/attachments/uuid:xxxxxxxxxx/filename1.jpg
+#' workdir/attachments/xxxxxxxxxx/filename1.jpg
 #'
-#' workdir/attachments/uuid:xxxxxxxxxx/filename2.jpg
+#' workdir/attachments/xxxxxxxxxx/filename2.jpg
 #'
-#' workdir/attachments/uuid:xxxxxxxxxx/filename3.jpg
+#' workdir/attachments/xxxxxxxxxx/filename3.jpg
 #'
 #' @template param-pid
 #' @template param-fid

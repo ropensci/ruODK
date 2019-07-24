@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting data from the API • ruODK</title>
+<title>Getting data from the REST API • ruODK</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Getting data from the API">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Getting data from the REST API">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -53,7 +53,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/api.html">Getting data from the API</a>
+      <a href="../articles/api.html">Getting data from the REST API</a>
     </li>
     <li>
       <a href="../articles/odata.html">OData</a>
@@ -86,10 +86,8 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Getting data from the API</h1>
-                        <h4 class="author">Florian Mayer, DBCA</h4>
+      <h1>Getting data from the REST API</h1>
             
-            <h4 class="date">2019-07-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbca-wa/ruODK/blob/master/vignettes/api.Rmd"><code>vignettes/api.Rmd</code></a></small>
       <div class="hidden name"><code>api.Rmd</code></div>
@@ -135,6 +133,16 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="right">1</td>
+<td align="left">DBCA</td>
+<td align="left">NA</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="left">2019-07-23 03:06:52</td>
+<td align="left">2019-06-05 09:12:44</td>
+<td align="left">2019-07-23 01:00:08</td>
+</tr>
+<tr class="even">
 <td align="right">3</td>
 <td align="left">Flora</td>
 <td align="left">NA</td>
@@ -144,7 +152,7 @@
 <td align="left">2019-06-06 03:24:31</td>
 <td align="left">2019-06-06 03:24:42</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">2</td>
 <td align="left">Spotlighting</td>
 <td align="left">NA</td>
@@ -153,16 +161,6 @@
 <td align="left">2019-06-26 07:12:25</td>
 <td align="left">2019-06-06 03:24:15</td>
 <td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left">Turtles</td>
-<td align="left">NA</td>
-<td align="right">6</td>
-<td align="right">1</td>
-<td align="left">2019-07-22 01:09:38</td>
-<td align="left">2019-06-05 09:12:44</td>
-<td align="left">2019-06-06 03:06:17</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
@@ -194,21 +192,21 @@
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
-<td align="left">Turtles</td>
+<td align="left">DBCA</td>
 <td align="right">6</td>
 <td align="right">1</td>
 <td align="left">2019-06-05T09:12:44.272Z</td>
-<td align="left">2019-06-06T03:06:17.600Z</td>
-<td align="left">2019-07-22T01:09:38.586Z</td>
+<td align="left">2019-07-23T01:00:08.564Z</td>
+<td align="left">2019-07-23T03:06:52.789Z</td>
 <td align="left">FALSE</td>
 <td align="left">list(“backup.create”, “backup.terminate”, “config.read”, “field_key.create”, “field_key.delete”, “field_key.list”, “form.create”, “form.delete”, “form.list”, “form.read”, “form.update”, “project.create”, “project.delete”, “project.read”, “project.update”, “session.end”, “submission.create”, “submission.read”, “submission.list”, “user.create”, “user.list”, “user.password.invalidate”, “user.read”, “user.update”, “submission.update”, “role.create”, “role.update”, “role.delete”, “assignment.list”, “assignment.create”,</td>
 </tr>
 <tr class="even">
 <td align="right">"</td>
-<td align="left">assignment</td>
-<td align="right">.delete"</td>
-<td align="right">, "user.del</td>
-<td align="left">ete")</td>
+<td align="left">assignm</td>
+<td align="right">ent.dele</td>
+<td align="right">te“,”user.</td>
+<td align="left">delete")</td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -255,12 +253,12 @@
 <td align="left">build_Predator-or-Disturbance-1-1_1559789410</td>
 <td align="left"></td>
 <td align="left">open</td>
-<td align="left">1</td>
+<td align="left">3</td>
 <td align="left">2019-06-06 03:31:25</td>
 <td align="right">5</td>
 <td align="left">Florian Mayer</td>
 <td align="left">NA</td>
-<td align="left">2019-06-27 03:17:02</td>
+<td align="left">2019-07-23 03:06:52</td>
 <td align="left">9c70919ed211e2492ff1dda7a6c7c564</td>
 </tr>
 <tr class="odd">

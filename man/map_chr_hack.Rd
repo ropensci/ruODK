@@ -7,7 +7,7 @@
 map_chr_hack(.x, .f, ...)
 }
 \arguments{
-\item{.x}{An interable data object}
+\item{.x}{An iterable data object}
 
 \item{.f}{A function to map over the data}
 

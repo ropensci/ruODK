@@ -3,7 +3,7 @@
 #' @details Use this function to extract chr elements with NAs
 #' from a list of lists into a tibble.
 #'
-#' @param .x An interable data object
+#' @param .x An iterable data object
 #' @param .f A function to map over the data
 #' @param ... Extra arguments to `map()`
 #' @author Jennifer Bryan https://github.com/jennybc/
@@ -20,7 +20,7 @@ map_chr_hack <- function(.x, .f, ...) {
 #' @details Use this function to extract ISO timestamps with NAs
 #' from a list of lists into a tibble.
 #'
-#' @param .x An interable data object
+#' @param .x An iterable data object
 #' @param .f A function to map over the data
 #' @param ... Extra arguments to `map()`
 #' @export
