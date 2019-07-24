@@ -1,7 +1,5 @@
 ---
 title: "Setup"
-author: "Florian Mayer, DBCA"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{setup}
@@ -20,14 +18,12 @@ knitr::opts_chunk$set(
 library(ruODK)
 ```
 
-
 # Configure ruODK
 Currently, ODK Central supports BasicAuth (username and password) and 
 SessionAuth. `ruODK` supports only BasicAuth.
 
 Each ruODK function accepts the server base URL, username, and password, with
-defaults looking for R environment variables 
-`ODKC_URL`, `ODKC_UN`, and `ODKC_PW`.
+defaults looking for R environment variables `ODKC_URL`, `ODKC_UN`, and `ODKC_PW`.
 
 There are three ways of providing those settings to each function call.
 
