@@ -2,3 +2,4 @@
 *.R
 ^docs$
 ^attachments$
+attachments

@@ -1,4 +1,5 @@
 Analyze
+api
 AppVeyor
 attrs
 BasicAuth
@@ -10,6 +11,7 @@ DataServices
 datatable
 Datatable
 datetime
+dbca
 DBCA
 dir
 DIY
@@ -26,6 +28,7 @@ extdata
 filename1
 filename2
 filename3
+Flatback
 fn
 getenv
 github
@@ -42,10 +45,13 @@ lon
 magrittr
 md5
 MD5
+odata
 OData
 ODK
 ODKC
 odkcentral
+opendatakit
+OpenDataKit
 POSIXct
 PowerBI
 presubmission
@@ -80,7 +86,10 @@ uuid
 UUID
 UUIDs
 vectorised
+VueJS
+wa
 Wickam
+WIP
 workdir
 Xform
 xxxxxxxxxx

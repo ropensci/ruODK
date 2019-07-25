@@ -5,8 +5,8 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
-  "description": "Utilities to access data from ODK Central's API, and to\n    transform them into a tidy format. \n    ODK Central is OpenDataKit's clearinghouse for digitally captured data \n    <https://docs.opendatakit.org/central-intro/>. \n    ODK Central's API is documented at <https://odkcentral.docs.apiary.io/>.",
-  "name": "ruODK: ODK Central API Wrapper",
+  "description": "Utilities to access and tidy up data from ODK Central's API.\n    ODK Central is OpenDataKit's clearinghouse for digitally captured data \n    <https://docs.opendatakit.org/central-intro/>. \n    ODK Central's API is documented at <https://odkcentral.docs.apiary.io/>.",
+  "name": "ruODK: Client for the ODK Central API",
   "codeRepository": "https://github.com/dbca-wa/ruODK",
   "issueTracker": "https://github.com/dbca-wa/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
@@ -21,7 +21,7 @@
   "author": [
     {
       "@type": "Person",
-      "givenName": "Florian",
+      "givenName": ["Florian", "W."],
       "familyName": "Mayer",
       "email": "Florian.Mayer@dbca.wa.gov.au",
       "@id": "https://orcid.org/0000-0003-4269-4242"
@@ -33,7 +33,7 @@
   "maintainer": [
     {
       "@type": "Person",
-      "givenName": "Florian",
+      "givenName": ["Florian", "W."],
       "familyName": "Mayer",
       "email": "Florian.Mayer@dbca.wa.gov.au",
       "@id": "https://orcid.org/0000-0003-4269-4242"
@@ -326,23 +326,23 @@
   "keywords": ["database", "open-data", "opendatakit", "odk", "api", "data", "dataset", "odata", "odata-client", "r"],
   "citation": [
     {
-      "@type": "SoftwareSourceCode",
+      "@type": "CreativeWork",
+      "datePublished": "2019",
       "author": [
         {
           "@type": "Person",
-          "givenName": "Florian",
-          "familyName": "Mayer",
-          "email": "Florian.Mayer@dbca.wa.gov.au",
-          "@id": "https://orcid.org/0000-0003-4269-4242"
+          "givenName": ["Florian", "W."],
+          "familyName": "Mayer"
         }
       ],
-      "name": "ruODK: ODK Central API Wrapper",
+      "name": "ruODK: Client for the ODK Central API",
       "url": "https://github.com/dbca-wa/ruODK",
       "description": "R package version 0.3.1"
     }
   ],
   "releaseNotes": "https://github.com/dbca-wa/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/dbca-wa/ruODK/blob/master/README.md",
-  "fileSize": "128.832KB",
-  "contIntegration": ["https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master"]
+  "fileSize": "207.786KB",
+  "contIntegration": ["https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master"],
+  "developmentStatus": "https://www.repostatus.org/#wip"
 }

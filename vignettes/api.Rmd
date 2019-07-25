@@ -1,5 +1,5 @@
 ---
-title: "Getting data from the REST API"
+title: "Accessing the RESTful API"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{restapi}

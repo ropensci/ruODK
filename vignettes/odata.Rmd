@@ -1,5 +1,5 @@
 ---
-title: "OData"
+title: "Accessing the OData API"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{odata}
@@ -171,7 +171,8 @@ fq_data_tae <- fq_tae %>%
 
 Note: A manually resized version of the original photos in this example live in
 the package source under 
-[`docs/articles/attachments`](https://github.com/dbca-wa/ruODK/tree/master/docs/articles/attachments). To minimise package size, they were resized with imagemagick:
+[`docs/articles/attachments`](https://github.com/dbca-wa/ruODK/tree/master/docs/articles/attachments). 
+To minimise package size, they were resized with imagemagick:
 `find docs/articles/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} \;`.
 
 ## DIY rectangling

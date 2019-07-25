@@ -1,17 +1,16 @@
 Type: Package
 Package: ruODK
-Title: ODK Central API Wrapper
+Title: Client for the ODK Central API
 Version: 0.3.1
 Authors@R: 
-    person(given = "Florian",
+    person(given = c("Florian", "W."),
            family = "Mayer",
            role = c("aut", "cre"),
            email = "Florian.Mayer@dbca.wa.gov.au",
            comment = c(ORCID = "0000-0003-4269-4242"))
-Author: Florian Mayer, DBCA
-Maintainer: Florian Mayer <Florian.Mayer@dbca.wa.gov.au>
-Description: Utilities to access data from ODK Central's API, and to
-    transform them into a tidy format. 
+Author: Florian W. Mayer [aut, cre]
+Maintainer: Florian W. Mayer <Florian.Mayer@dbca.wa.gov.au>
+Description: Utilities to access and tidy up data from ODK Central's API.
     ODK Central is OpenDataKit's clearinghouse for digitally captured data 
     <https://docs.opendatakit.org/central-intro/>. 
     ODK Central's API is documented at <https://odkcentral.docs.apiary.io/>.
