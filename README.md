@@ -149,20 +149,19 @@ library(ruODK)
 if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 # .RProfile sets ODKC_{URL, UN, PW}
 
-# ODK Central OData service URL
-# "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
-
 # Download from ODK Central
 proj <- project_list()
 proj
 
-meta <- ruODK::get_metadata(
+meta <- ruODK::odata_metadata_get(
   pid = 1,
   fid = "build_Turtle-Sighting-0-1_1559790020"
 )
 # listviewer::jsonedit(meta)
+meta$Edmx$DataServices$Schema$EntityContainer %>% attr("Name")
+#> [1] "build_Turtle-Sighting-0-1_1559790020"
 
-data <- ruODK::get_submissions(
+data <- ruODK::odata_submissions_get(
   pid = 1,
   fid = "build_Turtle-Sighting-0-1_1559790020"
 ) %>%
@@ -200,6 +199,7 @@ rmarkdown::render('README.Rmd',  encoding = 'UTF-8')
 # Checks
 styler::style_pkg()
 spelling::spell_check_package()
+spelling::update_wordlist()
 goodpractice::goodpractice(quiet = FALSE)
 devtools::check()
 
@@ -214,8 +214,7 @@ pkgdown::build_site()
 # let's mogrify all
 system("find vignettes/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} \\;")
 vignette_tempfiles <- here::here("vignettes", "attachments")
-fs::dir_copy(vignette_tempfiles, here::here("docs/articles/attachments"))
-if (fs::dir_exists(vignette_tempfiles)) fs::dir_delete(vignette_tempfiles)
+fs::dir_copy(vignette_tempfiles, here::here("docs/articles/"))
 
 # Git commit and push
 ```

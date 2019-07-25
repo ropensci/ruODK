@@ -79,7 +79,7 @@ ruODK made the opinionated decision to use these components separately in its fu
 Let's first get the metadata to review our data schema.
 
 ```{r load_ometadata, eval=F}
-fq_meta <- get_metadata(pid, fid, url = url, un = un, pw = pw)
+fq_meta <- odata_metadata_get(pid, fid, url = url, un = un, pw = pw)
 ```
 
 Each downloadable table is an EntityType under DataServices.Schema.
@@ -94,8 +94,8 @@ listviewer::jsonedit(fq_meta)
 So let's download the form submissions and, separately, repeating form groups.
 
 ```{r load_odata, eval=F}
-fq_raw <- get_submissions(pid, fid, url = url, un = un, pw = pw)
-fq_tae <- get_submissions(pid, fid, url = url, un = un, pw = pw, sub="Submissions.taxon_encounter")
+fq_raw <- odata_submissions_get(pid, fid, url = url, un = un, pw = pw)
+fq_tae <- odata_submissions_get(pid, fid, url = url, un = un, pw = pw, sub="Submissions.taxon_encounter")
 ```
 
 The output of the above code is provided as data objects `fq_raw` 
@@ -103,7 +103,7 @@ The output of the above code is provided as data objects `fq_raw`
 `fq_tae` (repeated group "Taxon Encounter" within a Flora Quadrat).
 
 # Rectangle the data
-The function `ruODK::get_submissions` returned the original XML response as a 
+The function `ruODK::odata_submissions_get` returned the original XML response as a 
 nested list of lists.
 To analyse and visualise the data, this nested list of lists must be transformed 
 into a rectangular shape.
@@ -115,7 +115,7 @@ In this example, we clean up the output further by renaming some columns, notabl
 we call the submission UUID `uuid`, and rename the main coordinates from 
 `...12` and `...13` to `longitude` and `latitude`.
 
-The vectorised function `get_attachment` downloads and links attachments like 
+The vectorised function `attachment_get` downloads and links attachments like 
 photos and other media to a local, relative path. This will take some time
 during the first run; once the files exist locally, the download will be skipped.
 
@@ -123,7 +123,7 @@ The date formats are parsed from ISO8601 timestamps into POSIXct objects with
 `lubridate::parse_date_time`. We use our local timezone (GMT+08) in this example.
 
 Other ODK forms will need to select their respective media attachment field names
-for `get_attachment`, and their respective date/datetime/time field names as well
+for `attachment_get`, and their respective date/datetime/time field names as well
 as their local timezone (if desired) for `lubridate`.
 
 The trailing `invisible` is a neutral operation to allow trailing magrittr 
@@ -148,9 +148,9 @@ fq_data <- fq_raw %>% parse_submissions(verbose=TRUE) %>%
     latitude=`...13`
     ) %>% 
   dplyr::mutate(
-    quadrat_photo = get_attachment(pid, fid, uuid, quadrat_photo, url = url),
-    morphological_type_photo = get_attachment(pid, fid, uuid, morphological_type_photo, url = url),
-    mudmap_photo = get_attachment(pid, fid, uuid, mudmap_photo, url = url),
+    quadrat_photo = attachment_get(pid, fid, uuid, quadrat_photo, url = url),
+    morphological_type_photo = attachment_get(pid, fid, uuid, morphological_type_photo, url = url),
+    mudmap_photo = attachment_get(pid, fid, uuid, mudmap_photo, url = url),
     submissionDate = lubridate::parse_date_time(submissionDate, orders=ord, tz = tz),
     encounter_start_datetime = lubridate::parse_date_time(encounter_start_datetime, orders=ord, tz = tz),
     encounter_end_datetime = lubridate::parse_date_time(encounter_end_datetime, orders=ord, tz = tz)
@@ -163,7 +163,7 @@ fq_data_tae <- fq_tae %>%
     tae_uuid=`.__id`,
     uuid=`.__Submissions.id`) %>%
   dplyr::mutate(
-    photo_in_situ = get_attachment(pid, fid, uuid, photo_in_situ, url = url)
+    photo_in_situ = attachment_get(pid, fid, uuid, photo_in_situ, url = url)
   ) %>% 
   dplyr::left_join(fq_data, by="uuid") %>% 
   invisible
@@ -195,7 +195,7 @@ fq_data_diy <- tibble::tibble(value=fq_raw$value) %>%
     # longitude=`...1`, latitude=`...2`, altitude=`...3`
     ) %>%
   # 3. handle media attachments
-  # dplyr::mutate(photo_field1 = get_attachment(data_url, uuid, photo_field1)) %>% 
+  # dplyr::mutate(photo_field1 = attachment_get(data_url, uuid, photo_field1)) %>% 
   invisible
 ```
 

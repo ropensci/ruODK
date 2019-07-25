@@ -1,7 +1,7 @@
-context("test-get_submissions.R")
+context("test-odata_submissions_get.R")
 
-test_that("get_submissions works with one known dataset", {
-  fresh_raw <- get_submissions(
+test_that("odata_submissions_get works with one known dataset", {
+  fresh_raw <- odata_submissions_get(
     Sys.getenv("ODKC_TEST_PID"),
     Sys.getenv("ODKC_TEST_FID"),
     url = Sys.getenv("ODKC_TEST_URL"),

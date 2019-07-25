@@ -1,7 +1,7 @@
-context("test-get_metadata.R")
+context("test-odata_metadata_get.R")
 
-test_that("get_metadata works", {
-  md <- get_metadata(
+test_that("odata_metadata_get works", {
+  md <- odata_metadata_get(
     Sys.getenv("ODKC_TEST_PID"),
     Sys.getenv("ODKC_TEST_FID"),
     url = Sys.getenv("ODKC_TEST_URL"),

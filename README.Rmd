@@ -111,7 +111,7 @@ while the `.xml` versions can be imported into ODK Central.
 ## Configure ruODK
 For a quick start, run the following chunk with your settings:
   
-```{r, eval=F}
+```{r rprofile, eval=F}
 Sys.setenv(ODKC_URL = "https://odkcentral.mydomain.com")
 Sys.setenv(ODKC_UN = "me@mail.com")
 Sys.setenv(ODKC_PW = ".......")
@@ -129,27 +129,25 @@ For all available detailed options to configure `ruODK`, read
 
 A quick example using the OData service:
 
-```{r, eval=T, message=FALSE}
+```{r odata_example, eval=T, message=FALSE}
 library(ruODK)
 
 # ODK Central credentials
 if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 # .RProfile sets ODKC_{URL, UN, PW}
 
-# ODK Central OData service URL
-# "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
-
 # Download from ODK Central
 proj <- project_list()
 proj
 
-meta <- ruODK::get_metadata(
+meta <- ruODK::odata_metadata_get(
   pid = 1,
   fid = "build_Turtle-Sighting-0-1_1559790020"
 )
 # listviewer::jsonedit(meta)
+meta$Edmx$DataServices$Schema$EntityContainer %>% attr("Name")
 
-data <- ruODK::get_submissions(
+data <- ruODK::odata_submissions_get(
   pid = 1,
   fid = "build_Turtle-Sighting-0-1_1559790020"
 ) %>%
@@ -172,7 +170,7 @@ and PRs are welcome!
 ## Release
 These steps prepare a new `ruODK` release.
 
-```{r, eval=F}
+```{r makefile, eval=F}
 # Tests
 devtools::test()
 
@@ -215,7 +213,7 @@ the [North West Shelf Flatback Turtle Conservation Program](https://flatbacks.db
 
 To cite package `ruODK` in publications use:
 
-```{r}
+```{r citation}
 citation("ruODK")
 ```
 
