@@ -201,6 +201,22 @@ fq_data_diy <- tibble::tibble(value=fq_raw$value) %>%
   invisible
 ```
 
+## Spatial formats - how granular would you like your coordinates?
+If we run `odata_submissions_get()` with `wkt=FALSE` (the default), we will
+receive GeoJSON. Point GeoJSON parses with `parse_submissions` into separate 
+columns for lat, lon, alt (soon accuracy). 
+This is useful for e.g. leaflet maps which want lat and lon separately, see 
+example map below.
+
+If we run `odata_submissions_get()` with `wkt=TRUE` (the default), we will
+not surprisingly receive WKT. This is useful for spatial objects with 
+non-deterministic length like lines and polygons. 
+If encountering WKT, `parse_submissions` simply retains the WKT string 
+containing the respective entire geometry. 
+This can further be turned into spatially enabled objects. 
+
+In future, we will add some examples for this use case here.
+
 # Visualise data
 This section provides some examples of standard data visualisations.
 
