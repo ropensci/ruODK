@@ -6,7 +6,7 @@
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
   "description": "Utilities to access and tidy up data from ODK Central's API.\n    ODK Central is OpenDataKit's clearinghouse for digitally captured data \n    <https://docs.opendatakit.org/central-intro/>. \n    ODK Central's API is documented at <https://odkcentral.docs.apiary.io/>.",
-  "name": "ruODK: Client for the ODK Central API",
+  "name": "ruODK: An R Client for the ODK Central API",
   "codeRepository": "https://github.com/dbca-wa/ruODK",
   "issueTracker": "https://github.com/dbca-wa/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
@@ -342,7 +342,7 @@
   ],
   "releaseNotes": "https://github.com/dbca-wa/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/dbca-wa/ruODK/blob/master/README.md",
-  "fileSize": "210.569KB",
+  "fileSize": "703.047KB",
   "contIntegration": [
     "https://travis-ci.org/dbca-wa/ruODK",
     "https://ci.appveyor.com/project/dbca-wa/ruODK",

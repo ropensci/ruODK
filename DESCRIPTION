@@ -1,6 +1,6 @@
 Type: Package
 Package: ruODK
-Title: Client for the ODK Central API
+Title: An R Client for the ODK Central API
 Version: 0.3.1
 Authors@R: 
     person(given = c("Florian", "W."),

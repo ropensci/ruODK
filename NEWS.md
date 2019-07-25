@@ -30,6 +30,7 @@
 * Spellchecks with `spelling::spell_check_package()`: added technical terms and
   function names to `inst/WORDLIST`.
 * Added citation and section in `README`.
+* Added `inst/joss/paper.md` for submission to JOSS.
 
 ## TODO
 * Add [examples](https://devguide.ropensci.org/building.html#examples) to docs.

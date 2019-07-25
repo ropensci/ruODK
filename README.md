@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ruODK: Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
+# ruODK: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 
 <!-- badges: start -->
 
@@ -20,11 +20,11 @@ status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](http
 
 Especially in these trying times, it is important to ask: “r u ODK?”
 
-[ODK Central](https://docs.opendatakit.org/central-intro/) an Open Data
-Kit server alternative to ODK Aggregate. It manages user accounts and
-permissions, stores form definitions, and allows data collection clients
-like ODK Collect to connect to it for form download and submission
-upload.
+[ODK Central](https://docs.opendatakit.org/central-intro/) is an Open
+Data Kit server alternative to ODK Aggregate. It manages user accounts
+and permissions, stores form definitions, and allows data collection
+clients like ODK Collect to connect to it for form download and
+submission upload.
 
 After data have been captured digitally using ODK Collect, the data are
 uploaded and stored in ODK Central. The next step from there is to

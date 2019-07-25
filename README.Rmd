@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# ruODK: Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
+# ruODK: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 <!-- badges: start -->
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![GitHub issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues)
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
 Especially in these trying times, it is important to ask: "r u ODK?"
 
-[ODK Central](https://docs.opendatakit.org/central-intro/) an Open Data Kit 
+[ODK Central](https://docs.opendatakit.org/central-intro/) is an Open Data Kit 
 server alternative to ODK Aggregate. It manages user accounts and permissions, 
 stores form definitions, and allows data collection clients like ODK Collect to 
 connect to it for form download and submission upload.
