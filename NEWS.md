@@ -7,7 +7,8 @@
   * Available on GitHub:  ✔ 
   * Rude misinterpretations: none
   * In summary: Package name seems to be OK. Well, ODK. OK, ruODK.
-* Added metadata via [`codemetar::write_codemeta("ruODK")`](https://devguide.ropensci.org/building.html#creating-metadata-for-your-package)
+* Added metadata via 
+  [`codemetar::write_codemeta("ruODK")`](https://devguide.ropensci.org/building.html#creating-metadata-for-your-package).
 * [Cross-platform](https://devguide.ropensci.org/building.html#platforms): 
   Runs on GNU/Linux (TravisCI) and on Windows (AppVeyor)
 * [Function naming](https://devguide.ropensci.org/building.html#function-and-argument-naming)
@@ -15,7 +16,7 @@
   with consistency, especially when to use plural and singular for `object`.
   Using `snake_case` except where camelCase inherited from API objects.
   Exception: functions operating on the OData endpoints are named `get_*`. These
-  will be renamed `odata_<object>_<verb>`.
+  will be renamed `odata_<object>_<verb>` ([ticket](https://github.com/dbca-wa/ruODK/issues/10)).
 * [Code style](https://devguide.ropensci.org/building.html#code-style) done
   by `styler::style_package()`, see section "Release" in `README.md`.
 * ruODK [has a `README.Rmd`](https://devguide.ropensci.org/building.html#readme) 
@@ -30,6 +31,7 @@
 
 ## TODO
 * Add [examples](https://devguide.ropensci.org/building.html#examples) to docs.
+* Implement seven missing functions ([ticket](https://github.com/dbca-wa/ruODK/issues/9)).
 
 
 # ruODK 0.3.0
