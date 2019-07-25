@@ -94,7 +94,9 @@ get_one_attachment <- function(pth, fn, src,
 #' workdir/attachments/xxxxxxxxxx/filename2.jpg
 #'
 #' workdir/attachments/xxxxxxxxxx/filename3.jpg
+#'
 #' https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment
+#'
 #' https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment
 #' @template param-pid
 #' @template param-fid

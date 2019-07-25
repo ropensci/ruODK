@@ -135,7 +135,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>odata_submissions_get</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>sub</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>,
+    <pre class="usage"><span class='fu'>odata_submissions_get</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>table</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>count</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
     
@@ -151,12 +152,32 @@
       <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
     </tr>
     <tr>
-      <th>sub</th>
-      <td><p>The submission EntityType name,
-default: "Submissions" (the main form).
+      <th>table</th>
+      <td><p>The submission EntityType, or in plain words, the table name.
+Default: "Submissions" (the main table).
 Change to "Submissions.GROUP_NAME" for repeating form groups.
 The group name can be found in the metadata under
 DataServices.Schema.[EntityType].Name</p></td>
+    </tr>
+    <tr>
+      <th>skip</th>
+      <td><p>The number of rows to be omitted from the results.
+Example: 10, default: NA (none skipped).</p></td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td><p>The number of rows to return.
+Example: 100, default: NA (all returned).</p></td>
+    </tr>
+    <tr>
+      <th>count</th>
+      <td><p>If TRUE, an `@odata.count` property will be returned in the
+response from ODK Central. Default: FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>wkt</th>
+      <td><p>If TRUE, geospatial data will be returned as WKT (Well Known Text)
+strings. Default: FALSE, returns GeoJSON structures.</p></td>
     </tr>
     <tr>
       <th>url</th>
@@ -178,11 +199,16 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of two named lists, value and context. `value` contains
-    the submissions, which can be "rectangled" using
+    <p>A nested list of lists.
+        `value` contains the submissions, which can be "rectangled" using
     `tidyr::unnest_wider("element_name")`.
-    `context` is the URL of the metadata.
-    See spec at</p>
+    `@odata.context` is the URL of the metadata.
+    `@odata.count` is the total number of rows in the table.
+    See spec at https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>See https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -195,10 +221,23 @@ un <- Sys.getenv("ODKC_TEST_UN")
 pw <- Sys.getenv("ODKC_TEST_PW")
 
 # With default credentials, see vignette("setup", package = "ruODK")
-data <- odata_submissions_get(pid, fid, sub = "Submissions")
+data <- odata_submissions_get(pid, fid, table = "Submissions")
 
 # With explicitly set credentials
-data <- odata_submissions_get(pid, fid, sub = "Submissions",
+data <- odata_submissions_get(pid, fid, table = "Submissions",
+                              url = url, un = un, pw = pw)
+
+# Skip one row, return the next 1 rows (top), include total row count
+data <- odata_submissions_get(pid, fid, table = "Submissions",
+                              skip = 1, top = 1, count = TRUE,
+                              url = url, un = un, pw = pw)
+
+# Parse point coordinates into lat, lon, alt
+data <- odata_submissions_get(pid, fid, table = "Submissions", wkt = FALSE,
+                              url = url, un = un, pw = pw)
+
+# Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"
+data <- odata_submissions_get(pid, fid, table = "Submissions", wkt = TRUE,
                               url = url, un = un, pw = pw)
 
 listviewer::jsonedit(data)
@@ -213,6 +252,8 @@ listviewer::jsonedit(data)
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -342,7 +342,7 @@
   ],
   "releaseNotes": "https://github.com/dbca-wa/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/dbca-wa/ruODK/blob/master/README.md",
-  "fileSize": "130.715KB",
+  "fileSize": "210.569KB",
   "contIntegration": [
     "https://travis-ci.org/dbca-wa/ruODK",
     "https://ci.appveyor.com/project/dbca-wa/ruODK",

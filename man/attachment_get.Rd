@@ -52,6 +52,8 @@ workdir/attachments/xxxxxxxxxx/filename1.jpg
 workdir/attachments/xxxxxxxxxx/filename2.jpg
 
 workdir/attachments/xxxxxxxxxx/filename3.jpg
+
 https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment
+
 https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment
 }

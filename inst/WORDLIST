@@ -4,6 +4,7 @@ AppVeyor
 attrs
 BasicAuth
 camelCase
+camelCased
 chr
 Comin
 compat
@@ -30,6 +31,8 @@ filename2
 filename3
 Flatback
 fn
+GeoJSON
+geospatial
 getenv
 github
 Hadley
@@ -90,6 +93,7 @@ VueJS
 wa
 Wickam
 WIP
+WKT
 workdir
 Xform
 xxxxxxxxxx

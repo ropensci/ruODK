@@ -61,6 +61,7 @@ if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 
 # ODK Central's OData URL
 data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
+
 pid <- 14
 fid <- "build_Flora-Quadrat-0-2_1558575936"
 url <- "https://sandbox.central.opendatakit.org"
@@ -95,7 +96,8 @@ So let's download the form submissions and, separately, repeating form groups.
 
 ```{r load_odata, eval=F}
 fq_raw <- odata_submissions_get(pid, fid, url = url, un = un, pw = pw)
-fq_tae <- odata_submissions_get(pid, fid, url = url, un = un, pw = pw, sub="Submissions.taxon_encounter")
+fq_tae <- odata_submissions_get(pid, fid, url = url, un = un, pw = pw, 
+                                table = "Submissions.taxon_encounter")
 ```
 
 The output of the above code is provided as data objects `fq_raw` 
