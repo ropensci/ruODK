@@ -33,10 +33,10 @@ project_list <- function(url = Sys.getenv("ODKC_URL"),
         name = purrr::map_chr(., "name"),
         archived = map_chr_hack(., "archived"),
         forms = purrr::map_int(., "forms"),
-        appUsers = purrr::map_int(., "appUsers"),
-        lastSubmission = map_dttm_hack(., "lastSubmission"),
-        createdAt = map_dttm_hack(., "createdAt"),
-        updatedAt = map_dttm_hack(., "updatedAt")
+        app_users = purrr::map_int(., "appUsers"),
+        last_submission = map_dttm_hack(., "lastSubmission"),
+        created_at = map_dttm_hack(., "createdAt"),
+        updated_at = map_dttm_hack(., "updatedAt")
       )
     }
 }

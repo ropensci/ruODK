@@ -17,7 +17,8 @@
   Using `snake_case` except where camelCase inherited from API objects.
   Exception: Functions operating on the OData endpoints are named 
   `odata_object_verb`, helper functions not related to API endpoints are named 
-  `verb_object`.
+  `verb_object`. All camelCased ODK attributes (e.g. `project_list`, 
+  `project_detail`) are snake_cased.
 * [Code style](https://devguide.ropensci.org/building.html#code-style) done
   by `styler::style_package()`, see section "Release" in `README.md`.
 * ruODK [has a `README.Rmd`](https://devguide.ropensci.org/building.html#readme) 
@@ -33,9 +34,6 @@
 ## TODO
 * Add [examples](https://devguide.ropensci.org/building.html#examples) to docs.
 * Implement seven missing functions ([ticket](https://github.com/dbca-wa/ruODK/issues/9)).
-* Should we consistently `snake_case` all variable names, even the camelCased ones
-  coming from the API? E.g. `xmlFormId`.
-
 
 # ruODK 0.3.0
 * Use tidyverse issue template

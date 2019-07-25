@@ -38,14 +38,14 @@ project_detail <- function(pid,
         id = .$id,
         name = .$name,
         forms = .$forms,
-        appUsers = .$appUsers,
-        createdAt = .$createdAt,
-        updatedAt = ifelse(
+        app_users = .$appUsers,
+        created_at = .$createdAt,
+        updated_at = ifelse(
           is.null(.$updatedAt),
           NA_character_,
           .$updatedAt
         ),
-        lastSubmission = ifelse(
+        last_submission = ifelse(
           is.null(.$lastSubmission),
           NA_character_,
           .$lastSubmission
