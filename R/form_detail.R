@@ -11,6 +11,10 @@
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime
 #' @export
+#' @examples
+#' \dontrun{
+#' fs <- form_schema(Sys.getenv("ODKC_TEST_PID"), Sys.getenv("ODKC_TEST_FID"), url = Sys.getenv("ODKC_TEST_URL"), un = Sys.getenv("ODKC_TEST_UN"), pw = Sys.getenv("ODKC_TEST_PW"))
+#' }
 form_detail <- function(pid,
                         fid,
                         url = Sys.getenv("ODKC_URL"),

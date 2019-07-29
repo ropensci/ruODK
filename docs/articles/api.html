@@ -128,19 +128,19 @@
 <th align="left">name</th>
 <th align="left">archived</th>
 <th align="right">forms</th>
-<th align="right">appUsers</th>
-<th align="left">lastSubmission</th>
-<th align="left">createdAt</th>
-<th align="left">updatedAt</th>
+<th align="right">app_users</th>
+<th align="left">last_submission</th>
+<th align="left">created_at</th>
+<th align="left">updated_at</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
 <td align="left">DBCA</td>
 <td align="left">NA</td>
-<td align="right">7</td>
+<td align="right">9</td>
 <td align="right">1</td>
-<td align="left">2019-07-23 03:06:52</td>
+<td align="left">2019-07-29 01:46:36</td>
 <td align="left">2019-06-05 09:12:44</td>
 <td align="left">2019-07-23 01:00:08</td>
 </tr>
@@ -150,7 +150,7 @@
 <td align="left">NA</td>
 <td align="right">1</td>
 <td align="right">1</td>
-<td align="left">NA</td>
+<td align="left">2019-07-28 04:37:27</td>
 <td align="left">2019-06-06 03:24:31</td>
 <td align="left">2019-06-06 03:24:42</td>
 </tr>
@@ -178,48 +178,36 @@
 </table>
 <p>Inspect a project. Turtles are, not surprisingly, number 1. Of course they are.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">pd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/project_detail.html">project_detail</a></span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2">pd <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
+<a class="sourceLine" id="cb3-2" title="2">pd <span class="op">%&gt;%</span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="st">"verbs"</span>) <span class="op">%&gt;%</span><span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">id</th>
 <th align="left">name</th>
 <th align="right">forms</th>
-<th align="right">appUsers</th>
-<th align="left">createdAt</th>
-<th align="left">updatedAt</th>
-<th align="left">lastSubmission</th>
+<th align="right">app_users</th>
+<th align="left">created_at</th>
+<th align="left">updated_at</th>
+<th align="left">last_submission</th>
 <th align="left">archived</th>
-<th align="left">verbs</th>
 </tr></thead>
-<tbody>
-<tr class="odd">
+<tbody><tr class="odd">
 <td align="right">1</td>
 <td align="left">DBCA</td>
-<td align="right">7</td>
+<td align="right">9</td>
 <td align="right">1</td>
 <td align="left">2019-06-05T09:12:44.272Z</td>
 <td align="left">2019-07-23T01:00:08.564Z</td>
-<td align="left">2019-07-23T03:06:52.789Z</td>
+<td align="left">2019-07-29T01:46:36.221Z</td>
 <td align="left">FALSE</td>
-<td align="left">list(“backup.create”, “backup.terminate”, “config.read”, “field_key.create”, “field_key.delete”, “field_key.list”, “form.create”, “form.delete”, “form.list”, “form.read”, “form.update”, “project.create”, “project.delete”, “project.read”, “project.update”, “session.end”, “submission.create”, “submission.read”, “submission.list”, “user.create”, “user.list”, “user.password.invalidate”, “user.read”, “user.update”, “submission.update”, “role.create”, “role.update”, “role.delete”, “assignment.list”, “assignment.create”,</td>
-</tr>
-<tr class="even">
-<td align="right">"</td>
-<td align="left">assignm</td>
-<td align="right">ent.dele</td>
-<td align="right">te“,”user.</td>
-<td align="left">delete")</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-</tbody>
+</tr></tbody>
 </table>
 </div>
 <div id="forms" class="section level1">
 <h1 class="hasAnchor">
 <a href="#forms" class="anchor"></a>Forms</h1>
+<div id="list" class="section level2">
+<h2 class="hasAnchor">
+<a href="#list" class="anchor"></a>List</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">forms &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form_list.html">form_list</a></span>(<span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb4-2" title="2">forms  <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="st">"xml"</span>) <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
@@ -238,6 +226,19 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="left">Flora Quadrat 0.4</td>
+<td align="left">build_Flora-Quadrat-0-4_1564384341</td>
+<td align="left"></td>
+<td align="left">open</td>
+<td align="left">0</td>
+<td align="left">2019-07-29 07:13:48</td>
+<td align="right">5</td>
+<td align="left">Florian Mayer</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">1bb959d541ac6990e3f74893e38c855b</td>
+</tr>
+<tr class="even">
 <td align="left">Marine Wildlife Incident 0.6</td>
 <td align="left">build_Marine-Wildlife-Incident-0-6_1559789189</td>
 <td align="left"></td>
@@ -250,7 +251,7 @@
 <td align="left">2019-06-28 08:36:08</td>
 <td align="left">ef79df7abb830de618d82765c36c2f59</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Predator or Disturbance 1.1</td>
 <td align="left">build_Predator-or-Disturbance-1-1_1559789410</td>
 <td align="left"></td>
@@ -263,7 +264,7 @@
 <td align="left">2019-07-23 03:06:52</td>
 <td align="left">9c70919ed211e2492ff1dda7a6c7c564</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Site Visit End 0.2</td>
 <td align="left">build_Site-Visit-End-0-2_1559789512</td>
 <td align="left"></td>
@@ -276,7 +277,7 @@
 <td align="left">NA</td>
 <td align="left">7b4d658b314cd1f0aef8c056c8d3009b</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Site Visit Start 0.3</td>
 <td align="left">build_Site-Visit-Start-0-3_1559789550</td>
 <td align="left"></td>
@@ -289,20 +290,20 @@
 <td align="left">NA</td>
 <td align="left">64e8fabc98ad20cd1eb1de62ac1d35c3</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Track Tally 0.5</td>
 <td align="left">build_Track-Tally-0-5_1564032721</td>
 <td align="left"></td>
-<td align="left">open</td>
-<td align="left">0</td>
+<td align="left">closing</td>
+<td align="left">2</td>
 <td align="left">2019-07-25 05:32:44</td>
 <td align="right">5</td>
 <td align="left">Florian Mayer</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
+<td align="left">2019-07-29 07:57:44</td>
+<td align="left">2019-07-29 01:46:36</td>
 <td align="left">2d521c5b75c07238a5c55010efecf21b</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Turtle Sighting 0.1</td>
 <td align="left">build_Turtle-Sighting-0-1_1559790020</td>
 <td align="left"></td>
@@ -315,7 +316,7 @@
 <td align="left">2019-07-22 01:09:38</td>
 <td align="left">dc5906a4a18c33ff0cfeee419b0ce00e</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Turtle Track or Nest 1.0</td>
 <td align="left">build_Turtle-Track-or-Nest-1-0_1559789920</td>
 <td align="left"></td>
@@ -328,8 +329,25 @@
 <td align="left">2019-06-27 03:16:50</td>
 <td align="left">b52193af35826ff9da3678cc22469535</td>
 </tr>
+<tr class="odd">
+<td align="left">Turtle Track Tally 0.6</td>
+<td align="left">build_Turtle-Track-Tally-0-6_1564387009</td>
+<td align="left"></td>
+<td align="left">open</td>
+<td align="left">0</td>
+<td align="left">2019-07-29 07:57:36</td>
+<td align="right">5</td>
+<td align="left">Florian Mayer</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">c293c4cc528738cdfb596e3b9732c66f</td>
+</tr>
 </tbody>
 </table>
+</div>
+<div id="details" class="section level2">
+<h2 class="hasAnchor">
+<a href="#details" class="anchor"></a>Details</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">form &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form_detail.html">form_detail</a></span>(<span class="dv">1</span>, forms<span class="op">$</span>xmlFormId[[<span class="dv">1</span>]])</a>
 <a class="sourceLine" id="cb5-2" title="2">form <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="st">"xml"</span>) <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
@@ -347,19 +365,27 @@
 <th align="left">hash</th>
 </tr></thead>
 <tbody><tr class="odd">
-<td align="left">Marine Wildlife Incident 0.6</td>
-<td align="left">build_Marine-Wildlife-Incident-0-6_1559789189</td>
+<td align="left">Flora Quadrat 0.4</td>
+<td align="left">build_Flora-Quadrat-0-4_1564384341</td>
 <td align="left"></td>
 <td align="left">open</td>
-<td align="right">4</td>
-<td align="left">2019-06-06T03:29:04.640Z</td>
+<td align="right">0</td>
+<td align="left">2019-07-29T07:13:48.415Z</td>
 <td align="right">5</td>
 <td align="left">Florian Mayer</td>
 <td align="left">NA</td>
-<td align="left">2019-06-28T08:36:08.982Z</td>
-<td align="left">ef79df7abb830de618d82765c36c2f59</td>
+<td align="left">NA</td>
+<td align="left">1bb959d541ac6990e3f74893e38c855b</td>
 </tr></tbody>
 </table>
+</div>
+<div id="form-schema" class="section level2">
+<h2 class="hasAnchor">
+<a href="#form-schema" class="anchor"></a>Form schema</h2>
+<p>The nested list of lists returned by <code>form_schema</code> is the cleanest representation of the Xform definition available in R. See the <a href="https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json">ODK Central API docs</a> and the examples of <code>??ruODK::form_schema</code> for more detail.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">fs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form_schema.html">form_schema</a></span>(<span class="dv">1</span>, forms<span class="op">$</span>xmlFormId[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co"># listviewer::jsonedit(fs)</span></a></code></pre></div>
+</div>
 </div>
 <div id="submissions" class="section level1">
 <h1 class="hasAnchor">
@@ -381,7 +407,13 @@
 <li><a href="#scope">Scope</a></li>
       <li><a href="#setup-ruodk">Setup ruODK</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#forms">Forms</a></li>
+      <li>
+<a href="#forms">Forms</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#list">List</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#form-schema">Form schema</a></li>
+      </ul>
+</li>
       <li><a href="#submissions">Submissions</a></li>
       <li><a href="#attachments">Attachments</a></li>
       </ul>

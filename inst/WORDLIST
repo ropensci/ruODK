@@ -12,6 +12,7 @@ DataServices
 datatable
 Datatable
 datetime
+datetimes
 dbca
 DBCA
 dir
@@ -32,6 +33,7 @@ filename3
 Flatback
 fn
 GeoJSON
+geopoint
 geospatial
 getenv
 github
@@ -39,11 +41,14 @@ Hadley
 http
 https
 imagemagick
+instanceId
 io
 ISO8601
 iterable
 jennybc
+JOSS
 jpg
+json
 lon
 magrittr
 md5
@@ -69,6 +74,7 @@ rlang
 Roadmap
 ROpenSci
 Rprofile
+select1
 SessionAuth
 setenv
 subfolder

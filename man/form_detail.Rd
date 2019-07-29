@@ -28,3 +28,8 @@ A tibble with one row and all form metadata as columns.
 \description{
 See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form
 }
+\examples{
+\dontrun{
+fs <- form_schema(Sys.getenv("ODKC_TEST_PID"), Sys.getenv("ODKC_TEST_FID"), url = Sys.getenv("ODKC_TEST_URL"), un = Sys.getenv("ODKC_TEST_UN"), pw = Sys.getenv("ODKC_TEST_PW"))
+}
+}

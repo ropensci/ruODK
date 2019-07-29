@@ -53,19 +53,34 @@ Inspect a project. Turtles are, not surprisingly, number 1. Of course they are.
 
 ```{r project_details}
 pd <- project_detail(1)
-pd %>% knitr::kable(.)
+pd %>%dplyr::select(-"verbs") %>%  knitr::kable(.)
 ```
 
 # Forms
+## List
 
 ```{r form_list}
 forms <- form_list(1)
 forms  %>% dplyr::select(-"xml") %>% knitr::kable(.)
 ```
 
+## Details
+
 ```{r form_detail}
 form <- form_detail(1, forms$xmlFormId[[1]])
 form %>% dplyr::select(-"xml") %>% knitr::kable(.)
+```
+
+## Form schema
+
+The nested list of lists returned by `form_schema` is the cleanest representation
+of the Xform definition available in R.
+See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of 
+`??ruODK::form_schema` for more detail.
+
+```{r form_schema}
+fs <- form_schema(1, forms$xmlFormId[[1]])
+# listviewer::jsonedit(fs)
 ```
 
 # Submissions
