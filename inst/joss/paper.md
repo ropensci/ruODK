@@ -68,7 +68,9 @@ R Client for the ODK Central API.
 
 `ruODK` aims:
 
-* To wrap all ODK Central API endpoints with a focus on **data access**.
+* To wrap all ODK Central API endpoints with a focus on **data access**. 
+  While this is mostly not a hard task, there is still a small barrier to novice
+  R users, and some duplication of code.
 * To provide working examples of interacting with the ODK Central API.
 * To provide convenience helpers for the day to day tasks when working with 
   ODK Central data in R: transforming the ODK Central API output into tidy 
@@ -84,7 +86,6 @@ R Client for the ODK Central API.
 * To provide extensive data visualisation. We show only minimal examples of data 
   visualisation and presentation, mainly to illustrate the example data.
   
-  
 # Typical use cases
 
 ## Smaller projects
@@ -95,7 +96,9 @@ Here, it may be sufficient to export the entire set of submissions, analyse
 and visualise it, and generate some products such as a CSV export of the data,
 vector or raster figures and maps for publications, and a rendered report.
 
-The vignette "odata" shows an example of this use case.
+The vignettes "odata" and "api" show examples of this use case. They differ in
+that the vignette "odata" uses the OData API, while the vignette "api" uses the
+RESTful API.
 
 ## Larger projects
 Long-term projects, such as environmental monitoring programs, may generate many

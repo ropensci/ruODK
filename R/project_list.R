@@ -13,6 +13,19 @@
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime
 #' @export
+#' @examples
+#' \dontrun{
+#' # With default credentials, see vignette("setup")
+#' pl <- project_list()
+#'
+#' # With explicit credentials, see tests
+#' p <- project_list(
+#'   url = Sys.getenv("ODKC_TEST_URL"),
+#'   un = Sys.getenv("ODKC_TEST_UN"),
+#'   pw = Sys.getenv("ODKC_TEST_PW")
+#' )
+#' knitr::kable(p)
+#' }
 project_list <- function(url = Sys.getenv("ODKC_URL"),
                          un = Sys.getenv("ODKC_UN"),
                          pw = Sys.getenv("ODKC_PW")) {

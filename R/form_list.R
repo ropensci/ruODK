@@ -10,6 +10,22 @@
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime
 #' @export
+#' @examples
+#' \dontrun{
+#' # With default credentials, see vignette("setup")
+#' fl <- form_list(1)
+#'
+#' # With explicit credentials, see tests
+#' fl <- form_list(
+#'   Sys.getenv("ODKC_TEST_PID"),
+#'   url = Sys.getenv("ODKC_TEST_URL"),
+#'   un = Sys.getenv("ODKC_TEST_UN"),
+#'   pw = Sys.getenv("ODKC_TEST_PW")
+#' )
+#'
+#' class(fl)
+#' # > c("tbl_df", "tbl", "data.frame")
+#' }
 form_list <- function(pid,
                       url = Sys.getenv("ODKC_URL"),
                       un = Sys.getenv("ODKC_UN"),

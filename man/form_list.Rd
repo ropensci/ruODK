@@ -26,3 +26,20 @@ A tibble with one row per form and all form metadata as columns.
 \description{
 See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms
 }
+\examples{
+\dontrun{
+# With default credentials, see vignette("setup")
+fl <- form_list(1)
+
+# With explicit credentials, see tests
+fl <- form_list(
+  Sys.getenv("ODKC_TEST_PID"),
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
+
+class(fl)
+# > c("tbl_df", "tbl", "data.frame")
+}
+}

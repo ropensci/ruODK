@@ -1,7 +1,7 @@
 test_that("form_detail works", {
 
   # The test project has a list of forms
-  formlist <- form_list(
+  fl <- form_list(
     Sys.getenv("ODKC_TEST_PID"),
     url = Sys.getenv("ODKC_TEST_URL"),
     un = Sys.getenv("ODKC_TEST_UN"),
@@ -11,7 +11,7 @@ test_that("form_detail works", {
   # The first form in the test project
   f <- form_detail(
     Sys.getenv("ODKC_TEST_PID"),
-    formlist$xmlFormId[[1]],
+    fl$xmlFormId[[1]],
     url = Sys.getenv("ODKC_TEST_URL"),
     un = Sys.getenv("ODKC_TEST_UN"),
     pw = Sys.getenv("ODKC_TEST_PW")
@@ -23,4 +23,10 @@ test_that("form_detail works", {
   # Columns: name, xmlFormId, and more
   testthat::expect_true("name" %in% names(f))
   testthat::expect_true("xmlFormId" %in% names(f))
+  cn <- c(
+    "name", "xmlFormId", "version", "state", "submissions", "createdAt",
+    "createdById", "createdBy", "updatedAt", "lastSubmission", "hash",
+    "xml"
+  )
+  testthat::expect_equal(names(f), cn)
 })

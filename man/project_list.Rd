@@ -29,3 +29,17 @@ See https://odkcentral.docs.apiary.io/#reference/project-management/projects/lis
 While the API endpoint will return all projects,
 `project_list` will fail with incorrect or missing authentication.
 }
+\examples{
+\dontrun{
+# With default credentials, see vignette("setup")
+pl <- project_list()
+
+# With explicit credentials, see tests
+p <- project_list(
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
+knitr::kable(p)
+}
+}

@@ -13,7 +13,32 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' fs <- form_schema(Sys.getenv("ODKC_TEST_PID"), Sys.getenv("ODKC_TEST_FID"), url = Sys.getenv("ODKC_TEST_URL"), un = Sys.getenv("ODKC_TEST_UN"), pw = Sys.getenv("ODKC_TEST_PW"))
+#' # With default credentials, see vignette("setup")
+#' fl <- form_list(1)
+#'
+#' # With explicit credentials, see tests
+#' fl <- form_list(
+#'   Sys.getenv("ODKC_TEST_PID"),
+#'   url = Sys.getenv("ODKC_TEST_URL"),
+#'   un = Sys.getenv("ODKC_TEST_UN"),
+#'   pw = Sys.getenv("ODKC_TEST_PW")
+#' )
+#'
+#' # The first form in the test project
+#' f <- form_detail(
+#'   Sys.getenv("ODKC_TEST_PID"),
+#'   fl$xmlFormId[[1]],
+#'   url = Sys.getenv("ODKC_TEST_URL"),
+#'   un = Sys.getenv("ODKC_TEST_UN"),
+#'   pw = Sys.getenv("ODKC_TEST_PW")
+#' )
+#'
+#' # form_detail returns exactly one row
+#' nrow(f)
+#' # > 1
+#'
+#' # form_detail returns all form metadata as columns: name, xmlFormId, etc.
+#' names(f)
 #' }
 form_detail <- function(pid,
                         fid,

@@ -81,6 +81,7 @@ odata_submissions_get <- function(pid,
                                   pw = Sys.getenv("ODKC_PW")) {
   . <- NULL # Silence R CMD check
 
+  # Parse params
   if (is.na(skip)) skip <- ""
   if (is.na(top)) top <- ""
   if (count == FALSE) {
@@ -94,6 +95,7 @@ odata_submissions_get <- function(pid,
     wkt <- "true"
   }
 
+  # Get submissions
   glue::glue(
     "{url}/v1/projects/{pid}/forms/{fid}.svc/{table}",
     "?$skip={skip}&$top={top}&$count={count}&$wkt={wkt}"

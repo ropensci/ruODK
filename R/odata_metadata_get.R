@@ -11,7 +11,6 @@
 #' @export
 #' @examples
 #' \dontrun{
-#'
 #' # Replace with your own working url, pid, fid, credentials:
 #' pid <- 14
 #' fid <- "build_Flora-Quadrat-0-2_1558575936"

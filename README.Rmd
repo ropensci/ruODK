@@ -175,15 +175,15 @@ These steps prepare a new `ruODK` release.
 devtools::test()
 
 # Docs
-codemetar::write_codemeta("ruODK")
+styler::style_pkg()
+spelling::spell_check_package()
+spelling::update_wordlist()
 devtools::document(roclets = c("rd", "collate", "namespace"))
+codemetar::write_codemeta("ruODK")
 usethis::edit_file("inst/CITATION")
 rmarkdown::render('README.Rmd',  encoding = 'UTF-8')
 
 # Checks
-styler::style_pkg()
-spelling::spell_check_package()
-spelling::update_wordlist()
 goodpractice::goodpractice(quiet = FALSE)
 devtools::check()
 
