@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List all forms. — form_list • ruODK</title>
+<title>Show the XML representation of one form as list. — form_xml • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="List all forms. — form_list" />
+<meta property="og:title" content="Show the XML representation of one form as list. — form_xml" />
 
-<meta property="og:description" content="See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms" />
+<meta property="og:description" content="https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,18 +124,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List all forms.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/form_list.R'><code>R/form_list.R</code></a></small>
-    <div class="hidden name"><code>form_list.Rd</code></div>
+    <h1>Show the XML representation of one form as list.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/form_xml.R'><code>R/form_xml.R</code></a></small>
+    <div class="hidden name"><code>form_xml.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms</p>
+    <p>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>form_list</span>(<span class='no'>pid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
+    <pre class="usage"><span class='fu'>form_xml</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -143,7 +143,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pid</th>
-      <td><p>The numeric ID of the project, e.g.: 3.</p></td>
+      <td><p>The numeric ID of the project, e.g.: 2.</p></td>
+    </tr>
+    <tr>
+      <th>fid</th>
+      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
     </tr>
     <tr>
       <th>url</th>
@@ -165,24 +169,27 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with one row per form and all form metadata as columns.</p>
+    <p>The form XML as a nested list.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># With default credentials, see vignette("setup")</span>
-<span class='no'>fl</span> <span class='kw'>&lt;-</span> <span class='fu'>form_list</span>(<span class='fl'>1</span>)
+<span class='no'>fxml_defaults</span> <span class='kw'>&lt;-</span> <span class='fu'>form_xml</span>(<span class='fl'>1</span>, <span class='st'>"build_xformsId"</span>)
 
 <span class='co'># With explicit credentials, see tests</span>
-<span class='no'>fl</span> <span class='kw'>&lt;-</span> <span class='fu'>form_list</span>(
+<span class='no'>fxml</span> <span class='kw'>&lt;-</span> <span class='fu'>form_xml</span>(
   <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>),
   <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
 )
+<span class='kw pkg'>listviewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/listviewer/man/jsonedit.html'>jsonedit</a></span>(<span class='no'>fxml</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>fl</span>)
-<span class='co'># &gt; c("tbl_df", "tbl", "data.frame")</span>
+<span class='co'># form_xml returns a nested list.</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>fxml</span>)
+<span class='co'># &gt; "list"</span>
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
