@@ -52,8 +52,16 @@ workdir/attachments/xxxxxxxxxx/filename1.jpg
 workdir/attachments/xxxxxxxxxx/filename2.jpg
 
 workdir/attachments/xxxxxxxxxx/filename3.jpg
-
-https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment
-
-https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment
 }
+\seealso{
+\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}
+
+\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
+
+Other odata-api: \code{\link{attachment_url}},
+  \code{\link{get_one_attachment}},
+  \code{\link{odata_metadata_get}},
+  \code{\link{odata_submissions_get}},
+  \code{\link{parse_submissions}}
+}
+\concept{odata-api}

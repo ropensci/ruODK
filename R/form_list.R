@@ -1,11 +1,11 @@
 #' List all forms.
 #'
 #'
-#' See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms
-#'
 #' @param pid The numeric ID of the project, e.g.: 3.
 #' @template param-auth
 #' @return A tibble with one row per form and all form metadata as columns.
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
+#' @family restful-api
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime
@@ -44,15 +44,15 @@ form_list <- function(pid,
     {
       tibble::tibble(
         name = purrr::map_chr(., "name"),
-        xmlFormId = purrr::map_chr(., "xmlFormId"),
+        fid = purrr::map_chr(., "xmlFormId"),
         version = purrr::map_chr(., "version"),
         state = purrr::map_chr(., "state"),
         submissions = purrr::map_chr(., "submissions"),
-        createdAt = map_dttm_hack(., "createdAt"),
-        createdById = purrr::map_int(., c("createdBy", "id")),
-        createdBy = purrr::map_chr(., c("createdBy", "displayName")),
-        updatedAt = map_dttm_hack(., "updatedAt"),
-        lastSubmission = map_dttm_hack(., "lastSubmission"),
+        created_at = map_dttm_hack(., "createdAt"),
+        created_by_id = purrr::map_int(., c("createdBy", "id")),
+        created_by = purrr::map_chr(., c("createdBy", "displayName")),
+        updated_at = map_dttm_hack(., "updatedAt"),
+        last_submission = map_dttm_hack(., "lastSubmission"),
         hash = purrr::map_chr(., "hash"),
         xml = purrr::map_chr(., "xml"),
       )

@@ -37,7 +37,7 @@ A nested list containing the form definition.
   fields are captured (e.g. "instanceId", form start datetimes etc.).
 }
 \description{
-See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json
+Show the schema of one form.
 }
 \examples{
 \dontrun{
@@ -106,3 +106,13 @@ fs_nested[[length(fs_nested)]]$type
 # > "dateTime"
 }
 }
+\seealso{
+\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json}
+
+Other restful-api: \code{\link{form_detail}},
+  \code{\link{form_list}}, \code{\link{form_xml}},
+  \code{\link{project_detail}}, \code{\link{project_list}},
+  \code{\link{submission_detail}},
+  \code{\link{submission_list}}
+}
+\concept{restful-api}

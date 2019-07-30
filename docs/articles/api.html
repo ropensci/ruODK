@@ -205,23 +205,23 @@
 <div id="forms" class="section level1">
 <h1 class="hasAnchor">
 <a href="#forms" class="anchor"></a>Forms</h1>
-<div id="list" class="section level2">
+<div id="list-forms-for-a-project" class="section level2">
 <h2 class="hasAnchor">
-<a href="#list" class="anchor"></a>List</h2>
+<a href="#list-forms-for-a-project" class="anchor"></a>List forms for a project</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">forms &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form_list.html">form_list</a></span>(<span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb4-2" title="2">forms  <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="st">"xml"</span>) <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
-<th align="left">xmlFormId</th>
+<th align="left">fid</th>
 <th align="left">version</th>
 <th align="left">state</th>
 <th align="left">submissions</th>
-<th align="left">createdAt</th>
-<th align="right">createdById</th>
-<th align="left">createdBy</th>
-<th align="left">updatedAt</th>
-<th align="left">lastSubmission</th>
+<th align="left">created_at</th>
+<th align="right">created_by_id</th>
+<th align="left">created_by</th>
+<th align="left">updated_at</th>
+<th align="left">last_submission</th>
 <th align="left">hash</th>
 </tr></thead>
 <tbody>
@@ -345,23 +345,23 @@
 </tbody>
 </table>
 </div>
-<div id="details" class="section level2">
+<div id="show-details-of-one-form" class="section level2">
 <h2 class="hasAnchor">
-<a href="#details" class="anchor"></a>Details</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">form &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form_detail.html">form_detail</a></span>(<span class="dv">1</span>, forms<span class="op">$</span>xmlFormId[[<span class="dv">1</span>]])</a>
+<a href="#show-details-of-one-form" class="anchor"></a>Show details of one form</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">form &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form_detail.html">form_detail</a></span>(<span class="dv">1</span>, forms<span class="op">$</span>fid[[<span class="dv">1</span>]])</a>
 <a class="sourceLine" id="cb5-2" title="2">form <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="st">"xml"</span>) <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
-<th align="left">xmlFormId</th>
+<th align="left">fid</th>
 <th align="left">version</th>
 <th align="left">state</th>
 <th align="right">submissions</th>
-<th align="left">createdAt</th>
-<th align="right">createdById</th>
-<th align="left">createdBy</th>
-<th align="left">updatedAt</th>
-<th align="left">lastSubmission</th>
+<th align="left">created_at</th>
+<th align="right">created_by_id</th>
+<th align="left">created_by</th>
+<th align="left">updated_at</th>
+<th align="left">last_submission</th>
 <th align="left">hash</th>
 </tr></thead>
 <tbody><tr class="odd">
@@ -379,23 +379,99 @@
 </tr></tbody>
 </table>
 </div>
-<div id="form-schema" class="section level2">
+<div id="inspect-form-schema" class="section level2">
 <h2 class="hasAnchor">
-<a href="#form-schema" class="anchor"></a>Form schema</h2>
+<a href="#inspect-form-schema" class="anchor"></a>Inspect form schema</h2>
 <p>The nested list of lists returned by <code>form_schema</code> is the cleanest representation of the Xform definition available in R. See the <a href="https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json">ODK Central API docs</a> and the examples of <code>??ruODK::form_schema</code> for more detail.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">fs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form_schema.html">form_schema</a></span>(<span class="dv">1</span>, forms<span class="op">$</span>xmlFormId[[<span class="dv">1</span>]])</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">fs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/form_schema.html">form_schema</a></span>(<span class="dv">1</span>, forms<span class="op">$</span>fid[[<span class="dv">1</span>]])</a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="co"># listviewer::jsonedit(fs)</span></a></code></pre></div>
 </div>
 </div>
 <div id="submissions" class="section level1">
 <h1 class="hasAnchor">
 <a href="#submissions" class="anchor"></a>Submissions</h1>
-<p>Coming soon</p>
+<div id="list-submissions-for-one-form" class="section level2">
+<h2 class="hasAnchor">
+<a href="#list-submissions-for-one-form" class="anchor"></a>List submissions for one form</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">sl &lt;-<span class="st"> </span><span class="kw"><a href="../reference/submission_list.html">submission_list</a></span>(<span class="dv">1</span>, forms<span class="op">$</span>fid[[<span class="dv">2</span>]])</a>
+<a class="sourceLine" id="cb7-2" title="2">sl <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">instance_id</th>
+<th align="right">submitter_id</th>
+<th align="left">device_id</th>
+<th align="left">created_at</th>
+<th align="left">updated_at</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">uuid:c7ba91c2-1721-4d99-bb45-6a416f24a353</td>
+<td align="right">16</td>
+<td align="left">android_id:1d368230c9c17874</td>
+<td align="left">2019-06-28 08:36:08</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">uuid:63ca5d72-2e91-40bd-9402-770770b12702</td>
+<td align="right">16</td>
+<td align="left">android_id:1d368230c9c17874</td>
+<td align="left">2019-06-28 08:36:07</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">uuid:7da50273-321c-4e96-98a1-1f86c67978c7</td>
+<td align="right">16</td>
+<td align="left">android_id:1d368230c9c17874</td>
+<td align="left">2019-06-28 08:36:05</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">uuid:6bd18979-bfdf-4835-a643-d8082f5d4089</td>
+<td align="right">16</td>
+<td align="left">android_id:1d368230c9c17874</td>
+<td align="left">2019-06-28 08:36:03</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<p>The list of submissions critically contains each submission’s unique ID in <code>instance_id</code>. If the submissions shall be downloaded and uploaded into another data warehouse, the <code>instance_id</code> can be used to determine whether a record already exists in the downstream warehouse or not. This workflow is preferable where the majority of submissions is already imported into another downstream data warehouse, and we only want to add new submissions, as in submissions which are not already imported into the data warehouse.</p>
+<p>Furthermore, the <code>instance_id</code>s can now be used to retrieve the actual submissions.</p>
+</div>
+<div id="get-one-submission" class="section level2">
+<h2 class="hasAnchor">
+<a href="#get-one-submission" class="anchor"></a>Get one submission</h2>
+<p>In order to import each submission, we need to retrieve the data by <code>instance_id</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">sub &lt;-<span class="st"> </span><span class="kw"><a href="../reference/submission_detail.html">submission_detail</a></span>(<span class="dv">1</span>, forms<span class="op">$</span>fid[[<span class="dv">2</span>]], sl<span class="op">$</span>instance_id[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb8-2" title="2">sub</a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; # A tibble: 1 x 6</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt;   instance_id   submitter_id submitter created_at          updated_at xml  </span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt;   &lt;chr&gt;                &lt;int&gt; &lt;chr&gt;     &lt;dttm&gt;              &lt;lgl&gt;      &lt;nam&gt;</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; 1 uuid:c7ba91c…           16 Turtles   2019-06-28 08:36:08 NA         &lt;nam…</span></a></code></pre></div>
+</div>
+<div id="get-all-submissions-for-one-form" class="section level2">
+<h2 class="hasAnchor">
+<a href="#get-all-submissions-for-one-form" class="anchor"></a>Get all submissions for one form</h2>
+<p>TODO</p>
+</div>
+<div id="parse-submissions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#parse-submissions" class="anchor"></a>Parse submissions</h2>
+<p>TODO</p>
+</div>
 </div>
 <div id="attachments" class="section level1">
 <h1 class="hasAnchor">
 <a href="#attachments" class="anchor"></a>Attachments</h1>
-<p>Comin soon</p>
+<div id="list-all-attachments-for-one-form" class="section level2">
+<h2 class="hasAnchor">
+<a href="#list-all-attachments-for-one-form" class="anchor"></a>List all attachments for one form</h2>
+<p>TODO</p>
+</div>
+<div id="get-attachments" class="section level2">
+<h2 class="hasAnchor">
+<a href="#get-attachments" class="anchor"></a>Get attachments</h2>
+<p>TODO</p>
+</div>
 </div>
   </div>
 
@@ -409,13 +485,25 @@
       <li><a href="#projects">Projects</a></li>
       <li>
 <a href="#forms">Forms</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#list">List</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#form-schema">Form schema</a></li>
+<li><a href="#list-forms-for-a-project">List forms for a project</a></li>
+      <li><a href="#show-details-of-one-form">Show details of one form</a></li>
+      <li><a href="#inspect-form-schema">Inspect form schema</a></li>
       </ul>
 </li>
-      <li><a href="#submissions">Submissions</a></li>
-      <li><a href="#attachments">Attachments</a></li>
+      <li>
+<a href="#submissions">Submissions</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#list-submissions-for-one-form">List submissions for one form</a></li>
+      <li><a href="#get-one-submission">Get one submission</a></li>
+      <li><a href="#get-all-submissions-for-one-form">Get all submissions for one form</a></li>
+      <li><a href="#parse-submissions">Parse submissions</a></li>
+      </ul>
+</li>
+      <li>
+<a href="#attachments">Attachments</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#list-all-attachments-for-one-form">List all attachments for one form</a></li>
+      <li><a href="#get-attachments">Get attachments</a></li>
+      </ul>
+</li>
       </ul>
 </div>
       </div>

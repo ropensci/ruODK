@@ -15,3 +15,9 @@ The string with a prepended "uuid:"
 \description{
 Prepend a leading "uuid:" to any string, e.g. an md5 hash.
 }
+\seealso{
+Other utilities: \code{\link{\%>\%}},
+  \code{\link{map_chr_hack}}, \code{\link{map_dttm_hack}},
+  \code{\link{strip_uuid}}, \code{\link{tidyeval}}
+}
+\concept{utilities}

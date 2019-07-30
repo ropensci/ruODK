@@ -208,7 +208,7 @@ usethis::use_version("minor")
 usethis::edit_file("NEWS.md")
 pkgdown::build_site()
 
-# Vignetts are big
+# Vignettes are big
 # the repo is small
 # so what shall we do
 # let's mogrify all

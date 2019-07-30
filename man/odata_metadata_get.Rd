@@ -25,7 +25,6 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 \value{
 A nested list containing DataServices and .attrs (Version).
         DataServices contains the dataset definition.
-        See exact spec at <https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/metadata-document>.
 }
 \description{
 Retrieve metadata from an OData URL ending in .svc as list of lists
@@ -48,3 +47,13 @@ meta <- odata_metadata_get(pid, fid, url = url, un = un, pw = pw)
 listviewer::jsonedit(meta)
 }
 }
+\seealso{
+\url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/metadata-document}
+
+Other odata-api: \code{\link{attachment_get}},
+  \code{\link{attachment_url}},
+  \code{\link{get_one_attachment}},
+  \code{\link{odata_submissions_get}},
+  \code{\link{parse_submissions}}
+}
+\concept{odata-api}

@@ -34,3 +34,11 @@ testthat::expect_equal(
 testthat::expect_equal(length(fq_raw$value), nrow(data_parsed))
 }
 }
+\seealso{
+Other odata-api: \code{\link{attachment_get}},
+  \code{\link{attachment_url}},
+  \code{\link{get_one_attachment}},
+  \code{\link{odata_metadata_get}},
+  \code{\link{odata_submissions_get}}
+}
+\concept{odata-api}

@@ -1,12 +1,12 @@
 #' Show details for one form.
 #'
 #'
-#' See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form
-#'
 #' @template param-pid
 #' @template param-fid
 #' @template param-auth
 #' @return A tibble with one row and all form metadata as columns.
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form}
+#' @family restful-api
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime
@@ -27,7 +27,7 @@
 #' # The first form in the test project
 #' f <- form_detail(
 #'   Sys.getenv("ODKC_TEST_PID"),
-#'   fl$xmlFormId[[1]],
+#'   fl$fid[[1]],
 #'   url = Sys.getenv("ODKC_TEST_URL"),
 #'   un = Sys.getenv("ODKC_TEST_UN"),
 #'   pw = Sys.getenv("ODKC_TEST_PW")
@@ -59,19 +59,19 @@ form_detail <- function(pid,
     {
       tibble::tibble(
         name = .$name,
-        xmlFormId = .$xmlFormId,
+        fid = .$xmlFormId,
         version = .$version,
         state = .$state,
         submissions = .$submissions,
-        createdAt = .$createdAt,
-        createdById = .$createdBy$id,
-        createdBy = .$createdBy$displayName,
-        updatedAt = ifelse(
+        created_at = .$createdAt,
+        created_by_id = .$createdBy$id,
+        created_by = .$createdBy$displayName,
+        updated_at = ifelse(
           is.null(.$updatedAt),
           NA_character_,
           .$updatedAt
         ),
-        lastSubmission = ifelse(
+        last_submission = ifelse(
           is.null(.$lastSubmission),
           NA_character_,
           .$lastSubmission

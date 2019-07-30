@@ -26,7 +26,7 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 The form XML as a nested list.
 }
 \description{
-https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml
+Show the XML representation of one form as list.
 }
 \examples{
 \dontrun{
@@ -48,3 +48,13 @@ class(fxml)
 # > "list"
 }
 }
+\seealso{
+\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
+
+Other restful-api: \code{\link{form_detail}},
+  \code{\link{form_list}}, \code{\link{form_schema}},
+  \code{\link{project_detail}}, \code{\link{project_list}},
+  \code{\link{submission_detail}},
+  \code{\link{submission_list}}
+}
+\concept{restful-api}

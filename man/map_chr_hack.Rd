@@ -20,6 +20,12 @@ Map given function, handle null as NA and flatten_chr()
 Use this function to extract chr elements with NAs
 from a list of lists into a tibble.
 }
+\seealso{
+Other utilities: \code{\link{\%>\%}},
+  \code{\link{map_dttm_hack}}, \code{\link{prepend_uuid}},
+  \code{\link{strip_uuid}}, \code{\link{tidyeval}}
+}
 \author{
 Jennifer Bryan https://github.com/jennybc/
 }
+\concept{utilities}

@@ -62,6 +62,7 @@ unnest_all <- function(nested_tbl,
 #'   default: "universal".
 #' @param verbose Whether to print verbose messages, default: FALSE.
 #' @return The submissions as unnested tibble
+#' @family odata-api
 #' @importFrom tibble as_tibble
 #' @export
 #' @examples

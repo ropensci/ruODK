@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Show the XML representation of one form as list. — form_xml • ruODK</title>
+<title>List all submissions of one form. — submission_list • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Show the XML representation of one form as list. — form_xml" />
+<meta property="og:title" content="List all submissions of one form. — submission_list" />
 
-<meta property="og:description" content="Show the XML representation of one form as list." />
+<meta property="og:description" content="List all submissions of one form." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,18 +124,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Show the XML representation of one form as list.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/form_xml.R'><code>R/form_xml.R</code></a></small>
-    <div class="hidden name"><code>form_xml.Rd</code></div>
+    <h1>List all submissions of one form.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/submission_list.R'><code>R/submission_list.R</code></a></small>
+    <div class="hidden name"><code>submission_list.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Show the XML representation of one form as list.</p>
+    <p>List all submissions of one form.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>form_xml</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
+    <pre class="usage"><span class='fu'>submission_list</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -169,36 +169,68 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The form XML as a nested list.</p>
+    <p>A tibble containing some high-level details of the form submissions.
+        One row per submission, columns are submission attributes:</p>
+<p>* instance_id: uuid, string. The unique ID for each submission.
+        * submitter_id: user ID, integer.
+        * device_id: Android device ID, string
+        * created_at: time of submission upload, dttm
+        * updated_at: time of submission update on server, dttm or NA</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml</a></p>
+    <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form</a></p>
 <p>Other restful-api: <code><a href='form_detail.html'>form_detail</a></code>,
   <code><a href='form_list.html'>form_list</a></code>, <code><a href='form_schema.html'>form_schema</a></code>,
-  <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
-  <code><a href='submission_detail.html'>submission_detail</a></code>,
-  <code><a href='submission_list.html'>submission_list</a></code></p></div>
+  <code><a href='form_xml.html'>form_xml</a></code>, <code><a href='project_detail.html'>project_detail</a></code>,
+  <code><a href='project_list.html'>project_list</a></code>,
+  <code><a href='submission_detail.html'>submission_detail</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># With default credentials, see vignette("setup")</span>
-<span class='no'>fxml_defaults</span> <span class='kw'>&lt;-</span> <span class='fu'>form_xml</span>(<span class='fl'>1</span>, <span class='st'>"build_xformsId"</span>)
+<span class='no'>sl_defaults</span> <span class='kw'>&lt;-</span> <span class='fu'>submission_list</span>(<span class='fl'>1</span>, <span class='st'>"build_xformsId"</span>)
 
 <span class='co'># With explicit credentials, see tests</span>
-<span class='no'>fxml</span> <span class='kw'>&lt;-</span> <span class='fu'>form_xml</span>(
+<span class='no'>sl</span> <span class='kw'>&lt;-</span> <span class='fu'>submission_list</span>(
   <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
   <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>),
   <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
 )
-<span class='kw pkg'>listviewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/listviewer/man/jsonedit.html'>jsonedit</a></span>(<span class='no'>fxml</span>)
+<span class='no'>sl</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
 
-<span class='co'># form_xml returns a nested list.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>fxml</span>)
-<span class='co'># &gt; "list"</span>
+<span class='no'>sl</span> <span class='kw'>&lt;-</span> <span class='fu'>submission_list</span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>),
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+)
+<span class='no'>fl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='form_list.html'>form_list</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+)
+
+<span class='co'># submission_list returns a tibble</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>sl</span>)
+<span class='co'># &gt; c("tbl_df", "tbl", "data.frame")</span>
+
+<span class='co'># Submission attributes are the tibble's columns</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>sl</span>)
+<span class='co'># &gt; "instance_id" "submitter_id" "device_id" "created_at" "updated_at"</span>
+
+<span class='co'># Number of submissions (rows) is same as advertised in form_list</span>
+<span class='no'>form_list_nsub</span> <span class='kw'>&lt;-</span> <span class='no'>fl</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>fid</span> <span class='kw'>==</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>magrittr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/magrittr/man/aliases.html'>extract2</a></span>(<span class='st'>"submissions"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>()
+<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>sl</span>) <span class='kw'>&lt;-</span> <span class='no'>form_list_nsub</span>
+<span class='co'># &gt; TRUE</span>
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -1,7 +1,6 @@
 #' Retrieve /Submissions from an OData URL ending in .svc as list of lists
 #'
 #'
-#' @details See https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document
 #' @template param-pid
 #' @template param-fid
 #' @param table The submission EntityType, or in plain words, the table name.
@@ -18,15 +17,17 @@
 #' @param wkt If TRUE, geospatial data will be returned as WKT (Well Known Text)
 #'            strings. Default: FALSE, returns GeoJSON structures.
 #' @template param-auth
-#' @importFrom glue glue
-#' @importFrom httr add_headers authenticate content GET
-#' @export
 #' @return A nested list of lists.
 #'         `value` contains the submissions, which can be "rectangled" using
 #'     `tidyr::unnest_wider("element_name")`.
 #'     `@odata.context` is the URL of the metadata.
 #'     `@odata.count` is the total number of rows in the table.
-#'     See spec at https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service}
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}
+#' @family odata-api
+#' @importFrom glue glue
+#' @importFrom httr add_headers authenticate content GET
+#' @export
 #' @examples
 #' \dontrun{
 #'

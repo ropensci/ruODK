@@ -1,23 +1,39 @@
 #' List all details of one project.
 #'
 #'
-#' See https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details
 #'
 #' While the API endpoint will return all details for one project,
 #' `project_list` will fail with incorrect or missing authentication.
 #'
 #' @param pid The numeric ID of the project, e.g.: 3.
 #' @template param-auth
-#' @return A tibble with exactly one row for the project and all project metadata
-#'   as columns as per ODK Central API docs.
+#' @return A tibble with exactly one row for the project and all project
+#'   metadata as columns as per ODK Central API docs.
+#'   Column names are renamed from ODK's `camelCase` to `snake_case`.
 #'   Values differ to values returned by ODK Central API:
 #'
 #'   * archived: FALSE (if NULL) else TRUE
 #'   * dates: NA if NULL
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details}
+#' @family restful-api
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime
 #' @export
+#' @examples
+#' \dontrun{
+# With default credentials, see vignette("setup")
+#' pl <- project_detail(1)
+#'
+#' # With explicit credentials, see tests
+#' p <- project_list(
+#'   Sys.getenv("ODKC_TEST_PID"),
+#'   url = Sys.getenv("ODKC_TEST_URL"),
+#'   un = Sys.getenv("ODKC_TEST_UN"),
+#'   pw = Sys.getenv("ODKC_TEST_PW")
+#' )
+#' pd %>%dplyr::select(-"verbs") %>%  knitr::kable(.)
+#' }
 project_detail <- function(pid,
                            url = Sys.getenv("ODKC_URL"),
                            un = Sys.getenv("ODKC_UN"),

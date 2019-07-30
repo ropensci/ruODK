@@ -20,4 +20,10 @@ symbols (`sym()`, `syms()`, `ensym()`), expressions (`expr()`,
 To learn more about tidy eval and how to use these tools, read
 <http://rlang.tidyverse.org/articles/tidy-evaluation.html>
 }
+\seealso{
+Other utilities: \code{\link{\%>\%}},
+  \code{\link{map_chr_hack}}, \code{\link{map_dttm_hack}},
+  \code{\link{prepend_uuid}}, \code{\link{strip_uuid}}
+}
+\concept{utilities}
 \keyword{internal}

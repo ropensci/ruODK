@@ -48,13 +48,9 @@ A nested list of lists.
     `tidyr::unnest_wider("element_name")`.
     `@odata.context` is the URL of the metadata.
     `@odata.count` is the total number of rows in the table.
-    See spec at https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service
 }
 \description{
 Retrieve /Submissions from an OData URL ending in .svc as list of lists
-}
-\details{
-See https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document
 }
 \examples{
 \dontrun{
@@ -99,3 +95,15 @@ listviewer::jsonedit(data)
 # Next: parse this nested list in to a tidy tibble with `parse_submissions`
 }
 }
+\seealso{
+\url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service}
+
+\url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}
+
+Other odata-api: \code{\link{attachment_get}},
+  \code{\link{attachment_url}},
+  \code{\link{get_one_attachment}},
+  \code{\link{odata_metadata_get}},
+  \code{\link{parse_submissions}}
+}
+\concept{odata-api}

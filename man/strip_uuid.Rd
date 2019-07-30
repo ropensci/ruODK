@@ -15,3 +15,9 @@ The string with every occurrence of "uuid:" deleted.
 \description{
 Strip the leading "uuid:" from a UUID hash.
 }
+\seealso{
+Other utilities: \code{\link{\%>\%}},
+  \code{\link{map_chr_hack}}, \code{\link{map_dttm_hack}},
+  \code{\link{prepend_uuid}}, \code{\link{tidyeval}}
+}
+\concept{utilities}

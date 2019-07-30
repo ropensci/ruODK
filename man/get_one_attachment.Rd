@@ -36,3 +36,11 @@ This is a helper function used by `get_attachment`.
 This function is not vectorised, but mapped by `get_attachment` to a tibble
 of input parameters.
 }
+\seealso{
+Other odata-api: \code{\link{attachment_get}},
+  \code{\link{attachment_url}},
+  \code{\link{odata_metadata_get}},
+  \code{\link{odata_submissions_get}},
+  \code{\link{parse_submissions}}
+}
+\concept{odata-api}

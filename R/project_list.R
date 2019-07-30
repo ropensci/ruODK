@@ -1,14 +1,14 @@
 #' List all projects.
 #'
 #'
-#' See https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects
-#'
 #' While the API endpoint will return all projects,
 #' `project_list` will fail with incorrect or missing authentication.
 #'
 #' @template param-auth
 #' @return A tibble with one row per project and all project metadata
 #'         as columns as per ODK Central API docs.
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects}
+#' @family restful-api
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom glue glue
 #' @importFrom readr parse_datetime

@@ -26,7 +26,7 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 A tibble with one row and all form metadata as columns.
 }
 \description{
-See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form
+Show details for one form.
 }
 \examples{
 \dontrun{
@@ -44,7 +44,7 @@ fl <- form_list(
 # The first form in the test project
 f <- form_detail(
   Sys.getenv("ODKC_TEST_PID"),
-  fl$xmlFormId[[1]],
+  fl$fid[[1]],
   url = Sys.getenv("ODKC_TEST_URL"),
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
@@ -58,3 +58,13 @@ nrow(f)
 names(f)
 }
 }
+\seealso{
+\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form}
+
+Other restful-api: \code{\link{form_list}},
+  \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_detail}}, \code{\link{project_list}},
+  \code{\link{submission_detail}},
+  \code{\link{submission_list}}
+}
+\concept{restful-api}

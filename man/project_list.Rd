@@ -23,9 +23,6 @@ A tibble with one row per project and all project metadata
         as columns as per ODK Central API docs.
 }
 \description{
-See https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects
-}
-\details{
 While the API endpoint will return all projects,
 `project_list` will fail with incorrect or missing authentication.
 }
@@ -43,3 +40,13 @@ p <- project_list(
 knitr::kable(p)
 }
 }
+\seealso{
+\url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects}
+
+Other restful-api: \code{\link{form_detail}},
+  \code{\link{form_list}}, \code{\link{form_schema}},
+  \code{\link{form_xml}}, \code{\link{project_detail}},
+  \code{\link{submission_detail}},
+  \code{\link{submission_list}}
+}
+\concept{restful-api}

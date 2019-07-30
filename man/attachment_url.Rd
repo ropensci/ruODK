@@ -26,3 +26,11 @@ This is a helper function used by `attachment_get`.
 This function is vectorised and accepts single values or vectors for uuid and
 fn.
 }
+\seealso{
+Other odata-api: \code{\link{attachment_get}},
+  \code{\link{get_one_attachment}},
+  \code{\link{odata_metadata_get}},
+  \code{\link{odata_submissions_get}},
+  \code{\link{parse_submissions}}
+}
+\concept{odata-api}

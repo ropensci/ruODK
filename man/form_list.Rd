@@ -24,7 +24,7 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 A tibble with one row per form and all form metadata as columns.
 }
 \description{
-See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms
+List all forms.
 }
 \examples{
 \dontrun{
@@ -43,3 +43,13 @@ class(fl)
 # > c("tbl_df", "tbl", "data.frame")
 }
 }
+\seealso{
+\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
+
+Other restful-api: \code{\link{form_detail}},
+  \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_detail}}, \code{\link{project_list}},
+  \code{\link{submission_detail}},
+  \code{\link{submission_list}}
+}
+\concept{restful-api}

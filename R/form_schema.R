@@ -1,8 +1,6 @@
 #' Show the schema of one form.
 #'
 #'
-#' See https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json
-#'
 #' @template param-pid
 #' @template param-fid
 #' @param flatten Whether to flatten the resulting list of lists (TRUE) or not
@@ -17,6 +15,8 @@
 #'   repeating screens, "repeat" for repeating screens).
 #'   A list with `name` "meta" may precede the structure, if several metadata
 #'   fields are captured (e.g. "instanceId", form start datetimes etc.).
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json}
+#' @family restful-api
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom glue glue
 #' @export

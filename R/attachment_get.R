@@ -2,6 +2,7 @@
 #'
 #' @param uuid A string which may contain any number of "uuid:"
 #' @return The string with every occurrence of "uuid:" deleted.
+#' @family utilities
 #' @export
 #' @importFrom stringr str_replace
 strip_uuid <- function(uuid) {
@@ -13,6 +14,7 @@ strip_uuid <- function(uuid) {
 #'
 #' @param md5hash A string, e.g. an md5 hash.
 #' @return The string with a prepended "uuid:"
+#' @family utilities
 #' @export
 #' @importFrom glue glue
 prepend_uuid <- function(md5hash) {
@@ -33,6 +35,7 @@ prepend_uuid <- function(md5hash) {
 #'           attachment filenames.
 #' @param url The OData URL, ending in .svc, no trailing slash.
 #' @return The inferred download URL.
+#' @family odata-api
 attachment_url <- function(pid, fid, uuid, fn,
                            url = Sys.getenv("ODKC_URL")) {
   glue::glue(
@@ -54,6 +57,7 @@ attachment_url <- function(pid, fid, uuid, fn,
 #' @template param-auth
 #' @param verbose Whether to display debug messages or not (default)
 #' @return The relative local path to the downloaded attachment or NA.
+#' @family odata-api
 #' @importFrom httr GET authenticate write_disk
 #' @importFrom fs file_exists
 #' @export
@@ -95,9 +99,6 @@ get_one_attachment <- function(pth, fn, src,
 #'
 #' workdir/attachments/xxxxxxxxxx/filename3.jpg
 #'
-#' https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment
-#'
-#' https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment
 #' @template param-pid
 #' @template param-fid
 #' @param submission_uuid One or many ODK submission UUIDs, an MD5 hash
@@ -108,6 +109,9 @@ get_one_attachment <- function(pth, fn, src,
 #' @template param-auth
 #' @param verbose Whether to display debug messages or not (default)
 #' @return The relative file path for the downloaded attachment(s)
+#' @family odata-api
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
 #' @importFrom glue glue
 #' @importFrom fs dir_create path
 #' @importFrom httr authenticate GET write_disk

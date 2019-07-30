@@ -1,12 +1,13 @@
 #' Show the XML representation of one form as list.
 #'
 #'
-#' https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml
 #'
 #' @template param-pid
 #' @template param-fid
 #' @template param-auth
 #' @return The form XML as a nested list.
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
+#' @family restful-api
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom glue glue
 #' @importFrom xml2 as_list

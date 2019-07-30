@@ -6,6 +6,7 @@
 #' @param .x An iterable data object
 #' @param .f A function to map over the data
 #' @param ... Extra arguments to `map()`
+#' @family utilities
 #' @author Jennifer Bryan https://github.com/jennybc/
 #' @export
 map_chr_hack <- function(.x, .f, ...) {
@@ -23,6 +24,7 @@ map_chr_hack <- function(.x, .f, ...) {
 #' @param .x An iterable data object
 #' @param .f A function to map over the data
 #' @param ... Extra arguments to `map()`
+#' @family utilities
 #' @export
 map_dttm_hack <- function(.x, .f, ...) {
   . <- NULL

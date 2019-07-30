@@ -5,7 +5,8 @@
 #' @template param-auth
 #' @return A nested list containing DataServices and .attrs (Version).
 #'         DataServices contains the dataset definition.
-#'         See exact spec at <https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/metadata-document>.
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/metadata-document}
+#' @family odata-api
 #' @importFrom httr add_headers authenticate content GET
 #' @importFrom xml2 as_list
 #' @export
