@@ -5,8 +5,8 @@
 \title{Export all form submissions to CSV.}
 \usage{
 submission_export(pid, fid, local_dir = here::here(), overwrite = TRUE,
-  verbose = FALSE, url = Sys.getenv("ODKC_URL"),
-  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
+  url = Sys.getenv("ODKC_URL"), un = Sys.getenv("ODKC_UN"),
+  pw = Sys.getenv("ODKC_PW"), verbose = FALSE)
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.}
@@ -16,7 +16,8 @@ submission_export(pid, fid, local_dir = here::here(), overwrite = TRUE,
 \item{local_dir}{The local folder to save the downloaded files to,
 default: `here::here()`.}
 
-\item{verbose}{Whether to display debug messages or not (default)}
+\item{overwrite}{Whether to overwrite previously downloaded zip files,
+default: FALSE}
 
 \item{url}{The OData URL, ending in .svc, no trailing slash.}
 
@@ -27,6 +28,8 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")}
 \item{pw}{The ODK Central password,,
 default: Sys.getenv("ODKC_PW").
 Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
+
+\item{verbose}{Whether to display debug messages or not (default)}
 }
 \value{
 The absolute path to the zip file named "`fid`.zip"

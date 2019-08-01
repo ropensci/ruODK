@@ -21,6 +21,8 @@
 #' @template param-fid
 #' @param local_dir The local folder to save the downloaded files to,
 #'                  default: `here::here()`.
+#' @param overwrite Whether to overwrite previously downloaded zip files,
+#'                 default: FALSE
 #' @template param-auth
 #' @template param-verbose
 #' @return The absolute path to the zip file named "`fid`.zip"
@@ -67,10 +69,10 @@ submission_export <- function(pid,
                               fid,
                               local_dir = here::here(),
                               overwrite = TRUE,
-                              verbose = FALSE,
                               url = Sys.getenv("ODKC_URL"),
                               un = Sys.getenv("ODKC_UN"),
-                              pw = Sys.getenv("ODKC_PW")) {
+                              pw = Sys.getenv("ODKC_PW"),
+                              verbose = FALSE) {
   . <- NULL
   pth <- fs::path(local_dir, glue::glue("{fid}.zip"))
 

@@ -11,7 +11,7 @@ test_that("submission_export works", {
   msg_keep <- glue::glue("Keeping previous download: {pth}\n")
   msg_chuck <- glue::glue("Overwriting previous download: {pth}\n")
 
-  # Once you drink Tequila, you're feeling really gööd
+  # Once you drink Tequila, you're feeling really good
   testthat::expect_message(
     se <- submission_export(
       Sys.getenv("ODKC_TEST_PID"),
@@ -27,7 +27,7 @@ test_that("submission_export works", {
   )
   dl1 <- fs::file_info(se)$modification_time
 
-  # Twice you drink Tequila, you're getting in ze mööd
+  # Twice you drink Tequila, you're getting in ze mood
   testthat::expect_message(
     se <- submission_export(
       Sys.getenv("ODKC_TEST_PID"),
@@ -46,7 +46,7 @@ test_that("submission_export works", {
   dl2 <- fs::file_info(se)$modification_time
   testthat::expect_true(dl1 == dl2)
 
-  # Three times Tequila, your cheeks gonna glööw
+  # Three times Tequila, your cheeks gonna glow
   testthat::expect_message(
     se <- submission_export(
       Sys.getenv("ODKC_TEST_PID"),
@@ -65,7 +65,7 @@ test_that("submission_export works", {
   dl3 <- fs::file_info(se)$modification_time
   testthat::expect_false(dl1 == dl3)
 
-  # Four times Tequila, öh öh öh
+  # Four times Tequila, oh oh oh
   # \url{https://www.youtube.com/watch?v=cWd5Uiyx5zg}
   testthat::expect_message(
     se <- submission_export(

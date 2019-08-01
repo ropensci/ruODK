@@ -142,8 +142,8 @@ included Submissions.</p>
     </div>
 
     <pre class="usage"><span class='fu'>submission_export</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='kw pkg'>here</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span>(), <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,8 +162,9 @@ included Submissions.</p>
 default: `here::here()`.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>Whether to display debug messages or not (default)</p></td>
+      <th>overwrite</th>
+      <td><p>Whether to overwrite previously downloaded zip files,
+default: FALSE</p></td>
     </tr>
     <tr>
       <th>url</th>
@@ -180,6 +181,10 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")</p></td>
       <td><p>The ODK Central password,,
 default: Sys.getenv("ODKC_PW").
 Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Whether to display debug messages or not (default)</p></td>
     </tr>
     </table>
     
