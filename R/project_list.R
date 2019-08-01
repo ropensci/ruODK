@@ -25,6 +25,15 @@
 #'   pw = Sys.getenv("ODKC_TEST_PW")
 #' )
 #' knitr::kable(p)
+#'
+#' # project_list returns a tibble
+#' class(p)
+#' # > "tbl_df" "tbl" "data.frame"
+#'
+#' # columns are project metadata
+#' names(p)
+#' # > "id" "name" "forms" "app_users" "last_submission"
+#' # > "created_at" "updated_at" "archived"
 #' }
 project_list <- function(url = Sys.getenv("ODKC_URL"),
                          un = Sys.getenv("ODKC_UN"),
@@ -44,12 +53,16 @@ project_list <- function(url = Sys.getenv("ODKC_URL"),
       tibble::tibble(
         id = purrr::map_int(., "id"),
         name = purrr::map_chr(., "name"),
-        archived = map_chr_hack(., "archived"),
         forms = purrr::map_int(., "forms"),
         app_users = purrr::map_int(., "appUsers"),
         last_submission = map_dttm_hack(., "lastSubmission"),
         created_at = map_dttm_hack(., "createdAt"),
-        updated_at = map_dttm_hack(., "updatedAt")
+        updated_at = map_dttm_hack(., "updatedAt"),
+        archived = ifelse(
+          is.null(.$archived),
+          FALSE,
+          TRUE
+        )
       )
     }
 }

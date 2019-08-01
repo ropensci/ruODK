@@ -19,22 +19,36 @@ library(ruODK)
 ```
 
 # Scope
-This vignette provides a walk-through of the "getting data out" functions of
-the RESTful API endpoints which list and view details.
-This is useful to build ETL pipelines from ODK Central into other data warehouses,
-or to build automated and reproducible reporting. 
+This vignette provides a walk-through of the "getting data out" 
+functions of the RESTful API endpoints which list and view details.
 
-The result will be similar to
+`ruODK` users would mix and match parts of the demonstrated workflows to build
+their own data pipelines, e.g.:
 
-* browsing ODK Central and downloading submissions as zip archive,
-* viewing ODK Central data in MS PowerBI, MS Excel, or Tableau through the
-  OData service, or
-* viewing ODK Central data through ruODK's OData functions.
+* to build a quick analysis from all data, freshly downloaded from a smaller 
+  project, or
+* to build an interactive ETL pipeline to selectively download only new submissions
+  for further processing and upload into downstream data warehouses.
+
+## Three ways to happiness
+
+ODK Central offers no less than three different ways to access data:
+
+* viewing ODK Central data in MS PowerBI, MS Excel, Tableau, or `ruODK` 
+  through the OData service endpoints, or
+* downloading all submissions including attachments as one (possibly gigantic) 
+  zip archive either through the "Export Submissions" button in the ODK Central
+  form submissions page or through `ruODK`,
+* viewing ODK Central data through `ruODK`'s RESTful API functions.
+
+While the `vignette("odata", package="ruODK")` 
+(online [here](https://dbca-wa.github.io/ruODK/articles/odata.html)) illustrates 
+the first option, this vignette demonstrates the remaining two.
 
 Not implemented (yet) are the "managing ODK Central" functions which create, 
 update, and delete projects, forms, users, roles, and permissions. 
 We haven't yet found a strong use case to automate those functions - 
-ODK Central (driven by humans) does those jobs beautifully.
+ODK Central (driven by humans) does those jobs beautifully on an expected scale.
 
 # Setup ruODK
 See [`vignette("Setup", package = "ruODK")`](https://dbca-wa.github.io/ruODK/articles/setup.html) 
@@ -42,32 +56,69 @@ for detailed options to configure `ruODK`.
 
 # Projects
 
-List projects.
+List projects. We see the project ID, a name, the number of forms and app users,
+dates of last form submissions plus project management timestamps (created, 
+updated).
+
+The important bit here is the project ID.
 
 ```{r project_list}
-p <- project_list()
+p <- ruODK::project_list()
 p %>% knitr::kable(.)
 ```
 
-Inspect a project. Turtles are, not surprisingly, number 1. Of course they are.
+Inspect a project using its ID. We receive a tibble with exactly one row,
+all the columns of `ruODK::project_list` plus a column `verbs`, which contains all
+available API actions for a project.
 
 ```{r project_details}
-pd <- project_detail(1)
+pd <- ruODK::project_detail(1)
 pd %>%dplyr::select(-"verbs") %>%  knitr::kable(.)
+pd$verbs[[1]] %>% purrr::map_chr(., 1)
 ```
+
+Nothing apart from the verbs is new compared to the data returned by 
+`ruODK::project_list`.
+
+To learn more about the functionality behind the verbs, refer to the interactive 
+[ODK Central API documentation](https://odkcentral.docs.apiary.io/#reference/project-management).
+
+To retrieve data from ODK Central, the functions shown below will suffice.
 
 # Forms
 ## List forms for a project
 
+To download form submissions, we need to know project ID and form ID.
+
+There are several ways of retrieving the form ID:
+
+* Browsing forms in the ODK Central's project overviews,
+* Stealing the form ID from the OData service endpoint URL as shown on 
+  ODK Central's form submission page,
+* Listing form metadata for a given project ID with `ruODK::form_list()`.
+
 ```{r form_list}
-forms <- form_list(1)
+forms <- ruODK::form_list(1)
 forms  %>% dplyr::select(-"xml") %>% knitr::kable(.)
+```
+
+Further to the metadata shown here, a column `xml` contains the entire XForms
+definition (originally XML) as nested list.
+
+If the original XML is needed rather than the R equivalent (nested list), 
+we can use `ruODK::form_xml` with parameter `parse=FALSE`:
+
+```{r form_xml}
+form_xml <- ruODK::form_xml(1, forms$fid[[1]], parse=FALSE)
+form_xml
 ```
 
 ## Show details of one form
 
+The details of a form are exactly the same as the output of `ruODK::form_list()`.
+
 ```{r form_detail}
-form <- form_detail(1, forms$fid[[1]])
+form <- ruODK::form_detail(1, forms$fid[[1]])
 form %>% dplyr::select(-"xml") %>% knitr::kable(.)
 ```
 
@@ -75,20 +126,123 @@ form %>% dplyr::select(-"xml") %>% knitr::kable(.)
 
 The nested list of lists returned by `form_schema` is the cleanest representation
 of the Xform definition available in R.
-See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of 
-`??ruODK::form_schema` for more detail.
+See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of  `??ruODK::form_schema()` for more detail.
 
 ```{r form_schema}
 fs <- form_schema(1, forms$fid[[1]])
 # listviewer::jsonedit(fs)
 ```
 
+Namely, the form schema tells us about form field data types (dates, geopoints, 
+binary attachments) and repeating groups. We need this knowledge to parse the 
+submission data into tidy tibbles later.
+
 # Submissions
+We are getting closer to the actual data! This section shows two of the options
+for data access: dump all submissions, or extract a subset.
+
+## Get all submissions for one form
+Smaller datasets lend themselves to be exported in one go.
+ODK Central offers one giant zip file containing all submissions, any
+repeating groups, and any attachments both on the form submission page, and as
+API endpoint which is provided as `ruODK::submission_export()`.
+
+The default behaviour of `ruODK::submission_export()` is to write the zip file
+to the project root (`here::here()`), and to overwrite existing previous downloads.
+See `?ruODK::submission_export()` for alternative download and retention options.
+
+In the following chuck, we illustrate common tasks:
+
+* Download the zip file.
+* Unpack the zip file.
+* Join repeating form group data `data_taxon` to main data `data_quadrat` to
+  annotate `data_taxon` with data from `data_quadrat`.
+* Sanitise the column names.
+* Prepend all attachment filenames (e.g. `data_quadrat$location_quadrat_photo`,
+  `data_taxon$photo_in_situ`) with `media/`.
+
+
+```{r submission_export}
+t <- fs::dir_create("api")
+
+# Predict filenames (with knowledge of form)
+fid <- Sys.getenv("ODKC_TEST_FID")
+fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
+fid_csv_tae <- fs::path(t, glue::glue("{fid}-taxon_encounter.csv"))
+
+# Download the zip file
+se <- ruODK::submission_export(
+  Sys.getenv("ODKC_TEST_PID"),
+  Sys.getenv("ODKC_TEST_FID"),
+  local_dir = t,
+  overwrite = FALSE,
+  verbose = TRUE,
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
+
+# Unpack the zip file
+f <- unzip(se, exdir = t)
+fs::dir_ls(t)
+
+# Read the CSV files
+data_quadrat_raw <- fid_csv %>% readr::read_csv()
+data_taxon_raw <- fid_csv_tae %>% readr::read_csv()
+
+# Sanitize column names
+names(data_quadrat_raw) <- names(data_quadrat_raw) %>% stringr::str_replace_all(., "-", "_")
+names(data_taxon_raw) <- names(data_taxon_raw) %>% stringr::str_replace_all(., "-", "_")
+
+# Prepend attachments with media/ to turn into relative file paths
+data_quadrat <- data_quadrat_raw %>% 
+  dplyr::mutate(
+    location_quadrat_photo = glue::glue("media/{location_quadrat_photo}"),
+    habitat_morphological_type_photo = glue::glue("media/{habitat_morphological_type_photo}"),
+    perimeter_mudmap_photo = glue::glue("media/{perimeter_mudmap_photo}")
+  )
+DT::datatable(data_quadrat)
+# Further: create map with popups, see vignette "odata"
+
+data_taxon <- data_taxon_raw %>% 
+  dplyr::mutate(
+    photo_in_situ = glue::glue("media/{photo_in_situ}")
+  ) %>% 
+  dplyr::left_join(
+    data_quadrat,
+    by = c("PARENT_KEY" = "meta_instanceID")
+  )
+DT::datatable(data_taxon)
+# Further: create map with popups, see vignette "odata"
+```
+
+
+In future versions of `ruODK`, we'll introspect the form schema to determine
+the names of repeating groups, the form field names of attachments (data type 
+"binary" in form schema), and thus could automate the process shown above.
 
 ## List submissions for one form
+Not always is it appropriate to download all submissions and all attachments
+at once. 
+
+If forms feed into downstream data warehouses, the typical ETL workflow is to 
+
+* List all submissions from ODK Central
+* Select the subset of new submissions to download, e.g.
+  * Submissions younger than the oldest submission date in the data warehouse.
+  * Submissions whose `instance_id` is not already present in the data warehouse.
+* Download only the selected submissions.
+* Download attachments of only the selected submissions.
+
 
 ```{r submission_list}
-sl <- submission_list(1, forms$fid[[2]])
+sl <- ruODK::submission_list(
+  Sys.getenv("ODKC_TEST_PID"),
+  Sys.getenv("ODKC_TEST_FID"),
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
 sl %>% knitr::kable(.)
 ```
 
@@ -110,20 +264,99 @@ In order to import each submission, we need to retrieve the data by
 `instance_id`.
 
 ```{r submission_detail}
-sub <- submission_detail(1, forms$fid[[2]], sl$instance_id[[1]])
-sub
+# One submission
+sub <- ruODK::submission_detail(
+  Sys.getenv("ODKC_TEST_PID"),
+  Sys.getenv("ODKC_TEST_FID"),
+  sl$instance_id[[1]],
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
+
+# Multiple submissions
+submissions <- tibble::tibble(
+  pid = Sys.getenv("ODKC_TEST_PID"),
+  fid = Sys.getenv("ODKC_TEST_FID"),
+  iid = sl$instance_id,  # this is a vector of multiple instance_ids
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+) %>% 
+  purrr::pmap(ruODK::submission_detail)
 ```
 
-## Get all submissions for one form
-TODO
-
 ## Parse submissions
-TODO 
+The data in `sub` is one row of the bulk downloaded submissions in `data_quadrat`.
+The data in `submissions` represents all (or let's pretend, the selected) 
+submissions in `data_quadrat`.
+The field `xml` contains the actual submission data including repeating groups.
+
+The structure is different to the output of `ruODK::odata_submissions_get`,
+therefore `parse_submissions` does not work (yet) for those.
+
+```{r}
+d <- submissions %>% purrr::map(., c("xml", "data")) 
+d
+# that's as far as it goes for today, stay tuned
+```
 
 # Attachments
 
 ## List all attachments for one form
-TODO
+
+```{r attachment_list}
+al <- attachment_list(
+  Sys.getenv("ODKC_TEST_PID"),
+  Sys.getenv("ODKC_TEST_FID"),
+  sl$instance_id[[1]],
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
+al
+
+attachments <- tibble::tibble(
+  pid = Sys.getenv("ODKC_TEST_PID"),
+  fid = Sys.getenv("ODKC_TEST_FID"),
+  iid = sl$instance_id,  # this is a vector of multiple instance_ids
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+) %>% 
+  purrr::pmap(ruODK::attachment_list)
+attachments
+```
 
 ## Get attachments
-TODO
+While we're working on parsing the submissions into something resembling
+`data_quadrat`, we'll demonstrate the use of `ruODK::attachment_get` using
+`data_quadrat_raw`, which still contains the plain filenames without prefixed 
+local folders.
+
+```{r attachment_get}
+data_quadrat_att <- data_quadrat_raw %>% 
+  dplyr::mutate(
+    location_quadrat_photo = ruODK::attachment_get(
+        Sys.getenv("ODKC_TEST_PID"),
+        Sys.getenv("ODKC_TEST_FID"),
+        location_quadrat_photo,
+        meta_instanceID,
+        local_dir = t,
+        url = Sys.getenv("ODKC_TEST_URL"),
+        un = Sys.getenv("ODKC_TEST_UN"),
+        pw = Sys.getenv("ODKC_TEST_PW")
+    )
+    # same for all other attachments
+    # requires knowledge or introspection of form schema
+  )
+
+# We have file paths...
+data_quadrat_att$location_quadrat_photo
+
+# ...and the corresponding files
+fs::dir_ls(t)
+```
+
+From here, we can use the separately created data tibbles and locally downloaded
+attachments to build visualisations as shown in the vignette "odata".

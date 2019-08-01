@@ -57,16 +57,16 @@ project_detail <- function(pid,
         name = .$name,
         forms = .$forms,
         app_users = .$appUsers,
+        last_submission = ifelse(
+          is.null(.$lastSubmission),
+          NA_character_,
+          .$lastSubmission
+        ),
         created_at = .$createdAt,
         updated_at = ifelse(
           is.null(.$updatedAt),
           NA_character_,
           .$updatedAt
-        ),
-        last_submission = ifelse(
-          is.null(.$lastSubmission),
-          NA_character_,
-          .$lastSubmission
         ),
         archived = ifelse(
           is.null(.$archived),

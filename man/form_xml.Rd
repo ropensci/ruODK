@@ -4,13 +4,15 @@
 \alias{form_xml}
 \title{Show the XML representation of one form as list.}
 \usage{
-form_xml(pid, fid, url = Sys.getenv("ODKC_URL"),
+form_xml(pid, fid, parse = TRUE, url = Sys.getenv("ODKC_URL"),
   un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
+
+\item{parse}{Whether to parse the XML into a nested list, default: TRUE}
 
 \item{url}{The OData URL, ending in .svc, no trailing slash.}
 

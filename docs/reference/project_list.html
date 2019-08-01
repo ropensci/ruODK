@@ -190,6 +190,15 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
 )
 <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>p</span>)
+
+<span class='co'># project_list returns a tibble</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>p</span>)
+<span class='co'># &gt; "tbl_df" "tbl" "data.frame"</span>
+
+<span class='co'># columns are project metadata</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>p</span>)
+<span class='co'># &gt; "id" "name" "forms" "app_users" "last_submission"</span>
+<span class='co'># &gt; "created_at" "updated_at" "archived"</span>
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -5,6 +5,16 @@ test_that("project_list works", {
     pw = Sys.getenv("ODKC_TEST_PW")
   )
   testthat::expect_true(nrow(p) > 0)
+
+  # project_list returns a tibble
+  testthat::expect_equal(class(p), c("tbl_df", "tbl", "data.frame"))
+
+  # Project metadata are the tibble's columns
+  cn <- c(
+    "id", "name", "forms", "app_users",
+    "last_submission", "created_at", "updated_at", "archived"
+  )
+  testthat::expect_equal(names(p), cn)
 })
 
 # All other functions use the same authentication on the ODK Central side.

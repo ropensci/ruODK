@@ -12,7 +12,6 @@ datatable
 Datatable
 datetime
 datetimes
-dbca
 DBCA
 dir
 DIY
@@ -34,6 +33,7 @@ Flatback
 fn
 GeoJSON
 geopoint
+geopoints
 geospatial
 getenv
 github
@@ -98,10 +98,10 @@ uuids
 UUIDs
 vectorised
 VueJS
-wa
 Wickam
 WIP
 WKT
 workdir
 Xform
+XForms
 xxxxxxxxxx

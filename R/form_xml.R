@@ -4,6 +4,7 @@
 #'
 #' @template param-pid
 #' @template param-fid
+#' @param parse Whether to parse the XML into a nested list, default: TRUE
 #' @template param-auth
 #' @return The form XML as a nested list.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
@@ -33,11 +34,12 @@
 #' }
 form_xml <- function(pid,
                      fid,
+                     parse = TRUE,
                      url = Sys.getenv("ODKC_URL"),
                      un = Sys.getenv("ODKC_UN"),
                      pw = Sys.getenv("ODKC_PW")) {
   . <- NULL
-  glue::glue(
+  out <- glue::glue(
     "{url}/v1/projects/{pid}/forms/{fid}.xml"
   ) %>%
     httr::GET(
@@ -45,6 +47,10 @@ form_xml <- function(pid,
       httr::authenticate(un, pw)
     ) %>%
     httr::stop_for_status() %>%
-    httr::content(.) %>%
-    xml2::as_list(.)
+    httr::content(.)
+
+  if (parse == FALSE) {
+    return(out)
+  }
+  out %>% xml2::as_list(.)
 }

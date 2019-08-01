@@ -7,4 +7,14 @@ test_that("project_detail works", {
   )
   testthat::expect_true(nrow(p) == 1)
   testthat::expect_true("name" %in% names(p))
+
+  # project_detail returns a tibble
+  testthat::expect_equal(class(p), c("tbl_df", "tbl", "data.frame"))
+
+  # Project metadata are the tibble's columns
+  cn <- c(
+    "id", "name", "forms", "app_users", "last_submission",
+    "created_at", "updated_at", "archived", "verbs"
+  )
+  testthat::expect_equal(names(p), cn)
 })

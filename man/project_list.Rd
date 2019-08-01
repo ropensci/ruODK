@@ -38,6 +38,15 @@ p <- project_list(
   pw = Sys.getenv("ODKC_TEST_PW")
 )
 knitr::kable(p)
+
+# project_list returns a tibble
+class(p)
+# > "tbl_df" "tbl" "data.frame"
+
+# columns are project metadata
+names(p)
+# > "id" "name" "forms" "app_users" "last_submission"
+# > "created_at" "updated_at" "archived"
 }
 }
 \seealso{

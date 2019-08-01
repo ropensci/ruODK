@@ -46,6 +46,9 @@ form_detail <- function(pid,
                         un = Sys.getenv("ODKC_UN"),
                         pw = Sys.getenv("ODKC_PW")) {
   . <- NULL
+  xml2list <- . %>%
+    xml2::as_xml_document(.) %>%
+    xml2::as_list(.)
   glue::glue("{url}/v1/projects/{pid}/forms/{fid}") %>%
     httr::GET(
       httr::add_headers(
@@ -77,7 +80,7 @@ form_detail <- function(pid,
           .$lastSubmission
         ),
         hash = .$hash,
-        xml = .$xml
+        xml = .$xml %>% xml2list()
       )
     }
 }

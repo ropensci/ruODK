@@ -31,6 +31,9 @@ form_list <- function(pid,
                       un = Sys.getenv("ODKC_UN"),
                       pw = Sys.getenv("ODKC_PW")) {
   . <- NULL
+  xml2list <- . %>%
+    xml2::as_xml_document(.) %>%
+    xml2::as_list(.)
   glue::glue("{url}/v1/projects/{pid}/forms") %>%
     httr::GET(
       httr::add_headers(
@@ -54,7 +57,7 @@ form_list <- function(pid,
         updated_at = map_dttm_hack(., "updatedAt"),
         last_submission = map_dttm_hack(., "lastSubmission"),
         hash = purrr::map_chr(., "hash"),
-        xml = purrr::map_chr(., "xml"),
+        xml = purrr::map_chr(., "xml") %>% purrr::map(xml2list)
       )
     }
 }

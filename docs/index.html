@@ -204,13 +204,13 @@
 <a class="sourceLine" id="cb3-8" title="8">proj &lt;-<span class="st"> </span><span class="kw"><a href="reference/project_list.html">project_list</a></span>()</a>
 <a class="sourceLine" id="cb3-9" title="9">proj</a>
 <a class="sourceLine" id="cb3-10" title="10"><span class="co">#&gt; # A tibble: 4 x 8</span></a>
-<a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt;      id name  archived forms app_users last_submission    </span></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;dttm&gt;             </span></a>
-<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt; 1     1 DBCA  &lt;NA&gt;         9         1 2019-08-01 01:45:12</span></a>
-<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt; 2     3 Flora &lt;NA&gt;         1         1 2019-07-28 04:37:27</span></a>
-<a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt; 3     2 Spot… &lt;NA&gt;         3         1 2019-06-26 07:12:25</span></a>
-<a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt; 4     4 DBCA  TRUE         0         0 NA                 </span></a>
-<a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; # … with 2 more variables: created_at &lt;dttm&gt;, updated_at &lt;dttm&gt;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt;      id name  forms app_users last_submission     created_at         </span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;int&gt;     &lt;int&gt; &lt;dttm&gt;              &lt;dttm&gt;             </span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt; 1     1 DBCA      9         1 2019-08-01 01:45:12 2019-06-05 09:12:44</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt; 2     3 Flora     1         1 2019-07-28 04:37:27 2019-06-06 03:24:31</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt; 3     2 Spot…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15</span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt; 4     4 DBCA      0         0 NA                  2019-06-27 02:54:30</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; # … with 2 more variables: updated_at &lt;dttm&gt;, archived &lt;lgl&gt;</span></a>
 <a class="sourceLine" id="cb3-18" title="18"></a>
 <a class="sourceLine" id="cb3-19" title="19">meta &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_metadata_get.html">odata_metadata_get</a></span>(</a>
 <a class="sourceLine" id="cb3-20" title="20">  <span class="dt">pid =</span> <span class="dv">1</span>,</a>

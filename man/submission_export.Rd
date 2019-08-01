@@ -47,7 +47,7 @@ included Submissions.
 The file will be downloaded to the project root unless specified otherwise
 (via `local_dir`). Subsequently, the zip file can be extracted.
 Attachment filenames (e.g. "12345.jpg") should be prepended with `media`
-(resulting in e.g. `media\12345.jpg`) in order to represent the relative
+(resulting in e.g. `media/12345.jpg`) in order to represent the relative
 path to the actual attachment file (as extracted from the zip file).
 
 This function downloads all submissions and attachments in one go.
