@@ -2,7 +2,7 @@
 #'
 #' @template param-pid
 #' @template param-fid
-#' @param iid The `instance_id`, a UUID, as returned by `submission_list`.
+#' @template param-iid
 #' @template param-auth
 #' @return A nested list, containing the submission data in `xml` as specified
 #'         by the `form_schema`.

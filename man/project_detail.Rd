@@ -38,6 +38,7 @@ While the API endpoint will return all details for one project,
 }
 \examples{
 \dontrun{
+# With default credentials, see vignette("setup")
 pl <- project_detail(1)
 
 # With explicit credentials, see tests
@@ -47,15 +48,18 @@ p <- project_list(
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )
-pd \%>\%dplyr::select(-"verbs") \%>\%  knitr::kable(.)
+pd \%>\%
+  dplyr::select(-"verbs") \%>\%
+  knitr::kable(.)
 }
 }
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details}
 
-Other restful-api: \code{\link{form_detail}},
-  \code{\link{form_list}}, \code{\link{form_schema}},
-  \code{\link{form_xml}}, \code{\link{project_list}},
+Other restful-api: \code{\link{attachment_list}},
+  \code{\link{form_detail}}, \code{\link{form_list}},
+  \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_list}}
 }

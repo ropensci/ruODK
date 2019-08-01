@@ -91,7 +91,8 @@ get_one_attachment <- function(pth, fn, src,
 #' The other parameters are automatically repeated.
 #'
 #' The media attachments are downloaded into a folder named by the submission's
-#' uuid inside the given `local_dir`. E.g.:
+#' uuid (minus "uuid:" for Windows compatibility) inside the given
+#' `local_dir`. E.g.:
 #'
 #' workdir/attachments/xxxxxxxxxx/filename1.jpg
 #'
@@ -114,9 +115,7 @@ get_one_attachment <- function(pth, fn, src,
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
 #' @importFrom glue glue
 #' @importFrom fs dir_create path
-#' @importFrom httr authenticate GET write_disk
 #' @importFrom purrr pmap
-#' @importFrom stringr str_remove_all
 #' @export
 attachment_get <- function(pid,
                            fid,

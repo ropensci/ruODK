@@ -69,9 +69,10 @@ listviewer::jsonedit(sub$xml)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/getting-submission-details}
 
-Other restful-api: \code{\link{form_detail}},
-  \code{\link{form_list}}, \code{\link{form_schema}},
-  \code{\link{form_xml}}, \code{\link{project_detail}},
-  \code{\link{project_list}}, \code{\link{submission_list}}
+Other restful-api: \code{\link{attachment_list}},
+  \code{\link{form_detail}}, \code{\link{form_list}},
+  \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_detail}}, \code{\link{project_list}},
+  \code{\link{submission_list}}
 }
 \concept{restful-api}

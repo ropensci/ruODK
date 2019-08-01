@@ -84,10 +84,10 @@ nrow(sl) <- form_list_nsub
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form}
 
-Other restful-api: \code{\link{form_detail}},
-  \code{\link{form_list}}, \code{\link{form_schema}},
-  \code{\link{form_xml}}, \code{\link{project_detail}},
-  \code{\link{project_list}},
+Other restful-api: \code{\link{attachment_list}},
+  \code{\link{form_detail}}, \code{\link{form_list}},
+  \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}}
 }
 \concept{restful-api}

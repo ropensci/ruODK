@@ -4,9 +4,7 @@ AppVeyor
 attrs
 BasicAuth
 camelCase
-camelCased
 chr
-Comin
 compat
 DataServices
 datatable
@@ -48,7 +46,6 @@ iterable
 jennybc
 JOSS
 jpg
-json
 lon
 magrittr
 md5
@@ -60,6 +57,7 @@ ODKC
 odkcentral
 opendatakit
 OpenDataKit
+OpenRosa
 POSIXct
 PowerBI
 presubmission
@@ -78,6 +76,7 @@ select1
 SessionAuth
 setenv
 subfolder
+subresource
 svc
 sym
 syms

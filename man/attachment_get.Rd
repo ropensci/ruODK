@@ -45,7 +45,8 @@ The other parameters are automatically repeated.
 }
 \details{
 The media attachments are downloaded into a folder named by the submission's
-uuid inside the given `local_dir`. E.g.:
+uuid (minus "uuid:" for Windows compatibility) inside the given
+`local_dir`. E.g.:
 
 workdir/attachments/xxxxxxxxxx/filename1.jpg
 

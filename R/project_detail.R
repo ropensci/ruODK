@@ -22,7 +22,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-# With default credentials, see vignette("setup")
+#' # With default credentials, see vignette("setup")
 #' pl <- project_detail(1)
 #'
 #' # With explicit credentials, see tests
@@ -32,7 +32,9 @@
 #'   un = Sys.getenv("ODKC_TEST_UN"),
 #'   pw = Sys.getenv("ODKC_TEST_PW")
 #' )
-#' pd %>%dplyr::select(-"verbs") %>%  knitr::kable(.)
+#' pd %>%
+#'   dplyr::select(-"verbs") %>%
+#'   knitr::kable(.)
 #' }
 project_detail <- function(pid,
                            url = Sys.getenv("ODKC_URL"),
