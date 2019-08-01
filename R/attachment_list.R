@@ -37,33 +37,31 @@
 #' s_default <- submission_list(1, "build_xformsId", "uuid:...")
 #'
 #' # With explicit credentials, see tests
-#' # sl <- submission_list(
-#' #   Sys.getenv("ODKC_TEST_PID"),
-#' #   Sys.getenv("ODKC_TEST_FID"),
-#' #   url = Sys.getenv("ODKC_TEST_URL"),
-#' #   un = Sys.getenv("ODKC_TEST_UN"),
-#' #   pw = Sys.getenv("ODKC_TEST_PW")
-#' # )
-#' #
-#' #
-#' # al <- attachment_list(
-#' #   Sys.getenv("ODKC_TEST_PID"),
-#' #   Sys.getenv("ODKC_TEST_FID"),
-#' #   sl$instance_id[[1]],
-#' #   url = Sys.getenv("ODKC_TEST_URL"),
-#' #   un = Sys.getenv("ODKC_TEST_UN"),
-#' #   pw = Sys.getenv("ODKC_TEST_PW")
-#' # )
-#' # al %>% knitr::kable(.)
-#' #
-#' #
-#' # # attachment_list returns a tibble
-#' # class(al)
-#' # # > c("tbl_df", "tbl", "data.frame")
-#' #
-#' # # Submission attributes are the tibble's columns
-#' # names(al)
-#' # # > "name" "exists"
+#' sl <- submission_list(
+#'   Sys.getenv("ODKC_TEST_PID"),
+#'   Sys.getenv("ODKC_TEST_FID"),
+#'   url = Sys.getenv("ODKC_TEST_URL"),
+#'   un = Sys.getenv("ODKC_TEST_UN"),
+#'   pw = Sys.getenv("ODKC_TEST_PW")
+#' )
+#'
+#' al <- attachment_list(
+#'   Sys.getenv("ODKC_TEST_PID"),
+#'   Sys.getenv("ODKC_TEST_FID"),
+#'   sl$instance_id[[1]],
+#'   url = Sys.getenv("ODKC_TEST_URL"),
+#'   un = Sys.getenv("ODKC_TEST_UN"),
+#'   pw = Sys.getenv("ODKC_TEST_PW")
+#' )
+#' al %>% knitr::kable(.)
+#'
+#' # attachment_list returns a tibble
+#' class(al)
+#' # > c("tbl_df", "tbl", "data.frame")
+#'
+#' # Submission attributes are the tibble's columns
+#' names(al)
+#' # > "name" "exists"
 #' }
 attachment_list <- function(pid,
                             fid,

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List all details of one project. — project_detail • ruODK</title>
+<title>Export all form submissions to CSV. — submission_export • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,12 @@
 
 
 
-<meta property="og:title" content="List all details of one project. — project_detail" />
+<meta property="og:title" content="Export all form submissions to CSV. — submission_export" />
 
-<meta property="og:description" content="List all details of one project." />
+<meta property="og:description" content="To export all the Submission data associated with a Form, just add .csv.zip
+to the end of the listing URL. The response will be a zip file containing one
+or more CSV files, as well as all multimedia attachments associated with the
+included Submissions." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,18 +127,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List all details of one project.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/project_detail.R'><code>R/project_detail.R</code></a></small>
-    <div class="hidden name"><code>project_detail.Rd</code></div>
+    <h1>Export all form submissions to CSV.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/submission_export.R'><code>R/submission_export.R</code></a></small>
+    <div class="hidden name"><code>submission_export.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>List all details of one project.</p>
+    <p>To export all the Submission data associated with a Form, just add .csv.zip
+to the end of the listing URL. The response will be a zip file containing one
+or more CSV files, as well as all multimedia attachments associated with the
+included Submissions.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_detail</span>(<span class='no'>pid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
+    <pre class="usage"><span class='fu'>submission_export</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='kw pkg'>here</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span>(), <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -143,7 +150,20 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pid</th>
-      <td><p>The numeric ID of the project, e.g.: 3.</p></td>
+      <td><p>The numeric ID of the project, e.g.: 2.</p></td>
+    </tr>
+    <tr>
+      <th>fid</th>
+      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
+    </tr>
+    <tr>
+      <th>local_dir</th>
+      <td><p>The local folder to save the downloaded files to,
+default: `here::here()`.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Whether to display debug messages or not (default)</p></td>
     </tr>
     <tr>
       <th>url</th>
@@ -165,45 +185,65 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with exactly one row for the project and all project
-  metadata as columns as per ODK Central API docs.
-  Column names are renamed from ODK's `camelCase` to `snake_case`.
-  Values differ to values returned by ODK Central API:</p>
-<p>* archived: FALSE (if NULL) else TRUE
-  * dates: NA if NULL</p>
+    <p>The absolute path to the zip file named "`fid`.zip"
+        containing submissions as CSV,
+        plus separate CSVs for any repeating groups,
+        plus any attachments in a subfolder `media`.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>While the API endpoint will return all details for one project,
-`project_list` will fail with incorrect or missing authentication.</p>
+    <p>The file will be downloaded to the project root unless specified otherwise
+(via `local_dir`). Subsequently, the zip file can be extracted.
+Attachment filenames (e.g. "12345.jpg") should be prepended with `media`
+(resulting in e.g. `media\12345.jpg`) in order to represent the relative
+path to the actual attachment file (as extracted from the zip file).</p>
+<p>This function downloads all submissions and attachments in one go.
+For incremental download of a subset of submissions, use `submission_list`,
+choose the submissions of interest (e.g. by submission date), and use their
+uuids to download them one by one via `submission_get`. Download attachments
+as listed for each submission (`attachment_list`).</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details'>https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details</a></p>
+    <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv</a></p>
 <p>Other restful-api: <code><a href='attachment_list.html'>attachment_list</a></code>,
   <code><a href='form_detail.html'>form_detail</a></code>, <code><a href='form_list.html'>form_list</a></code>,
   <code><a href='form_schema.html'>form_schema</a></code>, <code><a href='form_xml.html'>form_xml</a></code>,
-  <code><a href='project_list.html'>project_list</a></code>,
+  <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
   <code><a href='submission_detail.html'>submission_detail</a></code>,
-  <code><a href='submission_export.html'>submission_export</a></code>,
   <code><a href='submission_list.html'>submission_list</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># With default credentials, see vignette("setup")</span>
-<span class='no'>pl</span> <span class='kw'>&lt;-</span> <span class='fu'>project_detail</span>(<span class='fl'>1</span>)
+<span class='no'>se</span> <span class='kw'>&lt;-</span> <span class='fu'>submission_export</span>(<span class='fl'>1</span>, <span class='st'>"build_xformsId"</span>)
 
 <span class='co'># With explicit credentials, see tests</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='project_list.html'>project_list</a></span>(
+
+<span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
+
+<span class='no'>se</span> <span class='kw'>&lt;-</span> <span class='fu'>submission_export</span>(
   <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>),
+  <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='no'>t</span>,
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
 )
-<span class='no'>pd</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='st'>"verbs"</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
+
+<span class='co'># Unzip and inspect the loot</span>
+
+<span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
+<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/unzip.html'>unzip</a></span>(<span class='no'>se</span>, <span class='kw'>exdir</span> <span class='kw'>=</span> <span class='no'>t</span>)
+<span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span>(<span class='no'>t</span>)
+<span class='no'>fid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>)
+<span class='no'>sub</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span>(<span class='no'>t</span>, <span class='kw pkg'>glue</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/glue/man/glue.html'>glue</a></span>(<span class='st'>"{fid}.csv"</span>)) <span class='kw'>%&gt;%</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>()
+<span class='no'>sub</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
+<span class='co'># Cleanup</span>
+<span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/delete.html'>dir_delete</a></span>(<span class='no'>t</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -1,14 +1,14 @@
 # ODK Central example data
 if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
-fq_meta <- get_metadata(
+fq_meta <- odata_metadata_get(
   Sys.getenv("ODKC_TEST_PID"),
   Sys.getenv("ODKC_TEST_FID"),
   url = Sys.getenv("ODKC_TEST_URL"),
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )
-fq_raw <- get_submissions(
+fq_raw <- odata_submissions_get(
   Sys.getenv("ODKC_TEST_PID"),
   Sys.getenv("ODKC_TEST_FID"),
   url = Sys.getenv("ODKC_TEST_URL"),
@@ -29,7 +29,8 @@ darkred <- "#a50b0b"
 # logo s_, text p_, bg h_
 hexSticker::sticker(odklogo,
   s_x = 1.2, s_y = 0.9, s_width = 0.7, s_height = 0.9,
-  package = "ru", p_x = 0.45, p_y = 1, p_size = 40, p_family = "knewave", p_color = "#ffaa77",
+  package = "ru", p_x = 0.45, p_y = 1, p_size = 40,
+  p_family = "knewave", p_color = "#ffaa77",
   h_fill = "#d81c00", h_color = darkred,
   filename = ruodklogo
 )

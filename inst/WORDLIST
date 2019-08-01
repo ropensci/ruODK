@@ -6,6 +6,7 @@ BasicAuth
 camelCase
 chr
 compat
+csv
 DataServices
 datatable
 Datatable
@@ -25,6 +26,7 @@ eval
 expr
 exprs
 extdata
+fid
 filename1
 filename2
 filename3
@@ -92,6 +94,7 @@ unnesting
 unnests
 uuid
 UUID
+uuids
 UUIDs
 vectorised
 VueJS

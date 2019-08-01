@@ -48,6 +48,7 @@ Other restful-api: \code{\link{attachment_list}},
   \code{\link{form_schema}}, \code{\link{form_xml}},
   \code{\link{project_detail}},
   \code{\link{submission_detail}},
+  \code{\link{submission_export}},
   \code{\link{submission_list}}
 }
 \concept{restful-api}

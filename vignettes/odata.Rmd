@@ -89,6 +89,7 @@ Repeating form groups, in our example "taxon_encounter", are named "Submissions.
 The exact name is found under DataServices.Schema.EntityType[n].attrs.Name.
 
 ```{r view_metadata}
+# fq_meta
 listviewer::jsonedit(fq_meta)
 ```
 

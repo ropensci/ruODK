@@ -109,7 +109,7 @@ The `.odkbuild` versions can be loaded into [ODK Build](https://build.opendataki
 while the `.xml` versions can be imported into ODK Central.
 
 ## Configure ruODK
-For a quick start, run the following chunk with your settings:
+For a quick start, create R environment variables with your settings:
   
 ```{r rprofile, eval=F}
 Sys.setenv(ODKC_URL = "https://odkcentral.mydomain.com")
@@ -118,11 +118,11 @@ Sys.setenv(ODKC_PW = ".......")
 ```
 
 For a more permanent configuration setting, paste the above lines into your 
-`~/.Rprofile`.
+`~/.Rprofile` (`usethis::edit_r_profile()`) and restart R.
 
 For all available detailed options to configure `ruODK`, read 
 `vignette("Setup", package = "ruODK")` 
-(online [here]](https://dbca-wa.github.io/ruODK/articles/setup.html)).
+(online [here](https://dbca-wa.github.io/ruODK/articles/setup.html)).
 
 
 ## Use ruODK
@@ -157,10 +157,10 @@ data %>% head(.)
 
 A more detailed walk-through with some data visualisation examples is available
 in the `vignette("odata", package="ruODK")` 
-(online [here]](https://dbca-wa.github.io/ruODK/articles/odata.html)).
+(online [here](https://dbca-wa.github.io/ruODK/articles/odata.html)).
 
 See also `vignette("restapi", package="ruODK")` 
-(online [here]](https://dbca-wa.github.io/ruODK/articles/api.html))
+(online [here](https://dbca-wa.github.io/ruODK/articles/api.html))
 for examples using the alternative RESTful API.
 
 ## Contribute
@@ -182,6 +182,7 @@ devtools::document(roclets = c("rd", "collate", "namespace"))
 codemetar::write_codemeta("ruODK")
 usethis::edit_file("inst/CITATION")
 rmarkdown::render('README.Rmd',  encoding = 'UTF-8')
+if (fs::file_exists("README.html")) fs::file_delete("README.html")
 
 # Checks
 goodpractice::goodpractice(quiet = FALSE)

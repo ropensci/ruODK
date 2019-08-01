@@ -108,7 +108,7 @@ get_one_attachment <- function(pth, fn, src,
 #' @param local_dir The local folder to save the downloaded files to,
 #'                  default: "attachments"
 #' @template param-auth
-#' @param verbose Whether to display debug messages or not (default)
+#' @template param-verbose
 #' @return The relative file path for the downloaded attachment(s)
 #' @family odata-api
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}

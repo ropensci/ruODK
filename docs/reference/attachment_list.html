@@ -210,6 +210,7 @@ its filename to the request URL to download only that file (see below).</p>
   <code><a href='form_xml.html'>form_xml</a></code>, <code><a href='project_detail.html'>project_detail</a></code>,
   <code><a href='project_list.html'>project_list</a></code>,
   <code><a href='submission_detail.html'>submission_detail</a></code>,
+  <code><a href='submission_export.html'>submission_export</a></code>,
   <code><a href='submission_list.html'>submission_list</a></code></p></div>
     
 
@@ -219,33 +220,31 @@ its filename to the request URL to download only that file (see below).</p>
 <span class='no'>s_default</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='submission_list.html'>submission_list</a></span>(<span class='fl'>1</span>, <span class='st'>"build_xformsId"</span>, <span class='st'>"uuid:..."</span>)
 
 <span class='co'># With explicit credentials, see tests</span>
-<span class='co'># sl &lt;- submission_list(</span>
-<span class='co'>#   Sys.getenv("ODKC_TEST_PID"),</span>
-<span class='co'>#   Sys.getenv("ODKC_TEST_FID"),</span>
-<span class='co'>#   url = Sys.getenv("ODKC_TEST_URL"),</span>
-<span class='co'>#   un = Sys.getenv("ODKC_TEST_UN"),</span>
-<span class='co'>#   pw = Sys.getenv("ODKC_TEST_PW")</span>
-<span class='co'># )</span>
-<span class='co'>#</span>
-<span class='co'>#</span>
-<span class='co'># al &lt;- attachment_list(</span>
-<span class='co'>#   Sys.getenv("ODKC_TEST_PID"),</span>
-<span class='co'>#   Sys.getenv("ODKC_TEST_FID"),</span>
-<span class='co'>#   sl$instance_id[[1]],</span>
-<span class='co'>#   url = Sys.getenv("ODKC_TEST_URL"),</span>
-<span class='co'>#   un = Sys.getenv("ODKC_TEST_UN"),</span>
-<span class='co'>#   pw = Sys.getenv("ODKC_TEST_PW")</span>
-<span class='co'># )</span>
-<span class='co'># al %&gt;% knitr::kable(.)</span>
-<span class='co'>#</span>
-<span class='co'>#</span>
-<span class='co'># # attachment_list returns a tibble</span>
-<span class='co'># class(al)</span>
-<span class='co'># # &gt; c("tbl_df", "tbl", "data.frame")</span>
-<span class='co'>#</span>
-<span class='co'># # Submission attributes are the tibble's columns</span>
-<span class='co'># names(al)</span>
-<span class='co'># # &gt; "name" "exists"</span>
+<span class='no'>sl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='submission_list.html'>submission_list</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>),
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+)
+
+<span class='no'>al</span> <span class='kw'>&lt;-</span> <span class='fu'>attachment_list</span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>),
+  <span class='no'>sl</span>$<span class='no'>instance_id</span><span class='kw'>[[</span><span class='fl'>1</span>]],
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+)
+<span class='no'>al</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
+
+<span class='co'># attachment_list returns a tibble</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>al</span>)
+<span class='co'># &gt; c("tbl_df", "tbl", "data.frame")</span>
+
+<span class='co'># Submission attributes are the tibble's columns</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>al</span>)
+<span class='co'># &gt; "name" "exists"</span>
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

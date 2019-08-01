@@ -123,7 +123,7 @@ imported into ODK Central.
 
 ## Configure ruODK
 
-For a quick start, run the following chunk with your settings:
+For a quick start, create R environment variables with your settings:
 
 ``` r
 Sys.setenv(ODKC_URL = "https://odkcentral.mydomain.com")
@@ -132,11 +132,11 @@ Sys.setenv(ODKC_PW = ".......")
 ```
 
 For a more permanent configuration setting, paste the above lines into
-your `~/.Rprofile`.
+your `~/.Rprofile` (`usethis::edit_r_profile()`) and restart R.
 
 For all available detailed options to configure `ruODK`, read
 `vignette("Setup", package = "ruODK")` (online
-\[here\]\](<https://dbca-wa.github.io/ruODK/articles/setup.html>)).
+[here](https://dbca-wa.github.io/ruODK/articles/setup.html)).
 
 ## Use ruODK
 
@@ -171,11 +171,11 @@ data %>% head(.)
 
 A more detailed walk-through with some data visualisation examples is
 available in the `vignette("odata", package="ruODK")` (online
-\[here\]\](<https://dbca-wa.github.io/ruODK/articles/odata.html>)).
+[here](https://dbca-wa.github.io/ruODK/articles/odata.html)).
 
 See also `vignette("restapi", package="ruODK")` (online
-\[here\]\](<https://dbca-wa.github.io/ruODK/articles/api.html>)) for
-examples using the alternative RESTful API.
+[here](https://dbca-wa.github.io/ruODK/articles/api.html)) for examples
+using the alternative RESTful API.
 
 ## Contribute
 
