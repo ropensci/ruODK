@@ -99,7 +99,7 @@ There are several ways of retrieving the form ID:
 
 ```{r form_list}
 forms <- ruODK::form_list(1)
-forms  %>% dplyr::select(-"xml") %>% knitr::kable(.)
+forms %>% dplyr::select(-"xml") %>% knitr::kable(.)
 ```
 
 Further to the metadata shown here, a column `xml` contains the entire XForms
@@ -340,8 +340,8 @@ data_quadrat_att <- data_quadrat_raw %>%
     location_quadrat_photo = ruODK::attachment_get(
         Sys.getenv("ODKC_TEST_PID"),
         Sys.getenv("ODKC_TEST_FID"),
-        location_quadrat_photo,
         meta_instanceID,
+        location_quadrat_photo,
         local_dir = t,
         url = Sys.getenv("ODKC_TEST_URL"),
         un = Sys.getenv("ODKC_TEST_UN"),
@@ -355,7 +355,7 @@ data_quadrat_att <- data_quadrat_raw %>%
 data_quadrat_att$location_quadrat_photo
 
 # ...and the corresponding files
-fs::dir_ls(t)
+fs::dir_ls(t, recurse = TRUE)
 ```
 
 From here, we can use the separately created data tibbles and locally downloaded
