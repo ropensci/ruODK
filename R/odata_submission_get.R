@@ -70,16 +70,16 @@
 #'
 #' # Next: parse this nested list in to a tidy tibble with `parse_submissions`
 #' }
-odata_submissions_get <- function(pid,
-                                  fid,
-                                  table = "Submissions",
-                                  skip = NA,
-                                  top = NA,
-                                  count = FALSE,
-                                  wkt = FALSE,
-                                  url = Sys.getenv("ODKC_URL"),
-                                  un = Sys.getenv("ODKC_UN"),
-                                  pw = Sys.getenv("ODKC_PW")) {
+odata_submission_get <- function(pid,
+                                 fid,
+                                 table = "Submissions",
+                                 skip = NA,
+                                 top = NA,
+                                 count = FALSE,
+                                 wkt = FALSE,
+                                 url = Sys.getenv("ODKC_URL"),
+                                 un = Sys.getenv("ODKC_UN"),
+                                 pw = Sys.getenv("ODKC_PW")) {
   . <- NULL # Silence R CMD check
 
   # Parse params

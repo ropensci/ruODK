@@ -147,11 +147,11 @@ meta <- ruODK::odata_metadata_get(
 # listviewer::jsonedit(meta)
 meta$Edmx$DataServices$Schema$EntityContainer %>% attr("Name")
 
-data <- ruODK::odata_submissions_get(
+data <- ruODK::odata_submission_get(
   pid = 1,
   fid = "build_Turtle-Sighting-0-1_1559790020"
 ) %>%
-  ruODK::parse_submissions()
+  ruODK::odata_submission_parse()
 data %>% head(.)
 ```
 
@@ -176,9 +176,9 @@ devtools::test()
 
 # Docs
 styler::style_pkg()
+devtools::document(roclets = c("rd", "collate", "namespace"))
 spelling::spell_check_package()
 spelling::update_wordlist()
-devtools::document(roclets = c("rd", "collate", "namespace"))
 codemetar::write_codemeta("ruODK")
 usethis::edit_file("inst/CITATION")
 rmarkdown::render('README.Rmd',  encoding = 'UTF-8')

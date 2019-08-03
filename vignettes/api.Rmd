@@ -191,8 +191,9 @@ data_quadrat_raw <- fid_csv %>% readr::read_csv()
 data_taxon_raw <- fid_csv_tae %>% readr::read_csv()
 
 # Sanitize column names
-names(data_quadrat_raw) <- names(data_quadrat_raw) %>% stringr::str_replace_all(., "-", "_")
-names(data_taxon_raw) <- names(data_taxon_raw) %>% stringr::str_replace_all(., "-", "_")
+add_dettol <- . %>% stringr::str_replace_all(., "-", "_")
+names(data_quadrat_raw) <- names(data_quadrat_raw) %>% add_dettol
+names(data_taxon_raw) <- names(data_taxon_raw) %>% add_dettol
 
 # Prepend attachments with media/ to turn into relative file paths
 data_quadrat <- data_quadrat_raw %>% 
@@ -258,7 +259,7 @@ warehouse.
 Furthermore, the `instance_id`s can now be used to retrieve the actual 
 submissions.
 
-## Get one submission
+## Get submission data
 
 In order to import each submission, we need to retrieve the data by 
 `instance_id`.
@@ -292,13 +293,14 @@ The data in `submissions` represents all (or let's pretend, the selected)
 submissions in `data_quadrat`.
 The field `xml` contains the actual submission data including repeating groups.
 
-The structure is different to the output of `ruODK::odata_submissions_get`,
-therefore `parse_submissions` does not work (yet) for those.
+The structure is different to the output of `ruODK::odata_submission_get`,
+therefore `ruODK::odata_submission_parse` does not work for those, as
+here we might have repeating groups included in a submission.
 
 ```{r}
-d <- submissions %>% purrr::map(., c("xml", "data")) 
-d
-# that's as far as it goes for today, stay tuned
+d <- submissions %>% 
+  purrr::map(., c("xml", "data")) 
+head(d)
 ```
 
 # Attachments

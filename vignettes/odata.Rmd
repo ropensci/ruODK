@@ -96,8 +96,8 @@ listviewer::jsonedit(fq_meta)
 So let's download the form submissions and, separately, repeating form groups.
 
 ```{r load_odata, eval=F}
-fq_raw <- odata_submissions_get(pid, fid, url = url, un = un, pw = pw)
-fq_tae <- odata_submissions_get(pid, fid, url = url, un = un, pw = pw, 
+fq_raw <- odata_submission_get(pid, fid, url = url, un = un, pw = pw)
+fq_tae <- odata_submission_get(pid, fid, url = url, un = un, pw = pw, 
                                 table = "Submissions.taxon_encounter")
 ```
 
@@ -106,11 +106,11 @@ The output of the above code is provided as data objects `fq_raw`
 `fq_tae` (repeated group "Taxon Encounter" within a Flora Quadrat).
 
 # Rectangle the data
-The function `ruODK::odata_submissions_get` returned the original XML response as a 
+The function `ruODK::odata_submission_get` returned the original XML response as a 
 nested list of lists.
 To analyse and visualise the data, this nested list of lists must be transformed 
 into a rectangular shape.
-The function `ruODK::parse_submissions` recursively unnests list columns using
+The function `ruODK::odata_submission_parse` recursively unnests list columns using
 (tidyr::unnest_wider). Unnamed columns, notably the anonymous lat/lon/alt 
 coordinates, are named automatically to become unique.
 
@@ -137,14 +137,14 @@ to receive a (repeated) copy of the main observation's values
 (such as observation time and habitat description).
 The join benefits from the manually renamed `uuid` columns in either tibble.
 
-For clarity, we enable verbose messages from `parse_submissions` 
+For clarity, we enable verbose messages from `odata_submission_parse` 
 and preserve the message output in the code chunk options with `message=TRUE`.
 
 ```{r transform_data, message=TRUE}
 ord <- "YmdHMSz"
 tz <- "Australia/Perth"
   
-fq_data <- fq_raw %>% parse_submissions(verbose=TRUE) %>% 
+fq_data <- fq_raw %>% odata_submission_parse(verbose=TRUE) %>% 
   dplyr::rename(
     uuid=`.__id`,
     longitude=`...12`,
@@ -161,7 +161,7 @@ fq_data <- fq_raw %>% parse_submissions(verbose=TRUE) %>%
   invisible
 
 fq_data_tae <- fq_tae %>% 
-  parse_submissions(verbose=TRUE) %>% 
+  odata_submission_parse(verbose=TRUE) %>% 
   dplyr::rename(
     tae_uuid=`.__id`,
     uuid=`.__Submissions.id`) %>%
@@ -203,13 +203,13 @@ fq_data_diy <- tibble::tibble(value=fq_raw$value) %>%
 ```
 
 ## Spatial formats - how granular would you like your coordinates?
-If we run `odata_submissions_get()` with `wkt=FALSE` (the default), we will
+If we run `odata_submission_get()` with `wkt=FALSE` (the default), we will
 receive GeoJSON. Point GeoJSON parses with `parse_submissions` into separate 
 columns for lat, lon, alt (soon accuracy). 
 This is useful for e.g. leaflet maps which want lat and lon separately, see 
 example map below.
 
-If we run `odata_submissions_get()` with `wkt=TRUE` (the default), we will
+If we run `odata_submission_get()` with `wkt=TRUE` (the default), we will
 not surprisingly receive WKT. This is useful for spatial objects with 
 non-deterministic length like lines and polygons. 
 If encountering WKT, `parse_submissions` simply retains the WKT string 

@@ -1,7 +1,7 @@
-context("test-parse_submissions.R")
+context("test-odata_submission_parse.R")
 
 test_that("parse_submission_works", {
-  data_parsed <- parse_submissions(fq_raw, verbose = TRUE)
+  data_parsed <- odata_submission_parse(fq_raw, verbose = TRUE)
 
   # Field "device_id" is known part of fq_raw
   testthat::expect_equal(

@@ -30,9 +30,6 @@ A tibble with exactly one row for the project and all project
   * dates: NA if NULL
 }
 \description{
-List all details of one project.
-}
-\details{
 While the API endpoint will return all details for one project,
 `project_list` will fail with incorrect or missing authentication.
 }

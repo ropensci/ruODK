@@ -4,7 +4,7 @@ test_that("attachment_get works", {
   pid <- 14
   fid <- "build_Flora-Quadrat-0-2_1558575936"
   url <- "https://sandbox.central.opendatakit.org"
-  fresh_raw <- odata_submissions_get(
+  fresh_raw <- odata_submission_get(
     Sys.getenv("ODKC_TEST_PID"),
     Sys.getenv("ODKC_TEST_FID"),
     url = Sys.getenv("ODKC_TEST_URL"),
@@ -12,7 +12,7 @@ test_that("attachment_get works", {
     pw = Sys.getenv("ODKC_TEST_PW")
   )
   fresh_parsed <- fresh_raw %>%
-    parse_submissions() %>%
+    odata_submission_parse() %>%
     dplyr::rename(uuid = `.__id`) %>%
     dplyr::mutate(
       quadrat_photo = attachment_get(

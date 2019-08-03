@@ -1,4 +1,4 @@
-#' Export all form submissions to CSV.
+#' Export all form submissions including repeats and attachments to CSV.
 #'
 #' To export all the Submission data associated with a Form, just add .csv.zip
 #' to the end of the listing URL. The response will be a zip file containing one

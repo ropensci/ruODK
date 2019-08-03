@@ -152,6 +152,14 @@ if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 # Download from ODK Central
 proj <- project_list()
 proj
+#> # A tibble: 4 x 8
+#>      id name  forms app_users last_submission     created_at         
+#>   <int> <chr> <int>     <int> <dttm>              <dttm>             
+#> 1     1 DBCA      9         1 2019-08-01 01:45:12 2019-06-05 09:12:44
+#> 2     3 Flora     1         1 2019-07-28 04:37:27 2019-06-06 03:24:31
+#> 3     2 Spot…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15
+#> 4     4 DBCA      0         0 NA                  2019-06-27 02:54:30
+#> # … with 2 more variables: updated_at <dttm>, archived <lgl>
 
 meta <- ruODK::odata_metadata_get(
   pid = 1,
@@ -161,12 +169,26 @@ meta <- ruODK::odata_metadata_get(
 meta$Edmx$DataServices$Schema$EntityContainer %>% attr("Name")
 #> [1] "build_Turtle-Sighting-0-1_1559790020"
 
-data <- ruODK::odata_submissions_get(
+data <- ruODK::odata_submission_get(
   pid = 1,
   fid = "build_Turtle-Sighting-0-1_1559790020"
 ) %>%
-  ruODK::parse_submissions()
+  ruODK::odata_submission_parse()
 data %>% head(.)
+#> # A tibble: 6 x 20
+#>   .__id submissionDate submitterId submitterName instanceID
+#>   <chr> <chr>          <chr>       <chr>         <chr>     
+#> 1 uuid… 2019-07-22T01… 16          Turtles       uuid:ddee…
+#> 2 uuid… 2019-07-22T01… 16          Turtles       uuid:0b25…
+#> 3 uuid… 2019-07-22T01… 16          Turtles       uuid:05ca…
+#> 4 uuid… 2019-07-22T01… 16          Turtles       uuid:1351…
+#> 5 uuid… 2019-07-22T01… 16          Turtles       uuid:f175…
+#> 6 uuid… 2019-07-22T01… 16          Turtles       uuid:8141…
+#> # … with 15 more variables: observation_start_time <chr>, reporter <chr>,
+#> #   device_id <chr>, type <chr>, ...10 <dbl>, ...11 <dbl>, ...12 <dbl>,
+#> #   species <chr>, sex <chr>, maturity <chr>, activity <chr>,
+#> #   observer_acticity <chr>, photo_habitat <chr>,
+#> #   observation_end_time <chr>, .odata.context <chr>
 ```
 
 A more detailed walk-through with some data visualisation examples is
@@ -192,12 +214,13 @@ devtools::test()
 
 # Docs
 styler::style_pkg()
+devtools::document(roclets = c("rd", "collate", "namespace"))
 spelling::spell_check_package()
 spelling::update_wordlist()
-devtools::document(roclets = c("rd", "collate", "namespace"))
 codemetar::write_codemeta("ruODK")
 usethis::edit_file("inst/CITATION")
 rmarkdown::render('README.Rmd',  encoding = 'UTF-8')
+if (fs::file_exists("README.html")) fs::file_delete("README.html")
 
 # Checks
 goodpractice::goodpractice(quiet = FALSE)

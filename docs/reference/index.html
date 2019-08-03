@@ -148,6 +148,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="attachment_link.html">attachment_link()</a></code> </p>
+        </td>
+        <td><p>Change a tibble of submissions to link to local media attachments.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="attachment_list.html">attachment_list()</a></code> </p>
         </td>
         <td><p>List all submissions of one form.</p></td>
@@ -175,6 +181,12 @@
           <p><code><a href="form_schema.html">form_schema()</a></code> </p>
         </td>
         <td><p>Show the schema of one form.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="form_schema_parse.html">form_schema_parse()</a></code> </p>
+        </td>
+        <td><p>Parse a form schema into a tibble of name, type, and path.</p></td>
       </tr><tr>
         
         <td>
@@ -232,15 +244,21 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="odata_submissions_get.html">odata_submissions_get()</a></code> </p>
+          <p><code><a href="odata_submission_get.html">odata_submission_get()</a></code> </p>
         </td>
         <td><p>Retrieve /Submissions from an OData URL ending in .svc as list of lists</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="parse_submissions.html">parse_submissions()</a></code> </p>
+          <p><code><a href="odata_submission_parse.html">odata_submission_parse()</a></code> </p>
         </td>
-        <td><p>Parse submissions into a tidy tibble and unnest all levels.</p></td>
+        <td><p>Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="prefix_fn.html">prefix_fn()</a></code> </p>
+        </td>
+        <td><p>Prefix a filename and return an fs::path</p></td>
       </tr><tr>
         
         <td>
@@ -276,7 +294,7 @@
         <td>
           <p><code><a href="submission_export.html">submission_export()</a></code> </p>
         </td>
-        <td><p>Export all form submissions to CSV.</p></td>
+        <td><p>Export all form submissions including repeats and attachments to CSV.</p></td>
       </tr><tr>
         
         <td>

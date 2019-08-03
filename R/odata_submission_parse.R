@@ -55,7 +55,7 @@ unnest_all <- function(nested_tbl,
   nested_tbl
 }
 
-#' Parse submissions into a tidy tibble and unnest all levels.
+#' Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.
 #'
 #' @param data A nested list of lists as given by `ruODK::get_submissions`.
 #' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,
@@ -78,11 +78,11 @@ unnest_all <- function(nested_tbl,
 #' # fq_raw has two submissions
 #' testthat::expect_equal(length(fq_raw$value), nrow(data_parsed))
 #' }
-parse_submissions <- function(data,
-                              names_repair = "universal",
-                              verbose = FALSE) {
+odata_submission_parse <- function(data,
+                                   names_repair = "universal",
+                                   verbose = FALSE) {
   . <- NULL
   data %>%
-    tibble::as_tibble(.) %>%
+    tibble::as_tibble(., .name_repair = names_repair) %>%
     unnest_all(names_repair = names_repair, verbose = verbose)
 }

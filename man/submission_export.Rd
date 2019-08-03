@@ -2,7 +2,7 @@
 % Please edit documentation in R/submission_export.R
 \name{submission_export}
 \alias{submission_export}
-\title{Export all form submissions to CSV.}
+\title{Export all form submissions including repeats and attachments to CSV.}
 \usage{
 submission_export(pid, fid, local_dir = here::here(), overwrite = TRUE,
   url = Sys.getenv("ODKC_URL"), un = Sys.getenv("ODKC_UN"),

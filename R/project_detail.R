@@ -1,7 +1,5 @@
 #' List all details of one project.
 #'
-#'
-#'
 #' While the API endpoint will return all details for one project,
 #' `project_list` will fail with incorrect or missing authentication.
 #'
