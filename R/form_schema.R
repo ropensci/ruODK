@@ -5,6 +5,11 @@
 #' @template param-fid
 #' @param flatten Whether to flatten the resulting list of lists (TRUE) or not
 #'   (FALSE, default).
+#' @param odata Whether to sanitise the field names to match the way they will
+#'   be outputted for OData. While the original field names as given in the
+#'   XForms definition may be used as-is for CSV output, OData has some
+#'   restrictions related to the domain-qualified identifier syntax it uses.
+#'   Default: FALSE.
 #' @template param-auth
 #' @return A nested list containing the form definition.
 #'   At the lowest nesting level, each form field consists of a list of two
@@ -89,17 +94,22 @@
 form_schema <- function(pid,
                         fid,
                         flatten = FALSE,
+                        odata = FALSE,
                         url = Sys.getenv("ODKC_URL"),
                         un = Sys.getenv("ODKC_UN"),
                         pw = Sys.getenv("ODKC_PW")) {
   . <- NULL
+  qry <- list(
+    flatten = flatten,
+    odata = odata
+  )
   glue::glue(
-    "{url}/v1/projects/{pid}/forms/",
-    "{fid}.schema.json?flatten={flatten}"
+    "{url}/v1/projects/{pid}/forms/{fid}.schema.json"
   ) %>%
     httr::GET(
       httr::add_headers("Accept" = "application/json"),
-      httr::authenticate(un, pw)
+      httr::authenticate(un, pw),
+      query = qry
     ) %>%
     httr::stop_for_status() %>%
     httr::content(.)

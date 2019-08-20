@@ -4,8 +4,9 @@
 \alias{form_schema}
 \title{Show the schema of one form.}
 \usage{
-form_schema(pid, fid, flatten = FALSE, url = Sys.getenv("ODKC_URL"),
-  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
+form_schema(pid, fid, flatten = FALSE, odata = FALSE,
+  url = Sys.getenv("ODKC_URL"), un = Sys.getenv("ODKC_UN"),
+  pw = Sys.getenv("ODKC_PW"))
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.}
@@ -14,6 +15,12 @@ form_schema(pid, fid, flatten = FALSE, url = Sys.getenv("ODKC_URL"),
 
 \item{flatten}{Whether to flatten the resulting list of lists (TRUE) or not
 (FALSE, default).}
+
+\item{odata}{Whether to sanitise the field names to match the way they will
+be outputted for OData. While the original field names as given in the
+XForms definition may be used as-is for CSV output, OData has some
+restrictions related to the domain-qualified identifier syntax it uses.
+Default: FALSE.}
 
 \item{url}{The OData URL, ending in .svc, no trailing slash.}
 
@@ -110,8 +117,9 @@ fs_nested[[length(fs_nested)]]$type
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json}
 
 Other restful-api: \code{\link{attachment_list}},
-  \code{\link{form_detail}}, \code{\link{form_list}},
-  \code{\link{form_xml}}, \code{\link{project_create}},
+  \code{\link{audit_get}}, \code{\link{form_detail}},
+  \code{\link{form_list}}, \code{\link{form_xml}},
+  \code{\link{project_create}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}},

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Show the schema of one form. — form_schema • ruODK</title>
+<title>Get server audit log entries. — audit_get • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,10 @@
 
 
 
-<meta property="og:title" content="Show the schema of one form. — form_schema" />
+<meta property="og:title" content="Get server audit log entries. — audit_get" />
 
-<meta property="og:description" content="Show the schema of one form." />
+<meta property="og:description" content="Parameters to filter the audit logs:
+`action=form.create&amp;amp;start=2000-01-01z&amp;amp;end=2000-12-31T23" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,44 +125,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Show the schema of one form.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/form_schema.R'><code>R/form_schema.R</code></a></small>
-    <div class="hidden name"><code>form_schema.Rd</code></div>
+    <h1>Get server audit log entries.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/audit_get.R'><code>R/audit_get.R</code></a></small>
+    <div class="hidden name"><code>audit_get.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Show the schema of one form.</p>
+    <p>Parameters to filter the audit logs:
+`action=form.create&amp;start=2000-01-01z&amp;end=2000-12-31T23<!-- %3A59.999z&amp;limit=100&amp;offset=200` --></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>form_schema</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>flatten</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>odata</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
+    <pre class="usage"><span class='fu'>audit_get</span>(<span class='kw'>action</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pid</th>
-      <td><p>The numeric ID of the project, e.g.: 2.</p></td>
+      <th>action</th>
+      <td><p>string. The action to filter the logs, e.g. "user.create".
+See <a href='https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/'>https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/</a>
+for the full list of available actions.</p></td>
     </tr>
     <tr>
-      <th>fid</th>
-      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
+      <th>start</th>
+      <td><p>string. The ISO8601 timestamp of the earliest log entry to return.
+E.g. `2000-01-01z` or `2000-12-31T23:59.999z`,
+`2000-01-01T12:12:12+08` or `2000-01-01+08`.</p></td>
     </tr>
     <tr>
-      <th>flatten</th>
-      <td><p>Whether to flatten the resulting list of lists (TRUE) or not
-(FALSE, default).</p></td>
+      <th>end</th>
+      <td><p>string. The ISO8601 timestamp of the last log entry to return.</p></td>
     </tr>
     <tr>
-      <th>odata</th>
-      <td><p>Whether to sanitise the field names to match the way they will
-be outputted for OData. While the original field names as given in the
-XForms definition may be used as-is for CSV output, OData has some
-restrictions related to the domain-qualified identifier syntax it uses.
-Default: FALSE.</p></td>
+      <th>limit</th>
+      <td><p>integer. The max number of log entries to return.</p></td>
+    </tr>
+    <tr>
+      <th>offset</th>
+      <td><p>integer. The number of log entries to skip.</p></td>
     </tr>
     <tr>
       <th>url</th>
@@ -183,22 +188,23 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A nested list containing the form definition.
-  At the lowest nesting level, each form field consists of a list of two
-  nodes, `name` (the underlying field name) and `type` (the Xform field
-  type, as in "string", "select1", "geopoint", "binary" and so on).
-  These fields are nested in lists of tuples `name` (the Xform screen name),
-  `children` (the fields as described above), `type` ("structure" for non-
-  repeating screens, "repeat" for repeating screens).
-  A list with `name` "meta" may precede the structure, if several metadata
-  fields are captured (e.g. "instanceId", form start datetimes etc.).</p>
+    <p>A tibble containing server audit logs.
+        One row per audited action, columns are submission attributes:</p>
+<p>* actor_id: integer. The ID of the actor, if any, that initiated the
+          action.
+        * action: string. The action that was taken.
+        * actee_id: uuid, string. The ID of the permissioning object against
+          which the action was taken.
+        * details: list. Additional details about the action that vary
+          according to the type of action.
+        * logged_at: dttm. Time of action on server.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json</a></p>
+    <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries'>https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries</a></p>
 <p>Other restful-api: <code><a href='attachment_list.html'>attachment_list</a></code>,
-  <code><a href='audit_get.html'>audit_get</a></code>, <code><a href='form_detail.html'>form_detail</a></code>,
-  <code><a href='form_list.html'>form_list</a></code>, <code><a href='form_xml.html'>form_xml</a></code>,
+  <code><a href='form_detail.html'>form_detail</a></code>, <code><a href='form_list.html'>form_list</a></code>,
+  <code><a href='form_schema.html'>form_schema</a></code>, <code><a href='form_xml.html'>form_xml</a></code>,
   <code><a href='project_create.html'>project_create</a></code>,
   <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
   <code><a href='submission_detail.html'>submission_detail</a></code>,
@@ -209,68 +215,45 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># With default credentials, see vignette("setup")</span>
-<span class='no'>fs_defaults</span> <span class='kw'>&lt;-</span> <span class='fu'>form_schema</span>(<span class='fl'>1</span>, <span class='st'>"build_xformsId"</span>)
+<span class='no'>logs</span> <span class='kw'>&lt;-</span> <span class='fu'>audit_get</span>()
 
 <span class='co'># With explicit credentials, see tests</span>
-<span class='no'>fs_nested</span> <span class='kw'>&lt;-</span> <span class='fu'>form_schema</span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>),
-  <span class='kw'>flatten</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+<span class='no'>logs</span> <span class='kw'>&lt;-</span> <span class='fu'>audit_get</span>(
   <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
 )
-<span class='kw pkg'>listviewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/listviewer/man/jsonedit.html'>jsonedit</a></span>(<span class='no'>fs_nested</span>)
 
-<span class='no'>fs_flattened</span> <span class='kw'>&lt;-</span> <span class='fu'>form_schema</span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>),
-  <span class='kw'>flatten</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='co'># With search parameters</span>
+<span class='no'>logs</span> <span class='kw'>&lt;-</span> <span class='fu'>audit_get</span>(
+  <span class='kw'>action</span> <span class='kw'>=</span> <span class='st'>"project.update"</span>,
+  <span class='kw'>start</span> <span class='kw'>=</span> <span class='st'>"2019-08-01Z"</span>,
+  <span class='kw'>end</span> <span class='kw'>=</span> <span class='st'>"2019-08-31Z"</span>,
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>,
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
 )
-<span class='kw pkg'>listviewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/listviewer/man/jsonedit.html'>jsonedit</a></span>(<span class='no'>fs_flattened</span>)
 
-<span class='co'># form_schema returns a nested list. There's nothing to change about that.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>fs_nested</span>)
-<span class='co'># &gt; "list"</span>
+<span class='co'># With partial search parameters</span>
+<span class='no'>logs</span> <span class='kw'>&lt;-</span> <span class='fu'>audit_get</span>(
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>,
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+)
 
-<span class='no'>fs_flattened</span>
-<span class='co'># &gt; "list"</span>
+<span class='no'>logs</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
 
-<span class='co'># This assumes knowledge of that exact form being tested.</span>
-<span class='co'># First node: type "structure" (a field group) named "meta".</span>
-<span class='no'>fs_nested</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>type</span>
-<span class='co'># &gt; "structure"</span>
+<span class='co'># audit_get returns a tibble</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>logs</span>)
+<span class='co'># &gt; c("tbl_df", "tbl", "data.frame")</span>
 
-<span class='no'>fs_nested</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>name</span>
-<span class='co'># &gt; "meta"</span>
-
-<span class='co'># The first node contains children, which means it's an Xform field group.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>fs_nested</span><span class='kw'>[[</span><span class='fl'>1</span>]])
-<span class='co'># &gt; "children" ...</span>
-
-<span class='co'># Next node: a "meta" field of type "string" capturing the  "instanceId".</span>
-<span class='co'># First child node of "meta": type "string", name "instanceId".</span>
-<span class='no'>fs_nested</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>children</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>type</span>
-<span class='co'># &gt; "string"</span>
-<span class='no'>fs_nested</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>children</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>name</span>
-<span class='co'># &gt; "instanceID"</span>
-
-<span class='co'># In the flattened version, the field's and it's ancestors' names are the</span>
-<span class='co'># components of "path".</span>
-<span class='no'>fs_flattened</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>path</span>
-<span class='co'># &gt; "meta". "instanceId"</span>
-
-<span class='no'>fs_flattened</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>type</span>
-<span class='co'># &gt; "string"</span>
-
-<span class='co'># Last node: a "meta" field capturing the datetime of form completion</span>
-<span class='no'>fs_flattened</span><span class='kw'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>fs_flattened</span>)]]$<span class='no'>type</span>
-<span class='co'># &gt; "dateTime"</span>
-<span class='no'>fs_nested</span><span class='kw'>[[</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>fs_nested</span>)]]$<span class='no'>type</span>
-<span class='co'># &gt; "dateTime"</span>
+<span class='co'># Audit details</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>logs</span>)
+<span class='co'># &gt; "actor_id" "action" "actee_id" "details" "logged_at"</span>
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

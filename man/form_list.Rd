@@ -47,8 +47,9 @@ class(fl)
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
 
 Other restful-api: \code{\link{attachment_list}},
-  \code{\link{form_detail}}, \code{\link{form_schema}},
-  \code{\link{form_xml}}, \code{\link{project_create}},
+  \code{\link{audit_get}}, \code{\link{form_detail}},
+  \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_create}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}},

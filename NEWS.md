@@ -2,6 +2,8 @@
 * Version bump to match ODK Central's version.
 * Updated to match ODK Central's API at 0.6 (RESTful and OData) (c.f.).
 * Add commented out crosslinks to source code and related tests for convenience.
+* Encryption endpoints (new in 0.6) are not yet supported.
+* Audit logs supported, as they are a read-only export.
 
 # ruODK 0.3.1
 ## Preparation for ROpenSci presubmission
