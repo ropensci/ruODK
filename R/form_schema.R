@@ -104,3 +104,7 @@ form_schema <- function(pid,
     httr::stop_for_status() %>%
     httr::content(.)
 }
+
+
+# Tests
+# usethis::edit_file("tests/testthat/test-form_schema.R")

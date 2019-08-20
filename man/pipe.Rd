@@ -11,8 +11,9 @@ See \code{magrittr::\link[magrittr]{\%>\%}} for details.
 }
 \seealso{
 Other utilities: \code{\link{map_chr_hack}},
-  \code{\link{map_dttm_hack}}, \code{\link{prepend_uuid}},
-  \code{\link{strip_uuid}}, \code{\link{tidyeval}}
+  \code{\link{map_dttm_hack}}, \code{\link{map_int_hack}},
+  \code{\link{prepend_uuid}}, \code{\link{strip_uuid}},
+  \code{\link{tidyeval}}
 }
 \concept{utilities}
 \keyword{internal}

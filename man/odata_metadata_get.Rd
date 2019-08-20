@@ -32,9 +32,9 @@ Retrieve metadata from an OData URL ending in .svc as list of lists
 \examples{
 \dontrun{
 # Replace with your own working url, pid, fid, credentials:
-pid <- 14
-fid <- "build_Flora-Quadrat-0-2_1558575936"
-url <- "https://sandbox.central.opendatakit.org"
+pid <- Sys.getenv("ODKC_TEST_PID")
+fid <- Sys.getenv("ODKC_TEST_FID")
+url <- Sys.getenv("ODKC_TEST_URL")
 un <- Sys.getenv("ODKC_TEST_UN")
 pw <- Sys.getenv("ODKC_TEST_PW")
 
@@ -53,6 +53,7 @@ listviewer::jsonedit(meta)
 Other odata-api: \code{\link{attachment_get}},
   \code{\link{attachment_url}},
   \code{\link{get_one_attachment}},
+  \code{\link{odata_service_get}},
   \code{\link{odata_submission_get}},
   \code{\link{odata_submission_parse}}
 }

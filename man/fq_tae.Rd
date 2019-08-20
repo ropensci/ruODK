@@ -3,7 +3,7 @@
 \docType{data}
 \name{fq_tae}
 \alias{fq_tae}
-\title{Submission data for a subgroup of an ODK Central form.}
+\title{OData submission data for a subgroup of an ODK Central form.}
 \format{A list of lists}
 \source{
 See included file "inst/extdata/Flora Quadrat 0.2.xml"

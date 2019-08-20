@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -173,8 +173,7 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A nested list, containing the submission data in `xml` as specified
-        by the `form_schema`.</p>
+    <p>A nested list of submission metadata.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -182,6 +181,7 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
 <p>Other restful-api: <code><a href='attachment_list.html'>attachment_list</a></code>,
   <code><a href='form_detail.html'>form_detail</a></code>, <code><a href='form_list.html'>form_list</a></code>,
   <code><a href='form_schema.html'>form_schema</a></code>, <code><a href='form_xml.html'>form_xml</a></code>,
+  <code><a href='project_create.html'>project_create</a></code>,
   <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
   <code><a href='submission_export.html'>submission_export</a></code>,
   <code><a href='submission_list.html'>submission_list</a></code></p></div>
@@ -216,10 +216,7 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
 
 <span class='co'># The columns are metadata, plus the submission data in column 'xml`</span>
 <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>sub</span>)
-<span class='co'># &gt; "instance_id" "submitter_id" "submitter" "created_at" "updated_at" "xml"</span>
-
-<span class='co'># The column `xml` contains the actual submission data.</span>
-<span class='kw pkg'>listviewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/listviewer/man/jsonedit.html'>jsonedit</a></span>(<span class='no'>sub</span>$<span class='no'>xml</span>)
+<span class='co'># &gt; "instance_id" "submitter_id" "submitter" "created_at" "updated_at"</span>
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

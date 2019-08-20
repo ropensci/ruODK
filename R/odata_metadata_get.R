@@ -13,9 +13,9 @@
 #' @examples
 #' \dontrun{
 #' # Replace with your own working url, pid, fid, credentials:
-#' pid <- 14
-#' fid <- "build_Flora-Quadrat-0-2_1558575936"
-#' url <- "https://sandbox.central.opendatakit.org"
+#' pid <- Sys.getenv("ODKC_TEST_PID")
+#' fid <- Sys.getenv("ODKC_TEST_FID")
+#' url <- Sys.getenv("ODKC_TEST_URL")
 #' un <- Sys.getenv("ODKC_TEST_UN")
 #' pw <- Sys.getenv("ODKC_TEST_PW")
 #'
@@ -41,3 +41,6 @@ odata_metadata_get <- function(pid,
     httr::content(.) %>%
     xml2::as_list(.)
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-odata_metadata_get.R")

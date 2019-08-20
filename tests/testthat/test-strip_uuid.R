@@ -11,3 +11,7 @@ test_that("strip_uuid does its job even with weird clients", {
     ruODK::strip_uuid("uuid:uuid:uuid:4e7b-uuid:98d7-feac459d2e12uuid:uuid:")
   )
 })
+
+
+# Tests code
+# usethis::edit_file("R/attachment_get.R")

@@ -75,3 +75,6 @@ project_detail <- function(pid,
       )
     }
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-project_detail.R")

@@ -40,6 +40,7 @@ of input parameters.
 Other odata-api: \code{\link{attachment_get}},
   \code{\link{attachment_url}},
   \code{\link{odata_metadata_get}},
+  \code{\link{odata_service_get}},
   \code{\link{odata_submission_get}},
   \code{\link{odata_submission_parse}}
 }

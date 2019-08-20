@@ -1,3 +1,5 @@
+context("test-attachment_list.R")
+
 test_that("attachment_list works", {
   sl <- submission_list(
     Sys.getenv("ODKC_TEST_PID"),
@@ -21,8 +23,9 @@ test_that("attachment_list works", {
   testthat::expect_equal(class(al), c("tbl_df", "tbl", "data.frame"))
 
   # Attachment attributes are the tibble's columns
-  cn <- c(
-    "name", "exists"
-  )
+  cn <- c("name", "exists")
   testthat::expect_equal(names(al), cn)
 })
+
+# Tests code
+# usethis::edit_file("R/attachment_list.R")

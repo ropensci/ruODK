@@ -39,11 +39,12 @@ as documented (with live examples in multiple programming languages) at the
 
 # Configure ruODK
 
-Set your ODK Central username (email) and password as R environment variables, 
-e.g. in your `~/.Rprofile`.
+Set your ODK Central url, username (email), and password as R environment 
+variables, e.g. in your `~/.Rprofile`.
 
 ```{r sys_config, eval=F}
-Sys.setenv(ODKC_UN="...@...")
+Sys.setenv(ODKC_URL="https://sandbox.central.opendatakit.org")
+Sys.setenv(ODKC_UN="me@email.com")
 Sys.setenv(ODKC_PW=".......")
 ```
 
@@ -53,7 +54,8 @@ If we know our ODK Central URL, the project ID (a number) and the respective
 form ID (an alphanumeric string), we can infer the OData service URL.
 
 Alternatively, the OData service URL is shown in the form's "Submissions" tab >
-"Analyze via OData" on ODK Central.
+"Analyze via OData" on ODK Central. We can extract the base URL, project ID, and 
+the form ID from the service URL.
 
 ```{r odk_config}
 # ODK Central credentials
@@ -62,38 +64,68 @@ if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 # ODK Central's OData URL
 data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
 
-pid <- 14
-fid <- "build_Flora-Quadrat-0-2_1558575936"
-url <- "https://sandbox.central.opendatakit.org"
+pid <- Sys.getenv("ODKC_TEST_PID")  # 14
+fid <- Sys.getenv("ODKC_TEST_FID")  # "build_Flora-Quadrat-0-2_1558575936.svc"
+url <- Sys.getenv("ODKC_TEST_URL")  # "https://sandbox.central.opendatakit.org"
 un <- Sys.getenv("ODKC_TEST_UN")
 pw <- Sys.getenv("ODKC_TEST_PW")
+
+# Canned data
+data("fq_svc")
 data("fq_meta")
 data("fq_raw")
 data("fq_tae")
 ```
 
 In our example, the OData service URL is `r data_url`. 
-This URL contains the base URL (`r url`), the project ID (`r pid`), and the form ID (`r fid`).
+This URL contains the base URL (`r url`), the project ID (`r pid`), and the form 
+ID (`r fid`).
 
-ruODK made the opinionated decision to use these components separately in its functions.
+ruODK made the opinionated decision to use these components separately in its 
+functions.
 
-Let's first get the metadata to review our data schema.
+To extract data from the OData API endpoints, we have to:
+
+* discover data endpoints from the OData service document,
+* inspect the metadata schema to infer data types,
+* download submissions from the data endpoints,
+* download media and adjust their file paths to the downloaded copies.
+
+## OData service document
+Let's start off with the service document.
+
+```{r load_odata_service, eval=F}
+fq_svc <- odata_service_get(pid, fid, url = url, un = un, pw = pw)
+```
+
+We'll use the included example data `fq_svc`.
+```{r view_service}
+fq_svc %>% knitr::kable(.)
+```
+
+`ruODK` provides the names and urls of the service endpoints as `tibble`.
+We see the main data available under the url `Submissions`, and a repeating group
+called `taxon_encounter` in the ODK form under the url `Submissions.taxon_encounter`.
+
+The number and names of repeating subgroups of course depends on the ODK form.
+
+## OData metadata document
+Next, let's get the metadata to review our data schema.
+While we can download the submission data without it, the metadata document 
+contains information about field data types and attachment names.
+Future versions of `ruODK` might automate these steps.
 
 ```{r load_ometadata, eval=F}
 fq_meta <- odata_metadata_get(pid, fid, url = url, un = un, pw = pw)
 ```
 
-Each downloadable table is an EntityType under DataServices.Schema.
-The main form is called "Submissions". 
-Repeating form groups, in our example "taxon_encounter", are named "Submissions.taxon_encounter". 
-The exact name is found under DataServices.Schema.EntityType[n].attrs.Name.
-
-```{r view_metadata}
-# fq_meta
+```{r view_metadata, fig.width=7}
 listviewer::jsonedit(fq_meta)
 ```
 
-So let's download the form submissions and, separately, repeating form groups.
+
+## OData submission data documents
+Now let's download the form submissions and, separately, repeating form groups.
 
 ```{r load_odata, eval=F}
 fq_raw <- odata_submission_get(pid, fid, url = url, un = un, pw = pw)
@@ -102,8 +134,8 @@ fq_tae <- odata_submission_get(pid, fid, url = url, un = un, pw = pw,
 ```
 
 The output of the above code is provided as data objects `fq_raw` 
-(main submissions of form Flora Quadrat 0.2) and 
-`fq_tae` (repeated group "Taxon Encounter" within a Flora Quadrat).
+(main submissions of form Flora Quadrat 0.2) and `fq_tae` (repeated group "Taxon 
+Encounter" within a Flora Quadrat).
 
 # Rectangle the data
 The function `ruODK::odata_submission_get` returned the original XML response as a 
@@ -111,7 +143,7 @@ nested list of lists.
 To analyse and visualise the data, this nested list of lists must be transformed 
 into a rectangular shape.
 The function `ruODK::odata_submission_parse` recursively unnests list columns using
-(tidyr::unnest_wider). Unnamed columns, notably the anonymous lat/lon/alt 
+`tidyr::unnest_wider`. Unnamed columns, notably the anonymous lat/lon/alt 
 coordinates, are named automatically to become unique.
 
 In this example, we clean up the output further by renaming some columns, notably
@@ -144,32 +176,54 @@ and preserve the message output in the code chunk options with `message=TRUE`.
 ord <- "YmdHMSz"
 tz <- "Australia/Perth"
   
-fq_data <- fq_raw %>% odata_submission_parse(verbose=TRUE) %>% 
+fq_data <- fq_raw %>%
+  odata_submission_parse(verbose = TRUE) %>%
   dplyr::rename(
-    uuid=`.__id`,
-    longitude=`...12`,
-    latitude=`...13`
-    ) %>% 
+    uuid = `.__id`,
+    longitude = `...12`,
+    latitude = `...13`
+  ) %>%
   dplyr::mutate(
-    quadrat_photo = attachment_get(pid, fid, uuid, quadrat_photo, url = url),
-    morphological_type_photo = attachment_get(pid, fid, uuid, morphological_type_photo, url = url),
-    mudmap_photo = attachment_get(pid, fid, uuid, mudmap_photo, url = url),
-    submissionDate = lubridate::parse_date_time(submissionDate, orders=ord, tz = tz),
-    encounter_start_datetime = lubridate::parse_date_time(encounter_start_datetime, orders=ord, tz = tz),
-    encounter_end_datetime = lubridate::parse_date_time(encounter_end_datetime, orders=ord, tz = tz)
-  ) %>% 
-  invisible
-
-fq_data_tae <- fq_tae %>% 
-  odata_submission_parse(verbose=TRUE) %>% 
+    quadrat_photo = attachment_get(
+      pid, fid, uuid, quadrat_photo,
+      url = url
+    ),
+    morphological_type_photo = attachment_get(
+      pid, fid, uuid, morphological_type_photo,
+      url = url
+    ),
+    mudmap_photo = attachment_get(
+      pid, fid, uuid, mudmap_photo,
+      url = url
+    ),
+    submissionDate = lubridate::parse_date_time(
+      submissionDate,
+      orders = ord, tz = tz
+    ),
+    encounter_start_datetime = lubridate::parse_date_time(
+      encounter_start_datetime,
+      orders = ord, tz = tz
+    ),
+    encounter_end_datetime = lubridate::parse_date_time(
+      encounter_end_datetime,
+      orders = ord, tz = tz
+    )
+  ) %>%
+  invisible()
+fq_data_tae <- fq_tae %>%
+  odata_submission_parse(verbose = TRUE) %>%
   dplyr::rename(
-    tae_uuid=`.__id`,
-    uuid=`.__Submissions.id`) %>%
+    tae_uuid = `.__id`,
+    uuid = `.__Submissions.id`
+  ) %>%
   dplyr::mutate(
-    photo_in_situ = attachment_get(pid, fid, uuid, photo_in_situ, url = url)
-  ) %>% 
-  dplyr::left_join(fq_data, by="uuid") %>% 
-  invisible
+    photo_in_situ = attachment_get(
+      pid, fid, uuid, photo_in_situ,
+      url = url
+    )
+  ) %>%
+  dplyr::left_join(fq_data, by = "uuid") %>%
+  invisible()
 ```
 
 Note: A manually resized version of the original photos in this example live in
@@ -184,22 +238,22 @@ stepwise unnests each list column.
 This requires knowledge of the data structure, which can either be looked up
 from the metadata, or by inspecting the raw data, `fq_raw`.
 ```{r rectangle_diy}
-fq_data_diy <- tibble::tibble(value=fq_raw$value) %>%
-  tidyr::unnest_wider(value) %>% 
+fq_data_diy <- tibble::tibble(value = fq_raw$value) %>%
+  tidyr::unnest_wider(value) %>%
   # 1. find list columns:
-  tidyr::unnest_wider(`__system`) %>% 
-  tidyr::unnest_wider(meta) %>% 
+  tidyr::unnest_wider(`__system`) %>%
+  tidyr::unnest_wider(meta) %>%
   # add more lines here to unnest other form groups
   #
   # 2. rename column names
   dplyr::rename(
-    uuid=`__id`
-    # add more columns, e.g. 
+    uuid = `__id`
+    # add more columns, e.g.
     # longitude=`...1`, latitude=`...2`, altitude=`...3`
-    ) %>%
+  ) %>%
   # 3. handle media attachments
-  # dplyr::mutate(photo_field1 = attachment_get(data_url, uuid, photo_field1)) %>% 
-  invisible
+  # dplyr::mutate(photo_field1 = attachment_get(data_url, uuid, photo_field1)) %>%
+  invisible()
 ```
 
 ## Spatial formats - how granular would you like your coordinates?
@@ -239,13 +293,13 @@ Constructing label and popup requires knowledge of the dataset structure.
 leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::addProviderTiles("OpenStreetMap.Mapnik", group = "Place names") %>%
   leaflet::addProviderTiles("Esri.WorldImagery", group = "Aerial") %>%
-  leaflet::clearBounds() %>% 
+  leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
     data = fq_data,
     lng = ~longitude, lat = ~latitude,
     icon = leaflet::makeAwesomeIcon(text = "Q", markerColor = "red"),
-    label = ~glue::glue('{area_name} {encounter_start_datetime}'),
-    popup = ~glue::glue(
+    label = ~ glue::glue("{area_name} {encounter_start_datetime}"),
+    popup = ~ glue::glue(
       "<h3>{area_name}</h3>",
       "Survey start {encounter_start_datetime}</br>",
       "Reporter {reporter}</br>",
@@ -274,13 +328,13 @@ leaflet::leaflet(width = 800, height = 600) %>%
 leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::addProviderTiles("OpenStreetMap.Mapnik", group = "Place names") %>%
   leaflet::addProviderTiles("Esri.WorldImagery", group = "Aerial") %>%
-  leaflet::clearBounds() %>% 
+  leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
     data = fq_data_tae,
     lng = ~...6, lat = ~...7,
     icon = leaflet::makeAwesomeIcon(text = "T", markerColor = "green"),
-    label = ~glue::glue('{canonical_name} {encounter_start_datetime}'),
-    popup = ~glue::glue(
+    label = ~ glue::glue("{canonical_name} {encounter_start_datetime}"),
+    popup = ~ glue::glue(
       "<h3>{area_name}</h3>",
       "Survey start {encounter_start_datetime}</br>",
       "Reporter {reporter}</br>",
@@ -319,18 +373,18 @@ fq_data_tae %>%
   knitr::kable()
 
 # GGplot of a pivot table
-fq_data_tae %>% 
-  dplyr::group_by(life_form) %>% 
-  dplyr::tally() %>% 
-  ggplot2::ggplot(ggplot2::aes(x=life_form, y=n)) + 
+fq_data_tae %>%
+  dplyr::group_by(life_form) %>%
+  dplyr::tally() %>%
+  ggplot2::ggplot(ggplot2::aes(x = life_form, y = n)) +
   ggplot2::labs(
-    title="Title", 
-    subtitle="Subtitle", 
-    x="Life form", 
-    y="Abundance") +
-  ggplot2::geom_point() + 
+    title = "Title",
+    subtitle = "Subtitle",
+    x = "Life form",
+    y = "Abundance"
+  ) +
+  ggplot2::geom_point() +
   ggplot2::theme_classic()
-
 # GGplot with groups
 fq_data_tae %>% 
   ggplot2::ggplot(

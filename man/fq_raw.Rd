@@ -3,7 +3,7 @@
 \docType{data}
 \name{fq_raw}
 \alias{fq_raw}
-\title{Submission data for an ODK Central form.}
+\title{OData submission data for an ODK Central form.}
 \format{A list of lists}
 \source{
 See included file "inst/extdata/Flora Quadrat 0.2.xml"

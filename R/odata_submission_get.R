@@ -107,3 +107,6 @@ odata_submission_get <- function(pid,
     ) %>%
     httr::content(.)
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-odata_submission_get.R")

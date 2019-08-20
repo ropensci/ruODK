@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -178,6 +178,7 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
 <p>Other odata-api: <code><a href='attachment_get.html'>attachment_get</a></code>,
   <code><a href='attachment_url.html'>attachment_url</a></code>,
   <code><a href='get_one_attachment.html'>get_one_attachment</a></code>,
+  <code><a href='odata_service_get.html'>odata_service_get</a></code>,
   <code><a href='odata_submission_get.html'>odata_submission_get</a></code>,
   <code><a href='odata_submission_parse.html'>odata_submission_parse</a></code></p></div>
     
@@ -185,9 +186,9 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># Replace with your own working url, pid, fid, credentials:</span>
-<span class='no'>pid</span> <span class='kw'>&lt;-</span> <span class='fl'>14</span>
-<span class='no'>fid</span> <span class='kw'>&lt;-</span> <span class='st'>"build_Flora-Quadrat-0-2_1558575936"</span>
-<span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='st'>"https://sandbox.central.opendatakit.org"</span>
+<span class='no'>pid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>)
+<span class='no'>fid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>)
+<span class='no'>url</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>)
 <span class='no'>un</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>)
 <span class='no'>pw</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
 

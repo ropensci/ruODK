@@ -1,3 +1,8 @@
+# ruODK 0.6.0.9000
+* Version bump to match ODK Central's version.
+* Updated to match ODK Central's API at 0.6 (RESTful and OData) (c.f.).
+* Add commented out crosslinks to source code and related tests for convenience.
+
 # ruODK 0.3.1
 ## Preparation for ROpenSci presubmission
 * Check name with [`available::available("ruODK")`](https://devguide.ropensci.org/building.html#naming-your-package):

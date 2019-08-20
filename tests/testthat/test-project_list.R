@@ -61,3 +61,7 @@ test_that("project_list fails on missing password", {
     )
   )
 })
+
+
+# Tests code
+# usethis::edit_file("R/project_list.R")

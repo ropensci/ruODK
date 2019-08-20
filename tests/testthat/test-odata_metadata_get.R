@@ -9,8 +9,7 @@ test_that("odata_metadata_get works", {
     pw = Sys.getenv("ODKC_TEST_PW")
   )
   testthat::expect_equal(class(md), "list")
-  testthat::expect_equal(
-    attr(md$Edmx$DataServices$Schema$EntityContainer, "Name"),
-    Sys.getenv("ODKC_TEST_FID")
-  )
 })
+
+# Tests code
+# usethis::edit_file("R/odata_metadata_get.R")

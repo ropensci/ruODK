@@ -54,3 +54,7 @@ form_xml <- function(pid,
   }
   out %>% xml2::as_list(.)
 }
+
+
+# Tests
+# usethis::edit_file("tests/testthat/test-form_xml.R")

@@ -66,3 +66,6 @@ project_list <- function(url = Sys.getenv("ODKC_URL"),
       )
     }
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-project_list.R")

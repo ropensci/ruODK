@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -176,8 +176,8 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form</a></p>
 <p>Other restful-api: <code><a href='attachment_list.html'>attachment_list</a></code>,
   <code><a href='form_list.html'>form_list</a></code>, <code><a href='form_schema.html'>form_schema</a></code>,
-  <code><a href='form_xml.html'>form_xml</a></code>, <code><a href='project_detail.html'>project_detail</a></code>,
-  <code><a href='project_list.html'>project_list</a></code>,
+  <code><a href='form_xml.html'>form_xml</a></code>, <code><a href='project_create.html'>project_create</a></code>,
+  <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
   <code><a href='submission_detail.html'>submission_detail</a></code>,
   <code><a href='submission_export.html'>submission_export</a></code>,
   <code><a href='submission_list.html'>submission_list</a></code></p></div>
@@ -211,6 +211,9 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
 
 <span class='co'># form_detail returns all form metadata as columns: name, xmlFormId, etc.</span>
 <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>f</span>)
+
+<span class='co'># &gt; "name" "fid" "version" "state" "submissions" "created_at"</span>
+<span class='co'># &gt; "created_by_id" "created_by" "updated_at" "last_submission" "hash"</span>
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

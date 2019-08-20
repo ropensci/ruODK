@@ -22,7 +22,8 @@ from a list of lists into a tibble.
 }
 \seealso{
 Other utilities: \code{\link{\%>\%}},
-  \code{\link{map_chr_hack}}, \code{\link{prepend_uuid}},
-  \code{\link{strip_uuid}}, \code{\link{tidyeval}}
+  \code{\link{map_chr_hack}}, \code{\link{map_int_hack}},
+  \code{\link{prepend_uuid}}, \code{\link{strip_uuid}},
+  \code{\link{tidyeval}}
 }
 \concept{utilities}

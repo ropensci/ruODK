@@ -26,11 +26,10 @@ test_that("submission_detail works", {
   # The columns are metadata, plus the submission data in column 'xml`
   names(sub)
   cn <- c(
-    "instance_id", "submitter_id", "submitter",
-    "created_at", "updated_at", "xml"
+    "instance_id", "submitter_id", "submitter", "created_at", "updated_at"
   )
   testthat::expect_equal(names(sub), cn)
-
-  # The column `xml` contains the actual submission data.
-  testthat::expect_equal(class(sub$xml), "list")
 })
+
+# Tests code
+# usethis::edit_file("R/submission_detail.R")

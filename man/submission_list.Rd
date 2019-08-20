@@ -28,7 +28,6 @@ A tibble containing some high-level details of the form submissions.
 
         * instance_id: uuid, string. The unique ID for each submission.
         * submitter_id: user ID, integer.
-        * device_id: Android device ID, string
         * created_at: time of submission upload, dttm
         * updated_at: time of submission update on server, dttm or NA
 }
@@ -87,6 +86,7 @@ nrow(sl) <- form_list_nsub
 Other restful-api: \code{\link{attachment_list}},
   \code{\link{form_detail}}, \code{\link{form_list}},
   \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_create}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}}

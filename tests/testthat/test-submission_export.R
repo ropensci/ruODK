@@ -94,3 +94,6 @@ test_that("submission_export works", {
   # Chuck the litter out
   fs::dir_delete(t)
 })
+
+# Tests code
+# usethis::edit_file("R/submission_export.R")

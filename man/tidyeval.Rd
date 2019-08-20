@@ -23,7 +23,8 @@ To learn more about tidy eval and how to use these tools, read
 \seealso{
 Other utilities: \code{\link{\%>\%}},
   \code{\link{map_chr_hack}}, \code{\link{map_dttm_hack}},
-  \code{\link{prepend_uuid}}, \code{\link{strip_uuid}}
+  \code{\link{map_int_hack}}, \code{\link{prepend_uuid}},
+  \code{\link{strip_uuid}}
 }
 \concept{utilities}
 \keyword{internal}

@@ -25,8 +25,7 @@ default: Sys.getenv("ODKC_PW").
 Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
 }
 \value{
-A nested list, containing the submission data in `xml` as specified
-        by the `form_schema`.
+A nested list of submission metadata.
 }
 \description{
 Show details for one submission.
@@ -60,10 +59,7 @@ nrow(sub)
 
 # The columns are metadata, plus the submission data in column 'xml`
 names(sub)
-# > "instance_id" "submitter_id" "submitter" "created_at" "updated_at" "xml"
-
-# The column `xml` contains the actual submission data.
-listviewer::jsonedit(sub$xml)
+# > "instance_id" "submitter_id" "submitter" "created_at" "updated_at"
 }
 }
 \seealso{
@@ -72,6 +68,7 @@ listviewer::jsonedit(sub$xml)
 Other restful-api: \code{\link{attachment_list}},
   \code{\link{form_detail}}, \code{\link{form_list}},
   \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_create}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_export}},
   \code{\link{submission_list}}

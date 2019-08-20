@@ -148,3 +148,6 @@ attachment_get <- function(pid,
   ) %>%
     purrr::pmap(get_one_attachment)
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-attachment_get.R")

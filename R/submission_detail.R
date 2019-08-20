@@ -4,8 +4,7 @@
 #' @template param-fid
 #' @template param-iid
 #' @template param-auth
-#' @return A nested list, containing the submission data in `xml` as specified
-#'         by the `form_schema`.
+#' @return A nested list of submission metadata.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/getting-submission-details}
 #' @family restful-api
 #' @importFrom httr add_headers authenticate content GET
@@ -40,10 +39,7 @@
 #'
 #' # The columns are metadata, plus the submission data in column 'xml`
 #' names(sub)
-#' # > "instance_id" "submitter_id" "submitter" "created_at" "updated_at" "xml"
-#'
-#' # The column `xml` contains the actual submission data.
-#' listviewer::jsonedit(sub$xml)
+#' # > "instance_id" "submitter_id" "submitter" "created_at" "updated_at"
 #' }
 submission_detail <- function(pid,
                               fid,
@@ -57,7 +53,7 @@ submission_detail <- function(pid,
   ) %>%
     httr::GET(
       httr::add_headers(
-        "Accept" = "application/json",
+        "Accept" = "application/json; extended",
         "X-Extended-Metadata" = "true"
       ),
       httr::authenticate(un, pw)
@@ -76,9 +72,14 @@ submission_detail <- function(pid,
         updated_at = ifelse(
           is.null(.$updatedAt),
           NA,
-          readr::parse_datetime(.$updatedAt, format = "%Y-%m-%dT%H:%M:%OS%Z")
-        ),
-        xml = xml2::as_list(xml2::read_xml(.$xml))
+          readr::parse_datetime(
+            .$updatedAt,
+            format = "%Y-%m-%dT%H:%M:%OS%Z"
+          )
+        )
       )
     }
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-submission_detail.R")

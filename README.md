@@ -18,13 +18,13 @@ status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=
 status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
 <!-- badges: end -->
 
-Especially in these trying times, it is important to ask: “r u ODK?”
+Especially in these trying times, it is important to ask: “ruODK?”
 
-[ODK Central](https://docs.opendatakit.org/central-intro/) is an Open
-Data Kit server alternative to ODK Aggregate. It manages user accounts
-and permissions, stores form definitions, and allows data collection
-clients like ODK Collect to connect to it for form download and
-submission upload.
+[ODK Central](https://docs.opendatakit.org/central-intro/) is an
+OpenDataKit server alternative to ODK Aggregate. It manages user
+accounts and permissions, stores form definitions, and allows data
+collection clients like ODK Collect to connect to it for form download
+and submission upload.
 
 After data have been captured digitally using ODK Collect, the data are
 uploaded and stored in ODK Central. The next step from there is to
@@ -155,8 +155,8 @@ proj
 #> # A tibble: 4 x 8
 #>      id name  forms app_users last_submission     created_at         
 #>   <int> <chr> <int>     <int> <dttm>              <dttm>             
-#> 1     1 DBCA      9         1 2019-08-01 01:45:12 2019-06-05 09:12:44
-#> 2     3 Flora     1         1 2019-07-28 04:37:27 2019-06-06 03:24:31
+#> 1     1 DBCA      9         1 2019-08-16 09:07:01 2019-06-05 09:12:44
+#> 2     3 Flora     1         1 2019-08-12 04:47:05 2019-06-06 03:24:31
 #> 3     2 Spot…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15
 #> 4     4 DBCA      0         0 NA                  2019-06-27 02:54:30
 #> # … with 2 more variables: updated_at <dttm>, archived <lgl>
@@ -166,8 +166,57 @@ meta <- ruODK::odata_metadata_get(
   fid = "build_Turtle-Sighting-0-1_1559790020"
 )
 # listviewer::jsonedit(meta)
-meta$Edmx$DataServices$Schema$EntityContainer %>% attr("Name")
-#> [1] "build_Turtle-Sighting-0-1_1559790020"
+meta$Edmx$DataServices$Schema
+#> $ComplexType
+#> $ComplexType$Property
+#> list()
+#> attr(,"Name")
+#> [1] "submissionDate"
+#> attr(,"Type")
+#> [1] "Edm.DateTimeOffset"
+#> 
+#> $ComplexType$Property
+#> list()
+#> attr(,"Name")
+#> [1] "submitterId"
+#> attr(,"Type")
+#> [1] "Edm.String"
+#> 
+#> $ComplexType$Property
+#> list()
+#> attr(,"Name")
+#> [1] "submitterName"
+#> attr(,"Type")
+#> [1] "Edm.String"
+#> 
+#> $ComplexType$Property
+#> list()
+#> attr(,"Name")
+#> [1] "status"
+#> attr(,"Type")
+#> [1] "org.opendatakit.submission.Status"
+#> 
+#> attr(,"Name")
+#> [1] "metadata"
+#> 
+#> $EnumType
+#> $EnumType$Member
+#> list()
+#> attr(,"Name")
+#> [1] "NotDecrypted"
+#> 
+#> $EnumType$Member
+#> list()
+#> attr(,"Name")
+#> [1] "MissingEncryptedFormData"
+#> 
+#> attr(,"Name")
+#> [1] "Status"
+#> 
+#> attr(,"Namespace")
+#> [1] "org.opendatakit.submission"
+#> attr(,"xmlns")
+#> [1] "http://docs.oasis-open.org/odata/ns/edm"
 
 data <- ruODK::odata_submission_get(
   pid = 1,
@@ -175,20 +224,20 @@ data <- ruODK::odata_submission_get(
 ) %>%
   ruODK::odata_submission_parse()
 data %>% head(.)
-#> # A tibble: 6 x 20
-#>   .__id submissionDate submitterId submitterName instanceID
-#>   <chr> <chr>          <chr>       <chr>         <chr>     
-#> 1 uuid… 2019-07-22T01… 16          Turtles       uuid:ddee…
-#> 2 uuid… 2019-07-22T01… 16          Turtles       uuid:0b25…
-#> 3 uuid… 2019-07-22T01… 16          Turtles       uuid:05ca…
-#> 4 uuid… 2019-07-22T01… 16          Turtles       uuid:1351…
-#> 5 uuid… 2019-07-22T01… 16          Turtles       uuid:f175…
-#> 6 uuid… 2019-07-22T01… 16          Turtles       uuid:8141…
-#> # … with 15 more variables: observation_start_time <chr>, reporter <chr>,
-#> #   device_id <chr>, type <chr>, ...10 <dbl>, ...11 <dbl>, ...12 <dbl>,
-#> #   species <chr>, sex <chr>, maturity <chr>, activity <chr>,
-#> #   observer_acticity <chr>, photo_habitat <chr>,
-#> #   observation_end_time <chr>, .odata.context <chr>
+#> # A tibble: 6 x 21
+#>   .__id observation_sta… reporter device_id observation_end… submissionDate
+#>   <chr> <chr>            <chr>    <chr>     <chr>            <chr>         
+#> 1 uuid… 2019-06-25T14:5… Scott W… fd8105e0… 2019-06-25T14:5… 2019-07-22T01…
+#> 2 uuid… 2019-06-25T14:5… Scott W… fd8105e0… 2019-06-25T14:5… 2019-07-22T01…
+#> 3 uuid… 2019-06-25T14:2… Scott W… fd8105e0… 2019-06-25T14:2… 2019-07-22T01…
+#> 4 uuid… 2019-06-25T14:2… Scott W… fd8105e0… 2019-06-25T14:2… 2019-07-22T01…
+#> 5 uuid… 2019-06-25T14:2… Scott W… fd8105e0… 2019-06-25T14:2… 2019-07-22T01…
+#> 6 uuid… 2019-06-25T14:2… Scott W… fd8105e0… 2019-06-25T14:2… 2019-07-22T01…
+#> # … with 15 more variables: submitterId <chr>, submitterName <chr>,
+#> #   instanceID <chr>, type <chr>, ...11 <dbl>, ...12 <dbl>, ...13 <dbl>,
+#> #   accuracy <int>, species <chr>, sex <chr>, maturity <chr>,
+#> #   activity <chr>, observer_acticity <chr>, photo_habitat <chr>,
+#> #   .odata.context <chr>
 ```
 
 A more detailed walk-through with some data visualisation examples is

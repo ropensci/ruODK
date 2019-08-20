@@ -86,3 +86,6 @@ attachment_list <- function(pid,
       )
     }
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-attachment_list.R")

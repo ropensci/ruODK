@@ -56,8 +56,10 @@ form_list <- function(pid,
         created_by = purrr::map_chr(., c("createdBy", "displayName")),
         updated_at = map_dttm_hack(., "updatedAt"),
         last_submission = map_dttm_hack(., "lastSubmission"),
-        hash = purrr::map_chr(., "hash"),
-        xml = purrr::map_chr(., "xml") %>% purrr::map(xml2list)
+        hash = purrr::map_chr(., "hash")
       )
     }
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-form_list.R")

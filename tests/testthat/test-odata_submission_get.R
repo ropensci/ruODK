@@ -71,3 +71,7 @@ test_that("odata_submission_get count returns total number or rows", {
   testthat::expect_true("@odata.count" %in% names(x_raw))
   testthat::expect_gt(x_raw$`@odata.count`, nrow(x_parsed))
 })
+
+
+# Tests code
+# usethis::edit_file("R/odata_submission_get.R")

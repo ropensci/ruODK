@@ -98,3 +98,7 @@ submission_export <- function(pid,
     httr::content(.)
   pth
 }
+
+
+# Tests
+# usethis::edit_file("tests/testthat/test-submission_export.R")

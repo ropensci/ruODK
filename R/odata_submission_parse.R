@@ -86,3 +86,7 @@ odata_submission_parse <- function(data,
     tibble::as_tibble(., .name_repair = names_repair) %>%
     unnest_all(names_repair = names_repair, verbose = verbose)
 }
+
+
+# Tests
+# usethis::edit_file("tests/testthat/test-odata_submission_parse.R")

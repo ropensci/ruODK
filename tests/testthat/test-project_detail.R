@@ -1,6 +1,6 @@
 test_that("project_detail works", {
   p <- project_detail(
-    2,
+    Sys.getenv("ODKC_TEST_PID"),
     url = Sys.getenv("ODKC_TEST_URL"),
     un = Sys.getenv("ODKC_TEST_UN"),
     pw = Sys.getenv("ODKC_TEST_PW")
@@ -18,3 +18,6 @@ test_that("project_detail works", {
   )
   testthat::expect_equal(names(p), cn)
 })
+
+# Tests
+# usethis::edit_file("R/project_detail.R")

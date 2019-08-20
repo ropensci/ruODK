@@ -8,7 +8,6 @@
 #'
 #'         * instance_id: uuid, string. The unique ID for each submission.
 #'         * submitter_id: user ID, integer.
-#'         * device_id: Android device ID, string
 #'         * created_at: time of submission upload, dttm
 #'         * updated_at: time of submission update on server, dttm or NA
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form}
@@ -67,11 +66,12 @@ submission_list <- function(pid,
                             un = Sys.getenv("ODKC_UN"),
                             pw = Sys.getenv("ODKC_PW")) {
   . <- NULL
-  glue::glue(
-    "{url}/v1/projects/{pid}/forms/{fid}/submissions"
-  ) %>%
+  glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions") %>%
     httr::GET(
-      httr::add_headers("Accept" = "application/json"),
+      httr::add_headers(
+        "Accept" = "application/json",
+        "X-Extended-Metadata" = "true"
+      ),
       httr::authenticate(un, pw)
     ) %>%
     httr::stop_for_status() %>%
@@ -79,10 +79,13 @@ submission_list <- function(pid,
     {
       tibble::tibble(
         instance_id = purrr::map_chr(., "instanceId"),
-        submitter_id = purrr::map_int(., "submitter"),
+        submitter_id = map_int_hack(., c("submitter", "id")),
         device_id = map_chr_hack(., "deviceId"),
         created_at = map_dttm_hack(., "createdAt"),
         updated_at = map_dttm_hack(., "updatedAt")
       )
     }
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-submission_list.R")

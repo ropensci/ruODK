@@ -10,7 +10,7 @@
   "codeRepository": "https://github.com/dbca-wa/ruODK",
   "issueTracker": "https://github.com/dbca-wa/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.3.1",
+  "version": "0.6.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -219,6 +219,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "jsonlite",
+      "name": "jsonlite",
+      "version": ">= 1.6",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=jsonlite"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "magrittr",
       "name": "magrittr",
       "version": ">= 1.5",
@@ -342,7 +355,7 @@
   ],
   "releaseNotes": "https://github.com/dbca-wa/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/dbca-wa/ruODK/blob/master/README.md",
-  "fileSize": "115513.808KB",
+  "fileSize": "126890.73KB",
   "contIntegration": [
     "https://travis-ci.org/dbca-wa/ruODK",
     "https://ci.appveyor.com/project/dbca-wa/ruODK",

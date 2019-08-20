@@ -12,3 +12,6 @@ test_that("parse_submission_works", {
   # fq_raw has two submissions
   testthat::expect_equal(length(fq_raw$value), nrow(data_parsed))
 })
+
+# Tests code
+# usethis::edit_file("R/odata_submission_parse.R")

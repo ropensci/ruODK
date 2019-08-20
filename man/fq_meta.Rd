@@ -3,7 +3,7 @@
 \docType{data}
 \name{fq_meta}
 \alias{fq_meta}
-\title{Metadata for an ODK Central form.}
+\title{OData metadata document for an ODK Central form.}
 \format{A list of lists}
 \source{
 See included file "inst/extdata/Flora Quadrat 0.2.xml"

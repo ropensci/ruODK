@@ -39,6 +39,9 @@
 #'
 #' # form_detail returns all form metadata as columns: name, xmlFormId, etc.
 #' names(f)
+#'
+#' # > "name" "fid" "version" "state" "submissions" "created_at"
+#' # > "created_by_id" "created_by" "updated_at" "last_submission" "hash"
 #' }
 form_detail <- function(pid,
                         fid,
@@ -79,8 +82,10 @@ form_detail <- function(pid,
           NA_character_,
           .$lastSubmission
         ),
-        hash = .$hash,
-        xml = .$xml %>% xml2list()
+        hash = .$hash
       )
     }
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-form_detail.R")

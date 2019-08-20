@@ -43,3 +43,7 @@ test_that("form_schema works", {
   testthat::expect_equal(fs_flattened[[length(fs_flattened)]]$type, "dateTime")
   testthat::expect_equal(fs_nested[[length(fs_nested)]]$type, "dateTime")
 })
+
+
+# Tests code
+# usethis::edit_file("R/form_schema.R")

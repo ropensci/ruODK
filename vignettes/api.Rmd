@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+library(magrittr)
 library(ruODK)
 ```
 
@@ -73,8 +74,8 @@ available API actions for a project.
 
 ```{r project_details}
 pd <- ruODK::project_detail(1)
-pd %>%dplyr::select(-"verbs") %>%  knitr::kable(.)
-pd$verbs[[1]] %>% purrr::map_chr(., 1)
+pd %>% dplyr::select(-"verbs") %>%  knitr::kable(.)
+pd$verbs[[1]] %>% unlist(.)
 ```
 
 Nothing apart from the verbs is new compared to the data returned by 
@@ -98,8 +99,8 @@ There are several ways of retrieving the form ID:
 * Listing form metadata for a given project ID with `ruODK::form_list()`.
 
 ```{r form_list}
-forms <- ruODK::form_list(1)
-forms %>% dplyr::select(-"xml") %>% knitr::kable(.)
+forms <- ruODK::form_list(1) 
+forms %>% knitr::kable(.)
 ```
 
 Further to the metadata shown here, a column `xml` contains the entire XForms
@@ -119,7 +120,7 @@ The details of a form are exactly the same as the output of `ruODK::form_list()`
 
 ```{r form_detail}
 form <- ruODK::form_detail(1, forms$fid[[1]])
-form %>% dplyr::select(-"xml") %>% knitr::kable(.)
+form %>% knitr::kable(.)
 ```
 
 ## Inspect form schema
@@ -298,9 +299,7 @@ therefore `ruODK::odata_submission_parse` does not work for those, as
 here we might have repeating groups included in a submission.
 
 ```{r}
-d <- submissions %>% 
-  purrr::map(., c("xml", "data")) 
-head(d)
+head(submissions)
 ```
 
 # Attachments

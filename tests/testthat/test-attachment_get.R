@@ -84,3 +84,6 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   )
   testthat::expect_true(is.na(get_one_attachment(pth, NA, src, verbose = TRUE)))
 })
+
+# Tests code
+# usethis::edit_file("R/attachment_get.R")

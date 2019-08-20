@@ -56,6 +56,9 @@ nrow(f)
 
 # form_detail returns all form metadata as columns: name, xmlFormId, etc.
 names(f)
+
+# > "name" "fid" "version" "state" "submissions" "created_at"
+# > "created_by_id" "created_by" "updated_at" "last_submission" "hash"
 }
 }
 \seealso{
@@ -63,8 +66,8 @@ names(f)
 
 Other restful-api: \code{\link{attachment_list}},
   \code{\link{form_list}}, \code{\link{form_schema}},
-  \code{\link{form_xml}}, \code{\link{project_detail}},
-  \code{\link{project_list}},
+  \code{\link{form_xml}}, \code{\link{project_create}},
+  \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}},
   \code{\link{submission_list}}

@@ -7,7 +7,7 @@
 #'   * path The field path as list of named nodes
 form_schema_parse <- function(fs) {
   # TODO: magic goes here
-  warning("Not implemented")
+  rlang::warn("Not implemented.")
   fs
 }
 
@@ -46,6 +46,7 @@ prefix_fn <- function(fn, prefix) {
 #'   url = Sys.getenv("ODKC_TEST_URL"), un = Sys.getenv("ODKC_TEST_UN"),
 #'   pw = Sys.getenv("ODKC_TEST_PW")
 #' )
+#'
 #' # export submissions, unzip, read_csv
 #' # prepend all `attachment_fieldnames` with `att_local` path ("media")
 #' # fs::file_exists verifies that local paths are correct
@@ -57,15 +58,17 @@ attachment_link <- function(data_tbl,
                             url = Sys.getenv("ODKC_URL"),
                             un = Sys.getenv("ODKC_UN"),
                             pw = Sys.getenv("ODKC_PW")) {
-  # Names of form fields generating attachments derived from `form_schema`
-  att_cn <- form_schema(pid, fid, url = url, un = un, pw = pw) %>%
-    form_schema_parse(fs) %>%
-    dplyr::filter(type == "binary") %>%
-    dplyr:select("name")
-
-  # Mutate each field name in att_cn: prepend pth
-  d <- data_tbl %>% dplyr::mutate_at(att_cn, prefix_fn(pth))
-
-  warning("Not implemented")
-  data_tbl
+  warning("Not implemented.")
+  # # Names of form fields generating attachments derived from `form_schema`
+  # att_cn <- form_schema(pid, fid, url = url, un = un, pw = pw) %>%
+  #   form_schema_parse(.) %>%
+  #   dplyr::filter(type == "binary") %>%
+  #   dplyr:select("name")
+  #
+  # # Mutate each field name in att_cn: prepend pth
+  # d <- data_tbl %>% dplyr::mutate_at(att_cn, prefix_fn(pth))
+  # data_tbl
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-attachment_link.R")

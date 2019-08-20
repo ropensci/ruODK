@@ -58,7 +58,7 @@ is being introduced as a replacement for ODK Aggregate.
 
 While the use of ODK Aggregate is well established, the use of ODK Central is new
 to most users. As ODK Central provides all of its content through a well-documented
-API [@odkapi], there is an opportunity to create API wrappers to assist wiht the
+API [@odkapi], there is an opportunity to create API wrappers to assist with the
 data retrieval from ODK Central.
 
 ruODK [@ruodk], currently available from GitHub [@github], is the first dedicated
@@ -81,10 +81,11 @@ R Client for the ODK Central API.
 * To wrap "management" API endpoints. The ODK Central GUI already provides a 
   highly capable interface for the management of users, roles, permissions, 
   projects, and forms.
-  In fact, it is a [VueJS application](https://github.com/opendatakit/central-frontend/) 
+  ODK Central is a [VueJS application](https://github.com/opendatakit/central-frontend/) 
   working on the "management" API endpoints of the ODK Central backend.
-* To provide extensive data visualisation. We show only minimal examples of data 
-  visualisation and presentation, mainly to illustrate the example data.
+* To provide extensive data visualisation capability. 
+  We show only minimal examples of data visualisation and presentation, mainly 
+  to illustrate the example data.
   
 # Typical use cases
 
@@ -113,6 +114,6 @@ target database.
 
 In this case, ruODK assists with the retrieval of data, inspection of new vs. 
 existing submissions, and export into an intermediary format, such as CSV 
-snapshots.
+snapshots.  
 
 # References

@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
 <!-- badges: end -->
 
-Especially in these trying times, it is important to ask: "r u ODK?"
+Especially in these trying times, it is important to ask: "ruODK?"
 
-[ODK Central](https://docs.opendatakit.org/central-intro/) is an Open Data Kit 
+[ODK Central](https://docs.opendatakit.org/central-intro/) is an OpenDataKit 
 server alternative to ODK Aggregate. It manages user accounts and permissions, 
 stores form definitions, and allows data collection clients like ODK Collect to 
 connect to it for form download and submission upload.
@@ -145,7 +145,7 @@ meta <- ruODK::odata_metadata_get(
   fid = "build_Turtle-Sighting-0-1_1559790020"
 )
 # listviewer::jsonedit(meta)
-meta$Edmx$DataServices$Schema$EntityContainer %>% attr("Name")
+meta$Edmx$DataServices$Schema
 
 data <- ruODK::odata_submission_get(
   pid = 1,
