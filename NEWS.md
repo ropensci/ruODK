@@ -1,3 +1,7 @@
+# ruODK 0.6.0
+* Version bump and lifecycle bump to indicate that ruODK is ready to be used
+  against ODK Central 0.6.
+
 # ruODK 0.6.0.9000
 * Version bump to match ODK Central's version.
 * Updated to match ODK Central's API at 0.6 (RESTful and OData) (c.f.).

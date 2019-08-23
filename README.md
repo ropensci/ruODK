@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![Project Status: WIP – Initial development is in progress, but there
-has not yet been a stable, usable release suitable for the
-public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![GitHub
 issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues)
 [![Travis build
@@ -20,11 +20,21 @@ status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](http
 
 Especially in these trying times, it is important to ask: “ruODK?”
 
-[ODK Central](https://docs.opendatakit.org/central-intro/) is an
-OpenDataKit server alternative to ODK Aggregate. It manages user
-accounts and permissions, stores form definitions, and allows data
-collection clients like ODK Collect to connect to it for form download
-and submission upload.
+[OpenDataKit](https://opendatakit.org/) (ODK) is a free and open-source
+software for collecting, managing, and using data in
+resource-constrained environments.
+
+ODK consists of a range of [software packages and
+apps](https://opendatakit.org/software/). For a detailed overview, read
+the extensive [ODK documentation](https://docs.opendatakit.org/).
+
+[ODK Central](https://docs.opendatakit.org/central-intro/) is a
+cloud-based data clearinghouse for digitally captured data, replacing
+the older software [ODK
+Aggregate](https://docs.opendatakit.org/aggregate-intro/). ODK Central
+manages user accounts and permissions, stores form definitions, and
+allows data collection clients like ODK Collect to connect to it for
+form download and submission upload.
 
 After data have been captured digitally using ODK Collect, the data are
 uploaded and stored in ODK Central. The next step from there is to
@@ -66,9 +76,9 @@ a RESTful API with a comprehensive and interactive
 
 Out of scope:
 
-  - To wrap “management” API endpoints. The ODK Central GUI already is a
-    fantastic interface for the management of users, roles, permissions,
-    projects, and forms. In fact, it is a [VueJS
+  - To wrap “management” API endpoints. The ODK Central GUI provides a
+    comprehensive interface for the management of users, roles,
+    permissions, projects, and forms. Behind the scenes, it is a [VueJS
     application](https://github.com/opendatakit/central-frontend/)
     working on the “management” API endpoints of the ODK Central
     backend.
@@ -155,7 +165,7 @@ proj
 #> # A tibble: 4 x 8
 #>      id name  forms app_users last_submission     created_at         
 #>   <int> <chr> <int>     <int> <dttm>              <dttm>             
-#> 1     1 DBCA      9         1 2019-08-16 09:07:01 2019-06-05 09:12:44
+#> 1     1 DBCA      9         1 2019-08-23 00:05:19 2019-06-05 09:12:44
 #> 2     3 Flora     1         1 2019-08-12 04:47:05 2019-06-06 03:24:31
 #> 3     2 Spot…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15
 #> 4     4 DBCA      0         0 NA                  2019-06-27 02:54:30
@@ -227,12 +237,12 @@ data %>% head(.)
 #> # A tibble: 6 x 21
 #>   .__id observation_sta… reporter device_id observation_end… submissionDate
 #>   <chr> <chr>            <chr>    <chr>     <chr>            <chr>         
-#> 1 uuid… 2019-06-25T14:5… Scott W… fd8105e0… 2019-06-25T14:5… 2019-07-22T01…
-#> 2 uuid… 2019-06-25T14:5… Scott W… fd8105e0… 2019-06-25T14:5… 2019-07-22T01…
-#> 3 uuid… 2019-06-25T14:2… Scott W… fd8105e0… 2019-06-25T14:2… 2019-07-22T01…
-#> 4 uuid… 2019-06-25T14:2… Scott W… fd8105e0… 2019-06-25T14:2… 2019-07-22T01…
-#> 5 uuid… 2019-06-25T14:2… Scott W… fd8105e0… 2019-06-25T14:2… 2019-07-22T01…
-#> 6 uuid… 2019-06-25T14:2… Scott W… fd8105e0… 2019-06-25T14:2… 2019-07-22T01…
+#> 1 uuid… 2019-08-22T16:0… Scott W… e249db9e… 2019-08-22T16:0… 2019-08-23T00…
+#> 2 uuid… 2019-08-22T14:5… Scott W… e249db9e… 2019-08-22T14:5… 2019-08-23T00…
+#> 3 uuid… 2019-08-22T13:1… Scott W… e249db9e… 2019-08-22T13:1… 2019-08-23T00…
+#> 4 uuid… 2019-08-22T12:1… Scott W… e249db9e… 2019-08-22T12:1… 2019-08-23T00…
+#> 5 uuid… 2019-08-22T12:0… Scott W… e249db9e… 2019-08-22T12:0… 2019-08-23T00…
+#> 6 uuid… 2019-08-22T11:4… Scott W… e249db9e… 2019-08-22T11:4… 2019-08-23T00…
 #> # … with 15 more variables: submitterId <chr>, submitterName <chr>,
 #> #   instanceID <chr>, type <chr>, ...11 <dbl>, ...12 <dbl>, ...13 <dbl>,
 #> #   accuracy <int>, species <chr>, sex <chr>, maturity <chr>,

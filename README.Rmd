@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 ```
 # ruODK: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 <!-- badges: start -->
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![GitHub issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues)
 [![Travis build status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=master&svg=true)](https://ci.appveyor.com/project/dbca-wa/ruODK)
@@ -23,10 +23,18 @@ knitr::opts_chunk$set(
 
 Especially in these trying times, it is important to ask: "ruODK?"
 
-[ODK Central](https://docs.opendatakit.org/central-intro/) is an OpenDataKit 
-server alternative to ODK Aggregate. It manages user accounts and permissions, 
-stores form definitions, and allows data collection clients like ODK Collect to 
-connect to it for form download and submission upload.
+[OpenDataKit](https://opendatakit.org/) (ODK) is a free and open-source software for 
+collecting, managing, and using data in resource-constrained environments.
+
+ODK consists of a range of [software packages and apps](https://opendatakit.org/software/).
+For a detailed overview, read the extensive [ODK documentation](https://docs.opendatakit.org/).
+
+[ODK Central](https://docs.opendatakit.org/central-intro/) is a cloud-based
+data clearinghouse for digitally captured data, replacing the older software 
+[ODK Aggregate](https://docs.opendatakit.org/aggregate-intro/). 
+ODK Central manages user accounts and permissions, stores form definitions, 
+and allows data collection clients like ODK Collect to connect to it for 
+form download and submission upload.
 
 After data have been captured digitally using ODK Collect, the data are uploaded
 and stored in ODK Central. The next step from there is to extract the data, 
@@ -65,9 +73,9 @@ with a comprehensive and interactive
   
 Out of scope:
 
-* To wrap "management" API endpoints. The ODK Central GUI already is a fantastic 
+* To wrap "management" API endpoints. The ODK Central GUI provides a comprehensive 
   interface for the management of users, roles, permissions, projects, and forms.
-  In fact, it is a [VueJS application](https://github.com/opendatakit/central-frontend/) 
+  Behind the scenes, it is a [VueJS application](https://github.com/opendatakit/central-frontend/) 
   working on the "management" API endpoints of the ODK Central backend.
 * To provide extensive data visualisation. We show only minimal examples of data 
   visualisation and presentation, mainly to illustrate the example data.
