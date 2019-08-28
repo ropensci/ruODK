@@ -77,3 +77,12 @@ Of course, there is a helper for editing `~/.Renviron` in `usethis`.
 ```{r, eval=FALSE}
 usethis::edit_r_environ(scope = "user")
 ```
+
+Note, the format for `~/.Renviron` is:
+```{r, eval=FALSE}
+ODKC_URL="https://odkcentral.dbca.wa.gov.au"
+ODKC_UN="your@email.com"
+ODKC_PW="..."
+```
+
+

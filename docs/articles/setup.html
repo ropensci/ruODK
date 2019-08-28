@@ -133,6 +133,10 @@
 <p>Let’s make those settings a permanent default. Place them in your <code>~/.Renviron</code> to set them per machine, or in a separate file outside of version control to set them per project.</p>
 <p>Of course, there is a helper for editing <code>~/.Renviron</code> in <code>usethis</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit.html">edit_r_environ</a></span>(<span class="dt">scope =</span> <span class="st">"user"</span>)</a></code></pre></div>
+<p>Note, the format for <code>~/.Renviron</code> is:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">ODKC_URL=<span class="st">"https://odkcentral.dbca.wa.gov.au"</span></a>
+<a class="sourceLine" id="cb6-2" title="2">ODKC_UN=<span class="st">"your@email.com"</span></a>
+<a class="sourceLine" id="cb6-3" title="3">ODKC_PW=<span class="st">"..."</span></a></code></pre></div>
 </div>
 </div>
   </div>

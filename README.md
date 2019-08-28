@@ -142,17 +142,14 @@ imported into ODK Central.
 
 ## Configure ruODK
 
-For a quick start, create R environment variables with your settings:
+For a quick start, create R environment variables with your ODK Central
+credentials:
 
 ``` r
 Sys.setenv(ODKC_URL = "https://odkcentral.mydomain.com")
 Sys.setenv(ODKC_UN = "me@mail.com")
 Sys.setenv(ODKC_PW = ".......")
 ```
-
-For a more permanent configuration setting, paste the above lines into
-your `~/.Renviron` (`usethis::edit_r_environ(scope = "user")`) and
-restart R.
 
 For all available detailed options to configure `ruODK`, read
 `vignette("Setup", package = "ruODK")` (online

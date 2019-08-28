@@ -111,6 +111,19 @@ Sys.setenv(ODKC_PW="...")
 ```
 
 Keep these settings outside of version control, e.g. in your `~/.Renviron`.
+Note: `~/.Renviron` contains simple `key=value` assignments without `Sys.setenv()`.
+```r
+ODKC_TEST_URL="https://sandbox.central.opendatakit.org"
+ODKC_TEST_PID=14
+ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
+ODKC_TEST_UN="your@email.com"
+ODKC_TEST_PW="..."
+
+ODKC_URL="https://odkcentral.dbca.wa.gov.au"
+ODKC_UN="your@email.com"
+ODKC_PW="..."
+```
+
 Keep in mind that `ruODK` defaults to use `ODKC_{URL,UN,PW}`, so for everyday 
 use outside of contributing, you will want to use your own `ODKC_{URL,UN,PW}`
 account credentials.
