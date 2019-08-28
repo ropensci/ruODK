@@ -77,6 +77,8 @@ See the `RoxygenNote` in [DESCRIPTION](DESCRIPTION) for the version of
 roxygen2 being used. 
 
 ```r
+spelling::spell_check_package()
+spelling::update_wordlist()
 devtools::document(roclets = c("rd", "collate", "namespace"))
 ```
 
@@ -87,23 +89,31 @@ with test cases are easier to accept. If you are not sure what parts of your
 code are covered by tests, run the following to get a local coverage report of
 the package so you can see exactly what lines are not covered in the project.
 
-To run tests, you'll need access to an ODK Central instance. At the time of writing,
-ODK run a public sandbox at https://sandbox.central.opendatakit.org/.
-Ask the `ruODK` maintainer (or `@yanokwa` in the 
-[ODK forum](https://forum.opendatakit.org/)) for an account.
+To run tests, you'll need access to the 
+[ODK Central sandbox instance](https://sandbox.central.opendatakit.org/).
+To build the vignettes, you'll need access to 
+[DBCA's ODK Central instance](https://odkcentral.dbca.wa.gov.au).
+Create an [accont request issue](https://github.com/dbca-wa/ruODK/issues/new/choose)
+to request access to those two ODK Central instances.
 
 You will need to use the following environment variables:
+
 ```r
 Sys.setenv(ODKC_TEST_URL="https://sandbox.central.opendatakit.org")
 Sys.setenv(ODKC_TEST_PID=14)
 Sys.setenv(ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936")
-Sys.setenv(ODKC_TEST_UN="XXXX")
-Sys.setenv(ODKC_TEST_PW="YYYY")
+Sys.setenv(ODKC_TEST_UN="your@email.com")
+Sys.setenv(ODKC_TEST_PW="...")
+
+Sys.setenv(ODKC_URL="https://odkcentral.dbca.wa.gov.au")
+Sys.setenv(ODKC_UN="your@email.com")
+Sys.setenv(ODKC_PW="...")
 ```
 
-`XXXX` is the email address you signed up with at ODK Central, and `YYYY` is your
-ODK Central password.
-Keep these settings outside of version control, e.g. in your `~/.Rprofile`.
+Keep these settings outside of version control, e.g. in your `~/.Renviron`.
+Keep in mind that `ruODK` defaults to use `ODKC_{URL,UN,PW}`, so for everyday 
+use outside of contributing, you will want to use your own `ODKC_{URL,UN,PW}`
+account credentials.
 
 ```r
 devtools::test()
@@ -129,6 +139,7 @@ as a result of your edits.
 
 ```r
 devtools::check()
+goodpractice::goodpractice(quiet = FALSE)
 ```
 
 ### Commit
@@ -151,10 +162,9 @@ auto-linking syntax (e.g. `#15`).
 
 ### Review, revise, repeat
 
-Since tidyverse development happens in waves, the latency period between
-submitting your PR and its review may vary. When a maintainer does review
-your contribution, be sure to use the same conventions described here with any
-revision commits.
+The latency period between submitting your PR and its review may vary. 
+When a maintainer does review your contribution, be sure to use the same 
+conventions described here with any revision commits.
 
 ## Resources
 
@@ -186,6 +196,8 @@ abide by its terms.
 # Maintainer's steps
 
 The steps below are run by the package maintainer to prepare a new `ruODK` release.
+It is not necessary to run them as a contributor, but immensely convenient for
+the maintainer to have them here in one place.
 
 ```r
 # Tests

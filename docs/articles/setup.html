@@ -130,9 +130,9 @@
 <div id="per-machine-set-and-forget" class="section level2">
 <h2 class="hasAnchor">
 <a href="#per-machine-set-and-forget" class="anchor"></a>Per machine: set and forget</h2>
-<p>Let’s make those settings a permanent default. Place them in your <code>~/.Rprofile</code> to set them per machine, or in a separate file outside of version control to set them per project.</p>
-<p>Of course, there is a helper for editing <code>~/.Rprofile</code> in <code>usethis</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit.html">edit_r_profile</a></span>()</a></code></pre></div>
+<p>Let’s make those settings a permanent default. Place them in your <code>~/.Renviron</code> to set them per machine, or in a separate file outside of version control to set them per project.</p>
+<p>Of course, there is a helper for editing <code>~/.Renviron</code> in <code>usethis</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit.html">edit_r_environ</a></span>(<span class="dt">scope =</span> <span class="st">"user"</span>)</a></code></pre></div>
 </div>
 </div>
   </div>

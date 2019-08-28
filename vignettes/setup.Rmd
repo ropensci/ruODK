@@ -69,11 +69,11 @@ ruODK::project_list()
 
 ## Per machine: set and forget
 Let's make those settings a permanent default.
-Place them in your `~/.Rprofile` to set them per machine,
+Place them in your `~/.Renviron` to set them per machine,
 or in a separate file outside of version control to set them per project.
 
-Of course, there is a helper for editing `~/.Rprofile` in `usethis`.
+Of course, there is a helper for editing `~/.Renviron` in `usethis`.
 
 ```{r, eval=FALSE}
-usethis::edit_r_profile()
+usethis::edit_r_environ(scope = "user")
 ```

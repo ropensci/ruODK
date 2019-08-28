@@ -180,20 +180,26 @@
 <a href="#document" class="anchor"></a>Document</h3>
 <p>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>, specifically with the <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html">Markdown syntax</a>, to create <code>NAMESPACE</code> and all <code>.Rd</code> files. All edits to documentation should be done in roxygen comments above the associated function or object. Then, run <code><a href="https://rdrr.io/pkg/devtools/man/document.html">devtools::document()</a></code> to rebuild the <code>NAMESPACE</code> and <code>.Rd</code> files.</p>
 <p>See the <code>RoxygenNote</code> in <a href="DESCRIPTION">DESCRIPTION</a> for the version of roxygen2 being used.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/document.html">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rd"</span>, <span class="st">"collate"</span>, <span class="st">"namespace"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/spell_check_package.html">spell_check_package</a></span>()</a>
+<a class="sourceLine" id="cb3-2" title="2">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/wordlist.html">update_wordlist</a></span>()</a>
+<a class="sourceLine" id="cb3-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/document.html">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rd"</span>, <span class="st">"collate"</span>, <span class="st">"namespace"</span>))</a></code></pre></div>
 </div>
 <div id="test" class="section level3">
 <h3 class="hasAnchor">
 <a href="#test" class="anchor"></a>Test</h3>
 <p>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases are easier to accept. If you are not sure what parts of your code are covered by tests, run the following to get a local coverage report of the package so you can see exactly what lines are not covered in the project.</p>
-<p>To run tests, you’ll need access to an ODK Central instance. At the time of writing, ODK run a public sandbox at <a href="https://sandbox.central.opendatakit.org/" class="uri">https://sandbox.central.opendatakit.org/</a>. Ask the <code>ruODK</code> maintainer (or <code>@yanokwa</code> in the <a href="https://forum.opendatakit.org/">ODK forum</a>) for an account.</p>
+<p>To run tests, you’ll need access to the <a href="https://sandbox.central.opendatakit.org/">ODK Central sandbox instance</a>. To build the vignettes, you’ll need access to <a href="https://odkcentral.dbca.wa.gov.au">DBCA’s ODK Central instance</a>. Create an <a href="https://github.com/dbca-wa/ruODK/issues/new/choose">accont request issue</a> to request access to those two ODK Central instances.</p>
 <p>You will need to use the following environment variables:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_URL=</span><span class="st">"https://sandbox.central.opendatakit.org"</span>)</a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_PID=</span><span class="dv">14</span>)</a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_FID=</span><span class="st">"build_Flora-Quadrat-0-2_1558575936"</span>)</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_UN=</span><span class="st">"XXXX"</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_PW=</span><span class="st">"YYYY"</span>)</a></code></pre></div>
-<p><code>XXXX</code> is the email address you signed up with at ODK Central, and <code>YYYY</code> is your ODK Central password. Keep these settings outside of version control, e.g. in your <code>~/.Rprofile</code>.</p>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_UN=</span><span class="st">"your@email.com"</span>)</a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_PW=</span><span class="st">"..."</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_URL=</span><span class="st">"https://odkcentral.dbca.wa.gov.au"</span>)</a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_UN=</span><span class="st">"your@email.com"</span>)</a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_PW=</span><span class="st">"..."</span>)</a></code></pre></div>
+<p>Keep these settings outside of version control, e.g. in your <code>~/.Renviron</code>. Keep in mind that <code>ruODK</code> defaults to use <code>ODKC_{URL,UN,PW}</code>, so for everyday use outside of contributing, you will want to use your own <code>ODKC_{URL,UN,PW}</code> account credentials.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test</a></span>()</a>
 <a class="sourceLine" id="cb5-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test_coverage</a></span>()</a></code></pre></div>
 </div>
@@ -207,7 +213,8 @@
 <h3 class="hasAnchor">
 <a href="#re-check" class="anchor"></a>Re-check</h3>
 <p>Before submitting your changes, make sure that the package either still passes <code>R CMD check</code>, or that the warnings and/or notes have not <em>changed</em> as a result of your edits.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/check.html">check</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/check.html">check</a></span>()</a>
+<a class="sourceLine" id="cb7-2" title="2">goodpractice<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/goodpractice/man/gp.html">goodpractice</a></span>(<span class="dt">quiet =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 </div>
 <div id="commit" class="section level3">
 <h3 class="hasAnchor">
@@ -222,7 +229,7 @@
 <div id="review-revise-repeat" class="section level3">
 <h3 class="hasAnchor">
 <a href="#review-revise-repeat" class="anchor"></a>Review, revise, repeat</h3>
-<p>Since tidyverse development happens in waves, the latency period between submitting your PR and its review may vary. When a maintainer does review your contribution, be sure to use the same conventions described here with any revision commits.</p>
+<p>The latency period between submitting your PR and its review may vary. When a maintainer does review your contribution, be sure to use the same conventions described here with any revision commits.</p>
 </div>
 </div>
 <div id="resources" class="section level2">
@@ -263,7 +270,7 @@
 <div id="maintainers-steps" class="section level1">
 <h1 class="hasAnchor">
 <a href="#maintainers-steps" class="anchor"></a>Maintainer’s steps</h1>
-<p>The steps below are run by the package maintainer to prepare a new <code>ruODK</code> release.</p>
+<p>The steps below are run by the package maintainer to prepare a new <code>ruODK</code> release. It is not necessary to run them as a contributor, but immensely convenient for the maintainer to have them here in one place.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Tests</span></a>
 <a class="sourceLine" id="cb8-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test</a></span>()</a>
 <a class="sourceLine" id="cb8-3" title="3"></a>

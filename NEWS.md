@@ -2,6 +2,8 @@
 * ROpenSci submission review [milestone](https://github.com/dbca-wa/ruODK/milestone/3)
 * Updates to documentation #17 #15 #13
 * Group function docs
+* Update contribution guidelines and add account request issue template:
+  How to run `ruODK` tests and build the vignettes.
 
 # ruODK 0.6.0
 * Version bump and lifecycle bump to indicate that ruODK is ready to be used
