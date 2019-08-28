@@ -151,7 +151,8 @@ Sys.setenv(ODKC_PW = ".......")
 ```
 
 For a more permanent configuration setting, paste the above lines into
-your `~/.Rprofile` (`usethis::edit_r_profile()`) and restart R.
+your `~/.Renviron` (`usethis::edit_r_environ(scope = "user")`) and
+restart R.
 
 For all available detailed options to configure `ruODK`, read
 `vignette("Setup", package = "ruODK")` (online
@@ -172,7 +173,7 @@ proj
 #>   <int> <chr> <int>     <int> <dttm>              <dttm>             
 #> 1     1 DBCA      9         1 2019-08-26 05:46:56 2019-06-05 09:12:44
 #> 2     3 Flora     1         1 2019-08-12 04:47:05 2019-06-06 03:24:31
-#> 3     2 Spot…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15
+#> 3     2 Sand…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15
 #> 4     4 DBCA      0         0 NA                  2019-06-27 02:54:30
 #> # … with 2 more variables: updated_at <dttm>, archived <lgl>
 
