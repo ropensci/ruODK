@@ -25,17 +25,22 @@ software for collecting, managing, and using data in
 resource-constrained environments.
 
 ODK consists of a range of [software packages and
-apps](https://opendatakit.org/software/). For a detailed overview, read
-the extensive [ODK documentation](https://docs.opendatakit.org/).
+apps](https://opendatakit.org/software/). `ruODK` assumes some
+familiarity of its users with the ODK ecosystem and workflows. For a
+detailed overview, read the extensive [ODK
+documentation](https://docs.opendatakit.org/) and visit the friendly
+[ODK forum](https://forum.opendatakit.org/).
 
 [ODK Central](https://docs.opendatakit.org/central-intro/) is a
 cloud-based data clearinghouse for digitally captured data, replacing
 the older software [ODK
 Aggregate](https://docs.opendatakit.org/aggregate-intro/). ODK Central
 manages user accounts and permissions, stores form definitions, and
-allows data collection clients like ODK Collect to connect to it for
-form download and submission upload.
+allows data collection clients like [ODK
+Collect](https://docs.opendatakit.org/collect-intro/) to connect to it
+for form download and submission upload.
 
+A typical [ODK workflow](https://docs.opendatakit.org/#how-is-odk-used):
 After data have been captured digitally using ODK Collect, the data are
 uploaded and stored in ODK Central. The next step from there is to
 extract the data, optionally upload it into another data warehouse, and
@@ -45,6 +50,10 @@ While data can be retrieved in bulk through the GUI, ODK Central’s API
 provides access to its data and functionality through both an OData and
 a RESTful API with a comprehensive and interactive
 [documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
+
+`ruODK` is aimed at the technically minded researcher who wishes to
+access and use the data from ODK Central using the programming language
+R.
 
 `ruODK`’s scope:
 
@@ -58,19 +67,19 @@ a RESTful API with a comprehensive and interactive
 `ruODK`’s use cases:
 
   - Smaller projects:
-      - Data collection: ODK Collect `%>%`
-      - Data clearinghouse: ODK Central `%>%`
-      - Data analysis and reporting: `Rmd` (ruODK) `%>%`
-      - Publishing and dissemination:
+    1.  Data collection: ODK Collect
+    2.  Data clearinghouse: ODK Central
+    3.  Data analysis and reporting: `Rmd` (ruODK)
+    4.  Publishing and dissemination:
         [`ckanr`](https://docs.ropensci.org/ckanr/),
         [`CKAN`](https://ckan.org/)
   - Larger projects:
-      - Data collection: ODK Collect `%>%`
-      - Data clearinghouse: ODK Central `%>%`
-      - ETL pipeline into data warehouses: `Rmd` (ruODK) `%>%`
-      - QA: in data warehouse `%>%`
-      - Reporting: `Rmd` `%>%`
-      - Publishing and dissemination:
+    1.  Data collection: ODK Collect
+    2.  Data clearinghouse: ODK Central
+    3.  ETL pipeline into data warehouses: `Rmd` (ruODK)
+    4.  QA: in data warehouse
+    5.  Reporting: `Rmd`
+    6.  Publishing and dissemination:
         [`ckanr`](https://docs.ropensci.org/ckanr/),
         [`CKAN`](https://ckan.org/)
 
@@ -98,7 +107,7 @@ remotes::install_github("dbca-wa/ruODK", dependencies = TRUE)
 
 ## ODK Central
 
-### ODK Central instance
+### Access to an ODK Central instance
 
 First, we need an ODK Central instance and some data to play with\!
 
@@ -118,7 +127,7 @@ descriptions of the steps below.
     on an ODK Central instance. Your username will be an email address.
   - [Create a project](https://docs.opendatakit.org/central-projects/)
     and give the web user the relevant permissions.
-  - Create a Xform, e.g. using ODK Build, or use the provided example
+  - Create an Xform, e.g. using ODK Build, or use the provided example
     forms.
   - [Publish the form](https://docs.opendatakit.org/central-forms/) to
     ODK Central.
@@ -155,17 +164,13 @@ A quick example using the OData service:
 ``` r
 library(ruODK)
 
-# ODK Central credentials
-if (file.exists("~/.Rprofile")) source("~/.Rprofile")
-# .RProfile sets ODKC_{URL, UN, PW}
-
 # Download from ODK Central
-proj <- project_list()
+proj <- ruODK::project_list()
 proj
 #> # A tibble: 4 x 8
 #>      id name  forms app_users last_submission     created_at         
 #>   <int> <chr> <int>     <int> <dttm>              <dttm>             
-#> 1     1 DBCA      9         1 2019-08-23 00:05:19 2019-06-05 09:12:44
+#> 1     1 DBCA      9         1 2019-08-26 05:46:56 2019-06-05 09:12:44
 #> 2     3 Flora     1         1 2019-08-12 04:47:05 2019-06-06 03:24:31
 #> 3     2 Spot…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15
 #> 4     4 DBCA      0         0 NA                  2019-06-27 02:54:30
@@ -237,12 +242,12 @@ data %>% head(.)
 #> # A tibble: 6 x 21
 #>   .__id observation_sta… reporter device_id observation_end… submissionDate
 #>   <chr> <chr>            <chr>    <chr>     <chr>            <chr>         
-#> 1 uuid… 2019-08-22T16:0… Scott W… e249db9e… 2019-08-22T16:0… 2019-08-23T00…
-#> 2 uuid… 2019-08-22T14:5… Scott W… e249db9e… 2019-08-22T14:5… 2019-08-23T00…
-#> 3 uuid… 2019-08-22T13:1… Scott W… e249db9e… 2019-08-22T13:1… 2019-08-23T00…
-#> 4 uuid… 2019-08-22T12:1… Scott W… e249db9e… 2019-08-22T12:1… 2019-08-23T00…
-#> 5 uuid… 2019-08-22T12:0… Scott W… e249db9e… 2019-08-22T12:0… 2019-08-23T00…
-#> 6 uuid… 2019-08-22T11:4… Scott W… e249db9e… 2019-08-22T11:4… 2019-08-23T00…
+#> 1 uuid… 2019-08-23T15:2… Scott W… e249db9e… 2019-08-23T15:2… 2019-08-26T03…
+#> 2 uuid… 2019-08-23T15:1… Scott W… e249db9e… 2019-08-23T15:1… 2019-08-26T03…
+#> 3 uuid… 2019-08-23T15:1… Scott W… e249db9e… 2019-08-23T15:1… 2019-08-26T03…
+#> 4 uuid… 2019-08-23T14:2… Scott W… e249db9e… 2019-08-23T14:3… 2019-08-26T03…
+#> 5 uuid… 2019-08-23T14:2… Scott W… e249db9e… 2019-08-23T14:2… 2019-08-26T03…
+#> 6 uuid… 2019-08-23T14:1… Scott W… e249db9e… 2019-08-23T14:1… 2019-08-26T03…
 #> # … with 15 more variables: submitterId <chr>, submitterName <chr>,
 #> #   instanceID <chr>, type <chr>, ...11 <dbl>, ...12 <dbl>, ...13 <dbl>,
 #> #   accuracy <int>, species <chr>, sex <chr>, maturity <chr>,
@@ -263,43 +268,9 @@ using the alternative RESTful API.
 Contributions through [issues](https://github.com/dbca-wa/ruODK/issues)
 and PRs are welcome\!
 
-## Release
-
-These steps prepare a new `ruODK` release.
-
-``` r
-# Tests
-devtools::test()
-
-# Docs
-styler::style_pkg()
-devtools::document(roclets = c("rd", "collate", "namespace"))
-spelling::spell_check_package()
-spelling::update_wordlist()
-codemetar::write_codemeta("ruODK")
-usethis::edit_file("inst/CITATION")
-rmarkdown::render('README.Rmd',  encoding = 'UTF-8')
-if (fs::file_exists("README.html")) fs::file_delete("README.html")
-
-# Checks
-goodpractice::goodpractice(quiet = FALSE)
-devtools::check()
-
-# Release
-usethis::use_version("minor")
-usethis::edit_file("NEWS.md")
-pkgdown::build_site()
-
-# Vignettes are big
-# the repo is small
-# so what shall we do
-# let's mogrify all
-system("find vignettes/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} \\;")
-vignette_tempfiles <- here::here("vignettes", "attachments")
-fs::dir_copy(vignette_tempfiles, here::here("docs/articles/"))
-
-# Git commit and push
-```
+See the [contributing
+guide](https://dbca-wa.github.io/ruODK/CONTRIBUTING.html) on best
+practices and further readings for code contributions.
 
 ## Attribution
 
@@ -310,8 +281,6 @@ funded both by DBCA core funding and Offset funding through the [North
 West Shelf Flatback Turtle Conservation
 Program](https://flatbacks.dbca.wa.gov.au/).
 
-## Citation
-
 To cite package `ruODK` in publications use:
 
 ``` r
@@ -320,14 +289,14 @@ citation("ruODK")
 #> To cite ruODK in publications use:
 #> 
 #>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.
-#>   R package version 0.3.1. https://github.com/dbca-wa/ruODK
+#>   R package version 0.6.0. https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.3.1},
+#>     note = {R package version 0.6.0},
 #>     year = {2019},
 #>     url = {https://github.com/dbca-wa/ruODK},
 #>   }

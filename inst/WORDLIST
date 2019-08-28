@@ -55,6 +55,7 @@ iterable
 jennybc
 JOSS
 jpg
+lifecycle
 lon
 magrittr
 md5
@@ -108,7 +109,6 @@ UUIDs
 vectorised
 VueJS
 Wickam
-WIP
 WKT
 workdir
 Xform

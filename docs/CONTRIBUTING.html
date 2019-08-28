@@ -124,6 +124,7 @@
       <h1>Contributing to ruODK</h1>
     </div>
 
+
 <div id="contributing-to-ruodk" class="section level1">
 
 <ul>
@@ -147,7 +148,7 @@
 <li><a href="#code-of-conduct">Code of Conduct</a></li>
 </ul>
 <p>This explains how to propose a change to ruODK via a pull request using Git and GitHub.</p>
-<p>For more general info about contributing to the tidyverse, see the <a href="#resources">Resources</a> at the end of this document.</p>
+<p>For more general info about contributing to <code>ruODK</code>, see the <a href="#resources">Resources</a> at the end of this document.</p>
 <div id="prerequisites" class="section level2">
 <h2 class="hasAnchor">
 <a href="#prerequisites" class="anchor"></a>Prerequisites</h2>
@@ -172,29 +173,41 @@
 <a href="#style" class="anchor"></a>Style</h3>
 <p>Match the existing code style. This means you should follow the tidyverse <a href="http://style.tidyverse.org">style guide</a>. Use the <a href="https://CRAN.R-project.org/package=styler">styler</a> package to apply the style guide automatically.</p>
 <p>Be careful to only make style changes to the code you are contributing. If you find that there is a lot of code that doesn’t meet the style guide, it would be better to file an issue or a separate PR to fix that first.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">styler<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/styler/man/style_pkg.html">style_pkg</a></span>()</a></code></pre></div>
 </div>
 <div id="document" class="section level3">
 <h3 class="hasAnchor">
 <a href="#document" class="anchor"></a>Document</h3>
 <p>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>, specifically with the <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html">Markdown syntax</a>, to create <code>NAMESPACE</code> and all <code>.Rd</code> files. All edits to documentation should be done in roxygen comments above the associated function or object. Then, run <code><a href="https://rdrr.io/pkg/devtools/man/document.html">devtools::document()</a></code> to rebuild the <code>NAMESPACE</code> and <code>.Rd</code> files.</p>
 <p>See the <code>RoxygenNote</code> in <a href="DESCRIPTION">DESCRIPTION</a> for the version of roxygen2 being used.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/document.html">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rd"</span>, <span class="st">"collate"</span>, <span class="st">"namespace"</span>))</a></code></pre></div>
 </div>
 <div id="test" class="section level3">
 <h3 class="hasAnchor">
 <a href="#test" class="anchor"></a>Test</h3>
 <p>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases are easier to accept. If you are not sure what parts of your code are covered by tests, run the following to get a local coverage report of the package so you can see exactly what lines are not covered in the project.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test_coverage</a></span>()</a></code></pre></div>
+<p>To run tests, you’ll need access to an ODK Central instance. At the time of writing, ODK run a public sandbox at <a href="https://sandbox.central.opendatakit.org/" class="uri">https://sandbox.central.opendatakit.org/</a>. Ask the <code>ruODK</code> maintainer (or <code>@yanokwa</code> in the <a href="https://forum.opendatakit.org/">ODK forum</a>) for an account.</p>
+<p>You will need to use the following environment variables:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_URL=</span><span class="st">"https://sandbox.central.opendatakit.org"</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_PID=</span><span class="dv">14</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_FID=</span><span class="st">"build_Flora-Quadrat-0-2_1558575936"</span>)</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_UN=</span><span class="st">"XXXX"</span>)</a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_PW=</span><span class="st">"YYYY"</span>)</a></code></pre></div>
+<p><code>XXXX</code> is the email address you signed up with at ODK Central, and <code>YYYY</code> is your ODK Central password. Keep these settings outside of version control, e.g. in your <code>~/.Rprofile</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test</a></span>()</a>
+<a class="sourceLine" id="cb5-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test_coverage</a></span>()</a></code></pre></div>
 </div>
 <div id="news" class="section level3">
 <h3 class="hasAnchor">
 <a href="#news" class="anchor"></a>NEWS</h3>
 <p>For user-facing changes, add a bullet to <code>NEWS.md</code> that concisely describes the change. Small tweaks to the documentation do not need a bullet. The format should include your GitHub username, and links to relevant issue(s)/PR(s), as seen below.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb3-1" title="1">* <span class="bn">`function_name()`</span><span class="fl"> followed by brief description of change (#issue-num, @your-github-user-name)</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb6-1" title="1">* <span class="bn">`function_name()`</span><span class="fl"> followed by brief description of change (#issue-num, @your-github-user-name)</span></a></code></pre></div>
 </div>
 <div id="re-check" class="section level3">
 <h3 class="hasAnchor">
 <a href="#re-check" class="anchor"></a>Re-check</h3>
 <p>Before submitting your changes, make sure that the package either still passes <code>R CMD check</code>, or that the warnings and/or notes have not <em>changed</em> as a result of your edits.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/check.html">check</a></span>()</a></code></pre></div>
 </div>
 <div id="commit" class="section level3">
 <h3 class="hasAnchor">
@@ -247,6 +260,43 @@
 <p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
+<div id="maintainers-steps" class="section level1">
+<h1 class="hasAnchor">
+<a href="#maintainers-steps" class="anchor"></a>Maintainer’s steps</h1>
+<p>The steps below are run by the package maintainer to prepare a new <code>ruODK</code> release.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Tests</span></a>
+<a class="sourceLine" id="cb8-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test</a></span>()</a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co"># Docs</span></a>
+<a class="sourceLine" id="cb8-5" title="5">styler<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/styler/man/style_pkg.html">style_pkg</a></span>()</a>
+<a class="sourceLine" id="cb8-6" title="6">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/document.html">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rd"</span>, <span class="st">"collate"</span>, <span class="st">"namespace"</span>))</a>
+<a class="sourceLine" id="cb8-7" title="7">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/spell_check_package.html">spell_check_package</a></span>()</a>
+<a class="sourceLine" id="cb8-8" title="8">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/wordlist.html">update_wordlist</a></span>()</a>
+<a class="sourceLine" id="cb8-9" title="9">codemetar<span class="op">::</span><span class="kw"><a href="https://ropensci.github.io/codemetar/reference/write_codemeta.html">write_codemeta</a></span>(<span class="st">"ruODK"</span>)</a>
+<a class="sourceLine" id="cb8-10" title="10">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span>(<span class="st">"inst/CITATION"</span>)</a>
+<a class="sourceLine" id="cb8-11" title="11">rmarkdown<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span>(<span class="st">'README.Rmd'</span>,  <span class="dt">encoding =</span> <span class="st">'UTF-8'</span>)</a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="cf">if</span> (fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/file_access.html">file_exists</a></span>(<span class="st">"README.html"</span>)) fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/delete.html">file_delete</a></span>(<span class="st">"README.html"</span>)</a>
+<a class="sourceLine" id="cb8-13" title="13"></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co"># Checks</span></a>
+<a class="sourceLine" id="cb8-15" title="15">goodpractice<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/goodpractice/man/gp.html">goodpractice</a></span>(<span class="dt">quiet =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb8-16" title="16">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/check.html">check</a></span>()</a>
+<a class="sourceLine" id="cb8-17" title="17"></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="co"># Release</span></a>
+<a class="sourceLine" id="cb8-19" title="19">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_version.html">use_version</a></span>(<span class="st">"minor"</span>)</a>
+<a class="sourceLine" id="cb8-20" title="20">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span>(<span class="st">"NEWS.md"</span>)</a>
+<a class="sourceLine" id="cb8-21" title="21">pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</a>
+<a class="sourceLine" id="cb8-22" title="22"></a>
+<a class="sourceLine" id="cb8-23" title="23"><span class="co"># Vignettes are big</span></a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="co"># the repo is small</span></a>
+<a class="sourceLine" id="cb8-25" title="25"><span class="co"># so what shall we do</span></a>
+<a class="sourceLine" id="cb8-26" title="26"><span class="co"># let's mogrify all</span></a>
+<a class="sourceLine" id="cb8-27" title="27"><span class="kw"><a href="https://rdrr.io/r/base/system.html">system</a></span>(<span class="st">"find vignettes/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} </span><span class="ch">\\</span><span class="st">;"</span>)</a>
+<a class="sourceLine" id="cb8-28" title="28">vignette_tempfiles &lt;-<span class="st"> </span>here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"vignettes"</span>, <span class="st">"attachments"</span>)</a>
+<a class="sourceLine" id="cb8-29" title="29">fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/copy.html">dir_copy</a></span>(vignette_tempfiles, here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"docs/articles/"</span>))</a>
+<a class="sourceLine" id="cb8-30" title="30"></a>
+<a class="sourceLine" id="cb8-31" title="31"><span class="co"># Git commit, tag and push</span></a></code></pre></div>
+</div>
+
 
   </div>
 

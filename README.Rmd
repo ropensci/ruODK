@@ -23,19 +23,23 @@ knitr::opts_chunk$set(
 
 Especially in these trying times, it is important to ask: "ruODK?"
 
-[OpenDataKit](https://opendatakit.org/) (ODK) is a free and open-source software for 
-collecting, managing, and using data in resource-constrained environments.
+[OpenDataKit](https://opendatakit.org/) (ODK) is a free and open-source software 
+for collecting, managing, and using data in resource-constrained environments.
 
 ODK consists of a range of [software packages and apps](https://opendatakit.org/software/).
-For a detailed overview, read the extensive [ODK documentation](https://docs.opendatakit.org/).
+`ruODK` assumes some familiarity of its users with the ODK ecosystem and workflows.
+For a detailed overview, read the extensive [ODK documentation](https://docs.opendatakit.org/)
+and visit the friendly [ODK forum](https://forum.opendatakit.org/).
 
 [ODK Central](https://docs.opendatakit.org/central-intro/) is a cloud-based
 data clearinghouse for digitally captured data, replacing the older software 
 [ODK Aggregate](https://docs.opendatakit.org/aggregate-intro/). 
 ODK Central manages user accounts and permissions, stores form definitions, 
-and allows data collection clients like ODK Collect to connect to it for 
+and allows data collection clients like 
+[ODK Collect](https://docs.opendatakit.org/collect-intro/) to connect to it for 
 form download and submission upload.
 
+A typical [ODK workflow](https://docs.opendatakit.org/#how-is-odk-used):
 After data have been captured digitally using ODK Collect, the data are uploaded
 and stored in ODK Central. The next step from there is to extract the data, 
 optionally upload it into another data warehouse, and then to analyse and 
@@ -45,6 +49,9 @@ While data can be retrieved in bulk through the GUI, ODK Central's API provides
 access to its data and functionality through both an OData and a RESTful API 
 with a comprehensive and interactive 
 [documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
+
+`ruODK` is aimed at the technically minded researcher who wishes to access and
+use the data from ODK Central using the programming language R.
 
 `ruODK`'s scope:
 
@@ -57,25 +64,27 @@ with a comprehensive and interactive
 `ruODK`'s use cases:
 
 * Smaller projects:
-  * Data collection: ODK Collect `%>%`
-  * Data clearinghouse: ODK Central `%>%` 
-  * Data analysis and reporting: `Rmd` (ruODK) `%>%`
-  * Publishing and dissemination: [`ckanr`](https://docs.ropensci.org/ckanr/), 
-    [`CKAN`](https://ckan.org/)
+  1. Data collection: ODK Collect
+  2. Data clearinghouse: ODK Central
+  3. Data analysis and reporting: `Rmd` (ruODK)
+  4. Publishing and dissemination: [`ckanr`](https://docs.ropensci.org/ckanr/), 
+     [`CKAN`](https://ckan.org/)
+     
 * Larger projects:
-  * Data collection: ODK Collect `%>%`
-  * Data clearinghouse: ODK Central `%>%` 
-  * ETL pipeline into data warehouses: `Rmd` (ruODK) `%>%`
-  * QA: in data warehouse `%>%`
-  * Reporting: `Rmd` `%>%`
-  * Publishing and dissemination: [`ckanr`](https://docs.ropensci.org/ckanr/),
-    [`CKAN`](https://ckan.org/)
+  1. Data collection: ODK Collect
+  2. Data clearinghouse: ODK Central
+  3. ETL pipeline into data warehouses: `Rmd` (ruODK)
+  4. QA: in data warehouse
+  5. Reporting: `Rmd`
+  6. Publishing and dissemination: [`ckanr`](https://docs.ropensci.org/ckanr/),
+     [`CKAN`](https://ckan.org/)
   
 Out of scope:
 
 * To wrap "management" API endpoints. The ODK Central GUI provides a comprehensive 
   interface for the management of users, roles, permissions, projects, and forms.
-  Behind the scenes, it is a [VueJS application](https://github.com/opendatakit/central-frontend/) 
+  Behind the scenes, it is a 
+  [VueJS application](https://github.com/opendatakit/central-frontend/) 
   working on the "management" API endpoints of the ODK Central backend.
 * To provide extensive data visualisation. We show only minimal examples of data 
   visualisation and presentation, mainly to illustrate the example data.
@@ -91,7 +100,7 @@ remotes::install_github("dbca-wa/ruODK", dependencies = TRUE)
 ```
 
 ## ODK Central
-### ODK Central instance
+### Access to an ODK Central instance
 First, we need an ODK Central instance and some data to play with!
 
 Either ask in the [ODK forum] for an account in the 
@@ -107,7 +116,7 @@ provides up-to-date descriptions of the steps below.
   on an ODK Central instance. Your username will be an email address.
 * [Create a project](https://docs.opendatakit.org/central-projects/) and give the
   web user the relevant permissions.
-* Create a Xform, e.g. using ODK Build, or use the provided example forms.
+* Create an Xform, e.g. using ODK Build, or use the provided example forms.
 * [Publish the form](https://docs.opendatakit.org/central-forms/) to ODK Central.
 * Collect some data for this form on ODK Collect and let ODK Collect submit the
   finalised forms to ODK Central.
@@ -132,7 +141,6 @@ For all available detailed options to configure `ruODK`, read
 `vignette("Setup", package = "ruODK")` 
 (online [here](https://dbca-wa.github.io/ruODK/articles/setup.html)).
 
-
 ## Use ruODK
 
 A quick example using the OData service:
@@ -140,12 +148,8 @@ A quick example using the OData service:
 ```{r odata_example, eval=T, message=FALSE}
 library(ruODK)
 
-# ODK Central credentials
-if (file.exists("~/.Rprofile")) source("~/.Rprofile")
-# .RProfile sets ODKC_{URL, UN, PW}
-
 # Download from ODK Central
-proj <- project_list()
+proj <- ruODK::project_list()
 proj
 
 meta <- ruODK::odata_metadata_get(
@@ -175,50 +179,14 @@ for examples using the alternative RESTful API.
 Contributions through [issues](https://github.com/dbca-wa/ruODK/issues) 
 and PRs are welcome!
 
-## Release
-These steps prepare a new `ruODK` release.
-
-```{r makefile, eval=F}
-# Tests
-devtools::test()
-
-# Docs
-styler::style_pkg()
-devtools::document(roclets = c("rd", "collate", "namespace"))
-spelling::spell_check_package()
-spelling::update_wordlist()
-codemetar::write_codemeta("ruODK")
-usethis::edit_file("inst/CITATION")
-rmarkdown::render('README.Rmd',  encoding = 'UTF-8')
-if (fs::file_exists("README.html")) fs::file_delete("README.html")
-
-# Checks
-goodpractice::goodpractice(quiet = FALSE)
-devtools::check()
-
-# Release
-usethis::use_version("minor")
-usethis::edit_file("NEWS.md")
-pkgdown::build_site()
-
-# Vignettes are big
-# the repo is small
-# so what shall we do
-# let's mogrify all
-system("find vignettes/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} \\;")
-vignette_tempfiles <- here::here("vignettes", "attachments")
-fs::dir_copy(vignette_tempfiles, here::here("docs/articles/"))
-
-# Git commit and push
-```
+See the [contributing guide](https://dbca-wa.github.io/ruODK/CONTRIBUTING.html)
+on best practices and further readings for code contributions.
 
 ## Attribution
-`ruODK` was developed, and is maintained, by Florian Mayer for the Western 
-Australian [Department of Biodiversity, Conservation and Attractions (DBCA)](https://www.dbca.wa.gov.au/).
+`ruODK` was developed, and is maintained, by Florian Mayer for the Western Australian 
+[Department of Biodiversity, Conservation and Attractions (DBCA)](https://www.dbca.wa.gov.au/).
 The development was funded both by DBCA core funding and Offset funding through
 the [North West Shelf Flatback Turtle Conservation Program](https://flatbacks.dbca.wa.gov.au/).
-
-## Citation
 
 To cite package `ruODK` in publications use:
 

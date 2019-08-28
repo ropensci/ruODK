@@ -8,8 +8,6 @@ Authors@R:
            role = c("aut", "cre"),
            email = "Florian.Mayer@dbca.wa.gov.au",
            comment = c(ORCID = "0000-0003-4269-4242"))
-Author: Florian W. Mayer [aut, cre]
-Maintainer: Florian W. Mayer <Florian.Mayer@dbca.wa.gov.au>
 Description: Utilities to access and tidy up data from ODK Central's API.
     ODK Central is OpenDataKit's clearinghouse for digitally captured data 
     <https://docs.opendatakit.org/central-intro/>. 

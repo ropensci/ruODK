@@ -18,7 +18,7 @@
 This explains how to propose a change to ruODK via a pull request using
 Git and GitHub. 
 
-For more general info about contributing to the tidyverse, see the 
+For more general info about contributing to `ruODK`, see the 
 [Resources](#resources) at the end of this document.
 
 ## Prerequisites
@@ -45,7 +45,7 @@ MacOS) and, if applicable, AppVeyor (checks on Windows). You'll do this again
 before you finalize your pull request, but this baseline will make it easier to
 pinpoint any problems introduced by your changes.
 
-``` r
+```r
 devtools::check()
 ```
 
@@ -56,15 +56,18 @@ Match the existing code style. This means you should follow the tidyverse
 [styler](https://CRAN.R-project.org/package=styler) package to apply the style 
 guide automatically.
 
-
 Be careful to only make style changes to the code you are contributing. If you
 find that there is a lot of code that doesn't meet the style guide, it would be
 better to file an issue or a separate PR to fix that first.
 
+```r
+styler::style_pkg()
+```
+
 ### Document
 
-We use [roxygen2](https://cran.r-project.org/package=roxygen2),
-specifically with the [Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html),
+We use [roxygen2](https://cran.r-project.org/package=roxygen2), specifically with the 
+[Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html),
 to create `NAMESPACE` and all `.Rd` files. All edits to documentation
 should be done in roxygen comments above the associated function or
 object. Then, run `devtools::document()` to rebuild the `NAMESPACE` and `.Rd` 
@@ -73,6 +76,10 @@ files.
 See the `RoxygenNote` in [DESCRIPTION](DESCRIPTION) for the version of
 roxygen2 being used. 
 
+```r
+devtools::document(roclets = c("rd", "collate", "namespace"))
+```
+
 ### Test
 
 We use [testthat](https://cran.r-project.org/package=testthat). Contributions
@@ -80,7 +87,26 @@ with test cases are easier to accept. If you are not sure what parts of your
 code are covered by tests, run the following to get a local coverage report of
 the package so you can see exactly what lines are not covered in the project.
 
-``` r
+To run tests, you'll need access to an ODK Central instance. At the time of writing,
+ODK run a public sandbox at https://sandbox.central.opendatakit.org/.
+Ask the `ruODK` maintainer (or `@yanokwa` in the 
+[ODK forum](https://forum.opendatakit.org/)) for an account.
+
+You will need to use the following environment variables:
+```r
+Sys.setenv(ODKC_TEST_URL="https://sandbox.central.opendatakit.org")
+Sys.setenv(ODKC_TEST_PID=14)
+Sys.setenv(ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936")
+Sys.setenv(ODKC_TEST_UN="XXXX")
+Sys.setenv(ODKC_TEST_PW="YYYY")
+```
+
+`XXXX` is the email address you signed up with at ODK Central, and `YYYY` is your
+ODK Central password.
+Keep these settings outside of version control, e.g. in your `~/.Rprofile`.
+
+```r
+devtools::test()
 devtools::test_coverage()
 ```
 
@@ -100,6 +126,10 @@ seen below.
 Before submitting your changes, make sure that the package either still
 passes `R CMD check`, or that the warnings and/or notes have not _changed_
 as a result of your edits.
+
+```r
+devtools::check()
+```
 
 ### Commit
 
@@ -151,3 +181,42 @@ on GitHub.
 Please note that this project is released with a [Contributor Code of
 Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to
 abide by its terms.
+
+
+# Maintainer's steps
+
+The steps below are run by the package maintainer to prepare a new `ruODK` release.
+
+```r
+# Tests
+devtools::test()
+
+# Docs
+styler::style_pkg()
+devtools::document(roclets = c("rd", "collate", "namespace"))
+spelling::spell_check_package()
+spelling::update_wordlist()
+codemetar::write_codemeta("ruODK")
+usethis::edit_file("inst/CITATION")
+rmarkdown::render('README.Rmd',  encoding = 'UTF-8')
+if (fs::file_exists("README.html")) fs::file_delete("README.html")
+
+# Checks
+goodpractice::goodpractice(quiet = FALSE)
+devtools::check()
+
+# Release
+usethis::use_version("minor")
+usethis::edit_file("NEWS.md")
+pkgdown::build_site()
+
+# Vignettes are big
+# the repo is small
+# so what shall we do
+# let's mogrify all
+system("find vignettes/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} \\;")
+vignette_tempfiles <- here::here("vignettes", "attachments")
+fs::dir_copy(vignette_tempfiles, here::here("docs/articles/"))
+
+# Git commit, tag and push
+```
