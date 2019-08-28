@@ -135,7 +135,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-odata" class="hasAnchor"><a href="#section-odata" class="anchor"></a>OData</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -148,21 +148,53 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="attachment_link.html">attachment_link()</a></code> </p>
+          <p><code><a href="attachment_url.html">attachment_url()</a></code> </p>
         </td>
-        <td><p>Change a tibble of submissions to link to local media attachments.</p></td>
+        <td><p>Build the download URL for one or many submission UUIDs and filenames.</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="get_one_attachment.html">get_one_attachment()</a></code> </p>
+        </td>
+        <td><p>Download one media attachment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="odata_metadata_get.html">odata_metadata_get()</a></code> </p>
+        </td>
+        <td><p>Retrieve metadata from an OData URL ending in .svc as list of lists</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="odata_service_get.html">odata_service_get()</a></code> </p>
+        </td>
+        <td><p>Retrieve service metadata from an OData URL ending in .svc as list of lists</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="odata_submission_get.html">odata_submission_get()</a></code> </p>
+        </td>
+        <td><p>Retrieve /Submissions from an OData URL ending in .svc as list of lists</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="odata_submission_parse.html">odata_submission_parse()</a></code> </p>
+        </td>
+        <td><p>Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-restful-api" class="hasAnchor"><a href="#section-restful-api" class="anchor"></a>RESTful API</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="attachment_list.html">attachment_list()</a></code> </p>
         </td>
         <td><p>List all submissions of one form.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="attachment_url.html">attachment_url()</a></code> </p>
-        </td>
-        <td><p>Build the download URL for one or many submission UUIDs and filenames.</p></td>
       </tr><tr>
         
         <td>
@@ -190,105 +222,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="form_schema_parse.html">form_schema_parse()</a></code> </p>
-        </td>
-        <td><p>Parse a form schema into a tibble of name, type, and path.</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="form_xml.html">form_xml()</a></code> </p>
         </td>
         <td><p>Show the XML representation of one form as list.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fq_meta.html">fq_meta</a></code> </p>
-        </td>
-        <td><p>OData metadata document for an ODK Central form.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fq_raw.html">fq_raw</a></code> </p>
-        </td>
-        <td><p>OData submission data for an ODK Central form.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fq_svc.html">fq_svc</a></code> </p>
-        </td>
-        <td><p>OData service document for an ODK Central form.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fq_tae.html">fq_tae</a></code> </p>
-        </td>
-        <td><p>OData submission data for a subgroup of an ODK Central form.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_one_attachment.html">get_one_attachment()</a></code> </p>
-        </td>
-        <td><p>Download one media attachment</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="listcol_names.html">listcol_names()</a></code> </p>
-        </td>
-        <td><p>A functional to extract names of list columns from a tibble.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="map_chr_hack.html">map_chr_hack()</a></code> </p>
-        </td>
-        <td><p>Map given function, handle null as NA and flatten_chr()</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="map_dttm_hack.html">map_dttm_hack()</a></code> </p>
-        </td>
-        <td><p>Map given function, handle null as NA, flatten_chr() and convert to dttm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="map_int_hack.html">map_int_hack()</a></code> </p>
-        </td>
-        <td><p>Map given function, handle null as NA and flatten_int()</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="odata_metadata_get.html">odata_metadata_get()</a></code> </p>
-        </td>
-        <td><p>Retrieve metadata from an OData URL ending in .svc as list of lists</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="odata_service_get.html">odata_service_get()</a></code> </p>
-        </td>
-        <td><p>Retrieve service metadata from an OData URL ending in .svc as list of lists</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="odata_submission_get.html">odata_submission_get()</a></code> </p>
-        </td>
-        <td><p>Retrieve /Submissions from an OData URL ending in .svc as list of lists</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="odata_submission_parse.html">odata_submission_parse()</a></code> </p>
-        </td>
-        <td><p>Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="prefix_fn.html">prefix_fn()</a></code> </p>
-        </td>
-        <td><p>Prefix a filename and return an fs::path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="prepend_uuid.html">prepend_uuid()</a></code> </p>
-        </td>
-        <td><p>Prepend a leading "uuid:" to any string, e.g. an md5 hash.</p></td>
       </tr><tr>
         
         <td>
@@ -310,12 +246,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="strip_uuid.html">strip_uuid()</a></code> </p>
-        </td>
-        <td><p>Strip the leading "uuid:" from a UUID hash.</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="submission_detail.html">submission_detail()</a></code> </p>
         </td>
         <td><p>Show details for one submission.</p></td>
@@ -331,12 +261,44 @@
           <p><code><a href="submission_list.html">submission_list()</a></code> </p>
         </td>
         <td><p>List all submissions of one form.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="map_chr_hack.html">map_chr_hack()</a></code> </p>
+        </td>
+        <td><p>Map given function, handle null as NA and flatten_chr()</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="unnest_all.html">unnest_all()</a></code> </p>
+          <p><code><a href="map_dttm_hack.html">map_dttm_hack()</a></code> </p>
         </td>
-        <td><p>Recursively unnest_wide all list columns in a tibble.</p></td>
+        <td><p>Map given function, handle null as NA, flatten_chr() and convert to dttm</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="map_int_hack.html">map_int_hack()</a></code> </p>
+        </td>
+        <td><p>Map given function, handle null as NA and flatten_int()</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="prepend_uuid.html">prepend_uuid()</a></code> </p>
+        </td>
+        <td><p>Prepend a leading "uuid:" to any string, e.g. an md5 hash.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="strip_uuid.html">strip_uuid()</a></code> </p>
+        </td>
+        <td><p>Strip the leading "uuid:" from a UUID hash.</p></td>
       </tr>
     </tbody>
     </table>
@@ -345,7 +307,9 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-odata">OData</a></li>
+      <li><a href="#section-restful-api">RESTful API</a></li>
+      <li><a href="#section-utilities">Utilities</a></li>
     </ul>
   </div>
 </div>

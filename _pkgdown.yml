@@ -1,0 +1,10 @@
+reference:
+- title: OData
+  contents:
+  - has_concept("odata-api")
+- title: RESTful API
+  contents:
+  - has_concept("restful-api")
+- title: Utilities
+  contents:
+  - has_concept("utilities")

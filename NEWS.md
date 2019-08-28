@@ -1,3 +1,8 @@
+# ruODK dev
+* ROpenSci submission review [milestone](https://github.com/dbca-wa/ruODK/milestone/3)
+* Updates to documentation #17 #15 #13
+* Group function docs
+
 # ruODK 0.6.0
 * Version bump and lifecycle bump to indicate that ruODK is ready to be used
   against ODK Central 0.6.
