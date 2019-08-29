@@ -4,19 +4,23 @@
 \alias{project_list}
 \title{List all projects.}
 \usage{
-project_list(url = Sys.getenv("ODKC_URL"), un = Sys.getenv("ODKC_UN"),
-  pw = Sys.getenv("ODKC_PW"))
+project_list(url = get_default_url(), un = get_default_un(),
+  pw = get_default_pw())
 }
 \arguments{
-\item{url}{The OData URL, ending in .svc, no trailing slash.}
+\item{url}{The base ODK Central without a trailing slash,
+e.g. "https://sandbox.central.opendatakit.org".
+Default: \code{get_default_url()},
+which calls \code{Sys.getenv("ODKC_URL")}.}
 
-\item{un}{The ODK Central username (an email address),
-default: Sys.getenv("ODKC_UN").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")}
+\item{un}{The ODK Central username (an email address).
+Default: \code{get_default_un()},
+which calls \code{Sys.getenv("ODKC_UN")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{pw}{The ODK Central password,,
-default: Sys.getenv("ODKC_PW").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
+\item{pw}{The ODK Central password.
+Default: \code{get_default_pw()},
+which calls \code{Sys.getenv("ODKC_PW")}.}
 }
 \value{
 A tibble with one row per project and all project metadata
@@ -33,9 +37,9 @@ pl <- project_list()
 
 # With explicit credentials, see tests
 p <- project_list(
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 knitr::kable(p)
 

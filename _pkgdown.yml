@@ -1,5 +1,5 @@
 reference:
-- title: OData
+- title: OData API
   contents:
   - has_concept("odata-api")
 - title: RESTful API
@@ -8,3 +8,6 @@ reference:
 - title: Utilities
   contents:
   - has_concept("utilities")
+- title: Settings
+  contents:
+  - has_concept("ru_settings")

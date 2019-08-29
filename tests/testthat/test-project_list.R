@@ -1,8 +1,8 @@
 test_that("project_list works", {
   p <- project_list(
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   testthat::expect_true(nrow(p) > 0)
 
@@ -34,20 +34,18 @@ test_that("project_list fails on missing URL", {
   testthat::expect_error(
     p <- project_list(
       url = NULL,
-      un = Sys.getenv("ODKC_TEST_UN"),
-      pw = Sys.getenv("ODKC_TEST_PW")
+      un = get_test_un(),
+      pw = get_test_pw()
     )
   )
 })
 
-
-
 test_that("project_list fails on missing username", {
   testthat::expect_error(
     p <- project_list(
-      url = Sys.getenv("ODKC_TEST_URL"),
+      url = get_test_url(),
       un = NULL,
-      pw = Sys.getenv("ODKC_TEST_PW")
+      pw = get_test_pw()
     )
   )
 })
@@ -55,13 +53,64 @@ test_that("project_list fails on missing username", {
 test_that("project_list fails on missing password", {
   testthat::expect_error(
     p <- project_list(
-      url = Sys.getenv("ODKC_TEST_URL"),
-      un = Sys.getenv("ODKC_TEST_UN"),
+      url = get_test_url(),
+      un = get_test_un(),
       pw = NULL
     )
   )
 })
 
+test_that("project_list aborts on missing credentials", {
+  testthat::expect_error(
+    p <- project_list(
+      url = "",
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  )
+
+    testthat::expect_error(
+    p <- project_list(
+      url = get_test_url(),
+      un = "",
+      pw = get_test_pw()
+    )
+  )
+
+  testthat::expect_error(
+    p <- project_list(
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = ""
+    )
+  )
+})
+
+test_that("project_list warns on wrong credentials", {
+  testthat::expect_error(
+    p <- project_list(
+      url = "wrong_url",
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  )
+
+  testthat::expect_error(
+    p <- project_list(
+      url = get_test_url(),
+      un = "wrong_username",
+      pw = get_test_pw()
+    )
+  )
+
+  testthat::expect_error(
+    p <- project_list(
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = "wroing_password"
+    )
+  )
+})
 
 # Tests code
 # usethis::edit_file("R/project_list.R")

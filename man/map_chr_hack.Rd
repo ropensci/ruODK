@@ -2,7 +2,7 @@
 % Please edit documentation in R/map_hacks.R
 \name{map_chr_hack}
 \alias{map_chr_hack}
-\title{Map given function, handle null as NA and flatten_chr()}
+\title{Map given function, handle null as NA and flatten_chr().}
 \usage{
 map_chr_hack(.x, .f, ...)
 }
@@ -14,7 +14,7 @@ map_chr_hack(.x, .f, ...)
 \item{...}{Extra arguments to `map()`}
 }
 \description{
-Map given function, handle null as NA and flatten_chr()
+Map given function, handle null as NA and flatten_chr().
 }
 \details{
 Use this function to extract chr elements with NAs

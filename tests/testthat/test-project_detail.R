@@ -1,9 +1,9 @@
 test_that("project_detail works", {
   p <- project_detail(
-    Sys.getenv("ODKC_TEST_PID"),
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   testthat::expect_true(nrow(p) == 1)
   testthat::expect_true("name" %in% names(p))
@@ -17,6 +17,73 @@ test_that("project_detail works", {
     "created_at", "updated_at", "archived", "verbs"
   )
   testthat::expect_equal(names(p), cn)
+})
+
+test_that("project_detail aborts on missing credentials", {
+  testthat::expect_error(
+    p <- project_detail(
+      get_test_pid(),
+      url = "",
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  )
+
+  testthat::expect_error(
+    p <- project_detail(
+      get_test_pid(),
+      url = get_test_url(),
+      un = "",
+      pw = get_test_pw()
+    )
+  )
+
+  testthat::expect_error(
+    p <- project_detail(
+      get_test_pid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = ""
+    )
+  )
+})
+
+test_that("project_detail warns on wrong credentials", {
+  testthat::expect_error(
+    p <- project_detail(
+      111111,
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  )
+
+  testthat::expect_error(
+    p <- project_detail(
+      get_test_pid(),
+      url = "wrong_url",
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  )
+
+  testthat::expect_error(
+    p <- project_detail(
+      get_test_pid(),
+      url = get_test_url(),
+      un = "wrong_username",
+      pw = get_test_pw()
+    )
+  )
+
+  testthat::expect_error(
+    p <- project_detail(
+      get_test_pid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = "wroing_password"
+    )
+  )
 })
 
 # Tests

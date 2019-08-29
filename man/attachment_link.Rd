@@ -21,15 +21,19 @@ Attachments from `submission_export` will extract to `media/`.
 In contrast, `attachment_get` saves to `attachments/<uuid>/` and
 returns that path. See vignette `restapi` for a usage example.}
 
-\item{url}{The OData URL, ending in .svc, no trailing slash.}
+\item{url}{The base ODK Central without a trailing slash,
+e.g. "https://sandbox.central.opendatakit.org".
+Default: \code{get_default_url()},
+which calls \code{Sys.getenv("ODKC_URL")}.}
 
-\item{un}{The ODK Central username (an email address),
-default: Sys.getenv("ODKC_UN").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")}
+\item{un}{The ODK Central username (an email address).
+Default: \code{get_default_un()},
+which calls \code{Sys.getenv("ODKC_UN")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{pw}{The ODK Central password,,
-default: Sys.getenv("ODKC_PW").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
+\item{pw}{The ODK Central password.
+Default: \code{get_default_pw()},
+which calls \code{Sys.getenv("ODKC_PW")}.}
 }
 \value{
 The tibble of submission data with attachment filenames prefixed

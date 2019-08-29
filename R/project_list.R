@@ -20,9 +20,9 @@
 #'
 #' # With explicit credentials, see tests
 #' p <- project_list(
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #' knitr::kable(p)
 #'
@@ -35,10 +35,11 @@
 #' # > "id" "name" "forms" "app_users" "last_submission"
 #' # > "created_at" "updated_at" "archived"
 #' }
-project_list <- function(url = Sys.getenv("ODKC_URL"),
-                         un = Sys.getenv("ODKC_UN"),
-                         pw = Sys.getenv("ODKC_PW")) {
+project_list <- function(url = get_default_url(),
+                         un = get_default_un(),
+                         pw = get_default_pw()) {
   . <- NULL
+  yell_if_missing(url, un, pw)
   glue::glue("{url}/v1/projects/") %>%
     httr::GET(
       httr::add_headers(
@@ -47,8 +48,8 @@ project_list <- function(url = Sys.getenv("ODKC_URL"),
       ),
       httr::authenticate(un, pw)
     ) %>%
-    httr::stop_for_status() %>%
-    httr::content(.) %>%
+  yell_if_error(., url, un, pw) %>%
+  httr::content(.) %>%
     {
       tibble::tibble(
         id = purrr::map_int(., "id"),

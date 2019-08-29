@@ -2,7 +2,7 @@
 % Please edit documentation in R/map_hacks.R
 \name{map_int_hack}
 \alias{map_int_hack}
-\title{Map given function, handle null as NA and flatten_int()}
+\title{Map given function, handle null as NA and flatten_int().}
 \usage{
 map_int_hack(.x, .f, ...)
 }
@@ -14,7 +14,7 @@ map_int_hack(.x, .f, ...)
 \item{...}{Extra arguments to `map()`}
 }
 \description{
-Map given function, handle null as NA and flatten_int()
+Map given function, handle null as NA and flatten_int().
 }
 \details{
 Use this function to extract int elements with NAs

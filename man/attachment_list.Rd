@@ -14,15 +14,19 @@ attachment_list(pid, fid, iid, url = Sys.getenv("ODKC_URL"),
 
 \item{iid}{The `instance_id`, a UUID, as returned by `submission_list`.}
 
-\item{url}{The OData URL, ending in .svc, no trailing slash.}
+\item{url}{The base ODK Central without a trailing slash,
+e.g. "https://sandbox.central.opendatakit.org".
+Default: \code{get_default_url()},
+which calls \code{Sys.getenv("ODKC_URL")}.}
 
-\item{un}{The ODK Central username (an email address),
-default: Sys.getenv("ODKC_UN").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")}
+\item{un}{The ODK Central username (an email address).
+Default: \code{get_default_un()},
+which calls \code{Sys.getenv("ODKC_UN")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{pw}{The ODK Central password,,
-default: Sys.getenv("ODKC_PW").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
+\item{pw}{The ODK Central password.
+Default: \code{get_default_pw()},
+which calls \code{Sys.getenv("ODKC_PW")}.}
 }
 \value{
 A tibble containing some high-level details of the submission

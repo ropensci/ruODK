@@ -190,21 +190,22 @@
 <p>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases are easier to accept. If you are not sure what parts of your code are covered by tests, run the following to get a local coverage report of the package so you can see exactly what lines are not covered in the project.</p>
 <p>To run tests, you’ll need access to the <a href="https://sandbox.central.opendatakit.org/">ODK Central sandbox instance</a>. To build the vignettes, you’ll need access to <a href="https://odkcentral.dbca.wa.gov.au">DBCA’s ODK Central instance</a>. Create an <a href="https://github.com/dbca-wa/ruODK/issues/new/choose">accont request issue</a> to request access to those two ODK Central instances.</p>
 <p>You will need to use the following environment variables:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_URL=</span><span class="st">"https://sandbox.central.opendatakit.org"</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_PID=</span><span class="dv">14</span>)</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_FID=</span><span class="st">"build_Flora-Quadrat-0-2_1558575936"</span>)</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_UN=</span><span class="st">"your@email.com"</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_TEST_PW=</span><span class="st">"..."</span>)</a>
-<a class="sourceLine" id="cb4-6" title="6"></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_URL=</span><span class="st">"https://odkcentral.dbca.wa.gov.au"</span>)</a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_UN=</span><span class="st">"your@email.com"</span>)</a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_PW=</span><span class="st">"..."</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/ru_setup.html">ru_setup</a></span>(</a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">url =</span> <span class="st">"https://odkcentral.dbca.wa.gov.au"</span>,</a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">un =</span> <span class="st">"you@email.com"</span>,</a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="dt">pw =</span> <span class="st">"..."</span>,</a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="dt">test_url =</span> <span class="st">"https://sandbox.central.opendatakit.org"</span>,</a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="dt">test_un =</span> <span class="st">"you@email.com"</span>,</a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="dt">test_pw =</span> <span class="st">"..."</span>,</a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="dt">test_pid =</span> <span class="dv">14</span>,</a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="dt">test_fid =</span> <span class="st">"build_Flora-Quadrat-0-2_1558575936"</span></a>
+<a class="sourceLine" id="cb4-10" title="10">)</a></code></pre></div>
 <p>Keep these settings outside of version control, e.g. in your <code>~/.Renviron</code>. Note: <code>~/.Renviron</code> contains simple <code>key=value</code> assignments without <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">ODKC_TEST_URL=<span class="st">"https://sandbox.central.opendatakit.org"</span></a>
-<a class="sourceLine" id="cb5-2" title="2">ODKC_TEST_PID=<span class="dv">14</span></a>
-<a class="sourceLine" id="cb5-3" title="3">ODKC_TEST_FID=<span class="st">"build_Flora-Quadrat-0-2_1558575936"</span></a>
-<a class="sourceLine" id="cb5-4" title="4">ODKC_TEST_UN=<span class="st">"your@email.com"</span></a>
-<a class="sourceLine" id="cb5-5" title="5">ODKC_TEST_PW=<span class="st">"..."</span></a>
+<a class="sourceLine" id="cb5-2" title="2">ODKC_TEST_UN=<span class="st">"your@email.com"</span></a>
+<a class="sourceLine" id="cb5-3" title="3">ODKC_TEST_PW=<span class="st">"..."</span></a>
+<a class="sourceLine" id="cb5-4" title="4">ODKC_TEST_PID=<span class="dv">14</span></a>
+<a class="sourceLine" id="cb5-5" title="5">ODKC_TEST_FID=<span class="st">"build_Flora-Quadrat-0-2_1558575936"</span></a>
 <a class="sourceLine" id="cb5-6" title="6"></a>
 <a class="sourceLine" id="cb5-7" title="7">ODKC_URL=<span class="st">"https://odkcentral.dbca.wa.gov.au"</span></a>
 <a class="sourceLine" id="cb5-8" title="8">ODKC_UN=<span class="st">"your@email.com"</span></a>

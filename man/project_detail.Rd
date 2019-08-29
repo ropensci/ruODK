@@ -4,21 +4,25 @@
 \alias{project_detail}
 \title{List all details of one project.}
 \usage{
-project_detail(pid, url = Sys.getenv("ODKC_URL"),
-  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
+project_detail(pid, url = get_default_url(), un = get_default_un(),
+  pw = get_default_pw())
 }
 \arguments{
-\item{pid}{The numeric ID of the project, e.g.: 3.}
+\item{pid}{The numeric ID of the project, e.g.: 1.}
 
-\item{url}{The OData URL, ending in .svc, no trailing slash.}
+\item{url}{The base ODK Central without a trailing slash,
+e.g. "https://sandbox.central.opendatakit.org".
+Default: \code{get_default_url()},
+which calls \code{Sys.getenv("ODKC_URL")}.}
 
-\item{un}{The ODK Central username (an email address),
-default: Sys.getenv("ODKC_UN").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")}
+\item{un}{The ODK Central username (an email address).
+Default: \code{get_default_un()},
+which calls \code{Sys.getenv("ODKC_UN")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{pw}{The ODK Central password,,
-default: Sys.getenv("ODKC_PW").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
+\item{pw}{The ODK Central password.
+Default: \code{get_default_pw()},
+which calls \code{Sys.getenv("ODKC_PW")}.}
 }
 \value{
 A tibble with exactly one row for the project and all project
@@ -31,20 +35,21 @@ A tibble with exactly one row for the project and all project
 }
 \description{
 While the API endpoint will return all details for one project,
-`project_list` will fail with incorrect or missing authentication.
+`project_detail` will fail with incorrect or missing authentication.
 }
 \examples{
 \dontrun{
 # With default credentials, see vignette("setup")
-pl <- project_detail(1)
+pd <- project_detail(1)
 
 # With explicit credentials, see tests
-p <- project_list(
-  Sys.getenv("ODKC_TEST_PID"),
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+pd <- project_detail(
+  1,
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
+
 pd \%>\%
   dplyr::select(-"verbs") \%>\%
   knitr::kable(.)

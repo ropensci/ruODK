@@ -10,15 +10,19 @@ form_list(pid, url = Sys.getenv("ODKC_URL"),
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 3.}
 
-\item{url}{The OData URL, ending in .svc, no trailing slash.}
+\item{url}{The base ODK Central without a trailing slash,
+e.g. "https://sandbox.central.opendatakit.org".
+Default: \code{get_default_url()},
+which calls \code{Sys.getenv("ODKC_URL")}.}
 
-\item{un}{The ODK Central username (an email address),
-default: Sys.getenv("ODKC_UN").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")}
+\item{un}{The ODK Central username (an email address).
+Default: \code{get_default_un()},
+which calls \code{Sys.getenv("ODKC_UN")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{pw}{The ODK Central password,,
-default: Sys.getenv("ODKC_PW").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")}
+\item{pw}{The ODK Central password.
+Default: \code{get_default_pw()},
+which calls \code{Sys.getenv("ODKC_PW")}.}
 }
 \value{
 A tibble with one row per form and all form metadata as columns.

@@ -23,66 +23,100 @@ Currently, ODK Central supports BasicAuth (username and password) and
 SessionAuth. `ruODK` supports only BasicAuth.
 
 Each ruODK function accepts the server base URL, username, and password, with
-defaults looking for R environment variables `ODKC_URL`, `ODKC_UN`, and `ODKC_PW`.
+defaults looking for R environment variables `ODKC_URL`, `ODKC_UN`, and `ODKC_PW`
+through the helper functions `get_default_{url, un, pw}()`.
 
 There are three ways of providing those settings to each function call.
 
-## One-off: settings directly in function call
-
+## Per function call
 We can supply those credentials to each `ruODK` function call, but that's
 cumbersome and not securely reproducible (the command would include the 
 sensitive  credentials).
 
 ```{r, eval=FALSE}
-ruODK::project_list(
-  url="https://odkcentral.mydomain.com", 
-  un="me@mail.com", 
-  pw="......."
-)
+ruODK::project_list(url="https://my-odkc.com", un="me@mail.com", pw=".......")
 ```
 
-
 An example use case are the `ruODK` tests, which require settings different from
-the settings used during development.
+the settings used during development and in the vignettes.
 
-## Per session: environment variables
+## Per session
+`ruODK` provides helpers for settings, `ru_setup()` to set and `ru_settings()` 
+to get settings.
+While normal users of `ruODK` will only need a default url, username, and 
+password, contributors to `ruODK` can include optional test server settings.
 
-A better way is to set your ODK Central URL, username (email), and password as 
-R environment variables.
+```{r ru_setup}
+# ruODK user
+ruODK::ru_setup(
+  url = "https://odkcentral.dbca.wa.gov.au", 
+  un = "me@email.com", 
+  pw = "..."
+)
 
-`ruODK` functions default to use the R environment variables 
-`ODKC_URL`, `ODKC_UN`, and `ODKC_PW` for authentication.
-  
-```{r, eval=F}
-Sys.setenv(ODKC_URL="https://odkcentral.mydomain.com")
-Sys.setenv(ODKC_UN="me@mail.com")
-Sys.setenv(ODKC_PW=".......")
+# ruODK contributor
+ruODK::ru_setup(
+  url = "https://odkcentral.dbca.wa.gov.au", 
+  un = "me@email.com", 
+  pw = "...",
+  test_url = "https://sandbox.central.opendatakit.org", 
+  test_un = "me@email.com", 
+  test_pw = "...",
+  test_pid = 14,
+  test_fid = "build_Flora-Quadrat-0-2_1558575936"
+)
+
+# Review settings
+ruODK::ru_settings()
 ```
 
 Now we can call `ruODK` functions without settings, and let `ruODK` fall back
-to the environment variables:
+to the default credentials:
 
 ```{r, eval=FALSE}
 ruODK::project_list()
 ```
 
 
-## Per machine: set and forget
+## Per machine
 Let's make those settings a permanent default.
-Place them in your `~/.Renviron` to set them per machine,
-or in a separate file outside of version control to set them per project.
 
-Of course, there is a helper for editing `~/.Renviron` in `usethis`.
+A convenient way to have often used environment variables available is to add
+them to `~/.Renviron` using `usethis::edit_r_environ(scope = "user")`.
+This loads them freshly into a new session, eliminating the need to run 
+`ru_setup()`. Note that the environment variables can be cleared or overwritten 
+through calling `ru_setup()` or `Sys.setenv()`.
 
-```{r, eval=FALSE}
+```{r open_renviron, eval=FALSE}
 usethis::edit_r_environ(scope = "user")
 ```
 
-Note, the format for `~/.Renviron` is:
-```{r, eval=FALSE}
+
+```{r renviron, eval=FALSE}
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
-ODKC_UN="your@email.com"
+ODKC_UN="me@email.com"
 ODKC_PW="..."
+ODKC_TEST_URL="https://sandbox.central.opendatakit.org"
+ODKC_TEST_UN="me@email.com"
+ODKC_TEST_PW="..."
+ODKC_TEST_PID=14
+ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
 ```
 
 
+As an alternative to setting environment variables through `~/.Renviron`, 
+you can set them through `Sys.setenv()`:
+
+```{r setenv}
+Sys.setenv(ODKC_URL="https://odkcentral.dbca.wa.gov.au")
+Sys.setenv(ODKC_UN="me@mail.com")
+Sys.setenv(ODKC_PW="...")
+Sys.setenv(ODKC_TEST_URL="https://sandbox.central.opendatakit.org")
+Sys.setenv(ODKC_TEST_UN="me@mail.com")
+Sys.setenv(ODKC_TEST_PW="...")
+Sys.setenv(ODKC_TEST_PID=14)
+Sys.setenv(ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936")
+
+# Review settings
+ruODK::ru_settings()
+```

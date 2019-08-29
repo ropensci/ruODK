@@ -99,25 +99,26 @@ to request access to those two ODK Central instances.
 You will need to use the following environment variables:
 
 ```r
-Sys.setenv(ODKC_TEST_URL="https://sandbox.central.opendatakit.org")
-Sys.setenv(ODKC_TEST_PID=14)
-Sys.setenv(ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936")
-Sys.setenv(ODKC_TEST_UN="your@email.com")
-Sys.setenv(ODKC_TEST_PW="...")
-
-Sys.setenv(ODKC_URL="https://odkcentral.dbca.wa.gov.au")
-Sys.setenv(ODKC_UN="your@email.com")
-Sys.setenv(ODKC_PW="...")
+ruODK::ru_setup(
+  url = "https://odkcentral.dbca.wa.gov.au",
+  un = "you@email.com",
+  pw = "...",
+  test_url = "https://sandbox.central.opendatakit.org",
+  test_un = "you@email.com",
+  test_pw = "...",
+  test_pid = 14,
+  test_fid = "build_Flora-Quadrat-0-2_1558575936"
+)
 ```
 
 Keep these settings outside of version control, e.g. in your `~/.Renviron`.
 Note: `~/.Renviron` contains simple `key=value` assignments without `Sys.setenv()`.
 ```r
 ODKC_TEST_URL="https://sandbox.central.opendatakit.org"
-ODKC_TEST_PID=14
-ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
 ODKC_TEST_UN="your@email.com"
 ODKC_TEST_PW="..."
+ODKC_TEST_PID=14
+ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
 
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
 ODKC_UN="your@email.com"

@@ -151,19 +151,23 @@
     </tr>
     <tr>
       <th>url</th>
-      <td><p>The OData URL, ending in .svc, no trailing slash.</p></td>
+      <td><p>The base ODK Central without a trailing slash,
+e.g. "https://sandbox.central.opendatakit.org".
+Default: <code><a href='ru_settings.html'>get_default_url()</a></code>,
+which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_URL")</a></code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
-      <td><p>The ODK Central username (an email address),
-default: Sys.getenv("ODKC_UN").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")</p></td>
+      <td><p>The ODK Central username (an email address).
+Default: <code><a href='ru_settings.html'>get_default_un()</a></code>,
+which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_UN")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
-      <td><p>The ODK Central password,,
-default: Sys.getenv("ODKC_PW").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
+      <td><p>The ODK Central password.
+Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>,
+which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_PW")</a></code>.</p></td>
     </tr>
     </table>
     

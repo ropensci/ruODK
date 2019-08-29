@@ -35,7 +35,7 @@
 <meta property="og:title" content="List all details of one project. — project_detail" />
 
 <meta property="og:description" content="While the API endpoint will return all details for one project,
-`project_list` will fail with incorrect or missing authentication." />
+`project_detail` will fail with incorrect or missing authentication." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -133,35 +133,39 @@
     <div class="ref-description">
     
     <p>While the API endpoint will return all details for one project,
-`project_list` will fail with incorrect or missing authentication.</p>
+`project_detail` will fail with incorrect or missing authentication.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_detail</span>(<span class='no'>pid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
+    <pre class="usage"><span class='fu'>project_detail</span>(<span class='no'>pid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pid</th>
-      <td><p>The numeric ID of the project, e.g.: 3.</p></td>
+      <td><p>The numeric ID of the project, e.g.: 1.</p></td>
     </tr>
     <tr>
       <th>url</th>
-      <td><p>The OData URL, ending in .svc, no trailing slash.</p></td>
+      <td><p>The base ODK Central without a trailing slash,
+e.g. "https://sandbox.central.opendatakit.org".
+Default: <code><a href='ru_settings.html'>get_default_url()</a></code>,
+which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_URL")</a></code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
-      <td><p>The ODK Central username (an email address),
-default: Sys.getenv("ODKC_UN").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_UN="...@...")</p></td>
+      <td><p>The ODK Central username (an email address).
+Default: <code><a href='ru_settings.html'>get_default_un()</a></code>,
+which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_UN")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
-      <td><p>The ODK Central password,,
-default: Sys.getenv("ODKC_PW").
-Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
+      <td><p>The ODK Central password.
+Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>,
+which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_PW")</a></code>.</p></td>
     </tr>
     </table>
     
@@ -190,15 +194,16 @@ Add to your ~/.Rprofile: Sys.setenv(ODKC_PW="...")</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># With default credentials, see vignette("setup")</span>
-<span class='no'>pl</span> <span class='kw'>&lt;-</span> <span class='fu'>project_detail</span>(<span class='fl'>1</span>)
+<span class='no'>pd</span> <span class='kw'>&lt;-</span> <span class='fu'>project_detail</span>(<span class='fl'>1</span>)
 
 <span class='co'># With explicit credentials, see tests</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='project_list.html'>project_list</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+<span class='no'>pd</span> <span class='kw'>&lt;-</span> <span class='fu'>project_detail</span>(
+  <span class='fl'>1</span>,
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
 )
+
 <span class='no'>pd</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='st'>"verbs"</span>) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)

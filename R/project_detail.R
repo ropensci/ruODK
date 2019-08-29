@@ -1,9 +1,9 @@
 #' List all details of one project.
 #'
 #' While the API endpoint will return all details for one project,
-#' `project_list` will fail with incorrect or missing authentication.
+#' `project_detail` will fail with incorrect or missing authentication.
 #'
-#' @param pid The numeric ID of the project, e.g.: 3.
+#' @param pid The numeric ID of the project, e.g.: 1.
 #' @template param-auth
 #' @return A tibble with exactly one row for the project and all project
 #'   metadata as columns as per ODK Central API docs.
@@ -21,24 +21,26 @@
 #' @examples
 #' \dontrun{
 #' # With default credentials, see vignette("setup")
-#' pl <- project_detail(1)
+#' pd <- project_detail(1)
 #'
 #' # With explicit credentials, see tests
-#' p <- project_list(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#' pd <- project_detail(
+#'   1,
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
+#'
 #' pd %>%
 #'   dplyr::select(-"verbs") %>%
 #'   knitr::kable(.)
 #' }
 project_detail <- function(pid,
-                           url = Sys.getenv("ODKC_URL"),
-                           un = Sys.getenv("ODKC_UN"),
-                           pw = Sys.getenv("ODKC_PW")) {
+                           url = get_default_url(),
+                           un = get_default_un(),
+                           pw = get_default_pw()) {
   . <- NULL
+  yell_if_missing(url, un, pw, pid)
   p <- glue::glue("{url}/v1/projects/{pid}") %>%
     httr::GET(
       httr::add_headers(
@@ -47,7 +49,7 @@ project_detail <- function(pid,
       ),
       httr::authenticate(un, pw)
     ) %>%
-    httr::stop_for_status() %>%
+    yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {
       tibble::tibble(
