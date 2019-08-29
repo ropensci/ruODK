@@ -85,21 +85,51 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
 
   # Not happy, but tolerant: keep file at pth if exists
   testthat::expect_message(
-    get_one_attachment(pth, NA, src, verbose = TRUE),
+    get_one_attachment(
+      pth,
+      NA,
+      src,
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      verbose = TRUE),
     glue::glue("Keeping {pth}\n")
   )
   testthat::expect_equal(
-    get_one_attachment(pth, NA, src, verbose = TRUE),
+    get_one_attachment(pth,
+                       NA,
+                       src,
+                       url = get_test_url(),
+                       un = get_test_un(),
+                       pw = get_test_pw(),
+                       verbose = TRUE),
     as.character(pth)
   )
 
   # Now make sure pth doesn't exist
   pth <- fs::path(tempdir(), NA) %>% as.character()
   testthat::expect_message(
-    get_one_attachment(pth, NA, src, verbose = TRUE),
+    get_one_attachment(pth,
+                       NA,
+                       src,
+                       url = get_test_url(),
+                       un = get_test_un(),
+                       pw = get_test_pw(),
+                       verbose = TRUE),
     "Filename is NA, skipping download."
   )
-  testthat::expect_true(is.na(get_one_attachment(pth, NA, src, verbose = TRUE)))
+  testthat::expect_true(
+    is.na(get_one_attachment(
+      pth,
+      NA,
+      src,
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      verbose = TRUE
+      )
+    )
+  )
 })
 
 # Tests code

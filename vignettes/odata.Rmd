@@ -186,15 +186,15 @@ fq_data <- fq_raw %>%
   dplyr::mutate(
     quadrat_photo = attachment_get(
       pid, fid, uuid, quadrat_photo,
-      url = url
+      url = url, un = un, pw = pw
     ),
     morphological_type_photo = attachment_get(
       pid, fid, uuid, morphological_type_photo,
-      url = url
+      url = url, un = un, pw = pw
     ),
     mudmap_photo = attachment_get(
       pid, fid, uuid, mudmap_photo,
-      url = url
+      url = url, un = un, pw = pw
     ),
     submissionDate = lubridate::parse_date_time(
       submissionDate,
@@ -219,7 +219,7 @@ fq_data_tae <- fq_tae %>%
   dplyr::mutate(
     photo_in_situ = attachment_get(
       pid, fid, uuid, photo_in_situ,
-      url = url
+      url = url, un = un, pw = pw
     )
   ) %>%
   dplyr::left_join(fq_data, by = "uuid") %>%
