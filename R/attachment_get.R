@@ -146,6 +146,7 @@ attachment_get <- function(pid,
       attachment_filename,
       url = url
     ),
+    url = url,
     un = un,
     pw = pw,
     verbose = verbose
