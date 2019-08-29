@@ -4,8 +4,8 @@
 \alias{form_list}
 \title{List all forms.}
 \usage{
-form_list(pid, url = Sys.getenv("ODKC_URL"),
-  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
+form_list(pid, url = get_default_url(), un = get_default_un(),
+  pw = get_default_pw())
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 3.}
@@ -37,10 +37,10 @@ fl <- form_list(1)
 
 # With explicit credentials, see tests
 fl <- form_list(
-  Sys.getenv("ODKC_TEST_PID"),
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  get_test_pid(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 
 class(fl)

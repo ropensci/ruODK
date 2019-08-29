@@ -17,23 +17,21 @@
 #'
 #' # With explicit credentials, see tests
 #' fl <- form_list(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   get_test_pid(),
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #'
 #' class(fl)
 #' # > c("tbl_df", "tbl", "data.frame")
 #' }
 form_list <- function(pid,
-                      url = Sys.getenv("ODKC_URL"),
-                      un = Sys.getenv("ODKC_UN"),
-                      pw = Sys.getenv("ODKC_PW")) {
+                      url = get_default_url(),
+                      un = get_default_un(),
+                      pw = get_default_pw()) {
   . <- NULL
-  xml2list <- . %>%
-    xml2::as_xml_document(.) %>%
-    xml2::as_list(.)
+  yell_if_missing(url, un, pw, pid = pid)
   glue::glue("{url}/v1/projects/{pid}/forms") %>%
     httr::GET(
       httr::add_headers(
@@ -42,7 +40,7 @@ form_list <- function(pid,
       ),
       httr::authenticate(un, pw)
     ) %>%
-    httr::stop_for_status() %>%
+    yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {
       tibble::tibble(

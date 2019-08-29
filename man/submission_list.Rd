@@ -4,8 +4,8 @@
 \alias{submission_list}
 \title{List all submissions of one form.}
 \usage{
-submission_list(pid, fid, url = Sys.getenv("ODKC_URL"),
-  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
+submission_list(pid, fid, url = get_default_url(),
+  un = get_default_un(), pw = get_default_pw())
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.}
@@ -45,26 +45,19 @@ sl_defaults <- submission_list(1, "build_xformsId")
 
 # With explicit credentials, see tests
 sl <- submission_list(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  get_test_pid(),
+  get_test_fid(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 sl \%>\% knitr::kable(.)
 
-sl <- submission_list(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
-)
 fl <- form_list(
-  Sys.getenv("ODKC_TEST_PID"),
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  get_test_pid(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 
 # submission_list returns a tibble
@@ -77,10 +70,10 @@ names(sl)
 
 # Number of submissions (rows) is same as advertised in form_list
 form_list_nsub <- fl \%>\%
-  filter(fid == Sys.getenv("ODKC_TEST_FID")) \%>\%
+  filter(fid == get_test_fid()) \%>\%
   magrittr::extract2("submissions") \%>\%
   as.numeric()
-nrow(sl) <- form_list_nsub
+nrow(sl) == form_list_nsub
 # > TRUE
 }
 }

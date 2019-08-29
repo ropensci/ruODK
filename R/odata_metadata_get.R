@@ -12,32 +12,36 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Replace with your own working url, pid, fid, credentials:
-#' pid <- Sys.getenv("ODKC_TEST_PID")
-#' fid <- Sys.getenv("ODKC_TEST_FID")
-#' url <- Sys.getenv("ODKC_TEST_URL")
-#' un <- Sys.getenv("ODKC_TEST_UN")
-#' pw <- Sys.getenv("ODKC_TEST_PW")
-#'
 #' # With default credentials, see vignette("setup", package = "ruODK")
-#' meta <- odata_metadata_get(pid, fid)
+#' meta <- odata_metadata_get(
+#'   get_test_pid(),
+#'   get_test_fid()
+#' )
 #'
 #' # With explicitly set credentials
-#' meta <- odata_metadata_get(pid, fid, url = url, un = un, pw = pw)
+#' meta <- odata_metadata_get(
+#'   get_test_pid(),
+#'   get_test_fid(),
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
+#' )
 #'
 #' listviewer::jsonedit(meta)
 #' }
 odata_metadata_get <- function(pid,
                                fid,
-                               url = Sys.getenv("ODKC_URL"),
-                               un = Sys.getenv("ODKC_UN"),
-                               pw = Sys.getenv("ODKC_PW")) {
+                               url = get_default_url(),
+                               un = get_default_un(),
+                               pw = get_default_pw()) {
   . <- NULL
+  yell_if_missing(url, un, pw)
   glue::glue("{url}/v1/projects/{pid}/forms/{fid}.svc/$metadata") %>%
     httr::GET(
       httr::add_headers(Accept = "application/xml"),
       httr::authenticate(un, pw)
     ) %>%
+    yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     xml2::as_list(.)
 }

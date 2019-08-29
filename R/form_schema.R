@@ -32,22 +32,22 @@
 #'
 #' # With explicit credentials, see tests
 #' fs_nested <- form_schema(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   Sys.getenv("ODKC_TEST_FID"),
+#'   get_test_pid(),
+#'   get_test_fid(),
 #'   flatten = FALSE,
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #' listviewer::jsonedit(fs_nested)
 #'
 #' fs_flattened <- form_schema(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   Sys.getenv("ODKC_TEST_FID"),
+#'   get_test_pid(),
+#'   get_test_fid(),
 #'   flatten = TRUE,
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #' listviewer::jsonedit(fs_flattened)
 #'
@@ -95,26 +95,20 @@ form_schema <- function(pid,
                         fid,
                         flatten = FALSE,
                         odata = FALSE,
-                        url = Sys.getenv("ODKC_URL"),
-                        un = Sys.getenv("ODKC_UN"),
-                        pw = Sys.getenv("ODKC_PW")) {
+                        url = get_default_url(),
+                        un = get_default_un(),
+                        pw = get_default_pw()) {
   . <- NULL
-  qry <- list(
-    flatten = flatten,
-    odata = odata
-  )
-  glue::glue(
-    "{url}/v1/projects/{pid}/forms/{fid}.schema.json"
-  ) %>%
+  yell_if_missing(url, un, pw, pid = pid, fid = fid)
+  glue::glue("{url}/v1/projects/{pid}/forms/{fid}.schema.json") %>%
     httr::GET(
       httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw),
-      query = qry
+      query = list(flatten = flatten, odata = odata)
     ) %>%
-    httr::stop_for_status() %>%
+    yell_if_error(., url, un, pw) %>%
     httr::content(.)
 }
-
 
 # Tests
 # usethis::edit_file("tests/testthat/test-form_schema.R")

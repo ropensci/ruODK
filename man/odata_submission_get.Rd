@@ -5,9 +5,8 @@
 \title{Retrieve /Submissions from an OData URL ending in .svc as list of lists}
 \usage{
 odata_submission_get(pid, fid, table = "Submissions", skip = NA,
-  top = NA, count = FALSE, wkt = FALSE,
-  url = Sys.getenv("ODKC_URL"), un = Sys.getenv("ODKC_UN"),
-  pw = Sys.getenv("ODKC_PW"))
+  top = NA, count = FALSE, wkt = FALSE, url = get_default_url(),
+  un = get_default_un(), pw = get_default_pw())
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.}
@@ -58,40 +57,56 @@ Retrieve /Submissions from an OData URL ending in .svc as list of lists
 }
 \examples{
 \dontrun{
-
-# Replace with your own working url, pid, fid, credentials:
-pid <- 14
-fid <- "build_Flora-Quadrat-0-2_1558575936"
-url <- "https://sandbox.central.opendatakit.org"
-un <- Sys.getenv("ODKC_TEST_UN")
-pw <- Sys.getenv("ODKC_TEST_PW")
-
 # With default credentials, see vignette("setup", package = "ruODK")
-data <- odata_submissions_get(pid, fid, table = "Submissions")
+data <- odata_submissions_get(
+  get_test_pid(),
+  get_test_fid(),
+  table = "Submissions"
+)
 
 # With explicitly set credentials
-data <- odata_submissions_get(pid, fid,
+data <- odata_submissions_get(
+  get_test_pid(),
+  get_test_fid(),
   table = "Submissions",
-  url = url, un = un, pw = pw
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 
 # Skip one row, return the next 1 rows (top), include total row count
-data <- odata_submissions_get(pid, fid,
+data <- odata_submissions_get(
+  get_test_pid(),
+  get_test_fid(),
   table = "Submissions",
-  skip = 1, top = 1, count = TRUE,
-  url = url, un = un, pw = pw
+  skip = 1,
+  top = 1,
+  count = TRUE,
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 
 # Parse point coordinates into lat, lon, alt
-data <- odata_submissions_get(pid, fid,
-  table = "Submissions", wkt = FALSE,
-  url = url, un = un, pw = pw
+data <- odata_submissions_get(
+  get_test_pid(),
+  get_test_fid(),
+  table = "Submissions",
+  wkt = FALSE,
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 
 # Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"
-data <- odata_submissions_get(pid, fid,
-  table = "Submissions", wkt = TRUE,
-  url = url, un = un, pw = pw
+data <- odata_submissions_get(
+  get_test_pid(),
+  get_test_fid(),
+  table = "Submissions",
+  wkt = TRUE,
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 
 listviewer::jsonedit(data)
@@ -109,6 +124,7 @@ Other odata-api: \code{\link{attachment_get}},
   \code{\link{get_one_attachment}},
   \code{\link{odata_metadata_get}},
   \code{\link{odata_service_get}},
-  \code{\link{odata_submission_parse}}
+  \code{\link{odata_submission_parse}},
+  \code{\link{unnest_all}}
 }
 \concept{odata-api}

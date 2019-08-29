@@ -1,12 +1,13 @@
-# ruODK dev
+# ruODK 0.6.1
 * ROpenSci submission review [milestone](https://github.com/dbca-wa/ruODK/milestone/3),
   [discussion](https://github.com/ropensci/software-review/issues/335).
-* Updates to documentation #13 #15 #17
-* Group function docs #18
+* Updates to documentation. #13 #15 #17
+* Group function docs. #18
 * Update contribution guidelines and add account request issue template:
   How to run `ruODK` tests and build the vignettes. #15 #20
-* Add dedicated `ru_setup()` and `ru_settings()`. Narrowly avoided calling them
-  `ru_ready2rock&roll()` #16
+* Add dedicated `ru_setup()` and `ru_settings()`. 
+  Pat down functions for missing credentials and yell loudly but clearly about
+  httr errors. #16
 
 # ruODK 0.6.0
 * Version bump and lifecycle bump to indicate that ruODK is ready to be used

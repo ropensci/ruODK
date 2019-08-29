@@ -5,9 +5,8 @@
 \title{Download attachments and return the local path}
 \usage{
 attachment_get(pid, fid, submission_uuid, attachment_filename,
-  local_dir = "attachments", url = Sys.getenv("ODKC_URL"),
-  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"),
-  verbose = FALSE)
+  local_dir = "attachments", url = get_default_url(),
+  un = get_default_un(), pw = get_default_pw(), verbose = FALSE)
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.}
@@ -68,6 +67,7 @@ Other odata-api: \code{\link{attachment_url}},
   \code{\link{odata_metadata_get}},
   \code{\link{odata_service_get}},
   \code{\link{odata_submission_get}},
-  \code{\link{odata_submission_parse}}
+  \code{\link{odata_submission_parse}},
+  \code{\link{unnest_all}}
 }
 \concept{odata-api}

@@ -20,3 +20,13 @@ The unnested tibble in wide format
 \description{
 Recursively unnest_wide all list columns in a tibble.
 }
+\seealso{
+Other odata-api: \code{\link{attachment_get}},
+  \code{\link{attachment_url}},
+  \code{\link{get_one_attachment}},
+  \code{\link{odata_metadata_get}},
+  \code{\link{odata_service_get}},
+  \code{\link{odata_submission_get}},
+  \code{\link{odata_submission_parse}}
+}
+\concept{odata-api}

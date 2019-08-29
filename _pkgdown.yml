@@ -11,3 +11,6 @@ reference:
 - title: Settings
   contents:
   - has_concept("ru_settings")
+- title: Example data
+  contents:
+  - has_concept("included")

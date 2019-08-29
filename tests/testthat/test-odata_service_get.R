@@ -1,13 +1,13 @@
 context("test-odata_service_get.R")
 
 test_that("odata_service_get works", {
-  pid <- Sys.getenv("ODKC_TEST_PID")
-  fid <- Sys.getenv("ODKC_TEST_FID")
-  url <- Sys.getenv("ODKC_TEST_URL")
-  un <- Sys.getenv("ODKC_TEST_UN")
-  pw <- Sys.getenv("ODKC_TEST_PW")
-
-  svc <- odata_service_get(pid, fid, url = url, un = un, pw = pw)
+  svc <- odata_service_get(
+    get_test_pid(),
+    get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
 
   testthat::expect_equal(class(svc), c("tbl_df", "tbl", "data.frame"))
   cn <- c("name", "kind", "url")

@@ -4,7 +4,7 @@ test_that("submission_export works", {
   t <- tempdir()
 
   # High expectatios
-  fid <- Sys.getenv("ODKC_TEST_FID")
+  fid <- get_test_fid()
   pth <- fs::path(t, glue::glue("{fid}.zip"))
   fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
   msg_dl <- glue::glue("Downloading submissions to: {pth}\n")
@@ -14,14 +14,14 @@ test_that("submission_export works", {
   # Once you drink Tequila, you're feeling really good
   testthat::expect_message(
     se <- submission_export(
-      Sys.getenv("ODKC_TEST_PID"),
-      Sys.getenv("ODKC_TEST_FID"),
+      get_test_pid(),
+      get_test_fid(),
       local_dir = t,
       overwrite = FALSE,
       verbose = TRUE,
-      url = Sys.getenv("ODKC_TEST_URL"),
-      un = Sys.getenv("ODKC_TEST_UN"),
-      pw = Sys.getenv("ODKC_TEST_PW")
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
     ),
     msg_dl
   )
@@ -30,14 +30,14 @@ test_that("submission_export works", {
   # Twice you drink Tequila, you're getting in ze mood
   testthat::expect_message(
     se <- submission_export(
-      Sys.getenv("ODKC_TEST_PID"),
-      Sys.getenv("ODKC_TEST_FID"),
+      get_test_pid(),
+      get_test_fid(),
       local_dir = t,
       overwrite = FALSE,
       verbose = TRUE,
-      url = Sys.getenv("ODKC_TEST_URL"),
-      un = Sys.getenv("ODKC_TEST_UN"),
-      pw = Sys.getenv("ODKC_TEST_PW")
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
     ),
     msg_keep
   )
@@ -49,14 +49,14 @@ test_that("submission_export works", {
   # Three times Tequila, your cheeks gonna glow
   testthat::expect_message(
     se <- submission_export(
-      Sys.getenv("ODKC_TEST_PID"),
-      Sys.getenv("ODKC_TEST_FID"),
+      get_test_pid(),
+      get_test_fid(),
       local_dir = t,
       overwrite = TRUE,
       verbose = TRUE,
-      url = Sys.getenv("ODKC_TEST_URL"),
-      un = Sys.getenv("ODKC_TEST_UN"),
-      pw = Sys.getenv("ODKC_TEST_PW")
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
     ),
     msg_chuck
   )
@@ -65,18 +65,18 @@ test_that("submission_export works", {
   dl3 <- fs::file_info(se)$modification_time
   testthat::expect_false(dl1 == dl3)
 
-  # Four times Tequila, oh oh oh
+  # Four Tequila, oh oh oh
   # \url{https://www.youtube.com/watch?v=cWd5Uiyx5zg}
   testthat::expect_message(
     se <- submission_export(
-      Sys.getenv("ODKC_TEST_PID"),
-      Sys.getenv("ODKC_TEST_FID"),
+      get_test_pid(),
+      get_test_fid(),
       local_dir = t,
       overwrite = FALSE,
       verbose = TRUE,
-      url = Sys.getenv("ODKC_TEST_URL"),
-      un = Sys.getenv("ODKC_TEST_UN"),
-      pw = Sys.getenv("ODKC_TEST_PW")
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
     ),
     msg_keep
   )

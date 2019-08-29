@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -135,8 +135,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>form_detail</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
+    <pre class="usage"><span class='fu'>form_detail</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,19 +195,19 @@ which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("O
 
 <span class='co'># With explicit credentials, see tests</span>
 <span class='no'>fl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='form_list.html'>form_list</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+  <span class='fu'><a href='ru_settings.html'>get_test_pid</a></span>(),
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
 )
 
 <span class='co'># The first form in the test project</span>
 <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>form_detail</span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
+  <span class='fu'><a href='ru_settings.html'>get_test_pid</a></span>(),
   <span class='no'>fl</span>$<span class='no'>fid</span><span class='kw'>[[</span><span class='fl'>1</span>]],
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
 )
 
 <span class='co'># form_detail returns exactly one row</span>

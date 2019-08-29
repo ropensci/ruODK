@@ -2,20 +2,20 @@ context("test-attachment_list.R")
 
 test_that("attachment_list works", {
   sl <- submission_list(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    get_test_pid(),
+    get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
 
   al <- attachment_list(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
+    get_test_pid(),
+    get_test_fid(),
     sl$instance_id[[1]],
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   al %>% knitr::kable(.)
 

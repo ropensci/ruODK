@@ -2,19 +2,19 @@ test_that("form_detail works", {
 
   # The test project has a list of forms
   fl <- form_list(
-    Sys.getenv("ODKC_TEST_PID"),
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
 
   # The first form in the test project
   f <- form_detail(
-    Sys.getenv("ODKC_TEST_PID"),
+    get_test_pid(),
     fl$fid[[1]],
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
 
   # form_detail returns exactly one row

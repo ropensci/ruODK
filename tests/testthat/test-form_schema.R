@@ -1,20 +1,20 @@
 test_that("form_schema works", {
   fs_nested <- form_schema(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
+    get_test_pid(),
+    get_test_fid(),
     flatten = FALSE,
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
 
   fs_flattened <- form_schema(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
+    get_test_pid(),
+    get_test_fid(),
     flatten = TRUE,
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
 
   # form_schema returns a nested list. There's nothing to change about that.

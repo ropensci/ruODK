@@ -23,6 +23,7 @@ listcol_names <- function(tbl) {
 #' @return The unnested tibble in wide format
 #' @importFrom glue glue
 #' @importFrom tidyr unnest_wider
+#' @family odata-api
 #' @export
 unnest_all <- function(nested_tbl,
                        names_repair = "universal",

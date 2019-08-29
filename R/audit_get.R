@@ -37,9 +37,9 @@
 #'
 #' # With explicit credentials, see tests
 #' logs <- audit_get(
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #'
 #' # With search parameters
@@ -49,18 +49,18 @@
 #'   end = "2019-08-31Z",
 #'   limit = 100,
 #'   offset = 0,
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #'
 #' # With partial search parameters
 #' logs <- audit_get(
 #'   limit = 100,
 #'   offset = 0,
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #'
 #' logs %>% knitr::kable(.)
@@ -83,6 +83,7 @@ audit_get <- function(
                       un = Sys.getenv("ODKC_UN"),
                       pw = Sys.getenv("ODKC_PW")) {
   . <- NULL
+  yell_if_missing(url, un, pw)
   qry <- list(
     action = action,
     start = start,
@@ -93,13 +94,11 @@ audit_get <- function(
     Filter(Negate(is.null), .)
   glue::glue("{url}/v1/audits") %>%
     httr::GET(
-      httr::add_headers(
-        "Accept" = "application/json"
-      ),
+      httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw),
       query = qry
     ) %>%
-    httr::stop_for_status() %>%
+    yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {
       tibble::tibble(

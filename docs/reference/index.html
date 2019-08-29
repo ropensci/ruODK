@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -181,6 +181,12 @@
           <p><code><a href="odata_submission_parse.html">odata_submission_parse()</a></code> </p>
         </td>
         <td><p>Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="unnest_all.html">unnest_all()</a></code> </p>
+        </td>
+        <td><p>Recursively unnest_wide all list columns in a tibble.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -332,6 +338,38 @@
         </td>
         <td><p>Abort on missing ODK Central credentials (url, username, password).</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-example-data" class="hasAnchor"><a href="#section-example-data" class="anchor"></a>Example data</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="fq_meta.html">fq_meta</a></code> </p>
+        </td>
+        <td><p>OData metadata document for an ODK Central form.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_raw.html">fq_raw</a></code> </p>
+        </td>
+        <td><p>OData submission data for an ODK Central form.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_svc.html">fq_svc</a></code> </p>
+        </td>
+        <td><p>OData service document for an ODK Central form.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_tae.html">fq_tae</a></code> </p>
+        </td>
+        <td><p>OData submission data for a subgroup of an ODK Central form.</p></td>
+      </tr>
     </tbody>
     </table>
   </div>
@@ -343,6 +381,7 @@
       <li><a href="#section-restful-api">RESTful API</a></li>
       <li><a href="#section-utilities">Utilities</a></li>
       <li><a href="#section-settings">Settings</a></li>
+      <li><a href="#section-example-data">Example data</a></li>
     </ul>
   </div>
 </div>

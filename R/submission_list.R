@@ -22,26 +22,19 @@
 #'
 #' # With explicit credentials, see tests
 #' sl <- submission_list(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   Sys.getenv("ODKC_TEST_FID"),
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   get_test_pid(),
+#'   get_test_fid(),
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #' sl %>% knitr::kable(.)
 #'
-#' sl <- submission_list(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   Sys.getenv("ODKC_TEST_FID"),
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
-#' )
 #' fl <- form_list(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   get_test_pid(),
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #'
 #' # submission_list returns a tibble
@@ -54,18 +47,19 @@
 #'
 #' # Number of submissions (rows) is same as advertised in form_list
 #' form_list_nsub <- fl %>%
-#'   filter(fid == Sys.getenv("ODKC_TEST_FID")) %>%
+#'   filter(fid == get_test_fid()) %>%
 #'   magrittr::extract2("submissions") %>%
 #'   as.numeric()
-#' nrow(sl) <- form_list_nsub
+#' nrow(sl) == form_list_nsub
 #' # > TRUE
 #' }
 submission_list <- function(pid,
                             fid,
-                            url = Sys.getenv("ODKC_URL"),
-                            un = Sys.getenv("ODKC_UN"),
-                            pw = Sys.getenv("ODKC_PW")) {
+                            url = get_default_url(),
+                            un = get_default_un(),
+                            pw = get_default_pw()) {
   . <- NULL
+  yell_if_missing(url, un, pw, pid = pid, fid = fid)
   glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions") %>%
     httr::GET(
       httr::add_headers(
@@ -74,7 +68,7 @@ submission_list <- function(pid,
       ),
       httr::authenticate(un, pw)
     ) %>%
-    httr::stop_for_status() %>%
+    yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {
       tibble::tibble(

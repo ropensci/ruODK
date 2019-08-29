@@ -1,9 +1,9 @@
 test_that("form_list works", {
   fl <- form_list(
-    Sys.getenv("ODKC_TEST_PID"),
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   testthat::expect_equal(class(fl), c("tbl_df", "tbl", "data.frame"))
   cn <- c(
@@ -12,7 +12,6 @@ test_that("form_list works", {
   )
   testthat::expect_equal(names(fl), cn)
 })
-
 
 # Tests code
 # usethis::edit_file("R/form_list.R")

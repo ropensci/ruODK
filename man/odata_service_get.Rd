@@ -4,8 +4,8 @@
 \alias{odata_service_get}
 \title{Retrieve service metadata from an OData URL ending in .svc as list of lists}
 \usage{
-odata_service_get(pid, fid, url = Sys.getenv("ODKC_URL"),
-  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
+odata_service_get(pid, fid, url = get_default_url(),
+  un = get_default_un(), pw = get_default_pw())
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.}
@@ -36,17 +36,20 @@ Retrieve service metadata from an OData URL ending in .svc as list of lists
 \examples{
 \dontrun{
 # Replace with your own working url, pid, fid, credentials:
-pid <- Sys.getenv("ODKC_TEST_PID")
-fid <- Sys.getenv("ODKC_TEST_FID")
-url <- Sys.getenv("ODKC_TEST_URL")
-un <- Sys.getenv("ODKC_TEST_UN")
-pw <- Sys.getenv("ODKC_TEST_PW")
-
 # With default credentials, see vignette("setup", package = "ruODK")
-svc <- odata_service_get(pid, fid)
+svc <- odata_service_get(
+  get_test_pid(),
+  get_test_fid()
+)
 
 # With explicitly set credentials
-svc <- odata_service_get(pid, fid, url = url, un = un, pw = pw)
+svc <- odata_service_get(
+  get_test_pid(),
+  get_test_fid(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
+)
 svc
 }
 }
@@ -58,6 +61,7 @@ Other odata-api: \code{\link{attachment_get}},
   \code{\link{get_one_attachment}},
   \code{\link{odata_metadata_get}},
   \code{\link{odata_submission_get}},
-  \code{\link{odata_submission_parse}}
+  \code{\link{odata_submission_parse}},
+  \code{\link{unnest_all}}
 }
 \concept{odata-api}

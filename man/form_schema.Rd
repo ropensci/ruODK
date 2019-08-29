@@ -5,8 +5,8 @@
 \title{Show the schema of one form.}
 \usage{
 form_schema(pid, fid, flatten = FALSE, odata = FALSE,
-  url = Sys.getenv("ODKC_URL"), un = Sys.getenv("ODKC_UN"),
-  pw = Sys.getenv("ODKC_PW"))
+  url = get_default_url(), un = get_default_un(),
+  pw = get_default_pw())
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.}
@@ -57,22 +57,22 @@ fs_defaults <- form_schema(1, "build_xformsId")
 
 # With explicit credentials, see tests
 fs_nested <- form_schema(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
+  get_test_pid(),
+  get_test_fid(),
   flatten = FALSE,
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 listviewer::jsonedit(fs_nested)
 
 fs_flattened <- form_schema(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
+  get_test_pid(),
+  get_test_fid(),
   flatten = TRUE,
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 listviewer::jsonedit(fs_flattened)
 

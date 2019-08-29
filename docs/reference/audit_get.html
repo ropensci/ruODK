@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -223,9 +223,9 @@ which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("O
 
 <span class='co'># With explicit credentials, see tests</span>
 <span class='no'>logs</span> <span class='kw'>&lt;-</span> <span class='fu'>audit_get</span>(
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
 )
 
 <span class='co'># With search parameters</span>
@@ -235,18 +235,18 @@ which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("O
   <span class='kw'>end</span> <span class='kw'>=</span> <span class='st'>"2019-08-31Z"</span>,
   <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>,
   <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
 )
 
 <span class='co'># With partial search parameters</span>
 <span class='no'>logs</span> <span class='kw'>&lt;-</span> <span class='fu'>audit_get</span>(
   <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>100</span>,
   <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
 )
 
 <span class='no'>logs</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)

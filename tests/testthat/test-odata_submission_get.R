@@ -2,11 +2,11 @@ context("test-odata_submission_get.R")
 
 test_that("odata_submission_get works with one known dataset", {
   fresh_raw <- odata_submission_get(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    get_test_pid(),
+    get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   fresh_parsed <- fresh_raw %>% odata_submission_parse()
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))
@@ -15,21 +15,21 @@ test_that("odata_submission_get works with one known dataset", {
 
 test_that("odata_submission_get skip omits number of results", {
   fresh_raw <- odata_submission_get(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    get_test_pid(),
+    get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   fresh_parsed <- fresh_raw %>% odata_submission_parse()
 
   skip_raw <- odata_submission_get(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
+    get_test_pid(),
+    get_test_fid(),
     skip = 1,
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   skip_parsed <- skip_raw %>% odata_submission_parse()
 
@@ -38,12 +38,12 @@ test_that("odata_submission_get skip omits number of results", {
 
 test_that("odata_submission_get top limits number of results", {
   top_raw <- odata_submission_get(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
+    get_test_pid(),
+    get_test_fid(),
     top = 1,
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   top_parsed <- top_raw %>% odata_submission_parse()
 
@@ -53,14 +53,14 @@ test_that("odata_submission_get top limits number of results", {
 
 test_that("odata_submission_get count returns total number or rows", {
   x_raw <- odata_submission_get(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
+    get_test_pid(),
+    get_test_fid(),
     count = TRUE,
     top = 1,
     wkt = TRUE,
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   x_parsed <- x_raw %>% odata_submission_parse()
 

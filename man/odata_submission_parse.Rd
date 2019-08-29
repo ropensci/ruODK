@@ -41,6 +41,7 @@ Other odata-api: \code{\link{attachment_get}},
   \code{\link{get_one_attachment}},
   \code{\link{odata_metadata_get}},
   \code{\link{odata_service_get}},
-  \code{\link{odata_submission_get}}
+  \code{\link{odata_submission_get}},
+  \code{\link{unnest_all}}
 }
 \concept{odata-api}

@@ -241,16 +241,16 @@ yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL) {
 #' @param fid A form ID (character, optional)
 #' @return The response object
 #' @family ru_settings
-yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL){
+yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
   response %>%
     httr::stop_for_status(
       task = glue::glue(
-        "connect to {url} as user {un} with password {pw}.\n",
-        "This request failed likely on incorrect credentials (url, un, pw).\n",
+        "get desired response from {url} as user {un} with password {pw}.\n",
         "Troubleshooting tips:\n",
         "If you have used this function with default settings, ",
-        "check ru_settings() and run ru_setup() with working credentials.\n",
-        'Read the vignette("Setup", package = "ruODK") for details of setting ',
-        "up ruODK")
+        "check ru_settings() whether the credentials were correct.\n",
+        "Run ru_setup() with working credentials and retry.\n",
+        'Read the vignette("Setup", package = "ruODK") how to set up ruODK'
+      )
     )
 }

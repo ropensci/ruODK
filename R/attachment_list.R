@@ -38,20 +38,20 @@
 #'
 #' # With explicit credentials, see tests
 #' sl <- submission_list(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   Sys.getenv("ODKC_TEST_FID"),
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   get_test_pid(),
+#'   get_test_fid(),
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #'
 #' al <- attachment_list(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   Sys.getenv("ODKC_TEST_FID"),
+#'   get_test_pid(),
+#'   get_test_fid(),
 #'   sl$instance_id[[1]],
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   url = get_test_url(),
+#'   un = get_test_un(),
+#'   pw = get_test_pw()
 #' )
 #' al %>% knitr::kable(.)
 #'
@@ -66,10 +66,11 @@
 attachment_list <- function(pid,
                             fid,
                             iid,
-                            url = Sys.getenv("ODKC_URL"),
-                            un = Sys.getenv("ODKC_UN"),
-                            pw = Sys.getenv("ODKC_PW")) {
+                            url = get_default_url(),
+                            un = get_default_un(),
+                            pw = get_default_pw()) {
   . <- NULL
+  yell_if_missing(url, un, pw)
   glue::glue(
     "{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}/attachments"
   ) %>%
@@ -77,7 +78,7 @@ attachment_list <- function(pid,
       httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw)
     ) %>%
-    httr::stop_for_status() %>%
+    yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {
       tibble::tibble(

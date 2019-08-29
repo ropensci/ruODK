@@ -48,8 +48,8 @@ project_list <- function(url = get_default_url(),
       ),
       httr::authenticate(un, pw)
     ) %>%
-  yell_if_error(., url, un, pw) %>%
-  httr::content(.) %>%
+    yell_if_error(., url, un, pw) %>%
+    httr::content(.) %>%
     {
       tibble::tibble(
         id = purrr::map_int(., "id"),

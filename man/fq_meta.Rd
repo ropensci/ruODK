@@ -14,4 +14,9 @@ fq_meta
 \description{
 The OData response for the metadata of an ODK Central form.
 }
+\seealso{
+Other included: \code{\link{fq_raw}}, \code{\link{fq_svc}},
+  \code{\link{fq_tae}}
+}
+\concept{included}
 \keyword{datasets}

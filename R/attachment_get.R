@@ -33,14 +33,12 @@ prepend_uuid <- function(md5hash) {
 #' @param uuid The UUID of one form submission, or a vector of UUIDs.
 #' @param fn The attachment filename, as per ODK form submission, or a vector of
 #'           attachment filenames.
-#' @param url The OData URL, ending in .svc, no trailing slash.
+#' @param url The ODK Central base URL without trailing slash.
 #' @return The inferred download URL.
 #' @family odata-api
-attachment_url <- function(pid, fid, uuid, fn,
-                           url = Sys.getenv("ODKC_URL")) {
+attachment_url <- function(pid, fid, uuid, fn, url = get_default_url()) {
   glue::glue(
-    "{url}/v1/projects/{pid}/forms/{fid}/",
-    "submissions/{uuid}/attachments/{fn}"
+    "{url}/v1/projects/{pid}/forms/{fid}/submissions/{uuid}/attachments/{fn}"
   )
 }
 
@@ -61,11 +59,15 @@ attachment_url <- function(pid, fid, uuid, fn,
 #' @importFrom httr GET authenticate write_disk
 #' @importFrom fs file_exists
 #' @export
-get_one_attachment <- function(pth, fn, src,
-                               url = Sys.getenv("ODKC_URL"),
-                               un = Sys.getenv("ODKC_UN"),
-                               pw = Sys.getenv("ODKC_PW"),
+get_one_attachment <- function(pth,
+                               fn,
+                               src,
+                               url = get_default_url(),
+                               un = get_default_un(),
+                               pw = get_default_pw(),
                                verbose = FALSE) {
+  . <- NULL
+  yell_if_missing(url, un, pw)
   if (fs::file_exists(pth)) {
     if (verbose == TRUE) message(glue::glue("Keeping {pth}\n"))
     return(pth %>% as.character())
@@ -78,7 +80,8 @@ get_one_attachment <- function(pth, fn, src,
     src,
     httr::authenticate(un, pw),
     httr::write_disk(pth, overwrite = TRUE)
-  )
+  ) %>%
+    yell_if_error(., url, un, pw)
   if (verbose == TRUE) message(glue::glue("Saved {pth}\n"))
   return(pth %>% as.character())
 }
@@ -122,10 +125,11 @@ attachment_get <- function(pid,
                            submission_uuid,
                            attachment_filename,
                            local_dir = "attachments",
-                           url = Sys.getenv("ODKC_URL"),
-                           un = Sys.getenv("ODKC_UN"),
-                           pw = Sys.getenv("ODKC_PW"),
+                           url = get_default_url(),
+                           un = get_default_un(),
+                           pw = get_default_pw(),
                            verbose = FALSE) {
+  yell_if_missing(url, un, pw, pid = pid, fid = fid)
   dest_dir <- fs::path(local_dir, strip_uuid(submission_uuid))
   if (verbose == TRUE) {
     message(glue::glue("Using local directory: {dest_dir}\n"))

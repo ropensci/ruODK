@@ -14,4 +14,9 @@ fq_tae
 \description{
 The OData response for the subgroup of an ODK Central form.
 }
+\seealso{
+Other included: \code{\link{fq_meta}},
+  \code{\link{fq_raw}}, \code{\link{fq_svc}}
+}
+\concept{included}
 \keyword{datasets}

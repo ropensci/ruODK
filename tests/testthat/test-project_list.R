@@ -69,7 +69,7 @@ test_that("project_list aborts on missing credentials", {
     )
   )
 
-    testthat::expect_error(
+  testthat::expect_error(
     p <- project_list(
       url = get_test_url(),
       un = "",

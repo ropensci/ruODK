@@ -1,8 +1,8 @@
 test_that("audit_get works", {
   logs <- audit_get(
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
 
   # With search parameters
@@ -12,18 +12,18 @@ test_that("audit_get works", {
     end = "2019-08-31Z",
     limit = 100,
     offset = 0,
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
 
   logs_part <- audit_get(
     action = "project.update",
     limit = 100,
     offset = 0,
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
 
   # submission_list returns a tibble

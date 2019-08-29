@@ -25,7 +25,7 @@
 #'
 #' # With explicit credentials, see tests
 #' pd <- project_detail(
-#'   1,
+#'   get_test_pid(),
 #'   url = get_test_url(),
 #'   un = get_test_un(),
 #'   pw = get_test_pw()
@@ -40,8 +40,8 @@ project_detail <- function(pid,
                            un = get_default_un(),
                            pw = get_default_pw()) {
   . <- NULL
-  yell_if_missing(url, un, pw, pid)
-  p <- glue::glue("{url}/v1/projects/{pid}") %>%
+  yell_if_missing(url, un, pw, pid = pid)
+  glue::glue("{url}/v1/projects/{pid}") %>%
     httr::GET(
       httr::add_headers(
         "Accept" = "application/xml",

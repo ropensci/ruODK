@@ -61,9 +61,9 @@ logs <- audit_get()
 
 # With explicit credentials, see tests
 logs <- audit_get(
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 
 # With search parameters
@@ -73,18 +73,18 @@ logs <- audit_get(
   end = "2019-08-31Z",
   limit = 100,
   offset = 0,
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 
 # With partial search parameters
 logs <- audit_get(
   limit = 100,
   offset = 0,
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
 )
 
 logs \%>\% knitr::kable(.)

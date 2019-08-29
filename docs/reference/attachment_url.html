@@ -68,7 +68,7 @@ fn." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -139,7 +139,7 @@ fn.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>attachment_url</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='no'>uuid</span>, <span class='no'>fn</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>))</pre>
+    <pre class="usage"><span class='fu'>attachment_url</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='no'>uuid</span>, <span class='no'>fn</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,7 +163,7 @@ attachment filenames.</p></td>
     </tr>
     <tr>
       <th>url</th>
-      <td><p>The OData URL, ending in .svc, no trailing slash.</p></td>
+      <td><p>The ODK Central base URL without trailing slash.</p></td>
     </tr>
     </table>
     
@@ -178,7 +178,8 @@ attachment filenames.</p></td>
   <code><a href='odata_metadata_get.html'>odata_metadata_get</a></code>,
   <code><a href='odata_service_get.html'>odata_service_get</a></code>,
   <code><a href='odata_submission_get.html'>odata_submission_get</a></code>,
-  <code><a href='odata_submission_parse.html'>odata_submission_parse</a></code></p></div>
+  <code><a href='odata_submission_parse.html'>odata_submission_parse</a></code>,
+  <code><a href='unnest_all.html'>unnest_all</a></code></p></div>
     
 
   </div>

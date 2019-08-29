@@ -44,7 +44,7 @@ pd <- project_detail(1)
 
 # With explicit credentials, see tests
 pd <- project_detail(
-  1,
+  get_test_pid(),
   url = get_test_url(),
   un = get_test_un(),
   pw = get_test_pw()

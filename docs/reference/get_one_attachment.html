@@ -68,7 +68,7 @@ of input parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -139,9 +139,8 @@ of input parameters.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_one_attachment</span>(<span class='no'>pth</span>, <span class='no'>fn</span>, <span class='no'>src</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>),
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_one_attachment</span>(<span class='no'>pth</span>, <span class='no'>fn</span>, <span class='no'>src</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>(), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,7 +195,8 @@ which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("O
   <code><a href='odata_metadata_get.html'>odata_metadata_get</a></code>,
   <code><a href='odata_service_get.html'>odata_service_get</a></code>,
   <code><a href='odata_submission_get.html'>odata_submission_get</a></code>,
-  <code><a href='odata_submission_parse.html'>odata_submission_parse</a></code></p></div>
+  <code><a href='odata_submission_parse.html'>odata_submission_parse</a></code>,
+  <code><a href='unnest_all.html'>unnest_all</a></code></p></div>
     
 
   </div>

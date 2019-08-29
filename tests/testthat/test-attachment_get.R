@@ -1,23 +1,27 @@
 context("test-attachment_get.R")
 
 test_that("attachment_get works", {
-  pid <- 14
-  fid <- "build_Flora-Quadrat-0-2_1558575936"
-  url <- "https://sandbox.central.opendatakit.org"
   fresh_raw <- odata_submission_get(
-    Sys.getenv("ODKC_TEST_PID"),
-    Sys.getenv("ODKC_TEST_FID"),
-    url = Sys.getenv("ODKC_TEST_URL"),
-    un = Sys.getenv("ODKC_TEST_UN"),
-    pw = Sys.getenv("ODKC_TEST_PW")
+    get_test_pid(),
+    get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
   )
   fresh_parsed <- fresh_raw %>%
     odata_submission_parse() %>%
     dplyr::rename(uuid = `.__id`) %>%
     dplyr::mutate(
       quadrat_photo = attachment_get(
-        pid, fid, uuid, quadrat_photo,
-        local_dir = tempdir(), url = url, verbose = TRUE
+        get_test_pid(),
+        get_test_fid(),
+        uuid,
+        quadrat_photo,
+        local_dir = tempdir(),
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = get_test_pw(),
+        verbose = TRUE
       )
     )
   # submissions at the time of writing
@@ -28,13 +32,12 @@ test_that("attachment_get works", {
 test_that("attachment_url works", {
   uuid <- "uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12"
   fn <- "1558579592153.jpg"
-  pid <- 14
-  fid <- "build_Flora-Quadrat-0-2_1558575936"
-  url <- "https://sandbox.central.opendatakit.org"
+  url <- get_test_url()
+  pid <- get_test_pid()
+  fid <- get_test_fid()
 
   expected_url <- glue::glue(
-    "{url}/v1/projects/14/forms/{fid}/",
-    "submissions/{uuid}/attachments/{fn}"
+    "{url}/v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
   )
   calculated_url <- ruODK:::attachment_url(pid, fid, uuid, fn, url)
 
@@ -44,19 +47,33 @@ test_that("attachment_url works", {
 test_that("get_one_attachment handles repeat download and NA filenames", {
   uuid <- "uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12"
   fn <- "1558579592153.jpg"
-  pid <- 14
-  fid <- "build_Flora-Quadrat-0-2_1558575936"
-  url <- "https://sandbox.central.opendatakit.org"
+  url <- get_test_url()
+  pid <- get_test_pid()
+  fid <- get_test_fid()
 
   pth <- fs::path(tempdir(), fn)
   src <- ruODK:::attachment_url(pid, fid, uuid, fn, url)
 
   # Happy path: get one attachment should work
   testthat::expect_message(
-    get_one_attachment(pth, fn, src, verbose = TRUE),
+    get_one_attachment(pth,
+      fn,
+      src,
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      verbose = TRUE
+    ),
     glue::glue("Saved {pth}\n")
   )
-  fn_local <- get_one_attachment(pth, fn, src, verbose = TRUE)
+  fn_local <- get_one_attachment(pth,
+    fn,
+    src,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    verbose = TRUE
+  )
   testthat::expect_true(fs::file_exists(pth))
   testthat::expect_equal(fn_local, as.character(pth))
 
