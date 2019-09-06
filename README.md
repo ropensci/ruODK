@@ -40,8 +40,16 @@ allows data collection clients like [ODK
 Collect](https://docs.opendatakit.org/collect-intro/) to connect to it
 for form download and submission upload.
 
+![An ODK setup with ODK Build, Central, Collect, and
+ruODK](https://www.lucidchart.com/publicSegments/view/952c1350-3003-48c1-a2c8-94bad74cdb46/image.png)
+
 A typical [ODK workflow](https://docs.opendatakit.org/#how-is-odk-used):
-After data have been captured digitally using ODK Collect, the data are
+An XForm is designed e.g. in [ODK
+Build](https://build.opendatakit.org/), [published to ODK
+Central](https://docs.opendatakit.org/central-forms/), and downloaded
+onto an Android device running ODK Collect. After data have been
+captured digitally using [ODK
+Collect](https://docs.opendatakit.org/collect-intro/), the data are
 uploaded and stored in ODK Central. The next step from there is to
 extract the data, optionally upload it into another data warehouse, and
 then to analyse and generate insight from it.
@@ -54,6 +62,21 @@ a RESTful API with a comprehensive and interactive
 `ruODK` is aimed at the technically minded researcher who wishes to
 access and use the data from ODK Central using the programming language
 R.
+
+Benefits of using the R ecosystem in combination with ODK:
+
+  - Scalability: Both R and ODK are free and open source software.
+    Scaling to many users does not incur license fees.
+  - Ubiquity: R is known to many scientists and is widely taught at
+    universities.
+  - Automation: The entire data access workflow can be automated through
+    R scripts.
+  - Reproducible reporting (e.g. 
+    [Sweave](https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr),
+    [RMarkdown](https://rmarkdown.rstudio.com/)), interactive web apps
+    ([Shiny](https://shiny.rstudio.com/)), workflow scaling
+    ([drake](https://docs.ropensci.org/drake/)) and a range of
+    integrations with Docker (links coming soon).
 
 `ruODK`’s scope:
 
@@ -168,7 +191,7 @@ proj
 #> # A tibble: 4 x 8
 #>      id name  forms app_users last_submission     created_at         
 #>   <int> <chr> <int>     <int> <dttm>              <dttm>             
-#> 1     1 DBCA      9         1 2019-08-26 05:46:56 2019-06-05 09:12:44
+#> 1     1 DBCA      9         1 2019-08-30 02:37:41 2019-06-05 09:12:44
 #> 2     3 Flora     1         1 2019-08-12 04:47:05 2019-06-06 03:24:31
 #> 3     2 Sand…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15
 #> 4     4 DBCA      0         0 NA                  2019-06-27 02:54:30
@@ -287,14 +310,14 @@ citation("ruODK")
 #> To cite ruODK in publications use:
 #> 
 #>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.
-#>   R package version 0.6.0. https://github.com/dbca-wa/ruODK
+#>   R package version 0.6.1. https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.6.0},
+#>     note = {R package version 0.6.1},
 #>     year = {2019},
 #>     url = {https://github.com/dbca-wa/ruODK},
 #>   }

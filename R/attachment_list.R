@@ -28,8 +28,6 @@
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
 #' @family restful-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
 #' @export
 #' @examples
 #' \dontrun{

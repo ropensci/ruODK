@@ -7,10 +7,6 @@
 #'         Columns: name, kind, url.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/service-document}
 #' @family odata-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom magrittr extract2
-#' @importFrom purrr map_chr
-#' @importFrom tibble tibble
 #' @export
 #' @examples
 #' \dontrun{

@@ -193,15 +193,15 @@ which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("O
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A tibble containing server audit logs.
-        One row per audited action, columns are submission attributes:</p>
+ One row per audited action, columns are submission attributes:</p>
 <p>* actor_id: integer. The ID of the actor, if any, that initiated the
-          action.
-        * action: string. The action that was taken.
-        * actee_id: uuid, string. The ID of the permissioning object against
-          which the action was taken.
-        * details: list. Additional details about the action that vary
-          according to the type of action.
-        * logged_at: dttm. Time of action on server.</p>
+   action.
+ * action: string. The action that was taken.
+ * actee_id: uuid, string. The ID of the permissioning object against
+   which the action was taken.
+ * details: list. Additional details about the action that vary
+   according to the type of action.
+ * logged_at: dttm. Time of action on server.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -213,6 +213,7 @@ which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("O
   <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
   <code><a href='submission_detail.html'>submission_detail</a></code>,
   <code><a href='submission_export.html'>submission_export</a></code>,
+  <code><a href='submission_get.html'>submission_get</a></code>,
   <code><a href='submission_list.html'>submission_list</a></code></p></div>
     
 

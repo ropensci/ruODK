@@ -12,8 +12,6 @@
 #'         * updated_at: time of submission update on server, dttm or NA
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form}
 #' @family restful-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
 #' @export
 #' @examples
 #' \dontrun{

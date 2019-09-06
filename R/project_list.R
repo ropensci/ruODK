@@ -9,9 +9,6 @@
 #'         as columns as per ODK Central API docs.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects}
 #' @family restful-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
-#' @importFrom readr parse_datetime
 #' @export
 #' @examples
 #' \dontrun{

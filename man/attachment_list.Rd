@@ -98,6 +98,7 @@ Other restful-api: \code{\link{audit_get}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}},
+  \code{\link{submission_get}},
   \code{\link{submission_list}}
 }
 \concept{restful-api}

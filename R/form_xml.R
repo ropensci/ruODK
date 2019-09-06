@@ -9,9 +9,6 @@
 #' @return The form XML as a nested list.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
 #' @family restful-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
-#' @importFrom xml2 as_list
 #' @export
 #' @examples
 #' \dontrun{

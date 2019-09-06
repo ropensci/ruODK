@@ -13,15 +13,4 @@ test_that("prefix_fn works", {
   )
 })
 
-test_that("attachment_link warns not implemented", {
-  testthat::expect_warning(
-    attachment_link(tibble::tibble(a = 1:10, b = 20:30),
-      Sys.getenv("ODKC_TEST_PID"),
-      Sys.getenv("ODKC_TEST_FID"),
-      url = Sys.getenv("ODKC_TEST_URL"),
-      un = Sys.getenv("ODKC_TEST_UN"),
-      pw = Sys.getenv("ODKC_TEST_PW")
-    ),
-    "Not implemented."
-  )
-})
+

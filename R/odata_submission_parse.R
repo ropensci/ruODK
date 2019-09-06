@@ -2,9 +2,6 @@
 #'
 #' @param tbl A tibble, possibly with list columns
 #' @return A vector of list column names
-#' @importFrom dplyr summarise_all filter
-#' @importFrom tidyr gather
-#' @importFrom magrittr extract2
 listcol_names <- function(tbl) {
   variable <- NULL
   tbl %>%
@@ -21,8 +18,6 @@ listcol_names <- function(tbl) {
 #'   default: "universal".
 #' @param verbose Whether to print verbose messages, default: FALSE.
 #' @return The unnested tibble in wide format
-#' @importFrom glue glue
-#' @importFrom tidyr unnest_wider
 #' @family odata-api
 #' @export
 unnest_all <- function(nested_tbl,
@@ -64,7 +59,6 @@ unnest_all <- function(nested_tbl,
 #' @param verbose Whether to print verbose messages, default: FALSE.
 #' @return The submissions as unnested tibble
 #' @family odata-api
-#' @importFrom tibble as_tibble
 #' @export
 #' @examples
 #' \dontrun{

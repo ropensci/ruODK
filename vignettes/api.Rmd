@@ -15,7 +15,6 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(magrittr)
 library(ruODK)
 ```
 
@@ -74,7 +73,11 @@ available API actions for a project.
 
 ```{r project_details}
 pd <- ruODK::project_detail(1)
+
+# Project details (without verbs)
 pd %>% dplyr::select(-"verbs") %>%  knitr::kable(.)
+
+# Available verbs
 pd$verbs[[1]] %>% unlist(.)
 ```
 
@@ -114,6 +117,27 @@ form_xml <- ruODK::form_xml(1, forms$fid[[1]], parse=FALSE)
 form_xml
 ```
 
+## Inspect form schema
+
+The nested list of lists returned by `form_schema` is the cleanest representation
+of the Xform definition available in R.
+
+See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of  `??ruODK::form_schema()` for more detail.
+
+```{r form_schema}
+fs <- form_schema(1, forms$fid[[1]])
+listviewer::jsonedit(form_schema, mode="code")
+
+```
+
+Namely, the form schema tells us about form field data types (dates, geopoints, 
+binary attachments) and repeating groups. We need this knowledge to parse the 
+submission data into tidy tibbles later.
+
+Feel free to search this list for "binary" to find the field names of file 
+attachments. Similarly, search for "dateTime" to find field names of datetimes.
+
+
 ## Show details of one form
 
 The details of a form are exactly the same as the output of `ruODK::form_list()`.
@@ -122,21 +146,6 @@ The details of a form are exactly the same as the output of `ruODK::form_list()`
 form <- ruODK::form_detail(1, forms$fid[[1]])
 form %>% knitr::kable(.)
 ```
-
-## Inspect form schema
-
-The nested list of lists returned by `form_schema` is the cleanest representation
-of the Xform definition available in R.
-See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of  `??ruODK::form_schema()` for more detail.
-
-```{r form_schema}
-fs <- form_schema(1, forms$fid[[1]])
-# listviewer::jsonedit(fs)
-```
-
-Namely, the form schema tells us about form field data types (dates, geopoints, 
-binary attachments) and repeating groups. We need this knowledge to parse the 
-submission data into tidy tibbles later.
 
 # Submissions
 We are getting closer to the actual data! This section shows two of the options
@@ -187,41 +196,27 @@ se <- ruODK::submission_export(
 f <- unzip(se, exdir = t)
 fs::dir_ls(t)
 
-# Read the CSV files
-data_quadrat_raw <- fid_csv %>% readr::read_csv()
-data_taxon_raw <- fid_csv_tae %>% readr::read_csv()
-
-# Sanitize column names
-add_dettol <- . %>% stringr::str_replace_all(., "-", "_")
-names(data_quadrat_raw) <- names(data_quadrat_raw) %>% add_dettol
-names(data_taxon_raw) <- names(data_taxon_raw) %>% add_dettol
-
 # Prepend attachments with media/ to turn into relative file paths
-data_quadrat <- data_quadrat_raw %>% 
-  dplyr::mutate(
-    location_quadrat_photo = glue::glue("media/{location_quadrat_photo}"),
-    habitat_morphological_type_photo = glue::glue("media/{habitat_morphological_type_photo}"),
-    perimeter_mudmap_photo = glue::glue("media/{perimeter_mudmap_photo}")
-  )
+data_quadrat <- fid_csv %>% 
+  readr::read_csv(na = c("", "NA", "na")) %>% 
+  janitor::clean_names(.) %>% 
+  attachment_link(.) %>% 
+  parse_datetime(tz = "Australia/Perth")
+
 DT::datatable(data_quadrat)
 # Further: create map with popups, see vignette "odata"
 
-data_taxon <- data_taxon_raw %>% 
-  dplyr::mutate(
-    photo_in_situ = glue::glue("media/{photo_in_situ}")
-  ) %>% 
-  dplyr::left_join(
-    data_quadrat,
-    by = c("PARENT_KEY" = "meta_instanceID")
-  )
+data_taxon <- fid_csv_tae %>% 
+  readr::read_csv(na = c("", "NA", "na")) %>% 
+  janitor::clean_names(.) %>% 
+  attachment_link(.) %>% 
+  parse_datetime(tz = "Australia/Perth") %>% 
+  dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
+
 DT::datatable(data_taxon)
 # Further: create map with popups, see vignette "odata"
 ```
 
-
-In future versions of `ruODK`, we'll introspect the form schema to determine
-the names of repeating groups, the form field names of attachments (data type 
-"binary" in form schema), and thus could automate the process shown above.
 
 ## List submissions for one form
 Not always is it appropriate to download all submissions and all attachments
@@ -235,7 +230,6 @@ If forms feed into downstream data warehouses, the typical ETL workflow is to
   * Submissions whose `instance_id` is not already present in the data warehouse.
 * Download only the selected submissions.
 * Download attachments of only the selected submissions.
-
 
 ```{r submission_list}
 sl <- ruODK::submission_list(
@@ -260,14 +254,42 @@ warehouse.
 Furthermore, the `instance_id`s can now be used to retrieve the actual 
 submissions.
 
+A quick detour on submission metadata:
+```{r submission_metadata}
+# One submission
+sub_meta <- ruODK::submission_detail(
+  Sys.getenv("ODKC_TEST_PID"),
+  Sys.getenv("ODKC_TEST_FID"),
+  sl$instance_id[[1]],
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
+
+# Multiple submissions
+submissions_meta <- tibble::tibble(
+  pid = Sys.getenv("ODKC_TEST_PID"),
+  fid = Sys.getenv("ODKC_TEST_FID"),
+  iid = sl$instance_id,  # this is a vector of multiple instance_ids
+  url = Sys.getenv("ODKC_TEST_URL"),
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+) %>% 
+  purrr::pmap(ruODK::submission_detail)
+submissions_meta %>% knitr::kable(.)
+```
+
+Nothing new there compared to `submission_list`, so let's move on to the actual
+submission data.
+
 ## Get submission data
 
 In order to import each submission, we need to retrieve the data by 
 `instance_id`.
 
-```{r submission_detail}
+```{r submission_data}
 # One submission
-sub <- ruODK::submission_detail(
+sub <- ruODK::submission_get(
   Sys.getenv("ODKC_TEST_PID"),
   Sys.getenv("ODKC_TEST_FID"),
   sl$instance_id[[1]],
@@ -285,7 +307,7 @@ submissions <- tibble::tibble(
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 ) %>% 
-  purrr::pmap(ruODK::submission_detail)
+  purrr::pmap(ruODK::submission_get)
 ```
 
 ## Parse submissions
@@ -298,8 +320,33 @@ The structure is different to the output of `ruODK::odata_submission_get`,
 therefore `ruODK::odata_submission_parse` does not work for those, as
 here we might have repeating groups included in a submission.
 
-```{r}
-head(submissions)
+```{r view_submission_data}
+listviewer::jsonedit(submissions, mode = "code")
+```
+
+## Rectangling the submissions
+Here we'll un-nest the nested list of submission data into a rectangular `tibble`.
+
+In the example shown above, the repeated `taxon_encounter` groups are named
+`taxon_encounter`, `taxon_encounter.1` and so on. This is an artifact of the 
+`jsonedit::listviewer()` widget.
+
+With one additional step we can flatten the nested lists and bind them into one
+dataframe, then sanitise the column names and parse datetimes like we did with
+the CSV export.
+
+It appears this operation loses all but the last repeat of repeating groups.
+We should further also deparse locations (WKT) into latitude, longitude, 
+altitude and accuracy. 
+
+```{r parse_submissions}
+sub_parsed <- submissions %>% 
+  purrr::map_df(rlist::list.flatten) %>%
+  janitor::clean_names(.) %>% 
+  ruODK::parse_datetime(.)
+
+names(sub_parsed)
+sub_parsed %>% knitr::kable(.)
 ```
 
 # Attachments
@@ -335,13 +382,17 @@ While we're working on parsing the submissions into something resembling
 `data_quadrat_raw`, which still contains the plain filenames without prefixed 
 local folders.
 
+`ruODK::attachment_get` downloads the attachment files and links them similar
+to `ruODK::attachment_link` (which assumes that attachments are already 
+downloaded).
+
 ```{r attachment_get}
-data_quadrat_att <- data_quadrat_raw %>% 
+sub_att <- sub_parsed %>% 
   dplyr::mutate(
     location_quadrat_photo = ruODK::attachment_get(
         Sys.getenv("ODKC_TEST_PID"),
         Sys.getenv("ODKC_TEST_FID"),
-        meta_instanceID,
+        meta_instance_id,
         location_quadrat_photo,
         local_dir = t,
         url = Sys.getenv("ODKC_TEST_URL"),
@@ -353,11 +404,23 @@ data_quadrat_att <- data_quadrat_raw %>%
   )
 
 # We have file paths...
-data_quadrat_att$location_quadrat_photo
+sub_att$location_quadrat_photo
 
 # ...and the corresponding files
-fs::dir_ls(t, recurse = TRUE)
+fs::dir_ls(t, recurse = TRUE, glob = "*.jpg")
 ```
+
+# Outlook
 
 From here, we can use the separately created data tibbles and locally downloaded
 attachments to build visualisations as shown in the vignette "odata".
+
+The best course of action seems to be the data export to ZIP.
+
+# Future development
+
+In future versions of `ruODK`, we'll introspect `form_schema` to determine
+the names of repeating groups, the form field names of attachments (data type 
+"binary" in form schema), the form field names of date/time fields (data type 
+"dateTime"), and use this introspection to further automate the data extraction
+process shown above.

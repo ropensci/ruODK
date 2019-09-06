@@ -2,7 +2,7 @@
 % Please edit documentation in R/submission_detail.R
 \name{submission_detail}
 \alias{submission_detail}
-\title{Show details for one submission.}
+\title{Show metadata for one submission.}
 \usage{
 submission_detail(pid, fid, iid, url = get_default_url(),
   un = get_default_un(), pw = get_default_pw())
@@ -32,7 +32,7 @@ which calls \code{Sys.getenv("ODKC_PW")}.}
 A nested list of submission metadata.
 }
 \description{
-Show details for one submission.
+Show metadata for one submission.
 }
 \examples{
 \dontrun{
@@ -61,7 +61,7 @@ sub <- submission_detail(
 nrow(sub)
 # > 1
 
-# The columns are metadata, plus the submission data in column 'xml`
+# The columns are metadata about the submission
 names(sub)
 # > "instance_id" "submitter_id" "submitter" "created_at" "updated_at"
 }
@@ -75,6 +75,7 @@ Other restful-api: \code{\link{attachment_list}},
   \code{\link{form_xml}}, \code{\link{project_create}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_export}},
+  \code{\link{submission_get}},
   \code{\link{submission_list}}
 }
 \concept{restful-api}

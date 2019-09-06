@@ -1,4 +1,4 @@
-#' Show details for one submission.
+#' Show metadata for one submission.
 #'
 #' @template param-pid
 #' @template param-fid
@@ -7,8 +7,6 @@
 #' @return A nested list of submission metadata.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/getting-submission-details}
 #' @family restful-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
 #' @export
 #' @examples
 #' \dontrun{
@@ -37,7 +35,7 @@
 #' nrow(sub)
 #' # > 1
 #'
-#' # The columns are metadata, plus the submission data in column 'xml`
+#' # The columns are metadata about the submission
 #' names(sub)
 #' # > "instance_id" "submitter_id" "submitter" "created_at" "updated_at"
 #' }

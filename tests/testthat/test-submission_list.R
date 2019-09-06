@@ -23,7 +23,7 @@ test_that("submission_list works", {
 
   # Number of submissions (rows) is same as advertised in form_list
   form_list_nsub <- fl %>%
-    filter(fid == get_test_fid()) %>%
+    dplyr::filter(fid == get_test_fid()) %>%
     magrittr::extract2("submissions") %>%
     as.numeric()
   testthat::expect_equal(nrow(sl), form_list_nsub)

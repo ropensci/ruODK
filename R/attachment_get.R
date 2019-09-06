@@ -4,7 +4,6 @@
 #' @return The string with every occurrence of "uuid:" deleted.
 #' @family utilities
 #' @export
-#' @importFrom stringr str_replace
 strip_uuid <- function(uuid) {
   . <- NULL
   uuid %>% stringr::str_replace_all(., pattern = "uuid:", replacement = "")
@@ -16,7 +15,6 @@ strip_uuid <- function(uuid) {
 #' @return The string with a prepended "uuid:"
 #' @family utilities
 #' @export
-#' @importFrom glue glue
 prepend_uuid <- function(md5hash) {
   . <- NULL
   glue::glue("uuid:{md5hash}") %>% as.character(.)
@@ -56,8 +54,6 @@ attachment_url <- function(pid, fid, uuid, fn, url = get_default_url()) {
 #' @param verbose Whether to display debug messages or not (default)
 #' @return The relative local path to the downloaded attachment or NA.
 #' @family odata-api
-#' @importFrom httr GET authenticate write_disk
-#' @importFrom fs file_exists
 #' @export
 get_one_attachment <- function(pth,
                                fn,
@@ -116,9 +112,6 @@ get_one_attachment <- function(pth,
 #' @family odata-api
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
-#' @importFrom glue glue
-#' @importFrom fs dir_create path
-#' @importFrom purrr pmap
 #' @export
 attachment_get <- function(pid,
                            fid,

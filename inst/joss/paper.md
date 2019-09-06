@@ -40,7 +40,6 @@ The core ODK tools are [@odkdocs]:
 * ODK XLSForm, an Excel-based form designer.
 * ODK Briefcase, a desktop tool that pulls and exports data from Aggregate and Collect.
 
-
 The core workflow of ODK is:
 
 * A form for digital data capture is designed, either by hand, or using form 
@@ -63,6 +62,12 @@ data retrieval from ODK Central.
 
 ruODK [@ruodk], currently available from GitHub [@github], is the first dedicated
 R Client for the ODK Central API.
+
+A typical data flow involves a form builder (ODK Build), a data clearinghouse
+(ODK Central), an electronic data capture app (ODK Collect), and a way to
+automate data access and analysis (ruODK).
+
+![A typical ODK setup with ODK Build, Central, Collect, and ruODK](https://www.lucidchart.com/publicSegments/view/cd47b81f-04cf-49d7-af3f-eda5f8755203/image.png)
 
 # Scope
 

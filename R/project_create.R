@@ -6,10 +6,6 @@
 #'         as columns as per ODK Central API docs.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/creating-a-project}
 #' @family restful-api
-#' @importFrom glue glue
-#' @importFrom httr add_headers authenticate content POST
-#' @importFrom jsonlite toJSON
-#' @importFrom purrr map_int map_chr
 #' @export
 #' @examples
 #' \dontrun{

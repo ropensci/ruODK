@@ -25,8 +25,6 @@
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}
 #' @family odata-api
-#' @importFrom glue glue
-#' @importFrom httr add_headers authenticate content GET
 #' @export
 #' @examples
 #' \dontrun{

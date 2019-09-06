@@ -7,9 +7,6 @@
 #' @return A tibble with one row and all form metadata as columns.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form}
 #' @family restful-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
-#' @importFrom readr parse_datetime
 #' @export
 #' @examples
 #' \dontrun{

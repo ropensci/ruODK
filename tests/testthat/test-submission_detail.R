@@ -24,7 +24,7 @@ test_that("submission_detail works", {
   testthat::expect_equal(nrow(sub), 1)
 
   # The columns are metadata, plus the submission data in column 'xml`
-  names(sub)
+  # names(sub)
   cn <- c(
     "instance_id", "submitter_id", "submitter", "created_at", "updated_at"
   )

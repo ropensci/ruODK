@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Show details for one submission. — submission_detail • ruODK</title>
+<title>Show metadata for one submission. — submission_detail • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,9 +32,9 @@
 
 
 
-<meta property="og:title" content="Show details for one submission. — submission_detail" />
+<meta property="og:title" content="Show metadata for one submission. — submission_detail" />
 
-<meta property="og:description" content="Show details for one submission." />
+<meta property="og:description" content="Show metadata for one submission." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -124,14 +124,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Show details for one submission.</h1>
+    <h1>Show metadata for one submission.</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/submission_detail.R'><code>R/submission_detail.R</code></a></small>
     <div class="hidden name"><code>submission_detail.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Show details for one submission.</p>
+    <p>Show metadata for one submission.</p>
     
     </div>
 
@@ -188,6 +188,7 @@ which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("O
   <code><a href='form_xml.html'>form_xml</a></code>, <code><a href='project_create.html'>project_create</a></code>,
   <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
   <code><a href='submission_export.html'>submission_export</a></code>,
+  <code><a href='submission_get.html'>submission_get</a></code>,
   <code><a href='submission_list.html'>submission_list</a></code></p></div>
     
 
@@ -218,7 +219,7 @@ which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("O
 <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>sub</span>)
 <span class='co'># &gt; 1</span>
 
-<span class='co'># The columns are metadata, plus the submission data in column 'xml`</span>
+<span class='co'># The columns are metadata about the submission</span>
 <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>sub</span>)
 <span class='co'># &gt; "instance_id" "submitter_id" "submitter" "created_at" "updated_at"</span>
 <span class='co'># }</span></pre>

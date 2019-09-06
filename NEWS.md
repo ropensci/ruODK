@@ -8,7 +8,14 @@
 * Add dedicated `ru_setup()` and `ru_settings()`. 
   Pat down functions for missing credentials and yell loudly but clearly about
   httr errors. #16
-
+* Drop `@importFrom` to reduce duplication. All external functions are prefixed
+  with their package name already.
+* Add convenience helpers `attachment_link()` and `parse_datetime()`.
+* Use `janitor::clean_names()` on column names over home-grown helpers.
+* Since `submission_detail` is now metadata only, add `submission_get` to download
+  submission data.
+* Added a high level overview diagram to README and `inst/joss/paper.md` to
+  illustrate `ruODK`'s intended purpose in the ODK ecosystem.
 # ruODK 0.6.0
 * Version bump and lifecycle bump to indicate that ruODK is ready to be used
   against ODK Central 0.6.

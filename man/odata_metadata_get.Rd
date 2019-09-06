@@ -27,8 +27,8 @@ Default: \code{get_default_pw()},
 which calls \code{Sys.getenv("ODKC_PW")}.}
 }
 \value{
-A nested list containing DataServices and .attrs (Version).
-        DataServices contains the dataset definition.
+A nested list containing Edmx (dataset schema definition) and
+  .attrs (Version).
 }
 \description{
 Retrieve metadata from an OData URL ending in .svc as list of lists

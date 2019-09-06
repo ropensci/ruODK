@@ -6,6 +6,9 @@ actee
 Analyze
 api
 AppVeyor
+artifact
+att
+attchment
 attrs
 BasicAuth
 camelCase
@@ -17,12 +20,14 @@ DataServices
 datatable
 Datatable
 datetime
+dateTime
 datetimes
 DBCA
-dev
+defaule
 dir
 DIY
 dttm
+Edmx
 enexpr
 enquo
 ensym
@@ -33,6 +38,7 @@ expr
 exprs
 extdata
 fid
+fieldnames
 filename1
 filename2
 filename3
@@ -49,7 +55,9 @@ http
 https
 httr
 imagemagick
+importFrom
 instanceId
+integrations
 io
 ISO8601
 iterable
@@ -58,9 +66,11 @@ JOSS
 jpg
 lifecycle
 lon
+lubridate
 magrittr
 md5
 MD5
+noRd
 odata
 OData
 ODK
@@ -69,6 +79,7 @@ opendatakit
 OpenDataKit
 OpenRosa
 permissioning
+PosixCT
 POSIXct
 PowerBI
 presubmission
@@ -78,12 +89,14 @@ quos
 quosures
 rectangled
 rectangling
-restapi
+Rectangling
 RESTful
 rlang
+RMarkdown
 Roadmap
 ROpenSci
 ru
+Scalability
 select1
 SessionAuth
 subfolder
@@ -96,6 +109,7 @@ tibbles
 tidyr
 tidyverse
 TravisCI
+un
 unnest
 unnested
 unnesting
@@ -110,5 +124,7 @@ Wickam
 WKT
 workdir
 Xform
+XForm
+Xforms
 XForms
 xxxxxxxxxx

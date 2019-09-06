@@ -39,16 +39,16 @@ which calls \code{Sys.getenv("ODKC_PW")}.}
 }
 \value{
 A tibble containing server audit logs.
-        One row per audited action, columns are submission attributes:
+ One row per audited action, columns are submission attributes:
 
-        * actor_id: integer. The ID of the actor, if any, that initiated the
-          action.
-        * action: string. The action that was taken.
-        * actee_id: uuid, string. The ID of the permissioning object against
-          which the action was taken.
-        * details: list. Additional details about the action that vary
-          according to the type of action.
-        * logged_at: dttm. Time of action on server.
+ * actor_id: integer. The ID of the actor, if any, that initiated the
+   action.
+ * action: string. The action that was taken.
+ * actee_id: uuid, string. The ID of the permissioning object against
+   which the action was taken.
+ * details: list. Additional details about the action that vary
+   according to the type of action.
+ * logged_at: dttm. Time of action on server.
 }
 \description{
 Parameters to filter the audit logs:
@@ -108,6 +108,7 @@ Other restful-api: \code{\link{attachment_list}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}},
+  \code{\link{submission_get}},
   \code{\link{submission_list}}
 }
 \concept{restful-api}

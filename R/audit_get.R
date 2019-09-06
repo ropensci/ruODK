@@ -14,21 +14,18 @@
 #' @param offset integer. The number of log entries to skip.
 #' @template param-auth
 #' @return A tibble containing server audit logs.
-#'         One row per audited action, columns are submission attributes:
+#'  One row per audited action, columns are submission attributes:
 #'
-#'         * actor_id: integer. The ID of the actor, if any, that initiated the
-#'           action.
-#'         * action: string. The action that was taken.
-#'         * actee_id: uuid, string. The ID of the permissioning object against
-#'           which the action was taken.
-#'         * details: list. Additional details about the action that vary
-#'           according to the type of action.
-#'         * logged_at: dttm. Time of action on server.
+#'  * actor_id: integer. The ID of the actor, if any, that initiated the
+#'    action.
+#'  * action: string. The action that was taken.
+#'  * actee_id: uuid, string. The ID of the permissioning object against
+#'    which the action was taken.
+#'  * details: list. Additional details about the action that vary
+#'    according to the type of action.
+#'  * logged_at: dttm. Time of action on server.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries}
 #' @family restful-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
-#' @importFrom tibble tibble
 #' @export
 #' @examples
 #' \dontrun{

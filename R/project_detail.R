@@ -14,9 +14,6 @@
 #'   * dates: NA if NULL
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details}
 #' @family restful-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
-#' @importFrom readr parse_datetime
 #' @export
 #' @examples
 #' \dontrun{

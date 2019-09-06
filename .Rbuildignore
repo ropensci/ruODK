@@ -15,3 +15,5 @@
 ^\man-roxygen$
 ^appveyor\.yml$
 codemeta.json
+^inst/joss/paper\.html$
+^inst/joss/paper\.pdf$

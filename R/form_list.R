@@ -7,8 +7,6 @@
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
 #' @family restful-api
 #' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
-#' @importFrom readr parse_datetime
 #' @export
 #' @examples
 #' \dontrun{

@@ -88,7 +88,8 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
-      verbose = TRUE),
+      verbose = TRUE
+    ),
     glue::glue("Keeping {pth}\n")
   )
 
@@ -101,7 +102,8 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
-      verbose = TRUE),
+      verbose = TRUE
+    ),
     glue::glue("Keeping {pth}\n")
   )
   testthat::expect_equal(
@@ -112,7 +114,8 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
-      verbose = TRUE),
+      verbose = TRUE
+    ),
     as.character(pth)
   )
 
@@ -126,7 +129,8 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
-      verbose = TRUE),
+      verbose = TRUE
+    ),
     "Filename is NA, skipping download."
   )
   testthat::expect_true(
@@ -138,8 +142,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       un = get_test_un(),
       pw = get_test_pw(),
       verbose = TRUE
-      )
-    )
+    ))
   )
 })
 

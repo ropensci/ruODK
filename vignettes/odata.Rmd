@@ -58,12 +58,12 @@ Alternatively, the OData service URL is shown in the form's "Submissions" tab >
 the form ID from the service URL.
 
 ```{r odk_config}
-# ODK Central credentials
-if (file.exists("~/.Rprofile")) source("~/.Rprofile")
+# ODK Central credentials can go into .Renviron, see vignette "setup"
 
-# ODK Central's OData URL
+# ODK Central's OData URL contains project and form IDs
 data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
 
+# Components
 pid <- Sys.getenv("ODKC_TEST_PID")  # 14
 fid <- Sys.getenv("ODKC_TEST_FID")  # "build_Flora-Quadrat-0-2_1558575936.svc"
 url <- Sys.getenv("ODKC_TEST_URL")  # "https://sandbox.central.opendatakit.org"
@@ -104,8 +104,9 @@ fq_svc %>% knitr::kable(.)
 ```
 
 `ruODK` provides the names and urls of the service endpoints as `tibble`.
-We see the main data available under the url `Submissions`, and a repeating group
-called `taxon_encounter` in the ODK form under the url `Submissions.taxon_encounter`.
+We see the main data available under the url `Submissions`, and a repeating 
+group called `taxon_encounter` in the ODK form under the url 
+`Submissions.taxon_encounter`.
 
 The number and names of repeating subgroups of course depends on the ODK form.
 
@@ -122,7 +123,6 @@ fq_meta <- odata_metadata_get(pid, fid, url = url, un = un, pw = pw)
 ```{r view_metadata, fig.width=7}
 listviewer::jsonedit(fq_meta)
 ```
-
 
 ## OData submission data documents
 Now let's download the form submissions and, separately, repeating form groups.

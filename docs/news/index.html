@@ -129,18 +129,20 @@
 <h1 class="page-header">
 <a href="#ruodk-061" class="anchor"></a>ruODK 0.6.1</h1>
 <ul>
-<li>ROpenSci submission review <a href="https://github.com/dbca-wa/ruODK/milestone/3">milestone</a>, <a href="https://github.com/ropensci/software-review/issues/335">discussion</a>.</li>
-<li>Updates to documentation. <a href='https://github.com/dbca-wa/ruODK/issues/13'>#13</a> <a href='https://github.com/dbca-wa/ruODK/issues/15'>#15</a> <a href='https://github.com/dbca-wa/ruODK/issues/17'>#17</a></li>
-<li>Group function docs. <a href='https://github.com/dbca-wa/ruODK/issues/18'>#18</a></li>
-<li>Update contribution guidelines and add account request issue template: How to run <code>ruODK</code> tests and build the vignettes. <a href='https://github.com/dbca-wa/ruODK/issues/15'>#15</a> <a href='https://github.com/dbca-wa/ruODK/issues/20'>#20</a></li>
-<li>Add dedicated <code><a href="../reference/ru_setup.html">ru_setup()</a></code> and <code><a href="../reference/ru_settings.html">ru_settings()</a></code>. Pat down functions for missing credentials and yell loudly but clearly about httr errors. <a href='https://github.com/dbca-wa/ruODK/issues/16'>#16</a></li>
-</ul>
-</div>
-    <div id="ruodk-060" class="section level1">
-<h1 class="page-header">
-<a href="#ruodk-060" class="anchor"></a>ruODK 0.6.0</h1>
-<ul>
-<li>Version bump and lifecycle bump to indicate that ruODK is ready to be used against ODK Central 0.6.</li>
+<li><p>ROpenSci submission review <a href="https://github.com/dbca-wa/ruODK/milestone/3">milestone</a>, <a href="https://github.com/ropensci/software-review/issues/335">discussion</a>.</p></li>
+<li><p>Updates to documentation. <a href='https://github.com/dbca-wa/ruODK/issues/13'>#13</a> <a href='https://github.com/dbca-wa/ruODK/issues/15'>#15</a> <a href='https://github.com/dbca-wa/ruODK/issues/17'>#17</a></p></li>
+<li><p>Group function docs. <a href='https://github.com/dbca-wa/ruODK/issues/18'>#18</a></p></li>
+<li><p>Update contribution guidelines and add account request issue template: How to run <code>ruODK</code> tests and build the vignettes. <a href='https://github.com/dbca-wa/ruODK/issues/15'>#15</a> <a href='https://github.com/dbca-wa/ruODK/issues/20'>#20</a></p></li>
+<li><p>Add dedicated <code><a href="../reference/ru_setup.html">ru_setup()</a></code> and <code><a href="../reference/ru_settings.html">ru_settings()</a></code>. Pat down functions for missing credentials and yell loudly but clearly about httr errors. <a href='https://github.com/dbca-wa/ruODK/issues/16'>#16</a></p></li>
+<li><p>Drop <code>@importFrom</code> to reduce duplication. All external functions are prefixed with their package name already.</p></li>
+<li><p>Add convenience helpers <code><a href="../reference/attachment_link.html">attachment_link()</a></code> and <code><a href="../reference/parse_datetime.html">parse_datetime()</a></code>.</p></li>
+<li><p>Use <code><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">janitor::clean_names()</a></code> on column names over home-grown helpers.</p></li>
+<li><p>Since <code>submission_detail</code> is now metadata only, add <code>submission_get</code> to download submission data.</p></li>
+<li>
+<p>Added a high level overview diagram to README and <code>inst/joss/paper.md</code> to illustrate <code>ruODK</code>’s intended purpose in the ODK ecosystem.</p>
+<h1 id="ruodk-060" class="page-header">ruODK 0.6.0</h1>
+</li>
+<li><p>Version bump and lifecycle bump to indicate that ruODK is ready to be used against ODK Central 0.6.</p></li>
 </ul>
 </div>
     <div id="ruodk-0609000" class="section level1">
@@ -276,7 +278,6 @@
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
         <li><a href="#ruodk-061">0.6.1</a></li>
-        <li><a href="#ruodk-060">0.6.0</a></li>
         <li><a href="#ruodk-0609000">0.6.0.9000</a></li>
         <li><a href="#ruodk-031">0.3.1</a></li>
         <li><a href="#ruodk-030">0.3.0</a></li>

@@ -3,12 +3,10 @@
 #' @template param-pid
 #' @template param-fid
 #' @template param-auth
-#' @return A nested list containing DataServices and .attrs (Version).
-#'         DataServices contains the dataset definition.
+#' @return A nested list containing Edmx (dataset schema definition) and
+#'   .attrs (Version).
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/metadata-document}
 #' @family odata-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom xml2 as_list
 #' @export
 #' @examples
 #' \dontrun{

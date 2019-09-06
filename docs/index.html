@@ -105,9 +105,19 @@
 <p><a href="https://opendatakit.org/">OpenDataKit</a> (ODK) is a free and open-source software for collecting, managing, and using data in resource-constrained environments.</p>
 <p>ODK consists of a range of <a href="https://opendatakit.org/software/">software packages and apps</a>. <code>ruODK</code> assumes some familiarity of its users with the ODK ecosystem and workflows. For a detailed overview, read the extensive <a href="https://docs.opendatakit.org/">ODK documentation</a> and visit the friendly <a href="https://forum.opendatakit.org/">ODK forum</a>.</p>
 <p><a href="https://docs.opendatakit.org/central-intro/">ODK Central</a> is a cloud-based data clearinghouse for digitally captured data, replacing the older software <a href="https://docs.opendatakit.org/aggregate-intro/">ODK Aggregate</a>. ODK Central manages user accounts and permissions, stores form definitions, and allows data collection clients like <a href="https://docs.opendatakit.org/collect-intro/">ODK Collect</a> to connect to it for form download and submission upload.</p>
-<p>A typical <a href="https://docs.opendatakit.org/#how-is-odk-used">ODK workflow</a>: After data have been captured digitally using ODK Collect, the data are uploaded and stored in ODK Central. The next step from there is to extract the data, optionally upload it into another data warehouse, and then to analyse and generate insight from it.</p>
+<div class="figure">
+<img src="https://www.lucidchart.com/publicSegments/view/952c1350-3003-48c1-a2c8-94bad74cdb46/image.png" alt="An ODK setup with ODK Build, Central, Collect, and ruODK"><p class="caption">An ODK setup with ODK Build, Central, Collect, and ruODK</p>
+</div>
+<p>A typical <a href="https://docs.opendatakit.org/#how-is-odk-used">ODK workflow</a>: An XForm is designed e.g. in <a href="https://build.opendatakit.org/">ODK Build</a>, <a href="https://docs.opendatakit.org/central-forms/">published to ODK Central</a>, and downloaded onto an Android device running ODK Collect. After data have been captured digitally using <a href="https://docs.opendatakit.org/collect-intro/">ODK Collect</a>, the data are uploaded and stored in ODK Central. The next step from there is to extract the data, optionally upload it into another data warehouse, and then to analyse and generate insight from it.</p>
 <p>While data can be retrieved in bulk through the GUI, ODK Central’s API provides access to its data and functionality through both an OData and a RESTful API with a comprehensive and interactive <a href="https://odkcentral.docs.apiary.io/#reference/odata-endpoints">documentation</a>.</p>
 <p><code>ruODK</code> is aimed at the technically minded researcher who wishes to access and use the data from ODK Central using the programming language R.</p>
+<p>Benefits of using the R ecosystem in combination with ODK:</p>
+<ul>
+<li>Scalability: Both R and ODK are free and open source software. Scaling to many users does not incur license fees.</li>
+<li>Ubiquity: R is known to many scientists and is widely taught at universities.</li>
+<li>Automation: The entire data access workflow can be automated through R scripts.</li>
+<li>Reproducible reporting (e.g.  <a href="https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr">Sweave</a>, <a href="https://rmarkdown.rstudio.com/">RMarkdown</a>), interactive web apps (<a href="https://shiny.rstudio.com/">Shiny</a>), workflow scaling (<a href="https://docs.ropensci.org/drake/">drake</a>) and a range of integrations with Docker (links coming soon).</li>
+</ul>
 <p><code>ruODK</code>’s scope:</p>
 <ul>
 <li>To wrap all ODK Central API endpoints with a focus on <strong>data access</strong>.</li>
@@ -197,7 +207,7 @@
 <a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; # A tibble: 4 x 8</span></a>
 <a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt;      id name  forms app_users last_submission     created_at         </span></a>
 <a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt; &lt;int&gt;     &lt;int&gt; &lt;dttm&gt;              &lt;dttm&gt;             </span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; 1     1 DBCA      9         1 2019-08-26 05:46:56 2019-06-05 09:12:44</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; 1     1 DBCA      9         1 2019-08-30 02:37:41 2019-06-05 09:12:44</span></a>
 <a class="sourceLine" id="cb3-10" title="10"><span class="co">#&gt; 2     3 Flora     1         1 2019-08-12 04:47:05 2019-06-06 03:24:31</span></a>
 <a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt; 3     2 Sand…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15</span></a>
 <a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt; 4     4 DBCA      0         0 NA                  2019-06-27 02:54:30</span></a>
@@ -299,14 +309,14 @@
 <a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt; To cite ruODK in publications use:</span></a>
 <a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt;   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt;   R package version 0.6.0. https://github.com/dbca-wa/ruODK</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt;   R package version 0.6.1. https://github.com/dbca-wa/ruODK</span></a>
 <a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></a>
 <a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt;   @Misc{,</span></a>
 <a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt;     title = {ruODK: Client for the ODK Central API},</span></a>
 <a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt;     author = {Florian W. Mayer},</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.0},</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.1},</span></a>
 <a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt;     year = {2019},</span></a>
 <a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt;     url = {https://github.com/dbca-wa/ruODK},</span></a>
 <a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt;   }</span></a></code></pre></div>

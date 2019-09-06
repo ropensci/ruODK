@@ -3,7 +3,7 @@ test_that("submission_export works", {
   # A fresh litterbox
   t <- tempdir()
 
-  # High expectatios
+  # High expectations
   fid <- get_test_fid()
   pth <- fs::path(t, glue::glue("{fid}.zip"))
   fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
@@ -90,6 +90,16 @@ test_that("submission_export works", {
 
   # Find the payload
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
+
+  # Test attachment_link - this saves another download of the ZIP file
+  data_quadrat <- fid_csv %>%
+    readr::read_csv(na = c("", "NA", "na")) %>%
+    janitor::clean_names(.) %>%
+    attachment_link(.) %>%
+    parse_datetime(tz = "Australia/Perth")
+
+  # Test that filepath of attachment exists
+  # TODO
 
   # Chuck the litter out
   fs::dir_delete(t)

@@ -31,8 +31,6 @@
 #'         plus any attachments in a subfolder `media`.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv}
 #' @family restful-api
-#' @importFrom httr add_headers authenticate content GET
-#' @importFrom glue glue
 #' @export
 #' @examples
 #' \dontrun{
