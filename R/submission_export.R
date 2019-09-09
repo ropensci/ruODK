@@ -37,7 +37,10 @@
 #' \dontrun{
 #' # Set default credentials, see vignette "setup"
 #' ruODK::ru_setup(
-#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   svc = paste0(
+#'     "https://sandbox.central.opendatakit.org/v1/projects/14/",
+#'     "forms/build_Flora-Quadrat-0-2_1558575936.svc"
+#'   ),
 #'   un = "me@email.com",
 #'   pw = "..."
 #' )
@@ -51,9 +54,6 @@
 #' fid <- get_test_fid()
 #' sub <- fs::path(t, glue::glue("{fid}.csv")) %>% readr::read_csv()
 #' sub %>% knitr::kable(.)
-#'
-#' # Cleanup
-#' fs::dir_delete(t)
 #' }
 submission_export <- function(local_dir = here::here(),
                               overwrite = TRUE,

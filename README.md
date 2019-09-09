@@ -170,9 +170,9 @@ read-permitted ODK Central web user.
 
 ``` r
 ruODK::ru_setup(
-  svc="https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc",
-  # un = "me@email.com",
-  # pw = "..."
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
 )
 ```
 
@@ -186,17 +186,50 @@ A quick example using the OData service:
 
 ``` r
 library(ruODK)
+
 # List projects
 proj <- ruODK::project_list()
 proj %>% knitr::kable(.)
 ```
 
-| id | name    | forms | app\_users | last\_submission    | created\_at         | updated\_at         | archived |
-| -: | :------ | ----: | ---------: | :------------------ | :------------------ | :------------------ | :------- |
-|  1 | DBCA    |     9 |          1 | 2019-08-30 02:37:41 | 2019-06-05 09:12:44 | 2019-07-23 01:00:08 | FALSE    |
-|  3 | Flora   |     1 |          1 | 2019-08-12 04:47:05 | 2019-06-06 03:24:31 | 2019-06-06 03:24:42 | FALSE    |
-|  2 | Sandbox |     3 |          1 | 2019-06-26 07:12:25 | 2019-06-06 03:24:15 | 2019-08-28 11:25:26 | FALSE    |
-|  4 | DBCA    |     0 |          0 | NA                  | 2019-06-27 02:54:30 | 2019-07-22 02:44:23 | TRUE     |
+| id | name                                   | forms | app\_users | last\_submission    | created\_at         | updated\_at         | archived |
+| -: | :------------------------------------- | ----: | ---------: | :------------------ | :------------------ | :------------------ | :------- |
+|  8 | AmenazasRD                             |     0 |          0 | NA                  | 2019-04-14 06:21:00 | NA                  | FALSE    |
+|  9 | BAFCO Test                             |     1 |          1 | 2019-04-19 01:26:49 | 2019-04-19 00:30:45 | NA                  | FALSE    |
+| 11 | CaVaTeCo                               |     2 |          1 | 2019-04-30 08:07:55 | 2019-04-30 06:43:22 | NA                  | FALSE    |
+| 18 | CherryPatch                            |     2 |          1 | 2019-05-28 17:32:15 | 2019-05-27 21:09:33 | 2019-05-29 20:08:10 | FALSE    |
+| 32 | Collect3289v2                          |     1 |          2 | 2019-08-07 13:44:19 | 2019-08-07 12:52:56 | NA                  | FALSE    |
+|  4 | Curso                                  |     7 |          4 | 2019-03-21 22:22:57 | 2019-02-26 03:55:50 | NA                  | FALSE    |
+| 14 | DBCA WA                                |     8 |          3 | 2019-06-05 01:33:49 | 2019-05-17 03:10:51 | 2019-05-24 05:24:00 | FALSE    |
+|  7 | DRC Test                               |     1 |          4 | 2019-05-07 13:14:01 | 2019-03-29 08:52:32 | NA                  | FALSE    |
+| 24 | Farmers Survey                         |     1 |          0 | NA                  | 2019-06-25 15:51:47 | NA                  | FALSE    |
+|  1 | Forms you made before projects existed |    44 |         28 | 2019-08-24 16:10:29 | 2019-02-14 17:28:00 | NA                  | FALSE    |
+| 30 | FWW Epi Survey                         |     1 |          1 | 2019-08-06 17:19:15 | 2019-08-02 15:04:09 | NA                  | FALSE    |
+|  6 | g                                      |     0 |          0 | NA                  | 2019-03-27 13:16:47 | NA                  | FALSE    |
+| 23 | Guillermo’s tests                      |    44 |          0 | 2019-06-16 03:02:45 | 2019-06-15 11:30:05 | NA                  | FALSE    |
+| 33 | issa test                              |     0 |          0 | NA                  | 2019-08-07 22:27:11 | NA                  | FALSE    |
+| 26 | Kinshasa                               |     0 |          0 | NA                  | 2019-07-25 19:26:53 | NA                  | FALSE    |
+| 34 | MBA                                    |     1 |          2 | 2019-08-13 03:30:17 | 2019-08-13 02:06:28 | NA                  | FALSE    |
+|  2 | mon projet                             |     1 |          0 | NA                  | 2019-02-14 19:32:05 | NA                  | FALSE    |
+|  3 | MyProjects                             |     0 |          1 | NA                  | 2019-02-25 19:31:40 | NA                  | FALSE    |
+| 25 | Olivier38                              |     2 |          1 | 2019-07-27 20:14:39 | 2019-06-27 15:52:10 | NA                  | FALSE    |
+| 21 | PresentationTest                       |     0 |          1 | NA                  | 2019-06-11 09:38:45 | NA                  | FALSE    |
+| 13 | ProjetTest                             |     0 |          0 | NA                  | 2019-05-10 16:04:04 | NA                  | FALSE    |
+| 22 | psud test                              |     1 |          2 | 2019-06-12 00:30:26 | 2019-06-12 00:20:02 | NA                  | FALSE    |
+| 35 | Ronald Munjoma Test                    |     2 |          1 | NA                  | 2019-08-18 12:37:29 | NA                  | FALSE    |
+| 29 | ✨Secret project ✨                      |     1 |          1 | NA                  | 2019-08-02 03:55:59 | NA                  | FALSE    |
+|  5 | SurveyAir                              |     1 |          2 | 2019-04-11 07:36:35 | 2019-03-12 00:15:36 | NA                  | FALSE    |
+| 16 | TBBT                                   |     1 |          1 | 2019-05-17 12:29:18 | 2019-05-17 12:21:50 | NA                  | FALSE    |
+| 27 | Test form                              |     0 |          0 | NA                  | 2019-07-25 19:35:11 | NA                  | FALSE    |
+| 10 | TestWFPProjects                        |     0 |          0 | NA                  | 2019-04-25 16:09:51 | NA                  | FALSE    |
+| 28 | Tom Test                               |     2 |          1 | 2019-07-31 20:45:47 | 2019-07-31 20:08:20 | NA                  | FALSE    |
+| 12 | UDA                                    |     3 |          2 | 2019-05-07 07:31:12 | 2019-05-02 14:52:35 | NA                  | FALSE    |
+| 20 | UNCP-MW Test                           |     2 |          2 | 2019-06-06 00:36:20 | 2019-06-05 14:01:06 | 2019-06-05 18:19:14 | FALSE    |
+| 36 | Yaw’s test                             |     1 |          1 | NA                  | 2019-09-02 22:59:35 | NA                  | FALSE    |
+| 31 | Collect3289                            |     0 |          1 | NA                  | 2019-08-07 12:39:42 | 2019-08-07 12:52:50 | TRUE     |
+| 17 | sdf                                    |     0 |          0 | NA                  | 2019-05-24 12:21:59 | 2019-05-24 12:23:09 | TRUE     |
+| 15 | Turtles                                |     0 |          0 | NA                  | 2019-05-17 08:18:39 | 2019-05-24 05:25:34 | TRUE     |
+| 19 | WatermelonPatch                        |     1 |          1 | 2019-05-29 19:50:50 | 2019-05-29 19:44:14 | 2019-05-29 20:06:46 | TRUE     |
 
 ``` r
 
@@ -205,17 +238,16 @@ frms <- ruODK::form_list()
 frms %>% knitr::kable(.)
 ```
 
-| name                         | fid                                             | version | state   | submissions | created\_at         | created\_by\_id | created\_by   | updated\_at         | last\_submission    | hash                             |
-| :--------------------------- | :---------------------------------------------- | :------ | :------ | :---------- | :------------------ | --------------: | :------------ | :------------------ | :------------------ | :------------------------------- |
-| Flora Quadrat 0.4            | build\_Flora-Quadrat-0-4\_1564384341            |         | open    | 0           | 2019-07-29 07:13:48 |               5 | Florian Mayer | NA                  | NA                  | 1bb959d541ac6990e3f74893e38c855b |
-| Marine Wildlife Incident 0.6 | build\_Marine-Wildlife-Incident-0-6\_1559789189 |         | open    | 5           | 2019-06-06 03:29:04 |               5 | Florian Mayer | NA                  | 2019-08-26 00:58:47 | ef79df7abb830de618d82765c36c2f59 |
-| Predator or Disturbance 1.1  | build\_Predator-or-Disturbance-1-1\_1559789410  |         | open    | 14          | 2019-06-06 03:31:25 |               5 | Florian Mayer | NA                  | 2019-08-30 02:33:31 | 9c70919ed211e2492ff1dda7a6c7c564 |
-| Site Visit End 0.2           | build\_Site-Visit-End-0-2\_1559789512           |         | open    | 32          | 2019-06-06 03:31:13 |               5 | Florian Mayer | NA                  | 2019-08-30 02:34:55 | 7b4d658b314cd1f0aef8c056c8d3009b |
-| Site Visit Start 0.3         | build\_Site-Visit-Start-0-3\_1559789550         |         | open    | 32          | 2019-06-06 03:31:02 |               5 | Florian Mayer | NA                  | 2019-08-30 02:36:02 | 64e8fabc98ad20cd1eb1de62ac1d35c3 |
-| Track Tally 0.5              | build\_Track-Tally-0-5\_1564032721              |         | closing | 2           | 2019-07-25 05:32:44 |               5 | Florian Mayer | 2019-07-29 07:57:44 | 2019-07-29 01:46:36 | 2d521c5b75c07238a5c55010efecf21b |
-| Turtle Sighting 0.1          | build\_Turtle-Sighting-0-1\_1559790020          |         | open    | 150         | 2019-06-06 03:29:16 |               5 | Florian Mayer | NA                  | 2019-08-26 03:58:22 | dc5906a4a18c33ff0cfeee419b0ce00e |
-| Turtle Track or Nest 1.0     | build\_Turtle-Track-or-Nest-1-0\_1559789920     |         | open    | 129         | 2019-06-06 03:30:36 |               5 | Florian Mayer | NA                  | 2019-08-30 02:37:41 | b52193af35826ff9da3678cc22469535 |
-| Turtle Track Tally 0.6       | build\_Turtle-Track-Tally-0-6\_1564387009       |         | open    | 75          | 2019-07-29 07:57:36 |               5 | Florian Mayer | NA                  | 2019-08-30 02:36:38 | c293c4cc528738cdfb596e3b9732c66f |
+| name                          | fid                                              | version | state   | submissions | created\_at         | created\_by\_id | created\_by                    | updated\_at         | last\_submission    | hash                             |
+| :---------------------------- | :----------------------------------------------- | :------ | :------ | :---------- | :------------------ | --------------: | :----------------------------- | :------------------ | :------------------ | :------------------------------- |
+| Flora Quadrat 0.1             | build\_Flora-Quadrat-0-1\_1558330379             |         | closing | 1           | 2019-05-20 05:33:15 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-05-23 01:46:39 | 2019-05-20 05:44:20 | 4f0036619468ef05b572631b04b94f06 |
+| Flora Quadrat 0.2             | build\_Flora-Quadrat-0-2\_1558575936             |         | open    | 2           | 2019-05-23 01:46:08 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-08-19 07:57:38 | 2019-05-23 03:12:16 | 14e269a2374132392c275117efbe67b6 |
+| Flora Quadrat 0.3             | build\_Flora-Quadrat-0-3\_1559119570             |         | open    | 1           | 2019-05-29 08:48:15 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-05-29 08:55:59 | d5a80cefb1895eefcd0cb86a12d8acb4 |
+| Flora Quadrat 0.4             | build\_Flora-Quadrat-0-4\_1564384341             |         | open    | 0           | 2019-08-19 07:58:28 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | NA                  | 1bb959d541ac6990e3f74893e38c855b |
+| Spotlighting 0.5              | build\_Spotlighting-0-5\_1558320001              |         | closing | 1           | 2019-05-20 02:44:47 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-05-20 06:30:41 | 2019-05-20 02:58:09 | 3775dcdface98ba3a426739c494123f6 |
+| Spotlighting 0.6              | build\_Spotlighting-0-6\_1558333698              |         | open    | 3           | 2019-05-20 06:30:21 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-05-30 07:13:29 | 456daaa9a4f96670e6eef3cf4a7dd0db |
+| Spotlighting Survey End 0.3   | build\_Spotlighting-Survey-End-0-3\_1558320208   |         | open    | 2           | 2019-05-20 02:44:38 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-05-30 07:15:53 | 5fdfac8e773834b1267f7ca7e1c9a428 |
+| Spotlighting Survey Start 0.3 | build\_Spotlighting-Survey-Start-0-3\_1558320795 |         | open    | 7           | 2019-05-20 02:53:50 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-06-05 01:33:49 | f548a064cca13bca746f3c0b1a8b5a32 |
 
 ``` r
 
@@ -224,9 +256,9 @@ frmd <- ruODK::form_detail()
 frmd %>% knitr::kable(.)
 ```
 
-| name                | fid                                    | version | state | submissions | created\_at              | created\_by\_id | created\_by   | updated\_at | last\_submission         | hash                             |
-| :------------------ | :------------------------------------- | :------ | :---- | ----------: | :----------------------- | --------------: | :------------ | :---------- | :----------------------- | :------------------------------- |
-| Turtle Sighting 0.1 | build\_Turtle-Sighting-0-1\_1559790020 |         | open  |         150 | 2019-06-06T03:29:16.497Z |               5 | Florian Mayer | NA          | 2019-08-26T03:58:22.016Z | dc5906a4a18c33ff0cfeee419b0ce00e |
+| name              | fid                                  | version | state | submissions | created\_at              | created\_by\_id | created\_by                    | updated\_at              | last\_submission         | hash                             |
+| :---------------- | :----------------------------------- | :------ | :---- | ----------: | :----------------------- | --------------: | :----------------------------- | :----------------------- | :----------------------- | :------------------------------- |
+| Flora Quadrat 0.2 | build\_Flora-Quadrat-0-2\_1558575936 |         | open  |           2 | 2019-05-23T01:46:08.474Z |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-08-19T07:57:38.755Z | 2019-05-23T03:12:16.012Z | 14e269a2374132392c275117efbe67b6 |
 
 ``` r
 
@@ -285,23 +317,16 @@ meta$Edmx$DataServices$Schema
 #> attr(,"xmlns")
 #> [1] "http://docs.oasis-open.org/odata/ns/edm"
 
-# Form submissions (sensitive data omitted)
+# Form submissions
 data <- ruODK::odata_submission_get() %>%
   ruODK::odata_submission_parse()
-data %>% 
-  head(.) %>% 
-  dplyr::select(-"reporter", -"...11") %>%
-  knitr::kable(.)
+data %>% knitr::kable(.)
 ```
 
-| .\_\_id                                   | observation\_start\_time      | device\_id       | observation\_end\_time        | submissionDate           | submitterId | submitterName | instanceID                                | type  |        …12 |   …13 | accuracy | species           | sex | maturity       | activity     | observer\_acticity | photo\_habitat | .odata.context                                                                                                         |
-| :---------------------------------------- | :---------------------------- | :--------------- | :---------------------------- | :----------------------- | :---------- | :------------ | :---------------------------------------- | :---- | ---------: | ----: | -------: | :---------------- | :-- | :------------- | :----------- | :----------------- | :------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| uuid:4cab20c1-4d04-4450-a76d-aaa6cfc02b35 | 2019-08-23T15:23:35.052+08:00 | e249db9e68907e41 | 2019-08-23T15:24:17.055+08:00 | 2019-08-26T03:58:22.016Z | 16          | Turtles       | uuid:4cab20c1-4d04-4450-a76d-aaa6cfc02b35 | Point | \-18.03410 |   4.1 |       10 | natator-depressus | na  | adult          | non-breeding | net-catch-failed   | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
-| uuid:618e23a0-d5fb-45f3-b3d5-d669eca4b3e2 | 2019-08-23T15:18:31.267+08:00 | e249db9e68907e41 | 2019-08-23T15:18:56.466+08:00 | 2019-08-26T03:58:21.146Z | 16          | Turtles       | uuid:618e23a0-d5fb-45f3-b3d5-d669eca4b3e2 | Point | \-18.03370 |  42.6 |       10 | natator-depressus | na  | adult          | non-breeding | net-catch-failed   | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
-| uuid:3877e264-1c1d-45d5-a2af-34267bf2a320 | 2019-08-23T15:17:41.789+08:00 | e249db9e68907e41 | 2019-08-23T15:18:09.073+08:00 | 2019-08-26T03:58:20.249Z | 16          | Turtles       | uuid:3877e264-1c1d-45d5-a2af-34267bf2a320 | Point | \-18.03323 |  46.6 |       10 | natator-depressus | na  | adult          | non-breeding | net-catch-failed   | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
-| uuid:752e4d0c-dfac-4110-8adc-41f1898fbd4c | 2019-08-23T14:29:56.720+08:00 | e249db9e68907e41 | 2019-08-23T14:30:24.446+08:00 | 2019-08-26T03:58:19.479Z | 16          | Turtles       | uuid:752e4d0c-dfac-4110-8adc-41f1898fbd4c | Point | \-18.03521 | \-7.2 |       10 | natator-depressus | na  | adult          | non-breeding | no-interaction     | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
-| uuid:c295b83a-4208-48be-b55e-e581ebd3eb75 | 2019-08-23T14:21:18.958+08:00 | e249db9e68907e41 | 2019-08-23T14:21:57.573+08:00 | 2019-08-26T03:58:18.755Z | 16          | Turtles       | uuid:c295b83a-4208-48be-b55e-e581ebd3eb75 | Point | \-18.03506 | \-4.1 |       10 | natator-depressus | na  | post-hatchling | non-breeding | net-catch-failed   | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
-| uuid:09a1a70d-2beb-4766-b8bc-05b7362faf8a | 2019-08-23T14:11:48.456+08:00 | e249db9e68907e41 | 2019-08-23T14:12:08.446+08:00 | 2019-08-26T03:58:18.104Z | 16          | Turtles       | uuid:09a1a70d-2beb-4766-b8bc-05b7362faf8a | Point | \-18.03542 |   4.7 |       10 | natator-depressus | na  | adult          | non-breeding | no-interaction     | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
+| id                                        | encounter\_start\_datetime    | reporter      | device\_id       | encounter\_end\_datetime      | submission\_date         | submitter\_id | submitter\_name | instance\_id                              | area\_name | quadrat\_photo    | type\_12 |      x13 |        x14 |  x15 | accuracy\_16 | morphological\_type | morphological\_type\_photo | vegclass\_placeholder                   | type\_20 |      x21 |        x22 |  x23 | accuracy\_24 | type\_25 |      x26 |        x27 |  x28 | accuracy\_29 | type\_30 |      x31 |        x32 |  x33 | accuracy\_34 | mudmap\_photo     | odata\_context                                                                                                              |
+| :---------------------------------------- | :---------------------------- | :------------ | :--------------- | :---------------------------- | :----------------------- | :------------ | :-------------- | :---------------------------------------- | :--------- | :---------------- | :------- | -------: | ---------: | ---: | -----------: | :------------------ | :------------------------- | :-------------------------------------- | :------- | -------: | ---------: | ---: | -----------: | :------- | -------: | ---------: | ---: | -----------: | :------- | -------: | ---------: | ---: | -----------: | :---------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12 | 2019-05-23T10:46:04.821+08:00 | Florian Mayer | ccb596b33cd13298 | 2019-05-23T10:57:17.184+08:00 | 2019-05-23T03:12:16.012Z | 228           | manjimup        | uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12 | Kens1      | 1558579592153.jpg | Point    | 115.8840 | \-31.99618 |    0 |       41.909 | open-depression     | 1558579731266.jpg          | Lanscaped native shrubs over red gravel | Point    | 115.8840 | \-31.99612 |    0 |       40.977 | Point    | 115.8843 | \-31.99666 |    0 |       60.000 | Point    | 115.8841 | \-31.99613 |    0 |    72.900000 | 1558580082333.jpg | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions> |
+| uuid:e0375332-0bb5-4175-a498-549bb33420e4 | 2019-05-23T10:58:34.541+08:00 | Florian Mayer | 351848090572014  | 2019-05-23T11:05:48.371+08:00 | 2019-05-23T03:07:34.385Z | 228           | manjimup        | uuid:e0375332-0bb5-4175-a498-549bb33420e4 | Kens02     | 1558580334821.jpg | Point    | 115.8843 | \-31.99621 | \-21 |       12.864 | flat                | 1558580394989.jpg          | Planter box over concrete pavers        | Point    | 115.8843 | \-31.99620 | \-22 |       12.864 | Point    | 115.8843 | \-31.99620 | \-22 |       15.008 | Point    | 115.8843 | \-31.99618 | \-26 |     9.648001 | 1558580571494.jpg | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions> |
 
 A more detailed walk-through with some data visualisation examples is
 available in the `vignette("odata", package="ruODK")` (online
@@ -344,7 +369,7 @@ citation("ruODK")
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.6.1},
+#>     note = {R package version 0.6.2},
 #>     year = {2019},
 #>     url = {https://github.com/dbca-wa/ruODK},
 #>   }

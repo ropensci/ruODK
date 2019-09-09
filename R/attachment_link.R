@@ -66,9 +66,6 @@ prefix_fn <- function(fn, prefix) {
 #'   janitor::clean_names(.) %>%
 #'   attachment_link(.) %>%
 #'   parse_datetime(tz = "Australia/Perth")
-#'
-#' # Cleanup
-#' fs::dir_delete(t)
 #' }
 attachment_link <- function(data_tbl,
                             att_path = "media",

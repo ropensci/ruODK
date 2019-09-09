@@ -288,29 +288,30 @@
 <a class="sourceLine" id="cb9-5" title="5">styler<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/styler/man/style_pkg.html">style_pkg</a></span>()</a>
 <a class="sourceLine" id="cb9-6" title="6">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/document.html">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rd"</span>, <span class="st">"collate"</span>, <span class="st">"namespace"</span>))</a>
 <a class="sourceLine" id="cb9-7" title="7">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/spell_check_package.html">spell_check_package</a></span>()</a>
-<a class="sourceLine" id="cb9-8" title="8">codemetar<span class="op">::</span><span class="kw"><a href="https://ropensci.github.io/codemetar/reference/write_codemeta.html">write_codemeta</a></span>(<span class="st">"ruODK"</span>)</a>
-<a class="sourceLine" id="cb9-9" title="9">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span>(<span class="st">"inst/CITATION"</span>)</a>
-<a class="sourceLine" id="cb9-10" title="10">rmarkdown<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span>(<span class="st">"README.Rmd"</span>,  <span class="dt">encoding =</span> <span class="st">"UTF-8"</span>, <span class="dt">clean =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb9-11" title="11"><span class="cf">if</span> (fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/file_access.html">file_exists</a></span>(<span class="st">"README.html"</span>)) fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/delete.html">file_delete</a></span>(<span class="st">"README.html"</span>)</a>
-<a class="sourceLine" id="cb9-12" title="12"></a>
-<a class="sourceLine" id="cb9-13" title="13"><span class="co"># Checks</span></a>
-<a class="sourceLine" id="cb9-14" title="14">goodpractice<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/goodpractice/man/gp.html">goodpractice</a></span>(<span class="dt">quiet =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb9-15" title="15"><span class="co"># runs devtools::check()</span></a>
-<a class="sourceLine" id="cb9-16" title="16"></a>
-<a class="sourceLine" id="cb9-17" title="17"><span class="co"># Release</span></a>
-<a class="sourceLine" id="cb9-18" title="18">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_version.html">use_version</a></span>(<span class="st">"minor"</span>)</a>
-<a class="sourceLine" id="cb9-19" title="19">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span>(<span class="st">"NEWS.md"</span>)</a>
-<a class="sourceLine" id="cb9-20" title="20">pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</a>
-<a class="sourceLine" id="cb9-21" title="21"></a>
-<a class="sourceLine" id="cb9-22" title="22"><span class="co"># Vignettes are big</span></a>
-<a class="sourceLine" id="cb9-23" title="23"><span class="co"># the repo is small</span></a>
-<a class="sourceLine" id="cb9-24" title="24"><span class="co"># so what shall we do</span></a>
-<a class="sourceLine" id="cb9-25" title="25"><span class="co"># let's mogrify all</span></a>
-<a class="sourceLine" id="cb9-26" title="26"><span class="kw"><a href="https://rdrr.io/r/base/system.html">system</a></span>(<span class="st">"find vignettes/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} </span><span class="ch">\\</span><span class="st">;"</span>)</a>
-<a class="sourceLine" id="cb9-27" title="27">vignette_tempfiles &lt;-<span class="st"> </span>here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"vignettes"</span>, <span class="st">"attachments"</span>)</a>
-<a class="sourceLine" id="cb9-28" title="28">fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/copy.html">dir_copy</a></span>(vignette_tempfiles, here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"docs/articles/"</span>))</a>
-<a class="sourceLine" id="cb9-29" title="29"></a>
-<a class="sourceLine" id="cb9-30" title="30"><span class="co"># Git commit, tag and push</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-8" title="8">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/wordlist.html">update_wordlist</a></span>()</a>
+<a class="sourceLine" id="cb9-9" title="9">codemetar<span class="op">::</span><span class="kw"><a href="https://ropensci.github.io/codemetar/reference/write_codemeta.html">write_codemeta</a></span>(<span class="st">"ruODK"</span>)</a>
+<a class="sourceLine" id="cb9-10" title="10">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span>(<span class="st">"inst/CITATION"</span>)</a>
+<a class="sourceLine" id="cb9-11" title="11">rmarkdown<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span>(<span class="st">"README.Rmd"</span>,  <span class="dt">encoding =</span> <span class="st">"UTF-8"</span>, <span class="dt">clean =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="cf">if</span> (fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/file_access.html">file_exists</a></span>(<span class="st">"README.html"</span>)) fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/delete.html">file_delete</a></span>(<span class="st">"README.html"</span>)</a>
+<a class="sourceLine" id="cb9-13" title="13"></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="co"># Checks</span></a>
+<a class="sourceLine" id="cb9-15" title="15">goodpractice<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/goodpractice/man/gp.html">goodpractice</a></span>(<span class="dt">quiet =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="co"># runs devtools::check()</span></a>
+<a class="sourceLine" id="cb9-17" title="17"></a>
+<a class="sourceLine" id="cb9-18" title="18"><span class="co"># Release</span></a>
+<a class="sourceLine" id="cb9-19" title="19">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_version.html">use_version</a></span>(<span class="st">"minor"</span>)</a>
+<a class="sourceLine" id="cb9-20" title="20">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span>(<span class="st">"NEWS.md"</span>)</a>
+<a class="sourceLine" id="cb9-21" title="21">pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</a>
+<a class="sourceLine" id="cb9-22" title="22"></a>
+<a class="sourceLine" id="cb9-23" title="23"><span class="co"># Vignettes are big</span></a>
+<a class="sourceLine" id="cb9-24" title="24"><span class="co"># the repo is small</span></a>
+<a class="sourceLine" id="cb9-25" title="25"><span class="co"># so what shall we do</span></a>
+<a class="sourceLine" id="cb9-26" title="26"><span class="co"># let's mogrify all</span></a>
+<a class="sourceLine" id="cb9-27" title="27"><span class="kw"><a href="https://rdrr.io/r/base/system.html">system</a></span>(<span class="st">"find vignettes/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} </span><span class="ch">\\</span><span class="st">;"</span>)</a>
+<a class="sourceLine" id="cb9-28" title="28">vignette_tempfiles &lt;-<span class="st"> </span>here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"vignettes"</span>, <span class="st">"attachments"</span>)</a>
+<a class="sourceLine" id="cb9-29" title="29">fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/copy.html">dir_copy</a></span>(vignette_tempfiles, here<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/here/man/here.html">here</a></span>(<span class="st">"docs/articles/"</span>))</a>
+<a class="sourceLine" id="cb9-30" title="30"></a>
+<a class="sourceLine" id="cb9-31" title="31"><span class="co"># Git commit, tag and push</span></a></code></pre></div>
 </div>
 
 

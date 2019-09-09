@@ -57,9 +57,6 @@ data_quadrat <- fid_csv \%>\%
   janitor::clean_names(.) \%>\%
   attachment_link(.) \%>\%
   parse_datetime(tz = "Australia/Perth")
-
-# Cleanup
-fs::dir_delete(t)
 }
 }
 \seealso{

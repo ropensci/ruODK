@@ -93,17 +93,21 @@ test_that("submission_export works", {
 
   # Test attachment_link - this saves another download of the ZIP file
   # Tests usethis::edit_file("R/attachment_link.R")
-  data_quadrat <- fid_csv %>%
-    readr::read_csv(na = c("", "NA", "na")) %>%
-    janitor::clean_names(.) %>%
-    attachment_link(.) %>%
-    parse_datetime(tz = "Australia/Perth")
+  suppressWarnings(
+    data_quadrat_csv <- fid_csv %>%
+      readr::read_csv(na = c("", "NA", "na")) %>%
+      janitor::clean_names(.) %>%
+      attachment_link(.) %>%
+      parse_datetime(tz = "Australia/Perth")
+  )
 
   # Test that filepath of attachment exists
-  # TODO
-
-  # Chuck the litter out
-  fs::dir_delete(t)
+  for (i in seq_len(nrow(data_quadrat_csv))) {
+    testthat::expect_true(
+      fs::path(t, data_quadrat_csv[i, ]$location_quadrat_photo) %>%
+        fs::file_exists()
+    )
+  }
 })
 
 # Tests code

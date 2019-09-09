@@ -205,7 +205,8 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># Set default credentials, see vignette "setup"</span>
 <span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/ru_setup.html'>ru_setup</a></span>(
-  <span class='kw'>svc</span> <span class='kw'>=</span> <span class='st'>"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>,
+<span class='kw'>svc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"https://sandbox.central.opendatakit.org/v1/projects/14/"</span>,
+             <span class='st'>"forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>,
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>
 )

@@ -31,8 +31,6 @@ test_that("attachment_get works", {
   # submissions at the time of writing
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))
   testthat::expect_true(fs::file_exists(fresh_parsed$quadrat_photo[[1]]))
-
-  fs::dir_delete(t)
 })
 
 test_that("attachment_url works", {
@@ -162,8 +160,6 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       )
     )
   )
-
-  fs::dir_delete(t)
 })
 
 # Tests code

@@ -1,6 +1,9 @@
 # ODK Central example data
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  svc = paste0(
+    "https://sandbox.central.opendatakit.org/v1/projects/14/",
+    "forms/build_Flora-Quadrat-0-2_1558575936.svc"
+  ),
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )

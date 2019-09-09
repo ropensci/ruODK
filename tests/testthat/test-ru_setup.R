@@ -47,18 +47,22 @@ test_that("ru_setup resets settings if given empty string", {
 
   # Hammertime
   ru_setup(
+    pid = "",
+    fid = "",
     url = "",
     un = "",
     pw = "",
+    test_pid = "",
+    test_fid = "",
     test_url = "",
     test_un = "",
-    test_pw = "",
-    test_pid = "",
-    test_fid = ""
+    test_pw = ""
   )
   x <- ru_settings()
 
   # Yell at me
+  testthat::expect_warning(get_default_pid())
+  testthat::expect_warning(get_default_fid())
   testthat::expect_warning(get_default_url())
   testthat::expect_warning(get_default_un())
   testthat::expect_warning(get_default_pw())
@@ -129,19 +133,19 @@ test_that("ru_setup sets pid, fid, url if given service url", {
 test_that("ru_setup sets individual settings", {
 
   # Keep original test settings
-  url <- get_default_url()
+  url <- ruODK::get_test_url()
 
   # Hammertime
   xx <- "something"
   ru_setup(url = xx)
-  testthat::expect_equal(ru_settings()$url, xx)
+  testthat::expect_equal(ruODK::ru_settings()$url, xx)
 
   # Reset
-  # ru_setup(url = url)
+  ruODK::ru_setup(url = url)
 })
 
 test_that("ru_settings prints nicely", {
-  x <- ru_settings()
+  x <- ruODK::ru_settings()
   testthat::expect_equal(class(x), "ru_settings")
 
   out <- testthat::capture_output(print(x))
@@ -156,12 +160,8 @@ test_that("yell_if_missing yells loudly", {
   testthat::expect_error(yell_if_missing("", "", ""))
   testthat::expect_error(yell_if_missing("", "", "", ""))
   testthat::expect_error(yell_if_missing("", "", "", "", ""))
-  testthat::expect_error(
-    yell_if_missing("asd", "asd", "asd", pid = "", fid = "asd")
-  )
-  testthat::expect_error(
-    yell_if_missing("asd", "asd", "asd", pid = "asd", fid = "")
-  )
+  testthat::expect_error(yell_if_missing("x", "x", "x", pid = "", fid = "x"))
+  testthat::expect_error(yell_if_missing("x", "x", "x", pid = "x", fid = ""))
 })
 
 test_that("odata_svc_parse works", {

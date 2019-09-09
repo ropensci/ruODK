@@ -1,16 +1,16 @@
 test_that("submission_get works", {
   sl <- submission_list(
-    get_test_pid(),
-    get_test_fid(),
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
   )
 
   sub <- submission_get(
-    get_test_pid(),
-    get_test_fid(),
     sl$instance_id[[1]],
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
@@ -35,4 +35,4 @@ test_that("submission_get works", {
 
 
 # Tests code
-# usethis::edit_file("R/submission_detail.R")
+# usethis::edit_file("R/submission_get.R")

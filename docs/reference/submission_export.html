@@ -238,7 +238,8 @@ as listed for each submission (`attachment_list`).</p>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># Set default credentials, see vignette "setup"</span>
 <span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/ru_setup.html'>ru_setup</a></span>(
-  <span class='kw'>svc</span> <span class='kw'>=</span> <span class='st'>"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>,
+<span class='kw'>svc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"https://sandbox.central.opendatakit.org/v1/projects/14/"</span>,
+             <span class='st'>"forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>,
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>
 )
@@ -252,9 +253,6 @@ as listed for each submission (`attachment_list`).</p>
 <span class='no'>fid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru_settings.html'>get_test_fid</a></span>()
 <span class='no'>sub</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span>(<span class='no'>t</span>, <span class='kw pkg'>glue</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/glue/man/glue.html'>glue</a></span>(<span class='st'>"{fid}.csv"</span>)) <span class='kw'>%&gt;%</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>()
 <span class='no'>sub</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
-
-<span class='co'># Cleanup</span>
-<span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/delete.html'>dir_delete</a></span>(<span class='no'>t</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
