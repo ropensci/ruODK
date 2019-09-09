@@ -141,7 +141,7 @@ The other parameters are automatically repeated.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>attachment_get</span>(<span class='no'>sid</span>, <span class='no'>fn</span>, <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='st'>"attachments"</span>,
+    <pre class="usage"><span class='fu'>attachment_get</span>(<span class='no'>sid</span>, <span class='no'>fn</span>, <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='st'>"media"</span>, <span class='kw'>separate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(), <span class='kw'>fid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>(),
   <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>(), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
@@ -160,7 +160,18 @@ The other parameters are automatically repeated.</p>
     <tr>
       <th>local_dir</th>
       <td><p>The local folder to save the downloaded files to,
-default: "attachments".</p></td>
+default: "media".</p></td>
+    </tr>
+    <tr>
+      <th>separate</th>
+      <td><p>(logical) Whether to separate locally downloaded files into
+a subfolder named after the submission uuid within `local_dir`,
+default: FALSE.
+The defaults mirror the behaviour of <code>`submission_export`</code>, which
+keeps all attachment files together in a folder `media`.
+Enable this option if downloaded files collide on idential names. This can
+happen if two data collection devices by chance generate the same filename
+for two respective media files, e.g. `DCIM0001.jpg`.</p></td>
     </tr>
     <tr>
       <th>pid</th>

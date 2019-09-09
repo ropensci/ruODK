@@ -371,7 +371,7 @@ sub_att <- sub_parsed %>%
     location_quadrat_photo = ruODK::attachment_get(
         meta_instance_id,
         location_quadrat_photo,
-        local_dir = t
+        local_dir = fs::path(t, "media")
     )
     # same for all other attachments
     # requires knowledge or introspection of form schema

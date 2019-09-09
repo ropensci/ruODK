@@ -144,9 +144,14 @@ to receive a (repeated) copy of the main observation's values
 For clarity, we enable verbose messages from `odata_submission_parse` 
 and preserve the message output in the code chunk options with `message=TRUE`.
 
+We use a custom local path for attachments (`loc`). This results in a smaller
+installed package size for `ruODK`, as it shares the attachment files with the
+other vignettes. The default is a local folder `media`.
+
 ```{r transform_data, message=TRUE}
 ord <- "YmdHMSz"
 tz <- "Australia/Perth"
+loc <- fs::path("attachments", "media")
   
 fq_data <- fq_raw %>%
   ruODK::odata_submission_parse(verbose = TRUE) %>% 
@@ -158,10 +163,12 @@ fq_data <- fq_raw %>%
     altitude = x15
   ) %>%
   dplyr::mutate(
-    quadrat_photo = attachment_get(id, quadrat_photo),
-    morphological_type_photo = attachment_get(id, morphological_type_photo),
-    mudmap_photo = attachment_get(id, mudmap_photo),
-
+    quadrat_photo = attachment_get(
+      id, quadrat_photo, local_dir = loc),
+    morphological_type_photo = attachment_get(
+      id, morphological_type_photo, local_dir = loc),
+    mudmap_photo = attachment_get(
+      id, mudmap_photo, local_dir = loc)
   ) %>%
   invisible()
 
@@ -173,7 +180,8 @@ fq_data_tae <- fq_tae %>%
     alt = x8
   ) %>%
   dplyr::mutate(
-    photo_in_situ = attachment_get(submissions_id, photo_in_situ)
+    photo_in_situ = attachment_get(
+      submissions_id, photo_in_situ, local_dir = loc)
   ) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>%
   invisible()

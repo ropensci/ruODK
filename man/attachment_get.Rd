@@ -4,7 +4,7 @@
 \alias{attachment_get}
 \title{Download attachments and return the local path}
 \usage{
-attachment_get(sid, fn, local_dir = "attachments",
+attachment_get(sid, fn, local_dir = "media", separate = FALSE,
   pid = get_default_pid(), fid = get_default_fid(),
   url = get_default_url(), un = get_default_un(),
   pw = get_default_pw(), verbose = FALSE)
@@ -15,7 +15,16 @@ attachment_get(sid, fn, local_dir = "attachments",
 \item{fn}{One or many ODK form attachment filenames, e.g. "1558330537199.jpg".}
 
 \item{local_dir}{The local folder to save the downloaded files to,
-default: "attachments".}
+default: "media".}
+
+\item{separate}{(logical) Whether to separate locally downloaded files into
+a subfolder named after the submission uuid within `local_dir`,
+default: FALSE.
+The defaults mirror the behaviour of \code{`submission_export`}, which
+keeps all attachment files together in a folder `media`.
+Enable this option if downloaded files collide on idential names. This can
+happen if two data collection devices by chance generate the same filename
+for two respective media files, e.g. `DCIM0001.jpg`.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 Default: \code{get_default_pid()}.

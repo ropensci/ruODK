@@ -11,7 +11,7 @@ attachment_link(data_tbl, att_path = "media", att_contains = "photo")
 \code{`ruODK::submission_export()`} read into a `tibble` by
 \code{`readr::read_csv()`}.}
 
-\item{att_path}{A local path, defaule: "media" (as per .csv.zip export).
+\item{att_path}{A local path, default: "media" (as per .csv.zip export).
 Selected columns of the dataframe (containing attchment filenames) are
 prefixed with `att_path`, thus turning them into relative paths.}
 

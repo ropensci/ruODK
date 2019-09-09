@@ -3,6 +3,8 @@ context("test-attachment_get.R")
 test_that("attachment_get works", {
   t <- tempdir()
 
+  fs::dir_ls(t) %>% fs::file_delete()
+
   fresh_raw <- odata_submission_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -57,6 +59,7 @@ test_that("attachment_url works", {
 test_that("get_one_attachment handles repeat download and NA filenames", {
   t <- tempdir(check = TRUE)
   testthat::expect_true(fs::dir_exists(t))
+  fs::dir_ls(t) %>% fs::file_delete()
 
   uuid <- "uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12"
   fn <- "1558579592153.jpg"

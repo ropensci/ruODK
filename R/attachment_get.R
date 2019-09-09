@@ -107,7 +107,15 @@ get_one_attachment <- function(pth,
 #' @param sid One or many ODK submission UUIDs, an MD5 hash.
 #' @param fn One or many ODK form attachment filenames, e.g. "1558330537199.jpg".
 #' @param local_dir The local folder to save the downloaded files to,
-#'                  default: "attachments".
+#'                  default: "media".
+#' @param separate (logical) Whether to separate locally downloaded files into
+#'   a subfolder named after the submission uuid within `local_dir`,
+#'   default: FALSE.
+#'   The defaults mirror the behaviour of \code{`submission_export`}, which
+#'   keeps all attachment files together in a folder `media`.
+#'   Enable this option if downloaded files collide on idential names. This can
+#'   happen if two data collection devices by chance generate the same filename
+#'   for two respective media files, e.g. `DCIM0001.jpg`.
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
@@ -120,7 +128,8 @@ get_one_attachment <- function(pth,
 #' @export
 attachment_get <- function(sid,
                            fn,
-                           local_dir = "attachments",
+                           local_dir = "media",
+                           separate = FALSE,
                            pid = get_default_pid(),
                            fid = get_default_fid(),
                            url = get_default_url(),
@@ -128,7 +137,11 @@ attachment_get <- function(sid,
                            pw = get_default_pw(),
                            verbose = FALSE) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  dest_dir <- fs::path(local_dir, strip_uuid(sid))
+  if (separate == TRUE) {
+    dest_dir <- fs::path(local_dir, strip_uuid(sid))
+  } else {
+    dest_dir <- fs::path(local_dir)
+  }
   if (verbose == TRUE) {
     message(glue::glue("Using local directory: {dest_dir}\n"))
   }
