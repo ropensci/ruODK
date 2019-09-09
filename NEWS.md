@@ -5,6 +5,9 @@
   tests, vignettes, READMEs.
 * Add a high level overview diagram to README and `inst/joss/paper.md` to
   illustrate `ruODK`'s intended purpose in the ODK ecosystem. #19
+* Reduce installed package size by sharing attachment files. Add new parameter
+  `separate=FALSE` to `attachment_get` to prevent separating attachment files 
+  into subfolders named after their submission `uuid`. #22
 
 # ruODK 0.6.1
 * ROpenSci submission review [milestone](https://github.com/dbca-wa/ruODK/milestone/3),
