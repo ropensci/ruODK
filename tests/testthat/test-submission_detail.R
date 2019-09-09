@@ -1,16 +1,16 @@
 test_that("submission_detail works", {
   sl <- submission_list(
-    get_test_pid(),
-    get_test_fid(),
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
   )
 
   sub <- submission_detail(
-    get_test_pid(),
-    get_test_fid(),
     sl$instance_id[[1]],
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()

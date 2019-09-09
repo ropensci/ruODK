@@ -107,7 +107,7 @@ test_that("project_list warns on wrong credentials", {
     p <- project_list(
       url = get_test_url(),
       un = get_test_un(),
-      pw = "wroing_password"
+      pw = "wrong_password"
     )
   )
 })
