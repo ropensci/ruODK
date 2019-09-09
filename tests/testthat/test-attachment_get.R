@@ -30,9 +30,29 @@ test_that("attachment_get works", {
       )
     )
 
+  fresh_parsed_sep <- fresh_raw %>%
+    odata_submission_parse() %>%
+    janitor::clean_names() %>%
+    dplyr::mutate(
+      quadrat_photo = attachment_get(
+        id,
+        quadrat_photo,
+        local_dir = t,
+        separate = TRUE,
+        pid = get_test_pid(),
+        fid = get_test_fid(),
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = get_test_pw(),
+        verbose = TRUE
+      )
+    )
+
+
   # submissions at the time of writing
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))
   testthat::expect_true(fs::file_exists(fresh_parsed$quadrat_photo[[1]]))
+  testthat::expect_true(fs::file_exists(fresh_parsed_sep$quadrat_photo[[1]]))
 })
 
 test_that("attachment_url works", {
