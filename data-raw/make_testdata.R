@@ -1,27 +1,14 @@
 # ODK Central example data
-if (file.exists("~/.Rprofile")) source("~/.Rprofile")
-data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
-fq_svc <- odata_service_get(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
-  url = Sys.getenv("ODKC_TEST_URL"),
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )
-fq_meta <- odata_metadata_get(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
-)
-fq_raw <- odata_submissions_get(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
-)
+
+fq_svc <- ruODK::odata_service_get()
+fq_meta <- ruODK::odata_metadata_get()
+fq_raw <- ruODK::odata_submission_get()
+
 usethis::use_data(fq_svc, overwrite = T)
 usethis::use_data(fq_meta, overwrite = T)
 usethis::use_data(fq_raw, overwrite = T)

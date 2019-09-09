@@ -4,27 +4,35 @@
 \alias{form_detail}
 \title{Show details for one form.}
 \usage{
-form_detail(pid, fid, url = get_default_url(), un = get_default_un(),
+form_detail(pid = get_default_pid(), fid = get_default_fid(),
+  url = get_default_url(), un = get_default_un(),
   pw = get_default_pw())
 }
 \arguments{
-\item{pid}{The numeric ID of the project, e.g.: 2.}
+\item{pid}{The numeric ID of the project, e.g.: 2.
+Default: \code{get_default_pid()}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
+\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
+Default: \code{get_default_fid()}.
+Set default \code{fid} through \code{ru_setup(fid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{url}{The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: \code{get_default_url()},
-which calls \code{Sys.getenv("ODKC_URL")}.}
+\item{url}{The ODK Central base URL without trailing slash.#'
+Default: \code{get_default_url()}.
+Set default \code{url} through \code{ru_setup(url="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()},
-which calls \code{Sys.getenv("ODKC_UN")}.
+Default: \code{get_default_un()}.
+Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()},
-which calls \code{Sys.getenv("ODKC_PW")}.}
+Default: \code{get_default_pw()}.
+Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
 A tibble with one row and all form metadata as columns.
@@ -34,25 +42,18 @@ Show details for one form.
 }
 \examples{
 \dontrun{
-# With default credentials, see vignette("setup")
-fl <- form_list(1)
+# Set default credentials, see vignette "setup"
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = "me@email.com",
+  pw = "..."
+)
 
 # With explicit credentials, see tests
-fl <- form_list(
-  get_test_pid(),
-  url = get_test_url(),
-  un = get_test_un(),
-  pw = get_test_pw()
-)
+fl <- form_list()
 
 # The first form in the test project
-f <- form_detail(
-  get_test_pid(),
-  fl$fid[[1]],
-  url = get_test_url(),
-  un = get_test_un(),
-  pw = get_test_pw()
-)
+f <- form_detail(fl$fid[[1]])
 
 # form_detail returns exactly one row
 nrow(f)
@@ -68,10 +69,10 @@ names(f)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form}
 
-Other restful-api: \code{\link{attachment_list}},
-  \code{\link{audit_get}}, \code{\link{form_list}},
-  \code{\link{form_schema}}, \code{\link{form_xml}},
-  \code{\link{project_create}},
+Other restful-api: \code{\link{attachment_link}},
+  \code{\link{attachment_list}}, \code{\link{audit_get}},
+  \code{\link{form_list}}, \code{\link{form_schema}},
+  \code{\link{form_xml}}, \code{\link{project_create}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}},

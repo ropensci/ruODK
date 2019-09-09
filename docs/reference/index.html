@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -198,6 +198,12 @@
       <tr>
         
         <td>
+          <p><code><a href="attachment_link.html">attachment_link()</a></code> </p>
+        </td>
+        <td><p>Prefix attachment columns from CSV export with a local attachment file path.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="attachment_list.html">attachment_list()</a></code> </p>
         </td>
         <td><p>List all submissions of one form.</p></td>
@@ -284,6 +290,22 @@
       <tr>
         
         <td>
+          <p><code><a href="isodt_to_local.html">isodt_to_local()</a></code> </p>
+        </td>
+        <td><p>#' Check whether we have internet
+#'
+#' @importFrom httr GET
+#' @importFrom rlang warn
+#' @noRd
+has_internet &lt;- function() 
+  online &lt;- !is.null(httr::GET("google.com"))
+  if (online == FALSE) rlang::warn("Please check internet connectivity!")
+  invisible(online)
+
+Parse an ISO8601 datetime string to a timezone aware datetime.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="map_chr_hack.html">map_chr_hack()</a></code> </p>
         </td>
         <td><p>Map given function, handle null as NA and flatten_chr().</p></td>
@@ -299,6 +321,18 @@
           <p><code><a href="map_int_hack.html">map_int_hack()</a></code> </p>
         </td>
         <td><p>Map given function, handle null as NA and flatten_int().</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="map_lgl_hack.html">map_lgl_hack()</a></code> </p>
+        </td>
+        <td><p>Map given function, handle null as FALSE, flatten_chr() and convert to logical.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="parse_datetime.html">parse_datetime()</a></code> </p>
+        </td>
+        <td><p>Parse all columns containing a certain word in its name to localised datetime.</p></td>
       </tr><tr>
         
         <td>
@@ -322,7 +356,13 @@
       <tr>
         
         <td>
-          <p><code><a href="ru_settings.html">ru_settings()</a></code> <code><a href="ru_settings.html">get_default_url()</a></code> <code><a href="ru_settings.html">get_default_un()</a></code> <code><a href="ru_settings.html">get_default_pw()</a></code> <code><a href="ru_settings.html">get_test_url()</a></code> <code><a href="ru_settings.html">get_test_un()</a></code> <code><a href="ru_settings.html">get_test_pw()</a></code> <code><a href="ru_settings.html">get_test_pid()</a></code> <code><a href="ru_settings.html">get_test_fid()</a></code> </p>
+          <p><code><a href="odata_svc_parse.html">odata_svc_parse()</a></code> </p>
+        </td>
+        <td><p>Retrieve URL, project ID, and form ID from an ODK Central OData service URL.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ru_settings.html">ru_settings()</a></code> <code><a href="ru_settings.html">get_default_pid()</a></code> <code><a href="ru_settings.html">get_default_fid()</a></code> <code><a href="ru_settings.html">get_default_url()</a></code> <code><a href="ru_settings.html">get_default_un()</a></code> <code><a href="ru_settings.html">get_default_pw()</a></code> <code><a href="ru_settings.html">get_test_url()</a></code> <code><a href="ru_settings.html">get_test_un()</a></code> <code><a href="ru_settings.html">get_test_pw()</a></code> <code><a href="ru_settings.html">get_test_pid()</a></code> <code><a href="ru_settings.html">get_test_fid()</a></code> </p>
         </td>
         <td><p>Get or set <code>ruODK</code> settings.</p></td>
       </tr><tr>

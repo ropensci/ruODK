@@ -2,6 +2,8 @@
 % Please edit documentation in R/ru_setup.R
 \name{ru_settings}
 \alias{ru_settings}
+\alias{get_default_pid}
+\alias{get_default_fid}
 \alias{get_default_url}
 \alias{get_default_un}
 \alias{get_default_pw}
@@ -13,6 +15,10 @@
 \title{Get or set \code{ruODK} settings.}
 \usage{
 ru_settings()
+
+get_default_pid()
+
+get_default_fid()
 
 get_default_url()
 
@@ -31,8 +37,9 @@ get_test_pid()
 get_test_fid()
 }
 \value{
-\code{ru_settings} prints your default ODK Central url, username,
-and password, and corresponding optional test server settings.
+\code{ru_settings} prints your default ODK Central project ID,
+  form ID, url, username, and password, and corresponding optional test
+  server settings.
 \code{ru_setup} sets your production and test settings, while
 \code{get_(test_)*} get each of those respective settings.
 }
@@ -44,17 +51,19 @@ ru_settings()
 }
 \seealso{
 \code{\link{ru_setup}},
+\code{\link{get_default_pid}},
+\code{\link{get_default_fid}},
 \code{\link{get_default_url}},
 \code{\link{get_default_un}},
 \code{\link{get_default_pw}},
+\code{\link{get_test_pid}},
+\code{\link{get_test_fid}},
 \code{\link{get_test_url}},
 \code{\link{get_test_un}},
-\code{\link{get_test_pw}},
-\code{\link{get_test_pid}},
-\code{\link{get_test_fid}}.
+\code{\link{get_test_pw}}.
 
-Other ru_settings: \code{\link{ru_setup}},
-  \code{\link{yell_if_error}},
+Other ru_settings: \code{\link{odata_svc_parse}},
+  \code{\link{ru_setup}}, \code{\link{yell_if_error}},
   \code{\link{yell_if_missing}}
 }
 \concept{ru_settings}

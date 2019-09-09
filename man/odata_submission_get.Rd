@@ -4,15 +4,12 @@
 \alias{odata_submission_get}
 \title{Retrieve /Submissions from an OData URL ending in .svc as list of lists}
 \usage{
-odata_submission_get(pid, fid, table = "Submissions", skip = NA,
-  top = NA, count = FALSE, wkt = FALSE, url = get_default_url(),
+odata_submission_get(table = "Submissions", skip = NA, top = NA,
+  count = FALSE, wkt = FALSE, pid = get_default_pid(),
+  fid = get_default_fid(), url = get_default_url(),
   un = get_default_un(), pw = get_default_pw())
 }
 \arguments{
-\item{pid}{The numeric ID of the project, e.g.: 2.}
-
-\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
-
 \item{table}{The submission EntityType, or in plain words, the table name.
 Default: "Submissions" (the main table).
 Change to "Submissions.GROUP_NAME" for repeating form groups.
@@ -31,19 +28,30 @@ response from ODK Central. Default: FALSE.}
 \item{wkt}{If TRUE, geospatial data will be returned as WKT (Well Known Text)
 strings. Default: FALSE, returns GeoJSON structures.}
 
-\item{url}{The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: \code{get_default_url()},
-which calls \code{Sys.getenv("ODKC_URL")}.}
+\item{pid}{The numeric ID of the project, e.g.: 2.
+Default: \code{get_default_pid()}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
+Default: \code{get_default_fid()}.
+Set default \code{fid} through \code{ru_setup(fid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{url}{The ODK Central base URL without trailing slash.#'
+Default: \code{get_default_url()}.
+Set default \code{url} through \code{ru_setup(url="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()},
-which calls \code{Sys.getenv("ODKC_UN")}.
+Default: \code{get_default_un()}.
+Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()},
-which calls \code{Sys.getenv("ODKC_PW")}.}
+Default: \code{get_default_pw()}.
+Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
 A nested list of lists.
@@ -57,56 +65,33 @@ Retrieve /Submissions from an OData URL ending in .svc as list of lists
 }
 \examples{
 \dontrun{
-# With default credentials, see vignette("setup", package = "ruODK")
-data <- odata_submissions_get(
-  get_test_pid(),
-  get_test_fid(),
-  table = "Submissions"
+# Set default credentials, see vignette "setup"
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = "me@email.com",
+  pw = "..."
 )
 
-# With explicitly set credentials
-data <- odata_submissions_get(
-  get_test_pid(),
-  get_test_fid(),
-  table = "Submissions",
-  url = get_test_url(),
-  un = get_test_un(),
-  pw = get_test_pw()
-)
+data <- odata_submissions_get(table = "Submissions")
 
 # Skip one row, return the next 1 rows (top), include total row count
 data <- odata_submissions_get(
-  get_test_pid(),
-  get_test_fid(),
   table = "Submissions",
   skip = 1,
   top = 1,
-  count = TRUE,
-  url = get_test_url(),
-  un = get_test_un(),
-  pw = get_test_pw()
+  count = TRUE
 )
 
 # Parse point coordinates into lat, lon, alt
 data <- odata_submissions_get(
-  get_test_pid(),
-  get_test_fid(),
   table = "Submissions",
-  wkt = FALSE,
-  url = get_test_url(),
-  un = get_test_un(),
-  pw = get_test_pw()
+  wkt = FALSE
 )
 
 # Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"
 data <- odata_submissions_get(
-  get_test_pid(),
-  get_test_fid(),
   table = "Submissions",
-  wkt = TRUE,
-  url = get_test_url(),
-  un = get_test_un(),
-  pw = get_test_pw()
+  wkt = TRUE
 )
 
 listviewer::jsonedit(data)

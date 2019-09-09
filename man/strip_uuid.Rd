@@ -17,8 +17,9 @@ Strip the leading "uuid:" from a UUID hash.
 }
 \seealso{
 Other utilities: \code{\link{\%>\%}},
-  \code{\link{map_chr_hack}}, \code{\link{map_dttm_hack}},
-  \code{\link{map_int_hack}}, \code{\link{prepend_uuid}},
-  \code{\link{tidyeval}}
+  \code{\link{isodt_to_local}}, \code{\link{map_chr_hack}},
+  \code{\link{map_dttm_hack}}, \code{\link{map_int_hack}},
+  \code{\link{map_lgl_hack}}, \code{\link{parse_datetime}},
+  \code{\link{prepend_uuid}}, \code{\link{tidyeval}}
 }
 \concept{utilities}

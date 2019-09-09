@@ -17,12 +17,13 @@
 #' uuids to download them one by one via `submission_get`. Download attachments
 #' as listed for each submission (`attachment_list`).
 #'
-#' @template param-pid
-#' @template param-fid
 #' @param local_dir The local folder to save the downloaded files to,
 #'                  default: `here::here()`.
 #' @param overwrite Whether to overwrite previously downloaded zip files,
 #'                 default: FALSE
+#' @template param-pid
+#' @template param-fid
+#' @template param-url
 #' @template param-auth
 #' @template param-verbose
 #' @return The absolute path to the zip file named "`fid`.zip"
@@ -34,39 +35,30 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
-#' se <- submission_export(1, "build_xformsId")
-#'
-#' # With explicit credentials, see tests
-#'
-#' t <- tempdir()
-#'
-#' se <- submission_export(
-#'   get_test_pid(),
-#'   get_test_fid(),
-#'   local_dir = t,
-#'   overwrite = FALSE,
-#'   verbose = TRUE,
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
 #' )
 #'
-#' # Unzip and inspect the loot
+#' se <- submission_export()
 #'
+#' # Unzip and inspect the loot
 #' t <- tempdir()
 #' f <- unzip(se, exdir = t)
 #' fs::dir_ls(t)
 #' fid <- get_test_fid()
 #' sub <- fs::path(t, glue::glue("{fid}.csv")) %>% readr::read_csv()
 #' sub %>% knitr::kable(.)
+#'
 #' # Cleanup
 #' fs::dir_delete(t)
 #' }
-submission_export <- function(pid,
-                              fid,
-                              local_dir = here::here(),
+submission_export <- function(local_dir = here::here(),
                               overwrite = TRUE,
+                              pid = get_default_pid(),
+                              fid = get_default_fid(),
                               url = get_default_url(),
                               un = get_default_un(),
                               pw = get_default_pw(),
@@ -97,7 +89,6 @@ submission_export <- function(pid,
     httr::content(.)
   pth
 }
-
 
 # Tests
 # usethis::edit_file("tests/testthat/test-submission_export.R")

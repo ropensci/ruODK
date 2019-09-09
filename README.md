@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ruODK: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
+# `ruODK`: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 
 <!-- badges: start -->
 
@@ -163,15 +163,17 @@ forms](https://github.com/dbca-wa/ruODK/tree/master/inst/extdata): The
 Build](https://build.opendatakit.org/), while the `.xml` versions can be
 imported into ODK Central.
 
-## Configure ruODK
+## Configure `ruODK`
 
-For a quick start, create R environment variables with your ODK Central
-credentials:
+Set up `ruODK` with an OData Service URL and credentials of a
+read-permitted ODK Central web user.
 
 ``` r
-Sys.setenv(ODKC_URL = "https://odkcentral.mydomain.com")
-Sys.setenv(ODKC_UN = "me@mail.com")
-Sys.setenv(ODKC_PW = ".......")
+ruODK::ru_setup(
+  svc="https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc",
+  # un = "me@email.com",
+  # pw = "..."
+)
 ```
 
 For all available detailed options to configure `ruODK`, read
@@ -184,23 +186,52 @@ A quick example using the OData service:
 
 ``` r
 library(ruODK)
-
-# Download from ODK Central
+# List projects
 proj <- ruODK::project_list()
-proj
-#> # A tibble: 4 x 8
-#>      id name  forms app_users last_submission     created_at         
-#>   <int> <chr> <int>     <int> <dttm>              <dttm>             
-#> 1     1 DBCA      9         1 2019-08-30 02:37:41 2019-06-05 09:12:44
-#> 2     3 Flora     1         1 2019-08-12 04:47:05 2019-06-06 03:24:31
-#> 3     2 Sand…     3         1 2019-06-26 07:12:25 2019-06-06 03:24:15
-#> 4     4 DBCA      0         0 NA                  2019-06-27 02:54:30
-#> # … with 2 more variables: updated_at <dttm>, archived <lgl>
+proj %>% knitr::kable(.)
+```
 
-meta <- ruODK::odata_metadata_get(
-  pid = 1,
-  fid = "build_Turtle-Sighting-0-1_1559790020"
-)
+| id | name    | forms | app\_users | last\_submission    | created\_at         | updated\_at         | archived |
+| -: | :------ | ----: | ---------: | :------------------ | :------------------ | :------------------ | :------- |
+|  1 | DBCA    |     9 |          1 | 2019-08-30 02:37:41 | 2019-06-05 09:12:44 | 2019-07-23 01:00:08 | FALSE    |
+|  3 | Flora   |     1 |          1 | 2019-08-12 04:47:05 | 2019-06-06 03:24:31 | 2019-06-06 03:24:42 | FALSE    |
+|  2 | Sandbox |     3 |          1 | 2019-06-26 07:12:25 | 2019-06-06 03:24:15 | 2019-08-28 11:25:26 | FALSE    |
+|  4 | DBCA    |     0 |          0 | NA                  | 2019-06-27 02:54:30 | 2019-07-22 02:44:23 | TRUE     |
+
+``` r
+
+# List forms of default project
+frms <- ruODK::form_list()
+frms %>% knitr::kable(.)
+```
+
+| name                         | fid                                             | version | state   | submissions | created\_at         | created\_by\_id | created\_by   | updated\_at         | last\_submission    | hash                             |
+| :--------------------------- | :---------------------------------------------- | :------ | :------ | :---------- | :------------------ | --------------: | :------------ | :------------------ | :------------------ | :------------------------------- |
+| Flora Quadrat 0.4            | build\_Flora-Quadrat-0-4\_1564384341            |         | open    | 0           | 2019-07-29 07:13:48 |               5 | Florian Mayer | NA                  | NA                  | 1bb959d541ac6990e3f74893e38c855b |
+| Marine Wildlife Incident 0.6 | build\_Marine-Wildlife-Incident-0-6\_1559789189 |         | open    | 5           | 2019-06-06 03:29:04 |               5 | Florian Mayer | NA                  | 2019-08-26 00:58:47 | ef79df7abb830de618d82765c36c2f59 |
+| Predator or Disturbance 1.1  | build\_Predator-or-Disturbance-1-1\_1559789410  |         | open    | 14          | 2019-06-06 03:31:25 |               5 | Florian Mayer | NA                  | 2019-08-30 02:33:31 | 9c70919ed211e2492ff1dda7a6c7c564 |
+| Site Visit End 0.2           | build\_Site-Visit-End-0-2\_1559789512           |         | open    | 32          | 2019-06-06 03:31:13 |               5 | Florian Mayer | NA                  | 2019-08-30 02:34:55 | 7b4d658b314cd1f0aef8c056c8d3009b |
+| Site Visit Start 0.3         | build\_Site-Visit-Start-0-3\_1559789550         |         | open    | 32          | 2019-06-06 03:31:02 |               5 | Florian Mayer | NA                  | 2019-08-30 02:36:02 | 64e8fabc98ad20cd1eb1de62ac1d35c3 |
+| Track Tally 0.5              | build\_Track-Tally-0-5\_1564032721              |         | closing | 2           | 2019-07-25 05:32:44 |               5 | Florian Mayer | 2019-07-29 07:57:44 | 2019-07-29 01:46:36 | 2d521c5b75c07238a5c55010efecf21b |
+| Turtle Sighting 0.1          | build\_Turtle-Sighting-0-1\_1559790020          |         | open    | 150         | 2019-06-06 03:29:16 |               5 | Florian Mayer | NA                  | 2019-08-26 03:58:22 | dc5906a4a18c33ff0cfeee419b0ce00e |
+| Turtle Track or Nest 1.0     | build\_Turtle-Track-or-Nest-1-0\_1559789920     |         | open    | 129         | 2019-06-06 03:30:36 |               5 | Florian Mayer | NA                  | 2019-08-30 02:37:41 | b52193af35826ff9da3678cc22469535 |
+| Turtle Track Tally 0.6       | build\_Turtle-Track-Tally-0-6\_1564387009       |         | open    | 75          | 2019-07-29 07:57:36 |               5 | Florian Mayer | NA                  | 2019-08-30 02:36:38 | c293c4cc528738cdfb596e3b9732c66f |
+
+``` r
+
+# Form details of default form
+frmd <- ruODK::form_detail()
+frmd %>% knitr::kable(.)
+```
+
+| name                | fid                                    | version | state | submissions | created\_at              | created\_by\_id | created\_by   | updated\_at | last\_submission         | hash                             |
+| :------------------ | :------------------------------------- | :------ | :---- | ----------: | :----------------------- | --------------: | :------------ | :---------- | :----------------------- | :------------------------------- |
+| Turtle Sighting 0.1 | build\_Turtle-Sighting-0-1\_1559790020 |         | open  |         150 | 2019-06-06T03:29:16.497Z |               5 | Florian Mayer | NA          | 2019-08-26T03:58:22.016Z | dc5906a4a18c33ff0cfeee419b0ce00e |
+
+``` r
+
+# Form schema
+meta <- ruODK::odata_metadata_get()
 # listviewer::jsonedit(meta)
 meta$Edmx$DataServices$Schema
 #> $ComplexType
@@ -254,27 +285,23 @@ meta$Edmx$DataServices$Schema
 #> attr(,"xmlns")
 #> [1] "http://docs.oasis-open.org/odata/ns/edm"
 
-data <- ruODK::odata_submission_get(
-  pid = 1,
-  fid = "build_Turtle-Sighting-0-1_1559790020"
-) %>%
+# Form submissions (sensitive data omitted)
+data <- ruODK::odata_submission_get() %>%
   ruODK::odata_submission_parse()
-data %>% head(.)
-#> # A tibble: 6 x 21
-#>   .__id observation_sta… reporter device_id observation_end… submissionDate
-#>   <chr> <chr>            <chr>    <chr>     <chr>            <chr>         
-#> 1 uuid… 2019-08-23T15:2… Scott W… e249db9e… 2019-08-23T15:2… 2019-08-26T03…
-#> 2 uuid… 2019-08-23T15:1… Scott W… e249db9e… 2019-08-23T15:1… 2019-08-26T03…
-#> 3 uuid… 2019-08-23T15:1… Scott W… e249db9e… 2019-08-23T15:1… 2019-08-26T03…
-#> 4 uuid… 2019-08-23T14:2… Scott W… e249db9e… 2019-08-23T14:3… 2019-08-26T03…
-#> 5 uuid… 2019-08-23T14:2… Scott W… e249db9e… 2019-08-23T14:2… 2019-08-26T03…
-#> 6 uuid… 2019-08-23T14:1… Scott W… e249db9e… 2019-08-23T14:1… 2019-08-26T03…
-#> # … with 15 more variables: submitterId <chr>, submitterName <chr>,
-#> #   instanceID <chr>, type <chr>, ...11 <dbl>, ...12 <dbl>, ...13 <dbl>,
-#> #   accuracy <int>, species <chr>, sex <chr>, maturity <chr>,
-#> #   activity <chr>, observer_acticity <chr>, photo_habitat <chr>,
-#> #   .odata.context <chr>
+data %>% 
+  head(.) %>% 
+  dplyr::select(-"reporter", -"...11") %>%
+  knitr::kable(.)
 ```
+
+| .\_\_id                                   | observation\_start\_time      | device\_id       | observation\_end\_time        | submissionDate           | submitterId | submitterName | instanceID                                | type  |        …12 |   …13 | accuracy | species           | sex | maturity       | activity     | observer\_acticity | photo\_habitat | .odata.context                                                                                                         |
+| :---------------------------------------- | :---------------------------- | :--------------- | :---------------------------- | :----------------------- | :---------- | :------------ | :---------------------------------------- | :---- | ---------: | ----: | -------: | :---------------- | :-- | :------------- | :----------- | :----------------- | :------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| uuid:4cab20c1-4d04-4450-a76d-aaa6cfc02b35 | 2019-08-23T15:23:35.052+08:00 | e249db9e68907e41 | 2019-08-23T15:24:17.055+08:00 | 2019-08-26T03:58:22.016Z | 16          | Turtles       | uuid:4cab20c1-4d04-4450-a76d-aaa6cfc02b35 | Point | \-18.03410 |   4.1 |       10 | natator-depressus | na  | adult          | non-breeding | net-catch-failed   | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
+| uuid:618e23a0-d5fb-45f3-b3d5-d669eca4b3e2 | 2019-08-23T15:18:31.267+08:00 | e249db9e68907e41 | 2019-08-23T15:18:56.466+08:00 | 2019-08-26T03:58:21.146Z | 16          | Turtles       | uuid:618e23a0-d5fb-45f3-b3d5-d669eca4b3e2 | Point | \-18.03370 |  42.6 |       10 | natator-depressus | na  | adult          | non-breeding | net-catch-failed   | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
+| uuid:3877e264-1c1d-45d5-a2af-34267bf2a320 | 2019-08-23T15:17:41.789+08:00 | e249db9e68907e41 | 2019-08-23T15:18:09.073+08:00 | 2019-08-26T03:58:20.249Z | 16          | Turtles       | uuid:3877e264-1c1d-45d5-a2af-34267bf2a320 | Point | \-18.03323 |  46.6 |       10 | natator-depressus | na  | adult          | non-breeding | net-catch-failed   | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
+| uuid:752e4d0c-dfac-4110-8adc-41f1898fbd4c | 2019-08-23T14:29:56.720+08:00 | e249db9e68907e41 | 2019-08-23T14:30:24.446+08:00 | 2019-08-26T03:58:19.479Z | 16          | Turtles       | uuid:752e4d0c-dfac-4110-8adc-41f1898fbd4c | Point | \-18.03521 | \-7.2 |       10 | natator-depressus | na  | adult          | non-breeding | no-interaction     | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
+| uuid:c295b83a-4208-48be-b55e-e581ebd3eb75 | 2019-08-23T14:21:18.958+08:00 | e249db9e68907e41 | 2019-08-23T14:21:57.573+08:00 | 2019-08-26T03:58:18.755Z | 16          | Turtles       | uuid:c295b83a-4208-48be-b55e-e581ebd3eb75 | Point | \-18.03506 | \-4.1 |       10 | natator-depressus | na  | post-hatchling | non-breeding | net-catch-failed   | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
+| uuid:09a1a70d-2beb-4766-b8bc-05b7362faf8a | 2019-08-23T14:11:48.456+08:00 | e249db9e68907e41 | 2019-08-23T14:12:08.446+08:00 | 2019-08-26T03:58:18.104Z | 16          | Turtles       | uuid:09a1a70d-2beb-4766-b8bc-05b7362faf8a | Point | \-18.03542 |   4.7 |       10 | natator-depressus | na  | adult          | non-breeding | no-interaction     | NA             | <https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Turtle-Sighting-0-1_1559790020.svc/$metadata#Submissions> |
 
 A more detailed walk-through with some data visualisation examples is
 available in the `vignette("odata", package="ruODK")` (online

@@ -4,36 +4,43 @@
 \alias{attachment_get}
 \title{Download attachments and return the local path}
 \usage{
-attachment_get(pid, fid, submission_uuid, attachment_filename,
-  local_dir = "attachments", url = get_default_url(),
-  un = get_default_un(), pw = get_default_pw(), verbose = FALSE)
+attachment_get(sid, fn, local_dir = "attachments",
+  pid = get_default_pid(), fid = get_default_fid(),
+  url = get_default_url(), un = get_default_un(),
+  pw = get_default_pw(), verbose = FALSE)
 }
 \arguments{
-\item{pid}{The numeric ID of the project, e.g.: 2.}
+\item{sid}{One or many ODK submission UUIDs, an MD5 hash.}
 
-\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
-
-\item{submission_uuid}{One or many ODK submission UUIDs, an MD5 hash}
-
-\item{attachment_filename}{One or many ODK form attachment filenames,
-e.g. "1558330537199.jpg"}
+\item{fn}{One or many ODK form attachment filenames, e.g. "1558330537199.jpg".}
 
 \item{local_dir}{The local folder to save the downloaded files to,
-default: "attachments"}
+default: "attachments".}
 
-\item{url}{The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: \code{get_default_url()},
-which calls \code{Sys.getenv("ODKC_URL")}.}
+\item{pid}{The numeric ID of the project, e.g.: 2.
+Default: \code{get_default_pid()}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
+Default: \code{get_default_fid()}.
+Set default \code{fid} through \code{ru_setup(fid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{url}{The ODK Central base URL without trailing slash.#'
+Default: \code{get_default_url()}.
+Set default \code{url} through \code{ru_setup(url="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()},
-which calls \code{Sys.getenv("ODKC_UN")}.
+Default: \code{get_default_un()}.
+Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()},
-which calls \code{Sys.getenv("ODKC_PW")}.}
+Default: \code{get_default_pw()}.
+Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{verbose}{Whether to display debug messages or not (default)}
 }

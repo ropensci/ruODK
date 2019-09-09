@@ -1,6 +1,7 @@
 #' Create a new project.
 #'
 #' @param name The desired name of the project. Can contain whitespace.
+#' @template param-url
 #' @template param-auth
 #' @return A tibble with one row per project and all project metadata
 #'         as columns as per ODK Central API docs.
@@ -9,16 +10,14 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
-#' p <- project_create("Test Project")
-#'
-#' # With explicit credentials, see tests
-#' p <- project_create(
-#'   "Test Project",
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
 #' )
+#'
+#' p <- project_create("Test Project")
 #' knitr::kable(p)
 #'
 #' # project_create returns a tibble
@@ -30,9 +29,9 @@
 #' # > "id" "name" "archived"
 #' }
 project_create <- function(name,
-                           url = Sys.getenv("ODKC_URL"),
-                           un = Sys.getenv("ODKC_UN"),
-                           pw = Sys.getenv("ODKC_PW")) {
+                           url = get_default_url(),
+                           un = get_default_un(),
+                           pw = get_default_pw()) {
   rlang::warn("Not implemented.")
 
   # . <- NULL

@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -135,15 +135,34 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>ru_setup</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>un</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pw</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>test_un</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_pw</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_pid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_fid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>ru_setup</span>(<span class='kw'>svc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pw</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_svc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_pid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>test_fid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_un</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_pw</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>svc</th>
+      <td><p>(optional, character) The OData service URL of a form.
+This parameter will set <code>pid</code>, <code>fid</code>, and <code>url</code>.
+It is sufficient to supply <code>svc</code>, <code>un</code>, and <code>pw</code>.</p></td>
+    </tr>
+    <tr>
+      <th>pid</th>
+      <td><p>(optional, character) The ID of an existing project on <code>url</code>.
+This will override the project ID from <code>svc</code>.
+A numeric value for <code>pid</code> will be converted to character.</p></td>
+    </tr>
+    <tr>
+      <th>fid</th>
+      <td><p>(optional, character) The alphanumeric ID of an existing form
+in <code>pid</code>. This will override the form ID from <code>svc</code>.</p></td>
+    </tr>
+    <tr>
       <th>url</th>
-      <td><p>An ODK Central URL, e.g. "https://sandbox.central.opendatakit.org".</p></td>
+      <td><p>An ODK Central URL, e.g. "https://sandbox.central.opendatakit.org".
+This will override the ODK Central base URL from <code>svc</code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
@@ -155,8 +174,27 @@ specified ODK Central instance <code>url</code> (optional, character).</p></td>
       <td><p>The password for user <code>un</code> (optional, character).</p></td>
     </tr>
     <tr>
+      <th>test_svc</th>
+      <td><p>(optional, character) The OData service URL of a test form.
+This parameter will set <code>test_pid</code>, <code>test_fid</code>, and <code>test_url</code>.
+It is sufficient to supply <code>test_svc</code>, <code>test_un</code>, and
+<code>test_pw</code> to configure testing.</p></td>
+    </tr>
+    <tr>
+      <th>test_pid</th>
+      <td><p>(optional, character) The numeric ID of an existing project
+on <code>test_url</code>. This will override the project ID from <code>test_svc</code>.
+A numeric value for <code>test_pid</code> will be converted to character.</p></td>
+    </tr>
+    <tr>
+      <th>test_fid</th>
+      <td><p>(optional, character) The alphanumeric ID of an existing form
+in <code>test_pid</code>. This will override the form ID from <code>test_svc</code>.</p></td>
+    </tr>
+    <tr>
       <th>test_url</th>
-      <td><p>(optional, character) A valid ODK Central URL for testing.</p></td>
+      <td><p>(optional, character) A valid ODK Central URL for testing.
+This will override the ODK Central base URL from <code>svc</code>.</p></td>
     </tr>
     <tr>
       <th>test_un</th>
@@ -168,31 +206,27 @@ privileged to view the test project(s) at <code>test_url</code>.</p></td>
       <td><p>(optional, character) The valid ODK Central password for
 <code>test_un</code>.</p></td>
     </tr>
-    <tr>
-      <th>test_pid</th>
-      <td><p>(optional, integer) The numeric ID of an existing project on
-<code>test_url</code>.</p></td>
-    </tr>
-    <tr>
-      <th>test_fid</th>
-      <td><p>(optional, character) The alphanumeric ID of an existing form
-in <code>test_pid</code>.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>ru_setup</code> sets ODK Central connection details. <code>ruODK</code>'s functions
-  default to use the default URL, username, and password unless specified
-  explicitly.</p>
+  default to use the default project ID, form ID, URL, username, and password
+  unless specified explicitly.</p>
+<p>Any parameters not specified will remain unchanged. It is therefore possible
+to set up username and password initially with
+<code>ru_setup(un="XXX", pw="XXX")</code>, and switch between forms with
+<code>ru_setup(svc="XXX")</code>, supplying the form's OData service URL.
+ODK Central conveniently provides the OData service URL in the form submission
+tab, which in turn contains base URL, project ID, and form ID.</p>
 <p><code>ruODK</code>'s automated tests require a valid ODK Central URL, and a
   privileged username and password of a "web user" on that ODK Central
   instance, as well as an existing project and form.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other ru_settings: <code><a href='ru_settings.html'>ru_settings</a></code>,
-  <code><a href='yell_if_error.html'>yell_if_error</a></code>,
+    <div class='dont-index'><p>Other ru_settings: <code><a href='odata_svc_parse.html'>odata_svc_parse</a></code>,
+  <code><a href='ru_settings.html'>ru_settings</a></code>, <code><a href='yell_if_error.html'>yell_if_error</a></code>,
   <code><a href='yell_if_missing.html'>yell_if_missing</a></code></p></div>
     
 

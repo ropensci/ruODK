@@ -4,34 +4,42 @@
 \alias{submission_export}
 \title{Export all form submissions including repeats and attachments to CSV.}
 \usage{
-submission_export(pid, fid, local_dir = here::here(), overwrite = TRUE,
+submission_export(local_dir = here::here(), overwrite = TRUE,
+  pid = get_default_pid(), fid = get_default_fid(),
   url = get_default_url(), un = get_default_un(),
   pw = get_default_pw(), verbose = FALSE)
 }
 \arguments{
-\item{pid}{The numeric ID of the project, e.g.: 2.}
-
-\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
-
 \item{local_dir}{The local folder to save the downloaded files to,
 default: `here::here()`.}
 
 \item{overwrite}{Whether to overwrite previously downloaded zip files,
 default: FALSE}
 
-\item{url}{The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: \code{get_default_url()},
-which calls \code{Sys.getenv("ODKC_URL")}.}
+\item{pid}{The numeric ID of the project, e.g.: 2.
+Default: \code{get_default_pid()}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
+Default: \code{get_default_fid()}.
+Set default \code{fid} through \code{ru_setup(fid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{url}{The ODK Central base URL without trailing slash.#'
+Default: \code{get_default_url()}.
+Set default \code{url} through \code{ru_setup(url="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()},
-which calls \code{Sys.getenv("ODKC_UN")}.
+Default: \code{get_default_un()}.
+Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()},
-which calls \code{Sys.getenv("ODKC_PW")}.}
+Default: \code{get_default_pw()}.
+Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{verbose}{Whether to display debug messages or not (default)}
 }
@@ -62,32 +70,23 @@ as listed for each submission (`attachment_list`).
 }
 \examples{
 \dontrun{
-# With default credentials, see vignette("setup")
-se <- submission_export(1, "build_xformsId")
-
-# With explicit credentials, see tests
-
-t <- tempdir()
-
-se <- submission_export(
-  get_test_pid(),
-  get_test_fid(),
-  local_dir = t,
-  overwrite = FALSE,
-  verbose = TRUE,
-  url = get_test_url(),
-  un = get_test_un(),
-  pw = get_test_pw()
+# Set default credentials, see vignette "setup"
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = "me@email.com",
+  pw = "..."
 )
 
-# Unzip and inspect the loot
+se <- submission_export()
 
+# Unzip and inspect the loot
 t <- tempdir()
 f <- unzip(se, exdir = t)
 fs::dir_ls(t)
 fid <- get_test_fid()
 sub <- fs::path(t, glue::glue("{fid}.csv")) \%>\% readr::read_csv()
 sub \%>\% knitr::kable(.)
+
 # Cleanup
 fs::dir_delete(t)
 }
@@ -95,10 +94,11 @@ fs::dir_delete(t)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv}
 
-Other restful-api: \code{\link{attachment_list}},
-  \code{\link{audit_get}}, \code{\link{form_detail}},
-  \code{\link{form_list}}, \code{\link{form_schema}},
-  \code{\link{form_xml}}, \code{\link{project_create}},
+Other restful-api: \code{\link{attachment_link}},
+  \code{\link{attachment_list}}, \code{\link{audit_get}},
+  \code{\link{form_detail}}, \code{\link{form_list}},
+  \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_create}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_get}},

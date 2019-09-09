@@ -38,37 +38,18 @@ as documented (with live examples in multiple programming languages) at the
 [ODK Central API docs](https://odkcentral.docs.apiary.io/).
 
 # Configure ruODK
+The OData service URL is shown in the form's "Submissions" tab >
+"Analyze via OData" on ODK Central. It contains base URL, project ID, and 
+form ID and is used by `ruODK::ru_setup()`.
 
-Set your ODK Central url, username (email), and password as R environment 
-variables, e.g. in your `~/.Rprofile`.
-
-```{r sys_config, eval=F}
-Sys.setenv(ODKC_URL="https://sandbox.central.opendatakit.org")
-Sys.setenv(ODKC_UN="me@email.com")
-Sys.setenv(ODKC_PW=".......")
-```
-
-
-# Read data from ODK Central
-If we know our ODK Central URL, the project ID (a number) and the respective
-form ID (an alphanumeric string), we can infer the OData service URL.
-
-Alternatively, the OData service URL is shown in the form's "Submissions" tab >
-"Analyze via OData" on ODK Central. We can extract the base URL, project ID, and 
-the form ID from the service URL.
-
-```{r odk_config}
-# ODK Central credentials can go into .Renviron, see vignette "setup"
-
-# ODK Central's OData URL contains project and form IDs
-data_url <- "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
-
-# Components
-pid <- Sys.getenv("ODKC_TEST_PID")  # 14
-fid <- Sys.getenv("ODKC_TEST_FID")  # "build_Flora-Quadrat-0-2_1558575936.svc"
-url <- Sys.getenv("ODKC_TEST_URL")  # "https://sandbox.central.opendatakit.org"
-un <- Sys.getenv("ODKC_TEST_UN")
-pw <- Sys.getenv("ODKC_TEST_PW")
+```{r ru_setup}
+# ODK Central's OData URL contains base URL, project ID, and form ID
+# ODK Central credentials can live in .Renviron, see vignette "setup"
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
 
 # Canned data
 data("fq_svc")
@@ -77,25 +58,18 @@ data("fq_raw")
 data("fq_tae")
 ```
 
-In our example, the OData service URL is `r data_url`. 
-This URL contains the base URL (`r url`), the project ID (`r pid`), and the form 
-ID (`r fid`).
-
-ruODK made the opinionated decision to use these components separately in its 
-functions.
-
 To extract data from the OData API endpoints, we have to:
 
 * discover data endpoints from the OData service document,
 * inspect the metadata schema to infer data types,
 * download submissions from the data endpoints,
-* download media and adjust their file paths to the downloaded copies.
+* download media attachments and adjust their file paths to the downloaded files.
 
 ## OData service document
 Let's start off with the service document.
 
 ```{r load_odata_service, eval=F}
-fq_svc <- odata_service_get(pid, fid, url = url, un = un, pw = pw)
+fq_svc <- odata_service_get()
 ```
 
 We'll use the included example data `fq_svc`.
@@ -116,8 +90,8 @@ While we can download the submission data without it, the metadata document
 contains information about field data types and attachment names.
 Future versions of `ruODK` might automate these steps.
 
-```{r load_ometadata, eval=F}
-fq_meta <- odata_metadata_get(pid, fid, url = url, un = un, pw = pw)
+```{r load_ometadata}
+fq_meta <- odata_metadata_get()
 ```
 
 ```{r view_metadata, fig.width=7}
@@ -127,10 +101,9 @@ listviewer::jsonedit(fq_meta)
 ## OData submission data documents
 Now let's download the form submissions and, separately, repeating form groups.
 
-```{r load_odata, eval=F}
-fq_raw <- odata_submission_get(pid, fid, url = url, un = un, pw = pw)
-fq_tae <- odata_submission_get(pid, fid, url = url, un = un, pw = pw, 
-                                table = "Submissions.taxon_encounter")
+```{r load_odata}
+fq_raw <- odata_submission_get()
+fq_tae <- odata_submission_get(table = "Submissions.taxon_encounter")
 ```
 
 The output of the above code is provided as data objects `fq_raw` 
@@ -144,30 +117,29 @@ To analyse and visualise the data, this nested list of lists must be transformed
 into a rectangular shape.
 The function `ruODK::odata_submission_parse` recursively unnests list columns using
 `tidyr::unnest_wider`. Unnamed columns, notably the anonymous lat/lon/alt 
-coordinates, are named automatically to become unique.
+coordinates, are named automatically to become unique (a feature of 
+`tidyr::unnest_*()`), and then sanitised using the helper `janitor::clean_names()`.
 
 In this example, we clean up the output further by renaming some columns, notably
-we call the submission UUID `uuid`, and rename the main coordinates from 
-`...12` and `...13` to `longitude` and `latitude`.
+the main coordinates from `x13` and `x14` to `longitude` and `latitude`.
 
-The vectorised function `attachment_get` downloads and links attachments like 
-photos and other media to a local, relative path. This will take some time
+The vectorised function `ruODK::attachment_get` downloads and links attachments 
+like photos and other media to a local, relative path. This will take some time
 during the first run; once the files exist locally, the download will be skipped.
+Read `??ruODK::attachment_get` on specifying form field names (or parts thereof)
+indicating a media attachment; the default are any names containing "photo".
 
 The date formats are parsed from ISO8601 timestamps into POSIXct objects with
-`lubridate::parse_date_time`. We use our local timezone (GMT+08) in this example.
-
-Other ODK forms will need to select their respective media attachment field names
-for `attachment_get`, and their respective date/datetime/time field names as well
-as their local timezone (if desired) for `lubridate`.
+`ruODK::parse_datetime`. We use our local timezone (GMT+08) in this example.
+Read `??ruODK::parse_datetime` on specifying form field names (or parts thereof)
+indicating a date field; the default are any names containing "time".
 
 The trailing `invisible` is a neutral operation to allow trailing magrittr 
-pipelines `%>%` while commenting individual lines of the pipelines in or out.
+pipes (`%>%`) while commenting individual lines of the pipelines in or out.
 
 The repeated subgroup `taxon_encounter` is joined with the main observation
 to receive a (repeated) copy of the main observation's values 
 (such as observation time and habitat description).
-The join benefits from the manually renamed `uuid` columns in either tibble.
 
 For clarity, we enable verbose messages from `odata_submission_parse` 
 and preserve the message output in the code chunk options with `message=TRUE`.
@@ -177,52 +149,33 @@ ord <- "YmdHMSz"
 tz <- "Australia/Perth"
   
 fq_data <- fq_raw %>%
-  odata_submission_parse(verbose = TRUE) %>%
+  ruODK::odata_submission_parse(verbose = TRUE) %>% 
+  ruODK::parse_datetime(tz = "Australia/Perth") %>% 
+  ruODK::parse_datetime(tz = "Australia/Perth", col_contains = "date") %>%
   dplyr::rename(
-    uuid = `.__id`,
-    longitude = `...12`,
-    latitude = `...13`
+    longitude = x13,
+    latitude = x14,
+    altitude = x15
   ) %>%
   dplyr::mutate(
-    quadrat_photo = attachment_get(
-      pid, fid, uuid, quadrat_photo,
-      url = url, un = un, pw = pw
-    ),
-    morphological_type_photo = attachment_get(
-      pid, fid, uuid, morphological_type_photo,
-      url = url, un = un, pw = pw
-    ),
-    mudmap_photo = attachment_get(
-      pid, fid, uuid, mudmap_photo,
-      url = url, un = un, pw = pw
-    ),
-    submissionDate = lubridate::parse_date_time(
-      submissionDate,
-      orders = ord, tz = tz
-    ),
-    encounter_start_datetime = lubridate::parse_date_time(
-      encounter_start_datetime,
-      orders = ord, tz = tz
-    ),
-    encounter_end_datetime = lubridate::parse_date_time(
-      encounter_end_datetime,
-      orders = ord, tz = tz
-    )
+    quadrat_photo = attachment_get(id, quadrat_photo),
+    morphological_type_photo = attachment_get(id, morphological_type_photo),
+    mudmap_photo = attachment_get(id, mudmap_photo),
+
   ) %>%
   invisible()
+
 fq_data_tae <- fq_tae %>%
-  odata_submission_parse(verbose = TRUE) %>%
+  odata_submission_parse(verbose = TRUE) %>% 
   dplyr::rename(
-    tae_uuid = `.__id`,
-    uuid = `.__Submissions.id`
+    lon = x6,
+    lat = x7,
+    alt = x8
   ) %>%
   dplyr::mutate(
-    photo_in_situ = attachment_get(
-      pid, fid, uuid, photo_in_situ,
-      url = url, un = un, pw = pw
-    )
+    photo_in_situ = attachment_get(submissions_id, photo_in_situ)
   ) %>%
-  dplyr::left_join(fq_data, by = "uuid") %>%
+  dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>%
   invisible()
 ```
 
@@ -331,7 +284,7 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
     data = fq_data_tae,
-    lng = ~...6, lat = ~...7,
+    lng = ~lon, lat = ~lat,
     icon = leaflet::makeAwesomeIcon(text = "T", markerColor = "green"),
     label = ~ glue::glue("{canonical_name} {encounter_start_datetime}"),
     popup = ~ glue::glue(
@@ -362,7 +315,7 @@ for more background.
 ```{r eda, fig.height=5, fig.width=7}
 # How many submissions per device?
 fq_data %>% 
-  dplyr::group_by(instanceID) %>% 
+  dplyr::group_by(instance_id) %>% 
   dplyr::tally() %>% 
   knitr::kable()
 
@@ -385,6 +338,7 @@ fq_data_tae %>%
   ) +
   ggplot2::geom_point() +
   ggplot2::theme_classic()
+
 # GGplot with groups
 fq_data_tae %>% 
   ggplot2::ggplot(
@@ -392,7 +346,7 @@ fq_data_tae %>%
       x=encounter_start_datetime, 
       y=canonical_name, 
       colour=life_form,
-      shape=instanceID)) + 
+      shape=instance_id)) + 
   ggplot2::labs(
     title="Title", 
     subtitle="Subtitle", 
@@ -406,9 +360,8 @@ fq_data_tae %>%
 ```
 
 # Export
-The rectangled data can now be exported. e.g. to CSV.
-Note that all list columns must be either unnested or dropped before exporting to
-CSV.
+The rectangled data can now be exported. e.g. to CSV. Note that all list columns 
+must be either unnested or dropped before exporting to CSV.
 
 ```{r export, eval=F}
 fq_data %>% readr::write_csv("flora_quadrats.csv")

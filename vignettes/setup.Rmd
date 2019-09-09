@@ -19,49 +19,56 @@ library(ruODK)
 ```
 
 # Configure ruODK
-Currently, ODK Central supports BasicAuth (username and password) and 
-SessionAuth. `ruODK` supports only BasicAuth.
+`ruODK` functions work on a given ODK Central instance using a web user's 
+credentials (username and password). Some functions also require project and
+form IDs.
 
-Each ruODK function accepts the server base URL, username, and password, with
-defaults looking for R environment variables `ODKC_URL`, `ODKC_UN`, and `ODKC_PW`
-through the helper functions `get_default_{url, un, pw}()`.
+`ruODK`'s functions accept these parameters either as explicit keyword arguments,
+or fall back to defaults.
 
-There are three ways of providing those settings to each function call.
+`ruODK` suggests as best practice to set the defaults (or parts thereof) using 
+`ruODK::ru_setup()` or through permanently setting environment variables.
 
-## Per function call
-We can supply those credentials to each `ruODK` function call, but that's
-cumbersome and not securely reproducible (the command would include the 
-sensitive  credentials).
-
-```{r, eval=FALSE}
-ruODK::project_list(url="https://my-odkc.com", un="me@mail.com", pw=".......")
-```
-
-An example use case are the `ruODK` tests, which require settings different from
-the settings used during development and in the vignettes.
-
-## Per session
+## Best practice: `ru_setup`
 `ruODK` provides helpers for settings, `ru_setup()` to set and `ru_settings()` 
 to get settings.
-While normal users of `ruODK` will only need a default url, username, and 
-password, contributors to `ruODK` can include optional test server settings.
+
+While normal users of `ruODK` will only need a default pid, fid, url, username, 
+and password, contributors to `ruODK` can include optional test server settings
+which are required to run the test suite and build the vignettes.
+
+`ruODK` infers the base URL, project and form ID from the OData Service URL
+which is shown in ODK Central on the Form Submissions tab.
 
 ```{r ru_setup}
-# ruODK user
+# ruODK user using OData service URL, username (an email), and password
 ruODK::ru_setup(
-  url = "https://odkcentral.dbca.wa.gov.au", 
+  svc = "https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Flora-Quadrat-0-2_1558575936.svc", 
   un = "me@email.com", 
   pw = "..."
 )
 
 # ruODK contributor
 ruODK::ru_setup(
+  svc = "https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Flora-Quadrat-0-2_1558575936.svc", 
+  un = "me@email.com", 
+  pw = "my_default_password",
+  test_svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc", 
+  test_un = "me@email.com", 
+  test_pw = "YYYY"
+)
+
+# ruODK contributor using base URL, project ID, and form ID
+# Same effect as above, but more typing
+ruODK::ru_setup(
+  pid = 1,
+  fid = "build_Flora-Quadrat-0-2_1558575936",
   url = "https://odkcentral.dbca.wa.gov.au", 
   un = "me@email.com", 
-  pw = "...",
+  pw = "my_default_password",
   test_url = "https://sandbox.central.opendatakit.org", 
   test_un = "me@email.com", 
-  test_pw = "...",
+  test_pw = "my_test_password",
   test_pid = 14,
   test_fid = "build_Flora-Quadrat-0-2_1558575936"
 )
@@ -70,22 +77,25 @@ ruODK::ru_setup(
 ruODK::ru_settings()
 ```
 
-Now we can call `ruODK` functions without settings, and let `ruODK` fall back
-to the default credentials:
+Now we can call `ruODK` functions without specifying `url`, `un`, and `pw`, 
+and let `ruODK` fall back to the defaults:
 
 ```{r, eval=FALSE}
 ruODK::project_list()
+ruODK::submission_list()
 ```
 
-
-## Per machine
-Let's make those settings a permanent default.
+## Permanent defaults: Environment variables
+`ruODK`'s functions default to the getters `ruODK::get_default_{pid,fid,url,un.pw}()`.
+These getters in turn look up their values from environment variables.
 
 A convenient way to have often used environment variables available is to add
 them to `~/.Renviron` using `usethis::edit_r_environ(scope = "user")`.
 This loads them freshly into a new session, eliminating the need to run 
 `ru_setup()`. Note that the environment variables can be cleared or overwritten 
-through calling `ru_setup()` or `Sys.setenv()`.
+through calling `ru_setup()` or `Sys.setenv()` with respective arguments.
+
+`ru_setup()` will not change any omitted arguments.
 
 ```{r open_renviron, eval=FALSE}
 usethis::edit_r_environ(scope = "user")
@@ -93,6 +103,8 @@ usethis::edit_r_environ(scope = "user")
 
 
 ```{r renviron, eval=FALSE}
+ODKC_PID=1
+ODKC_FID="build_Flora-Quadrat-0-2_1558575936"
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
 ODKC_UN="me@email.com"
 ODKC_PW="..."
@@ -107,7 +119,7 @@ ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
 As an alternative to setting environment variables through `~/.Renviron`, 
 you can set them through `Sys.setenv()`:
 
-```{r setenv}
+```{r setenv, eval=FALSE}
 Sys.setenv(ODKC_URL="https://odkcentral.dbca.wa.gov.au")
 Sys.setenv(ODKC_UN="me@mail.com")
 Sys.setenv(ODKC_PW="...")
@@ -116,7 +128,83 @@ Sys.setenv(ODKC_TEST_UN="me@mail.com")
 Sys.setenv(ODKC_TEST_PW="...")
 Sys.setenv(ODKC_TEST_PID=14)
 Sys.setenv(ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936")
+```
 
-# Review settings
-ruODK::ru_settings()
+
+
+## The hard way: Per function call
+We can supply those credentials to each `ruODK` function call.
+
+```{r, eval=FALSE}
+# Use ruODK without ru_setup
+ruODK::project_list(
+  url="https://my-odkc.com", 
+  un="me@mail.com", 
+  pw="......."
+)
+
+# Tests use default test settings explicitly
+ruODK::project_list(
+  url=ruODK::get_test_url(), 
+  un=ruODK::get_test_un(), 
+  pw=ruODK::get_test_pw()
+)
+```
+
+An example use case are the `ruODK` tests, which explicitly set `url`, `un`, 
+`pw`, `pid` and `fid` from the test variables `ruODK::get_test_{url, un, pw, pid, fid}()`.
+
+
+# Moving across forms
+`ruODK`'s functions default to the default values for project ID (`pid`),
+form ID (`fid`), base URL (`url`), username (`un`), and password (`pw`).
+
+A typical workflow is to run several functions of `ruODK` against one form (and
+the overarching project). By running `ru_setup()` with the form's OData service
+URL and a web user's username and password, subsequent functions can omit
+`pid`, `fid`, `url`, `un`, and `pw`.
+
+```{r, eval=FALSE}
+# Server 1, Project 1, Form 1
+ruODK::ru_setup(
+  svc = "https://central1.org/v1/projects/1/forms/form1.svc",
+  un = "me@email.com",
+  pw = "..."
+)
+
+ruODK::project_detail()
+ruODK::form_detail()
+ruODK::submission_list()
+
+# Server 1, Project 1, Form 3
+ruODK::ru_setup(svc = "https://central1.org/v1/projects/1/forms/form3.svc")
+
+ruODK::project_detail()
+ruODK::form_detail()
+ruODK::submission_list()
+
+# Server 1, Project 5, Form 4
+ruODK::ru_setup(svc = "https://central1.org/v1/projects/5/forms/form4.svc")
+
+ruODK::project_detail()
+ruODK::form_detail()
+ruODK::submission_list()
+
+# Server 2, Project 11, Form 12
+ruODK::ru_setup(
+  svc = "https://central2.org/v1/projects/11/forms/form12.svc",
+  un = "me@email.com",
+  pw = "..."
+)
+
+ruODK::project_detail()
+ruODK::form_detail()
+ruODK::submission_list()
+
+# Server 2, Project 11, Form 13
+ruODK::ru_setup(svc = "https://central2.org/v1/projects/11/forms/form13.svc")
+
+ruODK::project_detail()
+ruODK::form_detail()
+ruODK::submission_list()
 ```

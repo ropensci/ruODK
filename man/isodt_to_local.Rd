@@ -42,3 +42,11 @@ has_internet <- function() {
 }
 Parse an ISO8601 datetime string to a timezone aware datetime.
 }
+\seealso{
+Other utilities: \code{\link{\%>\%}},
+  \code{\link{map_chr_hack}}, \code{\link{map_dttm_hack}},
+  \code{\link{map_int_hack}}, \code{\link{map_lgl_hack}},
+  \code{\link{parse_datetime}}, \code{\link{prepend_uuid}},
+  \code{\link{strip_uuid}}, \code{\link{tidyeval}}
+}
+\concept{utilities}

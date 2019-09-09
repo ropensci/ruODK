@@ -1,0 +1,808 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>Flora Quadrat 0.4</h:title>
+    <model>
+      <instance>
+        <data id="build_Flora-Quadrat-0-4_1568008745">
+          <meta>
+            <instanceID/>
+          </meta>
+          <encounter_start_datetime/>
+          <reporter/>
+          <device_id/>
+          <location>
+            <area_name/>
+            <quadrat_photo/>
+            <corner1/>
+          </location>
+          <habitat>
+            <morphological_type/>
+            <morphological_type_photo/>
+          </habitat>
+          <vegetation_stratum jr:template="">
+            <nvis_level3_broad_floristic_group/>
+            <max_height_m/>
+            <foliage_cover/>
+            <dominant_species_1/>
+            <dominant_species_2/>
+            <dominant_species_3/>
+            <dominant_species_4/>
+          </vegetation_stratum>
+          <perimeter>
+            <corner2/>
+            <corner3/>
+            <corner4/>
+            <mudmap_photo/>
+          </perimeter>
+          <taxon_encounter jr:template="">
+            <field_name/>
+            <photo_in_situ/>
+            <taxon_encounter_location/>
+            <life_form/>
+            <voucher_specimen_barcode/>
+            <voucher_specimen_label/>
+          </taxon_encounter>
+          <encounter_end_datetime/>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="English">
+          <text id="/data/location:label">
+            <value>Location</value>
+          </text>
+          <text id="/data/location/area_name:label">
+            <value>Quadrat name</value>
+          </text>
+          <text id="/data/location/area_name:hint">
+            <value></value>
+          </text>
+          <text id="/data/location/quadrat_photo:label">
+            <value>Quadrat Photo</value>
+          </text>
+          <text id="/data/location/quadrat_photo:hint">
+            <value>Capture a memorable overview</value>
+          </text>
+          <text id="/data/location/corner1:label">
+            <value>Corner 1</value>
+          </text>
+          <text id="/data/location/corner1:hint">
+            <value>First recorded corner of quadrat</value>
+          </text>
+          <text id="/data/habitat:label">
+            <value>Habitat</value>
+          </text>
+          <text id="/data/habitat/morphological_type:label">
+            <value>Morphological Type</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option0">
+            <value>Crest</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option1">
+            <value>Upper Slope</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option2">
+            <value>Mid Slope</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option3">
+            <value>Lower Slope</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option4">
+            <value>Flat</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option5">
+            <value>Open Depression</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option6">
+            <value>Closed Depression</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option7">
+            <value>Hill</value>
+          </text>
+          <text id="/data/habitat/morphological_type:option8">
+            <value>Ridge</value>
+          </text>
+          <text id="/data/habitat/morphological_type_photo:label">
+            <value>Morphological Type Photo</value>
+          </text>
+          <text id="/data/habitat/morphological_type_photo:hint">
+            <value>Take photo in landscape format</value>
+          </text>
+          <text id="/data/vegetation_stratum:label">
+            <value>Vegetation Stratum</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:label">
+            <value>Broad Floristic Group</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:hint">
+            <value>NVIS Level III</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option0">
+            <value>Trees: Dominant Genus</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option1">
+            <value>Trees: Rainforest</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option2">
+            <value>Trees: Cultivated Non-food</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option3">
+            <value>Trees: Cultivated Food</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option4">
+            <value>Trees: Planted / Cultivated</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option5">
+            <value>Woody Plant</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option6">
+            <value>Mallee</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option7">
+            <value>Shrub</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option8">
+            <value>Heath Shrub</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option9">
+            <value>Chenopod Shrub</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option10">
+            <value>Samphire Shrub</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option11">
+            <value>Hummock Grass</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option12">
+            <value>Tussock Grass</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option13">
+            <value>Other Grass</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option14">
+            <value>Sedge</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option15">
+            <value>Rush</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option16">
+            <value>Forb</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option17">
+            <value>Fern</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option18">
+            <value>Bryophyte</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option19">
+            <value>Lichen</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option20">
+            <value>Surface Crusts</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option21">
+            <value>Vine</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option22">
+            <value>Aquatic Non-woody</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option23">
+            <value>Seagrass Marine</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option24">
+            <value>Algae Fresh or Brackish</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option25">
+            <value>Algae Marine</value>
+          </text>
+          <text id="/data/vegetation_stratum/nvis_level3_broad_floristic_group:option26">
+            <value>Bare surface</value>
+          </text>
+          <text id="/data/vegetation_stratum/max_height_m:label">
+            <value>Max height of stratum [m]</value>
+          </text>
+          <text id="/data/vegetation_stratum/foliage_cover:label">
+            <value>Foliage cover</value>
+          </text>
+          <text id="/data/vegetation_stratum/foliage_cover:hint">
+            <value>of all dominant species combined</value>
+          </text>
+          <text id="/data/vegetation_stratum/foliage_cover:option0">
+            <value>D 100-70%</value>
+          </text>
+          <text id="/data/vegetation_stratum/foliage_cover:option1">
+            <value>O 70-30%</value>
+          </text>
+          <text id="/data/vegetation_stratum/foliage_cover:option2">
+            <value>S 30-10%</value>
+          </text>
+          <text id="/data/vegetation_stratum/foliage_cover:option3">
+            <value>V 10-5%</value>
+          </text>
+          <text id="/data/vegetation_stratum/foliage_cover:option4">
+            <value>L 5-0%</value>
+          </text>
+          <text id="/data/vegetation_stratum/foliage_cover:option5">
+            <value>I 0%</value>
+          </text>
+          <text id="/data/vegetation_stratum/dominant_species_1:label">
+            <value>Dominant species 1</value>
+          </text>
+          <text id="/data/vegetation_stratum/dominant_species_1:hint">
+            <value>Canonical name</value>
+          </text>
+          <text id="/data/vegetation_stratum/dominant_species_2:label">
+            <value>Dominant species 2</value>
+          </text>
+          <text id="/data/vegetation_stratum/dominant_species_2:hint">
+            <value>Canonical name</value>
+          </text>
+          <text id="/data/vegetation_stratum/dominant_species_3:label">
+            <value>Dominant species 3</value>
+          </text>
+          <text id="/data/vegetation_stratum/dominant_species_3:hint">
+            <value>Canonical name</value>
+          </text>
+          <text id="/data/vegetation_stratum/dominant_species_4:label">
+            <value>Dominant species 4</value>
+          </text>
+          <text id="/data/vegetation_stratum/dominant_species_4:hint">
+            <value>Canonical name</value>
+          </text>
+          <text id="/data/perimeter:label">
+            <value>Quadrat Perimeter</value>
+          </text>
+          <text id="/data/perimeter/corner2:label">
+            <value>Corner 2</value>
+          </text>
+          <text id="/data/perimeter/corner2:hint">
+            <value>Second recorded corner of quadrat</value>
+          </text>
+          <text id="/data/perimeter/corner3:label">
+            <value>Corner 3</value>
+          </text>
+          <text id="/data/perimeter/corner3:hint">
+            <value>Third recorded corner of quadrat</value>
+          </text>
+          <text id="/data/perimeter/corner4:label">
+            <value>Corner 4</value>
+          </text>
+          <text id="/data/perimeter/corner4:hint">
+            <value>Fourth recorded corner of quadrat</value>
+          </text>
+          <text id="/data/perimeter/mudmap_photo:label">
+            <value>Photo of mudmap</value>
+          </text>
+          <text id="/data/perimeter/mudmap_photo:hint">
+            <value>Hand-drawn mudmap if required</value>
+          </text>
+          <text id="/data/taxon_encounter:label">
+            <value>Plant Record</value>
+          </text>
+          <text id="/data/taxon_encounter/field_name:label">
+            <value>Taxon</value>
+          </text>
+          <text id="/data/taxon_encounter/field_name:hint">
+            <value>Field collection name</value>
+          </text>
+          <text id="/data/taxon_encounter/photo_in_situ:label">
+            <value>Photo in situ</value>
+          </text>
+          <text id="/data/taxon_encounter/taxon_encounter_location:label">
+            <value>Plant location</value>
+          </text>
+          <text id="/data/taxon_encounter/taxon_encounter_location:hint">
+            <value>Optional</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:label">
+            <value>Life form</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option0">
+            <value>Trees: Dominant Genus</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option1">
+            <value>Trees: Rainforest</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option2">
+            <value>Trees: Cultivated Non-food</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option3">
+            <value>Trees: Cultivated Food</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option4">
+            <value>Trees: Planted / Cultivated</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option5">
+            <value>Woody Plant</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option6">
+            <value>Mallee</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option7">
+            <value>Shrub</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option8">
+            <value>Heath Shrub</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option9">
+            <value>Chenopod Shrub</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option10">
+            <value>Samphire Shrub</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option11">
+            <value>Hummock Grass</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option12">
+            <value>Tussock Grass</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option13">
+            <value>Other Grass</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option14">
+            <value>Sedge</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option15">
+            <value>Rush</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option16">
+            <value>Forb</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option17">
+            <value>Fern</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option18">
+            <value>Bryophyte</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option19">
+            <value>Lichen</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option20">
+            <value>Surface Crusts</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option21">
+            <value>Vine</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option22">
+            <value>Aquatic Non-woody</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option23">
+            <value>Seagrass Marine</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option24">
+            <value>Algae Fresh or Brackish</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option25">
+            <value>Algae Marine</value>
+          </text>
+          <text id="/data/taxon_encounter/life_form:option26">
+            <value>Bare surface</value>
+          </text>
+          <text id="/data/taxon_encounter/voucher_specimen_barcode:label">
+            <value>Voucher specimen barcode</value>
+          </text>
+          <text id="/data/taxon_encounter/voucher_specimen_barcode:hint">
+            <value></value>
+          </text>
+          <text id="/data/taxon_encounter/voucher_specimen_label:label">
+            <value>Voucher specimen label</value>
+          </text>
+          <text id="/data/taxon_encounter/voucher_specimen_label:hint">
+            <value>If barcode not available</value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/encounter_start_datetime" type="dateTime" jr:preload="timestamp" jr:preloadParams="start"/>
+      <bind nodeset="/data/reporter" type="string" jr:preload="property" jr:preloadParams="username"/>
+      <bind nodeset="/data/device_id" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+      <bind nodeset="/data/location/area_name" type="string"/>
+      <bind nodeset="/data/location/quadrat_photo" type="binary"/>
+      <bind nodeset="/data/location/corner1" type="geopoint" required="true()"/>
+      <bind nodeset="/data/habitat/morphological_type" type="select1"/>
+      <bind nodeset="/data/habitat/morphological_type_photo" type="binary"/>
+      <bind nodeset="/data/vegetation_stratum/nvis_level3_broad_floristic_group" type="select1"/>
+      <bind nodeset="/data/vegetation_stratum/max_height_m" type="decimal" constraint="(. &gt;= '0') and (. &lt;= '100')" jr:constraintMsg="Value must be between 0 and 100"/>
+      <bind nodeset="/data/vegetation_stratum/foliage_cover" type="select1"/>
+      <bind nodeset="/data/vegetation_stratum/dominant_species_1" type="string"/>
+      <bind nodeset="/data/vegetation_stratum/dominant_species_2" type="string"/>
+      <bind nodeset="/data/vegetation_stratum/dominant_species_3" type="string"/>
+      <bind nodeset="/data/vegetation_stratum/dominant_species_4" type="string"/>
+      <bind nodeset="/data/perimeter/corner2" type="geopoint"/>
+      <bind nodeset="/data/perimeter/corner3" type="geopoint"/>
+      <bind nodeset="/data/perimeter/corner4" type="geopoint"/>
+      <bind nodeset="/data/perimeter/mudmap_photo" type="binary"/>
+      <bind nodeset="/data/taxon_encounter/field_name" type="string"/>
+      <bind nodeset="/data/taxon_encounter/photo_in_situ" type="binary"/>
+      <bind nodeset="/data/taxon_encounter/taxon_encounter_location" type="geopoint"/>
+      <bind nodeset="/data/taxon_encounter/life_form" type="select1"/>
+      <bind nodeset="/data/taxon_encounter/voucher_specimen_barcode" type="barcode"/>
+      <bind nodeset="/data/taxon_encounter/voucher_specimen_label" type="string"/>
+      <bind nodeset="/data/encounter_end_datetime" type="dateTime" jr:preload="timestamp" jr:preloadParams="end"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/location" appearance="field-list">
+      <label ref="jr:itext('/data/location:label')"/>
+      <input ref="/data/location/area_name">
+        <label ref="jr:itext('/data/location/area_name:label')"/>
+        <hint ref="jr:itext('/data/location/area_name:hint')"/>
+      </input>
+      <upload ref="/data/location/quadrat_photo" mediatype="image/*">
+        <label ref="jr:itext('/data/location/quadrat_photo:label')"/>
+        <hint ref="jr:itext('/data/location/quadrat_photo:hint')"/>
+      </upload>
+      <input ref="/data/location/corner1">
+        <label ref="jr:itext('/data/location/corner1:label')"/>
+        <hint ref="jr:itext('/data/location/corner1:hint')"/>
+      </input>
+    </group>
+    <group ref="/data/habitat" appearance="field-list">
+      <label ref="jr:itext('/data/habitat:label')"/>
+      <select1 ref="/data/habitat/morphological_type" appearance="minimal">
+        <label ref="jr:itext('/data/habitat/morphological_type:label')"/>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option0')"/>
+          <value>crest</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option1')"/>
+          <value>upper-slope</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option2')"/>
+          <value>mid-slope</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option3')"/>
+          <value>lower-slope</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option4')"/>
+          <value>flat</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option5')"/>
+          <value>open-depression</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option6')"/>
+          <value>closed-depression</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option7')"/>
+          <value>hill</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/habitat/morphological_type:option8')"/>
+          <value>ridge</value>
+        </item>
+      </select1>
+      <upload ref="/data/habitat/morphological_type_photo" mediatype="image/*">
+        <label ref="jr:itext('/data/habitat/morphological_type_photo:label')"/>
+        <hint ref="jr:itext('/data/habitat/morphological_type_photo:hint')"/>
+      </upload>
+    </group>
+    <group ref="/data/vegetation_stratum">
+      <label ref="jr:itext('/data/vegetation_stratum:label')"/>
+      <repeat nodeset="/data/vegetation_stratum">
+        <group appearance="field-list">
+          <select1 ref="/data/vegetation_stratum/nvis_level3_broad_floristic_group" appearance="minimal">
+            <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:label')"/>
+            <hint ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:hint')"/>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option0')"/>
+              <value>w1.0_trees_with_dominant_genus</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option1')"/>
+              <value>w1.1_trees_rainforest</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option2')"/>
+              <value>w1.2_trees_cultivated_non_food</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option3')"/>
+              <value>w1.3_trees_cultivated_food</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option4')"/>
+              <value>w1.4_trees_cultivated_food</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option5')"/>
+              <value>w2.0_woody_plant</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option6')"/>
+              <value>w2.1_mallee</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option7')"/>
+              <value>w3.0_shrub</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option8')"/>
+              <value>w3.1_heath_shrub</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option9')"/>
+              <value>w3.2_chenopod_shrub</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option10')"/>
+              <value>w3.3_samphire_shrub</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option11')"/>
+              <value>g1.0_hummock_grass</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option12')"/>
+              <value>g2.0_tussock_grass</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option13')"/>
+              <value>g3.0_other_grass</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option14')"/>
+              <value>g4.0_sedge</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option15')"/>
+              <value>g5.0_rush</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option16')"/>
+              <value>h1.0_forb</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option17')"/>
+              <value>f1.0_fern</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option18')"/>
+              <value>m1.0_bryophyte</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option19')"/>
+              <value>l1.0_lichen</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option20')"/>
+              <value>c1.0_surface_crusts</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option21')"/>
+              <value>v1.0_vine</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option22')"/>
+              <value>a1.0_aquatic_non_woody</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option23')"/>
+              <value>a2.0_seagrass_marine</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option24')"/>
+              <value>a3.0_algae_fresh_brackish</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option25')"/>
+              <value>a4.0_algae_marine</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/nvis_level3_broad_floristic_group:option26')"/>
+              <value>b1.0_bare_surface</value>
+            </item>
+          </select1>
+          <input ref="/data/vegetation_stratum/max_height_m">
+            <label ref="jr:itext('/data/vegetation_stratum/max_height_m:label')"/>
+          </input>
+          <select1 ref="/data/vegetation_stratum/foliage_cover" appearance="minimal">
+            <label ref="jr:itext('/data/vegetation_stratum/foliage_cover:label')"/>
+            <hint ref="jr:itext('/data/vegetation_stratum/foliage_cover:hint')"/>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/foliage_cover:option0')"/>
+              <value>100-70</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/foliage_cover:option1')"/>
+              <value>70-30</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/foliage_cover:option2')"/>
+              <value>30-10</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/foliage_cover:option3')"/>
+              <value>10-5</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/foliage_cover:option4')"/>
+              <value>5-0</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/vegetation_stratum/foliage_cover:option5')"/>
+              <value>0</value>
+            </item>
+          </select1>
+          <input ref="/data/vegetation_stratum/dominant_species_1">
+            <label ref="jr:itext('/data/vegetation_stratum/dominant_species_1:label')"/>
+            <hint ref="jr:itext('/data/vegetation_stratum/dominant_species_1:hint')"/>
+          </input>
+          <input ref="/data/vegetation_stratum/dominant_species_2">
+            <label ref="jr:itext('/data/vegetation_stratum/dominant_species_2:label')"/>
+            <hint ref="jr:itext('/data/vegetation_stratum/dominant_species_2:hint')"/>
+          </input>
+          <input ref="/data/vegetation_stratum/dominant_species_3">
+            <label ref="jr:itext('/data/vegetation_stratum/dominant_species_3:label')"/>
+            <hint ref="jr:itext('/data/vegetation_stratum/dominant_species_3:hint')"/>
+          </input>
+          <input ref="/data/vegetation_stratum/dominant_species_4">
+            <label ref="jr:itext('/data/vegetation_stratum/dominant_species_4:label')"/>
+            <hint ref="jr:itext('/data/vegetation_stratum/dominant_species_4:hint')"/>
+          </input>
+        </group>
+      </repeat>
+    </group>
+    <group ref="/data/perimeter" appearance="field-list">
+      <label ref="jr:itext('/data/perimeter:label')"/>
+      <input ref="/data/perimeter/corner2">
+        <label ref="jr:itext('/data/perimeter/corner2:label')"/>
+        <hint ref="jr:itext('/data/perimeter/corner2:hint')"/>
+      </input>
+      <input ref="/data/perimeter/corner3">
+        <label ref="jr:itext('/data/perimeter/corner3:label')"/>
+        <hint ref="jr:itext('/data/perimeter/corner3:hint')"/>
+      </input>
+      <input ref="/data/perimeter/corner4">
+        <label ref="jr:itext('/data/perimeter/corner4:label')"/>
+        <hint ref="jr:itext('/data/perimeter/corner4:hint')"/>
+      </input>
+      <upload ref="/data/perimeter/mudmap_photo" mediatype="image/*">
+        <label ref="jr:itext('/data/perimeter/mudmap_photo:label')"/>
+        <hint ref="jr:itext('/data/perimeter/mudmap_photo:hint')"/>
+      </upload>
+    </group>
+    <group ref="/data/taxon_encounter">
+      <label ref="jr:itext('/data/taxon_encounter:label')"/>
+      <repeat nodeset="/data/taxon_encounter">
+        <group appearance="field-list">
+          <input ref="/data/taxon_encounter/field_name">
+            <label ref="jr:itext('/data/taxon_encounter/field_name:label')"/>
+            <hint ref="jr:itext('/data/taxon_encounter/field_name:hint')"/>
+          </input>
+          <upload ref="/data/taxon_encounter/photo_in_situ" mediatype="image/*">
+            <label ref="jr:itext('/data/taxon_encounter/photo_in_situ:label')"/>
+          </upload>
+          <input ref="/data/taxon_encounter/taxon_encounter_location">
+            <label ref="jr:itext('/data/taxon_encounter/taxon_encounter_location:label')"/>
+            <hint ref="jr:itext('/data/taxon_encounter/taxon_encounter_location:hint')"/>
+          </input>
+          <select1 ref="/data/taxon_encounter/life_form" appearance="minimal">
+            <label ref="jr:itext('/data/taxon_encounter/life_form:label')"/>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option0')"/>
+              <value>w1.0_trees_with_dominant_genus</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option1')"/>
+              <value>w1.1_trees_rainforest</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option2')"/>
+              <value>w1.2_trees_cultivated_non_food</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option3')"/>
+              <value>w1.3_trees_cultivated_food</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option4')"/>
+              <value>w1.4_trees_cultivated_food</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option5')"/>
+              <value>w2.0_woody_plant</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option6')"/>
+              <value>w2.1_mallee</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option7')"/>
+              <value>w3.0_shrub</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option8')"/>
+              <value>w3.1_heath_shrub</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option9')"/>
+              <value>w3.2_chenopod_shrub</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option10')"/>
+              <value>w3.3_samphire_shrub</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option11')"/>
+              <value>g1.0_hummock_grass</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option12')"/>
+              <value>g2.0_tussock_grass</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option13')"/>
+              <value>g3.0_other_grass</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option14')"/>
+              <value>g4.0_sedge</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option15')"/>
+              <value>g5.0_rush</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option16')"/>
+              <value>h1.0_forb</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option17')"/>
+              <value>f1.0_fern</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option18')"/>
+              <value>m1.0_bryophyte</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option19')"/>
+              <value>l1.0_lichen</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option20')"/>
+              <value>c1.0_surface_crusts</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option21')"/>
+              <value>v1.0_vine</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option22')"/>
+              <value>a1.0_aquatic_non_woody</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option23')"/>
+              <value>a2.0_seagrass_marine</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option24')"/>
+              <value>a3.0_algae_fresh_brackish</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option25')"/>
+              <value>a4.0_algae_marine</value>
+            </item>
+            <item>
+              <label ref="jr:itext('/data/taxon_encounter/life_form:option26')"/>
+              <value>b1.0_bare_surface</value>
+            </item>
+          </select1>
+          <input ref="/data/taxon_encounter/voucher_specimen_barcode">
+            <label ref="jr:itext('/data/taxon_encounter/voucher_specimen_barcode:label')"/>
+            <hint ref="jr:itext('/data/taxon_encounter/voucher_specimen_barcode:hint')"/>
+          </input>
+          <input ref="/data/taxon_encounter/voucher_specimen_label">
+            <label ref="jr:itext('/data/taxon_encounter/voucher_specimen_label:label')"/>
+            <hint ref="jr:itext('/data/taxon_encounter/voucher_specimen_label:hint')"/>
+          </input>
+        </group>
+      </repeat>
+    </group>
+  </h:body>
+</h:html>

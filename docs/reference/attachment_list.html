@@ -73,7 +73,7 @@ data for any particular attachment." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -149,43 +149,51 @@ data for any particular attachment.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>attachment_list</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='no'>iid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>())</pre>
+    <pre class="usage"><span class='fu'>attachment_list</span>(<span class='no'>iid</span>, <span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(), <span class='kw'>fid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>(),
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pid</th>
-      <td><p>The numeric ID of the project, e.g.: 2.</p></td>
-    </tr>
-    <tr>
-      <th>fid</th>
-      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
-    </tr>
-    <tr>
       <th>iid</th>
       <td><p>The `instance_id`, a UUID, as returned by `submission_list`.</p></td>
     </tr>
     <tr>
+      <th>pid</th>
+      <td><p>The numeric ID of the project, e.g.: 2.
+Default: <code><a href='ru_settings.html'>get_default_pid()</a></code>.
+Set default <code>pid</code> through <code><a href='ru_setup.html'>ru_setup(pid="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>fid</th>
+      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
+Default: <code><a href='ru_settings.html'>get_default_fid()</a></code>.
+Set default <code>fid</code> through <code><a href='ru_setup.html'>ru_setup(fid="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
+    </tr>
+    <tr>
       <th>url</th>
-      <td><p>The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: <code><a href='ru_settings.html'>get_default_url()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_URL")</a></code>.</p></td>
+      <td><p>The ODK Central base URL without trailing slash.#'
+Default: <code><a href='ru_settings.html'>get_default_url()</a></code>.
+Set default <code>url</code> through <code><a href='ru_setup.html'>ru_setup(url="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
       <td><p>The ODK Central username (an email address).
-Default: <code><a href='ru_settings.html'>get_default_un()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_UN")</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_un()</a></code>.
+Set default <code>un</code> through <code><a href='ru_setup.html'>ru_setup(un="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
       <td><p>The ODK Central password.
-Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_PW")</a></code>.</p></td>
+Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>.
+Set default <code>pw</code> through <code><a href='ru_setup.html'>ru_setup(pw="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     </table>
     
@@ -209,10 +217,10 @@ its filename to the request URL to download only that file (see below).</p>
 
     <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments</a></p>
 <p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments</a></p>
-<p>Other restful-api: <code><a href='audit_get.html'>audit_get</a></code>,
-  <code><a href='form_detail.html'>form_detail</a></code>, <code><a href='form_list.html'>form_list</a></code>,
-  <code><a href='form_schema.html'>form_schema</a></code>, <code><a href='form_xml.html'>form_xml</a></code>,
-  <code><a href='project_create.html'>project_create</a></code>,
+<p>Other restful-api: <code><a href='attachment_link.html'>attachment_link</a></code>,
+  <code><a href='audit_get.html'>audit_get</a></code>, <code><a href='form_detail.html'>form_detail</a></code>,
+  <code><a href='form_list.html'>form_list</a></code>, <code><a href='form_schema.html'>form_schema</a></code>,
+  <code><a href='form_xml.html'>form_xml</a></code>, <code><a href='project_create.html'>project_create</a></code>,
   <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
   <code><a href='submission_detail.html'>submission_detail</a></code>,
   <code><a href='submission_export.html'>submission_export</a></code>,
@@ -222,26 +230,16 @@ its filename to the request URL to download only that file (see below).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># With default credentials, see vignette("setup")</span>
-<span class='no'>s_default</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='submission_list.html'>submission_list</a></span>(<span class='fl'>1</span>, <span class='st'>"build_xformsId"</span>, <span class='st'>"uuid:..."</span>)
-
-<span class='co'># With explicit credentials, see tests</span>
-<span class='no'>sl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='submission_list.html'>submission_list</a></span>(
-  <span class='fu'><a href='ru_settings.html'>get_test_pid</a></span>(),
-  <span class='fu'><a href='ru_settings.html'>get_test_fid</a></span>(),
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
+<span class='co'># Set default credentials, see vignette "setup"</span>
+<span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/ru_setup.html'>ru_setup</a></span>(
+  <span class='kw'>svc</span> <span class='kw'>=</span> <span class='st'>"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>,
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>,
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>
 )
 
-<span class='no'>al</span> <span class='kw'>&lt;-</span> <span class='fu'>attachment_list</span>(
-  <span class='fu'><a href='ru_settings.html'>get_test_pid</a></span>(),
-  <span class='fu'><a href='ru_settings.html'>get_test_fid</a></span>(),
-  <span class='no'>sl</span>$<span class='no'>instance_id</span><span class='kw'>[[</span><span class='fl'>1</span>]],
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
-)
+<span class='no'>sl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='submission_list.html'>submission_list</a></span>()
+
+<span class='no'>al</span> <span class='kw'>&lt;-</span> <span class='fu'>attachment_list</span>(<span class='no'>sl</span>$<span class='no'>instance_id</span><span class='kw'>[[</span><span class='fl'>1</span>]])
 <span class='no'>al</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
 
 <span class='co'># attachment_list returns a tibble</span>

@@ -2,9 +2,10 @@
 #'
 #'
 #'
+#' @param parse Whether to parse the XML into a nested list, default: TRUE
 #' @template param-pid
 #' @template param-fid
-#' @param parse Whether to parse the XML into a nested list, default: TRUE
+#' @template param-url
 #' @template param-auth
 #' @return The form XML as a nested list.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
@@ -12,26 +13,27 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
+#' )
+#'
+#' # With explicit pid and fid
 #' fxml_defaults <- form_xml(1, "build_xformsId")
 #'
-#' # With explicit credentials, see tests
-#' fxml <- form_xml(
-#'   get_test_pid(),
-#'   get_test_fid(),
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
-#' )
+#' # With defaults
+#' fxml <- form_xml()
 #' listviewer::jsonedit(fxml)
 #'
 #' # form_xml returns a nested list.
 #' class(fxml)
 #' # > "list"
 #' }
-form_xml <- function(pid,
-                     fid,
-                     parse = TRUE,
+form_xml <- function(parse = TRUE,
+                     pid = get_default_pid(),
+                     fid = get_default_fid(),
                      url = get_default_url(),
                      un = get_default_un(),
                      pw = get_default_pw()) {

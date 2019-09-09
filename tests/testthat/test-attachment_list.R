@@ -2,17 +2,17 @@ context("test-attachment_list.R")
 
 test_that("attachment_list works", {
   sl <- submission_list(
-    get_test_pid(),
-    get_test_fid(),
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
   )
 
   al <- attachment_list(
-    get_test_pid(),
-    get_test_fid(),
     sl$instance_id[[1]],
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()

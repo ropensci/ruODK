@@ -28,21 +28,23 @@ Prefix attachment columns from CSV export with a local attachment file path.
 \examples{
 \dontrun{
 t <- tempdir()
+# Set default credentials, see vignette "setup"
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = "me@email.com",
+  pw = "..."
+)
+
 # Predict filenames (with knowledge of form)
-fid <- Sys.getenv("ODKC_TEST_FID")
+fid <- get_default_fid()
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
 fid_csv_tae <- fs::path(t, glue::glue("{fid}-taxon_encounter.csv"))
 
 # Download the zip file
 se <- ruODK::submission_export(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
   local_dir = t,
   overwrite = FALSE,
-  verbose = TRUE,
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  verbose = TRUE
 )
 
 # Unpack the zip file
@@ -56,8 +58,19 @@ data_quadrat <- fid_csv \%>\%
   attachment_link(.) \%>\%
   parse_datetime(tz = "Australia/Perth")
 
-
 # Cleanup
 fs::dir_delete(t)
 }
 }
+\seealso{
+Other restful-api: \code{\link{attachment_list}},
+  \code{\link{audit_get}}, \code{\link{form_detail}},
+  \code{\link{form_list}}, \code{\link{form_schema}},
+  \code{\link{form_xml}}, \code{\link{project_create}},
+  \code{\link{project_detail}}, \code{\link{project_list}},
+  \code{\link{submission_detail}},
+  \code{\link{submission_export}},
+  \code{\link{submission_get}},
+  \code{\link{submission_list}}
+}
+\concept{restful-api}

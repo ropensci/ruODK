@@ -1,17 +1,17 @@
 test_that("form_schema works", {
   fs_nested <- form_schema(
-    get_test_pid(),
-    get_test_fid(),
     flatten = FALSE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
   )
 
   fs_flattened <- form_schema(
-    get_test_pid(),
-    get_test_fid(),
     flatten = TRUE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()

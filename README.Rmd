@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# ruODK: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
+# `ruODK`: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![GitHub issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues)
@@ -145,13 +145,16 @@ A note on the [included example forms](https://github.com/dbca-wa/ruODK/tree/mas
 The `.odkbuild` versions can be loaded into [ODK Build](https://build.opendatakit.org/), 
 while the `.xml` versions can be imported into ODK Central.
 
-## Configure ruODK
-For a quick start, create R environment variables with your ODK Central credentials:
+## Configure `ruODK`
+Set up `ruODK` with an OData Service URL and credentials of a read-permitted
+ODK Central web user.
   
-```{r rprofile, eval=F}
-Sys.setenv(ODKC_URL = "https://odkcentral.mydomain.com")
-Sys.setenv(ODKC_UN = "me@mail.com")
-Sys.setenv(ODKC_PW = ".......")
+```{r ru_setup}
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
 ```
 
 For all available detailed options to configure `ruODK`, read 
@@ -165,23 +168,27 @@ A quick example using the OData service:
 ```{r odata_example, eval=T, message=FALSE}
 library(ruODK)
 
-# Download from ODK Central
+# List projects
 proj <- ruODK::project_list()
-proj
+proj %>% knitr::kable(.)
 
-meta <- ruODK::odata_metadata_get(
-  pid = 1,
-  fid = "build_Turtle-Sighting-0-1_1559790020"
-)
+# List forms of default project
+frms <- ruODK::form_list()
+frms %>% knitr::kable(.)
+
+# Form details of default form
+frmd <- ruODK::form_detail()
+frmd %>% knitr::kable(.)
+
+# Form schema
+meta <- ruODK::odata_metadata_get()
 # listviewer::jsonedit(meta)
 meta$Edmx$DataServices$Schema
 
-data <- ruODK::odata_submission_get(
-  pid = 1,
-  fid = "build_Turtle-Sighting-0-1_1559790020"
-) %>%
+# Form submissions
+data <- ruODK::odata_submission_get() %>%
   ruODK::odata_submission_parse()
-data %>% head(.)
+data %>% knitr::kable(.)
 ```
 
 A more detailed walk-through with some data visualisation examples is available

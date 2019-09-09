@@ -12,5 +12,3 @@ test_that("prefix_fn works", {
     "somefolder/test.txt"
   )
 })
-
-

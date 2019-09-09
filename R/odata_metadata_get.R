@@ -2,6 +2,7 @@
 #'
 #' @template param-pid
 #' @template param-fid
+#' @template param-url
 #' @template param-auth
 #' @return A nested list containing Edmx (dataset schema definition) and
 #'   .attrs (Version).
@@ -10,25 +11,18 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup", package = "ruODK")
-#' meta <- odata_metadata_get(
-#'   get_test_pid(),
-#'   get_test_fid()
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
 #' )
 #'
-#' # With explicitly set credentials
-#' meta <- odata_metadata_get(
-#'   get_test_pid(),
-#'   get_test_fid(),
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
-#' )
-#'
+#' meta <- odata_metadata_get()
 #' listviewer::jsonedit(meta)
 #' }
-odata_metadata_get <- function(pid,
-                               fid,
+odata_metadata_get <- function(pid = get_default_pid(),
+                               fid = get_default_fid(),
                                url = get_default_url(),
                                un = get_default_un(),
                                pw = get_default_pw()) {

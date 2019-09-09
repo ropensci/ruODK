@@ -2,8 +2,8 @@ context("test-odata_submission_get.R")
 
 test_that("odata_submission_get works with one known dataset", {
   fresh_raw <- odata_submission_get(
-    get_test_pid(),
-    get_test_fid(),
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
@@ -15,8 +15,8 @@ test_that("odata_submission_get works with one known dataset", {
 
 test_that("odata_submission_get skip omits number of results", {
   fresh_raw <- odata_submission_get(
-    get_test_pid(),
-    get_test_fid(),
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
@@ -24,9 +24,9 @@ test_that("odata_submission_get skip omits number of results", {
   fresh_parsed <- fresh_raw %>% odata_submission_parse()
 
   skip_raw <- odata_submission_get(
-    get_test_pid(),
-    get_test_fid(),
     skip = 1,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
@@ -38,9 +38,9 @@ test_that("odata_submission_get skip omits number of results", {
 
 test_that("odata_submission_get top limits number of results", {
   top_raw <- odata_submission_get(
-    get_test_pid(),
-    get_test_fid(),
     top = 1,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
@@ -53,11 +53,11 @@ test_that("odata_submission_get top limits number of results", {
 
 test_that("odata_submission_get count returns total number or rows", {
   x_raw <- odata_submission_get(
-    get_test_pid(),
-    get_test_fid(),
     count = TRUE,
     top = 1,
     wkt = TRUE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()

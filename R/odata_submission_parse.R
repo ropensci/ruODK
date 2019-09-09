@@ -79,7 +79,8 @@ odata_submission_parse <- function(data,
   . <- NULL
   data %>%
     tibble::as_tibble(., .name_repair = names_repair) %>%
-    unnest_all(names_repair = names_repair, verbose = verbose)
+    unnest_all(names_repair = names_repair, verbose = verbose) %>%
+    janitor::clean_names(.)
 }
 
 

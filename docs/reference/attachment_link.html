@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -164,25 +164,39 @@ Columns of the dataframe are selected by the presence of `att_contains`.</p></td
     <p>The dataframe with attachment columns modified to contain relative
   paths to the downloaded attachment files.</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other restful-api: <code><a href='attachment_list.html'>attachment_list</a></code>,
+  <code><a href='audit_get.html'>audit_get</a></code>, <code><a href='form_detail.html'>form_detail</a></code>,
+  <code><a href='form_list.html'>form_list</a></code>, <code><a href='form_schema.html'>form_schema</a></code>,
+  <code><a href='form_xml.html'>form_xml</a></code>, <code><a href='project_create.html'>project_create</a></code>,
+  <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
+  <code><a href='submission_detail.html'>submission_detail</a></code>,
+  <code><a href='submission_export.html'>submission_export</a></code>,
+  <code><a href='submission_get.html'>submission_get</a></code>,
+  <code><a href='submission_list.html'>submission_list</a></code></p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
+<span class='co'># Set default credentials, see vignette "setup"</span>
+<span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/ru_setup.html'>ru_setup</a></span>(
+  <span class='kw'>svc</span> <span class='kw'>=</span> <span class='st'>"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>,
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>,
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>
+)
+
 <span class='co'># Predict filenames (with knowledge of form)</span>
-<span class='no'>fid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>)
+<span class='no'>fid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>()
 <span class='no'>fid_csv</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span>(<span class='no'>t</span>, <span class='kw pkg'>glue</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/glue/man/glue.html'>glue</a></span>(<span class='st'>"{fid}.csv"</span>))
 <span class='no'>fid_csv_tae</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span>(<span class='no'>t</span>, <span class='kw pkg'>glue</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/glue/man/glue.html'>glue</a></span>(<span class='st'>"{fid}-taxon_encounter.csv"</span>))
 
 <span class='co'># Download the zip file</span>
 <span class='no'>se</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/submission_export.html'>submission_export</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PID"</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_FID"</span>),
   <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='no'>t</span>,
   <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_UN"</span>),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_TEST_PW"</span>)
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )
 
 <span class='co'># Unpack the zip file</span>
@@ -196,7 +210,6 @@ Columns of the dataframe are selected by the presence of `att_contains`.</p></td
   <span class='fu'>attachment_link</span>(<span class='no'>.</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='parse_datetime.html'>parse_datetime</a></span>(<span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"Australia/Perth"</span>)
 
-
 <span class='co'># Cleanup</span>
 <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/delete.html'>dir_delete</a></span>(<span class='no'>t</span>)
 <span class='co'># }</span></pre>
@@ -207,6 +220,8 @@ Columns of the dataframe are selected by the presence of `att_contains`.</p></td
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

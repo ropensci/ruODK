@@ -4,25 +4,29 @@
 \alias{form_list}
 \title{List all forms.}
 \usage{
-form_list(pid, url = get_default_url(), un = get_default_un(),
-  pw = get_default_pw())
+form_list(pid = get_default_pid(), url = get_default_url(),
+  un = get_default_un(), pw = get_default_pw())
 }
 \arguments{
-\item{pid}{The numeric ID of the project, e.g.: 3.}
+\item{pid}{The numeric ID of the project, e.g.: 2.
+Default: \code{get_default_pid()}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{url}{The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: \code{get_default_url()},
-which calls \code{Sys.getenv("ODKC_URL")}.}
+\item{url}{The ODK Central base URL without trailing slash.#'
+Default: \code{get_default_url()}.
+Set default \code{url} through \code{ru_setup(url="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()},
-which calls \code{Sys.getenv("ODKC_UN")}.
+Default: \code{get_default_un()}.
+Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()},
-which calls \code{Sys.getenv("ODKC_PW")}.}
+Default: \code{get_default_pw()}.
+Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
 A tibble with one row per form and all form metadata as columns.
@@ -32,16 +36,18 @@ List all forms.
 }
 \examples{
 \dontrun{
-# With default credentials, see vignette("setup")
-fl <- form_list(1)
-
-# With explicit credentials, see tests
-fl <- form_list(
-  get_test_pid(),
-  url = get_test_url(),
-  un = get_test_un(),
-  pw = get_test_pw()
+# Set default credentials, see vignette "setup"
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = "me@email.com",
+  pw = "..."
 )
+
+# With default pid
+fl <- form_list()
+
+# With explicit pid
+fl <- form_list(pid = 1)
 
 class(fl)
 # > c("tbl_df", "tbl", "data.frame")
@@ -50,10 +56,10 @@ class(fl)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
 
-Other restful-api: \code{\link{attachment_list}},
-  \code{\link{audit_get}}, \code{\link{form_detail}},
-  \code{\link{form_schema}}, \code{\link{form_xml}},
-  \code{\link{project_create}},
+Other restful-api: \code{\link{attachment_link}},
+  \code{\link{attachment_list}}, \code{\link{audit_get}},
+  \code{\link{form_detail}}, \code{\link{form_schema}},
+  \code{\link{form_xml}}, \code{\link{project_create}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}},

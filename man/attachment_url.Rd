@@ -4,19 +4,29 @@
 \alias{attachment_url}
 \title{Build the download URL for one or many submission UUIDs and filenames.}
 \usage{
-attachment_url(pid, fid, uuid, fn, url = get_default_url())
+attachment_url(uuid, fn, pid = get_default_pid(),
+  fid = get_default_fid(), url = get_default_url())
 }
 \arguments{
-\item{pid}{The numeric ID of the project, e.g.: 2.}
-
-\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".}
-
 \item{uuid}{The UUID of one form submission, or a vector of UUIDs.}
 
 \item{fn}{The attachment filename, as per ODK form submission, or a vector of
 attachment filenames.}
 
-\item{url}{The ODK Central base URL without trailing slash.}
+\item{pid}{The numeric ID of the project, e.g.: 2.
+Default: \code{get_default_pid()}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
+Default: \code{get_default_fid()}.
+Set default \code{fid} through \code{ru_setup(fid="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{url}{The ODK Central base URL without trailing slash.#'
+Default: \code{get_default_url()}.
+Set default \code{url} through \code{ru_setup(url="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
 The inferred download URL.

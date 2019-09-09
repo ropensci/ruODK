@@ -1,32 +1,37 @@
 #' Get or set \code{ruODK} settings.
 #'
 #' @export
-#' @return \code{ru_settings} prints your default ODK Central url, username,
-#' and password, and corresponding optional test server settings.
+#' @return \code{ru_settings} prints your default ODK Central project ID,
+#'   form ID, url, username, and password, and corresponding optional test
+#'   server settings.
 #' \code{ru_setup} sets your production and test settings, while
 #' \code{get_(test_)*} get each of those respective settings.
 #' @seealso  \code{\link{ru_setup}},
+#' \code{\link{get_default_pid}},
+#' \code{\link{get_default_fid}},
 #' \code{\link{get_default_url}},
 #' \code{\link{get_default_un}},
 #' \code{\link{get_default_pw}},
+#' \code{\link{get_test_pid}},
+#' \code{\link{get_test_fid}},
 #' \code{\link{get_test_url}},
 #' \code{\link{get_test_un}},
-#' \code{\link{get_test_pw}},
-#' \code{\link{get_test_pid}},
-#' \code{\link{get_test_fid}}.
+#' \code{\link{get_test_pw}}.
 #' @family ru_settings
 #' @examples
 #' ru_settings()
 ru_settings <- function() {
   ops <- list(
+    pid = Sys.getenv("ODKC_PID", ""),
+    fid = Sys.getenv("ODKC_FID", ""),
     url = Sys.getenv("ODKC_URL", ""),
     un = Sys.getenv("ODKC_UN", ""),
     pw = Sys.getenv("ODKC_PW", ""),
+    test_pid = Sys.getenv("ODKC_TEST_PID", ""),
+    test_fid = Sys.getenv("ODKC_TEST_FID", ""),
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
-    test_pw = Sys.getenv("ODKC_TEST_PW", ""),
-    test_pid = Sys.getenv("ODKC_TEST_PID", ""),
-    test_fid = Sys.getenv("ODKC_TEST_FID", "")
+    test_pw = Sys.getenv("ODKC_TEST_PW", "")
   )
   structure(ops, class = "ru_settings")
 }
@@ -34,14 +39,42 @@ ru_settings <- function() {
 #' @export
 print.ru_settings <- function(x, ...) {
   cat("<ruODK settings>", sep = "\n")
+  cat("  Default ODK Central Project ID: ", x$pid, "\n")
+  cat("  Default ODK Central Form ID: ", x$fid, "\n")
   cat("  Default ODK Central URL: ", x$url, "\n")
   cat("  Default ODK Central Username: ", x$un, "\n")
   cat("  Default ODK Central Password: ", x$pw, "\n")
+  cat("  Test ODK Central Project ID:", x$test_pid, "\n")
+  cat("  Test ODK Central Form ID:", x$test_fid, "\n")
   cat("  Test ODK Central URL:", x$test_url, "\n")
   cat("  Test ODK Central Username:", x$test_un, "\n")
   cat("  Test ODK Central Password:", x$test_pw, "\n")
-  cat("  Test ODK Central Project ID:", x$test_pid, "\n")
-  cat("  Test ODK Central Form ID:", x$test_fid, "\n")
+}
+
+#------------------------------------------------------------------------------#
+# Helpers
+#
+#' Retrieve URL, project ID, and form ID from an ODK Central OData service URL.
+#'
+#' @param svc (character) The OData service URL of a form as provided by the
+#'   ODK Central form submissions tab.
+#'   Example: "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
+#' @export
+#' @family ru_settings
+#' @return A named list with three components (all of type character):
+#'
+#'   * \code{url} The ODK Central base URL.
+#'   * \code{pid} The project ID.
+#'   * \code{fid} The form ID.
+odata_svc_parse <- function(svc) {
+  . <- NULL
+  parts <- httr::parse_url(svc)
+  pth <- parts$path %>% stringr::str_split("/")
+  list(
+    url = glue::glue("{parts$scheme}://{parts$hostname}"),
+    pid = pth[[1]][[3]],
+    fid = pth[[1]][[5]] %>% fs::path_ext_remove(.)
+  )
 }
 
 #------------------------------------------------------------------------------#
@@ -50,24 +83,46 @@ print.ru_settings <- function(x, ...) {
 #' Configure default \code{ruODK} settings.
 #'
 #' @export
+#' @param svc (optional, character) The OData service URL of a form.
+#'   This parameter will set \code{pid}, \code{fid}, and \code{url}.
+#'   It is sufficient to supply \code{svc}, \code{un}, and \code{pw}.
+#' @param pid (optional, character) The ID of an existing project on \code{url}.
+#'   This will override the project ID from \code{svc}.
+#'   A numeric value for \code{pid} will be converted to character.
+#' @param fid (optional, character) The alphanumeric ID of an existing form
+#'   in \code{pid}. This will override the form ID from \code{svc}.
 #' @param url An ODK Central URL, e.g. "https://sandbox.central.opendatakit.org".
+#'   This will override the ODK Central base URL from \code{svc}.
 #' @param un An ODK Central username which is the email of a "web user" in the
 #'   specified ODK Central instance \code{url} (optional, character).
 #' @param pw The password for user \code{un} (optional, character).
+#' @param test_svc (optional, character) The OData service URL of a test form.
+#'   This parameter will set \code{test_pid}, \code{test_fid}, and \code{test_url}.
+#'   It is sufficient to supply \code{test_svc}, \code{test_un}, and
+#'   \code{test_pw} to configure testing.
+#' @param test_pid (optional, character) The numeric ID of an existing project
+#'   on \code{test_url}. This will override the project ID from \code{test_svc}.
+#'   A numeric value for \code{test_pid} will be converted to character.
+#' @param test_fid (optional, character) The alphanumeric ID of an existing form
+#'   in \code{test_pid}. This will override the form ID from \code{test_svc}.
 #' @param test_url (optional, character) A valid ODK Central URL for testing.
+#'   This will override the ODK Central base URL from \code{svc}.
 #' @param test_un (optional, character) A valid ODK Central username (email)
 #'   privileged to view the test project(s) at \code{test_url}.
 #' @param test_pw (optional, character) The valid ODK Central password for
 #'   \code{test_un}.
-#' @param test_pid (optional, integer) The numeric ID of an existing project on
-#'   \code{test_url}.
-#' @param test_fid (optional, character) The alphanumeric ID of an existing form
-#'   in \code{test_pid}.
 #' @family ru_settings
 #' @details
 #' \code{ru_setup} sets ODK Central connection details. \code{ruODK}'s functions
-#'   default to use the default URL, username, and password unless specified
-#'   explicitly.
+#'   default to use the default project ID, form ID, URL, username, and password
+#'   unless specified explicitly.
+#'
+#' Any parameters not specified will remain unchanged. It is therefore possible
+#' to set up username and password initially with
+#' \code{ru_setup(un="XXX", pw="XXX")}, and switch between forms with
+#' \code{ru_setup(svc="XXX")}, supplying the form's OData service URL.
+#' ODK Central conveniently provides the OData service URL in the form submission
+#' tab, which in turn contains base URL, project ID, and form ID.
 #'
 #' \code{ruODK}'s automated tests require a valid ODK Central URL, and a
 #'   privileged username and password of a "web user" on that ODK Central
@@ -89,27 +144,68 @@ print.ru_settings <- function(x, ...) {
 #'   test_pid = 14,
 #'   test_fid = "build_Flora-Quadrat-0-2_1558575936"
 #' )
-ru_setup <- function(url = NULL,
+ru_setup <- function(svc = NULL,
+                     pid = NULL,
+                     fid = NULL,
+                     url = NULL,
                      un = NULL,
                      pw = NULL,
+                     test_svc = NULL,
+                     test_pid = NULL,
+                     test_fid = NULL,
                      test_url = NULL,
                      test_un = NULL,
-                     test_pw = NULL,
-                     test_pid = NULL,
-                     test_fid = NULL) {
+                     test_pw = NULL) {
+  if (!is.null(svc)) {
+    odata_components <- odata_svc_parse(svc)
+    Sys.setenv("ODKC_PID" = odata_components$pid)
+    Sys.setenv("ODKC_FID" = odata_components$fid)
+    Sys.setenv("ODKC_URL" = odata_components$url)
+  }
+
+  if (!is.null(pid)) Sys.setenv("ODKC_PID" = as.character(pid))
+  if (!is.null(fid)) Sys.setenv("ODKC_FID" = fid)
   if (!is.null(url)) Sys.setenv("ODKC_URL" = url)
   if (!is.null(un)) Sys.setenv("ODKC_UN" = un)
   if (!is.null(pw)) Sys.setenv("ODKC_PW" = pw)
+
+  if (!is.null(test_svc)) {
+    odata_components <- odata_svc_parse(test_svc)
+    Sys.setenv("ODKC_TEST_PID" = odata_components$pid)
+    Sys.setenv("ODKC_TEST_FID" = odata_components$fid)
+    Sys.setenv("ODKC_TEST_URL" = odata_components$url)
+  }
+
+  if (!is.null(test_pid)) Sys.setenv("ODKC_TEST_PID" = as.character(test_pid))
+  if (!is.null(test_fid)) Sys.setenv("ODKC_TEST_FID" = test_fid)
   if (!is.null(test_url)) Sys.setenv("ODKC_TEST_URL" = test_url)
   if (!is.null(test_un)) Sys.setenv("ODKC_TEST_UN" = test_un)
   if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
-  if (!is.null(test_pid)) Sys.setenv("ODKC_TEST_PID" = test_pid)
-  if (!is.null(test_fid)) Sys.setenv("ODKC_TEST_FID" = test_fid)
 }
 
 #------------------------------------------------------------------------------#
 # Getters
 #
+#' @export
+#' @rdname ru_settings
+get_default_pid <- function() {
+  x <- Sys.getenv("ODKC_PID")
+  if (identical(x, "")) {
+    rlang::warn("No default ODK Central Project ID set. ru_setup()?")
+  }
+  x
+}
+
+#' @export
+#' @rdname ru_settings
+get_default_fid <- function() {
+  x <- Sys.getenv("ODKC_FID")
+  if (identical(x, "")) {
+    rlang::warn("No default ODK Central Form ID set. ru_setup()?")
+  }
+  x
+}
+
 #' @export
 #' @rdname ru_settings
 get_default_url <- function() {
@@ -254,3 +350,6 @@ yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
       )
     )
 }
+
+# Tests
+# usethis::edit_file("tests/testthat/test-ru_setup.R")

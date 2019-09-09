@@ -22,11 +22,9 @@ from a list of lists into a tibble.
 }
 \seealso{
 Other utilities: \code{\link{\%>\%}},
-  \code{\link{map_chr_hack}}, \code{\link{map_dttm_hack}},
-  \code{\link{prepend_uuid}}, \code{\link{strip_uuid}},
-  \code{\link{tidyeval}}
-}
-\author{
-Jennifer Bryan https://github.com/jennybc/
+  \code{\link{isodt_to_local}}, \code{\link{map_chr_hack}},
+  \code{\link{map_dttm_hack}}, \code{\link{map_lgl_hack}},
+  \code{\link{parse_datetime}}, \code{\link{prepend_uuid}},
+  \code{\link{strip_uuid}}, \code{\link{tidyeval}}
 }
 \concept{utilities}

@@ -4,6 +4,7 @@
 #' While the API endpoint will return all projects,
 #' `project_list` will fail with incorrect or missing authentication.
 #'
+#' @template param-url
 #' @template param-auth
 #' @return A tibble with one row per project and all project metadata
 #'         as columns as per ODK Central API docs.
@@ -12,15 +13,15 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
+#' )
+#'
 #' pl <- project_list()
 #'
-#' # With explicit credentials, see tests
-#' p <- project_list(
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
-#' )
 #' knitr::kable(p)
 #'
 #' # project_list returns a tibble
@@ -56,11 +57,7 @@ project_list <- function(url = get_default_url(),
         last_submission = map_dttm_hack(., "lastSubmission"),
         created_at = map_dttm_hack(., "createdAt"),
         updated_at = map_dttm_hack(., "updatedAt"),
-        archived = ifelse(
-          is.null(.$archived),
-          FALSE,
-          TRUE
-        )
+        archived = map_lgl_hack(., "archived")
       )
     }
 }

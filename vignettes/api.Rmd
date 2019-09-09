@@ -54,6 +54,20 @@ ODK Central (driven by humans) does those jobs beautifully on an expected scale.
 See [`vignette("Setup", package = "ruODK")`](https://dbca-wa.github.io/ruODK/articles/setup.html) 
 for detailed options to configure `ruODK`.
 
+Here, we'll grab the OData service URL from the form used in this vignette,
+plus username and password of a web user of ODK Central with access to that form.
+
+`ruODK::ru_setup()` will populate the default url, project ID, and form ID which
+are used by `ruODK`'s other functions (unless specified otherwise).
+
+```{r ru_setup}
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = Sys.getenv("ODKC_TEST_UN"),
+  pw = Sys.getenv("ODKC_TEST_PW")
+)
+```
+
 # Projects
 
 List projects. We see the project ID, a name, the number of forms and app users,
@@ -72,7 +86,7 @@ all the columns of `ruODK::project_list` plus a column `verbs`, which contains a
 available API actions for a project.
 
 ```{r project_details}
-pd <- ruODK::project_detail(1)
+pd <- ruODK::project_detail()
 
 # Project details (without verbs)
 pd %>% dplyr::select(-"verbs") %>%  knitr::kable(.)
@@ -102,7 +116,7 @@ There are several ways of retrieving the form ID:
 * Listing form metadata for a given project ID with `ruODK::form_list()`.
 
 ```{r form_list}
-forms <- ruODK::form_list(1) 
+forms <- ruODK::form_list() 
 forms %>% knitr::kable(.)
 ```
 
@@ -113,7 +127,7 @@ If the original XML is needed rather than the R equivalent (nested list),
 we can use `ruODK::form_xml` with parameter `parse=FALSE`:
 
 ```{r form_xml}
-form_xml <- ruODK::form_xml(1, forms$fid[[1]], parse=FALSE)
+form_xml <- ruODK::form_xml(parse=FALSE)
 form_xml
 ```
 
@@ -124,26 +138,24 @@ of the Xform definition available in R.
 
 See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of  `??ruODK::form_schema()` for more detail.
 
-```{r form_schema}
-fs <- form_schema(1, forms$fid[[1]])
+```{r form_schema, fig.width=7}
+fs <- form_schema()
 listviewer::jsonedit(form_schema, mode="code")
-
 ```
 
-Namely, the form schema tells us about form field data types (dates, geopoints, 
+The form schema tells us about form field data types (e.g. dates, geopoints, 
 binary attachments) and repeating groups. We need this knowledge to parse the 
 submission data into tidy tibbles later.
 
 Feel free to search this list for "binary" to find the field names of file 
 attachments. Similarly, search for "dateTime" to find field names of datetimes.
 
-
 ## Show details of one form
 
 The details of a form are exactly the same as the output of `ruODK::form_list()`.
 
 ```{r form_detail}
-form <- ruODK::form_detail(1, forms$fid[[1]])
+form <- ruODK::form_detail()
 form %>% knitr::kable(.)
 ```
 
@@ -173,23 +185,18 @@ In the following chuck, we illustrate common tasks:
 
 
 ```{r submission_export}
-t <- fs::dir_create("api")
+t <- fs::dir_create("attachments")
 
 # Predict filenames (with knowledge of form)
-fid <- Sys.getenv("ODKC_TEST_FID")
+fid <- ruODK::get_test_fid() # "build_Flora-Quadrat-0-2_1558575936.svc"
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
 fid_csv_tae <- fs::path(t, glue::glue("{fid}-taxon_encounter.csv"))
 
 # Download the zip file
 se <- ruODK::submission_export(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
   local_dir = t,
   overwrite = FALSE,
-  verbose = TRUE,
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  verbose = TRUE
 )
 
 # Unpack the zip file
@@ -198,25 +205,24 @@ fs::dir_ls(t)
 
 # Prepend attachments with media/ to turn into relative file paths
 data_quadrat <- fid_csv %>% 
-  readr::read_csv(na = c("", "NA", "na")) %>% 
+  readr::read_csv(na = c("", "NA", "na")) %>% # form uses "na" for NA
   janitor::clean_names(.) %>% 
   attachment_link(.) %>% 
-  parse_datetime(tz = "Australia/Perth")
+  parse_datetime(tz = "Australia/Perth")      # an example timezone
 
 DT::datatable(data_quadrat)
 # Further: create map with popups, see vignette "odata"
 
-data_taxon <- fid_csv_tae %>% 
-  readr::read_csv(na = c("", "NA", "na")) %>% 
-  janitor::clean_names(.) %>% 
-  attachment_link(.) %>% 
-  parse_datetime(tz = "Australia/Perth") %>% 
+data_taxon <- fid_csv_tae %>%
+  readr::read_csv(na = c("", "NA", "na")) %>%
+  janitor::clean_names(.) %>%
+  attachment_link(.) %>%
+  parse_datetime(tz = "Australia/Perth") %>%
   dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
 
 DT::datatable(data_taxon)
 # Further: create map with popups, see vignette "odata"
 ```
-
 
 ## List submissions for one form
 Not always is it appropriate to download all submissions and all attachments
@@ -232,13 +238,7 @@ If forms feed into downstream data warehouses, the typical ETL workflow is to
 * Download attachments of only the selected submissions.
 
 ```{r submission_list}
-sl <- ruODK::submission_list(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
-)
+sl <- ruODK::submission_list()
 sl %>% knitr::kable(.)
 ```
 
@@ -257,23 +257,16 @@ submissions.
 A quick detour on submission metadata:
 ```{r submission_metadata}
 # One submission
-sub_meta <- ruODK::submission_detail(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
-  sl$instance_id[[1]],
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
-)
+sub_meta <- ruODK::submission_detail(sl$instance_id[[1]])
 
 # Multiple submissions
 submissions_meta <- tibble::tibble(
-  pid = Sys.getenv("ODKC_TEST_PID"),
-  fid = Sys.getenv("ODKC_TEST_FID"),
+  pid = ruODK::get_test_pid(),
+  fid = ruODK::get_test_fid(),
   iid = sl$instance_id,  # this is a vector of multiple instance_ids
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  url = ruODK::get_test_url(),
+  un = ruODK::get_test_un(),
+  pw = ruODK::get_test_pw()
 ) %>% 
   purrr::pmap(ruODK::submission_detail)
 submissions_meta %>% knitr::kable(.)
@@ -289,23 +282,16 @@ In order to import each submission, we need to retrieve the data by
 
 ```{r submission_data}
 # One submission
-sub <- ruODK::submission_get(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
-  sl$instance_id[[1]],
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
-)
+sub <- ruODK::submission_get(sl$instance_id[[1]])
 
 # Multiple submissions
 submissions <- tibble::tibble(
-  pid = Sys.getenv("ODKC_TEST_PID"),
-  fid = Sys.getenv("ODKC_TEST_FID"),
+  pid = ruODK::get_test_pid(),
+  fid = ruODK::get_test_fid(),
   iid = sl$instance_id,  # this is a vector of multiple instance_ids
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  url = ruODK::get_test_url(),
+  un = ruODK::get_test_un(),
+  pw = ruODK::get_test_pw()
 ) %>% 
   purrr::pmap(ruODK::submission_get)
 ```
@@ -354,23 +340,16 @@ sub_parsed %>% knitr::kable(.)
 ## List all attachments for one form
 
 ```{r attachment_list}
-al <- attachment_list(
-  Sys.getenv("ODKC_TEST_PID"),
-  Sys.getenv("ODKC_TEST_FID"),
-  sl$instance_id[[1]],
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
-)
+al <- ruODK::attachment_list(sl$instance_id[[1]])
 al
 
 attachments <- tibble::tibble(
-  pid = Sys.getenv("ODKC_TEST_PID"),
-  fid = Sys.getenv("ODKC_TEST_FID"),
+  pid = ruODK::get_test_pid(),
+  fid = ruODK::get_test_fid(),
   iid = sl$instance_id,  # this is a vector of multiple instance_ids
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  url = ruODK::get_test_url(),
+  un = ruODK::get_test_un(),
+  pw = ruODK::get_test_pw()
 ) %>% 
   purrr::pmap(ruODK::attachment_list)
 attachments
@@ -390,14 +369,9 @@ downloaded).
 sub_att <- sub_parsed %>% 
   dplyr::mutate(
     location_quadrat_photo = ruODK::attachment_get(
-        Sys.getenv("ODKC_TEST_PID"),
-        Sys.getenv("ODKC_TEST_FID"),
         meta_instance_id,
         location_quadrat_photo,
-        local_dir = t,
-        url = Sys.getenv("ODKC_TEST_URL"),
-        un = Sys.getenv("ODKC_TEST_UN"),
-        pw = Sys.getenv("ODKC_TEST_PW")
+        local_dir = t
     )
     # same for all other attachments
     # requires knowledge or introspection of form schema

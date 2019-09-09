@@ -100,9 +100,6 @@ You will need to use the following environment variables:
 
 ```r
 ruODK::ru_setup(
-  url = "https://odkcentral.dbca.wa.gov.au",
-  un = "you@email.com",
-  pw = "...",
   test_url = "https://sandbox.central.opendatakit.org",
   test_un = "you@email.com",
   test_pw = "...",
@@ -123,6 +120,8 @@ ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
 ODKC_UN="your@email.com"
 ODKC_PW="..."
+ODKC_PID=1
+ODKC_FID="build_Predator-or-Disturbance-1-1_1559789410"
 ```
 
 Keep in mind that `ruODK` defaults to use `ODKC_{URL,UN,PW}`, so for everyday 
@@ -221,10 +220,9 @@ devtools::test()
 styler::style_pkg()
 devtools::document(roclets = c("rd", "collate", "namespace"))
 spelling::spell_check_package()
-spelling::update_wordlist()
 codemetar::write_codemeta("ruODK")
 usethis::edit_file("inst/CITATION")
-rmarkdown::render('README.Rmd',  encoding = 'UTF-8')
+rmarkdown::render("README.Rmd",  encoding = "UTF-8", clean = TRUE)
 if (fs::file_exists("README.html")) fs::file_delete("README.html")
 
 # Checks

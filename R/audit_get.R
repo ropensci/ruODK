@@ -12,6 +12,7 @@
 #' @param end string. The ISO8601 timestamp of the last log entry to return.
 #' @param limit integer. The max number of log entries to return.
 #' @param offset integer. The number of log entries to skip.
+#' @template param-url
 #' @template param-auth
 #' @return A tibble containing server audit logs.
 #'  One row per audited action, columns are submission attributes:
@@ -29,15 +30,14 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
-#' logs <- audit_get()
-#'
-#' # With explicit credentials, see tests
-#' logs <- audit_get(
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
 #' )
+#'
+#' logs <- audit_get()
 #'
 #' # With search parameters
 #' logs <- audit_get(
@@ -45,19 +45,13 @@
 #'   start = "2019-08-01Z",
 #'   end = "2019-08-31Z",
 #'   limit = 100,
-#'   offset = 0,
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#'   offset = 0
 #' )
 #'
 #' # With partial search parameters
 #' logs <- audit_get(
 #'   limit = 100,
-#'   offset = 0,
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#'   offset = 0
 #' )
 #'
 #' logs %>% knitr::kable(.)
@@ -70,8 +64,7 @@
 #' names(logs)
 #' # > "actor_id" "action" "actee_id" "details" "logged_at"
 #' }
-audit_get <- function(
-                      action = NULL,
+audit_get <- function(action = NULL,
                       start = NULL,
                       end = NULL,
                       limit = NULL,

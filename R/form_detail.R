@@ -3,6 +3,7 @@
 #'
 #' @template param-pid
 #' @template param-fid
+#' @template param-url
 #' @template param-auth
 #' @return A tibble with one row and all form metadata as columns.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form}
@@ -10,25 +11,18 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
-#' fl <- form_list(1)
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
+#' )
 #'
 #' # With explicit credentials, see tests
-#' fl <- form_list(
-#'   get_test_pid(),
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
-#' )
+#' fl <- form_list()
 #'
 #' # The first form in the test project
-#' f <- form_detail(
-#'   get_test_pid(),
-#'   fl$fid[[1]],
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
-#' )
+#' f <- form_detail(fl$fid[[1]])
 #'
 #' # form_detail returns exactly one row
 #' nrow(f)
@@ -40,8 +34,8 @@
 #' # > "name" "fid" "version" "state" "submissions" "created_at"
 #' # > "created_by_id" "created_by" "updated_at" "last_submission" "hash"
 #' }
-form_detail <- function(pid,
-                        fid,
+form_detail <- function(pid = get_default_pid(),
+                        fid = get_default_fid(),
                         url = get_default_url(),
                         un = get_default_un(),
                         pw = get_default_pw()) {

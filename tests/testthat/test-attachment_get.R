@@ -1,32 +1,38 @@
 context("test-attachment_get.R")
 
 test_that("attachment_get works", {
+  t <- tempdir()
+
   fresh_raw <- odata_submission_get(
-    get_test_pid(),
-    get_test_fid(),
+    pid = get_test_pid(),
+    fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
   )
+
   fresh_parsed <- fresh_raw %>%
     odata_submission_parse() %>%
-    dplyr::rename(uuid = `.__id`) %>%
+    janitor::clean_names() %>%
     dplyr::mutate(
       quadrat_photo = attachment_get(
-        get_test_pid(),
-        get_test_fid(),
-        uuid,
+        id,
         quadrat_photo,
-        local_dir = tempdir(),
+        local_dir = t,
+        pid = get_test_pid(),
+        fid = get_test_fid(),
         url = get_test_url(),
         un = get_test_un(),
         pw = get_test_pw(),
         verbose = TRUE
       )
     )
+
   # submissions at the time of writing
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))
   testthat::expect_true(fs::file_exists(fresh_parsed$quadrat_photo[[1]]))
+
+  fs::dir_delete(t)
 })
 
 test_that("attachment_url works", {
@@ -39,20 +45,29 @@ test_that("attachment_url works", {
   expected_url <- glue::glue(
     "{url}/v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
   )
-  calculated_url <- ruODK:::attachment_url(pid, fid, uuid, fn, url)
+  calculated_url <- ruODK:::attachment_url(
+    uuid,
+    fn,
+    pid = pid,
+    fid = fid,
+    url = url
+  )
 
   testthat::expect_equal(calculated_url, expected_url)
 })
 
 test_that("get_one_attachment handles repeat download and NA filenames", {
+  t <- tempdir(check = TRUE)
+  testthat::expect_true(fs::dir_exists(t))
+
   uuid <- "uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12"
   fn <- "1558579592153.jpg"
   url <- get_test_url()
   pid <- get_test_pid()
   fid <- get_test_fid()
 
-  pth <- fs::path(tempdir(), fn)
-  src <- ruODK:::attachment_url(pid, fid, uuid, fn, url)
+  pth <- fs::path(t, fn)
+  src <- ruODK:::attachment_url(uuid, fn, pid = pid, fid = fid, url = url)
 
   # Happy path: get one attachment should work
   testthat::expect_message(
@@ -67,6 +82,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     ),
     glue::glue("Saved {pth}\n")
   )
+
   fn_local <- get_one_attachment(
     pth,
     fn,
@@ -120,10 +136,10 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   )
 
   # Now make sure pth doesn't exist
-  pth <- fs::path(tempdir(), NA) %>% as.character()
+  pth2 <- fs::path(t, NA) %>% as.character()
   testthat::expect_message(
     get_one_attachment(
-      pth,
+      pth2,
       NA,
       src,
       url = get_test_url(),
@@ -134,16 +150,20 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     "Filename is NA, skipping download."
   )
   testthat::expect_true(
-    is.na(get_one_attachment(
-      pth,
-      NA,
-      src,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      verbose = TRUE
-    ))
+    is.na(
+      get_one_attachment(
+        pth2,
+        NA,
+        src,
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = get_test_pw(),
+        verbose = TRUE
+      )
+    )
   )
+
+  fs::dir_delete(t)
 })
 
 # Tests code

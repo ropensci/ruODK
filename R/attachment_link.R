@@ -33,24 +33,27 @@ prefix_fn <- function(fn, prefix) {
 #' @return The dataframe with attachment columns modified to contain relative
 #'   paths to the downloaded attachment files.
 #' @export
+#' @family restful-api
 #' @examples
 #' \dontrun{
 #' t <- tempdir()
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
+#' )
+#'
 #' # Predict filenames (with knowledge of form)
-#' fid <- Sys.getenv("ODKC_TEST_FID")
+#' fid <- get_default_fid()
 #' fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
 #' fid_csv_tae <- fs::path(t, glue::glue("{fid}-taxon_encounter.csv"))
 #'
 #' # Download the zip file
 #' se <- ruODK::submission_export(
-#'   Sys.getenv("ODKC_TEST_PID"),
-#'   Sys.getenv("ODKC_TEST_FID"),
 #'   local_dir = t,
 #'   overwrite = FALSE,
-#'   verbose = TRUE,
-#'   url = Sys.getenv("ODKC_TEST_URL"),
-#'   un = Sys.getenv("ODKC_TEST_UN"),
-#'   pw = Sys.getenv("ODKC_TEST_PW")
+#'   verbose = TRUE
 #' )
 #'
 #' # Unpack the zip file
@@ -63,7 +66,6 @@ prefix_fn <- function(fn, prefix) {
 #'   janitor::clean_names(.) %>%
 #'   attachment_link(.) %>%
 #'   parse_datetime(tz = "Australia/Perth")
-#'
 #'
 #' # Cleanup
 #' fs::dir_delete(t)

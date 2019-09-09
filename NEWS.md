@@ -1,3 +1,11 @@
+# ruODK 0.6.2
+* Simplifiy `ru_setup()` to use OData Service URL.
+* Change all functions to default to `get_default{pid,fid,url,un,pw}()`, partly
+  moving project ID (pid) and form ID (fid) to kwargs. This changes all examples,
+  tests, vignettes, READMEs.
+* Add a high level overview diagram to README and `inst/joss/paper.md` to
+  illustrate `ruODK`'s intended purpose in the ODK ecosystem. #19
+
 # ruODK 0.6.1
 * ROpenSci submission review [milestone](https://github.com/dbca-wa/ruODK/milestone/3),
   [discussion](https://github.com/ropensci/software-review/issues/335).
@@ -14,8 +22,7 @@
 * Use `janitor::clean_names()` on column names over home-grown helpers.
 * Since `submission_detail` is now metadata only, add `submission_get` to download
   submission data.
-* Added a high level overview diagram to README and `inst/joss/paper.md` to
-  illustrate `ruODK`'s intended purpose in the ODK ecosystem.
+
 # ruODK 0.6.0
 * Version bump and lifecycle bump to indicate that ruODK is ready to be used
   against ODK Central 0.6.

@@ -69,7 +69,7 @@ included Submissions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -141,21 +141,14 @@ included Submissions.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>submission_export</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='kw pkg'>here</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span>(), <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+    <pre class="usage"><span class='fu'>submission_export</span>(<span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='kw pkg'>here</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/here/man/here.html'>here</a></span>(), <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(), <span class='kw'>fid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>(),
   <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>(), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>pid</th>
-      <td><p>The numeric ID of the project, e.g.: 2.</p></td>
-    </tr>
-    <tr>
-      <th>fid</th>
-      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
-    </tr>
     <tr>
       <th>local_dir</th>
       <td><p>The local folder to save the downloaded files to,
@@ -167,24 +160,39 @@ default: `here::here()`.</p></td>
 default: FALSE</p></td>
     </tr>
     <tr>
+      <th>pid</th>
+      <td><p>The numeric ID of the project, e.g.: 2.
+Default: <code><a href='ru_settings.html'>get_default_pid()</a></code>.
+Set default <code>pid</code> through <code><a href='ru_setup.html'>ru_setup(pid="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>fid</th>
+      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
+Default: <code><a href='ru_settings.html'>get_default_fid()</a></code>.
+Set default <code>fid</code> through <code><a href='ru_setup.html'>ru_setup(fid="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
+    </tr>
+    <tr>
       <th>url</th>
-      <td><p>The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: <code><a href='ru_settings.html'>get_default_url()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_URL")</a></code>.</p></td>
+      <td><p>The ODK Central base URL without trailing slash.#'
+Default: <code><a href='ru_settings.html'>get_default_url()</a></code>.
+Set default <code>url</code> through <code><a href='ru_setup.html'>ru_setup(url="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
       <td><p>The ODK Central username (an email address).
-Default: <code><a href='ru_settings.html'>get_default_un()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_UN")</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_un()</a></code>.
+Set default <code>un</code> through <code><a href='ru_setup.html'>ru_setup(un="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
       <td><p>The ODK Central password.
-Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_PW")</a></code>.</p></td>
+Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>.
+Set default <code>pw</code> through <code><a href='ru_setup.html'>ru_setup(pw="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -215,10 +223,11 @@ as listed for each submission (`attachment_list`).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv</a></p>
-<p>Other restful-api: <code><a href='attachment_list.html'>attachment_list</a></code>,
-  <code><a href='audit_get.html'>audit_get</a></code>, <code><a href='form_detail.html'>form_detail</a></code>,
-  <code><a href='form_list.html'>form_list</a></code>, <code><a href='form_schema.html'>form_schema</a></code>,
-  <code><a href='form_xml.html'>form_xml</a></code>, <code><a href='project_create.html'>project_create</a></code>,
+<p>Other restful-api: <code><a href='attachment_link.html'>attachment_link</a></code>,
+  <code><a href='attachment_list.html'>attachment_list</a></code>, <code><a href='audit_get.html'>audit_get</a></code>,
+  <code><a href='form_detail.html'>form_detail</a></code>, <code><a href='form_list.html'>form_list</a></code>,
+  <code><a href='form_schema.html'>form_schema</a></code>, <code><a href='form_xml.html'>form_xml</a></code>,
+  <code><a href='project_create.html'>project_create</a></code>,
   <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
   <code><a href='submission_detail.html'>submission_detail</a></code>,
   <code><a href='submission_get.html'>submission_get</a></code>,
@@ -227,32 +236,23 @@ as listed for each submission (`attachment_list`).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># With default credentials, see vignette("setup")</span>
-<span class='no'>se</span> <span class='kw'>&lt;-</span> <span class='fu'>submission_export</span>(<span class='fl'>1</span>, <span class='st'>"build_xformsId"</span>)
-
-<span class='co'># With explicit credentials, see tests</span>
-
-<span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
-
-<span class='no'>se</span> <span class='kw'>&lt;-</span> <span class='fu'>submission_export</span>(
-  <span class='fu'><a href='ru_settings.html'>get_test_pid</a></span>(),
-  <span class='fu'><a href='ru_settings.html'>get_test_fid</a></span>(),
-  <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='no'>t</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
+<span class='co'># Set default credentials, see vignette "setup"</span>
+<span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/ru_setup.html'>ru_setup</a></span>(
+  <span class='kw'>svc</span> <span class='kw'>=</span> <span class='st'>"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>,
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>,
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>
 )
 
-<span class='co'># Unzip and inspect the loot</span>
+<span class='no'>se</span> <span class='kw'>&lt;-</span> <span class='fu'>submission_export</span>()
 
+<span class='co'># Unzip and inspect the loot</span>
 <span class='no'>t</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
 <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/unzip.html'>unzip</a></span>(<span class='no'>se</span>, <span class='kw'>exdir</span> <span class='kw'>=</span> <span class='no'>t</span>)
 <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span>(<span class='no'>t</span>)
 <span class='no'>fid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ru_settings.html'>get_test_fid</a></span>()
 <span class='no'>sub</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/path.html'>path</a></span>(<span class='no'>t</span>, <span class='kw pkg'>glue</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/glue/man/glue.html'>glue</a></span>(<span class='st'>"{fid}.csv"</span>)) <span class='kw'>%&gt;%</span> <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>()
 <span class='no'>sub</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
+
 <span class='co'># Cleanup</span>
 <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/delete.html'>dir_delete</a></span>(<span class='no'>t</span>)
 <span class='co'># }</span></pre>

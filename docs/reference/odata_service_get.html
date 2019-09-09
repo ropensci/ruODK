@@ -66,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -135,39 +135,47 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>odata_service_get</span>(<span class='no'>pid</span>, <span class='no'>fid</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>())</pre>
+    <pre class="usage"><span class='fu'>odata_service_get</span>(<span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(), <span class='kw'>fid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>(),
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pid</th>
-      <td><p>The numeric ID of the project, e.g.: 2.</p></td>
+      <td><p>The numeric ID of the project, e.g.: 2.
+Default: <code><a href='ru_settings.html'>get_default_pid()</a></code>.
+Set default <code>pid</code> through <code><a href='ru_setup.html'>ru_setup(pid="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>fid</th>
-      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".</p></td>
+      <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
+Default: <code><a href='ru_settings.html'>get_default_fid()</a></code>.
+Set default <code>fid</code> through <code><a href='ru_setup.html'>ru_setup(fid="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>url</th>
-      <td><p>The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: <code><a href='ru_settings.html'>get_default_url()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_URL")</a></code>.</p></td>
+      <td><p>The ODK Central base URL without trailing slash.#'
+Default: <code><a href='ru_settings.html'>get_default_url()</a></code>.
+Set default <code>url</code> through <code><a href='ru_setup.html'>ru_setup(url="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
       <td><p>The ODK Central username (an email address).
-Default: <code><a href='ru_settings.html'>get_default_un()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_UN")</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_un()</a></code>.
+Set default <code>un</code> through <code><a href='ru_setup.html'>ru_setup(un="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
       <td><p>The ODK Central password.
-Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_PW")</a></code>.</p></td>
+Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>.
+Set default <code>pw</code> through <code><a href='ru_setup.html'>ru_setup(pw="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     </table>
     
@@ -190,21 +198,14 @@ which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("O
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Replace with your own working url, pid, fid, credentials:</span>
-<span class='co'># With default credentials, see vignette("setup", package = "ruODK")</span>
-<span class='no'>svc</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_service_get</span>(
-  <span class='fu'><a href='ru_settings.html'>get_test_pid</a></span>(),
-  <span class='fu'><a href='ru_settings.html'>get_test_fid</a></span>()
+<span class='co'># Set default credentials, see vignette "setup"</span>
+<span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/ru_setup.html'>ru_setup</a></span>(
+  <span class='kw'>svc</span> <span class='kw'>=</span> <span class='st'>"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>,
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>,
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>
 )
 
-<span class='co'># With explicitly set credentials</span>
-<span class='no'>svc</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_service_get</span>(
-  <span class='fu'><a href='ru_settings.html'>get_test_pid</a></span>(),
-  <span class='fu'><a href='ru_settings.html'>get_test_fid</a></span>(),
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_url</a></span>(),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_un</a></span>(),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_test_pw</a></span>()
-)
+<span class='no'>svc</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_service_get</span>()
 <span class='no'>svc</span>
 <span class='co'># }</span></pre>
   </div>

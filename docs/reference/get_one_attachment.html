@@ -68,7 +68,7 @@ of input parameters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -160,27 +160,28 @@ will be downloaded, but NA will be returned.</p></td>
     </tr>
     <tr>
       <th>url</th>
-      <td><p>The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: <code><a href='ru_settings.html'>get_default_url()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_URL")</a></code>.</p></td>
+      <td><p>The ODK Central base URL without trailing slash.#'
+Default: <code><a href='ru_settings.html'>get_default_url()</a></code>.
+Set default <code>url</code> through <code><a href='ru_setup.html'>ru_setup(url="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
       <td><p>The ODK Central username (an email address).
-Default: <code><a href='ru_settings.html'>get_default_un()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_UN")</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_un()</a></code>.
+Set default <code>un</code> through <code><a href='ru_setup.html'>ru_setup(un="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
       <td><p>The ODK Central password.
-Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>,
-which calls <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("ODKC_PW")</a></code>.</p></td>
+Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>.
+Set default <code>pw</code> through <code><a href='ru_setup.html'>ru_setup(pw="...")</a></code>.
+See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Whether to display debug messages or not (default)</p></td>
+      <td><p>Whether to display debug messages or not (default).</p></td>
     </tr>
     </table>
     

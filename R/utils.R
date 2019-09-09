@@ -18,6 +18,7 @@
 #'   Default: \code{c("YmdHMS", "YmdHMSz")}.
 #' @param tz (character) The timezone string for lubridate. Default: \code{"UTC"}.
 #' @return A lubridate PosixCT datetime in the given timezone.
+#' @family utilities
 #' @export
 isodt_to_local <- function(datetime_string,
                            orders = c("YmdHMS", "YmdHMSz"),
@@ -43,6 +44,7 @@ isodt_to_local <- function(datetime_string,
 #' @param tz (character) The timezone string for lubridate. Default: \code{"UTC"}.
 #' @return The dataframe with matching columns mutated to lubridate datetimes.
 #' @export
+#' @family utilities
 #' @examples
 #' \dontrun{
 #' tsi <- "data/build_Turtle-Sighting-0-1_1559790020.csv" %>%

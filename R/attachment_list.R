@@ -14,9 +14,10 @@
 #' along with a boolean flag indicating whether the server actually has a copy
 #' of the expected file or not. If the server has a file, you can then append
 #' its filename to the request URL to download only that file (see below).
+#' @template param-iid
 #' @template param-pid
 #' @template param-fid
-#' @template param-iid
+#' @template param-url
 #' @template param-auth
 #' @return A tibble containing some high-level details of the submission
 #'         attachments.
@@ -31,26 +32,16 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
-#' s_default <- submission_list(1, "build_xformsId", "uuid:...")
-#'
-#' # With explicit credentials, see tests
-#' sl <- submission_list(
-#'   get_test_pid(),
-#'   get_test_fid(),
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
 #' )
 #'
-#' al <- attachment_list(
-#'   get_test_pid(),
-#'   get_test_fid(),
-#'   sl$instance_id[[1]],
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
-#' )
+#' sl <- submission_list()
+#'
+#' al <- attachment_list(sl$instance_id[[1]])
 #' al %>% knitr::kable(.)
 #'
 #' # attachment_list returns a tibble
@@ -61,9 +52,9 @@
 #' names(al)
 #' # > "name" "exists"
 #' }
-attachment_list <- function(pid,
-                            fid,
-                            iid,
+attachment_list <- function(iid,
+                            pid = get_default_pid(),
+                            fid = get_default_fid(),
                             url = get_default_url(),
                             un = get_default_un(),
                             pw = get_default_pw()) {

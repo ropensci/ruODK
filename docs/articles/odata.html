@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -116,49 +116,34 @@
 <div id="configure-ruodk" class="section level1">
 <h1 class="hasAnchor">
 <a href="#configure-ruodk" class="anchor"></a>Configure ruODK</h1>
-<p>Set your ODK Central url, username (email), and password as R environment variables, e.g. in your <code>~/.Rprofile</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_URL=</span><span class="st">"https://sandbox.central.opendatakit.org"</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_UN=</span><span class="st">"me@email.com"</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">ODKC_PW=</span><span class="st">"......."</span>)</a></code></pre></div>
-</div>
-<div id="read-data-from-odk-central" class="section level1">
-<h1 class="hasAnchor">
-<a href="#read-data-from-odk-central" class="anchor"></a>Read data from ODK Central</h1>
-<p>If we know our ODK Central URL, the project ID (a number) and the respective form ID (an alphanumeric string), we can infer the OData service URL.</p>
-<p>Alternatively, the OData service URL is shown in the form’s “Submissions” tab &gt; “Analyze via OData” on ODK Central. We can extract the base URL, project ID, and the form ID from the service URL.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># ODK Central credentials can go into .Renviron, see vignette "setup"</span></a>
-<a class="sourceLine" id="cb2-2" title="2"></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co"># ODK Central's OData URL contains project and form IDs</span></a>
-<a class="sourceLine" id="cb2-4" title="4">data_url &lt;-<span class="st"> "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span></a>
-<a class="sourceLine" id="cb2-5" title="5"></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co"># Components</span></a>
-<a class="sourceLine" id="cb2-7" title="7">pid &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_PID"</span>)  <span class="co"># 14</span></a>
-<a class="sourceLine" id="cb2-8" title="8">fid &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_FID"</span>)  <span class="co"># "build_Flora-Quadrat-0-2_1558575936.svc"</span></a>
-<a class="sourceLine" id="cb2-9" title="9">url &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_URL"</span>)  <span class="co"># "https://sandbox.central.opendatakit.org"</span></a>
-<a class="sourceLine" id="cb2-10" title="10">un &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_UN"</span>)</a>
-<a class="sourceLine" id="cb2-11" title="11">pw &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_PW"</span>)</a>
-<a class="sourceLine" id="cb2-12" title="12"></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="co"># Canned data</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"fq_svc"</span>)</a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"fq_meta"</span>)</a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"fq_raw"</span>)</a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"fq_tae"</span>)</a></code></pre></div>
-<p>In our example, the OData service URL is <a href="https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc" class="uri">https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc</a>. This URL contains the base URL (<a href="https://sandbox.central.opendatakit.org" class="uri">https://sandbox.central.opendatakit.org</a>), the project ID (14), and the form ID (build_Flora-Quadrat-0-2_1558575936).</p>
-<p>ruODK made the opinionated decision to use these components separately in its functions.</p>
+<p>The OData service URL is shown in the form’s “Submissions” tab &gt; “Analyze via OData” on ODK Central. It contains base URL, project ID, and form ID and is used by <code><a href="../reference/ru_setup.html">ruODK::ru_setup()</a></code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># ODK Central's OData URL contains base URL, project ID, and form ID</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># ODK Central credentials can live in .Renviron, see vignette "setup"</span></a>
+<a class="sourceLine" id="cb1-3" title="3">ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/ru_setup.html">ru_setup</a></span>(</a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">svc =</span> <span class="st">"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>,</a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">un =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_UN"</span>),</a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="dt">pw =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_PW"</span>)</a>
+<a class="sourceLine" id="cb1-7" title="7">)</a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co"># Canned data</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"fq_svc"</span>)</a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"fq_meta"</span>)</a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"fq_raw"</span>)</a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"fq_tae"</span>)</a></code></pre></div>
 <p>To extract data from the OData API endpoints, we have to:</p>
 <ul>
 <li>discover data endpoints from the OData service document,</li>
 <li>inspect the metadata schema to infer data types,</li>
 <li>download submissions from the data endpoints,</li>
-<li>download media and adjust their file paths to the downloaded copies.</li>
+<li>download media attachments and adjust their file paths to the downloaded files.</li>
 </ul>
 <div id="odata-service-document" class="section level2">
 <h2 class="hasAnchor">
 <a href="#odata-service-document" class="anchor"></a>OData service document</h2>
 <p>Let’s start off with the service document.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">fq_svc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/odata_service_get.html">odata_service_get</a></span>(pid, fid, <span class="dt">url =</span> url, <span class="dt">un =</span> un, <span class="dt">pw =</span> pw)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">fq_svc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/odata_service_get.html">odata_service_get</a></span>()</a></code></pre></div>
 <p>We’ll use the included example data <code>fq_svc</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">fq_svc <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">fq_svc <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
@@ -185,232 +170,241 @@
 <h2 class="hasAnchor">
 <a href="#odata-metadata-document" class="anchor"></a>OData metadata document</h2>
 <p>Next, let’s get the metadata to review our data schema. While we can download the submission data without it, the metadata document contains information about field data types and attachment names. Future versions of <code>ruODK</code> might automate these steps.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">fq_meta &lt;-<span class="st"> </span><span class="kw"><a href="../reference/odata_metadata_get.html">odata_metadata_get</a></span>(pid, fid, <span class="dt">url =</span> url, <span class="dt">un =</span> un, <span class="dt">pw =</span> pw)</a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">listviewer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/listviewer/man/jsonedit.html">jsonedit</a></span>(fq_meta)</a></code></pre></div>
-<div id="htmlwidget-3d22142e084bc30add08" style="width:672px;height:432.632880098888px;" class="jsonedit html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3d22142e084bc30add08">{"x":{"data":{"Edmx":{"DataServices":{"Schema":{"EntityType":{"Key":{"PropertyRef":[]},"Property":[],"Property.1":[],"Property.2":[],"Property.3":[],"Property.4":[],"Property.5":[],"Property.6":[],"Property.7":[],"Property.8":[],"Property.9":[],"Property.10":[]},"EntityType.1":{"Key":{"PropertyRef":[]},"Property":[],"Property.1":[],"Property.2":[],"Property.3":[],"Property.4":[],"Property.5":[],"Property.6":[]},"ComplexType":{"Property":[],"Property.1":[],"Property.2":[]},"ComplexType.1":{"Property":[]},"ComplexType.2":{"Property":[],"Property.1":[],"Property.2":[]},"ComplexType.3":{"Property":[],"Property.1":[]},"ComplexType.4":{"Property":[]},"ComplexType.5":{"Property":[],"Property.1":[],"Property.2":[],"Property.3":[]},"EntityContainer":{"EntitySet":{"Annotation":[],"Annotation.1":[],"Annotation.2":{"Record":{"PropertyValue":[]}},"Annotation.3":{"Record":{"PropertyValue":{"Collection":{"String":["eq"]}}}},"Annotation.4":{"Record":{"PropertyValue":[],"PropertyValue.1":[],"PropertyValue.2":{"Collection":{"PropertyPath":["meta"],"PropertyPath.1":["encounter_start_datetime"],"PropertyPath.2":["reporter"],"PropertyPath.3":["device_id"],"PropertyPath.4":["location"],"PropertyPath.5":["habitat"],"PropertyPath.6":["vegetation_structure"],"PropertyPath.7":["perimeter"],"PropertyPath.8":["taxon_encounter"],"PropertyPath.9":["encounter_end_datetime"]}}}},"Annotation.5":{"Record":{"PropertyValue":[]}},"Annotation.6":{"Record":{"PropertyValue":[]}}},"EntitySet.1":["\n        "]}}}}},"options":{"mode":"tree","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">fq_meta &lt;-<span class="st"> </span><span class="kw"><a href="../reference/odata_metadata_get.html">odata_metadata_get</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">listviewer<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/listviewer/man/jsonedit.html">jsonedit</a></span>(fq_meta)</a></code></pre></div>
+<div id="htmlwidget-0ddaee067043216d664d" style="width:672px;height:432.632880098888px;" class="jsonedit html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0ddaee067043216d664d">{"x":{"data":{"Edmx":{"DataServices":{"Schema":{"ComplexType":{"Property":[],"Property.1":[],"Property.2":[],"Property.3":[]},"EnumType":{"Member":[],"Member.1":[]}},"Schema.1":{"EntityType":{"Key":{"PropertyRef":[]},"Property":[],"Property.1":[],"Property.2":[],"Property.3":[],"Property.4":[],"Property.5":[],"Property.6":[],"Property.7":[],"Property.8":[],"Property.9":[],"Property.10":[]},"EntityType.1":{"Key":{"PropertyRef":[]},"Property":[],"Property.1":[],"Property.2":[],"Property.3":[],"Property.4":[],"Property.5":[],"Property.6":[]},"ComplexType":{"Property":[]},"ComplexType.1":{"Property":[],"Property.1":[],"Property.2":[]},"ComplexType.2":{"Property":[],"Property.1":[]},"ComplexType.3":{"Property":[]},"ComplexType.4":{"Property":[],"Property.1":[],"Property.2":[],"Property.3":[]},"EntityContainer":{"EntitySet":{"Annotation":[],"Annotation.1":[],"Annotation.2":{"Record":{"PropertyValue":[]}},"Annotation.3":{"Record":{"PropertyValue":{"Collection":{"String":["eq"]}}}},"Annotation.4":{"Record":{"PropertyValue":[],"PropertyValue.1":[],"PropertyValue.2":{"Collection":{"PropertyPath":["meta"],"PropertyPath.1":["encounter_start_datetime"],"PropertyPath.2":["reporter"],"PropertyPath.3":["device_id"],"PropertyPath.4":["location"],"PropertyPath.5":["habitat"],"PropertyPath.6":["vegetation_structure"],"PropertyPath.7":["perimeter"],"PropertyPath.8":["taxon_encounter"],"PropertyPath.9":["encounter_end_datetime"]}}}},"Annotation.5":{"Record":{"PropertyValue":[]}},"Annotation.6":{"Record":{"PropertyValue":[]}}},"EntitySet.1":["\n        "]}}}}},"options":{"mode":"tree","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="odata-submission-data-documents" class="section level2">
 <h2 class="hasAnchor">
 <a href="#odata-submission-data-documents" class="anchor"></a>OData submission data documents</h2>
 <p>Now let’s download the form submissions and, separately, repeating form groups.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">fq_raw &lt;-<span class="st"> </span><span class="kw"><a href="../reference/odata_submission_get.html">odata_submission_get</a></span>(pid, fid, <span class="dt">url =</span> url, <span class="dt">un =</span> un, <span class="dt">pw =</span> pw)</a>
-<a class="sourceLine" id="cb7-2" title="2">fq_tae &lt;-<span class="st"> </span><span class="kw"><a href="../reference/odata_submission_get.html">odata_submission_get</a></span>(pid, fid, <span class="dt">url =</span> url, <span class="dt">un =</span> un, <span class="dt">pw =</span> pw, </a>
-<a class="sourceLine" id="cb7-3" title="3">                                <span class="dt">table =</span> <span class="st">"Submissions.taxon_encounter"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">fq_raw &lt;-<span class="st"> </span><span class="kw"><a href="../reference/odata_submission_get.html">odata_submission_get</a></span>()</a>
+<a class="sourceLine" id="cb6-2" title="2">fq_tae &lt;-<span class="st"> </span><span class="kw"><a href="../reference/odata_submission_get.html">odata_submission_get</a></span>(<span class="dt">table =</span> <span class="st">"Submissions.taxon_encounter"</span>)</a></code></pre></div>
 <p>The output of the above code is provided as data objects <code>fq_raw</code> (main submissions of form Flora Quadrat 0.2) and <code>fq_tae</code> (repeated group “Taxon Encounter” within a Flora Quadrat).</p>
 </div>
 </div>
 <div id="rectangle-the-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#rectangle-the-data" class="anchor"></a>Rectangle the data</h1>
-<p>The function <code><a href="../reference/odata_submission_get.html">ruODK::odata_submission_get</a></code> returned the original XML response as a nested list of lists. To analyse and visualise the data, this nested list of lists must be transformed into a rectangular shape. The function <code><a href="../reference/odata_submission_parse.html">ruODK::odata_submission_parse</a></code> recursively unnests list columns using <code><a href="https://tidyr.tidyverse.org/reference/hoist.html">tidyr::unnest_wider</a></code>. Unnamed columns, notably the anonymous lat/lon/alt coordinates, are named automatically to become unique.</p>
-<p>In this example, we clean up the output further by renaming some columns, notably we call the submission UUID <code>uuid</code>, and rename the main coordinates from <code>...12</code> and <code>...13</code> to <code>longitude</code> and <code>latitude</code>.</p>
-<p>The vectorised function <code>attachment_get</code> downloads and links attachments like photos and other media to a local, relative path. This will take some time during the first run; once the files exist locally, the download will be skipped.</p>
-<p>The date formats are parsed from ISO8601 timestamps into POSIXct objects with <code><a href="http://lubridate.tidyverse.org/reference/parse_date_time.html">lubridate::parse_date_time</a></code>. We use our local timezone (GMT+08) in this example.</p>
-<p>Other ODK forms will need to select their respective media attachment field names for <code>attachment_get</code>, and their respective date/datetime/time field names as well as their local timezone (if desired) for <code>lubridate</code>.</p>
-<p>The trailing <code>invisible</code> is a neutral operation to allow trailing magrittr pipelines <code><a href="../reference/pipe.html">%&gt;%</a></code> while commenting individual lines of the pipelines in or out.</p>
-<p>The repeated subgroup <code>taxon_encounter</code> is joined with the main observation to receive a (repeated) copy of the main observation’s values (such as observation time and habitat description). The join benefits from the manually renamed <code>uuid</code> columns in either tibble.</p>
+<p>The function <code><a href="../reference/odata_submission_get.html">ruODK::odata_submission_get</a></code> returned the original XML response as a nested list of lists. To analyse and visualise the data, this nested list of lists must be transformed into a rectangular shape. The function <code><a href="../reference/odata_submission_parse.html">ruODK::odata_submission_parse</a></code> recursively unnests list columns using <code><a href="https://tidyr.tidyverse.org/reference/hoist.html">tidyr::unnest_wider</a></code>. Unnamed columns, notably the anonymous lat/lon/alt coordinates, are named automatically to become unique (a feature of <code>tidyr::unnest_*()</code>), and then sanitised using the helper <code><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">janitor::clean_names()</a></code>.</p>
+<p>In this example, we clean up the output further by renaming some columns, notably the main coordinates from <code>x13</code> and <code>x14</code> to <code>longitude</code> and <code>latitude</code>.</p>
+<p>The vectorised function <code><a href="../reference/attachment_get.html">ruODK::attachment_get</a></code> downloads and links attachments like photos and other media to a local, relative path. This will take some time during the first run; once the files exist locally, the download will be skipped. Read <code>??ruODK::attachment_get</code> on specifying form field names (or parts thereof) indicating a media attachment; the default are any names containing “photo”.</p>
+<p>The date formats are parsed from ISO8601 timestamps into POSIXct objects with <code><a href="../reference/parse_datetime.html">ruODK::parse_datetime</a></code>. We use our local timezone (GMT+08) in this example. Read <code>??ruODK::parse_datetime</code> on specifying form field names (or parts thereof) indicating a date field; the default are any names containing “time”.</p>
+<p>The trailing <code>invisible</code> is a neutral operation to allow trailing magrittr pipes (<code><a href="../reference/pipe.html">%&gt;%</a></code>) while commenting individual lines of the pipelines in or out.</p>
+<p>The repeated subgroup <code>taxon_encounter</code> is joined with the main observation to receive a (repeated) copy of the main observation’s values (such as observation time and habitat description).</p>
 <p>For clarity, we enable verbose messages from <code>odata_submission_parse</code> and preserve the message output in the code chunk options with <code>message=TRUE</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">ord &lt;-<span class="st"> "YmdHMSz"</span></a>
-<a class="sourceLine" id="cb8-2" title="2">tz &lt;-<span class="st"> "Australia/Perth"</span></a>
-<a class="sourceLine" id="cb8-3" title="3">  </a>
-<a class="sourceLine" id="cb8-4" title="4">fq_data &lt;-<span class="st"> </span>fq_raw <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/odata_submission_parse.html">odata_submission_parse</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(</a>
-<a class="sourceLine" id="cb8-7" title="7">    <span class="dt">uuid =</span> <span class="st">`</span><span class="dt">.__id</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb8-8" title="8">    <span class="dt">longitude =</span> <span class="st">`</span><span class="dt">...12</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb8-9" title="9">    <span class="dt">latitude =</span> <span class="st">`</span><span class="dt">...13</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb8-10" title="10">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
-<a class="sourceLine" id="cb8-12" title="12">    <span class="dt">quadrat_photo =</span> <span class="kw"><a href="../reference/attachment_get.html">attachment_get</a></span>(</a>
-<a class="sourceLine" id="cb8-13" title="13">      pid, fid, uuid, quadrat_photo,</a>
-<a class="sourceLine" id="cb8-14" title="14">      <span class="dt">url =</span> url, <span class="dt">un =</span> un, <span class="dt">pw =</span> pw</a>
-<a class="sourceLine" id="cb8-15" title="15">    ),</a>
-<a class="sourceLine" id="cb8-16" title="16">    <span class="dt">morphological_type_photo =</span> <span class="kw"><a href="../reference/attachment_get.html">attachment_get</a></span>(</a>
-<a class="sourceLine" id="cb8-17" title="17">      pid, fid, uuid, morphological_type_photo,</a>
-<a class="sourceLine" id="cb8-18" title="18">      <span class="dt">url =</span> url, <span class="dt">un =</span> un, <span class="dt">pw =</span> pw</a>
-<a class="sourceLine" id="cb8-19" title="19">    ),</a>
-<a class="sourceLine" id="cb8-20" title="20">    <span class="dt">mudmap_photo =</span> <span class="kw"><a href="../reference/attachment_get.html">attachment_get</a></span>(</a>
-<a class="sourceLine" id="cb8-21" title="21">      pid, fid, uuid, mudmap_photo,</a>
-<a class="sourceLine" id="cb8-22" title="22">      <span class="dt">url =</span> url, <span class="dt">un =</span> un, <span class="dt">pw =</span> pw</a>
-<a class="sourceLine" id="cb8-23" title="23">    ),</a>
-<a class="sourceLine" id="cb8-24" title="24">    <span class="dt">submissionDate =</span> lubridate<span class="op">::</span><span class="kw"><a href="http://lubridate.tidyverse.org/reference/parse_date_time.html">parse_date_time</a></span>(</a>
-<a class="sourceLine" id="cb8-25" title="25">      submissionDate,</a>
-<a class="sourceLine" id="cb8-26" title="26">      <span class="dt">orders =</span> ord, <span class="dt">tz =</span> tz</a>
-<a class="sourceLine" id="cb8-27" title="27">    ),</a>
-<a class="sourceLine" id="cb8-28" title="28">    <span class="dt">encounter_start_datetime =</span> lubridate<span class="op">::</span><span class="kw"><a href="http://lubridate.tidyverse.org/reference/parse_date_time.html">parse_date_time</a></span>(</a>
-<a class="sourceLine" id="cb8-29" title="29">      encounter_start_datetime,</a>
-<a class="sourceLine" id="cb8-30" title="30">      <span class="dt">orders =</span> ord, <span class="dt">tz =</span> tz</a>
-<a class="sourceLine" id="cb8-31" title="31">    ),</a>
-<a class="sourceLine" id="cb8-32" title="32">    <span class="dt">encounter_end_datetime =</span> lubridate<span class="op">::</span><span class="kw"><a href="http://lubridate.tidyverse.org/reference/parse_date_time.html">parse_date_time</a></span>(</a>
-<a class="sourceLine" id="cb8-33" title="33">      encounter_end_datetime,</a>
-<a class="sourceLine" id="cb8-34" title="34">      <span class="dt">orders =</span> ord, <span class="dt">tz =</span> tz</a>
-<a class="sourceLine" id="cb8-35" title="35">    )</a>
-<a class="sourceLine" id="cb8-36" title="36">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-37" title="37"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()</a>
-<a class="sourceLine" id="cb8-38" title="38"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-39" title="39"><span class="co">#&gt; * `@odata.context` -&gt; .odata.context</span></a>
-<a class="sourceLine" id="cb8-40" title="40"><span class="co">#&gt; Unnesting column 'value'</span></a>
-<a class="sourceLine" id="cb8-41" title="41"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-42" title="42"><span class="co">#&gt; * `__id` -&gt; .__id</span></a>
-<a class="sourceLine" id="cb8-43" title="43"><span class="co">#&gt; * `__system` -&gt; .__system</span></a>
-<a class="sourceLine" id="cb8-44" title="44"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
-<a class="sourceLine" id="cb8-45" title="45"><span class="co">#&gt; Unnesting column '.__system'</span></a>
-<a class="sourceLine" id="cb8-46" title="46"><span class="co">#&gt; Unnesting column 'meta'</span></a>
-<a class="sourceLine" id="cb8-47" title="47"><span class="co">#&gt; Unnesting column 'location'</span></a>
-<a class="sourceLine" id="cb8-48" title="48"><span class="co">#&gt; Unnesting column 'habitat'</span></a>
-<a class="sourceLine" id="cb8-49" title="49"><span class="co">#&gt; Unnesting column 'vegetation_structure'</span></a>
-<a class="sourceLine" id="cb8-50" title="50"><span class="co">#&gt; Unnesting column 'perimeter'</span></a>
-<a class="sourceLine" id="cb8-51" title="51"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
-<a class="sourceLine" id="cb8-52" title="52"><span class="co">#&gt; Unnesting column 'corner1'</span></a>
-<a class="sourceLine" id="cb8-53" title="53"><span class="co">#&gt; Unnesting column 'corner2'</span></a>
-<a class="sourceLine" id="cb8-54" title="54"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-55" title="55"><span class="co">#&gt; * type -&gt; type...11</span></a>
-<a class="sourceLine" id="cb8-56" title="56"><span class="co">#&gt; * coordinates -&gt; coordinates...12</span></a>
-<a class="sourceLine" id="cb8-57" title="57"><span class="co">#&gt; * type -&gt; type...16</span></a>
-<a class="sourceLine" id="cb8-58" title="58"><span class="co">#&gt; * coordinates -&gt; coordinates...17</span></a>
-<a class="sourceLine" id="cb8-59" title="59"><span class="co">#&gt; Unnesting column 'corner3'</span></a>
-<a class="sourceLine" id="cb8-60" title="60"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-61" title="61"><span class="co">#&gt; * type -&gt; type...18</span></a>
-<a class="sourceLine" id="cb8-62" title="62"><span class="co">#&gt; * coordinates -&gt; coordinates...19</span></a>
-<a class="sourceLine" id="cb8-63" title="63"><span class="co">#&gt; Unnesting column 'corner4'</span></a>
-<a class="sourceLine" id="cb8-64" title="64"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-65" title="65"><span class="co">#&gt; * type -&gt; type...20</span></a>
-<a class="sourceLine" id="cb8-66" title="66"><span class="co">#&gt; * coordinates -&gt; coordinates...21</span></a>
-<a class="sourceLine" id="cb8-67" title="67"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
-<a class="sourceLine" id="cb8-68" title="68"><span class="co">#&gt; Unnesting column 'coordinates...12'</span></a>
-<a class="sourceLine" id="cb8-69" title="69"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-71" title="71"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-72" title="72"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-73" title="73"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-74" title="74"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-75" title="75"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-76" title="76"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-77" title="77"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-78" title="78"><span class="co">#&gt; * ...1 -&gt; ...12</span></a>
-<a class="sourceLine" id="cb8-79" title="79"><span class="co">#&gt; * ...2 -&gt; ...13</span></a>
-<a class="sourceLine" id="cb8-80" title="80"><span class="co">#&gt; * ...3 -&gt; ...14</span></a>
-<a class="sourceLine" id="cb8-81" title="81"><span class="co">#&gt; * type...16 -&gt; type...18</span></a>
-<a class="sourceLine" id="cb8-82" title="82"><span class="co">#&gt; * coordinates...17 -&gt; coordinates...19</span></a>
-<a class="sourceLine" id="cb8-83" title="83"><span class="co">#&gt; * … and 4 more problems</span></a>
-<a class="sourceLine" id="cb8-84" title="84"><span class="co">#&gt; Skipping renamed column 'coordinates...17'</span></a>
-<a class="sourceLine" id="cb8-85" title="85"><span class="co">#&gt; Unnesting column 'coordinates...19'</span></a>
-<a class="sourceLine" id="cb8-86" title="86"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-87" title="87"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-88" title="88"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-89" title="89"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-90" title="90"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-91" title="91"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-92" title="92"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-93" title="93"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-94" title="94"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-95" title="95"><span class="co">#&gt; * ...1 -&gt; ...19</span></a>
-<a class="sourceLine" id="cb8-96" title="96"><span class="co">#&gt; * ...2 -&gt; ...20</span></a>
-<a class="sourceLine" id="cb8-97" title="97"><span class="co">#&gt; * ...3 -&gt; ...21</span></a>
-<a class="sourceLine" id="cb8-98" title="98"><span class="co">#&gt; * type...20 -&gt; type...22</span></a>
-<a class="sourceLine" id="cb8-99" title="99"><span class="co">#&gt; * coordinates...21 -&gt; coordinates...23</span></a>
-<a class="sourceLine" id="cb8-100" title="100"><span class="co">#&gt; * … and 2 more problems</span></a>
-<a class="sourceLine" id="cb8-101" title="101"><span class="co">#&gt; Skipping renamed column 'coordinates...21'</span></a>
-<a class="sourceLine" id="cb8-102" title="102"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
-<a class="sourceLine" id="cb8-103" title="103"><span class="co">#&gt; Unnesting column 'coordinates...23'</span></a>
-<a class="sourceLine" id="cb8-104" title="104"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-105" title="105"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-106" title="106"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-107" title="107"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-108" title="108"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-109" title="109"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-110" title="110"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-111" title="111"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-112" title="112"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-113" title="113"><span class="co">#&gt; * ...1 -&gt; ...23</span></a>
-<a class="sourceLine" id="cb8-114" title="114"><span class="co">#&gt; * ...2 -&gt; ...24</span></a>
-<a class="sourceLine" id="cb8-115" title="115"><span class="co">#&gt; * ...3 -&gt; ...25</span></a>
-<a class="sourceLine" id="cb8-116" title="116"><span class="co">#&gt; * type...24 -&gt; type...26</span></a>
-<a class="sourceLine" id="cb8-117" title="117"><span class="co">#&gt; * coordinates...25 -&gt; coordinates</span></a>
-<a class="sourceLine" id="cb8-118" title="118"><span class="co">#&gt; Skipping renamed column 'coordinates...25'</span></a>
-<a class="sourceLine" id="cb8-119" title="119"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
-<a class="sourceLine" id="cb8-120" title="120"><span class="co">#&gt; Unnesting column 'coordinates'</span></a>
-<a class="sourceLine" id="cb8-121" title="121"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-122" title="122"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-123" title="123"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-124" title="124"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-125" title="125"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-126" title="126"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-127" title="127"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-128" title="128"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-129" title="129"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-130" title="130"><span class="co">#&gt; * ...1 -&gt; ...27</span></a>
-<a class="sourceLine" id="cb8-131" title="131"><span class="co">#&gt; * ...2 -&gt; ...28</span></a>
-<a class="sourceLine" id="cb8-132" title="132"><span class="co">#&gt; * ...3 -&gt; ...29</span></a>
-<a class="sourceLine" id="cb8-133" title="133"><span class="co">#&gt; Date in ISO8601 format; converting timezone from UTC to "Australia/Perth".</span></a>
-<a class="sourceLine" id="cb8-134" title="134"><span class="co">#&gt; Date in ISO8601 format; converting timezone from UTC to "Australia/Perth".</span></a>
-<a class="sourceLine" id="cb8-135" title="135"><span class="co">#&gt; Date in ISO8601 format; converting timezone from UTC to "Australia/Perth".</span></a>
-<a class="sourceLine" id="cb8-136" title="136">fq_data_tae &lt;-<span class="st"> </span>fq_tae <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-137" title="137"><span class="st">  </span><span class="kw"><a href="../reference/odata_submission_parse.html">odata_submission_parse</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-138" title="138"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(</a>
-<a class="sourceLine" id="cb8-139" title="139">    <span class="dt">tae_uuid =</span> <span class="st">`</span><span class="dt">.__id</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb8-140" title="140">    <span class="dt">uuid =</span> <span class="st">`</span><span class="dt">.__Submissions.id</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb8-141" title="141">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-142" title="142"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
-<a class="sourceLine" id="cb8-143" title="143">    <span class="dt">photo_in_situ =</span> <span class="kw"><a href="../reference/attachment_get.html">attachment_get</a></span>(</a>
-<a class="sourceLine" id="cb8-144" title="144">      pid, fid, uuid, photo_in_situ,</a>
-<a class="sourceLine" id="cb8-145" title="145">      <span class="dt">url =</span> url, <span class="dt">un =</span> un, <span class="dt">pw =</span> pw</a>
-<a class="sourceLine" id="cb8-146" title="146">    )</a>
-<a class="sourceLine" id="cb8-147" title="147">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-148" title="148"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(fq_data, <span class="dt">by =</span> <span class="st">"uuid"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-149" title="149"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()</a>
-<a class="sourceLine" id="cb8-150" title="150"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-151" title="151"><span class="co">#&gt; * `@odata.context` -&gt; .odata.context</span></a>
-<a class="sourceLine" id="cb8-152" title="152"><span class="co">#&gt; Unnesting column 'value'</span></a>
-<a class="sourceLine" id="cb8-153" title="153"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-154" title="154"><span class="co">#&gt; * `__id` -&gt; .__id</span></a>
-<a class="sourceLine" id="cb8-155" title="155"><span class="co">#&gt; * `__Submissions-id` -&gt; .__Submissions.id</span></a>
-<a class="sourceLine" id="cb8-156" title="156"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
-<a class="sourceLine" id="cb8-157" title="157"><span class="co">#&gt; Unnesting column 'taxon_encounter_location'</span></a>
-<a class="sourceLine" id="cb8-158" title="158"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
-<a class="sourceLine" id="cb8-159" title="159"><span class="co">#&gt; Unnesting column 'coordinates'</span></a>
-<a class="sourceLine" id="cb8-160" title="160"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-161" title="161"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-162" title="162"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-163" title="163"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-164" title="164"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-165" title="165"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-166" title="166"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-167" title="167"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-168" title="168"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-169" title="169"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-170" title="170"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-171" title="171"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-172" title="172"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-173" title="173"><span class="co">#&gt; * `` -&gt; ...1</span></a>
-<a class="sourceLine" id="cb8-174" title="174"><span class="co">#&gt; * `` -&gt; ...2</span></a>
-<a class="sourceLine" id="cb8-175" title="175"><span class="co">#&gt; * `` -&gt; ...3</span></a>
-<a class="sourceLine" id="cb8-176" title="176"><span class="co">#&gt; New names:</span></a>
-<a class="sourceLine" id="cb8-177" title="177"><span class="co">#&gt; * ...1 -&gt; ...6</span></a>
-<a class="sourceLine" id="cb8-178" title="178"><span class="co">#&gt; * ...2 -&gt; ...7</span></a>
-<a class="sourceLine" id="cb8-179" title="179"><span class="co">#&gt; * ...3 -&gt; ...8</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">ord &lt;-<span class="st"> "YmdHMSz"</span></a>
+<a class="sourceLine" id="cb7-2" title="2">tz &lt;-<span class="st"> "Australia/Perth"</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  </a>
+<a class="sourceLine" id="cb7-4" title="4">fq_data &lt;-<span class="st"> </span>fq_raw <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_submission_parse.html">odata_submission_parse</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="st">  </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/parse_datetime.html">parse_datetime</a></span>(<span class="dt">tz =</span> <span class="st">"Australia/Perth"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="st">  </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/parse_datetime.html">parse_datetime</a></span>(<span class="dt">tz =</span> <span class="st">"Australia/Perth"</span>, <span class="dt">col_contains =</span> <span class="st">"date"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(</a>
+<a class="sourceLine" id="cb7-9" title="9">    <span class="dt">longitude =</span> x13,</a>
+<a class="sourceLine" id="cb7-10" title="10">    <span class="dt">latitude =</span> x14,</a>
+<a class="sourceLine" id="cb7-11" title="11">    <span class="dt">altitude =</span> x15</a>
+<a class="sourceLine" id="cb7-12" title="12">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
+<a class="sourceLine" id="cb7-14" title="14">    <span class="dt">quadrat_photo =</span> <span class="kw"><a href="../reference/attachment_get.html">attachment_get</a></span>(id, quadrat_photo),</a>
+<a class="sourceLine" id="cb7-15" title="15">    <span class="dt">morphological_type_photo =</span> <span class="kw"><a href="../reference/attachment_get.html">attachment_get</a></span>(id, morphological_type_photo),</a>
+<a class="sourceLine" id="cb7-16" title="16">    <span class="dt">mudmap_photo =</span> <span class="kw"><a href="../reference/attachment_get.html">attachment_get</a></span>(id, mudmap_photo),</a>
+<a class="sourceLine" id="cb7-17" title="17"></a>
+<a class="sourceLine" id="cb7-18" title="18">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()</a>
+<a class="sourceLine" id="cb7-20" title="20"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-21" title="21"><span class="co">#&gt; * `@odata.context` -&gt; .odata.context</span></a>
+<a class="sourceLine" id="cb7-22" title="22"><span class="co">#&gt; Unnesting column 'value'</span></a>
+<a class="sourceLine" id="cb7-23" title="23"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-24" title="24"><span class="co">#&gt; * `__id` -&gt; .__id</span></a>
+<a class="sourceLine" id="cb7-25" title="25"><span class="co">#&gt; * `__system` -&gt; .__system</span></a>
+<a class="sourceLine" id="cb7-26" title="26"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb7-27" title="27"><span class="co">#&gt; Unnesting column '.__system'</span></a>
+<a class="sourceLine" id="cb7-28" title="28"><span class="co">#&gt; Unnesting column 'meta'</span></a>
+<a class="sourceLine" id="cb7-29" title="29"><span class="co">#&gt; Unnesting column 'location'</span></a>
+<a class="sourceLine" id="cb7-30" title="30"><span class="co">#&gt; Unnesting column 'habitat'</span></a>
+<a class="sourceLine" id="cb7-31" title="31"><span class="co">#&gt; Unnesting column 'vegetation_structure'</span></a>
+<a class="sourceLine" id="cb7-32" title="32"><span class="co">#&gt; Unnesting column 'perimeter'</span></a>
+<a class="sourceLine" id="cb7-33" title="33"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb7-34" title="34"><span class="co">#&gt; Unnesting column 'corner1'</span></a>
+<a class="sourceLine" id="cb7-35" title="35"><span class="co">#&gt; Unnesting column 'corner2'</span></a>
+<a class="sourceLine" id="cb7-36" title="36"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-37" title="37"><span class="co">#&gt; * type -&gt; type...12</span></a>
+<a class="sourceLine" id="cb7-38" title="38"><span class="co">#&gt; * coordinates -&gt; coordinates...13</span></a>
+<a class="sourceLine" id="cb7-39" title="39"><span class="co">#&gt; * properties -&gt; properties...14</span></a>
+<a class="sourceLine" id="cb7-40" title="40"><span class="co">#&gt; * type -&gt; type...18</span></a>
+<a class="sourceLine" id="cb7-41" title="41"><span class="co">#&gt; * coordinates -&gt; coordinates...19</span></a>
+<a class="sourceLine" id="cb7-42" title="42"><span class="co">#&gt; * … and 1 more problem</span></a>
+<a class="sourceLine" id="cb7-43" title="43"><span class="co">#&gt; Unnesting column 'corner3'</span></a>
+<a class="sourceLine" id="cb7-44" title="44"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-45" title="45"><span class="co">#&gt; * type -&gt; type...21</span></a>
+<a class="sourceLine" id="cb7-46" title="46"><span class="co">#&gt; * coordinates -&gt; coordinates...22</span></a>
+<a class="sourceLine" id="cb7-47" title="47"><span class="co">#&gt; * properties -&gt; properties...23</span></a>
+<a class="sourceLine" id="cb7-48" title="48"><span class="co">#&gt; Unnesting column 'corner4'</span></a>
+<a class="sourceLine" id="cb7-49" title="49"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-50" title="50"><span class="co">#&gt; * type -&gt; type...24</span></a>
+<a class="sourceLine" id="cb7-51" title="51"><span class="co">#&gt; * coordinates -&gt; coordinates...25</span></a>
+<a class="sourceLine" id="cb7-52" title="52"><span class="co">#&gt; * properties -&gt; properties...26</span></a>
+<a class="sourceLine" id="cb7-53" title="53"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb7-54" title="54"><span class="co">#&gt; Unnesting column 'coordinates...13'</span></a>
+<a class="sourceLine" id="cb7-55" title="55"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-56" title="56"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-57" title="57"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-58" title="58"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-59" title="59"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-60" title="60"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-61" title="61"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-62" title="62"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-63" title="63"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-64" title="64"><span class="co">#&gt; * ...1 -&gt; ...13</span></a>
+<a class="sourceLine" id="cb7-65" title="65"><span class="co">#&gt; * ...2 -&gt; ...14</span></a>
+<a class="sourceLine" id="cb7-66" title="66"><span class="co">#&gt; * ...3 -&gt; ...15</span></a>
+<a class="sourceLine" id="cb7-67" title="67"><span class="co">#&gt; * properties...14 -&gt; properties...16</span></a>
+<a class="sourceLine" id="cb7-68" title="68"><span class="co">#&gt; * type...18 -&gt; type...20</span></a>
+<a class="sourceLine" id="cb7-69" title="69"><span class="co">#&gt; * … and 8 more problems</span></a>
+<a class="sourceLine" id="cb7-70" title="70"><span class="co">#&gt; Skipping renamed column 'properties...14'</span></a>
+<a class="sourceLine" id="cb7-71" title="71"><span class="co">#&gt; Skipping renamed column 'coordinates...19'</span></a>
+<a class="sourceLine" id="cb7-72" title="72"><span class="co">#&gt; Skipping renamed column 'properties...20'</span></a>
+<a class="sourceLine" id="cb7-73" title="73"><span class="co">#&gt; Skipping renamed column 'coordinates...22'</span></a>
+<a class="sourceLine" id="cb7-74" title="74"><span class="co">#&gt; Skipping renamed column 'properties...23'</span></a>
+<a class="sourceLine" id="cb7-75" title="75"><span class="co">#&gt; Skipping renamed column 'coordinates...25'</span></a>
+<a class="sourceLine" id="cb7-76" title="76"><span class="co">#&gt; Skipping renamed column 'properties...26'</span></a>
+<a class="sourceLine" id="cb7-77" title="77"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb7-78" title="78"><span class="co">#&gt; Unnesting column 'properties...16'</span></a>
+<a class="sourceLine" id="cb7-79" title="79"><span class="co">#&gt; Unnesting column 'coordinates...21'</span></a>
+<a class="sourceLine" id="cb7-80" title="80"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-81" title="81"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-82" title="82"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-83" title="83"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-84" title="84"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-85" title="85"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-86" title="86"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-87" title="87"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-88" title="88"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-89" title="89"><span class="co">#&gt; * ...1 -&gt; ...21</span></a>
+<a class="sourceLine" id="cb7-90" title="90"><span class="co">#&gt; * ...2 -&gt; ...22</span></a>
+<a class="sourceLine" id="cb7-91" title="91"><span class="co">#&gt; * ...3 -&gt; ...23</span></a>
+<a class="sourceLine" id="cb7-92" title="92"><span class="co">#&gt; * properties...22 -&gt; properties...24</span></a>
+<a class="sourceLine" id="cb7-93" title="93"><span class="co">#&gt; * type...23 -&gt; type...25</span></a>
+<a class="sourceLine" id="cb7-94" title="94"><span class="co">#&gt; * … and 5 more problems</span></a>
+<a class="sourceLine" id="cb7-95" title="95"><span class="co">#&gt; Skipping renamed column 'properties...22'</span></a>
+<a class="sourceLine" id="cb7-96" title="96"><span class="co">#&gt; Skipping renamed column 'coordinates...24'</span></a>
+<a class="sourceLine" id="cb7-97" title="97"><span class="co">#&gt; Skipping renamed column 'properties...25'</span></a>
+<a class="sourceLine" id="cb7-98" title="98"><span class="co">#&gt; Skipping renamed column 'coordinates...27'</span></a>
+<a class="sourceLine" id="cb7-99" title="99"><span class="co">#&gt; Skipping renamed column 'properties...28'</span></a>
+<a class="sourceLine" id="cb7-100" title="100"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb7-101" title="101"><span class="co">#&gt; Unnesting column 'properties...24'</span></a>
+<a class="sourceLine" id="cb7-102" title="102"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-103" title="103"><span class="co">#&gt; * accuracy -&gt; accuracy...16</span></a>
+<a class="sourceLine" id="cb7-104" title="104"><span class="co">#&gt; * accuracy -&gt; accuracy...24</span></a>
+<a class="sourceLine" id="cb7-105" title="105"><span class="co">#&gt; Unnesting column 'coordinates...26'</span></a>
+<a class="sourceLine" id="cb7-106" title="106"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-107" title="107"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-108" title="108"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-109" title="109"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-110" title="110"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-111" title="111"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-112" title="112"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-113" title="113"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-114" title="114"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-115" title="115"><span class="co">#&gt; * ...1 -&gt; ...26</span></a>
+<a class="sourceLine" id="cb7-116" title="116"><span class="co">#&gt; * ...2 -&gt; ...27</span></a>
+<a class="sourceLine" id="cb7-117" title="117"><span class="co">#&gt; * ...3 -&gt; ...28</span></a>
+<a class="sourceLine" id="cb7-118" title="118"><span class="co">#&gt; * properties...27 -&gt; properties...29</span></a>
+<a class="sourceLine" id="cb7-119" title="119"><span class="co">#&gt; * type...28 -&gt; type...30</span></a>
+<a class="sourceLine" id="cb7-120" title="120"><span class="co">#&gt; * … and 2 more problems</span></a>
+<a class="sourceLine" id="cb7-121" title="121"><span class="co">#&gt; Skipping renamed column 'properties...27'</span></a>
+<a class="sourceLine" id="cb7-122" title="122"><span class="co">#&gt; Skipping renamed column 'coordinates...29'</span></a>
+<a class="sourceLine" id="cb7-123" title="123"><span class="co">#&gt; Skipping renamed column 'properties...30'</span></a>
+<a class="sourceLine" id="cb7-124" title="124"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb7-125" title="125"><span class="co">#&gt; Unnesting column 'properties...29'</span></a>
+<a class="sourceLine" id="cb7-126" title="126"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-127" title="127"><span class="co">#&gt; * accuracy -&gt; accuracy...29</span></a>
+<a class="sourceLine" id="cb7-128" title="128"><span class="co">#&gt; * properties...32 -&gt; properties</span></a>
+<a class="sourceLine" id="cb7-129" title="129"><span class="co">#&gt; Unnesting column 'coordinates'</span></a>
+<a class="sourceLine" id="cb7-130" title="130"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-131" title="131"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-132" title="132"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-133" title="133"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-134" title="134"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-135" title="135"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-136" title="136"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-137" title="137"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-138" title="138"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-139" title="139"><span class="co">#&gt; * ...1 -&gt; ...31</span></a>
+<a class="sourceLine" id="cb7-140" title="140"><span class="co">#&gt; * ...2 -&gt; ...32</span></a>
+<a class="sourceLine" id="cb7-141" title="141"><span class="co">#&gt; * ...3 -&gt; ...33</span></a>
+<a class="sourceLine" id="cb7-142" title="142"><span class="co">#&gt; Skipping renamed column 'properties...32'</span></a>
+<a class="sourceLine" id="cb7-143" title="143"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb7-144" title="144"><span class="co">#&gt; Unnesting column 'properties'</span></a>
+<a class="sourceLine" id="cb7-145" title="145"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-146" title="146"><span class="co">#&gt; * accuracy -&gt; accuracy...34</span></a>
+<a class="sourceLine" id="cb7-147" title="147"></a>
+<a class="sourceLine" id="cb7-148" title="148">fq_data_tae &lt;-<span class="st"> </span>fq_tae <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-149" title="149"><span class="st">  </span><span class="kw"><a href="../reference/odata_submission_parse.html">odata_submission_parse</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-150" title="150"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(</a>
+<a class="sourceLine" id="cb7-151" title="151">    <span class="dt">lon =</span> x6,</a>
+<a class="sourceLine" id="cb7-152" title="152">    <span class="dt">lat =</span> x7,</a>
+<a class="sourceLine" id="cb7-153" title="153">    <span class="dt">alt =</span> x8</a>
+<a class="sourceLine" id="cb7-154" title="154">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-155" title="155"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(</a>
+<a class="sourceLine" id="cb7-156" title="156">    <span class="dt">photo_in_situ =</span> <span class="kw"><a href="../reference/attachment_get.html">attachment_get</a></span>(submissions_id, photo_in_situ)</a>
+<a class="sourceLine" id="cb7-157" title="157">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-158" title="158"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">left_join</a></span>(fq_data, <span class="dt">by =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"submissions_id"</span> =<span class="st"> "id"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-159" title="159"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()</a>
+<a class="sourceLine" id="cb7-160" title="160"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-161" title="161"><span class="co">#&gt; * `@odata.context` -&gt; .odata.context</span></a>
+<a class="sourceLine" id="cb7-162" title="162"><span class="co">#&gt; Unnesting column 'value'</span></a>
+<a class="sourceLine" id="cb7-163" title="163"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-164" title="164"><span class="co">#&gt; * `__id` -&gt; .__id</span></a>
+<a class="sourceLine" id="cb7-165" title="165"><span class="co">#&gt; * `__Submissions-id` -&gt; .__Submissions.id</span></a>
+<a class="sourceLine" id="cb7-166" title="166"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb7-167" title="167"><span class="co">#&gt; Unnesting column 'taxon_encounter_location'</span></a>
+<a class="sourceLine" id="cb7-168" title="168"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb7-169" title="169"><span class="co">#&gt; Unnesting column 'coordinates'</span></a>
+<a class="sourceLine" id="cb7-170" title="170"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-171" title="171"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-172" title="172"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-173" title="173"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-174" title="174"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-175" title="175"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-176" title="176"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-177" title="177"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-178" title="178"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-179" title="179"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-180" title="180"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-181" title="181"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-182" title="182"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-183" title="183"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb7-184" title="184"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb7-185" title="185"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb7-186" title="186"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb7-187" title="187"><span class="co">#&gt; * ...1 -&gt; ...6</span></a>
+<a class="sourceLine" id="cb7-188" title="188"><span class="co">#&gt; * ...2 -&gt; ...7</span></a>
+<a class="sourceLine" id="cb7-189" title="189"><span class="co">#&gt; * ...3 -&gt; ...8</span></a>
+<a class="sourceLine" id="cb7-190" title="190"><span class="co">#&gt; Unnesting column 'properties'</span></a></code></pre></div>
 <p>Note: A manually resized version of the original photos in this example live in the package source under <a href="https://github.com/dbca-wa/ruODK/tree/master/docs/articles/attachments"><code>docs/articles/attachments</code></a>. To minimise package size, they were resized with imagemagick: <code>find docs/articles/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} \;</code>.</p>
 <div id="diy-rectangling" class="section level2">
 <h2 class="hasAnchor">
 <a href="#diy-rectangling" class="anchor"></a>DIY rectangling</h2>
 <p>The unnesting could also be done manually by building up a pipeline, which stepwise unnests each list column. This requires knowledge of the data structure, which can either be looked up from the metadata, or by inspecting the raw data, <code>fq_raw</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">fq_data_diy &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(<span class="dt">value =</span> fq_raw<span class="op">$</span>value) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/hoist.html">unnest_wider</a></span>(value) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-3" title="3"><span class="st">  </span><span class="co"># 1. find list columns:</span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/hoist.html">unnest_wider</a></span>(<span class="st">`</span><span class="dt">__system</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/hoist.html">unnest_wider</a></span>(meta) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="st">  </span><span class="co"># add more lines here to unnest other form groups</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="st">  </span><span class="co">#</span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="st">  </span><span class="co"># 2. rename column names</span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(</a>
-<a class="sourceLine" id="cb9-10" title="10">    <span class="dt">uuid =</span> <span class="st">`</span><span class="dt">__id</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb9-11" title="11">    <span class="co"># add more columns, e.g.</span></a>
-<a class="sourceLine" id="cb9-12" title="12">    <span class="co"># longitude=`...1`, latitude=`...2`, altitude=`...3`</span></a>
-<a class="sourceLine" id="cb9-13" title="13">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-14" title="14"><span class="st">  </span><span class="co"># 3. handle media attachments</span></a>
-<a class="sourceLine" id="cb9-15" title="15"><span class="st">  </span><span class="co"># dplyr::mutate(photo_field1 = attachment_get(data_url, uuid, photo_field1)) %&gt;%</span></a>
-<a class="sourceLine" id="cb9-16" title="16"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">fq_data_diy &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(<span class="dt">value =</span> fq_raw<span class="op">$</span>value) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/hoist.html">unnest_wider</a></span>(value) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="st">  </span><span class="co"># 1. find list columns:</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/hoist.html">unnest_wider</a></span>(<span class="st">`</span><span class="dt">__system</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/hoist.html">unnest_wider</a></span>(meta) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="st">  </span><span class="co"># add more lines here to unnest other form groups</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="st">  </span><span class="co">#</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="st">  </span><span class="co"># 2. rename column names</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(</a>
+<a class="sourceLine" id="cb8-10" title="10">    <span class="dt">uuid =</span> <span class="st">`</span><span class="dt">__id</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb8-11" title="11">    <span class="co"># add more columns, e.g.</span></a>
+<a class="sourceLine" id="cb8-12" title="12">    <span class="co"># longitude=`...1`, latitude=`...2`, altitude=`...3`</span></a>
+<a class="sourceLine" id="cb8-13" title="13">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="st">  </span><span class="co"># 3. handle media attachments</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="st">  </span><span class="co"># dplyr::mutate(photo_field1 = attachment_get(data_url, uuid, photo_field1)) %&gt;%</span></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/invisible.html">invisible</a></span>()</a></code></pre></div>
 </div>
 <div id="spatial-formats---how-granular-would-you-like-your-coordinates" class="section level2">
 <h2 class="hasAnchor">
@@ -428,93 +422,93 @@
 <h2 class="hasAnchor">
 <a href="#datatable" class="anchor"></a>Datatable</h2>
 <p>Package <code>DT</code> provides an interactive (and searchable) datatable.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(fq_data)</a></code></pre></div>
-<div id="htmlwidget-d30b78f3af9a92ace9cb" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d30b78f3af9a92ace9cb">{"x":{"filter":"none","data":[["1","2"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["2019-05-23T03:12:16Z","2019-05-23T03:07:34Z"],["228","228"],["manjimup","manjimup"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["2019-05-23T02:46:04Z","2019-05-23T02:58:34Z"],["Florian Mayer","Florian Mayer"],["ccb596b33cd13298","351848090572014"],["Kens1","Kens02"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579592153.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580334821.jpg"],["Point","Point"],[115.8840312,115.88430933],[-31.9961844,-31.99620765],[0,-21],["open-depression","flat"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579731266.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580394989.jpg"],["Lanscaped native shrubs over red gravel","Planter box over concrete pavers"],["Point","Point"],[115.883982,115.88428661],[-31.9961229,-31.99620102],[0,-22],["Point","Point"],[115.884307,115.88427853],[-31.9966621,-31.99619855],[0,-22],["Point","Point"],[115.8840645,115.88427163],[-31.9961278,-31.99617953],[0,-26],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580082333.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580571494.jpg"],["2019-05-23T02:57:17Z","2019-05-23T03:05:48Z"],["https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>uuid<\/th>\n      <th>submissionDate<\/th>\n      <th>submitterId<\/th>\n      <th>submitterName<\/th>\n      <th>instanceID<\/th>\n      <th>encounter_start_datetime<\/th>\n      <th>reporter<\/th>\n      <th>device_id<\/th>\n      <th>area_name<\/th>\n      <th>quadrat_photo<\/th>\n      <th>type...11<\/th>\n      <th>longitude<\/th>\n      <th>latitude<\/th>\n      <th>...14<\/th>\n      <th>morphological_type<\/th>\n      <th>morphological_type_photo<\/th>\n      <th>vegclass_placeholder<\/th>\n      <th>type...18<\/th>\n      <th>...19<\/th>\n      <th>...20<\/th>\n      <th>...21<\/th>\n      <th>type...22<\/th>\n      <th>...23<\/th>\n      <th>...24<\/th>\n      <th>...25<\/th>\n      <th>type...26<\/th>\n      <th>...27<\/th>\n      <th>...28<\/th>\n      <th>...29<\/th>\n      <th>mudmap_photo<\/th>\n      <th>encounter_end_datetime<\/th>\n      <th>.odata.context<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[12,13,14,19,20,21,23,24,25,27,28,29]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(fq_data_tae)</a></code></pre></div>
-<div id="htmlwidget-5614cc7434bd6445484e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5614cc7434bd6445484e">{"x":{"filter":"none","data":[["1","2","3","4"],["a06d099f107e5cb628684aa8a681b31f7d16ef7b","eff506be0d3b097661b3718af904a51af27f3875","21709d87adc602ce438da95dbf5c2eb741d628ff","9571ce427dbe882ba510eb3323808e4733eee189"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["Grevillea","Dontknowsiana sp.","Species 1","Species2"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580116374.jpg","attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580178316.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580622081.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580706298.jpg"],["Point","Point","Point","Point"],[115.8841655,115.8843675,115.88431406,115.884342],[-31.9961627,-31.9963167,-31.99617267,-31.99615233],[0,0,-13,-8],["shrub","tree","shrub","shrub"],["9311960202528","9311960202528","9311960202528","9311960202528"],["https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions.taxon_encounter","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions.taxon_encounter","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions.taxon_encounter","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions.taxon_encounter"],["2019-05-23T03:12:16Z","2019-05-23T03:12:16Z","2019-05-23T03:07:34Z","2019-05-23T03:07:34Z"],["228","228","228","228"],["manjimup","manjimup","manjimup","manjimup"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["2019-05-23T02:46:04Z","2019-05-23T02:46:04Z","2019-05-23T02:58:34Z","2019-05-23T02:58:34Z"],["Florian Mayer","Florian Mayer","Florian Mayer","Florian Mayer"],["ccb596b33cd13298","ccb596b33cd13298","351848090572014","351848090572014"],["Kens1","Kens1","Kens02","Kens02"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579592153.jpg","attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579592153.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580334821.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580334821.jpg"],["Point","Point","Point","Point"],[115.8840312,115.8840312,115.88430933,115.88430933],[-31.9961844,-31.9961844,-31.99620765,-31.99620765],[0,0,-21,-21],["open-depression","open-depression","flat","flat"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579731266.jpg","attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579731266.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580394989.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580394989.jpg"],["Lanscaped native shrubs over red gravel","Lanscaped native shrubs over red gravel","Planter box over concrete pavers","Planter box over concrete pavers"],["Point","Point","Point","Point"],[115.883982,115.883982,115.88428661,115.88428661],[-31.9961229,-31.9961229,-31.99620102,-31.99620102],[0,0,-22,-22],["Point","Point","Point","Point"],[115.884307,115.884307,115.88427853,115.88427853],[-31.9966621,-31.9966621,-31.99619855,-31.99619855],[0,0,-22,-22],["Point","Point","Point","Point"],[115.8840645,115.8840645,115.88427163,115.88427163],[-31.9961278,-31.9961278,-31.99617953,-31.99617953],[0,0,-26,-26],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580082333.jpg","attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580082333.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580571494.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580571494.jpg"],["2019-05-23T02:57:17Z","2019-05-23T02:57:17Z","2019-05-23T03:05:48Z","2019-05-23T03:05:48Z"],["https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>tae_uuid<\/th>\n      <th>uuid<\/th>\n      <th>canonical_name<\/th>\n      <th>photo_in_situ<\/th>\n      <th>type<\/th>\n      <th>...6<\/th>\n      <th>...7<\/th>\n      <th>...8<\/th>\n      <th>life_form<\/th>\n      <th>voucher_specimen_barcode<\/th>\n      <th>.odata.context.x<\/th>\n      <th>submissionDate<\/th>\n      <th>submitterId<\/th>\n      <th>submitterName<\/th>\n      <th>instanceID<\/th>\n      <th>encounter_start_datetime<\/th>\n      <th>reporter<\/th>\n      <th>device_id<\/th>\n      <th>area_name<\/th>\n      <th>quadrat_photo<\/th>\n      <th>type...11<\/th>\n      <th>longitude<\/th>\n      <th>latitude<\/th>\n      <th>...14<\/th>\n      <th>morphological_type<\/th>\n      <th>morphological_type_photo<\/th>\n      <th>vegclass_placeholder<\/th>\n      <th>type...18<\/th>\n      <th>...19<\/th>\n      <th>...20<\/th>\n      <th>...21<\/th>\n      <th>type...22<\/th>\n      <th>...23<\/th>\n      <th>...24<\/th>\n      <th>...25<\/th>\n      <th>type...26<\/th>\n      <th>...27<\/th>\n      <th>...28<\/th>\n      <th>...29<\/th>\n      <th>mudmap_photo<\/th>\n      <th>encounter_end_datetime<\/th>\n      <th>.odata.context.y<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[6,7,8,22,23,24,29,30,31,33,34,35,37,38,39]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(<span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(fq_data_diy))</a></code></pre></div>
-<div id="htmlwidget-2e6ddc8d1e7773ef0130" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2e6ddc8d1e7773ef0130">{"x":{"filter":"none","data":[["1","2"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["2019-05-23T03:12:16.012Z","2019-05-23T03:07:34.385Z"],["228","228"],["manjimup","manjimup"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["2019-05-23T10:46:04.821+08:00","2019-05-23T10:58:34.541+08:00"],["Florian Mayer","Florian Mayer"],["ccb596b33cd13298","351848090572014"],[{"area_name":"Kens1","quadrat_photo":"1558579592153.jpg","corner1":{"type":"Point","coordinates":[115.8840312,-31.9961844,0]}},{"area_name":"Kens02","quadrat_photo":"1558580334821.jpg","corner1":{"type":"Point","coordinates":[115.88430933,-31.99620765,-21]}}],[{"morphological_type":"open-depression","morphological_type_photo":"1558579731266.jpg"},{"morphological_type":"flat","morphological_type_photo":"1558580394989.jpg"}],[{"vegclass_placeholder":"Lanscaped native shrubs over red gravel"},{"vegclass_placeholder":"Planter box over concrete pavers"}],[{"corner2":{"type":"Point","coordinates":[115.883982,-31.9961229,0]},"corner3":{"type":"Point","coordinates":[115.884307,-31.9966621,0]},"corner4":{"type":"Point","coordinates":[115.8840645,-31.9961278,0]},"mudmap_photo":"1558580082333.jpg"},{"corner2":{"type":"Point","coordinates":[115.88428661,-31.99620102,-22]},"corner3":{"type":"Point","coordinates":[115.88427853,-31.99619855,-22]},"corner4":{"type":"Point","coordinates":[115.88427163,-31.99617953,-26]},"mudmap_photo":"1558580571494.jpg"}],["2019-05-23T10:57:17.184+08:00","2019-05-23T11:05:48.371+08:00"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>uuid<\/th>\n      <th>submissionDate<\/th>\n      <th>submitterId<\/th>\n      <th>submitterName<\/th>\n      <th>instanceID<\/th>\n      <th>encounter_start_datetime<\/th>\n      <th>reporter<\/th>\n      <th>device_id<\/th>\n      <th>location<\/th>\n      <th>habitat<\/th>\n      <th>vegetation_structure<\/th>\n      <th>perimeter<\/th>\n      <th>encounter_end_datetime<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(fq_data)</a></code></pre></div>
+<div id="htmlwidget-31b2e534eaf483211529" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-31b2e534eaf483211529">{"x":{"filter":"none","data":[["1","2"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["2019-05-23T10:46:04Z","2019-05-23T10:58:34Z"],["Florian Mayer","Florian Mayer"],["ccb596b33cd13298","351848090572014"],["2019-05-23T10:57:17Z","2019-05-23T11:05:48Z"],["2019-05-23T03:12:16Z","2019-05-23T03:07:34Z"],["228","228"],["manjimup","manjimup"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["Kens1","Kens02"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579592153.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580334821.jpg"],["Point","Point"],[115.8840312,115.88430933],[-31.9961844,-31.99620765],[0,-21],[41.909,12.864],["open-depression","flat"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579731266.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580394989.jpg"],["Lanscaped native shrubs over red gravel","Planter box over concrete pavers"],["Point","Point"],[115.883982,115.88428661],[-31.9961229,-31.99620102],[0,-22],[40.977,12.864],["Point","Point"],[115.884307,115.88427853],[-31.9966621,-31.99619855],[0,-22],[60,15.008],["Point","Point"],[115.8840645,115.88427163],[-31.9961278,-31.99617953],[0,-26],[72.9,9.648001],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580082333.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580571494.jpg"],["https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>encounter_start_datetime<\/th>\n      <th>reporter<\/th>\n      <th>device_id<\/th>\n      <th>encounter_end_datetime<\/th>\n      <th>submission_date<\/th>\n      <th>submitter_id<\/th>\n      <th>submitter_name<\/th>\n      <th>instance_id<\/th>\n      <th>area_name<\/th>\n      <th>quadrat_photo<\/th>\n      <th>type_12<\/th>\n      <th>longitude<\/th>\n      <th>latitude<\/th>\n      <th>altitude<\/th>\n      <th>accuracy_16<\/th>\n      <th>morphological_type<\/th>\n      <th>morphological_type_photo<\/th>\n      <th>vegclass_placeholder<\/th>\n      <th>type_20<\/th>\n      <th>x21<\/th>\n      <th>x22<\/th>\n      <th>x23<\/th>\n      <th>accuracy_24<\/th>\n      <th>type_25<\/th>\n      <th>x26<\/th>\n      <th>x27<\/th>\n      <th>x28<\/th>\n      <th>accuracy_29<\/th>\n      <th>type_30<\/th>\n      <th>x31<\/th>\n      <th>x32<\/th>\n      <th>x33<\/th>\n      <th>accuracy_34<\/th>\n      <th>mudmap_photo<\/th>\n      <th>odata_context<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[13,14,15,16,21,22,23,24,26,27,28,29,31,32,33,34]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(fq_data_tae)</a></code></pre></div>
+<div id="htmlwidget-694cfb113066253418ca" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-694cfb113066253418ca">{"x":{"filter":"none","data":[["1","2","3","4"],["a06d099f107e5cb628684aa8a681b31f7d16ef7b","eff506be0d3b097661b3718af904a51af27f3875","21709d87adc602ce438da95dbf5c2eb741d628ff","9571ce427dbe882ba510eb3323808e4733eee189"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["Grevillea","Dontknowsiana sp.","Species 1","Species2"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580116374.jpg","attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580178316.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580622081.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580706298.jpg"],["Point","Point","Point","Point"],[115.8841655,115.8843675,115.88431406,115.884342],[-31.9961627,-31.9963167,-31.99617267,-31.99615233],[0,0,-13,-8],[56.1,40.519,5.36,4.288],["shrub","tree","shrub","shrub"],["9311960202528","9311960202528","9311960202528","9311960202528"],["https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions.taxon_encounter","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions.taxon_encounter","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions.taxon_encounter","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions.taxon_encounter"],["2019-05-23T10:46:04Z","2019-05-23T10:46:04Z","2019-05-23T10:58:34Z","2019-05-23T10:58:34Z"],["Florian Mayer","Florian Mayer","Florian Mayer","Florian Mayer"],["ccb596b33cd13298","ccb596b33cd13298","351848090572014","351848090572014"],["2019-05-23T10:57:17Z","2019-05-23T10:57:17Z","2019-05-23T11:05:48Z","2019-05-23T11:05:48Z"],["2019-05-23T03:12:16Z","2019-05-23T03:12:16Z","2019-05-23T03:07:34Z","2019-05-23T03:07:34Z"],["228","228","228","228"],["manjimup","manjimup","manjimup","manjimup"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["Kens1","Kens1","Kens02","Kens02"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579592153.jpg","attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579592153.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580334821.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580334821.jpg"],["Point","Point","Point","Point"],[115.8840312,115.8840312,115.88430933,115.88430933],[-31.9961844,-31.9961844,-31.99620765,-31.99620765],[0,0,-21,-21],[41.909,41.909,12.864,12.864],["open-depression","open-depression","flat","flat"],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579731266.jpg","attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579731266.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580394989.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580394989.jpg"],["Lanscaped native shrubs over red gravel","Lanscaped native shrubs over red gravel","Planter box over concrete pavers","Planter box over concrete pavers"],["Point","Point","Point","Point"],[115.883982,115.883982,115.88428661,115.88428661],[-31.9961229,-31.9961229,-31.99620102,-31.99620102],[0,0,-22,-22],[40.977,40.977,12.864,12.864],["Point","Point","Point","Point"],[115.884307,115.884307,115.88427853,115.88427853],[-31.9966621,-31.9966621,-31.99619855,-31.99619855],[0,0,-22,-22],[60,60,15.008,15.008],["Point","Point","Point","Point"],[115.8840645,115.8840645,115.88427163,115.88427163],[-31.9961278,-31.9961278,-31.99617953,-31.99617953],[0,0,-26,-26],[72.9,72.9,9.648001,9.648001],["attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580082333.jpg","attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580082333.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580571494.jpg","attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580571494.jpg"],["https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions","https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>submissions_id<\/th>\n      <th>canonical_name<\/th>\n      <th>photo_in_situ<\/th>\n      <th>type<\/th>\n      <th>lon<\/th>\n      <th>lat<\/th>\n      <th>alt<\/th>\n      <th>accuracy<\/th>\n      <th>life_form<\/th>\n      <th>voucher_specimen_barcode<\/th>\n      <th>odata_context.x<\/th>\n      <th>encounter_start_datetime<\/th>\n      <th>reporter<\/th>\n      <th>device_id<\/th>\n      <th>encounter_end_datetime<\/th>\n      <th>submission_date<\/th>\n      <th>submitter_id<\/th>\n      <th>submitter_name<\/th>\n      <th>instance_id<\/th>\n      <th>area_name<\/th>\n      <th>quadrat_photo<\/th>\n      <th>type_12<\/th>\n      <th>longitude<\/th>\n      <th>latitude<\/th>\n      <th>altitude<\/th>\n      <th>accuracy_16<\/th>\n      <th>morphological_type<\/th>\n      <th>morphological_type_photo<\/th>\n      <th>vegclass_placeholder<\/th>\n      <th>type_20<\/th>\n      <th>x21<\/th>\n      <th>x22<\/th>\n      <th>x23<\/th>\n      <th>accuracy_24<\/th>\n      <th>type_25<\/th>\n      <th>x26<\/th>\n      <th>x27<\/th>\n      <th>x28<\/th>\n      <th>accuracy_29<\/th>\n      <th>type_30<\/th>\n      <th>x31<\/th>\n      <th>x32<\/th>\n      <th>x33<\/th>\n      <th>accuracy_34<\/th>\n      <th>mudmap_photo<\/th>\n      <th>odata_context.y<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[6,7,8,9,24,25,26,27,32,33,34,35,37,38,39,40,42,43,44,45]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">DT<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span>(<span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(fq_data_diy))</a></code></pre></div>
+<div id="htmlwidget-15cbe504aeae0004012e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-15cbe504aeae0004012e">{"x":{"filter":"none","data":[["1","2"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],["2019-05-23T10:46:04.821+08:00","2019-05-23T10:58:34.541+08:00"],["Florian Mayer","Florian Mayer"],["ccb596b33cd13298","351848090572014"],["2019-05-23T10:57:17.184+08:00","2019-05-23T11:05:48.371+08:00"],["2019-05-23T03:12:16.012Z","2019-05-23T03:07:34.385Z"],["228","228"],["manjimup","manjimup"],["uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12","uuid:e0375332-0bb5-4175-a498-549bb33420e4"],[{"area_name":"Kens1","quadrat_photo":"1558579592153.jpg","corner1":{"type":"Point","coordinates":[115.8840312,-31.9961844,0],"properties":{"accuracy":41.909}}},{"area_name":"Kens02","quadrat_photo":"1558580334821.jpg","corner1":{"type":"Point","coordinates":[115.88430933,-31.99620765,-21],"properties":{"accuracy":12.864}}}],[{"morphological_type":"open-depression","morphological_type_photo":"1558579731266.jpg"},{"morphological_type":"flat","morphological_type_photo":"1558580394989.jpg"}],[{"vegclass_placeholder":"Lanscaped native shrubs over red gravel"},{"vegclass_placeholder":"Planter box over concrete pavers"}],[{"corner2":{"type":"Point","coordinates":[115.883982,-31.9961229,0],"properties":{"accuracy":40.977}},"corner3":{"type":"Point","coordinates":[115.884307,-31.9966621,0],"properties":{"accuracy":60}},"corner4":{"type":"Point","coordinates":[115.8840645,-31.9961278,0],"properties":{"accuracy":72.9}},"mudmap_photo":"1558580082333.jpg"},{"corner2":{"type":"Point","coordinates":[115.88428661,-31.99620102,-22],"properties":{"accuracy":12.864}},"corner3":{"type":"Point","coordinates":[115.88427853,-31.99619855,-22],"properties":{"accuracy":15.008}},"corner4":{"type":"Point","coordinates":[115.88427163,-31.99617953,-26],"properties":{"accuracy":9.648001}},"mudmap_photo":"1558580571494.jpg"}]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>uuid<\/th>\n      <th>encounter_start_datetime<\/th>\n      <th>reporter<\/th>\n      <th>device_id<\/th>\n      <th>encounter_end_datetime<\/th>\n      <th>submissionDate<\/th>\n      <th>submitterId<\/th>\n      <th>submitterName<\/th>\n      <th>instanceID<\/th>\n      <th>location<\/th>\n      <th>habitat<\/th>\n      <th>vegetation_structure<\/th>\n      <th>perimeter<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="map" class="section level2">
 <h2 class="hasAnchor">
 <a href="#map" class="anchor"></a>Map</h2>
 <p>Package <code>leaflet</code> provides interactive maps.</p>
 <p>Constructing label and popup requires knowledge of the dataset structure.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html">leaflet</a></span>(<span class="dt">width =</span> <span class="dv">800</span>, <span class="dt">height =</span> <span class="dv">600</span>) <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html">leaflet</a></span>(<span class="dt">width =</span> <span class="dv">800</span>, <span class="dt">height =</span> <span class="dv">600</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addProviderTiles.html">addProviderTiles</a></span>(<span class="st">"OpenStreetMap.Mapnik"</span>, <span class="dt">group =</span> <span class="st">"Place names"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addProviderTiles.html">addProviderTiles</a></span>(<span class="st">"Esri.WorldImagery"</span>, <span class="dt">group =</span> <span class="st">"Aerial"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/map-methods.html">clearBounds</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addAwesomeMarkers.html">addAwesomeMarkers</a></span>(</a>
+<a class="sourceLine" id="cb12-6" title="6">    <span class="dt">data =</span> fq_data,</a>
+<a class="sourceLine" id="cb12-7" title="7">    <span class="dt">lng =</span> <span class="op">~</span>longitude, <span class="dt">lat =</span> <span class="op">~</span>latitude,</a>
+<a class="sourceLine" id="cb12-8" title="8">    <span class="dt">icon =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/makeAwesomeIcon.html">makeAwesomeIcon</a></span>(<span class="dt">text =</span> <span class="st">"Q"</span>, <span class="dt">markerColor =</span> <span class="st">"red"</span>),</a>
+<a class="sourceLine" id="cb12-9" title="9">    <span class="dt">label =</span> <span class="op">~</span><span class="st"> </span>glue<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/glue/man/glue.html">glue</a></span>(<span class="st">"{area_name} {encounter_start_datetime}"</span>),</a>
+<a class="sourceLine" id="cb12-10" title="10">    <span class="dt">popup =</span> <span class="op">~</span><span class="st"> </span>glue<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/glue/man/glue.html">glue</a></span>(</a>
+<a class="sourceLine" id="cb12-11" title="11">      <span class="st">"&lt;h3&gt;{area_name}&lt;/h3&gt;"</span>,</a>
+<a class="sourceLine" id="cb12-12" title="12">      <span class="st">"Survey start {encounter_start_datetime}&lt;/br&gt;"</span>,</a>
+<a class="sourceLine" id="cb12-13" title="13">      <span class="st">"Reporter {reporter}&lt;/br&gt;"</span>,</a>
+<a class="sourceLine" id="cb12-14" title="14">      <span class="st">"Device {device_id}&lt;/br&gt;"</span>,</a>
+<a class="sourceLine" id="cb12-15" title="15">      <span class="st">"&lt;h5&gt;Site&lt;/h5&gt;"</span>,</a>
+<a class="sourceLine" id="cb12-16" title="16">      <span class="st">'&lt;div&gt;&lt;img src="{quadrat_photo}"'</span>,</a>
+<a class="sourceLine" id="cb12-17" title="17">      <span class="st">' height="150px" alt="Quadrat photo"&gt;&lt;/img&gt;&lt;/div&gt;'</span>,</a>
+<a class="sourceLine" id="cb12-18" title="18">      <span class="st">"&lt;h5&gt;Mudmap&lt;/h5&gt;"</span>,</a>
+<a class="sourceLine" id="cb12-19" title="19">      <span class="st">'&lt;div&gt;&lt;img src="{mudmap_photo}'</span>,</a>
+<a class="sourceLine" id="cb12-20" title="20">      <span class="st">' height="150px" alt="Mudmap"&gt;&lt;/img&gt;&lt;/div&gt;'</span>,</a>
+<a class="sourceLine" id="cb12-21" title="21">      <span class="st">"&lt;h5&gt;Habitat&lt;/h5&gt;"</span>,</a>
+<a class="sourceLine" id="cb12-22" title="22">      <span class="st">"Morphological type: {morphological_type}&lt;/br&gt;"</span>,</a>
+<a class="sourceLine" id="cb12-23" title="23">      <span class="st">'&lt;div&gt;&lt;img src="{morphological_type_photo}"'</span>,</a>
+<a class="sourceLine" id="cb12-24" title="24">      <span class="st">'height="150px" alt="Morphological type"&gt;&lt;/img&gt;&lt;/div&gt;'</span>,</a>
+<a class="sourceLine" id="cb12-25" title="25">      <span class="st">"Veg class: {vegclass_placeholder}&lt;/br&gt;"</span></a>
+<a class="sourceLine" id="cb12-26" title="26">    ),</a>
+<a class="sourceLine" id="cb12-27" title="27">    <span class="dt">clusterOptions =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/map-options.html">markerClusterOptions</a></span>()</a>
+<a class="sourceLine" id="cb12-28" title="28">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-29" title="29"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addLayersControl.html">addLayersControl</a></span>(</a>
+<a class="sourceLine" id="cb12-30" title="30">    <span class="dt">baseGroups =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Place names"</span>, <span class="st">"Aerial"</span>),</a>
+<a class="sourceLine" id="cb12-31" title="31">    <span class="dt">options =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addLayersControl.html">layersControlOptions</a></span>(<span class="dt">collapsed =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb12-32" title="32">  )</a></code></pre></div>
+<div id="htmlwidget-85fd2497312859891f0c" style="width:800px;height:600px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-85fd2497312859891f0c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap.Mapnik",null,"Place names",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Aerial",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addAwesomeMarkers","args":[[-31.9961844,-31.99620765],[115.8840312,115.88430933],{"icon":"home","markerColor":"red","iconColor":"white","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","text":"Q","prefix":"glyphicon"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<h3>Kens1<\/h3>Survey start 2019-05-23 18:46:04<\/br>Reporter Florian Mayer<\/br>Device ccb596b33cd13298<\/br><h5>Site<\/h5><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579592153.jpg\" height=\"150px\" alt=\"Quadrat photo\"><\/img><\/div><h5>Mudmap<\/h5><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580082333.jpg height=\"150px\" alt=\"Mudmap\"><\/img><\/div><h5>Habitat<\/h5>Morphological type: open-depression<\/br><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579731266.jpg\"height=\"150px\" alt=\"Morphological type\"><\/img><\/div>Veg class: Lanscaped native shrubs over red gravel<\/br>","<h3>Kens02<\/h3>Survey start 2019-05-23 18:58:34<\/br>Reporter Florian Mayer<\/br>Device 351848090572014<\/br><h5>Site<\/h5><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580334821.jpg\" height=\"150px\" alt=\"Quadrat photo\"><\/img><\/div><h5>Mudmap<\/h5><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580571494.jpg height=\"150px\" alt=\"Mudmap\"><\/img><\/div><h5>Habitat<\/h5>Morphological type: flat<\/br><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580394989.jpg\"height=\"150px\" alt=\"Morphological type\"><\/img><\/div>Veg class: Planter box over concrete pavers<\/br>"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,["Kens1 2019-05-23 18:46:04","Kens02 2019-05-23 18:58:34"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["Place names","Aerial"],[],{"collapsed":false,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[-31.99620765,-31.9961844],"lng":[115.8840312,115.88430933]}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html">leaflet</a></span>(<span class="dt">width =</span> <span class="dv">800</span>, <span class="dt">height =</span> <span class="dv">600</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addProviderTiles.html">addProviderTiles</a></span>(<span class="st">"OpenStreetMap.Mapnik"</span>, <span class="dt">group =</span> <span class="st">"Place names"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-3" title="3"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addProviderTiles.html">addProviderTiles</a></span>(<span class="st">"Esri.WorldImagery"</span>, <span class="dt">group =</span> <span class="st">"Aerial"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-4" title="4"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/map-methods.html">clearBounds</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-5" title="5"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addAwesomeMarkers.html">addAwesomeMarkers</a></span>(</a>
-<a class="sourceLine" id="cb13-6" title="6">    <span class="dt">data =</span> fq_data,</a>
-<a class="sourceLine" id="cb13-7" title="7">    <span class="dt">lng =</span> <span class="op">~</span>longitude, <span class="dt">lat =</span> <span class="op">~</span>latitude,</a>
-<a class="sourceLine" id="cb13-8" title="8">    <span class="dt">icon =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/makeAwesomeIcon.html">makeAwesomeIcon</a></span>(<span class="dt">text =</span> <span class="st">"Q"</span>, <span class="dt">markerColor =</span> <span class="st">"red"</span>),</a>
-<a class="sourceLine" id="cb13-9" title="9">    <span class="dt">label =</span> <span class="op">~</span><span class="st"> </span>glue<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/glue/man/glue.html">glue</a></span>(<span class="st">"{area_name} {encounter_start_datetime}"</span>),</a>
+<a class="sourceLine" id="cb13-6" title="6">    <span class="dt">data =</span> fq_data_tae,</a>
+<a class="sourceLine" id="cb13-7" title="7">    <span class="dt">lng =</span> <span class="op">~</span>lon, <span class="dt">lat =</span> <span class="op">~</span>lat,</a>
+<a class="sourceLine" id="cb13-8" title="8">    <span class="dt">icon =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/makeAwesomeIcon.html">makeAwesomeIcon</a></span>(<span class="dt">text =</span> <span class="st">"T"</span>, <span class="dt">markerColor =</span> <span class="st">"green"</span>),</a>
+<a class="sourceLine" id="cb13-9" title="9">    <span class="dt">label =</span> <span class="op">~</span><span class="st"> </span>glue<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/glue/man/glue.html">glue</a></span>(<span class="st">"{canonical_name} {encounter_start_datetime}"</span>),</a>
 <a class="sourceLine" id="cb13-10" title="10">    <span class="dt">popup =</span> <span class="op">~</span><span class="st"> </span>glue<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/glue/man/glue.html">glue</a></span>(</a>
 <a class="sourceLine" id="cb13-11" title="11">      <span class="st">"&lt;h3&gt;{area_name}&lt;/h3&gt;"</span>,</a>
 <a class="sourceLine" id="cb13-12" title="12">      <span class="st">"Survey start {encounter_start_datetime}&lt;/br&gt;"</span>,</a>
 <a class="sourceLine" id="cb13-13" title="13">      <span class="st">"Reporter {reporter}&lt;/br&gt;"</span>,</a>
 <a class="sourceLine" id="cb13-14" title="14">      <span class="st">"Device {device_id}&lt;/br&gt;"</span>,</a>
-<a class="sourceLine" id="cb13-15" title="15">      <span class="st">"&lt;h5&gt;Site&lt;/h5&gt;"</span>,</a>
-<a class="sourceLine" id="cb13-16" title="16">      <span class="st">'&lt;div&gt;&lt;img src="{quadrat_photo}"'</span>,</a>
-<a class="sourceLine" id="cb13-17" title="17">      <span class="st">' height="150px" alt="Quadrat photo"&gt;&lt;/img&gt;&lt;/div&gt;'</span>,</a>
-<a class="sourceLine" id="cb13-18" title="18">      <span class="st">"&lt;h5&gt;Mudmap&lt;/h5&gt;"</span>,</a>
-<a class="sourceLine" id="cb13-19" title="19">      <span class="st">'&lt;div&gt;&lt;img src="{mudmap_photo}'</span>,</a>
-<a class="sourceLine" id="cb13-20" title="20">      <span class="st">' height="150px" alt="Mudmap"&gt;&lt;/img&gt;&lt;/div&gt;'</span>,</a>
-<a class="sourceLine" id="cb13-21" title="21">      <span class="st">"&lt;h5&gt;Habitat&lt;/h5&gt;"</span>,</a>
-<a class="sourceLine" id="cb13-22" title="22">      <span class="st">"Morphological type: {morphological_type}&lt;/br&gt;"</span>,</a>
-<a class="sourceLine" id="cb13-23" title="23">      <span class="st">'&lt;div&gt;&lt;img src="{morphological_type_photo}"'</span>,</a>
-<a class="sourceLine" id="cb13-24" title="24">      <span class="st">'height="150px" alt="Morphological type"&gt;&lt;/img&gt;&lt;/div&gt;'</span>,</a>
-<a class="sourceLine" id="cb13-25" title="25">      <span class="st">"Veg class: {vegclass_placeholder}&lt;/br&gt;"</span></a>
-<a class="sourceLine" id="cb13-26" title="26">    ),</a>
-<a class="sourceLine" id="cb13-27" title="27">    <span class="dt">clusterOptions =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/map-options.html">markerClusterOptions</a></span>()</a>
-<a class="sourceLine" id="cb13-28" title="28">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-29" title="29"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addLayersControl.html">addLayersControl</a></span>(</a>
-<a class="sourceLine" id="cb13-30" title="30">    <span class="dt">baseGroups =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Place names"</span>, <span class="st">"Aerial"</span>),</a>
-<a class="sourceLine" id="cb13-31" title="31">    <span class="dt">options =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addLayersControl.html">layersControlOptions</a></span>(<span class="dt">collapsed =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb13-32" title="32">  )</a></code></pre></div>
-<div id="htmlwidget-f5298647a4de9af970c7" style="width:800px;height:600px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f5298647a4de9af970c7">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap.Mapnik",null,"Place names",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Aerial",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addAwesomeMarkers","args":[[-31.9961844,-31.99620765],[115.8840312,115.88430933],{"icon":"home","markerColor":"red","iconColor":"white","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","text":"Q","prefix":"glyphicon"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<h3>Kens1<\/h3>Survey start 2019-05-23 10:46:04<\/br>Reporter Florian Mayer<\/br>Device ccb596b33cd13298<\/br><h5>Site<\/h5><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579592153.jpg\" height=\"150px\" alt=\"Quadrat photo\"><\/img><\/div><h5>Mudmap<\/h5><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580082333.jpg height=\"150px\" alt=\"Mudmap\"><\/img><\/div><h5>Habitat<\/h5>Morphological type: open-depression<\/br><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558579731266.jpg\"height=\"150px\" alt=\"Morphological type\"><\/img><\/div>Veg class: Lanscaped native shrubs over red gravel<\/br>","<h3>Kens02<\/h3>Survey start 2019-05-23 10:58:34<\/br>Reporter Florian Mayer<\/br>Device 351848090572014<\/br><h5>Site<\/h5><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580334821.jpg\" height=\"150px\" alt=\"Quadrat photo\"><\/img><\/div><h5>Mudmap<\/h5><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580571494.jpg height=\"150px\" alt=\"Mudmap\"><\/img><\/div><h5>Habitat<\/h5>Morphological type: flat<\/br><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580394989.jpg\"height=\"150px\" alt=\"Morphological type\"><\/img><\/div>Veg class: Planter box over concrete pavers<\/br>"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,["Kens1 2019-05-23 10:46:04","Kens02 2019-05-23 10:58:34"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["Place names","Aerial"],[],{"collapsed":false,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[-31.99620765,-31.9961844],"lng":[115.8840312,115.88430933]}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html">leaflet</a></span>(<span class="dt">width =</span> <span class="dv">800</span>, <span class="dt">height =</span> <span class="dv">600</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addProviderTiles.html">addProviderTiles</a></span>(<span class="st">"OpenStreetMap.Mapnik"</span>, <span class="dt">group =</span> <span class="st">"Place names"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addProviderTiles.html">addProviderTiles</a></span>(<span class="st">"Esri.WorldImagery"</span>, <span class="dt">group =</span> <span class="st">"Aerial"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/map-methods.html">clearBounds</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addAwesomeMarkers.html">addAwesomeMarkers</a></span>(</a>
-<a class="sourceLine" id="cb14-6" title="6">    <span class="dt">data =</span> fq_data_tae,</a>
-<a class="sourceLine" id="cb14-7" title="7">    <span class="dt">lng =</span> <span class="op">~</span>...<span class="dv">6</span>, <span class="dt">lat =</span> <span class="op">~</span>...<span class="dv">7</span>,</a>
-<a class="sourceLine" id="cb14-8" title="8">    <span class="dt">icon =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/makeAwesomeIcon.html">makeAwesomeIcon</a></span>(<span class="dt">text =</span> <span class="st">"T"</span>, <span class="dt">markerColor =</span> <span class="st">"green"</span>),</a>
-<a class="sourceLine" id="cb14-9" title="9">    <span class="dt">label =</span> <span class="op">~</span><span class="st"> </span>glue<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/glue/man/glue.html">glue</a></span>(<span class="st">"{canonical_name} {encounter_start_datetime}"</span>),</a>
-<a class="sourceLine" id="cb14-10" title="10">    <span class="dt">popup =</span> <span class="op">~</span><span class="st"> </span>glue<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/glue/man/glue.html">glue</a></span>(</a>
-<a class="sourceLine" id="cb14-11" title="11">      <span class="st">"&lt;h3&gt;{area_name}&lt;/h3&gt;"</span>,</a>
-<a class="sourceLine" id="cb14-12" title="12">      <span class="st">"Survey start {encounter_start_datetime}&lt;/br&gt;"</span>,</a>
-<a class="sourceLine" id="cb14-13" title="13">      <span class="st">"Reporter {reporter}&lt;/br&gt;"</span>,</a>
-<a class="sourceLine" id="cb14-14" title="14">      <span class="st">"Device {device_id}&lt;/br&gt;"</span>,</a>
-<a class="sourceLine" id="cb14-15" title="15">      <span class="st">"&lt;h5&gt;Taxon&lt;/h5&gt;"</span>,</a>
-<a class="sourceLine" id="cb14-16" title="16">      <span class="st">'&lt;div&gt;&lt;img src="{photo_in_situ}"'</span>,</a>
-<a class="sourceLine" id="cb14-17" title="17">      <span class="st">' height="150px" alt="Taxon in situ"&gt;&lt;/img&gt;&lt;/div&gt;'</span>,</a>
-<a class="sourceLine" id="cb14-18" title="18">      <span class="st">"Specimen barcode: {voucher_specimen_barcode}&lt;/br&gt;"</span>,</a>
-<a class="sourceLine" id="cb14-19" title="19">      <span class="st">"Life form: {life_form}&lt;/br&gt;"</span></a>
-<a class="sourceLine" id="cb14-20" title="20">    ),</a>
-<a class="sourceLine" id="cb14-21" title="21">    <span class="dt">clusterOptions =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/map-options.html">markerClusterOptions</a></span>()</a>
-<a class="sourceLine" id="cb14-22" title="22">  ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-23" title="23"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addLayersControl.html">addLayersControl</a></span>(</a>
-<a class="sourceLine" id="cb14-24" title="24">    <span class="dt">baseGroups =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Place names"</span>, <span class="st">"Aerial"</span>),</a>
-<a class="sourceLine" id="cb14-25" title="25">    <span class="dt">options =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addLayersControl.html">layersControlOptions</a></span>(<span class="dt">collapsed =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb14-26" title="26">  )</a></code></pre></div>
-<div id="htmlwidget-bd0adcfbc06e648f668a" style="width:800px;height:600px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bd0adcfbc06e648f668a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap.Mapnik",null,"Place names",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Aerial",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addAwesomeMarkers","args":[[-31.9961627,-31.9963167,-31.99617267,-31.99615233],[115.8841655,115.8843675,115.88431406,115.884342],{"icon":"home","markerColor":"green","iconColor":"white","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","text":"T","prefix":"glyphicon"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<h3>Kens1<\/h3>Survey start 2019-05-23 10:46:04<\/br>Reporter Florian Mayer<\/br>Device ccb596b33cd13298<\/br><h5>Taxon<\/h5><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580116374.jpg\" height=\"150px\" alt=\"Taxon in situ\"><\/img><\/div>Specimen barcode: 9311960202528<\/br>Life form: shrub<\/br>","<h3>Kens1<\/h3>Survey start 2019-05-23 10:46:04<\/br>Reporter Florian Mayer<\/br>Device ccb596b33cd13298<\/br><h5>Taxon<\/h5><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580178316.jpg\" height=\"150px\" alt=\"Taxon in situ\"><\/img><\/div>Specimen barcode: 9311960202528<\/br>Life form: tree<\/br>","<h3>Kens02<\/h3>Survey start 2019-05-23 10:58:34<\/br>Reporter Florian Mayer<\/br>Device 351848090572014<\/br><h5>Taxon<\/h5><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580622081.jpg\" height=\"150px\" alt=\"Taxon in situ\"><\/img><\/div>Specimen barcode: 9311960202528<\/br>Life form: shrub<\/br>","<h3>Kens02<\/h3>Survey start 2019-05-23 10:58:34<\/br>Reporter Florian Mayer<\/br>Device 351848090572014<\/br><h5>Taxon<\/h5><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580706298.jpg\" height=\"150px\" alt=\"Taxon in situ\"><\/img><\/div>Specimen barcode: 9311960202528<\/br>Life form: shrub<\/br>"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,["Grevillea 2019-05-23 10:46:04","Dontknowsiana sp. 2019-05-23 10:46:04","Species 1 2019-05-23 10:58:34","Species2 2019-05-23 10:58:34"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["Place names","Aerial"],[],{"collapsed":false,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[-31.9963167,-31.99615233],"lng":[115.8841655,115.8843675]}},"evals":[],"jsHooks":[]}</script>
+<a class="sourceLine" id="cb13-15" title="15">      <span class="st">"&lt;h5&gt;Taxon&lt;/h5&gt;"</span>,</a>
+<a class="sourceLine" id="cb13-16" title="16">      <span class="st">'&lt;div&gt;&lt;img src="{photo_in_situ}"'</span>,</a>
+<a class="sourceLine" id="cb13-17" title="17">      <span class="st">' height="150px" alt="Taxon in situ"&gt;&lt;/img&gt;&lt;/div&gt;'</span>,</a>
+<a class="sourceLine" id="cb13-18" title="18">      <span class="st">"Specimen barcode: {voucher_specimen_barcode}&lt;/br&gt;"</span>,</a>
+<a class="sourceLine" id="cb13-19" title="19">      <span class="st">"Life form: {life_form}&lt;/br&gt;"</span></a>
+<a class="sourceLine" id="cb13-20" title="20">    ),</a>
+<a class="sourceLine" id="cb13-21" title="21">    <span class="dt">clusterOptions =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/map-options.html">markerClusterOptions</a></span>()</a>
+<a class="sourceLine" id="cb13-22" title="22">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-23" title="23"><span class="st">  </span>leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addLayersControl.html">addLayersControl</a></span>(</a>
+<a class="sourceLine" id="cb13-24" title="24">    <span class="dt">baseGroups =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Place names"</span>, <span class="st">"Aerial"</span>),</a>
+<a class="sourceLine" id="cb13-25" title="25">    <span class="dt">options =</span> leaflet<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/leaflet/man/addLayersControl.html">layersControlOptions</a></span>(<span class="dt">collapsed =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb13-26" title="26">  )</a></code></pre></div>
+<div id="htmlwidget-ba29d46f3fe6ec4346eb" style="width:800px;height:600px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ba29d46f3fe6ec4346eb">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap.Mapnik",null,"Place names",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Aerial",{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addAwesomeMarkers","args":[[-31.9961627,-31.9963167,-31.99617267,-31.99615233],[115.8841655,115.8843675,115.88431406,115.884342],{"icon":"home","markerColor":"green","iconColor":"white","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","text":"T","prefix":"glyphicon"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<h3>Kens1<\/h3>Survey start 2019-05-23 18:46:04<\/br>Reporter Florian Mayer<\/br>Device ccb596b33cd13298<\/br><h5>Taxon<\/h5><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580116374.jpg\" height=\"150px\" alt=\"Taxon in situ\"><\/img><\/div>Specimen barcode: 9311960202528<\/br>Life form: shrub<\/br>","<h3>Kens1<\/h3>Survey start 2019-05-23 18:46:04<\/br>Reporter Florian Mayer<\/br>Device ccb596b33cd13298<\/br><h5>Taxon<\/h5><div><img src=\"attachments/c0f9ce58-4388-4e7b-98d7-feac459d2e12/1558580178316.jpg\" height=\"150px\" alt=\"Taxon in situ\"><\/img><\/div>Specimen barcode: 9311960202528<\/br>Life form: tree<\/br>","<h3>Kens02<\/h3>Survey start 2019-05-23 18:58:34<\/br>Reporter Florian Mayer<\/br>Device 351848090572014<\/br><h5>Taxon<\/h5><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580622081.jpg\" height=\"150px\" alt=\"Taxon in situ\"><\/img><\/div>Specimen barcode: 9311960202528<\/br>Life form: shrub<\/br>","<h3>Kens02<\/h3>Survey start 2019-05-23 18:58:34<\/br>Reporter Florian Mayer<\/br>Device 351848090572014<\/br><h5>Taxon<\/h5><div><img src=\"attachments/e0375332-0bb5-4175-a498-549bb33420e4/1558580706298.jpg\" height=\"150px\" alt=\"Taxon in situ\"><\/img><\/div>Specimen barcode: 9311960202528<\/br>Life form: shrub<\/br>"],null,{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,["Grevillea 2019-05-23 18:46:04","Dontknowsiana sp. 2019-05-23 18:46:04","Species 1 2019-05-23 18:58:34","Species2 2019-05-23 18:58:34"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLayersControl","args":[["Place names","Aerial"],[],{"collapsed":false,"autoZIndex":true,"position":"topright"}]}],"limits":{"lat":[-31.9963167,-31.99615233],"lng":[115.8841655,115.8843675]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="summarising-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summarising-data" class="anchor"></a>Summarising data</h2>
 <p>The data tibbles are now “tidy” for exploratory data analysis. See Hadley Wickam’s <a href="https://r4ds.had.co.nz/exploratory-data-analysis.html">R for Data Science</a> for more background.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># How many submissions per device?</span></a>
-<a class="sourceLine" id="cb15-2" title="2">fq_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(instanceID) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/tally.html">tally</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># How many submissions per device?</span></a>
+<a class="sourceLine" id="cb14-2" title="2">fq_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(instance_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/tally.html">tally</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>()</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
-<th align="left">instanceID</th>
+<th align="left">instance_id</th>
 <th align="right">n</th>
 </tr></thead>
 <tbody>
@@ -528,12 +522,12 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="co"># How many species sightings per life form?</span></a>
-<a class="sourceLine" id="cb16-3" title="3">fq_data_tae <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(life_form) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/tally.html">tally</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-6" title="6"><span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="co"># How many species sightings per life form?</span></a>
+<a class="sourceLine" id="cb15-3" title="3">fq_data_tae <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(life_form) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/tally.html">tally</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>()</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">life_form</th>
@@ -550,39 +544,40 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="co"># GGplot of a pivot table</span></a>
-<a class="sourceLine" id="cb17-3" title="3">fq_data_tae <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(life_form) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/tally.html">tally</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-6" title="6"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> life_form, <span class="dt">y =</span> n)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-7" title="7"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(</a>
-<a class="sourceLine" id="cb17-8" title="8">    <span class="dt">title =</span> <span class="st">"Title"</span>,</a>
-<a class="sourceLine" id="cb17-9" title="9">    <span class="dt">subtitle =</span> <span class="st">"Subtitle"</span>,</a>
-<a class="sourceLine" id="cb17-10" title="10">    <span class="dt">x =</span> <span class="st">"Life form"</span>,</a>
-<a class="sourceLine" id="cb17-11" title="11">    <span class="dt">y =</span> <span class="st">"Abundance"</span></a>
-<a class="sourceLine" id="cb17-12" title="12">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-13" title="13"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-14" title="14"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="co"># GGplot of a pivot table</span></a>
+<a class="sourceLine" id="cb16-3" title="3">fq_data_tae <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(life_form) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/tally.html">tally</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> life_form, <span class="dt">y =</span> n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(</a>
+<a class="sourceLine" id="cb16-8" title="8">    <span class="dt">title =</span> <span class="st">"Title"</span>,</a>
+<a class="sourceLine" id="cb16-9" title="9">    <span class="dt">subtitle =</span> <span class="st">"Subtitle"</span>,</a>
+<a class="sourceLine" id="cb16-10" title="10">    <span class="dt">x =</span> <span class="st">"Life form"</span>,</a>
+<a class="sourceLine" id="cb16-11" title="11">    <span class="dt">y =</span> <span class="st">"Abundance"</span></a>
+<a class="sourceLine" id="cb16-12" title="12">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-13" title="13"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-14" title="14"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()</a></code></pre></div>
 <p><img src="odata_files/figure-html/eda-1.png" width="672"></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># GGplot with groups</span></a>
-<a class="sourceLine" id="cb18-2" title="2">fq_data_tae <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(</a>
-<a class="sourceLine" id="cb18-4" title="4">    ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(</a>
-<a class="sourceLine" id="cb18-5" title="5">      <span class="dt">x=</span>encounter_start_datetime, </a>
-<a class="sourceLine" id="cb18-6" title="6">      <span class="dt">y=</span>canonical_name, </a>
-<a class="sourceLine" id="cb18-7" title="7">      <span class="dt">colour=</span>life_form,</a>
-<a class="sourceLine" id="cb18-8" title="8">      <span class="dt">shape=</span>instanceID)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-9" title="9"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(</a>
-<a class="sourceLine" id="cb18-10" title="10">    <span class="dt">title=</span><span class="st">"Title"</span>, </a>
-<a class="sourceLine" id="cb18-11" title="11">    <span class="dt">subtitle=</span><span class="st">"Subtitle"</span>, </a>
-<a class="sourceLine" id="cb18-12" title="12">    <span class="dt">x=</span><span class="st">"Observation date"</span>, </a>
-<a class="sourceLine" id="cb18-13" title="13">    <span class="dt">y=</span><span class="st">"Species"</span>, </a>
-<a class="sourceLine" id="cb18-14" title="14">    <span class="dt">colour=</span><span class="st">"Life form"</span>,</a>
-<a class="sourceLine" id="cb18-15" title="15">    <span class="dt">shape=</span><span class="st">"Data collection device"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-16" title="16"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-17" title="17"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-18" title="18"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="co"># GGplot with groups</span></a>
+<a class="sourceLine" id="cb17-3" title="3">fq_data_tae <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(</a>
+<a class="sourceLine" id="cb17-5" title="5">    ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(</a>
+<a class="sourceLine" id="cb17-6" title="6">      <span class="dt">x=</span>encounter_start_datetime, </a>
+<a class="sourceLine" id="cb17-7" title="7">      <span class="dt">y=</span>canonical_name, </a>
+<a class="sourceLine" id="cb17-8" title="8">      <span class="dt">colour=</span>life_form,</a>
+<a class="sourceLine" id="cb17-9" title="9">      <span class="dt">shape=</span>instance_id)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-10" title="10"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(</a>
+<a class="sourceLine" id="cb17-11" title="11">    <span class="dt">title=</span><span class="st">"Title"</span>, </a>
+<a class="sourceLine" id="cb17-12" title="12">    <span class="dt">subtitle=</span><span class="st">"Subtitle"</span>, </a>
+<a class="sourceLine" id="cb17-13" title="13">    <span class="dt">x=</span><span class="st">"Observation date"</span>, </a>
+<a class="sourceLine" id="cb17-14" title="14">    <span class="dt">y=</span><span class="st">"Species"</span>, </a>
+<a class="sourceLine" id="cb17-15" title="15">    <span class="dt">colour=</span><span class="st">"Life form"</span>,</a>
+<a class="sourceLine" id="cb17-16" title="16">    <span class="dt">shape=</span><span class="st">"Data collection device"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-17" title="17"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-18" title="18"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-19" title="19"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="odata_files/figure-html/eda-2.png" width="672"></p>
 </div>
 </div>
@@ -590,8 +585,8 @@
 <h1 class="hasAnchor">
 <a href="#export" class="anchor"></a>Export</h1>
 <p>The rectangled data can now be exported. e.g. to CSV. Note that all list columns must be either unnested or dropped before exporting to CSV.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">fq_data <span class="op">%&gt;%</span><span class="st"> </span>readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span>(<span class="st">"flora_quadrats.csv"</span>)</a>
-<a class="sourceLine" id="cb19-2" title="2">fq_data_tae <span class="op">%&gt;%</span><span class="st"> </span>readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span>(<span class="st">"flora_quadrats_taxon_encounters.csv"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">fq_data <span class="op">%&gt;%</span><span class="st"> </span>readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span>(<span class="st">"flora_quadrats.csv"</span>)</a>
+<a class="sourceLine" id="cb18-2" title="2">fq_data_tae <span class="op">%&gt;%</span><span class="st"> </span>readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span>(<span class="st">"flora_quadrats_taxon_encounters.csv"</span>)</a></code></pre></div>
 </div>
   </div>
 
@@ -600,9 +595,8 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#configure-ruodk">Configure ruODK</a></li>
-      <li>
-<a href="#read-data-from-odk-central">Read data from ODK Central</a><ul class="nav nav-pills nav-stacked">
+<li>
+<a href="#configure-ruodk">Configure ruODK</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#odata-service-document">OData service document</a></li>
       <li><a href="#odata-metadata-document">OData metadata document</a></li>
       <li><a href="#odata-submission-data-documents">OData submission data documents</a></li>

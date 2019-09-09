@@ -3,14 +3,18 @@ test_that("ru_setup does not update settings if given NULL", {
 
   # This does not change settings
   ru_setup(
+    svc = NULL,
+    pid = NULL,
+    fid = NULL,
     url = NULL,
     un = NULL,
     pw = NULL,
+    test_svc = NULL,
+    test_pid = NULL,
+    test_fid = NULL,
     test_url = NULL,
     test_un = NULL,
-    test_pw = NULL,
-    test_pid = NULL,
-    test_fid = NULL
+    test_pw = NULL
   )
 
   # Get current (unchanged) settings
@@ -86,6 +90,42 @@ test_that("ru_setup resets settings if given empty string", {
   )
 })
 
+test_that("ru_setup sets pid, fid, url if given service url", {
+
+  # Keep original test settings
+  pid <- get_default_pid()
+  fid <- get_default_fid()
+  url <- get_default_url()
+  test_pid <- get_test_pid()
+  test_fid <- get_test_fid()
+  test_url <- get_test_url()
+
+  # Hammertime
+  ru_setup(
+    svc = "https://defaultserver.com/v1/projects/20/forms/FORMID.svc",
+    test_svc = "https://testserver.com/v1/projects/40/forms/TESTFORMID.svc"
+  )
+  x <- ru_settings()
+
+  testthat::expect_equal(x$url, "https://defaultserver.com")
+  testthat::expect_equal(x$pid, "20")
+  testthat::expect_equal(x$fid, "FORMID")
+  testthat::expect_equal(x$test_url, "https://testserver.com")
+  testthat::expect_equal(x$test_pid, "40")
+  testthat::expect_equal(x$test_fid, "TESTFORMID")
+
+  # Reset
+  ru_setup(
+    url = url,
+    pid = pid,
+    fid = fid,
+    test_url = test_url,
+    test_pid = test_pid,
+    test_fid = test_fid
+  )
+})
+
+
 test_that("ru_setup sets individual settings", {
 
   # Keep original test settings
@@ -97,7 +137,7 @@ test_that("ru_setup sets individual settings", {
   testthat::expect_equal(ru_settings()$url, xx)
 
   # Reset
-  ru_setup(url = url)
+  # ru_setup(url = url)
 })
 
 test_that("ru_settings prints nicely", {
@@ -123,3 +163,22 @@ test_that("yell_if_missing yells loudly", {
     yell_if_missing("asd", "asd", "asd", pid = "asd", fid = "")
   )
 })
+
+test_that("odata_svc_parse works", {
+  svc_url <- paste0(
+    "https://sandbox.central.opendatakit.org/v1/projects/14/",
+    "forms/build_Flora-Quadrat-0-2_1558575936.svc"
+  )
+  x <- odata_svc_parse(svc_url)
+  testthat::expect_equal(x$url, "https://sandbox.central.opendatakit.org")
+  testthat::expect_equal(x$pid, "14")
+  testthat::expect_equal(x$fid, "build_Flora-Quadrat-0-2_1558575936")
+
+  svc_url <- "https://central.org/v1/projects/5/forms/formid.svc"
+  x <- odata_svc_parse(svc_url)
+  testthat::expect_equal(x$url, "https://central.org")
+  testthat::expect_equal(x$pid, "5")
+  testthat::expect_equal(x$fid, "formid")
+})
+
+# usethis::edit_file("R/ru_setup.R")

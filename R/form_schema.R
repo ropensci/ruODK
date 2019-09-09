@@ -1,8 +1,6 @@
 #' Show the schema of one form.
 #'
 #'
-#' @template param-pid
-#' @template param-fid
 #' @param flatten Whether to flatten the resulting list of lists (TRUE) or not
 #'   (FALSE, default).
 #' @param odata Whether to sanitise the field names to match the way they will
@@ -10,6 +8,9 @@
 #'   XForms definition may be used as-is for CSV output, OData has some
 #'   restrictions related to the domain-qualified identifier syntax it uses.
 #'   Default: FALSE.
+#' @template param-pid
+#' @template param-fid
+#' @template param-url
 #' @template param-auth
 #' @return A nested list containing the form definition.
 #'   At the lowest nesting level, each form field consists of a list of two
@@ -25,27 +26,26 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
-#' fs_defaults <- form_schema(1, "build_xformsId")
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
+#' )
 #'
-#' # With explicit credentials, see tests
+#' # With explicit pid and fid
+#' fs_defaults <- form_schema(pid = 1, fid = "build_xformsId")
+#'
+#' # With defaults
 #' fs_nested <- form_schema(
-#'   get_test_pid(),
-#'   get_test_fid(),
 #'   flatten = FALSE,
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#'   odata = FALSE
 #' )
 #' listviewer::jsonedit(fs_nested)
 #'
 #' fs_flattened <- form_schema(
-#'   get_test_pid(),
-#'   get_test_fid(),
 #'   flatten = TRUE,
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#'   odata = FALSE
 #' )
 #' listviewer::jsonedit(fs_flattened)
 #'
@@ -89,10 +89,10 @@
 #' fs_nested[[length(fs_nested)]]$type
 #' # > "dateTime"
 #' }
-form_schema <- function(pid,
-                        fid,
-                        flatten = FALSE,
+form_schema <- function(flatten = FALSE,
                         odata = FALSE,
+                        pid = get_default_pid(),
+                        fid = get_default_fid(),
                         url = get_default_url(),
                         un = get_default_un(),
                         pw = get_default_pw()) {

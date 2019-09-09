@@ -14,11 +14,11 @@ test_that("submission_export works", {
   # Once you drink Tequila, you're feeling really good
   testthat::expect_message(
     se <- submission_export(
-      get_test_pid(),
-      get_test_fid(),
       local_dir = t,
       overwrite = FALSE,
       verbose = TRUE,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
@@ -30,11 +30,11 @@ test_that("submission_export works", {
   # Twice you drink Tequila, you're getting in ze mood
   testthat::expect_message(
     se <- submission_export(
-      get_test_pid(),
-      get_test_fid(),
       local_dir = t,
       overwrite = FALSE,
       verbose = TRUE,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
@@ -49,11 +49,11 @@ test_that("submission_export works", {
   # Three times Tequila, your cheeks gonna glow
   testthat::expect_message(
     se <- submission_export(
-      get_test_pid(),
-      get_test_fid(),
       local_dir = t,
       overwrite = TRUE,
       verbose = TRUE,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
@@ -69,11 +69,11 @@ test_that("submission_export works", {
   # \url{https://www.youtube.com/watch?v=cWd5Uiyx5zg}
   testthat::expect_message(
     se <- submission_export(
-      get_test_pid(),
-      get_test_fid(),
       local_dir = t,
       overwrite = FALSE,
       verbose = TRUE,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
@@ -92,6 +92,7 @@ test_that("submission_export works", {
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
 
   # Test attachment_link - this saves another download of the ZIP file
+  # Tests usethis::edit_file("R/attachment_link.R")
   data_quadrat <- fid_csv %>%
     readr::read_csv(na = c("", "NA", "na")) %>%
     janitor::clean_names(.) %>%

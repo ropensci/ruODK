@@ -1,8 +1,6 @@
 #' Retrieve /Submissions from an OData URL ending in .svc as list of lists
 #'
 #'
-#' @template param-pid
-#' @template param-fid
 #' @param table The submission EntityType, or in plain words, the table name.
 #'            Default: "Submissions" (the main table).
 #'            Change to "Submissions.GROUP_NAME" for repeating form groups.
@@ -16,6 +14,9 @@
 #'              response from ODK Central. Default: FALSE.
 #' @param wkt If TRUE, geospatial data will be returned as WKT (Well Known Text)
 #'            strings. Default: FALSE, returns GeoJSON structures.
+#' @template param-pid
+#' @template param-fid
+#' @template param-url
 #' @template param-auth
 #' @return A nested list of lists.
 #'         `value` contains the submissions, which can be "rectangled" using
@@ -28,69 +29,46 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup", package = "ruODK")
-#' data <- odata_submissions_get(
-#'   get_test_pid(),
-#'   get_test_fid(),
-#'   table = "Submissions"
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
 #' )
 #'
-#' # With explicitly set credentials
-#' data <- odata_submissions_get(
-#'   get_test_pid(),
-#'   get_test_fid(),
-#'   table = "Submissions",
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
-#' )
+#' data <- odata_submissions_get(table = "Submissions")
 #'
 #' # Skip one row, return the next 1 rows (top), include total row count
 #' data <- odata_submissions_get(
-#'   get_test_pid(),
-#'   get_test_fid(),
 #'   table = "Submissions",
 #'   skip = 1,
 #'   top = 1,
-#'   count = TRUE,
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#'   count = TRUE
 #' )
 #'
 #' # Parse point coordinates into lat, lon, alt
 #' data <- odata_submissions_get(
-#'   get_test_pid(),
-#'   get_test_fid(),
 #'   table = "Submissions",
-#'   wkt = FALSE,
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#'   wkt = FALSE
 #' )
 #'
 #' # Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"
 #' data <- odata_submissions_get(
-#'   get_test_pid(),
-#'   get_test_fid(),
 #'   table = "Submissions",
-#'   wkt = TRUE,
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#'   wkt = TRUE
 #' )
 #'
 #' listviewer::jsonedit(data)
 #'
 #' # Next: parse this nested list in to a tidy tibble with `parse_submissions`
 #' }
-odata_submission_get <- function(pid,
-                                 fid,
-                                 table = "Submissions",
+odata_submission_get <- function(table = "Submissions",
                                  skip = NA,
                                  top = NA,
                                  count = FALSE,
                                  wkt = FALSE,
+                                 pid = get_default_pid(),
+                                 fid = get_default_fid(),
                                  url = get_default_url(),
                                  un = get_default_un(),
                                  pw = get_default_pw()) {

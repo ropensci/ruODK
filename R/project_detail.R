@@ -3,7 +3,8 @@
 #' While the API endpoint will return all details for one project,
 #' `project_detail` will fail with incorrect or missing authentication.
 #'
-#' @param pid The numeric ID of the project, e.g.: 1.
+#' @template param-pid
+#' @template param-url
 #' @template param-auth
 #' @return A tibble with exactly one row for the project and all project
 #'   metadata as columns as per ODK Central API docs.
@@ -17,22 +18,20 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
-#' pd <- project_detail(1)
-#'
-#' # With explicit credentials, see tests
-#' pd <- project_detail(
-#'   get_test_pid(),
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
 #' )
+#'
+#' pd <- project_detail()
 #'
 #' pd %>%
 #'   dplyr::select(-"verbs") %>%
 #'   knitr::kable(.)
 #' }
-project_detail <- function(pid,
+project_detail <- function(pid = get_default_pid(),
                            url = get_default_url(),
                            un = get_default_un(),
                            pw = get_default_pw()) {

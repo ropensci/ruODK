@@ -4,25 +4,26 @@
 \alias{project_create}
 \title{Create a new project.}
 \usage{
-project_create(name, url = Sys.getenv("ODKC_URL"),
-  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
+project_create(name, url = get_default_url(), un = get_default_un(),
+  pw = get_default_pw())
 }
 \arguments{
 \item{name}{The desired name of the project. Can contain whitespace.}
 
-\item{url}{The base ODK Central without a trailing slash,
-e.g. "https://sandbox.central.opendatakit.org".
-Default: \code{get_default_url()},
-which calls \code{Sys.getenv("ODKC_URL")}.}
+\item{url}{The ODK Central base URL without trailing slash.#'
+Default: \code{get_default_url()}.
+Set default \code{url} through \code{ru_setup(url="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()},
-which calls \code{Sys.getenv("ODKC_UN")}.
+Default: \code{get_default_un()}.
+Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()},
-which calls \code{Sys.getenv("ODKC_PW")}.}
+Default: \code{get_default_pw()}.
+Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
 A tibble with one row per project and all project metadata
@@ -33,16 +34,14 @@ Create a new project.
 }
 \examples{
 \dontrun{
-# With default credentials, see vignette("setup")
-p <- project_create("Test Project")
-
-# With explicit credentials, see tests
-p <- project_create(
-  "Test Project",
-  url = Sys.getenv("ODKC_TEST_URL"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+# Set default credentials, see vignette "setup"
+ruODK::ru_setup(
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  un = "me@email.com",
+  pw = "..."
 )
+
+p <- project_create("Test Project")
 knitr::kable(p)
 
 # project_create returns a tibble
@@ -57,11 +56,11 @@ names(p)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/creating-a-project}
 
-Other restful-api: \code{\link{attachment_list}},
-  \code{\link{audit_get}}, \code{\link{form_detail}},
-  \code{\link{form_list}}, \code{\link{form_schema}},
-  \code{\link{form_xml}}, \code{\link{project_detail}},
-  \code{\link{project_list}},
+Other restful-api: \code{\link{attachment_link}},
+  \code{\link{attachment_list}}, \code{\link{audit_get}},
+  \code{\link{form_detail}}, \code{\link{form_list}},
+  \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}},
   \code{\link{submission_get}},

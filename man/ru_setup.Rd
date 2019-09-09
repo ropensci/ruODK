@@ -4,38 +4,65 @@
 \alias{ru_setup}
 \title{Configure default \code{ruODK} settings.}
 \usage{
-ru_setup(url = NULL, un = NULL, pw = NULL, test_url = NULL,
-  test_un = NULL, test_pw = NULL, test_pid = NULL, test_fid = NULL)
+ru_setup(svc = NULL, pid = NULL, fid = NULL, url = NULL,
+  un = NULL, pw = NULL, test_svc = NULL, test_pid = NULL,
+  test_fid = NULL, test_url = NULL, test_un = NULL, test_pw = NULL)
 }
 \arguments{
-\item{url}{An ODK Central URL, e.g. "https://sandbox.central.opendatakit.org".}
+\item{svc}{(optional, character) The OData service URL of a form.
+This parameter will set \code{pid}, \code{fid}, and \code{url}.
+It is sufficient to supply \code{svc}, \code{un}, and \code{pw}.}
+
+\item{pid}{(optional, character) The ID of an existing project on \code{url}.
+This will override the project ID from \code{svc}.
+A numeric value for \code{pid} will be converted to character.}
+
+\item{fid}{(optional, character) The alphanumeric ID of an existing form
+in \code{pid}. This will override the form ID from \code{svc}.}
+
+\item{url}{An ODK Central URL, e.g. "https://sandbox.central.opendatakit.org".
+This will override the ODK Central base URL from \code{svc}.}
 
 \item{un}{An ODK Central username which is the email of a "web user" in the
 specified ODK Central instance \code{url} (optional, character).}
 
 \item{pw}{The password for user \code{un} (optional, character).}
 
-\item{test_url}{(optional, character) A valid ODK Central URL for testing.}
+\item{test_svc}{(optional, character) The OData service URL of a test form.
+This parameter will set \code{test_pid}, \code{test_fid}, and \code{test_url}.
+It is sufficient to supply \code{test_svc}, \code{test_un}, and
+\code{test_pw} to configure testing.}
+
+\item{test_pid}{(optional, character) The numeric ID of an existing project
+on \code{test_url}. This will override the project ID from \code{test_svc}.
+A numeric value for \code{test_pid} will be converted to character.}
+
+\item{test_fid}{(optional, character) The alphanumeric ID of an existing form
+in \code{test_pid}. This will override the form ID from \code{test_svc}.}
+
+\item{test_url}{(optional, character) A valid ODK Central URL for testing.
+This will override the ODK Central base URL from \code{svc}.}
 
 \item{test_un}{(optional, character) A valid ODK Central username (email)
 privileged to view the test project(s) at \code{test_url}.}
 
 \item{test_pw}{(optional, character) The valid ODK Central password for
 \code{test_un}.}
-
-\item{test_pid}{(optional, integer) The numeric ID of an existing project on
-\code{test_url}.}
-
-\item{test_fid}{(optional, character) The alphanumeric ID of an existing form
-in \code{test_pid}.}
 }
 \description{
 Configure default \code{ruODK} settings.
 }
 \details{
 \code{ru_setup} sets ODK Central connection details. \code{ruODK}'s functions
-  default to use the default URL, username, and password unless specified
-  explicitly.
+  default to use the default project ID, form ID, URL, username, and password
+  unless specified explicitly.
+
+Any parameters not specified will remain unchanged. It is therefore possible
+to set up username and password initially with
+\code{ru_setup(un="XXX", pw="XXX")}, and switch between forms with
+\code{ru_setup(svc="XXX")}, supplying the form's OData service URL.
+ODK Central conveniently provides the OData service URL in the form submission
+tab, which in turn contains base URL, project ID, and form ID.
 
 \code{ruODK}'s automated tests require a valid ODK Central URL, and a
   privileged username and password of a "web user" on that ODK Central
@@ -59,8 +86,8 @@ ru_setup(
 )
 }
 \seealso{
-Other ru_settings: \code{\link{ru_settings}},
-  \code{\link{yell_if_error}},
+Other ru_settings: \code{\link{odata_svc_parse}},
+  \code{\link{ru_settings}}, \code{\link{yell_if_error}},
   \code{\link{yell_if_missing}}
 }
 \concept{ru_settings}

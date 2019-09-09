@@ -1,7 +1,8 @@
 #' List all forms.
 #'
 #'
-#' @param pid The numeric ID of the project, e.g.: 3.
+#' @template param-pid
+#' @template param-url
 #' @template param-auth
 #' @return A tibble with one row per form and all form metadata as columns.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
@@ -10,21 +11,23 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
-#' fl <- form_list(1)
-#'
-#' # With explicit credentials, see tests
-#' fl <- form_list(
-#'   get_test_pid(),
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
 #' )
+#'
+#' # With default pid
+#' fl <- form_list()
+#'
+#' # With explicit pid
+#' fl <- form_list(pid = 1)
 #'
 #' class(fl)
 #' # > c("tbl_df", "tbl", "data.frame")
 #' }
-form_list <- function(pid,
+form_list <- function(pid = get_default_pid(),
                       url = get_default_url(),
                       un = get_default_un(),
                       pw = get_default_pw()) {

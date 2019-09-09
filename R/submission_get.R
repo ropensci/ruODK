@@ -1,8 +1,9 @@
 #' Download one submission.
 #'
+#' @template param-iid
 #' @template param-pid
 #' @template param-fid
-#' @template param-iid
+#' @template param-url
 #' @template param-auth
 #' @return A nested list of submission data.
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
@@ -10,26 +11,17 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # With default credentials, see vignette("setup")
-#' sub <- submission_get(1, "build_xformsId", "uuid:...")
+#' # Set default credentials, see vignette "setup"
+#' ruODK::ru_setup(
+#'   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+#'   un = "me@email.com",
+#'   pw = "..."
+#' )
 #'
 #' # With explicit credentials, see tests
-#' sl <- submission_list(
-#'   get_test_pid(),
-#'   get_test_fid(),
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
-#' )
+#' sl <- submission_list()
 #'
-#' sub <- submission_get(
-#'   get_test_pid(),
-#'   get_test_fid(),
-#'   sl$instance_id[[1]],
-#'   url = get_test_url(),
-#'   un = get_test_un(),
-#'   pw = get_test_pw()
-#' )
+#' sub <- submission_get(sl$instance_id[[1]])
 #' listviewer::jsonedit(sub)
 #'
 #' # The details for one submission depend on the form fields
@@ -43,9 +35,9 @@
 #' # > "vegetation_structure"     "perimeter"                "taxon_encounter"
 #' # > "taxon_encounter"          "encounter_end_datetime"
 #' }
-submission_get <- function(pid,
-                           fid,
-                           iid,
+submission_get <- function(iid,
+                           pid = get_default_pid(),
+                           fid = get_default_fid(),
                            url = get_default_url(),
                            un = get_default_un(),
                            pw = get_default_pw()) {
