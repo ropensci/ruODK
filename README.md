@@ -362,7 +362,7 @@ citation("ruODK")
 #> To cite ruODK in publications use:
 #> 
 #>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.
-#>   R package version 0.6.1. https://github.com/dbca-wa/ruODK
+#>   R package version 0.6.2. https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
