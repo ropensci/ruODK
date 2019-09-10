@@ -8,6 +8,9 @@
 * Reduce installed package size by sharing attachment files. Add new parameter
   `separate=FALSE` to `attachment_get` to prevent separating attachment files 
   into subfolders named after their submission `uuid`. #22
+* Added link to explain 
+  [environment variables and R startup](https://whattheyforgot.org/r-startup.html) 
+  to vignette "setup". @maelle
 
 # ruODK 0.6.1
 * ROpenSci submission review [milestone](https://github.com/dbca-wa/ruODK/milestone/3),

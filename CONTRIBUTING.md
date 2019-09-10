@@ -1,4 +1,12 @@
-# Contributing to ruODK
+# Non-technical contributions to ruODK
+Feel free to [report issues](https://github.com/dbca-wa/ruODK/issues):
+
+* Bug reports are for unplanned malfunctions.
+* Reature requests are for ideas and new features.
+
+# Technical contributions to ruODK
+
+If you would like to contribute to the code base, follow the process below.
 
 -   [Prerequisites](#prerequisites)
 -   [PR Process](#pr-process)
@@ -111,12 +119,14 @@ ruODK::ru_setup(
 Keep these settings outside of version control, e.g. in your `~/.Renviron`.
 Note: `~/.Renviron` contains simple `key=value` assignments without `Sys.setenv()`.
 ```r
+# Required for testing
 ODKC_TEST_URL="https://sandbox.central.opendatakit.org"
 ODKC_TEST_UN="your@email.com"
 ODKC_TEST_PW="..."
 ODKC_TEST_PID=14
 ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
 
+# Useful for day to day use - use your own settings
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
 ODKC_UN="your@email.com"
 ODKC_PW="..."
@@ -206,7 +216,7 @@ Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to
 abide by its terms.
 
 
-# Maintainer's steps
+# Maintaining ruODK
 
 The steps below are run by the package maintainer to prepare a new `ruODK` release.
 It is not necessary to run them as a contributor, but immensely convenient for

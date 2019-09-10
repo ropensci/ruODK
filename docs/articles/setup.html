@@ -164,6 +164,7 @@
 <div id="permanent-defaults-environment-variables" class="section level2">
 <h2 class="hasAnchor">
 <a href="#permanent-defaults-environment-variables" class="anchor"></a>Permanent defaults: Environment variables</h2>
+<p>Read a great overview of R’s startup process, and how environment variables are sourced at the beginning of a new session at <a href="https://whattheyforgot.org/r-startup.html">whattheyforgot.org</a>.</p>
 <p><code>ruODK</code>’s functions default to the getters <code>ruODK::get_default_{pid,fid,url,un.pw}()</code>. These getters in turn look up their values from environment variables.</p>
 <p>A convenient way to have often used environment variables available is to add them to <code>~/.Renviron</code> using <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ(scope = "user")</a></code>. This loads them freshly into a new session, eliminating the need to run <code><a href="../reference/ru_setup.html">ru_setup()</a></code>. Note that the environment variables can be cleared or overwritten through calling <code><a href="../reference/ru_setup.html">ru_setup()</a></code> or <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv()</a></code> with respective arguments.</p>
 <p><code><a href="../reference/ru_setup.html">ru_setup()</a></code> will not change any omitted arguments.</p>

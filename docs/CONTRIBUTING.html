@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Contributing to ruODK • ruODK</title>
+<title>Non-technical contributions to ruODK • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,7 +32,7 @@
 
 
 
-<meta property="og:title" content="Contributing to ruODK" />
+<meta property="og:title" content="Non-technical contributions to ruODK" />
 
 
 
@@ -121,12 +121,22 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>Contributing to ruODK</h1>
+      <h1>Non-technical contributions to ruODK</h1>
     </div>
 
 
-<div id="contributing-to-ruodk" class="section level1">
+<div id="non-technical-contributions-to-ruodk" class="section level1">
 
+<p>Feel free to <a href="https://github.com/dbca-wa/ruODK/issues">report issues</a>:</p>
+<ul>
+<li>Bug reports are for unplanned malfunctions.</li>
+<li>Reature requests are for ideas and new features.</li>
+</ul>
+</div>
+<div id="technical-contributions-to-ruodk" class="section level1">
+<h1 class="hasAnchor">
+<a href="#technical-contributions-to-ruodk" class="anchor"></a>Technical contributions to ruODK</h1>
+<p>If you would like to contribute to the code base, follow the process below.</p>
 <ul>
 <li><a href="#prerequisites">Prerequisites</a></li>
 <li>
@@ -198,17 +208,19 @@
 <a class="sourceLine" id="cb4-6" title="6">  <span class="dt">test_fid =</span> <span class="st">"build_Flora-Quadrat-0-2_1558575936"</span></a>
 <a class="sourceLine" id="cb4-7" title="7">)</a></code></pre></div>
 <p>Keep these settings outside of version control, e.g. in your <code>~/.Renviron</code>. Note: <code>~/.Renviron</code> contains simple <code>key=value</code> assignments without <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv()</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">ODKC_TEST_URL=<span class="st">"https://sandbox.central.opendatakit.org"</span></a>
-<a class="sourceLine" id="cb5-2" title="2">ODKC_TEST_UN=<span class="st">"your@email.com"</span></a>
-<a class="sourceLine" id="cb5-3" title="3">ODKC_TEST_PW=<span class="st">"..."</span></a>
-<a class="sourceLine" id="cb5-4" title="4">ODKC_TEST_PID=<span class="dv">14</span></a>
-<a class="sourceLine" id="cb5-5" title="5">ODKC_TEST_FID=<span class="st">"build_Flora-Quadrat-0-2_1558575936"</span></a>
-<a class="sourceLine" id="cb5-6" title="6"></a>
-<a class="sourceLine" id="cb5-7" title="7">ODKC_URL=<span class="st">"https://odkcentral.dbca.wa.gov.au"</span></a>
-<a class="sourceLine" id="cb5-8" title="8">ODKC_UN=<span class="st">"your@email.com"</span></a>
-<a class="sourceLine" id="cb5-9" title="9">ODKC_PW=<span class="st">"..."</span></a>
-<a class="sourceLine" id="cb5-10" title="10">ODKC_PID=<span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-11" title="11">ODKC_FID=<span class="st">"build_Predator-or-Disturbance-1-1_1559789410"</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Required for testing</span></a>
+<a class="sourceLine" id="cb5-2" title="2">ODKC_TEST_URL=<span class="st">"https://sandbox.central.opendatakit.org"</span></a>
+<a class="sourceLine" id="cb5-3" title="3">ODKC_TEST_UN=<span class="st">"your@email.com"</span></a>
+<a class="sourceLine" id="cb5-4" title="4">ODKC_TEST_PW=<span class="st">"..."</span></a>
+<a class="sourceLine" id="cb5-5" title="5">ODKC_TEST_PID=<span class="dv">14</span></a>
+<a class="sourceLine" id="cb5-6" title="6">ODKC_TEST_FID=<span class="st">"build_Flora-Quadrat-0-2_1558575936"</span></a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co"># Useful for day to day use - use your own settings</span></a>
+<a class="sourceLine" id="cb5-9" title="9">ODKC_URL=<span class="st">"https://odkcentral.dbca.wa.gov.au"</span></a>
+<a class="sourceLine" id="cb5-10" title="10">ODKC_UN=<span class="st">"your@email.com"</span></a>
+<a class="sourceLine" id="cb5-11" title="11">ODKC_PW=<span class="st">"..."</span></a>
+<a class="sourceLine" id="cb5-12" title="12">ODKC_PID=<span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-13" title="13">ODKC_FID=<span class="st">"build_Predator-or-Disturbance-1-1_1559789410"</span></a></code></pre></div>
 <p>Keep in mind that <code>ruODK</code> defaults to use <code>ODKC_{URL,UN,PW}</code>, so for everyday use outside of contributing, you will want to use your own <code>ODKC_{URL,UN,PW}</code> account credentials.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test</a></span>()</a>
 <a class="sourceLine" id="cb6-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test_coverage</a></span>()</a></code></pre></div>
@@ -277,9 +289,9 @@
 <p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
-<div id="maintainers-steps" class="section level1">
+<div id="maintaining-ruodk" class="section level1">
 <h1 class="hasAnchor">
-<a href="#maintainers-steps" class="anchor"></a>Maintainer’s steps</h1>
+<a href="#maintaining-ruodk" class="anchor"></a>Maintaining ruODK</h1>
 <p>The steps below are run by the package maintainer to prepare a new <code>ruODK</code> release. It is not necessary to run them as a contributor, but immensely convenient for the maintainer to have them here in one place.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Tests</span></a>
 <a class="sourceLine" id="cb9-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test</a></span>()</a>
