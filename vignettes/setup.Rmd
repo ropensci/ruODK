@@ -86,6 +86,9 @@ ruODK::submission_list()
 ```
 
 ## Permanent defaults: Environment variables
+Read a great overview of R's startup process, and how environment variables
+are sourced at the beginning of a new session at [whattheyforgot.org](https://whattheyforgot.org/r-startup.html).
+
 `ruODK`'s functions default to the getters `ruODK::get_default_{pid,fid,url,un.pw}()`.
 These getters in turn look up their values from environment variables.
 
