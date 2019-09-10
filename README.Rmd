@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 ```
 # `ruODK`: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
 <!-- badges: start -->
+[![ROpenSci submission status](https://badges.ropensci.org/335_status.svg)](https://github.com/ropensci/software-review/issues/335)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![GitHub issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues)
 [![Travis build status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
@@ -229,3 +230,44 @@ the land to the culture and heritage of Aboriginal people.
 This software was created both as a contribution to the ODK ecosystem and for 
 the conservation of the biodiversity of Western Australia, and in doing so, 
 caring for country.
+
+## Package functionality
+
+There are several other R packages interacting with the ODK ecosystem, and/or
+[OData](https://www.odata.org/).
+
+### Comparison of ODK related software packages (non-ODK core)
+
+| Package                         | [ruODK](https://dbca-wa.github.io/ruODK/) | [odkr](https://validmeasures.org/odkr/) | [odk](https://cran.r-project.org/package=odk) | [odkmeta](https://github.com/nap2000/odkmeta) |
+|------------------------------|---------------|---------------|---------------|---------------|
+| Elevator pitch               | "[ckanr](https://github.com/ropensci/ckanr) for ODK Central"  | "Drive ODK Briefcase through R" | "Export ODK Aggregate to SPSS" | "Export ODK Aggregate to STATA" | 
+| Last commit                  | Sep 2019      |  Sep 2019     |    Nov 2017    |  Jun 2014    |
+| Website                      | [GH](https://github.com/dbca-wa/ruODK) [pkgdown](https://dbca-wa.github.io/ruODK/) |    [GH](https://github.com/dbca-wa/ruODK) [pkgdown](https://dbca-wa.github.io/ruODK/)   | [rdrr.io](https://rdrr.io/cran/odk/) |    [GH](https://github.com/nap2000/odkmeta) |
+| Test coverage [%]            | 100 | 68 | 0 | 0 |
+| Working examples             | README, vignettes, pkgdown | README, pkgdown | CRAN PDF | README |
+| Available on CRAN            | ❌ |  ✅ |  ✅ | ❌ |
+| Language/dialect             | tidyverse R | Base R | Base R | Stata |
+| External dependencies        | None | Java, ODK Briefcase | SPSS | Stata |
+| Affiliation                  | [DBCA WA](https://flatbacks.dbca.wa.gov.au/) / [ROpenSci prospectus](https://github.com/ropensci/software-review/issues/335) | [Valid Measues](https://github.com/validmeasures) | [Muntashir-Al-Arefin](https://stackoverflow.com/users/8875690/muntashir-al-arefin) | [ODK core developer Matt White](https://github.com/matthew-white) |
+| Covers ODK Central OData API        | ✅  |  ❌ |  ❌  | ❌  |
+| Covers ODK Central REST API         | ✅  |  ❌ |  ❌  | ❌  |
+| Covers ODK Central bulk export      | ✅  |  ❌ |  ❌  | ❌  |
+| Covers ODK Central OpenRosa API     | ❌  |  ✅  via ODK Briefcase |  ❌  | ❌  |
+| Data post-processing                | ✅  |  ✅ |  ❌  | ❌  |
+| Data visualisation examples         | ✅  |  ❌ | ❌  | ❌  |
+
+### Comparison of OData related R packages
+
+| Package                         | [ruODK](https://dbca-wa.github.io/ruODK/) | [odataR](https://github.com/HanOostdijk/odataR) | [cbsodataR](https://github.com/edwindj/cbsodataR) | [OData](https://cran.r-project.org/web/packages/OData/index.html) | [OData JDBC R tuturial](https://www.cdata.com/kb/tech/odata-jdbc-r.rst)
+|------------------------------|---------------|---------------|---------------|---------------|--------------|
+| Elevator pitch               | "[ckanr](https://github.com/ropensci/ckanr) for ODK Central"  | "OData client for https://opendata.cbs.nl (and similar)" | "OData client for https://www.cbs.nl" | "Minimal OData example" | "Minimal RJDBC example" | 
+| Last commit                  | Sep 2019 | Jan 2018 | Aug 2019 | Dec 2016 | ❓ |
+| Website | GH](https://github.com/dbca-wa/ruODK) [pkgdown](https://dbca-wa.github.io/ruODK/) | [GH](https://github.com/HanOostdijk/odataR) | [CRAN](https://cran.r-project.org/web/packages/cbsodataR/) [GH](https://github.com/edwindj/cbsodataR) [pkgdown](https://edwindj.github.io/cbsodataR/) | OData | odatajdbcr |
+| Test coverage [%]            | 100 | 68 | 0 | 0 | 0 |
+| Targets ODK Central | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Works with ODK Central | ✅ | ❓ |  ❓  | ❌ | ❌ |
+| Actively maintained to work against ODK Central | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Technologies | R, httr, xml2, tidyr | R, jsonlite, tidyverse | R, tidyverse | R, XML, RJSONIO | R, RJDBC, Java |
+| External dependencies | ❌  | ❌  | ❌  | ❌  |  JDBC, Java |
+| Available on CRAN            | ❌ |  ❌ | ✅ |  ✅ | ❌ |
+

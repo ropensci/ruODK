@@ -954,6 +954,251 @@
 <p>One of the Department’s core missions is to conserve and protect the value of the land to the culture and heritage of Aboriginal people.</p>
 <p>This software was created both as a contribution to the ODK ecosystem and for the conservation of the biodiversity of Western Australia, and in doing so, caring for country.</p>
 </div>
+<div id="package-functionality" class="section level2">
+<h2 class="hasAnchor">
+<a href="#package-functionality" class="anchor"></a>Package functionality</h2>
+<p>There are several other R packages interacting with the ODK ecosystem, and/or <a href="https://www.odata.org/">OData</a>.</p>
+<div id="comparison-of-odk-related-software-packages-non-odk-core" class="section level3">
+<h3 class="hasAnchor">
+<a href="#comparison-of-odk-related-software-packages-non-odk-core" class="anchor"></a>Comparison of ODK related software packages (non-ODK core)</h3>
+<table class="table table">
+<colgroup>
+<col width="33%">
+<col width="16%">
+<col width="16%">
+<col width="16%">
+<col width="16%">
+</colgroup>
+<thead><tr class="header">
+<th>Package</th>
+<th><a href="https://dbca-wa.github.io/ruODK/">ruODK</a></th>
+<th><a href="https://validmeasures.org/odkr/">odkr</a></th>
+<th><a href="https://cran.r-project.org/package=odk">odk</a></th>
+<th><a href="https://github.com/nap2000/odkmeta">odkmeta</a></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Elevator pitch</td>
+<td>“<a href="https://github.com/ropensci/ckanr">ckanr</a> for ODK Central”</td>
+<td>“Drive ODK Briefcase through R”</td>
+<td>“Export ODK Aggregate to SPSS”</td>
+<td>“Export ODK Aggregate to STATA”</td>
+</tr>
+<tr class="even">
+<td>Last commit</td>
+<td>Sep 2019</td>
+<td>Sep 2019</td>
+<td>Nov 2017</td>
+<td>Jun 2014</td>
+</tr>
+<tr class="odd">
+<td>Website</td>
+<td>
+<a href="https://github.com/dbca-wa/ruODK">GH</a> <a href="https://dbca-wa.github.io/ruODK/">pkgdown</a>
+</td>
+<td>
+<a href="https://github.com/dbca-wa/ruODK">GH</a> <a href="https://dbca-wa.github.io/ruODK/">pkgdown</a>
+</td>
+<td><a href="https://rdrr.io/cran/odk/">rdrr.io</a></td>
+<td><a href="https://github.com/nap2000/odkmeta">GH</a></td>
+</tr>
+<tr class="even">
+<td>Test coverage [%]</td>
+<td>100</td>
+<td>68</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Working examples</td>
+<td>README, vignettes, pkgdown</td>
+<td>README, pkgdown</td>
+<td>CRAN PDF</td>
+<td>README</td>
+</tr>
+<tr class="even">
+<td>Available on CRAN</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr class="odd">
+<td>Language/dialect</td>
+<td>tidyverse R</td>
+<td>Base R</td>
+<td>Base R</td>
+<td>Stata</td>
+</tr>
+<tr class="even">
+<td>External dependencies</td>
+<td>None</td>
+<td>Java, ODK Briefcase</td>
+<td>SPSS</td>
+<td>Stata</td>
+</tr>
+<tr class="odd">
+<td>Affiliation</td>
+<td>
+<a href="https://flatbacks.dbca.wa.gov.au/">DBCA WA</a> / <a href="https://github.com/ropensci/software-review/issues/335">ROpenSci prospectus</a>
+</td>
+<td><a href="https://github.com/validmeasures">Valid Measues</a></td>
+<td><a href="https://stackoverflow.com/users/8875690/muntashir-al-arefin">Muntashir-Al-Arefin</a></td>
+<td><a href="https://github.com/matthew-white">ODK core developer Matt White</a></td>
+</tr>
+<tr class="even">
+<td>Covers ODK Central OData API</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="odd">
+<td>Covers ODK Central REST API</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Covers ODK Central bulk export</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="odd">
+<td>Covers ODK Central OpenRosa API</td>
+<td>❌</td>
+<td>✅ via ODK Briefcase</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Data post-processing</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="odd">
+<td>Data visualisation examples</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="comparison-of-odata-related-r-packages" class="section level3">
+<h3 class="hasAnchor">
+<a href="#comparison-of-odata-related-r-packages" class="anchor"></a>Comparison of OData related R packages</h3>
+<table class="table table">
+<colgroup>
+<col width="28%">
+<col width="14%">
+<col width="14%">
+<col width="14%">
+<col width="14%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th>Package</th>
+<th><a href="https://dbca-wa.github.io/ruODK/">ruODK</a></th>
+<th><a href="https://github.com/HanOostdijk/odataR">odataR</a></th>
+<th><a href="https://github.com/edwindj/cbsodataR">cbsodataR</a></th>
+<th><a href="https://cran.r-project.org/web/packages/OData/index.html">OData</a></th>
+<th><a href="https://www.cdata.com/kb/tech/odata-jdbc-r.rst">OData JDBC R tuturial</a></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Elevator pitch</td>
+<td>“<a href="https://github.com/ropensci/ckanr">ckanr</a> for ODK Central”</td>
+<td>“OData client for <a href="https://opendata.cbs.nl" class="uri">https://opendata.cbs.nl</a> (and similar)”</td>
+<td>“OData client for <a href="https://www.cbs.nl" class="uri">https://www.cbs.nl</a>”</td>
+<td>“Minimal OData example”</td>
+<td>“Minimal RJDBC example”</td>
+</tr>
+<tr class="even">
+<td>Last commit</td>
+<td>Sep 2019</td>
+<td>Jan 2018</td>
+<td>Aug 2019</td>
+<td>Dec 2016</td>
+<td>❓</td>
+</tr>
+<tr class="odd">
+<td>Website</td>
+<td>GH](<a href="https://github.com/dbca-wa/ruODK" class="uri">https://github.com/dbca-wa/ruODK</a>) <a href="https://dbca-wa.github.io/ruODK/">pkgdown</a>
+</td>
+<td><a href="https://github.com/HanOostdijk/odataR">GH</a></td>
+<td>
+<a href="https://cran.r-project.org/web/packages/cbsodataR/">CRAN</a> <a href="https://github.com/edwindj/cbsodataR">GH</a> <a href="https://edwindj.github.io/cbsodataR/">pkgdown</a>
+</td>
+<td>OData</td>
+<td>odatajdbcr</td>
+</tr>
+<tr class="even">
+<td>Test coverage [%]</td>
+<td>100</td>
+<td>68</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Targets ODK Central</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Works with ODK Central</td>
+<td>✅</td>
+<td>❓</td>
+<td>❓</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="odd">
+<td>Actively maintained to work against ODK Central</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr class="even">
+<td>Technologies</td>
+<td>R, httr, xml2, tidyr</td>
+<td>R, jsonlite, tidyverse</td>
+<td>R, tidyverse</td>
+<td>R, XML, RJSONIO</td>
+<td>R, RJDBC, Java</td>
+</tr>
+<tr class="odd">
+<td>External dependencies</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>JDBC, Java</td>
+</tr>
+<tr class="even">
+<td>Available on CRAN</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
   </div>
 
@@ -997,6 +1242,7 @@
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://github.com/ropensci/software-review/issues/335"><img src="https://badges.ropensci.org/335_status.svg" alt="ROpenSci submission status"></a></li>
 <li><a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a></li>
 <li><a href="https://github.com/dbca-wa/ruODK/issues"><img src="https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout" alt="GitHub issues"></a></li>
 <li><a href="https://travis-ci.org/dbca-wa/ruODK"><img src="https://travis-ci.org/dbca-wa/ruODK.svg?branch=master" alt="Travis build status"></a></li>
