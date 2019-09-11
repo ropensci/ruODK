@@ -11,6 +11,7 @@
 * Added link to explain 
   [environment variables and R startup](https://whattheyforgot.org/r-startup.html) 
   to vignette "setup". @maelle
+* Add comparison of similar software to README #25
 
 # ruODK 0.6.1
 * ROpenSci submission review [milestone](https://github.com/dbca-wa/ruODK/milestone/3),

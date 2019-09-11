@@ -963,11 +963,12 @@
 <a href="#comparison-of-odk-related-software-packages-non-odk-core" class="anchor"></a>Comparison of ODK related software packages (non-ODK core)</h3>
 <table class="table table">
 <colgroup>
-<col width="33%">
-<col width="16%">
-<col width="16%">
-<col width="16%">
-<col width="16%">
+<col width="28%">
+<col width="14%">
+<col width="14%">
+<col width="14%">
+<col width="14%">
+<col width="14%">
 </colgroup>
 <thead><tr class="header">
 <th>Package</th>
@@ -975,6 +976,7 @@
 <th><a href="https://validmeasures.org/odkr/">odkr</a></th>
 <th><a href="https://cran.r-project.org/package=odk">odk</a></th>
 <th><a href="https://github.com/nap2000/odkmeta">odkmeta</a></th>
+<th><a href="https://unhcr.github.io/koboloadeR/docs/index.html">koboloadeR</a></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -983,6 +985,7 @@
 <td>“Drive ODK Briefcase through R”</td>
 <td>“Export ODK Aggregate to SPSS”</td>
 <td>“Export ODK Aggregate to STATA”</td>
+<td>“Metapackage for extended ODK ecosystem”</td>
 </tr>
 <tr class="even">
 <td>Last commit</td>
@@ -990,6 +993,7 @@
 <td>Sep 2019</td>
 <td>Nov 2017</td>
 <td>Jun 2014</td>
+<td>Jul 2019</td>
 </tr>
 <tr class="odd">
 <td>Website</td>
@@ -1001,20 +1005,27 @@
 </td>
 <td><a href="https://rdrr.io/cran/odk/">rdrr.io</a></td>
 <td><a href="https://github.com/nap2000/odkmeta">GH</a></td>
+<td>
+<a href="https://github.com/unhcr/koboloadeR">GH</a> <a href="https://unhcr.github.io/koboloadeR/docs/index.html">pkgdown</a>
+</td>
 </tr>
 <tr class="even">
-<td>Test coverage [%]</td>
+<td>Test coverage</td>
 <td><a href="https://codecov.io/github/dbca-wa/ruODK?branch=master"><img src="https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg" alt="Coverage status"></a></td>
 <td><a href="https://codecov.io/gh/validmeasures/odkr"><img src="https://codecov.io/gh/validmeasures/odkr/branch/master/graph/badge.svg" alt="codecov"></a></td>
 <td>❌</td>
 <td>❌</td>
+<td>
+<a href="https://travis-ci.org/unhcr/koboloadeR"><img src="https://travis-ci.org/unhcr/koboloadeR.svg?branch=gh-pages" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/unhcr/koboloadeR"><img src="https://ci.appveyor.com/api/projects/status/github/unhcr/koboloadeR?branch=gh-pages&amp;svg=true" alt="AppVeyor Build Status"></a>
+</td>
 </tr>
 <tr class="odd">
 <td>Working examples</td>
 <td>README, 3 vignettes, pkgdown</td>
 <td>README, pkgdown</td>
 <td>CRAN PDF</td>
-<td>README</td>
+<td>README README, 9 vignettes, shiny apps, pkgdown</td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Available on CRAN</td>
@@ -1022,13 +1033,15 @@
 <td>✅</td>
 <td>✅</td>
 <td>❌</td>
+<td>❌</td>
 </tr>
 <tr class="odd">
 <td>Language/dialect</td>
-<td>tidyverse R</td>
+<td>tidyverse R, XForms</td>
 <td>Base R</td>
 <td>Base R</td>
 <td>Stata</td>
+<td>R metapackage, XlsForms</td>
 </tr>
 <tr class="even">
 <td>External dependencies</td>
@@ -1036,6 +1049,8 @@
 <td>Java, ODK Briefcase</td>
 <td>SPSS</td>
 <td>Stata</td>
+<td>Java, ODK Briefcase, wraps <code>odkr</code>
+</td>
 </tr>
 <tr class="odd">
 <td>Affiliation</td>
@@ -1045,10 +1060,12 @@
 <td><a href="https://github.com/validmeasures">Valid Measues</a></td>
 <td><a href="https://stackoverflow.com/users/8875690/muntashir-al-arefin">Muntashir-Al-Arefin</a></td>
 <td><a href="https://github.com/matthew-white">ODK core developer Matt White</a></td>
+<td><a href="https://github.com/unhcr">UNHCR</a></td>
 </tr>
 <tr class="even">
 <td>Covers ODK Central OData API</td>
 <td>✅</td>
+<td>❌</td>
 <td>❌</td>
 <td>❌</td>
 <td>❌</td>
@@ -1059,6 +1076,7 @@
 <td>❌</td>
 <td>❌</td>
 <td>❌</td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Covers ODK Central bulk export</td>
@@ -1066,6 +1084,7 @@
 <td>❌</td>
 <td>❌</td>
 <td>❌</td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Covers ODK Central OpenRosa API</td>
@@ -1073,6 +1092,7 @@
 <td>✅ via ODK Briefcase</td>
 <td>❌</td>
 <td>❌</td>
+<td>✅ via ODK Briefcase</td>
 </tr>
 <tr class="even">
 <td>Data post-processing</td>
@@ -1080,6 +1100,7 @@
 <td>✅</td>
 <td>❌</td>
 <td>❌</td>
+<td>✅</td>
 </tr>
 <tr class="odd">
 <td>Data visualisation examples</td>
@@ -1087,9 +1108,13 @@
 <td>❌</td>
 <td>❌</td>
 <td>❌</td>
+<td>✅</td>
 </tr>
 </tbody>
 </table>
+<p>In summary:</p>
+<p><code>ruODK</code> provides a dependency-free interface to ODK Central.</p>
+<p><code>koboloadeR</code> is a metapackage containing lots of ancillary packages, with some heavy dependencies on Java and ODK Briefcase (which in turn can access ODK Central). Although built around the XlsForm standard and paradigm, <code>koboloadeR</code> is well worth exploring as a larger context to data wrangling in the ODK ecosystem.</p>
 </div>
 <div id="comparison-of-odata-related-r-packages" class="section level3">
 <h3 class="hasAnchor">
@@ -1141,7 +1166,7 @@
 <td><a href="https://www.cdata.com/kb/tech/odata-jdbc-r.rst">cdata.com</a></td>
 </tr>
 <tr class="even">
-<td>Test coverage [%]</td>
+<td>Test coverage</td>
 <td><a href="https://codecov.io/github/dbca-wa/ruODK?branch=master"><img src="https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg" alt="Coverage status"></a></td>
 <td>❌</td>
 <td>❌</td>
@@ -1207,6 +1232,10 @@
 </tr>
 </tbody>
 </table>
+<p>In summary:</p>
+<p><code>ruODK</code> is the only R package explicitly targetted towards ODK Central, both its OData and the RESTful API, and provide context and helpers around specific recurring data wrangling tasks.</p>
+<p>Wrangling OData output boils down to handling HTTP requests, navigating nested lists (from XML) and rectangling them into tidy data.</p>
+<p>The value of OData lies in its self-descriptive nature, which allows tools to introspect the data structures and types. Whereas GUI-driven tools like MS PowerBI use this introspection to assist users in wrangling their own data, <code>ruODK</code> aims to lower the barrier to the R-literate user, and reduce the data wrangling to simple, extensible steps in line with tidyverse’s data wrangling paradigm. Providing this functionality in a pure R environment allows to automate the data extracton, transformation, and reporting pipeline, and therefore provide reproducible reporting.</p>
 </div>
 </div>
 </div>
