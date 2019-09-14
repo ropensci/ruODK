@@ -11,7 +11,7 @@ status](https://badges.ropensci.org/335_status.svg)](https://github.com/ropensci
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![GitHub
-issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues/)
+issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues/?q=is:issue+is:open+milestone:rOpenSci)
 [![Travis build
 status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
 [![AppVeyor build
@@ -153,7 +153,7 @@ descriptions of the steps below.
     on an ODK Central instance. Your username will be an email address.
   - [Create a project](https://docs.opendatakit.org/central-projects/)
     and give the web user the relevant permissions.
-  - Create an Xform, e.g. using ODK Build, or use the provided example
+  - Create an XForm, e.g. using ODK Build, or use the provided example
     forms.
   - [Publish the form](https://docs.opendatakit.org/central-forms/) to
     ODK Central.

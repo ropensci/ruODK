@@ -19,7 +19,7 @@ isodt_to_local(datetime_string, orders = c("YmdHMS", "YmdHMSz"),
 }
 \arguments{
 \item{datetime_string}{(character) An ISO8601 datetime string as produced by
-Xforms exported from ODK Central.}
+XForms exported from ODK Central.}
 
 \item{orders}{(vector of character) Orders of datetime elements for lubridate.
 Default: \code{c("YmdHMS", "YmdHMSz")}.}

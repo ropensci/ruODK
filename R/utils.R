@@ -13,7 +13,7 @@
 #' Parse an ISO8601 datetime string to a timezone aware datetime.
 #'
 #' @param datetime_string (character) An ISO8601 datetime string as produced by
-#'   Xforms exported from ODK Central.
+#'   XForms exported from ODK Central.
 #' @param orders (vector of character) Orders of datetime elements for lubridate.
 #'   Default: \code{c("YmdHMS", "YmdHMSz")}.
 #' @param tz (character) The timezone string for lubridate. Default: \code{"UTC"}.

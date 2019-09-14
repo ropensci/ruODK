@@ -137,7 +137,7 @@ provides up-to-date descriptions of the steps below.
   on an ODK Central instance. Your username will be an email address.
 * [Create a project](https://docs.opendatakit.org/central-projects/) and give the
   web user the relevant permissions.
-* Create an Xform, e.g. using ODK Build, or use the provided example forms.
+* Create an XForm, e.g. using ODK Build, or use the provided example forms.
 * [Publish the form](https://docs.opendatakit.org/central-forms/) to ODK Central.
 * Collect some data for this form on ODK Collect and let ODK Collect submit the
   finalised forms to ODK Central.

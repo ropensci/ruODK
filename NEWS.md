@@ -49,7 +49,7 @@
 * Audit logs supported, as they are a read-only export.
 
 # ruODK 0.3.1
-## Preparation for ROpenSci presubmission
+## Preparation for ROpenSci pre-submission
 * Check name with [`available::available("ruODK")`](https://devguide.ropensci.org/building.html#naming-your-package):
   * Name valid: ✔
   * Available on CRAN: ✔ 

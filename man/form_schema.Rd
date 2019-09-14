@@ -46,9 +46,9 @@ See \code{vignette("Setup", package = "ruODK")}.}
 \value{
 A nested list containing the form definition.
   At the lowest nesting level, each form field consists of a list of two
-  nodes, `name` (the underlying field name) and `type` (the Xform field
+  nodes, `name` (the underlying field name) and `type` (the XForm field
   type, as in "string", "select1", "geopoint", "binary" and so on).
-  These fields are nested in lists of tuples `name` (the Xform screen name),
+  These fields are nested in lists of tuples `name` (the XForm screen name),
   `children` (the fields as described above), `type` ("structure" for non-
   repeating screens, "repeat" for repeating screens).
   A list with `name` "meta" may precede the structure, if several metadata
@@ -100,7 +100,7 @@ fs_nested[[1]]$type
 fs_nested[[1]]$name
 # > "meta"
 
-# The first node contains children, which means it's an Xform field group.
+# The first node contains children, which means it's an XForm field group.
 names(fs_nested[[1]])
 # > "children" ...
 

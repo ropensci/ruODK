@@ -134,7 +134,7 @@ form_xml
 ## Inspect form schema
 
 The nested list of lists returned by `form_schema` is the cleanest representation
-of the Xform definition available in R.
+of the XForm definition available in R.
 
 See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of  `??ruODK::form_schema()` for more detail.
 
