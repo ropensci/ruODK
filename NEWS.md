@@ -1,3 +1,10 @@
+# ruODK 0.6.3
+* [tidyr 1.0.0](https://www.tidyverse.org/articles/2019/09/tidyr-1-0-0/) is out!
+  Move `{tidyr}` dependency from GitHub master to CRAN version. #27
+* Add [David Henry](https://github.com/schemetrica)'s 
+  [Pentaho Kettle tutorial](https://forum.opendatakit.org/t/automating-data-delivery-using-the-odata-endpoint-in-odk-central/22010) 
+  to the software review in the README. #28
+
 # ruODK 0.6.2
 * Simplifiy `ru_setup()` to use OData Service URL.
 * Change all functions to default to `get_default{pid,fid,url,un,pw}()`, partly

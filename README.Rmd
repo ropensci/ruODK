@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![ROpenSci submission status](https://badges.ropensci.org/335_status.svg)](https://github.com/ropensci/software-review/issues/335)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![GitHub issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues)
+[![GitHub issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues/)
 [![Travis build status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=master&svg=true)](https://ci.appveyor.com/project/dbca-wa/ruODK)
 [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
@@ -28,7 +28,7 @@ Especially in these trying times, it is important to ask: "ruODK?"
 for collecting, managing, and using data in resource-constrained environments.
 
 ODK consists of a range of [software packages and apps](https://opendatakit.org/software/).
-`ruODK` assumes some familiarity of its users with the ODK ecosystem and workflows.
+`{ruODK}` assumes some familiarity of its users with the ODK ecosystem and workflows.
 For a detailed overview, read the extensive [ODK documentation](https://docs.opendatakit.org/)
 and visit the friendly [ODK forum](https://forum.opendatakit.org/).
 
@@ -58,7 +58,7 @@ access to its data and functionality through both an OData and a RESTful API
 with a comprehensive and interactive 
 [documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
 
-`ruODK` is aimed at the technically minded researcher who wishes to access and
+`{ruODK}` is aimed at the technically minded researcher who wishes to access and
 use the data from ODK Central using the programming language R.
 
 Benefits of using the R ecosystem in combination with ODK:
@@ -74,7 +74,7 @@ Benefits of using the R ecosystem in combination with ODK:
   workflow scaling ([drake](https://docs.ropensci.org/drake/)) and a range of
   integrations with Docker (links coming soon).
 
-`ruODK`'s scope:
+`{ruODK}`'s scope:
 
 * To wrap all ODK Central API endpoints with a focus on **data access**.
 * To provide working examples of interacting with the ODK Central API.
@@ -82,7 +82,7 @@ Benefits of using the R ecosystem in combination with ODK:
   ODK Central data in R: **data munging** the ODK Central API output into tidy 
   R formats.
   
-`ruODK`'s use cases:
+`{ruODK}`'s use cases:
 
 * Smaller projects:
   1. Data collection: ODK Collect
@@ -124,7 +124,7 @@ remotes::install_github("dbca-wa/ruODK", dependencies = TRUE)
 ### Access to an ODK Central instance
 First, we need an ODK Central instance and some data to play with!
 
-Either ask in the [ODK forum] for an account in the 
+Either ask in the [ODK forum](https://forum.opendatakit.org/) for an account in the 
 [ODK Central Sandbox](https://sandbox.central.opendatakit.org/),
 or follow the [setup instructions](https://docs.opendatakit.org/central-intro/)
 to build and deploy your very own ODK Central instance.
@@ -146,8 +146,8 @@ A note on the [included example forms](https://github.com/dbca-wa/ruODK/tree/mas
 The `.odkbuild` versions can be loaded into [ODK Build](https://build.opendatakit.org/), 
 while the `.xml` versions can be imported into ODK Central.
 
-## Configure `ruODK`
-Set up `ruODK` with an OData Service URL and credentials of a read-permitted
+## Configure `{ruODK}`
+Set up `{ruODK}` with an OData Service URL and credentials of a read-permitted
 ODK Central web user.
   
 ```{r ru_setup}
@@ -158,7 +158,7 @@ ruODK::ru_setup(
 )
 ```
 
-For all available detailed options to configure `ruODK`, read 
+For all available detailed options to configure `{ruODK}`, read 
 `vignette("Setup", package = "ruODK")` 
 (online [here](https://dbca-wa.github.io/ruODK/articles/setup.html)).
 
@@ -208,12 +208,12 @@ See the [contributing guide](https://dbca-wa.github.io/ruODK/CONTRIBUTING.html)
 on best practices and further readings for code contributions.
 
 ## Attribution
-`ruODK` was developed, and is maintained, by Florian Mayer for the Western Australian 
+`{ruODK}` was developed, and is maintained, by Florian Mayer for the Western Australian 
 [Department of Biodiversity, Conservation and Attractions (DBCA)](https://www.dbca.wa.gov.au/).
 The development was funded both by DBCA core funding and Offset funding through
 the [North West Shelf Flatback Turtle Conservation Program](https://flatbacks.dbca.wa.gov.au/).
 
-To cite package `ruODK` in publications use:
+To cite package `{ruODK}` in publications use:
 
 ```{r citation}
 citation("ruODK")
@@ -238,37 +238,42 @@ There are several other R packages interacting with the ODK ecosystem, and/or
 
 ### Comparison of ODK related software packages (non-ODK core)
 
-| Package                         | [ruODK](https://dbca-wa.github.io/ruODK/) | [odkr](https://validmeasures.org/odkr/) | [odk](https://cran.r-project.org/package=odk) | [odkmeta](https://github.com/nap2000/odkmeta) | [koboloadeR](https://unhcr.github.io/koboloadeR/docs/index.html)
-|------------------------------|---------------|---------------|---------------|---------------|---------------|
-| Elevator pitch               | "[ckanr](https://github.com/ropensci/ckanr) for ODK Central"  | "Drive ODK Briefcase through R" | "Export ODK Aggregate to SPSS" | "Export ODK Aggregate to STATA" | "Metapackage for extended ODK ecosystem" |
-| Last commit                  | Sep 2019      |  Sep 2019     |    Nov 2017    |  Jun 2014    | Jul 2019 |
-| Website                      | [GH](https://github.com/dbca-wa/ruODK) [pkgdown](https://dbca-wa.github.io/ruODK/) | [GH](https://github.com/dbca-wa/ruODK) [pkgdown](https://dbca-wa.github.io/ruODK/)   | [rdrr.io](https://rdrr.io/cran/odk/) |    [GH](https://github.com/nap2000/odkmeta) | [GH](https://github.com/unhcr/koboloadeR) [pkgdown](https://unhcr.github.io/koboloadeR/docs/index.html) |
-| Test coverage             | [![Travis build status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=master&svg=true)](https://ci.appveyor.com/project/dbca-wa/ruODK) [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master) | [![codecov](https://codecov.io/gh/validmeasures/odkr/branch/master/graph/badge.svg)](https://codecov.io/gh/validmeasures/odkr) | ❌ | ❌ | [![Travis build status](https://travis-ci.org/unhcr/koboloadeR.svg?branch=gh-pages)](https://travis-ci.org/unhcr/koboloadeR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/unhcr/koboloadeR?branch=gh-pages&svg=true)](https://ci.appveyor.com/project/unhcr/koboloadeR) [![codecov](https://codecov.io/gh/unhcr/koboloadeR/branch/gh-pages/graph/badge.svg)](https://codecov.io/gh/unhcr/koboloadeR) |
-| Working examples             | README, 3 vignettes, pkgdown | README, pkgdown | CRAN PDF | README, 9 vignettes, shiny apps, pkgdown |
-| Available on CRAN            | ❌ not yet |  ❌  |  ✅ [![version](http://www.r-pkg.org/badges/version/odk)](https://CRAN.R-project.org/package=odk)  | ❌ | ❌ |  
-| Language/dialect             | tidyverse R, XForms | Base R | Base R | Stata | R metapackage, XlsForms |
-| External dependencies        | None | Java, ODK Briefcase | SPSS | Stata | Java, ODK Briefcase, wraps `odkr`
-| Affiliation                  | [DBCA WA](https://flatbacks.dbca.wa.gov.au/) / [ROpenSci prospectus](https://github.com/ropensci/software-review/issues/335) | [Valid Measues](https://github.com/validmeasures) | [Muntashir-Al-Arefin](https://stackoverflow.com/users/8875690/muntashir-al-arefin) | [ODK core developer Matt White](https://github.com/matthew-white) | [UNHCR](https://github.com/unhcr)
-| Covers ODK Central OData API        | ✅  |  ❌ |  ❌  | ❌  | ❌  |
-| Covers ODK Central REST API         | ✅  |  ❌ |  ❌  | ❌  |
-| Covers ODK Central bulk export      | ✅  |  ❌ |  ❌  | ❌  |
-| Covers ODK Central OpenRosa API     | ❌  |  ✅  via ODK Briefcase |  ❌  | ❌  | ✅  via ODK Briefcase  |
-| Data post-processing                | ✅  |  ✅ |  ❌  | ❌  | ✅ | 
-| Data visualisation examples         | ✅  |  ❌ | ❌  | ❌  | ✅  |
-
+| Package                         | [`{ruODK}`](https://dbca-wa.github.io/ruODK/) | [`{odkr}`](https://validmeasures.org/odkr/) | [`{odk}`](https://cran.r-project.org/package=odk) | [`odkmeta`](https://github.com/nap2000/odkmeta) | [`{koboloadeR}`](https://unhcr.github.io/koboloadeR/docs/index.html) | [Pentaho Kettle tutorial](https://github.com/schemetrica/automating-data-delivery-odk-central)
+|------------------------------|---------------|---------------|---------------|---------------|---------------|---------------|
+| Elevator pitch               | "[ckanr](https://github.com/ropensci/ckanr) for ODK Central"  | "Drive ODK Briefcase through R" | "Export ODK Aggregate to SPSS" | "Export ODK Aggregate to STATA" | "Metapackage for extended ODK ecosystem" | "What ruODK does, but as GUI" |
+| Last commit                  | Sep 2019      |  Sep 2019     |    Nov 2017    |  Jun 2014    | Jul 2019 | Sept 2019 |
+| Website                      | [GH](https://github.com/dbca-wa/ruODK) [pkgdown](https://dbca-wa.github.io/ruODK/) | [GH](https://github.com/dbca-wa/ruODK) [pkgdown](https://dbca-wa.github.io/ruODK/)   | [rdrr.io](https://rdrr.io/cran/odk/) |    [GH](https://github.com/nap2000/odkmeta) | [GH](https://github.com/unhcr/koboloadeR) [pkgdown](https://unhcr.github.io/koboloadeR/docs/index.html) | [GH](https://github.com/schemetrica/automating-data-delivery-odk-central) |
+| Test coverage             | [![Travis build status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=master&svg=true)](https://ci.appveyor.com/project/dbca-wa/ruODK) [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master) | [![codecov](https://codecov.io/gh/validmeasures/odkr/branch/master/graph/badge.svg)](https://codecov.io/gh/validmeasures/odkr) | ❌ | ❌ | [![Travis build status](https://travis-ci.org/unhcr/koboloadeR.svg?branch=gh-pages)](https://travis-ci.org/unhcr/koboloadeR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/unhcr/koboloadeR?branch=gh-pages&svg=true)](https://ci.appveyor.com/project/unhcr/koboloadeR) [![codecov](https://codecov.io/gh/unhcr/koboloadeR/branch/gh-pages/graph/badge.svg)](https://codecov.io/gh/unhcr/koboloadeR) | NA |
+| Working examples             | README, 3 vignettes, pkgdown | README, pkgdown | CRAN PDF | README | README, 9 vignettes, shiny apps, pkgdown | Tutorial with screenshots |
+| Available on CRAN            | ❌ not yet |  ❌  |  ✅ [![version](http://www.r-pkg.org/badges/version/odk)](https://CRAN.R-project.org/package=odk)  | ❌ | ❌ | NA |
+| Language/dialect             | Tidyverse R, XForms | Base R | Base R | Stata | R metapackage, XlsForms | Pentaho Kettle GUI |
+| External dependencies        | None | Java, ODK Briefcase | SPSS | Stata | Java, ODK Briefcase, wraps `odkr` | [Pentaho Kettle](http://www.ibridge.be/), Java |
+| Affiliation                  | [DBCA WA](https://www.dbca.wa.gov.au/science) / [ROpenSci prospectus](https://github.com/ropensci/software-review/issues/335) | [Valid Measues](https://github.com/validmeasures) |  [Muntashir-Al-Arefin](https://stackoverflow.com/users/8875690/muntashir-al-arefin) | [ODK core developer Matt White](https://github.com/matthew-white) | [UNHCR](https://github.com/unhcr) | [Schemetrica](https://github.com/schemetrica) |
+| Covers ODK Central OData API        | ✅  |  ❌ |  ❌  | ❌  | ❌ | ✅  |
+| Covers ODK Central REST API         | ✅  |  ❌ |  ❌  | ❌  | ❌ | ❌  |
+| Covers ODK Central bulk export      | ✅  |  ❌ |  ❌  | ❌  | ❌ | ✅  |  
+| Covers ODK Central OpenRosa API     | ❌  |  ✅  via ODK Briefcase |  ❌  | ❌  | ✅  via ODK Briefcase  | ✅  |  
+| Data post-processing                | ✅  |  ✅ |  ❌  | ❌  | ✅ | ✅  |  
+| Data visualisation examples         | ✅  |  ❌ | ❌  | ❌  | ✅  | ❌ |  
+ 
 In summary:
 
-`ruODK` provides a dependency-free interface to ODK Central.
+`{ruODK}` provides a dependency-free interface to ODK Central.
 
-`koboloadeR` is a metapackage containing lots of ancillary packages, with some
+`{koboloadeR}` is a metapackage containing lots of ancillary packages, with some
 heavy dependencies on Java and ODK Briefcase (which in turn can access ODK Central).
-Although built around the XlsForm standard and paradigm, `koboloadeR` is well worth 
+Although built around the XlsForm standard and paradigm, `{koboloadeR}` is well worth 
 exploring as a larger context to data wrangling in the ODK ecosystem.
 
+Schemetrica's tutorial illustrates data ETL from ODK Central and deserves a special
+mention, as it is both very recent and aimed specifically against ODK Central.
+The GUI paradigm of Pentaho Kettle addresses a different audience to the scripting
+paradigm of `{ruODK}`. It should be mentioned that Kettle's composable data 
+manipulation steps can be used for many other use cases apart from ODK Central.
 
 ### Comparison of OData related R packages
 
-| Package                         | [ruODK](https://dbca-wa.github.io/ruODK/) | [odataR](https://github.com/HanOostdijk/odataR) | [cbsodataR](https://github.com/edwindj/cbsodataR) | [OData](https://cran.r-project.org/web/packages/OData/index.html) | [OData JDBC R tuturial](https://www.cdata.com/kb/tech/odata-jdbc-r.rst)
+| Package                         | [`{ruODK}`](https://dbca-wa.github.io/ruODK/) | [`{odataR}`](https://github.com/HanOostdijk/odataR) | [`{cbsodataR}`](https://github.com/edwindj/cbsodataR) | [`{OData}`](https://cran.r-project.org/web/packages/OData/index.html) | [OData JDBC R tutorial](https://www.cdata.com/kb/tech/odata-jdbc-r.rst)
 |------------------------------|---------------|---------------|---------------|---------------|--------------|
 | Elevator pitch               | "[ckanr](https://github.com/ropensci/ckanr) for ODK Central"  | "OData client for https://opendata.cbs.nl (and similar)" | "OData client for https://www.cbs.nl" | "Minimal OData example" | "Minimal RJDBC example" | 
 | Last commit                  | Sep 2019 | Jan 2018 | Aug 2019 | Dec 2016 | ❓ |
@@ -284,7 +289,7 @@ exploring as a larger context to data wrangling in the ODK ecosystem.
 
 In summary: 
 
-`ruODK` is the only R package explicitly targetted towards ODK Central, both its
+`{ruODK}` is the only R package explicitly aimed at ODK Central, both its
 OData and the RESTful API, and provide context and helpers around specific 
 recurring data wrangling tasks.
 
@@ -293,9 +298,9 @@ lists (from XML) and rectangling them into tidy data.
 
 The value of OData lies in its self-descriptive nature, which allows tools to 
 introspect the data structures and types. Whereas GUI-driven tools like MS PowerBI
-use this introspection to assist users in wrangling their own data, `ruODK` aims
+use this introspection to assist users in wrangling their own data, `{ruODK}` aims
 to lower the barrier to the R-literate user, and reduce the data wrangling to
 simple, extensible steps in line with tidyverse's data wrangling paradigm.
 Providing this functionality in a pure R environment allows to automate the 
-data extracton, transformation, and reporting pipeline, and therefore provide
+data extraction, transformation, and reporting pipeline, and therefore provide
 reproducible reporting.

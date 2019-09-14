@@ -1,7 +1,7 @@
 Type: Package
 Package: ruODK
 Title: An R Client for the ODK Central API
-Version: 0.6.2
+Version: 0.6.3
 Authors@R: 
     person(given = c("Florian", "W."),
            family = "Mayer",
@@ -29,7 +29,7 @@ Imports:
     rlang (>= 0.1.2),
     stringr (>= 1.3.1),
     tibble (>= 2.1),
-    tidyr (>= 0.8.3.9000),
+    tidyr (>= 1.0.0),
     xml2 (>= 1.2.0)
 Suggests: 
     covr (>= 3.0.1),
@@ -42,7 +42,6 @@ Suggests:
     rlist (>= 0.4.6.1),
     rmarkdown (>= 1.12),
     testthat (>= 2.1.0)
-Remotes: github::tidyverse/tidyr
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en_AU

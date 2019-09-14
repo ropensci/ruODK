@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -97,20 +97,20 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="ruodk-an-r-client-for-the-odk-central-api" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ruodk-an-r-client-for-the-odk-central-api" class="anchor"></a><code>ruODK</code>: An R Client for the ODK Central API <img src="reference/figures/ruODK.png" align="right" alt="Are you ODK?" width="120">
+<a href="#ruodk-an-r-client-for-the-odk-central-api" class="anchor"></a><code>{ruODK}</code>: An R Client for the ODK Central API <img src="reference/figures/ruODK.png" align="right" alt="Are you ODK?" width="120">
 </h1></div>
 <!-- badges: start -->
 
 <p>Especially in these trying times, it is important to ask: “ruODK?”</p>
 <p><a href="https://opendatakit.org/">OpenDataKit</a> (ODK) is a free and open-source software for collecting, managing, and using data in resource-constrained environments.</p>
-<p>ODK consists of a range of <a href="https://opendatakit.org/software/">software packages and apps</a>. <code>ruODK</code> assumes some familiarity of its users with the ODK ecosystem and workflows. For a detailed overview, read the extensive <a href="https://docs.opendatakit.org/">ODK documentation</a> and visit the friendly <a href="https://forum.opendatakit.org/">ODK forum</a>.</p>
+<p>ODK consists of a range of <a href="https://opendatakit.org/software/">software packages and apps</a>. <code>{ruODK}</code> assumes some familiarity of its users with the ODK ecosystem and workflows. For a detailed overview, read the extensive <a href="https://docs.opendatakit.org/">ODK documentation</a> and visit the friendly <a href="https://forum.opendatakit.org/">ODK forum</a>.</p>
 <p><a href="https://docs.opendatakit.org/central-intro/">ODK Central</a> is a cloud-based data clearinghouse for digitally captured data, replacing the older software <a href="https://docs.opendatakit.org/aggregate-intro/">ODK Aggregate</a>. ODK Central manages user accounts and permissions, stores form definitions, and allows data collection clients like <a href="https://docs.opendatakit.org/collect-intro/">ODK Collect</a> to connect to it for form download and submission upload.</p>
 <div class="figure">
 <img src="https://www.lucidchart.com/publicSegments/view/952c1350-3003-48c1-a2c8-94bad74cdb46/image.png" alt="An ODK setup with ODK Build, Central, Collect, and ruODK"><p class="caption">An ODK setup with ODK Build, Central, Collect, and ruODK</p>
 </div>
 <p>A typical <a href="https://docs.opendatakit.org/#how-is-odk-used">ODK workflow</a>: An XForm is designed e.g. in <a href="https://build.opendatakit.org/">ODK Build</a>, <a href="https://docs.opendatakit.org/central-forms/">published to ODK Central</a>, and downloaded onto an Android device running ODK Collect. After data have been captured digitally using <a href="https://docs.opendatakit.org/collect-intro/">ODK Collect</a>, the data are uploaded and stored in ODK Central. The next step from there is to extract the data, optionally upload it into another data warehouse, and then to analyse and generate insight from it.</p>
 <p>While data can be retrieved in bulk through the GUI, ODK Central’s API provides access to its data and functionality through both an OData and a RESTful API with a comprehensive and interactive <a href="https://odkcentral.docs.apiary.io/#reference/odata-endpoints">documentation</a>.</p>
-<p><code>ruODK</code> is aimed at the technically minded researcher who wishes to access and use the data from ODK Central using the programming language R.</p>
+<p><code>{ruODK}</code> is aimed at the technically minded researcher who wishes to access and use the data from ODK Central using the programming language R.</p>
 <p>Benefits of using the R ecosystem in combination with ODK:</p>
 <ul>
 <li>Scalability: Both R and ODK are free and open source software. Scaling to many users does not incur license fees.</li>
@@ -118,13 +118,13 @@
 <li>Automation: The entire data access workflow can be automated through R scripts.</li>
 <li>Reproducible reporting (e.g.  <a href="https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr">Sweave</a>, <a href="https://rmarkdown.rstudio.com/">RMarkdown</a>), interactive web apps (<a href="https://shiny.rstudio.com/">Shiny</a>), workflow scaling (<a href="https://docs.ropensci.org/drake/">drake</a>) and a range of integrations with Docker (links coming soon).</li>
 </ul>
-<p><code>ruODK</code>’s scope:</p>
+<p><code>{ruODK}</code>’s scope:</p>
 <ul>
 <li>To wrap all ODK Central API endpoints with a focus on <strong>data access</strong>.</li>
 <li>To provide working examples of interacting with the ODK Central API.</li>
 <li>To provide convenience helpers for the day to day tasks when working with ODK Central data in R: <strong>data munging</strong> the ODK Central API output into tidy R formats.</li>
 </ul>
-<p><code>ruODK</code>’s use cases:</p>
+<p><code>{ruODK}</code>’s use cases:</p>
 <ul>
 <li>Smaller projects:
 <ol style="list-style-type: decimal">
@@ -188,15 +188,15 @@
 </div>
 <div id="configure-ruodk" class="section level2">
 <h2 class="hasAnchor">
-<a href="#configure-ruodk" class="anchor"></a>Configure <code>ruODK</code>
+<a href="#configure-ruodk" class="anchor"></a>Configure <code>{ruODK}</code>
 </h2>
-<p>Set up <code>ruODK</code> with an OData Service URL and credentials of a read-permitted ODK Central web user.</p>
+<p>Set up <code>{ruODK}</code> with an OData Service URL and credentials of a read-permitted ODK Central web user.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/ru_setup.html">ru_setup</a></span>(</a>
 <a class="sourceLine" id="cb2-2" title="2">  <span class="dt">svc =</span> <span class="st">"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>,</a>
 <a class="sourceLine" id="cb2-3" title="3">  <span class="dt">un =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_UN"</span>),</a>
 <a class="sourceLine" id="cb2-4" title="4">  <span class="dt">pw =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_PW"</span>)</a>
 <a class="sourceLine" id="cb2-5" title="5">)</a></code></pre></div>
-<p>For all available detailed options to configure <code>ruODK</code>, read <code>vignette("Setup", package = "ruODK")</code> (online <a href="https://dbca-wa.github.io/ruODK/articles/setup.html">here</a>).</p>
+<p>For all available detailed options to configure <code>{ruODK}</code>, read <code>vignette("Setup", package = "ruODK")</code> (online <a href="https://dbca-wa.github.io/ruODK/articles/setup.html">here</a>).</p>
 </div>
 <div id="use-ruodk" class="section level2">
 <h2 class="hasAnchor">
@@ -300,6 +300,16 @@
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
+<td align="right">37</td>
+<td align="left">Duniatest</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="left">NA</td>
+<td align="left">2019-09-12 02:13:54</td>
+<td align="left">NA</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="right">24</td>
 <td align="left">Farmers Survey</td>
 <td align="right">1</td>
@@ -309,7 +319,7 @@
 <td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">1</td>
 <td align="left">Forms you made before projects existed</td>
 <td align="right">44</td>
@@ -319,7 +329,7 @@
 <td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">30</td>
 <td align="left">FWW Epi Survey</td>
 <td align="right">1</td>
@@ -329,7 +339,7 @@
 <td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6</td>
 <td align="left">g</td>
 <td align="right">0</td>
@@ -339,13 +349,23 @@
 <td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">23</td>
 <td align="left">Guillermo’s tests</td>
 <td align="right">44</td>
 <td align="right">0</td>
 <td align="left">2019-06-16 03:02:45</td>
 <td align="left">2019-06-15 11:30:05</td>
+<td align="left">NA</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="right">38</td>
+<td align="left">IFAKARA HEALTH TEST</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="left">NA</td>
+<td align="left">2019-09-12 06:37:56</td>
 <td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
@@ -928,21 +948,21 @@
 <div id="attribution" class="section level2">
 <h2 class="hasAnchor">
 <a href="#attribution" class="anchor"></a>Attribution</h2>
-<p><code>ruODK</code> was developed, and is maintained, by Florian Mayer for the Western Australian <a href="https://www.dbca.wa.gov.au/">Department of Biodiversity, Conservation and Attractions (DBCA)</a>. The development was funded both by DBCA core funding and Offset funding through the <a href="https://flatbacks.dbca.wa.gov.au/">North West Shelf Flatback Turtle Conservation Program</a>.</p>
-<p>To cite package <code>ruODK</code> in publications use:</p>
+<p><code>{ruODK}</code> was developed, and is maintained, by Florian Mayer for the Western Australian <a href="https://www.dbca.wa.gov.au/">Department of Biodiversity, Conservation and Attractions (DBCA)</a>. The development was funded both by DBCA core funding and Offset funding through the <a href="https://flatbacks.dbca.wa.gov.au/">North West Shelf Flatback Turtle Conservation Program</a>.</p>
+<p>To cite package <code>{ruODK}</code> in publications use:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="st">"ruODK"</span>)</a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; To cite ruODK in publications use:</span></a>
 <a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt;   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;   R package version 0.6.1. https://github.com/dbca-wa/ruODK</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;   R package version 0.6.3. https://github.com/dbca-wa/ruODK</span></a>
 <a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></a>
 <a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;   @Misc{,</span></a>
 <a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt;     title = {ruODK: Client for the ODK Central API},</span></a>
 <a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt;     author = {Florian W. Mayer},</span></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.2},</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.3},</span></a>
 <a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt;     year = {2019},</span></a>
 <a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;     url = {https://github.com/dbca-wa/ruODK},</span></a>
 <a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt;   }</span></a></code></pre></div>
@@ -963,20 +983,22 @@
 <a href="#comparison-of-odk-related-software-packages-non-odk-core" class="anchor"></a>Comparison of ODK related software packages (non-ODK core)</h3>
 <table class="table table">
 <colgroup>
-<col width="28%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
+<col width="25%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th>Package</th>
-<th><a href="https://dbca-wa.github.io/ruODK/">ruODK</a></th>
-<th><a href="https://validmeasures.org/odkr/">odkr</a></th>
-<th><a href="https://cran.r-project.org/package=odk">odk</a></th>
-<th><a href="https://github.com/nap2000/odkmeta">odkmeta</a></th>
-<th><a href="https://unhcr.github.io/koboloadeR/docs/index.html">koboloadeR</a></th>
+<th><a href="https://dbca-wa.github.io/ruODK/"><code>{ruODK}</code></a></th>
+<th><a href="https://validmeasures.org/odkr/"><code>{odkr}</code></a></th>
+<th><a href="https://cran.r-project.org/package=odk"><code>{odk}</code></a></th>
+<th><a href="https://github.com/nap2000/odkmeta"><code>odkmeta</code></a></th>
+<th><a href="https://unhcr.github.io/koboloadeR/docs/index.html"><code>{koboloadeR}</code></a></th>
+<th><a href="https://github.com/schemetrica/automating-data-delivery-odk-central">Pentaho Kettle tutorial</a></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -986,6 +1008,7 @@
 <td>“Export ODK Aggregate to SPSS”</td>
 <td>“Export ODK Aggregate to STATA”</td>
 <td>“Metapackage for extended ODK ecosystem”</td>
+<td>“What ruODK does, but as GUI”</td>
 </tr>
 <tr class="even">
 <td>Last commit</td>
@@ -994,6 +1017,7 @@
 <td>Nov 2017</td>
 <td>Jun 2014</td>
 <td>Jul 2019</td>
+<td>Sept 2019</td>
 </tr>
 <tr class="odd">
 <td>Website</td>
@@ -1008,6 +1032,7 @@
 <td>
 <a href="https://github.com/unhcr/koboloadeR">GH</a> <a href="https://unhcr.github.io/koboloadeR/docs/index.html">pkgdown</a>
 </td>
+<td><a href="https://github.com/schemetrica/automating-data-delivery-odk-central">GH</a></td>
 </tr>
 <tr class="even">
 <td>Test coverage</td>
@@ -1020,14 +1045,16 @@
 <td>
 <a href="https://travis-ci.org/unhcr/koboloadeR"><img src="https://travis-ci.org/unhcr/koboloadeR.svg?branch=gh-pages" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/unhcr/koboloadeR"><img src="https://ci.appveyor.com/api/projects/status/github/unhcr/koboloadeR?branch=gh-pages&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://codecov.io/gh/unhcr/koboloadeR"><img src="https://codecov.io/gh/unhcr/koboloadeR/branch/gh-pages/graph/badge.svg" alt="codecov"></a>
 </td>
+<td>NA</td>
 </tr>
 <tr class="odd">
 <td>Working examples</td>
 <td>README, 3 vignettes, pkgdown</td>
 <td>README, pkgdown</td>
 <td>CRAN PDF</td>
+<td>README</td>
 <td>README, 9 vignettes, shiny apps, pkgdown</td>
-<td></td>
+<td>Tutorial with screenshots</td>
 </tr>
 <tr class="even">
 <td>Available on CRAN</td>
@@ -1037,14 +1064,16 @@
 </td>
 <td>❌</td>
 <td>❌</td>
+<td>NA</td>
 </tr>
 <tr class="odd">
 <td>Language/dialect</td>
-<td>tidyverse R, XForms</td>
+<td>Tidyverse R, XForms</td>
 <td>Base R</td>
 <td>Base R</td>
 <td>Stata</td>
 <td>R metapackage, XlsForms</td>
+<td>Pentaho Kettle GUI</td>
 </tr>
 <tr class="even">
 <td>External dependencies</td>
@@ -1054,16 +1083,19 @@
 <td>Stata</td>
 <td>Java, ODK Briefcase, wraps <code>odkr</code>
 </td>
+<td>
+<a href="http://www.ibridge.be/">Pentaho Kettle</a>, Java</td>
 </tr>
 <tr class="odd">
 <td>Affiliation</td>
 <td>
-<a href="https://flatbacks.dbca.wa.gov.au/">DBCA WA</a> / <a href="https://github.com/ropensci/software-review/issues/335">ROpenSci prospectus</a>
+<a href="https://www.dbca.wa.gov.au/science">DBCA WA</a> / <a href="https://github.com/ropensci/software-review/issues/335">ROpenSci prospectus</a>
 </td>
 <td><a href="https://github.com/validmeasures">Valid Measues</a></td>
 <td><a href="https://stackoverflow.com/users/8875690/muntashir-al-arefin">Muntashir-Al-Arefin</a></td>
 <td><a href="https://github.com/matthew-white">ODK core developer Matt White</a></td>
 <td><a href="https://github.com/unhcr">UNHCR</a></td>
+<td><a href="https://github.com/schemetrica">Schemetrica</a></td>
 </tr>
 <tr class="even">
 <td>Covers ODK Central OData API</td>
@@ -1072,6 +1104,7 @@
 <td>❌</td>
 <td>❌</td>
 <td>❌</td>
+<td>✅</td>
 </tr>
 <tr class="odd">
 <td>Covers ODK Central REST API</td>
@@ -1079,7 +1112,8 @@
 <td>❌</td>
 <td>❌</td>
 <td>❌</td>
-<td></td>
+<td>❌</td>
+<td>❌</td>
 </tr>
 <tr class="even">
 <td>Covers ODK Central bulk export</td>
@@ -1087,7 +1121,8 @@
 <td>❌</td>
 <td>❌</td>
 <td>❌</td>
-<td></td>
+<td>❌</td>
+<td>✅</td>
 </tr>
 <tr class="odd">
 <td>Covers ODK Central OpenRosa API</td>
@@ -1096,6 +1131,7 @@
 <td>❌</td>
 <td>❌</td>
 <td>✅ via ODK Briefcase</td>
+<td>✅</td>
 </tr>
 <tr class="even">
 <td>Data post-processing</td>
@@ -1103,6 +1139,7 @@
 <td>✅</td>
 <td>❌</td>
 <td>❌</td>
+<td>✅</td>
 <td>✅</td>
 </tr>
 <tr class="odd">
@@ -1112,12 +1149,14 @@
 <td>❌</td>
 <td>❌</td>
 <td>✅</td>
+<td>❌</td>
 </tr>
 </tbody>
 </table>
 <p>In summary:</p>
-<p><code>ruODK</code> provides a dependency-free interface to ODK Central.</p>
-<p><code>koboloadeR</code> is a metapackage containing lots of ancillary packages, with some heavy dependencies on Java and ODK Briefcase (which in turn can access ODK Central). Although built around the XlsForm standard and paradigm, <code>koboloadeR</code> is well worth exploring as a larger context to data wrangling in the ODK ecosystem.</p>
+<p><code>{ruODK}</code> provides a dependency-free interface to ODK Central.</p>
+<p><code>{koboloadeR}</code> is a metapackage containing lots of ancillary packages, with some heavy dependencies on Java and ODK Briefcase (which in turn can access ODK Central). Although built around the XlsForm standard and paradigm, <code>{koboloadeR}</code> is well worth exploring as a larger context to data wrangling in the ODK ecosystem.</p>
+<p>Schemetrica’s tutorial illustrates data ETL from ODK Central and deserves a special mention, as it is both very recent and aimed specifically against ODK Central. The GUI paradigm of Pentaho Kettle addresses a different audience to the scripting paradigm of <code>{ruODK}</code>. It should be mentioned that Kettle’s composable data manipulation steps can be used for many other use cases apart from ODK Central.</p>
 </div>
 <div id="comparison-of-odata-related-r-packages" class="section level3">
 <h3 class="hasAnchor">
@@ -1133,11 +1172,11 @@
 </colgroup>
 <thead><tr class="header">
 <th>Package</th>
-<th><a href="https://dbca-wa.github.io/ruODK/">ruODK</a></th>
-<th><a href="https://github.com/HanOostdijk/odataR">odataR</a></th>
-<th><a href="https://github.com/edwindj/cbsodataR">cbsodataR</a></th>
-<th><a href="https://cran.r-project.org/web/packages/OData/index.html">OData</a></th>
-<th><a href="https://www.cdata.com/kb/tech/odata-jdbc-r.rst">OData JDBC R tuturial</a></th>
+<th><a href="https://dbca-wa.github.io/ruODK/"><code>{ruODK}</code></a></th>
+<th><a href="https://github.com/HanOostdijk/odataR"><code>{odataR}</code></a></th>
+<th><a href="https://github.com/edwindj/cbsodataR"><code>{cbsodataR}</code></a></th>
+<th><a href="https://cran.r-project.org/web/packages/OData/index.html"><code>{OData}</code></a></th>
+<th><a href="https://www.cdata.com/kb/tech/odata-jdbc-r.rst">OData JDBC R tutorial</a></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1241,9 +1280,9 @@
 </tbody>
 </table>
 <p>In summary:</p>
-<p><code>ruODK</code> is the only R package explicitly targetted towards ODK Central, both its OData and the RESTful API, and provide context and helpers around specific recurring data wrangling tasks.</p>
+<p><code>{ruODK}</code> is the only R package explicitly aimed at ODK Central, both its OData and the RESTful API, and provide context and helpers around specific recurring data wrangling tasks.</p>
 <p>Wrangling OData output boils down to handling HTTP requests, navigating nested lists (from XML) and rectangling them into tidy data.</p>
-<p>The value of OData lies in its self-descriptive nature, which allows tools to introspect the data structures and types. Whereas GUI-driven tools like MS PowerBI use this introspection to assist users in wrangling their own data, <code>ruODK</code> aims to lower the barrier to the R-literate user, and reduce the data wrangling to simple, extensible steps in line with tidyverse’s data wrangling paradigm. Providing this functionality in a pure R environment allows to automate the data extracton, transformation, and reporting pipeline, and therefore provide reproducible reporting.</p>
+<p>The value of OData lies in its self-descriptive nature, which allows tools to introspect the data structures and types. Whereas GUI-driven tools like MS PowerBI use this introspection to assist users in wrangling their own data, <code>{ruODK}</code> aims to lower the barrier to the R-literate user, and reduce the data wrangling to simple, extensible steps in line with tidyverse’s data wrangling paradigm. Providing this functionality in a pure R environment allows to automate the data extraction, transformation, and reporting pipeline, and therefore provide reproducible reporting.</p>
 </div>
 </div>
 </div>
@@ -1291,7 +1330,7 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/ropensci/software-review/issues/335"><img src="https://badges.ropensci.org/335_status.svg" alt="ROpenSci submission status"></a></li>
 <li><a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a></li>
-<li><a href="https://github.com/dbca-wa/ruODK/issues"><img src="https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout" alt="GitHub issues"></a></li>
+<li><a href="https://github.com/dbca-wa/ruODK/issues/?q=milestone:rOpenSci&amp;is:open"><img src="https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout" alt="GitHub issues"></a></li>
 <li><a href="https://travis-ci.org/dbca-wa/ruODK"><img src="https://travis-ci.org/dbca-wa/ruODK.svg?branch=master" alt="Travis build status"></a></li>
 <li><a href="https://ci.appveyor.com/project/dbca-wa/ruODK"><img src="https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
 <li><a href="https://codecov.io/github/dbca-wa/ruODK?branch=master"><img src="https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
