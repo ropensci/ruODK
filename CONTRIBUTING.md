@@ -2,11 +2,14 @@
 Feel free to [report issues](https://github.com/dbca-wa/ruODK/issues):
 
 * Bug reports are for unplanned malfunctions.
-* Reature requests are for ideas and new features.
+* Feature requests are for ideas and new features.
+* Account requests are for getting access to the ODK Central instances run by DBCA
+  (DBCA business only) or the public demo server (contributors, to run tests).
 
 # Technical contributions to ruODK
 
 If you would like to contribute to the code base, follow the process below.
+Note, this process is adjusted from the `usethis` tidyverse boilerplate.
 
 -   [Prerequisites](#prerequisites)
 -   [PR Process](#pr-process)
