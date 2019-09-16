@@ -1,0 +1,211 @@
+---
+title: "Untitled"
+output:
+  html_document: default
+  pdf_document:
+    latex_engine: xelatex
+  word_document: default
+---
+
+<!--  
+This Rmd template provides an example workflow to access submissions and 
+attachments of a given ODK Central form using its OData API.
+
+
+You will need:
+* An ODK Central form's OData Service URL (ending in .svc), accessed from the 
+  "Analyse using OData" button on the form submission tab.
+* Username and password of an ODK Central webuser authorised to view this form.
+-->
+
+<!--
+Step 1: Setup ruODK
+ODK Central webuser username and password are set as environment variables to
+keep them outside of this document.
+
+Read vignette "setup" for further information.
+-->
+<!-- Open the .Renviron file  -->
+```{r edit_renviron, echo=FALSE, eval=FALSE}
+usethis::edit_r_environ()
+```
+
+<!-- and paste the following with the webuser's credentials  -->
+```{r paste_env_vars, echo=FALSE, eval=FALSE}
+ODKC_UN="..."
+ODKC_PW="..."
+```
+<!-- and restart the session to load these environment variables. -->
+
+<!-- 
+* Configure ODK Central base URL, project ID, and form ID through OData Service URL.
+  Paste the OData Service URL over `SVC_URL`.
+* Paste your local timezone over `Australia/Perth`.
+* Adjust `loc` to a local subfolder for downloaded attachments.
+-->
+```{r setup, message=FALSE, warning=FALSE}
+library(knitr)
+library(dplyr)
+library(ckanr)
+library(ruODK)
+
+ruODK::ru_setup(svc="SVC_URL")
+tz <- "Australia/Perth"
+loc <- fs::path("attachments", "media")
+fs::dir_create(loc)
+```
+
+# Download data
+<!-- 
+Get table names. 
+
+form_tables will contain one row per separate table. 
+-->
+```{r svc_get}
+form_tables <- ruODK::odata_service_get()
+form_tables %>% knitr::kable(.)
+```
+
+<!-- 
+Get and parse submissions.
+
+* Rename any point coordinates which come out as `xn`, `xn+1`, `xn+2` into 
+  longitude, latitude, altitude.
+* Repeat parse_datetime for each form field name that symbolises a datetime.
+  Default assumes "time", example shows an additional step to also parse any
+  form field with "date" in its name.
+
+
+Repeat for each table name in form_tables$url. 
+-->
+```{r dl_submissions}
+data_main_raw <- ruODK::odata_submission_get()
+data_sub1_raw <- ruODK::odata_submission_get(table = "Submissions.nested_table_name1")
+
+data <- data_main_raw %>% 
+  ruODK::odata_submission_parse(verbose = TRUE) %>%
+  ruODK::parse_datetime(tz = tz) %>% 
+  ruODK::parse_datetime(tz = tz, col_contains = "date") %>%
+  dplyr::rename(
+    # longitude = x13,
+    # latitude = x14,
+    # altitude = x15
+  ) %>%
+  dplyr::mutate(
+    my_photo = attachment_get(id, my_photo, local_dir = loc),
+    another_photo = attachment_get(id, another_photo, local_dir = loc)
+    # add for each form field of type media attachment
+  ) %>%
+  invisible()
+
+data_sub1 <- data_sub1_raw %>% 
+  ruODK::odata_submission_parse(verbose = TRUE) %>%
+  ruODK::parse_datetime(tz = tz) %>% 
+  ruODK::parse_datetime(tz = tz, col_contains = "date") %>%
+  dplyr::mutate(
+    some_photo = attachment_get(id, some_photo, local_dir = loc),
+    # add for each form field of type media attachment
+  ) %>%
+  dplyr::left_join(data, by = c("submissions_id" = "id")) %>% # join main table
+  invisible()
+```
+
+# Analyse data
+<!-- Summarise, analyse, visualise the tibble(s) data (, data_sub1, data_sub2) -->
+```{r data_vis}
+skimr::skim(data)
+dplyr::glimpse(data)
+DT::datatable(head(data))
+```
+
+```{r data_map}
+leaflet::leaflet(width = 800, height = 600) %>%
+  leaflet::addProviderTiles("OpenStreetMap.Mapnik", group = "Place names") %>%
+  leaflet::addProviderTiles("Esri.WorldImagery", group = "Aerial") %>%
+  leaflet::clearBounds() %>%
+  leaflet::addAwesomeMarkers(
+    data = data,
+    lng = ~longitude, lat = ~latitude,
+    icon = leaflet::makeAwesomeIcon(text = "Q", markerColor = "red"),
+    # 
+    # # With your own field names
+    # 
+    # label = ~ glue::glue("{area_name} {encounter_start_datetime}"),
+    # popup = ~ glue::glue(
+    #   "<h3>{area_name}</h3>",
+    #   "Survey start {encounter_start_datetime}</br>",
+    #   "Reporter {reporter}</br>",
+    #   "Device {device_id}</br>",
+    #   "<h5>Site</h5>",
+    #   '<div><img src="{my_photo}"',
+    #   ' height="150px" alt="My photo"></img></div>'
+    # ),
+    clusterOptions = leaflet::markerClusterOptions()
+  ) %>%
+  leaflet::addLayersControl(
+    baseGroups = c("Place names", "Aerial"),
+    options = leaflet::layersControlOptions(collapsed = FALSE)
+  )
+```
+
+
+# Export
+
+<!--
+The form submissions are now extracted and visualised. What's next:
+
+* Save to a local spreadsheet.
+* Upload the data (spreadsheet) and possibly this report (compiled to HTML) 
+  to a CKAN data catalogue.
+* Upload data, report, attachments to Google Drive.
+* Generate the HTML report once off without the next chunk, as the chunk refers
+  to the rendered output file (HTML) before the file is created initially.
+* Run report always twice to generate (run 1) and upload (run 2) the latest HTML.
+-->
+```{r data_export}
+# Prepare report and products as local files
+rep_fn <- "my_report.html" # The file name you save this template under
+data_fn <- here::here(loc, "data.csv") # Main data
+data_sub1_fn <- here::here(loc, "data_sub1.csv") # Nested table 1
+zip_fn <- "products.zip" # Attachments as one zip file
+
+# Compress everything into `zip_fn`, retain relative path to `loc`
+zip(zipfile = zip_fn, files = fs::dir_ls(.))
+
+data %>% readr::write_csv(data_fn)
+# Same with nested tables and zipped attachments
+# data_sub1 %>% readr::write_csv()
+
+#------------------------------------------------------------------------------#
+# CKAN
+#
+# Upload to a CKAN data catalogue (need url and API key of a write permitted user)
+# See ROpenSci package ckanr
+ckanr::ckanr_setup(url = "https://demo.ckan.org", key = "APIKEY")
+
+# Run once to create resources
+d <- ckanr::package_show("dataset-title")
+res_data_main <- ckanr::resource_create(package_id = d$id, title="Main data", upload = data_fn)
+res_data_sub1 <- ckanr::resource_create(package_id = d$id, title="Nested data table 1", upload = data_sub1_fn)
+res_report <- ckanr::resource_create(package_id = d$id, title="Nested data table 1", upload = rep_fn)
+res_zip <- ckanr::resource_create(package_id = d$id, title="All data and attachments", upload = zip_fn)
+
+# Paste res_data_main$id over RID and keep here, repeat for each resource
+r <- ckanr::resource_update("res_data_main$id", path = data_fn)
+r <- ckanr::resource_update("res_data_sub1$id", path = data_sub1_fn)
+r <- ckanr::resource_update("res_report$id", path = res_report)
+r <- ckanr::resource_update("res_zip$id", path = zip_fn)
+
+#------------------------------------------------------------------------------#
+# Google Drive
+#
+# Once per machine:
+googledrive::drive_auth(reset=TRUE, use_oob = TRUE)
+
+# Upload to Google Drive
+googledrive::drive_ls("MYFOLDER") %>% googledrive::drive_rm(.) # Wipe older outputs
+googledrive::drive_upload(rep_fn, path=rep_fn) # Report as HTML
+googledrive::drive_upload(data_fn, path=data_fn) # Main data as CSV
+googledrive::drive_upload(data_sub1_fn, path=data_sub1_fn) # Nested table 1 as CSV
+googledrive::drive_upload(zip_fn, path=zip_fn) # All outputs as ZIP archive
+```

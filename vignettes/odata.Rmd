@@ -375,3 +375,10 @@ must be either unnested or dropped before exporting to CSV.
 fq_data %>% readr::write_csv("flora_quadrats.csv")
 fq_data_tae %>% readr::write_csv("flora_quadrats_taxon_encounters.csv")
 ```
+
+# Do it yourself
+To reproduce the demonstrated workflow easily in RStudio, create a new RMarkdown
+document "From template" and select ruODK's template "odata".
+
+Make sure to install a fresh version of `{ruODK}` to get the latest and greatest
+template.

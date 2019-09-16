@@ -1,9 +1,10 @@
 # ruODK 0.6.3
 * [tidyr 1.0.0](https://www.tidyverse.org/articles/2019/09/tidyr-1-0-0/) is out!
-  Move `{tidyr}` dependency from GitHub master to CRAN version. #27
+  Move `{tidyr}` dependency from GitHub master to CRAN version (#27)
 * Add [David Henry](https://github.com/schemetrica)'s 
   [Pentaho Kettle tutorial](https://forum.opendatakit.org/t/automating-data-delivery-using-the-odata-endpoint-in-odk-central/22010) 
-  to the software review in the README. #28
+  to the software review in the README (#28)
+* Add inaugural RMarkdown template "odata" (#26)
 
 # ruODK 0.6.2
 * Simplifiy `ru_setup()` to use OData Service URL.
@@ -11,25 +12,25 @@
   moving project ID (pid) and form ID (fid) to kwargs. This changes all examples,
   tests, vignettes, READMEs.
 * Add a high level overview diagram to README and `inst/joss/paper.md` to
-  illustrate `ruODK`'s intended purpose in the ODK ecosystem. #19
+  illustrate `ruODK`'s intended purpose in the ODK ecosystem (#19)
 * Reduce installed package size by sharing attachment files. Add new parameter
   `separate=FALSE` to `attachment_get` to prevent separating attachment files 
-  into subfolders named after their submission `uuid`. #22
+  into subfolders named after their submission `uuid` (#22)
 * Added link to explain 
   [environment variables and R startup](https://whattheyforgot.org/r-startup.html) 
   to vignette "setup". @maelle
-* Add comparison of similar software to README #25
+* Add comparison of similar software to README (#25)
 
 # ruODK 0.6.1
 * ROpenSci submission review [milestone](https://github.com/dbca-wa/ruODK/milestone/3),
   [discussion](https://github.com/ropensci/software-review/issues/335).
-* Updates to documentation. #13 #15 #17
-* Group function docs. #18
+* Updates to documentation (#13 #15 #17)
+* Group function docs (#18)
 * Update contribution guidelines and add account request issue template:
-  How to run `ruODK` tests and build the vignettes. #15 #20
+  How to run `ruODK` tests and build the vignettes (#15 #20)
 * Add dedicated `ru_setup()` and `ru_settings()`. 
   Pat down functions for missing credentials and yell loudly but clearly about
-  httr errors. #16
+  httr errors. (#16)
 * Drop `@importFrom` to reduce duplication. All external functions are prefixed
   with their package name already.
 * Add convenience helpers `attachment_link()` and `parse_datetime()`.

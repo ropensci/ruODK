@@ -130,8 +130,9 @@
 <a href="#ruodk-063" class="anchor"></a>ruODK 0.6.3</h1>
 <ul>
 <li>
-<a href="https://www.tidyverse.org/articles/2019/09/tidyr-1-0-0/">tidyr 1.0.0</a> is out! Move <code>{tidyr}</code> dependency from GitHub master to CRAN version. <a href='https://github.com/dbca-wa/ruODK/issues/27'>#27</a></li>
-<li>Add <a href="https://github.com/schemetrica">David Henry</a>’s <a href="https://forum.opendatakit.org/t/automating-data-delivery-using-the-odata-endpoint-in-odk-central/22010">Pentaho Kettle tutorial</a> to the software review in the README. <a href='https://github.com/dbca-wa/ruODK/issues/28'>#28</a></li>
+<a href="https://www.tidyverse.org/articles/2019/09/tidyr-1-0-0/">tidyr 1.0.0</a> is out! Move <code>{tidyr}</code> dependency from GitHub master to CRAN version (<a href='https://github.com/dbca-wa/ruODK/issues/27'>#27</a>)</li>
+<li>Add <a href="https://github.com/schemetrica">David Henry</a>’s <a href="https://forum.opendatakit.org/t/automating-data-delivery-using-the-odata-endpoint-in-odk-central/22010">Pentaho Kettle tutorial</a> to the software review in the README (<a href='https://github.com/dbca-wa/ruODK/issues/28'>#28</a>)</li>
+<li>Add inaugural RMarkdown template “odata” (<a href='https://github.com/dbca-wa/ruODK/issues/26'>#26</a>)</li>
 </ul>
 </div>
     <div id="ruodk-062" class="section level1">
@@ -140,10 +141,10 @@
 <ul>
 <li>Simplifiy <code><a href="../reference/ru_setup.html">ru_setup()</a></code> to use OData Service URL.</li>
 <li>Change all functions to default to <code>get_default{pid,fid,url,un,pw}()</code>, partly moving project ID (pid) and form ID (fid) to kwargs. This changes all examples, tests, vignettes, READMEs.</li>
-<li>Add a high level overview diagram to README and <code>inst/joss/paper.md</code> to illustrate <code>ruODK</code>’s intended purpose in the ODK ecosystem. <a href='https://github.com/dbca-wa/ruODK/issues/19'>#19</a></li>
-<li>Reduce installed package size by sharing attachment files. Add new parameter <code>separate=FALSE</code> to <code>attachment_get</code> to prevent separating attachment files into subfolders named after their submission <code>uuid</code>. <a href='https://github.com/dbca-wa/ruODK/issues/22'>#22</a></li>
+<li>Add a high level overview diagram to README and <code>inst/joss/paper.md</code> to illustrate <code>ruODK</code>’s intended purpose in the ODK ecosystem (<a href='https://github.com/dbca-wa/ruODK/issues/19'>#19</a>)</li>
+<li>Reduce installed package size by sharing attachment files. Add new parameter <code>separate=FALSE</code> to <code>attachment_get</code> to prevent separating attachment files into subfolders named after their submission <code>uuid</code> (<a href='https://github.com/dbca-wa/ruODK/issues/22'>#22</a>)</li>
 <li>Added link to explain <a href="https://whattheyforgot.org/r-startup.html">environment variables and R startup</a> to vignette “setup”. <a href='https://github.com/maelle'>@maelle</a></li>
-<li>Add comparison of similar software to README <a href='https://github.com/dbca-wa/ruODK/issues/25'>#25</a></li>
+<li>Add comparison of similar software to README (<a href='https://github.com/dbca-wa/ruODK/issues/25'>#25</a>)</li>
 </ul>
 </div>
     <div id="ruodk-061" class="section level1">
@@ -151,10 +152,10 @@
 <a href="#ruodk-061" class="anchor"></a>ruODK 0.6.1</h1>
 <ul>
 <li>ROpenSci submission review <a href="https://github.com/dbca-wa/ruODK/milestone/3">milestone</a>, <a href="https://github.com/ropensci/software-review/issues/335">discussion</a>.</li>
-<li>Updates to documentation. <a href='https://github.com/dbca-wa/ruODK/issues/13'>#13</a> <a href='https://github.com/dbca-wa/ruODK/issues/15'>#15</a> <a href='https://github.com/dbca-wa/ruODK/issues/17'>#17</a></li>
-<li>Group function docs. <a href='https://github.com/dbca-wa/ruODK/issues/18'>#18</a></li>
-<li>Update contribution guidelines and add account request issue template: How to run <code>ruODK</code> tests and build the vignettes. <a href='https://github.com/dbca-wa/ruODK/issues/15'>#15</a> <a href='https://github.com/dbca-wa/ruODK/issues/20'>#20</a></li>
-<li>Add dedicated <code><a href="../reference/ru_setup.html">ru_setup()</a></code> and <code><a href="../reference/ru_settings.html">ru_settings()</a></code>. Pat down functions for missing credentials and yell loudly but clearly about httr errors. <a href='https://github.com/dbca-wa/ruODK/issues/16'>#16</a></li>
+<li>Updates to documentation (<a href='https://github.com/dbca-wa/ruODK/issues/13'>#13</a> <a href='https://github.com/dbca-wa/ruODK/issues/15'>#15</a> <a href='https://github.com/dbca-wa/ruODK/issues/17'>#17</a>)</li>
+<li>Group function docs (<a href='https://github.com/dbca-wa/ruODK/issues/18'>#18</a>)</li>
+<li>Update contribution guidelines and add account request issue template: How to run <code>ruODK</code> tests and build the vignettes (<a href='https://github.com/dbca-wa/ruODK/issues/15'>#15</a> <a href='https://github.com/dbca-wa/ruODK/issues/20'>#20</a>)</li>
+<li>Add dedicated <code><a href="../reference/ru_setup.html">ru_setup()</a></code> and <code><a href="../reference/ru_settings.html">ru_settings()</a></code>. Pat down functions for missing credentials and yell loudly but clearly about httr errors. (<a href='https://github.com/dbca-wa/ruODK/issues/16'>#16</a>)</li>
 <li>Drop <code>@importFrom</code> to reduce duplication. All external functions are prefixed with their package name already.</li>
 <li>Add convenience helpers <code><a href="../reference/attachment_link.html">attachment_link()</a></code> and <code><a href="../reference/parse_datetime.html">parse_datetime()</a></code>.</li>
 <li>Use <code><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">janitor::clean_names()</a></code> on column names over home-grown helpers.</li>

@@ -116,6 +116,7 @@ jsonlite
 Kens02
 Kens1
 kwargs
+Lanscaped
 lifecycle
 lon
 lubridate
@@ -151,6 +152,7 @@ pkgdown
 PosixCT
 POSIXct
 PowerBI
+pre
 PresentationTest
 projet
 ProjetTest
@@ -174,6 +176,7 @@ rlang
 RMarkdown
 Roadmap
 ROpenSci
+RStudio
 ru
 Scalability
 Schemetrica
@@ -189,7 +192,6 @@ SurveyAir
 svc
 sym
 syms
-targetted
 TBBT
 TestWFPProjects
 tibble
