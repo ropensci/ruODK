@@ -96,8 +96,8 @@ data <- data_main_raw %>%
     # altitude = x15
   ) %>%
   dplyr::mutate(
-    my_photo = attachment_get(id, my_photo, local_dir = loc),
-    another_photo = attachment_get(id, another_photo, local_dir = loc)
+    my_photo = ruODK::attachment_get(id, my_photo, local_dir = loc),
+    another_photo = ruODK::attachment_get(id, another_photo, local_dir = loc)
     # add for each form field of type media attachment
   ) %>%
   invisible()
@@ -107,7 +107,7 @@ data_sub1 <- data_sub1_raw %>%
   ruODK::parse_datetime(tz = tz) %>% 
   ruODK::parse_datetime(tz = tz, col_contains = "date") %>%
   dplyr::mutate(
-    some_photo = attachment_get(id, some_photo, local_dir = loc),
+    some_photo = ruODK::attachment_get(id, some_photo, local_dir = loc),
     # add for each form field of type media attachment
   ) %>%
   dplyr::left_join(data, by = c("submissions_id" = "id")) %>% # join main table

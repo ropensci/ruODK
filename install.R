@@ -10,6 +10,7 @@ remotes::install_github("dbca-wa/ruODK", dependencies = TRUE)
 install.packages("janitor")
 
 # Data visualisation
+install.packages("skimr")
 install.packages("DT")
 install.packages("ggplot2")
 install.packages("leaflet")
@@ -20,3 +21,7 @@ install.packages("caTools")
 install.packages("bitops")
 install.packages("rmarkdown")
 install.packages("knitr")
+
+# Data dissemination
+install.packages("ckanr")
+install.packages("googledrive")
