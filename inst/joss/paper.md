@@ -24,32 +24,30 @@ affiliations:
 # Summary
 ruODK [@ruodk] is an R Client for the ODK Central API.
 
-
 # Background
 
 Open Data Kit (ODK, [@odk], [@hartung]) is a suite of open source tools that 
 help organizations collect and manage data.
 
-
 The core ODK tools are [@odkdocs]:
 
-* ODK Collect, an Android app that replaces paper-based forms.
-* ODK Aggregate, a proven server for data storage and analysis tool.
-* ODK Central, a modern server with a RESTful API.
-* ODK Build, a drag-and-drop form designer.
-* ODK XLSForm, an Excel-based form designer.
-* ODK Briefcase, a desktop tool that pulls and exports data from Aggregate and Collect.
+-  ODK Collect, an Android app that replaces paper-based forms.
+-  ODK Aggregate, a proven server for data storage and analysis tool.
+-  ODK Central, a modern server with a RESTful API.
+-  ODK Build, a drag-and-drop form designer.
+-  ODK XLSForm, an Excel-based form designer.
+-  ODK Briefcase, a desktop tool that pulls and exports data from Aggregate and Collect.
 
 The core workflow of ODK is:
 
-* A form for digital data capture is designed, either by hand, or using form 
+-  A form for digital data capture is designed, either by hand, or using form 
   builders like ODK Build.
-* A data clearinghouse like ODK Aggregate or ODK Central disseminates these
+-  A data clearinghouse like ODK Aggregate or ODK Central disseminates these
   form templates to authorised data collection devices (Android devices running
   ODK Collect).
-* Once data has been collected, ODK Collect submits the data back to the data
+-  Once data has been collected, ODK Collect submits the data back to the data
   clearinghouse, e.g. ODK Central.
-* From there, it is the responsibility of the maintainers to export and further
+-  From there, it is the responsibility of the maintainers to export and further
   process and use the data.
 
 At the time of writing, [ODK Central](https://docs.opendatakit.org/central-intro/)
@@ -73,22 +71,22 @@ automate data access and analysis (ruODK).
 
 `ruODK` aims:
 
-* To wrap all ODK Central API endpoints with a focus on **data access**. 
+-  To wrap all ODK Central API endpoints with a focus on **data access**. 
   While this is mostly not a hard task, there is still a small barrier to novice
   R users, and some duplication of code.
-* To provide working examples of interacting with the ODK Central API.
-* To provide convenience helpers for the day to day tasks when working with 
+-  To provide working examples of interacting with the ODK Central API.
+-  To provide convenience helpers for the day to day tasks when working with 
   ODK Central data in R: transforming the ODK Central API output into tidy 
   R formats.
   
 ## Out of scope
 
-* To wrap "management" API endpoints. The ODK Central GUI already provides a 
+-  To wrap "management" API endpoints. The ODK Central GUI already provides a 
   highly capable interface for the management of users, roles, permissions, 
   projects, and forms.
   ODK Central is a [VueJS application](https://github.com/opendatakit/central-frontend/) 
   working on the "management" API endpoints of the ODK Central backend.
-* To provide extensive data visualisation capability. 
+-  To provide extensive data visualisation capability. 
   We show only minimal examples of data visualisation and presentation, mainly 
   to illustrate the example data.
   

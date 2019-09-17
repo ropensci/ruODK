@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Non-technical contributions to ruODK • ruODK</title>
+<title>NA • ruODK</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,7 +32,7 @@
 
 
 
-<meta property="og:title" content="Non-technical contributions to ruODK" />
+<meta property="og:title" content="NA" />
 
 
 
@@ -121,12 +121,13 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>Non-technical contributions to ruODK</h1>
+      <h1>NA</h1>
     </div>
 
 
-<div id="non-technical-contributions-to-ruodk" class="section level1">
-
+<div id="non-technical-contributions-to-ruodk" class="section level2">
+<h2 class="hasAnchor">
+<a href="#non-technical-contributions-to-ruodk" class="anchor"></a>Non-technical contributions to ruODK</h2>
 <p>Feel free to <a href="https://github.com/dbca-wa/ruODK/issues">report issues</a>:</p>
 <ul>
 <li>Bug reports are for unplanned malfunctions.</li>
@@ -134,15 +135,13 @@
 <li>Account requests are for getting access to the ODK Central instances run by DBCA (DBCA business only) or the public demo server (contributors, to run tests).</li>
 </ul>
 </div>
-<div id="technical-contributions-to-ruodk" class="section level1">
-<h1 class="hasAnchor">
-<a href="#technical-contributions-to-ruodk" class="anchor"></a>Technical contributions to ruODK</h1>
+<div id="technical-contributions-to-ruodk" class="section level2">
+<h2 class="hasAnchor">
+<a href="#technical-contributions-to-ruodk" class="anchor"></a>Technical contributions to ruODK</h2>
 <p>If you would like to contribute to the code base, follow the process below. Note, this process is adjusted from the <code>usethis</code> tidyverse boilerplate.</p>
 <ul>
 <li><a href="#prerequisites">Prerequisites</a></li>
-<li>
-<a href="#pr-process">PR Process</a>
-<ul>
+<li><a href="#pr-process">PR Process</a></li>
 <li><a href="#fork-clone-branch">Fork, clone, branch</a></li>
 <li><a href="#check">Check</a></li>
 <li><a href="#style">Style</a></li>
@@ -153,51 +152,49 @@
 <li><a href="#commit">Commit</a></li>
 <li><a href="#push-and-pull">Push and pull</a></li>
 <li><a href="#review-revise-repeat">Review, revise, repeat</a></li>
-</ul>
-</li>
 <li><a href="#resources">Resources</a></li>
 <li><a href="#code-of-conduct">Code of Conduct</a></li>
 </ul>
 <p>This explains how to propose a change to ruODK via a pull request using Git and GitHub.</p>
 <p>For more general info about contributing to <code>ruODK</code>, see the <a href="#resources">Resources</a> at the end of this document.</p>
-<div id="prerequisites" class="section level2">
-<h2 class="hasAnchor">
-<a href="#prerequisites" class="anchor"></a>Prerequisites</h2>
+<div id="prerequisites" class="section level3">
+<h3 class="hasAnchor">
+<a href="#prerequisites" class="anchor"></a>Prerequisites</h3>
 <p>Before you do a pull request, you should always file an issue and make sure someone from the tidyverse team agrees that it’s a problem, and is happy with your basic proposal for fixing it. If you’ve found a bug, first create a minimal <a href="https://www.tidyverse.org/help/#reprex">reprex</a>.</p>
 </div>
-<div id="pr-process" class="section level2">
-<h2 class="hasAnchor">
-<a href="#pr-process" class="anchor"></a>PR process</h2>
-<div id="fork-clone-branch" class="section level3">
+<div id="pr-process" class="section level3">
 <h3 class="hasAnchor">
-<a href="#fork-clone-branch" class="anchor"></a>Fork, clone, branch</h3>
+<a href="#pr-process" class="anchor"></a>PR process</h3>
+<div id="fork-clone-branch" class="section level4">
+<h4 class="hasAnchor">
+<a href="#fork-clone-branch" class="anchor"></a>Fork, clone, branch</h4>
 <p>The first thing you’ll need to do is to <a href="https://help.github.com/articles/fork-a-repo/">fork</a> the <a href="https://github.com/dbca-wa/ruODK">ruODK GitHub repo</a>, and then clone it locally. We recommend that you create a branch for each PR.</p>
 </div>
-<div id="check" class="section level3">
-<h3 class="hasAnchor">
-<a href="#check" class="anchor"></a>Check</h3>
+<div id="check" class="section level4">
+<h4 class="hasAnchor">
+<a href="#check" class="anchor"></a>Check</h4>
 <p>Before changing anything, make sure the package still passes <code>R CMD check</code> locally for you. When in doubt, compare your <code>R CMD check</code> results with current results for <a href="https://travis-ci.org/dbca-wa/ruODK">ruODK on Travis</a> (checks on Linux and/or MacOS) and, if applicable, AppVeyor (checks on Windows). You’ll do this again before you finalize your pull request, but this baseline will make it easier to pinpoint any problems introduced by your changes.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/check.html">check</a></span>()</a></code></pre></div>
 </div>
-<div id="style" class="section level3">
-<h3 class="hasAnchor">
-<a href="#style" class="anchor"></a>Style</h3>
+<div id="style" class="section level4">
+<h4 class="hasAnchor">
+<a href="#style" class="anchor"></a>Style</h4>
 <p>Match the existing code style. This means you should follow the tidyverse <a href="http://style.tidyverse.org">style guide</a>. Use the <a href="https://CRAN.R-project.org/package=styler">styler</a> package to apply the style guide automatically.</p>
 <p>Be careful to only make style changes to the code you are contributing. If you find that there is a lot of code that doesn’t meet the style guide, it would be better to file an issue or a separate PR to fix that first.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">styler<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/styler/man/style_pkg.html">style_pkg</a></span>()</a></code></pre></div>
 </div>
-<div id="document" class="section level3">
-<h3 class="hasAnchor">
-<a href="#document" class="anchor"></a>Document</h3>
+<div id="document" class="section level4">
+<h4 class="hasAnchor">
+<a href="#document" class="anchor"></a>Document</h4>
 <p>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>, specifically with the <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html">Markdown syntax</a>, to create <code>NAMESPACE</code> and all <code>.Rd</code> files. All edits to documentation should be done in roxygen comments above the associated function or object. Then, run <code><a href="https://rdrr.io/pkg/devtools/man/document.html">devtools::document()</a></code> to rebuild the <code>NAMESPACE</code> and <code>.Rd</code> files.</p>
 <p>See the <code>RoxygenNote</code> in <a href="DESCRIPTION">DESCRIPTION</a> for the version of roxygen2 being used.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/spell_check_package.html">spell_check_package</a></span>()</a>
 <a class="sourceLine" id="cb3-2" title="2">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/wordlist.html">update_wordlist</a></span>()</a>
 <a class="sourceLine" id="cb3-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/document.html">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rd"</span>, <span class="st">"collate"</span>, <span class="st">"namespace"</span>))</a></code></pre></div>
 </div>
-<div id="test" class="section level3">
-<h3 class="hasAnchor">
-<a href="#test" class="anchor"></a>Test</h3>
+<div id="test" class="section level4">
+<h4 class="hasAnchor">
+<a href="#test" class="anchor"></a>Test</h4>
 <p>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases are easier to accept. If you are not sure what parts of your code are covered by tests, run the following to get a local coverage report of the package so you can see exactly what lines are not covered in the project.</p>
 <p>To run tests, you’ll need access to the <a href="https://sandbox.central.opendatakit.org/">ODK Central sandbox instance</a>. To build the vignettes, you’ll need access to <a href="https://odkcentral.dbca.wa.gov.au">DBCA’s ODK Central instance</a>. Create an <a href="https://github.com/dbca-wa/ruODK/issues/new/choose">accont request issue</a> to request access to those two ODK Central instances.</p>
 <p>You will need to use the following environment variables:</p>
@@ -226,38 +223,38 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test</a></span>()</a>
 <a class="sourceLine" id="cb6-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test_coverage</a></span>()</a></code></pre></div>
 </div>
-<div id="news" class="section level3">
-<h3 class="hasAnchor">
-<a href="#news" class="anchor"></a>NEWS</h3>
+<div id="news" class="section level4">
+<h4 class="hasAnchor">
+<a href="#news" class="anchor"></a>NEWS</h4>
 <p>For user-facing changes, add a bullet to <code>NEWS.md</code> that concisely describes the change. Small tweaks to the documentation do not need a bullet. The format should include your GitHub username, and links to relevant issue(s)/PR(s), as seen below.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb7-1" title="1">* <span class="bn">`function_name()`</span><span class="fl"> followed by brief description of change (#issue-num, @your-github-user-name)</span></a></code></pre></div>
 </div>
-<div id="re-check" class="section level3">
-<h3 class="hasAnchor">
-<a href="#re-check" class="anchor"></a>Re-check</h3>
+<div id="re-check" class="section level4">
+<h4 class="hasAnchor">
+<a href="#re-check" class="anchor"></a>Re-check</h4>
 <p>Before submitting your changes, make sure that the package either still passes <code>R CMD check</code>, or that the warnings and/or notes have not <em>changed</em> as a result of your edits.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/check.html">check</a></span>()</a>
 <a class="sourceLine" id="cb8-2" title="2">goodpractice<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/goodpractice/man/gp.html">goodpractice</a></span>(<span class="dt">quiet =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 </div>
-<div id="commit" class="section level3">
-<h3 class="hasAnchor">
-<a href="#commit" class="anchor"></a>Commit</h3>
+<div id="commit" class="section level4">
+<h4 class="hasAnchor">
+<a href="#commit" class="anchor"></a>Commit</h4>
 <p>When you’ve made your changes, write a clear commit message describing what you’ve done. If you’ve fixed or closed an issue, make sure to include keywords (e.g. <code>fixes #101</code>) at the end of your commit message (not in its title) to automatically close the issue when the PR is merged.</p>
 </div>
-<div id="push-and-pull" class="section level3">
-<h3 class="hasAnchor">
-<a href="#push-and-pull" class="anchor"></a>Push and pull</h3>
+<div id="push-and-pull" class="section level4">
+<h4 class="hasAnchor">
+<a href="#push-and-pull" class="anchor"></a>Push and pull</h4>
 <p>Once you’ve pushed your commit(s) to a branch in <em>your</em> fork, you’re ready to make the pull request. Pull requests should have descriptive titles to remind reviewers/maintainers what the PR is about. You can easily view what exact changes you are proposing using either the <a href="http://r-pkgs.had.co.nz/git.html#git-status">Git diff</a> view in RStudio, or the <a href="https://help.github.com/articles/creating-a-pull-request/">branch comparison view</a> you’ll be taken to when you go to create a new PR. If the PR is related to an issue, provide the issue number and slug in the <em>description</em> using auto-linking syntax (e.g. <code>#15</code>).</p>
 </div>
-<div id="review-revise-repeat" class="section level3">
-<h3 class="hasAnchor">
-<a href="#review-revise-repeat" class="anchor"></a>Review, revise, repeat</h3>
+<div id="review-revise-repeat" class="section level4">
+<h4 class="hasAnchor">
+<a href="#review-revise-repeat" class="anchor"></a>Review, revise, repeat</h4>
 <p>The latency period between submitting your PR and its review may vary. When a maintainer does review your contribution, be sure to use the same conventions described here with any revision commits.</p>
 </div>
 </div>
-<div id="resources" class="section level2">
-<h2 class="hasAnchor">
-<a href="#resources" class="anchor"></a>Resources</h2>
+<div id="resources" class="section level3">
+<h3 class="hasAnchor">
+<a href="#resources" class="anchor"></a>Resources</h3>
 <ul>
 <li>
 <a href="http://happygitwithr.com/">Happy Git and GitHub for the useR</a> by Jenny Bryan.</li>
@@ -284,15 +281,15 @@
 <a href="https://guides.github.com/activities/forking/">GitHub Guides: Forking Projects</a>.</li>
 </ul>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<div id="code-of-conduct" class="section level3">
+<h3 class="hasAnchor">
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h3>
 <p>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
-<div id="maintaining-ruodk" class="section level1">
-<h1 class="hasAnchor">
-<a href="#maintaining-ruodk" class="anchor"></a>Maintaining ruODK</h1>
+<div id="maintaining-ruodk" class="section level2">
+<h2 class="hasAnchor">
+<a href="#maintaining-ruodk" class="anchor"></a>Maintaining ruODK</h2>
 <p>The steps below are run by the package maintainer to prepare a new <code>ruODK</code> release. It is not necessary to run them as a contributor, but immensely convenient for the maintainer to have them here in one place.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Tests</span></a>
 <a class="sourceLine" id="cb9-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/test.html">test</a></span>()</a>

@@ -1,4 +1,12 @@
 # This file contains the install steps for binder (https://mybinder.org/)
 # https://mybinder.readthedocs.io/en/latest/using.html#preparing-a-repository-for-binder
+install.packages("remotes")
+install.packages("usethis")
 remotes::install_github("dbca-wa/ruODK", dependencies = TRUE)
 install.packages("rmarkdown")
+install.packages("DT")
+install.packages("janitor")
+install.packages("knitr")
+install.packages("ggplot2")
+install.packages("leaflet")
+install.packages("listviewer")

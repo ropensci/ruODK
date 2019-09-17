@@ -41,7 +41,8 @@ Suggests:
     listviewer (>= 1.4.0),
     rlist (>= 0.4.6.1),
     rmarkdown (>= 1.12),
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    usethis (>= 1.5.1)
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en_AU

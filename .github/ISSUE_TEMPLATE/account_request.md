@@ -6,13 +6,8 @@ labels: help-wanted
 assignees: florianm
 
 ---
+I want to run the tests and build the vignettes. 
+Please provide access to the ODK Central Sandbox <https://sandbox.central.opendatakit.org/>.
 
-## Email
-Please send me your email via email (see package contact info).
-
-## Purpose
-
-- [ ] I want to run the tests and require access to the ODK Central Sandbox 
-  https://sandbox.central.opendatakit.org/
-- [ ] I want to build the vignettes and require access to 
-  https://odkcentral.dbca.wa.gov.au/
+[ ] I have sent an email to the package maintainer requesting access.
+[ ] I have requested access to the ODK Central Sandbox in the [ODK Forum](https://forum.opendatakit.org/c/support).
