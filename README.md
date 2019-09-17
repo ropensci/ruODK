@@ -18,6 +18,7 @@ status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-c
 status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=master&svg=true)](https://ci.appveyor.com/project/dbca-wa/ruODK)
 [![Coverage
 status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/ruODK/master?urlpath=rstudio)
 <!-- badges: end -->
 
 Especially in these trying times, it is important to ask: “ruODK?”

@@ -1,21 +1,30 @@
 # ruODK 0.6.3
+## Dependencies
 * [tidyr 1.0.0](https://www.tidyverse.org/articles/2019/09/tidyr-1-0-0/) is out!
   Move `{tidyr}` dependency from GitHub master to CRAN version (#27)
+  
+## Documentation
 * Add [David Henry](https://github.com/schemetrica)'s 
   [Pentaho Kettle tutorial](https://forum.opendatakit.org/t/automating-data-delivery-using-the-odata-endpoint-in-odk-central/22010) 
   to the software review in the README (#28)
+  
+## DIY for workshops
 * Add inaugural RMarkdown template "odata" (#26)
+* Add Binder (https://mybinder.org/) launch button (one click start for #26)
 
 # ruODK 0.6.2
+## Code
 * Simplifiy `ru_setup()` to use OData Service URL.
 * Change all functions to default to `get_default{pid,fid,url,un,pw}()`, partly
   moving project ID (pid) and form ID (fid) to kwargs. This changes all examples,
   tests, vignettes, READMEs.
-* Add a high level overview diagram to README and `inst/joss/paper.md` to
-  illustrate `ruODK`'s intended purpose in the ODK ecosystem (#19)
 * Reduce installed package size by sharing attachment files. Add new parameter
   `separate=FALSE` to `attachment_get` to prevent separating attachment files 
   into subfolders named after their submission `uuid` (#22)
+  
+## Documentation
+* Add a high level overview diagram to README and `inst/joss/paper.md` to
+  illustrate `ruODK`'s intended purpose in the ODK ecosystem (#19)
 * Added link to explain 
   [environment variables and R startup](https://whattheyforgot.org/r-startup.html) 
   to vignette "setup". @maelle
