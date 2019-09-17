@@ -22,6 +22,7 @@ You will need:
 Step 1: Setup ruODK
 ODK Central webuser username and password are set as environment variables to
 keep them outside of this document.
+Optional: CKAN URL and API key.
 
 Read vignette "setup" for further information.
 -->
@@ -34,6 +35,9 @@ usethis::edit_r_environ()
 ```{r paste_env_vars, echo=FALSE, eval=FALSE}
 ODKC_UN="..."
 ODKC_PW="..."
+
+CKAN_URL="https://demo.ckan.org"
+CKAN_KEY="my-ckan-api-key"
 ```
 <!-- and restart the session to load these environment variables. -->
 
@@ -157,12 +161,13 @@ The form submissions are now extracted and visualised. What's next:
 * Save to a local spreadsheet.
 * Upload the data (spreadsheet) and possibly this report (compiled to HTML) 
   to a CKAN data catalogue.
-* Upload data, report, attachments to Google Drive.
-* Generate the HTML report once off without the next chunk, as the chunk refers
-  to the rendered output file (HTML) before the file is created initially.
+* Upload same data, report, attachments to Google Drive.
+* Generate the HTML report once off without the next chunk (`eval=F`), 
+  as the chunk refers to the rendered output file (HTML) before the file is 
+  created initially.
 * Run report always twice to generate (run 1) and upload (run 2) the latest HTML.
 -->
-```{r data_export}
+```{r data_export, eval=FALSE}
 # Prepare report and products as local files
 rep_fn <- "my_report.html" # The file name you save this template under
 data_fn <- here::here(loc, "data.csv") # Main data
@@ -181,14 +186,18 @@ data %>% readr::write_csv(data_fn)
 #
 # Upload to a CKAN data catalogue (need url and API key of a write permitted user)
 # See ROpenSci package ckanr
-ckanr::ckanr_setup(url = "https://demo.ckan.org", key = "APIKEY")
+ckanr::ckanr_setup(url = Sys.getenv("CKAN_URL"), key = Sys.getenv("CKAN_KEY"))
 
-# Run once to create resources
+# Run once to create resources on an existing dataset
 d <- ckanr::package_show("dataset-title")
-res_data_main <- ckanr::resource_create(package_id = d$id, title="Main data", upload = data_fn)
-res_data_sub1 <- ckanr::resource_create(package_id = d$id, title="Nested data table 1", upload = data_sub1_fn)
-res_report <- ckanr::resource_create(package_id = d$id, title="Nested data table 1", upload = rep_fn)
-res_zip <- ckanr::resource_create(package_id = d$id, title="All data and attachments", upload = zip_fn)
+res_data_main <- ckanr::resource_create(
+  package_id = d$id, title="Main data", upload = data_fn)
+res_data_sub1 <- ckanr::resource_create(
+  package_id = d$id, title="Nested data table 1", upload = data_sub1_fn)
+res_report <- ckanr::resource_create(
+  package_id = d$id, title="Nested data table 1", upload = rep_fn)
+res_zip <- ckanr::resource_create(
+  package_id = d$id, title="All data and attachments", upload = zip_fn)
 
 # Paste res_data_main$id over RID and keep here, repeat for each resource
 r <- ckanr::resource_update("res_data_main$id", path = data_fn)
@@ -199,7 +208,7 @@ r <- ckanr::resource_update("res_zip$id", path = zip_fn)
 #------------------------------------------------------------------------------#
 # Google Drive
 #
-# Once per machine:
+# Once per machine, then comment out:
 googledrive::drive_auth(reset=TRUE, use_oob = TRUE)
 
 # Upload to Google Drive

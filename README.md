@@ -19,8 +19,6 @@ status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-c
 status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=master&svg=true)](https://ci.appveyor.com/project/dbca-wa/ruODK)
 [![Coverage
 status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
-[![Codacy
-Badge](https://api.codacy.com/project/badge/Grade/b4814112362445dfb32fc08664aadb43)](https://www.codacy.com/manual/florianm/ruODK?utm_source=github.com&utm_medium=referral&utm_content=dbca-wa/ruODK&utm_campaign=Badge_Grade)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/ruODK/master?urlpath=rstudio)
 <!-- badges: end -->
 
