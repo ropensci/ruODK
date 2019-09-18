@@ -6,7 +6,8 @@
 \title{OData service document for an ODK Central form.}
 \format{A tibble with one row per submission data endpoint.}
 \source{
-OData service document for "inst/extdata/Flora Quadrat 0.2.xml"
+OData service document for
+  `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 }
 \usage{
 fq_svc
@@ -16,7 +17,8 @@ The OData response for the metadata of an ODK Central form.
 }
 \seealso{
 Other included: \code{\link{fq_meta}},
-  \code{\link{fq_raw}}, \code{\link{fq_tae}}
+  \code{\link{fq_raw_strata}}, \code{\link{fq_raw_taxa}},
+  \code{\link{fq_raw}}
 }
 \concept{included}
 \keyword{datasets}

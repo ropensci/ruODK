@@ -1,5 +1,0 @@
-canonical_name,photo_in_situ,taxon_encounter_location-Latitude,taxon_encounter_location-Longitude,taxon_encounter_location-Altitude,taxon_encounter_location-Accuracy,life_form,voucher_specimen_barcode,PARENT_KEY,KEY
-Grevillea,1558580116374.jpg,-31.9961627,115.8841655,0.0,56.1,shrub,9311960202528,uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12,uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12/taxon_encounter[1]
-Dontknowsiana sp.,1558580178316.jpg,-31.9963167,115.8843675,0.0,40.519,tree,9311960202528,uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12,uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12/taxon_encounter[2]
-Species 1,1558580622081.jpg,-31.99617267,115.88431406,-13.0,5.36,shrub,9311960202528,uuid:e0375332-0bb5-4175-a498-549bb33420e4,uuid:e0375332-0bb5-4175-a498-549bb33420e4/taxon_encounter[1]
-Species2,1558580706298.jpg,-31.99615233,115.884342,-8.0,4.288,shrub,9311960202528,uuid:e0375332-0bb5-4175-a498-549bb33420e4,uuid:e0375332-0bb5-4175-a498-549bb33420e4/taxon_encounter[2]

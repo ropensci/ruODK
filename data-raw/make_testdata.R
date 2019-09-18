@@ -1,20 +1,21 @@
 # ODK Central example data
 ruODK::ru_setup(
-  svc = paste0(
-    "https://sandbox.central.opendatakit.org/v1/projects/14/",
-    "forms/build_Flora-Quadrat-0-2_1558575936.svc"
-  ),
+  svc = Sys.getenv("ODKC_TEST_SVC"),
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )
 
 fq_svc <- ruODK::odata_service_get()
 fq_meta <- ruODK::odata_metadata_get()
-fq_raw <- ruODK::odata_submission_get()
+fq_raw <- ruODK::odata_submission_get(table = fq_svc$name[1])
+fq_raw_strata <- ruODK::odata_submission_get(table = fq_svc$name[2])
+fq_raw_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3])
 
 usethis::use_data(fq_svc, overwrite = T)
 usethis::use_data(fq_meta, overwrite = T)
 usethis::use_data(fq_raw, overwrite = T)
+usethis::use_data(fq_raw_strata, overwrite = T)
+usethis::use_data(fq_raw_taxa, overwrite = T)
 
 # Hex sticker
 # remotes::install_github("GuangchuangYu/hexSticker")

@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/dbca-wa/ruODK",
   "issueTracker": "https://github.com/dbca-wa/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -169,16 +169,16 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "tidyr",
-      "name": "tidyr",
-      "version": ">= 1.0.0",
+      "identifier": "usethis",
+      "name": "usethis",
+      "version": ">= 1.5.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=tidyr"
+      "sameAs": "https://CRAN.R-project.org/package=usethis"
     }
   ],
   "softwareRequirements": [
@@ -335,7 +335,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
-      "version": ">= 0.8.3.9000",
+      "version": ">= 1.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -373,7 +373,7 @@
       ],
       "name": "ruODK: Client for the ODK Central API",
       "url": "https://github.com/dbca-wa/ruODK",
-      "description": "R package version 0.6.3"
+      "description": "R package version 0.6.4"
     }
   ]
 }

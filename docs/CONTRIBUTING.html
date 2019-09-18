@@ -8,11 +8,13 @@
 
 <title>NA • ruODK</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -32,7 +34,9 @@
 
 
 
+
 <meta property="og:title" content="NA" />
+
 
 
 
@@ -63,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.4</span>
       </span>
     </div>
 
@@ -100,7 +104,6 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/dbca-wa/ruODK">
@@ -188,8 +191,8 @@
 <a href="#document" class="anchor"></a>Document</h4>
 <p>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>, specifically with the <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html">Markdown syntax</a>, to create <code>NAMESPACE</code> and all <code>.Rd</code> files. All edits to documentation should be done in roxygen comments above the associated function or object. Then, run <code><a href="https://rdrr.io/pkg/devtools/man/document.html">devtools::document()</a></code> to rebuild the <code>NAMESPACE</code> and <code>.Rd</code> files.</p>
 <p>See the <code>RoxygenNote</code> in <a href="DESCRIPTION">DESCRIPTION</a> for the version of roxygen2 being used.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/spell_check_package.html">spell_check_package</a></span>()</a>
-<a class="sourceLine" id="cb3-2" title="2">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/wordlist.html">update_wordlist</a></span>()</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">spelling<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/spelling/reference/spell_check_package.html">spell_check_package</a></span>()</a>
+<a class="sourceLine" id="cb3-2" title="2">spelling<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/spelling/reference/wordlist.html">update_wordlist</a></span>()</a>
 <a class="sourceLine" id="cb3-3" title="3">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/document.html">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rd"</span>, <span class="st">"collate"</span>, <span class="st">"namespace"</span>))</a></code></pre></div>
 </div>
 <div id="test" class="section level4">
@@ -297,9 +300,9 @@
 <a class="sourceLine" id="cb9-4" title="4"><span class="co"># Docs</span></a>
 <a class="sourceLine" id="cb9-5" title="5">styler<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/styler/man/style_pkg.html">style_pkg</a></span>()</a>
 <a class="sourceLine" id="cb9-6" title="6">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/document.html">document</a></span>(<span class="dt">roclets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rd"</span>, <span class="st">"collate"</span>, <span class="st">"namespace"</span>))</a>
-<a class="sourceLine" id="cb9-7" title="7">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/spell_check_package.html">spell_check_package</a></span>()</a>
-<a class="sourceLine" id="cb9-8" title="8">spelling<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/spelling/man/wordlist.html">update_wordlist</a></span>()</a>
-<a class="sourceLine" id="cb9-9" title="9">codemetar<span class="op">::</span><span class="kw"><a href="https://ropensci.github.io/codemetar/reference/write_codemeta.html">write_codemeta</a></span>(<span class="st">"ruODK"</span>)</a>
+<a class="sourceLine" id="cb9-7" title="7">spelling<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/spelling/reference/spell_check_package.html">spell_check_package</a></span>()</a>
+<a class="sourceLine" id="cb9-8" title="8">spelling<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/spelling/reference/wordlist.html">update_wordlist</a></span>()</a>
+<a class="sourceLine" id="cb9-9" title="9">codemetar<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/codemetar/reference/write_codemeta.html">write_codemeta</a></span>(<span class="st">"ruODK"</span>)</a>
 <a class="sourceLine" id="cb9-10" title="10">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/edit_file.html">edit_file</a></span>(<span class="st">"inst/CITATION"</span>)</a>
 <a class="sourceLine" id="cb9-11" title="11">rmarkdown<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rmarkdown/man/render.html">render</a></span>(<span class="st">"README.Rmd"</span>,  <span class="dt">encoding =</span> <span class="st">"UTF-8"</span>, <span class="dt">clean =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb9-12" title="12"><span class="cf">if</span> (fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/file_access.html">file_exists</a></span>(<span class="st">"README.html"</span>)) fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/delete.html">file_delete</a></span>(<span class="st">"README.html"</span>)</a>
@@ -337,7 +340,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

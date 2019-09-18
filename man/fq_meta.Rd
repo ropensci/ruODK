@@ -6,7 +6,7 @@
 \title{OData metadata document for an ODK Central form.}
 \format{A list of lists}
 \source{
-See included file "inst/extdata/Flora Quadrat 0.2.xml"
+See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 }
 \usage{
 fq_meta
@@ -15,8 +15,9 @@ fq_meta
 The OData response for the metadata of an ODK Central form.
 }
 \seealso{
-Other included: \code{\link{fq_raw}}, \code{\link{fq_svc}},
-  \code{\link{fq_tae}}
+Other included: \code{\link{fq_raw_strata}},
+  \code{\link{fq_raw_taxa}}, \code{\link{fq_raw}},
+  \code{\link{fq_svc}}
 }
 \concept{included}
 \keyword{datasets}

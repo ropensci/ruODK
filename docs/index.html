@@ -22,7 +22,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.4</span>
       </span>
     </div>
 
@@ -89,15 +89,10 @@
       
 
       </header><div class="row">
-  <div class="col-md-9 contents">
-    
-
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="ruodk-an-r-client-for-the-odk-central-api" class="section level1">
+  <div class="contents col-md-9">
+<div id="ruodk-an-r-client-for-the-odk-central-api-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ruodk-an-r-client-for-the-odk-central-api" class="anchor"></a><code>ruODK</code>: An R Client for the ODK Central API <img src="reference/figures/ruODK.png" align="right" alt="Are you ODK?" width="120">
+<a href="#ruodk-an-r-client-for-the-odk-central-api-" class="anchor"></a><code>ruODK</code>: An R Client for the ODK Central API <img src="reference/figures/ruODK.png" align="right" alt="Are you ODK?" width="120">
 </h1></div>
 <!-- badges: start -->
 
@@ -105,12 +100,11 @@
 <p><a href="https://opendatakit.org/">OpenDataKit</a> (ODK) is a free and open-source software for collecting, managing, and using data in resource-constrained environments.</p>
 <p>ODK consists of a range of <a href="https://opendatakit.org/software/">software packages and apps</a>. <code>{ruODK}</code> assumes some familiarity of its users with the ODK ecosystem and workflows. For a detailed overview, read the extensive <a href="https://docs.opendatakit.org/">ODK documentation</a> and visit the friendly <a href="https://forum.opendatakit.org/">ODK forum</a>.</p>
 <p><a href="https://docs.opendatakit.org/central-intro/">ODK Central</a> is a cloud-based data clearinghouse for digitally captured data, replacing the older software <a href="https://docs.opendatakit.org/aggregate-intro/">ODK Aggregate</a>. ODK Central manages user accounts and permissions, stores form definitions, and allows data collection clients like <a href="https://docs.opendatakit.org/collect-intro/">ODK Collect</a> to connect to it for form download and submission upload.</p>
-<div class="figure">
-<img src="https://www.lucidchart.com/publicSegments/view/952c1350-3003-48c1-a2c8-94bad74cdb46/image.png" alt="An ODK setup with ODK Build, Central, Collect, and ruODK"><p class="caption">An ODK setup with ODK Build, Central, Collect, and ruODK</p>
-</div>
+<p><img src="https://www.lucidchart.com/publicSegments/view/952c1350-3003-48c1-a2c8-94bad74cdb46/image.png" alt="An ODK setup with ODK Build, Central, Collect, and ruODK"></p>
 <p>A typical <a href="https://docs.opendatakit.org/#how-is-odk-used">ODK workflow</a>: An XForm is designed e.g. in <a href="https://build.opendatakit.org/">ODK Build</a>, <a href="https://docs.opendatakit.org/central-forms/">published to ODK Central</a>, and downloaded onto an Android device running ODK Collect. After data have been captured digitally using <a href="https://docs.opendatakit.org/collect-intro/">ODK Collect</a>, the data are uploaded and stored in ODK Central. The next step from there is to extract the data, optionally upload it into another data warehouse, and then to analyse and generate insight from it.</p>
 <p>While data can be retrieved in bulk through the GUI, ODK Central’s API provides access to its data and functionality through both an OData and a RESTful API with a comprehensive and interactive <a href="https://odkcentral.docs.apiary.io/#reference/odata-endpoints">documentation</a>.</p>
-<p><code>{ruODK}</code> is aimed at the technically minded researcher who wishes to access and use the data from ODK Central using the programming language R.</p>
+<p><code>{ruODK}</code> is aimed at the technically minded researcher who wishes to access and use the data from ODK Central using the programming language</p>
+<p>R.</p>
 <p>Benefits of using the R ecosystem in combination with ODK:</p>
 <ul>
 <li>Scalability: Both R and ODK are free and open source software. Scaling to many users does not incur license fees.</li>
@@ -127,7 +121,7 @@
 <p><code>{ruODK}</code>’s use cases:</p>
 <ul>
 <li>Smaller projects:
-<ol style="list-style-type: decimal">
+<ol>
 <li>Data collection: ODK Collect</li>
 <li>Data clearinghouse: ODK Central</li>
 <li>Data analysis and reporting: <code>Rmd</code> (ruODK)</li>
@@ -136,7 +130,7 @@
 </ol>
 </li>
 <li>Larger projects:
-<ol style="list-style-type: decimal">
+<ol>
 <li>Data collection: ODK Collect</li>
 <li>Data clearinghouse: ODK Central</li>
 <li>ETL pipeline into data warehouses: <code>Rmd</code> (ruODK)</li>
@@ -192,7 +186,7 @@
 </h2>
 <p>Set up <code>{ruODK}</code> with an OData Service URL and credentials of a read-permitted ODK Central web user.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/ru_setup.html">ru_setup</a></span>(</a>
-<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">svc =</span> <span class="st">"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>,</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">svc =</span> <span class="st">"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc"</span>,</a>
 <a class="sourceLine" id="cb2-3" title="3">  <span class="dt">un =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_UN"</span>),</a>
 <a class="sourceLine" id="cb2-4" title="4">  <span class="dt">pw =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_PW"</span>)</a>
 <a class="sourceLine" id="cb2-5" title="5">)</a></code></pre></div>
@@ -207,7 +201,17 @@
 <a class="sourceLine" id="cb3-3" title="3"><span class="co"># List projects</span></a>
 <a class="sourceLine" id="cb3-4" title="4">proj &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/project_list.html">project_list</a></span>()</a>
 <a class="sourceLine" id="cb3-5" title="5">proj <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
-<table class="table table">
+<table class="table">
+<colgroup>
+<col width="2%">
+<col width="13%">
+<col width="5%">
+<col width="10%">
+<col width="20%">
+<col width="20%">
+<col width="20%">
+<col width="8%">
+</colgroup>
 <thead><tr class="header">
 <th align="right">id</th>
 <th align="left">name</th>
@@ -285,7 +289,20 @@
 <a class="sourceLine" id="cb4-2" title="2"><span class="co"># List forms of default project</span></a>
 <a class="sourceLine" id="cb4-3" title="3">frms &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/form_list.html">form_list</a></span>()</a>
 <a class="sourceLine" id="cb4-4" title="4">frms <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
-<table class="table table">
+<table class="table">
+<colgroup>
+<col width="12%">
+<col width="20%">
+<col width="2%">
+<col width="2%">
+<col width="4%">
+<col width="8%">
+<col width="6%">
+<col width="12%">
+<col width="8%">
+<col width="8%">
+<col width="13%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">name</th>
 <th align="left">fid</th>
@@ -344,12 +361,12 @@
 <td align="left">build_Flora-Quadrat-0-4_1564384341</td>
 <td align="left"></td>
 <td align="left">open</td>
-<td align="left">0</td>
+<td align="left">1</td>
 <td align="left">2019-08-19 07:58:28</td>
 <td align="right">57</td>
 <td align="left"><a href="mailto:florian.mayer@dbca.wa.gov.au" class="email">florian.mayer@dbca.wa.gov.au</a></td>
 <td align="left">NA</td>
-<td align="left">NA</td>
+<td align="left">2019-09-18 06:20:25</td>
 <td align="left">1bb959d541ac6990e3f74893e38c855b</td>
 </tr>
 <tr class="odd">
@@ -410,7 +427,20 @@
 <a class="sourceLine" id="cb5-2" title="2"><span class="co"># Form details of default form</span></a>
 <a class="sourceLine" id="cb5-3" title="3">frmd &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/form_detail.html">form_detail</a></span>()</a>
 <a class="sourceLine" id="cb5-4" title="4">frmd <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
-<table class="table table">
+<table class="table">
+<colgroup>
+<col width="8%">
+<col width="16%">
+<col width="3%">
+<col width="2%">
+<col width="5%">
+<col width="11%">
+<col width="7%">
+<col width="14%">
+<col width="5%">
+<col width="11%">
+<col width="15%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">name</th>
 <th align="left">fid</th>
@@ -425,17 +455,17 @@
 <th align="left">hash</th>
 </tr></thead>
 <tbody><tr class="odd">
-<td align="left">Flora Quadrat 0.2</td>
-<td align="left">build_Flora-Quadrat-0-2_1558575936</td>
+<td align="left">Flora Quadrat 0.4</td>
+<td align="left">build_Flora-Quadrat-0-4_1564384341</td>
 <td align="left"></td>
 <td align="left">open</td>
-<td align="right">2</td>
-<td align="left">2019-05-23T01:46:08.474Z</td>
+<td align="right">1</td>
+<td align="left">2019-08-19T07:58:28.211Z</td>
 <td align="right">57</td>
 <td align="left"><a href="mailto:florian.mayer@dbca.wa.gov.au" class="email">florian.mayer@dbca.wa.gov.au</a></td>
-<td align="left">2019-08-19T07:57:38.755Z</td>
-<td align="left">2019-05-23T03:12:16.012Z</td>
-<td align="left">14e269a2374132392c275117efbe67b6</td>
+<td align="left">NA</td>
+<td align="left">2019-09-18T06:20:25.780Z</td>
+<td align="left">1bb959d541ac6990e3f74893e38c855b</td>
 </tr></tbody>
 </table>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"></a>
@@ -498,7 +528,44 @@
 <a class="sourceLine" id="cb6-58" title="58">data &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_submission_get.html">odata_submission_get</a></span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-59" title="59"><span class="st">  </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_submission_parse.html">odata_submission_parse</a></span>()</a>
 <a class="sourceLine" id="cb6-60" title="60">data <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
-<table class="table table">
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="4%">
+<col width="2%">
+<col width="2%">
+<col width="4%">
+<col width="3%">
+<col width="2%">
+<col width="2%">
+<col width="6%">
+<col width="3%">
+<col width="2%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="2%">
+<col width="4%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="2%">
+<col width="19%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">id</th>
 <th align="left">encounter_start_datetime</th>
@@ -518,106 +585,64 @@
 <th align="right">accuracy_16</th>
 <th align="left">morphological_type</th>
 <th align="left">morphological_type_photo</th>
-<th align="left">vegclass_placeholder</th>
-<th align="left">type_20</th>
+<th align="left">type_19</th>
+<th align="right">x20</th>
 <th align="right">x21</th>
 <th align="right">x22</th>
-<th align="right">x23</th>
-<th align="right">accuracy_24</th>
-<th align="left">type_25</th>
+<th align="right">accuracy_23</th>
+<th align="left">type_24</th>
+<th align="right">x25</th>
 <th align="right">x26</th>
 <th align="right">x27</th>
-<th align="right">x28</th>
-<th align="right">accuracy_29</th>
-<th align="left">type_30</th>
+<th align="right">accuracy_28</th>
+<th align="left">type_29</th>
+<th align="right">x30</th>
 <th align="right">x31</th>
 <th align="right">x32</th>
-<th align="right">x33</th>
-<th align="right">accuracy_34</th>
+<th align="right">accuracy_33</th>
 <th align="left">mudmap_photo</th>
 <th align="left">odata_context</th>
 </tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12</td>
-<td align="left">2019-05-23T10:46:04.821+08:00</td>
+<tbody><tr class="odd">
+<td align="left">uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f</td>
+<td align="left">2019-09-18T14:08:43.257+08:00</td>
 <td align="left">Florian Mayer</td>
-<td align="left">ccb596b33cd13298</td>
-<td align="left">2019-05-23T10:57:17.184+08:00</td>
-<td align="left">2019-05-23T03:12:16.012Z</td>
-<td align="left">228</td>
-<td align="left">manjimup</td>
-<td align="left">uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12</td>
-<td align="left">Kens1</td>
-<td align="left">1558579592153.jpg</td>
-<td align="left">Point</td>
-<td align="right">115.8840</td>
-<td align="right">-31.99618</td>
-<td align="right">0</td>
-<td align="right">41.909</td>
-<td align="left">open-depression</td>
-<td align="left">1558579731266.jpg</td>
-<td align="left">Lanscaped native shrubs over red gravel</td>
-<td align="left">Point</td>
-<td align="right">115.8840</td>
-<td align="right">-31.99612</td>
-<td align="right">0</td>
-<td align="right">40.977</td>
+<td align="left">f73d2e1221ceaa06</td>
+<td align="left">2019-09-18T14:18:53.583+08:00</td>
+<td align="left">2019-09-18T06:20:25.780Z</td>
+<td align="left">241</td>
+<td align="left">flora</td>
+<td align="left">uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f</td>
+<td align="left">Kensington Planter Box 1</td>
+<td align="left">1568786958640.jpg</td>
 <td align="left">Point</td>
 <td align="right">115.8843</td>
-<td align="right">-31.99666</td>
-<td align="right">0</td>
-<td align="right">60.000</td>
-<td align="left">Point</td>
-<td align="right">115.8841</td>
-<td align="right">-31.99613</td>
-<td align="right">0</td>
-<td align="right">72.900000</td>
-<td align="left">1558580082333.jpg</td>
-<td align="left"><a href="https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/%24metadata#Submissions" class="uri">https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions</a></td>
-</tr>
-<tr class="even">
-<td align="left">uuid:e0375332-0bb5-4175-a498-549bb33420e4</td>
-<td align="left">2019-05-23T10:58:34.541+08:00</td>
-<td align="left">Florian Mayer</td>
-<td align="left">351848090572014</td>
-<td align="left">2019-05-23T11:05:48.371+08:00</td>
-<td align="left">2019-05-23T03:07:34.385Z</td>
-<td align="left">228</td>
-<td align="left">manjimup</td>
-<td align="left">uuid:e0375332-0bb5-4175-a498-549bb33420e4</td>
-<td align="left">Kens02</td>
-<td align="left">1558580334821.jpg</td>
-<td align="left">Point</td>
-<td align="right">115.8843</td>
-<td align="right">-31.99621</td>
-<td align="right">-21</td>
-<td align="right">12.864</td>
+<td align="right">-31.99615</td>
+<td align="right">-17.37241</td>
+<td align="right">4.288</td>
 <td align="left">flat</td>
-<td align="left">1558580394989.jpg</td>
-<td align="left">Planter box over concrete pavers</td>
+<td align="left">1568787004467.jpg</td>
 <td align="left">Point</td>
-<td align="right">115.8843</td>
-<td align="right">-31.99620</td>
-<td align="right">-22</td>
-<td align="right">12.864</td>
+<td align="right">115.8844</td>
+<td align="right">-31.9962</td>
+<td align="right">-8.662476</td>
+<td align="right">4.288</td>
 <td align="left">Point</td>
-<td align="right">115.8843</td>
-<td align="right">-31.99620</td>
-<td align="right">-22</td>
-<td align="right">15.008</td>
+<td align="right">115.8844</td>
+<td align="right">-31.99622</td>
+<td align="right">-6.266144</td>
+<td align="right">4.288</td>
 <td align="left">Point</td>
-<td align="right">115.8843</td>
-<td align="right">-31.99618</td>
-<td align="right">-26</td>
-<td align="right">9.648001</td>
-<td align="left">1558580571494.jpg</td>
-<td align="left"><a href="https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/%24metadata#Submissions" class="uri">https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions</a></td>
-</tr>
-</tbody>
+<td align="right">115.8844</td>
+<td align="right">-31.99621</td>
+<td align="right">-6.597748</td>
+<td align="right">4.288</td>
+<td align="left">1568787172983.jpg</td>
+<td align="left"><a href="https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/%24metadata#Submissions" class="uri">https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions</a></td>
+</tr></tbody>
 </table>
 <p>A more detailed walk-through with some data visualisation examples is available in the <code><a href="articles/odata.html">vignette("odata", package="ruODK")</a></code> (online <a href="https://dbca-wa.github.io/ruODK/articles/odata.html">here</a>).</p>
-<p>See also <code>vignette("restapi", package="ruODK")</code> (online <a href="https://dbca-wa.github.io/ruODK/articles/api.html">here</a>) for examples using the alternative RESTful API.</p>
+<p>See also <code><a href="articles/api.html">vignette("api", package="ruODK")</a></code> (online <a href="https://dbca-wa.github.io/ruODK/articles/api.html">here</a>) for examples using the alternative RESTful API.</p>
 </div>
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor">
@@ -635,14 +660,14 @@
 <a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; To cite ruODK in publications use:</span></a>
 <a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt;   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;   R package version 0.6.3. https://github.com/dbca-wa/ruODK</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;   R package version 0.6.4. https://github.com/dbca-wa/ruODK</span></a>
 <a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></a>
 <a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;   @Misc{,</span></a>
 <a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt;     title = {ruODK: Client for the ODK Central API},</span></a>
 <a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt;     author = {Florian W. Mayer},</span></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.3},</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.4},</span></a>
 <a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt;     year = {2019},</span></a>
 <a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;     url = {https://github.com/dbca-wa/ruODK},</span></a>
 <a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt;   }</span></a></code></pre></div>
@@ -661,15 +686,15 @@
 <div id="comparison-of-odk-related-software-packages-non-odk-core" class="section level3">
 <h3 class="hasAnchor">
 <a href="#comparison-of-odk-related-software-packages-non-odk-core" class="anchor"></a>Comparison of ODK related software packages (non-ODK core)</h3>
-<table class="table table">
+<table class="table">
 <colgroup>
-<col width="25%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
+<col width="2%">
+<col width="33%">
+<col width="10%">
+<col width="7%">
+<col width="5%">
+<col width="33%">
+<col width="7%">
 </colgroup>
 <thead><tr class="header">
 <th>Package</th>
@@ -841,14 +866,14 @@
 <div id="comparison-of-odata-related-r-packages" class="section level3">
 <h3 class="hasAnchor">
 <a href="#comparison-of-odata-related-r-packages" class="anchor"></a>Comparison of OData related R packages</h3>
-<table class="table table">
+<table class="table">
 <colgroup>
-<col width="28%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="13%">
+<col width="4%">
+<col width="42%">
+<col width="5%">
+<col width="29%">
+<col width="10%">
+<col width="7%">
 </colgroup>
 <thead><tr class="header">
 <th>Package</th>
@@ -1005,7 +1030,7 @@
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/ropensci/software-review/issues/335"><img src="https://badges.ropensci.org/335_status.svg" alt="ROpenSci submission status"></a></li>
@@ -1019,9 +1044,7 @@
 </ul>
 </div>
 </div>
-
 </div>
-
 
 
       <footer><div class="copyright">
@@ -1029,7 +1052,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

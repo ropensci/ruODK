@@ -1,3 +1,11 @@
+# ruODK 0.6.4
+## Data
+*  Use a new test form to make package smaller and tests faster.
+   Use the test data as example data, include data from two nested tables.
+   Use the data in all vignettes and README.
+   The test service url now ends in 
+   [build_Flora-Quadrat-0-4_1564384341.svc](https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc), credentials are unchanged (#23)
+
 # ruODK 0.6.3
 ## Dependencies
 *  [tidyr 1.0.0](https://www.tidyverse.org/articles/2019/09/tidyr-1-0-0/) is out!

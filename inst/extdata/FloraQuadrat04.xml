@@ -1,9 +1,9 @@
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
   <h:head>
-    <h:title>Flora Quadrat 0.3</h:title>
+    <h:title>Flora Quadrat 0.4</h:title>
     <model>
       <instance>
-        <data id="build_Flora-Quadrat-0-3_1559119570">
+        <data id="build_Flora-Quadrat-0-4_1564384341">
           <meta>
             <instanceID/>
           </meta>
@@ -35,11 +35,12 @@
             <mudmap_photo/>
           </perimeter>
           <taxon_encounter jr:template="">
-            <canonical_name/>
+            <field_name/>
             <photo_in_situ/>
             <taxon_encounter_location/>
             <life_form/>
             <voucher_specimen_barcode/>
+            <voucher_specimen_label/>
           </taxon_encounter>
           <encounter_end_datetime/>
         </data>
@@ -104,7 +105,7 @@
             <value>Morphological Type Photo</value>
           </text>
           <text id="/data/habitat/morphological_type_photo:hint">
-            <value></value>
+            <value>Take photo in landscape format</value>
           </text>
           <text id="/data/vegetation_stratum:label">
             <value>Vegetation Stratum</value>
@@ -202,6 +203,9 @@
           <text id="/data/vegetation_stratum/foliage_cover:label">
             <value>Foliage cover</value>
           </text>
+          <text id="/data/vegetation_stratum/foliage_cover:hint">
+            <value>of all dominant species combined</value>
+          </text>
           <text id="/data/vegetation_stratum/foliage_cover:option0">
             <value>D 100-70%</value>
           </text>
@@ -274,11 +278,11 @@
           <text id="/data/taxon_encounter:label">
             <value>Plant Record</value>
           </text>
-          <text id="/data/taxon_encounter/canonical_name:label">
+          <text id="/data/taxon_encounter/field_name:label">
             <value>Taxon</value>
           </text>
-          <text id="/data/taxon_encounter/canonical_name:hint">
-            <value>Canonical name</value>
+          <text id="/data/taxon_encounter/field_name:hint">
+            <value>Field collection name</value>
           </text>
           <text id="/data/taxon_encounter/photo_in_situ:label">
             <value>Photo in situ</value>
@@ -379,6 +383,12 @@
           <text id="/data/taxon_encounter/voucher_specimen_barcode:hint">
             <value></value>
           </text>
+          <text id="/data/taxon_encounter/voucher_specimen_label:label">
+            <value>Voucher specimen label</value>
+          </text>
+          <text id="/data/taxon_encounter/voucher_specimen_label:hint">
+            <value>If barcode not available</value>
+          </text>
         </translation>
       </itext>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
@@ -401,11 +411,12 @@
       <bind nodeset="/data/perimeter/corner3" type="geopoint"/>
       <bind nodeset="/data/perimeter/corner4" type="geopoint"/>
       <bind nodeset="/data/perimeter/mudmap_photo" type="binary"/>
-      <bind nodeset="/data/taxon_encounter/canonical_name" type="string"/>
+      <bind nodeset="/data/taxon_encounter/field_name" type="string"/>
       <bind nodeset="/data/taxon_encounter/photo_in_situ" type="binary"/>
       <bind nodeset="/data/taxon_encounter/taxon_encounter_location" type="geopoint"/>
       <bind nodeset="/data/taxon_encounter/life_form" type="select1"/>
       <bind nodeset="/data/taxon_encounter/voucher_specimen_barcode" type="barcode"/>
+      <bind nodeset="/data/taxon_encounter/voucher_specimen_label" type="string"/>
       <bind nodeset="/data/encounter_end_datetime" type="dateTime" jr:preload="timestamp" jr:preloadParams="end"/>
     </model>
   </h:head>
@@ -592,6 +603,7 @@
           </input>
           <select1 ref="/data/vegetation_stratum/foliage_cover" appearance="minimal">
             <label ref="jr:itext('/data/vegetation_stratum/foliage_cover:label')"/>
+            <hint ref="jr:itext('/data/vegetation_stratum/foliage_cover:hint')"/>
             <item>
               <label ref="jr:itext('/data/vegetation_stratum/foliage_cover:option0')"/>
               <value>100-70</value>
@@ -659,9 +671,9 @@
       <label ref="jr:itext('/data/taxon_encounter:label')"/>
       <repeat nodeset="/data/taxon_encounter">
         <group appearance="field-list">
-          <input ref="/data/taxon_encounter/canonical_name">
-            <label ref="jr:itext('/data/taxon_encounter/canonical_name:label')"/>
-            <hint ref="jr:itext('/data/taxon_encounter/canonical_name:hint')"/>
+          <input ref="/data/taxon_encounter/field_name">
+            <label ref="jr:itext('/data/taxon_encounter/field_name:label')"/>
+            <hint ref="jr:itext('/data/taxon_encounter/field_name:hint')"/>
           </input>
           <upload ref="/data/taxon_encounter/photo_in_situ" mediatype="image/*">
             <label ref="jr:itext('/data/taxon_encounter/photo_in_situ:label')"/>
@@ -784,6 +796,10 @@
           <input ref="/data/taxon_encounter/voucher_specimen_barcode">
             <label ref="jr:itext('/data/taxon_encounter/voucher_specimen_barcode:label')"/>
             <hint ref="jr:itext('/data/taxon_encounter/voucher_specimen_barcode:hint')"/>
+          </input>
+          <input ref="/data/taxon_encounter/voucher_specimen_label">
+            <label ref="jr:itext('/data/taxon_encounter/voucher_specimen_label:label')"/>
+            <hint ref="jr:itext('/data/taxon_encounter/voucher_specimen_label:hint')"/>
           </input>
         </group>
       </repeat>

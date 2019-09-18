@@ -14,12 +14,21 @@ test_that("odata_submission_get works with one known dataset", {
 
 
 test_that("odata_submission_get skip omits number of results", {
-  fresh_raw <- odata_submission_get(
+  fq_svc <- odata_service_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
+  )
+
+  fresh_raw <- odata_submission_get(
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    table = fq_svc$name[2] # brittle: depends on form used
   )
   fresh_parsed <- fresh_raw %>% odata_submission_parse()
 
@@ -29,7 +38,8 @@ test_that("odata_submission_get skip omits number of results", {
     fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
-    pw = get_test_pw()
+    pw = get_test_pw(),
+    table = fq_svc$name[2] # brittle: depends on form used
   )
   skip_parsed <- skip_raw %>% odata_submission_parse()
 
@@ -69,7 +79,7 @@ test_that("odata_submission_get count returns total number or rows", {
 
   # Count: shows all records
   testthat::expect_true("@odata.count" %in% names(x_raw))
-  testthat::expect_gt(x_raw$`@odata.count`, nrow(x_parsed))
+  testthat::expect_gte(x_raw$`@odata.count`, nrow(x_parsed))
 })
 
 

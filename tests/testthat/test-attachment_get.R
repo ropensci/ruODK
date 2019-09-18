@@ -81,8 +81,10 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   testthat::expect_true(fs::dir_exists(t))
   fs::dir_ls(t) %>% fs::file_delete()
 
-  uuid <- "uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12"
-  fn <- "1558579592153.jpg"
+  # Brittle: depends on data collected for example form
+  uuid <- "uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f"
+  fn <- "1568786958640.jpg"
+
   url <- get_test_url()
   pid <- get_test_pid()
   fid <- get_test_fid()

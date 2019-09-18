@@ -21,13 +21,14 @@ test_that("submission_get works", {
 
 
   # The details for one submission return exactly one row
-  testthat::expect_equal(length(sub), 11)
+  testthat::expect_equal(length(sub), 15)
 
   # The columns are metadata, plus the submission data in column 'xml`
   # names(sub)
   cn <- c(
     "meta", "encounter_start_datetime", "reporter", "device_id", "location",
-    "habitat", "vegetation_structure", "perimeter", "taxon_encounter",
+    "habitat", "vegetation_stratum", "vegetation_stratum", "perimeter",
+    "taxon_encounter", "taxon_encounter", "taxon_encounter", "taxon_encounter",
     "taxon_encounter", "encounter_end_datetime"
   )
   testthat::expect_equal(names(sub), cn)

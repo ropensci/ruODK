@@ -175,7 +175,7 @@ read-permitted ODK Central web user.
 
 ``` r
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )
@@ -218,7 +218,7 @@ frms %>% knitr::kable(.)
 | Flora Quadrat 0.1             | build\_Flora-Quadrat-0-1\_1558330379             |         | closing | 1           | 2019-05-20 05:33:15 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-05-23 01:46:39 | 2019-05-20 05:44:20 | 4f0036619468ef05b572631b04b94f06 |
 | Flora Quadrat 0.2             | build\_Flora-Quadrat-0-2\_1558575936             |         | open    | 2           | 2019-05-23 01:46:08 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-08-19 07:57:38 | 2019-05-23 03:12:16 | 14e269a2374132392c275117efbe67b6 |
 | Flora Quadrat 0.3             | build\_Flora-Quadrat-0-3\_1559119570             |         | open    | 1           | 2019-05-29 08:48:15 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-05-29 08:55:59 | d5a80cefb1895eefcd0cb86a12d8acb4 |
-| Flora Quadrat 0.4             | build\_Flora-Quadrat-0-4\_1564384341             |         | open    | 0           | 2019-08-19 07:58:28 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | NA                  | 1bb959d541ac6990e3f74893e38c855b |
+| Flora Quadrat 0.4             | build\_Flora-Quadrat-0-4\_1564384341             |         | open    | 1           | 2019-08-19 07:58:28 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-09-18 06:20:25 | 1bb959d541ac6990e3f74893e38c855b |
 | Spotlighting 0.5              | build\_Spotlighting-0-5\_1558320001              |         | closing | 1           | 2019-05-20 02:44:47 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-05-20 06:30:41 | 2019-05-20 02:58:09 | 3775dcdface98ba3a426739c494123f6 |
 | Spotlighting 0.6              | build\_Spotlighting-0-6\_1558333698              |         | open    | 3           | 2019-05-20 06:30:21 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-05-30 07:13:29 | 456daaa9a4f96670e6eef3cf4a7dd0db |
 | Spotlighting Survey End 0.3   | build\_Spotlighting-Survey-End-0-3\_1558320208   |         | open    | 2           | 2019-05-20 02:44:38 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-05-30 07:15:53 | 5fdfac8e773834b1267f7ca7e1c9a428 |
@@ -231,9 +231,9 @@ frmd <- ruODK::form_detail()
 frmd %>% knitr::kable(.)
 ```
 
-| name              | fid                                  | version | state | submissions | created\_at              | created\_by\_id | created\_by                    | updated\_at              | last\_submission         | hash                             |
-| :---------------- | :----------------------------------- | :------ | :---- | ----------: | :----------------------- | --------------: | :----------------------------- | :----------------------- | :----------------------- | :------------------------------- |
-| Flora Quadrat 0.2 | build\_Flora-Quadrat-0-2\_1558575936 |         | open  |           2 | 2019-05-23T01:46:08.474Z |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-08-19T07:57:38.755Z | 2019-05-23T03:12:16.012Z | 14e269a2374132392c275117efbe67b6 |
+| name              | fid                                  | version | state | submissions | created\_at              | created\_by\_id | created\_by                    | updated\_at | last\_submission         | hash                             |
+| :---------------- | :----------------------------------- | :------ | :---- | ----------: | :----------------------- | --------------: | :----------------------------- | :---------- | :----------------------- | :------------------------------- |
+| Flora Quadrat 0.4 | build\_Flora-Quadrat-0-4\_1564384341 |         | open  |           1 | 2019-08-19T07:58:28.211Z |              57 | <florian.mayer@dbca.wa.gov.au> | NA          | 2019-09-18T06:20:25.780Z | 1bb959d541ac6990e3f74893e38c855b |
 
 ``` r
 
@@ -298,16 +298,15 @@ data <- ruODK::odata_submission_get() %>%
 data %>% knitr::kable(.)
 ```
 
-| id                                        | encounter\_start\_datetime    | reporter      | device\_id       | encounter\_end\_datetime      | submission\_date         | submitter\_id | submitter\_name | instance\_id                              | area\_name | quadrat\_photo    | type\_12 |      x13 |        x14 |  x15 | accuracy\_16 | morphological\_type | morphological\_type\_photo | vegclass\_placeholder                   | type\_20 |      x21 |        x22 |  x23 | accuracy\_24 | type\_25 |      x26 |        x27 |  x28 | accuracy\_29 | type\_30 |      x31 |        x32 |  x33 | accuracy\_34 | mudmap\_photo     | odata\_context                                                                                                              |
-| :---------------------------------------- | :---------------------------- | :------------ | :--------------- | :---------------------------- | :----------------------- | :------------ | :-------------- | :---------------------------------------- | :--------- | :---------------- | :------- | -------: | ---------: | ---: | -----------: | :------------------ | :------------------------- | :-------------------------------------- | :------- | -------: | ---------: | ---: | -----------: | :------- | -------: | ---------: | ---: | -----------: | :------- | -------: | ---------: | ---: | -----------: | :---------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12 | 2019-05-23T10:46:04.821+08:00 | Florian Mayer | ccb596b33cd13298 | 2019-05-23T10:57:17.184+08:00 | 2019-05-23T03:12:16.012Z | 228           | manjimup        | uuid:c0f9ce58-4388-4e7b-98d7-feac459d2e12 | Kens1      | 1558579592153.jpg | Point    | 115.8840 | \-31.99618 |    0 |       41.909 | open-depression     | 1558579731266.jpg          | Lanscaped native shrubs over red gravel | Point    | 115.8840 | \-31.99612 |    0 |       40.977 | Point    | 115.8843 | \-31.99666 |    0 |       60.000 | Point    | 115.8841 | \-31.99613 |    0 |    72.900000 | 1558580082333.jpg | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions> |
-| uuid:e0375332-0bb5-4175-a498-549bb33420e4 | 2019-05-23T10:58:34.541+08:00 | Florian Mayer | 351848090572014  | 2019-05-23T11:05:48.371+08:00 | 2019-05-23T03:07:34.385Z | 228           | manjimup        | uuid:e0375332-0bb5-4175-a498-549bb33420e4 | Kens02     | 1558580334821.jpg | Point    | 115.8843 | \-31.99621 | \-21 |       12.864 | flat                | 1558580394989.jpg          | Planter box over concrete pavers        | Point    | 115.8843 | \-31.99620 | \-22 |       12.864 | Point    | 115.8843 | \-31.99620 | \-22 |       15.008 | Point    | 115.8843 | \-31.99618 | \-26 |     9.648001 | 1558580571494.jpg | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc/$metadata#Submissions> |
+| id                                        | encounter\_start\_datetime    | reporter      | device\_id       | encounter\_end\_datetime      | submission\_date         | submitter\_id | submitter\_name | instance\_id                              | area\_name               | quadrat\_photo    | type\_12 |      x13 |        x14 |        x15 | accuracy\_16 | morphological\_type | morphological\_type\_photo | type\_19 |      x20 |       x21 |        x22 | accuracy\_23 | type\_24 |      x25 |        x26 |        x27 | accuracy\_28 | type\_29 |      x30 |        x31 |        x32 | accuracy\_33 | mudmap\_photo     | odata\_context                                                                                                              |
+| :---------------------------------------- | :---------------------------- | :------------ | :--------------- | :---------------------------- | :----------------------- | :------------ | :-------------- | :---------------------------------------- | :----------------------- | :---------------- | :------- | -------: | ---------: | ---------: | -----------: | :------------------ | :------------------------- | :------- | -------: | --------: | ---------: | -----------: | :------- | -------: | ---------: | ---------: | -----------: | :------- | -------: | ---------: | ---------: | -----------: | :---------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18T14:08:43.257+08:00 | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18T14:18:53.583+08:00 | 2019-09-18T06:20:25.780Z | 241           | flora           | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | 1568786958640.jpg | Point    | 115.8843 | \-31.99615 | \-17.37241 |        4.288 | flat                | 1568787004467.jpg          | Point    | 115.8844 | \-31.9962 | \-8.662476 |        4.288 | Point    | 115.8844 | \-31.99622 | \-6.266144 |        4.288 | Point    | 115.8844 | \-31.99621 | \-6.597748 |        4.288 | 1568787172983.jpg | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
 
 A more detailed walk-through with some data visualisation examples is
 available in the `vignette("odata", package="ruODK")` (online
 [here](https://dbca-wa.github.io/ruODK/articles/odata.html)).
 
-See also `vignette("restapi", package="ruODK")` (online
+See also `vignette("api", package="ruODK")` (online
 [here](https://dbca-wa.github.io/ruODK/articles/api.html)) for examples
 using the alternative RESTful API.
 
@@ -337,14 +336,14 @@ citation("ruODK")
 #> To cite ruODK in publications use:
 #> 
 #>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.
-#>   R package version 0.6.3. https://github.com/dbca-wa/ruODK
+#>   R package version 0.6.4. https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.6.3},
+#>     note = {R package version 0.6.4},
 #>     year = {2019},
 #>     url = {https://github.com/dbca-wa/ruODK},
 #>   }

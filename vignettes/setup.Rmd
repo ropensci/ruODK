@@ -43,17 +43,17 @@ which is shown in ODK Central on the Form Submissions tab.
 ```{r ru_setup}
 # ruODK user using OData service URL, username (an email), and password
 ruODK::ru_setup(
-  svc = "https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Flora-Quadrat-0-2_1558575936.svc", 
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
   un = "me@email.com", 
   pw = "..."
 )
 
 # ruODK contributor
 ruODK::ru_setup(
-  svc = "https://odkcentral.dbca.wa.gov.au/v1/projects/1/forms/build_Flora-Quadrat-0-2_1558575936.svc", 
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
   un = "me@email.com", 
   pw = "my_default_password",
-  test_svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc", 
+  test_svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
   test_un = "me@email.com", 
   test_pw = "YYYY"
 )
@@ -62,7 +62,7 @@ ruODK::ru_setup(
 # Same effect as above, but more typing
 ruODK::ru_setup(
   pid = 1,
-  fid = "build_Flora-Quadrat-0-2_1558575936",
+  fid = "build_Flora-Quadrat-0-4_1564384341",
   url = "https://odkcentral.dbca.wa.gov.au", 
   un = "me@email.com", 
   pw = "my_default_password",
@@ -70,7 +70,7 @@ ruODK::ru_setup(
   test_un = "me@email.com", 
   test_pw = "my_test_password",
   test_pid = 14,
-  test_fid = "build_Flora-Quadrat-0-2_1558575936"
+  test_fid = "build_Flora-Quadrat-0-4_1564384341"
 )
 
 # Review settings

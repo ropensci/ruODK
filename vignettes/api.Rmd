@@ -7,14 +7,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-```{r setup}
+```{r}
 library(ruODK)
 ```
 
@@ -62,7 +62,7 @@ are used by `ruODK`'s other functions (unless specified otherwise).
 
 ```{r ru_setup}
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )
@@ -140,7 +140,7 @@ See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/form
 
 ```{r form_schema, fig.width=7}
 fs <- form_schema()
-listviewer::jsonedit(form_schema, mode="code")
+listviewer::jsonedit(fs, mode="code")
 ```
 
 The form schema tells us about form field data types (e.g. dates, geopoints, 
@@ -191,13 +191,10 @@ t <- fs::dir_create("attachments")
 fid <- ruODK::get_test_fid() # "build_Flora-Quadrat-0-2_1558575936.svc"
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
 fid_csv_tae <- fs::path(t, glue::glue("{fid}-taxon_encounter.csv"))
+fid_csv_veg <- fs::path(t, glue::glue("{fid}-vegetation_stratum.csv"))
 
 # Download the zip file
-se <- ruODK::submission_export(
-  local_dir = t,
-  overwrite = FALSE,
-  verbose = TRUE
-)
+se <- ruODK::submission_export(local_dir = t, overwrite = FALSE, verbose = TRUE)
 
 # Unpack the zip file
 f <- unzip(se, exdir = t)
@@ -220,7 +217,15 @@ data_taxon <- fid_csv_tae %>%
   parse_datetime(tz = "Australia/Perth") %>%
   dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
 
+data_strata <- fid_csv_veg %>% 
+  readr::read_csv(na = c("", "NA", "na")) %>%
+  janitor::clean_names(.) %>%
+  attachment_link(.) %>%
+  parse_datetime(tz = "Australia/Perth") %>%
+  dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
+
 DT::datatable(data_taxon)
+DT::datatable(data_strata)
 # Further: create map with popups, see vignette "odata"
 ```
 

@@ -6,17 +6,28 @@
 \title{OData submission data for an ODK Central form.}
 \format{A list of lists}
 \source{
-See included file "inst/extdata/Flora Quadrat 0.2.xml"
+See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 }
 \usage{
 fq_raw
 }
 \description{
 The OData response for the submissions of an ODK Central form.
+This form represents a Flora Quadrat, which is a ca 50 by 50 m quadrat of
+a uniform plant community.
+}
+\details{
+The XML and .odkbuild versions for this form are
+available as `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
+and `system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")`,
+respectively.
+
+The data in this example are made up.
 }
 \seealso{
 Other included: \code{\link{fq_meta}},
-  \code{\link{fq_svc}}, \code{\link{fq_tae}}
+  \code{\link{fq_raw_strata}}, \code{\link{fq_raw_taxa}},
+  \code{\link{fq_svc}}
 }
 \concept{included}
 \keyword{datasets}

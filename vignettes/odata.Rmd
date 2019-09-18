@@ -46,7 +46,7 @@ form ID and is used by `ruODK::ru_setup()`.
 # ODK Central's OData URL contains base URL, project ID, and form ID
 # ODK Central credentials can live in .Renviron, see vignette "setup"
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc",
+  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )
@@ -55,7 +55,8 @@ ruODK::ru_setup(
 data("fq_svc")
 data("fq_meta")
 data("fq_raw")
-data("fq_tae")
+data("fq_raw_strata")
+data("fq_raw_taxa")
 ```
 
 To extract data from the OData API endpoints, we have to:
@@ -78,9 +79,10 @@ fq_svc %>% knitr::kable(.)
 ```
 
 `ruODK` provides the names and urls of the service endpoints as `tibble`.
-We see the main data available under the url `Submissions`, and a repeating 
-group called `taxon_encounter` in the ODK form under the url 
-`Submissions.taxon_encounter`.
+We see the main data available under the url `Submissions`, and repeating 
+groups called `taxon_encounter` and `vegetation_stratum` in the ODK form under 
+the url `Submissions.taxon_encounter` and `Submissions.vegetation_stratum`, 
+respectively.
 
 The number and names of repeating subgroups of course depends on the ODK form.
 
@@ -102,13 +104,15 @@ listviewer::jsonedit(fq_meta)
 Now let's download the form submissions and, separately, repeating form groups.
 
 ```{r load_odata}
-fq_raw <- odata_submission_get()
-fq_tae <- odata_submission_get(table = "Submissions.taxon_encounter")
+fq_raw <- odata_submission_get(table = fq_svc$name[1])
+fq_strata <- odata_submission_get(table = fq_svc$name[2])
+fq_taxa <- odata_submission_get(table = fq_svc$name[3])
 ```
 
-The output of the above code is provided as data objects `fq_raw` 
-(main submissions of form Flora Quadrat 0.2) and `fq_tae` (repeated group "Taxon 
-Encounter" within a Flora Quadrat).
+The output of the above code is provided as data objects 
+`fq_raw` (main submissions of form Flora Quadrat 0.4), 
+`fq_taxa` (repeated group "Taxon Encounter" within a Flora Quadrat), and
+`fq_strata` (repeated group "Vegetation Stratum" within a Flora Quadrat).
 
 # Rectangle the data
 The function `ruODK::odata_submission_get` returned the original XML response as a 
@@ -139,7 +143,8 @@ pipes (`%>%`) while commenting individual lines of the pipelines in or out.
 
 The repeated subgroup `taxon_encounter` is joined with the main observation
 to receive a (repeated) copy of the main observation's values 
-(such as observation time and habitat description).
+(such as observation time and habitat description). 
+We will do the same to the other repeated subgroup `vegetation_stratum`.
 
 For clarity, we enable verbose messages from `odata_submission_parse` 
 and preserve the message output in the code chunk options with `message=TRUE`.
@@ -163,27 +168,31 @@ fq_data <- fq_raw %>%
     altitude = x15
   ) %>%
   dplyr::mutate(
-    quadrat_photo = attachment_get(
+    quadrat_photo = ruODK::attachment_get(
       id, quadrat_photo, local_dir = loc),
-    morphological_type_photo = attachment_get(
+    morphological_type_photo = ruODK::attachment_get(
       id, morphological_type_photo, local_dir = loc),
     mudmap_photo = attachment_get(
       id, mudmap_photo, local_dir = loc)
   ) %>%
   invisible()
 
-fq_data_tae <- fq_tae %>%
-  odata_submission_parse(verbose = TRUE) %>% 
+fq_data_taxa <- fq_taxa %>%
+  ruODK::odata_submission_parse(verbose = TRUE) %>% 
   dplyr::rename(
     lon = x6,
     lat = x7,
     alt = x8
   ) %>%
   dplyr::mutate(
-    photo_in_situ = attachment_get(
+    photo_in_situ = ruODK::attachment_get(
       submissions_id, photo_in_situ, local_dir = loc)
   ) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>%
+  invisible()
+
+fq_data_strata <- fq_strata %>% 
+  ruODK::odata_submission_parse(verbose = TRUE) %>% 
   invisible()
 ```
 
@@ -241,7 +250,8 @@ Package `DT` provides an interactive (and searchable) datatable.
 
 ```{r vis_data}
 DT::datatable(fq_data)
-DT::datatable(fq_data_tae)
+DT::datatable(fq_data_taxa)
+DT::datatable(fq_data_strata)
 DT::datatable(head(fq_data_diy))
 ```
 
@@ -274,8 +284,7 @@ leaflet::leaflet(width = 800, height = 600) %>%
       "<h5>Habitat</h5>",
       "Morphological type: {morphological_type}</br>",
       '<div><img src="{morphological_type_photo}"',
-      'height="150px" alt="Morphological type"></img></div>',
-      "Veg class: {vegclass_placeholder}</br>"
+      'height="150px" alt="Morphological type"></img></div>'
     ),
     clusterOptions = leaflet::markerClusterOptions()
   ) %>%
@@ -291,12 +300,12 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::addProviderTiles("Esri.WorldImagery", group = "Aerial") %>%
   leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
-    data = fq_data_tae,
+    data = fq_data_taxa,
     lng = ~lon, lat = ~lat,
     icon = leaflet::makeAwesomeIcon(text = "T", markerColor = "green"),
-    label = ~ glue::glue("{canonical_name} {encounter_start_datetime}"),
+    label = ~ glue::glue("{field_name} {encounter_start_datetime}"),
     popup = ~ glue::glue(
-      "<h3>{area_name}</h3>",
+      "<h3>{field_name}</h3>",
       "Survey start {encounter_start_datetime}</br>",
       "Reporter {reporter}</br>",
       "Device {device_id}</br>",
@@ -328,13 +337,13 @@ fq_data %>%
   knitr::kable()
 
 # How many species sightings per life form?
-fq_data_tae %>% 
+fq_data_taxa %>% 
   dplyr::group_by(life_form) %>% 
   dplyr::tally() %>% 
   knitr::kable()
 
 # GGplot of a pivot table
-fq_data_tae %>%
+fq_data_taxa %>%
   dplyr::group_by(life_form) %>%
   dplyr::tally() %>%
   ggplot2::ggplot(ggplot2::aes(x = life_form, y = n)) +
@@ -348,11 +357,11 @@ fq_data_tae %>%
   ggplot2::theme_classic()
 
 # GGplot with groups
-fq_data_tae %>% 
+fq_data_taxa %>% 
   ggplot2::ggplot(
     ggplot2::aes(
       x=encounter_start_datetime, 
-      y=canonical_name, 
+      y=field_name, 
       colour=life_form,
       shape=instance_id)) + 
   ggplot2::labs(
@@ -374,11 +383,13 @@ must be either unnested or dropped before exporting to CSV.
 ```{r export, eval=F}
 fq_data %>% readr::write_csv("flora_quadrats.csv")
 fq_data_tae %>% readr::write_csv("flora_quadrats_taxon_encounters.csv")
+fq_data_veg %>% readr::write_csv("flora_quadrats_vegetation_strata.csv")
 ```
 
 # Do it yourself
 To reproduce the demonstrated workflow easily in RStudio, create a new RMarkdown
-document "From template" and select ruODK's template "odata".
+document "From template" and select ruODK's template "odata", or run 
+`rmarkdown::draft("test.Rmd", "odata", package="ruODK")`.
 
 Make sure to install a fresh version of `{ruODK}` to get the latest and greatest
 template.
