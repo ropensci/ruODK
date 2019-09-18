@@ -239,7 +239,7 @@ if (fs::file_exists("README.html")) fs::file_delete("README.html")
 
 # Checks
 goodpractice::goodpractice(quiet = FALSE)
-# runs devtools::check()
+devtools::check(  )
 
 # Release
 usethis::use_version("minor")

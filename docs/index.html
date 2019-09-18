@@ -98,12 +98,12 @@
 
 <p>Especially in these trying times, it is important to ask: “ruODK?”</p>
 <p><a href="https://opendatakit.org/">OpenDataKit</a> (ODK) is a free and open-source software for collecting, managing, and using data in resource-constrained environments.</p>
-<p>ODK consists of a range of <a href="https://opendatakit.org/software/">software packages and apps</a>. <code>{ruODK}</code> assumes some familiarity of its users with the ODK ecosystem and workflows. For a detailed overview, read the extensive <a href="https://docs.opendatakit.org/">ODK documentation</a> and visit the friendly <a href="https://forum.opendatakit.org/">ODK forum</a>.</p>
+<p>ODK consists of a range of <a href="https://opendatakit.org/software/">software packages and apps</a>. <code>ruODK</code> assumes some familiarity of its users with the ODK ecosystem and workflows. For a detailed overview, read the extensive <a href="https://docs.opendatakit.org/">ODK documentation</a> and visit the friendly <a href="https://forum.opendatakit.org/">ODK forum</a>.</p>
 <p><a href="https://docs.opendatakit.org/central-intro/">ODK Central</a> is a cloud-based data clearinghouse for digitally captured data, replacing the older software <a href="https://docs.opendatakit.org/aggregate-intro/">ODK Aggregate</a>. ODK Central manages user accounts and permissions, stores form definitions, and allows data collection clients like <a href="https://docs.opendatakit.org/collect-intro/">ODK Collect</a> to connect to it for form download and submission upload.</p>
 <p><img src="https://www.lucidchart.com/publicSegments/view/952c1350-3003-48c1-a2c8-94bad74cdb46/image.png" alt="An ODK setup with ODK Build, Central, Collect, and ruODK"></p>
 <p>A typical <a href="https://docs.opendatakit.org/#how-is-odk-used">ODK workflow</a>: An XForm is designed e.g. in <a href="https://build.opendatakit.org/">ODK Build</a>, <a href="https://docs.opendatakit.org/central-forms/">published to ODK Central</a>, and downloaded onto an Android device running ODK Collect. After data have been captured digitally using <a href="https://docs.opendatakit.org/collect-intro/">ODK Collect</a>, the data are uploaded and stored in ODK Central. The next step from there is to extract the data, optionally upload it into another data warehouse, and then to analyse and generate insight from it.</p>
 <p>While data can be retrieved in bulk through the GUI, ODK Central’s API provides access to its data and functionality through both an OData and a RESTful API with a comprehensive and interactive <a href="https://odkcentral.docs.apiary.io/#reference/odata-endpoints">documentation</a>.</p>
-<p><code>{ruODK}</code> is aimed at the technically minded researcher who wishes to access and use the data from ODK Central using the programming language</p>
+<p><code>ruODK</code> is aimed at the technically minded researcher who wishes to access and use the data from ODK Central using the programming language</p>
 <p>R.</p>
 <p>Benefits of using the R ecosystem in combination with ODK:</p>
 <ul>
@@ -112,13 +112,13 @@
 <li>Automation: The entire data access workflow can be automated through R scripts.</li>
 <li>Reproducible reporting (e.g.  <a href="https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr">Sweave</a>, <a href="https://rmarkdown.rstudio.com/">RMarkdown</a>), interactive web apps (<a href="https://shiny.rstudio.com/">Shiny</a>), workflow scaling (<a href="https://docs.ropensci.org/drake/">drake</a>) and a range of integrations with Docker (links coming soon).</li>
 </ul>
-<p><code>{ruODK}</code>’s scope:</p>
+<p><code>ruODK</code>’s scope:</p>
 <ul>
 <li>To wrap all ODK Central API endpoints with a focus on <strong>data access</strong>.</li>
 <li>To provide working examples of interacting with the ODK Central API.</li>
 <li>To provide convenience helpers for the day to day tasks when working with ODK Central data in R: <strong>data munging</strong> the ODK Central API output into tidy R formats.</li>
 </ul>
-<p><code>{ruODK}</code>’s use cases:</p>
+<p><code>ruODK</code>’s use cases:</p>
 <ul>
 <li>Smaller projects:
 <ol>
@@ -145,7 +145,7 @@
 <p>Out of scope:</p>
 <ul>
 <li>To wrap “management” API endpoints. The ODK Central GUI provides a comprehensive interface for the management of users, roles, permissions, projects, and forms. Behind the scenes, it is a <a href="https://github.com/opendatakit/central-frontend/">VueJS application</a> working on the “management” API endpoints of the ODK Central backend.</li>
-<li>To provide extensive data visualisation. We show only minimal examples of data visualisation and presentation, mainly to illustrate the example data. Once the data is in your hands as tidy tibbles… u r ODK!</li>
+<li>To provide extensive data visualisation. We show only minimal examples of data visualisation and presentation, mainly to illustrate the example data. Once the data is in your hands as tidy tibbles… urODK!</li>
 </ul>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
@@ -182,15 +182,15 @@
 </div>
 <div id="configure-ruodk" class="section level2">
 <h2 class="hasAnchor">
-<a href="#configure-ruodk" class="anchor"></a>Configure <code>{ruODK}</code>
+<a href="#configure-ruodk" class="anchor"></a>Configure <code>ruODK</code>
 </h2>
-<p>Set up <code>{ruODK}</code> with an OData Service URL and credentials of a read-permitted ODK Central web user.</p>
+<p>Set up <code>ruODK</code> with an OData Service URL and credentials of a read-permitted ODK Central web user.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/ru_setup.html">ru_setup</a></span>(</a>
 <a class="sourceLine" id="cb2-2" title="2">  <span class="dt">svc =</span> <span class="st">"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc"</span>,</a>
 <a class="sourceLine" id="cb2-3" title="3">  <span class="dt">un =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_UN"</span>),</a>
 <a class="sourceLine" id="cb2-4" title="4">  <span class="dt">pw =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_PW"</span>)</a>
 <a class="sourceLine" id="cb2-5" title="5">)</a></code></pre></div>
-<p>For all available detailed options to configure <code>{ruODK}</code>, read <code>vignette("Setup", package = "ruODK")</code> (online <a href="https://dbca-wa.github.io/ruODK/articles/setup.html">here</a>).</p>
+<p>For all available detailed options to configure <code>ruODK</code>, read <code>vignette("Setup", package = "ruODK")</code> (online <a href="https://dbca-wa.github.io/ruODK/articles/setup.html">here</a>).</p>
 </div>
 <div id="use-ruodk" class="section level2">
 <h2 class="hasAnchor">
@@ -682,6 +682,12 @@
 <p>A more detailed walk-through with some data visualisation examples is available in the <code><a href="articles/odata.html">vignette("odata", package="ruODK")</a></code> (online <a href="https://dbca-wa.github.io/ruODK/articles/odata.html">here</a>).</p>
 <p>See also <code><a href="articles/api.html">vignette("api", package="ruODK")</a></code> (online <a href="https://dbca-wa.github.io/ruODK/articles/api.html">here</a>) for examples using the alternative RESTful API.</p>
 </div>
+<div id="try-ruodk" class="section level2">
+<h2 class="hasAnchor">
+<a href="#try-ruodk" class="anchor"></a>Try ruODK</h2>
+<p><a href="https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a> will launch a disposable, hosted RStudio instance with <code>ruODK</code> installed and the companion package <a href="https://github.com/dbca-wa/urODK"><code>urODK</code></a> opened as starting point for a hands-on workshop or instant demo of <code>ruODK</code> usage.</p>
+<p>Create a new RMarkdown workbook from <code>ruODK</code> template “odata” and follow the instructions within.</p>
+</div>
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contribute" class="anchor"></a>Contribute</h2>
@@ -691,8 +697,8 @@
 <div id="attribution" class="section level2">
 <h2 class="hasAnchor">
 <a href="#attribution" class="anchor"></a>Attribution</h2>
-<p><code>{ruODK}</code> was developed, and is maintained, by Florian Mayer for the Western Australian <a href="https://www.dbca.wa.gov.au/">Department of Biodiversity, Conservation and Attractions (DBCA)</a>. The development was funded both by DBCA core funding and Offset funding through the <a href="https://flatbacks.dbca.wa.gov.au/">North West Shelf Flatback Turtle Conservation Program</a>.</p>
-<p>To cite package <code>{ruODK}</code> in publications use:</p>
+<p><code>ruODK</code> was developed, and is maintained, by Florian Mayer for the Western Australian <a href="https://www.dbca.wa.gov.au/">Department of Biodiversity, Conservation and Attractions (DBCA)</a>. The development was funded both by DBCA core funding and Offset funding through the <a href="https://flatbacks.dbca.wa.gov.au/">North West Shelf Flatback Turtle Conservation Program</a>.</p>
+<p>To cite package <code>ruODK</code> in publications use:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="st">"ruODK"</span>)</a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; To cite ruODK in publications use:</span></a>
@@ -736,7 +742,7 @@
 </colgroup>
 <thead><tr class="header">
 <th>Package</th>
-<th><a href="https://dbca-wa.github.io/ruODK/"><code>{ruODK}</code></a></th>
+<th><a href="https://dbca-wa.github.io/ruODK/"><code>ruODK</code></a></th>
 <th><a href="https://validmeasures.org/odkr/"><code>{odkr}</code></a></th>
 <th><a href="https://cran.r-project.org/package=odk"><code>{odk}</code></a></th>
 <th><a href="https://github.com/nap2000/odkmeta"><code>odkmeta</code></a></th>
@@ -897,9 +903,9 @@
 </tbody>
 </table>
 <p>In summary:</p>
-<p><code>{ruODK}</code> provides a dependency-free interface to ODK Central.</p>
+<p><code>ruODK</code> provides a dependency-free interface to ODK Central.</p>
 <p><code>{koboloadeR}</code> is a metapackage containing lots of ancillary packages, with some heavy dependencies on Java and ODK Briefcase (which in turn can access ODK Central). Although built around the XlsForm standard and paradigm, <code>{koboloadeR}</code> is well worth exploring as a larger context to data wrangling in the ODK ecosystem.</p>
-<p>Schemetrica’s tutorial illustrates data ETL from ODK Central and deserves a special mention, as it is both very recent and aimed specifically against ODK Central. The GUI paradigm of Pentaho Kettle addresses a different audience to the scripting paradigm of <code>{ruODK}</code>. It should be mentioned that Kettle’s composable data manipulation steps can be used for many other use cases apart from ODK Central.</p>
+<p>Schemetrica’s tutorial illustrates data ETL from ODK Central and deserves a special mention, as it is both very recent and aimed specifically against ODK Central. The GUI paradigm of Pentaho Kettle addresses a different audience to the scripting paradigm of <code>ruODK</code>. It should be mentioned that Kettle’s composable data manipulation steps can be used for many other use cases apart from ODK Central.</p>
 </div>
 <div id="comparison-of-odata-related-r-packages" class="section level3">
 <h3 class="hasAnchor">
@@ -915,7 +921,7 @@
 </colgroup>
 <thead><tr class="header">
 <th>Package</th>
-<th><a href="https://dbca-wa.github.io/ruODK/"><code>{ruODK}</code></a></th>
+<th><a href="https://dbca-wa.github.io/ruODK/"><code>ruODK</code></a></th>
 <th><a href="https://github.com/HanOostdijk/odataR"><code>{odataR}</code></a></th>
 <th><a href="https://github.com/edwindj/cbsodataR"><code>{cbsodataR}</code></a></th>
 <th><a href="https://cran.r-project.org/web/packages/OData/index.html"><code>{OData}</code></a></th>
@@ -1023,9 +1029,9 @@
 </tbody>
 </table>
 <p>In summary:</p>
-<p><code>{ruODK}</code> is the only R package explicitly aimed at ODK Central, both its OData and the RESTful API, and provide context and helpers around specific recurring data wrangling tasks.</p>
+<p><code>ruODK</code> is the only R package explicitly aimed at ODK Central, both its OData and the RESTful API, and provide context and helpers around specific recurring data wrangling tasks.</p>
 <p>Wrangling OData output boils down to handling HTTP requests, navigating nested lists (from XML) and rectangling them into tidy data.</p>
-<p>The value of OData lies in its self-descriptive nature, which allows tools to introspect the data structures and types. Whereas GUI-driven tools like MS PowerBI use this introspection to assist users in wrangling their own data, <code>{ruODK}</code> aims to lower the barrier to the R-literate user, and reduce the data wrangling to simple, extensible steps in line with tidyverse’s data wrangling paradigm. Providing this functionality in a pure R environment allows to automate the data extraction, transformation, and reporting pipeline, and therefore provide reproducible reporting.</p>
+<p>The value of OData lies in its self-descriptive nature, which allows tools to introspect the data structures and types. Whereas GUI-driven tools like MS PowerBI use this introspection to assist users in wrangling their own data, <code>ruODK</code> aims to lower the barrier to the R-literate user, and reduce the data wrangling to simple, extensible steps in line with tidyverse’s data wrangling paradigm. Providing this functionality in a pure R environment allows to automate the data extraction, transformation, and reporting pipeline, and therefore provide reproducible reporting.</p>
 </div>
 </div>
 </div>
