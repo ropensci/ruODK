@@ -151,7 +151,7 @@
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
 <p>You can install ruODK from GitHub with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"remotes"</span>)) {<span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)}</a>
 <a class="sourceLine" id="cb1-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"dbca-wa/ruODK"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="odk-central" class="section level2">
@@ -732,21 +732,21 @@
 <a href="#comparison-of-odk-related-software-packages-non-odk-core" class="anchor"></a>Comparison of ODK related software packages (non-ODK core)</h3>
 <table class="table">
 <colgroup>
-<col width="2%">
-<col width="33%">
-<col width="10%">
+<col width="1%">
+<col width="26%">
+<col width="15%">
 <col width="7%">
-<col width="5%">
-<col width="33%">
-<col width="7%">
+<col width="8%">
+<col width="26%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th>Package</th>
 <th><a href="https://dbca-wa.github.io/ruODK/"><code>ruODK</code></a></th>
-<th><a href="https://validmeasures.org/odkr/"><code>{odkr}</code></a></th>
-<th><a href="https://cran.r-project.org/package=odk"><code>{odk}</code></a></th>
+<th><a href="https://validmeasures.org/odkr/"><code>odkr</code></a></th>
+<th><a href="https://cran.r-project.org/package=odk"><code>odk</code></a></th>
 <th><a href="https://github.com/nap2000/odkmeta"><code>odkmeta</code></a></th>
-<th><a href="https://unhcr.github.io/koboloadeR/docs/index.html"><code>{koboloadeR}</code></a></th>
+<th><a href="https://unhcr.github.io/koboloadeR/docs/index.html"><code>koboloadeR</code></a></th>
 <th><a href="https://github.com/schemetrica/automating-data-delivery-odk-central">Pentaho Kettle tutorial</a></th>
 </tr></thead>
 <tbody>
@@ -761,27 +761,27 @@
 </tr>
 <tr class="even">
 <td>Last commit</td>
-<td>Sep 2019</td>
-<td>Sep 2019</td>
+<td><a href="https://github.com/dbca-wa/ruODK/commits/master"><img src="https://img.shields.io/github/last-commit/dbca-wa/ruODK.svg" alt="Last-changedate"></a></td>
+<td><a href="https://github.com/validmeasures/odkr/commits/master"><img src="https://img.shields.io/github/last-commit/validmeasures/odkr.svg" alt="Last-changedate"></a></td>
 <td>Nov 2017</td>
-<td>Jun 2014</td>
-<td>Jul 2019</td>
-<td>Sept 2019</td>
+<td><a href="https://github.com/nap2000/odkmeta/commits/master"><img src="https://img.shields.io/github/last-commit/nap2000/odkmeta.svg" alt="Last-changedate"></a></td>
+<td><a href="https://github.com/unhcr/koboloadeR/commits/master"><img src="https://img.shields.io/github/last-commit/unhcr/koboloadeR.svg" alt="Last-changedate"></a></td>
+<td><a href="https://github.com/schemetrica/automating-data-delivery-odk-central/commits/master"><img src="https://img.shields.io/github/last-commit/schemetrica/automating-data-delivery-odk-central.svg" alt="Last-changedate"></a></td>
 </tr>
 <tr class="odd">
 <td>Website</td>
 <td>
-<a href="https://github.com/dbca-wa/ruODK">GH</a> <a href="https://dbca-wa.github.io/ruODK/">pkgdown</a>
+<a href="https://github.com/dbca-wa/ruODK"><img src="https://img.shields.io/static/v1?label=code&amp;message=GitHub&amp;color=brightgreen"></a> <a href="https://dbca-wa.github.io/ruODK/"><img src="https://img.shields.io/static/v1?label=docs&amp;message=pkgdown&amp;color=brightgreen" alt="docs"></a>
 </td>
 <td>
-<a href="https://github.com/dbca-wa/ruODK">GH</a> <a href="https://dbca-wa.github.io/ruODK/">pkgdown</a>
+<a href="https://github.com/validmeasures/odkr"><img src="https://img.shields.io/static/v1?label=code&amp;message=GitHub&amp;color=brightgreen"></a> <a href="https://validmeasures.org/odkr/"><img src="https://img.shields.io/static/v1?label=docs&amp;message=pkgdown&amp;color=brightgreen" alt="docs"></a>
 </td>
-<td><a href="https://rdrr.io/cran/odk/">rdrr.io</a></td>
-<td><a href="https://github.com/nap2000/odkmeta">GH</a></td>
+<td><a href="https://rdrr.io/cran/odk/"><img src="https://img.shields.io/static/v1?label=docs&amp;message=rdrr.io&amp;color=brightgreen" alt="docs"></a></td>
+<td><a href="https://github.com/nap2000/odkmeta"><img src="https://img.shields.io/static/v1?label=code&amp;message=GitHub&amp;color=brightgreen"></a></td>
 <td>
-<a href="https://github.com/unhcr/koboloadeR">GH</a> <a href="https://unhcr.github.io/koboloadeR/docs/index.html">pkgdown</a>
+<a href="https://github.com/unhcr/koboloadeR"><img src="https://img.shields.io/static/v1?label=code&amp;message=GitHub&amp;color=brightgreen"></a> <a href="https://unhcr.github.io/koboloadeR/docs/index.html"><img src="https://img.shields.io/static/v1?label=docs&amp;message=pkgdown&amp;color=brightgreen" alt="docs"></a>
 </td>
-<td><a href="https://github.com/schemetrica/automating-data-delivery-odk-central">GH</a></td>
+<td><a href="https://github.com/schemetrica/automating-data-delivery-odk-central"><img src="https://img.shields.io/static/v1?label=code&amp;message=GitHub&amp;color=brightgreen"></a></td>
 </tr>
 <tr class="even">
 <td>Test coverage</td>
@@ -809,14 +809,13 @@
 <td>Available on CRAN</td>
 <td>❌ not yet</td>
 <td>❌</td>
-<td>✅ <a href="https://CRAN.R-project.org/package=odk"><img src="http://www.r-pkg.org/badges/version/odk" alt="version"></a>
-</td>
+<td><a href="https://CRAN.R-project.org/package=odk"><img src="http://www.r-pkg.org/badges/version/odk" alt="version"></a></td>
 <td>❌</td>
 <td>❌</td>
 <td>NA</td>
 </tr>
 <tr class="odd">
-<td>Language/dialect</td>
+<td>Technologies</td>
 <td>Tidyverse R, XForms</td>
 <td>Base R</td>
 <td>Base R</td>
@@ -904,7 +903,7 @@
 </table>
 <p>In summary:</p>
 <p><code>ruODK</code> provides a dependency-free interface to ODK Central.</p>
-<p><code>{koboloadeR}</code> is a metapackage containing lots of ancillary packages, with some heavy dependencies on Java and ODK Briefcase (which in turn can access ODK Central). Although built around the XlsForm standard and paradigm, <code>{koboloadeR}</code> is well worth exploring as a larger context to data wrangling in the ODK ecosystem.</p>
+<p><code>koboloadeR</code> is a metapackage containing lots of ancillary packages, with some heavy dependencies on Java and ODK Briefcase (which in turn can access ODK Central). Although built around the XlsForm standard and paradigm, <code>koboloadeR</code> is well worth exploring as a larger context to data wrangling in the ODK ecosystem.</p>
 <p>Schemetrica’s tutorial illustrates data ETL from ODK Central and deserves a special mention, as it is both very recent and aimed specifically against ODK Central. The GUI paradigm of Pentaho Kettle addresses a different audience to the scripting paradigm of <code>ruODK</code>. It should be mentioned that Kettle’s composable data manipulation steps can be used for many other use cases apart from ODK Central.</p>
 </div>
 <div id="comparison-of-odata-related-r-packages" class="section level3">
@@ -912,19 +911,19 @@
 <a href="#comparison-of-odata-related-r-packages" class="anchor"></a>Comparison of OData related R packages</h3>
 <table class="table">
 <colgroup>
-<col width="4%">
-<col width="42%">
-<col width="5%">
-<col width="29%">
+<col width="3%">
+<col width="33%">
+<col width="11%">
+<col width="30%">
 <col width="10%">
-<col width="7%">
+<col width="10%">
 </colgroup>
 <thead><tr class="header">
 <th>Package</th>
 <th><a href="https://dbca-wa.github.io/ruODK/"><code>ruODK</code></a></th>
-<th><a href="https://github.com/HanOostdijk/odataR"><code>{odataR}</code></a></th>
-<th><a href="https://github.com/edwindj/cbsodataR"><code>{cbsodataR}</code></a></th>
-<th><a href="https://cran.r-project.org/web/packages/OData/index.html"><code>{OData}</code></a></th>
+<th><a href="https://github.com/HanOostdijk/odataR"><code>odataR</code></a></th>
+<th><a href="https://github.com/edwindj/cbsodataR"><code>cbsodataR</code></a></th>
+<th><a href="https://cran.r-project.org/web/packages/OData/index.html"><code>OData</code></a></th>
 <th><a href="https://www.cdata.com/kb/tech/odata-jdbc-r.rst">OData JDBC R tutorial</a></th>
 </tr></thead>
 <tbody>
@@ -938,23 +937,23 @@
 </tr>
 <tr class="even">
 <td>Last commit</td>
-<td>Sep 2019</td>
-<td>Jan 2018</td>
-<td>Aug 2019</td>
+<td><a href="https://github.com/dbca-wa/ruODK/commits/master"><img src="https://img.shields.io/github/last-commit/dbca-wa/ruODK.svg" alt="Last-changedate"></a></td>
+<td><a href="https://github.com/HanOostdijk/odataR/commits/master"><img src="https://img.shields.io/github/last-commit/HanOostdijk/odataR.svg" alt="Last-changedate"></a></td>
+<td><a href="https://github.com/edwindj/cbsodataR/commits/master"><img src="https://img.shields.io/github/last-commit/edwindj/cbsodataR.svg" alt="Last-changedate"></a></td>
 <td>Dec 2016</td>
 <td>❓</td>
 </tr>
 <tr class="odd">
 <td>Website</td>
 <td>
-<a href="https://github.com/dbca-wa/ruODK">GH</a> <a href="https://dbca-wa.github.io/ruODK/">pkgdown</a>
+<a href="https://github.com/dbca-wa/ruODK"><img src="https://img.shields.io/static/v1?label=code&amp;message=GitHub&amp;color=brightgreen"></a> <a href="https://dbca-wa.github.io/ruODK/"><img src="https://img.shields.io/static/v1?label=docs&amp;message=pkgdown&amp;color=brightgreen" alt="docs"></a>
 </td>
-<td><a href="https://github.com/HanOostdijk/odataR">GH</a></td>
+<td><a href="https://github.com/HanOostdijk/odataR"><img src="https://img.shields.io/static/v1?label=code&amp;message=GitHub&amp;color=brightgreen"></a></td>
 <td>
-<a href="https://cran.r-project.org/web/packages/cbsodataR/">CRAN</a> <a href="https://github.com/edwindj/cbsodataR">GH</a> <a href="https://edwindj.github.io/cbsodataR/">pkgdown</a>
+<a href="https://cran.r-project.org/web/packages/cbsodataR/"><img src="https://img.shields.io/static/v1?label=code&amp;message=CRAN&amp;color=green" alt="docs"></a> <a href="https://github.com/edwindj/cbsodataR"><img src="https://img.shields.io/static/v1?label=code&amp;message=GitHub&amp;color=brightgreen"></a> <a href="https://edwindj.github.io/cbsodataR/"><img src="https://img.shields.io/static/v1?label=docs&amp;message=pkgdown&amp;color=brightgreen" alt="docs"></a>
 </td>
-<td><a href="https://cran.r-project.org/web/packages/OData/index.html">CRAN</a></td>
-<td><a href="https://www.cdata.com/kb/tech/odata-jdbc-r.rst">cdata.com</a></td>
+<td><a href="https://cran.r-project.org/web/packages/OData/index.html"><img src="https://img.shields.io/static/v1?label=code&amp;message=CRAN&amp;color=green"></a></td>
+<td><a href="https://www.cdata.com/kb/tech/odata-jdbc-r.rst"><img src="https://img.shields.io/static/v1?label=docs&amp;message=html&amp;color=brightgreen" alt="docs"></a></td>
 </tr>
 <tr class="even">
 <td>Test coverage</td>
@@ -1020,10 +1019,8 @@
 <td>Available on CRAN</td>
 <td>❌</td>
 <td>❌</td>
-<td>✅ <a href="https://CRAN.R-project.org/package=cbsodataR"><img src="http://www.r-pkg.org/badges/version/cbsodataR" alt="version"></a>
-</td>
-<td>✅ <a href="https://CRAN.R-project.org/package=OData"><img src="http://www.r-pkg.org/badges/version/OData" alt="version"></a>
-</td>
+<td><a href="https://CRAN.R-project.org/package=cbsodataR"><img src="http://www.r-pkg.org/badges/version/cbsodataR" alt="version"></a></td>
+<td><a href="https://CRAN.R-project.org/package=OData"><img src="http://www.r-pkg.org/badges/version/OData" alt="version"></a></td>
 <td>❌</td>
 </tr>
 </tbody>

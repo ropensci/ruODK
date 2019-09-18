@@ -234,12 +234,14 @@ spelling::spell_check_package()
 spelling::update_wordlist()
 codemetar::write_codemeta("ruODK")
 usethis::edit_file("inst/CITATION")
+if (fs::file_info("README.md")$modification_time < fs::file_info("README.Rmd")$modification_time){
 rmarkdown::render("README.Rmd",  encoding = "UTF-8", clean = TRUE)
 if (fs::file_exists("README.html")) fs::file_delete("README.html")
+}
 
 # Checks
 goodpractice::goodpractice(quiet = FALSE)
-devtools::check(  )
+devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
 
 # Release
 usethis::use_version("minor")
