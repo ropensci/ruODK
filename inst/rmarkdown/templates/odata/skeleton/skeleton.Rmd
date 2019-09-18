@@ -1,29 +1,32 @@
 ---
-title: "Untitled"
+title: "Report Title"
+author: "Report Author"
+date: "`r Sys.Date()`"
 output:
-  html_document: default
+  html_document:
+    toc = TRUE
+    fig_width = 9
+    code = FALSE
   pdf_document:
     latex_engine: xelatex
   word_document: default
 ---
-
 <!--  
 This Rmd template provides an example workflow to access submissions and 
-attachments of a given ODK Central form using its OData API.
-
+attachments of a given ODK Central form using its OData API and disseminate
+data, attachments, and this report via CKAN or Google Drive.
 
 You will need:
 * An ODK Central form's OData Service URL (ending in .svc), accessed from the 
   "Analyse using OData" button on the form submission tab.
 * Username and password of an ODK Central webuser authorised to view this form.
+* Optional: base URL and write-permitted API key for a CKAN instance.
+* Optional: a Google account and the means to authenticate (e.g. phone for 2FA).
 -->
 
 <!--
-Step 1: Setup ruODK
-ODK Central webuser username and password are set as environment variables to
-keep them outside of this document.
-Optional: CKAN URL and API key.
-
+Step 1: Setup ruODK, ckanr
+Secrets are set as environment variables to keep them outside of this document. 
 Read vignette "setup" for further information.
 -->
 <!-- Open the .Renviron file  -->
@@ -39,15 +42,17 @@ ODKC_PW="..."
 CKAN_URL="https://demo.ckan.org"
 CKAN_KEY="my-ckan-api-key"
 ```
-<!-- and restart the session to load these environment variables. -->
+<!-- and restart the R session to load these environment variables. -->
 
 <!-- 
 * Configure ODK Central base URL, project ID, and form ID through OData Service URL.
-  Paste the OData Service URL over `SVC_URL`.
+  Paste the (non-sensitive) OData Service URL over `SVC_URL`.
 * Paste your local timezone over `Australia/Perth`.
 * Adjust `loc` to a local subfolder for downloaded attachments.
 -->
 ```{r setup, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+
 library(knitr)
 library(dplyr)
 library(ckanr)
@@ -60,11 +65,7 @@ fs::dir_create(loc)
 ```
 
 # Download data
-<!-- 
-Get table names. 
-
-form_tables will contain one row per separate table. 
--->
+<!-- Get table names. `form_tables` will contain one row per separate table. -->
 ```{r svc_get}
 form_tables <- ruODK::odata_service_get()
 form_tables %>% knitr::kable(.)
@@ -83,14 +84,16 @@ Get and parse submissions.
 Repeat for each table name in form_tables$url. 
 -->
 ```{r dl_submissions}
-data_main_raw <- ruODK::odata_submission_get()
-data_sub1_raw <- ruODK::odata_submission_get(table = "Submissions.nested_table_name1")
+data_main_raw <- ruODK::odata_submission_get(table = form_tables$url[1])
+data_sub1_raw <- ruODK::odata_submission_get(table = form_tables$url[2])
+# repeat for any remaining nested tables
 
 data <- data_main_raw %>% 
   ruODK::odata_submission_parse(verbose = TRUE) %>%
   ruODK::parse_datetime(tz = tz) %>% 
   ruODK::parse_datetime(tz = tz, col_contains = "date") %>%
   dplyr::rename(
+    # # Inspect data, find colnames of coordinates (if any):
     # longitude = x13,
     # latitude = x14,
     # altitude = x15
@@ -152,34 +155,38 @@ leaflet::leaflet(width = 800, height = 600) %>%
   )
 ```
 
-
 # Export
-
 <!--
 The form submissions are now extracted and visualised. What's next:
 
-* Save to a local spreadsheet.
-* Upload the data (spreadsheet) and possibly this report (compiled to HTML) 
-  to a CKAN data catalogue.
-* Upload same data, report, attachments to Google Drive.
+* Save data to local files (e.g. CSV).
+* Compile report (e.g. to HTML).
+* Compress all outputs as ZIP.
+* Upload these artifacts to a CKAN data catalogue.
+* Upload same artifacts to Google Drive.
+
+Notes: 
+
 * Generate the HTML report once off without the next chunk (`eval=F`), 
   as the chunk refers to the rendered output file (HTML) before the file is 
   created initially.
 * Run report always twice to generate (run 1) and upload (run 2) the latest HTML.
 -->
 ```{r data_export, eval=FALSE}
+#------------------------------------------------------------------------------#
 # Prepare report and products as local files
+#
 rep_fn <- "my_report.html" # The file name you save this template under
-data_fn <- here::here(loc, "data.csv") # Main data
-data_sub1_fn <- here::here(loc, "data_sub1.csv") # Nested table 1
-zip_fn <- "products.zip" # Attachments as one zip file
+data_fn <- here::here(loc, "data.csv") %>% as.character()           # Main data
+data_sub1_fn <- here::here(loc, "data_sub1.csv") %>% as.character() # Nested table 1
+zip_fn <- "products.zip" # Attachments as one zip file (top level)
+
+# Write data tbls to CSV files
+readr::write_csv(data, path = data_fn)
+readr::write_csv(data_sub1, path = data_sub1_fn)
 
 # Compress everything into `zip_fn`, retain relative path to `loc`
-zip(zipfile = zip_fn, files = fs::dir_ls(.))
-
-data %>% readr::write_csv(data_fn)
-# Same with nested tables and zipped attachments
-# data_sub1 %>% readr::write_csv()
+zip(zipfile = zip_fn, files = fs::dir_ls(loc))
 
 #------------------------------------------------------------------------------#
 # CKAN
@@ -187,34 +194,36 @@ data %>% readr::write_csv(data_fn)
 # Upload to a CKAN data catalogue (need url and API key of a write permitted user)
 # See ROpenSci package ckanr
 ckanr::ckanr_setup(url = Sys.getenv("CKAN_URL"), key = Sys.getenv("CKAN_KEY"))
+ckan_ds_name <- "my-ckan-dataset-slug"
 
-# Run once to create resources on an existing dataset
-d <- ckanr::package_show("dataset-title")
+# Run once to create resources on an existing dataset, then comment out
+d <- ckanr::package_show(ckan_ds_name)
 res_data_main <- ckanr::resource_create(
-  package_id = d$id, title="Main data", upload = data_fn)
+  package_id = d$id, name="Main data", upload = data_fn)
 res_data_sub1 <- ckanr::resource_create(
-  package_id = d$id, title="Nested data table 1", upload = data_sub1_fn)
+  package_id = d$id, name="Nested data table 1", upload = data_sub1_fn)
 res_report <- ckanr::resource_create(
-  package_id = d$id, title="Nested data table 1", upload = rep_fn)
+  package_id = d$id, name="Data report", upload = rep_fn)
 res_zip <- ckanr::resource_create(
-  package_id = d$id, title="All data and attachments", upload = zip_fn)
+  package_id = d$id, name="All data and attachments", upload = zip_fn)
 
 # Paste res_data_main$id over RID and keep here, repeat for each resource
-r <- ckanr::resource_update("res_data_main$id", path = data_fn)
-r <- ckanr::resource_update("res_data_sub1$id", path = data_sub1_fn)
-r <- ckanr::resource_update("res_report$id", path = res_report)
-r <- ckanr::resource_update("res_zip$id", path = zip_fn)
+r <- ckanr::resource_update(res_data_main$id, path = data_fn)
+r <- ckanr::resource_update(res_data_sub1$id, path = data_sub1_fn)
+r <- ckanr::resource_update(res_report$id, path = res_report)
+r <- ckanr::resource_update(res_zip$id, path = zip_fn)
 
 #------------------------------------------------------------------------------#
 # Google Drive
 #
-# Once per machine, then comment out:
+# Run once per machine, then comment out:
 googledrive::drive_auth(reset=TRUE, use_oob = TRUE)
 
 # Upload to Google Drive
-googledrive::drive_ls("MYFOLDER") %>% googledrive::drive_rm(.) # Wipe older outputs
-googledrive::drive_upload(rep_fn, path=rep_fn) # Report as HTML
-googledrive::drive_upload(data_fn, path=data_fn) # Main data as CSV
+gd_fn <- "My Google Drive folder name"
+googledrive::drive_ls(gd_fn) %>% googledrive::drive_rm(.)  # Wipe older outputs
+googledrive::drive_upload(rep_fn, path=rep_fn)             # Report as HTML
+googledrive::drive_upload(data_fn, path=data_fn)           # Main data as CSV
 googledrive::drive_upload(data_sub1_fn, path=data_sub1_fn) # Nested table 1 as CSV
-googledrive::drive_upload(zip_fn, path=zip_fn) # All outputs as ZIP archive
+googledrive::drive_upload(zip_fn, path=zip_fn)             # All outputs as ZIP
 ```
