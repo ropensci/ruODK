@@ -112,10 +112,10 @@ You will need to use the following environment variables:
 ```r
 ruODK::ru_setup(
   test_url = "https://sandbox.central.opendatakit.org",
-  test_un = "you@email.com",
-  test_pw = "...",
   test_pid = 14,
-  test_fid = "build_Flora-Quadrat-0-2_1558575936"
+  test_fid = "build_Flora-Quadrat-0-4_1564384341",
+  test_un = "you@email.com",
+  test_pw = "..."
 )
 ```
 
@@ -124,17 +124,17 @@ Note: `~/.Renviron` contains simple `key=value` assignments without `Sys.setenv(
 ```r
 # Required for testing
 ODKC_TEST_URL="https://sandbox.central.opendatakit.org"
+ODKC_TEST_PID=14
+ODKC_TEST_FID="build_Flora-Quadrat-0-4_1564384341"
 ODKC_TEST_UN="your@email.com"
 ODKC_TEST_PW="..."
-ODKC_TEST_PID=14
-ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
 
 # Useful for day to day use - use your own settings
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
-ODKC_UN="your@email.com"
-ODKC_PW="..."
 ODKC_PID=1
 ODKC_FID="build_Predator-or-Disturbance-1-1_1559789410"
+ODKC_UN="your@email.com"
+ODKC_PW="..."
 ```
 
 Keep in mind that `ruODK` defaults to use `ODKC_{URL,UN,PW}`, so for everyday 
