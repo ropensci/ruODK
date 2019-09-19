@@ -231,6 +231,7 @@ devtools::test()
 styler::style_pkg()
 devtools::document(roclets = c("rd", "collate", "namespace"))
 spelling::spell_check_package()
+spelling::spell_check_files("README.Rmd")
 spelling::update_wordlist()
 codemetar::write_codemeta("ruODK")
 usethis::edit_file("inst/CITATION")
@@ -252,9 +253,10 @@ pkgdown::build_site()
 # the repo is small
 # so what shall we do
 # let's mogrify all
-system("find vignettes/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} \\;")
-vignette_tempfiles <- here::here("vignettes", "attachments")
-fs::dir_copy(vignette_tempfiles, here::here("docs/articles/"))
+system("find vignettes/attachments/media -type f -exec mogrify -resize 200x150 {} \\;")
+vignette_tempfiles <- here::here("vignettes", "attachments", "media")
+docs_media <- here::here("docs", "articles", "attachments", "media")
+fs::dir_copy(vignette_tempfiles, docs_media, overwrite = TRUE)
 
 # Git commit, tag and push
 ```

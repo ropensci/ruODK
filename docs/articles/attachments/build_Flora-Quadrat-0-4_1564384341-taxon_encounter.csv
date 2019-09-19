@@ -1,8 +1,0 @@
-field_name,photo_in_situ,taxon_encounter_location-Latitude,taxon_encounter_location-Longitude,taxon_encounter_location-Altitude,taxon_encounter_location-Accuracy,life_form,voucher_specimen_barcode,voucher_specimen_label,PARENT_KEY,KEY
-Conostylis yellow,1568795382633.jpg,-31.99605058,115.88433281,-25.6241455078125,4.288,g2.0_tussock_grass,09929760,JD001,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69/taxon_encounter[1]
-Blue bush,1568795579890.jpg,-31.99601125,115.88439814,-14.467254638671875,4.288,,,JD002,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69/taxon_encounter[2]
-Pileanthus sp. Peachy flowers,1568787220913.jpg,-31.99626091,115.88424501,-64.94879150390625,4.288,w3.0_shrub,08173089,,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f/taxon_encounter[1]
-Small pink flowers,1568787333689.jpg,-31.99623047,115.88428544,-44.85186767578125,4.288,w3.1_heath_shrub,,FM001,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f/taxon_encounter[2]
-Small red flowers,1568787380833.jpg,-31.99616689,115.88450938,-0.85919189453125,4.288,,,FM002,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f/taxon_encounter[3]
-Funky grass violet flowers,1568787456664.jpg,-31.99617326,115.88441209,-9.488067626953125,4.288,g4.0_sedge,,FM003,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f/taxon_encounter[4]
-Sharp edged red flowers,1568787504877.jpg,-31.9962021,115.88442761,-12.5390625,4.288,w3.1_heath_shrub,,FM004,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f/taxon_encounter[5]

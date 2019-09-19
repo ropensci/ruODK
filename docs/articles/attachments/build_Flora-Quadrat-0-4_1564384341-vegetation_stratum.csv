@@ -1,8 +1,0 @@
-nvis_level3_broad_floristic_group,max_height_m,foliage_cover,dominant_species_1,dominant_species_2,dominant_species_3,dominant_species_4,PARENT_KEY,KEY
-w1.0_trees_with_dominant_genus,3.0,10-5,Euc big fruit,,,,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69/vegetation_stratum[1]
-w3.0_shrub,2.0,30-10,Blue bush,Xmas shrub,Pom poms ,Salt bush,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69/vegetation_stratum[2]
-g4.0_sedge,,5-0,Tall spiky,,,,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69/vegetation_stratum[3]
-w3.0_shrub,0.5,30-10,Erem green frost,Banks is candles ,Conostylis yellow,,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69/vegetation_stratum[4]
-m1.0_bryophyte,0.05,5-0,Moss town,,,,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69,uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69/vegetation_stratum[5]
-w3.0_shrub,3.0,5-0,Plant name 1,Plant name 2,,,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f/vegetation_stratum[1]
-w3.1_heath_shrub,1.0,100-70,Plant name 4,Plant name 5,,,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f,uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f/vegetation_stratum[2]
