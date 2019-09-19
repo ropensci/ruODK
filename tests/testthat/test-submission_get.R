@@ -27,7 +27,7 @@ test_that("submission_get works", {
   # plus the submission data in column 'xml`
   # names(sub)
   cn <- c(
-    "meta","encounter_start_datetime", "reporter", "device_id", "location",
+    "meta", "encounter_start_datetime", "reporter", "device_id", "location",
     "habitat", "vegetation_stratum", "vegetation_stratum", "vegetation_stratum",
     "vegetation_stratum", "vegetation_stratum", "perimeter", "taxon_encounter",
     "taxon_encounter", "encounter_end_datetime"
