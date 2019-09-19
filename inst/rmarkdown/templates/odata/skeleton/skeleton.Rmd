@@ -29,36 +29,49 @@ Step 1: Setup ruODK, ckanr
 Secrets are set as environment variables to keep them outside of this document. 
 Read vignette "setup" for further information.
 -->
-<!-- Open the .Renviron file  -->
+<!-- 1a. Open the .Renviron file:  -->
 ```{r edit_renviron, echo=FALSE, eval=FALSE}
 usethis::edit_r_environ()
 ```
 
-<!-- and paste the following with the webuser's credentials  -->
+<!-- 1b. Paste the following block usign your own, working credentials:  -->
 ```{r paste_env_vars, echo=FALSE, eval=FALSE}
-ODKC_UN="..."
-ODKC_PW="..."
+# ODK Central web user with "manager" role on project
+ODKC_UN="my@email.com"
+ODKC_PW="my-odkc-password"
 
+# CKAN user with permissions to create a dataset
 CKAN_URL="https://demo.ckan.org"
 CKAN_KEY="my-ckan-api-key"
 ```
-<!-- and restart the R session to load these environment variables. -->
+<!-- 1c: Restart the R session to load these environment variables. -->
 
 <!-- 
-* Configure ODK Central base URL, project ID, and form ID through OData Service URL.
-  Paste the (non-sensitive) OData Service URL over `SVC_URL`.
+* Configure ODK Central base URL (url), project ID (pid), and form ID (fid) 
+  in one step using the OData Service URL.
+* Paste your own Service URL over `svc="..."`.
 * Paste your local timezone over `Australia/Perth`.
 * Adjust `loc` to a local subfolder for downloaded attachments.
 -->
 ```{r setup, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 
-library(knitr)
-library(dplyr)
+# All packages used in this example
 library(ckanr)
+library(dplyr)
+library(DT)
+library(fs)
+library(googledrive)
+library(knitr)
+library(leaflet)
+library(readr)
+library(skimr)
 library(ruODK)
 
-ruODK::ru_setup(svc="SVC_URL")
+# Set ruODK defaults to an ODK Central form
+ruODK::ru_setup(
+  svc=paste0("https://sandbox.central.opendatakit.org/v1/projects",
+             "/14/forms/build_Flora-Quadrat-0-4_1564384341.svc"))
 tz <- "Australia/Perth"
 loc <- fs::path("attachments", "media")
 fs::dir_create(loc)
@@ -86,6 +99,7 @@ Repeat for each table name in form_tables$url.
 ```{r dl_submissions}
 data_main_raw <- ruODK::odata_submission_get(table = form_tables$url[1])
 data_sub1_raw <- ruODK::odata_submission_get(table = form_tables$url[2])
+data_sub2_raw <- ruODK::odata_submission_get(table = form_tables$url[3])
 # repeat for any remaining nested tables
 
 data <- data_main_raw %>% 
@@ -93,27 +107,40 @@ data <- data_main_raw %>%
   ruODK::parse_datetime(tz = tz) %>% 
   ruODK::parse_datetime(tz = tz, col_contains = "date") %>%
   dplyr::rename(
-    # # Inspect data, find colnames of coordinates (if any):
-    # longitude = x13,
-    # latitude = x14,
-    # altitude = x15
+    # Adjust coordinate colnames
+    longitude = x13,
+    latitude = x14,
+    altitude = x15
   ) %>%
   dplyr::mutate(
-    my_photo = ruODK::attachment_get(id, my_photo, local_dir = loc),
-    another_photo = ruODK::attachment_get(id, another_photo, local_dir = loc)
-    # add for each form field of type media attachment
+    # Adjust photo fieldnames
+    quadrat_photo = ruODK::attachment_get(
+      id, quadrat_photo, local_dir = loc),
+    morphological_type_photo = ruODK::attachment_get(
+      id, morphological_type_photo, local_dir = loc),
+    mudmap_photo = attachment_get(
+      id, mudmap_photo, local_dir = loc)
   ) %>%
   invisible()
 
 data_sub1 <- data_sub1_raw %>% 
-  ruODK::odata_submission_parse(verbose = TRUE) %>%
-  ruODK::parse_datetime(tz = tz) %>% 
-  ruODK::parse_datetime(tz = tz, col_contains = "date") %>%
-  dplyr::mutate(
-    some_photo = ruODK::attachment_get(id, some_photo, local_dir = loc),
-    # add for each form field of type media attachment
+  ruODK::odata_submission_parse(verbose = TRUE) %>% 
+  invisible()
+
+data_sub2 <- data_sub2_raw %>%
+  ruODK::odata_submission_parse(verbose = TRUE) %>% 
+  dplyr::rename(
+    # Adjust coordinate colnames
+    lon = x6,
+    lat = x7,
+    alt = x8
   ) %>%
-  dplyr::left_join(data, by = c("submissions_id" = "id")) %>% # join main table
+  dplyr::mutate(
+    # Adjust photo fieldnames
+    photo_in_situ = ruODK::attachment_get(
+      submissions_id, photo_in_situ, local_dir = loc)
+  ) %>%
+  dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>%
   invisible()
 ```
 
@@ -179,11 +206,13 @@ Notes:
 rep_fn <- "my_report.html" # The file name you save this template under
 data_fn <- here::here(loc, "data.csv") %>% as.character()           # Main data
 data_sub1_fn <- here::here(loc, "data_sub1.csv") %>% as.character() # Nested table 1
+data_sub2_fn <- here::here(loc, "data_sub2.csv") %>% as.character() # Nested table 2
 zip_fn <- "products.zip" # Attachments as one zip file (top level)
 
 # Write data tbls to CSV files
 readr::write_csv(data, path = data_fn)
 readr::write_csv(data_sub1, path = data_sub1_fn)
+readr::write_csv(data_sub2, path = data_sub2_fn)
 
 # Compress everything into `zip_fn`, retain relative path to `loc`
 zip(zipfile = zip_fn, files = fs::dir_ls(loc))
@@ -202,6 +231,8 @@ res_data_main <- ckanr::resource_create(
   package_id = d$id, name="Main data", upload = data_fn)
 res_data_sub1 <- ckanr::resource_create(
   package_id = d$id, name="Nested data table 1", upload = data_sub1_fn)
+res_data_sub2 <- ckanr::resource_create(
+  package_id = d$id, name="Nested data table 2", upload = data_sub2_fn)
 res_report <- ckanr::resource_create(
   package_id = d$id, name="Data report", upload = rep_fn)
 res_zip <- ckanr::resource_create(
@@ -210,6 +241,7 @@ res_zip <- ckanr::resource_create(
 # Paste res_data_main$id over RID and keep here, repeat for each resource
 r <- ckanr::resource_update(res_data_main$id, path = data_fn)
 r <- ckanr::resource_update(res_data_sub1$id, path = data_sub1_fn)
+r <- ckanr::resource_update(res_data_sub2$id, path = data_sub2_fn)
 r <- ckanr::resource_update(res_report$id, path = res_report)
 r <- ckanr::resource_update(res_zip$id, path = zip_fn)
 
@@ -225,5 +257,6 @@ googledrive::drive_ls(gd_fn) %>% googledrive::drive_rm(.)  # Wipe older outputs
 googledrive::drive_upload(rep_fn, path=rep_fn)             # Report as HTML
 googledrive::drive_upload(data_fn, path=data_fn)           # Main data as CSV
 googledrive::drive_upload(data_sub1_fn, path=data_sub1_fn) # Nested table 1 as CSV
+googledrive::drive_upload(data_sub2_fn, path=data_sub2_fn) # Nested table 2 as CSV
 googledrive::drive_upload(zip_fn, path=zip_fn)             # All outputs as ZIP
 ```
