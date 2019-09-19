@@ -4,7 +4,7 @@ test_that("submission_export works", {
   t <- tempdir()
 
   # High expectations
-  fid <- get_test_fid()
+  fid <- "build_Spotlighting-0-6_1558333698" # small and without attachments
   pth <- fs::path(t, glue::glue("{fid}.zip"))
   fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
   msg_dl <- glue::glue("Downloading submissions to: {pth}\n")
@@ -18,7 +18,7 @@ test_that("submission_export works", {
       overwrite = FALSE,
       verbose = TRUE,
       pid = get_test_pid(),
-      fid = get_test_fid(),
+      fid = fid,
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
@@ -34,7 +34,7 @@ test_that("submission_export works", {
       overwrite = FALSE,
       verbose = TRUE,
       pid = get_test_pid(),
-      fid = get_test_fid(),
+      fid = fid,
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
@@ -53,7 +53,7 @@ test_that("submission_export works", {
       overwrite = TRUE,
       verbose = TRUE,
       pid = get_test_pid(),
-      fid = get_test_fid(),
+      fid = fid,
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
@@ -73,7 +73,7 @@ test_that("submission_export works", {
       overwrite = FALSE,
       verbose = TRUE,
       pid = get_test_pid(),
-      fid = get_test_fid(),
+      fid = fid,
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
@@ -91,23 +91,6 @@ test_that("submission_export works", {
   # Find the payload
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
 
-  # Test attachment_link - this saves another download of the ZIP file
-  # Tests usethis::edit_file("R/attachment_link.R")
-  suppressWarnings(
-    data_quadrat_csv <- fid_csv %>%
-      readr::read_csv(na = c("", "NA", "na")) %>%
-      janitor::clean_names(.) %>%
-      attachment_link(.) %>%
-      parse_datetime(tz = "Australia/Perth")
-  )
-
-  # Test that filepath of attachment exists
-  for (i in seq_len(nrow(data_quadrat_csv))) {
-    testthat::expect_true(
-      fs::path(t, data_quadrat_csv[i, ]$location_quadrat_photo) %>%
-        fs::file_exists()
-    )
-  }
 })
 
 # Tests code
