@@ -159,8 +159,7 @@ ruODK::ru_setup(
 ```
 
 For all available detailed options to configure `ruODK`, read 
-`vignette("Setup", package = "ruODK")` 
-(online [here](https://dbca-wa.github.io/ruODK/articles/setup.html)).
+[`vignette("setup", package = "ruODK")`](https://dbca-wa.github.io/ruODK/articles/setup.html).
 
 ## Use ruODK
 
@@ -192,11 +191,9 @@ data %>% knitr::kable(.)
 ```
 
 A more detailed walk-through with some data visualisation examples is available
-in the `vignette("odata", package="ruODK")` 
-(online [here](https://dbca-wa.github.io/ruODK/articles/odata.html)).
+in the [`vignette("odata", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata.html).
 
-See also `vignette("api", package="ruODK")` 
-(online [here](https://dbca-wa.github.io/ruODK/articles/api.html))
+See also [`vignette("api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/api.html)
 for examples using the alternative RESTful API.
 
 ## Try ruODK
@@ -205,12 +202,12 @@ will launch a disposable, hosted RStudio instance with `ruODK` installed and
 the companion package [`urODK`](https://github.com/dbca-wa/urODK) opened as 
 starting point for a hands-on workshop or instant demo of `ruODK` usage. 
 
-Create a new RMarkdown workbook from `ruODK` template "odata" and follow the
-instructions within.
+Create a new RMarkdown workbook from `ruODK` template "ODK Central via OData" 
+and follow the instructions within.
 
 ## Contribute
-Contributions through [issues](https://github.com/dbca-wa/ruODK/issues) 
-and PRs are welcome!
+Contributions through [issues](https://github.com/dbca-wa/ruODK/issues) and PRs 
+are welcome!
 
 See the [contributing guide](https://dbca-wa.github.io/ruODK/CONTRIBUTING.html)
 on best practices and further readings for code contributions.
