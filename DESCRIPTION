@@ -3,16 +3,17 @@ Package: ruODK
 Title: An R Client for the ODK Central API
 Version: 0.6.4
 Authors@R: 
-    person(given = c("Florian", "W."),
+    c(person(given = c("Florian", "W."),
            family = "Mayer",
            role = c("aut", "cre"),
            email = "Florian.Mayer@dbca.wa.gov.au",
-           comment = c(ORCID = "0000-0003-4269-4242"))
+           comment = c(ORCID = "0000-0003-4269-4242")),
+           person("DBCA", role = c("cph", "fnd")))
 Description: Utilities to access and tidy up data from ODK Central's API.
     ODK Central is OpenDataKit's clearinghouse for digitally captured data 
     <https://docs.opendatakit.org/central-intro/>. 
     ODK Central's API is documented at <https://odkcentral.docs.apiary.io/>.
-URL: https://github.com/dbca-wa/ruODK
+URL: https://dbca-wa.github.io/ruODK/, https://github.com/dbca-wa/ruODK
 BugReports: https://github.com/dbca-wa/ruODK/issues
 License: GPL-3
 Depends: 

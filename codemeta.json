@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
   "description": "Utilities to access and tidy up data from ODK Central's API.\n    ODK Central is OpenDataKit's clearinghouse for digitally captured data \n    <https://docs.opendatakit.org/central-intro/>. \n    ODK Central's API is documented at <https://odkcentral.docs.apiary.io/>.",
@@ -25,8 +28,18 @@
     }
   ],
   "contributor": {},
-  "copyrightHolder": {},
-  "funder": {},
+  "copyrightHolder": [
+    {
+      "@type": "Organization",
+      "name": "DBCA"
+    }
+  ],
+  "funder": [
+    {
+      "@type": "Organization",
+      "name": "DBCA"
+    }
+  ],
   "maintainer": [
     {
       "@type": "Person",
@@ -80,7 +93,7 @@
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
-      "version": ">=\n        1.24",
+      "version": ">= 1.24",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -119,7 +132,7 @@
       "@type": "SoftwareApplication",
       "identifier": "listviewer",
       "name": "listviewer",
-      "version": ">=\n        2.1.0",
+      "version": ">= 2.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -158,7 +171,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">=\n        2.2.1",
+      "version": ">= 2.2.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -231,7 +244,7 @@
       "@type": "SoftwareApplication",
       "identifier": "httr",
       "name": "httr",
-      "version": ">=\n        1.4.1",
+      "version": ">= 1.4.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -270,7 +283,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
-      "version": ">=\n        0.3.2",
+      "version": ">= 0.3.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -375,5 +388,11 @@
       "url": "https://github.com/dbca-wa/ruODK",
       "description": "R package version 0.6.4"
     }
-  ]
+  ],
+  "relatedLink": "https://dbca-wa.github.io/ruODK/",
+  "releaseNotes": "https://github.com/dbca-wa/ruODK/blob/master/NEWS.md",
+  "readme": "https://github.com/dbca-wa/ruODK/blob/master/README.md",
+  "fileSize": "54956.652KB",
+  "contIntegration": ["https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master", "https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master", "https://codecov.io/gh/validmeasures/odkr", "https://travis-ci.org/unhcr/koboloadeR", "https://ci.appveyor.com/project/unhcr/koboloadeR", "https://codecov.io/gh/unhcr/koboloadeR", "https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master", "https://travis-ci.org/edwindj/cbsodataR", "https://ci.appveyor.com/project/edwindj/cbsodatar"],
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

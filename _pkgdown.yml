@@ -14,3 +14,7 @@ reference:
 - title: Example data
   contents:
   - has_concept("included")
+authors:
+  DBCA:
+    html: "<img src='man/figures/BCS.png' width='200' alt='DBCA'/>"
+    href: https://www.dbca.wa.gov.au/science/
