@@ -38,6 +38,10 @@
     {
       "@type": "Organization",
       "name": "DBCA"
+    },
+    {
+      "@type": "Organization",
+      "name": "NWSFTCP"
     }
   ],
   "maintainer": [
@@ -392,7 +396,23 @@
   "relatedLink": "https://dbca-wa.github.io/ruODK/",
   "releaseNotes": "https://github.com/dbca-wa/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/dbca-wa/ruODK/blob/master/README.md",
-  "fileSize": "54956.652KB",
-  "contIntegration": ["https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master", "https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master", "https://codecov.io/gh/validmeasures/odkr", "https://travis-ci.org/unhcr/koboloadeR", "https://ci.appveyor.com/project/unhcr/koboloadeR", "https://codecov.io/gh/unhcr/koboloadeR", "https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master", "https://travis-ci.org/edwindj/cbsodataR", "https://ci.appveyor.com/project/edwindj/cbsodatar"],
+  "fileSize": "55042.393KB",
+  "contIntegration": [
+    "https://travis-ci.org/dbca-wa/ruODK",
+    "https://ci.appveyor.com/project/dbca-wa/ruODK",
+    "https://codecov.io/github/dbca-wa/ruODK?branch=master",
+    "https://travis-ci.org/dbca-wa/ruODK",
+    "https://ci.appveyor.com/project/dbca-wa/ruODK",
+    "https://codecov.io/github/dbca-wa/ruODK?branch=master",
+    "https://codecov.io/gh/validmeasures/odkr",
+    "https://travis-ci.org/unhcr/koboloadeR",
+    "https://ci.appveyor.com/project/unhcr/koboloadeR",
+    "https://codecov.io/gh/unhcr/koboloadeR",
+    "https://travis-ci.org/dbca-wa/ruODK",
+    "https://ci.appveyor.com/project/dbca-wa/ruODK",
+    "https://codecov.io/github/dbca-wa/ruODK?branch=master",
+    "https://travis-ci.org/edwindj/cbsodataR",
+    "https://ci.appveyor.com/project/edwindj/cbsodatar"
+  ],
   "developmentStatus": "https://www.repostatus.org/#active"
 }

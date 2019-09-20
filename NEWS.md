@@ -1,13 +1,12 @@
 # ruODK 0.6.4
 ## Data
-*  Use a new test form to make package smaller and tests faster.
-   Use the test data as example data, include data from two nested tables.
-   Use the data in all vignettes and README.
-   The test service url now ends in 
-   [build_Flora-Quadrat-0-4_1564384341.svc](https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc), credentials are unchanged (#23)
-*  Speed up tests by using smaller forms where appropriate. Refactor settings
-   to add two new test forms, update vignette "setup" and contributing guidelines 
-   (#23)
+*  Use three new test forms to make package smaller and tests faster.
+   Use the main test form for example data, including data from two nested tables.
+   Use the main test form in all vignettes and README.
+   Use a small form without attachments for tests repeatedly exporting to ZIP.
+   Use another small form with only one submission and two attachments for tests
+   downloading attachments.
+   The test credentials are unchanged (#23)
 
 # ruODK 0.6.3
 ## Dependencies

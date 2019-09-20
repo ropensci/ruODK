@@ -5,7 +5,7 @@ devtools::test()
 styler::style_pkg()
 devtools::document(roclets = c("rd", "collate", "namespace"))
 spelling::spell_check_package()
-spelling::spell_check_files("README.Rmd")
+spelling::spell_check_files("README.Rmd", lang = "en_AU") # How to update word list from that?
 spelling::update_wordlist()
 codemetar::write_codemeta("ruODK")
 usethis::edit_file("inst/CITATION")
