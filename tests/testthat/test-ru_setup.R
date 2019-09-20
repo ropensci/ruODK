@@ -12,6 +12,8 @@ test_that("ru_setup does not update settings if given NULL", {
     test_svc = NULL,
     test_pid = NULL,
     test_fid = NULL,
+    test_fid_zip = NULL,
+    test_fid_att = NULL,
     test_url = NULL,
     test_un = NULL,
     test_pw = NULL
@@ -31,6 +33,8 @@ test_that("ru_setup does not update settings if given NULL", {
   testthat::expect_equal(x$test_pw, get_test_pw())
   testthat::expect_equal(x$test_pid, get_test_pid())
   testthat::expect_equal(x$test_fid, get_test_fid())
+  testthat::expect_equal(x$test_fid_zip, get_test_fid_zip())
+  testthat::expect_equal(x$test_fid_att, get_test_fid_att())
 })
 
 test_that("ru_setup resets settings if given empty string", {
@@ -44,6 +48,8 @@ test_that("ru_setup resets settings if given empty string", {
   test_pw <- get_test_pw()
   test_pid <- get_test_pid()
   test_fid <- get_test_fid()
+  test_fid_zip <- get_test_fid_zip()
+  test_fid_att <- get_test_fid_att()
 
   # Hammertime
   ru_setup(
@@ -54,6 +60,8 @@ test_that("ru_setup resets settings if given empty string", {
     pw = "",
     test_pid = "",
     test_fid = "",
+    test_fid_zip = "",
+    test_fid_att = "",
     test_url = "",
     test_un = "",
     test_pw = ""
@@ -71,6 +79,8 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_test_pw())
   testthat::expect_warning(get_test_pid())
   testthat::expect_warning(get_test_fid())
+  testthat::expect_warning(get_test_fid_zip())
+  testthat::expect_warning(get_test_fid_att())
 
   testthat::expect_equal(x$url, "")
   testthat::expect_equal(x$un, "")
@@ -80,6 +90,8 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_equal(x$test_pw, "")
   testthat::expect_equal(x$test_pid, "")
   testthat::expect_equal(x$test_fid, "")
+  testthat::expect_equal(x$test_fid_zip, "")
+  testthat::expect_equal(x$test_fid_att, "")
 
   # Reset
   ru_setup(
@@ -90,18 +102,19 @@ test_that("ru_setup resets settings if given empty string", {
     test_un = test_un,
     test_pw = test_pw,
     test_pid = test_pid,
-    test_fid = test_fid
+    test_fid = test_fid,
+    test_fid_zip = test_fid_zip,
+    test_fid_att = test_fid_att
   )
 })
 
 test_that("ru_setup sets pid, fid, url if given service url", {
 
-  # Keep original test settings
-  pid <- get_default_pid()
-  fid <- get_default_fid()
-  url <- get_default_url()
+  # Save sane state
   test_pid <- get_test_pid()
   test_fid <- get_test_fid()
+  test_fid_zip <- get_test_fid_zip()
+  test_fid_att <- get_test_fid_att()
   test_url <- get_test_url()
 
   # Hammertime
@@ -118,34 +131,32 @@ test_that("ru_setup sets pid, fid, url if given service url", {
   testthat::expect_equal(x$test_pid, "40")
   testthat::expect_equal(x$test_fid, "TESTFORMID")
 
-  # Reset
+  # Restore sane state
   ru_setup(
-    url = url,
-    pid = pid,
-    fid = fid,
     test_url = test_url,
     test_pid = test_pid,
-    test_fid = test_fid
+    test_fid = test_fid,
+    test_fid_zip = test_fid_zip,
+    test_fid_att = test_fid_att
   )
 })
-
 
 test_that("ru_setup sets individual settings", {
 
   # Keep original test settings
-  url <- ruODK::get_test_url()
+  url <- get_test_url()
 
   # Hammertime
   xx <- "something"
   ru_setup(url = xx)
-  testthat::expect_equal(ruODK::ru_settings()$url, xx)
+  testthat::expect_equal(ru_settings()$url, xx)
 
   # Reset
-  ruODK::ru_setup(url = url)
+  ru_setup(url = url)
 })
 
 test_that("ru_settings prints nicely", {
-  x <- ruODK::ru_settings()
+  x <- ru_settings()
   testthat::expect_equal(class(x), "ru_settings")
 
   out <- testthat::capture_output(print(x))

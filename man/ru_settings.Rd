@@ -12,6 +12,8 @@
 \alias{get_test_pw}
 \alias{get_test_pid}
 \alias{get_test_fid}
+\alias{get_test_fid_zip}
+\alias{get_test_fid_att}
 \title{Get or set \code{ruODK} settings.}
 \usage{
 ru_settings()
@@ -35,6 +37,10 @@ get_test_pw()
 get_test_pid()
 
 get_test_fid()
+
+get_test_fid_zip()
+
+get_test_fid_att()
 }
 \value{
 \code{ru_settings} prints your default ODK Central project ID,
@@ -58,6 +64,8 @@ ru_settings()
 \code{\link{get_default_pw}},
 \code{\link{get_test_pid}},
 \code{\link{get_test_fid}},
+\code{\link{get_test_fid_zip}},
+\code{\link{get_test_fid_att}},
 \code{\link{get_test_url}},
 \code{\link{get_test_un}},
 \code{\link{get_test_pw}}.

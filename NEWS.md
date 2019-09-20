@@ -5,6 +5,9 @@
    Use the data in all vignettes and README.
    The test service url now ends in 
    [build_Flora-Quadrat-0-4_1564384341.svc](https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc), credentials are unchanged (#23)
+*  Speed up tests by using smaller forms where appropriate. Refactor settings
+   to add two new test forms, update vignette "setup" and contributing guidelines 
+   (#23)
 
 # ruODK 0.6.3
 ## Dependencies

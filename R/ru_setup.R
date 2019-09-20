@@ -14,6 +14,8 @@
 #' \code{\link{get_default_pw}},
 #' \code{\link{get_test_pid}},
 #' \code{\link{get_test_fid}},
+#' \code{\link{get_test_fid_zip}},
+#' \code{\link{get_test_fid_att}},
 #' \code{\link{get_test_url}},
 #' \code{\link{get_test_un}},
 #' \code{\link{get_test_pw}}.
@@ -29,6 +31,8 @@ ru_settings <- function() {
     pw = Sys.getenv("ODKC_PW", ""),
     test_pid = Sys.getenv("ODKC_TEST_PID", ""),
     test_fid = Sys.getenv("ODKC_TEST_FID", ""),
+    test_fid_zip = Sys.getenv("ODKC_TEST_FID_ZIP", ""),
+    test_fid_att = Sys.getenv("ODKC_TEST_FID_ATT", ""),
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", "")
@@ -46,6 +50,8 @@ print.ru_settings <- function(x, ...) {
   cat("  Default ODK Central Password: ", x$pw, "\n")
   cat("  Test ODK Central Project ID:", x$test_pid, "\n")
   cat("  Test ODK Central Form ID:", x$test_fid, "\n")
+  cat("  Test ODK Central Form ID (ZIP tests):", x$test_fid_zip, "\n")
+  cat("  Test ODK Central Form ID (Attachment tests):", x$test_fid_att, "\n")
   cat("  Test ODK Central URL:", x$test_url, "\n")
   cat("  Test ODK Central Username:", x$test_un, "\n")
   cat("  Test ODK Central Password:", x$test_pw, "\n")
@@ -105,6 +111,16 @@ odata_svc_parse <- function(svc) {
 #'   A numeric value for \code{test_pid} will be converted to character.
 #' @param test_fid (optional, character) The alphanumeric ID of an existing form
 #'   in \code{test_pid}. This will override the form ID from \code{test_svc}.
+#'   This form is used as default form in all tests, examples, vignettes, data,
+#'   and Rmd templates.
+#' @param test_fid_zip (optional, character) The alphanumeric ID of an existing form
+#'   in \code{test_pid}. This will override the form ID from \code{test_svc}.
+#'   Provide the form ID of a form with few submissions and without attachments.
+#'   This form is used to test the repeated download of all form submissions.
+#' @param test_fid_att (optional, character) The alphanumeric ID of an existing form
+#'   in \code{test_pid}. This will override the form ID from \code{test_svc}.
+#'   Provide the form ID of a form with few submissions and few attachments.
+#'   This form is used to test downloading and linking attachments.
 #' @param test_url (optional, character) A valid ODK Central URL for testing.
 #'   This will override the ODK Central base URL from \code{svc}.
 #' @param test_un (optional, character) A valid ODK Central username (email)
@@ -142,7 +158,9 @@ odata_svc_parse <- function(svc) {
 #'   test_un = "me@email.com",
 #'   test_pw = "...",
 #'   test_pid = 14,
-#'   test_fid = "build_Flora-Quadrat-0-2_1558575936"
+#'   test_fid = "build_Flora-Quadrat-0-2_1558575936",
+#'   test_fid_zip = "build_Spotlighting-0-6_1558333698",
+#'   test_fid_att = "build_Flora-Quadrat-0-1_1558330379"
 #' )
 ru_setup <- function(svc = NULL,
                      pid = NULL,
@@ -153,6 +171,8 @@ ru_setup <- function(svc = NULL,
                      test_svc = NULL,
                      test_pid = NULL,
                      test_fid = NULL,
+                     test_fid_zip = NULL,
+                     test_fid_att = NULL,
                      test_url = NULL,
                      test_un = NULL,
                      test_pw = NULL) {
@@ -178,6 +198,8 @@ ru_setup <- function(svc = NULL,
 
   if (!is.null(test_pid)) Sys.setenv("ODKC_TEST_PID" = as.character(test_pid))
   if (!is.null(test_fid)) Sys.setenv("ODKC_TEST_FID" = test_fid)
+  if (!is.null(test_fid_zip)) Sys.setenv("ODKC_TEST_FID_ZIP" = test_fid_zip)
+  if (!is.null(test_fid_att)) Sys.setenv("ODKC_TEST_FID_ATT" = test_fid_att)
   if (!is.null(test_url)) Sys.setenv("ODKC_TEST_URL" = test_url)
   if (!is.null(test_un)) Sys.setenv("ODKC_TEST_UN" = test_un)
   if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
@@ -286,6 +308,25 @@ get_test_fid <- function() {
   x
 }
 
+#' @export
+#' @rdname ru_settings
+get_test_fid_zip <- function() {
+  x <- Sys.getenv("ODKC_TEST_FID_ZIP")
+  if (identical(x, "")) {
+    rlang::warn("No test ODK Central ZIP form ID set. ru_setup()?")
+  }
+  x
+}
+
+#' @export
+#' @rdname ru_settings
+get_test_fid_att <- function() {
+  x <- Sys.getenv("ODKC_TEST_FID_ATT")
+  if (identical(x, "")) {
+    rlang::warn("No test ODK Central ATT form ID set. ru_setup()?")
+  }
+  x
+}
 #' Abort on missing ODK Central credentials (url, username, password).
 #'
 #' @param url A URL (character)

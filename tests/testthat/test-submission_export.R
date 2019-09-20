@@ -4,7 +4,7 @@ test_that("submission_export works", {
   t <- tempdir()
 
   # High expectations
-  fid <- "build_Spotlighting-0-6_1558333698" # small and without attachments
+  fid <- get_test_fid_zip() # small and without attachments
   pth <- fs::path(t, glue::glue("{fid}.zip"))
   fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
   msg_dl <- glue::glue("Downloading submissions to: {pth}\n")
@@ -90,7 +90,6 @@ test_that("submission_export works", {
 
   # Find the payload
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
-
 })
 
 # Tests code

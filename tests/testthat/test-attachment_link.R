@@ -17,7 +17,7 @@ test_that("attachment_link works", {
 
   # A fresh litterbox
   t <- tempdir()
-  fid <- "build_Flora-Quadrat-0-1_1558330379" # Form with one submission
+  fid <- get_test_fid_att() # Form with one submission
 
   fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
 

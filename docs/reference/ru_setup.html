@@ -137,7 +137,8 @@
 
     <pre class="usage"><span class='fu'>ru_setup</span>(<span class='kw'>svc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pw</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_svc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_pid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>test_fid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_un</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_pw</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>test_fid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_fid_zip</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_fid_att</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>test_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_un</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>test_pw</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,7 +190,23 @@ A numeric value for <code>test_pid</code> will be converted to character.</p></t
     <tr>
       <th>test_fid</th>
       <td><p>(optional, character) The alphanumeric ID of an existing form
-in <code>test_pid</code>. This will override the form ID from <code>test_svc</code>.</p></td>
+in <code>test_pid</code>. This will override the form ID from <code>test_svc</code>.
+This form is used as default form in all tests, examples, vignettes, data,
+and Rmd templates.</p></td>
+    </tr>
+    <tr>
+      <th>test_fid_zip</th>
+      <td><p>(optional, character) The alphanumeric ID of an existing form
+in <code>test_pid</code>. This will override the form ID from <code>test_svc</code>.
+Provide the form ID of a form with few submissions and without attachments.
+This form is used to test the repeated download of all form submissions.</p></td>
+    </tr>
+    <tr>
+      <th>test_fid_att</th>
+      <td><p>(optional, character) The alphanumeric ID of an existing form
+in <code>test_pid</code>. This will override the form ID from <code>test_svc</code>.
+Provide the form ID of a form with few submissions and few attachments.
+This form is used to test downloading and linking attachments.</p></td>
     </tr>
     <tr>
       <th>test_url</th>
@@ -242,7 +259,9 @@ tab, which in turn contains base URL, project ID, and form ID.</p>
   <span class='kw'>test_un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>,
   <span class='kw'>test_pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>,
   <span class='kw'>test_pid</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-  <span class='kw'>test_fid</span> <span class='kw'>=</span> <span class='st'>"build_Flora-Quadrat-0-2_1558575936"</span>
+  <span class='kw'>test_fid</span> <span class='kw'>=</span> <span class='st'>"build_Flora-Quadrat-0-2_1558575936"</span>,
+  <span class='kw'>test_fid_zip</span> <span class='kw'>=</span> <span class='st'>"build_Spotlighting-0-6_1558333698"</span>,
+  <span class='kw'>test_fid_att</span> <span class='kw'>=</span> <span class='st'>"build_Flora-Quadrat-0-1_1558330379"</span>
 )</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

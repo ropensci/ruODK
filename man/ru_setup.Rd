@@ -6,7 +6,8 @@
 \usage{
 ru_setup(svc = NULL, pid = NULL, fid = NULL, url = NULL,
   un = NULL, pw = NULL, test_svc = NULL, test_pid = NULL,
-  test_fid = NULL, test_url = NULL, test_un = NULL, test_pw = NULL)
+  test_fid = NULL, test_fid_zip = NULL, test_fid_att = NULL,
+  test_url = NULL, test_un = NULL, test_pw = NULL)
 }
 \arguments{
 \item{svc}{(optional, character) The OData service URL of a form.
@@ -38,7 +39,19 @@ on \code{test_url}. This will override the project ID from \code{test_svc}.
 A numeric value for \code{test_pid} will be converted to character.}
 
 \item{test_fid}{(optional, character) The alphanumeric ID of an existing form
-in \code{test_pid}. This will override the form ID from \code{test_svc}.}
+in \code{test_pid}. This will override the form ID from \code{test_svc}.
+This form is used as default form in all tests, examples, vignettes, data,
+and Rmd templates.}
+
+\item{test_fid_zip}{(optional, character) The alphanumeric ID of an existing form
+in \code{test_pid}. This will override the form ID from \code{test_svc}.
+Provide the form ID of a form with few submissions and without attachments.
+This form is used to test the repeated download of all form submissions.}
+
+\item{test_fid_att}{(optional, character) The alphanumeric ID of an existing form
+in \code{test_pid}. This will override the form ID from \code{test_svc}.
+Provide the form ID of a form with few submissions and few attachments.
+This form is used to test downloading and linking attachments.}
 
 \item{test_url}{(optional, character) A valid ODK Central URL for testing.
 This will override the ODK Central base URL from \code{svc}.}
@@ -82,7 +95,9 @@ ru_setup(
   test_un = "me@email.com",
   test_pw = "...",
   test_pid = 14,
-  test_fid = "build_Flora-Quadrat-0-2_1558575936"
+  test_fid = "build_Flora-Quadrat-0-2_1558575936",
+  test_fid_zip = "build_Spotlighting-0-6_1558333698",
+  test_fid_att = "build_Flora-Quadrat-0-1_1558330379"
 )
 }
 \seealso{
