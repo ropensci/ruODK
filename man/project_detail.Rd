@@ -41,6 +41,9 @@ A tibble with exactly one row for the project and all project
 While the API endpoint will return all details for one project,
 `project_detail` will fail with incorrect or missing authentication.
 }
+\details{
+\lifecycle{stable}
+}
 \examples{
 \dontrun{
 # Set default credentials, see vignette "setup"

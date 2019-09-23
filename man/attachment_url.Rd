@@ -32,6 +32,9 @@ See \code{vignette("Setup", package = "ruODK")}.}
 The inferred download URL.
 }
 \description{
+\lifecycle{stable}
+}
+\details{
 This is a helper function used by `attachment_get`.
 This function is vectorised and accepts single values or vectors for uuid and
 fn.

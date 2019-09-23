@@ -17,6 +17,8 @@
 #' uuids to download them one by one via `submission_get`. Download attachments
 #' as listed for each submission (`attachment_list`).
 #'
+#' \lifecycle{stable}
+#'
 #' @param local_dir The local folder to save the downloaded files to,
 #'                  default: `here::here()`.
 #' @param overwrite Whether to overwrite previously downloaded zip files,

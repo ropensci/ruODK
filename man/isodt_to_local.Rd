@@ -30,17 +30,7 @@ Default: \code{c("YmdHMS", "YmdHMSz")}.}
 A lubridate PosixCT datetime in the given timezone.
 }
 \description{
-#' Check whether we have internet
-#'
-#' @importFrom httr GET
-#' @importFrom rlang warn
-#' @noRd
-has_internet <- function() {
-  online <- !is.null(httr::GET("google.com"))
-  if (online == FALSE) rlang::warn("Please check internet connectivity!")
-  invisible(online)
-}
-Parse an ISO8601 datetime string to a timezone aware datetime.
+\lifecycle{stable}
 }
 \seealso{
 Other utilities: \code{\link{\%>\%}},

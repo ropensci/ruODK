@@ -38,7 +38,7 @@ See \code{vignette("Setup", package = "ruODK")}.}
 A tibble with one row and all form metadata as columns.
 }
 \description{
-Show details for one form.
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

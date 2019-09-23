@@ -14,7 +14,7 @@ map_dttm_hack(.x, .f, ...)
 \item{...}{Extra arguments to `map()`}
 }
 \description{
-Map given function, handle null as NA, flatten_chr() and convert to dttm.
+\lifecycle{stable}
 }
 \details{
 Use this function to extract ISO timestamps with NAs

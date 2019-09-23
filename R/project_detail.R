@@ -3,6 +3,8 @@
 #' While the API endpoint will return all details for one project,
 #' `project_detail` will fail with incorrect or missing authentication.
 #'
+#' \lifecycle{stable}
+#'
 #' @template param-pid
 #' @template param-url
 #' @template param-auth

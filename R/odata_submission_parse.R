@@ -1,5 +1,7 @@
 #' A functional to extract names of list columns from a tibble.
 #'
+#' \lifecycle{stable}
+#'
 #' @param tbl A tibble, possibly with list columns
 #' @return A vector of list column names
 listcol_names <- function(tbl) {
@@ -13,6 +15,7 @@ listcol_names <- function(tbl) {
 
 #' Recursively unnest_wide all list columns in a tibble.
 #'
+#' \lifecycle{stable}
 #' @param nested_tbl A nested tibble
 #' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,
 #'   default: "universal".
@@ -52,6 +55,8 @@ unnest_all <- function(nested_tbl,
 }
 
 #' Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.
+#'
+#' \lifecycle{maturing}
 #'
 #' @param data A nested list of lists as given by `ruODK::get_submissions`.
 #' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,

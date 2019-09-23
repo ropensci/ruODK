@@ -52,6 +52,9 @@ A tibble containing server audit logs.
  * logged_at: dttm. Time of action on server.
 }
 \description{
+\lifecycle{stable}
+}
+\details{
 Parameters to filter the audit logs:
 `action=form.create&start=2000-01-01z&end=2000-12-31T23%3A59.999z&limit=100&offset=200`
 }

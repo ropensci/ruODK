@@ -14,7 +14,7 @@ map_lgl_hack(.x, .f, ...)
 \item{...}{Extra arguments to `map()`}
 }
 \description{
-Map given function, handle null as FALSE, flatten_chr() and convert to logical.
+\lifecycle{stable}
 }
 \details{
 Use this function to handle NULLy logicals.

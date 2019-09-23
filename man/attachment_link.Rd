@@ -23,7 +23,7 @@ The dataframe with attachment columns modified to contain relative
   paths to the downloaded attachment files.
 }
 \description{
-Prefix attachment columns from CSV export with a local attachment file path.
+\lifecycle{maturing}
 }
 \examples{
 \dontrun{

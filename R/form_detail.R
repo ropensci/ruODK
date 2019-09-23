@@ -1,5 +1,6 @@
 #' Show details for one form.
 #'
+#' \lifecycle{stable}
 #'
 #' @template param-pid
 #' @template param-fid

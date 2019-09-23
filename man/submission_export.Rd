@@ -67,6 +67,8 @@ For incremental download of a subset of submissions, use `submission_list`,
 choose the submissions of interest (e.g. by submission date), and use their
 uuids to download them one by one via `submission_get`. Download attachments
 as listed for each submission (`attachment_list`).
+
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

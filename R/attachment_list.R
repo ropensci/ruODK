@@ -1,5 +1,6 @@
 #' List all submissions of one form.
 #'
+#' \lifecycle{stable}
 #'
 #' When a Submission is created, either over the OpenRosa or the REST interface,
 #' its XML data is analysed to determine which file attachments it references:

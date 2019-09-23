@@ -56,17 +56,7 @@ has_internet &lt;- function()
   invisible(online)
 
 Parse an ISO8601 datetime string to a timezone aware datetime. — isodt_to_local" />
-<meta property="og:description" content="#' Check whether we have internet
-#'
-#' @importFrom httr GET
-#' @importFrom rlang warn
-#' @noRd
-has_internet &amp;lt;- function() 
-  online &amp;lt;- !is.null(httr::GET(&quot;google.com&quot;))
-  if (online == FALSE) rlang::warn(&quot;Please check internet connectivity!&quot;)
-  invisible(online)
-
-Parse an ISO8601 datetime string to a timezone aware datetime." />
+<meta property="og:description" content="" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,7 +89,7 @@ Parse an ISO8601 datetime string to a timezone aware datetime." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.5</span>
       </span>
     </div>
 
@@ -172,17 +162,7 @@ Parse an ISO8601 datetime string to a timezone aware datetime.</h1>
     </div>
 
     <div class="ref-description">
-    <p>#' Check whether we have internet
-#'
-#' @importFrom httr GET
-#' @importFrom rlang warn
-#' @noRd
-has_internet &lt;- function() 
-  online &lt;- !is.null(httr::GET("google.com"))
-  if (online == FALSE) rlang::warn("Please check internet connectivity!")
-  invisible(online)
-
-Parse an ISO8601 datetime string to a timezone aware datetime.</p>
+    <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
     </div>
 
     <pre class="usage"><span class='fu'>isodt_to_local</span>(<span class='no'>datetime_string</span>, <span class='kw'>orders</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"YmdHMS"</span>, <span class='st'>"YmdHMSz"</span>),

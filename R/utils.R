@@ -12,6 +12,7 @@
 
 #' Parse an ISO8601 datetime string to a timezone aware datetime.
 #'
+#' \lifecycle{stable}
 #' @param datetime_string (character) An ISO8601 datetime string as produced by
 #'   XForms exported from ODK Central.
 #' @param orders (vector of character) Orders of datetime elements for lubridate.
@@ -31,6 +32,7 @@ isodt_to_local <- function(datetime_string,
 
 #' Parse all columns containing a certain word in its name to localised datetime.
 #'
+#' \lifecycle{stable}
 #' @details This function wraps a \code{`dplyr::mutate_at()`} operation on all
 #' datetime columns containing a tell-tale `col_contains` string like "time"
 #' (default), "datetime" or "date". The operator using this function will have

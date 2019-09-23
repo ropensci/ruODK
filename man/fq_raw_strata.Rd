@@ -12,15 +12,20 @@ See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 fq_raw_strata
 }
 \description{
-The OData response for the subgroup of an ODK Central form.
+\lifecycle{stable}
 }
 \details{
+The OData response for the subgroup of an ODK Central form.
+
 This subgroup represents vegetation strata as per the NVIS classification.
 A vegetation stratum is a layer of plants with the same height, and dominated
 by one or few plant taxa. Plant communities can be made of up to five strata,
 with two to three being most common.
 
-The data in this example is freely made up.
+This data is kept up to date with the data used in vignettes and package tests.
+The data is comprised of test records with nonsensical data.
+The forms used to capture this data are development versions of real-world
+forms.
 }
 \seealso{
 Other included: \code{\link{fq_meta}},

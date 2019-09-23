@@ -1,5 +1,6 @@
 #' Show the schema of one form.
 #'
+#' \lifecycle{stable}
 #'
 #' @param flatten Whether to flatten the resulting list of lists (TRUE) or not
 #'   (FALSE, default).
@@ -111,5 +112,48 @@ form_schema <- function(flatten = FALSE,
     httr::content(.)
 }
 
+#' Parse a form_schema into a tibble of fields with name, type, and path.
+#'
+#' \lifecycle{experimental}
+#'
+#' @param fs The output of form_schema as nested list
+#' @template param-verbose
+#' @export
+#' @examples
+#' \dontrun{
+#' fs <- form_schema()
+#' fsp <- form_schema_parse(fs)
+#' fsp
+#' }
+form_schema_parse <- function(fs, verbose = TRUE) {
+  rlang::warn("Not implemented.")
+
+  # 0. R CMD check
+  . <- NULL
+  type <- NULL
+  name <- NULL
+  children <- NULL
+
+  # 1. Early exit for terminal nodes
+
+  # 2. Grab next level type/name pairs
+  x <- rlist::list.select(fs, type, name) %>% rlist::list.stack(.)
+  # Debug
+  if (verbose == TRUE) {
+    message("\nFound fields:\n")
+    print(x)
+  }
+
+  # 3. Map form_schema_parse over nested elements
+  xx <- rlist::list.select(fs, children) %>% rlist::list.stack(.)
+  # for (i in x) {form_schema_parse(fs[[i]])}
+  xxx <- purrr::map(fs, form_schema_parse)
+
+  # 4. Combine x and output of 3.
+  # TODO
+
+  # 5. Return combined type/name pairs as tibble
+  x
+}
 # Tests
 # usethis::edit_file("tests/testthat/test-form_schema.R")

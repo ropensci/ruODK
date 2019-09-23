@@ -19,7 +19,7 @@ A named list with three components (all of type character):
   * \code{fid} The form ID.
 }
 \description{
-Retrieve URL, project ID, and form ID from an ODK Central OData service URL.
+\lifecycle{stable}
 }
 \seealso{
 Other ru_settings: \code{\link{ru_settings}},

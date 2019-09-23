@@ -32,7 +32,7 @@ See \code{vignette("Setup", package = "ruODK")}.}
 A tibble with one row per form and all form metadata as columns.
 }
 \description{
-List all forms.
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

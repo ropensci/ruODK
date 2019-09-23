@@ -39,7 +39,7 @@ A nested list containing Edmx (dataset schema definition) and
   .attrs (Version).
 }
 \description{
-Retrieve metadata from an OData URL ending in .svc as list of lists
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

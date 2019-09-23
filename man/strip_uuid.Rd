@@ -13,7 +13,7 @@ strip_uuid(uuid)
 The string with every occurrence of "uuid:" deleted.
 }
 \description{
-Strip the leading "uuid:" from a UUID hash.
+\lifecycle{stable}
 }
 \seealso{
 Other utilities: \code{\link{\%>\%}},

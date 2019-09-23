@@ -19,7 +19,7 @@ default: "universal".}
 The submissions as unnested tibble
 }
 \description{
-Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.
+\lifecycle{maturing}
 }
 \examples{
 \dontrun{

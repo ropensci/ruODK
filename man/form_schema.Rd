@@ -55,7 +55,7 @@ A nested list containing the form definition.
   fields are captured (e.g. "instanceId", form start datetimes etc.).
 }
 \description{
-Show the schema of one form.
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

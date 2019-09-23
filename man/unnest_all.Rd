@@ -18,7 +18,7 @@ default: "universal".}
 The unnested tibble in wide format
 }
 \description{
-Recursively unnest_wide all list columns in a tibble.
+\lifecycle{stable}
 }
 \seealso{
 Other odata-api: \code{\link{attachment_get}},

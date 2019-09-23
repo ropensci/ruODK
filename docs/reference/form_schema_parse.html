@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse a form schema into a tibble of name, type, and path. — form_schema_parse • ruODK</title>
+<title>Parse a form_schema into a tibble of fields with name, type, and path. — form_schema_parse • ruODK</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Parse a form schema into a tibble of name, type, and path. — form_schema_parse" />
-<meta property="og:description" content="Parse a form schema into a tibble of name, type, and path." />
+<meta property="og:title" content="Parse a form_schema into a tibble of fields with name, type, and path. — form_schema_parse" />
+<meta property="og:description" content="" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.5</span>
       </span>
     </div>
 
@@ -126,39 +126,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse a form schema into a tibble of name, type, and path.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/attachment_link.R'><code>R/attachment_link.R</code></a></small>
+    <h1>Parse a form_schema into a tibble of fields with name, type, and path.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/form_schema.R'><code>R/form_schema.R</code></a></small>
     <div class="hidden name"><code>form_schema_parse.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Parse a form schema into a tibble of name, type, and path.</p>
+    <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>form_schema_parse</span>(<span class='no'>fs</span>)</pre>
+    <pre class="usage"><span class='fu'>form_schema_parse</span>(<span class='no'>fs</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fs</th>
-      <td><p>A form schema as returned by `form_schema`</p></td>
+      <td><p>The output of form_schema as nested list</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Whether to display debug messages or not (default)</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with a row for each form field and three columns:
-  * name The field name
-  * type The field type
-  * path The field path as list of named nodes</p>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>fs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='form_schema.html'>form_schema</a></span>()
+<span class='no'>fsp</span> <span class='kw'>&lt;-</span> <span class='fu'>form_schema_parse</span>(<span class='no'>fs</span>)
+<span class='no'>fsp</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

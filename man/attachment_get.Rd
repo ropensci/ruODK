@@ -2,7 +2,7 @@
 % Please edit documentation in R/attachment_get.R
 \name{attachment_get}
 \alias{attachment_get}
-\title{Download attachments and return the local path}
+\title{Download attachments and return the local path.}
 \usage{
 attachment_get(sid, fn, local_dir = "media", separate = FALSE,
   pid = get_default_pid(), fid = get_default_fid(),
@@ -57,12 +57,14 @@ See \code{vignette("Setup", package = "ruODK")}.}
 The relative file path for the downloaded attachment(s)
 }
 \description{
+\lifecycle{stable}
+}
+\details{
 This function is vectorised and can handle either one or many records.
 Parameters submission_uuid and attachment_filename accept single or exactly
 the same number of multiple values.
 The other parameters are automatically repeated.
-}
-\details{
+
 The media attachments are downloaded into a folder named by the submission's
 uuid (minus "uuid:" for Windows compatibility) inside the given
 `local_dir`. E.g.:

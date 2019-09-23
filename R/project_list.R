@@ -4,6 +4,8 @@
 #' While the API endpoint will return all projects,
 #' `project_list` will fail with incorrect or missing authentication.
 #'
+#' \lifecycle{stable}
+#'
 #' @template param-url
 #' @template param-auth
 #' @return A tibble with one row per project and all project metadata

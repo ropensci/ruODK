@@ -1,3 +1,8 @@
+# ruODK 0.6.5
+## Documentation
+* Use lifecycle badges on functions. Add lifecycle to dependencies, version bump
+  usethis (#29)
+
 # ruODK 0.6.4
 ## Data
 *  Use three new test forms to make package smaller and tests faster.

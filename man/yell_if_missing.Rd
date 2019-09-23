@@ -18,7 +18,7 @@ yell_if_missing(url, un, pw, pid = NULL, fid = NULL)
 \item{fid}{A form ID (character, optional)}
 }
 \description{
-Abort on missing ODK Central credentials (url, username, password).
+\lifecycle{stable}
 }
 \details{
 This is a helper function to pat down \code{ruODK} functions for

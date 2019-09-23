@@ -61,7 +61,7 @@ A nested list of lists.
     `@odata.count` is the total number of rows in the table.
 }
 \description{
-Retrieve /Submissions from an OData URL ending in .svc as list of lists
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

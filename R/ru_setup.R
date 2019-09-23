@@ -1,5 +1,7 @@
 #' Get or set \code{ruODK} settings.
 #'
+#' \lifecycle{stable}
+#'
 #' @export
 #' @return \code{ru_settings} prints your default ODK Central project ID,
 #'   form ID, url, username, and password, and corresponding optional test
@@ -62,6 +64,8 @@ print.ru_settings <- function(x, ...) {
 #
 #' Retrieve URL, project ID, and form ID from an ODK Central OData service URL.
 #'
+#' \lifecycle{stable}
+#'
 #' @param svc (character) The OData service URL of a form as provided by the
 #'   ODK Central form submissions tab.
 #'   Example: "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
@@ -87,6 +91,8 @@ odata_svc_parse <- function(svc) {
 # Setters
 #
 #' Configure default \code{ruODK} settings.
+#'
+#' \lifecycle{stable}
 #'
 #' @export
 #' @param svc (optional, character) The OData service URL of a form.
@@ -208,6 +214,7 @@ ru_setup <- function(svc = NULL,
 #------------------------------------------------------------------------------#
 # Getters
 #
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_default_pid <- function() {
@@ -218,6 +225,7 @@ get_default_pid <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_default_fid <- function() {
@@ -228,6 +236,7 @@ get_default_fid <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_default_url <- function() {
@@ -238,6 +247,7 @@ get_default_url <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_default_un <- function() {
@@ -248,6 +258,7 @@ get_default_un <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_default_pw <- function() {
@@ -258,6 +269,7 @@ get_default_pw <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_test_url <- function() {
@@ -268,6 +280,7 @@ get_test_url <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_test_un <- function() {
@@ -278,6 +291,7 @@ get_test_un <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_test_pw <- function() {
@@ -288,6 +302,7 @@ get_test_pw <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_test_pid <- function() {
@@ -298,6 +313,7 @@ get_test_pid <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_test_fid <- function() {
@@ -308,6 +324,7 @@ get_test_fid <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_test_fid_zip <- function() {
@@ -318,6 +335,7 @@ get_test_fid_zip <- function() {
   x
 }
 
+#' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_test_fid_att <- function() {
@@ -327,7 +345,10 @@ get_test_fid_att <- function() {
   }
   x
 }
+
 #' Abort on missing ODK Central credentials (url, username, password).
+#'
+#' \lifecycle{stable}
 #'
 #' @param url A URL (character)
 #' @param un A username (character)
@@ -365,6 +386,8 @@ yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL) {
 }
 
 #' Warn about failed web requests and give helpful troubleshooting tips.
+#'
+#' \lifecycle{stable}
 #'
 #' A wrapper around \code{httr::stop_for_status()} with a helpful error message.
 #' Examples: see tests for \code{ruODK::project_list()}.

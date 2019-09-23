@@ -14,7 +14,7 @@ map_int_hack(.x, .f, ...)
 \item{...}{Extra arguments to `map()`}
 }
 \description{
-Map given function, handle null as NA and flatten_int().
+\lifecycle{stable}
 }
 \details{
 Use this function to extract int elements with NAs

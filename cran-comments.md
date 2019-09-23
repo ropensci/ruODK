@@ -18,14 +18,19 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 3 notes
 
 * This is a new release.
-* "installed size is  5.0Mb, sub-directories of 1Mb or more: doc 4.4Mb":
-  The vignette "odata" contains a leaflet map with popups showing embedded
-  photos, a highly sought after use case.
-  The third party dependencies, especially leaflet-awesomemarkers (for map 
-  popups), cost over 3MB. 
-  The example images have been resized aggressively to 200x150 px.
-  The other vignette "api" refers to the map in vignette "odata" as not to 
-  duplicate the expensive map.
+* "installed size is  5.2Mb, sub-directories of 1Mb or more: doc 4.4Mb":
+  * The vignette "odata" contains a leaflet map with popups showing embedded
+    photos, a highly sought after use case.
+    The third party dependencies, especially leaflet-awesomemarkers (for map 
+    popups), cost over 3MB. 
+  * The other vignette "api" refers to the map in vignette "odata" as not to 
+    duplicate the expensive map.
+  * The example images have been resized aggressively to 200x150 px.
+  * Included images for branding and attribution are at lowest legible size.
+* "Namespace in Imports field not imported from: ‘lifecycle’"
+  * Using badges for function lifecycle stages from package `lifecycle` raises
+    this note and also causes warnings in `goodpractice` checks. This seems to 
+    be a known issue <https://github.com/ropensci/spelling/issues/42>

@@ -1,5 +1,6 @@
 #' Retrieve /Submissions from an OData URL ending in .svc as list of lists
 #'
+#' \lifecycle{stable}
 #'
 #' @param table The submission EntityType, or in plain words, the table name.
 #'            Default: "Submissions" (the main table).

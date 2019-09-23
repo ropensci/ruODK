@@ -1,5 +1,7 @@
 #' Retrieve metadata from an OData URL ending in .svc as list of lists
 #'
+#' \lifecycle{stable}
+#'
 #' @template param-pid
 #' @template param-fid
 #' @template param-url

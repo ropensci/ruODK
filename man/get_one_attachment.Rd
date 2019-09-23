@@ -2,7 +2,7 @@
 % Please edit documentation in R/attachment_get.R
 \name{get_one_attachment}
 \alias{get_one_attachment}
-\title{Download one media attachment}
+\title{Download one media attachment.}
 \usage{
 get_one_attachment(pth, fn, src, url = get_default_url(),
   un = get_default_un(), pw = get_default_pw(), verbose = FALSE)
@@ -36,6 +36,9 @@ See \code{vignette("Setup", package = "ruODK")}.}
 The relative local path to the downloaded attachment or NA.
 }
 \description{
+\lifecycle{stable}
+}
+\details{
 This is a helper function used by `get_attachment`.
 This function is not vectorised, but mapped by `get_attachment` to a tibble
 of input parameters.

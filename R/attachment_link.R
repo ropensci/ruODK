@@ -1,17 +1,6 @@
-#' Parse a form schema into a tibble of name, type, and path.
-#'
-#' @param fs A form schema as returned by `form_schema`
-#' @return A tibble with a row for each form field and three columns:
-#'   * name The field name
-#'   * type The field type
-#'   * path The field path as list of named nodes
-form_schema_parse <- function(fs) {
-  # TODO: magic goes here
-  rlang::warn("Not implemented.")
-  fs
-}
-
 #' Prefix a filename and return an fs::path
+#'
+#' \lifecycle{stable}
 #'
 #' @param fn A filename (string)
 #' @param prefix a prefix (string)
@@ -21,6 +10,8 @@ prefix_fn <- function(fn, prefix) {
 }
 
 #' Prefix attachment columns from CSV export with a local attachment file path.
+#'
+#' \lifecycle{maturing}
 #'
 #' @param data_tbl The downloaded submissions from
 #'   \code{`ruODK::submission_export()`} read into a `tibble` by

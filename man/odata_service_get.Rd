@@ -39,7 +39,7 @@ A tibble with one row per submission data endpoint.
         Columns: name, kind, url.
 }
 \description{
-Retrieve service metadata from an OData URL ending in .svc as list of lists
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

@@ -1,5 +1,7 @@
 #' Download one submission.
 #'
+#' \lifecycle{stable}
+#'
 #' @template param-iid
 #' @template param-pid
 #' @template param-fid

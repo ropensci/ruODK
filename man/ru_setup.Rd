@@ -63,7 +63,7 @@ privileged to view the test project(s) at \code{test_url}.}
 \code{test_un}.}
 }
 \description{
-Configure default \code{ruODK} settings.
+\lifecycle{stable}
 }
 \details{
 \code{ru_setup} sets ODK Central connection details. \code{ruODK}'s functions

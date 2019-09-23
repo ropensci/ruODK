@@ -40,7 +40,7 @@ See \code{vignette("Setup", package = "ruODK")}.}
 The form XML as a nested list.
 }
 \description{
-Show the XML representation of one form as list.
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

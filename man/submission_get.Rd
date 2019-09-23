@@ -40,7 +40,7 @@ See \code{vignette("Setup", package = "ruODK")}.}
 A nested list of submission data.
 }
 \description{
-Download one submission.
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

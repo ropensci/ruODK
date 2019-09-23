@@ -50,7 +50,7 @@ get_test_fid_att()
 \code{get_(test_)*} get each of those respective settings.
 }
 \description{
-Get or set \code{ruODK} settings.
+\lifecycle{stable}
 }
 \examples{
 ru_settings()

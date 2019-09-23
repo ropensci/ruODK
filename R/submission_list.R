@@ -1,5 +1,6 @@
 #' List all submissions of one form.
 #'
+#' \lifecycle{stable}
 #' @template param-pid
 #' @template param-fid
 #' @template param-url

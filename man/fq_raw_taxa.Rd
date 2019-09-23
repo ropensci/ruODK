@@ -12,9 +12,11 @@ See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 fq_raw_taxa
 }
 \description{
-The OData response for a subgroup of an ODK Central form.
+\lifecycle{stable}
 }
 \details{
+The OData response for a subgroup of an ODK Central form.
+
 This subgroup represents an individual plant taxon which is encountered by
 the enumerators. Typically, one voucher specimen is taken for each distinct
 encountered plant taxon. A field name is allocated by the enumerators, which
@@ -22,7 +24,10 @@ can be the proper canonical name (if known) or any other moniker.
 The voucher specimens are later determined by taxonomic experts, who then
 provide the real, terminal taxonomic name for a given voucher specimen.
 
-The data in this example is freely made up. The plants shown are real.
+This data is kept up to date with the data used in vignettes and package tests.
+The data is comprised of test records with nonsensical data.
+The forms used to capture this data are development versions of real-world
+forms.
 }
 \seealso{
 Other included: \code{\link{fq_meta}},

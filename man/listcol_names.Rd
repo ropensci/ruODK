@@ -13,5 +13,5 @@ listcol_names(tbl)
 A vector of list column names
 }
 \description{
-A functional to extract names of list columns from a tibble.
+\lifecycle{stable}
 }

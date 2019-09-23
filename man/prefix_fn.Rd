@@ -15,5 +15,5 @@ prefix_fn(fn, prefix)
 A fs::path "prefix/fn"
 }
 \description{
-Prefix a filename and return an fs::path
+\lifecycle{stable}
 }

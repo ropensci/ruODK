@@ -1,5 +1,7 @@
 #' Create a new project.
 #'
+#' \lifecycle{experimental}
+#'
 #' @param name The desired name of the project. Can contain whitespace.
 #' @template param-url
 #' @template param-auth

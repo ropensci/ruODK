@@ -23,7 +23,7 @@ Default: \code{c("YmdHMS", "YmdHMSz")}.}
 The dataframe with matching columns mutated to lubridate datetimes.
 }
 \description{
-Parse all columns containing a certain word in its name to localised datetime.
+\lifecycle{stable}
 }
 \details{
 This function wraps a \code{`dplyr::mutate_at()`} operation on all

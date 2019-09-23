@@ -1,5 +1,6 @@
 #' List all forms.
 #'
+#' \lifecycle{stable}
 #'
 #' @template param-pid
 #' @template param-url

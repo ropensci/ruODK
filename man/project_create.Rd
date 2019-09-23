@@ -30,7 +30,7 @@ A tibble with one row per project and all project metadata
         as columns as per ODK Central API docs.
 }
 \description{
-Create a new project.
+\lifecycle{experimental}
 }
 \examples{
 \dontrun{

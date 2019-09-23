@@ -46,6 +46,9 @@ A tibble containing some high-level details of the submission
           server.
 }
 \description{
+\lifecycle{stable}
+}
+\details{
 When a Submission is created, either over the OpenRosa or the REST interface,
 its XML data is analysed to determine which file attachments it references:
 these may be photos or video taken as part of the survey, or an audit/timing
@@ -54,8 +57,7 @@ expectations are recorded permanently alongside the Submission. With this
 subresource, you can list the expected attachments, see whether the server
 actually has a copy or not, and download, upload, re-upload, or clear binary
 data for any particular attachment.
-}
-\details{
+
 You can retrieve the list of expected Submission attachments at this route,
 along with a boolean flag indicating whether the server actually has a copy
 of the expected file or not. If the server has a file, you can then append

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download attachments and return the local path — attachment_get • ruODK</title>
+<title>Download attachments and return the local path. — attachment_get • ruODK</title>
 
 
 <!-- jquery -->
@@ -35,11 +35,8 @@
 
 
 
-<meta property="og:title" content="Download attachments and return the local path — attachment_get" />
-<meta property="og:description" content="This function is vectorised and can handle either one or many records.
-Parameters submission_uuid and attachment_filename accept single or exactly
-the same number of multiple values.
-The other parameters are automatically repeated." />
+<meta property="og:title" content="Download attachments and return the local path. — attachment_get" />
+<meta property="og:description" content="" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -72,7 +69,7 @@ The other parameters are automatically repeated." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.5</span>
       </span>
     </div>
 
@@ -129,16 +126,13 @@ The other parameters are automatically repeated." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download attachments and return the local path</h1>
+    <h1>Download attachments and return the local path.</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/attachment_get.R'><code>R/attachment_get.R</code></a></small>
     <div class="hidden name"><code>attachment_get.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function is vectorised and can handle either one or many records.
-Parameters submission_uuid and attachment_filename accept single or exactly
-the same number of multiple values.
-The other parameters are automatically repeated.</p>
+    <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
     </div>
 
     <pre class="usage"><span class='fu'>attachment_get</span>(<span class='no'>sid</span>, <span class='no'>fn</span>, <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='st'>"media"</span>, <span class='kw'>separate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -219,7 +213,11 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     <p>The relative file path for the downloaded attachment(s)</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The media attachments are downloaded into a folder named by the submission's
+    <p>This function is vectorised and can handle either one or many records.
+Parameters submission_uuid and attachment_filename accept single or exactly
+the same number of multiple values.
+The other parameters are automatically repeated.</p>
+<p>The media attachments are downloaded into a folder named by the submission's
 uuid (minus "uuid:" for Windows compatibility) inside the given
 `local_dir`. E.g.:</p>
 <p>workdir/attachments/xxxxxxxxxx/filename1.jpg</p>

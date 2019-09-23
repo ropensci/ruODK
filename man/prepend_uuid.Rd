@@ -13,7 +13,7 @@ prepend_uuid(md5hash)
 The string with a prepended "uuid:"
 }
 \description{
-Prepend a leading "uuid:" to any string, e.g. an md5 hash.
+\lifecycle{stable}
 }
 \seealso{
 Other utilities: \code{\link{\%>\%}},

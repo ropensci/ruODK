@@ -40,7 +40,7 @@ See \code{vignette("Setup", package = "ruODK")}.}
 A nested list of submission metadata.
 }
 \description{
-Show metadata for one submission.
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

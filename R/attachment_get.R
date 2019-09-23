@@ -1,5 +1,7 @@
 #' Strip the leading "uuid:" from a UUID hash.
 #'
+#' \lifecycle{stable}
+#'
 #' @param uuid A string which may contain any number of "uuid:"
 #' @return The string with every occurrence of "uuid:" deleted.
 #' @family utilities
@@ -11,6 +13,8 @@ strip_uuid <- function(uuid) {
 
 #' Prepend a leading "uuid:" to any string, e.g. an md5 hash.
 #'
+#' \lifecycle{stable}
+#'
 #' @param md5hash A string, e.g. an md5 hash.
 #' @return The string with a prepended "uuid:"
 #' @family utilities
@@ -21,6 +25,8 @@ prepend_uuid <- function(md5hash) {
 }
 
 #' Build the download URL for one or many submission UUIDs and filenames.
+#'
+#' \lifecycle{stable}
 #'
 #' This is a helper function used by `attachment_get`.
 #' This function is vectorised and accepts single values or vectors for uuid and
@@ -44,7 +50,9 @@ attachment_url <- function(uuid,
   )
 }
 
-#' Download one media attachment
+#' Download one media attachment.
+#'
+#' \lifecycle{stable}
 #'
 #' This is a helper function used by `get_attachment`.
 #' This function is not vectorised, but mapped by `get_attachment` to a tibble
@@ -87,7 +95,9 @@ get_one_attachment <- function(pth,
   return(pth %>% as.character())
 }
 
-#' Download attachments and return the local path
+#' Download attachments and return the local path.
+#'
+#' \lifecycle{stable}
 #'
 #' This function is vectorised and can handle either one or many records.
 #' Parameters submission_uuid and attachment_filename accept single or exactly

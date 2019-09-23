@@ -23,6 +23,9 @@ yell_if_error(response, url, un, pw, pid = NULL, fid = NULL)
 The response object
 }
 \description{
+\lifecycle{stable}
+}
+\details{
 A wrapper around \code{httr::stop_for_status()} with a helpful error message.
 Examples: see tests for \code{ruODK::project_list()}.
 This function is used internally but may be useful for debugging and

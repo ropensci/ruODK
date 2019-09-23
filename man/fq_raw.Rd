@@ -12,17 +12,22 @@ See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 fq_raw
 }
 \description{
+\lifecycle{stable}
+}
+\details{
 The OData response for the submissions of an ODK Central form.
 This form represents a Flora Quadrat, which is a ca 50 by 50 m quadrat of
 a uniform plant community.
-}
-\details{
+
 The XML and .odkbuild versions for this form are
 available as `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 and `system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")`,
 respectively.
 
-The data in this example are made up.
+This data is kept up to date with the data used in vignettes and package tests.
+The data is comprised of test records with nonsensical data.
+The forms used to capture this data are development versions of real-world
+forms.
 }
 \seealso{
 Other included: \code{\link{fq_meta}},

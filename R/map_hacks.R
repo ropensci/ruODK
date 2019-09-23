@@ -1,5 +1,7 @@
 #' Map given function, handle null as NA and flatten_chr().
 #'
+#' \lifecycle{stable}
+#'
 #' @details Use this function to extract chr elements with NAs
 #' from a list of lists into a tibble.
 #'
@@ -18,6 +20,8 @@ map_chr_hack <- function(.x, .f, ...) {
 
 #' Map given function, handle null as NA and flatten_int().
 #'
+#' \lifecycle{stable}
+#'
 #' @details Use this function to extract int elements with NAs
 #' from a list of lists into a tibble.
 #'
@@ -35,6 +39,8 @@ map_int_hack <- function(.x, .f, ...) {
 
 #' Map given function, handle null as NA, flatten_chr() and convert to dttm.
 #'
+#' \lifecycle{stable}
+#'
 #' @details Use this function to extract ISO timestamps with NAs
 #' from a list of lists into a tibble.
 #'
@@ -51,7 +57,10 @@ map_dttm_hack <- function(.x, .f, ...) {
     readr::parse_datetime(., format = "%Y-%m-%dT%H:%M:%OS%Z")
 }
 
+
 #' Map given function, handle null as FALSE, flatten_chr() and convert to logical.
+#'
+#' \lifecycle{stable}
 #'
 #' @details Use this function to handle NULLy logicals.
 #'
