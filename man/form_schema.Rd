@@ -4,9 +4,10 @@
 \alias{form_schema}
 \title{Show the schema of one form.}
 \usage{
-form_schema(flatten = FALSE, odata = FALSE, pid = get_default_pid(),
-  fid = get_default_fid(), url = get_default_url(),
-  un = get_default_un(), pw = get_default_pw())
+form_schema(flatten = FALSE, odata = FALSE, parse = FALSE,
+  pid = get_default_pid(), fid = get_default_fid(),
+  url = get_default_url(), un = get_default_un(),
+  pw = get_default_pw())
 }
 \arguments{
 \item{flatten}{Whether to flatten the resulting list of lists (TRUE) or not
@@ -17,6 +18,11 @@ be outputted for OData. While the original field names as given in the
 XForms definition may be used as-is for CSV output, OData has some
 restrictions related to the domain-qualified identifier syntax it uses.
 Default: FALSE.}
+
+\item{parse}{Whether to parse the form schema into a tibble of form field
+type and name. This uses \code{`form_schema_parse`} internally.
+If used together with `flatten=TRUE` \code{`form_schema`} will raise a
+warning and return the unparsed, flattened form schema.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 Default: \code{get_default_pid()}.
@@ -124,6 +130,19 @@ fs_flattened[[length(fs_flattened)]]$type
 # > "dateTime"
 fs_nested[[length(fs_nested)]]$type
 # > "dateTime"
+
+# Parsed into a tibble of form field type/name:
+# Useful to inform further parsing of submission data (attachments, dates)
+fsp <- form_schema(parse = TRUE)
+
+# Attachments: use \\code{`attachment_get`} on each of
+fsp \%>\% dplyr::filter(type == "binary")
+
+# dateYime: use \\code{`parse_datetime`} on each of
+fsp \%>\% dplyr::filter(type == "dateTime")
+
+# Point location: will be split into lat/lon/alt/acc
+fsp \%>\% dplyr::filter(type == "geopoint")
 }
 }
 \seealso{

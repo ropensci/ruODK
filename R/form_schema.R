@@ -9,6 +9,10 @@
 #'   XForms definition may be used as-is for CSV output, OData has some
 #'   restrictions related to the domain-qualified identifier syntax it uses.
 #'   Default: FALSE.
+#' @param parse Whether to parse the form schema into a tibble of form field
+#'   type and name. This uses \code{`form_schema_parse`} internally.
+#'   If used together with `flatten=TRUE` \code{`form_schema`} will raise a
+#'   warning and return the unparsed, flattened form schema.
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
@@ -92,9 +96,23 @@
 #' # > "dateTime"
 #' fs_nested[[length(fs_nested)]]$type
 #' # > "dateTime"
+#'
+#' # Parsed into a tibble of form field type/name:
+#' # Useful to inform further parsing of submission data (attachments, dates)
+#' fsp <- form_schema(parse = TRUE)
+#'
+#' # Attachments: use \code{`attachment_get`} on each of
+#' fsp %>% dplyr::filter(type == "binary")
+#'
+#' # dateYime: use \code{`parse_datetime`} on each of
+#' fsp %>% dplyr::filter(type == "dateTime")
+#'
+#' # Point location: will be split into lat/lon/alt/acc
+#' fsp %>% dplyr::filter(type == "geopoint")
 #' }
 form_schema <- function(flatten = FALSE,
                         odata = FALSE,
+                        parse = FALSE,
                         pid = get_default_pid(),
                         fid = get_default_fid(),
                         url = get_default_url(),
@@ -102,7 +120,7 @@ form_schema <- function(flatten = FALSE,
                         pw = get_default_pw()) {
   . <- NULL
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  glue::glue("{url}/v1/projects/{pid}/forms/{fid}.schema.json") %>%
+  fs <- glue::glue("{url}/v1/projects/{pid}/forms/{fid}.schema.json") %>%
     httr::GET(
       httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw),
@@ -110,50 +128,22 @@ form_schema <- function(flatten = FALSE,
     ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.)
-}
 
-#' Parse a form_schema into a tibble of fields with name, type, and path.
-#'
-#' \lifecycle{experimental}
-#'
-#' @param fs The output of form_schema as nested list
-#' @template param-verbose
-#' @export
-#' @examples
-#' \dontrun{
-#' fs <- form_schema()
-#' fsp <- form_schema_parse(fs)
-#' fsp
-#' }
-form_schema_parse <- function(fs, verbose = TRUE) {
-  rlang::warn("Not implemented.")
-
-  # 0. R CMD check
-  . <- NULL
-  type <- NULL
-  name <- NULL
-  children <- NULL
-
-  # 1. Early exit for terminal nodes
-
-  # 2. Grab next level type/name pairs
-  x <- rlist::list.select(fs, type, name) %>% rlist::list.stack(.)
-  # Debug
-  if (verbose == TRUE) {
-    message("\nFound fields:\n")
-    print(x)
+  if (parse == TRUE) {
+    if (flatten == TRUE) {
+      rlang::warn(
+        glue::glue(
+          "Cannot parse flattened form schema, ",
+          "returning unparsed and flattened.",
+          "Use flatten=FALSE with parse=TRUE for a parsed form_schema."
+        )
+      )
+      return(fs)
+    }
+    return(form_schema_parse(fs))
   }
-
-  # 3. Map form_schema_parse over nested elements
-  xx <- rlist::list.select(fs, children) %>% rlist::list.stack(.)
-  # for (i in x) {form_schema_parse(fs[[i]])}
-  xxx <- purrr::map(fs, form_schema_parse)
-
-  # 4. Combine x and output of 3.
-  # TODO
-
-  # 5. Return combined type/name pairs as tibble
-  x
+  return(fs)
 }
+
 # Tests
 # usethis::edit_file("tests/testthat/test-form_schema.R")

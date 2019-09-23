@@ -1,11 +1,3 @@
-test_that("form_schema_parse warns not implemented", {
-  testthat::expect_warning(
-    form_schema_parse(list()),
-    "Not implemented."
-  )
-})
-
-
 test_that("prefix_fn works", {
   testthat::expect_equal(
     prefix_fn(fn = "test.txt", prefix = "somefolder"),
@@ -38,6 +30,7 @@ test_that("attachment_link works", {
 
   # Find the payload
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
+  testthat::expect_true(fs::file_exists(fid_csv))
 
   # Test attachment_link - this saves another download of the ZIP file
   # Tests usethis::edit_file("R/attachment_link.R")

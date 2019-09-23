@@ -59,5 +59,4 @@ Language: en_AU
 LazyData: true
 RoxygenNote: 6.1.1
 X-schema.org-applicationCategory: Data Access
-X-schema.org-keywords: database, open-data, opendatakit, odk,
-    api, data, dataset
+X-schema.org-keywords: database, open-data, opendatakit, odk, api, data, dataset

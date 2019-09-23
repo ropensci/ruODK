@@ -45,5 +45,34 @@ test_that("form_schema works", {
 })
 
 
+test_that("form_schema_parse works through form_schema", {
+  fsp <- form_schema(
+    parse = TRUE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
+
+  testthat::expect_equal(class(fsp), c("tbl_df", "tbl", "data.frame"))
+  testthat::expect_true("encounter_start_datetime" %in% fsp$name)
+  testthat::expect_true("quadrat_photo" %in% fsp$name)
+})
+
+test_that("form_schema_parse warns on flatten and parsed", {
+  testthat::expect_warning(
+    fsp <- form_schema(
+      parse = TRUE,
+      flatten = TRUE,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  )
+})
+
 # Tests code
 # usethis::edit_file("R/form_schema.R")

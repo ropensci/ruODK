@@ -1,16 +1,14 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
-  "description": "Utilities to access and tidy up data from ODK Central's API.\n    ODK Central is OpenDataKit's clearinghouse for digitally captured data \n    <https://docs.opendatakit.org/central-intro/>. \n    ODK Central's API is documented at <https://odkcentral.docs.apiary.io/>.",
+  "description": "Utilities to access and tidy up data from ODK\n    Central's API.  ODK Central is OpenDataKit's clearinghouse for\n    digitally captured data <https://docs.opendatakit.org/central-intro/>.\n    ODK Central's API is documented at\n    <https://odkcentral.docs.apiary.io/>.",
   "name": "ruODK: An R Client for the ODK Central API",
   "codeRepository": "https://github.com/dbca-wa/ruODK",
+  "relatedLink": "https://dbca-wa.github.io/ruODK/",
   "issueTracker": "https://github.com/dbca-wa/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -82,9 +80,22 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "version": ">= 3.2.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "janitor",
       "name": "janitor",
-      "version": ">= 1.2.0",
+      "version": ">=\n        1.2.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -108,19 +119,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "ggplot2",
-      "name": "ggplot2",
-      "version": ">= 3.2.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "leaflet",
       "name": "leaflet",
       "version": ">= 2.0.2",
@@ -131,6 +129,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=leaflet"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "lifecycle",
+      "name": "lifecycle",
+      "version": ">=\n        0.1.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lifecycle"
     },
     {
       "@type": "SoftwareApplication",
@@ -248,7 +259,7 @@
       "@type": "SoftwareApplication",
       "identifier": "httr",
       "name": "httr",
-      "version": ">= 1.4.1",
+      "version": ">=\n        1.4.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -287,7 +298,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
-      "version": ">= 0.3.2",
+      "version": ">=\n        0.3.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -390,29 +401,7 @@
       ],
       "name": "ruODK: Client for the ODK Central API",
       "url": "https://github.com/dbca-wa/ruODK",
-      "description": "R package version 0.6.4"
+      "description": "R package version 0.6.5"
     }
-  ],
-  "relatedLink": "https://dbca-wa.github.io/ruODK/",
-  "releaseNotes": "https://github.com/dbca-wa/ruODK/blob/master/NEWS.md",
-  "readme": "https://github.com/dbca-wa/ruODK/blob/master/README.md",
-  "fileSize": "55042.393KB",
-  "contIntegration": [
-    "https://travis-ci.org/dbca-wa/ruODK",
-    "https://ci.appveyor.com/project/dbca-wa/ruODK",
-    "https://codecov.io/github/dbca-wa/ruODK?branch=master",
-    "https://travis-ci.org/dbca-wa/ruODK",
-    "https://ci.appveyor.com/project/dbca-wa/ruODK",
-    "https://codecov.io/github/dbca-wa/ruODK?branch=master",
-    "https://codecov.io/gh/validmeasures/odkr",
-    "https://travis-ci.org/unhcr/koboloadeR",
-    "https://ci.appveyor.com/project/unhcr/koboloadeR",
-    "https://codecov.io/gh/unhcr/koboloadeR",
-    "https://travis-ci.org/dbca-wa/ruODK",
-    "https://ci.appveyor.com/project/dbca-wa/ruODK",
-    "https://codecov.io/github/dbca-wa/ruODK?branch=master",
-    "https://travis-ci.org/edwindj/cbsodataR",
-    "https://ci.appveyor.com/project/edwindj/cbsodatar"
-  ],
-  "developmentStatus": "https://www.repostatus.org/#active"
+  ]
 }
