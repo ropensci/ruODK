@@ -49,7 +49,7 @@ Suggests:
     rmarkdown (>= 1.15),
     testthat (>= 2.2.1)
 Remotes:
-    r-lib/lifecycle
+    r-lib/lifecycle,
     r-lib/usethis
 VignetteBuilder: 
     knitr
