@@ -44,13 +44,12 @@ Suggests:
     janitor (>= 1.2.0),
     knitr (>= 1.24),
     leaflet (>= 2.0.2),
+    lifecycle (>= 0.1.0),
     listviewer (>= 2.1.0),
     rlist (>= 0.4.6.1),
     rmarkdown (>= 1.15),
-    testthat (>= 2.2.1)
-Remotes:
-    r-lib/lifecycle,
-    r-lib/usethis
+    testthat (>= 2.2.1),
+    usethis (>= 1.5.1)
 VignetteBuilder: 
     knitr
 RdMacros: 
