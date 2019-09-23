@@ -74,8 +74,9 @@ names(f)
 
 Other restful-api: \code{\link{attachment_link}},
   \code{\link{attachment_list}}, \code{\link{audit_get}},
-  \code{\link{form_list}}, \code{\link{form_schema}},
-  \code{\link{form_xml}}, \code{\link{project_create}},
+  \code{\link{form_list}}, \code{\link{form_schema_parse}},
+  \code{\link{form_schema}}, \code{\link{form_xml}},
+  \code{\link{project_create}},
   \code{\link{project_detail}}, \code{\link{project_list}},
   \code{\link{submission_detail}},
   \code{\link{submission_export}},

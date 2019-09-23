@@ -105,6 +105,7 @@ JDBC
 jennybc
 JOSS
 jpg
+JSON
 jsonlite
 Kensington
 kwargs
@@ -185,6 +186,7 @@ unnest
 unnested
 unnesting
 unnests
+unparsed
 urODK
 uuid
 UUID

@@ -150,6 +150,14 @@ submission data into tidy tibbles later.
 Feel free to search this list for "binary" to find the field names of file 
 attachments. Similarly, search for "dateTime" to find field names of datetimes.
 
+Taking form schema one step further, we can also parse it into a `tibble` of
+form field types and names.
+
+```{r}
+fsp <- form_schema(parse=TRUE)
+fsp %>% knitr::kable(.)
+```
+
 ## Show details of one form
 
 The details of a form are exactly the same as the output of `ruODK::form_list()`.

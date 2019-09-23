@@ -100,6 +100,16 @@ fq_meta <- odata_metadata_get()
 listviewer::jsonedit(fq_meta)
 ```
 
+As an alternative to the OData metadata document, ODK Central also offers
+form metadata as a much cleaner JSON document, which `ruODK` can read and parse
+into a clean `tibble` of field type and name. To know the names of fields of
+a certain type will help us later to parse the submission data.
+
+```{r form_schema}
+fq_fs <- form_schema(parse=TRUE)
+fq_fs %>% knitr::kable(.)
+```
+
 ## OData submission data documents
 Now let's download the form submissions and, separately, repeating form groups.
 
@@ -132,13 +142,15 @@ like photos and other media to a local, relative path. This will take some time
 during the first run; once the files exist locally, the download will be skipped.
 Read `??ruODK::attachment_get` on specifying form field names (or parts thereof)
 indicating a media attachment; the default are any names containing "photo".
+Fields of type "binary" (attachments) are listed in the form schema, `fq_fs`.
 
 The date formats are parsed from ISO8601 timestamps into POSIXct objects with
 `ruODK::parse_datetime`. We use our local timezone (GMT+08) in this example.
 Read `??ruODK::parse_datetime` on specifying form field names (or parts thereof)
 indicating a date field; the default are any names containing "time".
+Fields of type "dateTime" and "date" are listed in the form schema, `fq_fs`.
 
-The trailing `invisible` is a neutral operation to allow trailing magrittr 
+The trailing `invisible` is a neutral operation to terminate trailing magrittr 
 pipes (`%>%`) while commenting individual lines of the pipelines in or out.
 
 The repeated subgroup `taxon_encounter` is joined with the main observation
@@ -157,11 +169,24 @@ other vignettes. The default is a local folder `media`.
 ord <- "YmdHMSz"
 tz <- "Australia/Perth"
 loc <- fs::path("attachments", "media")
-  
+
+# Candidates for ruODK::parse_datetime()
+fq_fs %>%
+  dplyr::filter(type == "dateTime") %>%
+  knitr::kable(.)
+fq_fs %>%
+  dplyr::filter(type == "date") %>%
+  knitr::kable(.)
+
+# Candidates for ruODK::attachment_get()
+fq_fs %>%
+  dplyr::filter(type == "binary") %>%
+  knitr::kable(.)
+
 fq_data <- fq_raw %>%
-  ruODK::odata_submission_parse(verbose = TRUE) %>% 
-  ruODK::parse_datetime(tz = "Australia/Perth") %>% 
-  ruODK::parse_datetime(tz = "Australia/Perth", col_contains = "date") %>%
+  ruODK::odata_submission_parse(verbose = TRUE) %>%
+  ruODK::parse_datetime(tz = tz, col_contains = "time") %>%
+  ruODK::parse_datetime(tz = tz, col_contains = "date") %>%
   dplyr::rename(
     longitude = x13,
     latitude = x14,
@@ -169,16 +194,19 @@ fq_data <- fq_raw %>%
   ) %>%
   dplyr::mutate(
     quadrat_photo = ruODK::attachment_get(
-      id, quadrat_photo, local_dir = loc),
+      id, quadrat_photo, local_dir = loc
+    ),
     morphological_type_photo = ruODK::attachment_get(
-      id, morphological_type_photo, local_dir = loc),
+      id, morphological_type_photo, local_dir = loc
+    ),
     mudmap_photo = attachment_get(
-      id, mudmap_photo, local_dir = loc)
+      id, mudmap_photo, local_dir = loc
+    )
   ) %>%
   invisible()
 
 fq_data_taxa <- fq_taxa %>%
-  ruODK::odata_submission_parse(verbose = TRUE) %>% 
+  ruODK::odata_submission_parse(verbose = TRUE) %>%
   dplyr::rename(
     lon = x6,
     lat = x7,
@@ -186,13 +214,15 @@ fq_data_taxa <- fq_taxa %>%
   ) %>%
   dplyr::mutate(
     photo_in_situ = ruODK::attachment_get(
-      submissions_id, photo_in_situ, local_dir = loc)
+      submissions_id, photo_in_situ,
+      local_dir = loc
+    )
   ) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>%
   invisible()
 
-fq_data_strata <- fq_strata %>% 
-  ruODK::odata_submission_parse(verbose = TRUE) %>% 
+fq_data_strata <- fq_strata %>%
+  ruODK::odata_submission_parse(verbose = TRUE) %>%
   invisible()
 ```
 

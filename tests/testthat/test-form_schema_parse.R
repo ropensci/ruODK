@@ -36,12 +36,11 @@ test_that("form_schema_parse debug messages work", {
 
   testthat::capture_output(
     testthat::expect_message(
-      fsp <- form_schema_parse(fs, verbose=TRUE)
+      fsp <- form_schema_parse(fs, verbose = TRUE)
     )
   )
 
   testthat::expect_equal(class(fsp), c("tbl_df", "tbl", "data.frame"))
   testthat::expect_true("encounter_start_datetime" %in% fsp$name)
   testthat::expect_true("quadrat_photo" %in% fsp$name)
-
 })
