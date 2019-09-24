@@ -18,10 +18,15 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 3 notes
+0 errors | 0 warnings | 2 notes
 
 * This is a new release.
-* "installed size is  5.2Mb, sub-directories of 1Mb or more: doc 4.4Mb":
+* "Package has help file(s) containing install/render-stage `\Sexpr{}`
+  expressions but no prebuilt PDF manual."
+  * Lifecycle badges on function help come out OK when installed, and fall back
+    to text if not rendered.
+  * PDF version of manual added but not picked up by CMD CHECK.
+* "installed size is  5.5Mb, sub-directories of 1Mb or more: doc 4.6Mb":
   * The vignette "odata" contains a leaflet map with popups showing embedded
     photos, a highly sought after use case.
     The third party dependencies, especially leaflet-awesomemarkers (for map 
@@ -30,7 +35,4 @@
     duplicate the expensive map.
   * The example images have been resized aggressively to 200x150 px.
   * Included images for branding and attribution are at lowest legible size.
-* "Namespace in Imports field not imported from: ‘lifecycle’"
-  * Using badges for function lifecycle stages from package `lifecycle` raises
-    this note and also causes warnings in `goodpractice` checks. This seems to 
-    be a known issue <https://github.com/ropensci/spelling/issues/42>
+  
