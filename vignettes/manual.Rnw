@@ -1,0 +1,8 @@
+\documentclass{article}
+\usepackage{pdfpages}
+%\VignetteIndexEntry{pdf_manual}
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\includepdf[pages=-, fitpaper=true]{../inst/extdoc/ruODK.pdf}
+\end{document}
+

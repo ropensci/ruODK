@@ -29,7 +29,13 @@ devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
 #
 usethis::use_version("minor") # or hand-edit DESC, CIT
 usethis::edit_file("NEWS.md")
-devtools::build_manual(path = "man")
+#
+# Build PDF manual
+fs::file_delete("inst/extdoc/ruODK.pdf")
+devtools::build_manual(path = "inst/extdoc") # rm > pdf
+fs::file_move(fs::dir_ls("inst/extdoc/"), "inst/extdoc/ruODK.pdf") # rename pdf
+usethis::edit_file("vignettes/manual.Rnw") # hit "Compile PDF"
+#
 pkgdown::build_site()
 
 # Vignettes are big

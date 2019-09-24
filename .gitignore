@@ -4,3 +4,5 @@
 .Ruserdata
 inst/doc
 *.RData
+manual.tex
+manual-concordance.tex
