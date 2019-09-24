@@ -125,6 +125,7 @@ data <- data_main_raw %>%
 
 data_sub1 <- data_sub1_raw %>% 
   ruODK::odata_submission_parse(verbose = TRUE) %>% 
+  dplyr::left_join(data, by = c("submissions_id" = "id")) %>%
   invisible()
 
 data_sub2 <- data_sub2_raw %>%
@@ -140,7 +141,7 @@ data_sub2 <- data_sub2_raw %>%
     photo_in_situ = ruODK::attachment_get(
       submissions_id, photo_in_situ, local_dir = loc)
   ) %>%
-  dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>%
+  dplyr::left_join(data, by = c("submissions_id" = "id")) %>%
   invisible()
 ```
 
