@@ -10,7 +10,7 @@ odata_submission_parse(data, names_repair = "universal",
 \arguments{
 \item{data}{A nested list of lists as given by `ruODK::get_submissions`.}
 
-\item{names_repair}{The argument `names_repair` for `tibble::unnest_wider`,
+\item{names_repair}{The argument `names_repair` for `tidyr::unnest_wider`,
 default: "universal".}
 
 \item{verbose}{Whether to print verbose messages, default: FALSE.}
@@ -20,6 +20,9 @@ The submissions as unnested tibble
 }
 \description{
 \lifecycle{maturing}
+}
+\details{
+Coming soon: [Better column names](https://github.com/dbca-wa/ruODK/issues/7)
 }
 \examples{
 \dontrun{

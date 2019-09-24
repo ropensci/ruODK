@@ -61,7 +61,11 @@ A nested list of lists.
     `@odata.count` is the total number of rows in the table.
 }
 \description{
-\lifecycle{stable}
+\lifecycle{maturing}
+}
+\details{
+Coming soon:
+[Parse submissions and download attachments](https://github.com/dbca-wa/ruODK/issues/6)
 }
 \examples{
 \dontrun{

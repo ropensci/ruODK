@@ -1,6 +1,9 @@
 #' Retrieve /Submissions from an OData URL ending in .svc as list of lists.
 #'
-#' \lifecycle{stable}
+#' \lifecycle{maturing}
+#'
+#' Coming soon:
+#' [Parse submissions and download attachments](https://github.com/dbca-wa/ruODK/issues/6)
 #'
 #' @param table The submission EntityType, or in plain words, the table name.
 #'            Default: "Submissions" (the main table).

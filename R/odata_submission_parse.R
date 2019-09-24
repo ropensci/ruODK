@@ -59,8 +59,10 @@ unnest_all <- function(nested_tbl,
 #'
 #' \lifecycle{maturing}
 #'
+#' Coming soon: [Better column names](https://github.com/dbca-wa/ruODK/issues/7)
+#'
 #' @param data A nested list of lists as given by `ruODK::get_submissions`.
-#' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,
+#' @param names_repair The argument `names_repair` for `tidyr::unnest_wider`,
 #'   default: "universal".
 #' @param verbose Whether to print verbose messages, default: FALSE.
 #' @return The submissions as unnested tibble
