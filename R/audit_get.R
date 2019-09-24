@@ -97,11 +97,12 @@ audit_get <- function(action = NULL,
     httr::content(.) %>%
     {
       tibble::tibble(
-        actor_id = map_int_hack(., "actorId"),
+        actor_id = purrr::map_int(., "actorId", .default = NA),
         action = purrr::map_chr(., "action"),
-        actee_id = map_chr_hack(., "acteeId"),
+        actee_id = purrr::map_chr(., "acteeId", .default = NA),
         details = purrr::map(., "details"),
-        logged_at = map_dttm_hack(., "loggedAt")
+        logged_at = purrr::map_chr(., "loggedAt", .default = NA) %>%
+          isodt_to_local(),
       )
     }
 }

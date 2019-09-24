@@ -138,6 +138,15 @@
 <li>Use lifecycle badges on functions. Add lifecycle to dependencies, version bump <code>usethis</code> (<a href='https://github.com/dbca-wa/ruODK/issues/29'>#29</a>)</li>
 </ul>
 </div>
+<div id="code" class="section level2">
+<h2 class="hasAnchor">
+<a href="#code" class="anchor"></a>Code</h2>
+<ul>
+<li>Refactor list wrangling code to use <code>map_*(.default=NA)</code>, removing some internal helpers (thanks to <a href='https://github.com/jennybc'>@jennybc</a>)</li>
+<li>Use dummy imports to silence R CMD check NOTES as per <a href="https://github.com/tidyverse/googledrive/blob/050a982cba630503702bdde05a77d727baa36d48/R/googledrive-package.R">googledrive</a>’s example (thanks to <a href='https://github.com/jennybc'>@jennybc</a>)</li>
+<li>Drop unused internal helper functions</li>
+</ul>
+</div>
 </div>
     <div id="ruodk-064" class="section level1">
 <h1 class="page-header">
@@ -181,9 +190,9 @@
     <div id="ruodk-062" class="section level1">
 <h1 class="page-header">
 <a href="#ruodk-062" class="anchor"></a>ruODK 0.6.2</h1>
-<div id="code" class="section level2">
+<div id="code-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#code" class="anchor"></a>Code</h2>
+<a href="#code-1" class="anchor"></a>Code</h2>
 <ul>
 <li>Simplifiy <code><a href="../reference/ru_setup.html">ru_setup()</a></code> to use OData Service URL.</li>
 <li>Change all functions to default to <code>get_default{pid,fid,url,un,pw}()</code>, partly moving project ID (pid) and form ID (fid) to kwargs. This changes all examples, tests, vignettes, READMEs.</li>

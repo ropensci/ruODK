@@ -165,7 +165,7 @@
         <td>
           <p><code><a href="odata_metadata_get.html">odata_metadata_get()</a></code> </p>
         </td>
-        <td><p>Retrieve metadata from an OData URL ending in .svc as list of lists</p></td>
+        <td><p>Retrieve metadata from an OData URL ending in .svc as list of lists.</p></td>
       </tr><tr>
         
         <td>
@@ -177,7 +177,7 @@
         <td>
           <p><code><a href="odata_submission_get.html">odata_submission_get()</a></code> </p>
         </td>
-        <td><p>Retrieve /Submissions from an OData URL ending in .svc as list of lists</p></td>
+        <td><p>Retrieve /Submissions from an OData URL ending in .svc as list of lists.</p></td>
       </tr><tr>
         
         <td>
@@ -301,41 +301,7 @@
         <td>
           <p><code><a href="isodt_to_local.html">isodt_to_local()</a></code> </p>
         </td>
-        <td><p>#' Check whether we have internet
-#'
-#' @importFrom httr GET
-#' @importFrom rlang warn
-#' @noRd
-has_internet &lt;- function() 
-  online &lt;- !is.null(httr::GET("google.com"))
-  if (online == FALSE) rlang::warn("Please check internet connectivity!")
-  invisible(online)
-
-Parse an ISO8601 datetime string to a timezone aware datetime.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="map_chr_hack.html">map_chr_hack()</a></code> </p>
-        </td>
-        <td><p>Map given function, handle null as NA and flatten_chr().</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="map_dttm_hack.html">map_dttm_hack()</a></code> </p>
-        </td>
-        <td><p>Map given function, handle null as NA, flatten_chr() and convert to dttm.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="map_int_hack.html">map_int_hack()</a></code> </p>
-        </td>
-        <td><p>Map given function, handle null as NA and flatten_int().</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="map_lgl_hack.html">map_lgl_hack()</a></code> </p>
-        </td>
-        <td><p>Map given function, handle null as FALSE, flatten_chr() and convert to logical.</p></td>
+        <td><p>Parse an ISO8601 datetime string to a timezone aware datetime.</p></td>
       </tr><tr>
         
         <td>

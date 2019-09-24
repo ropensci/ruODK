@@ -1,10 +1,3 @@
-test_that("prefix_fn works", {
-  testthat::expect_equal(
-    prefix_fn(fn = "test.txt", prefix = "somefolder"),
-    "somefolder/test.txt"
-  )
-})
-
 test_that("attachment_link works", {
 
   # A fresh litterbox

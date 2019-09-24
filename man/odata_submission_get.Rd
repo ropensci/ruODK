@@ -2,7 +2,7 @@
 % Please edit documentation in R/odata_submission_get.R
 \name{odata_submission_get}
 \alias{odata_submission_get}
-\title{Retrieve /Submissions from an OData URL ending in .svc as list of lists}
+\title{Retrieve /Submissions from an OData URL ending in .svc as list of lists.}
 \usage{
 odata_submission_get(table = "Submissions", skip = NA, top = NA,
   count = FALSE, wkt = FALSE, pid = get_default_pid(),

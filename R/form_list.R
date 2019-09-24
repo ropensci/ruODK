@@ -54,11 +54,14 @@ form_list <- function(pid = get_default_pid(),
         version = purrr::map_chr(., "version"),
         state = purrr::map_chr(., "state"),
         submissions = purrr::map_chr(., "submissions"),
-        created_at = map_dttm_hack(., "createdAt"),
+        created_at = purrr::map_chr(., "createdAt", .default = NA) %>%
+          isodt_to_local(),
         created_by_id = purrr::map_int(., c("createdBy", "id")),
         created_by = purrr::map_chr(., c("createdBy", "displayName")),
-        updated_at = map_dttm_hack(., "updatedAt"),
-        last_submission = map_dttm_hack(., "lastSubmission"),
+        updated_at = purrr::map_chr(., "updatedAt", .default = NA) %>%
+          isodt_to_local(),
+        last_submission = purrr::map_chr(., "lastSubmission", .default = NA) %>%
+          isodt_to_local(),
         hash = purrr::map_chr(., "hash")
       )
     }

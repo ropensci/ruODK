@@ -3,6 +3,7 @@
 #' \lifecycle{stable}
 #'
 #' @param tbl A tibble, possibly with list columns
+#' @keywords internal
 #' @return A vector of list column names
 listcol_names <- function(tbl) {
   variable <- NULL

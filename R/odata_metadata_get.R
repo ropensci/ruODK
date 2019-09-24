@@ -1,4 +1,4 @@
-#' Retrieve metadata from an OData URL ending in .svc as list of lists
+#' Retrieve metadata from an OData URL ending in .svc as list of lists.
 #'
 #' \lifecycle{stable}
 #'

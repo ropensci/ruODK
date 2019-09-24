@@ -59,10 +59,13 @@ project_list <- function(url = get_default_url(),
         name = purrr::map_chr(., "name"),
         forms = purrr::map_int(., "forms"),
         app_users = purrr::map_int(., "appUsers"),
-        last_submission = map_dttm_hack(., "lastSubmission"),
-        created_at = map_dttm_hack(., "createdAt"),
-        updated_at = map_dttm_hack(., "updatedAt"),
-        archived = map_lgl_hack(., "archived")
+        created_at = purrr::map_chr(., "createdAt", .default = NA) %>%
+          isodt_to_local(),
+        updated_at = purrr::map_chr(., "updated_at", .default = NA) %>%
+          isodt_to_local(),
+        last_submission = purrr::map_chr(., "lastSubmission", .default = NA) %>%
+          isodt_to_local(),
+        archived = purrr::map_lgl(., "archived", .default = FALSE)
       )
     }
 }

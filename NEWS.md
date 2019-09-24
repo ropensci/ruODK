@@ -2,6 +2,12 @@
 ## Documentation
 * Use lifecycle badges on functions. Add lifecycle to dependencies, version bump
   `usethis` (#29)
+  
+## Code
+* Refactor list wrangling code to use `map_*(.default=NA)`, removing some 
+  internal helpers (thanks to @jennybc)
+* Use dummy imports to silence R CMD check NOTES as per [googledrive](https://github.com/tidyverse/googledrive/blob/050a982cba630503702bdde05a77d727baa36d48/R/googledrive-package.R)'s example (thanks to @jennybc)
+* Drop unused internal helper functions
 
 # ruODK 0.6.4
 ## Data

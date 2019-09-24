@@ -68,10 +68,12 @@ submission_list <- function(pid = get_default_pid(),
     {
       tibble::tibble(
         instance_id = purrr::map_chr(., "instanceId"),
-        submitter_id = map_int_hack(., c("submitter", "id")),
-        device_id = map_chr_hack(., "deviceId"),
-        created_at = map_dttm_hack(., "createdAt"),
-        updated_at = map_dttm_hack(., "updatedAt")
+        submitter_id = purrr::map_int(., c("submitter", "id"), .default = NA),
+        device_id = purrr::map_chr(., "deviceId", .default = NA),
+        created_at = purrr::map_chr(., "createdAt", .default = NA) %>%
+          isodt_to_local(),
+        updated_at = purrr::map_chr(., "updated_at", .default = NA) %>%
+          isodt_to_local(),
       )
     }
 }

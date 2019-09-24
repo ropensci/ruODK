@@ -39,8 +39,8 @@ CaVaTeCo
 cbs
 changedate
 CherryPatch
-chr
 ckanr
+CMD
 codecov
 Collect3289v2
 compat
@@ -57,6 +57,7 @@ Datatable
 datetime
 dateTime
 datetimes
+dbca
 dcde716efb4f
 DCIM0001
 dir
@@ -83,12 +84,14 @@ Flatback
 FloraQuadrat04
 fn
 fs
+funder
 GeoJSON
 geopoint
 geopoints
 geospatial
 getters
 github
+googledrive
 Hadley
 http
 https
@@ -100,9 +103,7 @@ instanceId
 integrations
 io
 ISO8601
-iterable
 JDBC
-jennybc
 JOSS
 jpg
 JSON
@@ -122,7 +123,6 @@ mudmap
 Muntashir
 nl
 noRd
-NULLy
 NVIS
 odata
 OData
@@ -195,6 +195,7 @@ UUIDs
 v1
 vectorised
 VueJS
+wa
 whattheyforgot
 Wickam
 WKT

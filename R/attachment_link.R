@@ -1,14 +1,3 @@
-#' Prefix a filename and return an fs::path
-#'
-#' \lifecycle{stable}
-#'
-#' @param fn A filename (string)
-#' @param prefix a prefix (string)
-#' @return A fs::path "prefix/fn"
-prefix_fn <- function(fn, prefix) {
-  fs::path(prefix, fn)
-}
-
 #' Prefix attachment columns from CSV export with a local attachment file path.
 #'
 #' \lifecycle{maturing}

@@ -1,7 +1,7 @@
 # Package mainainers can use the steps below to prepare a new release.
 
 # -----------------------------------------------------------------------------#
-# Prepare package
+# Prepare package: run steps, fix errors, start over until all steps pass
 #
 # Tests
 devtools::test()
@@ -29,6 +29,7 @@ devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
 #
 usethis::use_version("minor") # or hand-edit DESC, CIT
 usethis::edit_file("NEWS.md")
+devtools::build_manual(path = "man")
 pkgdown::build_site()
 
 # Vignettes are big

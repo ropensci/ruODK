@@ -2,17 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{isodt_to_local}
 \alias{isodt_to_local}
-\title{#' Check whether we have internet
-#'
-#' @importFrom httr GET
-#' @importFrom rlang warn
-#' @noRd
-has_internet <- function() {
-  online <- !is.null(httr::GET("google.com"))
-  if (online == FALSE) rlang::warn("Please check internet connectivity!")
-  invisible(online)
-}
-Parse an ISO8601 datetime string to a timezone aware datetime.}
+\title{Parse an ISO8601 datetime string to a timezone aware datetime.}
 \usage{
 isodt_to_local(datetime_string, orders = c("YmdHMS", "YmdHMSz"),
   tz = "UTC")
@@ -34,8 +24,6 @@ A lubridate PosixCT datetime in the given timezone.
 }
 \seealso{
 Other utilities: \code{\link{\%>\%}},
-  \code{\link{map_chr_hack}}, \code{\link{map_dttm_hack}},
-  \code{\link{map_int_hack}}, \code{\link{map_lgl_hack}},
   \code{\link{parse_datetime}}, \code{\link{prepend_uuid}},
   \code{\link{strip_uuid}}, \code{\link{tidyeval}}
 }

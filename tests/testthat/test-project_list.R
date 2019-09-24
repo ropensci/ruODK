@@ -12,7 +12,7 @@ test_that("project_list works", {
   # Project metadata are the tibble's columns
   cn <- c(
     "id", "name", "forms", "app_users",
-    "last_submission", "created_at", "updated_at", "archived"
+    "created_at", "updated_at", "last_submission", "archived"
   )
   testthat::expect_equal(names(p), cn)
 })

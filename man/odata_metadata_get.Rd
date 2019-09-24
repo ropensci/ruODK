@@ -2,7 +2,7 @@
 % Please edit documentation in R/odata_metadata_get.R
 \name{odata_metadata_get}
 \alias{odata_metadata_get}
-\title{Retrieve metadata from an OData URL ending in .svc as list of lists}
+\title{Retrieve metadata from an OData URL ending in .svc as list of lists.}
 \usage{
 odata_metadata_get(pid = get_default_pid(), fid = get_default_fid(),
   url = get_default_url(), un = get_default_un(),
