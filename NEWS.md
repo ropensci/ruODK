@@ -1,3 +1,5 @@
+# ruODK 0.6.6
+
 # ruODK 0.6.5
 ## Documentation
 * Use lifecycle badges on functions. Add lifecycle to dependencies, version bump
