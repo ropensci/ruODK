@@ -1,4 +1,7 @@
 # ruODK 0.6.6
+* The big one has landed: `odata_submission_get()` now defaults to parse 
+  submissions from nested lists into a tibble, parse dates and datetimes,
+  download and link attachments (#6)
 
 # ruODK 0.6.5
 ## Documentation

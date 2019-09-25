@@ -22,7 +22,7 @@ data, attachments, and this report via CKAN or Google Drive.
 
 You will need:
 * An ODK Central form's OData Service URL (ending in .svc), accessed from the 
-  "Analyse using OData" button on the form submission tab.
+"Analyse using OData" button on the form submission tab.
 * Username and password of an ODK Central webuser authorised to view this form.
 * Optional: base URL and write-permitted API key for a CKAN instance.
 * Optional: a Google account and the means to authenticate (e.g. phone for 2FA).
@@ -52,7 +52,7 @@ CKAN_KEY="my-ckan-api-key"
 
 <!-- 
 * Configure ODK Central base URL (url), project ID (pid), and form ID (fid) 
-  in one step using the OData Service URL.
+in one step using the OData Service URL.
 * Paste your own Service URL over `svc="..."`.
 * Paste your local timezone over `Australia/Perth`.
 * Adjust `loc` to a local subfolder for downloaded attachments.
@@ -92,61 +92,41 @@ form_tables %>% knitr::kable(.)
 Get and parse submissions.
 
 * Rename any point coordinates which come out as `xn`, `xn+1`, `xn+2` into 
-  longitude, latitude, altitude.
+longitude, latitude, altitude.
 * Repeat parse_datetime for each form field name that symbolises a datetime.
-  Default assumes "time", example shows an additional step to also parse any
-  form field with "date" in its name.
+Default assumes "time", example shows an additional step to also parse any
+form field with "date" in its name.
 
 
 Repeat for each table name in form_tables$url. 
 -->
 ```{r dl_submissions}
-data_main_raw <- ruODK::odata_submission_get(table = form_tables$url[1])
-data_sub1_raw <- ruODK::odata_submission_get(table = form_tables$url[2])
-data_sub2_raw <- ruODK::odata_submission_get(table = form_tables$url[3])
+data <- ruODK::odata_submission_get(
+  table = form_tables$url[1], verbose = TRUE, tz = tz, local_dir = loc
+) %>%
+  dplyr::rename(
+    # Adjust coordinate colnames as needed
+    # longitude = x13,
+    # latitude = x14,
+    # altitude = x15
+  )
+data_sub1 <- ruODK::odata_submission_get(
+  table = form_tables$url[2], verbose = TRUE, tz = tz, local_dir = loc
+) %>%
+  dplyr::left_join(data, by = c("submissions_id" = "id"))
+
+data_sub2 <- ruODK::odata_submission_get(
+  table = form_tables$url[3], verbose = TRUE, tz = tz, local_dir = loc
+) %>% 
+  dplyr::rename(
+    # Adjust coordinate colnames as needed, avoid name conflicts with main data
+    # lon = x6,
+    # lat = x7,
+    # alt = x8
+  ) %>%
+  dplyr::left_join(data, by = c("submissions_id" = "id"))
+
 # repeat for any remaining nested tables
-
-data <- data_main_raw %>% 
-  ruODK::odata_submission_parse(verbose = TRUE) %>%
-  ruODK::parse_datetime(tz = tz) %>% 
-  ruODK::parse_datetime(tz = tz, col_contains = "date") %>%
-  dplyr::rename(
-    # Adjust coordinate colnames
-    longitude = x13,
-    latitude = x14,
-    altitude = x15
-  ) %>%
-  dplyr::mutate(
-    # Adjust photo fieldnames
-    quadrat_photo = ruODK::attachment_get(
-      id, quadrat_photo, local_dir = loc),
-    morphological_type_photo = ruODK::attachment_get(
-      id, morphological_type_photo, local_dir = loc),
-    mudmap_photo = attachment_get(
-      id, mudmap_photo, local_dir = loc)
-  ) %>%
-  invisible()
-
-data_sub1 <- data_sub1_raw %>% 
-  ruODK::odata_submission_parse(verbose = TRUE) %>% 
-  dplyr::left_join(data, by = c("submissions_id" = "id")) %>%
-  invisible()
-
-data_sub2 <- data_sub2_raw %>%
-  ruODK::odata_submission_parse(verbose = TRUE) %>% 
-  dplyr::rename(
-    # Adjust coordinate colnames
-    lon = x6,
-    lat = x7,
-    alt = x8
-  ) %>%
-  dplyr::mutate(
-    # Adjust photo fieldnames
-    photo_in_situ = ruODK::attachment_get(
-      submissions_id, photo_in_situ, local_dir = loc)
-  ) %>%
-  dplyr::left_join(data, by = c("submissions_id" = "id")) %>%
-  invisible()
 ```
 
 # Analyse data
@@ -200,8 +180,8 @@ The form submissions are now extracted and visualised. What's next:
 Notes: 
 
 * Generate the HTML report once off without the next chunk (`eval=F`), 
-  as the chunk refers to the rendered output file (HTML) before the file is 
-  created initially.
+as the chunk refers to the rendered output file (HTML) before the file is 
+created initially.
 * Run report always twice to generate (run 1) and upload (run 2) the latest HTML.
 -->
 ```{r data_export, eval=FALSE}

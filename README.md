@@ -197,14 +197,14 @@ proj <- ruODK::project_list()
 proj %>% head() %>% knitr::kable(.)
 ```
 
-| id | name          | forms | app\_users | last\_submission    | created\_at         | updated\_at         | archived |
-| -: | :------------ | ----: | ---------: | :------------------ | :------------------ | :------------------ | :------- |
-|  8 | AmenazasRD    |     0 |          0 | NA                  | 2019-04-14 06:21:00 | NA                  | FALSE    |
-|  9 | BAFCO Test    |     1 |          1 | 2019-04-19 01:26:49 | 2019-04-19 00:30:45 | NA                  | FALSE    |
-| 11 | CaVaTeCo      |     2 |          1 | 2019-04-30 08:07:55 | 2019-04-30 06:43:22 | NA                  | FALSE    |
-| 18 | CherryPatch   |     2 |          1 | 2019-05-28 17:32:15 | 2019-05-27 21:09:33 | 2019-05-29 20:08:10 | FALSE    |
-| 32 | Collect3289v2 |     1 |          2 | 2019-08-07 13:44:19 | 2019-08-07 12:52:56 | NA                  | FALSE    |
-|  4 | Curso         |     7 |          4 | 2019-03-21 22:22:57 | 2019-02-26 03:55:50 | NA                  | FALSE    |
+| id | name          | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
+| -: | :------------ | ----: | ---------: | :------------------ | :---------- | :------------------ | :------- |
+|  8 | AmenazasRD    |     0 |          0 | 2019-04-14 06:21:00 | NA          | NA                  | FALSE    |
+|  9 | BAFCO Test    |     1 |          1 | 2019-04-19 00:30:45 | NA          | 2019-04-19 01:26:49 | FALSE    |
+| 11 | CaVaTeCo      |     2 |          1 | 2019-04-30 06:43:22 | NA          | 2019-04-30 08:07:55 | FALSE    |
+| 18 | CherryPatch   |     2 |          1 | 2019-05-27 21:09:33 | NA          | 2019-05-28 17:32:15 | FALSE    |
+| 32 | Collect3289v2 |     1 |          2 | 2019-08-07 12:52:56 | NA          | 2019-08-07 13:44:19 | FALSE    |
+|  4 | Curso         |     7 |          4 | 2019-02-26 03:55:50 | NA          | 2019-03-21 22:22:57 | FALSE    |
 
 ``` r
 
@@ -238,69 +238,34 @@ frmd %>% knitr::kable(.)
 ``` r
 
 # Form schema
-meta <- ruODK::odata_metadata_get()
-# listviewer::jsonedit(meta)
-meta$Edmx$DataServices$Schema
-#> $ComplexType
-#> $ComplexType$Property
-#> list()
-#> attr(,"Name")
-#> [1] "submissionDate"
-#> attr(,"Type")
-#> [1] "Edm.DateTimeOffset"
-#> 
-#> $ComplexType$Property
-#> list()
-#> attr(,"Name")
-#> [1] "submitterId"
-#> attr(,"Type")
-#> [1] "Edm.String"
-#> 
-#> $ComplexType$Property
-#> list()
-#> attr(,"Name")
-#> [1] "submitterName"
-#> attr(,"Type")
-#> [1] "Edm.String"
-#> 
-#> $ComplexType$Property
-#> list()
-#> attr(,"Name")
-#> [1] "status"
-#> attr(,"Type")
-#> [1] "org.opendatakit.submission.Status"
-#> 
-#> attr(,"Name")
-#> [1] "metadata"
-#> 
-#> $EnumType
-#> $EnumType$Member
-#> list()
-#> attr(,"Name")
-#> [1] "NotDecrypted"
-#> 
-#> $EnumType$Member
-#> list()
-#> attr(,"Name")
-#> [1] "MissingEncryptedFormData"
-#> 
-#> attr(,"Name")
-#> [1] "Status"
-#> 
-#> attr(,"Namespace")
-#> [1] "org.opendatakit.submission"
-#> attr(,"xmlns")
-#> [1] "http://docs.oasis-open.org/odata/ns/edm"
+meta <- ruODK::form_schema(parse = TRUE)
+meta
+#> # A tibble: 33 x 3
+#>    type      name                     path       
+#>    <chr>     <chr>                    <chr>      
+#>  1 structure meta                     Submissions
+#>  2 dateTime  encounter_start_datetime Submissions
+#>  3 string    reporter                 Submissions
+#>  4 string    device_id                Submissions
+#>  5 structure location                 Submissions
+#>  6 structure habitat                  Submissions
+#>  7 repeat    vegetation_stratum       Submissions
+#>  8 structure perimeter                Submissions
+#>  9 repeat    taxon_encounter          Submissions
+#> 10 dateTime  encounter_end_datetime   Submissions
+#> # … with 23 more rows
 
 # Form submissions
-data <- ruODK::odata_submission_get() %>% ruODK::odata_submission_parse()
+d <- fs::path("docs/articles/attachments/media")   # choose your own
+tz <- "Australia/Perth"                            # crikey
+data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 data %>% knitr::kable(.)
 ```
 
-| id                                        | encounter\_start\_datetime    | reporter      | device\_id       | encounter\_end\_datetime      | submission\_date         | submitter\_id | submitter\_name | instance\_id                              | area\_name               | quadrat\_photo    | type\_12 |      x13 |        x14 |        x15 | accuracy\_16 | morphological\_type | morphological\_type\_photo | type\_19 |      x20 |        x21 |         x22 | accuracy\_23 | type\_24 |      x25 |        x26 |         x27 | accuracy\_28 | type\_29 |      x30 |        x31 |         x32 | accuracy\_33 | mudmap\_photo     | odata\_context                                                                                                              |
-| :---------------------------------------- | :---------------------------- | :------------ | :--------------- | :---------------------------- | :----------------------- | :------------ | :-------------- | :---------------------------------------- | :----------------------- | :---------------- | :------- | -------: | ---------: | ---------: | -----------: | :------------------ | :------------------------- | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :---------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 2019-09-18T16:12:21.147+08:00 | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18T16:40:46.155+08:00 | 2019-09-18T08:51:07.481Z | 241           | flora           | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | 1568794395624.jpg | Point    | 115.8846 | \-31.99606 |    6.40451 |        4.288 | mid-slope           | 1568794560256.jpg          | Point    | 115.8844 | \-31.99623 | \-26.305695 |        4.288 | Point    | 115.8844 | \-31.99615 | \-17.897552 |        4.288 | Point    | 115.8843 | \-31.99610 | \-27.759338 |        4.288 | NA                | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
-| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18T14:08:43.257+08:00 | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18T14:18:53.583+08:00 | 2019-09-18T06:20:25.780Z | 241           | flora           | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | 1568786958640.jpg | Point    | 115.8843 | \-31.99615 | \-17.37241 |        4.288 | flat                | 1568787004467.jpg          | Point    | 115.8844 | \-31.99620 |  \-8.662476 |        4.288 | Point    | 115.8844 | \-31.99622 |  \-6.266144 |        4.288 | Point    | 115.8844 | \-31.99621 |  \-6.597748 |        4.288 | 1568787172983.jpg | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
+| id                                        | encounter\_start\_datetime | reporter      | device\_id       | encounter\_end\_datetime | submission\_date         | submitter\_id | submitter\_name | instance\_id                              | area\_name               | quadrat\_photo                                    | type\_12 |      x13 |        x14 |        x15 | accuracy\_16 | morphological\_type | morphological\_type\_photo                        | type\_19 |      x20 |        x21 |         x22 | accuracy\_23 | type\_24 |      x25 |        x26 |         x27 | accuracy\_28 | type\_29 |      x30 |        x31 |         x32 | accuracy\_33 | mudmap\_photo                                     | odata\_context                                                                                                              |
+| :---------------------------------------- | :------------------------- | :------------ | :--------------- | :----------------------- | :----------------------- | :------------ | :-------------- | :---------------------------------------- | :----------------------- | :------------------------------------------------ | :------- | -------: | ---------: | ---------: | -----------: | :------------------ | :------------------------------------------------ | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 1568794341.147             | Florian Mayer | f73d2e1221ceaa06 | 1568796046.155           | 2019-09-18T08:51:07.481Z | 241           | flora           | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | docs/articles/attachments/media/1568794395624.jpg | Point    | 115.8846 | \-31.99606 |    6.40451 |        4.288 | mid-slope           | docs/articles/attachments/media/1568794560256.jpg | Point    | 115.8844 | \-31.99623 | \-26.305695 |        4.288 | Point    | 115.8844 | \-31.99615 | \-17.897552 |        4.288 | Point    | 115.8843 | \-31.99610 | \-27.759338 |        4.288 | NA                                                | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
+| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 1568786923.257             | Florian Mayer | f73d2e1221ceaa06 | 1568787533.583           | 2019-09-18T06:20:25.780Z | 241           | flora           | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | docs/articles/attachments/media/1568786958640.jpg | Point    | 115.8843 | \-31.99615 | \-17.37241 |        4.288 | flat                | docs/articles/attachments/media/1568787004467.jpg | Point    | 115.8844 | \-31.99620 |  \-8.662476 |        4.288 | Point    | 115.8844 | \-31.99622 |  \-6.266144 |        4.288 | Point    | 115.8844 | \-31.99621 |  \-6.597748 |        4.288 | docs/articles/attachments/media/1568787172983.jpg | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
 
 A more detailed walk-through with some data visualisation examples is
 available in the [`vignette("odata",
@@ -348,14 +313,14 @@ citation("ruODK")
 #> To cite ruODK in publications use:
 #> 
 #>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.
-#>   R package version 0.6.4. https://github.com/dbca-wa/ruODK
+#>   R package version 0.6.5. https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.6.4},
+#>     note = {R package version 0.6.5},
 #>     year = {2019},
 #>     url = {https://github.com/dbca-wa/ruODK},
 #>   }

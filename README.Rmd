@@ -181,12 +181,13 @@ frmd <- ruODK::form_detail()
 frmd %>% knitr::kable(.)
 
 # Form schema
-meta <- ruODK::odata_metadata_get()
-# listviewer::jsonedit(meta)
-meta$Edmx$DataServices$Schema
+meta <- ruODK::form_schema(parse = TRUE)
+meta
 
 # Form submissions
-data <- ruODK::odata_submission_get() %>% ruODK::odata_submission_parse()
+d <- fs::path("docs/articles/attachments/media")   # choose your own
+tz <- "Australia/Perth"                            # crikey
+data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 data %>% knitr::kable(.)
 ```
 

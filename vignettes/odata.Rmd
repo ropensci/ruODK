@@ -126,7 +126,7 @@ The only manual step remaining is to rename the point location components.
 ```{r load_odata}
 fq_data <- ruODK::odata_submission_get(
   table = fq_svc$name[1], verbose = TRUE, tz = tz, local_dir = loc
-)%>%
+  ) %>%
   dplyr::rename(
     longitude = x13,
     latitude = x14,
@@ -139,7 +139,7 @@ fq_data_strata <- ruODK::odata_submission_get(
 
 fq_data_taxa <- ruODK::odata_submission_get(
   table = fq_svc$name[3], verbose = TRUE, tz = tz, local_dir = loc
-) %>%
+  ) %>%
   dplyr::rename(
     lon = x6,
     lat = x7,
