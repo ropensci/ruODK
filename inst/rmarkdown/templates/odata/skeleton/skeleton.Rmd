@@ -1,12 +1,16 @@
 ---
 title: "Report Title"
 author: "Report Author"
-date: "`r Sys.date()`"
+date: "`r Sys.Date()`"
 output:
   html_document:
-    toc = TRUE
-    fig_width = 9
-    code = FALSE
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    fig_width: 10
+    fig_height: 6
+    code_folding: hide
+    theme: lumen
   pdf_document:
     latex_engine: xelatex
   word_document: default
