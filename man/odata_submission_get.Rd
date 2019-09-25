@@ -2,7 +2,7 @@
 % Please edit documentation in R/odata_submission_get.R
 \name{odata_submission_get}
 \alias{odata_submission_get}
-\title{Retrieve /Submissions from an OData URL ending in .svc as list of lists.}
+\title{Retrieve form submissions, parse data and dates, download and link attachments.}
 \usage{
 odata_submission_get(table = "Submissions", skip = NULL, top = NULL,
   count = FALSE, wkt = FALSE, parse = TRUE, verbose = FALSE,
@@ -78,8 +78,30 @@ A list of lists.
 \lifecycle{maturing}
 }
 \details{
-Coming soon:
-[Parse submissions and download attachments](https://github.com/dbca-wa/ruODK/issues/6)
+\code{`odata_submissions_get()`} downloads submissions from (default)
+the main form group (submission table) including any non-repeating form
+groups, or from any other table as specified by parameter `table`.
+
+
+With parameter `parse=TRUE` (default), submission data is parsed into a
+tibble. Any fields of type "dateTime" or "date" are parsed into dates, with
+an optional parameter `tz` to specify the local timezone.
+A parameter `local_dir` (default: "media") specifies a local directory for
+downloaded attachment files. Already existing, previously downloaded
+attachments will be retained. The only remaining manual step is to optionally
+rename any point location coordinate parts into "latitude", "longitude",
+"altitude", and "accuracy", as well as to join subtables to the master table.
+The parameter `verbose` enables diagnostic messages along the download and
+parsing process.
+
+With parameter `parse=FALSE`, submission data is presented as nested list,
+which is the R equivalent of the returned form JSON.
+From there, \code{`odata_submission_parse()`} will parse the data into a tibble,
+and subsequent lines of \code{`parse_datetime()`} and \code{`attachment_get()`}
+parse dates and download and link file attachments.
+As any of these steps might fail on unexpected errors, `ruODK` offers this
+longer, more manual pathway as an option to investigate and narrow down
+unexpected or unwanted behaviour.
 }
 \examples{
 \dontrun{
@@ -93,35 +115,38 @@ ruODK::ru_setup(
   pw = "..."
 )
 
-data <- odata_submissions_get(table = "Submissions")
+form_tables <- ruODK::odata_service_get()
+data <- odata_submissions_get() # default: main data table
+data <- odata_submissions_get(table = form_tables$url[1]) # same, explicitly
+data_sub1 <- odata_submissions_get(table = form_tables$url[2]) # sub-table 1
+data_sub2 <- odata_submissions_get(table = form_tables$url[3]) # sub-table 2
 
 # Skip one row, return the next 1 rows (top), include total row count
 data <- odata_submissions_get(
-  table = "Submissions",
+  table = form_tables$url[1],
   skip = 1,
   top = 1,
   count = TRUE
 )
 
-# Parse point coordinates into lat, lon, alt
+# Point coordinates (lat, lon, alt, acc) need to be renamed
 data <- odata_submissions_get(
-  table = "Submissions",
-  wkt = FALSE
-)
+    table = form_tables$url[1],
+    wkt = FALSE
+  ) \%>\%
+  dplyr::rename(
+  # Adjust coordinate colnames as needed
+  # longitude = x13,
+  # latitude = x14,
+  # altitude = x15,
+  # accuracy = x16
+  )
 
 # Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"
 data <- odata_submissions_get(
-  table = "Submissions",
+  table = form_tables$url[1],
   wkt = TRUE
 )
-
-listviewer::jsonedit(data)
-
-# Next:
-# odata_submission_parse()
-# parse_datetime()
-# attachment_get()
-# or: odata_submission_get(parse = TRUE)
 }
 }
 \seealso{

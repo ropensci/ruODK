@@ -177,13 +177,14 @@
         <td>
           <p><code><a href="odata_submission_get.html">odata_submission_get()</a></code> </p>
         </td>
-        <td><p>Retrieve /Submissions from an OData URL ending in .svc as list of lists.</p></td>
+        <td><p>Retrieve form submissions, parse data and dates, download and link attachments.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="odata_submission_parse.html">odata_submission_parse()</a></code> </p>
         </td>
-        <td><p>Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.</p></td>
+        <td><p>Parse the output of `odata_submission_get(parse=FALSE)` into a tidy tibble
+and unnest all levels.</p></td>
       </tr><tr>
         
         <td>

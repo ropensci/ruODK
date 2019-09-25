@@ -13,6 +13,7 @@
 #'   type and name. This uses \code{`form_schema_parse`} internally.
 #'   If used together with `flatten=TRUE` \code{`form_schema`} will raise a
 #'   warning and return the unparsed, flattened form schema.
+#'   Default: TRUE.
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
@@ -112,7 +113,7 @@
 #' }
 form_schema <- function(flatten = FALSE,
                         odata = FALSE,
-                        parse = FALSE,
+                        parse = TRUE,
                         pid = get_default_pid(),
                         fid = get_default_fid(),
                         url = get_default_url(),

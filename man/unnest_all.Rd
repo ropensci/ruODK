@@ -20,6 +20,11 @@ The unnested tibble in wide format
 \description{
 \lifecycle{stable}
 }
+\details{
+\code{odata_submission_parse()} uses this function internally.
+Interested users can use this function to break down `ruODK`'s automated
+steps into smaller components.
+}
 \seealso{
 Other odata-api: \code{\link{attachment_get}},
   \code{\link{attachment_url}},

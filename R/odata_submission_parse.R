@@ -17,6 +17,10 @@ listcol_names <- function(tbl) {
 #' Recursively unnest_wide all list columns in a tibble.
 #'
 #' \lifecycle{stable}
+#'
+#' @details \code{odata_submission_parse()} uses this function internally.
+#' Interested users can use this function to break down `ruODK`'s automated
+#' steps into smaller components.
 #' @param nested_tbl A nested tibble
 #' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,
 #'   default: "universal".
@@ -55,7 +59,8 @@ unnest_all <- function(nested_tbl,
   nested_tbl
 }
 
-#' Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.
+#' Parse the output of `odata_submission_get(parse=FALSE)` into a tidy tibble
+#' and unnest all levels.
 #'
 #' \lifecycle{maturing}
 #'

@@ -2,7 +2,8 @@
 % Please edit documentation in R/odata_submission_parse.R
 \name{odata_submission_parse}
 \alias{odata_submission_parse}
-\title{Parse the output of `odata_submission_get` into a tidy tibble and unnest all levels.}
+\title{Parse the output of `odata_submission_get(parse=FALSE)` into a tidy tibble
+and unnest all levels.}
 \usage{
 odata_submission_parse(data, names_repair = "universal",
   verbose = FALSE)

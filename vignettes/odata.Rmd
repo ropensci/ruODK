@@ -110,7 +110,7 @@ into a clean `tibble` of field type, name, and path.
 `ruODK` uses this introspection to parse submission data.
 
 ```{r form_schema}
-fq_fs <- form_schema(parse=TRUE)
+fq_fs <- form_schema()
 fq_fs %>% knitr::kable(.)
 ```
 

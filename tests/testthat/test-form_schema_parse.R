@@ -1,6 +1,7 @@
 test_that("form_schema_parse works", {
   fs <- form_schema(
     flatten = FALSE,
+    parse = FALSE,
     pid = get_test_pid(),
     fid = get_test_fid(),
     url = get_test_url(),
@@ -28,6 +29,7 @@ test_that("form_schema_parse works", {
 test_that("form_schema_parse debug messages work", {
   fs <- form_schema(
     flatten = FALSE,
+    parse = FALSE,
     pid = get_test_pid(),
     fid = get_test_fid(),
     url = get_test_url(),

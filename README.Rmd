@@ -181,7 +181,7 @@ frmd <- ruODK::form_detail()
 frmd %>% knitr::kable(.)
 
 # Form schema
-meta <- ruODK::form_schema(parse = TRUE)
+meta <- ruODK::form_schema()
 meta
 
 # Form submissions

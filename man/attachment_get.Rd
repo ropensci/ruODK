@@ -65,15 +65,13 @@ Parameters submission_uuid and attachment_filename accept single or exactly
 the same number of multiple values.
 The other parameters are automatically repeated.
 
-The media attachments are downloaded into a folder named by the submission's
-uuid (minus "uuid:" for Windows compatibility) inside the given
-`local_dir`. E.g.:
+The media attachments are downloaded into a folder given by `local_dir`:
 
-workdir/attachments/xxxxxxxxxx/filename1.jpg
+workdir/media/filename1.jpg
 
-workdir/attachments/xxxxxxxxxx/filename2.jpg
+workdir/media/filename2.jpg
 
-workdir/attachments/xxxxxxxxxx/filename3.jpg
+workdir/media/filename3.jpg
 }
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}

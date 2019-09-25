@@ -139,7 +139,7 @@ of the XForm definition available in R.
 See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of  `??ruODK::form_schema()` for more detail.
 
 ```{r form_schema, fig.width=7}
-fs <- form_schema()
+fs <- form_schema(parse=FALSE)
 listviewer::jsonedit(fs, mode="code")
 ```
 
@@ -402,7 +402,7 @@ fs::dir_ls(t, recurse = TRUE, glob = "*.jpg")
 From here, we can use the separately created data tibbles and locally downloaded
 attachments to build visualisations as shown in the vignette "odata".
 
-The best course of action seems to be the data export to ZIP.
+The best course of action seems to be the data export to ZIP or use the OData API.
 
 # Future development
 

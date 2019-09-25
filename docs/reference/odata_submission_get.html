@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve /Submissions from an OData URL ending in .svc as list of lists. — odata_submission_get • ruODK</title>
+<title>Retrieve form submissions, parse data and dates, download and link attachments. — odata_submission_get • ruODK</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Retrieve /Submissions from an OData URL ending in .svc as list of lists. — odata_submission_get" />
+<meta property="og:title" content="Retrieve form submissions, parse data and dates, download and link attachments. — odata_submission_get" />
 <meta property="og:description" content="" />
 <meta name="twitter:card" content="summary" />
 
@@ -126,7 +126,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve /Submissions from an OData URL ending in .svc as list of lists.</h1>
+    <h1>Retrieve form submissions, parse data and dates, download and link attachments.</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/odata_submission_get.R'><code>R/odata_submission_get.R</code></a></small>
     <div class="hidden name"><code>odata_submission_get.Rd</code></div>
     </div>
@@ -238,8 +238,28 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
   * `@odata.count` is the total number of rows in the table.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Coming soon:
-[Parse submissions and download attachments](https://github.com/dbca-wa/ruODK/issues/6)</p>
+    <p><code>`odata_submissions_get()`</code> downloads submissions from (default)
+the main form group (submission table) including any non-repeating form
+groups, or from any other table as specified by parameter `table`.</p>
+
+<p>With parameter `parse=TRUE` (default), submission data is parsed into a
+tibble. Any fields of type "dateTime" or "date" are parsed into dates, with
+an optional parameter `tz` to specify the local timezone.
+A parameter `local_dir` (default: "media") specifies a local directory for
+downloaded attachment files. Already existing, previously downloaded
+attachments will be retained. The only remaining manual step is to optionally
+rename any point location coordinate parts into "latitude", "longitude",
+"altitude", and "accuracy", as well as to join subtables to the master table.
+The parameter `verbose` enables diagnostic messages along the download and
+parsing process.</p>
+<p>With parameter `parse=FALSE`, submission data is presented as nested list,
+which is the R equivalent of the returned form JSON.
+From there, <code>`odata_submission_parse()`</code> will parse the data into a tibble,
+and subsequent lines of <code>`parse_datetime()`</code> and <code>`attachment_get()`</code>
+parse dates and download and link file attachments.
+As any of these steps might fail on unexpected errors, `ruODK` offers this
+longer, more manual pathway as an option to investigate and narrow down
+unexpected or unwanted behaviour.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service'>https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service</a></p>
@@ -264,35 +284,38 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
   <span class='kw'>pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>
 )
 
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>)
+<span class='no'>form_tables</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/odata_service_get.html'>odata_service_get</a></span>()
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>() <span class='co'># default: main data table</span>
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>]) <span class='co'># same, explicitly</span>
+<span class='no'>data_sub1</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>2</span>]) <span class='co'># sub-table 1</span>
+<span class='no'>data_sub2</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>3</span>]) <span class='co'># sub-table 2</span>
 
 <span class='co'># Skip one row, return the next 1 rows (top), include total row count</span>
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(
-  <span class='kw'>table</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>,
+  <span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>],
   <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>count</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )
 
-<span class='co'># Parse point coordinates into lat, lon, alt</span>
+<span class='co'># Point coordinates (lat, lon, alt, acc) need to be renamed</span>
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(
-  <span class='kw'>table</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>,
-  <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
+    <span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>],
+    <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  ) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>rename</a></span>(
+  <span class='co'># Adjust coordinate colnames as needed</span>
+  <span class='co'># longitude = x13,</span>
+  <span class='co'># latitude = x14,</span>
+  <span class='co'># altitude = x15,</span>
+  <span class='co'># accuracy = x16</span>
+  )
 
 <span class='co'># Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"</span>
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(
-  <span class='kw'>table</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>,
+  <span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>],
   <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )
-
-<span class='kw pkg'>listviewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/listviewer/man/jsonedit.html'>jsonedit</a></span>(<span class='no'>data</span>)
-
-<span class='co'># Next:</span>
-<span class='co'># odata_submission_parse()</span>
-<span class='co'># parse_datetime()</span>
-<span class='co'># attachment_get()</span>
-<span class='co'># or: odata_submission_get(parse = TRUE)</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

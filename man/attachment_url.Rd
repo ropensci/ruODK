@@ -35,7 +35,7 @@ The inferred download URL.
 \lifecycle{stable}
 }
 \details{
-This is a helper function used by `attachment_get`.
+This is a helper function used by \code{`attachment_get()`}.
 This function is vectorised and accepts single values or vectors for uuid and
 fn.
 }

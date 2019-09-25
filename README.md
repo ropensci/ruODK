@@ -238,22 +238,282 @@ frmd %>% knitr::kable(.)
 ``` r
 
 # Form schema
-meta <- ruODK::form_schema(parse = TRUE)
+meta <- ruODK::form_schema()
 meta
-#> # A tibble: 33 x 3
-#>    type      name                     path       
-#>    <chr>     <chr>                    <chr>      
-#>  1 structure meta                     Submissions
-#>  2 dateTime  encounter_start_datetime Submissions
-#>  3 string    reporter                 Submissions
-#>  4 string    device_id                Submissions
-#>  5 structure location                 Submissions
-#>  6 structure habitat                  Submissions
-#>  7 repeat    vegetation_stratum       Submissions
-#>  8 structure perimeter                Submissions
-#>  9 repeat    taxon_encounter          Submissions
-#> 10 dateTime  encounter_end_datetime   Submissions
-#> # … with 23 more rows
+#> [[1]]
+#> [[1]]$name
+#> [1] "meta"
+#> 
+#> [[1]]$children
+#> [[1]]$children[[1]]
+#> [[1]]$children[[1]]$name
+#> [1] "instanceID"
+#> 
+#> [[1]]$children[[1]]$type
+#> [1] "string"
+#> 
+#> 
+#> 
+#> [[1]]$type
+#> [1] "structure"
+#> 
+#> 
+#> [[2]]
+#> [[2]]$name
+#> [1] "encounter_start_datetime"
+#> 
+#> [[2]]$type
+#> [1] "dateTime"
+#> 
+#> 
+#> [[3]]
+#> [[3]]$name
+#> [1] "reporter"
+#> 
+#> [[3]]$type
+#> [1] "string"
+#> 
+#> 
+#> [[4]]
+#> [[4]]$name
+#> [1] "device_id"
+#> 
+#> [[4]]$type
+#> [1] "string"
+#> 
+#> 
+#> [[5]]
+#> [[5]]$name
+#> [1] "location"
+#> 
+#> [[5]]$children
+#> [[5]]$children[[1]]
+#> [[5]]$children[[1]]$name
+#> [1] "area_name"
+#> 
+#> [[5]]$children[[1]]$type
+#> [1] "string"
+#> 
+#> 
+#> [[5]]$children[[2]]
+#> [[5]]$children[[2]]$name
+#> [1] "quadrat_photo"
+#> 
+#> [[5]]$children[[2]]$type
+#> [1] "binary"
+#> 
+#> 
+#> [[5]]$children[[3]]
+#> [[5]]$children[[3]]$name
+#> [1] "corner1"
+#> 
+#> [[5]]$children[[3]]$type
+#> [1] "geopoint"
+#> 
+#> 
+#> 
+#> [[5]]$type
+#> [1] "structure"
+#> 
+#> 
+#> [[6]]
+#> [[6]]$name
+#> [1] "habitat"
+#> 
+#> [[6]]$children
+#> [[6]]$children[[1]]
+#> [[6]]$children[[1]]$name
+#> [1] "morphological_type"
+#> 
+#> [[6]]$children[[1]]$type
+#> [1] "select1"
+#> 
+#> 
+#> [[6]]$children[[2]]
+#> [[6]]$children[[2]]$name
+#> [1] "morphological_type_photo"
+#> 
+#> [[6]]$children[[2]]$type
+#> [1] "binary"
+#> 
+#> 
+#> 
+#> [[6]]$type
+#> [1] "structure"
+#> 
+#> 
+#> [[7]]
+#> [[7]]$name
+#> [1] "vegetation_stratum"
+#> 
+#> [[7]]$children
+#> [[7]]$children[[1]]
+#> [[7]]$children[[1]]$name
+#> [1] "nvis_level3_broad_floristic_group"
+#> 
+#> [[7]]$children[[1]]$type
+#> [1] "select1"
+#> 
+#> 
+#> [[7]]$children[[2]]
+#> [[7]]$children[[2]]$name
+#> [1] "max_height_m"
+#> 
+#> [[7]]$children[[2]]$type
+#> [1] "decimal"
+#> 
+#> 
+#> [[7]]$children[[3]]
+#> [[7]]$children[[3]]$name
+#> [1] "foliage_cover"
+#> 
+#> [[7]]$children[[3]]$type
+#> [1] "select1"
+#> 
+#> 
+#> [[7]]$children[[4]]
+#> [[7]]$children[[4]]$name
+#> [1] "dominant_species_1"
+#> 
+#> [[7]]$children[[4]]$type
+#> [1] "string"
+#> 
+#> 
+#> [[7]]$children[[5]]
+#> [[7]]$children[[5]]$name
+#> [1] "dominant_species_2"
+#> 
+#> [[7]]$children[[5]]$type
+#> [1] "string"
+#> 
+#> 
+#> [[7]]$children[[6]]
+#> [[7]]$children[[6]]$name
+#> [1] "dominant_species_3"
+#> 
+#> [[7]]$children[[6]]$type
+#> [1] "string"
+#> 
+#> 
+#> [[7]]$children[[7]]
+#> [[7]]$children[[7]]$name
+#> [1] "dominant_species_4"
+#> 
+#> [[7]]$children[[7]]$type
+#> [1] "string"
+#> 
+#> 
+#> 
+#> [[7]]$type
+#> [1] "repeat"
+#> 
+#> 
+#> [[8]]
+#> [[8]]$name
+#> [1] "perimeter"
+#> 
+#> [[8]]$children
+#> [[8]]$children[[1]]
+#> [[8]]$children[[1]]$name
+#> [1] "corner2"
+#> 
+#> [[8]]$children[[1]]$type
+#> [1] "geopoint"
+#> 
+#> 
+#> [[8]]$children[[2]]
+#> [[8]]$children[[2]]$name
+#> [1] "corner3"
+#> 
+#> [[8]]$children[[2]]$type
+#> [1] "geopoint"
+#> 
+#> 
+#> [[8]]$children[[3]]
+#> [[8]]$children[[3]]$name
+#> [1] "corner4"
+#> 
+#> [[8]]$children[[3]]$type
+#> [1] "geopoint"
+#> 
+#> 
+#> [[8]]$children[[4]]
+#> [[8]]$children[[4]]$name
+#> [1] "mudmap_photo"
+#> 
+#> [[8]]$children[[4]]$type
+#> [1] "binary"
+#> 
+#> 
+#> 
+#> [[8]]$type
+#> [1] "structure"
+#> 
+#> 
+#> [[9]]
+#> [[9]]$name
+#> [1] "taxon_encounter"
+#> 
+#> [[9]]$children
+#> [[9]]$children[[1]]
+#> [[9]]$children[[1]]$name
+#> [1] "field_name"
+#> 
+#> [[9]]$children[[1]]$type
+#> [1] "string"
+#> 
+#> 
+#> [[9]]$children[[2]]
+#> [[9]]$children[[2]]$name
+#> [1] "photo_in_situ"
+#> 
+#> [[9]]$children[[2]]$type
+#> [1] "binary"
+#> 
+#> 
+#> [[9]]$children[[3]]
+#> [[9]]$children[[3]]$name
+#> [1] "taxon_encounter_location"
+#> 
+#> [[9]]$children[[3]]$type
+#> [1] "geopoint"
+#> 
+#> 
+#> [[9]]$children[[4]]
+#> [[9]]$children[[4]]$name
+#> [1] "life_form"
+#> 
+#> [[9]]$children[[4]]$type
+#> [1] "select1"
+#> 
+#> 
+#> [[9]]$children[[5]]
+#> [[9]]$children[[5]]$name
+#> [1] "voucher_specimen_barcode"
+#> 
+#> [[9]]$children[[5]]$type
+#> [1] "barcode"
+#> 
+#> 
+#> [[9]]$children[[6]]
+#> [[9]]$children[[6]]$name
+#> [1] "voucher_specimen_label"
+#> 
+#> [[9]]$children[[6]]$type
+#> [1] "string"
+#> 
+#> 
+#> 
+#> [[9]]$type
+#> [1] "repeat"
+#> 
+#> 
+#> [[10]]
+#> [[10]]$name
+#> [1] "encounter_end_datetime"
+#> 
+#> [[10]]$type
+#> [1] "dateTime"
 
 # Form submissions
 d <- fs::path("docs/articles/attachments/media")   # choose your own
@@ -313,14 +573,14 @@ citation("ruODK")
 #> To cite ruODK in publications use:
 #> 
 #>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.
-#>   R package version 0.6.5. https://github.com/dbca-wa/ruODK
+#>   R package version 0.6.6. https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.6.5},
+#>     note = {R package version 0.6.6},
 #>     year = {2019},
 #>     url = {https://github.com/dbca-wa/ruODK},
 #>   }
