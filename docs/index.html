@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6</span>
       </span>
     </div>
 
@@ -203,24 +203,14 @@
 <a class="sourceLine" id="cb3-4" title="4">proj &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/project_list.html">project_list</a></span>()</a>
 <a class="sourceLine" id="cb3-5" title="5">proj <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
-<colgroup>
-<col width="2%">
-<col width="13%">
-<col width="5%">
-<col width="10%">
-<col width="20%">
-<col width="20%">
-<col width="20%">
-<col width="8%">
-</colgroup>
 <thead><tr class="header">
 <th align="right">id</th>
 <th align="left">name</th>
 <th align="right">forms</th>
 <th align="right">app_users</th>
-<th align="left">last_submission</th>
 <th align="left">created_at</th>
 <th align="left">updated_at</th>
+<th align="left">last_submission</th>
 <th align="left">archived</th>
 </tr></thead>
 <tbody>
@@ -229,8 +219,8 @@
 <td align="left">AmenazasRD</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="left">NA</td>
 <td align="left">2019-04-14 06:21:00</td>
+<td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
@@ -239,9 +229,9 @@
 <td align="left">BAFCO Test</td>
 <td align="right">1</td>
 <td align="right">1</td>
-<td align="left">2019-04-19 01:26:49</td>
 <td align="left">2019-04-19 00:30:45</td>
 <td align="left">NA</td>
+<td align="left">2019-04-19 01:26:49</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
@@ -249,9 +239,9 @@
 <td align="left">CaVaTeCo</td>
 <td align="right">2</td>
 <td align="right">1</td>
-<td align="left">2019-04-30 08:07:55</td>
 <td align="left">2019-04-30 06:43:22</td>
 <td align="left">NA</td>
+<td align="left">2019-04-30 08:07:55</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
@@ -259,9 +249,9 @@
 <td align="left">CherryPatch</td>
 <td align="right">2</td>
 <td align="right">1</td>
-<td align="left">2019-05-28 17:32:15</td>
 <td align="left">2019-05-27 21:09:33</td>
-<td align="left">2019-05-29 20:08:10</td>
+<td align="left">NA</td>
+<td align="left">2019-05-28 17:32:15</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
@@ -269,9 +259,9 @@
 <td align="left">Collect3289v2</td>
 <td align="right">1</td>
 <td align="right">2</td>
-<td align="left">2019-08-07 13:44:19</td>
 <td align="left">2019-08-07 12:52:56</td>
 <td align="left">NA</td>
+<td align="left">2019-08-07 13:44:19</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
@@ -279,9 +269,9 @@
 <td align="left">Curso</td>
 <td align="right">7</td>
 <td align="right">4</td>
-<td align="left">2019-03-21 22:22:57</td>
 <td align="left">2019-02-26 03:55:50</td>
 <td align="left">NA</td>
+<td align="left">2019-03-21 22:22:57</td>
 <td align="left">FALSE</td>
 </tr>
 </tbody>
@@ -471,83 +461,48 @@
 </table>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="co"># Form schema</span></a>
-<a class="sourceLine" id="cb6-3" title="3">meta &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_metadata_get.html">odata_metadata_get</a></span>()</a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co"># listviewer::jsonedit(meta)</span></a>
-<a class="sourceLine" id="cb6-5" title="5">meta<span class="op">$</span>Edmx<span class="op">$</span>DataServices<span class="op">$</span>Schema</a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; $ComplexType</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt; $ComplexType$Property</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; list()</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; attr(,"Name")</span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; [1] "submissionDate"</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt; attr(,"Type")</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; [1] "Edm.DateTimeOffset"</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt; $ComplexType$Property</span></a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt; list()</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; attr(,"Name")</span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt; [1] "submitterId"</span></a>
-<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt; attr(,"Type")</span></a>
-<a class="sourceLine" id="cb6-19" title="19"><span class="co">#&gt; [1] "Edm.String"</span></a>
-<a class="sourceLine" id="cb6-20" title="20"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-21" title="21"><span class="co">#&gt; $ComplexType$Property</span></a>
-<a class="sourceLine" id="cb6-22" title="22"><span class="co">#&gt; list()</span></a>
-<a class="sourceLine" id="cb6-23" title="23"><span class="co">#&gt; attr(,"Name")</span></a>
-<a class="sourceLine" id="cb6-24" title="24"><span class="co">#&gt; [1] "submitterName"</span></a>
-<a class="sourceLine" id="cb6-25" title="25"><span class="co">#&gt; attr(,"Type")</span></a>
-<a class="sourceLine" id="cb6-26" title="26"><span class="co">#&gt; [1] "Edm.String"</span></a>
-<a class="sourceLine" id="cb6-27" title="27"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-28" title="28"><span class="co">#&gt; $ComplexType$Property</span></a>
-<a class="sourceLine" id="cb6-29" title="29"><span class="co">#&gt; list()</span></a>
-<a class="sourceLine" id="cb6-30" title="30"><span class="co">#&gt; attr(,"Name")</span></a>
-<a class="sourceLine" id="cb6-31" title="31"><span class="co">#&gt; [1] "status"</span></a>
-<a class="sourceLine" id="cb6-32" title="32"><span class="co">#&gt; attr(,"Type")</span></a>
-<a class="sourceLine" id="cb6-33" title="33"><span class="co">#&gt; [1] "org.opendatakit.submission.Status"</span></a>
-<a class="sourceLine" id="cb6-34" title="34"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-35" title="35"><span class="co">#&gt; attr(,"Name")</span></a>
-<a class="sourceLine" id="cb6-36" title="36"><span class="co">#&gt; [1] "metadata"</span></a>
-<a class="sourceLine" id="cb6-37" title="37"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-38" title="38"><span class="co">#&gt; $EnumType</span></a>
-<a class="sourceLine" id="cb6-39" title="39"><span class="co">#&gt; $EnumType$Member</span></a>
-<a class="sourceLine" id="cb6-40" title="40"><span class="co">#&gt; list()</span></a>
-<a class="sourceLine" id="cb6-41" title="41"><span class="co">#&gt; attr(,"Name")</span></a>
-<a class="sourceLine" id="cb6-42" title="42"><span class="co">#&gt; [1] "NotDecrypted"</span></a>
-<a class="sourceLine" id="cb6-43" title="43"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-44" title="44"><span class="co">#&gt; $EnumType$Member</span></a>
-<a class="sourceLine" id="cb6-45" title="45"><span class="co">#&gt; list()</span></a>
-<a class="sourceLine" id="cb6-46" title="46"><span class="co">#&gt; attr(,"Name")</span></a>
-<a class="sourceLine" id="cb6-47" title="47"><span class="co">#&gt; [1] "MissingEncryptedFormData"</span></a>
-<a class="sourceLine" id="cb6-48" title="48"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-49" title="49"><span class="co">#&gt; attr(,"Name")</span></a>
-<a class="sourceLine" id="cb6-50" title="50"><span class="co">#&gt; [1] "Status"</span></a>
-<a class="sourceLine" id="cb6-51" title="51"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-52" title="52"><span class="co">#&gt; attr(,"Namespace")</span></a>
-<a class="sourceLine" id="cb6-53" title="53"><span class="co">#&gt; [1] "org.opendatakit.submission"</span></a>
-<a class="sourceLine" id="cb6-54" title="54"><span class="co">#&gt; attr(,"xmlns")</span></a>
-<a class="sourceLine" id="cb6-55" title="55"><span class="co">#&gt; [1] "http://docs.oasis-open.org/odata/ns/edm"</span></a>
-<a class="sourceLine" id="cb6-56" title="56"></a>
-<a class="sourceLine" id="cb6-57" title="57"><span class="co"># Form submissions</span></a>
-<a class="sourceLine" id="cb6-58" title="58">data &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_submission_get.html">odata_submission_get</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_submission_parse.html">odata_submission_parse</a></span>()</a>
-<a class="sourceLine" id="cb6-59" title="59">data <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
+<a class="sourceLine" id="cb6-3" title="3">meta &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/form_schema.html">form_schema</a></span>(<span class="dt">parse =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb6-4" title="4">meta</a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; # A tibble: 33 x 3</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt;    type      name                     path       </span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;                    &lt;chr&gt;      </span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt;  1 structure meta                     Submissions</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt;  2 dateTime  encounter_start_datetime Submissions</span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt;  3 string    reporter                 Submissions</span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt;  4 string    device_id                Submissions</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt;  5 structure location                 Submissions</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt;  6 structure habitat                  Submissions</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt;  7 repeat    vegetation_stratum       Submissions</span></a>
+<a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt;  8 structure perimeter                Submissions</span></a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt;  9 repeat    taxon_encounter          Submissions</span></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt; 10 dateTime  encounter_end_datetime   Submissions</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt; # … with 23 more rows</span></a>
+<a class="sourceLine" id="cb6-19" title="19"></a>
+<a class="sourceLine" id="cb6-20" title="20"><span class="co"># Form submissions</span></a>
+<a class="sourceLine" id="cb6-21" title="21">d &lt;-<span class="st"> </span>fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/path.html">path</a></span>(<span class="st">"docs/articles/attachments/media"</span>)   <span class="co"># choose your own</span></a>
+<a class="sourceLine" id="cb6-22" title="22">tz &lt;-<span class="st"> "Australia/Perth"</span>                            <span class="co"># crikey</span></a>
+<a class="sourceLine" id="cb6-23" title="23">data &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_submission_get.html">odata_submission_get</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">local_dir =</span> d, <span class="dt">tz =</span> tz)</a>
+<a class="sourceLine" id="cb6-24" title="24">data <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="6%">
-<col width="4%">
-<col width="2%">
-<col width="2%">
-<col width="4%">
+<col width="5%">
 <col width="3%">
+<col width="1%">
 <col width="2%">
+<col width="3%">
+<col width="3%">
+<col width="1%">
+<col width="2%">
+<col width="5%">
+<col width="3%">
+<col width="6%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
+<col width="1%">
 <col width="2%">
 <col width="6%">
-<col width="3%">
-<col width="2%">
-<col width="1%">
-<col width="1%">
-<col width="1%">
-<col width="1%">
-<col width="1%">
-<col width="2%">
-<col width="4%">
 <col width="1%">
 <col width="1%">
 <col width="1%">
@@ -563,8 +518,8 @@
 <col width="1%">
 <col width="1%">
 <col width="1%">
-<col width="2%">
-<col width="19%">
+<col width="6%">
+<col width="17%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">id</th>
@@ -606,23 +561,23 @@
 <tbody>
 <tr class="odd">
 <td align="left">uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69</td>
-<td align="left">2019-09-18T16:12:21.147+08:00</td>
+<td align="left">1568794341.147</td>
 <td align="left">Florian Mayer</td>
 <td align="left">f73d2e1221ceaa06</td>
-<td align="left">2019-09-18T16:40:46.155+08:00</td>
+<td align="left">1568796046.155</td>
 <td align="left">2019-09-18T08:51:07.481Z</td>
 <td align="left">241</td>
 <td align="left">flora</td>
 <td align="left">uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69</td>
 <td align="left">Kensington Carpark 01</td>
-<td align="left">1568794395624.jpg</td>
+<td align="left">docs/articles/attachments/media/1568794395624.jpg</td>
 <td align="left">Point</td>
 <td align="right">115.8846</td>
 <td align="right">-31.99606</td>
 <td align="right">6.40451</td>
 <td align="right">4.288</td>
 <td align="left">mid-slope</td>
-<td align="left">1568794560256.jpg</td>
+<td align="left">docs/articles/attachments/media/1568794560256.jpg</td>
 <td align="left">Point</td>
 <td align="right">115.8844</td>
 <td align="right">-31.99623</td>
@@ -643,23 +598,23 @@
 </tr>
 <tr class="even">
 <td align="left">uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f</td>
-<td align="left">2019-09-18T14:08:43.257+08:00</td>
+<td align="left">1568786923.257</td>
 <td align="left">Florian Mayer</td>
 <td align="left">f73d2e1221ceaa06</td>
-<td align="left">2019-09-18T14:18:53.583+08:00</td>
+<td align="left">1568787533.583</td>
 <td align="left">2019-09-18T06:20:25.780Z</td>
 <td align="left">241</td>
 <td align="left">flora</td>
 <td align="left">uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f</td>
 <td align="left">Kensington Planter Box 1</td>
-<td align="left">1568786958640.jpg</td>
+<td align="left">docs/articles/attachments/media/1568786958640.jpg</td>
 <td align="left">Point</td>
 <td align="right">115.8843</td>
 <td align="right">-31.99615</td>
 <td align="right">-17.37241</td>
 <td align="right">4.288</td>
 <td align="left">flat</td>
-<td align="left">1568787004467.jpg</td>
+<td align="left">docs/articles/attachments/media/1568787004467.jpg</td>
 <td align="left">Point</td>
 <td align="right">115.8844</td>
 <td align="right">-31.99620</td>
@@ -675,7 +630,7 @@
 <td align="right">-31.99621</td>
 <td align="right">-6.597748</td>
 <td align="right">4.288</td>
-<td align="left">1568787172983.jpg</td>
+<td align="left">docs/articles/attachments/media/1568787172983.jpg</td>
 <td align="left"><a href="https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/%24metadata#Submissions" class="uri">https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions</a></td>
 </tr>
 </tbody>
@@ -705,14 +660,14 @@
 <a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; To cite ruODK in publications use:</span></a>
 <a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt;   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;   R package version 0.6.4. https://github.com/dbca-wa/ruODK</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;   R package version 0.6.5. https://github.com/dbca-wa/ruODK</span></a>
 <a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></a>
 <a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;   @Misc{,</span></a>
 <a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt;     title = {ruODK: Client for the ODK Central API},</span></a>
 <a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt;     author = {Florian W. Mayer},</span></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.4},</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.5},</span></a>
 <a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt;     year = {2019},</span></a>
 <a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;     url = {https://github.com/dbca-wa/ruODK},</span></a>
 <a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt;   }</span></a></code></pre></div>

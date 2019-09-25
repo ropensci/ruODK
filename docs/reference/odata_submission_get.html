@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6</span>
       </span>
     </div>
 
@@ -136,7 +136,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>odata_submission_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>top</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>count</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(),
+  <span class='kw'>count</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"UTC"</span>, <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='st'>"media"</span>, <span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(),
   <span class='kw'>fid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>(), <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(),
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>())</pre>
 
@@ -148,8 +149,7 @@
       <td><p>The submission EntityType, or in plain words, the table name.
 Default: "Submissions" (the main table).
 Change to "Submissions.GROUP_NAME" for repeating form groups.
-The group name can be found in the metadata under
-DataServices.Schema.[EntityType].Name</p></td>
+The group name can be found through <code>`odata_service_get()`</code>.</p></td>
     </tr>
     <tr>
       <th>skip</th>
@@ -169,7 +169,29 @@ response from ODK Central. Default: FALSE.</p></td>
     <tr>
       <th>wkt</th>
       <td><p>If TRUE, geospatial data will be returned as WKT (Well Known Text)
-strings. Default: FALSE, returns GeoJSON structures.</p></td>
+strings. Default: FALSE, returns GeoJSON structures.
+Note, ODK Central currently only honours this parameter for Point geometries.
+Line and Polygon geometries are returned as "ODK WKT".</p></td>
+    </tr>
+    <tr>
+      <th>parse</th>
+      <td><p>Whether to parse submission data based on form schema.
+Dates and datetimes will be parsed into local time.
+Attachments will be downloaded, and the field updated to the local file path.
+Default: TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Whether to display debug messages or not (default)</p></td>
+    </tr>
+    <tr>
+      <th>tz</th>
+      <td><p>A timezone, e.g. "Australia/Perth" or "UTC". Default: "UTC".</p></td>
+    </tr>
+    <tr>
+      <th>local_dir</th>
+      <td><p>The local folder to save the downloaded files to,
+default: "media".</p></td>
     </tr>
     <tr>
       <th>pid</th>
@@ -210,11 +232,10 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A nested list of lists.
-        `value` contains the submissions, which can be "rectangled" using
-    `tidyr::unnest_wider("element_name")`.
-    `@odata.context` is the URL of the metadata.
-    `@odata.count` is the total number of rows in the table.</p>
+    <p>A list of lists.</p>
+<p>* `value` contains the submissions as list of lists.
+  * `@odata.context` is the URL of the metadata.
+  * `@odata.count` is the total number of rows in the table.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Coming soon:
@@ -267,7 +288,11 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
 
 <span class='kw pkg'>listviewer</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/listviewer/man/jsonedit.html'>jsonedit</a></span>(<span class='no'>data</span>)
 
-<span class='co'># Next: parse this nested list in to a tidy tibble with `parse_submissions`</span>
+<span class='co'># Next:</span>
+<span class='co'># odata_submission_parse()</span>
+<span class='co'># parse_datetime()</span>
+<span class='co'># attachment_get()</span>
+<span class='co'># or: odata_submission_get(parse = TRUE)</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
