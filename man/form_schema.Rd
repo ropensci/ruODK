@@ -4,7 +4,7 @@
 \alias{form_schema}
 \title{Show the schema of one form.}
 \usage{
-form_schema(flatten = FALSE, odata = FALSE, parse = FALSE,
+form_schema(flatten = FALSE, odata = FALSE, parse = TRUE,
   pid = get_default_pid(), fid = get_default_fid(),
   url = get_default_url(), un = get_default_un(),
   pw = get_default_pw())
@@ -22,7 +22,8 @@ Default: FALSE.}
 \item{parse}{Whether to parse the form schema into a tibble of form field
 type and name. This uses \code{`form_schema_parse`} internally.
 If used together with `flatten=TRUE` \code{`form_schema`} will raise a
-warning and return the unparsed, flattened form schema.}
+warning and return the unparsed, flattened form schema.
+Default: TRUE.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 Default: \code{get_default_pid()}.
