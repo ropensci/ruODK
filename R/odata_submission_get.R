@@ -30,6 +30,7 @@
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}
 #' @family odata-api
+#' @importFrom rlang %||%
 #' @export
 #' @examples
 #' \dontrun{
@@ -70,8 +71,8 @@
 #' # Next: parse this nested list in to a tidy tibble with `parse_submissions`
 #' }
 odata_submission_get <- function(table = "Submissions",
-                                 skip = NA,
-                                 top = NA,
+                                 skip = NULL,
+                                 top = NULL,
                                  count = FALSE,
                                  wkt = FALSE,
                                  pid = get_default_pid(),
@@ -83,8 +84,8 @@ odata_submission_get <- function(table = "Submissions",
   yell_if_missing(url, un, pw)
 
   # Parse params
-  if (is.na(skip)) skip <- ""
-  if (is.na(top)) top <- ""
+  skip <- skip %||% ""
+  top <- top %||% ""
   if (count == FALSE) {
     count <- "false"
   } else {
