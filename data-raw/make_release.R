@@ -27,7 +27,7 @@ devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
 # Release package
 #
 usethis::edit_file("inst/CITATION")
-usethis::use_version("dev") # or hand-edit DESC, CIT
+usethis::use_version() # or hand-edit DESC, CIT
 usethis::edit_file("NEWS.md")
 #
 # Build PDF manual: not required!
