@@ -13,7 +13,6 @@ spelling::spell_check_package()
 spelling::spell_check_files("README.Rmd", lang = "en_AU") # How to update word list from that?
 spelling::update_wordlist()
 codemetar::write_codemeta("ruODK")
-usethis::edit_file("inst/CITATION")
 if (fs::file_info("README.md")$modification_time <
   fs::file_info("README.Rmd")$modification_time) {
   rmarkdown::render("README.Rmd", encoding = "UTF-8", clean = TRUE)
@@ -27,15 +26,25 @@ devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
 # -----------------------------------------------------------------------------#
 # Release package
 #
-usethis::use_version("minor") # or hand-edit DESC, CIT
+usethis::edit_file("inst/CITATION")
+usethis::use_version("dev") # or hand-edit DESC, CIT
 usethis::edit_file("NEWS.md")
 #
-# Build PDF manual
-fs::file_delete("inst/extdoc/ruODK.pdf")
-devtools::build_manual(path = "inst/extdoc") # rm > pdf
-fs::file_move(fs::dir_ls("inst/extdoc/"), "inst/extdoc/ruODK.pdf") # rename pdf
-tools::compactPDF("inst/extdoc/ruODK.pdf", gs_quality = "ebook") # compress pdf
-usethis::edit_file("vignettes/manual.Rnw") # hit "Compile PDF"
+# Build PDF manual: not required!
+# Contents of manual.Rnw:
+# \documentclass{article}
+# \usepackage{pdfpages}
+# %\VignetteIndexEntry{Manual}
+# \begin{document}
+# \SweaveOpts{concordance=TRUE}
+# \includepdf[pages=-, fitpaper=true]{../inst/extdoc/ruODK.pdf}
+# \end{document}
+#
+# fs::file_delete("inst/extdoc/ruODK.pdf")
+# devtools::build_manual(path = "inst/extdoc") # rm > pdf
+# fs::file_move(fs::dir_ls("inst/extdoc/"), "inst/extdoc/ruODK.pdf") # rename pdf
+# tools::compactPDF("inst/extdoc/ruODK.pdf", gs_quality = "ebook") # compress pdf
+# usethis::edit_file("vignettes/manual.Rnw") # hit "Compile PDF"
 #
 pkgdown::build_site()
 
