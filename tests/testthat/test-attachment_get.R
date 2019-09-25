@@ -10,7 +10,8 @@ test_that("attachment_get works", {
     fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
-    pw = get_test_pw()
+    pw = get_test_pw(),
+    parse = FALSE
   )
 
   fresh_parsed <- fresh_raw %>%

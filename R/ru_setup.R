@@ -408,7 +408,7 @@ yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
         "get desired response from server {url} as user {un}.\n\n",
         "Troubleshooting tips:\n",
         "* Is the server online at {url}? Is the internet flaky? Retry!\n",
-        "* Check ruODK::ru_settings() - are credentials and defaults correct?\n",
+        "* Check ruODK::ru_settings() - credentials and defaults correct?\n",
         "* Run ru_setup() with working credentials and defaults.\n",
         '* Read the vignette("setup", package = "ruODK") how to set up ruODK'
       )
