@@ -17,7 +17,7 @@ library(leaflet)
 library(listviewer)
 library(magrittr)
 library(tibble)
-# library(tidyr)
+library(tidyr)
 library(lubridate)
 library(knitr)
 library(dplyr)
@@ -46,7 +46,8 @@ form ID and is used by `ruODK::ru_setup()`.
 # ODK Central's OData URL contains base URL, project ID, and form ID
 # ODK Central credentials can live in .Renviron, see vignette "setup"
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
+  svc = paste0("https://sandbox.central.opendatakit.org/v1/projects/14/",
+               "forms/build_Flora-Quadrat-0-4_1564384341.svc"),
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )
@@ -73,7 +74,7 @@ Let's start off with the service document.
 fq_svc <- odata_service_get()
 ```
 
-We'll use the included example data `fq_svc`.
+The same data is included as example data `fq_svc`.
 ```{r view_service}
 fq_svc %>% knitr::kable(.)
 ```
@@ -102,8 +103,8 @@ listviewer::jsonedit(fq_meta)
 
 As an alternative to the OData metadata document, ODK Central also offers
 form metadata as a much cleaner JSON document, which `ruODK` can read and parse
-into a clean `tibble` of field type and name. To know the names of fields of
-a certain type will help us later to parse the submission data.
+into a clean `tibble` of field type, name, and path. To know the names of fields 
+of a certain type will help us later to parse the submission data.
 
 ```{r form_schema}
 fq_fs <- form_schema(parse=TRUE)
@@ -166,23 +167,18 @@ installed package size for `ruODK`, as it shares the attachment files with the
 other vignettes. The default is a local folder `media`.
 
 ```{r transform_data, message=TRUE}
-ord <- "YmdHMSz"
 tz <- "Australia/Perth"
 loc <- fs::path("attachments", "media")
 
 # Candidates for ruODK::parse_datetime()
-fq_fs %>%
-  dplyr::filter(type == "dateTime") %>%
+fq_fs %>% 
+  dplyr::filter(type %in% c("dateTime", "date")) %>% 
   knitr::kable(.)
-fq_fs %>%
-  dplyr::filter(type == "date") %>%
-  knitr::kable(.)
-
 # Candidates for ruODK::attachment_get()
-fq_fs %>%
-  dplyr::filter(type == "binary") %>%
+fq_fs %>% 
+  dplyr::filter(type == "binary") %>% 
   knitr::kable(.)
-
+# Parse main data
 fq_data <- fq_raw %>%
   ruODK::odata_submission_parse(verbose = TRUE) %>%
   ruODK::parse_datetime(tz = tz, col_contains = "time") %>%
@@ -194,17 +190,24 @@ fq_data <- fq_raw %>%
   ) %>%
   dplyr::mutate(
     quadrat_photo = ruODK::attachment_get(
-      id, quadrat_photo, local_dir = loc
+      id, 
+      quadrat_photo, 
+      local_dir = loc
     ),
     morphological_type_photo = ruODK::attachment_get(
-      id, morphological_type_photo, local_dir = loc
+      id, 
+      morphological_type_photo, 
+      local_dir = loc
     ),
-    mudmap_photo = attachment_get(
-      id, mudmap_photo, local_dir = loc
+    mudmap_photo = ruODK::attachment_get(
+      id, 
+      mudmap_photo, 
+      local_dir = loc
     )
   ) %>%
   invisible()
 
+# Parse nested group "taxa"
 fq_data_taxa <- fq_taxa %>%
   ruODK::odata_submission_parse(verbose = TRUE) %>%
   dplyr::rename(
@@ -214,13 +217,15 @@ fq_data_taxa <- fq_taxa %>%
   ) %>%
   dplyr::mutate(
     photo_in_situ = ruODK::attachment_get(
-      submissions_id, photo_in_situ,
+      submissions_id, 
+      photo_in_situ, 
       local_dir = loc
     )
   ) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>%
   invisible()
 
+# Parse nested group "strata"
 fq_data_strata <- fq_strata %>%
   ruODK::odata_submission_parse(verbose = TRUE) %>%
   invisible()
@@ -230,7 +235,7 @@ Note: A manually resized version of the original photos in this example live in
 the package source under 
 [`docs/articles/attachments`](https://github.com/dbca-wa/ruODK/tree/master/docs/articles/attachments). 
 To minimise package size, they were resized with imagemagick:
-`find docs/articles/attachments/ -maxdepth 2 -type f -exec mogrify -resize 300x200 {} \;`.
+`find vignettes/attachments/media -type f -exec mogrify -resize 200x150 {} \\;`.
 
 ## DIY rectangling
 The unnesting could also be done manually by building up a pipeline, which
@@ -269,6 +274,9 @@ non-deterministic length like lines and polygons.
 If encountering WKT, `parse_submissions` simply retains the WKT string 
 containing the respective entire geometry. 
 This can further be turned into spatially enabled objects. 
+
+Note that ODK Central currently only honours the `wkt` parameter for Point
+locations. Any other geometry will be returned as non-standard "ODK WKT".
 
 In future, we will add some examples for this use case here.
 

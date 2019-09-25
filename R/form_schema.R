@@ -134,7 +134,7 @@ form_schema <- function(flatten = FALSE,
       rlang::warn(
         glue::glue(
           "Cannot parse flattened form schema, ",
-          "returning unparsed and flattened.",
+          "returning unparsed and flattened.\n",
           "Use flatten=FALSE with parse=TRUE for a parsed form_schema."
         )
       )

@@ -18,15 +18,10 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 1 note
 
 * This is a new release.
-* "Package has help file(s) containing install/render-stage `\Sexpr{}`
-  expressions but no prebuilt PDF manual."
-  * Lifecycle badges on function help come out OK when installed, and fall back
-    to text if not rendered.
-  * PDF version of manual added but not picked up by CMD CHECK.
-* "installed size is  5.5Mb, sub-directories of 1Mb or more: doc 4.6Mb":
+* "installed size is  5.2Mb, sub-directories of 1Mb or more: doc 4.4Mb":
   * The vignette "odata" contains a leaflet map with popups showing embedded
     photos, a highly sought after use case.
     The third party dependencies, especially leaflet-awesomemarkers (for map 

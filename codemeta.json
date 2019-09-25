@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
   "description": "Utilities to access and tidy up data from ODK\n    Central's API.  ODK Central is OpenDataKit's clearinghouse for\n    digitally captured data <https://docs.opendatakit.org/central-intro/>.\n    ODK Central's API is documented at\n    <https://odkcentral.docs.apiary.io/>.",
@@ -93,19 +96,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "janitor",
-      "name": "janitor",
-      "version": ">=\n        1.2.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=janitor"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
       "version": ">= 1.24",
@@ -134,7 +124,7 @@
       "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
-      "version": ">=\n        0.1.0",
+      "version": ">= 0.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -259,7 +249,7 @@
       "@type": "SoftwareApplication",
       "identifier": "httr",
       "name": "httr",
-      "version": ">=\n        1.4.1",
+      "version": ">= 1.4.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -267,6 +257,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=httr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "janitor",
+      "name": "janitor",
+      "version": ">= 1.2.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=janitor"
     },
     {
       "@type": "SoftwareApplication",
@@ -298,7 +301,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
-      "version": ">=\n        0.3.2",
+      "version": ">= 0.3.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -403,5 +406,10 @@
       "url": "https://github.com/dbca-wa/ruODK",
       "description": "R package version 0.6.5"
     }
-  ]
+  ],
+  "releaseNotes": "https://github.com/dbca-wa/ruODK/blob/master/NEWS.md",
+  "readme": "https://github.com/dbca-wa/ruODK/blob/master/README.md",
+  "fileSize": "55045.751KB",
+  "contIntegration": ["https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master", "https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master", "https://codecov.io/gh/validmeasures/odkr", "https://travis-ci.org/unhcr/koboloadeR", "https://ci.appveyor.com/project/unhcr/koboloadeR", "https://codecov.io/gh/unhcr/koboloadeR", "https://travis-ci.org/dbca-wa/ruODK", "https://ci.appveyor.com/project/dbca-wa/ruODK", "https://codecov.io/github/dbca-wa/ruODK?branch=master", "https://travis-ci.org/edwindj/cbsodataR", "https://ci.appveyor.com/project/edwindj/cbsodatar"],
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

@@ -4,10 +4,18 @@
 \alias{form_schema_parse}
 \title{Parse a form_schema into a tibble of fields with name, type, and path.}
 \usage{
-form_schema_parse(fs, verbose = FALSE)
+form_schema_parse(fs, path = "Submissions", verbose = FALSE)
 }
 \arguments{
 \item{fs}{The output of form_schema as nested list}
+
+\item{path}{The base path for form fields. Default: "Submissions".
+\code{`form_schema_parse()`} recursively steps into deeper nesting levels,
+which are reflected as separate OData tables.
+The returned value in `path` reflects the XForm group name, which
+translates to separate screens in ODK Collect.
+Non-repeating form groups will be flattened out into the main Submissions
+table. Repeating groups are available as separate OData tables.}
 
 \item{verbose}{Whether to display debug messages or not (default)}
 }

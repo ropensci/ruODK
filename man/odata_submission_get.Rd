@@ -4,7 +4,7 @@
 \alias{odata_submission_get}
 \title{Retrieve /Submissions from an OData URL ending in .svc as list of lists.}
 \usage{
-odata_submission_get(table = "Submissions", skip = NA, top = NA,
+odata_submission_get(table = "Submissions", skip = NULL, top = NULL,
   count = FALSE, wkt = FALSE, pid = get_default_pid(),
   fid = get_default_fid(), url = get_default_url(),
   un = get_default_un(), pw = get_default_pw())

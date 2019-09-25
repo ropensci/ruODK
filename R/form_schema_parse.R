@@ -13,6 +13,13 @@
 #' \code{`attachment_link`}, respectively.
 #'
 #' @param fs The output of form_schema as nested list
+#' @param path The base path for form fields. Default: "Submissions".
+#'   \code{`form_schema_parse()`} recursively steps into deeper nesting levels,
+#'   which are reflected as separate OData tables.
+#'   The returned value in `path` reflects the XForm group name, which
+#'   translates to separate screens in ODK Collect.
+#'   Non-repeating form groups will be flattened out into the main Submissions
+#'   table. Repeating groups are available as separate OData tables.
 #' @template param-verbose
 #' @family restful-api
 #' @export
@@ -36,25 +43,34 @@
 #' # Point location: will be split into lat/lon/alt/acc
 #' fsp %>% dplyr::filter(type == "geopoint")
 #' }
-form_schema_parse <- function(fs, verbose = FALSE) {
+form_schema_parse <- function(fs, path = "Submissions", verbose = FALSE) {
+  # 00. Recursion airbag
+  # if (!(is.list(fs) && "children" %in% names(fs))) return(NULL)
+
   # 0. Spray R CMD check with WD-40
   . <- NULL
   type <- NULL
   name <- NULL
   children <- NULL
 
-  # 1. Grab next level type/name pairs.
+  # 1. Grab next level type/name pairs, append column "path".
   # This does not work recursively - if it did, we'd be done here.
-  x <- rlist::list.select(fs, type, name) %>% rlist::list.stack(.)
+  x <- fs %>%
+    rlist::list.select(type, name) %>%
+    rlist::list.stack(.) %>%
+    dplyr::mutate(path = path)
   if (verbose == TRUE) message(glue::glue("\n\nFound fields:\n{str(x)}\n"))
 
   # 2. Recursively run form_schema_parse over nested elements.
   for (node in fs) {
     # Recursion seatbelt: only step into lists containing "children".
-    if (is.list(node) && "children" %in% names(node)) {
+    if (is.list(node) &&
+      "children" %in% names(node) &&
+      "name" %in% names(node)) {
       for (child in node) {
         if (verbose == TRUE) message(glue::glue("\n\nFound child: {child}\n"))
-        xxx <- form_schema_parse(child)
+        odata_table_path <- glue::glue("{path}.{node['name']}")
+        xxx <- form_schema_parse(child, path = odata_table_path)
         x <- rbind(x, xxx)
       }
     }

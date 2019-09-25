@@ -11,6 +11,7 @@ test_that("form_schema_parse works", {
   fsp <- form_schema_parse(fs)
 
   testthat::expect_equal(class(fsp), c("tbl_df", "tbl", "data.frame"))
+  testthat::expect_equal(names(fsp), c("type", "name", "path"))
   testthat::expect_true("encounter_start_datetime" %in% fsp$name)
   testthat::expect_true("quadrat_photo" %in% fsp$name)
 

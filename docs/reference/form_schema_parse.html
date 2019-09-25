@@ -135,7 +135,7 @@
     <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>form_schema_parse</span>(<span class='no'>fs</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>form_schema_parse</span>(<span class='no'>fs</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"Submissions"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,6 +143,16 @@
     <tr>
       <th>fs</th>
       <td><p>The output of form_schema as nested list</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>The base path for form fields. Default: "Submissions".
+<code>`form_schema_parse()`</code> recursively steps into deeper nesting levels,
+which are reflected as separate OData tables.
+The returned value in `path` reflects the XForm group name, which
+translates to separate screens in ODK Collect.
+Non-repeating form groups will be flattened out into the main Submissions
+table. Repeating groups are available as separate OData tables.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
