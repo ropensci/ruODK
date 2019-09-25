@@ -5,7 +5,8 @@
 \title{Retrieve /Submissions from an OData URL ending in .svc as list of lists.}
 \usage{
 odata_submission_get(table = "Submissions", skip = NULL, top = NULL,
-  count = FALSE, wkt = FALSE, pid = get_default_pid(),
+  count = FALSE, wkt = FALSE, parse = TRUE, verbose = FALSE,
+  tz = "UTC", local_dir = "media", pid = get_default_pid(),
   fid = get_default_fid(), url = get_default_url(),
   un = get_default_un(), pw = get_default_pw())
 }
@@ -13,8 +14,7 @@ odata_submission_get(table = "Submissions", skip = NULL, top = NULL,
 \item{table}{The submission EntityType, or in plain words, the table name.
 Default: "Submissions" (the main table).
 Change to "Submissions.GROUP_NAME" for repeating form groups.
-The group name can be found in the metadata under
-DataServices.Schema.[EntityType].Name}
+The group name can be found through \code{`odata_service_get()`}.}
 
 \item{skip}{The number of rows to be omitted from the results.
 Example: 10, default: NA (none skipped).}
@@ -26,7 +26,21 @@ Example: 100, default: NA (all returned).}
 response from ODK Central. Default: FALSE.}
 
 \item{wkt}{If TRUE, geospatial data will be returned as WKT (Well Known Text)
-strings. Default: FALSE, returns GeoJSON structures.}
+strings. Default: FALSE, returns GeoJSON structures.
+Note, ODK Central currently only honours this parameter for Point geometries.
+Line and Polygon geometries are returned as "ODK WKT".}
+
+\item{parse}{Whether to parse submission data based on form schema.
+Dates and datetimes will be parsed into local time.
+Attachments will be downloaded, and the field updated to the local file path.
+Default: TRUE.}
+
+\item{verbose}{Whether to display debug messages or not (default)}
+
+\item{tz}{A timezone, e.g. "Australia/Perth" or "UTC". Default: "UTC".}
+
+\item{local_dir}{The local folder to save the downloaded files to,
+default: "media".}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 Default: \code{get_default_pid()}.
@@ -54,11 +68,11 @@ Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
-A nested list of lists.
-        `value` contains the submissions, which can be "rectangled" using
-    `tidyr::unnest_wider("element_name")`.
-    `@odata.context` is the URL of the metadata.
-    `@odata.count` is the total number of rows in the table.
+A list of lists.
+
+  * `value` contains the submissions as list of lists.
+  * `@odata.context` is the URL of the metadata.
+  * `@odata.count` is the total number of rows in the table.
 }
 \description{
 \lifecycle{maturing}
@@ -103,7 +117,11 @@ data <- odata_submissions_get(
 
 listviewer::jsonedit(data)
 
-# Next: parse this nested list in to a tidy tibble with `parse_submissions`
+# Next:
+# odata_submission_parse()
+# parse_datetime()
+# attachment_get()
+# or: odata_submission_get(parse = TRUE)
 }
 }
 \seealso{

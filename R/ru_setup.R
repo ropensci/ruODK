@@ -405,12 +405,12 @@ yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
   response %>%
     httr::stop_for_status(
       task = glue::glue(
-        "get desired response from {url} as user {un} with password {pw}.\n",
+        "get desired response from server {url} as user {un}.\n\n",
         "Troubleshooting tips:\n",
-        "If you have used this function with default settings, ",
-        "check ru_settings() whether the credentials were correct.\n",
-        "Run ru_setup() with working credentials and retry.\n",
-        'Read the vignette("Setup", package = "ruODK") how to set up ruODK'
+        "* Is the server online at {url}? Is the internet flaky? Retry!\n",
+        "* Check ruODK::ru_settings() - are credentials and defaults correct?\n",
+        "* Run ru_setup() with working credentials and defaults.\n",
+        '* Read the vignette("setup", package = "ruODK") how to set up ruODK'
       )
     )
 }

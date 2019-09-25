@@ -52,6 +52,10 @@ ruODK::ru_setup(
   pw = Sys.getenv("ODKC_TEST_PW")
 )
 
+# Settings for timezone and file attachment download location
+tz <- "Australia/Perth"
+loc <- fs::path("attachments", "media")
+
 # Canned data
 data("fq_svc")
 data("fq_meta")
@@ -91,7 +95,6 @@ The number and names of repeating subgroups of course depends on the ODK form.
 Next, let's get the metadata to review our data schema.
 While we can download the submission data without it, the metadata document 
 contains information about field data types and attachment names.
-Future versions of `ruODK` might automate these steps.
 
 ```{r load_ometadata}
 fq_meta <- odata_metadata_get()
@@ -103,8 +106,8 @@ listviewer::jsonedit(fq_meta)
 
 As an alternative to the OData metadata document, ODK Central also offers
 form metadata as a much cleaner JSON document, which `ruODK` can read and parse
-into a clean `tibble` of field type, name, and path. To know the names of fields 
-of a certain type will help us later to parse the submission data.
+into a clean `tibble` of field type, name, and path. 
+`ruODK` uses this introspection to parse submission data.
 
 ```{r form_schema}
 fq_fs <- form_schema(parse=TRUE)
@@ -113,19 +116,38 @@ fq_fs %>% knitr::kable(.)
 
 ## OData submission data documents
 Now let's download the form submissions and, separately, repeating form groups.
+`ruODK::odata_submission_get()` defaults to download the submission data,
+parse it into a tidy tibble, parses dates and datetimes, and finally downloads
+and links file attachments. For the fun of it, we'll enable verbose messages and
+watch `ruODK` churning the data.
+
+The only manual step remaining is to rename the point location components.
 
 ```{r load_odata}
-fq_raw <- odata_submission_get(table = fq_svc$name[1])
-fq_strata <- odata_submission_get(table = fq_svc$name[2])
-fq_taxa <- odata_submission_get(table = fq_svc$name[3])
+fq_data <- ruODK::odata_submission_get(
+  table = fq_svc$name[1], verbose = TRUE, tz = tz, local_dir = loc
+)%>%
+  dplyr::rename(
+    longitude = x13,
+    latitude = x14,
+    altitude = x15
+  )
+
+fq_data_strata <- ruODK::odata_submission_get(
+  table = fq_svc$name[2], verbose = TRUE, tz = tz, local_dir = loc
+)
+
+fq_data_taxa <- ruODK::odata_submission_get(
+  table = fq_svc$name[3], verbose = TRUE, tz = tz, local_dir = loc
+) %>%
+  dplyr::rename(
+    lon = x6,
+    lat = x7,
+    alt = x8
+  )
 ```
 
-The output of the above code is provided as data objects 
-`fq_raw` (main submissions of form Flora Quadrat 0.4), 
-`fq_taxa` (repeated group "Taxon Encounter" within a Flora Quadrat), and
-`fq_strata` (repeated group "Vegetation Stratum" within a Flora Quadrat).
-
-# Rectangle the data
+# Detour: Rectangle the data
 The function `ruODK::odata_submission_get` returned the original XML response as a 
 nested list of lists.
 To analyse and visualise the data, this nested list of lists must be transformed 
@@ -166,10 +188,15 @@ We use a custom local path for attachments (`loc`). This results in a smaller
 installed package size for `ruODK`, as it shares the attachment files with the
 other vignettes. The default is a local folder `media`.
 
-```{r transform_data, message=TRUE}
-tz <- "Australia/Perth"
-loc <- fs::path("attachments", "media")
+The raw and unparsed example data is provided as data objects 
+`fq_raw` (main submissions of form Flora Quadrat 0.4), 
+`fq_taxa` (repeated group "Taxon Encounter" within a Flora Quadrat), and
+`fq_strata` (repeated group "Vegetation Stratum" within a Flora Quadrat).
 
+The result of this code chunk should be exactly the same as the compact version
+with `odata_submission_get(parse=TRUE)`.
+
+```{r transform_data, message=TRUE}
 # Candidates for ruODK::parse_datetime()
 fq_fs %>% 
   dplyr::filter(type %in% c("dateTime", "date")) %>% 
@@ -178,6 +205,12 @@ fq_fs %>%
 fq_fs %>% 
   dplyr::filter(type == "binary") %>% 
   knitr::kable(.)
+
+# The raw submission data
+fq_raw <- ruODK::odata_submission_get(table = fq_svc$name[1], parse = FALSE)
+fq_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], parse = FALSE)
+fq_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], parse = FALSE)
+
 # Parse main data
 fq_data <- fq_raw %>%
   ruODK::odata_submission_parse(verbose = TRUE) %>%
@@ -238,10 +271,14 @@ To minimise package size, they were resized with imagemagick:
 `find vignettes/attachments/media -type f -exec mogrify -resize 200x150 {} \\;`.
 
 ## DIY rectangling
+For those wishing to go one step further, this section demonstrates the inner
+workings of `ruODK`, the recursive use of `tidyr::unnest_wider()`.
+
 The unnesting could also be done manually by building up a pipeline, which
 stepwise unnests each list column.
 This requires knowledge of the data structure, which can either be looked up
 from the metadata, or by inspecting the raw data, `fq_raw`.
+
 ```{r rectangle_diy}
 fq_data_diy <- tibble::tibble(value = fq_raw$value) %>%
   tidyr::unnest_wider(value) %>%

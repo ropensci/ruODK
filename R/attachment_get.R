@@ -82,7 +82,7 @@ get_one_attachment <- function(pth,
     return(pth %>% as.character())
   }
   if (is.na(fn)) {
-    message("Filename is NA, skipping download.")
+    message("Filename is NA, skipping download.\n")
     return(NA)
   }
   httr::GET(
