@@ -1,4 +1,16 @@
 # ruODK (development version)
+## Major fixes
+
+## Minor fixes
+
+## Dependencies
+* Moved `rlist` to Imports, as it is now used in `odata_submission_get()` (#6)
+
+## Data
+
+## Documentation
+* Updated workshop comparion [urODK](https://github.com/dbca-wa/urODK)
+
 
 # ruODK 0.6.6
 * The big one has landed: `odata_submission_get()` now defaults to parse 
