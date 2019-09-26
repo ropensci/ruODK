@@ -18,10 +18,32 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 2 notes
 
+```
+❯ checking CRAN incoming feasibility ... NOTE
+  Maintainer: ‘Florian W. Mayer <Florian.Mayer@dbca.wa.gov.au>’
+  
+  New submission
+  
+  Version contains large components (0.6.6.9000)
+  
+  Package has help file(s) containing install/render-stage \Sexpr{} expressions but no prebuilt PDF manual.
+  
+  Size of tarball: 56390108 bytes
+
+❯ checking installed package size ... NOTE
+    installed size is  5.2Mb
+    sub-directories of 1Mb or more:
+      doc   4.5Mb
+```      
+      
 * This is a new release.
-* "installed size is  5.2Mb, sub-directories of 1Mb or more: doc 4.5Mb":
+* Version: currently a development version, will be incremented across ruODK
+  features (patch), and kept in line with ODK Central versions (major and minor).
+* Package help contains `\Sexpr{}`. PDF of manual can be included on request, 
+  but currently not included as per advice from ROpenSci.
+* Installation size:
   * The vignette "odata" contains a leaflet map with popups showing embedded
     photos, a highly sought after use case.
     The third party dependencies, especially leaflet-awesomemarkers (for map 
