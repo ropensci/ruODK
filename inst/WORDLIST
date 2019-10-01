@@ -31,6 +31,7 @@ att
 attchment
 attrs
 BAFCO
+barcode
 camelCase
 Carpark
 CaVaTeCo
@@ -41,8 +42,13 @@ ckanr
 CMD
 codecov
 Collect3289v2
+comparion
 compat
 composable
+corner1
+corner2
+corner3
+corner4
 crosslinks
 csv
 Curso
@@ -64,6 +70,7 @@ Edmx
 enexpr
 enquo
 ensym
+EntitySet
 EntityType
 ETL
 eval
@@ -79,6 +86,7 @@ filename2
 filename3
 Flatback
 FloraQuadrat04
+floristic
 fn
 funder
 GeoJSON
@@ -95,7 +103,7 @@ httr
 idential
 imagemagick
 instanceId
-integrations
+instanceID
 io
 ISO8601
 JDBC
@@ -105,6 +113,7 @@ JSON
 jsonlite
 Kensington
 kwargs
+level3
 lifecycle
 lon
 lubridate
@@ -117,6 +126,8 @@ Metapackage
 mudmap
 Muntashir
 nl
+NodeJS
+nvis
 NVIS
 odata
 OData
@@ -141,6 +152,7 @@ quadrat
 Quadrat
 quos
 quosures
+RaaS
 README
 READMEs
 rectangled
@@ -154,17 +166,20 @@ RMarkdown
 Rmd
 Roadmap
 ROpenSci
+Rstudio
 RStudio
 ru
 Scalability
 Schemetrica
 select1
 Simplifiy
+situ
 Stata
 STATA
 subfolder
 subfolders
 subresource
+subtables
 svc
 sym
 syms
@@ -174,6 +189,7 @@ tidyr
 tidyverse
 Tidyverse
 TravisCI
+tz
 un
 UNHCR
 unnest
@@ -212,4 +228,3 @@ XForms
 XlsForm
 XlsForms
 xml2
-xxxxxxxxxx

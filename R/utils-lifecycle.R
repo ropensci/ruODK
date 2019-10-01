@@ -4,8 +4,7 @@
 #' @importFrom lifecycle deprecate_soft
 #' @keywords internal
 lifecycle_shim <- function(){
-  if (FALSE) lifecycle::deprecate_soft()
-  return(NULL)
+  lifecycle::deprecate_soft(when = "1.0", what = "lifecycle_shim()")
 }
 
 # usethis::use_test("utils-lifecycle")

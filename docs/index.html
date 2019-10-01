@@ -111,7 +111,9 @@
 <li>Scalability: Both R and ODK are free and open source software. Scaling to many users does not incur license fees.</li>
 <li>Ubiquity: R is known to many scientists and is widely taught at universities.</li>
 <li>Automation: The entire data access workflow can be automated through R scripts.</li>
-<li>Reproducible reporting (e.g.  <a href="https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr">Sweave</a>, <a href="https://rmarkdown.rstudio.com/">RMarkdown</a>), interactive web apps (<a href="https://shiny.rstudio.com/">Shiny</a>), workflow scaling (<a href="https://docs.ropensci.org/drake/">drake</a>) and a range of integrations with Docker (links coming soon).</li>
+<li>Reproducible reporting (e.g.  <a href="https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr">Sweave</a>, <a href="https://rmarkdown.rstudio.com/">RMarkdown</a>), interactive web apps (<a href="https://shiny.rstudio.com/">Shiny</a>), workflow scaling (<a href="https://docs.ropensci.org/drake/">drake</a>)</li>
+<li>Rstudio-as-a-Service (RaaS) at <a href="https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a>
+</li>
 </ul>
 <p><code>ruODK</code>’s scope:</p>
 <ul>
@@ -145,13 +147,13 @@
 </ul>
 <p>Out of scope:</p>
 <ul>
-<li>To wrap “management” API endpoints. The ODK Central GUI provides a comprehensive interface for the management of users, roles, permissions, projects, and forms. Behind the scenes, it is a <a href="https://github.com/opendatakit/central-frontend/">VueJS application</a> working on the “management” API endpoints of the ODK Central backend.</li>
+<li>To wrap “management” API endpoints. ODK Central is a <a href="https://github.com/opendatakit/central-frontend/">VueJS/NodeJS application</a> which provides a comprehensive graphical user interface for the management of users, roles, permissions, projects, and forms.</li>
 <li>To provide extensive data visualisation. We show only minimal examples of data visualisation and presentation, mainly to illustrate the example data. Once the data is in your hands as tidy tibbles… urODK!</li>
 </ul>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
-<p>You can install ruODK from GitHub with:</p>
+<p>You can install <code>ruODK</code> from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"remotes"</span>)) {<span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)}</a>
 <a class="sourceLine" id="cb1-2" title="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"dbca-wa/ruODK"</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
@@ -172,13 +174,12 @@
 <li>
 <a href="https://docs.opendatakit.org/central-users/#creating-a-web-user">Create a web user account</a> on an ODK Central instance. Your username will be an email address.</li>
 <li>
-<a href="https://docs.opendatakit.org/central-projects/">Create a project</a> and give the web user the relevant permissions.</li>
-<li>Create an XForm, e.g. using ODK Build, or use the provided example forms.</li>
+<a href="https://docs.opendatakit.org/central-projects/">Create a project</a> and give the web user at least <a href="https://docs.opendatakit.org/central-projects/#managing-project-managers">read permissions</a>.</li>
+<li>Create an XForm, e.g. using ODK Build, or use the <a href="https://github.com/dbca-wa/ruODK/tree/master/inst/extdata">example forms</a> provided by <code>ruODK</code>. The <code>.odkbuild</code> versions can be loaded into <a href="https://build.opendatakit.org/">ODK Build</a>, while the <code>.xml</code> versions can be directly imported into ODK Central.</li>
 <li>
-<a href="https://docs.opendatakit.org/central-forms/">Publish the form</a> to ODK Central.</li>
+<a href="https://docs.opendatakit.org/central-forms/">Publish the form</a>to ODK Central.</li>
 <li>Collect some data for this form on ODK Collect and let ODK Collect submit the finalised forms to ODK Central.</li>
 </ul>
-<p>A note on the <a href="https://github.com/dbca-wa/ruODK/tree/master/inst/extdata">included example forms</a>: The <code>.odkbuild</code> versions can be loaded into <a href="https://build.opendatakit.org/">ODK Build</a>, while the <code>.xml</code> versions can be imported into ODK Central.</p>
 </div>
 </div>
 <div id="configure-ruodk" class="section level2">
@@ -188,17 +189,17 @@
 <p>Set up <code>ruODK</code> with an OData Service URL and credentials of a read-permitted ODK Central web user.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/ru_setup.html">ru_setup</a></span>(</a>
 <a class="sourceLine" id="cb2-2" title="2">  <span class="dt">svc =</span> <span class="st">"https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc"</span>,</a>
-<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">un =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_UN"</span>),</a>
-<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">pw =</span> <span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"ODKC_TEST_PW"</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">un =</span> <span class="st">"me@email.com"</span>,</a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">pw =</span> <span class="st">"..."</span></a>
 <a class="sourceLine" id="cb2-5" title="5">)</a></code></pre></div>
 <p>For all available detailed options to configure <code>ruODK</code>, read <a href="https://dbca-wa.github.io/ruODK/articles/setup.html"><code><a href="articles/setup.html">vignette("setup", package = "ruODK")</a></code></a>.</p>
 </div>
 <div id="use-ruodk" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use-ruodk" class="anchor"></a>Use ruODK</h2>
-<p>A quick example using the OData service:</p>
+<p>A quick example browsing projects, forms, submissions, and accessing the data:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ruODK)</a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co"># Part 1: Data discovery ------------------------------------------------------#</span></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="co"># List projects</span></a>
 <a class="sourceLine" id="cb3-4" title="4">proj &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/project_list.html">project_list</a></span>()</a>
 <a class="sourceLine" id="cb3-5" title="5">proj <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
@@ -276,10 +277,9 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co"># List forms of default project</span></a>
-<a class="sourceLine" id="cb4-3" title="3">frms &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/form_list.html">form_list</a></span>()</a>
-<a class="sourceLine" id="cb4-4" title="4">frms <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># List forms of default project</span></a>
+<a class="sourceLine" id="cb4-2" title="2">frms &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/form_list.html">form_list</a></span>()</a>
+<a class="sourceLine" id="cb4-3" title="3">frms <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="12%">
@@ -414,10 +414,9 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co"># Form details of default form</span></a>
-<a class="sourceLine" id="cb5-3" title="3">frmd &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/form_detail.html">form_detail</a></span>()</a>
-<a class="sourceLine" id="cb5-4" title="4">frmd <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Form details of default form</span></a>
+<a class="sourceLine" id="cb5-2" title="2">frmd &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/form_detail.html">form_detail</a></span>()</a>
+<a class="sourceLine" id="cb5-3" title="3">frmd <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="8%">
@@ -459,290 +458,358 @@
 <td align="left">1bb959d541ac6990e3f74893e38c855b</td>
 </tr></tbody>
 </table>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co"># Form schema</span></a>
-<a class="sourceLine" id="cb6-3" title="3">meta &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/form_schema.html">form_schema</a></span>()</a>
-<a class="sourceLine" id="cb6-4" title="4">meta</a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; [[1]]</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; [[1]]$name</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt; [1] "meta"</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; [[1]]$children</span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; [[1]]$children[[1]]</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt; [[1]]$children[[1]]$name</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; [1] "instanceID"</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt; [[1]]$children[[1]]$type</span></a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-19" title="19"><span class="co">#&gt; [[1]]$type</span></a>
-<a class="sourceLine" id="cb6-20" title="20"><span class="co">#&gt; [1] "structure"</span></a>
-<a class="sourceLine" id="cb6-21" title="21"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-22" title="22"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-23" title="23"><span class="co">#&gt; [[2]]</span></a>
-<a class="sourceLine" id="cb6-24" title="24"><span class="co">#&gt; [[2]]$name</span></a>
-<a class="sourceLine" id="cb6-25" title="25"><span class="co">#&gt; [1] "encounter_start_datetime"</span></a>
-<a class="sourceLine" id="cb6-26" title="26"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-27" title="27"><span class="co">#&gt; [[2]]$type</span></a>
-<a class="sourceLine" id="cb6-28" title="28"><span class="co">#&gt; [1] "dateTime"</span></a>
-<a class="sourceLine" id="cb6-29" title="29"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-30" title="30"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-31" title="31"><span class="co">#&gt; [[3]]</span></a>
-<a class="sourceLine" id="cb6-32" title="32"><span class="co">#&gt; [[3]]$name</span></a>
-<a class="sourceLine" id="cb6-33" title="33"><span class="co">#&gt; [1] "reporter"</span></a>
-<a class="sourceLine" id="cb6-34" title="34"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-35" title="35"><span class="co">#&gt; [[3]]$type</span></a>
-<a class="sourceLine" id="cb6-36" title="36"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-37" title="37"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-38" title="38"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-39" title="39"><span class="co">#&gt; [[4]]</span></a>
-<a class="sourceLine" id="cb6-40" title="40"><span class="co">#&gt; [[4]]$name</span></a>
-<a class="sourceLine" id="cb6-41" title="41"><span class="co">#&gt; [1] "device_id"</span></a>
-<a class="sourceLine" id="cb6-42" title="42"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-43" title="43"><span class="co">#&gt; [[4]]$type</span></a>
-<a class="sourceLine" id="cb6-44" title="44"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-45" title="45"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-46" title="46"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-47" title="47"><span class="co">#&gt; [[5]]</span></a>
-<a class="sourceLine" id="cb6-48" title="48"><span class="co">#&gt; [[5]]$name</span></a>
-<a class="sourceLine" id="cb6-49" title="49"><span class="co">#&gt; [1] "location"</span></a>
-<a class="sourceLine" id="cb6-50" title="50"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-51" title="51"><span class="co">#&gt; [[5]]$children</span></a>
-<a class="sourceLine" id="cb6-52" title="52"><span class="co">#&gt; [[5]]$children[[1]]</span></a>
-<a class="sourceLine" id="cb6-53" title="53"><span class="co">#&gt; [[5]]$children[[1]]$name</span></a>
-<a class="sourceLine" id="cb6-54" title="54"><span class="co">#&gt; [1] "area_name"</span></a>
-<a class="sourceLine" id="cb6-55" title="55"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-56" title="56"><span class="co">#&gt; [[5]]$children[[1]]$type</span></a>
-<a class="sourceLine" id="cb6-57" title="57"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-58" title="58"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-59" title="59"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-60" title="60"><span class="co">#&gt; [[5]]$children[[2]]</span></a>
-<a class="sourceLine" id="cb6-61" title="61"><span class="co">#&gt; [[5]]$children[[2]]$name</span></a>
-<a class="sourceLine" id="cb6-62" title="62"><span class="co">#&gt; [1] "quadrat_photo"</span></a>
-<a class="sourceLine" id="cb6-63" title="63"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-64" title="64"><span class="co">#&gt; [[5]]$children[[2]]$type</span></a>
-<a class="sourceLine" id="cb6-65" title="65"><span class="co">#&gt; [1] "binary"</span></a>
-<a class="sourceLine" id="cb6-66" title="66"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-67" title="67"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-68" title="68"><span class="co">#&gt; [[5]]$children[[3]]</span></a>
-<a class="sourceLine" id="cb6-69" title="69"><span class="co">#&gt; [[5]]$children[[3]]$name</span></a>
-<a class="sourceLine" id="cb6-70" title="70"><span class="co">#&gt; [1] "corner1"</span></a>
-<a class="sourceLine" id="cb6-71" title="71"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-72" title="72"><span class="co">#&gt; [[5]]$children[[3]]$type</span></a>
-<a class="sourceLine" id="cb6-73" title="73"><span class="co">#&gt; [1] "geopoint"</span></a>
-<a class="sourceLine" id="cb6-74" title="74"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-75" title="75"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-76" title="76"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-77" title="77"><span class="co">#&gt; [[5]]$type</span></a>
-<a class="sourceLine" id="cb6-78" title="78"><span class="co">#&gt; [1] "structure"</span></a>
-<a class="sourceLine" id="cb6-79" title="79"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-80" title="80"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-81" title="81"><span class="co">#&gt; [[6]]</span></a>
-<a class="sourceLine" id="cb6-82" title="82"><span class="co">#&gt; [[6]]$name</span></a>
-<a class="sourceLine" id="cb6-83" title="83"><span class="co">#&gt; [1] "habitat"</span></a>
-<a class="sourceLine" id="cb6-84" title="84"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-85" title="85"><span class="co">#&gt; [[6]]$children</span></a>
-<a class="sourceLine" id="cb6-86" title="86"><span class="co">#&gt; [[6]]$children[[1]]</span></a>
-<a class="sourceLine" id="cb6-87" title="87"><span class="co">#&gt; [[6]]$children[[1]]$name</span></a>
-<a class="sourceLine" id="cb6-88" title="88"><span class="co">#&gt; [1] "morphological_type"</span></a>
-<a class="sourceLine" id="cb6-89" title="89"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-90" title="90"><span class="co">#&gt; [[6]]$children[[1]]$type</span></a>
-<a class="sourceLine" id="cb6-91" title="91"><span class="co">#&gt; [1] "select1"</span></a>
-<a class="sourceLine" id="cb6-92" title="92"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-93" title="93"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-94" title="94"><span class="co">#&gt; [[6]]$children[[2]]</span></a>
-<a class="sourceLine" id="cb6-95" title="95"><span class="co">#&gt; [[6]]$children[[2]]$name</span></a>
-<a class="sourceLine" id="cb6-96" title="96"><span class="co">#&gt; [1] "morphological_type_photo"</span></a>
-<a class="sourceLine" id="cb6-97" title="97"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-98" title="98"><span class="co">#&gt; [[6]]$children[[2]]$type</span></a>
-<a class="sourceLine" id="cb6-99" title="99"><span class="co">#&gt; [1] "binary"</span></a>
-<a class="sourceLine" id="cb6-100" title="100"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-101" title="101"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-102" title="102"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-103" title="103"><span class="co">#&gt; [[6]]$type</span></a>
-<a class="sourceLine" id="cb6-104" title="104"><span class="co">#&gt; [1] "structure"</span></a>
-<a class="sourceLine" id="cb6-105" title="105"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-106" title="106"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-107" title="107"><span class="co">#&gt; [[7]]</span></a>
-<a class="sourceLine" id="cb6-108" title="108"><span class="co">#&gt; [[7]]$name</span></a>
-<a class="sourceLine" id="cb6-109" title="109"><span class="co">#&gt; [1] "vegetation_stratum"</span></a>
-<a class="sourceLine" id="cb6-110" title="110"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-111" title="111"><span class="co">#&gt; [[7]]$children</span></a>
-<a class="sourceLine" id="cb6-112" title="112"><span class="co">#&gt; [[7]]$children[[1]]</span></a>
-<a class="sourceLine" id="cb6-113" title="113"><span class="co">#&gt; [[7]]$children[[1]]$name</span></a>
-<a class="sourceLine" id="cb6-114" title="114"><span class="co">#&gt; [1] "nvis_level3_broad_floristic_group"</span></a>
-<a class="sourceLine" id="cb6-115" title="115"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-116" title="116"><span class="co">#&gt; [[7]]$children[[1]]$type</span></a>
-<a class="sourceLine" id="cb6-117" title="117"><span class="co">#&gt; [1] "select1"</span></a>
-<a class="sourceLine" id="cb6-118" title="118"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-119" title="119"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-120" title="120"><span class="co">#&gt; [[7]]$children[[2]]</span></a>
-<a class="sourceLine" id="cb6-121" title="121"><span class="co">#&gt; [[7]]$children[[2]]$name</span></a>
-<a class="sourceLine" id="cb6-122" title="122"><span class="co">#&gt; [1] "max_height_m"</span></a>
-<a class="sourceLine" id="cb6-123" title="123"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-124" title="124"><span class="co">#&gt; [[7]]$children[[2]]$type</span></a>
-<a class="sourceLine" id="cb6-125" title="125"><span class="co">#&gt; [1] "decimal"</span></a>
-<a class="sourceLine" id="cb6-126" title="126"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-127" title="127"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-128" title="128"><span class="co">#&gt; [[7]]$children[[3]]</span></a>
-<a class="sourceLine" id="cb6-129" title="129"><span class="co">#&gt; [[7]]$children[[3]]$name</span></a>
-<a class="sourceLine" id="cb6-130" title="130"><span class="co">#&gt; [1] "foliage_cover"</span></a>
-<a class="sourceLine" id="cb6-131" title="131"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-132" title="132"><span class="co">#&gt; [[7]]$children[[3]]$type</span></a>
-<a class="sourceLine" id="cb6-133" title="133"><span class="co">#&gt; [1] "select1"</span></a>
-<a class="sourceLine" id="cb6-134" title="134"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-135" title="135"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-136" title="136"><span class="co">#&gt; [[7]]$children[[4]]</span></a>
-<a class="sourceLine" id="cb6-137" title="137"><span class="co">#&gt; [[7]]$children[[4]]$name</span></a>
-<a class="sourceLine" id="cb6-138" title="138"><span class="co">#&gt; [1] "dominant_species_1"</span></a>
-<a class="sourceLine" id="cb6-139" title="139"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-140" title="140"><span class="co">#&gt; [[7]]$children[[4]]$type</span></a>
-<a class="sourceLine" id="cb6-141" title="141"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-142" title="142"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-143" title="143"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-144" title="144"><span class="co">#&gt; [[7]]$children[[5]]</span></a>
-<a class="sourceLine" id="cb6-145" title="145"><span class="co">#&gt; [[7]]$children[[5]]$name</span></a>
-<a class="sourceLine" id="cb6-146" title="146"><span class="co">#&gt; [1] "dominant_species_2"</span></a>
-<a class="sourceLine" id="cb6-147" title="147"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-148" title="148"><span class="co">#&gt; [[7]]$children[[5]]$type</span></a>
-<a class="sourceLine" id="cb6-149" title="149"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-150" title="150"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-151" title="151"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-152" title="152"><span class="co">#&gt; [[7]]$children[[6]]</span></a>
-<a class="sourceLine" id="cb6-153" title="153"><span class="co">#&gt; [[7]]$children[[6]]$name</span></a>
-<a class="sourceLine" id="cb6-154" title="154"><span class="co">#&gt; [1] "dominant_species_3"</span></a>
-<a class="sourceLine" id="cb6-155" title="155"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-156" title="156"><span class="co">#&gt; [[7]]$children[[6]]$type</span></a>
-<a class="sourceLine" id="cb6-157" title="157"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-158" title="158"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-159" title="159"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-160" title="160"><span class="co">#&gt; [[7]]$children[[7]]</span></a>
-<a class="sourceLine" id="cb6-161" title="161"><span class="co">#&gt; [[7]]$children[[7]]$name</span></a>
-<a class="sourceLine" id="cb6-162" title="162"><span class="co">#&gt; [1] "dominant_species_4"</span></a>
-<a class="sourceLine" id="cb6-163" title="163"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-164" title="164"><span class="co">#&gt; [[7]]$children[[7]]$type</span></a>
-<a class="sourceLine" id="cb6-165" title="165"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-166" title="166"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-167" title="167"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-168" title="168"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-169" title="169"><span class="co">#&gt; [[7]]$type</span></a>
-<a class="sourceLine" id="cb6-170" title="170"><span class="co">#&gt; [1] "repeat"</span></a>
-<a class="sourceLine" id="cb6-171" title="171"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-172" title="172"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-173" title="173"><span class="co">#&gt; [[8]]</span></a>
-<a class="sourceLine" id="cb6-174" title="174"><span class="co">#&gt; [[8]]$name</span></a>
-<a class="sourceLine" id="cb6-175" title="175"><span class="co">#&gt; [1] "perimeter"</span></a>
-<a class="sourceLine" id="cb6-176" title="176"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-177" title="177"><span class="co">#&gt; [[8]]$children</span></a>
-<a class="sourceLine" id="cb6-178" title="178"><span class="co">#&gt; [[8]]$children[[1]]</span></a>
-<a class="sourceLine" id="cb6-179" title="179"><span class="co">#&gt; [[8]]$children[[1]]$name</span></a>
-<a class="sourceLine" id="cb6-180" title="180"><span class="co">#&gt; [1] "corner2"</span></a>
-<a class="sourceLine" id="cb6-181" title="181"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-182" title="182"><span class="co">#&gt; [[8]]$children[[1]]$type</span></a>
-<a class="sourceLine" id="cb6-183" title="183"><span class="co">#&gt; [1] "geopoint"</span></a>
-<a class="sourceLine" id="cb6-184" title="184"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-185" title="185"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-186" title="186"><span class="co">#&gt; [[8]]$children[[2]]</span></a>
-<a class="sourceLine" id="cb6-187" title="187"><span class="co">#&gt; [[8]]$children[[2]]$name</span></a>
-<a class="sourceLine" id="cb6-188" title="188"><span class="co">#&gt; [1] "corner3"</span></a>
-<a class="sourceLine" id="cb6-189" title="189"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-190" title="190"><span class="co">#&gt; [[8]]$children[[2]]$type</span></a>
-<a class="sourceLine" id="cb6-191" title="191"><span class="co">#&gt; [1] "geopoint"</span></a>
-<a class="sourceLine" id="cb6-192" title="192"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-193" title="193"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-194" title="194"><span class="co">#&gt; [[8]]$children[[3]]</span></a>
-<a class="sourceLine" id="cb6-195" title="195"><span class="co">#&gt; [[8]]$children[[3]]$name</span></a>
-<a class="sourceLine" id="cb6-196" title="196"><span class="co">#&gt; [1] "corner4"</span></a>
-<a class="sourceLine" id="cb6-197" title="197"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-198" title="198"><span class="co">#&gt; [[8]]$children[[3]]$type</span></a>
-<a class="sourceLine" id="cb6-199" title="199"><span class="co">#&gt; [1] "geopoint"</span></a>
-<a class="sourceLine" id="cb6-200" title="200"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-201" title="201"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-202" title="202"><span class="co">#&gt; [[8]]$children[[4]]</span></a>
-<a class="sourceLine" id="cb6-203" title="203"><span class="co">#&gt; [[8]]$children[[4]]$name</span></a>
-<a class="sourceLine" id="cb6-204" title="204"><span class="co">#&gt; [1] "mudmap_photo"</span></a>
-<a class="sourceLine" id="cb6-205" title="205"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-206" title="206"><span class="co">#&gt; [[8]]$children[[4]]$type</span></a>
-<a class="sourceLine" id="cb6-207" title="207"><span class="co">#&gt; [1] "binary"</span></a>
-<a class="sourceLine" id="cb6-208" title="208"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-209" title="209"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-210" title="210"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-211" title="211"><span class="co">#&gt; [[8]]$type</span></a>
-<a class="sourceLine" id="cb6-212" title="212"><span class="co">#&gt; [1] "structure"</span></a>
-<a class="sourceLine" id="cb6-213" title="213"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-214" title="214"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-215" title="215"><span class="co">#&gt; [[9]]</span></a>
-<a class="sourceLine" id="cb6-216" title="216"><span class="co">#&gt; [[9]]$name</span></a>
-<a class="sourceLine" id="cb6-217" title="217"><span class="co">#&gt; [1] "taxon_encounter"</span></a>
-<a class="sourceLine" id="cb6-218" title="218"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-219" title="219"><span class="co">#&gt; [[9]]$children</span></a>
-<a class="sourceLine" id="cb6-220" title="220"><span class="co">#&gt; [[9]]$children[[1]]</span></a>
-<a class="sourceLine" id="cb6-221" title="221"><span class="co">#&gt; [[9]]$children[[1]]$name</span></a>
-<a class="sourceLine" id="cb6-222" title="222"><span class="co">#&gt; [1] "field_name"</span></a>
-<a class="sourceLine" id="cb6-223" title="223"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-224" title="224"><span class="co">#&gt; [[9]]$children[[1]]$type</span></a>
-<a class="sourceLine" id="cb6-225" title="225"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-226" title="226"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-227" title="227"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-228" title="228"><span class="co">#&gt; [[9]]$children[[2]]</span></a>
-<a class="sourceLine" id="cb6-229" title="229"><span class="co">#&gt; [[9]]$children[[2]]$name</span></a>
-<a class="sourceLine" id="cb6-230" title="230"><span class="co">#&gt; [1] "photo_in_situ"</span></a>
-<a class="sourceLine" id="cb6-231" title="231"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-232" title="232"><span class="co">#&gt; [[9]]$children[[2]]$type</span></a>
-<a class="sourceLine" id="cb6-233" title="233"><span class="co">#&gt; [1] "binary"</span></a>
-<a class="sourceLine" id="cb6-234" title="234"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-235" title="235"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-236" title="236"><span class="co">#&gt; [[9]]$children[[3]]</span></a>
-<a class="sourceLine" id="cb6-237" title="237"><span class="co">#&gt; [[9]]$children[[3]]$name</span></a>
-<a class="sourceLine" id="cb6-238" title="238"><span class="co">#&gt; [1] "taxon_encounter_location"</span></a>
-<a class="sourceLine" id="cb6-239" title="239"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-240" title="240"><span class="co">#&gt; [[9]]$children[[3]]$type</span></a>
-<a class="sourceLine" id="cb6-241" title="241"><span class="co">#&gt; [1] "geopoint"</span></a>
-<a class="sourceLine" id="cb6-242" title="242"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-243" title="243"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-244" title="244"><span class="co">#&gt; [[9]]$children[[4]]</span></a>
-<a class="sourceLine" id="cb6-245" title="245"><span class="co">#&gt; [[9]]$children[[4]]$name</span></a>
-<a class="sourceLine" id="cb6-246" title="246"><span class="co">#&gt; [1] "life_form"</span></a>
-<a class="sourceLine" id="cb6-247" title="247"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-248" title="248"><span class="co">#&gt; [[9]]$children[[4]]$type</span></a>
-<a class="sourceLine" id="cb6-249" title="249"><span class="co">#&gt; [1] "select1"</span></a>
-<a class="sourceLine" id="cb6-250" title="250"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-251" title="251"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-252" title="252"><span class="co">#&gt; [[9]]$children[[5]]</span></a>
-<a class="sourceLine" id="cb6-253" title="253"><span class="co">#&gt; [[9]]$children[[5]]$name</span></a>
-<a class="sourceLine" id="cb6-254" title="254"><span class="co">#&gt; [1] "voucher_specimen_barcode"</span></a>
-<a class="sourceLine" id="cb6-255" title="255"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-256" title="256"><span class="co">#&gt; [[9]]$children[[5]]$type</span></a>
-<a class="sourceLine" id="cb6-257" title="257"><span class="co">#&gt; [1] "barcode"</span></a>
-<a class="sourceLine" id="cb6-258" title="258"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-259" title="259"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-260" title="260"><span class="co">#&gt; [[9]]$children[[6]]</span></a>
-<a class="sourceLine" id="cb6-261" title="261"><span class="co">#&gt; [[9]]$children[[6]]$name</span></a>
-<a class="sourceLine" id="cb6-262" title="262"><span class="co">#&gt; [1] "voucher_specimen_label"</span></a>
-<a class="sourceLine" id="cb6-263" title="263"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-264" title="264"><span class="co">#&gt; [[9]]$children[[6]]$type</span></a>
-<a class="sourceLine" id="cb6-265" title="265"><span class="co">#&gt; [1] "string"</span></a>
-<a class="sourceLine" id="cb6-266" title="266"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-267" title="267"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-268" title="268"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-269" title="269"><span class="co">#&gt; [[9]]$type</span></a>
-<a class="sourceLine" id="cb6-270" title="270"><span class="co">#&gt; [1] "repeat"</span></a>
-<a class="sourceLine" id="cb6-271" title="271"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-272" title="272"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-273" title="273"><span class="co">#&gt; [[10]]</span></a>
-<a class="sourceLine" id="cb6-274" title="274"><span class="co">#&gt; [[10]]$name</span></a>
-<a class="sourceLine" id="cb6-275" title="275"><span class="co">#&gt; [1] "encounter_end_datetime"</span></a>
-<a class="sourceLine" id="cb6-276" title="276"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-277" title="277"><span class="co">#&gt; [[10]]$type</span></a>
-<a class="sourceLine" id="cb6-278" title="278"><span class="co">#&gt; [1] "dateTime"</span></a>
-<a class="sourceLine" id="cb6-279" title="279"></a>
-<a class="sourceLine" id="cb6-280" title="280"><span class="co"># Form submissions</span></a>
-<a class="sourceLine" id="cb6-281" title="281">d &lt;-<span class="st"> </span>fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/path.html">path</a></span>(<span class="st">"docs/articles/attachments/media"</span>)   <span class="co"># choose your own</span></a>
-<a class="sourceLine" id="cb6-282" title="282">tz &lt;-<span class="st"> "Australia/Perth"</span>                            <span class="co"># crikey</span></a>
-<a class="sourceLine" id="cb6-283" title="283">data &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_submission_get.html">odata_submission_get</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">local_dir =</span> d, <span class="dt">tz =</span> tz)</a>
-<a class="sourceLine" id="cb6-284" title="284">data <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Form schema</span></a>
+<a class="sourceLine" id="cb6-2" title="2">meta &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/form_schema.html">form_schema</a></span>()</a>
+<a class="sourceLine" id="cb6-3" title="3">meta <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">type</th>
+<th align="left">name</th>
+<th align="left">path</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">structure</td>
+<td align="left">meta</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="even">
+<td align="left">dateTime</td>
+<td align="left">encounter_start_datetime</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="odd">
+<td align="left">string</td>
+<td align="left">reporter</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="even">
+<td align="left">string</td>
+<td align="left">device_id</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="odd">
+<td align="left">structure</td>
+<td align="left">location</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="even">
+<td align="left">structure</td>
+<td align="left">habitat</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="odd">
+<td align="left">repeat</td>
+<td align="left">vegetation_stratum</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="even">
+<td align="left">structure</td>
+<td align="left">perimeter</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="odd">
+<td align="left">repeat</td>
+<td align="left">taxon_encounter</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="even">
+<td align="left">dateTime</td>
+<td align="left">encounter_end_datetime</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="odd">
+<td align="left">string</td>
+<td align="left">instanceID</td>
+<td align="left">Submissions.meta</td>
+</tr>
+<tr class="even">
+<td align="left">string</td>
+<td align="left">area_name</td>
+<td align="left">Submissions.location</td>
+</tr>
+<tr class="odd">
+<td align="left">binary</td>
+<td align="left">quadrat_photo</td>
+<td align="left">Submissions.location</td>
+</tr>
+<tr class="even">
+<td align="left">geopoint</td>
+<td align="left">corner1</td>
+<td align="left">Submissions.location</td>
+</tr>
+<tr class="odd">
+<td align="left">select1</td>
+<td align="left">morphological_type</td>
+<td align="left">Submissions.habitat</td>
+</tr>
+<tr class="even">
+<td align="left">binary</td>
+<td align="left">morphological_type_photo</td>
+<td align="left">Submissions.habitat</td>
+</tr>
+<tr class="odd">
+<td align="left">select1</td>
+<td align="left">nvis_level3_broad_floristic_group</td>
+<td align="left">Submissions.vegetation_stratum</td>
+</tr>
+<tr class="even">
+<td align="left">decimal</td>
+<td align="left">max_height_m</td>
+<td align="left">Submissions.vegetation_stratum</td>
+</tr>
+<tr class="odd">
+<td align="left">select1</td>
+<td align="left">foliage_cover</td>
+<td align="left">Submissions.vegetation_stratum</td>
+</tr>
+<tr class="even">
+<td align="left">string</td>
+<td align="left">dominant_species_1</td>
+<td align="left">Submissions.vegetation_stratum</td>
+</tr>
+<tr class="odd">
+<td align="left">string</td>
+<td align="left">dominant_species_2</td>
+<td align="left">Submissions.vegetation_stratum</td>
+</tr>
+<tr class="even">
+<td align="left">string</td>
+<td align="left">dominant_species_3</td>
+<td align="left">Submissions.vegetation_stratum</td>
+</tr>
+<tr class="odd">
+<td align="left">string</td>
+<td align="left">dominant_species_4</td>
+<td align="left">Submissions.vegetation_stratum</td>
+</tr>
+<tr class="even">
+<td align="left">geopoint</td>
+<td align="left">corner2</td>
+<td align="left">Submissions.perimeter</td>
+</tr>
+<tr class="odd">
+<td align="left">geopoint</td>
+<td align="left">corner3</td>
+<td align="left">Submissions.perimeter</td>
+</tr>
+<tr class="even">
+<td align="left">geopoint</td>
+<td align="left">corner4</td>
+<td align="left">Submissions.perimeter</td>
+</tr>
+<tr class="odd">
+<td align="left">binary</td>
+<td align="left">mudmap_photo</td>
+<td align="left">Submissions.perimeter</td>
+</tr>
+<tr class="even">
+<td align="left">string</td>
+<td align="left">field_name</td>
+<td align="left">Submissions.taxon_encounter</td>
+</tr>
+<tr class="odd">
+<td align="left">binary</td>
+<td align="left">photo_in_situ</td>
+<td align="left">Submissions.taxon_encounter</td>
+</tr>
+<tr class="even">
+<td align="left">geopoint</td>
+<td align="left">taxon_encounter_location</td>
+<td align="left">Submissions.taxon_encounter</td>
+</tr>
+<tr class="odd">
+<td align="left">select1</td>
+<td align="left">life_form</td>
+<td align="left">Submissions.taxon_encounter</td>
+</tr>
+<tr class="even">
+<td align="left">barcode</td>
+<td align="left">voucher_specimen_barcode</td>
+<td align="left">Submissions.taxon_encounter</td>
+</tr>
+<tr class="odd">
+<td align="left">string</td>
+<td align="left">voucher_specimen_label</td>
+<td align="left">Submissions.taxon_encounter</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Part 2: Data access ---------------------------------------------------------#</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co"># Form tables</span></a>
+<a class="sourceLine" id="cb7-3" title="3">srv &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_service_get.html">odata_service_get</a></span>()</a>
+<a class="sourceLine" id="cb7-4" title="4">srv <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">name</th>
+<th align="left">kind</th>
+<th align="left">url</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Submissions</td>
+<td align="left">EntitySet</td>
+<td align="left">Submissions</td>
+</tr>
+<tr class="even">
+<td align="left">Submissions.vegetation_stratum</td>
+<td align="left">EntitySet</td>
+<td align="left">Submissions.vegetation_stratum</td>
+</tr>
+<tr class="odd">
+<td align="left">Submissions.taxon_encounter</td>
+<td align="left">EntitySet</td>
+<td align="left">Submissions.taxon_encounter</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Form submissions</span></a>
+<a class="sourceLine" id="cb8-2" title="2">d &lt;-<span class="st"> </span>fs<span class="op">::</span><span class="kw"><a href="http://fs.r-lib.org/reference/path.html">path</a></span>(<span class="st">"docs/articles/attachments/media"</span>)   <span class="co"># choose your own</span></a>
+<a class="sourceLine" id="cb8-3" title="3">tz &lt;-<span class="st"> "Australia/Perth"</span>                            <span class="co"># g'day mate</span></a>
+<a class="sourceLine" id="cb8-4" title="4">data &lt;-<span class="st"> </span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/odata_submission_get.html">odata_submission_get</a></span>(<span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">local_dir =</span> d, <span class="dt">tz =</span> tz)</a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; Downloading submissions...</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; Downloaded 2 submissions.</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; * `@odata.context` -&gt; .odata.context</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; Unnesting column 'value'</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; * `__id` -&gt; .__id</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; * `__system` -&gt; .__system</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; Unnesting column '.__system'</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt; Unnesting column 'meta'</span></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="co">#&gt; Unnesting column 'location'</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="co">#&gt; Unnesting column 'habitat'</span></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="co">#&gt; Unnesting column 'perimeter'</span></a>
+<a class="sourceLine" id="cb8-19" title="19"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb8-20" title="20"><span class="co">#&gt; Unnesting column 'corner1'</span></a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="co">#&gt; Unnesting column 'corner2'</span></a>
+<a class="sourceLine" id="cb8-22" title="22"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-23" title="23"><span class="co">#&gt; * type -&gt; type...12</span></a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="co">#&gt; * coordinates -&gt; coordinates...13</span></a>
+<a class="sourceLine" id="cb8-25" title="25"><span class="co">#&gt; * properties -&gt; properties...14</span></a>
+<a class="sourceLine" id="cb8-26" title="26"><span class="co">#&gt; * type -&gt; type...17</span></a>
+<a class="sourceLine" id="cb8-27" title="27"><span class="co">#&gt; * coordinates -&gt; coordinates...18</span></a>
+<a class="sourceLine" id="cb8-28" title="28"><span class="co">#&gt; * … and 1 more problem</span></a>
+<a class="sourceLine" id="cb8-29" title="29"><span class="co">#&gt; Unnesting column 'corner3'</span></a>
+<a class="sourceLine" id="cb8-30" title="30"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-31" title="31"><span class="co">#&gt; * type -&gt; type...20</span></a>
+<a class="sourceLine" id="cb8-32" title="32"><span class="co">#&gt; * coordinates -&gt; coordinates...21</span></a>
+<a class="sourceLine" id="cb8-33" title="33"><span class="co">#&gt; * properties -&gt; properties...22</span></a>
+<a class="sourceLine" id="cb8-34" title="34"><span class="co">#&gt; Unnesting column 'corner4'</span></a>
+<a class="sourceLine" id="cb8-35" title="35"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-36" title="36"><span class="co">#&gt; * type -&gt; type...23</span></a>
+<a class="sourceLine" id="cb8-37" title="37"><span class="co">#&gt; * coordinates -&gt; coordinates...24</span></a>
+<a class="sourceLine" id="cb8-38" title="38"><span class="co">#&gt; * properties -&gt; properties...25</span></a>
+<a class="sourceLine" id="cb8-39" title="39"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb8-40" title="40"><span class="co">#&gt; Unnesting column 'coordinates...13'</span></a>
+<a class="sourceLine" id="cb8-41" title="41"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-42" title="42"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb8-43" title="43"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb8-44" title="44"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb8-45" title="45"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-46" title="46"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb8-47" title="47"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb8-48" title="48"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb8-49" title="49"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-50" title="50"><span class="co">#&gt; * ...1 -&gt; ...13</span></a>
+<a class="sourceLine" id="cb8-51" title="51"><span class="co">#&gt; * ...2 -&gt; ...14</span></a>
+<a class="sourceLine" id="cb8-52" title="52"><span class="co">#&gt; * ...3 -&gt; ...15</span></a>
+<a class="sourceLine" id="cb8-53" title="53"><span class="co">#&gt; * properties...14 -&gt; properties...16</span></a>
+<a class="sourceLine" id="cb8-54" title="54"><span class="co">#&gt; * type...17 -&gt; type...19</span></a>
+<a class="sourceLine" id="cb8-55" title="55"><span class="co">#&gt; * … and 8 more problems</span></a>
+<a class="sourceLine" id="cb8-56" title="56"><span class="co">#&gt; Skipping renamed column 'properties...14'</span></a>
+<a class="sourceLine" id="cb8-57" title="57"><span class="co">#&gt; Skipping renamed column 'coordinates...18'</span></a>
+<a class="sourceLine" id="cb8-58" title="58"><span class="co">#&gt; Skipping renamed column 'properties...19'</span></a>
+<a class="sourceLine" id="cb8-59" title="59"><span class="co">#&gt; Skipping renamed column 'coordinates...21'</span></a>
+<a class="sourceLine" id="cb8-60" title="60"><span class="co">#&gt; Skipping renamed column 'properties...22'</span></a>
+<a class="sourceLine" id="cb8-61" title="61"><span class="co">#&gt; Skipping renamed column 'coordinates...24'</span></a>
+<a class="sourceLine" id="cb8-62" title="62"><span class="co">#&gt; Skipping renamed column 'properties...25'</span></a>
+<a class="sourceLine" id="cb8-63" title="63"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb8-64" title="64"><span class="co">#&gt; Unnesting column 'properties...16'</span></a>
+<a class="sourceLine" id="cb8-65" title="65"><span class="co">#&gt; Unnesting column 'coordinates...20'</span></a>
+<a class="sourceLine" id="cb8-66" title="66"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-67" title="67"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb8-68" title="68"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb8-69" title="69"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-71" title="71"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb8-72" title="72"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb8-73" title="73"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb8-74" title="74"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-75" title="75"><span class="co">#&gt; * ...1 -&gt; ...20</span></a>
+<a class="sourceLine" id="cb8-76" title="76"><span class="co">#&gt; * ...2 -&gt; ...21</span></a>
+<a class="sourceLine" id="cb8-77" title="77"><span class="co">#&gt; * ...3 -&gt; ...22</span></a>
+<a class="sourceLine" id="cb8-78" title="78"><span class="co">#&gt; * properties...21 -&gt; properties...23</span></a>
+<a class="sourceLine" id="cb8-79" title="79"><span class="co">#&gt; * type...22 -&gt; type...24</span></a>
+<a class="sourceLine" id="cb8-80" title="80"><span class="co">#&gt; * … and 5 more problems</span></a>
+<a class="sourceLine" id="cb8-81" title="81"><span class="co">#&gt; Skipping renamed column 'properties...21'</span></a>
+<a class="sourceLine" id="cb8-82" title="82"><span class="co">#&gt; Skipping renamed column 'coordinates...23'</span></a>
+<a class="sourceLine" id="cb8-83" title="83"><span class="co">#&gt; Skipping renamed column 'properties...24'</span></a>
+<a class="sourceLine" id="cb8-84" title="84"><span class="co">#&gt; Skipping renamed column 'coordinates...26'</span></a>
+<a class="sourceLine" id="cb8-85" title="85"><span class="co">#&gt; Skipping renamed column 'properties...27'</span></a>
+<a class="sourceLine" id="cb8-86" title="86"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb8-87" title="87"><span class="co">#&gt; Unnesting column 'properties...23'</span></a>
+<a class="sourceLine" id="cb8-88" title="88"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-89" title="89"><span class="co">#&gt; * accuracy -&gt; accuracy...16</span></a>
+<a class="sourceLine" id="cb8-90" title="90"><span class="co">#&gt; * accuracy -&gt; accuracy...23</span></a>
+<a class="sourceLine" id="cb8-91" title="91"><span class="co">#&gt; Unnesting column 'coordinates...25'</span></a>
+<a class="sourceLine" id="cb8-92" title="92"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-93" title="93"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb8-94" title="94"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb8-95" title="95"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb8-96" title="96"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-97" title="97"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb8-98" title="98"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb8-99" title="99"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb8-100" title="100"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-101" title="101"><span class="co">#&gt; * ...1 -&gt; ...25</span></a>
+<a class="sourceLine" id="cb8-102" title="102"><span class="co">#&gt; * ...2 -&gt; ...26</span></a>
+<a class="sourceLine" id="cb8-103" title="103"><span class="co">#&gt; * ...3 -&gt; ...27</span></a>
+<a class="sourceLine" id="cb8-104" title="104"><span class="co">#&gt; * properties...26 -&gt; properties...28</span></a>
+<a class="sourceLine" id="cb8-105" title="105"><span class="co">#&gt; * type...27 -&gt; type...29</span></a>
+<a class="sourceLine" id="cb8-106" title="106"><span class="co">#&gt; * … and 2 more problems</span></a>
+<a class="sourceLine" id="cb8-107" title="107"><span class="co">#&gt; Skipping renamed column 'properties...26'</span></a>
+<a class="sourceLine" id="cb8-108" title="108"><span class="co">#&gt; Skipping renamed column 'coordinates...28'</span></a>
+<a class="sourceLine" id="cb8-109" title="109"><span class="co">#&gt; Skipping renamed column 'properties...29'</span></a>
+<a class="sourceLine" id="cb8-110" title="110"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb8-111" title="111"><span class="co">#&gt; Unnesting column 'properties...28'</span></a>
+<a class="sourceLine" id="cb8-112" title="112"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-113" title="113"><span class="co">#&gt; * accuracy -&gt; accuracy...28</span></a>
+<a class="sourceLine" id="cb8-114" title="114"><span class="co">#&gt; * properties...31 -&gt; properties</span></a>
+<a class="sourceLine" id="cb8-115" title="115"><span class="co">#&gt; Unnesting column 'coordinates'</span></a>
+<a class="sourceLine" id="cb8-116" title="116"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-117" title="117"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb8-118" title="118"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb8-119" title="119"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb8-120" title="120"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-121" title="121"><span class="co">#&gt; * `` -&gt; ...1</span></a>
+<a class="sourceLine" id="cb8-122" title="122"><span class="co">#&gt; * `` -&gt; ...2</span></a>
+<a class="sourceLine" id="cb8-123" title="123"><span class="co">#&gt; * `` -&gt; ...3</span></a>
+<a class="sourceLine" id="cb8-124" title="124"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-125" title="125"><span class="co">#&gt; * ...1 -&gt; ...30</span></a>
+<a class="sourceLine" id="cb8-126" title="126"><span class="co">#&gt; * ...2 -&gt; ...31</span></a>
+<a class="sourceLine" id="cb8-127" title="127"><span class="co">#&gt; * ...3 -&gt; ...32</span></a>
+<a class="sourceLine" id="cb8-128" title="128"><span class="co">#&gt; Skipping renamed column 'properties...31'</span></a>
+<a class="sourceLine" id="cb8-129" title="129"><span class="co">#&gt; Found more nested columns, unnesting again.</span></a>
+<a class="sourceLine" id="cb8-130" title="130"><span class="co">#&gt; Unnesting column 'properties'</span></a>
+<a class="sourceLine" id="cb8-131" title="131"><span class="co">#&gt; New names:</span></a>
+<a class="sourceLine" id="cb8-132" title="132"><span class="co">#&gt; * accuracy -&gt; accuracy...33</span></a>
+<a class="sourceLine" id="cb8-133" title="133"><span class="co">#&gt; Reading form schema...</span></a>
+<a class="sourceLine" id="cb8-134" title="134"><span class="co">#&gt; Found date column: encounter_start_datetime.Found date column: encounter_end_datetime.</span></a>
+<a class="sourceLine" id="cb8-135" title="135"><span class="co">#&gt; Parsing encounter_start_datetime as Australia/Perth...</span></a>
+<a class="sourceLine" id="cb8-136" title="136"><span class="co">#&gt; Parsing encounter_end_datetime as Australia/Perth...</span></a>
+<a class="sourceLine" id="cb8-137" title="137"><span class="co">#&gt; Downloading attachments...</span></a>
+<a class="sourceLine" id="cb8-138" title="138"><span class="co">#&gt; Using local directory: docs/articles/attachments/media</span></a>
+<a class="sourceLine" id="cb8-139" title="139"><span class="co">#&gt; Keeping docs/articles/attachments/media/1568794395624.jpg</span></a>
+<a class="sourceLine" id="cb8-140" title="140"><span class="co">#&gt; Keeping docs/articles/attachments/media/1568786958640.jpg</span></a>
+<a class="sourceLine" id="cb8-141" title="141"><span class="co">#&gt; Using local directory: docs/articles/attachments/media</span></a>
+<a class="sourceLine" id="cb8-142" title="142"><span class="co">#&gt; Keeping docs/articles/attachments/media/1568794560256.jpg</span></a>
+<a class="sourceLine" id="cb8-143" title="143"><span class="co">#&gt; Keeping docs/articles/attachments/media/1568787004467.jpg</span></a>
+<a class="sourceLine" id="cb8-144" title="144"><span class="co">#&gt; Using local directory: docs/articles/attachments/media</span></a>
+<a class="sourceLine" id="cb8-145" title="145"><span class="co">#&gt; Filename is NA, skipping download.</span></a>
+<a class="sourceLine" id="cb8-146" title="146"><span class="co">#&gt; Keeping docs/articles/attachments/media/1568787172983.jpg</span></a>
+<a class="sourceLine" id="cb8-147" title="147">data <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(.)</a></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="5%">
@@ -915,22 +982,22 @@
 <a href="#attribution" class="anchor"></a>Attribution</h2>
 <p><code>ruODK</code> was developed, and is maintained, by Florian Mayer for the Western Australian <a href="https://www.dbca.wa.gov.au/">Department of Biodiversity, Conservation and Attractions (DBCA)</a>. The development was funded both by DBCA core funding and Offset funding through the <a href="https://flatbacks.dbca.wa.gov.au/">North West Shelf Flatback Turtle Conservation Program</a>.</p>
 <p>To cite package <code>ruODK</code> in publications use:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="st">"ruODK"</span>)</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; To cite ruODK in publications use:</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt;   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;   R package version 0.6.6. https://github.com/dbca-wa/ruODK</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;   @Misc{,</span></a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt;     title = {ruODK: Client for the ODK Central API},</span></a>
-<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt;     author = {Florian W. Mayer},</span></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.6},</span></a>
-<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt;     year = {2019},</span></a>
-<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;     url = {https://github.com/dbca-wa/ruODK},</span></a>
-<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt;   }</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="st">"ruODK"</span>)</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; To cite ruODK in publications use:</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt;   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt;   R package version 0.6.6. https://github.com/dbca-wa/ruODK</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt;   @Misc{,</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt;     title = {ruODK: Client for the ODK Central API},</span></a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="co">#&gt;     author = {Florian W. Mayer},</span></a>
+<a class="sourceLine" id="cb9-13" title="13"><span class="co">#&gt;     note = {R package version 0.6.6},</span></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="co">#&gt;     year = {2019},</span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="co">#&gt;     url = {https://github.com/dbca-wa/ruODK},</span></a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="co">#&gt;   }</span></a></code></pre></div>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
@@ -1242,9 +1309,9 @@
 </tbody>
 </table>
 <p>In summary:</p>
-<p><code>ruODK</code> is the only R package explicitly aimed at ODK Central, both its OData and the RESTful API, and provide context and helpers around specific recurring data wrangling tasks.</p>
-<p>Wrangling OData output boils down to handling HTTP requests, navigating nested lists (from XML) and rectangling them into tidy data.</p>
-<p>The value of OData lies in its self-descriptive nature, which allows tools to introspect the data structures and types. Whereas GUI-driven tools like MS PowerBI use this introspection to assist users in wrangling their own data, <code>ruODK</code> aims to lower the barrier to the R-literate user, and reduce the data wrangling to simple, extensible steps in line with tidyverse’s data wrangling paradigm. Providing this functionality in a pure R environment allows to automate the data extraction, transformation, and reporting pipeline, and therefore provide reproducible reporting.</p>
+<p><code>ruODK</code> is the only R package explicitly aimed at ODK Central’s OData and RESTful API, as well as providing context and helpers around specific recurring data wrangling tasks.</p>
+<p>The value of OData lies in its self-descriptive nature, which allows tools to introspect the data structures and types. Both GUI-driven tools like MS PowerBI and <code>ruODK</code> use this introspection to assist users in wrangling their own data.</p>
+<p>The script-based approach of <code>ruODK</code> allows to automate the data extraction, transformation, and reporting pipeline, and therefore provide reproducible reporting.</p>
 </div>
 </div>
 </div>

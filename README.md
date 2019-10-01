@@ -79,8 +79,9 @@ Benefits of using the R ecosystem in combination with ODK:
     [Sweave](https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr),
     [RMarkdown](https://rmarkdown.rstudio.com/)), interactive web apps
     ([Shiny](https://shiny.rstudio.com/)), workflow scaling
-    ([drake](https://docs.ropensci.org/drake/)) and a range of
-    integrations with Docker (links coming soon).
+    ([drake](https://docs.ropensci.org/drake/))
+  - Rstudio-as-a-Service (RaaS) at
+    [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 
 `ruODK`’s scope:
 
@@ -112,12 +113,10 @@ Benefits of using the R ecosystem in combination with ODK:
 
 Out of scope:
 
-  - To wrap “management” API endpoints. The ODK Central GUI provides a
-    comprehensive interface for the management of users, roles,
-    permissions, projects, and forms. Behind the scenes, it is a [VueJS
-    application](https://github.com/opendatakit/central-frontend/)
-    working on the “management” API endpoints of the ODK Central
-    backend.
+  - To wrap “management” API endpoints. ODK Central is a [VueJS/NodeJS
+    application](https://github.com/opendatakit/central-frontend/) which
+    provides a comprehensive graphical user interface for the management
+    of users, roles, permissions, projects, and forms.
   - To provide extensive data visualisation. We show only minimal
     examples of data visualisation and presentation, mainly to
     illustrate the example data. Once the data is in your hands as tidy
@@ -125,7 +124,7 @@ Out of scope:
 
 ## Install
 
-You can install ruODK from GitHub with:
+You can install `ruODK` from GitHub with:
 
 ``` r
 if (!requireNamespace("remotes")) {install.packages("remotes")}
@@ -154,19 +153,17 @@ descriptions of the steps below.
     account](https://docs.opendatakit.org/central-users/#creating-a-web-user)
     on an ODK Central instance. Your username will be an email address.
   - [Create a project](https://docs.opendatakit.org/central-projects/)
-    and give the web user the relevant permissions.
-  - Create an XForm, e.g. using ODK Build, or use the provided example
-    forms.
-  - [Publish the form](https://docs.opendatakit.org/central-forms/) to
+    and give the web user at least [read
+    permissions](https://docs.opendatakit.org/central-projects/#managing-project-managers).
+  - Create an XForm, e.g. using ODK Build, or use the [example
+    forms](https://github.com/dbca-wa/ruODK/tree/master/inst/extdata)
+    provided by `ruODK`. The `.odkbuild` versions can be loaded into
+    [ODK Build](https://build.opendatakit.org/), while the `.xml`
+    versions can be directly imported into ODK Central.
+  - [Publish the form](https://docs.opendatakit.org/central-forms/)to
     ODK Central.
   - Collect some data for this form on ODK Collect and let ODK Collect
     submit the finalised forms to ODK Central.
-
-A note on the [included example
-forms](https://github.com/dbca-wa/ruODK/tree/master/inst/extdata): The
-`.odkbuild` versions can be loaded into [ODK
-Build](https://build.opendatakit.org/), while the `.xml` versions can be
-imported into ODK Central.
 
 ## Configure `ruODK`
 
@@ -176,8 +173,8 @@ read-permitted ODK Central web user.
 ``` r
 ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  un = "me@email.com",
+  pw = "..."
 )
 ```
 
@@ -187,11 +184,12 @@ For all available detailed options to configure `ruODK`, read
 
 ## Use ruODK
 
-A quick example using the OData service:
+A quick example browsing projects, forms, submissions, and accessing the
+data:
 
 ``` r
 library(ruODK)
-
+# Part 1: Data discovery ------------------------------------------------------#
 # List projects
 proj <- ruODK::project_list()
 proj %>% head() %>% knitr::kable(.)
@@ -207,7 +205,6 @@ proj %>% head() %>% knitr::kable(.)
 |  4 | Curso         |     7 |          4 | 2019-02-26 03:55:50 | NA          | 2019-03-21 22:22:57 | FALSE    |
 
 ``` r
-
 # List forms of default project
 frms <- ruODK::form_list()
 frms %>% knitr::kable(.)
@@ -225,7 +222,6 @@ frms %>% knitr::kable(.)
 | Spotlighting Survey Start 0.3 | build\_Spotlighting-Survey-Start-0-3\_1558320795 |         | open    | 7           | 2019-05-20 02:53:50 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-06-05 01:33:49 | f548a064cca13bca746f3c0b1a8b5a32 |
 
 ``` r
-
 # Form details of default form
 frmd <- ruODK::form_detail()
 frmd %>% knitr::kable(.)
@@ -236,289 +232,207 @@ frmd %>% knitr::kable(.)
 | Flora Quadrat 0.4 | build\_Flora-Quadrat-0-4\_1564384341 |         | open  |           2 | 2019-08-19T07:58:28.211Z |              57 | <florian.mayer@dbca.wa.gov.au> | NA          | 2019-09-18T08:51:07.481Z | 1bb959d541ac6990e3f74893e38c855b |
 
 ``` r
-
 # Form schema
 meta <- ruODK::form_schema()
-meta
-#> [[1]]
-#> [[1]]$name
-#> [1] "meta"
-#> 
-#> [[1]]$children
-#> [[1]]$children[[1]]
-#> [[1]]$children[[1]]$name
-#> [1] "instanceID"
-#> 
-#> [[1]]$children[[1]]$type
-#> [1] "string"
-#> 
-#> 
-#> 
-#> [[1]]$type
-#> [1] "structure"
-#> 
-#> 
-#> [[2]]
-#> [[2]]$name
-#> [1] "encounter_start_datetime"
-#> 
-#> [[2]]$type
-#> [1] "dateTime"
-#> 
-#> 
-#> [[3]]
-#> [[3]]$name
-#> [1] "reporter"
-#> 
-#> [[3]]$type
-#> [1] "string"
-#> 
-#> 
-#> [[4]]
-#> [[4]]$name
-#> [1] "device_id"
-#> 
-#> [[4]]$type
-#> [1] "string"
-#> 
-#> 
-#> [[5]]
-#> [[5]]$name
-#> [1] "location"
-#> 
-#> [[5]]$children
-#> [[5]]$children[[1]]
-#> [[5]]$children[[1]]$name
-#> [1] "area_name"
-#> 
-#> [[5]]$children[[1]]$type
-#> [1] "string"
-#> 
-#> 
-#> [[5]]$children[[2]]
-#> [[5]]$children[[2]]$name
-#> [1] "quadrat_photo"
-#> 
-#> [[5]]$children[[2]]$type
-#> [1] "binary"
-#> 
-#> 
-#> [[5]]$children[[3]]
-#> [[5]]$children[[3]]$name
-#> [1] "corner1"
-#> 
-#> [[5]]$children[[3]]$type
-#> [1] "geopoint"
-#> 
-#> 
-#> 
-#> [[5]]$type
-#> [1] "structure"
-#> 
-#> 
-#> [[6]]
-#> [[6]]$name
-#> [1] "habitat"
-#> 
-#> [[6]]$children
-#> [[6]]$children[[1]]
-#> [[6]]$children[[1]]$name
-#> [1] "morphological_type"
-#> 
-#> [[6]]$children[[1]]$type
-#> [1] "select1"
-#> 
-#> 
-#> [[6]]$children[[2]]
-#> [[6]]$children[[2]]$name
-#> [1] "morphological_type_photo"
-#> 
-#> [[6]]$children[[2]]$type
-#> [1] "binary"
-#> 
-#> 
-#> 
-#> [[6]]$type
-#> [1] "structure"
-#> 
-#> 
-#> [[7]]
-#> [[7]]$name
-#> [1] "vegetation_stratum"
-#> 
-#> [[7]]$children
-#> [[7]]$children[[1]]
-#> [[7]]$children[[1]]$name
-#> [1] "nvis_level3_broad_floristic_group"
-#> 
-#> [[7]]$children[[1]]$type
-#> [1] "select1"
-#> 
-#> 
-#> [[7]]$children[[2]]
-#> [[7]]$children[[2]]$name
-#> [1] "max_height_m"
-#> 
-#> [[7]]$children[[2]]$type
-#> [1] "decimal"
-#> 
-#> 
-#> [[7]]$children[[3]]
-#> [[7]]$children[[3]]$name
-#> [1] "foliage_cover"
-#> 
-#> [[7]]$children[[3]]$type
-#> [1] "select1"
-#> 
-#> 
-#> [[7]]$children[[4]]
-#> [[7]]$children[[4]]$name
-#> [1] "dominant_species_1"
-#> 
-#> [[7]]$children[[4]]$type
-#> [1] "string"
-#> 
-#> 
-#> [[7]]$children[[5]]
-#> [[7]]$children[[5]]$name
-#> [1] "dominant_species_2"
-#> 
-#> [[7]]$children[[5]]$type
-#> [1] "string"
-#> 
-#> 
-#> [[7]]$children[[6]]
-#> [[7]]$children[[6]]$name
-#> [1] "dominant_species_3"
-#> 
-#> [[7]]$children[[6]]$type
-#> [1] "string"
-#> 
-#> 
-#> [[7]]$children[[7]]
-#> [[7]]$children[[7]]$name
-#> [1] "dominant_species_4"
-#> 
-#> [[7]]$children[[7]]$type
-#> [1] "string"
-#> 
-#> 
-#> 
-#> [[7]]$type
-#> [1] "repeat"
-#> 
-#> 
-#> [[8]]
-#> [[8]]$name
-#> [1] "perimeter"
-#> 
-#> [[8]]$children
-#> [[8]]$children[[1]]
-#> [[8]]$children[[1]]$name
-#> [1] "corner2"
-#> 
-#> [[8]]$children[[1]]$type
-#> [1] "geopoint"
-#> 
-#> 
-#> [[8]]$children[[2]]
-#> [[8]]$children[[2]]$name
-#> [1] "corner3"
-#> 
-#> [[8]]$children[[2]]$type
-#> [1] "geopoint"
-#> 
-#> 
-#> [[8]]$children[[3]]
-#> [[8]]$children[[3]]$name
-#> [1] "corner4"
-#> 
-#> [[8]]$children[[3]]$type
-#> [1] "geopoint"
-#> 
-#> 
-#> [[8]]$children[[4]]
-#> [[8]]$children[[4]]$name
-#> [1] "mudmap_photo"
-#> 
-#> [[8]]$children[[4]]$type
-#> [1] "binary"
-#> 
-#> 
-#> 
-#> [[8]]$type
-#> [1] "structure"
-#> 
-#> 
-#> [[9]]
-#> [[9]]$name
-#> [1] "taxon_encounter"
-#> 
-#> [[9]]$children
-#> [[9]]$children[[1]]
-#> [[9]]$children[[1]]$name
-#> [1] "field_name"
-#> 
-#> [[9]]$children[[1]]$type
-#> [1] "string"
-#> 
-#> 
-#> [[9]]$children[[2]]
-#> [[9]]$children[[2]]$name
-#> [1] "photo_in_situ"
-#> 
-#> [[9]]$children[[2]]$type
-#> [1] "binary"
-#> 
-#> 
-#> [[9]]$children[[3]]
-#> [[9]]$children[[3]]$name
-#> [1] "taxon_encounter_location"
-#> 
-#> [[9]]$children[[3]]$type
-#> [1] "geopoint"
-#> 
-#> 
-#> [[9]]$children[[4]]
-#> [[9]]$children[[4]]$name
-#> [1] "life_form"
-#> 
-#> [[9]]$children[[4]]$type
-#> [1] "select1"
-#> 
-#> 
-#> [[9]]$children[[5]]
-#> [[9]]$children[[5]]$name
-#> [1] "voucher_specimen_barcode"
-#> 
-#> [[9]]$children[[5]]$type
-#> [1] "barcode"
-#> 
-#> 
-#> [[9]]$children[[6]]
-#> [[9]]$children[[6]]$name
-#> [1] "voucher_specimen_label"
-#> 
-#> [[9]]$children[[6]]$type
-#> [1] "string"
-#> 
-#> 
-#> 
-#> [[9]]$type
-#> [1] "repeat"
-#> 
-#> 
-#> [[10]]
-#> [[10]]$name
-#> [1] "encounter_end_datetime"
-#> 
-#> [[10]]$type
-#> [1] "dateTime"
+meta %>% knitr::kable(.)
+```
 
+| type      | name                                  | path                            |
+| :-------- | :------------------------------------ | :------------------------------ |
+| structure | meta                                  | Submissions                     |
+| dateTime  | encounter\_start\_datetime            | Submissions                     |
+| string    | reporter                              | Submissions                     |
+| string    | device\_id                            | Submissions                     |
+| structure | location                              | Submissions                     |
+| structure | habitat                               | Submissions                     |
+| repeat    | vegetation\_stratum                   | Submissions                     |
+| structure | perimeter                             | Submissions                     |
+| repeat    | taxon\_encounter                      | Submissions                     |
+| dateTime  | encounter\_end\_datetime              | Submissions                     |
+| string    | instanceID                            | Submissions.meta                |
+| string    | area\_name                            | Submissions.location            |
+| binary    | quadrat\_photo                        | Submissions.location            |
+| geopoint  | corner1                               | Submissions.location            |
+| select1   | morphological\_type                   | Submissions.habitat             |
+| binary    | morphological\_type\_photo            | Submissions.habitat             |
+| select1   | nvis\_level3\_broad\_floristic\_group | Submissions.vegetation\_stratum |
+| decimal   | max\_height\_m                        | Submissions.vegetation\_stratum |
+| select1   | foliage\_cover                        | Submissions.vegetation\_stratum |
+| string    | dominant\_species\_1                  | Submissions.vegetation\_stratum |
+| string    | dominant\_species\_2                  | Submissions.vegetation\_stratum |
+| string    | dominant\_species\_3                  | Submissions.vegetation\_stratum |
+| string    | dominant\_species\_4                  | Submissions.vegetation\_stratum |
+| geopoint  | corner2                               | Submissions.perimeter           |
+| geopoint  | corner3                               | Submissions.perimeter           |
+| geopoint  | corner4                               | Submissions.perimeter           |
+| binary    | mudmap\_photo                         | Submissions.perimeter           |
+| string    | field\_name                           | Submissions.taxon\_encounter    |
+| binary    | photo\_in\_situ                       | Submissions.taxon\_encounter    |
+| geopoint  | taxon\_encounter\_location            | Submissions.taxon\_encounter    |
+| select1   | life\_form                            | Submissions.taxon\_encounter    |
+| barcode   | voucher\_specimen\_barcode            | Submissions.taxon\_encounter    |
+| string    | voucher\_specimen\_label              | Submissions.taxon\_encounter    |
+
+``` r
+# Part 2: Data access ---------------------------------------------------------#
+# Form tables
+srv <- ruODK::odata_service_get()
+srv %>% knitr::kable(.)
+```
+
+| name                            | kind      | url                             |
+| :------------------------------ | :-------- | :------------------------------ |
+| Submissions                     | EntitySet | Submissions                     |
+| Submissions.vegetation\_stratum | EntitySet | Submissions.vegetation\_stratum |
+| Submissions.taxon\_encounter    | EntitySet | Submissions.taxon\_encounter    |
+
+``` r
 # Form submissions
 d <- fs::path("docs/articles/attachments/media")   # choose your own
-tz <- "Australia/Perth"                            # crikey
+tz <- "Australia/Perth"                            # g'day mate
 data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
+#> Downloading submissions...
+#> Downloaded 2 submissions.
+#> New names:
+#> * `@odata.context` -> .odata.context
+#> Unnesting column 'value'
+#> New names:
+#> * `__id` -> .__id
+#> * `__system` -> .__system
+#> Found more nested columns, unnesting again.
+#> Unnesting column '.__system'
+#> Unnesting column 'meta'
+#> Unnesting column 'location'
+#> Unnesting column 'habitat'
+#> Unnesting column 'perimeter'
+#> Found more nested columns, unnesting again.
+#> Unnesting column 'corner1'
+#> Unnesting column 'corner2'
+#> New names:
+#> * type -> type...12
+#> * coordinates -> coordinates...13
+#> * properties -> properties...14
+#> * type -> type...17
+#> * coordinates -> coordinates...18
+#> * … and 1 more problem
+#> Unnesting column 'corner3'
+#> New names:
+#> * type -> type...20
+#> * coordinates -> coordinates...21
+#> * properties -> properties...22
+#> Unnesting column 'corner4'
+#> New names:
+#> * type -> type...23
+#> * coordinates -> coordinates...24
+#> * properties -> properties...25
+#> Found more nested columns, unnesting again.
+#> Unnesting column 'coordinates...13'
+#> New names:
+#> * `` -> ...1
+#> * `` -> ...2
+#> * `` -> ...3
+#> New names:
+#> * `` -> ...1
+#> * `` -> ...2
+#> * `` -> ...3
+#> New names:
+#> * ...1 -> ...13
+#> * ...2 -> ...14
+#> * ...3 -> ...15
+#> * properties...14 -> properties...16
+#> * type...17 -> type...19
+#> * … and 8 more problems
+#> Skipping renamed column 'properties...14'
+#> Skipping renamed column 'coordinates...18'
+#> Skipping renamed column 'properties...19'
+#> Skipping renamed column 'coordinates...21'
+#> Skipping renamed column 'properties...22'
+#> Skipping renamed column 'coordinates...24'
+#> Skipping renamed column 'properties...25'
+#> Found more nested columns, unnesting again.
+#> Unnesting column 'properties...16'
+#> Unnesting column 'coordinates...20'
+#> New names:
+#> * `` -> ...1
+#> * `` -> ...2
+#> * `` -> ...3
+#> New names:
+#> * `` -> ...1
+#> * `` -> ...2
+#> * `` -> ...3
+#> New names:
+#> * ...1 -> ...20
+#> * ...2 -> ...21
+#> * ...3 -> ...22
+#> * properties...21 -> properties...23
+#> * type...22 -> type...24
+#> * … and 5 more problems
+#> Skipping renamed column 'properties...21'
+#> Skipping renamed column 'coordinates...23'
+#> Skipping renamed column 'properties...24'
+#> Skipping renamed column 'coordinates...26'
+#> Skipping renamed column 'properties...27'
+#> Found more nested columns, unnesting again.
+#> Unnesting column 'properties...23'
+#> New names:
+#> * accuracy -> accuracy...16
+#> * accuracy -> accuracy...23
+#> Unnesting column 'coordinates...25'
+#> New names:
+#> * `` -> ...1
+#> * `` -> ...2
+#> * `` -> ...3
+#> New names:
+#> * `` -> ...1
+#> * `` -> ...2
+#> * `` -> ...3
+#> New names:
+#> * ...1 -> ...25
+#> * ...2 -> ...26
+#> * ...3 -> ...27
+#> * properties...26 -> properties...28
+#> * type...27 -> type...29
+#> * … and 2 more problems
+#> Skipping renamed column 'properties...26'
+#> Skipping renamed column 'coordinates...28'
+#> Skipping renamed column 'properties...29'
+#> Found more nested columns, unnesting again.
+#> Unnesting column 'properties...28'
+#> New names:
+#> * accuracy -> accuracy...28
+#> * properties...31 -> properties
+#> Unnesting column 'coordinates'
+#> New names:
+#> * `` -> ...1
+#> * `` -> ...2
+#> * `` -> ...3
+#> New names:
+#> * `` -> ...1
+#> * `` -> ...2
+#> * `` -> ...3
+#> New names:
+#> * ...1 -> ...30
+#> * ...2 -> ...31
+#> * ...3 -> ...32
+#> Skipping renamed column 'properties...31'
+#> Found more nested columns, unnesting again.
+#> Unnesting column 'properties'
+#> New names:
+#> * accuracy -> accuracy...33
+#> Reading form schema...
+#> Found date column: encounter_start_datetime.Found date column: encounter_end_datetime.
+#> Parsing encounter_start_datetime as Australia/Perth...
+#> Parsing encounter_end_datetime as Australia/Perth...
+#> Downloading attachments...
+#> Using local directory: docs/articles/attachments/media
+#> Keeping docs/articles/attachments/media/1568794395624.jpg
+#> Keeping docs/articles/attachments/media/1568786958640.jpg
+#> Using local directory: docs/articles/attachments/media
+#> Keeping docs/articles/attachments/media/1568794560256.jpg
+#> Keeping docs/articles/attachments/media/1568787004467.jpg
+#> Using local directory: docs/articles/attachments/media
+#> Filename is NA, skipping download.
+#> Keeping docs/articles/attachments/media/1568787172983.jpg
 data %>% knitr::kable(.)
 ```
 
@@ -661,19 +575,15 @@ Central.
 
 In summary:
 
-`ruODK` is the only R package explicitly aimed at ODK Central, both its
-OData and the RESTful API, and provide context and helpers around
+`ruODK` is the only R package explicitly aimed at ODK Central’s OData
+and RESTful API, as well as providing context and helpers around
 specific recurring data wrangling tasks.
 
-Wrangling OData output boils down to handling HTTP requests, navigating
-nested lists (from XML) and rectangling them into tidy data.
-
 The value of OData lies in its self-descriptive nature, which allows
-tools to introspect the data structures and types. Whereas GUI-driven
-tools like MS PowerBI use this introspection to assist users in
-wrangling their own data, `ruODK` aims to lower the barrier to the
-R-literate user, and reduce the data wrangling to simple, extensible
-steps in line with tidyverse’s data wrangling paradigm. Providing this
-functionality in a pure R environment allows to automate the data
+tools to introspect the data structures and types. Both GUI-driven tools
+like MS PowerBI and `ruODK` use this introspection to assist users in
+wrangling their own data.
+
+The script-based approach of `ruODK` allows to automate the data
 extraction, transformation, and reporting pipeline, and therefore
 provide reproducible reporting.
