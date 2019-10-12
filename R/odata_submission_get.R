@@ -1,10 +1,11 @@
-#' Retrieve form submissions, parse data and dates, download and link attachments.
+#' Retrieve form submissions, parse data and dates, download and link
+#' attachments.
 #'
 #' \lifecycle{maturing}
 #'
-#' @details \code{`odata_submissions_get()`} downloads submissions from (default)
-#' the main form group (submission table) including any non-repeating form
-#' groups, or from any other table as specified by parameter `table`.
+#' @details \code{`odata_submissions_get()`} downloads submissions from
+#' (default) the main form group (submission table) including any non-repeating
+#' form groups, or from any other table as specified by parameter `table`.
 #'
 #'
 #' With parameter `parse=TRUE` (default), submission data is parsed into a
@@ -20,9 +21,9 @@
 #'
 #' With parameter `parse=FALSE`, submission data is presented as nested list,
 #' which is the R equivalent of the returned form JSON.
-#' From there, \code{`odata_submission_parse()`} will parse the data into a tibble,
-#' and subsequent lines of \code{`parse_datetime()`} and \code{`attachment_get()`}
-#' parse dates and download and link file attachments.
+#' From there, \code{`odata_submission_parse()`} will parse the data into a
+#' tibble, and subsequent lines of \code{`parse_datetime()`} and
+#' \code{`attachment_get()`} parse dates and download and link file attachments.
 #' As any of these steps might fail on unexpected errors, `ruODK` offers this
 #' longer, more manual pathway as an option to investigate and narrow down
 #' unexpected or unwanted behaviour.
@@ -39,11 +40,13 @@
 #'   response from ODK Central. Default: FALSE.
 #' @param wkt If TRUE, geospatial data will be returned as WKT (Well Known Text)
 #'   strings. Default: FALSE, returns GeoJSON structures.
-#'   Note, ODK Central currently only honours this parameter for Point geometries.
+#'   Note, ODK Central currently only honours this parameter for Point
+#'   geometries.
 #'   Line and Polygon geometries are returned as "ODK WKT".
 #' @param parse Whether to parse submission data based on form schema.
 #'   Dates and datetimes will be parsed into local time.
-#'   Attachments will be downloaded, and the field updated to the local file path.
+#'   Attachments will be downloaded, and the field updated to the local file
+#'   path.
 #'   Default: TRUE.
 #' @template param-verbose
 #' @param tz A timezone, e.g. "Australia/Perth" or "UTC". Default: "UTC".

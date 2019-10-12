@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve form submissions, parse data and dates, download and link attachments. — odata_submission_get • ruODK</title>
+<title>Retrieve form submissions, parse data and dates, download and link
+attachments. — odata_submission_get • ruODK</title>
 
 
 <!-- jquery -->
@@ -35,7 +36,8 @@
 
 
 
-<meta property="og:title" content="Retrieve form submissions, parse data and dates, download and link attachments. — odata_submission_get" />
+<meta property="og:title" content="Retrieve form submissions, parse data and dates, download and link
+attachments. — odata_submission_get" />
 <meta property="og:description" content="" />
 <meta name="twitter:card" content="summary" />
 
@@ -69,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
       </span>
     </div>
 
@@ -126,7 +128,8 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve form submissions, parse data and dates, download and link attachments.</h1>
+    <h1>Retrieve form submissions, parse data and dates, download and link
+attachments.</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/odata_submission_get.R'><code>R/odata_submission_get.R</code></a></small>
     <div class="hidden name"><code>odata_submission_get.Rd</code></div>
     </div>
@@ -170,14 +173,16 @@ response from ODK Central. Default: FALSE.</p></td>
       <th>wkt</th>
       <td><p>If TRUE, geospatial data will be returned as WKT (Well Known Text)
 strings. Default: FALSE, returns GeoJSON structures.
-Note, ODK Central currently only honours this parameter for Point geometries.
+Note, ODK Central currently only honours this parameter for Point
+geometries.
 Line and Polygon geometries are returned as "ODK WKT".</p></td>
     </tr>
     <tr>
       <th>parse</th>
       <td><p>Whether to parse submission data based on form schema.
 Dates and datetimes will be parsed into local time.
-Attachments will be downloaded, and the field updated to the local file path.
+Attachments will be downloaded, and the field updated to the local file
+path.
 Default: TRUE.</p></td>
     </tr>
     <tr>
@@ -238,9 +243,9 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
   * `@odata.count` is the total number of rows in the table.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>`odata_submissions_get()`</code> downloads submissions from (default)
-the main form group (submission table) including any non-repeating form
-groups, or from any other table as specified by parameter `table`.</p>
+    <p><code>`odata_submissions_get()`</code> downloads submissions from
+(default) the main form group (submission table) including any non-repeating
+form groups, or from any other table as specified by parameter `table`.</p>
 
 <p>With parameter `parse=TRUE` (default), submission data is parsed into a
 tibble. Any fields of type "dateTime" or "date" are parsed into dates, with
@@ -254,9 +259,9 @@ The parameter `verbose` enables diagnostic messages along the download and
 parsing process.</p>
 <p>With parameter `parse=FALSE`, submission data is presented as nested list,
 which is the R equivalent of the returned form JSON.
-From there, <code>`odata_submission_parse()`</code> will parse the data into a tibble,
-and subsequent lines of <code>`parse_datetime()`</code> and <code>`attachment_get()`</code>
-parse dates and download and link file attachments.
+From there, <code>`odata_submission_parse()`</code> will parse the data into a
+tibble, and subsequent lines of <code>`parse_datetime()`</code> and
+<code>`attachment_get()`</code> parse dates and download and link file attachments.
 As any of these steps might fail on unexpected errors, `ruODK` offers this
 longer, more manual pathway as an option to investigate and narrow down
 unexpected or unwanted behaviour.</p>
@@ -300,15 +305,15 @@ unexpected or unwanted behaviour.</p>
 
 <span class='co'># Point coordinates (lat, lon, alt, acc) need to be renamed</span>
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(
-    <span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>],
-    <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-  ) <span class='kw'>%&gt;%</span>
+  <span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>],
+  <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>rename</a></span>(
-  <span class='co'># Adjust coordinate colnames as needed</span>
-  <span class='co'># longitude = x13,</span>
-  <span class='co'># latitude = x14,</span>
-  <span class='co'># altitude = x15,</span>
-  <span class='co'># accuracy = x16</span>
+    <span class='co'># Adjust coordinate colnames as needed</span>
+    <span class='co'># longitude = x13,</span>
+    <span class='co'># latitude = x14,</span>
+    <span class='co'># altitude = x15,</span>
+    <span class='co'># accuracy = x16</span>
   )
 
 <span class='co'># Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"</span>

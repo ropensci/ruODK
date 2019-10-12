@@ -12,7 +12,8 @@ attachment_get(sid, fn, local_dir = "media", separate = FALSE,
 \arguments{
 \item{sid}{One or many ODK submission UUIDs, an MD5 hash.}
 
-\item{fn}{One or many ODK form attachment filenames, e.g. "1558330537199.jpg".}
+\item{fn}{One or many ODK form attachment filenames,
+e.g. "1558330537199.jpg".}
 
 \item{local_dir}{The local folder to save the downloaded files to,
 default: "media".}
@@ -60,7 +61,8 @@ The relative file path for the downloaded attachment(s)
 \lifecycle{stable}
 }
 \details{
-This function is vectorised and can handle either one or many records.
+This function is vectorised and can handle either one or many
+records.
 Parameters submission_uuid and attachment_filename accept single or exactly
 the same number of multiple values.
 The other parameters are automatically repeated.

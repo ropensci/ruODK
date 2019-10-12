@@ -100,7 +100,8 @@ get_one_attachment <- function(pth,
 #'
 #' \lifecycle{stable}
 #'
-#' @details This function is vectorised and can handle either one or many records.
+#' @details This function is vectorised and can handle either one or many
+#' records.
 #' Parameters submission_uuid and attachment_filename accept single or exactly
 #' the same number of multiple values.
 #' The other parameters are automatically repeated.
@@ -114,9 +115,10 @@ get_one_attachment <- function(pth,
 #' workdir/media/filename3.jpg
 #'
 #' @param sid One or many ODK submission UUIDs, an MD5 hash.
-#' @param fn One or many ODK form attachment filenames, e.g. "1558330537199.jpg".
+#' @param fn One or many ODK form attachment filenames,
+#'   e.g. "1558330537199.jpg".
 #' @param local_dir The local folder to save the downloaded files to,
-#'                  default: "media".
+#'   default: "media".
 #' @param separate (logical) Whether to separate locally downloaded files into
 #'   a subfolder named after the submission uuid within `local_dir`,
 #'   default: FALSE.

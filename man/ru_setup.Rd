@@ -21,7 +21,8 @@ A numeric value for \code{pid} will be converted to character.}
 \item{fid}{(optional, character) The alphanumeric ID of an existing form
 in \code{pid}. This will override the form ID from \code{svc}.}
 
-\item{url}{An ODK Central URL, e.g. "https://sandbox.central.opendatakit.org".
+\item{url}{An ODK Central URL,
+e.g. "https://sandbox.central.opendatakit.org".
 This will override the ODK Central base URL from \code{svc}.}
 
 \item{un}{An ODK Central username which is the email of a "web user" in the
@@ -30,9 +31,9 @@ specified ODK Central instance \code{url} (optional, character).}
 \item{pw}{The password for user \code{un} (optional, character).}
 
 \item{test_svc}{(optional, character) The OData service URL of a test form.
-This parameter will set \code{test_pid}, \code{test_fid}, and \code{test_url}.
-It is sufficient to supply \code{test_svc}, \code{test_un}, and
-\code{test_pw} to configure testing.}
+This parameter will set \code{test_pid}, \code{test_fid}, and
+\code{test_url}. It is sufficient to supply \code{test_svc},
+\code{test_un}, and \code{test_pw} to configure testing.}
 
 \item{test_pid}{(optional, character) The numeric ID of an existing project
 on \code{test_url}. This will override the project ID from \code{test_svc}.
@@ -43,13 +44,15 @@ in \code{test_pid}. This will override the form ID from \code{test_svc}.
 This form is used as default form in all tests, examples, vignettes, data,
 and Rmd templates.}
 
-\item{test_fid_zip}{(optional, character) The alphanumeric ID of an existing form
-in \code{test_pid}. This will override the form ID from \code{test_svc}.
+\item{test_fid_zip}{(optional, character) The alphanumeric ID of an existing
+form in \code{test_pid}. This will override the form ID from
+\code{test_svc}.
 Provide the form ID of a form with few submissions and without attachments.
 This form is used to test the repeated download of all form submissions.}
 
-\item{test_fid_att}{(optional, character) The alphanumeric ID of an existing form
-in \code{test_pid}. This will override the form ID from \code{test_svc}.
+\item{test_fid_att}{(optional, character) The alphanumeric ID of an existing
+form in \code{test_pid}. This will override the form ID from
+\code{test_svc}.
 Provide the form ID of a form with few submissions and few attachments.
 This form is used to test downloading and linking attachments.}
 
@@ -74,19 +77,19 @@ Any parameters not specified will remain unchanged. It is therefore possible
 to set up username and password initially with
 \code{ru_setup(un="XXX", pw="XXX")}, and switch between forms with
 \code{ru_setup(svc="XXX")}, supplying the form's OData service URL.
-ODK Central conveniently provides the OData service URL in the form submission
-tab, which in turn contains base URL, project ID, and form ID.
+ODK Central conveniently provides the OData service URL in the form
+submission tab, which in turn contains base URL, project ID, and form ID.
 
 \code{ruODK}'s automated tests require a valid ODK Central URL, and a
   privileged username and password of a "web user" on that ODK Central
   instance, as well as an existing project and form.
 }
 \examples{
-# \\code{ruODK} users only need default settings to their ODK Central instance:
+# \\code{ruODK} users only need default settings to their ODK Central:
 ru_setup(url = "https://my-odkc.com", un = "me@email.com", pw = "...")
 
-# \\code{ruODK} contributors and maintainers need specific ODK Central instances
-# to run tests and build vignettes, see contributing guide:
+# \\code{ruODK} contributors and maintainers need specific ODK Central
+# instances to run tests and build vignettes, see contributing guide:
 ru_setup(
   url = "https://odkcentral.dbca.wa.gov.au",
   un = "me@email.com",

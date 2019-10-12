@@ -22,8 +22,8 @@ A vegetation stratum is a layer of plants with the same height, and dominated
 by one or few plant taxa. Plant communities can be made of up to five strata,
 with two to three being most common.
 
-This data is kept up to date with the data used in vignettes and package tests.
-The data is comprised of test records with nonsensical data.
+This data is kept up to date with the data used in vignettes and package
+tests. The data is comprised of test records with nonsensical data.
 The forms used to capture this data are development versions of real-world
 forms.
 }

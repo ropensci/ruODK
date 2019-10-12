@@ -2,22 +2,25 @@
 % Please edit documentation in R/utils.R
 \name{parse_datetime}
 \alias{parse_datetime}
-\title{Parse all columns containing a certain word in its name to localised datetime.}
+\title{Parse all columns containing a certain word in its name to localised
+datetime.}
 \usage{
 parse_datetime(df, col_contains = "time", orders = c("YmdHMS",
-  "YmdHMSz"), tz = "Australia/Perth")
+  "YmdHMSz", "Ymd HMS", "Ymd HMSz"), tz = "Australia/Perth")
 }
 \arguments{
 \item{df}{A dataframe or tibble.}
 
-\item{col_contains}{A character string indicating a date/time column. This can
-be a part of the column name or the whole column name.
+\item{col_contains}{A character string indicating a date/time column.
+This can be a part of the column name or the whole column name.
 Default: "time" will match all column names containing "time".}
 
-\item{orders}{(vector of character) Orders of datetime elements for lubridate.
+\item{orders}{(vector of character) Orders of datetime elements for
+lubridate.
 Default: \code{c("YmdHMS", "YmdHMSz")}.}
 
-\item{tz}{(character) The timezone string for lubridate. Default: \code{"UTC"}.}
+\item{tz}{(character) The timezone string for lubridate.
+Default: \code{"UTC"}.}
 }
 \value{
 The dataframe with matching columns mutated to lubridate datetimes.

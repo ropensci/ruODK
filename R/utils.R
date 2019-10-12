@@ -3,9 +3,11 @@
 #' \lifecycle{stable}
 #' @param datetime_string (character) An ISO8601 datetime string as produced by
 #'   XForms exported from ODK Central.
-#' @param orders (vector of character) Orders of datetime elements for lubridate.
-#'   Default: \code{c("YmdHMS", "YmdHMSz")}.
-#' @param tz (character) The timezone string for lubridate. Default: \code{"UTC"}.
+#' @param orders (vector of character) Orders of datetime elements for
+#'   lubridate.
+#'   Default: \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz")}.
+#' @param tz (character) The timezone string for lubridate.
+#'   Default: \code{"UTC"}.
 #' @return A lubridate PosixCT datetime in the given timezone.
 #' @family utilities
 #' @export
@@ -18,7 +20,8 @@ isodt_to_local <- function(datetime_string,
     lubridate::with_tz(., tzone = tz)
 }
 
-#' Parse all columns containing a certain word in its name to localised datetime.
+#' Parse all columns containing a certain word in its name to localised
+#' datetime.
 #'
 #' \lifecycle{stable}
 #' @details This function wraps a \code{`dplyr::mutate_at()`} operation on all
@@ -26,12 +29,14 @@ isodt_to_local <- function(datetime_string,
 #' (default), "datetime" or "date". The operator using this function will have
 #' to know the column names (or commonalities like `"..._time"`).
 #' @param df A dataframe or tibble.
-#' @param col_contains A character string indicating a date/time column. This can
-#'   be a part of the column name or the whole column name.
+#' @param col_contains A character string indicating a date/time column.
+#'   This can be a part of the column name or the whole column name.
 #'   Default: "time" will match all column names containing "time".
-#' @param orders (vector of character) Orders of datetime elements for lubridate.
+#' @param orders (vector of character) Orders of datetime elements for
+#'   lubridate.
 #'   Default: \code{c("YmdHMS", "YmdHMSz")}.
-#' @param tz (character) The timezone string for lubridate. Default: \code{"UTC"}.
+#' @param tz (character) The timezone string for lubridate.
+#'   Default: \code{"UTC"}.
 #' @return The dataframe with matching columns mutated to lubridate datetimes.
 #' @export
 #' @family utilities

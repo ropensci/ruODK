@@ -8,7 +8,7 @@
   "relatedLink": "https://dbca-wa.github.io/ruODK/",
   "issueTracker": "https://github.com/dbca-wa/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.6.6.9000",
+  "version": "0.6.6.9001",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -69,7 +69,7 @@
       "@type": "SoftwareApplication",
       "identifier": "DT",
       "name": "DT",
-      "version": ">= 0.8",
+      "version": ">= 0.9",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -95,7 +95,7 @@
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
-      "version": ">=\n        1.24",
+      "version": ">=\n        1.25",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -134,7 +134,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
-      "version": ">=\n        1.15",
+      "version": ">=\n        1.16",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -160,7 +160,7 @@
       "@type": "SoftwareApplication",
       "identifier": "usethis",
       "name": "usethis",
-      "version": ">= 1.5.1",
+      "version": ">= 1.5.1.9000",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -246,7 +246,7 @@
       "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
-      "version": ">= 0.1.0",
+      "version": ">= 0.1.0.9000",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -259,7 +259,7 @@
       "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
-      "version": ">=\n        1.7.4",
+      "version": ">= 1.7.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -285,7 +285,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
-      "version": ">= 0.3.2",
+      "version": ">= 0.3.2.9000",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -311,7 +311,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
-      "version": ">= 0.4.0",
+      "version": ">= 0.4.0.9004",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",

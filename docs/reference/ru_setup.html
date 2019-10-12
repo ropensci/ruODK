@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
       </span>
     </div>
 
@@ -162,7 +162,8 @@ in <code>pid</code>. This will override the form ID from <code>svc</code>.</p></
     </tr>
     <tr>
       <th>url</th>
-      <td><p>An ODK Central URL, e.g. "https://sandbox.central.opendatakit.org".
+      <td><p>An ODK Central URL,
+e.g. "https://sandbox.central.opendatakit.org".
 This will override the ODK Central base URL from <code>svc</code>.</p></td>
     </tr>
     <tr>
@@ -177,9 +178,9 @@ specified ODK Central instance <code>url</code> (optional, character).</p></td>
     <tr>
       <th>test_svc</th>
       <td><p>(optional, character) The OData service URL of a test form.
-This parameter will set <code>test_pid</code>, <code>test_fid</code>, and <code>test_url</code>.
-It is sufficient to supply <code>test_svc</code>, <code>test_un</code>, and
-<code>test_pw</code> to configure testing.</p></td>
+This parameter will set <code>test_pid</code>, <code>test_fid</code>, and
+<code>test_url</code>. It is sufficient to supply <code>test_svc</code>,
+<code>test_un</code>, and <code>test_pw</code> to configure testing.</p></td>
     </tr>
     <tr>
       <th>test_pid</th>
@@ -196,15 +197,17 @@ and Rmd templates.</p></td>
     </tr>
     <tr>
       <th>test_fid_zip</th>
-      <td><p>(optional, character) The alphanumeric ID of an existing form
-in <code>test_pid</code>. This will override the form ID from <code>test_svc</code>.
+      <td><p>(optional, character) The alphanumeric ID of an existing
+form in <code>test_pid</code>. This will override the form ID from
+<code>test_svc</code>.
 Provide the form ID of a form with few submissions and without attachments.
 This form is used to test the repeated download of all form submissions.</p></td>
     </tr>
     <tr>
       <th>test_fid_att</th>
-      <td><p>(optional, character) The alphanumeric ID of an existing form
-in <code>test_pid</code>. This will override the form ID from <code>test_svc</code>.
+      <td><p>(optional, character) The alphanumeric ID of an existing
+form in <code>test_pid</code>. This will override the form ID from
+<code>test_svc</code>.
 Provide the form ID of a form with few submissions and few attachments.
 This form is used to test downloading and linking attachments.</p></td>
     </tr>
@@ -234,8 +237,8 @@ privileged to view the test project(s) at <code>test_url</code>.</p></td>
 to set up username and password initially with
 <code>ru_setup(un="XXX", pw="XXX")</code>, and switch between forms with
 <code>ru_setup(svc="XXX")</code>, supplying the form's OData service URL.
-ODK Central conveniently provides the OData service URL in the form submission
-tab, which in turn contains base URL, project ID, and form ID.</p>
+ODK Central conveniently provides the OData service URL in the form
+submission tab, which in turn contains base URL, project ID, and form ID.</p>
 <p><code>ruODK</code>'s automated tests require a valid ODK Central URL, and a
   privileged username and password of a "web user" on that ODK Central
   instance, as well as an existing project and form.</p>
@@ -246,11 +249,11 @@ tab, which in turn contains base URL, project ID, and form ID.</p>
   <code><a href='yell_if_missing.html'>yell_if_missing</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \code{ruODK} users only need default settings to their ODK Central instance:</span>
+    <pre class="examples"><div class='input'><span class='co'># \code{ruODK} users only need default settings to their ODK Central:</span>
 <span class='fu'>ru_setup</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='st'>"https://my-odkc.com"</span>, <span class='kw'>un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>, <span class='kw'>pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>)
 
-<span class='co'># \code{ruODK} contributors and maintainers need specific ODK Central instances</span>
-<span class='co'># to run tests and build vignettes, see contributing guide:</span>
+<span class='co'># \code{ruODK} contributors and maintainers need specific ODK Central</span>
+<span class='co'># instances to run tests and build vignettes, see contributing guide:</span>
 <span class='fu'>ru_setup</span>(
   <span class='kw'>url</span> <span class='kw'>=</span> <span class='st'>"https://odkcentral.dbca.wa.gov.au"</span>,
   <span class='kw'>un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>,

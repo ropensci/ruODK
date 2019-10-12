@@ -2,7 +2,8 @@
 % Please edit documentation in R/odata_submission_get.R
 \name{odata_submission_get}
 \alias{odata_submission_get}
-\title{Retrieve form submissions, parse data and dates, download and link attachments.}
+\title{Retrieve form submissions, parse data and dates, download and link
+attachments.}
 \usage{
 odata_submission_get(table = "Submissions", skip = NULL, top = NULL,
   count = FALSE, wkt = FALSE, parse = TRUE, verbose = FALSE,
@@ -27,12 +28,14 @@ response from ODK Central. Default: FALSE.}
 
 \item{wkt}{If TRUE, geospatial data will be returned as WKT (Well Known Text)
 strings. Default: FALSE, returns GeoJSON structures.
-Note, ODK Central currently only honours this parameter for Point geometries.
+Note, ODK Central currently only honours this parameter for Point
+geometries.
 Line and Polygon geometries are returned as "ODK WKT".}
 
 \item{parse}{Whether to parse submission data based on form schema.
 Dates and datetimes will be parsed into local time.
-Attachments will be downloaded, and the field updated to the local file path.
+Attachments will be downloaded, and the field updated to the local file
+path.
 Default: TRUE.}
 
 \item{verbose}{Whether to display debug messages or not (default)}
@@ -78,9 +81,9 @@ A list of lists.
 \lifecycle{maturing}
 }
 \details{
-\code{`odata_submissions_get()`} downloads submissions from (default)
-the main form group (submission table) including any non-repeating form
-groups, or from any other table as specified by parameter `table`.
+\code{`odata_submissions_get()`} downloads submissions from
+(default) the main form group (submission table) including any non-repeating
+form groups, or from any other table as specified by parameter `table`.
 
 
 With parameter `parse=TRUE` (default), submission data is parsed into a
@@ -96,9 +99,9 @@ parsing process.
 
 With parameter `parse=FALSE`, submission data is presented as nested list,
 which is the R equivalent of the returned form JSON.
-From there, \code{`odata_submission_parse()`} will parse the data into a tibble,
-and subsequent lines of \code{`parse_datetime()`} and \code{`attachment_get()`}
-parse dates and download and link file attachments.
+From there, \code{`odata_submission_parse()`} will parse the data into a
+tibble, and subsequent lines of \code{`parse_datetime()`} and
+\code{`attachment_get()`} parse dates and download and link file attachments.
 As any of these steps might fail on unexpected errors, `ruODK` offers this
 longer, more manual pathway as an option to investigate and narrow down
 unexpected or unwanted behaviour.

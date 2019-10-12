@@ -24,8 +24,8 @@ available as `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 and `system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")`,
 respectively.
 
-This data is kept up to date with the data used in vignettes and package tests.
-The data is comprised of test records with nonsensical data.
+This data is kept up to date with the data used in vignettes and package
+tests. The data is comprised of test records with nonsensical data.
 The forms used to capture this data are development versions of real-world
 forms.
 }

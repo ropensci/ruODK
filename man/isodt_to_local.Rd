@@ -11,10 +11,12 @@ isodt_to_local(datetime_string, orders = c("YmdHMS", "YmdHMSz"),
 \item{datetime_string}{(character) An ISO8601 datetime string as produced by
 XForms exported from ODK Central.}
 
-\item{orders}{(vector of character) Orders of datetime elements for lubridate.
-Default: \code{c("YmdHMS", "YmdHMSz")}.}
+\item{orders}{(vector of character) Orders of datetime elements for
+lubridate.
+Default: \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz")}.}
 
-\item{tz}{(character) The timezone string for lubridate. Default: \code{"UTC"}.}
+\item{tz}{(character) The timezone string for lubridate.
+Default: \code{"UTC"}.}
 }
 \value{
 A lubridate PosixCT datetime in the given timezone.

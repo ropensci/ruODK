@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse all columns containing a certain word in its name to localised datetime. — parse_datetime • ruODK</title>
+<title>Parse all columns containing a certain word in its name to localised
+datetime. — parse_datetime • ruODK</title>
 
 
 <!-- jquery -->
@@ -35,7 +36,8 @@
 
 
 
-<meta property="og:title" content="Parse all columns containing a certain word in its name to localised datetime. — parse_datetime" />
+<meta property="og:title" content="Parse all columns containing a certain word in its name to localised
+datetime. — parse_datetime" />
 <meta property="og:description" content="" />
 <meta name="twitter:card" content="summary" />
 
@@ -69,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
       </span>
     </div>
 
@@ -126,7 +128,8 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse all columns containing a certain word in its name to localised datetime.</h1>
+    <h1>Parse all columns containing a certain word in its name to localised
+datetime.</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
     <div class="hidden name"><code>parse_datetime.Rd</code></div>
     </div>
@@ -136,7 +139,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>parse_datetime</span>(<span class='no'>df</span>, <span class='kw'>col_contains</span> <span class='kw'>=</span> <span class='st'>"time"</span>, <span class='kw'>orders</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"YmdHMS"</span>,
-  <span class='st'>"YmdHMSz"</span>), <span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"Australia/Perth"</span>)</pre>
+  <span class='st'>"YmdHMSz"</span>, <span class='st'>"Ymd HMS"</span>, <span class='st'>"Ymd HMSz"</span>), <span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"Australia/Perth"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,18 +150,20 @@
     </tr>
     <tr>
       <th>col_contains</th>
-      <td><p>A character string indicating a date/time column. This can
-be a part of the column name or the whole column name.
+      <td><p>A character string indicating a date/time column.
+This can be a part of the column name or the whole column name.
 Default: "time" will match all column names containing "time".</p></td>
     </tr>
     <tr>
       <th>orders</th>
-      <td><p>(vector of character) Orders of datetime elements for lubridate.
+      <td><p>(vector of character) Orders of datetime elements for
+lubridate.
 Default: <code><a href='https://rdrr.io/r/base/c.html'>c("YmdHMS", "YmdHMSz")</a></code>.</p></td>
     </tr>
     <tr>
       <th>tz</th>
-      <td><p>(character) The timezone string for lubridate. Default: <code>"UTC"</code>.</p></td>
+      <td><p>(character) The timezone string for lubridate.
+Default: <code>"UTC"</code>.</p></td>
     </tr>
     </table>
 
