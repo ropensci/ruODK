@@ -50,7 +50,7 @@ Suggests:
 Remotes:
     tidyverse/purrr,
     r-lib/rlang,
-    tidyverse/lifecycle
+    r-lib/lifecycle
 VignetteBuilder: 
     knitr
 RdMacros: 
