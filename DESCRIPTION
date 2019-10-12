@@ -48,8 +48,8 @@ Suggests:
     testthat (>= 2.2.1),
     usethis (>= 1.5.1.9000)
 Remotes:
-    tidyverse/purrr
-    r-lib/rlang
+    tidyverse/purrr,
+    r-lib/rlang,
     tidyverse/lifecycle
 VignetteBuilder: 
     knitr
