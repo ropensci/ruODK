@@ -69,7 +69,7 @@ library(googledrive)
 library(knitr)
 library(leaflet)
 library(readr)
-library(skimr)
+# library(skimr)
 library(ruODK)
 
 # Set ruODK defaults to an ODK Central form
@@ -132,7 +132,7 @@ data_sub2 <- ruODK::odata_submission_get(
 # Analyse data
 <!-- Summarise, analyse, visualise the tibble(s) data (, data_sub1, data_sub2) -->
 ```{r data_vis}
-skimr::skim(data)
+# skimr::skim(data)
 dplyr::glimpse(data)
 DT::datatable(head(data))
 ```
