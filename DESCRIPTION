@@ -51,9 +51,10 @@ Suggests:
     testthat (>= 2.2.1),
     usethis (>= 1.5.1.9000)
 Remotes:
-    github::tidyverse/tidyr,
+    github::tidyverse/purrr,
     github::r-lib/rlang,
-    github::r-lib/lifecycle
+    github::r-lib/lifecycle,
+    github::r-lib/usethis
 VignetteBuilder: 
     knitr
 RdMacros: 
