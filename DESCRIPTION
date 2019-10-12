@@ -50,7 +50,7 @@ Suggests:
     rmarkdown (>= 1.16),
     testthat (>= 2.2.1),
     usethis (>= 1.5.1.9000)
-Remotes
+Remotes:
     github::tidyverse/tidyr,
     github::r-lib/rlang,
     github::r-lib/lifecycle
