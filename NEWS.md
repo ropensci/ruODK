@@ -5,11 +5,13 @@
 
 ## Dependencies
 * Moved `rlist` to Imports, as it is now used in `odata_submission_get()` (#6)
+* Use development versions of `rlang`, `purrr` and `lifecycle` to get their
+  latest bug fixes.
 
 ## Data
 
 ## Documentation
-* Updated workshop comparion [urODK](https://github.com/dbca-wa/urODK)
+* Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK)
 
 
 # ruODK 0.6.6
