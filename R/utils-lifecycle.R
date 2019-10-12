@@ -3,7 +3,7 @@
 #' HT Jim Hester, Lionel Henry, Jenny Bryan for advice
 #' @importFrom lifecycle deprecate_soft
 #' @keywords internal
-lifecycle_shim <- function(){
+lifecycle_shim <- function() {
   lifecycle::deprecate_soft(when = "1.0", what = "lifecycle_shim()")
 }
 

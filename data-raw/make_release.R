@@ -4,7 +4,7 @@
 # Implement new features
 #
 # Starting from a clean code base, create new dev version
-usethis::use_version()
+usethis::use_version(which = "dev")
 
 # Write code, add tests
 

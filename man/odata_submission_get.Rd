@@ -131,15 +131,15 @@ data <- odata_submissions_get(
 
 # Point coordinates (lat, lon, alt, acc) need to be renamed
 data <- odata_submissions_get(
-    table = form_tables$url[1],
-    wkt = FALSE
-  ) \%>\%
+  table = form_tables$url[1],
+  wkt = FALSE
+) \%>\%
   dplyr::rename(
-  # Adjust coordinate colnames as needed
-  # longitude = x13,
-  # latitude = x14,
-  # altitude = x15,
-  # accuracy = x16
+    # Adjust coordinate colnames as needed
+    # longitude = x13,
+    # latitude = x14,
+    # altitude = x15,
+    # accuracy = x16
   )
 
 # Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"

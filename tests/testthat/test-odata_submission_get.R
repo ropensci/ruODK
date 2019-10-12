@@ -34,7 +34,6 @@ test_that("odata_submission_get works with one known dataset", {
     magrittr::extract2("quadrat_photo") %>%
     as.character()
   purrr::map(local_files, ~ testthat::expect_true(fs::file_exists(.)))
-
 })
 
 

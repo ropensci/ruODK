@@ -91,15 +91,15 @@
 #'
 #' # Point coordinates (lat, lon, alt, acc) need to be renamed
 #' data <- odata_submissions_get(
-#'     table = form_tables$url[1],
-#'     wkt = FALSE
-#'   ) %>%
+#'   table = form_tables$url[1],
+#'   wkt = FALSE
+#' ) %>%
 #'   dplyr::rename(
-#'   # Adjust coordinate colnames as needed
-#'   # longitude = x13,
-#'   # latitude = x14,
-#'   # altitude = x15,
-#'   # accuracy = x16
+#'     # Adjust coordinate colnames as needed
+#'     # longitude = x13,
+#'     # latitude = x14,
+#'     # altitude = x15,
+#'     # accuracy = x16
 #'   )
 #'
 #' # Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"
@@ -160,7 +160,9 @@ odata_submission_get <- function(table = "Submissions",
     message(glue::glue("Downloaded {length(sub)} submissions.\n"))
   }
 
-  if (parse == FALSE) { return(sub) }
+  if (parse == FALSE) {
+    return(sub)
+  }
 
   #----------------------------------------------------------------------------#
   # Parse submission data
@@ -185,7 +187,7 @@ odata_submission_get <- function(table = "Submissions",
   if (verbose == TRUE) {
     message(glue::glue("Found date column: {dttm_cols}.\n"))
   }
-  for (colname in dttm_cols){
+  for (colname in dttm_cols) {
     if (verbose == TRUE) message(glue::glue("Parsing {colname} as {tz}...\n"))
     sub <- sub %>% parse_datetime(tz = tz, col_contains = as.character(colname))
   }
