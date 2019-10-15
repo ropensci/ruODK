@@ -29,6 +29,7 @@ Useful links:
 Other contributors:
 \itemize{
   \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (0000-0002-2815-0399) [reviewer]
+  \item Karissa Whiting (0000-0002-4683-1868) [reviewer]
   \item DBCA [copyright holder, funder]
   \item NWSFTCP [funder]
 }
