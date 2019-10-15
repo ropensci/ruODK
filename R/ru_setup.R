@@ -49,14 +49,14 @@ print.ru_settings <- function(x, ...) {
   cat("  Default ODK Central Form ID: ", x$fid, "\n")
   cat("  Default ODK Central URL: ", x$url, "\n")
   cat("  Default ODK Central Username: ", x$un, "\n")
-  cat("  Default ODK Central Password: ", x$pw, "\n")
+  cat("  Default ODK Central Password: run ruODK::get_default_pw() to show \n")
   cat("  Test ODK Central Project ID:", x$test_pid, "\n")
   cat("  Test ODK Central Form ID:", x$test_fid, "\n")
   cat("  Test ODK Central Form ID (ZIP tests):", x$test_fid_zip, "\n")
   cat("  Test ODK Central Form ID (Attachment tests):", x$test_fid_att, "\n")
   cat("  Test ODK Central URL:", x$test_url, "\n")
   cat("  Test ODK Central Username:", x$test_un, "\n")
-  cat("  Test ODK Central Password:", x$test_pw, "\n")
+  cat("  Test ODK Central Password: run ruODK::get_test_pw() to show \n")
 }
 
 #------------------------------------------------------------------------------#
@@ -211,6 +211,8 @@ ru_setup <- function(svc = NULL,
   if (!is.null(test_url)) Sys.setenv("ODKC_TEST_URL" = test_url)
   if (!is.null(test_un)) Sys.setenv("ODKC_TEST_UN" = test_un)
   if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
+
+  print(ru_settings())
 }
 
 #------------------------------------------------------------------------------#
