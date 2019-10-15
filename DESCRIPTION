@@ -58,7 +58,8 @@ Suggests:
     listviewer (>= 2.1.0),
     rmarkdown (>= 1.16),
     testthat (>= 2.2.1),
-    usethis (>= 1.5.1.9000)
+    usethis (>= 1.5.1.9000),
+    vcr (>= 0.3.0)
 Remotes:
     github::tidyverse/purrr,
     github::r-lib/rlang,

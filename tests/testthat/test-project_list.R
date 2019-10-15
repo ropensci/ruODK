@@ -1,9 +1,11 @@
 test_that("project_list works", {
-  p <- project_list(
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw()
-  )
+  # vcr::use_cassette("project_list", {
+    p <- project_list(
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  # })
   testthat::expect_true(nrow(p) > 0)
 
   # project_list returns a tibble
