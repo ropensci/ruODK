@@ -8,7 +8,7 @@ project_list(url = get_default_url(), un = get_default_un(),
   pw = get_default_pw())
 }
 \arguments{
-\item{url}{The ODK Central base URL without trailing slash.#'
+\item{url}{The ODK Central base URL without trailing slash.
 Default: \code{get_default_url()}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}

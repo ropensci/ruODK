@@ -23,7 +23,7 @@ E.g. `2000-01-01z` or `2000-12-31T23:59.999z`,
 
 \item{offset}{integer. The number of log entries to skip.}
 
-\item{url}{The ODK Central base URL without trailing slash.#'
+\item{url}{The ODK Central base URL without trailing slash.
 Default: \code{get_default_url()}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}

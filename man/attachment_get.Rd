@@ -37,7 +37,7 @@ Default: \code{get_default_fid()}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{url}{The ODK Central base URL without trailing slash.#'
+\item{url}{The ODK Central base URL without trailing slash.
 Default: \code{get_default_url()}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}

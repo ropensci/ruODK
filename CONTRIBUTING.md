@@ -1,3 +1,4 @@
+# Contributing 
 ## Non-technical contributions to ruODK
 Feel free to [report issues](https://github.com/dbca-wa/ruODK/issues):
 
@@ -6,10 +7,9 @@ Feel free to [report issues](https://github.com/dbca-wa/ruODK/issues):
 * Account requests are for getting access to the ODK Central instances run by DBCA
   (DBCA business only) or the public demo server (contributors, to run tests).
 
-## Technical contributions to ruODK
+## Technical contributions to `ruODK`
 
 If you would like to contribute to the code base, follow the process below.
-Note, this process is adjusted from the `usethis` tidyverse boilerplate.
 
 *  [Prerequisites](#prerequisites)
 *  [PR Process](#pr-process)
@@ -26,16 +26,20 @@ Note, this process is adjusted from the `usethis` tidyverse boilerplate.
 *   [Resources](#resources)
 *   [Code of Conduct](#code-of-conduct)
 
-This explains how to propose a change to ruODK via a pull request using
+This explains how to propose a change to `ruODK` via a pull request using
 Git and GitHub. 
 
 For more general info about contributing to `ruODK`, see the 
 [Resources](#resources) at the end of this document.
 
 ### Prerequisites
+To test the package and build the vignettes, you will need valid credentials for
+the test server, currently the ODK Central Sandbox.
+Create an [accont request issue](https://github.com/dbca-wa/ruODK/issues/new/choose)
+to request access to those two ODK Central instances.
 
 Before you do a pull request, you should always file an issue and make sure
-someone from the tidyverse team agrees that it’s a problem, and is happy with
+the maintainers agree that it’s a problem, and is happy with
 your basic proposal for fixing it. If you’ve found a bug, first create a minimal
 [reprex](https://www.tidyverse.org/help/#reprex).
 
@@ -44,14 +48,14 @@ your basic proposal for fixing it. If you’ve found a bug, first create a minim
 #### Fork, clone, branch
 
 The first thing you'll need to do is to [fork](https://help.github.com/articles/fork-a-repo/) 
-the [ruODK GitHub repo](https://github.com/dbca-wa/ruODK), and 
+the [`ruODK` GitHub repo](https://github.com/dbca-wa/ruODK), and 
 then clone it locally. We recommend that you create a branch for each PR.
 
 #### Check
 
 Before changing anything, make sure the package still passes `R CMD check`
 locally for you. When in doubt, compare your `R CMD check` results with current
-results for [ruODK on Travis](https://travis-ci.org/dbca-wa/ruODK) (checks on Linux and/or 
+results for [`ruODK` on Travis](https://travis-ci.org/dbca-wa/ruODK) (checks on Linux and/or 
 MacOS) and, if applicable, AppVeyor (checks on Windows). You'll do this again
 before you finalize your pull request, but this baseline will make it easier to
 pinpoint any problems introduced by your changes.
@@ -100,11 +104,9 @@ with test cases are easier to accept. If you are not sure what parts of your
 code are covered by tests, run the following to get a local coverage report of
 the package so you can see exactly what lines are not covered in the project.
 
-To run tests, you'll need access to the 
+To run tests and build the vignettes, you'll need access to the 
 [ODK Central sandbox instance](https://sandbox.central.opendatakit.org/).
-To build the vignettes, you'll need access to 
-[DBCA's ODK Central instance](https://odkcentral.dbca.wa.gov.au).
-Create an [accont request issue](https://github.com/dbca-wa/ruODK/issues/new/choose)
+If you haven't got an account yet, create an [accont request issue](https://github.com/dbca-wa/ruODK/issues/new/choose)
 to request access to those two ODK Central instances.
 
 You will need to use the following environment variables:
@@ -219,7 +221,7 @@ Please note that this project is released with a [Contributor Code of
 Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to
 abide by its terms.
 
-## Maintaining ruODK
+## Maintaining `ruODK`
 The steps to prepare a new `ruODK` release are in `data-raw/make_release.R`.
 It is not necessary to run them as a contributor, but immensely convenient for
 the maintainer to have them there in one place.

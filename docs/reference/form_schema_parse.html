@@ -194,10 +194,10 @@ which columns require <code>`parse_datetime`</code>, <code>`attachment_get`</cod
 
 <span class='no'>fsp</span>
 
-<span class='co'># Attachments: use \code{`attachment_get`} on each of</span>
+<span class='co'># Attachments: use `attachment_get` on each of</span>
 <span class='no'>fsp</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>type</span> <span class='kw'>==</span> <span class='st'>"binary"</span>)
 
-<span class='co'># dateYime: use \code{`parse_datetime`} on each of</span>
+<span class='co'># dateYime: use `parse_datetime` on each of</span>
 <span class='no'>fsp</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>type</span> <span class='kw'>==</span> <span class='st'>"dateTime"</span>)
 
 <span class='co'># Point location: will be split into lat/lon/alt/acc</span>

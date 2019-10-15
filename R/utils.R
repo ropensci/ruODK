@@ -50,8 +50,10 @@ isodt_to_local <- function(datetime_string,
 #' }
 parse_datetime <- function(df,
                            col_contains = "time",
-                           orders = c("YmdHMS", "YmdHMSz",
-                                      "Ymd HMS", "Ymd HMSz"),
+                           orders = c(
+                             "YmdHMS", "YmdHMSz",
+                             "Ymd HMS", "Ymd HMSz"
+                           ),
                            tz = "Australia/Perth") {
   df %>%
     dplyr::mutate_at(

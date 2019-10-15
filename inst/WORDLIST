@@ -42,7 +42,6 @@ ckanr
 CMD
 codecov
 Collect3289v2
-comparion
 compat
 composable
 corner1
@@ -158,6 +157,7 @@ READMEs
 rectangled
 rectangling
 Rectangling
+repo
 RESTful
 RJDBC
 RJSONIO

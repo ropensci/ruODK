@@ -26,6 +26,8 @@ form IDs.
 `ruODK`'s functions accept these parameters either as explicit keyword arguments,
 or fall back to defaults.
 
+Note: Always consider code to be public. Never use plain text credentials in code.
+
 `ruODK` suggests as best practice to set the defaults (or parts thereof) using 
 `ruODK::ru_setup()` or through permanently setting environment variables.
 
@@ -42,22 +44,23 @@ which is shown in ODK Central on the Form Submissions tab.
 
 ```{r ru_setup}
 # ruODK user using OData service URL, username (an email), and password
+# Never use plaintext username and password, use Sys.getenv() instead
 ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
-  un = "me@email.com", 
-  pw = "..."
+  un = Sys.getenv("ODKC_UN"), 
+  pw = Sys.getenv("ODKC_PW")
 )
 
 # ruODK contributor
 ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
-  un = "me@email.com", 
-  pw = "my_default_password",
+  un = Sys.getenv("ODKC_UN"), 
+  pw = Sys.getenv("ODKC_PW"),
   test_svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
   test_fid_zip = "build_Spotlighting-0-6_1558333698",
   test_fid_att = "build_Flora-Quadrat-0-1_1558330379",
-  test_un = "me@email.com", 
-  test_pw = "YYYY"
+  test_un = Sys.getenv("ODKC_TEST_UN"), 
+  test_pw = Sys.getenv("ODKC_TEST_PW")
 )
 
 # ruODK contributor using base URL, project ID, and form ID
@@ -65,12 +68,12 @@ ruODK::ru_setup(
 ruODK::ru_setup(
   pid = 1,
   fid = "build_Flora-Quadrat-0-4_1564384341",
-  url = "https://odkcentral.dbca.wa.gov.au", 
-  un = "me@email.com", 
-  pw = "my_default_password",
-  test_url = "https://sandbox.central.opendatakit.org", 
-  test_un = "me@email.com", 
-  test_pw = "my_test_password",
+  url = "https://odkcentral.dbca.wa.gov.au",
+  un = Sys.getenv("ODKC_UN"), 
+  pw = Sys.getenv("ODKC_PW"),
+  test_url = "https://sandbox.central.opendatakit.org",
+  test_un = Sys.getenv("ODKC_TEST_UN"), 
+  test_pw = Sys.getenv("ODKC_TEST_PW"),
   test_pid = 14,
   test_fid = "build_Flora-Quadrat-0-4_1564384341",
   test_fid_zip = "build_Spotlighting-0-6_1558333698",
@@ -142,7 +145,6 @@ Sys.setenv(ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379")
 ```
 
 
-
 ## The hard way: Per function call
 We can supply those credentials to each `ruODK` function call.
 
@@ -150,13 +152,13 @@ We can supply those credentials to each `ruODK` function call.
 # Use ruODK without ru_setup
 ruODK::project_list(
   url="https://my-odkc.com", 
-  un="me@mail.com", 
-  pw="......."
+  un = Sys.getenv("ODKC_UN"), 
+  pw = Sys.getenv("ODKC_PW")
 )
 
 # Tests use default test settings explicitly
 ruODK::project_list(
-  url=ruODK::get_test_url(), 
+  url=ruODK::get_test_url(),
   un=ruODK::get_test_un(), 
   pw=ruODK::get_test_pw()
 )
@@ -179,8 +181,8 @@ URL and a web user's username and password, subsequent functions can omit
 # Server 1, Project 1, Form 1
 ruODK::ru_setup(
   svc = "https://central1.org/v1/projects/1/forms/form1.svc",
-  un = "me@email.com",
-  pw = "..."
+  un = Sys.getenv("ODKC_UN"), 
+  pw = Sys.getenv("ODKC_PW")
 )
 
 ruODK::project_detail()
@@ -204,8 +206,8 @@ ruODK::submission_list()
 # Server 2, Project 11, Form 12
 ruODK::ru_setup(
   svc = "https://central2.org/v1/projects/11/forms/form12.svc",
-  un = "me@email.com",
-  pw = "..."
+  un = Sys.getenv("ODKC_UN2"), 
+  pw = Sys.getenv("ODKC_PW2")
 )
 
 ruODK::project_detail()

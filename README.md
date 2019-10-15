@@ -160,7 +160,7 @@ descriptions of the steps below.
     provided by `ruODK`. The `.odkbuild` versions can be loaded into
     [ODK Build](https://build.opendatakit.org/), while the `.xml`
     versions can be directly imported into ODK Central.
-  - [Publish the form](https://docs.opendatakit.org/central-forms/)to
+  - [Publish the form](https://docs.opendatakit.org/central-forms/) to
     ODK Central.
   - Collect some data for this form on ODK Collect and let ODK Collect
     submit the finalised forms to ODK Central.
@@ -169,6 +169,20 @@ descriptions of the steps below.
 
 Set up `ruODK` with an OData Service URL and credentials of a
 read-permitted ODK Central web user.
+
+    #> <ruODK settings>
+    #>   Default ODK Central Project ID:  14 
+    #>   Default ODK Central Form ID:  build_Flora-Quadrat-0-4_1564384341 
+    #>   Default ODK Central URL:  https://sandbox.central.opendatakit.org 
+    #>   Default ODK Central Username:  Florian.Mayer@dbca.wa.gov.au 
+    #>   Default ODK Central Password: run ruODK::get_default_pw() to show 
+    #>   Test ODK Central Project ID: 14 
+    #>   Test ODK Central Form ID: build_Flora-Quadrat-0-4_1564384341 
+    #>   Test ODK Central Form ID (ZIP tests): build_Spotlighting-0-6_1558333698 
+    #>   Test ODK Central Form ID (Attachment tests): build_Flora-Quadrat-0-1_1558330379 
+    #>   Test ODK Central URL: https://sandbox.central.opendatakit.org 
+    #>   Test ODK Central Username: Florian.Mayer@dbca.wa.gov.au 
+    #>   Test ODK Central Password: run ruODK::get_test_pw() to show
 
 ``` r
 ruODK::ru_setup(

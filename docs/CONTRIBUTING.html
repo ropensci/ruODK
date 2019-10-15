@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NA • ruODK</title>
+<title>Contributing • ruODK</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="NA" />
+<meta property="og:title" content="Contributing" />
 
 
 
@@ -124,9 +124,10 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>NA</h1>
+      <h1>Contributing</h1>
     </div>
 
+<div id="contributing" class="section level1">
 
 <div id="non-technical-contributions-to-ruodk" class="section level2">
 <h2 class="hasAnchor">
@@ -140,8 +141,9 @@
 </div>
 <div id="technical-contributions-to-ruodk" class="section level2">
 <h2 class="hasAnchor">
-<a href="#technical-contributions-to-ruodk" class="anchor"></a>Technical contributions to ruODK</h2>
-<p>If you would like to contribute to the code base, follow the process below. Note, this process is adjusted from the <code>usethis</code> tidyverse boilerplate.</p>
+<a href="#technical-contributions-to-ruodk" class="anchor"></a>Technical contributions to <code>ruODK</code>
+</h2>
+<p>If you would like to contribute to the code base, follow the process below.</p>
 <ul>
 <li><a href="#prerequisites">Prerequisites</a></li>
 <li><a href="#pr-process">PR Process</a></li>
@@ -158,12 +160,13 @@
 <li><a href="#resources">Resources</a></li>
 <li><a href="#code-of-conduct">Code of Conduct</a></li>
 </ul>
-<p>This explains how to propose a change to ruODK via a pull request using Git and GitHub.</p>
+<p>This explains how to propose a change to <code>ruODK</code> via a pull request using Git and GitHub.</p>
 <p>For more general info about contributing to <code>ruODK</code>, see the <a href="#resources">Resources</a> at the end of this document.</p>
 <div id="prerequisites" class="section level3">
 <h3 class="hasAnchor">
 <a href="#prerequisites" class="anchor"></a>Prerequisites</h3>
-<p>Before you do a pull request, you should always file an issue and make sure someone from the tidyverse team agrees that it’s a problem, and is happy with your basic proposal for fixing it. If you’ve found a bug, first create a minimal <a href="https://www.tidyverse.org/help/#reprex">reprex</a>.</p>
+<p>To test the package and build the vignettes, you will need valid credentials for the test server, currently the ODK Central Sandbox. Create an <a href="https://github.com/dbca-wa/ruODK/issues/new/choose">accont request issue</a> to request access to those two ODK Central instances.</p>
+<p>Before you do a pull request, you should always file an issue and make sure the maintainers agree that it’s a problem, and is happy with your basic proposal for fixing it. If you’ve found a bug, first create a minimal <a href="https://www.tidyverse.org/help/#reprex">reprex</a>.</p>
 </div>
 <div id="pr-process" class="section level3">
 <h3 class="hasAnchor">
@@ -171,12 +174,12 @@
 <div id="fork-clone-branch" class="section level4">
 <h4 class="hasAnchor">
 <a href="#fork-clone-branch" class="anchor"></a>Fork, clone, branch</h4>
-<p>The first thing you’ll need to do is to <a href="https://help.github.com/articles/fork-a-repo/">fork</a> the <a href="https://github.com/dbca-wa/ruODK">ruODK GitHub repo</a>, and then clone it locally. We recommend that you create a branch for each PR.</p>
+<p>The first thing you’ll need to do is to <a href="https://help.github.com/articles/fork-a-repo/">fork</a> the <a href="https://github.com/dbca-wa/ruODK"><code>ruODK</code> GitHub repo</a>, and then clone it locally. We recommend that you create a branch for each PR.</p>
 </div>
 <div id="check" class="section level4">
 <h4 class="hasAnchor">
 <a href="#check" class="anchor"></a>Check</h4>
-<p>Before changing anything, make sure the package still passes <code>R CMD check</code> locally for you. When in doubt, compare your <code>R CMD check</code> results with current results for <a href="https://travis-ci.org/dbca-wa/ruODK">ruODK on Travis</a> (checks on Linux and/or MacOS) and, if applicable, AppVeyor (checks on Windows). You’ll do this again before you finalize your pull request, but this baseline will make it easier to pinpoint any problems introduced by your changes.</p>
+<p>Before changing anything, make sure the package still passes <code>R CMD check</code> locally for you. When in doubt, compare your <code>R CMD check</code> results with current results for <a href="https://travis-ci.org/dbca-wa/ruODK"><code>ruODK</code> on Travis</a> (checks on Linux and/or MacOS) and, if applicable, AppVeyor (checks on Windows). You’ll do this again before you finalize your pull request, but this baseline will make it easier to pinpoint any problems introduced by your changes.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/check.html">check</a></span>()</a></code></pre></div>
 </div>
 <div id="style" class="section level4">
@@ -199,7 +202,7 @@
 <h4 class="hasAnchor">
 <a href="#test" class="anchor"></a>Test</h4>
 <p>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases are easier to accept. If you are not sure what parts of your code are covered by tests, run the following to get a local coverage report of the package so you can see exactly what lines are not covered in the project.</p>
-<p>To run tests, you’ll need access to the <a href="https://sandbox.central.opendatakit.org/">ODK Central sandbox instance</a>. To build the vignettes, you’ll need access to <a href="https://odkcentral.dbca.wa.gov.au">DBCA’s ODK Central instance</a>. Create an <a href="https://github.com/dbca-wa/ruODK/issues/new/choose">accont request issue</a> to request access to those two ODK Central instances.</p>
+<p>To run tests and build the vignettes, you’ll need access to the <a href="https://sandbox.central.opendatakit.org/">ODK Central sandbox instance</a>. If you haven’t got an account yet, create an <a href="https://github.com/dbca-wa/ruODK/issues/new/choose">accont request issue</a> to request access to those two ODK Central instances.</p>
 <p>You will need to use the following environment variables:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/ru_setup.html">ru_setup</a></span>(</a>
 <a class="sourceLine" id="cb4-2" title="2">  <span class="dt">test_url =</span> <span class="st">"https://sandbox.central.opendatakit.org"</span>,</a>
@@ -294,10 +297,11 @@
 </div>
 <div id="maintaining-ruodk" class="section level2">
 <h2 class="hasAnchor">
-<a href="#maintaining-ruodk" class="anchor"></a>Maintaining ruODK</h2>
+<a href="#maintaining-ruodk" class="anchor"></a>Maintaining <code>ruODK</code>
+</h2>
 <p>The steps to prepare a new <code>ruODK</code> release are in <code>data-raw/make_release.R</code>. It is not necessary to run them as a contributor, but immensely convenient for the maintainer to have them there in one place.</p>
 </div>
-
+</div>
 
   </div>
 

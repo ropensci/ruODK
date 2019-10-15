@@ -6,12 +6,12 @@
 \alias{ruODK-package}
 \title{ruODK: An R Client for the ODK Central API}
 \description{
-ruODK is an R Client for the ODK Central API.
+`ruODK` is an R Client for the ODK Central API.
 
-  Please see the ruODK website for full documentation:
+  Please see the `ruODK` website for full documentation:
   * <https://dbca-wa.github.io/ruODK/>
 
-  ruODK is "pipe-friendly" and, in fact, re-exports `%>%`, but does not
+  `ruODK` is "pipe-friendly" and, in fact, re-exports `%>%`, but does not
   require its use.
 }
 \seealso{
@@ -28,6 +28,7 @@ Useful links:
 
 Other contributors:
 \itemize{
+  \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (0000-0002-2815-0399) [reviewer]
   \item DBCA [copyright holder, funder]
   \item NWSFTCP [funder]
 }

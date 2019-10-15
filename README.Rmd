@@ -143,7 +143,8 @@ provides up-to-date descriptions of the steps below.
    provided by `ruODK`. The `.odkbuild` versions can be loaded into 
    [ODK Build](https://build.opendatakit.org/), while the `.xml` versions can be 
    directly imported into ODK Central.
-*  [Publish the form](https://docs.opendatakit.org/central-forms/)to ODK Central.
+*  [Publish the form](https://docs.opendatakit.org/central-forms/)
+   to ODK Central.
 *  Collect some data for this form on ODK Collect and let ODK Collect submit the
    finalised forms to ODK Central.
 

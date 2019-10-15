@@ -10,7 +10,7 @@ project_create(name, url = get_default_url(), un = get_default_un(),
 \arguments{
 \item{name}{The desired name of the project. Can contain whitespace.}
 
-\item{url}{The ODK Central base URL without trailing slash.#'
+\item{url}{The ODK Central base URL without trailing slash.
 Default: \code{get_default_url()}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
