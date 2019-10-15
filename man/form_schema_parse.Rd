@@ -44,10 +44,10 @@ fsp <- form_schema(parse = TRUE)
 
 fsp
 
-# Attachments: use \\code{`attachment_get`} on each of
+# Attachments: use `attachment_get` on each of
 fsp \%>\% dplyr::filter(type == "binary")
 
-# dateYime: use \\code{`parse_datetime`} on each of
+# dateYime: use `parse_datetime` on each of
 fsp \%>\% dplyr::filter(type == "dateTime")
 
 # Point location: will be split into lat/lon/alt/acc

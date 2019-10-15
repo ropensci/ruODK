@@ -47,7 +47,7 @@ get_test_fid_att()
   form ID, url, username, and password, and corresponding optional test
   server settings.
 \code{ru_setup} sets your production and test settings, while
-\code{get_(test_)*} get each of those respective settings.
+\code{get_(default/test)_*} get each of those respective settings.
 }
 \description{
 \lifecycle{stable}

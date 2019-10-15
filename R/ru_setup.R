@@ -7,7 +7,7 @@
 #'   form ID, url, username, and password, and corresponding optional test
 #'   server settings.
 #' \code{ru_setup} sets your production and test settings, while
-#' \code{get_(test_)*} get each of those respective settings.
+#' \code{get_(default/test)_*} get each of those respective settings.
 #' @seealso  \code{\link{ru_setup}},
 #' \code{\link{get_default_pid}},
 #' \code{\link{get_default_fid}},
@@ -153,10 +153,10 @@ odata_svc_parse <- function(svc) {
 #'   instance, as well as an existing project and form.
 #'
 #' @examples
-#' # \code{ruODK} users only need default settings to their ODK Central:
+#' # `ruODK` users only need default settings to their ODK Central:
 #' ru_setup(url = "https://my-odkc.com", un = "me@email.com", pw = "...")
 #'
-#' # \code{ruODK} contributors and maintainers need specific ODK Central
+#' # `ruODK` contributors and maintainers need specific ODK Central
 #' # instances to run tests and build vignettes, see contributing guide:
 #' ru_setup(
 #'   url = "https://odkcentral.dbca.wa.gov.au",

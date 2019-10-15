@@ -85,10 +85,10 @@ submission tab, which in turn contains base URL, project ID, and form ID.
   instance, as well as an existing project and form.
 }
 \examples{
-# \\code{ruODK} users only need default settings to their ODK Central:
+# `ruODK` users only need default settings to their ODK Central:
 ru_setup(url = "https://my-odkc.com", un = "me@email.com", pw = "...")
 
-# \\code{ruODK} contributors and maintainers need specific ODK Central
+# `ruODK` contributors and maintainers need specific ODK Central
 # instances to run tests and build vignettes, see contributing guide:
 ru_setup(
   url = "https://odkcentral.dbca.wa.gov.au",
