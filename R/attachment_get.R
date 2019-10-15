@@ -7,7 +7,6 @@
 #' @family utilities
 #' @export
 strip_uuid <- function(uuid) {
-  . <- NULL
   uuid %>% stringr::str_replace_all(., pattern = "uuid:", replacement = "")
 }
 
@@ -20,7 +19,6 @@ strip_uuid <- function(uuid) {
 #' @family utilities
 #' @export
 prepend_uuid <- function(md5hash) {
-  . <- NULL
   glue::glue("uuid:{md5hash}") %>% as.character(.)
 }
 
@@ -76,7 +74,6 @@ get_one_attachment <- function(pth,
                                un = get_default_un(),
                                pw = get_default_pw(),
                                verbose = FALSE) {
-  . <- NULL
   yell_if_missing(url, un, pw)
   if (fs::file_exists(pth)) {
     if (verbose == TRUE) message(glue::glue("Keeping {pth}\n"))

@@ -9,3 +9,5 @@
 #' @importFrom rlang %||%
 #' @keywords internal
 "_PACKAGE"
+
+utils::globalVariables(".")

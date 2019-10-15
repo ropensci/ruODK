@@ -41,7 +41,6 @@
 project_list <- function(url = get_default_url(),
                          un = get_default_un(),
                          pw = get_default_pw()) {
-  . <- NULL
   yell_if_missing(url, un, pw)
   glue::glue("{url}/v1/projects/") %>%
     httr::GET(

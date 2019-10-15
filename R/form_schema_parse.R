@@ -48,10 +48,7 @@ form_schema_parse <- function(fs, path = "Submissions", verbose = FALSE) {
   # if (!(is.list(fs) && "children" %in% names(fs))) return(NULL)
 
   # 0. Spray R CMD check with WD-40
-  . <- NULL
-  type <- NULL
-  name <- NULL
-  children <- NULL
+  type <- name <- children <- NULL
 
   # 1. Grab next level type/name pairs, append column "path".
   # This does not work recursively - if it did, we'd be done here.

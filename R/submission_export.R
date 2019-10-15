@@ -65,7 +65,6 @@ submission_export <- function(local_dir = here::here(),
                               un = get_default_un(),
                               pw = get_default_pw(),
                               verbose = FALSE) {
-  . <- NULL
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   pth <- fs::path(local_dir, glue::glue("{fid}.zip"))
 

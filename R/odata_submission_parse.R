@@ -89,7 +89,6 @@ unnest_all <- function(nested_tbl,
 odata_submission_parse <- function(data,
                                    names_repair = "universal",
                                    verbose = FALSE) {
-  . <- NULL
   data %>%
     tibble::as_tibble(., .name_repair = names_repair) %>%
     unnest_all(names_repair = names_repair, verbose = verbose) %>%

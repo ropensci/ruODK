@@ -39,7 +39,6 @@ project_create <- function(name,
                            pw = get_default_pw()) {
   rlang::warn("Not implemented.")
 
-  # . <- NULL
   # has_internet()
   # glue::glue("{url}/v1/projects/") %>%
   #   httr::POST(

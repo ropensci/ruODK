@@ -77,7 +77,6 @@ print.ru_settings <- function(x, ...) {
 #'   * \code{pid} The project ID.
 #'   * \code{fid} The form ID.
 odata_svc_parse <- function(svc) {
-  . <- NULL
   parts <- httr::parse_url(svc)
   pth <- parts$path %>% stringr::str_split("/")
   list(

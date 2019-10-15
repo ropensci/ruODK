@@ -119,7 +119,6 @@ form_schema <- function(flatten = FALSE,
                         url = get_default_url(),
                         un = get_default_un(),
                         pw = get_default_pw()) {
-  . <- NULL
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   fs <- glue::glue("{url}/v1/projects/{pid}/forms/{fid}.schema.json") %>%
     httr::GET(

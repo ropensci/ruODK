@@ -125,7 +125,6 @@ odata_submission_get <- function(table = "Submissions",
                                  url = get_default_url(),
                                  un = get_default_un(),
                                  pw = get_default_pw()) {
-  . <- NULL
   type <- NULL
   yell_if_missing(url, un, pw)
 

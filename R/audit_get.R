@@ -77,7 +77,6 @@ audit_get <- function(action = NULL,
                       url = Sys.getenv("ODKC_URL"),
                       un = Sys.getenv("ODKC_UN"),
                       pw = Sys.getenv("ODKC_PW")) {
-  . <- NULL
   yell_if_missing(url, un, pw)
   qry <- list(
     action = action,

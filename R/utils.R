@@ -14,7 +14,6 @@
 isodt_to_local <- function(datetime_string,
                            orders = c("YmdHMS", "YmdHMSz"),
                            tz = "UTC") {
-  . <- NULL
   datetime_string %>%
     lubridate::parse_date_time(orders = orders) %>%
     lubridate::with_tz(., tzone = tz)

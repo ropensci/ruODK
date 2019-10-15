@@ -61,7 +61,7 @@ fxml_defaults <- form_xml(1, "build_xformsId")
 fxml <- form_xml()
 listviewer::jsonedit(fxml)
 
-# form_xml returns a nested list.
+# form_xml returns a nested list
 class(fxml)
 # > "list"
 }

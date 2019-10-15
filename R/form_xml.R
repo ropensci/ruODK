@@ -30,7 +30,7 @@
 #' fxml <- form_xml()
 #' listviewer::jsonedit(fxml)
 #'
-#' # form_xml returns a nested list.
+#' # form_xml returns a nested list
 #' class(fxml)
 #' # > "list"
 #' }
@@ -40,7 +40,6 @@ form_xml <- function(parse = TRUE,
                      url = get_default_url(),
                      un = get_default_un(),
                      pw = get_default_pw()) {
-  . <- NULL
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   out <- glue::glue("{url}/v1/projects/{pid}/forms/{fid}.xml") %>%
     httr::GET(

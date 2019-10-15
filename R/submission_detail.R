@@ -41,7 +41,6 @@ submission_detail <- function(iid,
                               url = get_default_url(),
                               un = get_default_un(),
                               pw = get_default_pw()) {
-  . <- NULL
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}") %>%
     httr::GET(
