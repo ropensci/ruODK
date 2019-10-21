@@ -23,7 +23,9 @@ The forms used to capture this data are development versions of real-world
 forms.
 }
 \seealso{
-Other included: \code{\link{fq_raw_strata}},
+Other included: \code{\link{fq_data_strata}},
+  \code{\link{fq_data_taxa}}, \code{\link{fq_data}},
+  \code{\link{fq_fs}}, \code{\link{fq_raw_strata}},
   \code{\link{fq_raw_taxa}}, \code{\link{fq_raw}},
   \code{\link{fq_svc}}
 }
