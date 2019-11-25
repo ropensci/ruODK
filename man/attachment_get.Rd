@@ -4,10 +4,18 @@
 \alias{attachment_get}
 \title{Download attachments and return the local path.}
 \usage{
-attachment_get(sid, fn, local_dir = "media", separate = FALSE,
-  pid = get_default_pid(), fid = get_default_fid(),
-  url = get_default_url(), un = get_default_un(),
-  pw = get_default_pw(), verbose = FALSE)
+attachment_get(
+  sid,
+  fn,
+  local_dir = "media",
+  separate = FALSE,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{sid}{One or many ODK submission UUIDs, an MD5 hash.}
@@ -80,12 +88,13 @@ workdir/media/filename3.jpg
 
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
 
-Other odata-api: \code{\link{attachment_url}},
-  \code{\link{get_one_attachment}},
-  \code{\link{odata_metadata_get}},
-  \code{\link{odata_service_get}},
-  \code{\link{odata_submission_get}},
-  \code{\link{odata_submission_parse}},
-  \code{\link{unnest_all}}
+Other odata-api: 
+\code{\link{attachment_url}()},
+\code{\link{get_one_attachment}()},
+\code{\link{odata_metadata_get}()},
+\code{\link{odata_service_get}()},
+\code{\link{odata_submission_get}()},
+\code{\link{odata_submission_parse}()},
+\code{\link{unnest_all}()}
 }
 \concept{odata-api}

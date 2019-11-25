@@ -7,15 +7,29 @@ ruODK::ru_setup(
 
 fq_svc <- ruODK::odata_service_get()
 fq_meta <- ruODK::odata_metadata_get()
-fq_raw <- ruODK::odata_submission_get(table = fq_svc$name[1])
-fq_raw_strata <- ruODK::odata_submission_get(table = fq_svc$name[2])
-fq_raw_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3])
+fq_fs <- ruODK::form_schema()
+fq_raw <- ruODK::odata_submission_get(table = fq_svc$name[1], parse = FALSE)
+fq_raw_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], parse = FALSE)
+fq_raw_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], parse = FALSE)
+fq_data <- ruODK::odata_submission_get(table = fq_svc$name[1], parse = TRUE)
+fq_data_strata <- ruODK::odata_submission_get(
+  table = fq_svc$name[2], parse = TRUE
+) %>%
+  dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
+fq_data_taxa <- ruODK::odata_submission_get(
+  table = fq_svc$name[3], parse = TRUE
+) %>%
+  dplyr::rename(lon = x6, lat = x7, alt = x8) %>%
+  dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 
 usethis::use_data(fq_svc, overwrite = T)
 usethis::use_data(fq_meta, overwrite = T)
 usethis::use_data(fq_raw, overwrite = T)
 usethis::use_data(fq_raw_strata, overwrite = T)
 usethis::use_data(fq_raw_taxa, overwrite = T)
+usethis::use_data(fq_data, overwrite = T)
+usethis::use_data(fq_data_strata, overwrite = T)
+usethis::use_data(fq_data_taxa, overwrite = T)
 
 # Hex sticker
 # remotes::install_github("GuangchuangYu/hexSticker")

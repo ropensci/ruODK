@@ -34,8 +34,10 @@ testthat::expect_error(yell_if_missing("", "", "", ""))
 testthat::expect_error(yell_if_missing("", "", "", "", ""))
 }
 \seealso{
-Other ru_settings: \code{\link{odata_svc_parse}},
-  \code{\link{ru_settings}}, \code{\link{ru_setup}},
-  \code{\link{yell_if_error}}
+Other ru_settings: 
+\code{\link{odata_svc_parse}()},
+\code{\link{ru_settings}()},
+\code{\link{ru_setup}()},
+\code{\link{yell_if_error}()}
 }
 \concept{ru_settings}

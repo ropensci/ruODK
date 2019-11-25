@@ -5,11 +5,23 @@
 \title{Retrieve form submissions, parse data and dates, download and link
 attachments.}
 \usage{
-odata_submission_get(table = "Submissions", skip = NULL, top = NULL,
-  count = FALSE, wkt = FALSE, parse = TRUE, verbose = FALSE,
-  tz = "UTC", local_dir = "media", pid = get_default_pid(),
-  fid = get_default_fid(), url = get_default_url(),
-  un = get_default_un(), pw = get_default_pw())
+odata_submission_get(
+  table = "Submissions",
+  skip = NULL,
+  top = NULL,
+  count = FALSE,
+  wkt = FALSE,
+  parse = TRUE,
+  verbose = FALSE,
+  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  tz = "UTC",
+  local_dir = "media",
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw()
+)
 }
 \arguments{
 \item{table}{The submission EntityType, or in plain words, the table name.
@@ -39,6 +51,11 @@ path.
 Default: TRUE.}
 
 \item{verbose}{Whether to display debug messages or not (default)}
+
+\item{orders}{(vector of character) Orders of datetime elements for
+lubridate.
+Default:
+\code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
 
 \item{tz}{A timezone, e.g. "Australia/Perth" or "UTC". Default: "UTC".}
 
@@ -136,7 +153,7 @@ data <- odata_submissions_get(
 data <- odata_submissions_get(
   table = form_tables$url[1],
   wkt = FALSE
-) \%>\%
+) %>%
   dplyr::rename(
     # Adjust coordinate colnames as needed
     # longitude = x13,
@@ -157,12 +174,13 @@ data <- odata_submissions_get(
 
 \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}
 
-Other odata-api: \code{\link{attachment_get}},
-  \code{\link{attachment_url}},
-  \code{\link{get_one_attachment}},
-  \code{\link{odata_metadata_get}},
-  \code{\link{odata_service_get}},
-  \code{\link{odata_submission_parse}},
-  \code{\link{unnest_all}}
+Other odata-api: 
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
+\code{\link{get_one_attachment}()},
+\code{\link{odata_metadata_get}()},
+\code{\link{odata_service_get}()},
+\code{\link{odata_submission_parse}()},
+\code{\link{unnest_all}()}
 }
 \concept{odata-api}

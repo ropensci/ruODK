@@ -92,10 +92,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/api.html">Accessing the RESTful API</a>
+      <a href="../articles/odata-api.html">Accessing the OData API</a>
     </li>
     <li>
-      <a href="../articles/odata.html">Accessing the OData API</a>
+      <a href="../articles/restful-api.html">Accessing the RESTful API</a>
     </li>
     <li>
       <a href="../articles/setup.html">Setup</a>
@@ -135,9 +135,14 @@
     <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>attachment_list</span>(<span class='no'>iid</span>, <span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(), <span class='kw'>fid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>(),
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>())</pre>
+    <pre class="usage"><span class='fu'>attachment_list</span>(
+  <span class='no'>iid</span>,
+  <span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(),
+  <span class='kw'>fid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>(),
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,16 +214,21 @@ its filename to the request URL to download only that file (see below).</p>
 
     <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments</a></p>
 <p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments</a></p>
-<p>Other restful-api: <code><a href='attachment_link.html'>attachment_link</a></code>,
-  <code><a href='audit_get.html'>audit_get</a></code>, <code><a href='form_detail.html'>form_detail</a></code>,
-  <code><a href='form_list.html'>form_list</a></code>, <code><a href='form_schema_parse.html'>form_schema_parse</a></code>,
-  <code><a href='form_schema.html'>form_schema</a></code>, <code><a href='form_xml.html'>form_xml</a></code>,
-  <code><a href='project_create.html'>project_create</a></code>,
-  <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
-  <code><a href='submission_detail.html'>submission_detail</a></code>,
-  <code><a href='submission_export.html'>submission_export</a></code>,
-  <code><a href='submission_get.html'>submission_get</a></code>,
-  <code><a href='submission_list.html'>submission_list</a></code></p></div>
+<p>Other restful-api: 
+<code><a href='attachment_link.html'>attachment_link</a>()</code>,
+<code><a href='audit_get.html'>audit_get</a>()</code>,
+<code><a href='form_detail.html'>form_detail</a>()</code>,
+<code><a href='form_list.html'>form_list</a>()</code>,
+<code><a href='form_schema_parse.html'>form_schema_parse</a>()</code>,
+<code><a href='form_schema.html'>form_schema</a>()</code>,
+<code><a href='form_xml.html'>form_xml</a>()</code>,
+<code><a href='project_create.html'>project_create</a>()</code>,
+<code><a href='project_detail.html'>project_detail</a>()</code>,
+<code><a href='project_list.html'>project_list</a>()</code>,
+<code><a href='submission_detail.html'>submission_detail</a>()</code>,
+<code><a href='submission_export.html'>submission_export</a>()</code>,
+<code><a href='submission_get.html'>submission_get</a>()</code>,
+<code><a href='submission_list.html'>submission_list</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -235,7 +245,7 @@ its filename to the request URL to download only that file (see below).</p>
 <span class='no'>sl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='submission_list.html'>submission_list</a></span>()
 
 <span class='no'>al</span> <span class='kw'>&lt;-</span> <span class='fu'>attachment_list</span>(<span class='no'>sl</span>$<span class='no'>instance_id</span><span class='kw'>[[</span><span class='fl'>1</span>]])
-<span class='no'>al</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
+<span class='no'>al</span>
 
 <span class='co'># attachment_list returns a tibble</span>
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>al</span>)

@@ -6,7 +6,9 @@
 #' @template param-url
 #' @template param-auth
 #' @return A tibble with one row per form and all form metadata as columns.
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
+# nolint end
 #' @family restful-api
 #' @importFrom httr add_headers authenticate content GET
 #' @export

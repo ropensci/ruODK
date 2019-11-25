@@ -10,7 +10,9 @@
 #' @template param-auth
 #' @return A tibble with one row per project and all project metadata
 #'         as columns as per ODK Central API docs.
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects}
+# nolint end
 #' @family restful-api
 #' @export
 #' @examples

@@ -92,10 +92,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/api.html">Accessing the RESTful API</a>
+      <a href="../articles/odata-api.html">Accessing the OData API</a>
     </li>
     <li>
-      <a href="../articles/odata.html">Accessing the OData API</a>
+      <a href="../articles/restful-api.html">Accessing the RESTful API</a>
     </li>
     <li>
       <a href="../articles/setup.html">Setup</a>
@@ -165,16 +165,21 @@ Columns of the dataframe are selected by the presence of `att_contains`.</p></td
   paths to the downloaded attachment files.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other restful-api: <code><a href='attachment_list.html'>attachment_list</a></code>,
-  <code><a href='audit_get.html'>audit_get</a></code>, <code><a href='form_detail.html'>form_detail</a></code>,
-  <code><a href='form_list.html'>form_list</a></code>, <code><a href='form_schema_parse.html'>form_schema_parse</a></code>,
-  <code><a href='form_schema.html'>form_schema</a></code>, <code><a href='form_xml.html'>form_xml</a></code>,
-  <code><a href='project_create.html'>project_create</a></code>,
-  <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
-  <code><a href='submission_detail.html'>submission_detail</a></code>,
-  <code><a href='submission_export.html'>submission_export</a></code>,
-  <code><a href='submission_get.html'>submission_get</a></code>,
-  <code><a href='submission_list.html'>submission_list</a></code></p></div>
+    <div class='dont-index'><p>Other restful-api: 
+<code><a href='attachment_list.html'>attachment_list</a>()</code>,
+<code><a href='audit_get.html'>audit_get</a>()</code>,
+<code><a href='form_detail.html'>form_detail</a>()</code>,
+<code><a href='form_list.html'>form_list</a>()</code>,
+<code><a href='form_schema_parse.html'>form_schema_parse</a>()</code>,
+<code><a href='form_schema.html'>form_schema</a>()</code>,
+<code><a href='form_xml.html'>form_xml</a>()</code>,
+<code><a href='project_create.html'>project_create</a>()</code>,
+<code><a href='project_detail.html'>project_detail</a>()</code>,
+<code><a href='project_list.html'>project_list</a>()</code>,
+<code><a href='submission_detail.html'>submission_detail</a>()</code>,
+<code><a href='submission_export.html'>submission_export</a>()</code>,
+<code><a href='submission_get.html'>submission_get</a>()</code>,
+<code><a href='submission_list.html'>submission_list</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -206,11 +211,11 @@ Columns of the dataframe are selected by the presence of `att_contains`.</p></td
 <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span>(<span class='no'>t</span>)
 
 <span class='co'># Prepend attachments with media/ to turn into relative file paths</span>
-<span class='no'>data_quadrat</span> <span class='kw'>&lt;-</span> <span class='no'>fid_csv</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>(<span class='kw'>na</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='st'>"NA"</span>, <span class='st'>"na"</span>)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>janitor</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names</a></span>(<span class='no'>.</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>attachment_link</span>(<span class='no'>.</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='parse_datetime.html'>parse_datetime</a></span>(<span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"Australia/Perth"</span>)
+<span class='no'>data_quadrat</span> <span class='kw'>&lt;-</span> <span class='no'>fid_csv</span>
+  <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>(<span class='kw'>na</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='st'>"NA"</span>, <span class='st'>"na"</span>))
+  <span class='kw pkg'>janitor</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names</a></span>(<span class='no'>.</span>)
+  <span class='fu'>attachment_link</span>(<span class='no'>.</span>)
+  <span class='fu'>parse_datetime</span>(<span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"Australia/Perth"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

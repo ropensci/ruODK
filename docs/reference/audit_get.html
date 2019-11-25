@@ -92,10 +92,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/api.html">Accessing the RESTful API</a>
+      <a href="../articles/odata-api.html">Accessing the OData API</a>
     </li>
     <li>
-      <a href="../articles/odata.html">Accessing the OData API</a>
+      <a href="../articles/restful-api.html">Accessing the RESTful API</a>
     </li>
     <li>
       <a href="../articles/setup.html">Setup</a>
@@ -135,9 +135,16 @@
     <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>audit_get</span>(<span class='kw'>action</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>), <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>))</pre>
+    <pre class="usage"><span class='fu'>audit_get</span>(
+  <span class='kw'>action</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>limit</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_URL"</span>),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_UN"</span>),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"ODKC_PW"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,9 +157,10 @@ for the full list of available actions.</p></td>
     </tr>
     <tr>
       <th>start</th>
-      <td><p>string. The ISO8601 timestamp of the earliest log entry to return.
-E.g. `2000-01-01z` or `2000-12-31T23:59.999z`,
-`2000-01-01T12:12:12+08` or `2000-01-01+08`.</p></td>
+      <td><p>string. The ISO8601 timestamp of the earliest log entry to
+return.
+E.g. `2000-01-01z` or `2000-12-31T23:59.999z`, `2000-01-01T12:12:12+08` or
+`2000-01-01+08`.</p></td>
     </tr>
     <tr>
       <th>end</th>
@@ -204,20 +212,25 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Parameters to filter the audit logs:
-`action=form.create&amp;start=2000-01-01z&amp;end=2000-12-31T23<!-- %3A59.999z&amp;limit=100&amp;offset=200` --></p>
+`action=form.create&amp;start=2000-01-01z&amp;end=2000-12-31T23<!-- %3A59.999z` --></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries'>https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries</a></p>
-<p>Other restful-api: <code><a href='attachment_link.html'>attachment_link</a></code>,
-  <code><a href='attachment_list.html'>attachment_list</a></code>, <code><a href='form_detail.html'>form_detail</a></code>,
-  <code><a href='form_list.html'>form_list</a></code>, <code><a href='form_schema_parse.html'>form_schema_parse</a></code>,
-  <code><a href='form_schema.html'>form_schema</a></code>, <code><a href='form_xml.html'>form_xml</a></code>,
-  <code><a href='project_create.html'>project_create</a></code>,
-  <code><a href='project_detail.html'>project_detail</a></code>, <code><a href='project_list.html'>project_list</a></code>,
-  <code><a href='submission_detail.html'>submission_detail</a></code>,
-  <code><a href='submission_export.html'>submission_export</a></code>,
-  <code><a href='submission_get.html'>submission_get</a></code>,
-  <code><a href='submission_list.html'>submission_list</a></code></p></div>
+<p>Other restful-api: 
+<code><a href='attachment_link.html'>attachment_link</a>()</code>,
+<code><a href='attachment_list.html'>attachment_list</a>()</code>,
+<code><a href='form_detail.html'>form_detail</a>()</code>,
+<code><a href='form_list.html'>form_list</a>()</code>,
+<code><a href='form_schema_parse.html'>form_schema_parse</a>()</code>,
+<code><a href='form_schema.html'>form_schema</a>()</code>,
+<code><a href='form_xml.html'>form_xml</a>()</code>,
+<code><a href='project_create.html'>project_create</a>()</code>,
+<code><a href='project_detail.html'>project_detail</a>()</code>,
+<code><a href='project_list.html'>project_list</a>()</code>,
+<code><a href='submission_detail.html'>submission_detail</a>()</code>,
+<code><a href='submission_export.html'>submission_export</a>()</code>,
+<code><a href='submission_get.html'>submission_get</a>()</code>,
+<code><a href='submission_list.html'>submission_list</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -248,7 +261,7 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
   <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>
 )
 
-<span class='no'>logs</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
+<span class='no'>logs</span>
 
 <span class='co'># audit_get returns a tibble</span>
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>logs</span>)

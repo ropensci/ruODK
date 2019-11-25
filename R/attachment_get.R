@@ -131,8 +131,10 @@ get_one_attachment <- function(pth,
 #' @template param-verbose
 #' @return The relative file path for the downloaded attachment(s)
 #' @family odata-api
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
+# nolint end
 #' @export
 attachment_get <- function(sid,
                            fn,

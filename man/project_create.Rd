@@ -4,8 +4,12 @@
 \alias{project_create}
 \title{Create a new project.}
 \usage{
-project_create(name, url = get_default_url(), un = get_default_un(),
-  pw = get_default_pw())
+project_create(
+  name,
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw()
+)
 }
 \arguments{
 \item{name}{The desired name of the project. Can contain whitespace.}
@@ -59,15 +63,20 @@ names(p)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/creating-a-project}
 
-Other restful-api: \code{\link{attachment_link}},
-  \code{\link{attachment_list}}, \code{\link{audit_get}},
-  \code{\link{form_detail}}, \code{\link{form_list}},
-  \code{\link{form_schema_parse}},
-  \code{\link{form_schema}}, \code{\link{form_xml}},
-  \code{\link{project_detail}}, \code{\link{project_list}},
-  \code{\link{submission_detail}},
-  \code{\link{submission_export}},
-  \code{\link{submission_get}},
-  \code{\link{submission_list}}
+Other restful-api: 
+\code{\link{attachment_link}()},
+\code{\link{attachment_list}()},
+\code{\link{audit_get}()},
+\code{\link{form_detail}()},
+\code{\link{form_list}()},
+\code{\link{form_schema_parse}()},
+\code{\link{form_schema}()},
+\code{\link{form_xml}()},
+\code{\link{project_detail}()},
+\code{\link{project_list}()},
+\code{\link{submission_detail}()},
+\code{\link{submission_export}()},
+\code{\link{submission_get}()},
+\code{\link{submission_list}()}
 }
 \concept{restful-api}

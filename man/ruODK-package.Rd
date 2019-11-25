@@ -24,12 +24,13 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Florian W. Mayer \email{Florian.Mayer@dbca.wa.gov.au} (0000-0003-4269-4242)
+\strong{Maintainer}: Florian W. Mayer \email{Florian.Mayer@dbca.wa.gov.au} (\href{https://orcid.org/0000-0003-4269-4242}{ORCID})
 
 Other contributors:
 \itemize{
-  \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (0000-0002-2815-0399) [reviewer]
-  \item Karissa Whiting (0000-0002-4683-1868) [reviewer]
+  \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) [reviewer]
+  \item Karissa Whiting (\href{https://orcid.org/0000-0002-4683-1868}{ORCID}) [reviewer]
+  \item Jason Taylor [reviewer]
   \item DBCA [copyright holder, funder]
   \item NWSFTCP [funder]
 }

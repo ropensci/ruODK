@@ -26,12 +26,13 @@ Interested users can use this function to break down `ruODK`'s automated
 steps into smaller components.
 }
 \seealso{
-Other odata-api: \code{\link{attachment_get}},
-  \code{\link{attachment_url}},
-  \code{\link{get_one_attachment}},
-  \code{\link{odata_metadata_get}},
-  \code{\link{odata_service_get}},
-  \code{\link{odata_submission_get}},
-  \code{\link{odata_submission_parse}}
+Other odata-api: 
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
+\code{\link{get_one_attachment}()},
+\code{\link{odata_metadata_get}()},
+\code{\link{odata_service_get}()},
+\code{\link{odata_submission_get}()},
+\code{\link{odata_submission_parse}()}
 }
 \concept{odata-api}

@@ -8,7 +8,9 @@
 #' @template param-url
 #' @template param-auth
 #' @return The form XML as a nested list.
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
+# nolint end
 #' @family restful-api
 #' @export
 #' @examples

@@ -4,8 +4,7 @@
 \alias{isodt_to_local}
 \title{Parse an ISO8601 datetime string to a timezone aware datetime.}
 \usage{
-isodt_to_local(datetime_string, orders = c("YmdHMS", "YmdHMSz"),
-  tz = "UTC")
+isodt_to_local(datetime_string, orders = c("YmdHMS", "YmdHMSz"), tz = "UTC")
 }
 \arguments{
 \item{datetime_string}{(character) An ISO8601 datetime string as produced by
@@ -25,8 +24,11 @@ A lubridate PosixCT datetime in the given timezone.
 \lifecycle{stable}
 }
 \seealso{
-Other utilities: \code{\link{\%>\%}},
-  \code{\link{parse_datetime}}, \code{\link{prepend_uuid}},
-  \code{\link{strip_uuid}}, \code{\link{tidyeval}}
+Other utilities: 
+\code{\link{\%>\%}()},
+\code{\link{prepend_uuid}()},
+\code{\link{ru_datetime}()},
+\code{\link{strip_uuid}()},
+\code{\link{tidyeval}}
 }
 \concept{utilities}

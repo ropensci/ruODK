@@ -4,18 +4,26 @@
 \alias{audit_get}
 \title{Get server audit log entries.}
 \usage{
-audit_get(action = NULL, start = NULL, end = NULL, limit = NULL,
-  offset = NULL, url = Sys.getenv("ODKC_URL"),
-  un = Sys.getenv("ODKC_UN"), pw = Sys.getenv("ODKC_PW"))
+audit_get(
+  action = NULL,
+  start = NULL,
+  end = NULL,
+  limit = NULL,
+  offset = NULL,
+  url = Sys.getenv("ODKC_URL"),
+  un = Sys.getenv("ODKC_UN"),
+  pw = Sys.getenv("ODKC_PW")
+)
 }
 \arguments{
 \item{action}{string. The action to filter the logs, e.g. "user.create".
 See \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/}
 for the full list of available actions.}
 
-\item{start}{string. The ISO8601 timestamp of the earliest log entry to return.
-E.g. `2000-01-01z` or `2000-12-31T23:59.999z`,
-`2000-01-01T12:12:12+08` or `2000-01-01+08`.}
+\item{start}{string. The ISO8601 timestamp of the earliest log entry to
+return.
+E.g. `2000-01-01z` or `2000-12-31T23:59.999z`, `2000-01-01T12:12:12+08` or
+`2000-01-01+08`.}
 
 \item{end}{string. The ISO8601 timestamp of the last log entry to return.}
 
@@ -56,7 +64,7 @@ A tibble containing server audit logs.
 }
 \details{
 Parameters to filter the audit logs:
-`action=form.create&start=2000-01-01z&end=2000-12-31T23%3A59.999z&limit=100&offset=200`
+`action=form.create&start=2000-01-01z&end=2000-12-31T23%3A59.999z`
 }
 \examples{
 \dontrun{
@@ -87,7 +95,7 @@ logs <- audit_get(
   offset = 0
 )
 
-logs \%>\% knitr::kable(.)
+logs %>% knitr::kable(.)
 
 # audit_get returns a tibble
 class(logs)
@@ -101,15 +109,20 @@ names(logs)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries}
 
-Other restful-api: \code{\link{attachment_link}},
-  \code{\link{attachment_list}}, \code{\link{form_detail}},
-  \code{\link{form_list}}, \code{\link{form_schema_parse}},
-  \code{\link{form_schema}}, \code{\link{form_xml}},
-  \code{\link{project_create}},
-  \code{\link{project_detail}}, \code{\link{project_list}},
-  \code{\link{submission_detail}},
-  \code{\link{submission_export}},
-  \code{\link{submission_get}},
-  \code{\link{submission_list}}
+Other restful-api: 
+\code{\link{attachment_link}()},
+\code{\link{attachment_list}()},
+\code{\link{form_detail}()},
+\code{\link{form_list}()},
+\code{\link{form_schema_parse}()},
+\code{\link{form_schema}()},
+\code{\link{form_xml}()},
+\code{\link{project_create}()},
+\code{\link{project_detail}()},
+\code{\link{project_list}()},
+\code{\link{submission_detail}()},
+\code{\link{submission_export}()},
+\code{\link{submission_get}()},
+\code{\link{submission_list}()}
 }
 \concept{restful-api}

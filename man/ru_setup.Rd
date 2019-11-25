@@ -4,10 +4,22 @@
 \alias{ru_setup}
 \title{Configure default \code{ruODK} settings.}
 \usage{
-ru_setup(svc = NULL, pid = NULL, fid = NULL, url = NULL,
-  un = NULL, pw = NULL, test_svc = NULL, test_pid = NULL,
-  test_fid = NULL, test_fid_zip = NULL, test_fid_att = NULL,
-  test_url = NULL, test_un = NULL, test_pw = NULL)
+ru_setup(
+  svc = NULL,
+  pid = NULL,
+  fid = NULL,
+  url = NULL,
+  un = NULL,
+  pw = NULL,
+  test_svc = NULL,
+  test_pid = NULL,
+  test_fid = NULL,
+  test_fid_zip = NULL,
+  test_fid_att = NULL,
+  test_url = NULL,
+  test_un = NULL,
+  test_pw = NULL
+)
 }
 \arguments{
 \item{svc}{(optional, character) The OData service URL of a form.
@@ -104,8 +116,10 @@ ru_setup(
 )
 }
 \seealso{
-Other ru_settings: \code{\link{odata_svc_parse}},
-  \code{\link{ru_settings}}, \code{\link{yell_if_error}},
-  \code{\link{yell_if_missing}}
+Other ru_settings: 
+\code{\link{odata_svc_parse}()},
+\code{\link{ru_settings}()},
+\code{\link{yell_if_error}()},
+\code{\link{yell_if_missing}()}
 }
 \concept{ru_settings}

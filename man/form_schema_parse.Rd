@@ -45,25 +45,30 @@ fsp <- form_schema(parse = TRUE)
 fsp
 
 # Attachments: use `attachment_get` on each of
-fsp \%>\% dplyr::filter(type == "binary")
+fsp %>% dplyr::filter(type == "binary")
 
 # dateYime: use `parse_datetime` on each of
-fsp \%>\% dplyr::filter(type == "dateTime")
+fsp %>% dplyr::filter(type == "dateTime")
 
 # Point location: will be split into lat/lon/alt/acc
-fsp \%>\% dplyr::filter(type == "geopoint")
+fsp %>% dplyr::filter(type == "geopoint")
 }
 }
 \seealso{
-Other restful-api: \code{\link{attachment_link}},
-  \code{\link{attachment_list}}, \code{\link{audit_get}},
-  \code{\link{form_detail}}, \code{\link{form_list}},
-  \code{\link{form_schema}}, \code{\link{form_xml}},
-  \code{\link{project_create}},
-  \code{\link{project_detail}}, \code{\link{project_list}},
-  \code{\link{submission_detail}},
-  \code{\link{submission_export}},
-  \code{\link{submission_get}},
-  \code{\link{submission_list}}
+Other restful-api: 
+\code{\link{attachment_link}()},
+\code{\link{attachment_list}()},
+\code{\link{audit_get}()},
+\code{\link{form_detail}()},
+\code{\link{form_list}()},
+\code{\link{form_schema}()},
+\code{\link{form_xml}()},
+\code{\link{project_create}()},
+\code{\link{project_detail}()},
+\code{\link{project_list}()},
+\code{\link{submission_detail}()},
+\code{\link{submission_export}()},
+\code{\link{submission_get}()},
+\code{\link{submission_list}()}
 }
 \concept{restful-api}

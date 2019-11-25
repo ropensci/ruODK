@@ -11,7 +11,7 @@
 #'   Default: FALSE.
 #' @param parse Whether to parse the form schema into a tibble of form field
 #'   type and name. This uses \code{`form_schema_parse`} internally.
-#'   If used together with `flatten=TRUE` \code{`form_schema`} will raise a
+#'   If used together with `flatten=TRUE`, \code{`form_schema`} will raise a
 #'   warning and return the unparsed, flattened form schema.
 #'   Default: TRUE.
 #' @template param-pid
@@ -27,7 +27,9 @@
 #'   repeating screens, "repeat" for repeating screens).
 #'   A list with `name` "meta" may precede the structure, if several metadata
 #'   fields are captured (e.g. "instanceId", form start datetimes etc.).
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json}
+# nolint end
 #' @family restful-api
 #' @export
 #' @examples
@@ -102,10 +104,10 @@
 #' # Useful to inform further parsing of submission data (attachments, dates)
 #' fsp <- form_schema(parse = TRUE)
 #'
-#' # Attachments: use \code{`attachment_get`} on each of
+#' # Attachments: use `attachment_get` on each of
 #' fsp %>% dplyr::filter(type == "binary")
 #'
-#' # dateTime: use \code{`parse_datetime`} on each of
+#' # dateTime: use `parse_datetime` on each of
 #' fsp %>% dplyr::filter(type == "dateTime")
 #'
 #' # Point location: will be split into lat/lon/alt/acc

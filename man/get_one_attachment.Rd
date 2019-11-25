@@ -4,8 +4,15 @@
 \alias{get_one_attachment}
 \title{Download one media attachment.}
 \usage{
-get_one_attachment(pth, fn, src, url = get_default_url(),
-  un = get_default_un(), pw = get_default_pw(), verbose = FALSE)
+get_one_attachment(
+  pth,
+  fn,
+  src,
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{pth}{A local file path to save the attachment to.}
@@ -45,12 +52,13 @@ This function is not vectorised, but mapped by \code{`get_attachment()`}
 to a tibble of input parameters.
 }
 \seealso{
-Other odata-api: \code{\link{attachment_get}},
-  \code{\link{attachment_url}},
-  \code{\link{odata_metadata_get}},
-  \code{\link{odata_service_get}},
-  \code{\link{odata_submission_get}},
-  \code{\link{odata_submission_parse}},
-  \code{\link{unnest_all}}
+Other odata-api: 
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
+\code{\link{odata_metadata_get}()},
+\code{\link{odata_service_get}()},
+\code{\link{odata_submission_get}()},
+\code{\link{odata_submission_parse}()},
+\code{\link{unnest_all}()}
 }
 \concept{odata-api}

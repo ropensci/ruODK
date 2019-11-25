@@ -4,8 +4,13 @@
 \alias{attachment_url}
 \title{Build the download URL for one or many submission UUIDs and filenames.}
 \usage{
-attachment_url(uuid, fn, pid = get_default_pid(),
-  fid = get_default_fid(), url = get_default_url())
+attachment_url(
+  uuid,
+  fn,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url()
+)
 }
 \arguments{
 \item{uuid}{The UUID of one form submission, or a vector of UUIDs.}
@@ -40,12 +45,13 @@ This function is vectorised and accepts single values or vectors for uuid and
 fn.
 }
 \seealso{
-Other odata-api: \code{\link{attachment_get}},
-  \code{\link{get_one_attachment}},
-  \code{\link{odata_metadata_get}},
-  \code{\link{odata_service_get}},
-  \code{\link{odata_submission_get}},
-  \code{\link{odata_submission_parse}},
-  \code{\link{unnest_all}}
+Other odata-api: 
+\code{\link{attachment_get}()},
+\code{\link{get_one_attachment}()},
+\code{\link{odata_metadata_get}()},
+\code{\link{odata_service_get}()},
+\code{\link{odata_submission_get}()},
+\code{\link{odata_submission_parse}()},
+\code{\link{unnest_all}()}
 }
 \concept{odata-api}

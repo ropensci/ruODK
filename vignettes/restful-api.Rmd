@@ -213,7 +213,7 @@ data_quadrat <- fid_csv %>%
   readr::read_csv(na = c("", "NA", "na")) %>% # form uses "na" for NA
   janitor::clean_names(.) %>% 
   attachment_link(.) %>% 
-  parse_datetime(tz = "Australia/Perth")      # an example timezone
+  ru_datetime(tz = "Australia/Perth")      # an example timezone
 
 DT::datatable(data_quadrat)
 # Further: create map with popups, see vignette "odata"
@@ -222,14 +222,14 @@ data_taxon <- fid_csv_tae %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
   attachment_link(.) %>%
-  parse_datetime(tz = "Australia/Perth") %>%
+  ru_datetime(tz = "Australia/Perth") %>%
   dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
 
 data_strata <- fid_csv_veg %>% 
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
   attachment_link(.) %>%
-  parse_datetime(tz = "Australia/Perth") %>%
+  ru_datetime(tz = "Australia/Perth") %>%
   dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
 
 DT::datatable(data_taxon)
@@ -342,7 +342,7 @@ altitude and accuracy.
 sub_parsed <- submissions %>% 
   purrr::map_df(rlist::list.flatten) %>%
   janitor::clean_names(.) %>% 
-  ruODK::parse_datetime(.)
+  ruODK::ru_datetime(.)
 
 names(sub_parsed)
 sub_parsed %>% knitr::kable(.)

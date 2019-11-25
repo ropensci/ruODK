@@ -58,6 +58,7 @@ loc <- fs::path("attachments", "media")
 
 # Canned data
 data("fq_svc")
+data("fq_fs")
 data("fq_meta")
 data("fq_raw")
 data("fq_raw_strata")
@@ -110,7 +111,7 @@ into a clean `tibble` of field type, name, and path.
 `ruODK` uses this introspection to parse submission data.
 
 ```{r form_schema, eval=FALSE}
-fq_fs <- form_schema()
+fq_fs <- ruODK::form_schema()
 ```
 
 ```{r form_schema_show}
@@ -277,13 +278,11 @@ fq_data_taxa <- fq_taxa %>%
       local_dir = loc
     )
   ) %>%
-  dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>%
-  invisible()
+  dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 
 # Parse nested group "strata"
 fq_data_strata <- fq_strata %>%
-  ruODK::odata_submission_parse(verbose = TRUE) %>%
-  invisible()
+  ruODK::odata_submission_parse(verbose = TRUE)
 ```
 
 Note: A manually resized version of the original photos in this example live in
@@ -401,17 +400,13 @@ leaflet::leaflet(width = 800, height = 600) %>%
 ```
 
 ```{r map_data_tae}
-data("fq_data")
-data("fq_data_taxa")
-fq_data_taxa_joined <- fq_data_taxa %>%
-  dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
-
 leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::addProviderTiles("OpenStreetMap.Mapnik", group = "Place names") %>%
   leaflet::addProviderTiles("Esri.WorldImagery", group = "Aerial") %>%
   leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
-    data = fq_data_taxa_joined,
+    data = fq_data_taxa  %>%
+      dplyr::left_join(fq_data, by = c("submissions_id" = "id")),
     lng = ~lon, lat = ~lat,
     icon = leaflet::makeAwesomeIcon(text = "T", markerColor = "green"),
     label = ~ glue::glue("{field_name} {encounter_start_datetime}"),
@@ -435,10 +430,9 @@ leaflet::leaflet(width = 800, height = 600) %>%
 ```
 
 ## Summarising data
-The data tibbles are now "tidy" for exploratory data analysis.
 See Hadley Wickam's 
 [R for Data Science](https://r4ds.had.co.nz/exploratory-data-analysis.html)
-for more background.
+for more ideas on data exploration.
 
 ```{r eda, fig.height=5, fig.width=7}
 # How many submissions per device?
@@ -454,7 +448,8 @@ fq_data_taxa %>%
   knitr::kable()
 
 # GGplot of a pivot table
-fq_data_taxa %>%
+fq_data_taxa  %>%
+  dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>%
   dplyr::group_by(life_form) %>%
   dplyr::tally() %>%
   ggplot2::ggplot(ggplot2::aes(x = life_form, y = n)) +
@@ -468,7 +463,8 @@ fq_data_taxa %>%
   ggplot2::theme_classic()
 
 # GGplot with groups
-fq_data_taxa_joined %>% 
+fq_data_taxa %>%
+  dplyr::left_join(fq_data, by = c("submissions_id" = "id")) %>% 
   ggplot2::ggplot(
     ggplot2::aes(
       x=encounter_start_datetime, 
@@ -484,7 +480,7 @@ fq_data_taxa_joined %>%
     shape="Data collection device") +
   ggplot2::geom_point() + 
   ggplot2::theme_classic() + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 # Export

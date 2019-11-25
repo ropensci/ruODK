@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
   "description": "Utilities to access and tidy up data from ODK\n    Central's API.  ODK Central is OpenDataKit's clearinghouse for\n    digitally captured data <https://docs.opendatakit.org/central-intro/>.\n    ODK Central's API is documented at\n    <https://odkcentral.docs.apiary.io/>.",
@@ -95,7 +98,7 @@
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
-      "version": ">=\n        1.25",
+      "version": ">= 1.25",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -134,7 +137,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
-      "version": ">=\n        1.16",
+      "version": ">= 1.16",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -168,6 +171,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://github.com/r-lib/usethis"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "vcr",
+      "name": "vcr",
+      "version": ">= 0.3.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=vcr"
     }
   ],
   "softwareRequirements": [
@@ -220,7 +236,7 @@
       "@type": "SoftwareApplication",
       "identifier": "httr",
       "name": "httr",
-      "version": ">=\n        1.4.1",
+      "version": ">= 1.4.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -324,7 +340,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
-      "version": ">=\n        0.3.2.9000",
+      "version": ">= 0.3.2.9000",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -363,7 +379,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
-      "version": ">=\n        1.0.0",
+      "version": ">= 1.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -403,5 +419,26 @@
       "url": "https://github.com/dbca-wa/ruODK",
       "description": "R package version 0.6.6"
     }
-  ]
+  ],
+  "releaseNotes": "https://github.com/dbca-wa/ruODK/blob/master/NEWS.md",
+  "readme": "https://github.com/dbca-wa/ruODK/blob/master/README.md",
+  "fileSize": "55055.444KB",
+  "contIntegration": [
+    "https://travis-ci.org/dbca-wa/ruODK",
+    "https://ci.appveyor.com/project/dbca-wa/ruODK",
+    "https://codecov.io/github/dbca-wa/ruODK?branch=master",
+    "https://travis-ci.org/dbca-wa/ruODK",
+    "https://ci.appveyor.com/project/dbca-wa/ruODK",
+    "https://codecov.io/github/dbca-wa/ruODK?branch=master",
+    "https://codecov.io/gh/validmeasures/odkr",
+    "https://travis-ci.org/unhcr/koboloadeR",
+    "https://ci.appveyor.com/project/unhcr/koboloadeR",
+    "https://codecov.io/gh/unhcr/koboloadeR",
+    "https://travis-ci.org/dbca-wa/ruODK",
+    "https://ci.appveyor.com/project/dbca-wa/ruODK",
+    "https://codecov.io/github/dbca-wa/ruODK?branch=master",
+    "https://travis-ci.org/edwindj/cbsodataR",
+    "https://ci.appveyor.com/project/edwindj/cbsodatar"
+  ],
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

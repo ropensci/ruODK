@@ -27,8 +27,10 @@
 #'         * name: The attachment filename, e.g. 12345.jpg
 #'         * exists: Whether the attachment for that submission exists on the
 #'           server.
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
+# nolint end
 #' @family restful-api
 #' @export
 #' @examples

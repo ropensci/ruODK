@@ -4,9 +4,13 @@
 \alias{odata_metadata_get}
 \title{Retrieve metadata from an OData URL ending in .svc as list of lists.}
 \usage{
-odata_metadata_get(pid = get_default_pid(), fid = get_default_fid(),
-  url = get_default_url(), un = get_default_un(),
-  pw = get_default_pw())
+odata_metadata_get(
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw()
+)
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.
@@ -60,12 +64,13 @@ listviewer::jsonedit(meta)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/metadata-document}
 
-Other odata-api: \code{\link{attachment_get}},
-  \code{\link{attachment_url}},
-  \code{\link{get_one_attachment}},
-  \code{\link{odata_service_get}},
-  \code{\link{odata_submission_get}},
-  \code{\link{odata_submission_parse}},
-  \code{\link{unnest_all}}
+Other odata-api: 
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
+\code{\link{get_one_attachment}()},
+\code{\link{odata_service_get}()},
+\code{\link{odata_submission_get}()},
+\code{\link{odata_submission_parse}()},
+\code{\link{unnest_all}()}
 }
 \concept{odata-api}

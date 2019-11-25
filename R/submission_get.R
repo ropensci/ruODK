@@ -8,7 +8,9 @@
 #' @template param-url
 #' @template param-auth
 #' @return A nested list of submission data.
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
+# nolint end
 #' @family restful-api
 #' @export
 #' @examples

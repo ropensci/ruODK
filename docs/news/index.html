@@ -90,10 +90,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/api.html">Accessing the RESTful API</a>
+      <a href="../articles/odata-api.html">Accessing the OData API</a>
     </li>
     <li>
-      <a href="../articles/odata.html">Accessing the OData API</a>
+      <a href="../articles/restful-api.html">Accessing the RESTful API</a>
     </li>
     <li>
       <a href="../articles/setup.html">Setup</a>
@@ -131,7 +131,7 @@
     <div id="ruodk-development-version" class="section level1">
 <h1 class="page-header">
 <a href="#ruodk-development-version" class="anchor"></a><code>ruODK</code> (development version)</h1>
-<p>This version addresses ROpenSci reviewer comments from <a href='https://github.com/karissawhiting'>@karissawhiting</a>.</p>
+<p>This version addresses ROpenSci reviewer comments from <a href='https://github.com/karissawhiting'>@karissawhiting</a> and <a href='https://github.com/jmt2080ad'>@jmt2080ad</a>.</p>
 <div id="major-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#major-fixes" class="anchor"></a>Major fixes</h2>
@@ -140,17 +140,19 @@
 <h2 class="hasAnchor">
 <a href="#minor-fixes" class="anchor"></a>Minor fixes</h2>
 <ul>
-<li>Drop <code>. &lt;- NULL</code> in favour of <code><a href="https://rdrr.io/r/utils/globalVariables.html">utils::globalVariables(".")</a></code> (<a href='https://github.com/dbca-wa/ruODK/issues/35'>#35</a>)</li>
+<li>Drop <code>. &lt;- NULL</code> in favour of <code><a href="https://rdrr.io/r/utils/globalVariables.html">utils::globalVariables(".")</a></code>. (<a href='https://github.com/dbca-wa/ruODK/issues/35'>#35</a>)</li>
 <li>Print settings now hides passwords but instructs how to show them. (<a href='https://github.com/dbca-wa/ruODK/issues/37'>#37</a>)</li>
 <li>
 <code><a href="../reference/ru_setup.html">ru_setup()</a></code> now prints settings. (<a href='https://github.com/dbca-wa/ruODK/issues/37'>#37</a>)</li>
+<li>
+<code>parse_datetime()</code> renamed to <code><a href="../reference/ru_datetime.html">ru_datetime()</a></code> to avoid naming conflict with <code><a href="https://readr.tidyverse.org/reference/parse_datetime.html">readr::parse_datetime()</a></code>. (<a href='https://github.com/dbca-wa/ruODK/issues/43'>#43</a>)</li>
 </ul>
 </div>
 <div id="dependencies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dependencies" class="anchor"></a>Dependencies</h2>
 <ul>
-<li>Moved <code>rlist</code> to Imports, as it is now used in <code><a href="../reference/odata_submission_get.html">odata_submission_get()</a></code> (<a href='https://github.com/dbca-wa/ruODK/issues/6'>#6</a>)</li>
+<li>Moved <code>rlist</code> to Imports, as it is now used in <code><a href="../reference/odata_submission_get.html">odata_submission_get()</a></code>. (<a href='https://github.com/dbca-wa/ruODK/issues/6'>#6</a>)</li>
 <li>Use development versions of <code>rlang</code>, <code>purrr</code> and <code>lifecycle</code> to get their latest bug fixes.</li>
 </ul>
 </div>
@@ -162,8 +164,9 @@
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
 <ul>
-<li>Updated workshop companion package <a href="https://github.com/dbca-wa/urODK">urODK</a>
-</li>
+<li>Updated workshop companion package <a href="https://github.com/dbca-wa/urODK">urODK</a>.</li>
+<li>Rename vignettes to <code>odata-api</code> and <code>restful-api</code>. (<a href='https://github.com/dbca-wa/ruODK/issues/34'>#34</a>)</li>
+<li>Warn against using plain text credentials in vignette <code>setup</code>. (<a href='https://github.com/dbca-wa/ruODK/issues/34'>#34</a>)</li>
 </ul>
 </div>
 </div>
@@ -171,7 +174,7 @@
 <h1 class="page-header">
 <a href="#ruodk-066" class="anchor"></a><code>ruODK</code> 0.6.6</h1>
 <ul>
-<li>The big one has landed: <code><a href="../reference/odata_submission_get.html">odata_submission_get()</a></code> now defaults to parse submissions from nested lists into a tibble, parse dates and datetimes, download and link attachments (<a href='https://github.com/dbca-wa/ruODK/issues/6'>#6</a>)</li>
+<li>The big one has landed: <code><a href="../reference/odata_submission_get.html">odata_submission_get()</a></code> now defaults to parse submissions from nested lists into a tibble, parse dates and datetimes, download and link attachments. (<a href='https://github.com/dbca-wa/ruODK/issues/6'>#6</a>)</li>
 </ul>
 </div>
     <div id="ruodk-065" class="section level1">
@@ -181,7 +184,7 @@
 <h2 class="hasAnchor">
 <a href="#documentation-1" class="anchor"></a>Documentation</h2>
 <ul>
-<li>Use lifecycle badges on functions. Add lifecycle to dependencies, version bump <code>usethis</code> (<a href='https://github.com/dbca-wa/ruODK/issues/29'>#29</a>)</li>
+<li>Use lifecycle badges on functions. Add lifecycle to dependencies, version bump <code>usethis</code>. (<a href='https://github.com/dbca-wa/ruODK/issues/29'>#29</a>)</li>
 </ul>
 </div>
 <div id="code" class="section level2">
@@ -265,7 +268,7 @@
 <li>Update contribution guidelines and add account request issue template: How to run <code>ruODK</code> tests and build the vignettes (<a href='https://github.com/dbca-wa/ruODK/issues/15'>#15</a> <a href='https://github.com/dbca-wa/ruODK/issues/20'>#20</a>)</li>
 <li>Add dedicated <code><a href="../reference/ru_setup.html">ru_setup()</a></code> and <code><a href="../reference/ru_settings.html">ru_settings()</a></code>. Pat down functions for missing credentials and yell loudly but clearly about httr errors. (<a href='https://github.com/dbca-wa/ruODK/issues/16'>#16</a>)</li>
 <li>Drop <code>@importFrom</code> to reduce duplication. All external functions are prefixed with their package name already.</li>
-<li>Add convenience helpers <code><a href="../reference/attachment_link.html">attachment_link()</a></code> and <code><a href="../reference/parse_datetime.html">parse_datetime()</a></code>.</li>
+<li>Add convenience helpers <code><a href="../reference/attachment_link.html">attachment_link()</a></code> and <code>parse_datetime()</code>.</li>
 <li>Use <code><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">janitor::clean_names()</a></code> on column names over home-grown helpers.</li>
 <li>Since <code>submission_detail</code> is now metadata only, add <code>submission_get</code> to download submission data.</li>
 </ul>

@@ -209,14 +209,14 @@ proj <- ruODK::project_list()
 proj %>% head() %>% knitr::kable(.)
 ```
 
-| id | name          | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
-| -: | :------------ | ----: | ---------: | :------------------ | :---------- | :------------------ | :------- |
-|  8 | AmenazasRD    |     0 |          0 | 2019-04-14 06:21:00 | NA          | NA                  | FALSE    |
-|  9 | BAFCO Test    |     1 |          1 | 2019-04-19 00:30:45 | NA          | 2019-04-19 01:26:49 | FALSE    |
-| 11 | CaVaTeCo      |     2 |          1 | 2019-04-30 06:43:22 | NA          | 2019-04-30 08:07:55 | FALSE    |
-| 18 | CherryPatch   |     2 |          1 | 2019-05-27 21:09:33 | NA          | 2019-05-28 17:32:15 | FALSE    |
-| 32 | Collect3289v2 |     1 |          2 | 2019-08-07 12:52:56 | NA          | 2019-08-07 13:44:19 | FALSE    |
-|  4 | Curso         |     7 |          4 | 2019-02-26 03:55:50 | NA          | 2019-03-21 22:22:57 | FALSE    |
+| id | name                     | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
+| -: | :----------------------- | ----: | ---------: | :------------------ | :---------- | :------------------ | :------- |
+|  8 | AmenazasRD               |     0 |          0 | 2019-04-14 06:21:00 | NA          | NA                  | FALSE    |
+|  9 | BAFCO Test               |     1 |          1 | 2019-04-19 00:30:45 | NA          | 2019-04-19 01:26:49 | FALSE    |
+| 47 | Building Materials Reuse |     0 |          0 | 2019-10-16 05:07:56 | NA          | NA                  | FALSE    |
+| 11 | CaVaTeCo                 |     2 |          1 | 2019-04-30 06:43:22 | NA          | 2019-04-30 08:07:55 | FALSE    |
+| 18 | CherryPatch              |     2 |          1 | 2019-05-27 21:09:33 | NA          | 2019-05-28 17:32:15 | FALSE    |
+| 32 | Collect3289v2            |     1 |          2 | 2019-08-07 12:52:56 | NA          | 2019-08-07 13:44:19 | FALSE    |
 
 ``` r
 # List forms of default project
@@ -500,8 +500,8 @@ citation("ruODK")
 #> 
 #> To cite ruODK in publications use:
 #> 
-#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API.
-#>   R package version 0.6.6. https://github.com/dbca-wa/ruODK
+#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API. R package version 0.6.6.
+#>   https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 

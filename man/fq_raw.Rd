@@ -19,8 +19,8 @@ The OData response for the submissions of an ODK Central form.
 This form represents a Flora Quadrat, which is a ca 50 by 50 m quadrat of
 a uniform plant community.
 
-The XML and .odkbuild versions for this form are
-available as `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
+The XML and .odkbuild versions for this form are available as
+`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 and `system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")`,
 respectively.
 
@@ -30,11 +30,15 @@ The forms used to capture this data are development versions of real-world
 forms.
 }
 \seealso{
-Other included: \code{\link{fq_data_strata}},
-  \code{\link{fq_data_taxa}}, \code{\link{fq_data}},
-  \code{\link{fq_fs}}, \code{\link{fq_meta}},
-  \code{\link{fq_raw_strata}}, \code{\link{fq_raw_taxa}},
-  \code{\link{fq_svc}}
+Other included: 
+\code{\link{fq_data_strata}},
+\code{\link{fq_data_taxa}},
+\code{\link{fq_data}},
+\code{\link{fq_fs}},
+\code{\link{fq_meta}},
+\code{\link{fq_raw_strata}},
+\code{\link{fq_raw_taxa}},
+\code{\link{fq_svc}}
 }
 \concept{included}
 \keyword{datasets}

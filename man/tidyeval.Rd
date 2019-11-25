@@ -21,10 +21,12 @@ To learn more about tidy eval and how to use these tools, read
 <http://rlang.tidyverse.org/articles/tidy-evaluation.html>
 }
 \seealso{
-Other utilities: \code{\link{\%>\%}},
-  \code{\link{isodt_to_local}},
-  \code{\link{parse_datetime}}, \code{\link{prepend_uuid}},
-  \code{\link{strip_uuid}}
+Other utilities: 
+\code{\link{\%>\%}()},
+\code{\link{isodt_to_local}()},
+\code{\link{prepend_uuid}()},
+\code{\link{ru_datetime}()},
+\code{\link{strip_uuid}()}
 }
 \concept{utilities}
 \keyword{internal}

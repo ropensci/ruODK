@@ -92,10 +92,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/api.html">Accessing the RESTful API</a>
+      <a href="../articles/odata-api.html">Accessing the OData API</a>
     </li>
     <li>
-      <a href="../articles/odata.html">Accessing the OData API</a>
+      <a href="../articles/restful-api.html">Accessing the RESTful API</a>
     </li>
     <li>
       <a href="../articles/setup.html">Setup</a>
@@ -135,10 +135,18 @@
     <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>attachment_get</span>(<span class='no'>sid</span>, <span class='no'>fn</span>, <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='st'>"media"</span>, <span class='kw'>separate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(), <span class='kw'>fid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>(),
-  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(), <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>(), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>attachment_get</span>(
+  <span class='no'>sid</span>,
+  <span class='no'>fn</span>,
+  <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='st'>"media"</span>,
+  <span class='kw'>separate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>pid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pid</a></span>(),
+  <span class='kw'>fid</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_fid</a></span>(),
+  <span class='kw'>url</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_url</a></span>(),
+  <span class='kw'>un</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_un</a></span>(),
+  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='fu'><a href='ru_settings.html'>get_default_pw</a></span>(),
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -227,13 +235,14 @@ The other parameters are automatically repeated.</p>
 
     <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment</a></p>
 <p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment</a></p>
-<p>Other odata-api: <code><a href='attachment_url.html'>attachment_url</a></code>,
-  <code><a href='get_one_attachment.html'>get_one_attachment</a></code>,
-  <code><a href='odata_metadata_get.html'>odata_metadata_get</a></code>,
-  <code><a href='odata_service_get.html'>odata_service_get</a></code>,
-  <code><a href='odata_submission_get.html'>odata_submission_get</a></code>,
-  <code><a href='odata_submission_parse.html'>odata_submission_parse</a></code>,
-  <code><a href='unnest_all.html'>unnest_all</a></code></p></div>
+<p>Other odata-api: 
+<code><a href='attachment_url.html'>attachment_url</a>()</code>,
+<code><a href='get_one_attachment.html'>get_one_attachment</a>()</code>,
+<code><a href='odata_metadata_get.html'>odata_metadata_get</a>()</code>,
+<code><a href='odata_service_get.html'>odata_service_get</a>()</code>,
+<code><a href='odata_submission_get.html'>odata_submission_get</a>()</code>,
+<code><a href='odata_submission_parse.html'>odata_submission_parse</a>()</code>,
+<code><a href='unnest_all.html'>unnest_all</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

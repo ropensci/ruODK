@@ -16,9 +16,11 @@ The string with every occurrence of "uuid:" deleted.
 \lifecycle{stable}
 }
 \seealso{
-Other utilities: \code{\link{\%>\%}},
-  \code{\link{isodt_to_local}},
-  \code{\link{parse_datetime}}, \code{\link{prepend_uuid}},
-  \code{\link{tidyeval}}
+Other utilities: 
+\code{\link{\%>\%}()},
+\code{\link{isodt_to_local}()},
+\code{\link{prepend_uuid}()},
+\code{\link{ru_datetime}()},
+\code{\link{tidyeval}}
 }
 \concept{utilities}

@@ -68,7 +68,9 @@ print.ru_settings <- function(x, ...) {
 #'
 #' @param svc (character) The OData service URL of a form as provided by the
 #'   ODK Central form submissions tab.
+# nolint start
 #'   Example: "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
+# nolint end
 #' @export
 #' @family ru_settings
 #' @return A named list with three components (all of type character):
@@ -409,12 +411,12 @@ yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
   response %>%
     httr::stop_for_status(
       task = glue::glue(
-        "get desired response from server {url} as user {un}.\n\n",
+        "get desired response from server {url} as user \"{un}\".\n\n",
         "Troubleshooting tips:\n",
         "* Is the server online at {url}? Is the internet flaky? Retry!\n",
         "* Check ruODK::ru_settings() - credentials and defaults correct?\n",
         "* Run ru_setup() with working credentials and defaults.\n",
-        '* Read the vignette("setup", package = "ruODK") how to set up ruODK'
+        '* Read the vignette("setup", package = "ruODK") how to set up ruODK.'
       )
     )
 }

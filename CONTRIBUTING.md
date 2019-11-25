@@ -1,4 +1,8 @@
 # Contributing 
+This contributing guide has been derived from the `tidyverse` boilerplate.
+Where it seems over the top, common sense is appreciated, and every contribution
+is appreciated.
+
 ## Non-technical contributions to ruODK
 Feel free to [report issues](https://github.com/dbca-wa/ruODK/issues):
 

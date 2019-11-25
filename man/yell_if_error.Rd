@@ -32,8 +32,10 @@ This function is used internally but may be useful for debugging and
 \code{ruODK} development.
 }
 \seealso{
-Other ru_settings: \code{\link{odata_svc_parse}},
-  \code{\link{ru_settings}}, \code{\link{ru_setup}},
-  \code{\link{yell_if_missing}}
+Other ru_settings: 
+\code{\link{odata_svc_parse}()},
+\code{\link{ru_settings}()},
+\code{\link{ru_setup}()},
+\code{\link{yell_if_missing}()}
 }
 \concept{ru_settings}

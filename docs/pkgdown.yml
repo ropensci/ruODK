@@ -2,7 +2,7 @@ pandoc: '2.7'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
-  api: api.html
-  odata: odata.html
+  odata-api: odata-api.html
+  restful-api: restful-api.html
   setup: setup.html
 

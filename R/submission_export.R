@@ -32,7 +32,9 @@
 #'         containing submissions as CSV,
 #'         plus separate CSVs for any repeating groups,
 #'         plus any attachments in a subfolder `media`.
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv}
+# nolint end
 #' @family restful-api
 #' @export
 #' @examples

@@ -116,7 +116,6 @@ level3
 lifecycle
 lon
 lubridate
-magrittr
 md5
 MD5
 Measues
@@ -137,6 +136,7 @@ opendata
 opendatakit
 OpenDataKit
 OpenRosa
+ORCID
 Pentaho
 permissioning
 pid
@@ -169,6 +169,7 @@ ROpenSci
 Rstudio
 RStudio
 ru
+ruReady
 Scalability
 Schemetrica
 select1

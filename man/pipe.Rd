@@ -10,9 +10,12 @@ lhs \%>\% rhs
 See \code{magrittr::\link[magrittr]{\%>\%}} for details.
 }
 \seealso{
-Other utilities: \code{\link{isodt_to_local}},
-  \code{\link{parse_datetime}}, \code{\link{prepend_uuid}},
-  \code{\link{strip_uuid}}, \code{\link{tidyeval}}
+Other utilities: 
+\code{\link{isodt_to_local}()},
+\code{\link{prepend_uuid}()},
+\code{\link{ru_datetime}()},
+\code{\link{strip_uuid}()},
+\code{\link{tidyeval}}
 }
 \concept{utilities}
 \keyword{internal}

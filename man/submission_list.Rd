@@ -4,9 +4,13 @@
 \alias{submission_list}
 \title{List all submissions of one form.}
 \usage{
-submission_list(pid = get_default_pid(), fid = get_default_fid(),
-  url = get_default_url(), un = get_default_un(),
-  pw = get_default_pw())
+submission_list(
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw()
+)
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.
@@ -59,7 +63,7 @@ ruODK::ru_setup(
 )
 
 sl <- submission_list()
-sl \%>\% knitr::kable(.)
+sl %>% knitr::kable(.)
 
 fl <- form_list()
 
@@ -72,9 +76,9 @@ names(sl)
 # > "instance_id" "submitter_id" "device_id" "created_at" "updated_at"
 
 # Number of submissions (rows) is same as advertised in form_list
-form_list_nsub <- fl \%>\%
-  filter(fid == get_test_fid()) \%>\%
-  magrittr::extract2("submissions") \%>\%
+form_list_nsub <- fl %>%
+  filter(fid == get_test_fid()) %>%
+  magrittr::extract2("submissions") %>%
   as.numeric()
 nrow(sl) == form_list_nsub
 # > TRUE
@@ -83,15 +87,20 @@ nrow(sl) == form_list_nsub
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form}
 
-Other restful-api: \code{\link{attachment_link}},
-  \code{\link{attachment_list}}, \code{\link{audit_get}},
-  \code{\link{form_detail}}, \code{\link{form_list}},
-  \code{\link{form_schema_parse}},
-  \code{\link{form_schema}}, \code{\link{form_xml}},
-  \code{\link{project_create}},
-  \code{\link{project_detail}}, \code{\link{project_list}},
-  \code{\link{submission_detail}},
-  \code{\link{submission_export}},
-  \code{\link{submission_get}}
+Other restful-api: 
+\code{\link{attachment_link}()},
+\code{\link{attachment_list}()},
+\code{\link{audit_get}()},
+\code{\link{form_detail}()},
+\code{\link{form_list}()},
+\code{\link{form_schema_parse}()},
+\code{\link{form_schema}()},
+\code{\link{form_xml}()},
+\code{\link{project_create}()},
+\code{\link{project_detail}()},
+\code{\link{project_list}()},
+\code{\link{submission_detail}()},
+\code{\link{submission_export}()},
+\code{\link{submission_get}()}
 }
 \concept{restful-api}

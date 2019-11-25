@@ -1,33 +1,38 @@
 # `ruODK` (development version)
-This version addresses ROpenSci reviewer comments from @karissawhiting.
+This version addresses ROpenSci reviewer comments from 
+@karissawhiting and @jmt2080ad.
 
 ## Major fixes
 
 ## Minor fixes
-* Drop `. <- NULL` in favour of `utils::globalVariables(".")` (#35)
+* Drop `. <- NULL` in favour of `utils::globalVariables(".")`. (#35)
 * Print settings now hides passwords but instructs how to show them. (#37)
 * `ru_setup()` now prints settings. (#37)
+* `parse_datetime()` renamed to `ru_datetime()` to avoid naming conflict with 
+  `readr::parse_datetime()`. (#43)
 
 ## Dependencies
-* Moved `rlist` to Imports, as it is now used in `odata_submission_get()` (#6)
+* Moved `rlist` to Imports, as it is now used in `odata_submission_get()`. (#6)
 * Use development versions of `rlang`, `purrr` and `lifecycle` to get their
   latest bug fixes.
 
 ## Data
 
 ## Documentation
-* Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK)
+* Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK).
+* Rename vignettes to `odata-api` and `restful-api`. (#34)
+* Warn against using plain text credentials in vignette `setup`. (#34)
 
 
 # `ruODK` 0.6.6
 * The big one has landed: `odata_submission_get()` now defaults to parse 
   submissions from nested lists into a tibble, parse dates and datetimes,
-  download and link attachments (#6)
+  download and link attachments. (#6)
 
 # `ruODK` 0.6.5
 ## Documentation
 * Use lifecycle badges on functions. Add lifecycle to dependencies, version bump
-  `usethis` (#29)
+  `usethis`. (#29)
   
 ## Code
 * Refactor list wrangling code to use `map_*(.default=NA)`, removing some 

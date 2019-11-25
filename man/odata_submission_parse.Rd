@@ -5,8 +5,7 @@
 \title{Parse the output of `odata_submission_get(parse=FALSE)` into a tidy tibble
 and unnest all levels.}
 \usage{
-odata_submission_parse(data, names_repair = "universal",
-  verbose = FALSE)
+odata_submission_parse(data, names_repair = "universal", verbose = FALSE)
 }
 \arguments{
 \item{data}{A nested list of lists as given by `ruODK::get_submissions`.}
@@ -40,12 +39,13 @@ testthat::expect_equal(length(fq_raw$value), nrow(data_parsed))
 }
 }
 \seealso{
-Other odata-api: \code{\link{attachment_get}},
-  \code{\link{attachment_url}},
-  \code{\link{get_one_attachment}},
-  \code{\link{odata_metadata_get}},
-  \code{\link{odata_service_get}},
-  \code{\link{odata_submission_get}},
-  \code{\link{unnest_all}}
+Other odata-api: 
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
+\code{\link{get_one_attachment}()},
+\code{\link{odata_metadata_get}()},
+\code{\link{odata_service_get}()},
+\code{\link{odata_submission_get}()},
+\code{\link{unnest_all}()}
 }
 \concept{odata-api}

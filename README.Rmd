@@ -124,8 +124,8 @@ remotes::install_github("dbca-wa/ruODK", dependencies = TRUE)
 ### Access to an ODK Central instance
 First, we need an ODK Central instance and some data to play with!
 
-Either ask in the [ODK forum](https://forum.opendatakit.org/) for an account in the 
-[ODK Central Sandbox](https://sandbox.central.opendatakit.org/),
+Either ask in the [ODK forum](https://forum.opendatakit.org/) for an account in 
+the [ODK Central Sandbox](https://sandbox.central.opendatakit.org/),
 or follow the [setup instructions](https://docs.opendatakit.org/central-intro/)
 to build and deploy your very own ODK Central instance.
 

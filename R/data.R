@@ -62,8 +62,8 @@
 #' This form represents a Flora Quadrat, which is a ca 50 by 50 m quadrat of
 #' a uniform plant community.
 #'
-#' The XML and .odkbuild versions for this form are
-#' available as `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
+#' The XML and .odkbuild versions for this form are available as
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 #' and `system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")`,
 #' respectively.
 #'
@@ -129,8 +129,8 @@
 #' This form represents a Flora Quadrat, which is a ca 50 by 50 m quadrat of
 #' a uniform plant community.
 #'
-#' The XML and .odkbuild versions for this form are
-#' available as `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
+#' The XML and .odkbuild versions for this form are available as
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 #' and `system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")`,
 #' respectively.
 #'

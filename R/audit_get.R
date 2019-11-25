@@ -3,14 +3,17 @@
 #' \lifecycle{stable}
 #'
 #' Parameters to filter the audit logs:
-#' `action=form.create&start=2000-01-01z&end=2000-12-31T23%3A59.999z&limit=100&offset=200`
+#' `action=form.create&start=2000-01-01z&end=2000-12-31T23%3A59.999z`
 #'
 #' @param action string. The action to filter the logs, e.g. "user.create".
-#'               See \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/}
-#'               for the full list of available actions.
-#' @param start string. The ISO8601 timestamp of the earliest log entry to return.
-#'              E.g. `2000-01-01z` or `2000-12-31T23:59.999z`,
-#'              `2000-01-01T12:12:12+08` or `2000-01-01+08`.
+# nolint start
+#'   See \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/}
+# nolint end
+#'   for the full list of available actions.
+#' @param start string. The ISO8601 timestamp of the earliest log entry to
+#'   return.
+#'   E.g. `2000-01-01z` or `2000-12-31T23:59.999z`, `2000-01-01T12:12:12+08` or
+#'   `2000-01-01+08`.
 #' @param end string. The ISO8601 timestamp of the last log entry to return.
 #' @param limit integer. The max number of log entries to return.
 #' @param offset integer. The number of log entries to skip.
@@ -27,7 +30,9 @@
 #'  * details: list. Additional details about the action that vary
 #'    according to the type of action.
 #'  * logged_at: dttm. Time of action on server.
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries}
+# nolint end
 #' @family restful-api
 #' @export
 #' @examples

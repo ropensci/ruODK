@@ -92,10 +92,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/api.html">Accessing the RESTful API</a>
+      <a href="../articles/odata-api.html">Accessing the OData API</a>
     </li>
     <li>
-      <a href="../articles/odata.html">Accessing the OData API</a>
+      <a href="../articles/restful-api.html">Accessing the RESTful API</a>
     </li>
     <li>
       <a href="../articles/setup.html">Setup</a>
@@ -168,18 +168,20 @@
          missing credentials and stop with a loud but informative yell.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other ru_settings: <code><a href='odata_svc_parse.html'>odata_svc_parse</a></code>,
-  <code><a href='ru_settings.html'>ru_settings</a></code>, <code><a href='ru_setup.html'>ru_setup</a></code>,
-  <code><a href='yell_if_error.html'>yell_if_error</a></code></p></div>
+    <div class='dont-index'><p>Other ru_settings: 
+<code><a href='odata_svc_parse.html'>odata_svc_parse</a>()</code>,
+<code><a href='ru_settings.html'>ru_settings</a>()</code>,
+<code><a href='ru_setup.html'>ru_setup</a>()</code>,
+<code><a href='yell_if_error.html'>yell_if_error</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/output-expectations.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>"username"</span>, <span class='st'>"password"</span>))
-<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/output-expectations.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>"url"</span>, <span class='st'>""</span>, <span class='st'>"password"</span>))
-<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/output-expectations.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>"url"</span>, <span class='st'>"username"</span>, <span class='st'>""</span>))
-<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/output-expectations.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='kw'>NULL</span>, <span class='st'>""</span>, <span class='st'>""</span>))
-<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/output-expectations.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))
-<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/output-expectations.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))
-<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/output-expectations.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))</div></pre>
+    <pre class="examples"><div class='input'><span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>"username"</span>, <span class='st'>"password"</span>))
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>"url"</span>, <span class='st'>""</span>, <span class='st'>"password"</span>))
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>"url"</span>, <span class='st'>"username"</span>, <span class='st'>""</span>))
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='kw'>NULL</span>, <span class='st'>""</span>, <span class='st'>""</span>))
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

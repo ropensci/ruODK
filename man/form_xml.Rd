@@ -4,9 +4,14 @@
 \alias{form_xml}
 \title{Show the XML representation of one form as list.}
 \usage{
-form_xml(parse = TRUE, pid = get_default_pid(),
-  fid = get_default_fid(), url = get_default_url(),
-  un = get_default_un(), pw = get_default_pw())
+form_xml(
+  parse = TRUE,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw()
+)
 }
 \arguments{
 \item{parse}{Whether to parse the XML into a nested list, default: TRUE}
@@ -69,15 +74,20 @@ class(fxml)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
 
-Other restful-api: \code{\link{attachment_link}},
-  \code{\link{attachment_list}}, \code{\link{audit_get}},
-  \code{\link{form_detail}}, \code{\link{form_list}},
-  \code{\link{form_schema_parse}},
-  \code{\link{form_schema}}, \code{\link{project_create}},
-  \code{\link{project_detail}}, \code{\link{project_list}},
-  \code{\link{submission_detail}},
-  \code{\link{submission_export}},
-  \code{\link{submission_get}},
-  \code{\link{submission_list}}
+Other restful-api: 
+\code{\link{attachment_link}()},
+\code{\link{attachment_list}()},
+\code{\link{audit_get}()},
+\code{\link{form_detail}()},
+\code{\link{form_list}()},
+\code{\link{form_schema_parse}()},
+\code{\link{form_schema}()},
+\code{\link{project_create}()},
+\code{\link{project_detail}()},
+\code{\link{project_list}()},
+\code{\link{submission_detail}()},
+\code{\link{submission_export}()},
+\code{\link{submission_get}()},
+\code{\link{submission_list}()}
 }
 \concept{restful-api}

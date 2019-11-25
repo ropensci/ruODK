@@ -22,8 +22,10 @@ A named list with three components (all of type character):
 \lifecycle{stable}
 }
 \seealso{
-Other ru_settings: \code{\link{ru_settings}},
-  \code{\link{ru_setup}}, \code{\link{yell_if_error}},
-  \code{\link{yell_if_missing}}
+Other ru_settings: 
+\code{\link{ru_settings}()},
+\code{\link{ru_setup}()},
+\code{\link{yell_if_error}()},
+\code{\link{yell_if_missing}()}
 }
 \concept{ru_settings}

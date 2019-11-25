@@ -54,10 +54,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/api.html">Accessing the RESTful API</a>
+      <a href="../articles/odata-api.html">Accessing the OData API</a>
     </li>
     <li>
-      <a href="../articles/odata.html">Accessing the OData API</a>
+      <a href="../articles/restful-api.html">Accessing the RESTful API</a>
     </li>
     <li>
       <a href="../articles/setup.html">Setup</a>
@@ -244,6 +244,7 @@
 <h2 class="hasAnchor">
 <a href="#the-hard-way-per-function-call" class="anchor"></a>The hard way: Per function call</h2>
 <p>We can supply those credentials to each <code>ruODK</code> function call.</p>
+<p>Note, including sensitive credentials in plain text into code is bad practice. This option is shown only for completeness.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Use ruODK without ru_setup</span></a>
 <a class="sourceLine" id="cb7-2" title="2">ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/project_list.html">project_list</a></span>(</a>
 <a class="sourceLine" id="cb7-3" title="3">  <span class="dt">url=</span><span class="st">"https://my-odkc.com"</span>, </a>
@@ -257,7 +258,7 @@
 <a class="sourceLine" id="cb7-11" title="11">  <span class="dt">un=</span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/ru_settings.html">get_test_un</a></span>(), </a>
 <a class="sourceLine" id="cb7-12" title="12">  <span class="dt">pw=</span>ruODK<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ruODK/man/ru_settings.html">get_test_pw</a></span>()</a>
 <a class="sourceLine" id="cb7-13" title="13">)</a></code></pre></div>
-<p>An example use case are the <code>ruODK</code> tests, which explicitly set <code>url</code>, <code>un</code>, <code>pw</code>, <code>pid</code> and <code>fid</code> from the test variables <code>ruODK::get_test_{url, un, pw, pid, fid}()</code>.</p>
+<p>An example use case are the <code>ruODK</code> tests, which explicitly set <code>url</code>, <code>un</code>, <code>pw</code>, <code>pid</code> and <code>fid</code> from the test variables <code>ruODK::get_test_{url, un, pw, pid, fid}()</code>. Note that this uses functions instead of plain text versions of sensitive credentials. Alternatively, variables could also be used to set credentials per function call.</p>
 </div>
 </div>
 <div id="moving-across-forms" class="section level1">

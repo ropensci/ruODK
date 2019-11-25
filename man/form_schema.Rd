@@ -4,10 +4,16 @@
 \alias{form_schema}
 \title{Show the schema of one form.}
 \usage{
-form_schema(flatten = FALSE, odata = FALSE, parse = TRUE,
-  pid = get_default_pid(), fid = get_default_fid(),
-  url = get_default_url(), un = get_default_un(),
-  pw = get_default_pw())
+form_schema(
+  flatten = FALSE,
+  odata = FALSE,
+  parse = TRUE,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw()
+)
 }
 \arguments{
 \item{flatten}{Whether to flatten the resulting list of lists (TRUE) or not
@@ -21,7 +27,7 @@ Default: FALSE.}
 
 \item{parse}{Whether to parse the form schema into a tibble of form field
 type and name. This uses \code{`form_schema_parse`} internally.
-If used together with `flatten=TRUE` \code{`form_schema`} will raise a
+If used together with `flatten=TRUE`, \code{`form_schema`} will raise a
 warning and return the unparsed, flattened form schema.
 Default: TRUE.}
 
@@ -136,28 +142,33 @@ fs_nested[[length(fs_nested)]]$type
 # Useful to inform further parsing of submission data (attachments, dates)
 fsp <- form_schema(parse = TRUE)
 
-# Attachments: use \\code{`attachment_get`} on each of
-fsp \%>\% dplyr::filter(type == "binary")
+# Attachments: use `attachment_get` on each of
+fsp %>% dplyr::filter(type == "binary")
 
-# dateTime: use \\code{`parse_datetime`} on each of
-fsp \%>\% dplyr::filter(type == "dateTime")
+# dateTime: use `parse_datetime` on each of
+fsp %>% dplyr::filter(type == "dateTime")
 
 # Point location: will be split into lat/lon/alt/acc
-fsp \%>\% dplyr::filter(type == "geopoint")
+fsp %>% dplyr::filter(type == "geopoint")
 }
 }
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json}
 
-Other restful-api: \code{\link{attachment_link}},
-  \code{\link{attachment_list}}, \code{\link{audit_get}},
-  \code{\link{form_detail}}, \code{\link{form_list}},
-  \code{\link{form_schema_parse}}, \code{\link{form_xml}},
-  \code{\link{project_create}},
-  \code{\link{project_detail}}, \code{\link{project_list}},
-  \code{\link{submission_detail}},
-  \code{\link{submission_export}},
-  \code{\link{submission_get}},
-  \code{\link{submission_list}}
+Other restful-api: 
+\code{\link{attachment_link}()},
+\code{\link{attachment_list}()},
+\code{\link{audit_get}()},
+\code{\link{form_detail}()},
+\code{\link{form_list}()},
+\code{\link{form_schema_parse}()},
+\code{\link{form_xml}()},
+\code{\link{project_create}()},
+\code{\link{project_detail}()},
+\code{\link{project_list}()},
+\code{\link{submission_detail}()},
+\code{\link{submission_export}()},
+\code{\link{submission_get}()},
+\code{\link{submission_list}()}
 }
 \concept{restful-api}

@@ -8,7 +8,9 @@
 #' @template param-auth
 #' @return A nested list containing Edmx (dataset schema definition) and
 #'   .attrs (Version).
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/metadata-document}
+# nolint end
 #' @family odata-api
 #' @export
 #' @examples

@@ -49,6 +49,10 @@
 #'   path.
 #'   Default: TRUE.
 #' @template param-verbose
+#' @param orders (vector of character) Orders of datetime elements for
+#'   lubridate.
+#'   Default:
+#'   \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.
 #' @param tz A timezone, e.g. "Australia/Perth" or "UTC". Default: "UTC".
 #' @param local_dir The local folder to save the downloaded files to,
 #'   default: "media".
@@ -61,8 +65,10 @@
 #'   * `value` contains the submissions as list of lists.
 #'   * `@odata.context` is the URL of the metadata.
 #'   * `@odata.count` is the total number of rows in the table.
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}
+# nolint end
 #' @family odata-api
 #' @importFrom rlang %||%
 #' @export
@@ -118,6 +124,10 @@ odata_submission_get <- function(table = "Submissions",
                                  wkt = FALSE,
                                  parse = TRUE,
                                  verbose = FALSE,
+                                 orders = c(
+                                   "YmdHMS", "YmdHMSz", "Ymd HMS",
+                                   "Ymd HMSz", "Ymd", "ymd"
+                                 ),
                                  tz = "UTC",
                                  local_dir = "media",
                                  pid = get_default_pid(),
@@ -191,7 +201,12 @@ odata_submission_get <- function(table = "Submissions",
   }
   for (colname in dttm_cols) {
     if (verbose == TRUE) message(glue::glue("Parsing {colname} as {tz}...\n"))
-    sub <- sub %>% parse_datetime(tz = tz, col_contains = as.character(colname))
+    sub <- sub %>%
+      ru_datetime(
+        orders = orders,
+        tz = tz,
+        col_contains = as.character(colname)
+      )
   }
 
   # Download and link attachments

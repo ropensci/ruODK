@@ -148,6 +148,9 @@ Sys.setenv(ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379")
 ## The hard way: Per function call
 We can supply those credentials to each `ruODK` function call.
 
+Note, including sensitive credentials in plain text into code is bad practice.
+This option is shown only for completeness.
+
 ```{r, eval=FALSE}
 # Use ruODK without ru_setup
 ruODK::project_list(
@@ -166,6 +169,9 @@ ruODK::project_list(
 
 An example use case are the `ruODK` tests, which explicitly set `url`, `un`, 
 `pw`, `pid` and `fid` from the test variables `ruODK::get_test_{url, un, pw, pid, fid}()`.
+Note that this uses functions instead of plain text versions of sensitive 
+credentials. Alternatively, variables could also be used to set credentials per
+function call.
 
 
 # Moving across forms

@@ -17,6 +17,9 @@ Authors@R:
              family = "Whiting",
              role = "rev",
              comment = c(ORCID = "0000-0002-4683-1868")),
+      person(given = "Jason",
+             family = "Taylor",
+             role = "rev"),
       person(given = "DBCA",
              role = c("cph", "fnd")),
       person(given = "NWSFTCP",
@@ -72,6 +75,6 @@ RdMacros:
 Encoding: UTF-8
 Language: en_AU
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
 X-schema.org-applicationCategory: Data Access
 X-schema.org-keywords: database, open-data, opendatakit, odk, api, data, dataset

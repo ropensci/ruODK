@@ -55,23 +55,28 @@ f <- unzip(se, exdir = t)
 fs::dir_ls(t)
 
 # Prepend attachments with media/ to turn into relative file paths
-data_quadrat <- fid_csv \%>\%
-  readr::read_csv(na = c("", "NA", "na")) \%>\%
-  janitor::clean_names(.) \%>\%
-  attachment_link(.) \%>\%
+data_quadrat <- fid_csv %>%
+  readr::read_csv(na = c("", "NA", "na")) %>%
+  janitor::clean_names(.) %>%
+  attachment_link(.) %>%
   parse_datetime(tz = "Australia/Perth")
 }
 }
 \seealso{
-Other restful-api: \code{\link{attachment_list}},
-  \code{\link{audit_get}}, \code{\link{form_detail}},
-  \code{\link{form_list}}, \code{\link{form_schema_parse}},
-  \code{\link{form_schema}}, \code{\link{form_xml}},
-  \code{\link{project_create}},
-  \code{\link{project_detail}}, \code{\link{project_list}},
-  \code{\link{submission_detail}},
-  \code{\link{submission_export}},
-  \code{\link{submission_get}},
-  \code{\link{submission_list}}
+Other restful-api: 
+\code{\link{attachment_list}()},
+\code{\link{audit_get}()},
+\code{\link{form_detail}()},
+\code{\link{form_list}()},
+\code{\link{form_schema_parse}()},
+\code{\link{form_schema}()},
+\code{\link{form_xml}()},
+\code{\link{project_create}()},
+\code{\link{project_detail}()},
+\code{\link{project_list}()},
+\code{\link{submission_detail}()},
+\code{\link{submission_export}()},
+\code{\link{submission_get}()},
+\code{\link{submission_list}()}
 }
 \concept{restful-api}

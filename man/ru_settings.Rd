@@ -70,8 +70,10 @@ ru_settings()
 \code{\link{get_test_un}},
 \code{\link{get_test_pw}}.
 
-Other ru_settings: \code{\link{odata_svc_parse}},
-  \code{\link{ru_setup}}, \code{\link{yell_if_error}},
-  \code{\link{yell_if_missing}}
+Other ru_settings: 
+\code{\link{odata_svc_parse}()},
+\code{\link{ru_setup}()},
+\code{\link{yell_if_error}()},
+\code{\link{yell_if_missing}()}
 }
 \concept{ru_settings}

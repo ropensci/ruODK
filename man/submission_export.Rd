@@ -4,10 +4,16 @@
 \alias{submission_export}
 \title{Export all form submissions including repeats and attachments to CSV.}
 \usage{
-submission_export(local_dir = here::here(), overwrite = TRUE,
-  pid = get_default_pid(), fid = get_default_fid(),
-  url = get_default_url(), un = get_default_un(),
-  pw = get_default_pw(), verbose = FALSE)
+submission_export(
+  local_dir = here::here(),
+  overwrite = TRUE,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{local_dir}{The local folder to save the downloaded files to,
@@ -89,22 +95,27 @@ t <- tempdir()
 f <- unzip(se, exdir = t)
 fs::dir_ls(t)
 fid <- get_test_fid()
-sub <- fs::path(t, glue::glue("{fid}.csv")) \%>\% readr::read_csv()
-sub \%>\% knitr::kable(.)
+sub <- fs::path(t, glue::glue("{fid}.csv")) %>% readr::read_csv()
+sub %>% knitr::kable(.)
 }
 }
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv}
 
-Other restful-api: \code{\link{attachment_link}},
-  \code{\link{attachment_list}}, \code{\link{audit_get}},
-  \code{\link{form_detail}}, \code{\link{form_list}},
-  \code{\link{form_schema_parse}},
-  \code{\link{form_schema}}, \code{\link{form_xml}},
-  \code{\link{project_create}},
-  \code{\link{project_detail}}, \code{\link{project_list}},
-  \code{\link{submission_detail}},
-  \code{\link{submission_get}},
-  \code{\link{submission_list}}
+Other restful-api: 
+\code{\link{attachment_link}()},
+\code{\link{attachment_list}()},
+\code{\link{audit_get}()},
+\code{\link{form_detail}()},
+\code{\link{form_list}()},
+\code{\link{form_schema_parse}()},
+\code{\link{form_schema}()},
+\code{\link{form_xml}()},
+\code{\link{project_create}()},
+\code{\link{project_detail}()},
+\code{\link{project_list}()},
+\code{\link{submission_detail}()},
+\code{\link{submission_get}()},
+\code{\link{submission_list}()}
 }
 \concept{restful-api}

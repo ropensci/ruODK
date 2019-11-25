@@ -33,7 +33,8 @@ isodt_to_local <- function(datetime_string,
 #'   Default: "time" will match all column names containing "time".
 #' @param orders (vector of character) Orders of datetime elements for
 #'   lubridate.
-#'   Default: \code{c("YmdHMS", "YmdHMSz")}.
+#'   Default:
+#'   \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.
 #' @param tz (character) The timezone string for lubridate.
 #'   Default: \code{"UTC"}.
 #' @return The dataframe with matching columns mutated to lubridate datetimes.
@@ -45,16 +46,15 @@ isodt_to_local <- function(datetime_string,
 #'   readr::read_csv(na = c("", "NA", "na")) %>%
 #'   janitor::clean_names() %>%
 #'   link_attachments() %>%
-#'   parse_datetime(dt_contains = "Date", tz = "Australia/Perth") %>%
-#'   parse_datetime(tz = "Australia/Perth")
+#'   ru_datetime(dt_contains = "Date", tz = "Australia/Perth") %>%
+#'   ru_datetime(tz = "Australia/Perth")
 #' }
-parse_datetime <- function(df,
-                           col_contains = "time",
-                           orders = c(
-                             "YmdHMS", "YmdHMSz",
-                             "Ymd HMS", "Ymd HMSz"
-                           ),
-                           tz = "Australia/Perth") {
+ru_datetime <- function(df,
+                        col_contains = "time",
+                        orders = c(
+                          "YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd"
+                        ),
+                        tz = "UTC") {
   df %>%
     dplyr::mutate_at(
       dplyr::vars(tidyr::contains(col_contains)),

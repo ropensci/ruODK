@@ -15,7 +15,9 @@
 #'
 #'   * archived: FALSE (if NULL) else TRUE
 #'   * dates: NA if NULL
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details}
+# nolint end
 #' @family restful-api
 #' @export
 #' @examples

@@ -32,7 +32,7 @@ test_that("attachment_link works", {
       readr::read_csv(na = c("", "NA", "na")) %>%
       janitor::clean_names(.) %>%
       attachment_link(.) %>%
-      parse_datetime(tz = "Australia/Perth")
+      ru_datetime(tz = "Australia/Perth")
   )
 
   # Test that filepath of attachment exists

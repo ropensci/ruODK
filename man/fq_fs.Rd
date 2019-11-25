@@ -29,11 +29,15 @@ credentials to an ODK Central server. The test suite ensures that the
 "canned" data is identical to the "live" data.
 }
 \seealso{
-Other included: \code{\link{fq_data_strata}},
-  \code{\link{fq_data_taxa}}, \code{\link{fq_data}},
-  \code{\link{fq_meta}}, \code{\link{fq_raw_strata}},
-  \code{\link{fq_raw_taxa}}, \code{\link{fq_raw}},
-  \code{\link{fq_svc}}
+Other included: 
+\code{\link{fq_data_strata}},
+\code{\link{fq_data_taxa}},
+\code{\link{fq_data}},
+\code{\link{fq_meta}},
+\code{\link{fq_raw_strata}},
+\code{\link{fq_raw_taxa}},
+\code{\link{fq_raw}},
+\code{\link{fq_svc}}
 }
 \concept{included}
 \keyword{datasets}

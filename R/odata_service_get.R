@@ -8,7 +8,9 @@
 #' @template param-auth
 #' @return A tibble with one row per submission data endpoint.
 #'         Columns: name, kind, url.
+# nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/service-document}
+# nolint end
 #' @family odata-api
 #' @export
 #' @examples
