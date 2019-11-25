@@ -136,13 +136,13 @@ ruODK::ru_setup(
 )
 
 form_tables <- ruODK::odata_service_get()
-data <- odata_submissions_get() # default: main data table
-data <- odata_submissions_get(table = form_tables$url[1]) # same, explicitly
-data_sub1 <- odata_submissions_get(table = form_tables$url[2]) # sub-table 1
-data_sub2 <- odata_submissions_get(table = form_tables$url[3]) # sub-table 2
+data <- odata_submission_get() # default: main data table
+data <- odata_submission_get(table = form_tables$url[1]) # same, explicitly
+data_sub1 <- odata_submission_get(table = form_tables$url[2]) # sub-table 1
+data_sub2 <- odata_submission_get(table = form_tables$url[3]) # sub-table 2
 
 # Skip one row, return the next 1 rows (top), include total row count
-data <- odata_submissions_get(
+data <- odata_submission_get(
   table = form_tables$url[1],
   skip = 1,
   top = 1,
@@ -150,7 +150,7 @@ data <- odata_submissions_get(
 )
 
 # Point coordinates (lat, lon, alt, acc) need to be renamed
-data <- odata_submissions_get(
+data <- odata_submission_get(
   table = form_tables$url[1],
   wkt = FALSE
 ) %>%
@@ -163,7 +163,7 @@ data <- odata_submissions_get(
   )
 
 # Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"
-data <- odata_submissions_get(
+data <- odata_submission_get(
   table = form_tables$url[1],
   wkt = TRUE
 )
