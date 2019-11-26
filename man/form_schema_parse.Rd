@@ -10,8 +10,8 @@ form_schema_parse(fs, path = "Submissions", verbose = FALSE)
 \item{fs}{The output of form_schema as nested list}
 
 \item{path}{The base path for form fields. Default: "Submissions".
-\code{`form_schema_parse()`} recursively steps into deeper nesting levels,
-which are reflected as separate OData tables.
+\code{\link{form_schema_parse}} recursively steps into deeper nesting
+levels, which are reflected as separate OData tables.
 The returned value in `path` reflects the XForm group name, which
 translates to separate screens in ODK Collect.
 Non-repeating form groups will be flattened out into the main Submissions
@@ -28,10 +28,10 @@ The form definition consists of fields (with a type and name), and form
 groups, which are rendered as separate ODK Collect screens.
 Form groups in turn can also contain form fields.
 
-\code{`form_schema_parse`} recursively unpacks the form and extracts the name
-and type of each field. This information then can be used to inform the user
-which columns require \code{`parse_datetime`}, \code{`attachment_get`}, or
-\code{`attachment_link`}, respectively.
+\code{\link{form_schema_parse}} recursively unpacks the form and extracts the
+name and type of each field. This information then can be used to inform the
+user which columns require \code{\link{ru_datetime}},
+\code{\link{attachment_get}}, or \code{\link{attachment_link}}, respectively.
 }
 \examples{
 \dontrun{
@@ -44,14 +44,14 @@ fsp <- form_schema(parse = TRUE)
 
 fsp
 
-# Attachments: use `attachment_get` on each of
-fsp %>% dplyr::filter(type == "binary")
+# Attachments: use \\code{\\link{attachment_get}} on each of
+fsp \%>\% dplyr::filter(type == "binary")
 
-# dateYime: use `parse_datetime` on each of
-fsp %>% dplyr::filter(type == "dateTime")
+# dateTime: use \\code{\\link{ru_datetime}} on each of
+fsp \%>\% dplyr::filter(type == "dateTime")
 
 # Point location: will be split into lat/lon/alt/acc
-fsp %>% dplyr::filter(type == "geopoint")
+fsp \%>\% dplyr::filter(type == "geopoint")
 }
 }
 \seealso{

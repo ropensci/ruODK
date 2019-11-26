@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
       </span>
     </div>
 
@@ -143,8 +143,8 @@
     <tr>
       <th>data_tbl</th>
       <td><p>The downloaded submissions from
-<code>`ruODK::submission_export()`</code> read into a `tibble` by
-<code>`readr::read_csv()`</code>.</p></td>
+<code><a href='submission_export.html'>submission_export</a></code> read into a `tibble` by
+<code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv</a></code>.</p></td>
     </tr>
     <tr>
       <th>att_path</th>
@@ -211,10 +211,10 @@ Columns of the dataframe are selected by the presence of `att_contains`.</p></td
 <span class='kw pkg'>fs</span><span class='kw ns'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span>(<span class='no'>t</span>)
 
 <span class='co'># Prepend attachments with media/ to turn into relative file paths</span>
-<span class='no'>data_quadrat</span> <span class='kw'>&lt;-</span> <span class='no'>fid_csv</span>
-  <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>(<span class='kw'>na</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='st'>"NA"</span>, <span class='st'>"na"</span>))
-  <span class='kw pkg'>janitor</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names</a></span>(<span class='no'>.</span>)
-  <span class='fu'>attachment_link</span>(<span class='no'>.</span>)
+<span class='no'>data_quadrat</span> <span class='kw'>&lt;-</span> <span class='no'>fid_csv</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>(<span class='kw'>na</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='st'>"NA"</span>, <span class='st'>"na"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>janitor</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names</a></span>(<span class='no'>.</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>attachment_link</span>(<span class='no'>.</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>parse_datetime</span>(<span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"Australia/Perth"</span>)
 }</div></pre>
   </div>

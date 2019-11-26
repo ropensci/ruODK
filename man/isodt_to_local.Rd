@@ -28,6 +28,7 @@ Other utilities:
 \code{\link{\%>\%}()},
 \code{\link{prepend_uuid}()},
 \code{\link{ru_datetime}()},
+\code{\link{split_geopoint}()},
 \code{\link{strip_uuid}()},
 \code{\link{tidyeval}}
 }

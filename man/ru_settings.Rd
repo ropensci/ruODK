@@ -43,10 +43,10 @@ get_test_fid_zip()
 get_test_fid_att()
 }
 \value{
-\code{ru_settings} prints your default ODK Central project ID,
+\code{\link{ru_settings}} prints your default ODK Central project ID,
   form ID, url, username, and password, and corresponding optional test
   server settings.
-\code{ru_setup} sets your production and test settings, while
+\code{\link{ru_setup}} sets your production and test settings, while
 \code{get_(default/test)_*} get each of those respective settings.
 }
 \description{

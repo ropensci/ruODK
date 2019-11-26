@@ -71,7 +71,7 @@ attachments. — odata_submission_get" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
       </span>
     </div>
 
@@ -164,7 +164,7 @@ attachments.</h1>
       <td><p>The submission EntityType, or in plain words, the table name.
 Default: "Submissions" (the main table).
 Change to "Submissions.GROUP_NAME" for repeating form groups.
-The group name can be found through <code>`odata_service_get()`</code>.</p></td>
+The group name can be found through <code><a href='odata_service_get.html'>odata_service_get</a></code>.</p></td>
     </tr>
     <tr>
       <th>skip</th>
@@ -187,7 +187,9 @@ response from ODK Central. Default: FALSE.</p></td>
 strings. Default: FALSE, returns GeoJSON structures.
 Note, ODK Central currently only honours this parameter for Point
 geometries.
-Line and Polygon geometries are returned as "ODK WKT".</p></td>
+Line and Polygon geometries are returned as "ODK WKT".
+ruODK parses `geopoint` WKT into latitude, longitude, and altitude,
+prefixed by the original field name to avoid naming conflicts.</p></td>
     </tr>
     <tr>
       <th>parse</th>
@@ -195,6 +197,10 @@ Line and Polygon geometries are returned as "ODK WKT".</p></td>
 Dates and datetimes will be parsed into local time.
 Attachments will be downloaded, and the field updated to the local file
 path.
+Point locations will be split into components; GeoJSON (`wkt=FALSE`) will
+be split into latitude, longitude, altitude and accuracy (with anonymous
+field names), while WKT will be split into latitude, longitude, and
+altitude (missing accuracy) prefixed by the original field name.
 Default: TRUE.</p></td>
     </tr>
     <tr>
@@ -220,35 +226,35 @@ default: "media".</p></td>
     <tr>
       <th>pid</th>
       <td><p>The numeric ID of the project, e.g.: 2.
-Default: <code><a href='ru_settings.html'>get_default_pid()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_pid</a></code>.
 Set default <code>pid</code> through <code><a href='ru_setup.html'>ru_setup(pid="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>fid</th>
       <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
-Default: <code><a href='ru_settings.html'>get_default_fid()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_fid</a></code>.
 Set default <code>fid</code> through <code><a href='ru_setup.html'>ru_setup(fid="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>url</th>
       <td><p>The ODK Central base URL without trailing slash.
-Default: <code><a href='ru_settings.html'>get_default_url()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_url</a></code>.
 Set default <code>url</code> through <code><a href='ru_setup.html'>ru_setup(url="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
       <td><p>The ODK Central username (an email address).
-Default: <code><a href='ru_settings.html'>get_default_un()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_un</a></code>.
 Set default <code>un</code> through <code><a href='ru_setup.html'>ru_setup(un="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
       <td><p>The ODK Central password.
-Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_pw</a></code>.
 Set default <code>pw</code> through <code><a href='ru_setup.html'>ru_setup(pw="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
@@ -262,25 +268,34 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
   * `@odata.count` is the total number of rows in the table.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>`odata_submissions_get()`</code> downloads submissions from
+    <p><code>odata_submission_get</code> downloads submissions from
 (default) the main form group (submission table) including any non-repeating
 form groups, or from any other table as specified by parameter `table`.</p>
 
 <p>With parameter `parse=TRUE` (default), submission data is parsed into a
-tibble. Any fields of type "dateTime" or "date" are parsed into dates, with
+tibble. Any fields of type `dateTime`` or `date`` are parsed into dates, with
 an optional parameter `tz` to specify the local timezone.
 A parameter `local_dir` (default: "media") specifies a local directory for
 downloaded attachment files. Already existing, previously downloaded
 attachments will be retained. The only remaining manual step is to optionally
-rename any point location coordinate parts into "latitude", "longitude",
-"altitude", and "accuracy", as well as to join subtables to the master table.
+rename any point location coordinate parts into `latitude`, `longitude`,
+`altitude`, and `accuracy`, as well as to join subtables to the master table.
 The parameter `verbose` enables diagnostic messages along the download and
 parsing process.</p>
+<p>With parameter `wkt=TRUE`, spatial fields will be returned as WKT, rather
+than GeoJSON. In addition, fields of type `geopoint` will be split into
+latitude, longitude, and altitude, prefixed with the original field name.
+E.g. a field `start_location` of type `geopoint` will be split into
+`start_location_latitude`, `start_location_longitude`, and
+`start_location_altitude`. The field name prefix will allow multiple fields
+of type `geopoint` to be split into their components without naming
+conflicts. Other spatial fields will be retained as WKT.</p>
 <p>With parameter `parse=FALSE`, submission data is presented as nested list,
 which is the R equivalent of the returned form JSON.
-From there, <code>`odata_submission_parse()`</code> will parse the data into a
-tibble, and subsequent lines of <code>`parse_datetime()`</code> and
-<code>`attachment_get()`</code> parse dates and download and link file attachments.
+From there, <code><a href='odata_submission_parse.html'>odata_submission_parse</a></code> will parse the data into a
+tibble, and subsequent lines of <code><a href='ru_datetime.html'>ru_datetime</a></code> and
+<code><a href='attachment_get.html'>attachment_get</a></code> parse dates and download and link file
+attachments.
 As any of these steps might fail on unexpected errors, `ruODK` offers this
 longer, more manual pathway as an option to investigate and narrow down
 unexpected or unwanted behaviour.</p>
@@ -310,13 +325,13 @@ unexpected or unwanted behaviour.</p>
 )
 
 <span class='no'>form_tables</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/odata_service_get.html'>odata_service_get</a></span>()
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>() <span class='co'># default: main data table</span>
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>]) <span class='co'># same, explicitly</span>
-<span class='no'>data_sub1</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>2</span>]) <span class='co'># sub-table 1</span>
-<span class='no'>data_sub2</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>3</span>]) <span class='co'># sub-table 2</span>
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submission_get</span>() <span class='co'># default: main data table</span>
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submission_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>]) <span class='co'># same, explicitly</span>
+<span class='no'>data_sub1</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submission_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>2</span>]) <span class='co'># sub-table 1</span>
+<span class='no'>data_sub2</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submission_get</span>(<span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>3</span>]) <span class='co'># sub-table 2</span>
 
 <span class='co'># Skip one row, return the next 1 rows (top), include total row count</span>
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submission_get</span>(
   <span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>],
   <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>1</span>,
@@ -324,10 +339,10 @@ unexpected or unwanted behaviour.</p>
 )
 
 <span class='co'># Point coordinates (lat, lon, alt, acc) need to be renamed</span>
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submission_get</span>(
   <span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>],
   <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
+) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>rename</a></span>(
     <span class='co'># Adjust coordinate colnames as needed</span>
     <span class='co'># longitude = x13,</span>
@@ -337,10 +352,13 @@ unexpected or unwanted behaviour.</p>
   )
 
 <span class='co'># Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"</span>
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submissions_get</span>(
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>odata_submission_get</span>(
   <span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>form_tables</span>$<span class='no'>url</span>[<span class='fl'>1</span>],
   <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )
+<span class='co'># Columns of type "geopoint" will be split into lat lon alt (no accuracy) and</span>
+<span class='co'># prefixed with the ODK geopoint field name. Use parse=FALSE to retain WKT.</span>
+<span class='co'># Columns of other spatial types will remain WKT.</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -12,17 +12,17 @@ project_list(
 }
 \arguments{
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{get_default_url()}.
+Default: \code{\link{get_default_url}}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()}.
+Default: \code{\link{get_default_un}}.
 Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()}.
+Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 }
@@ -32,7 +32,8 @@ A tibble with one row per project and all project metadata
 }
 \description{
 While the API endpoint will return all projects,
-`project_list` will fail with incorrect or missing authentication.
+\code{\link{project_list}} will fail with incorrect or missing
+authentication.
 }
 \details{
 \lifecycle{stable}

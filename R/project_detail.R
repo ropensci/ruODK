@@ -1,7 +1,8 @@
 #' List all details of one project.
 #'
 #' While the API endpoint will return all details for one project,
-#' `project_detail` will fail with incorrect or missing authentication.
+#' \code{\link{project_detail}} will fail with incorrect or missing
+#' authentication.
 #'
 #' \lifecycle{stable}
 #'

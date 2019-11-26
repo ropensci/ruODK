@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Configure default <code>ruODK</code> settings. — ru_setup • ruODK</title>
+<title>Configure default <code><a href='ruODK-package.html'>ruODK</a></code> settings. — ru_setup • ruODK</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,7 @@
 
 
 
-<meta property="og:title" content="Configure default <code>ruODK</code> settings. — ru_setup" />
+<meta property="og:title" content="Configure default <code><a href='ruODK-package.html'>ruODK</a></code> settings. — ru_setup" />
 <meta property="og:description" content="" />
 <meta name="twitter:card" content="summary" />
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
       </span>
     </div>
 
@@ -126,7 +126,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Configure default <code>ruODK</code> settings.</h1>
+    <h1>Configure default <code><a href='ruODK-package.html'>ruODK</a></code> settings.</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/ru_setup.R'><code>R/ru_setup.R</code></a></small>
     <div class="hidden name"><code>ru_setup.Rd</code></div>
     </div>
@@ -242,16 +242,16 @@ privileged to view the test project(s) at <code>test_url</code>.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>ru_setup</code> sets ODK Central connection details. <code>ruODK</code>'s functions
-  default to use the default project ID, form ID, URL, username, and password
-  unless specified explicitly.</p>
+    <p><code>ru_setup</code> sets ODK Central connection details.
+  <code><a href='ruODK-package.html'>ruODK</a></code>'s functions default to use the default project ID,
+  form ID, URL, username, and password unless specified explicitly.</p>
 <p>Any parameters not specified will remain unchanged. It is therefore possible
 to set up username and password initially with
 <code>ru_setup(un="XXX", pw="XXX")</code>, and switch between forms with
 <code>ru_setup(svc="XXX")</code>, supplying the form's OData service URL.
 ODK Central conveniently provides the OData service URL in the form
 submission tab, which in turn contains base URL, project ID, and form ID.</p>
-<p><code>ruODK</code>'s automated tests require a valid ODK Central URL, and a
+<p><code><a href='ruODK-package.html'>ruODK</a></code>'s automated tests require a valid ODK Central URL, and a
   privileged username and password of a "web user" on that ODK Central
   instance, as well as an existing project and form.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

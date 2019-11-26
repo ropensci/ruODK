@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
       </span>
     </div>
 
@@ -165,43 +165,43 @@ Default: FALSE.</p></td>
     <tr>
       <th>parse</th>
       <td><p>Whether to parse the form schema into a tibble of form field
-type and name. This uses <code>`form_schema_parse`</code> internally.
-If used together with `flatten=TRUE`, <code>`form_schema`</code> will raise a
-warning and return the unparsed, flattened form schema.
+type and name. This uses <code><a href='form_schema_parse.html'>form_schema_parse</a></code> internally.
+If used together with `flatten=TRUE`, <code>form_schema</code> will raise
+a warning and return the unparsed, flattened form schema.
 Default: TRUE.</p></td>
     </tr>
     <tr>
       <th>pid</th>
       <td><p>The numeric ID of the project, e.g.: 2.
-Default: <code><a href='ru_settings.html'>get_default_pid()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_pid</a></code>.
 Set default <code>pid</code> through <code><a href='ru_setup.html'>ru_setup(pid="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>fid</th>
       <td><p>The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
-Default: <code><a href='ru_settings.html'>get_default_fid()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_fid</a></code>.
 Set default <code>fid</code> through <code><a href='ru_setup.html'>ru_setup(fid="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>url</th>
       <td><p>The ODK Central base URL without trailing slash.
-Default: <code><a href='ru_settings.html'>get_default_url()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_url</a></code>.
 Set default <code>url</code> through <code><a href='ru_setup.html'>ru_setup(url="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
       <td><p>The ODK Central username (an email address).
-Default: <code><a href='ru_settings.html'>get_default_un()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_un</a></code>.
 Set default <code>un</code> through <code><a href='ru_setup.html'>ru_setup(un="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
       <td><p>The ODK Central password.
-Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_pw</a></code>.
 Set default <code>pw</code> through <code><a href='ru_setup.html'>ru_setup(pw="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
@@ -309,14 +309,14 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
 <span class='co'># Useful to inform further parsing of submission data (attachments, dates)</span>
 <span class='no'>fsp</span> <span class='kw'>&lt;-</span> <span class='fu'>form_schema</span>(<span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'># Attachments: use `attachment_get` on each of</span>
-<span class='no'>fsp</span>
+<span class='co'># Attachments: use \code{\link{attachment_get}} on each of</span>
+<span class='no'>fsp</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>type</span> <span class='kw'>==</span> <span class='st'>"binary"</span>)
 
-<span class='co'># dateTime: use `parse_datetime` on each of</span>
-<span class='no'>fsp</span>
+<span class='co'># dateTime: use \code{\link{ru_datetime}} on each of</span>
+<span class='no'>fsp</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>type</span> <span class='kw'>==</span> <span class='st'>"dateTime"</span>)
 
 <span class='co'># Point location: will be split into lat/lon/alt/acc</span>
-<span class='no'>fsp</span>
+<span class='no'>fsp</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>type</span> <span class='kw'>==</span> <span class='st'>"geopoint"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

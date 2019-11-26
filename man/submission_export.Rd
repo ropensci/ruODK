@@ -17,33 +17,33 @@ submission_export(
 }
 \arguments{
 \item{local_dir}{The local folder to save the downloaded files to,
-default: `here::here()`.}
+default: \code{here::here}.}
 
 \item{overwrite}{Whether to overwrite previously downloaded zip files,
 default: FALSE}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
-Default: \code{get_default_pid()}.
+Default: \code{\link{get_default_pid}}.
 Set default \code{pid} through \code{ru_setup(pid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
-Default: \code{get_default_fid()}.
+Default: \code{\link{get_default_fid}}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{get_default_url()}.
+Default: \code{\link{get_default_url}}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()}.
+Default: \code{\link{get_default_un}}.
 Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()}.
+Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
@@ -69,10 +69,12 @@ Attachment filenames (e.g. "12345.jpg") should be prepended with `media`
 path to the actual attachment file (as extracted from the zip file).
 
 This function downloads all submissions and attachments in one go.
-For incremental download of a subset of submissions, use `submission_list`,
+For incremental download of a subset of submissions, use
+\code{\link{submission_list}},
 choose the submissions of interest (e.g. by submission date), and use their
-uuids to download them one by one via `submission_get`. Download attachments
-as listed for each submission (`attachment_list`).
+uuids to download them one by one via \code{\link{submission_get}}.
+Download attachments as listed for each submission
+(\code{\link{attachment_list}}).
 
 \lifecycle{stable}
 }
@@ -95,8 +97,8 @@ t <- tempdir()
 f <- unzip(se, exdir = t)
 fs::dir_ls(t)
 fid <- get_test_fid()
-sub <- fs::path(t, glue::glue("{fid}.csv")) %>% readr::read_csv()
-sub %>% knitr::kable(.)
+sub <- fs::path(t, glue::glue("{fid}.csv")) \%>\% readr::read_csv()
+sub \%>\% knitr::kable(.)
 }
 }
 \seealso{

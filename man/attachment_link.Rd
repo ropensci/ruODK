@@ -8,8 +8,8 @@ attachment_link(data_tbl, att_path = "media", att_contains = "photo")
 }
 \arguments{
 \item{data_tbl}{The downloaded submissions from
-\code{`ruODK::submission_export()`} read into a `tibble` by
-\code{`readr::read_csv()`}.}
+\code{\link{submission_export}} read into a `tibble` by
+\code{readr::read_csv}.}
 
 \item{att_path}{A local path, default: "media" (as per .csv.zip export).
 Selected columns of the dataframe (containing attchment filenames) are
@@ -55,10 +55,10 @@ f <- unzip(se, exdir = t)
 fs::dir_ls(t)
 
 # Prepend attachments with media/ to turn into relative file paths
-data_quadrat <- fid_csv %>%
-  readr::read_csv(na = c("", "NA", "na")) %>%
-  janitor::clean_names(.) %>%
-  attachment_link(.) %>%
+data_quadrat <- fid_csv \%>\%
+  readr::read_csv(na = c("", "NA", "na")) \%>\%
+  janitor::clean_names(.) \%>\%
+  attachment_link(.) \%>\%
   parse_datetime(tz = "Australia/Perth")
 }
 }

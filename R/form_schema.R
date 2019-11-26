@@ -10,9 +10,9 @@
 #'   restrictions related to the domain-qualified identifier syntax it uses.
 #'   Default: FALSE.
 #' @param parse Whether to parse the form schema into a tibble of form field
-#'   type and name. This uses \code{`form_schema_parse`} internally.
-#'   If used together with `flatten=TRUE`, \code{`form_schema`} will raise a
-#'   warning and return the unparsed, flattened form schema.
+#'   type and name. This uses \code{\link{form_schema_parse}} internally.
+#'   If used together with `flatten=TRUE`, \code{\link{form_schema}} will raise
+#'   a warning and return the unparsed, flattened form schema.
 #'   Default: TRUE.
 #' @template param-pid
 #' @template param-fid
@@ -104,10 +104,10 @@
 #' # Useful to inform further parsing of submission data (attachments, dates)
 #' fsp <- form_schema(parse = TRUE)
 #'
-#' # Attachments: use `attachment_get` on each of
+#' # Attachments: use \\code{\\link{attachment_get}} on each of
 #' fsp %>% dplyr::filter(type == "binary")
 #'
-#' # dateTime: use `parse_datetime` on each of
+#' # dateTime: use \\code{\\link{ru_datetime}} on each of
 #' fsp %>% dplyr::filter(type == "dateTime")
 #'
 #' # Point location: will be split into lat/lon/alt/acc

@@ -66,7 +66,7 @@ test_that("submission_export works", {
   testthat::expect_false(dl1 == dl3)
 
   # Four Tequila, oh oh oh
-  # \url{https://www.youtube.com/watch?v=cWd5Uiyx5zg}
+  # https://www.youtube.com/watch?v=cWd5Uiyx5zg
   testthat::expect_message(
     se <- submission_export(
       local_dir = t,

@@ -38,12 +38,12 @@ ODK Central offers no less than three different ways to access data:
   through the OData service endpoints, or
 * downloading all submissions including attachments as one (possibly gigantic) 
   zip archive either through the "Export Submissions" button in the ODK Central
-  form submissions page or through `ruODK`,
+  form submissions page or through `ruODK`, or
 * viewing ODK Central data through `ruODK`'s RESTful API functions.
 
 While the `vignette("odata", package="ruODK")` 
-(online [here](https://dbca-wa.github.io/ruODK/articles/odata.html)) illustrates 
-the first option, this vignette demonstrates the remaining two.
+(online [here](https://dbca-wa.github.io/ruODK/articles/odata-api.html)) 
+illustrates the first option, this vignette demonstrates the remaining two.
 
 Not implemented (yet) are the "managing ODK Central" functions which create, 
 update, and delete projects, forms, users, roles, and permissions. 

@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
       </span>
     </div>
 
@@ -147,8 +147,8 @@
     <tr>
       <th>path</th>
       <td><p>The base path for form fields. Default: "Submissions".
-<code>`form_schema_parse()`</code> recursively steps into deeper nesting levels,
-which are reflected as separate OData tables.
+<code>form_schema_parse</code> recursively steps into deeper nesting
+levels, which are reflected as separate OData tables.
 The returned value in `path` reflects the XForm group name, which
 translates to separate screens in ODK Collect.
 Non-repeating form groups will be flattened out into the main Submissions
@@ -166,10 +166,10 @@ table. Repeating groups are available as separate OData tables.</p></td>
 The form definition consists of fields (with a type and name), and form
 groups, which are rendered as separate ODK Collect screens.
 Form groups in turn can also contain form fields.</p>
-<p><code>`form_schema_parse`</code> recursively unpacks the form and extracts the name
-and type of each field. This information then can be used to inform the user
-which columns require <code>`parse_datetime`</code>, <code>`attachment_get`</code>, or
-<code>`attachment_link`</code>, respectively.</p>
+<p><code>form_schema_parse</code> recursively unpacks the form and extracts the
+name and type of each field. This information then can be used to inform the
+user which columns require <code><a href='ru_datetime.html'>ru_datetime</a></code>,
+<code><a href='attachment_get.html'>attachment_get</a></code>, or <code><a href='attachment_link.html'>attachment_link</a></code>, respectively.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other restful-api: 
@@ -199,14 +199,14 @@ which columns require <code>`parse_datetime`</code>, <code>`attachment_get`</cod
 
 <span class='no'>fsp</span>
 
-<span class='co'># Attachments: use `attachment_get` on each of</span>
-<span class='no'>fsp</span>
+<span class='co'># Attachments: use \code{\link{attachment_get}} on each of</span>
+<span class='no'>fsp</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>type</span> <span class='kw'>==</span> <span class='st'>"binary"</span>)
 
-<span class='co'># dateYime: use `parse_datetime` on each of</span>
-<span class='no'>fsp</span>
+<span class='co'># dateTime: use \code{\link{ru_datetime}} on each of</span>
+<span class='no'>fsp</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>type</span> <span class='kw'>==</span> <span class='st'>"dateTime"</span>)
 
 <span class='co'># Point location: will be split into lat/lon/alt/acc</span>
-<span class='no'>fsp</span>
+<span class='no'>fsp</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>type</span> <span class='kw'>==</span> <span class='st'>"geopoint"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -3,8 +3,8 @@
 #' \lifecycle{maturing}
 #'
 #' @param data_tbl The downloaded submissions from
-#'   \code{`ruODK::submission_export()`} read into a `tibble` by
-#'   \code{`readr::read_csv()`}.
+#'   \code{\link{submission_export}} read into a `tibble` by
+#'   \code{readr::read_csv}.
 #' @param att_path A local path, default: "media" (as per .csv.zip export).
 #'   Selected columns of the dataframe (containing attchment filenames) are
 #'   prefixed with `att_path`, thus turning them into relative paths.

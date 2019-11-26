@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
       </span>
     </div>
 
@@ -146,8 +146,8 @@
     </tr>
     <tr>
       <th>names_repair</th>
-      <td><p>The argument `names_repair` for `tibble::unnest_wider`,
-default: "universal".</p></td>
+      <td><p>The argument `names_repair` for
+<code><a href='https://tidyr.tidyverse.org/reference/hoist.html'>tidyr::unnest_wider</a></code>, default: "universal".</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -160,9 +160,11 @@ default: "universal".</p></td>
     <p>The unnested tibble in wide format</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code><a href='odata_submission_parse.html'>odata_submission_parse()</a></code> uses this function internally.
+    <p><code><a href='odata_submission_parse.html'>odata_submission_parse</a></code>uses this function internally.
 Interested users can use this function to break down `ruODK`'s automated
 steps into smaller components.</p>
+<p>The quite verbose output of <code><a href='https://tidyr.tidyverse.org/reference/hoist.html'>tidyr::unnest_wider</a></code> is captured
+and hidden from the user.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other odata-api: 

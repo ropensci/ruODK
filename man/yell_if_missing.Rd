@@ -21,8 +21,8 @@ yell_if_missing(url, un, pw, pid = NULL, fid = NULL)
 \lifecycle{stable}
 }
 \details{
-This is a helper function to pat down \code{ruODK} functions for
-         missing credentials and stop with a loud but informative yell.
+This is a helper function to pat down \code{\link{ruODK}} functions
+  for missing credentials and stop with a loud but informative yell.
 }
 \examples{
 testthat::expect_error(yell_if_missing("", "username", "password"))

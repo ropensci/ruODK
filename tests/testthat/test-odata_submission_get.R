@@ -111,5 +111,26 @@ test_that("odata_submission_get count returns total number or rows", {
 })
 
 
+test_that("odata_submission_get parses WKT geopoint", {
+  df <- odata_submission_get(
+    wkt = TRUE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    parse = TRUE,
+    verbose = TRUE
+  )
+
+  testthat::expect_true("corner1_latitude" %in% names(df))
+  testthat::expect_true("corner1_longitude" %in% names(df))
+  testthat::expect_true("corner1_altitude" %in% names(df))
+
+  testthat::expect_true("corner4_latitude" %in% names(df))
+  testthat::expect_true("corner4_longitude" %in% names(df))
+  testthat::expect_true("corner4_altitude" %in% names(df))
+})
+
 # Tests code
 # usethis::edit_file("R/odata_submission_get.R")

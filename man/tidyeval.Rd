@@ -26,6 +26,7 @@ Other utilities:
 \code{\link{isodt_to_local}()},
 \code{\link{prepend_uuid}()},
 \code{\link{ru_datetime}()},
+\code{\link{split_geopoint}()},
 \code{\link{strip_uuid}()}
 }
 \concept{utilities}

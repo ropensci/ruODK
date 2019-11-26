@@ -2,7 +2,7 @@
 % Please edit documentation in R/ru_setup.R
 \name{ru_setup}
 \alias{ru_setup}
-\title{Configure default \code{ruODK} settings.}
+\title{Configure default \code{\link{ruODK}} settings.}
 \usage{
 ru_setup(
   svc = NULL,
@@ -81,9 +81,9 @@ privileged to view the test project(s) at \code{test_url}.}
 \lifecycle{stable}
 }
 \details{
-\code{ru_setup} sets ODK Central connection details. \code{ruODK}'s functions
-  default to use the default project ID, form ID, URL, username, and password
-  unless specified explicitly.
+\code{\link{ru_setup}} sets ODK Central connection details.
+  \code{\link{ruODK}}'s functions default to use the default project ID,
+  form ID, URL, username, and password unless specified explicitly.
 
 Any parameters not specified will remain unchanged. It is therefore possible
 to set up username and password initially with
@@ -92,7 +92,7 @@ to set up username and password initially with
 ODK Central conveniently provides the OData service URL in the form
 submission tab, which in turn contains base URL, project ID, and form ID.
 
-\code{ruODK}'s automated tests require a valid ODK Central URL, and a
+\code{\link{ruODK}}'s automated tests require a valid ODK Central URL, and a
   privileged username and password of a "web user" on that ODK Central
   instance, as well as an existing project and form.
 }

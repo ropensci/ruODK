@@ -27,7 +27,7 @@ odata_submission_get(
 \item{table}{The submission EntityType, or in plain words, the table name.
 Default: "Submissions" (the main table).
 Change to "Submissions.GROUP_NAME" for repeating form groups.
-The group name can be found through \code{`odata_service_get()`}.}
+The group name can be found through \code{\link{odata_service_get}}.}
 
 \item{skip}{The number of rows to be omitted from the results.
 Example: 10, default: NA (none skipped).}
@@ -42,12 +42,18 @@ response from ODK Central. Default: FALSE.}
 strings. Default: FALSE, returns GeoJSON structures.
 Note, ODK Central currently only honours this parameter for Point
 geometries.
-Line and Polygon geometries are returned as "ODK WKT".}
+Line and Polygon geometries are returned as "ODK WKT".
+ruODK parses `geopoint` WKT into latitude, longitude, and altitude,
+prefixed by the original field name to avoid naming conflicts.}
 
 \item{parse}{Whether to parse submission data based on form schema.
 Dates and datetimes will be parsed into local time.
 Attachments will be downloaded, and the field updated to the local file
 path.
+Point locations will be split into components; GeoJSON (`wkt=FALSE`) will
+be split into latitude, longitude, altitude and accuracy (with anonymous
+field names), while WKT will be split into latitude, longitude, and
+altitude (missing accuracy) prefixed by the original field name.
 Default: TRUE.}
 
 \item{verbose}{Whether to display debug messages or not (default)}
@@ -63,27 +69,27 @@ Default:
 default: "media".}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
-Default: \code{get_default_pid()}.
+Default: \code{\link{get_default_pid}}.
 Set default \code{pid} through \code{ru_setup(pid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
-Default: \code{get_default_fid()}.
+Default: \code{\link{get_default_fid}}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{get_default_url()}.
+Default: \code{\link{get_default_url}}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()}.
+Default: \code{\link{get_default_un}}.
 Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()}.
+Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 }
@@ -98,27 +104,37 @@ A list of lists.
 \lifecycle{maturing}
 }
 \details{
-\code{`odata_submissions_get()`} downloads submissions from
+\code{\link{odata_submission_get}} downloads submissions from
 (default) the main form group (submission table) including any non-repeating
 form groups, or from any other table as specified by parameter `table`.
 
 
 With parameter `parse=TRUE` (default), submission data is parsed into a
-tibble. Any fields of type "dateTime" or "date" are parsed into dates, with
+tibble. Any fields of type `dateTime`` or `date`` are parsed into dates, with
 an optional parameter `tz` to specify the local timezone.
 A parameter `local_dir` (default: "media") specifies a local directory for
 downloaded attachment files. Already existing, previously downloaded
 attachments will be retained. The only remaining manual step is to optionally
-rename any point location coordinate parts into "latitude", "longitude",
-"altitude", and "accuracy", as well as to join subtables to the master table.
+rename any point location coordinate parts into `latitude`, `longitude`,
+`altitude`, and `accuracy`, as well as to join subtables to the master table.
 The parameter `verbose` enables diagnostic messages along the download and
 parsing process.
 
+With parameter `wkt=TRUE`, spatial fields will be returned as WKT, rather
+than GeoJSON. In addition, fields of type `geopoint` will be split into
+latitude, longitude, and altitude, prefixed with the original field name.
+E.g. a field `start_location` of type `geopoint` will be split into
+`start_location_latitude`, `start_location_longitude`, and
+`start_location_altitude`. The field name prefix will allow multiple fields
+of type `geopoint` to be split into their components without naming
+conflicts. Other spatial fields will be retained as WKT.
+
 With parameter `parse=FALSE`, submission data is presented as nested list,
 which is the R equivalent of the returned form JSON.
-From there, \code{`odata_submission_parse()`} will parse the data into a
-tibble, and subsequent lines of \code{`parse_datetime()`} and
-\code{`attachment_get()`} parse dates and download and link file attachments.
+From there, \code{\link{odata_submission_parse}} will parse the data into a
+tibble, and subsequent lines of \code{\link{ru_datetime}} and
+\code{\link{attachment_get}} parse dates and download and link file
+attachments.
 As any of these steps might fail on unexpected errors, `ruODK` offers this
 longer, more manual pathway as an option to investigate and narrow down
 unexpected or unwanted behaviour.
@@ -153,7 +169,7 @@ data <- odata_submission_get(
 data <- odata_submission_get(
   table = form_tables$url[1],
   wkt = FALSE
-) %>%
+) \%>\%
   dplyr::rename(
     # Adjust coordinate colnames as needed
     # longitude = x13,
@@ -167,6 +183,9 @@ data <- odata_submission_get(
   table = form_tables$url[1],
   wkt = TRUE
 )
+# Columns of type "geopoint" will be split into lat lon alt (no accuracy) and
+# prefixed with the ODK geopoint field name. Use parse=FALSE to retain WKT.
+# Columns of other spatial types will remain WKT.
 }
 }
 \seealso{

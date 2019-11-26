@@ -12,15 +12,17 @@
 #' path to the actual attachment file (as extracted from the zip file).
 #'
 #' This function downloads all submissions and attachments in one go.
-#' For incremental download of a subset of submissions, use `submission_list`,
+#' For incremental download of a subset of submissions, use
+#' \code{\link{submission_list}},
 #' choose the submissions of interest (e.g. by submission date), and use their
-#' uuids to download them one by one via `submission_get`. Download attachments
-#' as listed for each submission (`attachment_list`).
+#' uuids to download them one by one via \code{\link{submission_get}}.
+#' Download attachments as listed for each submission
+#' (\code{\link{attachment_list}}).
 #'
 #' \lifecycle{stable}
 #'
 #' @param local_dir The local folder to save the downloaded files to,
-#'                  default: `here::here()`.
+#'                  default: \code{here::here}.
 #' @param overwrite Whether to overwrite previously downloaded zip files,
 #'                 default: FALSE
 #' @template param-pid

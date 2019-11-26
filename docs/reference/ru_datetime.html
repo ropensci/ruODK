@@ -71,7 +71,7 @@ datetime. — ru_datetime" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
       </span>
     </div>
 
@@ -141,7 +141,7 @@ datetime.</h1>
     <pre class="usage"><span class='fu'>ru_datetime</span>(
   <span class='no'>df</span>,
   <span class='kw'>col_contains</span> <span class='kw'>=</span> <span class='st'>"time"</span>,
-  <span class='kw'>orders</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"YmdHMS"</span>, <span class='st'>"YmdHMSz"</span>, <span class='st'>"Ymd HMS"</span>, <span class='st'>"Ymd HMSz"</span>, <span class='st'>"Ymd"</span>),
+  <span class='kw'>orders</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"YmdHMS"</span>, <span class='st'>"YmdHMSz"</span>, <span class='st'>"Ymd HMS"</span>, <span class='st'>"Ymd HMSz"</span>, <span class='st'>"Ymd"</span>, <span class='st'>"ymd"</span>),
   <span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"UTC"</span>
 )</pre>
 
@@ -177,7 +177,7 @@ Default: <code>"UTC"</code>.</p></td>
     <p>The dataframe with matching columns mutated to lubridate datetimes.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function wraps a <code>`dplyr::mutate_at()`</code> operation on all
+    <p>This function wraps a <code><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>dplyr::mutate_at</a></code> operation on all
 datetime columns containing a tell-tale `col_contains` string like "time"
 (default), "datetime" or "date". The operator using this function will have
 to know the column names (or commonalities like `"..._time"`).</p>
@@ -187,16 +187,17 @@ to know the column names (or commonalities like `"..._time"`).</p>
 <code>%&gt;%()</code>,
 <code><a href='isodt_to_local.html'>isodt_to_local</a>()</code>,
 <code><a href='prepend_uuid.html'>prepend_uuid</a>()</code>,
+<code><a href='split_geopoint.html'>split_geopoint</a>()</code>,
 <code><a href='strip_uuid.html'>strip_uuid</a>()</code>,
 <code><a href='tidyeval.html'>tidyeval</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>tsi</span> <span class='kw'>&lt;-</span> <span class='st'>"data/build_Turtle-Sighting-0-1_1559790020.csv"</span>
-  <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>(<span class='kw'>na</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='st'>"NA"</span>, <span class='st'>"na"</span>))
-  <span class='kw pkg'>janitor</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names</a></span>()
-  <span class='fu'>link_attachments</span>()
-  <span class='fu'>ru_datetime</span>(<span class='kw'>dt_contains</span> <span class='kw'>=</span> <span class='st'>"Date"</span>, <span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"Australia/Perth"</span>)
+<span class='no'>tsi</span> <span class='kw'>&lt;-</span> <span class='st'>"data/build_Turtle-Sighting-0-1_1559790020.csv"</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>(<span class='kw'>na</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>, <span class='st'>"NA"</span>, <span class='st'>"na"</span>)) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>janitor</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>link_attachments</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>ru_datetime</span>(<span class='kw'>dt_contains</span> <span class='kw'>=</span> <span class='st'>"Date"</span>, <span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"Australia/Perth"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>ru_datetime</span>(<span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"Australia/Perth"</span>)
 }</div></pre>
   </div>

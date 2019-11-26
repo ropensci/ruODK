@@ -23,7 +23,7 @@ isodt_to_local <- function(datetime_string,
 #' datetime.
 #'
 #' \lifecycle{stable}
-#' @details This function wraps a \code{`dplyr::mutate_at()`} operation on all
+#' @details This function wraps a \code{dplyr::mutate_at} operation on all
 #' datetime columns containing a tell-tale `col_contains` string like "time"
 #' (default), "datetime" or "date". The operator using this function will have
 #' to know the column names (or commonalities like `"..._time"`).
@@ -52,7 +52,12 @@ isodt_to_local <- function(datetime_string,
 ru_datetime <- function(df,
                         col_contains = "time",
                         orders = c(
-                          "YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd"
+                          "YmdHMS",
+                          "YmdHMSz",
+                          "Ymd HMS",
+                          "Ymd HMSz",
+                          "Ymd",
+                          "ymd"
                         ),
                         tz = "UTC") {
   df %>%
@@ -61,3 +66,42 @@ ru_datetime <- function(df,
       ~ isodt_to_local(., orders = orders, tz = tz)
     )
 }
+
+#' Split a column of a dataframe containing WKT POINT into lat, lon, alt.
+#'
+#' @param data (dataframe) A dataframe with a column of type WKT POINT
+#' @param colname (chr) The name of the WKT POINT column
+#' @return The given dataframe with the WKT POINT column <cn> replaced by three
+#'   columns, `<colname>_latitude`, `<colname>_longitude`, `<colname>_altitude`.
+#'   The three new columns are prefixed with the original `colname` to avoid
+#'   naming conflicts with possible other geopoint columns.
+#' @export
+#' @family utilities
+#' @examples
+#' df <- tibble::tibble(
+#'   stuff = c("asd", "sdf", "sdf"),
+#'   loc = c(
+#'     "POINT (-32 115 20)",
+#'     "POINT (-33 116 15)",
+#'     "POINT (-31 114 23)"
+#'   )
+#' )
+#' df_split <- df %>% split_geopoint("loc")
+#' names(df_split) == c(
+#'   "stuff", "loc_latitude", "loc_longitude", "loc_altitude"
+#' )
+split_geopoint <- function(data, colname) {
+  data %>%
+    tidyr::extract(
+      colname,
+      c(
+        glue::glue("{colname}_latitude"),
+        glue::glue("{colname}_longitude"),
+        glue::glue("{colname}_altitude")
+      ),
+      "POINT \\(([^,]+) ([^)]+) ([^,]+)\\)"
+    )
+}
+
+# Tests
+# usethis::use_test("split_geopoint")

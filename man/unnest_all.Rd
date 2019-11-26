@@ -9,8 +9,8 @@ unnest_all(nested_tbl, names_repair = "universal", verbose = FALSE)
 \arguments{
 \item{nested_tbl}{A nested tibble}
 
-\item{names_repair}{The argument `names_repair` for `tibble::unnest_wider`,
-default: "universal".}
+\item{names_repair}{The argument `names_repair` for
+\code{tidyr::unnest_wider}, default: "universal".}
 
 \item{verbose}{Whether to print verbose messages, default: FALSE.}
 }
@@ -21,9 +21,12 @@ The unnested tibble in wide format
 \lifecycle{stable}
 }
 \details{
-\code{odata_submission_parse()} uses this function internally.
+\code{\link{odata_submission_parse}}uses this function internally.
 Interested users can use this function to break down `ruODK`'s automated
 steps into smaller components.
+
+The quite verbose output of \code{tidyr::unnest_wider} is captured
+and hidden from the user.
 }
 \seealso{
 Other odata-api: 

@@ -18,12 +18,16 @@ listcol_names <- function(tbl) {
 #'
 #' \lifecycle{stable}
 #'
-#' @details \code{odata_submission_parse()} uses this function internally.
+#' @details \code{\link{odata_submission_parse}}uses this function internally.
 #' Interested users can use this function to break down `ruODK`'s automated
 #' steps into smaller components.
+#'
+#' The quite verbose output of \code{tidyr::unnest_wider} is captured
+#' and hidden from the user.
+#'
 #' @param nested_tbl A nested tibble
-#' @param names_repair The argument `names_repair` for `tibble::unnest_wider`,
-#'   default: "universal".
+#' @param names_repair The argument `names_repair` for
+#'   \code{tidyr::unnest_wider}, default: "universal".
 #' @param verbose Whether to print verbose messages, default: FALSE.
 #' @return The unnested tibble in wide format
 #' @family odata-api
@@ -38,12 +42,13 @@ unnest_all <- function(nested_tbl,
         message(glue::glue("Skipping renamed column '{colname}'\n"))
       }
     } else {
-      if (verbose == TRUE) {
-        message(glue::glue("Unnesting column '{colname}'\n"))
-      }
-      nested_tbl <- tidyr::unnest_wider(
-        nested_tbl, colname,
-        names_repair = names_repair
+      if (verbose == TRUE) message(glue::glue("Unnesting column '{colname}'\n"))
+      suppressMessages( # ball-gag unnest_wider
+        nested_tbl <- tidyr::unnest_wider(
+          nested_tbl,
+          colname,
+          names_repair = names_repair
+        )
       )
     }
   }
@@ -59,16 +64,17 @@ unnest_all <- function(nested_tbl,
   nested_tbl
 }
 
-#' Parse the output of `odata_submission_get(parse=FALSE)` into a tidy tibble
-#' and unnest all levels.
+#' Parse the output of \code{\link{odata_submission_get}(parse=FALSE)}
+#' into a tidy tibble and unnest all levels.
 #'
 #' \lifecycle{maturing}
 #'
 #' Coming soon: [Better column names](https://github.com/dbca-wa/ruODK/issues/7)
 #'
-#' @param data A nested list of lists as given by `ruODK::get_submissions`.
-#' @param names_repair The argument `names_repair` for `tidyr::unnest_wider`,
-#'   default: "universal".
+#' @param data A nested list of lists as given by
+#'   \code{\link{odata_submission_get}}.
+#' @param names_repair The argument `names_repair` for
+#'   \code{tidyr::unnest_wider}, default: "universal".
 #' @param verbose Whether to print verbose messages, default: FALSE.
 #' @return The submissions as unnested tibble
 #' @family odata-api

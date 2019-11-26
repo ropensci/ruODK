@@ -13,22 +13,22 @@ project_detail(
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.
-Default: \code{get_default_pid()}.
+Default: \code{\link{get_default_pid}}.
 Set default \code{pid} through \code{ru_setup(pid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{get_default_url()}.
+Default: \code{\link{get_default_url}}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()}.
+Default: \code{\link{get_default_un}}.
 Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()}.
+Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 }
@@ -43,7 +43,8 @@ A tibble with exactly one row for the project and all project
 }
 \description{
 While the API endpoint will return all details for one project,
-`project_detail` will fail with incorrect or missing authentication.
+\code{\link{project_detail}} will fail with incorrect or missing
+authentication.
 }
 \details{
 \lifecycle{stable}
@@ -62,8 +63,8 @@ ruODK::ru_setup(
 
 pd <- project_detail()
 
-pd %>%
-  dplyr::select(-"verbs") %>%
+pd \%>\%
+  dplyr::select(-"verbs") \%>\%
   knitr::kable(.)
 }
 }

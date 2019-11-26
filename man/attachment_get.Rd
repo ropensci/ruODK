@@ -29,34 +29,34 @@ default: "media".}
 \item{separate}{(logical) Whether to separate locally downloaded files into
 a subfolder named after the submission uuid within `local_dir`,
 default: FALSE.
-The defaults mirror the behaviour of \code{`submission_export`}, which
+The defaults mirror the behaviour of \code{\link{submission_export}}, which
 keeps all attachment files together in a folder `media`.
 Enable this option if downloaded files collide on idential names. This can
 happen if two data collection devices by chance generate the same filename
 for two respective media files, e.g. `DCIM0001.jpg`.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
-Default: \code{get_default_pid()}.
+Default: \code{\link{get_default_pid}}.
 Set default \code{pid} through \code{ru_setup(pid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
-Default: \code{get_default_fid()}.
+Default: \code{\link{get_default_fid}}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{get_default_url()}.
+Default: \code{\link{get_default_url}}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()}.
+Default: \code{\link{get_default_un}}.
 Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()}.
+Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 

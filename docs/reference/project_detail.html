@@ -37,7 +37,8 @@
 
 <meta property="og:title" content="List all details of one project. — project_detail" />
 <meta property="og:description" content="While the API endpoint will return all details for one project,
-`project_detail` will fail with incorrect or missing authentication." />
+project_detail will fail with incorrect or missing
+authentication." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -70,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
       </span>
     </div>
 
@@ -134,7 +135,8 @@
 
     <div class="ref-description">
     <p>While the API endpoint will return all details for one project,
-`project_detail` will fail with incorrect or missing authentication.</p>
+<code>project_detail</code> will fail with incorrect or missing
+authentication.</p>
     </div>
 
     <pre class="usage"><span class='fu'>project_detail</span>(
@@ -150,28 +152,28 @@
     <tr>
       <th>pid</th>
       <td><p>The numeric ID of the project, e.g.: 2.
-Default: <code><a href='ru_settings.html'>get_default_pid()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_pid</a></code>.
 Set default <code>pid</code> through <code><a href='ru_setup.html'>ru_setup(pid="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>url</th>
       <td><p>The ODK Central base URL without trailing slash.
-Default: <code><a href='ru_settings.html'>get_default_url()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_url</a></code>.
 Set default <code>url</code> through <code><a href='ru_setup.html'>ru_setup(url="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
       <td><p>The ODK Central username (an email address).
-Default: <code><a href='ru_settings.html'>get_default_un()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_un</a></code>.
 Set default <code>un</code> through <code><a href='ru_setup.html'>ru_setup(un="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
       <td><p>The ODK Central password.
-Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_pw</a></code>.
 Set default <code>pw</code> through <code><a href='ru_setup.html'>ru_setup(pw="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
@@ -221,8 +223,8 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
 
 <span class='no'>pd</span> <span class='kw'>&lt;-</span> <span class='fu'>project_detail</span>()
 
-<span class='no'>pd</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='st'>"verbs"</span>)
+<span class='no'>pd</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(-<span class='st'>"verbs"</span>) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
 }</div></pre>
   </div>

@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
       </span>
     </div>
 
@@ -177,21 +177,21 @@ E.g. `2000-01-01z` or `2000-12-31T23:59.999z`, `2000-01-01T12:12:12+08` or
     <tr>
       <th>url</th>
       <td><p>The ODK Central base URL without trailing slash.
-Default: <code><a href='ru_settings.html'>get_default_url()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_url</a></code>.
 Set default <code>url</code> through <code><a href='ru_setup.html'>ru_setup(url="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>un</th>
       <td><p>The ODK Central username (an email address).
-Default: <code><a href='ru_settings.html'>get_default_un()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_un</a></code>.
 Set default <code>un</code> through <code><a href='ru_setup.html'>ru_setup(un="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
     <tr>
       <th>pw</th>
       <td><p>The ODK Central password.
-Default: <code><a href='ru_settings.html'>get_default_pw()</a></code>.
+Default: <code><a href='ru_settings.html'>get_default_pw</a></code>.
 Set default <code>pw</code> through <code><a href='ru_setup.html'>ru_setup(pw="...")</a></code>.
 See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
     </tr>
@@ -261,7 +261,7 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
   <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fl'>0</span>
 )
 
-<span class='no'>logs</span>
+<span class='no'>logs</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
 
 <span class='co'># audit_get returns a tibble</span>
 <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>logs</span>)

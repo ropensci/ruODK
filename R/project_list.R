@@ -2,7 +2,8 @@
 #'
 #'
 #' While the API endpoint will return all projects,
-#' `project_list` will fail with incorrect or missing authentication.
+#' \code{\link{project_list}} will fail with incorrect or missing
+#' authentication.
 #'
 #' \lifecycle{stable}
 #'

@@ -2,16 +2,17 @@
 % Please edit documentation in R/odata_submission_parse.R
 \name{odata_submission_parse}
 \alias{odata_submission_parse}
-\title{Parse the output of `odata_submission_get(parse=FALSE)` into a tidy tibble
-and unnest all levels.}
+\title{Parse the output of \code{\link{odata_submission_get}(parse=FALSE)}
+into a tidy tibble and unnest all levels.}
 \usage{
 odata_submission_parse(data, names_repair = "universal", verbose = FALSE)
 }
 \arguments{
-\item{data}{A nested list of lists as given by `ruODK::get_submissions`.}
+\item{data}{A nested list of lists as given by
+\code{\link{odata_submission_get}}.}
 
-\item{names_repair}{The argument `names_repair` for `tidyr::unnest_wider`,
-default: "universal".}
+\item{names_repair}{The argument `names_repair` for
+\code{tidyr::unnest_wider}, default: "universal".}
 
 \item{verbose}{Whether to print verbose messages, default: FALSE.}
 }

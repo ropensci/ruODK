@@ -4,12 +4,12 @@
 \name{fq_data_strata}
 \alias{fq_data_strata}
 \title{Parsed submission data for a subgroup of an ODK Central form.}
-\format{The output of `ruODK::odata_submission_get()` for a set of example
+\format{The output of \code{\link{odata_submission_get}} for a set of example
   data. A tidy tibble referencing the attachments included in the vignettes
   and documentation at a relative path `attachments/media/<filename>.<ext>`.}
 \source{
 See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
-  and `ruODK::odata_submission_get()`.
+  and \code{\link{odata_submission_get}}.
 }
 \usage{
 fq_data_strata

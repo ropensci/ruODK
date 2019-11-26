@@ -26,10 +26,11 @@ The response object
 \lifecycle{stable}
 }
 \details{
-A wrapper around \code{httr::stop_for_status()} with a helpful error message.
-Examples: see tests for \code{ruODK::project_list()}.
+A wrapper around \code{httr::stop_for_status} with a more helpful error
+message.
+Examples: see tests for \code{\link{project_list}}.
 This function is used internally but may be useful for debugging and
-\code{ruODK} development.
+\code{\link{ruODK}} development.
 }
 \seealso{
 Other ru_settings: 

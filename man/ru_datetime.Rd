@@ -8,7 +8,7 @@ datetime.}
 ru_datetime(
   df,
   col_contains = "time",
-  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd"),
+  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
   tz = "UTC"
 )
 }
@@ -34,18 +34,18 @@ The dataframe with matching columns mutated to lubridate datetimes.
 \lifecycle{stable}
 }
 \details{
-This function wraps a \code{`dplyr::mutate_at()`} operation on all
+This function wraps a \code{dplyr::mutate_at} operation on all
 datetime columns containing a tell-tale `col_contains` string like "time"
 (default), "datetime" or "date". The operator using this function will have
 to know the column names (or commonalities like `"..._time"`).
 }
 \examples{
 \dontrun{
-tsi <- "data/build_Turtle-Sighting-0-1_1559790020.csv" %>%
-  readr::read_csv(na = c("", "NA", "na")) %>%
-  janitor::clean_names() %>%
-  link_attachments() %>%
-  ru_datetime(dt_contains = "Date", tz = "Australia/Perth") %>%
+tsi <- "data/build_Turtle-Sighting-0-1_1559790020.csv" \%>\%
+  readr::read_csv(na = c("", "NA", "na")) \%>\%
+  janitor::clean_names() \%>\%
+  link_attachments() \%>\%
+  ru_datetime(dt_contains = "Date", tz = "Australia/Perth") \%>\%
   ru_datetime(tz = "Australia/Perth")
 }
 }
@@ -54,6 +54,7 @@ Other utilities:
 \code{\link{\%>\%}()},
 \code{\link{isodt_to_local}()},
 \code{\link{prepend_uuid}()},
+\code{\link{split_geopoint}()},
 \code{\link{strip_uuid}()},
 \code{\link{tidyeval}}
 }

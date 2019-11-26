@@ -3,10 +3,10 @@
 #' \lifecycle{stable}
 #'
 #' @export
-#' @return \code{ru_settings} prints your default ODK Central project ID,
+#' @return \code{\link{ru_settings}} prints your default ODK Central project ID,
 #'   form ID, url, username, and password, and corresponding optional test
 #'   server settings.
-#' \code{ru_setup} sets your production and test settings, while
+#' \code{\link{ru_setup}} sets your production and test settings, while
 #' \code{get_(default/test)_*} get each of those respective settings.
 #' @seealso  \code{\link{ru_setup}},
 #' \code{\link{get_default_pid}},
@@ -91,7 +91,7 @@ odata_svc_parse <- function(svc) {
 #------------------------------------------------------------------------------#
 # Setters
 #
-#' Configure default \code{ruODK} settings.
+#' Configure default \code{\link{ruODK}} settings.
 #'
 #' \lifecycle{stable}
 #'
@@ -139,9 +139,9 @@ odata_svc_parse <- function(svc) {
 #'   \code{test_un}.
 #' @family ru_settings
 #' @details
-#' \code{ru_setup} sets ODK Central connection details. \code{ruODK}'s functions
-#'   default to use the default project ID, form ID, URL, username, and password
-#'   unless specified explicitly.
+#' \code{\link{ru_setup}} sets ODK Central connection details.
+#'   \code{\link{ruODK}}'s functions default to use the default project ID,
+#'   form ID, URL, username, and password unless specified explicitly.
 #'
 #' Any parameters not specified will remain unchanged. It is therefore possible
 #' to set up username and password initially with
@@ -150,7 +150,7 @@ odata_svc_parse <- function(svc) {
 #' ODK Central conveniently provides the OData service URL in the form
 #' submission tab, which in turn contains base URL, project ID, and form ID.
 #'
-#' \code{ruODK}'s automated tests require a valid ODK Central URL, and a
+#' \code{\link{ruODK}}'s automated tests require a valid ODK Central URL, and a
 #'   privileged username and password of a "web user" on that ODK Central
 #'   instance, as well as an existing project and form.
 #'
@@ -361,8 +361,8 @@ get_test_fid_att <- function() {
 #' @param pw A password (character)
 #' @param pid A project ID (numeric, optional)
 #' @param fid A form ID (character, optional)
-#' @details This is a helper function to pat down \code{ruODK} functions for
-#'          missing credentials and stop with a loud but informative yell.
+#' @details This is a helper function to pat down \code{\link{ruODK}} functions
+#'   for missing credentials and stop with a loud but informative yell.
 #' @family ru_settings
 #' @export
 #' @examples
@@ -395,10 +395,11 @@ yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL) {
 #'
 #' \lifecycle{stable}
 #'
-#' A wrapper around \code{httr::stop_for_status()} with a helpful error message.
-#' Examples: see tests for \code{ruODK::project_list()}.
+#' A wrapper around \code{httr::stop_for_status} with a more helpful error
+#' message.
+#' Examples: see tests for \code{\link{project_list}}.
 #' This function is used internally but may be useful for debugging and
-#' \code{ruODK} development.
+#' \code{\link{ruODK}} development.
 #' @param response A httr response object
 #' @param url A URL (character)
 #' @param un A username (character)

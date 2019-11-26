@@ -26,33 +26,33 @@ restrictions related to the domain-qualified identifier syntax it uses.
 Default: FALSE.}
 
 \item{parse}{Whether to parse the form schema into a tibble of form field
-type and name. This uses \code{`form_schema_parse`} internally.
-If used together with `flatten=TRUE`, \code{`form_schema`} will raise a
-warning and return the unparsed, flattened form schema.
+type and name. This uses \code{\link{form_schema_parse}} internally.
+If used together with `flatten=TRUE`, \code{\link{form_schema}} will raise
+a warning and return the unparsed, flattened form schema.
 Default: TRUE.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
-Default: \code{get_default_pid()}.
+Default: \code{\link{get_default_pid}}.
 Set default \code{pid} through \code{ru_setup(pid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
-Default: \code{get_default_fid()}.
+Default: \code{\link{get_default_fid}}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{get_default_url()}.
+Default: \code{\link{get_default_url}}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()}.
+Default: \code{\link{get_default_un}}.
 Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()}.
+Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 }
@@ -142,14 +142,14 @@ fs_nested[[length(fs_nested)]]$type
 # Useful to inform further parsing of submission data (attachments, dates)
 fsp <- form_schema(parse = TRUE)
 
-# Attachments: use `attachment_get` on each of
-fsp %>% dplyr::filter(type == "binary")
+# Attachments: use \\code{\\link{attachment_get}} on each of
+fsp \%>\% dplyr::filter(type == "binary")
 
-# dateTime: use `parse_datetime` on each of
-fsp %>% dplyr::filter(type == "dateTime")
+# dateTime: use \\code{\\link{ru_datetime}} on each of
+fsp \%>\% dplyr::filter(type == "dateTime")
 
 # Point location: will be split into lat/lon/alt/acc
-fsp %>% dplyr::filter(type == "geopoint")
+fsp \%>\% dplyr::filter(type == "geopoint")
 }
 }
 \seealso{

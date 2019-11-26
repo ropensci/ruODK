@@ -3,27 +3,37 @@
 #'
 #' \lifecycle{maturing}
 #'
-#' @details \code{`odata_submissions_get()`} downloads submissions from
+#' @details \code{\link{odata_submission_get}} downloads submissions from
 #' (default) the main form group (submission table) including any non-repeating
 #' form groups, or from any other table as specified by parameter `table`.
 #'
 #'
 #' With parameter `parse=TRUE` (default), submission data is parsed into a
-#' tibble. Any fields of type "dateTime" or "date" are parsed into dates, with
+#' tibble. Any fields of type `dateTime`` or `date`` are parsed into dates, with
 #' an optional parameter `tz` to specify the local timezone.
 #' A parameter `local_dir` (default: "media") specifies a local directory for
 #' downloaded attachment files. Already existing, previously downloaded
 #' attachments will be retained. The only remaining manual step is to optionally
-#' rename any point location coordinate parts into "latitude", "longitude",
-#' "altitude", and "accuracy", as well as to join subtables to the master table.
+#' rename any point location coordinate parts into `latitude`, `longitude`,
+#' `altitude`, and `accuracy`, as well as to join subtables to the master table.
 #' The parameter `verbose` enables diagnostic messages along the download and
 #' parsing process.
 #'
+#' With parameter `wkt=TRUE`, spatial fields will be returned as WKT, rather
+#' than GeoJSON. In addition, fields of type `geopoint` will be split into
+#' latitude, longitude, and altitude, prefixed with the original field name.
+#' E.g. a field `start_location` of type `geopoint` will be split into
+#' `start_location_latitude`, `start_location_longitude`, and
+#' `start_location_altitude`. The field name prefix will allow multiple fields
+#' of type `geopoint` to be split into their components without naming
+#' conflicts. Other spatial fields will be retained as WKT.
+#'
 #' With parameter `parse=FALSE`, submission data is presented as nested list,
 #' which is the R equivalent of the returned form JSON.
-#' From there, \code{`odata_submission_parse()`} will parse the data into a
-#' tibble, and subsequent lines of \code{`parse_datetime()`} and
-#' \code{`attachment_get()`} parse dates and download and link file attachments.
+#' From there, \code{\link{odata_submission_parse}} will parse the data into a
+#' tibble, and subsequent lines of \code{\link{ru_datetime}} and
+#' \code{\link{attachment_get}} parse dates and download and link file
+#' attachments.
 #' As any of these steps might fail on unexpected errors, `ruODK` offers this
 #' longer, more manual pathway as an option to investigate and narrow down
 #' unexpected or unwanted behaviour.
@@ -31,7 +41,7 @@
 #' @param table The submission EntityType, or in plain words, the table name.
 #'   Default: "Submissions" (the main table).
 #'   Change to "Submissions.GROUP_NAME" for repeating form groups.
-#'   The group name can be found through \code{`odata_service_get()`}.
+#'   The group name can be found through \code{\link{odata_service_get}}.
 #' @param skip The number of rows to be omitted from the results.
 #'   Example: 10, default: NA (none skipped).
 #' @param top The number of rows to return.
@@ -43,10 +53,16 @@
 #'   Note, ODK Central currently only honours this parameter for Point
 #'   geometries.
 #'   Line and Polygon geometries are returned as "ODK WKT".
+#'   ruODK parses `geopoint` WKT into latitude, longitude, and altitude,
+#'   prefixed by the original field name to avoid naming conflicts.
 #' @param parse Whether to parse submission data based on form schema.
 #'   Dates and datetimes will be parsed into local time.
 #'   Attachments will be downloaded, and the field updated to the local file
 #'   path.
+#'   Point locations will be split into components; GeoJSON (`wkt=FALSE`) will
+#'   be split into latitude, longitude, altitude and accuracy (with anonymous
+#'   field names), while WKT will be split into latitude, longitude, and
+#'   altitude (missing accuracy) prefixed by the original field name.
 #'   Default: TRUE.
 #' @template param-verbose
 #' @param orders (vector of character) Orders of datetime elements for
@@ -116,6 +132,9 @@
 #'   table = form_tables$url[1],
 #'   wkt = TRUE
 #' )
+#' # Columns of type "geopoint" will be split into lat lon alt (no accuracy) and
+#' # prefixed with the ODK geopoint field name. Use parse=FALSE to retain WKT.
+#' # Columns of other spatial types will remain WKT.
 #' }
 odata_submission_get <- function(table = "Submissions",
                                  skip = NULL,
@@ -125,8 +144,12 @@ odata_submission_get <- function(table = "Submissions",
                                  parse = TRUE,
                                  verbose = FALSE,
                                  orders = c(
-                                   "YmdHMS", "YmdHMSz", "Ymd HMS",
-                                   "Ymd HMSz", "Ymd", "ymd"
+                                   "YmdHMS",
+                                   "YmdHMSz",
+                                   "Ymd HMS",
+                                   "Ymd HMSz",
+                                   "Ymd",
+                                   "ymd"
                                  ),
                                  tz = "UTC",
                                  local_dir = "media",
@@ -178,6 +201,7 @@ odata_submission_get <- function(table = "Submissions",
 
   #----------------------------------------------------------------------------#
   # Parse submission data
+  if (verbose == TRUE) message("Parsing submissions...\n")
   sub <- sub %>% odata_submission_parse(verbose = verbose)
 
   # Get form fields
@@ -196,15 +220,14 @@ odata_submission_get <- function(table = "Submissions",
     dplyr::filter(type %in% c("dateTime", "date")) %>%
     magrittr::extract2("name")
 
-  if (verbose == TRUE) {
-    message(glue::glue("Found date column: {dttm_cols}. "))
-  }
+  if (verbose == TRUE) message(glue::glue("Found date/time: {dttm_cols}. "))
+
   for (colname in dttm_cols) {
     if (verbose == TRUE) {
       message(glue::glue("\nParsing {colname} with timezone {tz}...\n"))
     }
     sub <- sub %>%
-      ru_datetime(
+      ruODK::ru_datetime(
         orders = orders,
         tz = tz,
         col_contains = as.character(colname)
@@ -219,7 +242,8 @@ odata_submission_get <- function(table = "Submissions",
     intersect(names(sub))
 
   if (verbose == TRUE) {
-    message(glue::glue("\nDownloading attachments...\n"))
+    message(glue::glue("Found attachments: {att_cols}. "))
+    message("\nDownloading attachments...\n")
   }
 
   sub <- sub %>% dplyr::mutate_at(
@@ -237,28 +261,22 @@ odata_submission_get <- function(table = "Submissions",
     )
   )
 
-  # Parse geopoints
-  gp_cols <- fs %>%
-    dplyr::filter(type=="geopoint") %>%
-    magrittr::extract2("name")
+  # Parse geopoints (already split into e.g. x10 x11 x12 if wkt="false")
+  if (wkt == "true") {
+    gp_cols <- fs %>%
+      dplyr::filter(type == "geopoint") %>%
+      magrittr::extract2("name")
 
-  if (verbose == TRUE) {
-    message(glue::glue("\nFound geopoint column: {gp_cols}.\n"))
-  }
-  for (colname in gp_cols) {
     if (verbose == TRUE) {
-      message(glue::glue("\nParsing {colname} into lat/lon/alt...\n"))
+      message(glue::glue("\nFound geopoint column: {gp_cols}.\n"))
     }
 
-    # TODO make this work
-    # split_geopoint <- function(data, cn){
-    #   dplyr::mutate(data, gps = str_replace(cn, "POINT \\(","")) %>%
-    #   dplyr::mutate(., gps = str_replace(gps, "\\)",""))  %>%
-    #   tidyr::separate(., gps, c("longitude", "latitude", "altitude"), sep = " ")
-    # }
-    #
-    # sub <- sub %>% split_geopoint(colname)
-
+    for (colname in gp_cols) {
+      if (colname %in% names(sub)) {
+        if (verbose == TRUE) message(glue::glue("\nParsing {colname}...\n"))
+        sub <- sub %>% split_geopoint(as.character(colname))
+      }
+    }
   }
 
   #
@@ -268,4 +286,5 @@ odata_submission_get <- function(table = "Submissions",
 }
 
 # Tests
+
 # usethis::edit_file("tests/testthat/test-odata_submission_get.R")

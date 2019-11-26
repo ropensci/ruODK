@@ -14,27 +14,27 @@ submission_list(
 }
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.
-Default: \code{get_default_pid()}.
+Default: \code{\link{get_default_pid}}.
 Set default \code{pid} through \code{ru_setup(pid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
-Default: \code{get_default_fid()}.
+Default: \code{\link{get_default_fid}}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{get_default_url()}.
+Default: \code{\link{get_default_url}}.
 Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{get_default_un()}.
+Default: \code{\link{get_default_un}}.
 Set default \code{un} through \code{ru_setup(un="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{get_default_pw()}.
+Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 }
@@ -63,7 +63,7 @@ ruODK::ru_setup(
 )
 
 sl <- submission_list()
-sl %>% knitr::kable(.)
+sl \%>\% knitr::kable(.)
 
 fl <- form_list()
 
@@ -76,9 +76,9 @@ names(sl)
 # > "instance_id" "submitter_id" "device_id" "created_at" "updated_at"
 
 # Number of submissions (rows) is same as advertised in form_list
-form_list_nsub <- fl %>%
-  filter(fid == get_test_fid()) %>%
-  magrittr::extract2("submissions") %>%
+form_list_nsub <- fl \%>\%
+  filter(fid == get_test_fid()) \%>\%
+  magrittr::extract2("submissions") \%>\%
   as.numeric()
 nrow(sl) == form_list_nsub
 # > TRUE
