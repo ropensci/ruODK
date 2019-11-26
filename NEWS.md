@@ -1,8 +1,6 @@
-# ruODK (development version)
-
 # `ruODK` (development version)
 This version addresses ROpenSci reviewer comments from 
-@karissawhiting and @jmt2080ad.
+@karissawhiting and @jmt2080ad as well as ideas from @OdiljonQurbon.
 
 ## Major fixes
 * Split and rename WKT POINT (ODK geopoint) fields with 
