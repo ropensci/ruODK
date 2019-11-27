@@ -2,20 +2,20 @@
 % Please edit documentation in R/submission_get.R
 \name{submission_get}
 \alias{submission_get}
-\title{Download one submission.}
+\title{Get submissions for a list of submission instance IDs}
 \usage{
 submission_get(
   iid,
-  pid = get_default_pid(),
-  fid = get_default_fid(),
-  url = get_default_url(),
-  un = get_default_un(),
-  pw = get_default_pw()
+  pid = ruODK::get_test_pid(),
+  fid = ruODK::get_test_fid(),
+  url = ruODK::get_test_url(),
+  un = ruODK::get_test_un(),
+  pw = ruODK::get_test_pw()
 )
 }
 \arguments{
-\item{iid}{The `instance_id`, a UUID, as returned by
-\code{\link{submission_list}}.}
+\item{iid}{A list of submission instance IDs, e.g. from
+\code{\link{submission_list}$instance_id}.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 Default: \code{\link{get_default_pid}}.
@@ -46,37 +46,11 @@ See \code{vignette("Setup", package = "ruODK")}.}
 A nested list of submission data.
 }
 \description{
-\lifecycle{stable}
-}
-\examples{
-\dontrun{
-# Set default credentials, see vignette "setup"
-ruODK::ru_setup(
-  svc = paste0(
-    "https://sandbox.central.opendatakit.org/v1/projects/14/",
-    "forms/build_Flora-Quadrat-0-2_1558575936.svc"
-  ),
-  un = "me@email.com",
-  pw = "..."
-)
-
-# With explicit credentials, see tests
-sl <- submission_list()
-
-sub <- submission_get(sl$instance_id[[1]])
-listviewer::jsonedit(sub)
-
-# The details for one submission depend on the form fields
-length(sub)
-# > 11
-
-# The items are the field names. Repeated groups have the same name.
-names(sub)
-# > "meta"                     "encounter_start_datetime" "reporter"
-# > "device_id"                "location"                 "habitat"
-# > "vegetation_structure"     "perimeter"                "taxon_encounter"
-# > "taxon_encounter"          "encounter_end_datetime"
-}
+Uses \code{\link{get_one_submission}} on a list of submission instance IDs
+(`iid`) as returned from \code{\link{submission_list}$instance_id}.
+By giving the list of `iid` to download explicitly, that list can be
+modified using information not accessible to `ruODK`,
+e.g. `iid` can be restricted to "only not already downloaded submissions".
 }
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
@@ -90,6 +64,8 @@ Other restful-api:
 \code{\link{form_schema_parse}()},
 \code{\link{form_schema}()},
 \code{\link{form_xml}()},
+\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission}()},
 \code{\link{project_create}()},
 \code{\link{project_detail}()},
 \code{\link{project_list}()},

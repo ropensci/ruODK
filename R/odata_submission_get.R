@@ -267,9 +267,7 @@ odata_submission_get <- function(table = "Submissions",
       dplyr::filter(type == "geopoint") %>%
       magrittr::extract2("name")
 
-    if (verbose == TRUE) {
-      message(glue::glue("\nFound geopoint column: {gp_cols}.\n"))
-    }
+    if (verbose == TRUE) message(glue::glue("Found geopoint: {gp_cols}. "))
 
     for (colname in gp_cols) {
       if (colname %in% names(sub)) {

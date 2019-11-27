@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9004</span>
       </span>
     </div>
 
@@ -211,7 +211,7 @@ into a tidy tibble and unnest all levels.</p></td>
         <td>
           <p><code><a href="attachment_list.html">attachment_list()</a></code> </p>
         </td>
-        <td><p>List all submissions of one form.</p></td>
+        <td><p>List all attachments for a list of submission instances.</p></td>
       </tr><tr>
         
         <td>
@@ -251,6 +251,18 @@ into a tidy tibble and unnest all levels.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="get_one_submission.html">get_one_submission()</a></code> </p>
+        </td>
+        <td><p>Download one submission.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_one_submission_attachment_list.html">get_one_submission_attachment_list()</a></code> </p>
+        </td>
+        <td><p>List all attachments of one submission.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="project_create.html">project_create()</a></code> </p>
         </td>
         <td><p>Create a new project.</p></td>
@@ -283,7 +295,7 @@ into a tidy tibble and unnest all levels.</p></td>
         <td>
           <p><code><a href="submission_get.html">submission_get()</a></code> </p>
         </td>
-        <td><p>Download one submission.</p></td>
+        <td><p>Get submissions for a list of submission instance IDs</p></td>
       </tr><tr>
         
         <td>
@@ -378,6 +390,12 @@ datetime.</p></td>
       <tr>
         
         <td>
+          <p><code><a href="fq_attachments.html">fq_attachments</a></code> </p>
+        </td>
+        <td><p>A tibble of submission attachments.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="fq_data.html">fq_data</a></code> </p>
         </td>
         <td><p>Parsed submission data for an ODK Central form.</p></td>
@@ -396,15 +414,51 @@ datetime.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="fq_fs.html">fq_fs</a></code> </p>
+          <p><code><a href="fq_form_detail.html">fq_form_detail</a></code> </p>
+        </td>
+        <td><p>A tibble of form metadata.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_form_list.html">fq_form_list</a></code> </p>
+        </td>
+        <td><p>A tibble of forms.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_form_schema.html">fq_form_schema</a></code> <code><a href="fq_form_schema.html">fq_form_schema</a></code> </p>
         </td>
         <td><p>JSON form schema for an ODK Central form.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_form_schema_raw.html">fq_form_schema_raw</a></code> </p>
+        </td>
+        <td><p>A nested list of form fields and field types.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_form_xml.html">fq_form_xml</a></code> </p>
+        </td>
+        <td><p>A nested list of a form definition.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="fq_meta.html">fq_meta</a></code> </p>
         </td>
         <td><p>OData metadata document for an ODK Central form.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_project_detail.html">fq_project_detail</a></code> </p>
+        </td>
+        <td><p>A tibble of project metadata.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_project_list.html">fq_project_list</a></code> </p>
+        </td>
+        <td><p>A tibble of project metadata.</p></td>
       </tr><tr>
         
         <td>
@@ -426,9 +480,39 @@ datetime.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="fq_submission_list.html">fq_submission_list</a></code> </p>
+        </td>
+        <td><p>A tibble of submission metadata.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_submissions.html">fq_submissions</a></code> </p>
+        </td>
+        <td><p>A nested list of submission data.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="fq_svc.html">fq_svc</a></code> </p>
         </td>
         <td><p>OData service document for an ODK Central form.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_zip_data.html">fq_zip_data</a></code> </p>
+        </td>
+        <td><p>A tibble of the main data table of records from a test form.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_zip_strata.html">fq_zip_strata</a></code> </p>
+        </td>
+        <td><p>A tibble of a repeated sub-group of records from a test form.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fq_zip_taxa.html">fq_zip_taxa</a></code> </p>
+        </td>
+        <td><p>A tibble of a repeated sub-group of records from a test form.</p></td>
       </tr>
     </tbody>
     </table>

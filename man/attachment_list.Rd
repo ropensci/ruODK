@@ -2,7 +2,7 @@
 % Please edit documentation in R/attachment_list.R
 \name{attachment_list}
 \alias{attachment_list}
-\title{List all submissions of one form.}
+\title{List all attachments for a list of submission instances.}
 \usage{
 attachment_list(
   iid,
@@ -14,8 +14,8 @@ attachment_list(
 )
 }
 \arguments{
-\item{iid}{The `instance_id`, a UUID, as returned by
-\code{\link{submission_list}}.}
+\item{iid}{A list of submission instance IDs, e.g. from
+\code{\link{submission_list}$instance_id}.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 Default: \code{\link{get_default_pid}}.
@@ -52,48 +52,7 @@ A tibble containing some high-level details of the submission
           server.
 }
 \description{
-\lifecycle{stable}
-}
-\details{
-When a Submission is created, either over the OpenRosa or the REST interface,
-its XML data is analysed to determine which file attachments it references:
-these may be photos or video taken as part of the survey, or an audit/timing
-log, among other things. Each reference is an expected attachment, and these
-expectations are recorded permanently alongside the Submission. With this
-subresource, you can list the expected attachments, see whether the server
-actually has a copy or not, and download, upload, re-upload, or clear binary
-data for any particular attachment.
-
-You can retrieve the list of expected Submission attachments at this route,
-along with a boolean flag indicating whether the server actually has a copy
-of the expected file or not. If the server has a file, you can then append
-its filename to the request URL to download only that file (see below).
-}
-\examples{
-\dontrun{
-# Set default credentials, see vignette "setup"
-ruODK::ru_setup(
-  svc = paste0(
-    "https://sandbox.central.opendatakit.org/v1/projects/14/",
-    "forms/build_Flora-Quadrat-0-2_1558575936.svc"
-  ),
-  un = "me@email.com",
-  pw = "..."
-)
-
-sl <- submission_list()
-
-al <- attachment_list(sl$instance_id[[1]])
-al \%>\% knitr::kable(.)
-
-# attachment_list returns a tibble
-class(al)
-# > c("tbl_df", "tbl", "data.frame")
-
-# Submission attributes are the tibble's columns
-names(al)
-# > "name" "exists"
-}
+List all attachments for a list of submission instances.
 }
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
@@ -108,6 +67,8 @@ Other restful-api:
 \code{\link{form_schema_parse}()},
 \code{\link{form_schema}()},
 \code{\link{form_xml}()},
+\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission}()},
 \code{\link{project_create}()},
 \code{\link{project_detail}()},
 \code{\link{project_list}()},

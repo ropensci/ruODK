@@ -4,7 +4,7 @@
 \alias{yell_if_missing}
 \title{Abort on missing ODK Central credentials (url, username, password).}
 \usage{
-yell_if_missing(url, un, pw, pid = NULL, fid = NULL)
+yell_if_missing(url, un, pw, pid = NULL, fid = NULL, iid = NULL)
 }
 \arguments{
 \item{url}{A URL (character)}
@@ -16,6 +16,8 @@ yell_if_missing(url, un, pw, pid = NULL, fid = NULL)
 \item{pid}{A project ID (numeric, optional)}
 
 \item{fid}{A form ID (character, optional)}
+
+\item{iid}{A submission instance ID (character, optional)}
 }
 \description{
 \lifecycle{stable}
@@ -32,6 +34,7 @@ testthat::expect_error(yell_if_missing(NULL, "", ""))
 testthat::expect_error(yell_if_missing("", "", ""))
 testthat::expect_error(yell_if_missing("", "", "", ""))
 testthat::expect_error(yell_if_missing("", "", "", "", ""))
+testthat::expect_error(yell_if_missing("", "", "", "", "", ""))
 }
 \seealso{
 Other ru_settings: 

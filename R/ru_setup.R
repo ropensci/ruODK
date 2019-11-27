@@ -363,6 +363,7 @@ get_test_fid_att <- function() {
 #' @param fid A form ID (character, optional)
 #' @details This is a helper function to pat down \code{\link{ruODK}} functions
 #'   for missing credentials and stop with a loud but informative yell.
+#' @param iid A submission instance ID (character, optional)
 #' @family ru_settings
 #' @export
 #' @examples
@@ -373,7 +374,8 @@ get_test_fid_att <- function() {
 #' testthat::expect_error(yell_if_missing("", "", ""))
 #' testthat::expect_error(yell_if_missing("", "", "", ""))
 #' testthat::expect_error(yell_if_missing("", "", "", "", ""))
-yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL) {
+#' testthat::expect_error(yell_if_missing("", "", "", "", "", ""))
+yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL) {
   if (is.null(url) | identical(url, "")) {
     rlang::abort("Missing ODK Central URL. ru_setup()?")
   }
@@ -388,6 +390,9 @@ yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL) {
   }
   if (!is.null(fid) && identical(fid, "")) {
     rlang::abort("Missing ODK Central form ID. ru_setup()?")
+  }
+  if (!is.null(iid) && identical(iid, "")) {
+    rlang::abort("Missing ODK Central submission instance ID.")
   }
 }
 

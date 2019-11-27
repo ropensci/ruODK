@@ -8,6 +8,9 @@ usethis::use_version(which = "dev")
 
 # Write code, add tests
 
+# regenerate test data
+source(here::here("data-raw/make_data.R"))
+
 # Tests
 devtools::test()
 #

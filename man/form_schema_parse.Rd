@@ -63,6 +63,8 @@ Other restful-api:
 \code{\link{form_list}()},
 \code{\link{form_schema}()},
 \code{\link{form_xml}()},
+\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission}()},
 \code{\link{project_create}()},
 \code{\link{project_detail}()},
 \code{\link{project_list}()},

@@ -7,7 +7,7 @@ test_that("submission_get works", {
     pw = get_test_pw()
   )
 
-  sub <- submission_get(
+  sub <- get_one_submission(
     sl$instance_id[[1]],
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -16,12 +16,22 @@ test_that("submission_get works", {
     pw = get_test_pw()
   )
 
-  # submission_detail returns a tibble
+  subs <- submission_get(
+    sl$instance_id,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
+
   testthat::expect_equal(class(sub), "list")
+  testthat::expect_equal(class(subs), "list")
 
 
   # The details for one submission return exactly one row
   testthat::expect_equal(length(sub), 15)
+  testthat::expect_equal(length(subs), 2) # number of submissions
 
   # The columns are form fields or groups,
   # plus the submission data in column 'xml`

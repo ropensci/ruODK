@@ -15,6 +15,7 @@
 #' @family included
 "fq_svc"
 
+
 #' OData metadata document for an ODK Central form.
 #'
 #' \lifecycle{stable}
@@ -30,6 +31,7 @@
 #' @source See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 #' @family included
 "fq_meta"
+
 
 #' JSON form schema for an ODK Central form.
 #'
@@ -52,7 +54,8 @@
 #' @source See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 #'   and `ruODK::form_schema()`.
 #' @family included
-"fq_fs"
+"fq_form_schema"
+
 
 #' OData submission data for an ODK Central form.
 #'
@@ -77,6 +80,7 @@
 #' @family included
 "fq_raw"
 
+
 #' OData submission data for a subgroup of an ODK Central form.
 #'
 #' \lifecycle{stable}
@@ -97,6 +101,7 @@
 #' @source See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 #' @family included
 "fq_raw_strata"
+
 
 #' OData submission data for a subgroup of an ODK Central form.
 #'
@@ -120,6 +125,7 @@
 #' @source See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 #' @family included
 "fq_raw_taxa"
+
 
 #' Parsed submission data for an ODK Central form.
 #'
@@ -147,6 +153,7 @@
 #' @family included
 "fq_data"
 
+
 #' Parsed submission data for a subgroup of an ODK Central form.
 #'
 #' \lifecycle{stable}
@@ -170,6 +177,7 @@
 #'   and \code{\link{odata_submission_get}}.
 #' @family included
 "fq_data_strata"
+
 
 #' Parsed submission data for a subgroup of an ODK Central form.
 #'
@@ -196,3 +204,169 @@
 #'   and \code{\link{odata_submission_get}}.
 #' @family included
 "fq_data_taxa"
+
+
+#' A tibble of submission attachments.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of submission attachments.
+#' @source The output of \code{\link{attachment_list}}
+#' run on submissions of the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"fq_attachments"
+
+
+#' A tibble of form metadata.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of form metadata.
+#' @source The output of \code{\link{form_detail}}
+#' run on submissions of the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"fq_form_detail"
+
+
+#' A tibble of forms.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of forms
+#' @source The output of \code{\link{form_list}}.
+#' run on the project.
+#' @family included
+#' @encoding UTF-8
+"fq_form_list"
+
+
+#' A tibble of form fields and field types.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of form fields and field types.
+#' @source The output of \code{\link{form_schema}}
+#' run on the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"fq_form_schema"
+
+
+#' A nested list of form fields and field types.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A nested list of form fields and field types.
+#' @source The output of \code{\link{form_schema}(parse=FALSE)}
+#' run on the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"fq_form_schema_raw"
+
+
+#' A nested list of a form definition.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A nested list of a form definition.
+#' @source The output of \code{\link{form_xml}}
+#' run on the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"fq_form_xml"
+
+
+#' A tibble of project metadata.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of project metadata.
+#' @source The output of \code{\link{project_detail}}
+#' run on the project containing the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+"fq_project_detail"
+
+
+#' A tibble of project metadata.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of project metadata.
+#' @source The output of \code{\link{project_list}}
+#' run on all projects on the configured ODK Central server.
+#' @family included
+#' @encoding UTF-8
+"fq_project_list"
+
+
+#' A tibble of submission metadata.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of submission metadata.
+#' @source The output of \code{\link{submission_list}}
+#' run on the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"fq_submission_list"
+
+
+#' A nested list of submission data.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A nested list of submission data.
+#' @source The output of \code{\link{submission_get}}
+#' run on the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
+#' using submission instance IDs from \code{\link{submission_list}}.
+#' @family included
+#' @encoding UTF-8
+"fq_submissions"
+
+#' A tibble of the main data table of records from a test form.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of main records from a test form.
+#' @source \code{\link{submission_export}}
+#' run on the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"fq_zip_data"
+
+
+#' A tibble of a repeated sub-group of records from a test form.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of repeated sub-group of records from a test form.
+#' @source \code{\link{submission_export}}
+#' run on the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"fq_zip_strata"
+
+
+#' A tibble of a repeated sub-group of records from a test form.
+#'
+#' \lifecycle{stable}
+#'
+#' @format A tibble of repeated sub-group of records from a test form.
+#' @source \code{\link{submission_export}}
+#' run on the test form
+#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"fq_zip_taxa"

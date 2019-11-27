@@ -1,10 +1,4 @@
-cast <- asciicast::record("data-raw/make_asciicast.R",
-  title = "ruODK walkthough",
-  start_wait = 1,
-  end_wait = 5,
-  typing_speed = 0.1,
-  echo = TRUE
-)
-
+cast <- asciicast::record("data-raw/make_asciicast.R")
 asciicast::write_json(cast, "data-raw/odata.json")
-asciicast::write_svg(cast, "data-raw/odata.svg", window = TRUE)
+asciicast::write_svg(cast, here::here("man", "figures", "odata.svg"))
+asciicast::play(cast)

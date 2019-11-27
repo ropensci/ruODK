@@ -14,12 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r}
-library(ruODK)
-```
-
 # Scope
-This vignette provides a walk-through of the "getting data out" 
+This vignette provides a guided walk-through of the "getting data out" 
 functions of the RESTful API endpoints which list and view details.
 
 `ruODK` users would mix and match parts of the demonstrated workflows to build
@@ -29,6 +25,9 @@ their own data pipelines, e.g.:
   project, or
 * to build an interactive ETL pipeline to selectively download only new submissions
   for further processing and upload into downstream data warehouses.
+  
+A typical and more stream-lined workflow is provided in the RMarkdown template 
+"ODK Central via OData" which is supplied by `ruODK`.
 
 ## Three ways to happiness
 
@@ -61,11 +60,29 @@ plus username and password of a web user of ODK Central with access to that form
 are used by `ruODK`'s other functions (unless specified otherwise).
 
 ```{r ru_setup}
+library(ruODK)
 ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW")
 )
+```
+
+```{r load_canned_data, echo=FALSE}
+# We load canned data, so end users can build vignettes without authenticated 
+# calls to ODK Central
+data("fq_project_list")
+data("fq_project_detail")
+data("fq_form_list")
+data("fq_form_xml")
+data("fq_form_schema_raw")
+data("fq_form_schema")
+data("fq_zip_data")
+data("fq_zip_strata")
+data("fq_zip_taxa")
+data("fq_submission_list")
+data("fq_submissions")
+data("fq_attachments")
 ```
 
 # Projects
@@ -76,23 +93,28 @@ updated).
 
 The important bit here is the project ID.
 
-```{r project_list}
-p <- ruODK::project_list()
-p %>% knitr::kable(.)
+```{r project_list, eval=F}
+fq_project_list <- ruODK::project_list()
+```
+
+```{r project_list_show}
+fq_project_list %>% knitr::kable(.)
 ```
 
 Inspect a project using its ID. We receive a tibble with exactly one row,
 all the columns of `ruODK::project_list` plus a column `verbs`, which contains all
 available API actions for a project.
 
-```{r project_details}
-pd <- ruODK::project_detail()
+```{r project_details, eval=FALSE}
+fq_project_detail <- ruODK::project_detail()
+```
 
+```{r project_detail_show}
 # Project details (without verbs)
-pd %>% dplyr::select(-"verbs") %>%  knitr::kable(.)
+fq_project_detail %>% dplyr::select(-"verbs") %>%  knitr::kable(.)
 
 # Available verbs
-pd$verbs[[1]] %>% unlist(.)
+fq_project_detail$verbs[[1]] %>% unlist(.)
 ```
 
 Nothing apart from the verbs is new compared to the data returned by 
@@ -115,9 +137,12 @@ There are several ways of retrieving the form ID:
   ODK Central's form submission page,
 * Listing form metadata for a given project ID with `ruODK::form_list()`.
 
-```{r form_list}
-forms <- ruODK::form_list() 
-forms %>% knitr::kable(.)
+```{r form_list, eval=FALSE}
+fq_form_list <- ruODK::form_list()
+```
+
+```{r form_list_show}
+fq_form_list %>% knitr::kable(.)
 ```
 
 Further to the metadata shown here, a column `xml` contains the entire XForms
@@ -126,9 +151,12 @@ definition (originally XML) as nested list.
 If the original XML is needed rather than the R equivalent (nested list), 
 we can use `ruODK::form_xml` with parameter `parse=FALSE`:
 
-```{r form_xml}
-form_xml <- ruODK::form_xml(parse=FALSE)
-form_xml
+```{r form_xml, eval=F}
+fq_form_xml <- ruODK::form_xml(parse=FALSE)
+```
+
+```{r form_xml_show}
+fq_form_xml
 ```
 
 ## Inspect form schema
@@ -138,9 +166,12 @@ of the XForm definition available in R.
 
 See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of  `??ruODK::form_schema()` for more detail.
 
-```{r form_schema, fig.width=7}
-fs <- form_schema(parse=FALSE)
-listviewer::jsonedit(fs, mode="code")
+```{r form_schema_raw, eval=FALSE}
+fq_form_schema_raw <- ruODK::form_schema(parse=FALSE)
+```
+
+```{r form_schema_raw_view, fig.width=7}
+listviewer::jsonedit(fq_form_schema_raw, mode="code")
 ```
 
 The form schema tells us about form field data types (e.g. dates, geopoints, 
@@ -153,18 +184,24 @@ attachments. Similarly, search for "dateTime" to find field names of datetimes.
 Taking form schema one step further, we can also parse it into a `tibble` of
 form field types and names.
 
-```{r}
-fsp <- form_schema(parse=TRUE)
-fsp %>% knitr::kable(.)
+```{r form_schema, eval=FALSE}
+fq_form_schema <- ruODK::form_schema(parse=TRUE)
+```
+
+```{r form_schema_view}
+fq_form_schema %>% knitr::kable(.)
 ```
 
 ## Show details of one form
 
 The details of a form are exactly the same as the output of `ruODK::form_list()`.
 
-```{r form_detail}
-form <- ruODK::form_detail()
-form %>% knitr::kable(.)
+```{r form_detail, eval=F}
+fq_form_detail <- ruODK::form_detail()
+```
+
+```{r form_detail_view}
+fq_form_detail %>% knitr::kable(.)
 ```
 
 # Submissions
@@ -192,14 +229,14 @@ In the following chuck, we illustrate common tasks:
   `data_taxon$photo_in_situ`) with `media/`.
 
 
-```{r submission_export}
+```{r submission_export, eval=F}
 t <- fs::dir_create("attachments")
 
 # Predict filenames (with knowledge of form)
-fid <- ruODK::get_test_fid() # "build_Flora-Quadrat-0-2_1558575936.svc"
+fid <- ruODK::get_test_fid()
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
-fid_csv_tae <- fs::path(t, glue::glue("{fid}-taxon_encounter.csv"))
 fid_csv_veg <- fs::path(t, glue::glue("{fid}-vegetation_stratum.csv"))
+fid_csv_tae <- fs::path(t, glue::glue("{fid}-taxon_encounter.csv"))
 
 # Download the zip file
 se <- ruODK::submission_export(local_dir = t, overwrite = FALSE, verbose = TRUE)
@@ -209,31 +246,31 @@ f <- unzip(se, exdir = t)
 fs::dir_ls(t)
 
 # Prepend attachments with media/ to turn into relative file paths
-data_quadrat <- fid_csv %>% 
+fq_zip_data <- fid_csv %>% 
   readr::read_csv(na = c("", "NA", "na")) %>% # form uses "na" for NA
   janitor::clean_names(.) %>% 
   attachment_link(.) %>% 
   ru_datetime(tz = "Australia/Perth")      # an example timezone
 
-DT::datatable(data_quadrat)
-# Further: create map with popups, see vignette "odata"
-
-data_taxon <- fid_csv_tae %>%
+fq_zip_strata <- fid_csv_veg %>% 
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
   attachment_link(.) %>%
   ru_datetime(tz = "Australia/Perth") %>%
   dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
 
-data_strata <- fid_csv_veg %>% 
+fq_zip_taxa <- fid_csv_tae %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
   attachment_link(.) %>%
   ru_datetime(tz = "Australia/Perth") %>%
   dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
+```
 
-DT::datatable(data_taxon)
-DT::datatable(data_strata)
+```{r zip_view}
+head(fq_zip_data)
+head(fq_zip_strata)
+head(fq_zip_taxa)
 # Further: create map with popups, see vignette "odata"
 ```
 
@@ -250,9 +287,12 @@ If forms feed into downstream data warehouses, the typical ETL workflow is to
 * Download only the selected submissions.
 * Download attachments of only the selected submissions.
 
-```{r submission_list}
-sl <- ruODK::submission_list()
-sl %>% knitr::kable(.)
+```{r submission_list, eval=F}
+fq_submission_list <- ruODK::submission_list()
+```
+
+```{r submission_list_view}
+fq_submission_list %>% knitr::kable(.)
 ```
 
 The list of submissions critically contains each submission's unique ID in
@@ -267,46 +307,17 @@ warehouse.
 Furthermore, the `instance_id`s can now be used to retrieve the actual 
 submissions.
 
-A quick detour on submission metadata:
-```{r submission_metadata}
-# One submission
-sub_meta <- ruODK::submission_detail(sl$instance_id[[1]])
-
-# Multiple submissions
-submissions_meta <- tibble::tibble(
-  pid = ruODK::get_test_pid(),
-  fid = ruODK::get_test_fid(),
-  iid = sl$instance_id,  # this is a vector of multiple instance_ids
-  url = ruODK::get_test_url(),
-  un = ruODK::get_test_un(),
-  pw = ruODK::get_test_pw()
-) %>% 
-  purrr::pmap(ruODK::submission_detail)
-submissions_meta %>% knitr::kable(.)
-```
-
-Nothing new there compared to `submission_list`, so let's move on to the actual
-submission data.
-
 ## Get submission data
 
 In order to import each submission, we need to retrieve the data by 
 `instance_id`.
 
-```{r submission_data}
+```{r submission_data, eval=F}
 # One submission
-sub <- ruODK::submission_get(sl$instance_id[[1]])
+fq_one_submission <- ruODK::get_one_submission(fq_submission_list$instance_id[[1]])
 
 # Multiple submissions
-submissions <- tibble::tibble(
-  pid = ruODK::get_test_pid(),
-  fid = ruODK::get_test_fid(),
-  iid = sl$instance_id,  # this is a vector of multiple instance_ids
-  url = ruODK::get_test_url(),
-  un = ruODK::get_test_un(),
-  pw = ruODK::get_test_pw()
-) %>% 
-  purrr::pmap(ruODK::submission_get)
+fq_submissions <- ruODK::submission_get(fq_submission_list$instance_id)
 ```
 
 ## Parse submissions
@@ -319,12 +330,21 @@ The structure is different to the output of `ruODK::odata_submission_get`,
 therefore `ruODK::odata_submission_parse` does not work for those, as
 here we might have repeating groups included in a submission.
 
-```{r view_submission_data}
-listviewer::jsonedit(submissions, mode = "code")
+This structure could be used for upload into data warehouses accepting nested data
+as e.g. JSON.
+
+```{r view_submission_data, fig.width=7}
+listviewer::jsonedit(fq_submissions, mode = "code")
 ```
 
 ## Rectangling the submissions
-Here we'll un-nest the nested list of submission data into a rectangular `tibble`.
+For a more traditional analysis, we need the data in a rectangular shape.
+The unpredictably nested structure of the submission data (when containing 
+repeated subgroups) makes it challenging to do this in an automated fashion.
+
+While both the ZIP export and the OData API provide clean, rectangular versions
+of the data, we'll still attempt here to un-nest the nested list of submission 
+data into a rectangular `tibble`.
 
 In the example shown above, the repeated `taxon_encounter` groups are named
 `taxon_encounter`, `taxon_encounter.1` and so on. This is an artifact of the 
@@ -339,61 +359,48 @@ We should further also deparse locations (WKT) into latitude, longitude,
 altitude and accuracy. 
 
 ```{r parse_submissions}
-sub_parsed <- submissions %>% 
+sub_parsed <- fq_submissions %>% 
   purrr::map_df(rlist::list.flatten) %>%
   janitor::clean_names(.) %>% 
   ruODK::ru_datetime(.)
 
 names(sub_parsed)
-sub_parsed %>% knitr::kable(.)
+head(sub_parsed)
 ```
 
 # Attachments
 
 ## List all attachments for one form
 
-```{r attachment_list}
-al <- ruODK::attachment_list(sl$instance_id[[1]])
-al
+```{r attachment_list, eval=F}
+fq_attachments <- ruODK::attachment_list(sl$instance_id)
+```
 
-attachments <- tibble::tibble(
-  pid = ruODK::get_test_pid(),
-  fid = ruODK::get_test_fid(),
-  iid = sl$instance_id,  # this is a vector of multiple instance_ids
-  url = ruODK::get_test_url(),
-  un = ruODK::get_test_un(),
-  pw = ruODK::get_test_pw()
-) %>% 
-  purrr::pmap(ruODK::attachment_list)
-attachments
+```{r attachment_list_view}
+head(fq_attachments)
 ```
 
 ## Get attachments
-While we're working on parsing the submissions into something resembling
-`data_quadrat`, we'll demonstrate the use of `ruODK::attachment_get` using
-`data_quadrat_raw`, which still contains the plain filenames without prefixed 
-local folders.
-
 `ruODK::attachment_get` downloads the attachment files and links them similar
-to `ruODK::attachment_link` (which assumes that attachments are already 
+to `ruODK::attachment_link` (which assumes that attachments have already been 
 downloaded).
 
-```{r attachment_get}
+```{r attachment_get, eval=F}
 sub_att <- sub_parsed %>% 
   dplyr::mutate(
     location_quadrat_photo = ruODK::attachment_get(
         meta_instance_id,
         location_quadrat_photo,
-        local_dir = fs::path(t, "media")
+        local_dir = fs::path("attachments", "media")
     )
     # same for all other attachments
     # requires knowledge or introspection of form schema
   )
 
-# We have file paths...
+# Show attachment with relative path
 sub_att$location_quadrat_photo
 
-# ...and the corresponding files
+# List corresponding files
 fs::dir_ls(t, recurse = TRUE, glob = "*.jpg")
 ```
 

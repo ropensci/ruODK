@@ -111,6 +111,9 @@ Out of scope:
    visualisation and presentation, mainly to illustrate the example data.
    Once the data is in your hands as tidy tibbles... urODK!
 
+## A quick preview
+<img src="man/figures/odata.svg" alt="ruODK screencast" width="100%" />
+
 ## Install
 
 You can install `ruODK` from GitHub with:

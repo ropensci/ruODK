@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List all submissions of one form. — attachment_list • ruODK</title>
+<title>List all attachments for a list of submission instances. — attachment_list • ruODK</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="List all submissions of one form. — attachment_list" />
-<meta property="og:description" content="" />
+<meta property="og:title" content="List all attachments for a list of submission instances. — attachment_list" />
+<meta property="og:description" content="List all attachments for a list of submission instances." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9004</span>
       </span>
     </div>
 
@@ -126,13 +126,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List all submissions of one form.</h1>
+    <h1>List all attachments for a list of submission instances.</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/attachment_list.R'><code>R/attachment_list.R</code></a></small>
     <div class="hidden name"><code>attachment_list.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
+    <p>List all attachments for a list of submission instances.</p>
     </div>
 
     <pre class="usage"><span class='fu'>attachment_list</span>(
@@ -149,8 +149,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>iid</th>
-      <td><p>The `instance_id`, a UUID, as returned by
-<code><a href='submission_list.html'>submission_list</a></code>.</p></td>
+      <td><p>A list of submission instance IDs, e.g. from
+<code><a href='submission_list.html'>submission_list</a>$instance_id</code>.</p></td>
     </tr>
     <tr>
       <th>pid</th>
@@ -197,20 +197,6 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
 <p>* name: The attachment filename, e.g. 12345.jpg
         * exists: Whether the attachment for that submission exists on the
           server.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>When a Submission is created, either over the OpenRosa or the REST interface,
-its XML data is analysed to determine which file attachments it references:
-these may be photos or video taken as part of the survey, or an audit/timing
-log, among other things. Each reference is an expected attachment, and these
-expectations are recorded permanently alongside the Submission. With this
-subresource, you can list the expected attachments, see whether the server
-actually has a copy or not, and download, upload, re-upload, or clear binary
-data for any particular attachment.</p>
-<p>You can retrieve the list of expected Submission attachments at this route,
-along with a boolean flag indicating whether the server actually has a copy
-of the expected file or not. If the server has a file, you can then append
-its filename to the request URL to download only that file (see below).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments'>https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments</a></p>
@@ -223,6 +209,8 @@ its filename to the request URL to download only that file (see below).</p>
 <code><a href='form_schema_parse.html'>form_schema_parse</a>()</code>,
 <code><a href='form_schema.html'>form_schema</a>()</code>,
 <code><a href='form_xml.html'>form_xml</a>()</code>,
+<code><a href='get_one_submission_attachment_list.html'>get_one_submission_attachment_list</a>()</code>,
+<code><a href='get_one_submission.html'>get_one_submission</a>()</code>,
 <code><a href='project_create.html'>project_create</a>()</code>,
 <code><a href='project_detail.html'>project_detail</a>()</code>,
 <code><a href='project_list.html'>project_list</a>()</code>,
@@ -231,40 +219,13 @@ its filename to the request URL to download only that file (see below).</p>
 <code><a href='submission_get.html'>submission_get</a>()</code>,
 <code><a href='submission_list.html'>submission_list</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Set default credentials, see vignette "setup"</span>
-<span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/ru_setup.html'>ru_setup</a></span>(
-  <span class='kw'>svc</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(
-    <span class='st'>"https://sandbox.central.opendatakit.org/v1/projects/14/"</span>,
-    <span class='st'>"forms/build_Flora-Quadrat-0-2_1558575936.svc"</span>
-  ),
-  <span class='kw'>un</span> <span class='kw'>=</span> <span class='st'>"me@email.com"</span>,
-  <span class='kw'>pw</span> <span class='kw'>=</span> <span class='st'>"..."</span>
-)
-
-<span class='no'>sl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='submission_list.html'>submission_list</a></span>()
-
-<span class='no'>al</span> <span class='kw'>&lt;-</span> <span class='fu'>attachment_list</span>(<span class='no'>sl</span>$<span class='no'>instance_id</span><span class='kw'>[[</span><span class='fl'>1</span>]])
-<span class='no'>al</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span>(<span class='no'>.</span>)
-
-<span class='co'># attachment_list returns a tibble</span>
-<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>al</span>)
-<span class='co'># &gt; c("tbl_df", "tbl", "data.frame")</span>
-
-<span class='co'># Submission attributes are the tibble's columns</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>al</span>)
-<span class='co'># &gt; "name" "exists"</span>
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

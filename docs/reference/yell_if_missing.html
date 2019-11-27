@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9004</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
     <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>yell_if_missing</span>(<span class='no'>url</span>, <span class='no'>un</span>, <span class='no'>pw</span>, <span class='kw'>pid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>yell_if_missing</span>(<span class='no'>url</span>, <span class='no'>un</span>, <span class='no'>pw</span>, <span class='kw'>pid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>iid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,6 +160,10 @@
       <th>fid</th>
       <td><p>A form ID (character, optional)</p></td>
     </tr>
+    <tr>
+      <th>iid</th>
+      <td><p>A submission instance ID (character, optional)</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -181,7 +185,8 @@
 <span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='kw'>NULL</span>, <span class='st'>""</span>, <span class='st'>""</span>))
 <span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))
 <span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))
-<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))</div></pre>
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/expect_error.html'>expect_error</a></span>(<span class='fu'>yell_if_missing</span>(<span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>, <span class='st'>""</span>))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

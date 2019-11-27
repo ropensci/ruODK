@@ -173,6 +173,9 @@ test_that("yell_if_missing yells loudly", {
   testthat::expect_error(yell_if_missing("", "", "", "", ""))
   testthat::expect_error(yell_if_missing("x", "x", "x", pid = "", fid = "x"))
   testthat::expect_error(yell_if_missing("x", "x", "x", pid = "x", fid = ""))
+  testthat::expect_error(
+    yell_if_missing("x", "x", "x", pid = "x", fid = "x", iid = "")
+  )
 })
 
 test_that("odata_svc_parse works", {

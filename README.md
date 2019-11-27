@@ -122,6 +122,10 @@ Out of scope:
     illustrate the example data. Once the data is in your hands as tidy
     tibbles… urODK\!
 
+## A quick preview
+
+<img src="man/figures/odata.svg" alt="ruODK screencast" width="100%" />
+
 ## Install
 
 You can install `ruODK` from GitHub with:
@@ -307,12 +311,10 @@ tz <- "Australia/Perth"                            # g'day mate
 data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 #> Downloading submissions...
 #> Downloaded 2 submissions.
+#> Parsing submissions...
 #> New names:
 #> * `@odata.context` -> .odata.context
 #> Unnesting column 'value'
-#> New names:
-#> * `__id` -> .__id
-#> * `__system` -> .__system
 #> Found more nested columns, unnesting again.
 #> Unnesting column '.__system'
 #> Unnesting column 'meta'
@@ -322,40 +324,10 @@ data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 #> Found more nested columns, unnesting again.
 #> Unnesting column 'corner1'
 #> Unnesting column 'corner2'
-#> New names:
-#> * type -> type...12
-#> * coordinates -> coordinates...13
-#> * properties -> properties...14
-#> * type -> type...17
-#> * coordinates -> coordinates...18
-#> * … and 1 more problem
 #> Unnesting column 'corner3'
-#> New names:
-#> * type -> type...20
-#> * coordinates -> coordinates...21
-#> * properties -> properties...22
 #> Unnesting column 'corner4'
-#> New names:
-#> * type -> type...23
-#> * coordinates -> coordinates...24
-#> * properties -> properties...25
 #> Found more nested columns, unnesting again.
 #> Unnesting column 'coordinates...13'
-#> New names:
-#> * `` -> ...1
-#> * `` -> ...2
-#> * `` -> ...3
-#> New names:
-#> * `` -> ...1
-#> * `` -> ...2
-#> * `` -> ...3
-#> New names:
-#> * ...1 -> ...13
-#> * ...2 -> ...14
-#> * ...3 -> ...15
-#> * properties...14 -> properties...16
-#> * type...17 -> type...19
-#> * … and 8 more problems
 #> Skipping renamed column 'properties...14'
 #> Skipping renamed column 'coordinates...18'
 #> Skipping renamed column 'properties...19'
@@ -366,21 +338,6 @@ data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 #> Found more nested columns, unnesting again.
 #> Unnesting column 'properties...16'
 #> Unnesting column 'coordinates...20'
-#> New names:
-#> * `` -> ...1
-#> * `` -> ...2
-#> * `` -> ...3
-#> New names:
-#> * `` -> ...1
-#> * `` -> ...2
-#> * `` -> ...3
-#> New names:
-#> * ...1 -> ...20
-#> * ...2 -> ...21
-#> * ...3 -> ...22
-#> * properties...21 -> properties...23
-#> * type...22 -> type...24
-#> * … and 5 more problems
 #> Skipping renamed column 'properties...21'
 #> Skipping renamed column 'coordinates...23'
 #> Skipping renamed column 'properties...24'
@@ -388,55 +345,22 @@ data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 #> Skipping renamed column 'properties...27'
 #> Found more nested columns, unnesting again.
 #> Unnesting column 'properties...23'
-#> New names:
-#> * accuracy -> accuracy...16
-#> * accuracy -> accuracy...23
 #> Unnesting column 'coordinates...25'
-#> New names:
-#> * `` -> ...1
-#> * `` -> ...2
-#> * `` -> ...3
-#> New names:
-#> * `` -> ...1
-#> * `` -> ...2
-#> * `` -> ...3
-#> New names:
-#> * ...1 -> ...25
-#> * ...2 -> ...26
-#> * ...3 -> ...27
-#> * properties...26 -> properties...28
-#> * type...27 -> type...29
-#> * … and 2 more problems
 #> Skipping renamed column 'properties...26'
 #> Skipping renamed column 'coordinates...28'
 #> Skipping renamed column 'properties...29'
 #> Found more nested columns, unnesting again.
 #> Unnesting column 'properties...28'
-#> New names:
-#> * accuracy -> accuracy...28
-#> * properties...31 -> properties
 #> Unnesting column 'coordinates'
-#> New names:
-#> * `` -> ...1
-#> * `` -> ...2
-#> * `` -> ...3
-#> New names:
-#> * `` -> ...1
-#> * `` -> ...2
-#> * `` -> ...3
-#> New names:
-#> * ...1 -> ...30
-#> * ...2 -> ...31
-#> * ...3 -> ...32
 #> Skipping renamed column 'properties...31'
 #> Found more nested columns, unnesting again.
 #> Unnesting column 'properties'
-#> New names:
-#> * accuracy -> accuracy...33
 #> Reading form schema...
-#> Found date column: encounter_start_datetime.Found date column: encounter_end_datetime.
-#> Parsing encounter_start_datetime as Australia/Perth...
-#> Parsing encounter_end_datetime as Australia/Perth...
+#> Found date/time: encounter_start_datetime. Found date/time: encounter_end_datetime.
+#> Parsing encounter_start_datetime with timezone Australia/Perth...
+#> Parsing encounter_end_datetime with timezone Australia/Perth...
+#> Found attachments: quadrat_photo. Found attachments: morphological_type_photo. Found attachments: mudmap_photo.
+#> 
 #> Downloading attachments...
 #> Using local directory: docs/articles/attachments/media
 #> Keeping docs/articles/attachments/media/1568794395624.jpg
@@ -500,8 +424,8 @@ citation("ruODK")
 #> 
 #> To cite ruODK in publications use:
 #> 
-#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API. R package version 0.6.6.
-#>   https://github.com/dbca-wa/ruODK
+#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API. R
+#>   package version 0.6.6. https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 

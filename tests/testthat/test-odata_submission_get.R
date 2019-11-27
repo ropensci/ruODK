@@ -130,6 +130,10 @@ test_that("odata_submission_get parses WKT geopoint", {
   testthat::expect_true("corner4_latitude" %in% names(df))
   testthat::expect_true("corner4_longitude" %in% names(df))
   testthat::expect_true("corner4_altitude" %in% names(df))
+
+  testthat::expect_true(is.numeric(df$corner1_longitude))
+  testthat::expect_true(is.numeric(df$corner2_latitude))
+  testthat::expect_true(is.numeric(df$corner3_altitude))
 })
 
 # Tests code

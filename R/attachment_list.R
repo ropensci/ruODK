@@ -1,4 +1,4 @@
-#' List all submissions of one form.
+#' List all attachments of one submission.
 #'
 #' \lifecycle{stable}
 #'
@@ -14,7 +14,7 @@
 #' You can retrieve the list of expected Submission attachments at this route,
 #' along with a boolean flag indicating whether the server actually has a copy
 #' of the expected file or not. If the server has a file, you can then append
-#' its filename to the request URL to download only that file (see below).
+#' its filename to the request URL to download only that file.
 #' @template param-iid
 #' @template param-pid
 #' @template param-fid
@@ -47,7 +47,7 @@
 #'
 #' sl <- submission_list()
 #'
-#' al <- attachment_list(sl$instance_id[[1]])
+#' al <- get_one_submission_attachment_list(sl$instance_id[[1]])
 #' al %>% knitr::kable(.)
 #'
 #' # attachment_list returns a tibble
@@ -58,12 +58,12 @@
 #' names(al)
 #' # > "name" "exists"
 #' }
-attachment_list <- function(iid,
-                            pid = get_default_pid(),
-                            fid = get_default_fid(),
-                            url = get_default_url(),
-                            un = get_default_un(),
-                            pw = get_default_pw()) {
+get_one_submission_attachment_list <- function(iid,
+                                               pid = get_default_pid(),
+                                               fid = get_default_fid(),
+                                               url = get_default_url(),
+                                               un = get_default_un(),
+                                               pw = get_default_pw()) {
   yell_if_missing(url, un, pw)
   glue::glue(
     "{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}/attachments"
@@ -80,6 +80,46 @@ attachment_list <- function(iid,
         exists = purrr::map_lgl(., "exists")
       )
     }
+}
+
+#' List all attachments for a list of submission instances.
+#'
+#' @param iid A list of submission instance IDs, e.g. from
+#'   \code{\link{submission_list}$instance_id}.
+#' @template param-pid
+#' @template param-fid
+#' @template param-url
+#' @template param-auth
+#' @return A tibble containing some high-level details of the submission
+#'         attachments.
+#'         One row per submission attachment, columns are submission attributes:
+#'
+#'         * name: The attachment filename, e.g. 12345.jpg
+#'         * exists: Whether the attachment for that submission exists on the
+#'           server.
+# nolint start
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
+# nolint end
+#' @family restful-api
+#' @export
+attachment_list <- function(iid,
+                            pid = get_default_pid(),
+                            fid = get_default_fid(),
+                            url = get_default_url(),
+                            un = get_default_un(),
+                            pw = get_default_pw()) {
+  yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
+  tibble::tibble(
+    iid = iid,
+    pid = pid,
+    fid = fid,
+    url = url,
+    un = un,
+    pw = pw
+  ) %>%
+    purrr::pmap(ruODK::get_one_submission_attachment_list) %>%
+    dplyr::bind_rows()
 }
 
 # Tests

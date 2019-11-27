@@ -5,6 +5,8 @@ This version addresses ROpenSci reviewer comments from
 ## Major fixes
 * Split and rename WKT POINT (ODK geopoint) fields with 
   `odata_submission_get(wkt=T)`. (#31 #7 HT @OdiljonQurbon)
+* `submission_get` now accepts a vector of (all or selected) submission instance 
+  IDs (`iid`), similar to `odata_submission_get()`. (#38)
 
 ## Minor fixes
 * Drop `. <- NULL` in favour of `utils::globalVariables(".")`. (#35)
@@ -19,12 +21,17 @@ This version addresses ROpenSci reviewer comments from
   latest bug fixes.
 
 ## Data
+* Use canned data in all vignettes, so they can build without authentication. 
+  (#33)
 
 ## Documentation
 * Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK).
 * Rename vignettes to `odata-api` and `restful-api`. (#34)
 * Warn against using plain text credentials in vignette `setup`. (#34)
-* More documentation improvements at https://github.com/dbca-wa/ruODK/issues/34.
+* More documentation improvements at 
+  [#34](https://github.com/dbca-wa/ruODK/issues/34).
+* Add screencast to the README. (#45)
+* Improve logo - more turtles, questionable photoshopping.
 
 
 # `ruODK` 0.6.6

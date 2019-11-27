@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9004</span>
       </span>
     </div>
 
@@ -131,12 +131,14 @@
     <div id="ruodk-development-version" class="section level1">
 <h1 class="page-header">
 <a href="#ruodk-development-version" class="anchor"></a><code>ruODK</code> (development version)</h1>
-<p>This version addresses ROpenSci reviewer comments from <a href='https://github.com/karissawhiting'>@karissawhiting</a> and <a href='https://github.com/jmt2080ad'>@jmt2080ad</a>.</p>
+<p>This version addresses ROpenSci reviewer comments from <a href='https://github.com/karissawhiting'>@karissawhiting</a> and <a href='https://github.com/jmt2080ad'>@jmt2080ad</a> as well as ideas from <a href='https://github.com/OdiljonQurbon'>@OdiljonQurbon</a>.</p>
 <div id="major-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#major-fixes" class="anchor"></a>Major fixes</h2>
 <ul>
 <li>Split and rename WKT POINT (ODK geopoint) fields with <code><a href="../reference/odata_submission_get.html">odata_submission_get(wkt=T)</a></code>. (<a href='https://github.com/dbca-wa/ruODK/issues/31'>#31</a> <a href='https://github.com/dbca-wa/ruODK/issues/7'>#7</a> HT <a href='https://github.com/OdiljonQurbon'>@OdiljonQurbon</a>)</li>
+<li>
+<code>submission_get</code> now accepts a vector of (all or selected) submission instance IDs (<code>iid</code>), similar to <code><a href="../reference/odata_submission_get.html">odata_submission_get()</a></code>. (<a href='https://github.com/dbca-wa/ruODK/issues/38'>#38</a>)</li>
 </ul>
 </div>
 <div id="minor-fixes" class="section level2">
@@ -162,6 +164,9 @@
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
+<ul>
+<li>Use canned data in all vignettes, so they can build without authentication. (<a href='https://github.com/dbca-wa/ruODK/issues/33'>#33</a>)</li>
+</ul>
 </div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
@@ -170,7 +175,9 @@
 <li>Updated workshop companion package <a href="https://github.com/dbca-wa/urODK">urODK</a>.</li>
 <li>Rename vignettes to <code>odata-api</code> and <code>restful-api</code>. (<a href='https://github.com/dbca-wa/ruODK/issues/34'>#34</a>)</li>
 <li>Warn against using plain text credentials in vignette <code>setup</code>. (<a href='https://github.com/dbca-wa/ruODK/issues/34'>#34</a>)</li>
-<li>More documentation improvements at <a href="https://github.com/dbca-wa/ruODK/issues/34" class="uri">https://github.com/dbca-wa/ruODK/issues/34</a>.</li>
+<li>More documentation improvements at <a href="https://github.com/dbca-wa/ruODK/issues/34"><a href='https://github.com/dbca-wa/ruODK/issues/34'>#34</a></a>.</li>
+<li>Add screencast to the README. (<a href='https://github.com/dbca-wa/ruODK/issues/45'>#45</a>)</li>
+<li>Improve logo - more turtles, questionable photoshopping.</li>
 </ul>
 </div>
 </div>
