@@ -78,7 +78,7 @@ test_that("attachment_url works", {
 })
 
 test_that("get_one_attachment handles repeat download and NA filenames", {
-  t <- tempdir(check = TRUE)
+  t <- tempdir()
   testthat::expect_true(fs::dir_exists(t))
   fs::dir_ls(t) %>% fs::file_delete()
 
