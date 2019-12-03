@@ -30,7 +30,7 @@ This version addresses ROpenSci reviewer comments from
 * Warn against using plain text credentials in vignette `setup`. (#34)
 * More documentation improvements at 
   [#34](https://github.com/dbca-wa/ruODK/issues/34).
-* Add screencast to the README. (#45)
+* Add screencast to the README. HT to asciicast! (#45)
 * Improve logo - more turtles, questionable photoshopping.
 
 

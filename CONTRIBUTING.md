@@ -134,6 +134,7 @@ ODKC_TEST_PID=14
 ODKC_TEST_FID="build_Flora-Quadrat-0-4_1564384341"
 ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698"
 ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379"
+ODKC_TEST_FID_GAP="build_Turtle-Track-or-Nest-1-0_1569907666"
 ODKC_TEST_UN="your@email.com"
 ODKC_TEST_PW="..."
 
