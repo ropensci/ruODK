@@ -14,6 +14,12 @@ listcol_names <- function(tbl) {
     magrittr::extract2("variable")
 }
 
+#' Predict the column type based on optional form_schema
+#' This is stupid, we should map first, then parse
+# predict_ptype <- function(cn, fs=NULL){
+#  return("chr")
+# }
+
 #' Recursively unnest_wide all list columns in a tibble.
 #'
 #' \lifecycle{stable}
@@ -43,6 +49,14 @@ unnest_all <- function(nested_tbl,
       }
     } else {
       if (verbose == TRUE) message(glue::glue("Unnesting column '{colname}'\n"))
+
+      # If colname contains NULL, we have to supply ptype
+      # pt <- predict_ptype(colname, form_schema){}
+
+      # If colname is of type geopoint (form_schema knows), split_geopoint
+
+      # If colname is of type dateTime or date, ru_datetime
+
       suppressMessages( # ball-gag unnest_wider
         nested_tbl <- tidyr::unnest_wider(
           nested_tbl,
@@ -58,7 +72,8 @@ unnest_all <- function(nested_tbl,
     }
     nested_tbl <- unnest_all(
       nested_tbl,
-      names_repair = names_repair, verbose = verbose
+      names_repair = names_repair,
+      verbose = verbose
     )
   }
   nested_tbl

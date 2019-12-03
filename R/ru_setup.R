@@ -18,6 +18,7 @@
 #' \code{\link{get_test_fid}},
 #' \code{\link{get_test_fid_zip}},
 #' \code{\link{get_test_fid_att}},
+#' \code{\link{get_test_fid_gap}},
 #' \code{\link{get_test_url}},
 #' \code{\link{get_test_un}},
 #' \code{\link{get_test_pw}}.
@@ -35,6 +36,7 @@ ru_settings <- function() {
     test_fid = Sys.getenv("ODKC_TEST_FID", ""),
     test_fid_zip = Sys.getenv("ODKC_TEST_FID_ZIP", ""),
     test_fid_att = Sys.getenv("ODKC_TEST_FID_ATT", ""),
+    test_fid_gap = Sys.getenv("ODKC_TEST_FID_GAP", ""),
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", "")
@@ -54,6 +56,7 @@ print.ru_settings <- function(x, ...) {
   cat("  Test ODK Central Form ID:", x$test_fid, "\n")
   cat("  Test ODK Central Form ID (ZIP tests):", x$test_fid_zip, "\n")
   cat("  Test ODK Central Form ID (Attachment tests):", x$test_fid_att, "\n")
+  cat("  Test ODK Central Form ID (Parsing tests):", x$test_fid_gap, "\n")
   cat("  Test ODK Central URL:", x$test_url, "\n")
   cat("  Test ODK Central Username:", x$test_un, "\n")
   cat("  Test ODK Central Password: run ruODK::get_test_pw() to show \n")
@@ -131,6 +134,11 @@ odata_svc_parse <- function(svc) {
 #'   \code{test_svc}.
 #'   Provide the form ID of a form with few submissions and few attachments.
 #'   This form is used to test downloading and linking attachments.
+#' @param test_fid_gap (optional, character) The alphanumeric ID of an existing
+#'   form in \code{test_pid}. This will override the form ID from
+#'   \code{test_svc}.
+#'   Provide the form ID of a form with gaps in the first submission.
+#'   This form is used to test parsing incomplete submissions.
 #' @param test_url (optional, character) A valid ODK Central URL for testing.
 #'   This will override the ODK Central base URL from \code{svc}.
 #' @param test_un (optional, character) A valid ODK Central username (email)
@@ -183,6 +191,7 @@ ru_setup <- function(svc = NULL,
                      test_fid = NULL,
                      test_fid_zip = NULL,
                      test_fid_att = NULL,
+                     test_fid_gap = NULL,
                      test_url = NULL,
                      test_un = NULL,
                      test_pw = NULL) {
@@ -210,6 +219,7 @@ ru_setup <- function(svc = NULL,
   if (!is.null(test_fid)) Sys.setenv("ODKC_TEST_FID" = test_fid)
   if (!is.null(test_fid_zip)) Sys.setenv("ODKC_TEST_FID_ZIP" = test_fid_zip)
   if (!is.null(test_fid_att)) Sys.setenv("ODKC_TEST_FID_ATT" = test_fid_att)
+  if (!is.null(test_fid_gap)) Sys.setenv("ODKC_TEST_FID_GAP" = test_fid_gap)
   if (!is.null(test_url)) Sys.setenv("ODKC_TEST_URL" = test_url)
   if (!is.null(test_un)) Sys.setenv("ODKC_TEST_UN" = test_un)
   if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
@@ -348,6 +358,17 @@ get_test_fid_att <- function() {
   x <- Sys.getenv("ODKC_TEST_FID_ATT")
   if (identical(x, "")) {
     rlang::warn("No test ODK Central ATT form ID set. ru_setup()?")
+  }
+  x
+}
+
+#' \lifecycle{stable}
+#' @export
+#' @rdname ru_settings
+get_test_fid_gap <- function() {
+  x <- Sys.getenv("ODKC_TEST_FID_GAP")
+  if (identical(x, "")) {
+    rlang::warn("No test ODK Central GAP form ID set. ru_setup()?")
   }
   x
 }

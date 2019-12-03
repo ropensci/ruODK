@@ -2,7 +2,9 @@
 % Please edit documentation in R/odata_submission_parse.R
 \name{unnest_all}
 \alias{unnest_all}
-\title{Recursively unnest_wide all list columns in a tibble.}
+\title{Predict the column type based on optional form_schema
+This is stupid, we should map first, then parse
+Recursively unnest_wide all list columns in a tibble.}
 \usage{
 unnest_all(nested_tbl, names_repair = "universal", verbose = FALSE)
 }

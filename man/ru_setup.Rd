@@ -16,6 +16,7 @@ ru_setup(
   test_fid = NULL,
   test_fid_zip = NULL,
   test_fid_att = NULL,
+  test_fid_gap = NULL,
   test_url = NULL,
   test_un = NULL,
   test_pw = NULL
@@ -67,6 +68,12 @@ form in \code{test_pid}. This will override the form ID from
 \code{test_svc}.
 Provide the form ID of a form with few submissions and few attachments.
 This form is used to test downloading and linking attachments.}
+
+\item{test_fid_gap}{(optional, character) The alphanumeric ID of an existing
+form in \code{test_pid}. This will override the form ID from
+\code{test_svc}.
+Provide the form ID of a form with gaps in the first submission.
+This form is used to test parsing incomplete submissions.}
 
 \item{test_url}{(optional, character) A valid ODK Central URL for testing.
 This will override the ODK Central base URL from \code{svc}.}
