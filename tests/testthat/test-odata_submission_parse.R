@@ -1,6 +1,6 @@
 context("test-odata_submission_parse.R")
 
-test_that("odata_submission_get works with one known dataset", {
+test_that("odata_submission_parse works with gaps in first submission", {
   t <- tempdir()
   fresh_raw <- odata_submission_get(
     pid = get_test_pid(),
@@ -24,8 +24,10 @@ test_that("odata_submission_get works with one known dataset", {
     )
 
     # Throws error:
-    # test-odata_submission_parse.R:13: error: odata_submission_get works with one known dataset
-    # Can't cast `track_photos$...1` <logical> to `track_photos$...1` <vctrs_unspecified>.
+    # test-odata_submission_parse.R:13: error:
+    # odata_submission_get works with one known dataset
+    # Can't cast `track_photos$...1` <logical> to `track_photos$...1`
+    # <vctrs_unspecified>.
   )
 
   # fresh_parsed <- fresh_raw %>% odata_submission_parse()

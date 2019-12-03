@@ -88,6 +88,9 @@ unnest_all <- function(nested_tbl,
 #'
 #' @param data A nested list of lists as given by
 #'   \code{\link{odata_submission_get}}.
+#' @param form_schema The output of \code{\link{form_schema}} for the given
+#'   data. \code{\link{odata_submission_get}(parse=TRUE)} automatically supplies
+#'   \code{form_schema} to \code{\link{odata_submission_parse}}.
 #' @param names_repair The argument `names_repair` for
 #'   \code{tidyr::unnest_wider}, default: "universal".
 #' @param verbose Whether to print verbose messages, default: FALSE.
@@ -108,12 +111,20 @@ unnest_all <- function(nested_tbl,
 #' testthat::expect_equal(length(fq_raw$value), nrow(data_parsed))
 #' }
 odata_submission_parse <- function(data,
+                                   form_schema = NULL,
                                    names_repair = "universal",
                                    verbose = FALSE) {
-  data %>%
-    tibble::as_tibble(., .name_repair = names_repair) %>%
-    unnest_all(names_repair = names_repair, verbose = verbose) %>%
-    janitor::clean_names(.)
+
+  # TODO
+  # if (!is.null(form_schema)){
+    # TODO parse with form_schema
+    # } else {
+
+      data %>%
+        tibble::as_tibble(., .name_repair = names_repair) %>%
+        unnest_all(names_repair = names_repair, verbose = verbose) %>%
+        janitor::clean_names(.)
+    # }
 }
 
 

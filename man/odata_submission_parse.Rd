@@ -5,11 +5,20 @@
 \title{Parse the output of \code{\link{odata_submission_get}(parse=FALSE)}
 into a tidy tibble and unnest all levels.}
 \usage{
-odata_submission_parse(data, names_repair = "universal", verbose = FALSE)
+odata_submission_parse(
+  data,
+  form_schema = NULL,
+  names_repair = "universal",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{A nested list of lists as given by
 \code{\link{odata_submission_get}}.}
+
+\item{form_schema}{The output of \code{\link{form_schema}} for the given
+data. \code{\link{odata_submission_get}(parse=TRUE)} automatically supplies
+\code{form_schema} to \code{\link{odata_submission_parse}}.}
 
 \item{names_repair}{The argument `names_repair` for
 \code{tidyr::unnest_wider}, default: "universal".}

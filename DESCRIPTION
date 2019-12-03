@@ -75,6 +75,6 @@ RdMacros:
 Encoding: UTF-8
 Language: en_AU
 LazyData: true
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2
 X-schema.org-applicationCategory: Data Access
 X-schema.org-keywords: database, open-data, opendatakit, odk, api, data, dataset

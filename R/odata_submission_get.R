@@ -200,11 +200,7 @@ odata_submission_get <- function(table = "Submissions",
   }
 
   #----------------------------------------------------------------------------#
-  # Parse submission data
-  if (verbose == TRUE) message("Parsing submissions...\n")
-  sub <- sub %>% odata_submission_parse(verbose = verbose)
-
-  # Get form fields
+  # Get form schema
   if (verbose == TRUE) message("Reading form schema...\n")
   fs <- form_schema(
     parse = TRUE,
@@ -214,6 +210,13 @@ odata_submission_get <- function(table = "Submissions",
     un = un,
     pw = pw
   )
+
+  #----------------------------------------------------------------------------#
+  # Parse submission data
+  if (verbose == TRUE) message("Parsing submissions...\n")
+  sub <- sub %>% odata_submission_parse(form_schema = fs, verbose = verbose)
+
+
 
   # Parse dates
   dttm_cols <- fs %>%
