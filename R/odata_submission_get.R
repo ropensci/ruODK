@@ -201,7 +201,12 @@ odata_submission_get <- function(table = "Submissions",
 
   #----------------------------------------------------------------------------#
   # Get form schema
-  if (verbose == TRUE) message("Reading form schema...\n")
+  if (verbose == TRUE) {
+    message(crayon::cyan(
+      glue::glue("{clisymbols::symbol$info} Reading form schema...\n")
+    ))
+  }
+
   fs <- form_schema(
     parse = TRUE,
     pid = pid,
@@ -213,7 +218,11 @@ odata_submission_get <- function(table = "Submissions",
 
   #----------------------------------------------------------------------------#
   # Parse submission data
-  if (verbose == TRUE) message("Parsing submissions...\n")
+  if (verbose == TRUE) {
+    message(crayon::cyan(
+      glue::glue("{clisymbols::symbol$info} Parsing submissions...\n")
+    ))
+  }
   sub <- sub %>% odata_submission_parse(form_schema = fs, verbose = verbose)
 
 
@@ -223,11 +232,22 @@ odata_submission_get <- function(table = "Submissions",
     dplyr::filter(type %in% c("dateTime", "date")) %>%
     magrittr::extract2("name")
 
-  if (verbose == TRUE) message(glue::glue("Found date/time: {dttm_cols}. "))
+  if (verbose == TRUE) {
+    message(crayon::cyan(
+      glue::glue("{clisymbols::symbol$info}",
+                 " Found date/time: \"{dttm_cols}\". \n")
+    ))
+  }
+
 
   for (colname in dttm_cols) {
     if (verbose == TRUE) {
-      message(glue::glue("\nParsing {colname} with timezone {tz}...\n"))
+      if (verbose == TRUE) {
+        message(crayon::cyan(
+          glue::glue("{clisymbols::symbol$info}",
+                     "\nParsing \"{colname}\" with timezone \"{tz}\"...\n")
+        ))
+      }
     }
     sub <- sub %>%
       ruODK::ru_datetime(
@@ -245,8 +265,17 @@ odata_submission_get <- function(table = "Submissions",
     intersect(names(sub))
 
   if (verbose == TRUE) {
-    message(glue::glue("Found attachments: {att_cols}. "))
-    message("\nDownloading attachments...\n")
+    if (verbose == TRUE) {
+      message(crayon::cyan(
+        glue::glue("{clisymbols::symbol$info}",
+                   " Found attachments: \"{att_cols}\". \n")
+      ))
+      message(crayon::green(
+        glue::glue("{clisymbols::symbol$tick}",
+                   "\nDownloading attachments...\n")
+      ))
+    }
+
   }
 
   sub <- sub %>% dplyr::mutate_at(
@@ -270,11 +299,23 @@ odata_submission_get <- function(table = "Submissions",
       dplyr::filter(type == "geopoint") %>%
       magrittr::extract2("name")
 
-    if (verbose == TRUE) message(glue::glue("Found geopoint: {gp_cols}. "))
+    if (verbose == TRUE) {
+      message(crayon::cyan(
+        glue::glue("{clisymbols::symbol$info}",
+                   " Found geopoint: \"{gp_cols}\". \n")
+      ))
+    }
 
     for (colname in gp_cols) {
       if (colname %in% names(sub)) {
         if (verbose == TRUE) message(glue::glue("\nParsing {colname}...\n"))
+        if (verbose == TRUE) {
+          message(crayon::cyan(
+            glue::glue("{clisymbols::symbol$info}",
+                       "\nParsing {colname}...\n")
+          ))
+        }
+
         sub <- sub %>% split_geopoint(as.character(colname))
       }
     }

@@ -135,6 +135,7 @@ form_schema <- function(flatten = FALSE,
     if (flatten == TRUE) {
       rlang::warn(
         glue::glue(
+          "clisymbols$symbol$cross",
           "Cannot parse flattened form schema, ",
           "returning unparsed and flattened.\n",
           "Use flatten=FALSE with parse=TRUE for a parsed form_schema."

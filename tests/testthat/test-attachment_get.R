@@ -104,7 +104,10 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       pw = get_test_pw(),
       verbose = TRUE
     ),
-    glue::glue("Saved {pth}\n")
+    glue::glue(
+      "{clisymbols::symbol$tick} ",
+      "File saved to \"{pth}\".\n"
+    )
   )
 
   fn_local <- get_one_attachment(
@@ -130,7 +133,10 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       pw = get_test_pw(),
       verbose = TRUE
     ),
-    glue::glue("Keeping {pth}\n")
+    glue::glue(
+      "{clisymbols::symbol$tick} ",
+      "File already donwloaded, keeping \"{pth}\".\n"
+    )
   )
 
   # Not happy, but tolerant: keep file at pth if exists
@@ -144,7 +150,10 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       pw = get_test_pw(),
       verbose = TRUE
     ),
-    glue::glue("Keeping {pth}\n")
+      glue::glue(
+        "{clisymbols::symbol$tick} ",
+        "File already donwloaded, keeping \"{pth}\".\n"
+      )
   )
   testthat::expect_equal(
     get_one_attachment(
@@ -171,7 +180,10 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       pw = get_test_pw(),
       verbose = TRUE
     ),
-    "Filename is NA, skipping download."
+      glue::glue(
+        "{clisymbols::symbol$cross} ",
+        "Filename is NA, skipping download.\n"
+      )
   )
   testthat::expect_true(
     is.na(

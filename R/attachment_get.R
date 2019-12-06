@@ -76,20 +76,45 @@ get_one_attachment <- function(pth,
                                verbose = FALSE) {
   yell_if_missing(url, un, pw)
   if (fs::file_exists(pth)) {
-    if (verbose == TRUE) message(glue::glue("Keeping {pth}\n"))
+    if (verbose == TRUE) {
+      message(crayon::green(
+        glue::glue(
+          "{clisymbols::symbol$tick} ",
+          "File already donwloaded, keeping \"{pth}\".\n"
+        )
+      ))
+    }
     return(pth %>% as.character())
   }
   if (is.na(fn)) {
-    message("Filename is NA, skipping download.\n")
+    if (verbose == TRUE) {
+      message(crayon::green(
+        glue::glue(
+          "{clisymbols::symbol$cross} ",
+          "Filename is NA, skipping download.\n"
+        )
+      ))
+    }
     return(NA)
   }
+
   httr::GET(
     src,
     httr::authenticate(un, pw),
     httr::write_disk(pth, overwrite = TRUE)
   ) %>%
     yell_if_error(., url, un, pw)
-  if (verbose == TRUE) message(glue::glue("Saved {pth}\n"))
+
+  if (verbose == TRUE) {
+    message(crayon::green(
+      glue::glue(
+        "{clisymbols::symbol$tick} ",
+        "File saved to \"{pth}\".\n"
+      )
+    ))
+  }
+
+
   return(pth %>% as.character())
 }
 
@@ -153,8 +178,14 @@ attachment_get <- function(sid,
     dest_dir <- fs::path(local_dir)
   }
   if (verbose == TRUE) {
-    message(glue::glue("Using local directory: {dest_dir}\n"))
+    message(crayon::cyan(
+      glue::glue(
+        "{clisymbols::symbol$info} ",
+        "Using local directory \"{dest_dir}\".\n"
+      )
+    ))
   }
+
   fs::dir_create(dest_dir)
 
   tibble::tibble(

@@ -36,6 +36,8 @@ BugReports: https://github.com/dbca-wa/ruODK/issues
 Depends: 
     R (>= 3.4)
 Imports: 
+    clisymbols,
+    crayon,
     dplyr (>= 0.8.3),
     fs (>= 1.3.1),
     glue (>= 1.3.1),

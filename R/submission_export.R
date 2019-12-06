@@ -72,18 +72,38 @@ submission_export <- function(local_dir = here::here(),
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   pth <- fs::path(local_dir, glue::glue("{fid}.zip"))
 
-  if (verbose == TRUE) {
-    if (fs::file_exists(pth)) {
-      if (overwrite == TRUE) {
-        message(glue::glue("Overwriting previous download: {pth}\n"))
-      } else {
-        message(glue::glue("Keeping previous download: {pth}\n"))
-        return(pth)
+  if (fs::file_exists(pth)) {
+    if (overwrite == TRUE) {
+      if (verbose == TRUE) {
+        message(crayon::cyan(
+          glue::glue(
+            "{clisymbols::symbol$info} ",
+            "Overwriting previous download: \"{pth}\"\n"
+          )
+        ))
       }
     } else {
-      message(glue::glue("Downloading submissions to: {pth}\n"))
+      if (verbose == TRUE) {
+        message(crayon::cyan(
+          glue::glue(
+            "{clisymbols::symbol$info} ",
+            "Keeping previous download: \"{pth}\"\n"
+          )
+        ))
+      }
+      return(pth)
+    }
+  } else {
+    if (verbose == TRUE) {
+      message(crayon::cyan(
+        glue::glue(
+          "{clisymbols::symbol$info} ",
+          "Downloading submissions to \"{pth}\"\n"
+        )
+      ))
     }
   }
+
 
   glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions.csv.zip") %>%
     httr::GET(

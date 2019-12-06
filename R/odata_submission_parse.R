@@ -45,10 +45,19 @@ unnest_all <- function(nested_tbl,
     # colname <- listcol_names(nested_tbl)[[1]]
     if (!(colname %in% names(nested_tbl))) {
       if (verbose == TRUE) {
-        message(glue::glue("Skipping renamed column '{colname}'\n"))
+        message(crayon::cyan(
+          glue::glue("{clisymbols::symbol$info}",
+                     "Skipping renamed column \"{colname}\"\n")
+        ))
       }
+
     } else {
-      if (verbose == TRUE) message(glue::glue("Unnesting column '{colname}'\n"))
+      if (verbose == TRUE) {
+        message(crayon::cyan(
+          glue::glue("{clisymbols::symbol$info}",
+                     "Unnesting column \"{colname}\"\n")
+        ))
+      }
 
       # If colname contains NULL, we have to supply ptype
       # pt <- predict_ptype(colname, form_schema){}
@@ -68,7 +77,10 @@ unnest_all <- function(nested_tbl,
   }
   if (length(listcol_names(nested_tbl)) > 0) {
     if (verbose == TRUE) {
-      message("Found more nested columns, unnesting again.\n")
+      message(crayon::cyan(
+        glue::glue("{clisymbols::symbol$info}",
+                   "Found more nested columns, unnesting again.\n")
+      ))
     }
     nested_tbl <- unnest_all(
       nested_tbl,

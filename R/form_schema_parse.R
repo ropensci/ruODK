@@ -56,16 +56,29 @@ form_schema_parse <- function(fs, path = "Submissions", verbose = FALSE) {
     rlist::list.select(type, name) %>%
     rlist::list.stack(.) %>%
     dplyr::mutate(path = path)
-  if (verbose == TRUE) message(glue::glue("\n\nFound fields:\n{str(x)}\n"))
+
+  if (verbose == TRUE) {
+    message(crayon::cyan(
+      glue::glue("{clisymbols::symbol$info}\n\nFound fields:\n{str(x)}\n")
+    ))
+  }
+
 
   # 2. Recursively run form_schema_parse over nested elements.
   for (node in fs) {
     # Recursion seatbelt: only step into lists containing "children".
     if (is.list(node) &&
-      "children" %in% names(node) &&
-      "name" %in% names(node)) {
+        "children" %in% names(node) &&
+        "name" %in% names(node)) {
       for (child in node) {
-        if (verbose == TRUE) message(glue::glue("\n\nFound child: {child}\n"))
+        if (verbose == TRUE) {
+          message(crayon::cyan(
+            glue::glue(
+              "{clisymbols::symbol$info}\n\nFound child: {child}\n"
+            )
+          ))
+        }
+
         odata_table_path <- glue::glue("{path}.{node['name']}")
         xxx <- form_schema_parse(child, path = odata_table_path)
         x <- rbind(x, xxx)
@@ -74,7 +87,12 @@ form_schema_parse <- function(fs, path = "Submissions", verbose = FALSE) {
   }
 
   # 3. Return combined type/name pairs as tibble
-  if (verbose == TRUE) message(glue::glue("Returning data {str(x)}"))
+  if (verbose == TRUE) {
+    message(crayon::cyan(
+      glue::glue("{clisymbols::symbol$info} Returning data \"{str(x)}\"")
+    ))
+  }
+
   x %>% tibble::as_tibble()
 }
 
