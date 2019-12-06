@@ -178,7 +178,12 @@ odata_submission_get <- function(table = "Submissions",
   }
 
   # Get submissions
-  if (verbose == TRUE) message("Downloading submissions...\n")
+  if (verbose == TRUE) {
+    message(crayon::cyan(
+      glue::glue("{clisymbols::symbol$info}",
+                 " Downloading submissions...\n")
+    ))
+  }
 
   sub <- glue::glue(
     "{url}/v1/projects/{pid}/forms/{fid}.svc/{table}",
@@ -192,11 +197,21 @@ odata_submission_get <- function(table = "Submissions",
     httr::content(.)
 
   if (verbose == TRUE) {
-    message(glue::glue("Downloaded {length(sub)} submissions.\n"))
+    message(crayon::green(
+      glue::glue("{clisymbols::symbol$tick}",
+      " Downloaded {length(sub)} submissions.\n")
+    ))
   }
 
   if (parse == FALSE) {
     return(sub)
+  } else{
+    if (verbose == TRUE) {
+      message(crayon::cyan(
+        glue::glue("{clisymbols::symbol$info}",
+                   " Parsing submissions...\n")
+      ))
+    }
   }
 
   #----------------------------------------------------------------------------#
@@ -245,7 +260,7 @@ odata_submission_get <- function(table = "Submissions",
       if (verbose == TRUE) {
         message(crayon::cyan(
           glue::glue("{clisymbols::symbol$info}",
-                     "\nParsing \"{colname}\" with timezone \"{tz}\"...\n")
+                     " Parsing \"{colname}\" with timezone \"{tz}\"...\n")
         ))
       }
     }
@@ -272,7 +287,7 @@ odata_submission_get <- function(table = "Submissions",
       ))
       message(crayon::green(
         glue::glue("{clisymbols::symbol$tick}",
-                   "\nDownloading attachments...\n")
+                   " Downloading attachments...\n")
       ))
     }
 
@@ -308,11 +323,10 @@ odata_submission_get <- function(table = "Submissions",
 
     for (colname in gp_cols) {
       if (colname %in% names(sub)) {
-        if (verbose == TRUE) message(glue::glue("\nParsing {colname}...\n"))
         if (verbose == TRUE) {
           message(crayon::cyan(
             glue::glue("{clisymbols::symbol$info}",
-                       "\nParsing {colname}...\n")
+                       " Parsing {colname}...\n")
           ))
         }
 
@@ -324,6 +338,12 @@ odata_submission_get <- function(table = "Submissions",
   #
   # End parse submission data
   #----------------------------------------------------------------------------#
+  if (verbose == TRUE) {
+    message(crayon::green(
+      glue::glue("{clisymbols::symbol$tick}",
+                 " Returning parsed submissions.\n")
+    ))
+  }
   sub
 }
 

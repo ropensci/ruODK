@@ -79,7 +79,7 @@ get_one_attachment <- function(pth,
     if (verbose == TRUE) {
       message(crayon::green(
         glue::glue(
-          "{clisymbols::symbol$tick} ",
+          "{clisymbols::symbol$circle_filled} ",
           "File already donwloaded, keeping \"{pth}\".\n"
         )
       ))
@@ -90,7 +90,7 @@ get_one_attachment <- function(pth,
     if (verbose == TRUE) {
       message(crayon::green(
         glue::glue(
-          "{clisymbols::symbol$cross} ",
+          "{clisymbols::symbol$circle} ",
           "Filename is NA, skipping download.\n"
         )
       ))

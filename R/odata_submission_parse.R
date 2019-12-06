@@ -47,7 +47,7 @@ unnest_all <- function(nested_tbl,
       if (verbose == TRUE) {
         message(crayon::cyan(
           glue::glue("{clisymbols::symbol$info}",
-                     "Skipping renamed column \"{colname}\"\n")
+                     " Skipping renamed column \"{colname}\"\n")
         ))
       }
 
@@ -55,7 +55,7 @@ unnest_all <- function(nested_tbl,
       if (verbose == TRUE) {
         message(crayon::cyan(
           glue::glue("{clisymbols::symbol$info}",
-                     "Unnesting column \"{colname}\"\n")
+                     " Unnesting column \"{colname}\"\n")
         ))
       }
 
@@ -79,7 +79,7 @@ unnest_all <- function(nested_tbl,
     if (verbose == TRUE) {
       message(crayon::cyan(
         glue::glue("{clisymbols::symbol$info}",
-                   "Found more nested columns, unnesting again.\n")
+                   " Found more nested columns, unnesting again.\n")
       ))
     }
     nested_tbl <- unnest_all(
