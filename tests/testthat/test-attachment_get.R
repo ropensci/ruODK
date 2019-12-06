@@ -63,16 +63,13 @@ test_that("attachment_url works", {
   pid <- get_test_pid()
   fid <- get_test_fid()
 
-  expected_url <- glue::glue(
-    "{url}/v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
-  )
-  calculated_url <- ruODK:::attachment_url(
-    uuid,
-    fn,
-    pid = pid,
-    fid = fid,
-    url = url
-  )
+  expected_url <-
+    glue::glue("{url}/v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}")
+  calculated_url <- ruODK:::attachment_url(uuid,
+                                           fn,
+                                           pid = pid,
+                                           fid = fid,
+                                           url = url)
 
   testthat::expect_equal(calculated_url, expected_url)
 })
@@ -91,25 +88,13 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   fid <- get_test_fid()
 
   pth <- fs::path(t, fn)
-  src <- ruODK:::attachment_url(uuid, fn, pid = pid, fid = fid, url = url)
+  src <- ruODK:::attachment_url(uuid,
+                                fn,
+                                pid = pid,
+                                fid = fid,
+                                url = url)
 
   # Happy path: get one attachment should work
-  testthat::expect_message(
-    get_one_attachment(
-      pth,
-      fn,
-      src,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      verbose = TRUE
-    ),
-    glue::glue(
-      "{clisymbols::symbol$tick} ",
-      "File saved to \"{pth}\".\n"
-    )
-  )
-
   fn_local <- get_one_attachment(
     pth,
     fn,
@@ -120,40 +105,33 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     verbose = TRUE
   )
   testthat::expect_true(fs::file_exists(pth))
+  first_dl_time <- fs::file_info(fn_local)$modification_time
   testthat::expect_equal(fn_local, as.character(pth))
 
   # Happy, but faster: keep existing download
-  testthat::expect_message(
-    get_one_attachment(
-      pth,
-      fn,
-      src,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      verbose = TRUE
-    ),
-    glue::glue(
-      "{clisymbols::symbol$tick} ",
-      "File already donwloaded, keeping \"{pth}\".\n"
-    )
+  fn_retained <- get_one_attachment(
+    pth,
+    fn,
+    src,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    verbose = TRUE
   )
 
+  testthat::expect_true(fs::file_exists(pth))
+  testthat::expect_equal(fn_retained, as.character(pth))
+  testthat::expect_equal(first_dl_time, fs::file_info(pth)$modification_time)
+
   # Not happy, but tolerant: keep file at pth if exists
-  testthat::expect_message(
-    get_one_attachment(
-      pth,
-      NA,
-      src,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      verbose = TRUE
-    ),
-      glue::glue(
-        "{clisymbols::symbol$tick} ",
-        "File already donwloaded, keeping \"{pth}\".\n"
-      )
+  get_one_attachment(
+    pth,
+    NA,
+    src,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    verbose = TRUE
   )
   testthat::expect_equal(
     get_one_attachment(
@@ -167,10 +145,20 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     ),
     as.character(pth)
   )
+  testthat::expect_equal(first_dl_time, fs::file_info(pth)$modification_time)
 
   # Now make sure pth doesn't exist
   pth2 <- fs::path(t, NA) %>% as.character()
-  testthat::expect_message(
+  get_one_attachment(
+    pth2,
+    NA,
+    src,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    verbose = TRUE
+  )
+  testthat::expect_true(is.na(
     get_one_attachment(
       pth2,
       NA,
@@ -179,25 +167,8 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
       un = get_test_un(),
       pw = get_test_pw(),
       verbose = TRUE
-    ),
-      glue::glue(
-        "{clisymbols::symbol$cross} ",
-        "Filename is NA, skipping download.\n"
-      )
-  )
-  testthat::expect_true(
-    is.na(
-      get_one_attachment(
-        pth2,
-        NA,
-        src,
-        url = get_test_url(),
-        un = get_test_un(),
-        pw = get_test_pw(),
-        verbose = TRUE
-      )
     )
-  )
+  ))
 })
 
 # Tests code
