@@ -80,6 +80,17 @@ get_one_submission <- function(iid,
 # nolint end
 #' @family restful-api
 #' @export
+#' @examples
+#' \dontrun{
+#' # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
+#' ruODK::ru_setup(svc="...")
+#'
+#' # Step 2: List all submissions of form
+#' sl <- submission_list()
+#'
+#' # Step 3: Get submissions
+#' subs <- submission_get(sl$instance_id)
+#' }
 submission_get <- function(iid,
                            pid = ruODK::get_test_pid(),
                            fid = ruODK::get_test_fid(),

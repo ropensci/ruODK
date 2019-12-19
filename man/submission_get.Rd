@@ -52,6 +52,18 @@ By giving the list of `iid` to download explicitly, that list can be
 modified using information not accessible to `ruODK`,
 e.g. `iid` can be restricted to "only not already downloaded submissions".
 }
+\examples{
+\dontrun{
+# Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
+ruODK::ru_setup(svc="...")
+
+# Step 2: List all submissions of form
+sl <- submission_list()
+
+# Step 3: Get submissions
+subs <- submission_get(sl$instance_id)
+}
+}
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
 

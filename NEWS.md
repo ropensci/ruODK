@@ -2,6 +2,8 @@
 This version addresses ROpenSci reviewer comments from 
 @karissawhiting and @jmt2080ad as well as ideas from @OdiljonQurbon.
 
+This version is the RC for v0.7 to support ODK Central 0.7.
+
 ## Major fixes
 * Split and rename WKT POINT (ODK geopoint) fields with 
   `odata_submission_get(wkt=T)`. (#31 #7 HT @OdiljonQurbon)
@@ -31,8 +33,8 @@ This version addresses ROpenSci reviewer comments from
 * More documentation improvements at 
   [#34](https://github.com/dbca-wa/ruODK/issues/34).
 * Add screencast to the README. HT to asciicast! (#45)
-* Improve logo - more turtles, questionable photoshopping.
-
+* Improve logo - more turtles, but questionable photoshopping.
+* Add examples where missing. (#32)
 
 # `ruODK` 0.6.6
 * The big one has landed: `odata_submission_get()` now defaults to parse 

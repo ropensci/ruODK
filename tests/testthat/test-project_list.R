@@ -1,12 +1,12 @@
 test_that("project_list works", {
   # TODO enable vcr for all tests once vcr works with httr basicauth
-  # vcr::use_cassette("project_list", {
+  vcr::use_cassette("project_list", {
   p <- project_list(
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
   )
-  # })
+  })
   testthat::expect_true(nrow(p) > 0)
 
   # project_list returns a tibble

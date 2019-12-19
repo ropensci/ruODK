@@ -103,6 +103,20 @@ get_one_submission_attachment_list <- function(iid,
 # nolint end
 #' @family restful-api
 #' @export
+#' @examples
+#' \dontrun{
+#' # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
+#' ruODK::ru_setup(svc="...")
+#'
+#' # Step 2: List all submissions of form
+#' sl <- submission_list()
+#'
+#' # Step 3a: Get attachment list for first submission
+#' al <- get_one_submission_attachment_list(sl$instance_id[[1]])
+#'
+#' # Ste 3b: Get all attachments for all submissions
+#' all <- attachment_list(sl$instance_id)
+#' }
 attachment_list <- function(iid,
                             pid = get_default_pid(),
                             fid = get_default_fid(),

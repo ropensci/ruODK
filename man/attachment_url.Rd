@@ -44,6 +44,11 @@ This is a helper function used by \code{\link{attachment_get}}.
 This function is vectorised and accepts single values or vectors for uuid and
 fn.
 }
+\examples{
+ruODK:::attachment_url("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
+"filename.jpg", pid=1, fid="form1",
+url="https://sandbox.central.opendatakit.com")
+}
 \seealso{
 Other odata-api: 
 \code{\link{attachment_get}()},

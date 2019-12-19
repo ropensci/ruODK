@@ -6,6 +6,9 @@
 #' @return The string with every occurrence of "uuid:" deleted.
 #' @family utilities
 #' @export
+#' @examples
+#' strip_uuid("uuid:1234")
+#' strip_uuid("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
 strip_uuid <- function(uuid) {
   uuid %>% stringr::str_replace_all(., pattern = "uuid:", replacement = "")
 }
@@ -18,6 +21,8 @@ strip_uuid <- function(uuid) {
 #' @return The string with a prepended "uuid:"
 #' @family utilities
 #' @export
+#' prepend_uuid("1234")
+#' prepend_uuid("d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
 prepend_uuid <- function(md5hash) {
   glue::glue("uuid:{md5hash}") %>% as.character(.)
 }
@@ -38,6 +43,10 @@ prepend_uuid <- function(md5hash) {
 #' @template param-url
 #' @return The inferred download URL.
 #' @family odata-api
+#' @examples
+#' ruODK:::attachment_url("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
+#' "filename.jpg", pid=1, fid="form1",
+#' url="https://sandbox.central.opendatakit.com")
 attachment_url <- function(uuid,
                            fn,
                            pid = get_default_pid(),
@@ -67,6 +76,21 @@ attachment_url <- function(uuid,
 #' @return The relative local path to the downloaded attachment or NA.
 #' @family odata-api
 #' @export
+#' \dontrun{
+#' # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
+#' ruODK::ru_setup(svc="...")
+#'
+#' # Step 2: Construct attachment_url
+#' att_url <- ruODK:::attachment_url(
+#'   "uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
+#'   "filename.jpg"
+#' )
+#'
+#' # Step 3: Get one attachment
+#' local_fn <- get_one_attachment("media/filename.jpg", "filename.jpg", att_url)
+#'
+#' # In real life: done in bulk behind the scenes during odata_submission_get()
+#' }
 get_one_attachment <- function(pth,
                                fn,
                                src,
@@ -80,7 +104,7 @@ get_one_attachment <- function(pth,
       message(crayon::green(
         glue::glue(
           "{clisymbols::symbol$circle_filled} ",
-          "File already donwloaded, keeping \"{pth}\".\n"
+          "File already downloaded, keeping \"{pth}\".\n"
         )
       ))
     }
@@ -161,6 +185,26 @@ get_one_attachment <- function(pth,
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
 # nolint end
 #' @export
+#' @examples
+#' \dontrun{
+#' # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
+#' ruODK::ru_setup(svc="...")
+#' a_local_dir <- here::here()
+#'
+#' # Step 2: Get unparsed submissions
+#' fresh_raw <- odata_submission_get(parse = FALSE)
+#'
+#' # Step 3: Get attachment field "my_photo"
+#' fresh_parsed <- fresh_raw %>%
+#'   odata_submission_parse() %>%
+#'   dplyr::mutate(
+#'     my_photo = attachment_get(id,
+#'                               my_photo,
+#'                               local_dir = a_local_dir,
+#'                               verbose = TRUE)
+#'    # Repeat for all other attachment fields
+#'   )
+#' }
 attachment_get <- function(sid,
                            fn,
                            local_dir = "media",

@@ -83,6 +83,27 @@ workdir/media/filename2.jpg
 
 workdir/media/filename3.jpg
 }
+\examples{
+\dontrun{
+# Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
+ruODK::ru_setup(svc="...")
+a_local_dir <- here::here()
+
+# Step 2: Get unparsed submissions
+fresh_raw <- odata_submission_get(parse = FALSE)
+
+# Step 3: Get attachment field "my_photo"
+fresh_parsed <- fresh_raw \%>\%
+  odata_submission_parse() \%>\%
+  dplyr::mutate(
+    my_photo = attachment_get(id,
+                              my_photo,
+                              local_dir = a_local_dir,
+                              verbose = TRUE)
+   # Repeat for all other attachment fields
+  )
+}
+}
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}
 

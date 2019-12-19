@@ -54,6 +54,21 @@ A tibble containing some high-level details of the submission
 \description{
 List all attachments for a list of submission instances.
 }
+\examples{
+\dontrun{
+# Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
+ruODK::ru_setup(svc="...")
+
+# Step 2: List all submissions of form
+sl <- submission_list()
+
+# Step 3a: Get attachment list for first submission
+al <- get_one_submission_attachment_list(sl$instance_id[[1]])
+
+# Ste 3b: Get all attachments for all submissions
+all <- attachment_list(sl$instance_id)
+}
+}
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
 
