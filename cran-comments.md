@@ -31,18 +31,22 @@
   Package has help file(s) containing install/render-stage \Sexpr{} expressions but no prebuilt PDF manual.
   
   Size of tarball: 56390108 bytes
+  
+❯ NOTE: Note: found 1 marked UTF-8 string
 
 ❯ checking installed package size ... NOTE
-    installed size is  5.2Mb
+    installed size is  6.1Mb
     sub-directories of 1Mb or more:
-      doc   4.5Mb
+      doc 4.5Mb, help 1.6 MB
 ```      
       
 * This is a new release.
 * Version: currently a development version, will be incremented across ruODK
   features (patch), and kept in line with ODK Central versions (major and minor).
-* Package help contains `\Sexpr{}`. PDF of manual can be included on request, 
-  but currently not included as per advice from ROpenSci.
+* Package help contains `\Sexpr{}` which causes R CMD CHECK warnings. 
+* The PDF version of the manual can be included on request, but is currently 
+  not included as per advice from ROpenSci.
+* The example data contains UTF-8 strings.
 * Installation size:
   * The vignette "odata" contains a leaflet map with popups showing embedded
     photos, a highly sought after use case.

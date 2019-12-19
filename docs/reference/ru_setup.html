@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9007</span>
       </span>
     </div>
 
@@ -147,6 +147,7 @@
   <span class='kw'>test_fid</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>test_fid_zip</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>test_fid_att</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>test_fid_gap</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>test_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>test_un</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>test_pw</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
@@ -224,6 +225,14 @@ Provide the form ID of a form with few submissions and few attachments.
 This form is used to test downloading and linking attachments.</p></td>
     </tr>
     <tr>
+      <th>test_fid_gap</th>
+      <td><p>(optional, character) The alphanumeric ID of an existing
+form in <code>test_pid</code>. This will override the form ID from
+<code>test_svc</code>.
+Provide the form ID of a form with gaps in the first submission.
+This form is used to test parsing incomplete submissions.</p></td>
+    </tr>
+    <tr>
       <th>test_url</th>
       <td><p>(optional, character) A valid ODK Central URL for testing.
 This will override the ODK Central base URL from <code>svc</code>.</p></td>
@@ -274,6 +283,7 @@ submission tab, which in turn contains base URL, project ID, and form ID.</p>
 #&gt;   Test ODK Central Form ID: build_Flora-Quadrat-0-4_1564384341 
 #&gt;   Test ODK Central Form ID (ZIP tests): build_Spotlighting-0-6_1558333698 
 #&gt;   Test ODK Central Form ID (Attachment tests): build_Flora-Quadrat-0-1_1558330379 
+#&gt;   Test ODK Central Form ID (Parsing tests): build_Turtle-Track-or-Nest-1-0_1569907666 
 #&gt;   Test ODK Central URL: https://sandbox.central.opendatakit.org 
 #&gt;   Test ODK Central Username: Florian.Mayer@dbca.wa.gov.au 
 #&gt;   Test ODK Central Password: run ruODK::get_test_pw() to show </div><div class='input'>
@@ -300,6 +310,7 @@ submission tab, which in turn contains base URL, project ID, and form ID.</p>
 #&gt;   Test ODK Central Form ID: build_Flora-Quadrat-0-2_1558575936 
 #&gt;   Test ODK Central Form ID (ZIP tests): build_Spotlighting-0-6_1558333698 
 #&gt;   Test ODK Central Form ID (Attachment tests): build_Flora-Quadrat-0-1_1558330379 
+#&gt;   Test ODK Central Form ID (Parsing tests): build_Turtle-Track-or-Nest-1-0_1569907666 
 #&gt;   Test ODK Central URL: https://sandbox.central.opendatakit.org 
 #&gt;   Test ODK Central Username: me@email.com 
 #&gt;   Test ODK Central Password: run ruODK::get_test_pw() to show </div></pre>

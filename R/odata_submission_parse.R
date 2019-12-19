@@ -46,16 +46,19 @@ unnest_all <- function(nested_tbl,
     if (!(colname %in% names(nested_tbl))) {
       if (verbose == TRUE) {
         message(crayon::cyan(
-          glue::glue("{clisymbols::symbol$info}",
-                     " Skipping renamed column \"{colname}\"\n")
+          glue::glue(
+            "{clisymbols::symbol$info}",
+            " Skipping renamed column \"{colname}\"\n"
+          )
         ))
       }
-
     } else {
       if (verbose == TRUE) {
         message(crayon::cyan(
-          glue::glue("{clisymbols::symbol$info}",
-                     " Unnesting column \"{colname}\"\n")
+          glue::glue(
+            "{clisymbols::symbol$info}",
+            " Unnesting column \"{colname}\"\n"
+          )
         ))
       }
 
@@ -78,8 +81,10 @@ unnest_all <- function(nested_tbl,
   if (length(listcol_names(nested_tbl)) > 0) {
     if (verbose == TRUE) {
       message(crayon::cyan(
-        glue::glue("{clisymbols::symbol$info}",
-                   " Found more nested columns, unnesting again.\n")
+        glue::glue(
+          "{clisymbols::symbol$info}",
+          " Found more nested columns, unnesting again.\n"
+        )
       ))
     }
     nested_tbl <- unnest_all(
@@ -129,14 +134,14 @@ odata_submission_parse <- function(data,
 
   # TODO
   # if (!is.null(form_schema)){
-    # TODO parse with form_schema
-    # } else {
+  # TODO parse with form_schema
+  # } else {
 
-      data %>%
-        tibble::as_tibble(., .name_repair = names_repair) %>%
-        unnest_all(names_repair = names_repair, verbose = verbose) %>%
-        janitor::clean_names(.)
-    # }
+  data %>%
+    tibble::as_tibble(., .name_repair = names_repair) %>%
+    unnest_all(names_repair = names_repair, verbose = verbose) %>%
+    janitor::clean_names(.)
+  # }
 }
 
 

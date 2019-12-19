@@ -71,7 +71,7 @@ into a tidy tibble and unnest all levels. — odata_submission_parse" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9007</span>
       </span>
     </div>
 
@@ -138,7 +138,12 @@ into a tidy tibble and unnest all levels.</h1>
     <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>odata_submission_parse</span>(<span class='no'>data</span>, <span class='kw'>names_repair</span> <span class='kw'>=</span> <span class='st'>"universal"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>odata_submission_parse</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>form_schema</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>names_repair</span> <span class='kw'>=</span> <span class='st'>"universal"</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +152,12 @@ into a tidy tibble and unnest all levels.</h1>
       <th>data</th>
       <td><p>A nested list of lists as given by
 <code><a href='odata_submission_get.html'>odata_submission_get</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>form_schema</th>
+      <td><p>The output of <code><a href='form_schema.html'>form_schema</a></code> for the given
+data. <code><a href='odata_submission_get.html'>odata_submission_get</a>(parse=TRUE)</code> automatically supplies
+<code>form_schema</code> to <code>odata_submission_parse</code>.</p></td>
     </tr>
     <tr>
       <th>names_repair</th>

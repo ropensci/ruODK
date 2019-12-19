@@ -55,7 +55,7 @@ e.g. `iid` can be restricted to "only not already downloaded submissions".
 \examples{
 \dontrun{
 # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
-ruODK::ru_setup(svc="...")
+ruODK::ru_setup(svc = "...")
 
 # Step 2: List all submissions of form
 sl <- submission_list()

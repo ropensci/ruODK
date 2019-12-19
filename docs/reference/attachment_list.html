@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9007</span>
       </span>
     </div>
 
@@ -219,6 +219,20 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
 <code><a href='submission_get.html'>submission_get</a>()</code>,
 <code><a href='submission_list.html'>submission_list</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Step 1: Setup ruODK with OData Service URL (has url, pid, fid)</span>
+<span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/ru_setup.html'>ru_setup</a></span>(<span class='kw'>svc</span> <span class='kw'>=</span> <span class='st'>"..."</span>)
+
+<span class='co'># Step 2: List all submissions of form</span>
+<span class='no'>sl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='submission_list.html'>submission_list</a></span>()
+
+<span class='co'># Step 3a: Get attachment list for first submission</span>
+<span class='no'>al</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_one_submission_attachment_list.html'>get_one_submission_attachment_list</a></span>(<span class='no'>sl</span>$<span class='no'>instance_id</span><span class='kw'>[[</span><span class='fl'>1</span>]])
+
+<span class='co'># Ste 3b: Get all attachments for all submissions</span>
+<span class='no'>all</span> <span class='kw'>&lt;-</span> <span class='fu'>attachment_list</span>(<span class='no'>sl</span>$<span class='no'>instance_id</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -226,6 +240,7 @@ See <code>vignette("Setup", package = "ruODK")</code>.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

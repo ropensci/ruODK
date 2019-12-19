@@ -98,7 +98,7 @@ submission_export <- function(local_dir = here::here(),
       message(crayon::green(
         glue::glue(
           "{clisymbols::symbol$tick} ",
-          "Downloading submissions to \"{pth}\"\n"
+          "Downloading submissions to: \"{pth}\"\n"
         )
       ))
     }

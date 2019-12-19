@@ -68,8 +68,8 @@ form_schema_parse <- function(fs, path = "Submissions", verbose = FALSE) {
   for (node in fs) {
     # Recursion seatbelt: only step into lists containing "children".
     if (is.list(node) &&
-        "children" %in% names(node) &&
-        "name" %in% names(node)) {
+      "children" %in% names(node) &&
+      "name" %in% names(node)) {
       for (child in node) {
         if (verbose == TRUE) {
           message(crayon::cyan(

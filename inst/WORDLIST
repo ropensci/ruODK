@@ -27,6 +27,7 @@ api
 AppVeyor
 Arefin
 artifact
+asciicast
 att
 attchment
 attrs
@@ -207,6 +208,7 @@ uuid
 UUID
 uuids
 UUIDs
+v0
 v1
 vectorised
 VueJS

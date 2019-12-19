@@ -45,8 +45,10 @@ prepend_uuid <- function(md5hash) {
 #' @family odata-api
 #' @examples
 #' ruODK:::attachment_url("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
-#' "filename.jpg", pid=1, fid="form1",
-#' url="https://sandbox.central.opendatakit.com")
+#'   "filename.jpg",
+#'   pid = 1, fid = "form1",
+#'   url = "https://sandbox.central.opendatakit.com"
+#' )
 attachment_url <- function(uuid,
                            fn,
                            pid = get_default_pid(),
@@ -188,7 +190,7 @@ get_one_attachment <- function(pth,
 #' @examples
 #' \dontrun{
 #' # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
-#' ruODK::ru_setup(svc="...")
+#' ruODK::ru_setup(svc = "...")
 #' a_local_dir <- here::here()
 #'
 #' # Step 2: Get unparsed submissions
@@ -199,10 +201,11 @@ get_one_attachment <- function(pth,
 #'   odata_submission_parse() %>%
 #'   dplyr::mutate(
 #'     my_photo = attachment_get(id,
-#'                               my_photo,
-#'                               local_dir = a_local_dir,
-#'                               verbose = TRUE)
-#'    # Repeat for all other attachment fields
+#'       my_photo,
+#'       local_dir = a_local_dir,
+#'       verbose = TRUE
+#'     )
+#'     # Repeat for all other attachment fields
 #'   )
 #' }
 attachment_get <- function(sid,
@@ -222,6 +225,9 @@ attachment_get <- function(sid,
     dest_dir <- fs::path(local_dir)
   }
   if (verbose == TRUE) {
+    # CMD check can't detect use of clisymbols inside glue statement
+    infosymbol <- clisymbols::symbol$info
+
     message(crayon::cyan(
       glue::glue(
         "{clisymbols::symbol$info} ",

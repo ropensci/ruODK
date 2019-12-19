@@ -7,9 +7,9 @@ test_that("submission_export works", {
   fid <- get_test_fid_zip() # small and without attachments
   pth <- fs::path(t, glue::glue("{fid}.zip"))
   fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
-  msg_dl <- glue::glue("Downloading submissions to: {pth}\n")
-  msg_keep <- glue::glue("Keeping previous download: {pth}\n")
-  msg_chuck <- glue::glue("Overwriting previous download: {pth}\n")
+  msg_dl <- glue::glue("Downloading submissions to: \"{pth}\"\n")
+  msg_keep <- glue::glue("Keeping previous download: \"{pth}\"\n")
+  msg_chuck <- glue::glue("Overwriting previous download: \"{pth}\"\n")
 
   # Once you drink Tequila, you're feeling really good
   testthat::expect_message(
