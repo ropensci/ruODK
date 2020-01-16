@@ -184,6 +184,7 @@ read-permitted ODK Central web user.
     #>   Test ODK Central Form ID: build_Flora-Quadrat-0-4_1564384341 
     #>   Test ODK Central Form ID (ZIP tests): build_Spotlighting-0-6_1558333698 
     #>   Test ODK Central Form ID (Attachment tests): build_Flora-Quadrat-0-1_1558330379 
+    #>   Test ODK Central Form ID (Parsing tests): build_Turtle-Track-or-Nest-1-0_1569907666 
     #>   Test ODK Central URL: https://sandbox.central.opendatakit.org 
     #>   Test ODK Central Username: Florian.Mayer@dbca.wa.gov.au 
     #>   Test ODK Central Password: run ruODK::get_test_pw() to show
@@ -215,12 +216,12 @@ proj %>% head() %>% knitr::kable(.)
 
 | id | name                     | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
 | -: | :----------------------- | ----: | ---------: | :------------------ | :---------- | :------------------ | :------- |
+| 59 | 1Horizon test project    |     1 |          2 | 2020-01-13 12:45:32 | NA          | 2020-01-13 15:06:15 | FALSE    |
+| 57 | AB’s                     |     1 |          1 | 2020-01-06 00:56:00 | NA          | NA                  | FALSE    |
 |  8 | AmenazasRD               |     0 |          0 | 2019-04-14 06:21:00 | NA          | NA                  | FALSE    |
 |  9 | BAFCO Test               |     1 |          1 | 2019-04-19 00:30:45 | NA          | 2019-04-19 01:26:49 | FALSE    |
 | 47 | Building Materials Reuse |     0 |          0 | 2019-10-16 05:07:56 | NA          | NA                  | FALSE    |
 | 11 | CaVaTeCo                 |     2 |          1 | 2019-04-30 06:43:22 | NA          | 2019-04-30 08:07:55 | FALSE    |
-| 18 | CherryPatch              |     2 |          1 | 2019-05-27 21:09:33 | NA          | 2019-05-28 17:32:15 | FALSE    |
-| 32 | Collect3289v2            |     1 |          2 | 2019-08-07 12:52:56 | NA          | 2019-08-07 13:44:19 | FALSE    |
 
 ``` r
 # List forms of default project
@@ -238,6 +239,7 @@ frms %>% knitr::kable(.)
 | Spotlighting 0.6              | build\_Spotlighting-0-6\_1558333698              |         | open    | 18          | 2019-05-20 06:30:21 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-10-09 01:15:23 | 456daaa9a4f96670e6eef3cf4a7dd0db |
 | Spotlighting Survey End 0.3   | build\_Spotlighting-Survey-End-0-3\_1558320208   |         | open    | 3           | 2019-05-20 02:44:38 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-10-09 02:43:40 | 5fdfac8e773834b1267f7ca7e1c9a428 |
 | Spotlighting Survey Start 0.3 | build\_Spotlighting-Survey-Start-0-3\_1558320795 |         | open    | 9           | 2019-05-20 02:53:50 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-10-09 01:15:25 | f548a064cca13bca746f3c0b1a8b5a32 |
+| Turtle Track or Nest 1.0      | build\_Turtle-Track-or-Nest-1-0\_1569907666      |         | open    | 2           | 2019-12-03 07:16:51 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-12-03 07:26:14 | 0b3b5e07e3f24f3a36afc92296693ec4 |
 
 ``` r
 # Form details of default form
@@ -309,75 +311,76 @@ srv %>% knitr::kable(.)
 d <- fs::path("docs/articles/attachments/media")   # choose your own
 tz <- "Australia/Perth"                            # g'day mate
 data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
-#> Downloading submissions...
-#> Downloaded 2 submissions.
-#> Parsing submissions...
+#> ℹ Downloading submissions...
+#> 
+#> ℹ Parsing submissions...
+#> ℹ Reading form schema...
+#> ℹ Parsing submissions...
 #> New names:
 #> * `@odata.context` -> .odata.context
-#> Unnesting column 'value'
-#> Found more nested columns, unnesting again.
-#> Unnesting column '.__system'
-#> Unnesting column 'meta'
-#> Unnesting column 'location'
-#> Unnesting column 'habitat'
-#> Unnesting column 'perimeter'
-#> Found more nested columns, unnesting again.
-#> Unnesting column 'corner1'
-#> Unnesting column 'corner2'
-#> Unnesting column 'corner3'
-#> Unnesting column 'corner4'
-#> Found more nested columns, unnesting again.
-#> Unnesting column 'coordinates...13'
-#> Skipping renamed column 'properties...14'
-#> Skipping renamed column 'coordinates...18'
-#> Skipping renamed column 'properties...19'
-#> Skipping renamed column 'coordinates...21'
-#> Skipping renamed column 'properties...22'
-#> Skipping renamed column 'coordinates...24'
-#> Skipping renamed column 'properties...25'
-#> Found more nested columns, unnesting again.
-#> Unnesting column 'properties...16'
-#> Unnesting column 'coordinates...20'
-#> Skipping renamed column 'properties...21'
-#> Skipping renamed column 'coordinates...23'
-#> Skipping renamed column 'properties...24'
-#> Skipping renamed column 'coordinates...26'
-#> Skipping renamed column 'properties...27'
-#> Found more nested columns, unnesting again.
-#> Unnesting column 'properties...23'
-#> Unnesting column 'coordinates...25'
-#> Skipping renamed column 'properties...26'
-#> Skipping renamed column 'coordinates...28'
-#> Skipping renamed column 'properties...29'
-#> Found more nested columns, unnesting again.
-#> Unnesting column 'properties...28'
-#> Unnesting column 'coordinates'
-#> Skipping renamed column 'properties...31'
-#> Found more nested columns, unnesting again.
-#> Unnesting column 'properties'
-#> Reading form schema...
-#> Found date/time: encounter_start_datetime. Found date/time: encounter_end_datetime.
-#> Parsing encounter_start_datetime with timezone Australia/Perth...
-#> Parsing encounter_end_datetime with timezone Australia/Perth...
-#> Found attachments: quadrat_photo. Found attachments: morphological_type_photo. Found attachments: mudmap_photo.
-#> 
-#> Downloading attachments...
-#> Using local directory: docs/articles/attachments/media
-#> Keeping docs/articles/attachments/media/1568794395624.jpg
-#> Keeping docs/articles/attachments/media/1568786958640.jpg
-#> Using local directory: docs/articles/attachments/media
-#> Keeping docs/articles/attachments/media/1568794560256.jpg
-#> Keeping docs/articles/attachments/media/1568787004467.jpg
-#> Using local directory: docs/articles/attachments/media
-#> Filename is NA, skipping download.
-#> Keeping docs/articles/attachments/media/1568787172983.jpg
+#> ℹ Unnesting column "value"
+#> ℹ Found more nested columns, unnesting again.
+#> ℹ Unnesting column ".__system"
+#> ℹ Unnesting column "meta"
+#> ℹ Unnesting column "location"
+#> ℹ Unnesting column "habitat"
+#> ℹ Unnesting column "perimeter"
+#> ℹ Found more nested columns, unnesting again.
+#> ℹ Unnesting column "corner1"
+#> ℹ Unnesting column "corner2"
+#> ℹ Unnesting column "corner3"
+#> ℹ Unnesting column "corner4"
+#> ℹ Found more nested columns, unnesting again.
+#> ℹ Unnesting column "coordinates...15"
+#> ℹ Skipping renamed column "properties...16"
+#> ℹ Skipping renamed column "coordinates...21"
+#> ℹ Skipping renamed column "properties...22"
+#> ℹ Skipping renamed column "coordinates...24"
+#> ℹ Skipping renamed column "properties...25"
+#> ℹ Skipping renamed column "coordinates...27"
+#> ℹ Skipping renamed column "properties...28"
+#> ℹ Found more nested columns, unnesting again.
+#> ℹ Unnesting column "properties...18"
+#> ℹ Unnesting column "coordinates...23"
+#> ℹ Skipping renamed column "properties...24"
+#> ℹ Skipping renamed column "coordinates...26"
+#> ℹ Skipping renamed column "properties...27"
+#> ℹ Skipping renamed column "coordinates...29"
+#> ℹ Skipping renamed column "properties...30"
+#> ℹ Found more nested columns, unnesting again.
+#> ℹ Unnesting column "properties...26"
+#> ℹ Unnesting column "coordinates...28"
+#> ℹ Skipping renamed column "properties...29"
+#> ℹ Skipping renamed column "coordinates...31"
+#> ℹ Skipping renamed column "properties...32"
+#> ℹ Found more nested columns, unnesting again.
+#> ℹ Unnesting column "properties...31"
+#> ℹ Unnesting column "coordinates"
+#> ℹ Skipping renamed column "properties...34"
+#> ℹ Found more nested columns, unnesting again.
+#> ℹ Unnesting column "properties"
+#> ℹ Found date/time: "encounter_start_datetime". ℹ Found date/time: "encounter_end_datetime".
+#> ℹ Parsing "encounter_start_datetime" with timezone "Australia/Perth"...
+#> ℹ Parsing "encounter_end_datetime" with timezone "Australia/Perth"...
+#> ℹ Found attachments: "quadrat_photo". ℹ Found attachments: "morphological_type_photo". ℹ Found attachments: "mudmap_photo".
+#> ✔ Downloading attachments...
+#> ℹ Using local directory "docs/articles/attachments/media".
+#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568794395624.jpg".
+#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568786958640.jpg".
+#> ℹ Using local directory "docs/articles/attachments/media".
+#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568794560256.jpg".
+#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568787004467.jpg".
+#> ℹ Using local directory "docs/articles/attachments/media".
+#> ◯ Filename is NA, skipping download.
+#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568787172983.jpg".
+#> ✔ Returning parsed submissions.
 data %>% knitr::kable(.)
 ```
 
-| id                                        | encounter\_start\_datetime | reporter      | device\_id       | encounter\_end\_datetime | submission\_date         | submitter\_id | submitter\_name | instance\_id                              | area\_name               | quadrat\_photo                                    | type\_12 |      x13 |        x14 |        x15 | accuracy\_16 | morphological\_type | morphological\_type\_photo                        | type\_19 |      x20 |        x21 |         x22 | accuracy\_23 | type\_24 |      x25 |        x26 |         x27 | accuracy\_28 | type\_29 |      x30 |        x31 |         x32 | accuracy\_33 | mudmap\_photo                                     | odata\_context                                                                                                              |
-| :---------------------------------------- | :------------------------- | :------------ | :--------------- | :----------------------- | :----------------------- | :------------ | :-------------- | :---------------------------------------- | :----------------------- | :------------------------------------------------ | :------- | -------: | ---------: | ---------: | -----------: | :------------------ | :------------------------------------------------ | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
-| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 1568794341.147             | Florian Mayer | f73d2e1221ceaa06 | 1568796046.155           | 2019-09-18T08:51:07.481Z | 241           | flora           | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | docs/articles/attachments/media/1568794395624.jpg | Point    | 115.8846 | \-31.99606 |    6.40451 |        4.288 | mid-slope           | docs/articles/attachments/media/1568794560256.jpg | Point    | 115.8844 | \-31.99623 | \-26.305695 |        4.288 | Point    | 115.8844 | \-31.99615 | \-17.897552 |        4.288 | Point    | 115.8843 | \-31.99610 | \-27.759338 |        4.288 | NA                                                | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
-| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 1568786923.257             | Florian Mayer | f73d2e1221ceaa06 | 1568787533.583           | 2019-09-18T06:20:25.780Z | 241           | flora           | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | docs/articles/attachments/media/1568786958640.jpg | Point    | 115.8843 | \-31.99615 | \-17.37241 |        4.288 | flat                | docs/articles/attachments/media/1568787004467.jpg | Point    | 115.8844 | \-31.99620 |  \-8.662476 |        4.288 | Point    | 115.8844 | \-31.99622 |  \-6.266144 |        4.288 | Point    | 115.8844 | \-31.99621 |  \-6.597748 |        4.288 | docs/articles/attachments/media/1568787172983.jpg | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
+| id                                        | encounter\_start\_datetime | reporter      | device\_id       | encounter\_end\_datetime | submission\_date         | submitter\_id | submitter\_name | attachments\_present | attachments\_expected | instance\_id                              | area\_name               | quadrat\_photo                                    | type\_14 |      x15 |        x16 |        x17 | accuracy\_18 | morphological\_type | morphological\_type\_photo                        | vegetation\_stratum\_odata\_navigation\_link                                 | type\_22 |      x23 |        x24 |         x25 | accuracy\_26 | type\_27 |      x28 |        x29 |         x30 | accuracy\_31 | type\_32 |      x33 |        x34 |         x35 | accuracy\_36 | mudmap\_photo                                     | taxon\_encounter\_odata\_navigation\_link                                 | odata\_context                                                                                                              |
+| :---------------------------------------- | :------------------------- | :------------ | :--------------- | :----------------------- | :----------------------- | :------------ | :-------------- | -------------------: | --------------------: | :---------------------------------------- | :----------------------- | :------------------------------------------------ | :------- | -------: | ---------: | ---------: | -----------: | :------------------ | :------------------------------------------------ | :--------------------------------------------------------------------------- | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :------------------------------------------------ | :------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 2019-09-18 16:12:21        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 16:40:46      | 2019-09-18T08:51:07.481Z | 241           | flora           |                    4 |                     4 | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | docs/articles/attachments/media/1568794395624.jpg | Point    | 115.8846 | \-31.99606 |    6.40451 |        4.288 | mid-slope           | docs/articles/attachments/media/1568794560256.jpg | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/vegetation\_stratum | Point    | 115.8844 | \-31.99623 | \-26.305695 |        4.288 | Point    | 115.8844 | \-31.99615 | \-17.897552 |        4.288 | Point    | 115.8843 | \-31.99610 | \-27.759338 |        4.288 | NA                                                | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
+| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18 14:08:43        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 14:18:53      | 2019-09-18T06:20:25.780Z | 241           | flora           |                    8 |                     8 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | docs/articles/attachments/media/1568786958640.jpg | Point    | 115.8843 | \-31.99615 | \-17.37241 |        4.288 | flat                | docs/articles/attachments/media/1568787004467.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/vegetation\_stratum | Point    | 115.8844 | \-31.99620 |  \-8.662476 |        4.288 | Point    | 115.8844 | \-31.99622 |  \-6.266144 |        4.288 | Point    | 115.8844 | \-31.99621 |  \-6.597748 |        4.288 | docs/articles/attachments/media/1568787172983.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
 
 A more detailed walk-through with some data visualisation examples is
 available in the [`vignette("odata",

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 <!-- badges: end -->
-
+   
 Especially in these trying times, it is important to ask: "ruODK?"
 
 [OpenDataKit](https://opendatakit.org/) (ODK) is a free and open-source software 
