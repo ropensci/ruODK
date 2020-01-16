@@ -205,9 +205,9 @@ data %>% knitr::kable(.)
 ```
 
 A more detailed walk-through with some data visualisation examples is available
-in the [`vignette("odata", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata.html).
+in the [`vignette("odata-api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata.html).
 
-See also [`vignette("api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/api.html)
+See also [`vignette("restful-api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/api.html)
 for examples using the alternative RESTful API.
 
 ## Try ruODK
