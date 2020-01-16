@@ -247,7 +247,8 @@ attachment_get <- function(sid,
     pw = pw,
     verbose = verbose
   ) %>%
-    purrr::pmap(get_one_attachment)
+    purrr::pmap(get_one_attachment) %>%
+    as.character(.)
 }
 
 # Tests

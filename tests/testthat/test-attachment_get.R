@@ -47,6 +47,8 @@ test_that("attachment_get works", {
       )
     )
 
+  # Attachment paths should be character, not e.g. list (pmap outputs lists)
+  testthat::expect_equal(class(fresh_parsed$quadrat_photo), "character")
 
   # submissions at the time of writing
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))

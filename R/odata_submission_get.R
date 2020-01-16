@@ -202,7 +202,7 @@ odata_submission_get <- function(table = "Submissions",
     message(crayon::green(
       glue::glue(
         "{clisymbols::symbol$tick}",
-        " Downloaded {length(sub)} submissions.\n"
+        " Downloaded submissions.\n"
       )
     ))
   }
@@ -306,19 +306,20 @@ odata_submission_get <- function(table = "Submissions",
     }
   }
 
-  sub <- sub %>% dplyr::mutate_at(
-    dplyr::vars(att_cols),
-    ~ ruODK::attachment_get(
-      id,
-      .,
-      local_dir = local_dir,
-      verbose = verbose,
-      pid = pid,
-      fid = fid,
-      url = url,
-      un = un,
-      pw = pw
-    )
+  sub <- sub %>%
+    dplyr::mutate_at(
+      dplyr::vars(att_cols),
+      ~ ruODK::attachment_get(
+        id,
+        .,
+        local_dir = local_dir,
+        verbose = verbose,
+        pid = pid,
+        fid = fid,
+        url = url,
+        un = un,
+        pw = pw
+      )
   )
 
   # Parse geopoints (already split into e.g. x10 x11 x12 if wkt="false")

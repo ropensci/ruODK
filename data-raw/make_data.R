@@ -1,6 +1,7 @@
 # -----------------------------------------------------------------------------#
 # ODK Central example data
 #
+library(magrittr)
 ruODK::ru_setup(
   svc = Sys.getenv("ODKC_TEST_SVC"),
   un = Sys.getenv("ODKC_TEST_UN"),
@@ -16,7 +17,7 @@ fq_raw_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], parse = FAL
 fq_raw_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], parse = FALSE)
 fq_data <- ruODK::odata_submission_get(table = fq_svc$name[1], parse = TRUE, wkt = TRUE)
 fq_data_strata <- ruODK::odata_submission_get(
-  table = fq_svc$name[2], parse = TRUE, wkt = TRUE
+  table = fq_svc$name[2], parse = TRUE, wkt = TRUE, verbose = TRUE
 ) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 fq_data_taxa <- ruODK::odata_submission_get(
