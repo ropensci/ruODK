@@ -12,6 +12,7 @@ See \code{magrittr::\link[magrittr]{\%>\%}} for details.
 \seealso{
 Other utilities: 
 \code{\link{isodt_to_local}()},
+\code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
 \code{\link{ru_datetime}()},
 \code{\link{split_geopoint}()},

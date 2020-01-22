@@ -30,7 +30,7 @@ test_that("odata_submission_get works with one known dataset", {
   )
 
   local_files <- fresh_raw_parsed %>%
-    dplyr::filter(!is.null(quadrat_photo)) %>%
+    dplyr::filter(!is.null(location_quadrat_photo)) %>%
     magrittr::extract2("quadrat_photo") %>%
     as.character()
   purrr::map(local_files, ~ testthat::expect_true(fs::file_exists(.)))
@@ -122,18 +122,27 @@ test_that("odata_submission_get parses WKT geopoint", {
     parse = TRUE,
     verbose = TRUE
   )
+  fs <- form_schema(
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    parse = TRUE
+  )
+  fs
 
-  testthat::expect_true("corner1_latitude" %in% names(df))
-  testthat::expect_true("corner1_longitude" %in% names(df))
-  testthat::expect_true("corner1_altitude" %in% names(df))
+  testthat::expect_true("location_corner1_latitude" %in% names(df))
+  testthat::expect_true("location_corner1_longitude" %in% names(df))
+  testthat::expect_true("location_corner1_altitude" %in% names(df))
 
-  testthat::expect_true("corner4_latitude" %in% names(df))
-  testthat::expect_true("corner4_longitude" %in% names(df))
-  testthat::expect_true("corner4_altitude" %in% names(df))
+  testthat::expect_true("perimeter_corner4_latitude" %in% names(df))
+  testthat::expect_true("perimeter_corner4_longitude" %in% names(df))
+  testthat::expect_true("perimeter_corner4_altitude" %in% names(df))
 
-  testthat::expect_true(is.numeric(df$corner1_longitude))
-  testthat::expect_true(is.numeric(df$corner2_latitude))
-  testthat::expect_true(is.numeric(df$corner3_altitude))
+  testthat::expect_true(is.numeric(df$location_corner1_longitude))
+  testthat::expect_true(is.numeric(df$perimeter_corner2_latitude))
+  testthat::expect_true(is.numeric(df$perimeter_corner3_altitude))
 })
 
 # Tests code

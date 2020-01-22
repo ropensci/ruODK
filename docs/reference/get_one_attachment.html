@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9009</span>
       </span>
     </div>
 
@@ -208,6 +208,22 @@ to a tibble of input parameters.</p>
 <code><a href='odata_submission_parse.html'>odata_submission_parse</a>()</code>,
 <code><a href='unnest_all.html'>unnest_all</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Step 1: Setup ruODK with OData Service URL (has url, pid, fid)</span>
+<span class='kw pkg'>ruODK</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/ru_setup.html'>ru_setup</a></span>(<span class='kw'>svc</span> <span class='kw'>=</span> <span class='st'>"..."</span>)
+
+<span class='co'># Step 2: Construct attachment_url</span>
+<span class='no'>att_url</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ruODK</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/ruODK/man/attachment_url.html'>attachment_url</a></span>(
+  <span class='st'>"uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0"</span>,
+  <span class='st'>"filename.jpg"</span>
+)
+
+<span class='co'># Step 3: Get one attachment</span>
+<span class='no'>local_fn</span> <span class='kw'>&lt;-</span> <span class='fu'>get_one_attachment</span>(<span class='st'>"media/filename.jpg"</span>, <span class='st'>"filename.jpg"</span>, <span class='no'>att_url</span>)
+
+<span class='co'># In real life: done in bulk behind the scenes during odata_submission_get()</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -216,6 +232,7 @@ to a tibble of input parameters.</p>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

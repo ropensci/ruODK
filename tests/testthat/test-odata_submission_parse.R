@@ -22,27 +22,20 @@ test_that("odata_submission_parse works with gaps in first submission", {
       verbose = TRUE,
       local_dir = t
     )
-
-    # https://github.com/dbca-wa/ruODK/issues/46
-    # Throws error:
-    # test-odata_submission_parse.R:13: error:
-    # odata_submission_get works with one known dataset
-    # Can't cast `track_photos$...1` <logical> to `track_photos$...1`
-    # <vctrs_unspecified>.
   )
 
-  fresh_parsed <- fresh_raw %>% odata_submission_parse()
+  fresh_parsed <- fresh_raw %>% odata_submission_parse(verbose = TRUE)
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))
   testthat::expect_gte(nrow(fresh_parsed), nrow(fresh_raw_parsed))
 
-  # testthat::expect_equal(
-  #   class(fresh_raw_parsed$encounter_start_datetime),
-  #   c("POSIXct", "POSIXt")
-  # )
+  testthat::expect_equal(
+    class(fresh_raw_parsed$observation_start_time[1]),
+    c("POSIXct", "POSIXt")
+  )
 
   # local_files <- fresh_raw_parsed %>%
-  #   dplyr::filter(!is.null(quadrat_photo)) %>%
-  #   magrittr::extract2("quadrat_photo") %>%
+  #   dplyr::filter(!is.null(location_quadrat_photo)) %>%
+  #   magrittr::extract2("location_quadrat_photo") %>%
   #   as.character()
   # purrr::map(local_files, ~ testthat::expect_true(fs::file_exists(.)))
 })

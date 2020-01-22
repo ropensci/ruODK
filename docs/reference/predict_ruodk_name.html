@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A nested list of form fields and field types. — fq_form_schema_raw • ruODK</title>
+<title>Predict a field name after <code>tidyr::unnest_wider(names_sep="_")</code> prefixes
+the form path — predict_ruodk_name • ruODK</title>
 
 
 <!-- jquery -->
@@ -35,8 +36,10 @@
 
 
 
-<meta property="og:title" content="A nested list of form fields and field types. — fq_form_schema_raw" />
-<meta property="og:description" content="" />
+<meta property="og:title" content="Predict a field name after <code>tidyr::unnest_wider(names_sep="_")</code> prefixes
+the form path — predict_ruodk_name" />
+<meta property="og:description" content="Predict a field name after tidyr::unnest_wider(names_sep=&quot;_&quot;) prefixes
+the form path" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,57 +129,65 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A nested list of form fields and field types.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>fq_form_schema_raw.Rd</code></div>
+    <h1>Predict a field name after <code>tidyr::unnest_wider(names_sep="_")</code> prefixes
+the form path</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbca-wa/ruODK/blob/master/R/form_schema_parse.R'><code>R/form_schema_parse.R</code></a></small>
+    <div class="hidden name"><code>predict_ruodk_name.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
+    <p>Predict a field name after <code><a href='https://tidyr.tidyverse.org/reference/hoist.html'>tidyr::unnest_wider(names_sep="_")</a></code> prefixes
+the form path</p>
     </div>
 
-    <pre class="usage"><span class='no'>fq_form_schema_raw</span></pre>
+    <pre class="usage"><span class='fu'>predict_ruodk_name</span>(<span class='no'>name_str</span>, <span class='no'>path_str</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>name_str</th>
+      <td><p>An Xform field name string.</p></td>
+    </tr>
+    <tr>
+      <th>path_str</th>
+      <td><p>A path string,
+e.g. "Submissions" or "Submissions.group_name".</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A nested list of form fields and field types.</p>
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>The output of <code><a href='form_schema.html'>form_schema</a>(parse=FALSE)</code>
-run on the test form
-`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.</p>
+    <p>The name as built by <code><a href='https://tidyr.tidyverse.org/reference/hoist.html'>tidyr::unnest_wider(names_sep="_")</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other included: 
-<code><a href='fq_attachments.html'>fq_attachments</a></code>,
-<code><a href='fq_data_strata.html'>fq_data_strata</a></code>,
-<code><a href='fq_data_taxa.html'>fq_data_taxa</a></code>,
-<code><a href='fq_data.html'>fq_data</a></code>,
-<code><a href='fq_form_detail.html'>fq_form_detail</a></code>,
-<code><a href='fq_form_list.html'>fq_form_list</a></code>,
-<code><a href='fq_form_schema.html'>fq_form_schema</a></code>,
-<code><a href='fq_form_xml.html'>fq_form_xml</a></code>,
-<code><a href='fq_meta.html'>fq_meta</a></code>,
-<code><a href='fq_project_detail.html'>fq_project_detail</a></code>,
-<code><a href='fq_project_list.html'>fq_project_list</a></code>,
-<code><a href='fq_raw_strata.html'>fq_raw_strata</a></code>,
-<code><a href='fq_raw_taxa.html'>fq_raw_taxa</a></code>,
-<code><a href='fq_raw.html'>fq_raw</a></code>,
-<code><a href='fq_submission_list.html'>fq_submission_list</a></code>,
-<code><a href='fq_submissions.html'>fq_submissions</a></code>,
-<code><a href='fq_svc.html'>fq_svc</a></code>,
-<code><a href='fq_zip_data.html'>fq_zip_data</a></code>,
-<code><a href='fq_zip_strata.html'>fq_zip_strata</a></code>,
-<code><a href='fq_zip_taxa.html'>fq_zip_taxa</a></code></p></div>
+    <div class='dont-index'><p>Other utilities: 
+<code>%&gt;%()</code>,
+<code><a href='isodt_to_local.html'>isodt_to_local</a>()</code>,
+<code><a href='prepend_uuid.html'>prepend_uuid</a>()</code>,
+<code><a href='ru_datetime.html'>ru_datetime</a>()</code>,
+<code><a href='split_geopoint.html'>split_geopoint</a>()</code>,
+<code><a href='strip_uuid.html'>strip_uuid</a>()</code>,
+<code><a href='tidyeval.html'>tidyeval</a></code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(
+  <span class='fu'>predict_ruodk_name</span>(<span class='st'>"bar"</span>, <span class='st'>"Submissions.foo"</span>), <span class='st'>"foo_bar"</span>
+)
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(
+  <span class='fu'>predict_ruodk_name</span>(<span class='st'>"bar"</span>, <span class='st'>"Submissions"</span>), <span class='st'>"bar"</span>
+)
+<span class='kw pkg'>testthat</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/testthat/man/equality-expectations.html'>expect_equal</a></span>(
+  <span class='fu'>predict_ruodk_name</span>(<span class='st'>"bar"</span>, <span class='st'>"Submissions.foo_fighters"</span>), <span class='st'>"foo_fighters_bar"</span>
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
-      <li><a href="#source">Source</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

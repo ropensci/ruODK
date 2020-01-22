@@ -1,3 +1,20 @@
+test_that("predict_ruodk_name works", {
+  testthat::expect_equal(
+    predict_ruodk_name("bar", "Submissions.foo"),
+    "foo_bar"
+  )
+
+  testthat::expect_equal(
+    predict_ruodk_name("bar", "Submissions"),
+    "bar"
+  )
+
+  testthat::expect_equal(
+    predict_ruodk_name("rock", "Submissions.foo_fighters"),
+    "foo_fighters_rock"
+  )
+})
+
 test_that("form_schema_parse works", {
   fs <- form_schema(
     flatten = FALSE,

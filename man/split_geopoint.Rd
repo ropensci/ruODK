@@ -38,6 +38,7 @@ names(df_split) == c(
 Other utilities: 
 \code{\link{\%>\%}()},
 \code{\link{isodt_to_local}()},
+\code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
 \code{\link{ru_datetime}()},
 \code{\link{strip_uuid}()},

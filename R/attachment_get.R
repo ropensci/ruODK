@@ -21,6 +21,7 @@ strip_uuid <- function(uuid) {
 #' @return The string with a prepended "uuid:"
 #' @family utilities
 #' @export
+#' @examples
 #' prepend_uuid("1234")
 #' prepend_uuid("d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
 prepend_uuid <- function(md5hash) {
@@ -78,9 +79,10 @@ attachment_url <- function(uuid,
 #' @return The relative local path to the downloaded attachment or NA.
 #' @family odata-api
 #' @export
+#' @examples
 #' \dontrun{
 #' # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
-#' ruODK::ru_setup(svc="...")
+#' ruODK::ru_setup(svc = "...")
 #'
 #' # Step 2: Construct attachment_url
 #' att_url <- ruODK:::attachment_url(

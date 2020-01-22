@@ -53,6 +53,7 @@ tsi <- "data/build_Turtle-Sighting-0-1_1559790020.csv" \%>\%
 Other utilities: 
 \code{\link{\%>\%}()},
 \code{\link{isodt_to_local}()},
+\code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
 \code{\link{split_geopoint}()},
 \code{\link{strip_uuid}()},

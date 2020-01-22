@@ -51,6 +51,23 @@ This is a helper function used by \code{\link{attachment_get}}.
 This function is not vectorised, but mapped by \code{\link{attachment_get}}
 to a tibble of input parameters.
 }
+\examples{
+\dontrun{
+# Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
+ruODK::ru_setup(svc = "...")
+
+# Step 2: Construct attachment_url
+att_url <- ruODK:::attachment_url(
+  "uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
+  "filename.jpg"
+)
+
+# Step 3: Get one attachment
+local_fn <- get_one_attachment("media/filename.jpg", "filename.jpg", att_url)
+
+# In real life: done in bulk behind the scenes during odata_submission_get()
+}
+}
 \seealso{
 Other odata-api: 
 \code{\link{attachment_get}()},

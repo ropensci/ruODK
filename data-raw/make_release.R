@@ -36,6 +36,9 @@ usethis::edit_file("NEWS.md")
 #
 # Build site
 pkgdown::build_site()
+# if https://github.com/r-lib/pkgdown/issues/1157 happens:
+# httr::set_config(httr::config(ssl_verifypeer = 0L))
+# pkgdown::build_site(pkg = ".", new_process = FALSE)
 #
 # Commit and push
 
@@ -66,8 +69,6 @@ system("find vignettes/attachments/media -type f -exec mogrify -resize 200x150 {
 vignette_tempfiles <- here::here("vignettes", "attachments", "media")
 docs_media <- here::here("docs", "articles", "attachments", "media")
 fs::dir_copy(vignette_tempfiles, docs_media, overwrite = TRUE)
-
-
 
 
 # -----------------------------------------------------------------------------#

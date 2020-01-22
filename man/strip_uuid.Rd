@@ -23,6 +23,7 @@ strip_uuid("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
 Other utilities: 
 \code{\link{\%>\%}()},
 \code{\link{isodt_to_local}()},
+\code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
 \code{\link{ru_datetime}()},
 \code{\link{split_geopoint}()},

@@ -15,10 +15,15 @@ The string with a prepended "uuid:"
 \description{
 \lifecycle{stable}
 }
+\examples{
+prepend_uuid("1234")
+prepend_uuid("d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
+}
 \seealso{
 Other utilities: 
 \code{\link{\%>\%}()},
 \code{\link{isodt_to_local}()},
+\code{\link{predict_ruodk_name}()},
 \code{\link{ru_datetime}()},
 \code{\link{split_geopoint}()},
 \code{\link{strip_uuid}()},

@@ -24,6 +24,7 @@ To learn more about tidy eval and how to use these tools, read
 Other utilities: 
 \code{\link{\%>\%}()},
 \code{\link{isodt_to_local}()},
+\code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
 \code{\link{ru_datetime}()},
 \code{\link{split_geopoint}()},

@@ -246,12 +246,10 @@ odata_submission_get <- function(table = "Submissions",
   }
   sub <- sub %>% odata_submission_parse(form_schema = fs, verbose = verbose)
 
-
-
   # Parse dates
   dttm_cols <- fs %>%
     dplyr::filter(type %in% c("dateTime", "date")) %>%
-    magrittr::extract2("name")
+    magrittr::extract2("ruodk_name")
 
   if (verbose == TRUE) {
     message(crayon::cyan(
@@ -261,7 +259,6 @@ odata_submission_get <- function(table = "Submissions",
       )
     ))
   }
-
 
   for (colname in dttm_cols) {
     if (verbose == TRUE) {
@@ -286,7 +283,7 @@ odata_submission_get <- function(table = "Submissions",
   # Caveat: if an attachment field has no submissions, it is dropped from sub
   att_cols <- fs %>%
     dplyr::filter(type == "binary") %>%
-    magrittr::extract2("name") %>%
+    magrittr::extract2("ruodk_name") %>%
     intersect(names(sub))
 
   if (verbose == TRUE) {
@@ -320,13 +317,13 @@ odata_submission_get <- function(table = "Submissions",
         un = un,
         pw = pw
       )
-  )
+    )
 
   # Parse geopoints (already split into e.g. x10 x11 x12 if wkt="false")
   if (wkt == "true") {
     gp_cols <- fs %>%
       dplyr::filter(type == "geopoint") %>%
-      magrittr::extract2("name")
+      magrittr::extract2("ruodk_name")
 
     if (verbose == TRUE) {
       message(crayon::cyan(

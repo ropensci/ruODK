@@ -143,7 +143,8 @@ form_schema <- function(flatten = FALSE,
       )
       return(fs)
     }
-    return(form_schema_parse(fs))
+    return(form_schema_parse(fs) %>%
+      dplyr::mutate(ruodk_name = predict_ruodk_name(name, path)))
   }
   return(fs)
 }

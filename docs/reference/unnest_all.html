@@ -73,7 +73,7 @@ Recursively unnest_wide all list columns in a tibble. — unnest_all" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ruODK</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9008</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.6.9009</span>
       </span>
     </div>
 
@@ -141,7 +141,12 @@ Recursively unnest_wide all list columns in a tibble.</h1>
     <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>unnest_all</span>(<span class='no'>nested_tbl</span>, <span class='kw'>names_repair</span> <span class='kw'>=</span> <span class='st'>"universal"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>unnest_all</span>(
+  <span class='no'>nested_tbl</span>,
+  <span class='kw'>names_repair</span> <span class='kw'>=</span> <span class='st'>"universal"</span>,
+  <span class='kw'>names_sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,6 +159,14 @@ Recursively unnest_wide all list columns in a tibble.</h1>
       <th>names_repair</th>
       <td><p>The argument `names_repair` for
 <code><a href='https://tidyr.tidyverse.org/reference/hoist.html'>tidyr::unnest_wider</a></code>, default: "universal".</p></td>
+    </tr>
+    <tr>
+      <th>names_sep</th>
+      <td><p>The argument `names_sep` for
+<code><a href='https://tidyr.tidyverse.org/reference/hoist.html'>tidyr::unnest_wider</a></code>, default: "_".
+Unnested variables inside a list column will be prefixed by the list column
+name, separated by `names_sep`. This avoids unsightly repaired names
+such as `latitude...1`.</p></td>
     </tr>
     <tr>
       <th>verbose</th>

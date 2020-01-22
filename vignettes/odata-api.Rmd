@@ -254,7 +254,7 @@ fq_data <- fq_raw %>%
   dplyr::mutate(
     quadrat_photo = ruODK::attachment_get(
       id, 
-      quadrat_photo, 
+      location_quadrat_photo, 
       local_dir = loc
     ),
     morphological_type_photo = ruODK::attachment_get(
@@ -379,23 +379,24 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
     data = fq_data,
-    lng = ~corner1_longitude, lat = ~corner1_latitude,
+    lng = ~location_corner1_longitude, 
+    lat = ~location_corner1_latitude,
     icon = leaflet::makeAwesomeIcon(text = "Q", markerColor = "red"),
-    label = ~ glue::glue("{area_name} {encounter_start_datetime}"),
+    label = ~ glue::glue("{location_area_name} {encounter_start_datetime}"),
     popup = ~ glue::glue(
-      "<h3>{area_name}</h3>",
+      "<h3>{location_area_name}</h3>",
       "Survey start {encounter_start_datetime}</br>",
       "Reporter {reporter}</br>",
       "Device {device_id}</br>",
       "<h5>Site</h5>",
-      '<div><img src="{quadrat_photo}"',
+      '<div><img src="{location_quadrat_photo}"',
       ' height="150px" alt="Quadrat photo"></img></div>',
       "<h5>Mudmap</h5>",
-      '<div><img src="{mudmap_photo}',
+      '<div><img src="{perimeter_mudmap_photo}',
       ' height="150px" alt="Mudmap"></img></div>',
       "<h5>Habitat</h5>",
-      "Morphological type: {morphological_type}</br>",
-      '<div><img src="{morphological_type_photo}"',
+      "Morphological type: {habitat_morphological_type}</br>",
+      '<div><img src="{habitat_morphological_type_photo}"',
       'height="150px" alt="Morphological type"></img></div>'
     ),
     clusterOptions = leaflet::markerClusterOptions()
@@ -413,8 +414,8 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
     data = fq_data_taxa,
-    lng = ~ taxon_encounter_location_longitude, 
-    lat = ~ taxon_encounter_location_latitude,
+    lng = ~ location_corner1_longitude, 
+    lat = ~ location_corner1_latitude,
     icon = leaflet::makeAwesomeIcon(text = "T", markerColor = "green"),
     label = ~ glue::glue("{field_name} {encounter_start_datetime}"),
     popup = ~ glue::glue(
@@ -444,7 +445,7 @@ for more ideas on data exploration.
 ```{r eda, fig.height=5, fig.width=7}
 # How many submissions per device?
 fq_data %>% 
-  dplyr::group_by(instance_id) %>% 
+  dplyr::group_by(meta_instance_id) %>% 
   dplyr::tally() %>% 
   knitr::kable()
 
@@ -475,7 +476,7 @@ fq_data_taxa %>%
       x=encounter_start_datetime, 
       y=field_name, 
       colour=life_form,
-      shape=instance_id)) + 
+      shape=meta_instance_id)) + 
   ggplot2::labs(
     title="Title", 
     subtitle="Subtitle", 

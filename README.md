@@ -94,7 +94,8 @@ Benefits of using the R ecosystem in combination with ODK:
 
 `ruODK`’s use cases:
 
-  - Smaller projects:
+  - Smaller projects: Example
+    [rGeoCBI](https://dbca-wa.github.io/rGeoCBI/)
     1.  Data collection: ODK Collect
     2.  Data clearinghouse: ODK Central
     3.  Data analysis and reporting: `Rmd` (ruODK)
@@ -312,7 +313,7 @@ d <- fs::path("docs/articles/attachments/media")   # choose your own
 tz <- "Australia/Perth"                            # g'day mate
 data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 #> ℹ Downloading submissions...
-#> 
+#> ✔ Downloaded submissions.
 #> ℹ Parsing submissions...
 #> ℹ Reading form schema...
 #> ℹ Parsing submissions...
@@ -383,10 +384,10 @@ data %>% knitr::kable(.)
 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18 14:08:43        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 14:18:53      | 2019-09-18T06:20:25.780Z | 241           | flora           |                    8 |                     8 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | docs/articles/attachments/media/1568786958640.jpg | Point    | 115.8843 | \-31.99615 | \-17.37241 |        4.288 | flat                | docs/articles/attachments/media/1568787004467.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/vegetation\_stratum | Point    | 115.8844 | \-31.99620 |  \-8.662476 |        4.288 | Point    | 115.8844 | \-31.99622 |  \-6.266144 |        4.288 | Point    | 115.8844 | \-31.99621 |  \-6.597748 |        4.288 | docs/articles/attachments/media/1568787172983.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
 
 A more detailed walk-through with some data visualisation examples is
-available in the [`vignette("odata",
+available in the [`vignette("odata-api",
 package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata.html).
 
-See also [`vignette("api",
+See also [`vignette("restful-api",
 package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/api.html)
 for examples using the alternative RESTful
 API.

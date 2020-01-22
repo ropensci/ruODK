@@ -6,13 +6,24 @@
 This is stupid, we should map first, then parse
 Recursively unnest_wide all list columns in a tibble.}
 \usage{
-unnest_all(nested_tbl, names_repair = "universal", verbose = FALSE)
+unnest_all(
+  nested_tbl,
+  names_repair = "universal",
+  names_sep = "_",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{nested_tbl}{A nested tibble}
 
 \item{names_repair}{The argument `names_repair` for
 \code{tidyr::unnest_wider}, default: "universal".}
+
+\item{names_sep}{The argument `names_sep` for
+\code{tidyr::unnest_wider}, default: "_".
+Unnested variables inside a list column will be prefixed by the list column
+name, separated by `names_sep`. This avoids unsightly repaired names
+such as `latitude...1`.}
 
 \item{verbose}{Whether to print verbose messages, default: FALSE.}
 }

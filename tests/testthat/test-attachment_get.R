@@ -19,7 +19,7 @@ test_that("attachment_get works", {
     dplyr::mutate(
       quadrat_photo = attachment_get(
         id,
-        quadrat_photo,
+        location_quadrat_photo,
         local_dir = t,
         pid = get_test_pid(),
         fid = get_test_fid(),
@@ -35,7 +35,7 @@ test_that("attachment_get works", {
     dplyr::mutate(
       quadrat_photo = attachment_get(
         id,
-        quadrat_photo,
+        location_quadrat_photo,
         local_dir = t,
         separate = TRUE,
         pid = get_test_pid(),

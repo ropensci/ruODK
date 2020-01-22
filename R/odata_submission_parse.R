@@ -34,12 +34,18 @@ listcol_names <- function(tbl) {
 #' @param nested_tbl A nested tibble
 #' @param names_repair The argument `names_repair` for
 #'   \code{tidyr::unnest_wider}, default: "universal".
+#' @param names_sep The argument `names_sep` for
+#'   \code{tidyr::unnest_wider}, default: "_".
+#'   Unnested variables inside a list column will be prefixed by the list column
+#'   name, separated by `names_sep`. This avoids unsightly repaired names
+#'   such as `latitude...1`.
 #' @param verbose Whether to print verbose messages, default: FALSE.
 #' @return The unnested tibble in wide format
 #' @family odata-api
 #' @export
 unnest_all <- function(nested_tbl,
                        names_repair = "universal",
+                       names_sep = "_",
                        verbose = FALSE) {
   for (colname in listcol_names(nested_tbl)) {
     # colname <- listcol_names(nested_tbl)[[1]]
@@ -69,11 +75,12 @@ unnest_all <- function(nested_tbl,
 
       # If colname is of type dateTime or date, ru_datetime
 
-      suppressMessages( # ball-gag unnest_wider
+      suppressMessages(
         nested_tbl <- tidyr::unnest_wider(
           nested_tbl,
           colname,
-          names_repair = names_repair
+          names_repair = names_repair,
+          names_sep = names_sep
         )
       )
     }
@@ -90,11 +97,13 @@ unnest_all <- function(nested_tbl,
     nested_tbl <- unnest_all(
       nested_tbl,
       names_repair = names_repair,
+      names_sep = names_sep,
       verbose = verbose
     )
   }
   nested_tbl
 }
+
 
 #' Parse the output of \code{\link{odata_submission_get}(parse=FALSE)}
 #' into a tidy tibble and unnest all levels.
@@ -110,6 +119,11 @@ unnest_all <- function(nested_tbl,
 #'   \code{form_schema} to \code{\link{odata_submission_parse}}.
 #' @param names_repair The argument `names_repair` for
 #'   \code{tidyr::unnest_wider}, default: "universal".
+#' @param names_sep The argument `names_sep` for
+#'   \code{tidyr::unnest_wider}, default: "_".
+#'   Unnested variables inside a list column will be prefixed by the list column
+#'   name, separated by `names_sep`. This avoids unsightly repaired names
+#'   such as `latitude...1`.
 #' @param verbose Whether to print verbose messages, default: FALSE.
 #' @return The submissions as unnested tibble
 #' @family odata-api
@@ -130,18 +144,16 @@ unnest_all <- function(nested_tbl,
 odata_submission_parse <- function(data,
                                    form_schema = NULL,
                                    names_repair = "universal",
+                                   names_sep = "_",
                                    verbose = FALSE) {
-
-  # TODO
-  # if (!is.null(form_schema)){
-  # TODO parse with form_schema
-  # } else {
-
   data %>%
     tibble::as_tibble(., .name_repair = names_repair) %>%
     unnest_all(names_repair = names_repair, verbose = verbose) %>%
-    janitor::clean_names(.)
-  # }
+    janitor::clean_names(.) %>%
+    dplyr::rename_at(
+      dplyr::vars(dplyr::starts_with("value_")),
+      ~ stringr::str_remove(., "value_")
+    )
 }
 
 

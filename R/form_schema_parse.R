@@ -63,7 +63,6 @@ form_schema_parse <- function(fs, path = "Submissions", verbose = FALSE) {
     ))
   }
 
-
   # 2. Recursively run form_schema_parse over nested elements.
   for (node in fs) {
     # Recursion seatbelt: only step into lists containing "children".
@@ -93,7 +92,36 @@ form_schema_parse <- function(fs, path = "Submissions", verbose = FALSE) {
     ))
   }
 
-  x %>% tibble::as_tibble()
+  # 4. Predict ruodk_name
+  x %>%
+    tibble::as_tibble()
+}
+
+#' Predict a field name after \code{tidyr::unnest_wider(names_sep="_")} prefixes
+#' the form path
+#'
+#' @param name_str An Xform field name string.
+#' @param path_str A path string,
+#'   e.g. "Submissions" or "Submissions.group_name".
+#' @return The name as built by \code{tidyr::unnest_wider(names_sep="_")}.
+#' @family utilities
+#' @export
+#' @examples
+#' testthat::expect_equal(
+#'   predict_ruodk_name("bar", "Submissions.foo"), "foo_bar"
+#' )
+#' testthat::expect_equal(
+#'   predict_ruodk_name("bar", "Submissions"), "bar"
+#' )
+#' testthat::expect_equal(
+#'   predict_ruodk_name("bar", "Submissions.foo_fighters"), "foo_fighters_bar"
+#' )
+predict_ruodk_name <- function(name_str, path_str) {
+  prefix <- path_str %>%
+    stringr::str_remove("Submissions") %>%
+    stringr::str_remove(".")
+  sep <- ifelse(prefix == "", "", "_")
+  glue::glue("{prefix}{sep}{name_str}") %>% as.character()
 }
 
 # Tests

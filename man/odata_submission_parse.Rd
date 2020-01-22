@@ -9,6 +9,7 @@ odata_submission_parse(
   data,
   form_schema = NULL,
   names_repair = "universal",
+  names_sep = "_",
   verbose = FALSE
 )
 }
@@ -22,6 +23,12 @@ data. \code{\link{odata_submission_get}(parse=TRUE)} automatically supplies
 
 \item{names_repair}{The argument `names_repair` for
 \code{tidyr::unnest_wider}, default: "universal".}
+
+\item{names_sep}{The argument `names_sep` for
+\code{tidyr::unnest_wider}, default: "_".
+Unnested variables inside a list column will be prefixed by the list column
+name, separated by `names_sep`. This avoids unsightly repaired names
+such as `latitude...1`.}
 
 \item{verbose}{Whether to print verbose messages, default: FALSE.}
 }

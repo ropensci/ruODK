@@ -26,6 +26,7 @@ A lubridate PosixCT datetime in the given timezone.
 \seealso{
 Other utilities: 
 \code{\link{\%>\%}()},
+\code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
 \code{\link{ru_datetime}()},
 \code{\link{split_geopoint}()},
