@@ -29,7 +29,7 @@ if (fs::file_info("README.md")$modification_time <
 #
 # Checks
 goodpractice::goodpractice(quiet = FALSE)
-devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
+devtools::check(cran = FALSE, remote = TRUE, incoming = TRUE)
 #
 # Add new feature to news if user-facing
 usethis::edit_file("NEWS.md")

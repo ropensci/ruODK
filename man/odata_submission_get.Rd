@@ -12,6 +12,7 @@ odata_submission_get(
   count = FALSE,
   wkt = FALSE,
   parse = TRUE,
+  download = TRUE,
   verbose = FALSE,
   orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
   tz = "UTC",
@@ -54,6 +55,12 @@ Point locations will be split into components; GeoJSON (`wkt=FALSE`) will
 be split into latitude, longitude, altitude and accuracy (with anonymous
 field names), while WKT will be split into latitude, longitude, and
 altitude (missing accuracy) prefixed by the original field name.
+Default: TRUE.}
+
+\item{download}{Whether to download attachments to `local_dir` or not.
+If in the future, ODK Central supports hot-linking attachments,
+this parameter will replace attachment filenames with their fully qualified
+attachment URL.
 Default: TRUE.}
 
 \item{verbose}{Whether to display debug messages or not (default)}

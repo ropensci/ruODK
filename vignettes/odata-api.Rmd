@@ -368,7 +368,7 @@ DT::datatable(fq_data_strata)
 ```
 
 ## Map
-Package `leaflet` provides interactive maps.
+The R package `leaflet` provides interactive maps.
 
 Constructing label and popup requires knowledge of the dataset structure.
 

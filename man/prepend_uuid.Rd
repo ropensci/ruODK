@@ -15,6 +15,9 @@ The string with a prepended "uuid:"
 \description{
 \lifecycle{stable}
 }
+\details{
+This is the inverse of the helper function \code{\link{strip_uuid}}.
+}
 \examples{
 prepend_uuid("1234")
 prepend_uuid("d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")

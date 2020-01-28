@@ -64,6 +64,11 @@
 #'   field names), while WKT will be split into latitude, longitude, and
 #'   altitude (missing accuracy) prefixed by the original field name.
 #'   Default: TRUE.
+#' @param download Whether to download attachments to `local_dir` or not.
+#'   If in the future, ODK Central supports hot-linking attachments,
+#'   this parameter will replace attachment filenames with their fully qualified
+#'   attachment URL.
+#'   Default: TRUE.
 #' @template param-verbose
 #' @param orders (vector of character) Orders of datetime elements for
 #'   lubridate.
@@ -142,6 +147,7 @@ odata_submission_get <- function(table = "Submissions",
                                  count = FALSE,
                                  wkt = FALSE,
                                  parse = TRUE,
+                                 download = TRUE,
                                  verbose = FALSE,
                                  orders = c(
                                    "YmdHMS",
@@ -164,18 +170,8 @@ odata_submission_get <- function(table = "Submissions",
   # Parse params
   skip <- skip %||% ""
   top <- top %||% ""
-
-  if (count == FALSE) {
-    count <- "false"
-  } else {
-    count <- "true"
-  }
-
-  if (wkt == FALSE) {
-    wkt <- "false"
-  } else {
-    wkt <- "true"
-  }
+  count <- ifelse(count == FALSE, "false", "true")
+  wkt <- ifelse(wkt == FALSE, "false", "true")
 
   # Get submissions
   if (verbose == TRUE) {
@@ -279,45 +275,47 @@ odata_submission_get <- function(table = "Submissions",
       )
   }
 
-  # Download and link attachments
-  # Caveat: if an attachment field has no submissions, it is dropped from sub
-  att_cols <- fs %>%
-    dplyr::filter(type == "binary") %>%
-    magrittr::extract2("ruodk_name") %>%
-    intersect(names(sub))
+  if (download == TRUE) {
+    # Download and link attachments
+    # Caveat: if an attachment field has no submissions, it is dropped from sub
+    att_cols <- fs %>%
+      dplyr::filter(type == "binary") %>%
+      magrittr::extract2("ruodk_name") %>%
+      intersect(names(sub))
 
-  if (verbose == TRUE) {
     if (verbose == TRUE) {
-      message(crayon::cyan(
-        glue::glue(
-          "{clisymbols::symbol$info}",
-          " Found attachments: \"{att_cols}\". \n"
-        )
-      ))
-      message(crayon::green(
-        glue::glue(
-          "{clisymbols::symbol$tick}",
-          " Downloading attachments...\n"
-        )
-      ))
+      if (verbose == TRUE) {
+        message(crayon::cyan(
+          glue::glue(
+            "{clisymbols::symbol$info}",
+            " Found attachments: \"{att_cols}\". \n"
+          )
+        ))
+        message(crayon::green(
+          glue::glue(
+            "{clisymbols::symbol$tick}",
+            " Downloading attachments...\n"
+          )
+        ))
+      }
     }
-  }
 
-  sub <- sub %>%
-    dplyr::mutate_at(
-      dplyr::vars(att_cols),
-      ~ ruODK::attachment_get(
-        id,
-        .,
-        local_dir = local_dir,
-        verbose = verbose,
-        pid = pid,
-        fid = fid,
-        url = url,
-        un = un,
-        pw = pw
+    sub <- sub %>%
+      dplyr::mutate_at(
+        dplyr::vars(att_cols),
+        ~ ruODK::attachment_get(
+          id,
+          .,
+          local_dir = local_dir,
+          verbose = verbose,
+          pid = pid,
+          fid = fid,
+          url = url,
+          un = un,
+          pw = pw
+        )
       )
-    )
+  }
 
   # Parse geopoints (already split into e.g. x10 x11 x12 if wkt="false")
   if (wkt == "true") {

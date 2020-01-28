@@ -1,5 +1,28 @@
 context("test-odata_submission_get.R")
 
+test_that("odata_submission_get skips download", {
+  # A guaranteed empty download directory
+  t <- tempdir()
+  t %>%
+    fs::dir_ls() %>%
+    fs::file_delete()
+
+  # Get submissions, do not download attachments
+  fresh_raw <- odata_submission_get(
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    parse = TRUE,
+    download = FALSE,
+    local_dir = t
+  )
+
+  # There should be no files in the download dir
+  testthat::expect_equal(t %>% fs::dir_ls(), character(0))
+})
+
 test_that("odata_submission_get works with one known dataset", {
   t <- tempdir()
   fresh_raw <- odata_submission_get(
@@ -31,7 +54,7 @@ test_that("odata_submission_get works with one known dataset", {
 
   local_files <- fresh_raw_parsed %>%
     dplyr::filter(!is.null(location_quadrat_photo)) %>%
-    magrittr::extract2("quadrat_photo") %>%
+    magrittr::extract2("location_quadrat_photo") %>%
     as.character()
   purrr::map(local_files, ~ testthat::expect_true(fs::file_exists(.)))
 })

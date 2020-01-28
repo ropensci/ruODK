@@ -2,6 +2,8 @@
 #'
 #' \lifecycle{stable}
 #'
+#' This is a helper function used by \code{\link{attachment_get}}.
+#'
 #' @param uuid A string which may contain any number of "uuid:"
 #' @return The string with every occurrence of "uuid:" deleted.
 #' @family utilities
@@ -16,6 +18,8 @@ strip_uuid <- function(uuid) {
 #' Prepend a leading "uuid:" to any string, e.g. an md5 hash.
 #'
 #' \lifecycle{stable}
+#'
+#' This is the inverse of the helper function \code{\link{strip_uuid}}.
 #'
 #' @param md5hash A string, e.g. an md5 hash.
 #' @return The string with a prepended "uuid:"

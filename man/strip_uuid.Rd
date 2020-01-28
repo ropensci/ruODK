@@ -15,6 +15,9 @@ The string with every occurrence of "uuid:" deleted.
 \description{
 \lifecycle{stable}
 }
+\details{
+This is a helper function used by \code{\link{attachment_get}}.
+}
 \examples{
 strip_uuid("uuid:1234")
 strip_uuid("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
