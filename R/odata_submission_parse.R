@@ -6,7 +6,6 @@
 #' @keywords internal
 #' @return A vector of list column names
 listcol_names <- function(tbl) {
-  variable <- NULL
   tbl %>%
     dplyr::summarise_all(class) %>%
     tidyr::gather(variable, class) %>%
@@ -48,16 +47,17 @@ unnest_all <- function(nested_tbl,
                        names_sep = "_",
                        verbose = FALSE) {
   for (colname in listcol_names(nested_tbl)) {
-    # colname <- listcol_names(nested_tbl)[[1]]
+
     if (!(colname %in% names(nested_tbl))) {
-      if (verbose == TRUE) {
-        message(crayon::cyan(
-          glue::glue(
-            "{clisymbols::symbol$info}",
-            " Skipping renamed column \"{colname}\"\n"
-          )
-        ))
-      }
+      # # Diagnostic message
+      # if (verbose == TRUE) {
+      #   message(crayon::cyan(
+      #     glue::glue(
+      #       "{clisymbols::symbol$info}",
+      #       " Skipping renamed column \"{colname}\"\n"
+      #     )
+      #   ))
+      # }
     } else {
       if (verbose == TRUE) {
         message(crayon::cyan(
@@ -150,10 +150,8 @@ odata_submission_parse <- function(data,
     tibble::as_tibble(., .name_repair = names_repair) %>%
     unnest_all(names_repair = names_repair, verbose = verbose) %>%
     janitor::clean_names(.) %>%
-    dplyr::rename_at(
-      dplyr::vars(dplyr::starts_with("value_")),
-      ~ stringr::str_remove(., "value_")
-    )
+    dplyr::rename_at(dplyr::vars(dplyr::starts_with("value_")),
+                     ~ stringr::str_remove(., "value_"))
 }
 
 

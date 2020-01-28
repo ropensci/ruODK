@@ -35,9 +35,9 @@
 ❯ NOTE: Note: found 1 marked UTF-8 string
 
 ❯ checking installed package size ... NOTE
-    installed size is  6.1Mb
-    sub-directories of 1Mb or more:
-      doc 4.5Mb, help 1.6 MB
+    installed size is 6.7Mb 
+    sub-directories of 1Mb or more: 
+    doc 4.2Mb help 1.6Mb
 ```      
       
 * This is a new release.
@@ -46,14 +46,14 @@
 * Package help contains `\Sexpr{}` which causes R CMD CHECK warnings. 
 * The PDF version of the manual can be included on request, but is currently 
   not included as per advice from ROpenSci.
-* The example data contains UTF-8 strings.
+* The example data contains UTF-8 strings. This is a realistic scenario.
 * Installation size:
-  * The vignette "odata" contains a leaflet map with popups showing embedded
+  * The vignette "odata-api" contains a leaflet map with popups showing embedded
     photos, a highly sought after use case.
     The third party dependencies, especially leaflet-awesomemarkers (for map 
     popups), cost over 3MB. 
-  * The other vignette "api" refers to the map in vignette "odata" as not to 
-    duplicate the expensive map.
+  * The other vignette "restful-api" refers to the map in vignette "odata" as 
+    not to duplicate the expensive map.
   * The example images have been resized aggressively to 200x150 px.
   * Included images for branding and attribution are at lowest legible size.
   
