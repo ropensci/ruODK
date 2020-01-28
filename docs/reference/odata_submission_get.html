@@ -145,6 +145,7 @@ attachments.</h1>
   <span class='kw'>count</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>wkt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>parse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>download</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>orders</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"YmdHMS"</span>, <span class='st'>"YmdHMSz"</span>, <span class='st'>"Ymd HMS"</span>, <span class='st'>"Ymd HMSz"</span>, <span class='st'>"Ymd"</span>, <span class='st'>"ymd"</span>),
   <span class='kw'>tz</span> <span class='kw'>=</span> <span class='st'>"UTC"</span>,
@@ -201,6 +202,14 @@ Point locations will be split into components; GeoJSON (`wkt=FALSE`) will
 be split into latitude, longitude, altitude and accuracy (with anonymous
 field names), while WKT will be split into latitude, longitude, and
 altitude (missing accuracy) prefixed by the original field name.
+Default: TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>download</th>
+      <td><p>Whether to download attachments to `local_dir` or not.
+If in the future, ODK Central supports hot-linking attachments,
+this parameter will replace attachment filenames with their fully qualified
+attachment URL.
 Default: TRUE.</p></td>
     </tr>
     <tr>
