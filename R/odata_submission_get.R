@@ -183,14 +183,15 @@ odata_submission_get <- function(table = "Submissions",
     ))
   }
 
-  sub <- glue::glue(
-    "{url}/v1/projects/{pid}/forms/{fid}.svc/{table}",
-    "?$skip={skip}&$top={top}&$count={count}&$wkt={wkt}"
+  sub <- httr::RETRY(
+    "GET",
+    glue::glue(
+      "{url}/v1/projects/{pid}/forms/{fid}.svc/{table}",
+      "?$skip={skip}&$top={top}&$count={count}&$wkt={wkt}"
+    ),
+    httr::add_headers(Accept = "application/json"),
+    httr::authenticate(un, pw)
   ) %>%
-    httr::GET(
-      httr::add_headers(Accept = "application/json"),
-      httr::authenticate(un, pw)
-    ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.)
 

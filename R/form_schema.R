@@ -122,12 +122,13 @@ form_schema <- function(flatten = FALSE,
                         un = get_default_un(),
                         pw = get_default_pw()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  fs <- glue::glue("{url}/v1/projects/{pid}/forms/{fid}.schema.json") %>%
-    httr::GET(
-      httr::add_headers("Accept" = "application/json"),
-      httr::authenticate(un, pw),
-      query = list(flatten = flatten, odata = odata)
-    ) %>%
+  fs <- httr::RETRY(
+    "GET",
+    glue::glue("{url}/v1/projects/{pid}/forms/{fid}.schema.json"),
+    httr::add_headers("Accept" = "application/json"),
+    httr::authenticate(un, pw),
+    query = list(flatten = flatten, odata = odata)
+  ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.)
 

@@ -9,6 +9,7 @@ This version is the RC for v0.7 to support ODK Central 0.7.
   `odata_submission_get(wkt=T)`. (#31 #7 HT @OdiljonQurbon)
 * `submission_get` now accepts a vector of (all or selected) submission instance 
   IDs (`iid`), similar to `odata_submission_get()`. (#38)
+* All `httr::GET()` are now replaced with `httr::RETRY("GET", ...)` (#48)
 
 ## Minor fixes
 * Drop `. <- NULL` in favour of `utils::globalVariables(".")`. (#35)

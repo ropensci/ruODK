@@ -65,13 +65,14 @@ get_one_submission_attachment_list <- function(iid,
                                                un = get_default_un(),
                                                pw = get_default_pw()) {
   yell_if_missing(url, un, pw)
-  glue::glue(
-    "{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}/attachments"
+  httr::RETRY(
+    "GET",
+    glue::glue(
+      "{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}/attachments"
+    ),
+    httr::add_headers("Accept" = "application/json"),
+    httr::authenticate(un, pw)
   ) %>%
-    httr::GET(
-      httr::add_headers("Accept" = "application/json"),
-      httr::authenticate(un, pw)
-    ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {

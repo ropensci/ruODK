@@ -52,8 +52,11 @@ get_one_submission <- function(iid,
                                un = get_default_un(),
                                pw = get_default_pw()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
-  glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}.xml") %>%
-    httr::GET(httr::authenticate(un, pw)) %>%
+  httr::RETRY(
+    "GET",
+    glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}.xml"),
+    httr::authenticate(un, pw)
+  ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     xml2::as_list(.) %>%

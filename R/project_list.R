@@ -45,14 +45,15 @@ project_list <- function(url = get_default_url(),
                          un = get_default_un(),
                          pw = get_default_pw()) {
   yell_if_missing(url, un, pw)
-  glue::glue("{url}/v1/projects/") %>%
-    httr::GET(
-      httr::add_headers(
-        "Accept" = "application/xml",
-        "X-Extended-Metadata" = "true"
-      ),
-      httr::authenticate(un, pw)
-    ) %>%
+  httr::RETRY(
+    "GET",
+    glue::glue("{url}/v1/projects/"),
+    httr::add_headers(
+      "Accept" = "application/xml",
+      "X-Extended-Metadata" = "true"
+    ),
+    httr::authenticate(un, pw)
+  ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {

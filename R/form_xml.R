@@ -43,11 +43,12 @@ form_xml <- function(parse = TRUE,
                      un = get_default_un(),
                      pw = get_default_pw()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  out <- glue::glue("{url}/v1/projects/{pid}/forms/{fid}.xml") %>%
-    httr::GET(
-      httr::add_headers("Accept" = "application/xml"),
-      httr::authenticate(un, pw)
-    ) %>%
+  out <- httr::RETRY(
+    "GET",
+    glue::glue("{url}/v1/projects/{pid}/forms/{fid}.xml"),
+    httr::add_headers("Accept" = "application/xml"),
+    httr::authenticate(un, pw)
+  ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.)
 

@@ -9,7 +9,7 @@ test_that("odata_submission_parse works with gaps in first submission", {
     un = get_test_un(),
     pw = get_test_pw(),
     parse = FALSE,
-    verbose=TRUE
+    verbose = TRUE
   )
 
   testthat::expect_warning(

@@ -47,7 +47,6 @@ unnest_all <- function(nested_tbl,
                        names_sep = "_",
                        verbose = FALSE) {
   for (colname in listcol_names(nested_tbl)) {
-
     if (!(colname %in% names(nested_tbl))) {
       # # Diagnostic message
       # if (verbose == TRUE) {
@@ -150,8 +149,10 @@ odata_submission_parse <- function(data,
     tibble::as_tibble(., .name_repair = names_repair) %>%
     unnest_all(names_repair = names_repair, verbose = verbose) %>%
     janitor::clean_names(.) %>%
-    dplyr::rename_at(dplyr::vars(dplyr::starts_with("value_")),
-                     ~ stringr::str_remove(., "value_"))
+    dplyr::rename_at(
+      dplyr::vars(dplyr::starts_with("value_")),
+      ~ stringr::str_remove(., "value_")
+    )
 }
 
 

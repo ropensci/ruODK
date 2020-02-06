@@ -34,11 +34,12 @@ odata_metadata_get <- function(pid = get_default_pid(),
                                un = get_default_un(),
                                pw = get_default_pw()) {
   yell_if_missing(url, un, pw)
-  glue::glue("{url}/v1/projects/{pid}/forms/{fid}.svc/$metadata") %>%
-    httr::GET(
-      httr::add_headers(Accept = "application/xml"),
-      httr::authenticate(un, pw)
-    ) %>%
+  httr::RETRY(
+    "GET",
+    glue::glue("{url}/v1/projects/{pid}/forms/{fid}.svc/$metadata"),
+    httr::add_headers(Accept = "application/xml"),
+    httr::authenticate(un, pw)
+  ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     xml2::as_list(.)

@@ -91,12 +91,13 @@ audit_get <- function(action = NULL,
     offset = offset
   ) %>%
     Filter(Negate(is.null), .)
-  glue::glue("{url}/v1/audits") %>%
-    httr::GET(
-      httr::add_headers("Accept" = "application/json"),
-      httr::authenticate(un, pw),
-      query = qry
-    ) %>%
+  httr::RETRY(
+    "GET",
+    glue::glue("{url}/v1/audits"),
+    httr::add_headers("Accept" = "application/json"),
+    httr::authenticate(un, pw),
+    query = qry
+  ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {

@@ -10,9 +10,11 @@
 #' @keywords internal
 "_PACKAGE"
 
-utils::globalVariables(c(".",
-                         "children",
-                         "name",
-                         "path",
-                         "type",
-                         "variable"))
+utils::globalVariables(c(
+  ".",
+  "children",
+  "name",
+  "path",
+  "type",
+  "variable"
+))

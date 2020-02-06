@@ -130,7 +130,8 @@ get_one_attachment <- function(pth,
     return(NA)
   }
 
-  httr::GET(
+  httr::RETRY(
+    "GET",
     src,
     httr::authenticate(un, pw),
     httr::write_disk(pth, overwrite = TRUE)

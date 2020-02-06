@@ -105,11 +105,12 @@ submission_export <- function(local_dir = here::here(),
   }
 
 
-  glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions.csv.zip") %>%
-    httr::GET(
-      httr::authenticate(un, pw),
-      httr::write_disk(pth, overwrite = overwrite)
-    ) %>%
+  httr::RETRY(
+    "GET",
+    glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions.csv.zip"),
+    httr::authenticate(un, pw),
+    httr::write_disk(pth, overwrite = overwrite)
+  ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.)
   pth

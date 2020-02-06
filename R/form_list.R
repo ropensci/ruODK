@@ -38,14 +38,15 @@ form_list <- function(pid = get_default_pid(),
                       un = get_default_un(),
                       pw = get_default_pw()) {
   yell_if_missing(url, un, pw, pid = pid)
-  glue::glue("{url}/v1/projects/{pid}/forms") %>%
-    httr::GET(
-      httr::add_headers(
-        "Accept" = "application/xml",
-        "X-Extended-Metadata" = "true"
-      ),
-      httr::authenticate(un, pw)
-    ) %>%
+  httr::RETRY(
+    "GET",
+    glue::glue("{url}/v1/projects/{pid}/forms"),
+    httr::add_headers(
+      "Accept" = "application/xml",
+      "X-Extended-Metadata" = "true"
+    ),
+    httr::authenticate(un, pw)
+  ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {
