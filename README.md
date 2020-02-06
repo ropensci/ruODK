@@ -217,7 +217,7 @@ proj %>% head() %>% knitr::kable(.)
 
 | id | name                     | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
 | -: | :----------------------- | ----: | ---------: | :------------------ | :---------- | :------------------ | :------- |
-| 59 | 1Horizon test project    |     1 |          2 | 2020-01-13 12:45:32 | NA          | 2020-01-13 15:06:15 | FALSE    |
+| 59 | 1Horizon test project    |     1 |          3 | 2020-01-13 12:45:32 | NA          | 2020-01-23 14:20:13 | FALSE    |
 | 57 | AB’s                     |     1 |          1 | 2020-01-06 00:56:00 | NA          | NA                  | FALSE    |
 |  8 | AmenazasRD               |     0 |          0 | 2019-04-14 06:21:00 | NA          | NA                  | FALSE    |
 |  9 | BAFCO Test               |     1 |          1 | 2019-04-19 00:30:45 | NA          | 2019-04-19 01:26:49 | FALSE    |
@@ -258,41 +258,41 @@ meta <- ruODK::form_schema()
 meta %>% knitr::kable(.)
 ```
 
-| type      | name                                  | path                            |
-| :-------- | :------------------------------------ | :------------------------------ |
-| structure | meta                                  | Submissions                     |
-| dateTime  | encounter\_start\_datetime            | Submissions                     |
-| string    | reporter                              | Submissions                     |
-| string    | device\_id                            | Submissions                     |
-| structure | location                              | Submissions                     |
-| structure | habitat                               | Submissions                     |
-| repeat    | vegetation\_stratum                   | Submissions                     |
-| structure | perimeter                             | Submissions                     |
-| repeat    | taxon\_encounter                      | Submissions                     |
-| dateTime  | encounter\_end\_datetime              | Submissions                     |
-| string    | instanceID                            | Submissions.meta                |
-| string    | area\_name                            | Submissions.location            |
-| binary    | quadrat\_photo                        | Submissions.location            |
-| geopoint  | corner1                               | Submissions.location            |
-| select1   | morphological\_type                   | Submissions.habitat             |
-| binary    | morphological\_type\_photo            | Submissions.habitat             |
-| select1   | nvis\_level3\_broad\_floristic\_group | Submissions.vegetation\_stratum |
-| decimal   | max\_height\_m                        | Submissions.vegetation\_stratum |
-| select1   | foliage\_cover                        | Submissions.vegetation\_stratum |
-| string    | dominant\_species\_1                  | Submissions.vegetation\_stratum |
-| string    | dominant\_species\_2                  | Submissions.vegetation\_stratum |
-| string    | dominant\_species\_3                  | Submissions.vegetation\_stratum |
-| string    | dominant\_species\_4                  | Submissions.vegetation\_stratum |
-| geopoint  | corner2                               | Submissions.perimeter           |
-| geopoint  | corner3                               | Submissions.perimeter           |
-| geopoint  | corner4                               | Submissions.perimeter           |
-| binary    | mudmap\_photo                         | Submissions.perimeter           |
-| string    | field\_name                           | Submissions.taxon\_encounter    |
-| binary    | photo\_in\_situ                       | Submissions.taxon\_encounter    |
-| geopoint  | taxon\_encounter\_location            | Submissions.taxon\_encounter    |
-| select1   | life\_form                            | Submissions.taxon\_encounter    |
-| barcode   | voucher\_specimen\_barcode            | Submissions.taxon\_encounter    |
-| string    | voucher\_specimen\_label              | Submissions.taxon\_encounter    |
+| type      | name                                  | path                            | ruodk\_name                                                |
+| :-------- | :------------------------------------ | :------------------------------ | :--------------------------------------------------------- |
+| structure | meta                                  | Submissions                     | meta                                                       |
+| dateTime  | encounter\_start\_datetime            | Submissions                     | encounter\_start\_datetime                                 |
+| string    | reporter                              | Submissions                     | reporter                                                   |
+| string    | device\_id                            | Submissions                     | device\_id                                                 |
+| structure | location                              | Submissions                     | location                                                   |
+| structure | habitat                               | Submissions                     | habitat                                                    |
+| repeat    | vegetation\_stratum                   | Submissions                     | vegetation\_stratum                                        |
+| structure | perimeter                             | Submissions                     | perimeter                                                  |
+| repeat    | taxon\_encounter                      | Submissions                     | taxon\_encounter                                           |
+| dateTime  | encounter\_end\_datetime              | Submissions                     | encounter\_end\_datetime                                   |
+| string    | instanceID                            | Submissions.meta                | meta\_instanceID                                           |
+| string    | area\_name                            | Submissions.location            | location\_area\_name                                       |
+| binary    | quadrat\_photo                        | Submissions.location            | location\_quadrat\_photo                                   |
+| geopoint  | corner1                               | Submissions.location            | location\_corner1                                          |
+| select1   | morphological\_type                   | Submissions.habitat             | habitat\_morphological\_type                               |
+| binary    | morphological\_type\_photo            | Submissions.habitat             | habitat\_morphological\_type\_photo                        |
+| select1   | nvis\_level3\_broad\_floristic\_group | Submissions.vegetation\_stratum | vegetation\_stratum\_nvis\_level3\_broad\_floristic\_group |
+| decimal   | max\_height\_m                        | Submissions.vegetation\_stratum | vegetation\_stratum\_max\_height\_m                        |
+| select1   | foliage\_cover                        | Submissions.vegetation\_stratum | vegetation\_stratum\_foliage\_cover                        |
+| string    | dominant\_species\_1                  | Submissions.vegetation\_stratum | vegetation\_stratum\_dominant\_species\_1                  |
+| string    | dominant\_species\_2                  | Submissions.vegetation\_stratum | vegetation\_stratum\_dominant\_species\_2                  |
+| string    | dominant\_species\_3                  | Submissions.vegetation\_stratum | vegetation\_stratum\_dominant\_species\_3                  |
+| string    | dominant\_species\_4                  | Submissions.vegetation\_stratum | vegetation\_stratum\_dominant\_species\_4                  |
+| geopoint  | corner2                               | Submissions.perimeter           | perimeter\_corner2                                         |
+| geopoint  | corner3                               | Submissions.perimeter           | perimeter\_corner3                                         |
+| geopoint  | corner4                               | Submissions.perimeter           | perimeter\_corner4                                         |
+| binary    | mudmap\_photo                         | Submissions.perimeter           | perimeter\_mudmap\_photo                                   |
+| string    | field\_name                           | Submissions.taxon\_encounter    | taxon\_encounter\_field\_name                              |
+| binary    | photo\_in\_situ                       | Submissions.taxon\_encounter    | taxon\_encounter\_photo\_in\_situ                          |
+| geopoint  | taxon\_encounter\_location            | Submissions.taxon\_encounter    | taxon\_encounter\_taxon\_encounter\_location               |
+| select1   | life\_form                            | Submissions.taxon\_encounter    | taxon\_encounter\_life\_form                               |
+| barcode   | voucher\_specimen\_barcode            | Submissions.taxon\_encounter    | taxon\_encounter\_voucher\_specimen\_barcode               |
+| string    | voucher\_specimen\_label              | Submissions.taxon\_encounter    | taxon\_encounter\_voucher\_specimen\_label                 |
 
 ``` r
 # Part 2: Data access ---------------------------------------------------------#
@@ -321,49 +321,29 @@ data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 #> * `@odata.context` -> .odata.context
 #> ℹ Unnesting column "value"
 #> ℹ Found more nested columns, unnesting again.
-#> ℹ Unnesting column ".__system"
-#> ℹ Unnesting column "meta"
-#> ℹ Unnesting column "location"
-#> ℹ Unnesting column "habitat"
-#> ℹ Unnesting column "perimeter"
+#> ℹ Unnesting column "value___system"
+#> ℹ Unnesting column "value_meta"
+#> ℹ Unnesting column "value_location"
+#> ℹ Unnesting column "value_habitat"
+#> ℹ Unnesting column "value_perimeter"
 #> ℹ Found more nested columns, unnesting again.
-#> ℹ Unnesting column "corner1"
-#> ℹ Unnesting column "corner2"
-#> ℹ Unnesting column "corner3"
-#> ℹ Unnesting column "corner4"
+#> ℹ Unnesting column "value_location_corner1"
+#> ℹ Unnesting column "value_perimeter_corner2"
+#> ℹ Unnesting column "value_perimeter_corner3"
+#> ℹ Unnesting column "value_perimeter_corner4"
 #> ℹ Found more nested columns, unnesting again.
-#> ℹ Unnesting column "coordinates...15"
-#> ℹ Skipping renamed column "properties...16"
-#> ℹ Skipping renamed column "coordinates...21"
-#> ℹ Skipping renamed column "properties...22"
-#> ℹ Skipping renamed column "coordinates...24"
-#> ℹ Skipping renamed column "properties...25"
-#> ℹ Skipping renamed column "coordinates...27"
-#> ℹ Skipping renamed column "properties...28"
-#> ℹ Found more nested columns, unnesting again.
-#> ℹ Unnesting column "properties...18"
-#> ℹ Unnesting column "coordinates...23"
-#> ℹ Skipping renamed column "properties...24"
-#> ℹ Skipping renamed column "coordinates...26"
-#> ℹ Skipping renamed column "properties...27"
-#> ℹ Skipping renamed column "coordinates...29"
-#> ℹ Skipping renamed column "properties...30"
-#> ℹ Found more nested columns, unnesting again.
-#> ℹ Unnesting column "properties...26"
-#> ℹ Unnesting column "coordinates...28"
-#> ℹ Skipping renamed column "properties...29"
-#> ℹ Skipping renamed column "coordinates...31"
-#> ℹ Skipping renamed column "properties...32"
-#> ℹ Found more nested columns, unnesting again.
-#> ℹ Unnesting column "properties...31"
-#> ℹ Unnesting column "coordinates"
-#> ℹ Skipping renamed column "properties...34"
-#> ℹ Found more nested columns, unnesting again.
-#> ℹ Unnesting column "properties"
+#> ℹ Unnesting column "value_location_corner1_coordinates"
+#> ℹ Unnesting column "value_location_corner1_properties"
+#> ℹ Unnesting column "value_perimeter_corner2_coordinates"
+#> ℹ Unnesting column "value_perimeter_corner2_properties"
+#> ℹ Unnesting column "value_perimeter_corner3_coordinates"
+#> ℹ Unnesting column "value_perimeter_corner3_properties"
+#> ℹ Unnesting column "value_perimeter_corner4_coordinates"
+#> ℹ Unnesting column "value_perimeter_corner4_properties"
 #> ℹ Found date/time: "encounter_start_datetime". ℹ Found date/time: "encounter_end_datetime".
 #> ℹ Parsing "encounter_start_datetime" with timezone "Australia/Perth"...
 #> ℹ Parsing "encounter_end_datetime" with timezone "Australia/Perth"...
-#> ℹ Found attachments: "quadrat_photo". ℹ Found attachments: "morphological_type_photo". ℹ Found attachments: "mudmap_photo".
+#> ℹ Found attachments: "location_quadrat_photo". ℹ Found attachments: "habitat_morphological_type_photo". ℹ Found attachments: "perimeter_mudmap_photo".
 #> ✔ Downloading attachments...
 #> ℹ Using local directory "docs/articles/attachments/media".
 #> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568794395624.jpg".
@@ -378,10 +358,10 @@ data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 data %>% knitr::kable(.)
 ```
 
-| id                                        | encounter\_start\_datetime | reporter      | device\_id       | encounter\_end\_datetime | submission\_date         | submitter\_id | submitter\_name | attachments\_present | attachments\_expected | instance\_id                              | area\_name               | quadrat\_photo                                    | type\_14 |      x15 |        x16 |        x17 | accuracy\_18 | morphological\_type | morphological\_type\_photo                        | vegetation\_stratum\_odata\_navigation\_link                                 | type\_22 |      x23 |        x24 |         x25 | accuracy\_26 | type\_27 |      x28 |        x29 |         x30 | accuracy\_31 | type\_32 |      x33 |        x34 |         x35 | accuracy\_36 | mudmap\_photo                                     | taxon\_encounter\_odata\_navigation\_link                                 | odata\_context                                                                                                              |
-| :---------------------------------------- | :------------------------- | :------------ | :--------------- | :----------------------- | :----------------------- | :------------ | :-------------- | -------------------: | --------------------: | :---------------------------------------- | :----------------------- | :------------------------------------------------ | :------- | -------: | ---------: | ---------: | -----------: | :------------------ | :------------------------------------------------ | :--------------------------------------------------------------------------- | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :------- | -------: | ---------: | ----------: | -----------: | :------------------------------------------------ | :------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
-| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 2019-09-18 16:12:21        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 16:40:46      | 2019-09-18T08:51:07.481Z | 241           | flora           |                    4 |                     4 | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | docs/articles/attachments/media/1568794395624.jpg | Point    | 115.8846 | \-31.99606 |    6.40451 |        4.288 | mid-slope           | docs/articles/attachments/media/1568794560256.jpg | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/vegetation\_stratum | Point    | 115.8844 | \-31.99623 | \-26.305695 |        4.288 | Point    | 115.8844 | \-31.99615 | \-17.897552 |        4.288 | Point    | 115.8843 | \-31.99610 | \-27.759338 |        4.288 | NA                                                | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
-| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18 14:08:43        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 14:18:53      | 2019-09-18T06:20:25.780Z | 241           | flora           |                    8 |                     8 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | docs/articles/attachments/media/1568786958640.jpg | Point    | 115.8843 | \-31.99615 | \-17.37241 |        4.288 | flat                | docs/articles/attachments/media/1568787004467.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/vegetation\_stratum | Point    | 115.8844 | \-31.99620 |  \-8.662476 |        4.288 | Point    | 115.8844 | \-31.99622 |  \-6.266144 |        4.288 | Point    | 115.8844 | \-31.99621 |  \-6.597748 |        4.288 | docs/articles/attachments/media/1568787172983.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
+| id                                        | encounter\_start\_datetime | reporter      | device\_id       | encounter\_end\_datetime | system\_submission\_date | system\_submitter\_id | system\_submitter\_name | system\_attachments\_present | system\_attachments\_expected | meta\_instance\_id                        | location\_area\_name     | location\_quadrat\_photo                          | location\_corner1\_type | location\_corner1\_coordinates\_1 | location\_corner1\_coordinates\_2 | location\_corner1\_coordinates\_3 | location\_corner1\_properties\_accuracy | habitat\_morphological\_type | habitat\_morphological\_type\_photo               | vegetation\_stratum\_odata\_navigation\_link                                 | perimeter\_corner2\_type | perimeter\_corner2\_coordinates\_1 | perimeter\_corner2\_coordinates\_2 | perimeter\_corner2\_coordinates\_3 | perimeter\_corner2\_properties\_accuracy | perimeter\_corner3\_type | perimeter\_corner3\_coordinates\_1 | perimeter\_corner3\_coordinates\_2 | perimeter\_corner3\_coordinates\_3 | perimeter\_corner3\_properties\_accuracy | perimeter\_corner4\_type | perimeter\_corner4\_coordinates\_1 | perimeter\_corner4\_coordinates\_2 | perimeter\_corner4\_coordinates\_3 | perimeter\_corner4\_properties\_accuracy | perimeter\_mudmap\_photo                          | taxon\_encounter\_odata\_navigation\_link                                 | odata\_context                                                                                                              |
+| :---------------------------------------- | :------------------------- | :------------ | :--------------- | :----------------------- | :----------------------- | :-------------------- | :---------------------- | ---------------------------: | ----------------------------: | :---------------------------------------- | :----------------------- | :------------------------------------------------ | :---------------------- | --------------------------------: | --------------------------------: | --------------------------------: | --------------------------------------: | :--------------------------- | :------------------------------------------------ | :--------------------------------------------------------------------------- | :----------------------- | ---------------------------------: | ---------------------------------: | ---------------------------------: | ---------------------------------------: | :----------------------- | ---------------------------------: | ---------------------------------: | ---------------------------------: | ---------------------------------------: | :----------------------- | ---------------------------------: | ---------------------------------: | ---------------------------------: | ---------------------------------------: | :------------------------------------------------ | :------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 2019-09-18 16:12:21        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 16:40:46      | 2019-09-18T08:51:07.481Z | 241                   | flora                   |                            4 |                             4 | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | docs/articles/attachments/media/1568794395624.jpg | Point                   |                          115.8846 |                        \-31.99606 |                           6.40451 |                                   4.288 | mid-slope                    | docs/articles/attachments/media/1568794560256.jpg | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/vegetation\_stratum | Point                    |                           115.8844 |                         \-31.99623 |                        \-26.305695 |                                    4.288 | Point                    |                           115.8844 |                         \-31.99615 |                        \-17.897552 |                                    4.288 | Point                    |                           115.8843 |                         \-31.99610 |                        \-27.759338 |                                    4.288 | NA                                                | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
+| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18 14:08:43        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 14:18:53      | 2019-09-18T06:20:25.780Z | 241                   | flora                   |                            8 |                             8 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | docs/articles/attachments/media/1568786958640.jpg | Point                   |                          115.8843 |                        \-31.99615 |                        \-17.37241 |                                   4.288 | flat                         | docs/articles/attachments/media/1568787004467.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/vegetation\_stratum | Point                    |                           115.8844 |                         \-31.99620 |                         \-8.662476 |                                    4.288 | Point                    |                           115.8844 |                         \-31.99622 |                         \-6.266144 |                                    4.288 | Point                    |                           115.8844 |                         \-31.99621 |                         \-6.597748 |                                    4.288 | docs/articles/attachments/media/1568787172983.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
 
 A more detailed walk-through with some data visualisation examples is
 available in the [`vignette("odata-api",
@@ -428,8 +408,7 @@ citation("ruODK")
 #> 
 #> To cite ruODK in publications use:
 #> 
-#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API. R
-#>   package version 0.6.6. https://github.com/dbca-wa/ruODK
+#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API. R package version 0.6.6. https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
