@@ -173,7 +173,7 @@ descriptions of the steps below.
 ## Configure `ruODK`
 
 Set up `ruODK` with an OData Service URL and credentials of a
-read-permitted ODK Central web user.
+read-permitted ODK Central web user. Adjust verbosity to your liking.
 
     #> <ruODK settings>
     #>   Default ODK Central Project ID:  14 
@@ -188,13 +188,15 @@ read-permitted ODK Central web user.
     #>   Test ODK Central Form ID (Parsing tests): build_Turtle-Track-or-Nest-1-0_1569907666 
     #>   Test ODK Central URL: https://sandbox.central.opendatakit.org 
     #>   Test ODK Central Username: Florian.Mayer@dbca.wa.gov.au 
-    #>   Test ODK Central Password: run ruODK::get_test_pw() to show
+    #>   Test ODK Central Password: run ruODK::get_test_pw() to show 
+    #>   Verbose messages: TRUE
 
 ``` r
 ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = "me@email.com",
-  pw = "..."
+  pw = "...",
+  verbose = TRUE # great for demo or debugging
 )
 ```
 
@@ -255,6 +257,284 @@ frmd %>% knitr::kable(.)
 ``` r
 # Form schema
 meta <- ruODK::form_schema()
+#> 'data.frame':    10 obs. of  3 variables:
+#>  $ type: chr  "structure" "dateTime" "string" "string" ...
+#>  $ name: chr  "meta" "encounter_start_datetime" "reporter" "device_id" ...
+#>  $ path: chr  "Submissions" "Submissions" "Submissions" "Submissions" ...
+#> 
+#> ℹ
+#> 
+#> Found child: meta
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "instanceID", type = "string")
+#> 'data.frame':    1 obs. of  3 variables:
+#>  $ type: chr "string"
+#>  $ name: chr "instanceID"
+#>  $ path: 'glue' chr "Submissions.meta"
+#> 
+#> 'data.frame':    1 obs. of  3 variables:
+#>  $ type: chr "string"
+#>  $ name: chr "instanceID"
+#>  $ path: 'glue' chr "Submissions.meta"
+#> 
+#> ℹ
+#> 
+#> Found child: structure
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: location
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "area_name", type = "string")ℹ
+#> 
+#> Found child: list(name = "quadrat_photo", type = "binary")ℹ
+#> 
+#> Found child: list(name = "corner1", type = "geopoint")
+#> 'data.frame':    3 obs. of  3 variables:
+#>  $ type: chr  "string" "binary" "geopoint"
+#>  $ name: chr  "area_name" "quadrat_photo" "corner1"
+#>  $ path: 'glue' chr  "Submissions.location" "Submissions.location" "Submissions.location"
+#> 
+#> 'data.frame':    3 obs. of  3 variables:
+#>  $ type: chr  "string" "binary" "geopoint"
+#>  $ name: chr  "area_name" "quadrat_photo" "corner1"
+#>  $ path: 'glue' chr  "Submissions.location" "Submissions.location" "Submissions.location"
+#> 
+#> ℹ
+#> 
+#> Found child: structure
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: habitat
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "morphological_type", type = "select1")ℹ
+#> 
+#> Found child: list(name = "morphological_type_photo", type = "binary")
+#> 'data.frame':    2 obs. of  3 variables:
+#>  $ type: chr  "select1" "binary"
+#>  $ name: chr  "morphological_type" "morphological_type_photo"
+#>  $ path: 'glue' chr  "Submissions.habitat" "Submissions.habitat"
+#> 
+#> 'data.frame':    2 obs. of  3 variables:
+#>  $ type: chr  "select1" "binary"
+#>  $ name: chr  "morphological_type" "morphological_type_photo"
+#>  $ path: 'glue' chr  "Submissions.habitat" "Submissions.habitat"
+#> 
+#> ℹ
+#> 
+#> Found child: structure
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: vegetation_stratum
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "nvis_level3_broad_floristic_group", type = "select1")ℹ
+#> 
+#> Found child: list(name = "max_height_m", type = "decimal")ℹ
+#> 
+#> Found child: list(name = "foliage_cover", type = "select1")ℹ
+#> 
+#> Found child: list(name = "dominant_species_1", type = "string")ℹ
+#> 
+#> Found child: list(name = "dominant_species_2", type = "string")ℹ
+#> 
+#> Found child: list(name = "dominant_species_3", type = "string")ℹ
+#> 
+#> Found child: list(name = "dominant_species_4", type = "string")
+#> 'data.frame':    7 obs. of  3 variables:
+#>  $ type: chr  "select1" "decimal" "select1" "string" ...
+#>  $ name: chr  "nvis_level3_broad_floristic_group" "max_height_m" "foliage_cover" "dominant_species_1" ...
+#>  $ path: 'glue' chr  "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" ...
+#> 
+#> 'data.frame':    7 obs. of  3 variables:
+#>  $ type: chr  "select1" "decimal" "select1" "string" ...
+#>  $ name: chr  "nvis_level3_broad_floristic_group" "max_height_m" "foliage_cover" "dominant_species_1" ...
+#>  $ path: 'glue' chr  "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" ...
+#> 
+#> ℹ
+#> 
+#> Found child: repeat
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: perimeter
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "corner2", type = "geopoint")ℹ
+#> 
+#> Found child: list(name = "corner3", type = "geopoint")ℹ
+#> 
+#> Found child: list(name = "corner4", type = "geopoint")ℹ
+#> 
+#> Found child: list(name = "mudmap_photo", type = "binary")
+#> 'data.frame':    4 obs. of  3 variables:
+#>  $ type: chr  "geopoint" "geopoint" "geopoint" "binary"
+#>  $ name: chr  "corner2" "corner3" "corner4" "mudmap_photo"
+#>  $ path: 'glue' chr  "Submissions.perimeter" "Submissions.perimeter" "Submissions.perimeter" "Submissions.perimeter"
+#> 
+#> 'data.frame':    4 obs. of  3 variables:
+#>  $ type: chr  "geopoint" "geopoint" "geopoint" "binary"
+#>  $ name: chr  "corner2" "corner3" "corner4" "mudmap_photo"
+#>  $ path: 'glue' chr  "Submissions.perimeter" "Submissions.perimeter" "Submissions.perimeter" "Submissions.perimeter"
+#> 
+#> ℹ
+#> 
+#> Found child: structure
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: taxon_encounter
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "field_name", type = "string")ℹ
+#> 
+#> Found child: list(name = "photo_in_situ", type = "binary")ℹ
+#> 
+#> Found child: list(name = "taxon_encounter_location", type = "geopoint")ℹ
+#> 
+#> Found child: list(name = "life_form", type = "select1")ℹ
+#> 
+#> Found child: list(name = "voucher_specimen_barcode", type = "barcode")ℹ
+#> 
+#> Found child: list(name = "voucher_specimen_label", type = "string")
+#> 'data.frame':    6 obs. of  3 variables:
+#>  $ type: chr  "string" "binary" "geopoint" "select1" ...
+#>  $ name: chr  "field_name" "photo_in_situ" "taxon_encounter_location" "life_form" ...
+#>  $ path: 'glue' chr  "Submissions.taxon_encounter" "Submissions.taxon_encounter" "Submissions.taxon_encounter" "Submissions.taxon_encounter" ...
+#> 
+#> 'data.frame':    6 obs. of  3 variables:
+#>  $ type: chr  "string" "binary" "geopoint" "select1" ...
+#>  $ name: chr  "field_name" "photo_in_situ" "taxon_encounter_location" "life_form" ...
+#>  $ path: 'glue' chr  "Submissions.taxon_encounter" "Submissions.taxon_encounter" "Submissions.taxon_encounter" "Submissions.taxon_encounter" ...
+#> 
+#> ℹ
+#> 
+#> Found child: repeat
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    33 obs. of  3 variables:
+#>  $ type: chr  "structure" "dateTime" "string" "string" ...
+#>  $ name: chr  "meta" "encounter_start_datetime" "reporter" "device_id" ...
+#>  $ path: chr  "Submissions" "Submissions" "Submissions" "Submissions" ...
+#> 
 meta %>% knitr::kable(.)
 ```
 
@@ -309,13 +589,291 @@ srv %>% knitr::kable(.)
 
 ``` r
 # Form submissions
-d <- fs::path("docs/articles/attachments/media")   # choose your own
-tz <- "Australia/Perth"                            # g'day mate
-data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
+d <- fs::path("vignettes/media")    # choose your own
+tz <- "Australia/Perth"             # g'day mate
+data <- ruODK::odata_submission_get(local_dir = d, tz = tz)
 #> ℹ Downloading submissions...
 #> ✔ Downloaded submissions.
 #> ℹ Parsing submissions...
 #> ℹ Reading form schema...
+#> 'data.frame':    10 obs. of  3 variables:
+#>  $ type: chr  "structure" "dateTime" "string" "string" ...
+#>  $ name: chr  "meta" "encounter_start_datetime" "reporter" "device_id" ...
+#>  $ path: chr  "Submissions" "Submissions" "Submissions" "Submissions" ...
+#> 
+#> ℹ
+#> 
+#> Found child: meta
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "instanceID", type = "string")
+#> 'data.frame':    1 obs. of  3 variables:
+#>  $ type: chr "string"
+#>  $ name: chr "instanceID"
+#>  $ path: 'glue' chr "Submissions.meta"
+#> 
+#> 'data.frame':    1 obs. of  3 variables:
+#>  $ type: chr "string"
+#>  $ name: chr "instanceID"
+#>  $ path: 'glue' chr "Submissions.meta"
+#> 
+#> ℹ
+#> 
+#> Found child: structure
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: location
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "area_name", type = "string")ℹ
+#> 
+#> Found child: list(name = "quadrat_photo", type = "binary")ℹ
+#> 
+#> Found child: list(name = "corner1", type = "geopoint")
+#> 'data.frame':    3 obs. of  3 variables:
+#>  $ type: chr  "string" "binary" "geopoint"
+#>  $ name: chr  "area_name" "quadrat_photo" "corner1"
+#>  $ path: 'glue' chr  "Submissions.location" "Submissions.location" "Submissions.location"
+#> 
+#> 'data.frame':    3 obs. of  3 variables:
+#>  $ type: chr  "string" "binary" "geopoint"
+#>  $ name: chr  "area_name" "quadrat_photo" "corner1"
+#>  $ path: 'glue' chr  "Submissions.location" "Submissions.location" "Submissions.location"
+#> 
+#> ℹ
+#> 
+#> Found child: structure
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: habitat
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "morphological_type", type = "select1")ℹ
+#> 
+#> Found child: list(name = "morphological_type_photo", type = "binary")
+#> 'data.frame':    2 obs. of  3 variables:
+#>  $ type: chr  "select1" "binary"
+#>  $ name: chr  "morphological_type" "morphological_type_photo"
+#>  $ path: 'glue' chr  "Submissions.habitat" "Submissions.habitat"
+#> 
+#> 'data.frame':    2 obs. of  3 variables:
+#>  $ type: chr  "select1" "binary"
+#>  $ name: chr  "morphological_type" "morphological_type_photo"
+#>  $ path: 'glue' chr  "Submissions.habitat" "Submissions.habitat"
+#> 
+#> ℹ
+#> 
+#> Found child: structure
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: vegetation_stratum
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "nvis_level3_broad_floristic_group", type = "select1")ℹ
+#> 
+#> Found child: list(name = "max_height_m", type = "decimal")ℹ
+#> 
+#> Found child: list(name = "foliage_cover", type = "select1")ℹ
+#> 
+#> Found child: list(name = "dominant_species_1", type = "string")ℹ
+#> 
+#> Found child: list(name = "dominant_species_2", type = "string")ℹ
+#> 
+#> Found child: list(name = "dominant_species_3", type = "string")ℹ
+#> 
+#> Found child: list(name = "dominant_species_4", type = "string")
+#> 'data.frame':    7 obs. of  3 variables:
+#>  $ type: chr  "select1" "decimal" "select1" "string" ...
+#>  $ name: chr  "nvis_level3_broad_floristic_group" "max_height_m" "foliage_cover" "dominant_species_1" ...
+#>  $ path: 'glue' chr  "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" ...
+#> 
+#> 'data.frame':    7 obs. of  3 variables:
+#>  $ type: chr  "select1" "decimal" "select1" "string" ...
+#>  $ name: chr  "nvis_level3_broad_floristic_group" "max_height_m" "foliage_cover" "dominant_species_1" ...
+#>  $ path: 'glue' chr  "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" "Submissions.vegetation_stratum" ...
+#> 
+#> ℹ
+#> 
+#> Found child: repeat
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: perimeter
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "corner2", type = "geopoint")ℹ
+#> 
+#> Found child: list(name = "corner3", type = "geopoint")ℹ
+#> 
+#> Found child: list(name = "corner4", type = "geopoint")ℹ
+#> 
+#> Found child: list(name = "mudmap_photo", type = "binary")
+#> 'data.frame':    4 obs. of  3 variables:
+#>  $ type: chr  "geopoint" "geopoint" "geopoint" "binary"
+#>  $ name: chr  "corner2" "corner3" "corner4" "mudmap_photo"
+#>  $ path: 'glue' chr  "Submissions.perimeter" "Submissions.perimeter" "Submissions.perimeter" "Submissions.perimeter"
+#> 
+#> 'data.frame':    4 obs. of  3 variables:
+#>  $ type: chr  "geopoint" "geopoint" "geopoint" "binary"
+#>  $ name: chr  "corner2" "corner3" "corner4" "mudmap_photo"
+#>  $ path: 'glue' chr  "Submissions.perimeter" "Submissions.perimeter" "Submissions.perimeter" "Submissions.perimeter"
+#> 
+#> ℹ
+#> 
+#> Found child: structure
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: taxon_encounter
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> ℹ
+#> 
+#> Found child: list(name = "field_name", type = "string")ℹ
+#> 
+#> Found child: list(name = "photo_in_situ", type = "binary")ℹ
+#> 
+#> Found child: list(name = "taxon_encounter_location", type = "geopoint")ℹ
+#> 
+#> Found child: list(name = "life_form", type = "select1")ℹ
+#> 
+#> Found child: list(name = "voucher_specimen_barcode", type = "barcode")ℹ
+#> 
+#> Found child: list(name = "voucher_specimen_label", type = "string")
+#> 'data.frame':    6 obs. of  3 variables:
+#>  $ type: chr  "string" "binary" "geopoint" "select1" ...
+#>  $ name: chr  "field_name" "photo_in_situ" "taxon_encounter_location" "life_form" ...
+#>  $ path: 'glue' chr  "Submissions.taxon_encounter" "Submissions.taxon_encounter" "Submissions.taxon_encounter" "Submissions.taxon_encounter" ...
+#> 
+#> 'data.frame':    6 obs. of  3 variables:
+#>  $ type: chr  "string" "binary" "geopoint" "select1" ...
+#>  $ name: chr  "field_name" "photo_in_situ" "taxon_encounter_location" "life_form" ...
+#>  $ path: 'glue' chr  "Submissions.taxon_encounter" "Submissions.taxon_encounter" "Submissions.taxon_encounter" "Submissions.taxon_encounter" ...
+#> 
+#> ℹ
+#> 
+#> Found child: repeat
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    0 obs. of  3 variables:
+#>  $ type: logi 
+#>  $ name: logi 
+#>  $ path: 'glue' chr
+#> 
+#> 'data.frame':    33 obs. of  3 variables:
+#>  $ type: chr  "structure" "dateTime" "string" "string" ...
+#>  $ name: chr  "meta" "encounter_start_datetime" "reporter" "device_id" ...
+#>  $ path: chr  "Submissions" "Submissions" "Submissions" "Submissions" ...
+#> 
 #> ℹ Parsing submissions...
 #> New names:
 #> * `@odata.context` -> .odata.context
@@ -345,23 +903,23 @@ data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
 #> ℹ Parsing "encounter_end_datetime" with timezone "Australia/Perth"...
 #> ℹ Found attachments: "location_quadrat_photo". ℹ Found attachments: "habitat_morphological_type_photo". ℹ Found attachments: "perimeter_mudmap_photo".
 #> ✔ Downloading attachments...
-#> ℹ Using local directory "docs/articles/attachments/media".
-#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568794395624.jpg".
-#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568786958640.jpg".
-#> ℹ Using local directory "docs/articles/attachments/media".
-#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568794560256.jpg".
-#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568787004467.jpg".
-#> ℹ Using local directory "docs/articles/attachments/media".
+#> ℹ Using local directory "vignettes/media".
+#> ◉ File already downloaded, keeping "vignettes/media/1568794395624.jpg".
+#> ◉ File already downloaded, keeping "vignettes/media/1568786958640.jpg".
+#> ℹ Using local directory "vignettes/media".
+#> ◉ File already downloaded, keeping "vignettes/media/1568794560256.jpg".
+#> ◉ File already downloaded, keeping "vignettes/media/1568787004467.jpg".
+#> ℹ Using local directory "vignettes/media".
 #> ◯ Filename is NA, skipping download.
-#> ◉ File already downloaded, keeping "docs/articles/attachments/media/1568787172983.jpg".
+#> ◉ File already downloaded, keeping "vignettes/media/1568787172983.jpg".
 #> ✔ Returning parsed submissions.
 data %>% knitr::kable(.)
 ```
 
-| id                                        | encounter\_start\_datetime | reporter      | device\_id       | encounter\_end\_datetime | system\_submission\_date | system\_submitter\_id | system\_submitter\_name | system\_attachments\_present | system\_attachments\_expected | meta\_instance\_id                        | location\_area\_name     | location\_quadrat\_photo                          | location\_corner1\_type | location\_corner1\_coordinates\_1 | location\_corner1\_coordinates\_2 | location\_corner1\_coordinates\_3 | location\_corner1\_properties\_accuracy | habitat\_morphological\_type | habitat\_morphological\_type\_photo               | vegetation\_stratum\_odata\_navigation\_link                                 | perimeter\_corner2\_type | perimeter\_corner2\_coordinates\_1 | perimeter\_corner2\_coordinates\_2 | perimeter\_corner2\_coordinates\_3 | perimeter\_corner2\_properties\_accuracy | perimeter\_corner3\_type | perimeter\_corner3\_coordinates\_1 | perimeter\_corner3\_coordinates\_2 | perimeter\_corner3\_coordinates\_3 | perimeter\_corner3\_properties\_accuracy | perimeter\_corner4\_type | perimeter\_corner4\_coordinates\_1 | perimeter\_corner4\_coordinates\_2 | perimeter\_corner4\_coordinates\_3 | perimeter\_corner4\_properties\_accuracy | perimeter\_mudmap\_photo                          | taxon\_encounter\_odata\_navigation\_link                                 | odata\_context                                                                                                              |
-| :---------------------------------------- | :------------------------- | :------------ | :--------------- | :----------------------- | :----------------------- | :-------------------- | :---------------------- | ---------------------------: | ----------------------------: | :---------------------------------------- | :----------------------- | :------------------------------------------------ | :---------------------- | --------------------------------: | --------------------------------: | --------------------------------: | --------------------------------------: | :--------------------------- | :------------------------------------------------ | :--------------------------------------------------------------------------- | :----------------------- | ---------------------------------: | ---------------------------------: | ---------------------------------: | ---------------------------------------: | :----------------------- | ---------------------------------: | ---------------------------------: | ---------------------------------: | ---------------------------------------: | :----------------------- | ---------------------------------: | ---------------------------------: | ---------------------------------: | ---------------------------------------: | :------------------------------------------------ | :------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
-| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 2019-09-18 16:12:21        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 16:40:46      | 2019-09-18T08:51:07.481Z | 241                   | flora                   |                            4 |                             4 | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | docs/articles/attachments/media/1568794395624.jpg | Point                   |                          115.8846 |                        \-31.99606 |                           6.40451 |                                   4.288 | mid-slope                    | docs/articles/attachments/media/1568794560256.jpg | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/vegetation\_stratum | Point                    |                           115.8844 |                         \-31.99623 |                        \-26.305695 |                                    4.288 | Point                    |                           115.8844 |                         \-31.99615 |                        \-17.897552 |                                    4.288 | Point                    |                           115.8843 |                         \-31.99610 |                        \-27.759338 |                                    4.288 | NA                                                | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
-| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18 14:08:43        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 14:18:53      | 2019-09-18T06:20:25.780Z | 241                   | flora                   |                            8 |                             8 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | docs/articles/attachments/media/1568786958640.jpg | Point                   |                          115.8843 |                        \-31.99615 |                        \-17.37241 |                                   4.288 | flat                         | docs/articles/attachments/media/1568787004467.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/vegetation\_stratum | Point                    |                           115.8844 |                         \-31.99620 |                         \-8.662476 |                                    4.288 | Point                    |                           115.8844 |                         \-31.99622 |                         \-6.266144 |                                    4.288 | Point                    |                           115.8844 |                         \-31.99621 |                         \-6.597748 |                                    4.288 | docs/articles/attachments/media/1568787172983.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
+| id                                        | encounter\_start\_datetime | reporter      | device\_id       | encounter\_end\_datetime | system\_submission\_date | system\_submitter\_id | system\_submitter\_name | system\_attachments\_present | system\_attachments\_expected | meta\_instance\_id                        | location\_area\_name     | location\_quadrat\_photo          | location\_corner1\_type | location\_corner1\_coordinates\_1 | location\_corner1\_coordinates\_2 | location\_corner1\_coordinates\_3 | location\_corner1\_properties\_accuracy | habitat\_morphological\_type | habitat\_morphological\_type\_photo | vegetation\_stratum\_odata\_navigation\_link                                 | perimeter\_corner2\_type | perimeter\_corner2\_coordinates\_1 | perimeter\_corner2\_coordinates\_2 | perimeter\_corner2\_coordinates\_3 | perimeter\_corner2\_properties\_accuracy | perimeter\_corner3\_type | perimeter\_corner3\_coordinates\_1 | perimeter\_corner3\_coordinates\_2 | perimeter\_corner3\_coordinates\_3 | perimeter\_corner3\_properties\_accuracy | perimeter\_corner4\_type | perimeter\_corner4\_coordinates\_1 | perimeter\_corner4\_coordinates\_2 | perimeter\_corner4\_coordinates\_3 | perimeter\_corner4\_properties\_accuracy | perimeter\_mudmap\_photo          | taxon\_encounter\_odata\_navigation\_link                                 | odata\_context                                                                                                              |
+| :---------------------------------------- | :------------------------- | :------------ | :--------------- | :----------------------- | :----------------------- | :-------------------- | :---------------------- | ---------------------------: | ----------------------------: | :---------------------------------------- | :----------------------- | :-------------------------------- | :---------------------- | --------------------------------: | --------------------------------: | --------------------------------: | --------------------------------------: | :--------------------------- | :---------------------------------- | :--------------------------------------------------------------------------- | :----------------------- | ---------------------------------: | ---------------------------------: | ---------------------------------: | ---------------------------------------: | :----------------------- | ---------------------------------: | ---------------------------------: | ---------------------------------: | ---------------------------------------: | :----------------------- | ---------------------------------: | ---------------------------------: | ---------------------------------: | ---------------------------------------: | :-------------------------------- | :------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
+| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 2019-09-18 16:12:21        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 16:40:46      | 2019-09-18T08:51:07.481Z | 241                   | flora                   |                            4 |                             4 | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | vignettes/media/1568794395624.jpg | Point                   |                          115.8846 |                        \-31.99606 |                           6.40451 |                                   4.288 | mid-slope                    | vignettes/media/1568794560256.jpg   | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/vegetation\_stratum | Point                    |                           115.8844 |                         \-31.99623 |                        \-26.305695 |                                    4.288 | Point                    |                           115.8844 |                         \-31.99615 |                        \-17.897552 |                                    4.288 | Point                    |                           115.8843 |                         \-31.99610 |                        \-27.759338 |                                    4.288 | NA                                | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
+| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18 14:08:43        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 14:18:53      | 2019-09-18T06:20:25.780Z | 241                   | flora                   |                            8 |                             8 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | vignettes/media/1568786958640.jpg | Point                   |                          115.8843 |                        \-31.99615 |                        \-17.37241 |                                   4.288 | flat                         | vignettes/media/1568787004467.jpg   | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/vegetation\_stratum | Point                    |                           115.8844 |                         \-31.99620 |                         \-8.662476 |                                    4.288 | Point                    |                           115.8844 |                         \-31.99622 |                         \-6.266144 |                                    4.288 | Point                    |                           115.8844 |                         \-31.99621 |                         \-6.597748 |                                    4.288 | vignettes/media/1568787172983.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/taxon\_encounter | <https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc/$metadata#Submissions> |
 
 A more detailed walk-through with some data visualisation examples is
 available in the [`vignette("odata-api",
@@ -408,7 +966,8 @@ citation("ruODK")
 #> 
 #> To cite ruODK in publications use:
 #> 
-#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API. R package version 0.6.6. https://github.com/dbca-wa/ruODK
+#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API. R
+#>   package version 0.6.6. https://github.com/dbca-wa/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
