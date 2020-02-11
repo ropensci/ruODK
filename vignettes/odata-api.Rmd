@@ -437,7 +437,7 @@ leaflet::leaflet(width = 800, height = 600) %>%
       "Reporter {reporter}</br>",
       "Device {device_id}</br>",
       "<h5>Taxon</h5>",
-      '<div><img src="{photo_in_situ}"',
+      '<div><img src="media/{photo_in_situ}"',
       ' height="150px" alt="Taxon in situ"></img></div>',
       "Specimen barcode: {voucher_specimen_barcode}</br>",
       "Life form: {life_form}</br>"
