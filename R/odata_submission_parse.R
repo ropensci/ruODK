@@ -38,14 +38,14 @@ listcol_names <- function(tbl) {
 #'   Unnested variables inside a list column will be prefixed by the list column
 #'   name, separated by `names_sep`. This avoids unsightly repaired names
 #'   such as `latitude...1`.
-#' @param verbose Whether to print verbose messages, default: FALSE.
+#' @template param-verbose
 #' @return The unnested tibble in wide format
 #' @family odata-api
 #' @export
 unnest_all <- function(nested_tbl,
                        names_repair = "universal",
                        names_sep = "_",
-                       verbose = FALSE) {
+                       verbose = get_ru_verbose()) {
   for (colname in listcol_names(nested_tbl)) {
     if (!(colname %in% names(nested_tbl))) {
       # # Diagnostic message
@@ -123,7 +123,7 @@ unnest_all <- function(nested_tbl,
 #'   Unnested variables inside a list column will be prefixed by the list column
 #'   name, separated by `names_sep`. This avoids unsightly repaired names
 #'   such as `latitude...1`.
-#' @param verbose Whether to print verbose messages, default: FALSE.
+#' @template param-verbose
 #' @return The submissions as unnested tibble
 #' @family odata-api
 #' @export
@@ -144,7 +144,7 @@ odata_submission_parse <- function(data,
                                    form_schema = NULL,
                                    names_repair = "universal",
                                    names_sep = "_",
-                                   verbose = FALSE) {
+                                   verbose = get_ru_verbose()) {
   data %>%
     tibble::as_tibble(., .name_repair = names_repair) %>%
     unnest_all(names_repair = names_repair, verbose = verbose) %>%

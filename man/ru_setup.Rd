@@ -19,7 +19,8 @@ ru_setup(
   test_fid_gap = NULL,
   test_url = NULL,
   test_un = NULL,
-  test_pw = NULL
+  test_pw = NULL,
+  verbose = NULL
 )
 }
 \arguments{
@@ -83,6 +84,14 @@ privileged to view the test project(s) at \code{test_url}.}
 
 \item{test_pw}{(optional, character) The valid ODK Central password for
 \code{test_un}.}
+
+\item{verbose}{Global default for `ruODK` verbosity.
+`ruODK` verbosity is determined in order of precedence:
+  * Function parameter:
+    e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
+  * `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
+  * Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
+  * `FALSE`.}
 }
 \description{
 \lifecycle{stable}
@@ -119,7 +128,8 @@ ru_setup(
   test_pid = 14,
   test_fid = "build_Flora-Quadrat-0-2_1558575936",
   test_fid_zip = "build_Spotlighting-0-6_1558333698",
-  test_fid_att = "build_Flora-Quadrat-0-1_1558330379"
+  test_fid_att = "build_Flora-Quadrat-0-1_1558330379",
+  verbose = TRUE
 )
 }
 \seealso{

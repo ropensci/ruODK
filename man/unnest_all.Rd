@@ -10,7 +10,7 @@ unnest_all(
   nested_tbl,
   names_repair = "universal",
   names_sep = "_",
-  verbose = FALSE
+  verbose = get_ru_verbose()
 )
 }
 \arguments{
@@ -25,7 +25,9 @@ Unnested variables inside a list column will be prefixed by the list column
 name, separated by `names_sep`. This avoids unsightly repaired names
 such as `latitude...1`.}
 
-\item{verbose}{Whether to print verbose messages, default: FALSE.}
+\item{verbose}{Whether to display debug messages or not.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+verbosity can be set globally or per function.}
 }
 \value{
 The unnested tibble in wide format

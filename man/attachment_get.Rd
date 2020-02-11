@@ -14,7 +14,7 @@ attachment_get(
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
-  verbose = FALSE
+  verbose = get_ru_verbose()
 )
 }
 \arguments{
@@ -60,7 +60,9 @@ Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{verbose}{Whether to display debug messages or not (default)}
+\item{verbose}{Whether to display debug messages or not.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+verbosity can be set globally or per function.}
 }
 \value{
 The relative file path for the downloaded attachment(s)

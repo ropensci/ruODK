@@ -43,7 +43,9 @@
 #' # Point location: will be split into lat/lon/alt/acc
 #' fsp %>% dplyr::filter(type == "geopoint")
 #' }
-form_schema_parse <- function(fs, path = "Submissions", verbose = FALSE) {
+form_schema_parse <- function(fs,
+                              path = "Submissions",
+                              verbose = get_ru_verbose()) {
   # 00. Recursion airbag
   # if (!(is.list(fs) && "children" %in% names(fs))) return(NULL)
 

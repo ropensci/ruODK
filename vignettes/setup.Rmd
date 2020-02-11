@@ -42,13 +42,18 @@ which are required to run the test suite and build the vignettes.
 `ruODK` infers the base URL, project and form ID from the OData Service URL
 which is shown in ODK Central on the Form Submissions tab.
 
+Furthermore, some functions offer verbose messages, which can assist to
+debug unexpected behaviour. Unless specified in the settings, or in the 
+respective function calls, `ruODK` defaults to hide verbose messages.
+
 ```{r ru_setup}
 # ruODK user using OData service URL, username (an email), and password
 # Never use plaintext username and password, use Sys.getenv() instead
 ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
   un = Sys.getenv("ODKC_UN"), 
-  pw = Sys.getenv("ODKC_PW")
+  pw = Sys.getenv("ODKC_PW"),
+  verbose = TRUE
 )
 
 # ruODK contributor
@@ -125,6 +130,7 @@ ODKC_TEST_PID=14
 ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
 ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698"
 ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379"
+RU_VERBOSE=TRUE
 ```
 
 
@@ -142,6 +148,7 @@ Sys.setenv(ODKC_TEST_PID=14)
 Sys.setenv(ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936")
 Sys.setenv(ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698")
 Sys.setenv(ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379")
+Sys.setenv(RU_VERBOSE=TRUE)
 ```
 
 
@@ -168,7 +175,8 @@ ruODK::project_list(
 ```
 
 An example use case are the `ruODK` tests, which explicitly set `url`, `un`, 
-`pw`, `pid` and `fid` from the test variables `ruODK::get_test_{url, un, pw, pid, fid}()`.
+`pw`, `pid` and `fid` from the test variables 
+`ruODK::get_test_{url, un, pw, pid, fid}()`.
 Note that this uses functions instead of plain text versions of sensitive 
 credentials. Alternatively, variables could also be used to set credentials per
 function call.

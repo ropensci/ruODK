@@ -54,19 +54,6 @@ system(glue::glue("git tag -a {v} -m '{v}'"))
 system(glue::glue("git push origin {v}"))
 
 # -----------------------------------------------------------------------------#
-# If attachments in vignettes change
-#
-# Vignettes are big
-# the repo is small
-# so what shall we do
-# let's mogrify all
-system("find vignettes/attachments/media -type f -exec mogrify -resize 200x150 {} \\;")
-vignette_tempfiles <- here::here("vignettes", "attachments", "media")
-docs_media <- here::here("docs", "articles", "attachments", "media")
-fs::dir_copy(vignette_tempfiles, docs_media, overwrite = TRUE)
-
-
-# -----------------------------------------------------------------------------#
 # Backyard
 #
 # Build PDF manual: not required!

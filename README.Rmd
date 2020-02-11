@@ -154,13 +154,14 @@ provides up-to-date descriptions of the steps below.
 
 ## Configure `ruODK`
 Set up `ruODK` with an OData Service URL and credentials of a read-permitted
-ODK Central web user.
+ODK Central web user. Adjust verbosity to your liking.
   
 ```{r ru_setup_rmd, echo=FALSE, eval=TRUE}
 ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  pw = Sys.getenv("ODKC_TEST_PW"),
+  verbose = TRUE
 )
 ```
 
@@ -168,7 +169,8 @@ ruODK::ru_setup(
 ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = "me@email.com",
-  pw = "..."
+  pw = "...",
+  verbose = TRUE # great for demo or debugging
 )
 ```
 
@@ -199,9 +201,9 @@ meta %>% knitr::kable(.)
 srv <- ruODK::odata_service_get()
 srv %>% knitr::kable(.)
 # Form submissions
-d <- fs::path("docs/articles/attachments/media")   # choose your own
-tz <- "Australia/Perth"                            # g'day mate
-data <- ruODK::odata_submission_get(verbose = TRUE, local_dir = d, tz = tz)
+d <- fs::path("vignettes/media")    # choose your own
+tz <- "Australia/Perth"             # g'day mate
+data <- ruODK::odata_submission_get(local_dir = d, tz = tz)
 data %>% knitr::kable(.)
 ```
 

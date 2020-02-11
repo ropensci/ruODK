@@ -64,7 +64,8 @@ library(ruODK)
 ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  pw = Sys.getenv("ODKC_TEST_PW"),
+  verbose = TRUE
 )
 ```
 
@@ -230,7 +231,7 @@ In the following chuck, we illustrate common tasks:
 
 
 ```{r submission_export, eval=F}
-t <- fs::dir_create("attachments")
+t <- fs::dir_create("media")
 
 # Predict filenames (with knowledge of form)
 fid <- ruODK::get_test_fid()
@@ -391,7 +392,7 @@ sub_att <- sub_parsed %>%
     location_quadrat_photo = ruODK::attachment_get(
         meta_instance_id,
         location_quadrat_photo,
-        local_dir = fs::path("attachments", "media")
+        local_dir = fs::path("media")
     )
     # same for all other attachments
     # requires knowledge or introspection of form schema

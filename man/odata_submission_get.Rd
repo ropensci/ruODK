@@ -13,7 +13,6 @@ odata_submission_get(
   wkt = FALSE,
   parse = TRUE,
   download = TRUE,
-  verbose = FALSE,
   orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
   tz = "UTC",
   local_dir = "media",
@@ -21,7 +20,8 @@ odata_submission_get(
   fid = get_default_fid(),
   url = get_default_url(),
   un = get_default_un(),
-  pw = get_default_pw()
+  pw = get_default_pw(),
+  verbose = get_ru_verbose()
 )
 }
 \arguments{
@@ -63,8 +63,6 @@ this parameter will replace attachment filenames with their fully qualified
 attachment URL.
 Default: TRUE.}
 
-\item{verbose}{Whether to display debug messages or not (default)}
-
 \item{orders}{(vector of character) Orders of datetime elements for
 lubridate.
 Default:
@@ -99,6 +97,10 @@ See \code{vignette("Setup", package = "ruODK")}.}
 Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{verbose}{Whether to display debug messages or not.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+verbosity can be set globally or per function.}
 }
 \value{
 A list of lists.

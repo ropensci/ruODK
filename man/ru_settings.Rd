@@ -15,6 +15,7 @@
 \alias{get_test_fid_zip}
 \alias{get_test_fid_att}
 \alias{get_test_fid_gap}
+\alias{get_ru_verbose}
 \title{Get or set \code{ruODK} settings.}
 \usage{
 ru_settings()
@@ -44,11 +45,13 @@ get_test_fid_zip()
 get_test_fid_att()
 
 get_test_fid_gap()
+
+get_ru_verbose()
 }
 \value{
 \code{\link{ru_settings}} prints your default ODK Central project ID,
-  form ID, url, username, and password, and corresponding optional test
-  server settings.
+  form ID, url, username, and password, corresponding optional test
+  server as well as verbosity settings.
 \code{\link{ru_setup}} sets your production and test settings, while
 \code{get_(default/test)_*} get each of those respective settings.
 }
@@ -72,7 +75,8 @@ ru_settings()
 \code{\link{get_test_fid_gap}},
 \code{\link{get_test_url}},
 \code{\link{get_test_un}},
-\code{\link{get_test_pw}}.
+\code{\link{get_test_pw}},
+\code{\link{get_ru_verbose}}.
 
 Other ru_settings: 
 \code{\link{odata_svc_parse}()},

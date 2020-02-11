@@ -62,12 +62,13 @@ ruODK::ru_setup(
   svc = paste0("https://sandbox.central.opendatakit.org/v1/projects/14/",
                "forms/build_Flora-Quadrat-0-4_1564384341.svc"),
   un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  pw = Sys.getenv("ODKC_TEST_PW"),
+  verbose = TRUE
 )
 
 # Settings for timezone and file attachment download location
 tz <- "Australia/Perth"
-loc <- fs::path("attachments", "media")
+loc <- fs::path("media")
 
 # Canned data
 data("fq_svc")
@@ -148,21 +149,18 @@ anonymous names like `x10`, `x11`, `x12` which then need to be renamed.
 ```{r load_odata, eval=FALSE}
 fq_data <- ruODK::odata_submission_get(
   table = fq_svc$name[1], 
-  verbose = TRUE, 
   tz = tz, 
   local_dir = loc,
   wkt=TRUE)
 
 fq_data_strata <- ruODK::odata_submission_get(
   table = fq_svc$name[2], 
-  verbose = TRUE, 
   tz = tz, 
   local_dir = loc
 )
 
 fq_data_taxa <- ruODK::odata_submission_get(
   table = fq_svc$name[3], 
-  verbose = TRUE, 
   tz = tz, 
   local_dir = loc,
   wkt=TRUE)
@@ -311,7 +309,7 @@ the package source under [`docs/articles/attachments`
 To minimise package size, they were resized with imagemagick:
 
 ```{sh, eval=FALSE}
-find vignettes/attachments/media -type f -exec mogrify -resize 200x150 {} \\;
+find vignettes/media -type f -exec mogrify -resize 200x150 {} \\;
 ```
 
 ## DIY rectangling

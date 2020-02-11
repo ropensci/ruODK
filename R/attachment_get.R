@@ -79,7 +79,7 @@ attachment_url <- function(uuid,
 #'   \code{\link{attachment_url}}.
 #' @template param-url
 #' @template param-auth
-#' @param verbose Whether to display debug messages or not (default).
+#' @template param-verbose
 #' @return The relative local path to the downloaded attachment or NA.
 #' @family odata-api
 #' @export
@@ -105,7 +105,7 @@ get_one_attachment <- function(pth,
                                url = get_default_url(),
                                un = get_default_un(),
                                pw = get_default_pw(),
-                               verbose = FALSE) {
+                               verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw)
   if (fs::file_exists(pth)) {
     if (verbose == TRUE) {
@@ -224,7 +224,7 @@ attachment_get <- function(sid,
                            url = get_default_url(),
                            un = get_default_un(),
                            pw = get_default_pw(),
-                           verbose = FALSE) {
+                           verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   if (separate == TRUE) {
     dest_dir <- fs::path(local_dir, strip_uuid(sid))

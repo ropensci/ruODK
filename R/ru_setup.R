@@ -4,8 +4,8 @@
 #'
 #' @export
 #' @return \code{\link{ru_settings}} prints your default ODK Central project ID,
-#'   form ID, url, username, and password, and corresponding optional test
-#'   server settings.
+#'   form ID, url, username, and password, corresponding optional test
+#'   server as well as verbosity settings.
 #' \code{\link{ru_setup}} sets your production and test settings, while
 #' \code{get_(default/test)_*} get each of those respective settings.
 #' @seealso  \code{\link{ru_setup}},
@@ -21,7 +21,8 @@
 #' \code{\link{get_test_fid_gap}},
 #' \code{\link{get_test_url}},
 #' \code{\link{get_test_un}},
-#' \code{\link{get_test_pw}}.
+#' \code{\link{get_test_pw}},
+#' \code{\link{get_ru_verbose}}.
 #' @family ru_settings
 #' @examples
 #' ru_settings()
@@ -39,7 +40,8 @@ ru_settings <- function() {
     test_fid_gap = Sys.getenv("ODKC_TEST_FID_GAP", ""),
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
-    test_pw = Sys.getenv("ODKC_TEST_PW", "")
+    test_pw = Sys.getenv("ODKC_TEST_PW", ""),
+    verbose = Sys.getenv("RU_VERBOSE", FALSE)
   )
   structure(ops, class = "ru_settings")
 }
@@ -60,6 +62,7 @@ print.ru_settings <- function(x, ...) {
   cat("  Test ODK Central URL:", x$test_url, "\n")
   cat("  Test ODK Central Username:", x$test_un, "\n")
   cat("  Test ODK Central Password: run ruODK::get_test_pw() to show \n")
+  cat("  Verbose messages:", x$verbose, "\n")
 }
 
 #------------------------------------------------------------------------------#
@@ -145,6 +148,13 @@ odata_svc_parse <- function(svc) {
 #'   privileged to view the test project(s) at \code{test_url}.
 #' @param test_pw (optional, character) The valid ODK Central password for
 #'   \code{test_un}.
+#' @param verbose Global default for `ruODK` verbosity.
+#'   `ruODK` verbosity is determined in order of precedence:
+#'     * Function parameter:
+#'       e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
+#'     * `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
+#'     * Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
+#'     * `FALSE`.
 #' @family ru_settings
 #' @details
 #' \code{\link{ru_setup}} sets ODK Central connection details.
@@ -178,7 +188,8 @@ odata_svc_parse <- function(svc) {
 #'   test_pid = 14,
 #'   test_fid = "build_Flora-Quadrat-0-2_1558575936",
 #'   test_fid_zip = "build_Spotlighting-0-6_1558333698",
-#'   test_fid_att = "build_Flora-Quadrat-0-1_1558330379"
+#'   test_fid_att = "build_Flora-Quadrat-0-1_1558330379",
+#'   verbose = TRUE
 #' )
 ru_setup <- function(svc = NULL,
                      pid = NULL,
@@ -194,7 +205,8 @@ ru_setup <- function(svc = NULL,
                      test_fid_gap = NULL,
                      test_url = NULL,
                      test_un = NULL,
-                     test_pw = NULL) {
+                     test_pw = NULL,
+                     verbose = NULL) {
   if (!is.null(svc)) {
     odata_components <- odata_svc_parse(svc)
     Sys.setenv("ODKC_PID" = odata_components$pid)
@@ -223,6 +235,7 @@ ru_setup <- function(svc = NULL,
   if (!is.null(test_url)) Sys.setenv("ODKC_TEST_URL" = test_url)
   if (!is.null(test_un)) Sys.setenv("ODKC_TEST_UN" = test_un)
   if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
+  if (!is.null(verbose)) Sys.setenv("RU_VERBOSE" = verbose)
 
   print(ru_settings())
 }
@@ -370,6 +383,14 @@ get_test_fid_gap <- function() {
   if (identical(x, "")) {
     rlang::warn("No test ODK Central GAP form ID set. ru_setup()?")
   }
+  x
+}
+
+#' \lifecycle{stable}
+#' @export
+#' @rdname ru_settings
+get_ru_verbose <- function() {
+  x <- Sys.getenv("RU_VERBOSE", unset = FALSE)
   x
 }
 

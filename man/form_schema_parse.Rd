@@ -4,7 +4,7 @@
 \alias{form_schema_parse}
 \title{Parse a form_schema into a tibble of fields with name, type, and path.}
 \usage{
-form_schema_parse(fs, path = "Submissions", verbose = FALSE)
+form_schema_parse(fs, path = "Submissions", verbose = get_ru_verbose())
 }
 \arguments{
 \item{fs}{The output of form_schema as nested list}
@@ -17,7 +17,9 @@ translates to separate screens in ODK Collect.
 Non-repeating form groups will be flattened out into the main Submissions
 table. Repeating groups are available as separate OData tables.}
 
-\item{verbose}{Whether to display debug messages or not (default)}
+\item{verbose}{Whether to display debug messages or not.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+verbosity can be set globally or per function.}
 }
 \description{
 \lifecycle{maturing}

@@ -69,7 +69,6 @@
 #'   this parameter will replace attachment filenames with their fully qualified
 #'   attachment URL.
 #'   Default: TRUE.
-#' @template param-verbose
 #' @param orders (vector of character) Orders of datetime elements for
 #'   lubridate.
 #'   Default:
@@ -81,6 +80,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-verbose
 #' @return A list of lists.
 #'
 #'   * `value` contains the submissions as list of lists.
@@ -148,7 +148,6 @@ odata_submission_get <- function(table = "Submissions",
                                  wkt = FALSE,
                                  parse = TRUE,
                                  download = TRUE,
-                                 verbose = FALSE,
                                  orders = c(
                                    "YmdHMS",
                                    "YmdHMSz",
@@ -163,7 +162,9 @@ odata_submission_get <- function(table = "Submissions",
                                  fid = get_default_fid(),
                                  url = get_default_url(),
                                  un = get_default_un(),
-                                 pw = get_default_pw()) {
+                                 pw = get_default_pw(),
+                                 verbose = get_ru_verbose()
+                                 ) {
   type <- NULL
   yell_if_missing(url, un, pw)
 
