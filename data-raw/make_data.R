@@ -91,3 +91,7 @@ usethis::use_data(fq_zip_taxa, overwrite = T)
 usethis::use_data(fq_submission_list, overwrite = T)
 usethis::use_data(fq_submissions, overwrite = T)
 usethis::use_data(fq_attachments, overwrite = T)
+
+# Update header of vignettes/odata-api.Rmd with (delete abs path):
+# - attachments/media/1568786958640.jpg
+ymlthis::yml_resource_files(ymlthis::yml(), fs::dir_ls(here::here("vignettes/attachments/media/")))
