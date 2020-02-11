@@ -41,7 +41,7 @@ ru_settings <- function() {
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", ""),
-    verbose = Sys.getenv("RU_VERBOSE", FALSE)
+    verbose = as.logical(Sys.getenv("RU_VERBOSE", FALSE))
   )
   structure(ops, class = "ru_settings")
 }
@@ -390,7 +390,7 @@ get_test_fid_gap <- function() {
 #' @export
 #' @rdname ru_settings
 get_ru_verbose <- function() {
-  x <- Sys.getenv("RU_VERBOSE", unset = FALSE)
+  x <- as.logical(Sys.getenv("RU_VERBOSE", unset = FALSE))
   x
 }
 

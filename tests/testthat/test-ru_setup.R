@@ -17,7 +17,8 @@ test_that("ru_setup does not update settings if given NULL", {
     test_fid_gap = NULL,
     test_url = NULL,
     test_un = NULL,
-    test_pw = NULL
+    test_pw = NULL,
+    verbose = NULL
   )
 
   # Get current (unchanged) settings
@@ -37,6 +38,7 @@ test_that("ru_setup does not update settings if given NULL", {
   testthat::expect_equal(x$test_fid_zip, get_test_fid_zip())
   testthat::expect_equal(x$test_fid_att, get_test_fid_att())
   testthat::expect_equal(x$test_fid_gap, get_test_fid_gap())
+  testthat::expect_equal(x$verbose, get_ru_verbose())
 })
 
 test_that("ru_setup resets settings if given empty string", {
@@ -68,7 +70,8 @@ test_that("ru_setup resets settings if given empty string", {
     test_fid_gap = "",
     test_url = "",
     test_un = "",
-    test_pw = ""
+    test_pw = "",
+    verbose = FALSE
   )
   x <- ru_settings()
 
@@ -98,6 +101,8 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_equal(x$test_fid_zip, "")
   testthat::expect_equal(x$test_fid_att, "")
   testthat::expect_equal(x$test_fid_gap, "")
+  testthat::expect_equal(x$verbose, FALSE)
+
 
   # Reset
   ru_setup(
@@ -111,7 +116,8 @@ test_that("ru_setup resets settings if given empty string", {
     test_fid = test_fid,
     test_fid_zip = test_fid_zip,
     test_fid_att = test_fid_att,
-    test_fid_gap = test_fid_gap
+    test_fid_gap = test_fid_gap,
+    verbose = TRUE
   )
 })
 
@@ -127,7 +133,8 @@ test_that("ru_setup sets pid, fid, url if given service url", {
   # Hammertime
   ru_setup(
     svc = "https://defaultserver.com/v1/projects/20/forms/FORMID.svc",
-    test_svc = "https://testserver.com/v1/projects/40/forms/TESTFORMID.svc"
+    test_svc = "https://testserver.com/v1/projects/40/forms/TESTFORMID.svc",
+    verbose = TRUE
   )
   x <- ru_settings()
 
@@ -137,6 +144,8 @@ test_that("ru_setup sets pid, fid, url if given service url", {
   testthat::expect_equal(x$test_url, "https://testserver.com")
   testthat::expect_equal(x$test_pid, "40")
   testthat::expect_equal(x$test_fid, "TESTFORMID")
+  testthat::expect_equal(x$verbose, TRUE)
+
 
   # Restore sane state
   ru_setup(
@@ -149,6 +158,13 @@ test_that("ru_setup sets pid, fid, url if given service url", {
 })
 
 test_that("ru_setup sets individual settings", {
+
+  ru_setup(verbose = FALSE)
+  testthat::expect_equal(get_ru_verbose(), FALSE)
+
+  ru_setup(verbose = TRUE)
+  testthat::expect_equal(get_ru_verbose(), TRUE)
+
 
   # Keep original test settings
   url <- get_test_url()
