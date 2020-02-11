@@ -33,13 +33,8 @@ devtools::check(cran = FALSE, remote = TRUE, incoming = TRUE)
 #
 # Add new feature to news if user-facing
 usethis::edit_file("NEWS.md")
-#
-# Build site
-pkgdown::build_site()
-# if https://github.com/r-lib/pkgdown/issues/1157 happens:
-# httr::set_config(httr::config(ssl_verifypeer = 0L))
-# pkgdown::build_site(pkg = ".", new_process = FALSE)
-#
+
+
 # Commit and push
 
 # -----------------------------------------------------------------------------#
@@ -90,3 +85,33 @@ fs::dir_copy(vignette_tempfiles, docs_media, overwrite = TRUE)
 # tools::compactPDF("inst/extdoc/ruODK.pdf", gs_quality = "ebook") # compress pdf
 # usethis::edit_file("vignettes/manual.Rnw") # hit "Compile PDF"
 #
+# -----------------------------------------------------------------------------#
+# Build site - built by TravisCI
+# pkgdown::build_site()
+# if https://github.com/r-lib/pkgdown/issues/1157 happens:
+# httr::set_config(httr::config(ssl_verifypeer = 0L))
+# pkgdown::build_site(pkg = ".", new_process = FALSE)
+# * `usethis::use_pkgdown_travis()`
+# * creates a branch gh-pages
+# * gitignores docs/
+#   * instructs to paste into tavis.yml the following block
+#     (note RStudio auto-indent will mess up the indent -
+#     `deploy` must be top level)
+# ```
+# before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
+# deploy:
+#   provider: script
+#   script: Rscript -e 'pkgdown::deploy_site_github()'
+#   cleanup: false
+#   skip_cleanup: true
+# ```
+# * `travis::browse_travis_token(endpoint = '.org')` opens
+#   <https://travis-ci.org/account/preferences> to view Travis API key
+# * `usethis::edit_r_environ()` to open ~/.Renviron >
+#   add `R_TRAVIS_ORG = "xxx"`, restart session
+# * `travis::use_travis_deploy(endpoint = ".org")`
+#   creates a deploy key on <https://github.com/dbca-wa/ruODK> > Settings >
+#   Deploy keys using the authentication from the Travis CI API token.
+#   Push a change or trigger a travis build.
+# * <https://github.com/dbca-wa/ruODK> > Settings > GitHub pages:
+#   build from gh-pages branch.

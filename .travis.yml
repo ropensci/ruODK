@@ -2,7 +2,6 @@
 
 language: R
 sudo: false
-cache: packages
 
 r:
 - oldrel
@@ -10,6 +9,9 @@ r:
 - devel
 
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
+
+cache: packages
+
 deploy:
   provider: script
   script: Rscript -e 'pkgdown::deploy_site_github()'

@@ -1,9 +1,4 @@
 *.html
-*.R
-^docs$
-^attachments$
-attachments
-api
 manual.log
 manual-concordance.tex
 manual.synctex.gz
