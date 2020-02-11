@@ -98,4 +98,3 @@ ymlthis::yml_resource_files(
   ymlthis::yml(),
   fs::dir_ls(here::here("vignettes/attachments/media/"))
 )
-
