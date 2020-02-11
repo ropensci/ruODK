@@ -6,18 +6,18 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-- attachments/media/1568786958640.jpg
-- attachments/media/1568787004467.jpg
-- attachments/media/1568787172983.jpg
-- attachments/media/1568787220913.jpg
-- attachments/media/1568787333689.jpg
-- attachments/media/1568787380833.jpg
-- attachments/media/1568787456664.jpg
-- attachments/media/1568787504877.jpg
-- attachments/media/1568794395624.jpg
-- attachments/media/1568794560256.jpg
-- attachments/media/1568795382633.jpg
-- attachments/media/1568795579890.jpg
+- media/1568786958640.jpg
+- media/1568787004467.jpg
+- media/1568787172983.jpg
+- media/1568787220913.jpg
+- media/1568787333689.jpg
+- media/1568787380833.jpg
+- media/1568787456664.jpg
+- media/1568787504877.jpg
+- media/1568794395624.jpg
+- media/1568794560256.jpg
+- media/1568795382633.jpg
+- media/1568795579890.jpg
 ---
 
 ```{r setup, include = FALSE}

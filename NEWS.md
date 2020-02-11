@@ -36,6 +36,7 @@ This version is the RC for v0.7 to support ODK Central 0.7.
 * Add screencast to the README. HT to asciicast! (#45)
 * Improve logo - more turtles, but questionable photoshopping.
 * Add examples where missing. (#32)
+* Build pkgdown site via travis. (#52)
 
 # `ruODK` 0.6.6
 * The big one has landed: `odata_submission_get()` now defaults to parse 
