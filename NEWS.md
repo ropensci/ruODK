@@ -1,6 +1,7 @@
 # `ruODK` (development version)
 This version addresses ROpenSci reviewer comments from 
-@karissawhiting and @jmt2080ad as well as ideas from @OdiljonQurbon.
+@karissawhiting and @jmt2080ad as well as ideas from 
+@OdiljonQurbon and @arestrom.
 
 This version is the RC for v0.7 to support ODK Central 0.7.
 
@@ -17,6 +18,7 @@ This version is the RC for v0.7 to support ODK Central 0.7.
 * `ru_setup()` now prints settings. (#37)
 * `parse_datetime()` renamed to `ru_datetime()` to avoid naming conflict with 
   `readr::parse_datetime()`. (#43)
+* Add a global default for verbosity. (#51)
 
 ## Dependencies
 * Moved `rlist` to Imports, as it is now used in `odata_submission_get()`. (#6)
@@ -26,6 +28,8 @@ This version is the RC for v0.7 to support ODK Central 0.7.
 ## Data
 * Use canned data in all vignettes, so they can build without authentication. 
   (#33)
+* Update canned data (and `make-data.R`) to work with travis-built pkgdown site.
+  (#52)
 
 ## Documentation
 * Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK).
@@ -51,7 +55,8 @@ This version is the RC for v0.7 to support ODK Central 0.7.
 ## Code
 * Refactor list wrangling code to use `map_*(.default=NA)`, removing some 
   internal helpers (thanks to @jennybc)
-* Use dummy imports to silence R CMD check NOTES as per [googledrive](https://github.com/tidyverse/googledrive/blob/050a982cba630503702bdde05a77d727baa36d48/R/googledrive-package.R)'s example (thanks to @jennybc)
+* Use dummy imports to silence R CMD check NOTES as per [googledrive](https://github.com/tidyverse/googledrive/blob/050a982cba630503702bdde05a77d727baa36d48/R/googledrive-package.R)'s 
+  example (thanks to @jennybc)
 * Drop unused internal helper functions
 
 # `ruODK` 0.6.4
