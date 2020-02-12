@@ -14,6 +14,7 @@
 #' \code{\link{get_default_url}},
 #' \code{\link{get_default_un}},
 #' \code{\link{get_default_pw}},
+#' \code{\link{get_default_tz}},
 #' \code{\link{get_test_pid}},
 #' \code{\link{get_test_fid}},
 #' \code{\link{get_test_fid_zip}},
@@ -33,6 +34,7 @@ ru_settings <- function() {
     url = Sys.getenv("ODKC_URL", ""),
     un = Sys.getenv("ODKC_UN", ""),
     pw = Sys.getenv("ODKC_PW", ""),
+    tz = Sys.getenv("RU_TIMEZONE", "UTC"),
     test_pid = Sys.getenv("ODKC_TEST_PID", ""),
     test_fid = Sys.getenv("ODKC_TEST_FID", ""),
     test_fid_zip = Sys.getenv("ODKC_TEST_FID_ZIP", ""),
@@ -54,6 +56,7 @@ print.ru_settings <- function(x, ...) {
   cat("  Default ODK Central URL: ", x$url, "\n")
   cat("  Default ODK Central Username: ", x$un, "\n")
   cat("  Default ODK Central Password: run ruODK::get_default_pw() to show \n")
+  cat("  Default Time Zone: ", x$tz, "\n")
   cat("  Test ODK Central Project ID:", x$test_pid, "\n")
   cat("  Test ODK Central Form ID:", x$test_fid, "\n")
   cat("  Test ODK Central Form ID (ZIP tests):", x$test_fid_zip, "\n")
@@ -116,6 +119,13 @@ odata_svc_parse <- function(svc) {
 #' @param un An ODK Central username which is the email of a "web user" in the
 #'   specified ODK Central instance \code{url} (optional, character).
 #' @param pw The password for user \code{un} (optional, character).
+#' @param tz Global default time zone.
+#'   `ruODK`'s time zone is determined in order of precedence:
+#'     * Function parameter:
+#'       e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
+#'     * `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
+#'     * Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
+#'     * `GMT`.
 #' @param test_svc (optional, character) The OData service URL of a test form.
 #'   This parameter will set \code{test_pid}, \code{test_fid}, and
 #'   \code{test_url}. It is sufficient to supply \code{test_svc},
@@ -197,6 +207,7 @@ ru_setup <- function(svc = NULL,
                      url = NULL,
                      un = NULL,
                      pw = NULL,
+                     tz = NULL,
                      test_svc = NULL,
                      test_pid = NULL,
                      test_fid = NULL,
@@ -219,6 +230,7 @@ ru_setup <- function(svc = NULL,
   if (!is.null(url)) Sys.setenv("ODKC_URL" = url)
   if (!is.null(un)) Sys.setenv("ODKC_UN" = un)
   if (!is.null(pw)) Sys.setenv("ODKC_PW" = pw)
+  if (!is.null(tz)) Sys.setenv("RU_TIMEZONE" = tz)
 
   if (!is.null(test_svc)) {
     odata_components <- odata_svc_parse(test_svc)
@@ -294,6 +306,17 @@ get_default_pw <- function() {
   x <- Sys.getenv("ODKC_PW")
   if (identical(x, "")) {
     rlang::warn("No default ODK Central password set. ru_setup()?")
+  }
+  x
+}
+
+#' \lifecycle{stable}
+#' @export
+#' @rdname ru_settings
+get_default_tz <- function() {
+  x <- Sys.getenv("RU_TIMEZONE", unset = "UTC")
+  if (identical(x, "")) {
+    rlang::warn("Empty ruODK timezone set. ru_setup()?")
   }
   x
 }

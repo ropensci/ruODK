@@ -11,6 +11,7 @@ ru_setup(
   url = NULL,
   un = NULL,
   pw = NULL,
+  tz = NULL,
   test_svc = NULL,
   test_pid = NULL,
   test_fid = NULL,
@@ -43,6 +44,14 @@ This will override the ODK Central base URL from \code{svc}.}
 specified ODK Central instance \code{url} (optional, character).}
 
 \item{pw}{The password for user \code{un} (optional, character).}
+
+\item{tz}{Global default time zone.
+`ruODK`'s time zone is determined in order of precedence:
+  * Function parameter:
+    e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
+  * `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
+  * Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
+  * `GMT`.}
 
 \item{test_svc}{(optional, character) The OData service URL of a test form.
 This parameter will set \code{test_pid}, \code{test_fid}, and

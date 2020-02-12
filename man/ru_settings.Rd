@@ -7,6 +7,7 @@
 \alias{get_default_url}
 \alias{get_default_un}
 \alias{get_default_pw}
+\alias{get_default_tz}
 \alias{get_test_url}
 \alias{get_test_un}
 \alias{get_test_pw}
@@ -29,6 +30,8 @@ get_default_url()
 get_default_un()
 
 get_default_pw()
+
+get_default_tz()
 
 get_test_url()
 
@@ -68,6 +71,7 @@ ru_settings()
 \code{\link{get_default_url}},
 \code{\link{get_default_un}},
 \code{\link{get_default_pw}},
+\code{\link{get_default_tz}},
 \code{\link{get_test_pid}},
 \code{\link{get_test_fid}},
 \code{\link{get_test_fid_zip}},

@@ -63,11 +63,11 @@ ruODK::ru_setup(
                "forms/build_Flora-Quadrat-0-4_1564384341.svc"),
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW"),
+  tz = "Australia/Perth",
   verbose = TRUE
 )
 
-# Settings for timezone and file attachment download location
-tz <- "Australia/Perth"
+# File attachment download location
 loc <- fs::path("media")
 
 # Canned data
@@ -149,19 +149,16 @@ anonymous names like `x10`, `x11`, `x12` which then need to be renamed.
 ```{r load_odata, eval=FALSE}
 fq_data <- ruODK::odata_submission_get(
   table = fq_svc$name[1], 
-  tz = tz, 
   local_dir = loc,
   wkt=TRUE)
 
 fq_data_strata <- ruODK::odata_submission_get(
   table = fq_svc$name[2], 
-  tz = tz, 
   local_dir = loc
 )
 
 fq_data_taxa <- ruODK::odata_submission_get(
   table = fq_svc$name[3], 
-  tz = tz, 
   local_dir = loc,
   wkt=TRUE)
 ```
@@ -254,9 +251,9 @@ fq_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], parse = FALSE)
 
 # Parse main data
 fq_data <- fq_raw %>%
-  ruODK::odata_submission_parse(verbose = TRUE) %>%
-  ruODK::parse_datetime(tz = tz, col_contains = "time") %>%
-  ruODK::parse_datetime(tz = tz, col_contains = "date") %>%
+  ruODK::odata_submission_parse() %>%
+  ruODK::parse_datetime(col_contains = "time") %>%
+  ruODK::parse_datetime(col_contains = "date") %>%
   dplyr::rename(
     longitude = x13,
     latitude = x14,
@@ -283,7 +280,7 @@ fq_data <- fq_raw %>%
 
 # Parse nested group "taxa"
 fq_data_taxa <- fq_taxa %>%
-  ruODK::odata_submission_parse(verbose = TRUE) %>%
+  ruODK::odata_submission_parse() %>%
   dplyr::rename(
     lon = x6,
     lat = x7,
@@ -300,7 +297,7 @@ fq_data_taxa <- fq_taxa %>%
 
 # Parse nested group "strata"
 fq_data_strata <- fq_strata %>%
-  ruODK::odata_submission_parse(verbose = TRUE)
+  ruODK::odata_submission_parse()
 ```
 
 Note: A manually resized version of the original photos in this example live in

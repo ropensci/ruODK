@@ -51,7 +51,7 @@
   * The vignette "odata-api" contains a leaflet map with popups showing embedded
     photos, a highly sought after use case.
     The third party dependencies, especially leaflet-awesomemarkers (for map 
-    popups), cost over 3MB. 
+    popups), add over 3MB. 
   * The other vignette "restful-api" refers to the map in vignette "odata" as 
     not to duplicate the expensive map.
   * The example images have been resized aggressively to 200x150 px.

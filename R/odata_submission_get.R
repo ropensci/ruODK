@@ -73,13 +73,13 @@
 #'   lubridate.
 #'   Default:
 #'   \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.
-#' @param tz A timezone, e.g. "Australia/Perth" or "UTC". Default: "UTC".
 #' @param local_dir The local folder to save the downloaded files to,
 #'   default: "media".
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-tz
 #' @template param-verbose
 #' @return A list of lists.
 #'
@@ -156,13 +156,13 @@ odata_submission_get <- function(table = "Submissions",
                                    "Ymd",
                                    "ymd"
                                  ),
-                                 tz = "UTC",
                                  local_dir = "media",
                                  pid = get_default_pid(),
                                  fid = get_default_fid(),
                                  url = get_default_url(),
                                  un = get_default_un(),
                                  pw = get_default_pw(),
+                                 tz = get_default_tz(),
                                  verbose = get_ru_verbose()
                                  ) {
   type <- NULL

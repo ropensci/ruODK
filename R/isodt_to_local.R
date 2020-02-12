@@ -6,14 +6,13 @@
 #' @param orders (vector of character) Orders of datetime elements for
 #'   lubridate.
 #'   Default: \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz")}.
-#' @param tz (character) The timezone string for lubridate.
-#'   Default: \code{"UTC"}.
+#' @template param-tz
 #' @return A lubridate PosixCT datetime in the given timezone.
 #' @family utilities
 #' @export
 isodt_to_local <- function(datetime_string,
                            orders = c("YmdHMS", "YmdHMSz"),
-                           tz = "UTC") {
+                           tz = get_default_tz()) {
   datetime_string %>%
     lubridate::parse_date_time(orders = orders) %>%
     lubridate::with_tz(., tzone = tz)

@@ -181,6 +181,7 @@ read-permitted ODK Central web user. Adjust verbosity to your liking.
     #>   Default ODK Central URL:  https://sandbox.central.opendatakit.org 
     #>   Default ODK Central Username:  Florian.Mayer@dbca.wa.gov.au 
     #>   Default ODK Central Password: run ruODK::get_default_pw() to show 
+    #>   Default Time Zone:  Australia/Perth 
     #>   Test ODK Central Project ID: 14 
     #>   Test ODK Central Form ID: build_Flora-Quadrat-0-4_1564384341 
     #>   Test ODK Central Form ID (ZIP tests): build_Spotlighting-0-6_1558333698 
@@ -196,6 +197,7 @@ ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = "me@email.com",
   pw = "...",
+  tz = "Australia/Perth",
   verbose = TRUE # great for demo or debugging
 )
 ```
@@ -219,12 +221,12 @@ proj %>% head() %>% knitr::kable(.)
 
 | id | name                     | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
 | -: | :----------------------- | ----: | ---------: | :------------------ | :---------- | :------------------ | :------- |
-| 59 | 1Horizon test project    |     1 |          3 | 2020-01-13 12:45:32 | NA          | 2020-01-23 14:20:13 | FALSE    |
-| 57 | AB’s                     |     1 |          1 | 2020-01-06 00:56:00 | NA          | NA                  | FALSE    |
-|  8 | AmenazasRD               |     0 |          0 | 2019-04-14 06:21:00 | NA          | NA                  | FALSE    |
-|  9 | BAFCO Test               |     1 |          1 | 2019-04-19 00:30:45 | NA          | 2019-04-19 01:26:49 | FALSE    |
-| 47 | Building Materials Reuse |     0 |          0 | 2019-10-16 05:07:56 | NA          | NA                  | FALSE    |
-| 11 | CaVaTeCo                 |     2 |          1 | 2019-04-30 06:43:22 | NA          | 2019-04-30 08:07:55 | FALSE    |
+| 59 | 1Horizon test project    |     1 |          3 | 2020-01-13 20:45:32 | NA          | 2020-01-23 22:20:13 | FALSE    |
+| 57 | AB’s                     |     1 |          1 | 2020-01-06 08:56:00 | NA          | NA                  | FALSE    |
+|  8 | AmenazasRD               |     0 |          0 | 2019-04-14 14:21:00 | NA          | NA                  | FALSE    |
+|  9 | BAFCO Test               |     1 |          1 | 2019-04-19 08:30:45 | NA          | 2019-04-19 09:26:49 | FALSE    |
+| 47 | Building Materials Reuse |     0 |          0 | 2019-10-16 13:07:56 | NA          | NA                  | FALSE    |
+| 11 | CaVaTeCo                 |     2 |          1 | 2019-04-30 14:43:22 | NA          | 2019-04-30 16:07:55 | FALSE    |
 
 ``` r
 # List forms of default project
@@ -234,15 +236,15 @@ frms %>% knitr::kable(.)
 
 | name                          | fid                                              | version | state   | submissions | created\_at         | created\_by\_id | created\_by                    | updated\_at         | last\_submission    | hash                             |
 | :---------------------------- | :----------------------------------------------- | :------ | :------ | :---------- | :------------------ | --------------: | :----------------------------- | :------------------ | :------------------ | :------------------------------- |
-| Flora Quadrat 0.1             | build\_Flora-Quadrat-0-1\_1558330379             |         | closing | 1           | 2019-05-20 05:33:15 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-05-23 01:46:39 | 2019-05-20 05:44:20 | 4f0036619468ef05b572631b04b94f06 |
-| Flora Quadrat 0.2             | build\_Flora-Quadrat-0-2\_1558575936             |         | open    | 2           | 2019-05-23 01:46:08 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-08-19 07:57:38 | 2019-05-23 03:12:16 | 14e269a2374132392c275117efbe67b6 |
-| Flora Quadrat 0.3             | build\_Flora-Quadrat-0-3\_1559119570             |         | open    | 1           | 2019-05-29 08:48:15 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-05-29 08:55:59 | d5a80cefb1895eefcd0cb86a12d8acb4 |
-| Flora Quadrat 0.4             | build\_Flora-Quadrat-0-4\_1564384341             |         | open    | 2           | 2019-08-19 07:58:28 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-09-18 08:51:07 | 1bb959d541ac6990e3f74893e38c855b |
-| Spotlighting 0.5              | build\_Spotlighting-0-5\_1558320001              |         | closing | 1           | 2019-05-20 02:44:47 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-05-20 06:30:41 | 2019-05-20 02:58:09 | 3775dcdface98ba3a426739c494123f6 |
-| Spotlighting 0.6              | build\_Spotlighting-0-6\_1558333698              |         | open    | 18          | 2019-05-20 06:30:21 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-10-09 01:15:23 | 456daaa9a4f96670e6eef3cf4a7dd0db |
-| Spotlighting Survey End 0.3   | build\_Spotlighting-Survey-End-0-3\_1558320208   |         | open    | 3           | 2019-05-20 02:44:38 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-10-09 02:43:40 | 5fdfac8e773834b1267f7ca7e1c9a428 |
-| Spotlighting Survey Start 0.3 | build\_Spotlighting-Survey-Start-0-3\_1558320795 |         | open    | 9           | 2019-05-20 02:53:50 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-10-09 01:15:25 | f548a064cca13bca746f3c0b1a8b5a32 |
-| Turtle Track or Nest 1.0      | build\_Turtle-Track-or-Nest-1-0\_1569907666      |         | open    | 2           | 2019-12-03 07:16:51 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-12-03 07:26:14 | 0b3b5e07e3f24f3a36afc92296693ec4 |
+| Flora Quadrat 0.1             | build\_Flora-Quadrat-0-1\_1558330379             |         | closing | 1           | 2019-05-20 13:33:15 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-05-23 09:46:39 | 2019-05-20 13:44:20 | 4f0036619468ef05b572631b04b94f06 |
+| Flora Quadrat 0.2             | build\_Flora-Quadrat-0-2\_1558575936             |         | open    | 2           | 2019-05-23 09:46:08 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-08-19 15:57:38 | 2019-05-23 11:12:16 | 14e269a2374132392c275117efbe67b6 |
+| Flora Quadrat 0.3             | build\_Flora-Quadrat-0-3\_1559119570             |         | open    | 1           | 2019-05-29 16:48:15 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-05-29 16:55:59 | d5a80cefb1895eefcd0cb86a12d8acb4 |
+| Flora Quadrat 0.4             | build\_Flora-Quadrat-0-4\_1564384341             |         | open    | 2           | 2019-08-19 15:58:28 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-09-18 16:51:07 | 1bb959d541ac6990e3f74893e38c855b |
+| Spotlighting 0.5              | build\_Spotlighting-0-5\_1558320001              |         | closing | 1           | 2019-05-20 10:44:47 |              57 | <florian.mayer@dbca.wa.gov.au> | 2019-05-20 14:30:41 | 2019-05-20 10:58:09 | 3775dcdface98ba3a426739c494123f6 |
+| Spotlighting 0.6              | build\_Spotlighting-0-6\_1558333698              |         | open    | 18          | 2019-05-20 14:30:21 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-10-09 09:15:23 | 456daaa9a4f96670e6eef3cf4a7dd0db |
+| Spotlighting Survey End 0.3   | build\_Spotlighting-Survey-End-0-3\_1558320208   |         | open    | 3           | 2019-05-20 10:44:38 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-10-09 10:43:40 | 5fdfac8e773834b1267f7ca7e1c9a428 |
+| Spotlighting Survey Start 0.3 | build\_Spotlighting-Survey-Start-0-3\_1558320795 |         | open    | 9           | 2019-05-20 10:53:50 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-10-09 09:15:25 | f548a064cca13bca746f3c0b1a8b5a32 |
+| Turtle Track or Nest 1.0      | build\_Turtle-Track-or-Nest-1-0\_1569907666      |         | open    | 2           | 2019-12-03 15:16:51 |              57 | <florian.mayer@dbca.wa.gov.au> | NA                  | 2019-12-03 15:26:14 | 0b3b5e07e3f24f3a36afc92296693ec4 |
 
 ``` r
 # Form details of default form
@@ -589,9 +591,7 @@ srv %>% knitr::kable(.)
 
 ``` r
 # Form submissions
-d <- fs::path("vignettes/media")    # choose your own
-tz <- "Australia/Perth"             # g'day mate
-data <- ruODK::odata_submission_get(local_dir = d, tz = tz)
+data <- ruODK::odata_submission_get(local_dir = fs::path("vignettes/media"))
 #> ℹ Downloading submissions...
 #> ✔ Downloaded submissions.
 #> ℹ Parsing submissions...

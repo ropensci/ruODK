@@ -14,8 +14,7 @@
 #'   lubridate.
 #'   Default:
 #'   \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.
-#' @param tz (character) The timezone string for lubridate.
-#'   Default: \code{"UTC"}.
+#' @template param-tz
 #' @return The dataframe with matching columns mutated to lubridate datetimes.
 #' @export
 #' @family utilities
@@ -25,8 +24,8 @@
 #'   readr::read_csv(na = c("", "NA", "na")) %>%
 #'   janitor::clean_names() %>%
 #'   link_attachments() %>%
-#'   ru_datetime(dt_contains = "Date", tz = "Australia/Perth") %>%
-#'   ru_datetime(tz = "Australia/Perth")
+#'   ru_datetime(dt_contains = "Date") %>%
+#'   ru_datetime()
 #' }
 ru_datetime <- function(df,
                         col_contains = "time",
@@ -38,7 +37,7 @@ ru_datetime <- function(df,
                           "Ymd",
                           "ymd"
                         ),
-                        tz = "UTC") {
+                        tz = get_default_tz()) {
   df %>%
     dplyr::mutate_at(
       dplyr::vars(tidyr::contains(col_contains)),

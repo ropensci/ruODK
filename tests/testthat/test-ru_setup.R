@@ -9,6 +9,7 @@ test_that("ru_setup does not update settings if given NULL", {
     url = NULL,
     un = NULL,
     pw = NULL,
+    tz = NULL,
     test_svc = NULL,
     test_pid = NULL,
     test_fid = NULL,
@@ -27,9 +28,9 @@ test_that("ru_setup does not update settings if given NULL", {
   # Settings are still the default/test settings
   testthat::expect_equal(x$url, get_default_url())
   testthat::expect_equal(xx$url, get_default_url())
-
   testthat::expect_equal(x$un, get_default_un())
   testthat::expect_equal(x$pw, get_default_pw())
+  testthat::expect_equal(x$tz, get_default_tz())
   testthat::expect_equal(x$test_url, get_test_url())
   testthat::expect_equal(x$test_un, get_test_un())
   testthat::expect_equal(x$test_pw, get_test_pw())
@@ -47,6 +48,7 @@ test_that("ru_setup resets settings if given empty string", {
   url <- get_default_url()
   un <- get_default_un()
   pw <- get_default_pw()
+  tz <- get_default_tz()
   test_url <- get_test_url()
   test_un <- get_test_un()
   test_pw <- get_test_pw()
@@ -63,6 +65,7 @@ test_that("ru_setup resets settings if given empty string", {
     url = "",
     un = "",
     pw = "",
+    tz = "",
     test_pid = "",
     test_fid = "",
     test_fid_zip = "",
@@ -81,6 +84,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_default_url())
   testthat::expect_warning(get_default_un())
   testthat::expect_warning(get_default_pw())
+  testthat::expect_warning(get_default_tz())
   testthat::expect_warning(get_test_url())
   testthat::expect_warning(get_test_un())
   testthat::expect_warning(get_test_pw())
@@ -93,6 +97,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_equal(x$url, "")
   testthat::expect_equal(x$un, "")
   testthat::expect_equal(x$pw, "")
+  testthat::expect_equal(x$tz, "")
   testthat::expect_equal(x$test_url, "")
   testthat::expect_equal(x$test_un, "")
   testthat::expect_equal(x$test_pw, "")
@@ -109,6 +114,7 @@ test_that("ru_setup resets settings if given empty string", {
     url = url,
     un = un,
     pw = pw,
+    tz = tz,
     test_url = test_url,
     test_un = test_un,
     test_pw = test_pw,

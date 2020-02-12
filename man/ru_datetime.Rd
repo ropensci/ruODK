@@ -9,7 +9,7 @@ ru_datetime(
   df,
   col_contains = "time",
   orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
-  tz = "UTC"
+  tz = get_default_tz()
 )
 }
 \arguments{
@@ -24,8 +24,9 @@ lubridate.
 Default:
 \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
 
-\item{tz}{(character) The timezone string for lubridate.
-Default: \code{"UTC"}.}
+\item{tz}{A timezone to convert dates and times to.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+timezone can be set globally or per function.}
 }
 \value{
 The dataframe with matching columns mutated to lubridate datetimes.
@@ -45,8 +46,8 @@ tsi <- "data/build_Turtle-Sighting-0-1_1559790020.csv" \%>\%
   readr::read_csv(na = c("", "NA", "na")) \%>\%
   janitor::clean_names() \%>\%
   link_attachments() \%>\%
-  ru_datetime(dt_contains = "Date", tz = "Australia/Perth") \%>\%
-  ru_datetime(tz = "Australia/Perth")
+  ru_datetime(dt_contains = "Date") \%>\%
+  ru_datetime()
 }
 }
 \seealso{

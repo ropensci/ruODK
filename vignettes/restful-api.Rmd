@@ -65,6 +65,7 @@ ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW"),
+  tz = "Australia/Perth",
   verbose = TRUE
 )
 ```
@@ -251,20 +252,20 @@ fq_zip_data <- fid_csv %>%
   readr::read_csv(na = c("", "NA", "na")) %>% # form uses "na" for NA
   janitor::clean_names(.) %>% 
   attachment_link(.) %>% 
-  ru_datetime(tz = "Australia/Perth")      # an example timezone
+  ru_datetime()
 
 fq_zip_strata <- fid_csv_veg %>% 
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
   attachment_link(.) %>%
-  ru_datetime(tz = "Australia/Perth") %>%
+  ru_datetime() %>%
   dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
 
 fq_zip_taxa <- fid_csv_tae %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
   attachment_link(.) %>%
-  ru_datetime(tz = "Australia/Perth") %>%
+  ru_datetime() %>%
   dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
 ```
 

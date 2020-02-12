@@ -4,7 +4,11 @@
 \alias{isodt_to_local}
 \title{Parse an ISO8601 datetime string to a timezone aware datetime.}
 \usage{
-isodt_to_local(datetime_string, orders = c("YmdHMS", "YmdHMSz"), tz = "UTC")
+isodt_to_local(
+  datetime_string,
+  orders = c("YmdHMS", "YmdHMSz"),
+  tz = get_default_tz()
+)
 }
 \arguments{
 \item{datetime_string}{(character) An ISO8601 datetime string as produced by
@@ -14,8 +18,9 @@ XForms exported from ODK Central.}
 lubridate.
 Default: \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz")}.}
 
-\item{tz}{(character) The timezone string for lubridate.
-Default: \code{"UTC"}.}
+\item{tz}{A timezone to convert dates and times to.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+timezone can be set globally or per function.}
 }
 \value{
 A lubridate PosixCT datetime in the given timezone.

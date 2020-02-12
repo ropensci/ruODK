@@ -59,7 +59,7 @@ data_quadrat <- fid_csv \%>\%
   readr::read_csv(na = c("", "NA", "na")) \%>\%
   janitor::clean_names(.) \%>\%
   attachment_link(.) \%>\%
-  parse_datetime(tz = "Australia/Perth")
+  ru_datetime(tz = "Australia/Perth")
 }
 }
 \seealso{

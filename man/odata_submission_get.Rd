@@ -14,13 +14,13 @@ odata_submission_get(
   parse = TRUE,
   download = TRUE,
   orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
-  tz = "UTC",
   local_dir = "media",
   pid = get_default_pid(),
   fid = get_default_fid(),
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
+  tz = get_default_tz(),
   verbose = get_ru_verbose()
 )
 }
@@ -68,8 +68,6 @@ lubridate.
 Default:
 \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
 
-\item{tz}{A timezone, e.g. "Australia/Perth" or "UTC". Default: "UTC".}
-
 \item{local_dir}{The local folder to save the downloaded files to,
 default: "media".}
 
@@ -97,6 +95,10 @@ See \code{vignette("Setup", package = "ruODK")}.}
 Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{tz}{A timezone to convert dates and times to.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+timezone can be set globally or per function.}
 
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s

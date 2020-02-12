@@ -48,7 +48,7 @@
 #'   readr::read_csv(na = c("", "NA", "na")) %>%
 #'   janitor::clean_names(.) %>%
 #'   attachment_link(.) %>%
-#'   parse_datetime(tz = "Australia/Perth")
+#'   ru_datetime(tz = "Australia/Perth")
 #' }
 attachment_link <- function(data_tbl,
                             att_path = "media",

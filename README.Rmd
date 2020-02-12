@@ -161,6 +161,7 @@ ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW"),
+  tz = "Australia/Perth",
   verbose = TRUE
 )
 ```
@@ -170,6 +171,7 @@ ruODK::ru_setup(
   svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = "me@email.com",
   pw = "...",
+  tz = "Australia/Perth",
   verbose = TRUE # great for demo or debugging
 )
 ```
@@ -201,9 +203,7 @@ meta %>% knitr::kable(.)
 srv <- ruODK::odata_service_get()
 srv %>% knitr::kable(.)
 # Form submissions
-d <- fs::path("vignettes/media")    # choose your own
-tz <- "Australia/Perth"             # g'day mate
-data <- ruODK::odata_submission_get(local_dir = d, tz = tz)
+data <- ruODK::odata_submission_get(local_dir = fs::path("vignettes/media"))
 data %>% knitr::kable(.)
 ```
 

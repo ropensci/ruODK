@@ -19,6 +19,8 @@ This version is the RC for v0.7 to support ODK Central 0.7.
 * `parse_datetime()` renamed to `ru_datetime()` to avoid naming conflict with 
   `readr::parse_datetime()`. (#43)
 * Add a global default for verbosity. (#51)
+* Add a global default for time zone. (#53)
+
 
 ## Dependencies
 * Moved `rlist` to Imports, as it is now used in `odata_submission_get()`. (#6)

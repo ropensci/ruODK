@@ -6,7 +6,8 @@ library(ruODK)
 ruODK::ru_setup(
   svc = Sys.getenv("ODKC_TEST_SVC"),
   un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW")
+  pw = Sys.getenv("ODKC_TEST_PW"),
+  tz = "Australia/Perth"
 )
 
 # Used in vignette odata-api
@@ -36,7 +37,6 @@ fq_form_schema <- ruODK::form_schema(parse = TRUE)
 fq_form_detail <- ruODK::form_detail()
 
 t <- fs::dir_create("attachments")
-tz <- "Australia/Perth"
 
 fid <- ruODK::get_test_fid()
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
@@ -49,18 +49,18 @@ fq_zip_data <- fid_csv %>%
   readr::read_csv(na = c("", "NA", "na")) %>% # form uses "na" for NA
   janitor::clean_names(.) %>%
   attachment_link(.) %>%
-  ru_datetime(tz = tz) # an example timezone
+  ru_datetime() # an example timezone
 fq_zip_strata <- fid_csv_veg %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
   attachment_link(.) %>%
-  ru_datetime(tz = tz) %>%
+  ru_datetime() %>%
   dplyr::left_join(fq_zip_data, by = c("parent_key" = "meta_instance_id"))
 fq_zip_taxa <- fid_csv_tae %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
   attachment_link(.) %>%
-  ru_datetime(tz = tz) %>%
+  ru_datetime() %>%
   dplyr::left_join(fq_zip_data, by = c("parent_key" = "meta_instance_id"))
 
 fq_submission_list <- ruODK::submission_list()
@@ -96,7 +96,7 @@ usethis::use_data(fq_attachments, overwrite = T)
 
 # Update header of vignettes/odata-api.Rmd with:
 # - media/1568786958640.jpg
-fs::dir_ls(here::here("media/media"), glob="*.jpg") %>%
+fs::dir_ls(here::here("attachments/media"), glob="*.jpg") %>%
 fs::file_copy(here::here("media"), overwrite = TRUE)
 ymlthis::yml_resource_files(
   ymlthis::yml(),
@@ -116,5 +116,5 @@ ymlthis::yml_resource_files(
 
 # Cleanup temp files
 fs::dir_delete(here::here("media"))
-fs::dir_delete(here::here("attachments/"))
+fs::dir_delete(here::here("attachments"))
 fs::dir_ls(here::here(), glob="*.zip") %>% fs::file_delete()
