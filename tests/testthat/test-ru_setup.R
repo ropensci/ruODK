@@ -224,4 +224,14 @@ test_that("odata_svc_parse works", {
   testthat::expect_equal(x$fid, "formid")
 })
 
+test_that("ru_settings prints only if verbose", {
+  testthat::expect_output(ru_setup(verbose = TRUE))
+
+  testthat::expect_equal(
+    testthat::capture_output(ru_setup(verbose = FALSE)),
+    ""
+  )
+
+})
+
 # usethis::edit_file("R/ru_setup.R")

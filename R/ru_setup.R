@@ -102,6 +102,9 @@ odata_svc_parse <- function(svc) {
 #
 #' Configure default \code{\link{ruODK}} settings.
 #'
+#' Settings are returned invisibly and additionally printed depending on
+#' \code{\link{get_ru_verbose}}.
+#'
 #' \lifecycle{stable}
 #'
 #' @export
@@ -249,7 +252,9 @@ ru_setup <- function(svc = NULL,
   if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
   if (!is.null(verbose)) Sys.setenv("RU_VERBOSE" = verbose)
 
-  print(ru_settings())
+  if (get_ru_verbose()) {
+    print(ru_settings())
+  }
 }
 
 #------------------------------------------------------------------------------#

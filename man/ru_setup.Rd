@@ -103,9 +103,13 @@ privileged to view the test project(s) at \code{test_url}.}
   * `FALSE`.}
 }
 \description{
-\lifecycle{stable}
+Settings are returned invisibly and additionally printed depending on
+\code{\link{get_ru_verbose}}.
 }
 \details{
+\lifecycle{stable}
+
+
 \code{\link{ru_setup}} sets ODK Central connection details.
   \code{\link{ruODK}}'s functions default to use the default project ID,
   form ID, URL, username, and password unless specified explicitly.
