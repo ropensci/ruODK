@@ -128,7 +128,7 @@ odata_svc_parse <- function(svc) {
 #'       e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
 #'     * `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
 #'     * Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
-#'     * `GMT`.
+#'     * UTC (GMT+00)
 #' @param test_svc (optional, character) The OData service URL of a test form.
 #'   This parameter will set \code{test_pid}, \code{test_fid}, and
 #'   \code{test_url}. It is sufficient to supply \code{test_svc},
@@ -319,9 +319,9 @@ get_default_pw <- function() {
 #' @export
 #' @rdname ru_settings
 get_default_tz <- function() {
-  x <- Sys.getenv("RU_TIMEZONE")
+  x <- Sys.getenv("RU_TIMEZONE", unset = "UTC")
   if (identical(x, "")) {
-    rlang::warn("Empty ruODK timezone set. ru_setup()?")
+    rlang::warn("No default timezone set. ru_setup()?")
   }
   x
 }

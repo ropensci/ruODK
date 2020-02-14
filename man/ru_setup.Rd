@@ -51,7 +51,7 @@ specified ODK Central instance \code{url} (optional, character).}
     e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
   * `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
   * Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
-  * `GMT`.}
+  * UTC (GMT+00)}
 
 \item{test_svc}{(optional, character) The OData service URL of a test form.
 This parameter will set \code{test_pid}, \code{test_fid}, and
