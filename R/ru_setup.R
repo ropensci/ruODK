@@ -319,7 +319,7 @@ get_default_pw <- function() {
 #' @export
 #' @rdname ru_settings
 get_default_tz <- function() {
-  x <- Sys.getenv("RU_TIMEZONE", unset = "UTC")
+  x <- Sys.getenv("RU_TIMEZONE")
   if (identical(x, "")) {
     rlang::warn("Empty ruODK timezone set. ru_setup()?")
   }

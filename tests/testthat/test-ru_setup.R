@@ -26,6 +26,7 @@ test_that("ru_setup does not update settings if given NULL", {
   x <- ru_settings()
 
   # Settings are still the default/test settings
+  # If env vars not set, default getters will issue warnings
   testthat::expect_equal(x$url, get_default_url())
   testthat::expect_equal(xx$url, get_default_url())
   testthat::expect_equal(x$un, get_default_un())
@@ -49,6 +50,7 @@ test_that("ru_setup resets settings if given empty string", {
   un <- get_default_un()
   pw <- get_default_pw()
   tz <- get_default_tz()
+  verbose <- get_ru_verbose()
   test_url <- get_test_url()
   test_un <- get_test_un()
   test_pw <- get_test_pw()

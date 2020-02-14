@@ -121,7 +121,8 @@ ruODK::ru_setup(
   test_pid = 14,
   test_fid = "build_Flora-Quadrat-0-4_1564384341",
   test_un = "you@email.com",
-  test_pw = "..."
+  test_pw = "...",
+  tz = "Australia/Perth" # or any valid timezone
 )
 ```
 
@@ -137,6 +138,7 @@ ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379"
 ODKC_TEST_FID_GAP="build_Turtle-Track-or-Nest-1-0_1569907666"
 ODKC_TEST_UN="your@email.com"
 ODKC_TEST_PW="..."
+RU_TIMEZOME="Australia/Perth"
 
 # Useful for day to day use - use your own settings
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
