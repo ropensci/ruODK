@@ -72,20 +72,22 @@ library(readr)
 library(skimr)
 library(ruODK)
 
-# Set ruODK defaults to an ODK Central form
+# Set ruODK defaults to an ODK Central form, choose own tz and verbosity
 ruODK::ru_setup(
   svc=paste0("https://sandbox.central.opendatakit.org/v1/projects",
-             "/14/forms/build_Flora-Quadrat-0-4_1564384341.svc"))
-tz <- "Australia/Perth"
-loc <- fs::path("attachments", "media")
+             "/14/forms/build_Flora-Quadrat-0-4_1564384341.svc"),
+  tz = "Australia/Perth",
+  verbose = TRUE)
+
+loc <- fs::path("media")
 fs::dir_create(loc)
 ```
 
 # Download data
 <!-- Get table names. `form_tables` will contain one row per separate table. -->
 ```{r svc_get}
-form_tables <- ruODK::odata_service_get()
-form_tables %>% knitr::kable(.)
+ft <- ruODK::odata_service_get()
+ft %>% knitr::kable(.)
 ```
 
 <!-- 
@@ -102,34 +104,33 @@ Repeat for each table name in form_tables$url.
 -->
 ```{r dl_submissions}
 data <- ruODK::odata_submission_get(
-  table = form_tables$url[1], verbose = TRUE, tz = tz, local_dir = loc
-) %>%
-  dplyr::rename(
-    # Adjust coordinate colnames as needed
-    # longitude = x13,
-    # latitude = x14,
-    # altitude = x15
-  )
+  table = ft$url[1], 
+  local_dir = loc, 
+  wkt = TRUE
+)
+
 data_sub1 <- ruODK::odata_submission_get(
-  table = form_tables$url[2], verbose = TRUE, tz = tz, local_dir = loc
+  table = ft$url[2], 
+  local_dir = loc
 ) %>%
-  dplyr::left_join(data, by = c("submissions_id" = "id"))
+  dplyr::left_join(
+    data, 
+    by = c("submissions_id" = "id")
+  )
 
 data_sub2 <- ruODK::odata_submission_get(
-  table = form_tables$url[3], verbose = TRUE, tz = tz, local_dir = loc
-) %>% 
-  dplyr::rename(
-    # Adjust coordinate colnames as needed, avoid name conflicts with main data
-    # lon = x6,
-    # lat = x7,
-    # alt = x8
-  ) %>%
-  dplyr::left_join(data, by = c("submissions_id" = "id"))
+  table = ft$url[3], 
+  local_dir = loc
+) %>%
+  dplyr::left_join(
+    data, 
+    by = c("submissions_id" = "id")
+)
 
 # repeat for any remaining nested tables
 ```
 
-# Analyse data
+# Visualise data
 <!-- Summarise, analyse, visualise the tibble(s) data (, data_sub1, data_sub2) -->
 ```{r data_vis}
 skimr::skim(data)
@@ -144,19 +145,23 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
     data = data,
-    lng = ~longitude, lat = ~latitude,
+    # 
+    # # Adjust to your coordinate field names
+    # 
+    lng = ~location_corner1_longitude, 
+    lat = ~location_corner1_latitude, 
     icon = leaflet::makeAwesomeIcon(text = "Q", markerColor = "red"),
     # 
     # # With your own field names
     # 
-    # label = ~ glue::glue("{area_name} {encounter_start_datetime}"),
+    # label = ~ glue::glue("{location_area_name} {encounter_start_datetime}"),
     # popup = ~ glue::glue(
-    #   "<h3>{area_name}</h3>",
+    #   "<h3>{location_area_name}</h3>",
     #   "Survey start {encounter_start_datetime}</br>",
     #   "Reporter {reporter}</br>",
     #   "Device {device_id}</br>",
     #   "<h5>Site</h5>",
-    #   '<div><img src="{my_photo}"',
+    #   '<div><img src="{habitat_morphological_type_photo}"',
     #   ' height="150px" alt="My photo"></img></div>'
     # ),
     clusterOptions = leaflet::markerClusterOptions()
@@ -190,8 +195,8 @@ created initially.
 #
 rep_fn <- "my_report.html" # The file name you save this template under
 data_fn <- here::here(loc, "data.csv") %>% as.character()           # Main data
-data_sub1_fn <- here::here(loc, "data_sub1.csv") %>% as.character() # Nested table 1
-data_sub2_fn <- here::here(loc, "data_sub2.csv") %>% as.character() # Nested table 2
+data_sub1_fn <- here::here(loc, "data_sub1.csv") %>% as.character() # Sub table 1
+data_sub2_fn <- here::here(loc, "data_sub2.csv") %>% as.character() # Sub table 2
 zip_fn <- "products.zip" # Attachments as one zip file (top level)
 
 # Write data tbls to CSV files
@@ -234,14 +239,14 @@ r <- ckanr::resource_update(res_zip$id, path = zip_fn)
 # Google Drive
 #
 # Run once per machine, then comment out:
-googledrive::drive_auth(reset=TRUE, use_oob = TRUE)
+googledrive::drive_auth(use_oob = TRUE)
 
 # Upload to Google Drive
 gd_fn <- "My Google Drive folder name"
 googledrive::drive_ls(gd_fn) %>% googledrive::drive_rm(.)  # Wipe older outputs
 googledrive::drive_upload(rep_fn, path=rep_fn)             # Report as HTML
 googledrive::drive_upload(data_fn, path=data_fn)           # Main data as CSV
-googledrive::drive_upload(data_sub1_fn, path=data_sub1_fn) # Nested table 1 as CSV
-googledrive::drive_upload(data_sub2_fn, path=data_sub2_fn) # Nested table 2 as CSV
+googledrive::drive_upload(data_sub1_fn, path=data_sub1_fn) # Sub table 1 as CSV
+googledrive::drive_upload(data_sub2_fn, path=data_sub2_fn) # Sub table 2 as CSV
 googledrive::drive_upload(zip_fn, path=zip_fn)             # All outputs as ZIP
 ```
