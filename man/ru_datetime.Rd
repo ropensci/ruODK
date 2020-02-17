@@ -46,7 +46,7 @@ tsi <- "data/build_Turtle-Sighting-0-1_1559790020.csv" \%>\%
   readr::read_csv(na = c("", "NA", "na")) \%>\%
   janitor::clean_names() \%>\%
   link_attachments() \%>\%
-  ru_datetime(dt_contains = "Date") \%>\%
+  ru_datetime(col_contains = "Date") \%>\%
   ru_datetime()
 }
 }

@@ -46,12 +46,13 @@ specified ODK Central instance \code{url} (optional, character).}
 \item{pw}{The password for user \code{un} (optional, character).}
 
 \item{tz}{Global default time zone.
-`ruODK`'s time zone is determined in order of precedence:
-  * Function parameter:
-    e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
-  * `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
-  * Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
-  * UTC (GMT+00)}
+  `ruODK`'s time zone is determined in order of precedence:
+
+    * Function parameter:
+      e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
+    * `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
+    * Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
+    * UTC (GMT+00)}
 
 \item{test_svc}{(optional, character) The OData service URL of a test form.
 This parameter will set \code{test_pid}, \code{test_fid}, and
@@ -95,12 +96,13 @@ privileged to view the test project(s) at \code{test_url}.}
 \code{test_un}.}
 
 \item{verbose}{Global default for `ruODK` verbosity.
-`ruODK` verbosity is determined in order of precedence:
-  * Function parameter:
-    e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
-  * `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
-  * Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
-  * `FALSE`.}
+  `ruODK` verbosity is determined in order of precedence:
+
+    * Function parameter:
+      e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
+    * `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
+    * Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
+    * `FALSE`.}
 }
 \description{
 Settings are returned invisibly and additionally printed depending on

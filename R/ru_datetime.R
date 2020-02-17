@@ -24,7 +24,7 @@
 #'   readr::read_csv(na = c("", "NA", "na")) %>%
 #'   janitor::clean_names() %>%
 #'   link_attachments() %>%
-#'   ru_datetime(dt_contains = "Date") %>%
+#'   ru_datetime(col_contains = "Date") %>%
 #'   ru_datetime()
 #' }
 ru_datetime <- function(df,
