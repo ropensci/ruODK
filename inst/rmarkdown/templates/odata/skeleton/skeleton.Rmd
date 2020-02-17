@@ -84,7 +84,7 @@ fs::dir_create(loc)
 ```
 
 # Download data
-<!-- Get table names. `form_tables` will contain one row per separate table. -->
+<!-- Get table names. `ft` will contain one row per separate table. -->
 ```{r svc_get}
 ft <- ruODK::odata_service_get()
 ft %>% knitr::kable(.)
@@ -93,14 +93,12 @@ ft %>% knitr::kable(.)
 <!-- 
 Get and parse submissions.
 
-* Rename any point coordinates which come out as `xn`, `xn+1`, `xn+2` into 
-longitude, latitude, altitude.
-* Repeat parse_datetime for each form field name that symbolises a datetime.
-Default assumes "time", example shows an additional step to also parse any
-form field with "date" in its name.
-
+Points parse nicely using WKT = TRUE. 
+Polygons and Lines parse better with WKT = FALSE (default).
 
 Repeat for each table name in form_tables$url. 
+
+Once happy with the parsing results, verbose can be set to FALSE.
 -->
 ```{r dl_submissions}
 data <- ruODK::odata_submission_get(
@@ -130,7 +128,7 @@ data_sub2 <- ruODK::odata_submission_get(
 # repeat for any remaining nested tables
 ```
 
-# Visualise data
+# Analyse and visualise data
 <!-- Summarise, analyse, visualise the tibble(s) data (, data_sub1, data_sub2) -->
 ```{r data_vis}
 skimr::skim(data)
