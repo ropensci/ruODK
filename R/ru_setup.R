@@ -124,6 +124,7 @@ odata_svc_parse <- function(svc) {
 #' @param pw The password for user \code{un} (optional, character).
 #' @param tz Global default time zone.
 #'   `ruODK`'s time zone is determined in order of precedence:
+#'
 #'     * Function parameter:
 #'       e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
 #'     * `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
@@ -163,6 +164,7 @@ odata_svc_parse <- function(svc) {
 #'   \code{test_un}.
 #' @param verbose Global default for `ruODK` verbosity.
 #'   `ruODK` verbosity is determined in order of precedence:
+#'
 #'     * Function parameter:
 #'       e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
 #'     * `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
