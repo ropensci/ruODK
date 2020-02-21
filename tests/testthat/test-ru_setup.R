@@ -130,18 +130,18 @@ test_that("ru_setup resets settings if given empty string", {
 
 test_that("get_default_tz warns if tz explicitly set to empty string", {
 
-  tz <- get_default_tz()
+  tz0 <- get_default_tz()
+  testthat::expect_equal(tz0, "Australia/Perth")
 
   # Override tz
-  ru_setup(tz = "")
+  ru_setup(tz1 = "")
 
-  # Appveyor seems to be UTC
-  message("Default time zone after setting to empty string: ")
-  message(get_default_tz())
+  suppressWarnings(tz1 <- get_default_tz())
+  testthat::expect_equal(tz1, "")
 
   testthat::expect_warning(get_default_tz())
 
-  ru_setup(tz = tz) # restore previous settings
+  ru_setup(tz = tz0) # restore previous settings
 })
 
 test_that("ru_setup sets pid, fid, url if given service url", {
