@@ -48,7 +48,7 @@ test_that("ru_setup resets settings if given empty string", {
   url <- get_default_url()
   un <- get_default_un()
   pw <- get_default_pw()
-  tz <- get_default_tz()
+  suppressWarnings(tz <- get_default_tz())
   verbose <- get_ru_verbose()
   test_url <- get_test_url()
   test_un <- get_test_un()
@@ -85,7 +85,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_default_url())
   testthat::expect_warning(get_default_un())
   testthat::expect_warning(get_default_pw())
-  # testthat::expect_warning(get_default_tz())
+  testthat::expect_warning(get_default_tz())
   testthat::expect_warning(get_test_url())
   testthat::expect_warning(get_test_un())
   testthat::expect_warning(get_test_pw())
@@ -130,18 +130,14 @@ test_that("ru_setup resets settings if given empty string", {
 
 test_that("get_default_tz warns if tz explicitly set to empty string", {
 
-  tz0 <- get_default_tz()
-  testthat::expect_equal(tz0, "Australia/Perth")
+  # tz0 <- get_default_tz()
+  # testthat::expect_equal(tz0, "UTC") # TZ is not set in tests
 
   # Override tz
-  ru_setup(tz1 = "")
-
+  ru_setup(tz = "")
   suppressWarnings(tz1 <- get_default_tz())
   testthat::expect_equal(tz1, "")
-
   testthat::expect_warning(get_default_tz())
-
-  ru_setup(tz = tz0) # restore previous settings
 })
 
 test_that("ru_setup sets pid, fid, url if given service url", {
