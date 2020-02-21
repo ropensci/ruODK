@@ -27,20 +27,19 @@ test_that("ru_setup does not update settings if given NULL", {
 
   # Settings are still the default/test settings
   # If env vars not set, default getters will issue warnings
-  testthat::expect_equal(x$url, get_default_url())
-  testthat::expect_equal(xx$url, get_default_url())
-  testthat::expect_equal(xx$un, get_default_un())
-  testthat::expect_equal(xx$pw, get_default_pw())
-  testthat::expect_equal(xx$tz, get_default_tz())
-  testthat::expect_equal(xx$test_url, get_test_url())
-  testthat::expect_equal(xx$test_un, get_test_un())
-  testthat::expect_equal(xx$test_pw, get_test_pw())
-  testthat::expect_equal(xx$test_pid, get_test_pid())
-  testthat::expect_equal(xx$test_fid, get_test_fid())
-  testthat::expect_equal(xx$test_fid_zip, get_test_fid_zip())
-  testthat::expect_equal(xx$test_fid_att, get_test_fid_att())
-  testthat::expect_equal(xx$test_fid_gap, get_test_fid_gap())
-  testthat::expect_equal(xx$verbose, get_ru_verbose())
+  testthat::expect_equal(x$url, xx$url)
+  testthat::expect_equal(x$un, xx$un)
+  testthat::expect_equal(x$pw, x$pw)
+  testthat::expect_equal(x$tz, x$tz)
+  testthat::expect_equal(x$test_url, xx$test_url)
+  testthat::expect_equal(x$test_un, xx$test_un)
+  testthat::expect_equal(x$test_pw, xx$test_pw)
+  testthat::expect_equal(x$test_pid,xx$test_pid)
+  testthat::expect_equal(x$test_fid, xx$test_fid)
+  testthat::expect_equal(x$test_fid_zip, xx$test_fid_zip)
+  testthat::expect_equal(x$test_fid_att, xx$test_fid_att)
+  testthat::expect_equal(x$test_fid_gap, xx$test_fid_gap)
+  testthat::expect_equal(x$verbose, xx$verbose)
 })
 
 test_that("ru_setup resets settings if given empty string", {
@@ -129,7 +128,7 @@ test_that("ru_setup resets settings if given empty string", {
   )
 })
 
-test_that("ru_setup sets pid, fid, url if given service url", {
+test_that("get_default_tz warns if tz explicitly set to empty string", {
   ru_setup(tz = "")
   testthat::expect_warning(get_default_tz())
 })
