@@ -3,16 +3,16 @@
 language: R
 sudo: false
 
-r:
-- oldrel
-- release
-  before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
-  deploy:
-    provider: script
-    script: Rscript -e 'pkgdown::deploy_site_github()'
-    cleanup: false
-    skip_cleanup: true
-- devel
+jobs:
+  include:
+  - r: release
+    before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
+    deploy:
+      provider: script
+      script: Rscript -e 'pkgdown::deploy_site_github()'
+      skip_cleanup: true
+  - r: devel
+  - r: oldrel
 
 cache: packages
 
