@@ -321,11 +321,10 @@ get_default_pw <- function() {
 #' @export
 #' @rdname ru_settings
 get_default_tz <- function() {
-  x <- Sys.getenv("RU_TIMEZONE", unset = "UTC")
+  x <- Sys.getenv("RU_TIMEZONE")
   if (identical(x, "")) {
-    rlang::warn(
-      "Timezone set to empty string, overriding default of 'UTC'. ru_setup()?"
-    )
+    rlang::warn("No default timezone set, defaulting to 'UTC'. ru_setup()?")
+    x <- "UTC"
   }
   x
 }
