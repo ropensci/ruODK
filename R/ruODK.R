@@ -3,8 +3,8 @@
 #'   Please see the `ruODK` website for full documentation:
 #'   <https://dbca-wa.github.io/ruODK/>
 #'
-#'   `ruODK` is "pipe-friendly" and re-exports `\%>\%` and `\%||\%`, but does not
-#'   require their use.
+#' `ruODK` is "pipe-friendly" and re-exports `\%>\%` and `\%||\%`, but does not
+#'  require their use.
 #'
 #' @importFrom rlang %||%
 #' @keywords internal

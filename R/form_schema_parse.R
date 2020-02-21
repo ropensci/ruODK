@@ -59,11 +59,7 @@ form_schema_parse <- function(fs,
     rlist::list.stack(.) %>%
     dplyr::mutate(path = path)
 
-  if (verbose == TRUE) {
-    message(crayon::cyan(
-      glue::glue("{clisymbols::symbol$info}\n\nFound fields:\n{str(x)}\n")
-    ))
-  }
+  if (verbose == TRUE) ru_msg_info(glue::glue("Found fields:\n{str(x)}"))
 
   # 2. Recursively run form_schema_parse over nested elements.
   for (node in fs) {
@@ -72,14 +68,7 @@ form_schema_parse <- function(fs,
       "children" %in% names(node) &&
       "name" %in% names(node)) {
       for (child in node) {
-        if (verbose == TRUE) {
-          message(crayon::cyan(
-            glue::glue(
-              "{clisymbols::symbol$info}\n\nFound child: {child}\n"
-            )
-          ))
-        }
-
+        if (verbose == TRUE) ru_msg_info(glue::glue("Found child: {child}"))
         odata_table_path <- glue::glue("{path}.{node['name']}")
         xxx <- form_schema_parse(child, path = odata_table_path)
         x <- rbind(x, xxx)
@@ -88,11 +77,7 @@ form_schema_parse <- function(fs,
   }
 
   # 3. Return combined type/name pairs as tibble
-  if (verbose == TRUE) {
-    message(crayon::cyan(
-      glue::glue("{clisymbols::symbol$info} Returning data \"{str(x)}\"")
-    ))
-  }
+  if (verbose == TRUE) ru_msg_info(glue::glue("Returning data \"{str(x)}\""))
 
   # 4. Predict ruodk_name
   x %>%

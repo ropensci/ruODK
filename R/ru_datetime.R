@@ -10,10 +10,7 @@
 #' @param col_contains A character string indicating a date/time column.
 #'   This can be a part of the column name or the whole column name.
 #'   Default: "time" will match all column names containing "time".
-#' @param orders (vector of character) Orders of datetime elements for
-#'   lubridate.
-#'   Default:
-#'   \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.
+#' @template param-orders
 #' @template param-tz
 #' @return The dataframe with matching columns mutated to lubridate datetimes.
 #' @export

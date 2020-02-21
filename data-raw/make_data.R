@@ -11,20 +11,18 @@ ruODK::ru_setup(
 )
 
 # Used in vignette odata-api
+t <- fs::dir_create("attachments")
 fq_svc <- ruODK::odata_service_get()
 fq_meta <- ruODK::odata_metadata_get()
 fq_fs <- ruODK::form_schema()
 fq_raw <- ruODK::odata_submission_get(table = fq_svc$name[1], parse = FALSE)
 fq_raw_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], parse = FALSE)
 fq_raw_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], parse = FALSE)
-fq_data <- ruODK::odata_submission_get(table = fq_svc$name[1], parse = TRUE, wkt = TRUE)
-fq_data_strata <- ruODK::odata_submission_get(
-  table = fq_svc$name[2], parse = TRUE, wkt = TRUE, verbose = TRUE
-) %>%
+
+fq_data <- ruODK::odata_submission_get(table = fq_svc$name[1], wkt = TRUE, parse = T)
+fq_data_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], wkt = TRUE) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
-fq_data_taxa <- ruODK::odata_submission_get(
-  table = fq_svc$name[3], parse = TRUE, wkt = TRUE, verbose = TRUE
-) %>%
+fq_data_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], wkt = TRUE) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 
 # Used in vignette rest-api
@@ -36,7 +34,6 @@ fq_form_schema_raw <- ruODK::form_schema(parse = FALSE)
 fq_form_schema <- ruODK::form_schema(parse = TRUE)
 fq_form_detail <- ruODK::form_detail()
 
-t <- fs::dir_create("attachments")
 
 fid <- ruODK::get_test_fid()
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
@@ -45,23 +42,33 @@ fid_csv_veg <- fs::path(t, glue::glue("{fid}-vegetation_stratum.csv"))
 
 se <- ruODK::submission_export(local_dir = ".", overwrite = FALSE, verbose = TRUE)
 f <- unzip(se, exdir = t)
+# Prepend attachments with media/ to turn into relative file paths
 fq_zip_data <- fid_csv %>%
   readr::read_csv(na = c("", "NA", "na")) %>% # form uses "na" for NA
   janitor::clean_names(.) %>%
-  attachment_link(.) %>%
-  ru_datetime() # an example timezone
+  dplyr::mutate(id = meta_instance_id) %>%
+  ruODK::handle_ru_datetimes(fq_form_schema) %>%
+  ruODK::handle_ru_geopoints(fq_form_schema) %>%
+  ruODK::handle_ru_attachments(fq_form_schema, local_dir = t)
+
 fq_zip_strata <- fid_csv_veg %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
-  attachment_link(.) %>%
-  ru_datetime() %>%
+  dplyr::mutate(id = parent_key) %>%
+  # ruODK::handle_ru_datetimes(fq_form_schema) parent_key%>% # no dates
+  # ruODK::handle_ru_geopoints(fq_form_schema) %>%  # no geopoints
+  # ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>% # no attachm.
   dplyr::left_join(fq_zip_data, by = c("parent_key" = "meta_instance_id"))
+
 fq_zip_taxa <- fid_csv_tae %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
   janitor::clean_names(.) %>%
-  attachment_link(.) %>%
-  ru_datetime() %>%
+  dplyr::mutate(id = parent_key) %>%
+  # ruODK::handle_ru_datetimes(fq_form_schema) %>%
+  # ruODK::handle_ru_geopoints(fq_form_schema) %>%
+  # ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>%
   dplyr::left_join(fq_zip_data, by = c("parent_key" = "meta_instance_id"))
+
 
 fq_submission_list <- ruODK::submission_list()
 fq_submissions <- ruODK::submission_get(fq_submission_list$instance_id)
@@ -96,11 +103,11 @@ usethis::use_data(fq_attachments, overwrite = T)
 
 # Update header of vignettes/odata-api.Rmd with:
 # - media/1568786958640.jpg
-fs::dir_ls(here::here("attachments/media"), glob="*.jpg") %>%
-fs::file_copy(here::here("media"), overwrite = TRUE)
+fs::dir_ls(here::here("attachments/media"), glob = "*.jpg") %>%
+  fs::file_copy(here::here("media"), overwrite = TRUE)
 ymlthis::yml_resource_files(
   ymlthis::yml(),
-  fs::dir_ls(fs::path("media"), glob="*.jpg")
+  fs::dir_ls(fs::path("media"), glob = "*.jpg")
 )
 
 # -----------------------------------------------------------------------------#
@@ -111,10 +118,10 @@ ymlthis::yml_resource_files(
 # so what shall we do
 # let's mogrify all
 # fs::dir_ls(here::here("media"), glob="*.jpg") %>%
-  # fs::file_copy(here::here("vignettes/media/"), overwrite = TRUE)
+# fs::file_copy(here::here("vignettes/media/"), overwrite = TRUE)
 # system("find vignettes/media -type f -exec mogrify -resize 200x150 {} \\;")
 
 # Cleanup temp files
 fs::dir_delete(here::here("media"))
 fs::dir_delete(here::here("attachments"))
-fs::dir_ls(here::here(), glob="*.zip") %>% fs::file_delete()
+fs::dir_ls(here::here(), glob = "*.zip") %>% fs::file_delete()

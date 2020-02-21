@@ -142,10 +142,11 @@ conflicts. Other spatial fields will be retained as WKT.
 
 With parameter `parse=FALSE`, submission data is presented as nested list,
 which is the R equivalent of the returned form JSON.
-From there, \code{\link{odata_submission_parse}} will parse the data into a
-tibble, and subsequent lines of \code{\link{ru_datetime}} and
-\code{\link{attachment_get}} parse dates and download and link file
-attachments.
+From there, \code{\link{odata_submission_rectangle}} will rectangle the data
+into a tibble, and subsequent lines of \code{\link{handle_ru_datetimes}},
+\code{\link{handle_ru_attachments}} and \code{\link{handle_ru_geopoints}}
+parse dates, download and link file attachments, and split geopoints into
+coordinates.
 As any of these steps might fail on unexpected errors, `ruODK` offers this
 longer, more manual pathway as an option to investigate and narrow down
 unexpected or unwanted behaviour.
@@ -210,7 +211,7 @@ Other odata-api:
 \code{\link{get_one_attachment}()},
 \code{\link{odata_metadata_get}()},
 \code{\link{odata_service_get}()},
-\code{\link{odata_submission_parse}()},
+\code{\link{odata_submission_rectangle}()},
 \code{\link{unnest_all}()}
 }
 \concept{odata-api}

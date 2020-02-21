@@ -232,15 +232,7 @@ attachment_get <- function(sid,
     dest_dir <- fs::path(local_dir)
   }
   if (verbose == TRUE) {
-    # CMD check can't detect use of clisymbols inside glue statement
-    infosymbol <- clisymbols::symbol$info
-
-    message(crayon::cyan(
-      glue::glue(
-        "{clisymbols::symbol$info} ",
-        "Using local directory \"{dest_dir}\".\n"
-      )
-    ))
+    ru_msg_info(glue::glue("Using local directory \"{dest_dir}\".\n"))
   }
 
   fs::dir_create(dest_dir)

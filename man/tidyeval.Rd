@@ -23,6 +23,9 @@ To learn more about tidy eval and how to use these tools, read
 \seealso{
 Other utilities: 
 \code{\link{\%>\%}()},
+\code{\link{handle_ru_attachments}()},
+\code{\link{handle_ru_datetimes}()},
+\code{\link{handle_ru_geopoints}()},
 \code{\link{isodt_to_local}()},
 \code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},

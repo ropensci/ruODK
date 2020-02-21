@@ -130,6 +130,11 @@ test_that("ru_setup resets settings if given empty string", {
 })
 
 test_that("ru_setup sets pid, fid, url if given service url", {
+  ru_setup(tz = "")
+  testthat::expect_warning(get_default_tz())
+})
+
+test_that("ru_setup sets pid, fid, url if given service url", {
 
   # Save sane state
   test_pid <- get_test_pid()
@@ -166,7 +171,6 @@ test_that("ru_setup sets pid, fid, url if given service url", {
 })
 
 test_that("ru_setup sets individual settings", {
-
   ru_setup(verbose = FALSE)
   testthat::expect_equal(get_ru_verbose(), FALSE)
 
@@ -233,7 +237,6 @@ test_that("ru_settings prints only if verbose", {
     testthat::capture_output(ru_setup(verbose = FALSE)),
     ""
   )
-
 })
 
 # usethis::edit_file("R/ru_setup.R")

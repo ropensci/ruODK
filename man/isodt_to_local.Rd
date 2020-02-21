@@ -31,6 +31,9 @@ A lubridate PosixCT datetime in the given timezone.
 \seealso{
 Other utilities: 
 \code{\link{\%>\%}()},
+\code{\link{handle_ru_attachments}()},
+\code{\link{handle_ru_datetimes}()},
+\code{\link{handle_ru_geopoints}()},
 \code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
 \code{\link{ru_datetime}()},

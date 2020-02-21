@@ -128,6 +128,7 @@ mudmap
 Muntashir
 nl
 NodeJS
+noop
 nvis
 NVIS
 odata
@@ -161,6 +162,7 @@ READMEs
 rectangled
 rectangling
 Rectangling
+Renviron
 repo
 RESTful
 rGeoCBI
@@ -174,6 +176,7 @@ ROpenSci
 Rstudio
 RStudio
 ru
+ruodk
 ruReady
 Scalability
 Schemetrica
@@ -196,6 +199,7 @@ tibbles
 tidyr
 tidyverse
 Tidyverse
+travis
 TravisCI
 tz
 un
@@ -222,18 +226,6 @@ wkt
 WKT
 workdir
 www
-x15
-x16
-x17
-x23
-x24
-x25
-x28
-x29
-x30
-x33
-x34
-x35
 Xform
 XForm
 XForms

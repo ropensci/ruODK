@@ -251,53 +251,26 @@ fq_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], parse = FALSE)
 
 # Parse main data
 fq_data <- fq_raw %>%
-  ruODK::odata_submission_parse() %>%
-  ruODK::parse_datetime(col_contains = "time") %>%
-  ruODK::parse_datetime(col_contains = "date") %>%
-  dplyr::rename(
-    longitude = x13,
-    latitude = x14,
-    altitude = x15
-  ) %>%
-  dplyr::mutate(
-    quadrat_photo = ruODK::attachment_get(
-      id, 
-      location_quadrat_photo, 
-      local_dir = loc
-    ),
-    morphological_type_photo = ruODK::attachment_get(
-      id, 
-      morphological_type_photo, 
-      local_dir = loc
-    ),
-    mudmap_photo = ruODK::attachment_get(
-      id, 
-      mudmap_photo, 
-      local_dir = loc
-    )
-  ) %>%
-  invisible()
+  ruODK::odata_submission_rectangle() %>%
+  ruODK::handle_ru_datetimes(fq_form_schema) %>%
+  ruODK::handle_ru_geopoints(fq_form_schema) %>%
+  ruODK::handle_ru_attachments(fq_form_schema, local_dir = t)
 
 # Parse nested group "taxa"
-fq_data_taxa <- fq_taxa %>%
-  ruODK::odata_submission_parse() %>%
-  dplyr::rename(
-    lon = x6,
-    lat = x7,
-    alt = x8
-  ) %>%
-  dplyr::mutate(
-    photo_in_situ = ruODK::attachment_get(
-      submissions_id, 
-      photo_in_situ, 
-      local_dir = loc
-    )
-  ) %>%
+fq_data_taxa <- fq_taxa %>% 
+  ruODK::odata_submission_rectangle() %>%
+  ruODK::handle_ru_datetimes(fq_form_schema) %>%
+  ruODK::handle_ru_geopoints(fq_form_schema) %>%
+  ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 
 # Parse nested group "strata"
-fq_data_strata <- fq_strata %>%
-  ruODK::odata_submission_parse()
+fq_data_strata <- fq_strata %>% 
+  ruODK::odata_submission_rectangle() %>%
+  ruODK::handle_ru_datetimes(fq_form_schema) %>%
+  ruODK::handle_ru_geopoints(fq_form_schema) %>%
+  ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>%
+  dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 ```
 
 Note: A manually resized version of the original photos in this example live in

@@ -30,10 +30,11 @@
 #'
 #' With parameter `parse=FALSE`, submission data is presented as nested list,
 #' which is the R equivalent of the returned form JSON.
-#' From there, \code{\link{odata_submission_parse}} will parse the data into a
-#' tibble, and subsequent lines of \code{\link{ru_datetime}} and
-#' \code{\link{attachment_get}} parse dates and download and link file
-#' attachments.
+#' From there, \code{\link{odata_submission_rectangle}} will rectangle the data
+#' into a tibble, and subsequent lines of \code{\link{handle_ru_datetimes}},
+#' \code{\link{handle_ru_attachments}} and \code{\link{handle_ru_geopoints}}
+#' parse dates, download and link file attachments, and split geopoints into
+#' coordinates.
 #' As any of these steps might fail on unexpected errors, `ruODK` offers this
 #' longer, more manual pathway as an option to investigate and narrow down
 #' unexpected or unwanted behaviour.
@@ -163,26 +164,16 @@ odata_submission_get <- function(table = "Submissions",
                                  un = get_default_un(),
                                  pw = get_default_pw(),
                                  tz = get_default_tz(),
-                                 verbose = get_ru_verbose()
-                                 ) {
-  type <- NULL
+                                 verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw)
-
-  # Parse params
   skip <- skip %||% ""
   top <- top %||% ""
   count <- ifelse(count == FALSE, "false", "true")
   wkt <- ifelse(wkt == FALSE, "false", "true")
 
-  # Get submissions
-  if (verbose == TRUE) {
-    message(crayon::cyan(
-      glue::glue(
-        "{clisymbols::symbol$info}",
-        " Downloading submissions...\n"
-      )
-    ))
-  }
+  #----------------------------------------------------------------------------#
+  # Download submissions
+  if (verbose == TRUE) ru_msg_info("Downloading submissions...")
 
   sub <- httr::RETRY(
     "GET",
@@ -196,35 +187,18 @@ odata_submission_get <- function(table = "Submissions",
     yell_if_error(., url, un, pw) %>%
     httr::content(.)
 
-  if (verbose == TRUE) {
-    message(crayon::green(
-      glue::glue(
-        "{clisymbols::symbol$tick}",
-        " Downloaded submissions.\n"
-      )
-    ))
-  }
+  if (verbose == TRUE) ru_msg_success("Downloaded submissions.")
 
   if (parse == FALSE) {
+    if (verbose == TRUE) ru_msg_success("Returning unparsed submissions.")
     return(sub)
   } else {
-    if (verbose == TRUE) {
-      message(crayon::cyan(
-        glue::glue(
-          "{clisymbols::symbol$info}",
-          " Parsing submissions...\n"
-        )
-      ))
-    }
+    if (verbose == TRUE) ru_msg_info("Parsing submissions...")
   }
 
   #----------------------------------------------------------------------------#
   # Get form schema
-  if (verbose == TRUE) {
-    message(crayon::cyan(
-      glue::glue("{clisymbols::symbol$info} Reading form schema...\n")
-    ))
-  }
+  if (verbose == TRUE) ru_msg_info("Reading form schema...")
 
   fs <- form_schema(
     parse = TRUE,
@@ -237,130 +211,42 @@ odata_submission_get <- function(table = "Submissions",
 
   #----------------------------------------------------------------------------#
   # Parse submission data
-  if (verbose == TRUE) {
-    message(crayon::cyan(
-      glue::glue("{clisymbols::symbol$info} Parsing submissions...\n")
-    ))
-  }
-  sub <- sub %>% odata_submission_parse(form_schema = fs, verbose = verbose)
+  if (verbose == TRUE) ru_msg_info("Parsing submissions...")
 
-  # Parse dates
-  dttm_cols <- fs %>%
-    dplyr::filter(type %in% c("dateTime", "date")) %>%
-    magrittr::extract2("ruodk_name")
-
-  if (verbose == TRUE) {
-    message(crayon::cyan(
-      glue::glue(
-        "{clisymbols::symbol$info}",
-        " Found date/time: \"{dttm_cols}\". \n"
-      )
-    ))
-  }
-
-  for (colname in dttm_cols) {
-    if (verbose == TRUE) {
-      if (verbose == TRUE) {
-        message(crayon::cyan(
-          glue::glue(
-            "{clisymbols::symbol$info}",
-            " Parsing \"{colname}\" with timezone \"{tz}\"...\n"
-          )
-        ))
-      }
-    }
-    sub <- sub %>%
-      ruODK::ru_datetime(
-        orders = orders,
-        tz = tz,
-        col_contains = as.character(colname)
-      )
-  }
-
-  if (download == TRUE) {
-    # Download and link attachments
-    # Caveat: if an attachment field has no submissions, it is dropped from sub
-    att_cols <- fs %>%
-      dplyr::filter(type == "binary") %>%
-      magrittr::extract2("ruodk_name") %>%
-      intersect(names(sub))
-
-    if (verbose == TRUE) {
-      if (verbose == TRUE) {
-        message(crayon::cyan(
-          glue::glue(
-            "{clisymbols::symbol$info}",
-            " Found attachments: \"{att_cols}\". \n"
-          )
-        ))
-        message(crayon::green(
-          glue::glue(
-            "{clisymbols::symbol$tick}",
-            " Downloading attachments...\n"
-          )
-        ))
-      }
-    }
-
-    sub <- sub %>%
-      dplyr::mutate_at(
-        dplyr::vars(att_cols),
-        ~ ruODK::attachment_get(
-          id,
-          .,
+  # Rectangle, handle date/times, attachments, geopoints.
+  sub <- sub %>%
+    odata_submission_rectangle(verbose = verbose) %>%
+    handle_ru_datetimes(form_schema = fs, verbose = verbose) %>%
+    {
+      if (download == TRUE) {
+        fs::dir_create(local_dir)
+        handle_ru_attachments(
+          data = .,
+          form_schema = fs,
           local_dir = local_dir,
-          verbose = verbose,
           pid = pid,
           fid = fid,
           url = url,
           un = un,
-          pw = pw
+          pw = pw,
+          verbose = verbose
         )
-      )
-  }
-
-  # Parse geopoints (already split into e.g. x10 x11 x12 if wkt="false")
-  if (wkt == "true") {
-    gp_cols <- fs %>%
-      dplyr::filter(type == "geopoint") %>%
-      magrittr::extract2("ruodk_name")
-
-    if (verbose == TRUE) {
-      message(crayon::cyan(
-        glue::glue(
-          "{clisymbols::symbol$info}",
-          " Found geopoint: \"{gp_cols}\". \n"
-        )
-      ))
-    }
-
-    for (colname in gp_cols) {
-      if (colname %in% names(sub)) {
-        if (verbose == TRUE) {
-          message(crayon::cyan(
-            glue::glue(
-              "{clisymbols::symbol$info}",
-              " Parsing {colname}...\n"
-            )
-          ))
-        }
-
-        sub <- sub %>% split_geopoint(as.character(colname))
+      } else {
+        .
+      }
+    } %>%
+    {
+      if (wkt == "true") {
+        handle_ru_geopoints(data = ., form_schema = fs, verbose = verbose)
+      } else {
+        .
       }
     }
-  }
 
   #
   # End parse submission data
   #----------------------------------------------------------------------------#
-  if (verbose == TRUE) {
-    message(crayon::green(
-      glue::glue(
-        "{clisymbols::symbol$tick}",
-        " Returning parsed submissions.\n"
-      )
-    ))
-  }
+  if (verbose == TRUE) ru_msg_success("Returning parsed submissions.")
   sub
 }
 

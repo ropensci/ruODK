@@ -1,6 +1,6 @@
-context("test-odata_submission_parse.R")
+context("test-odata_submission_rectangle.R")
 
-test_that("odata_submission_parse works with gaps in first submission", {
+test_that("odata_submission_rectangle works with gaps in first submission", {
   t <- tempdir()
   fresh_raw <- odata_submission_get(
     pid = get_test_pid(),
@@ -25,7 +25,7 @@ test_that("odata_submission_parse works with gaps in first submission", {
     )
   )
 
-  fresh_parsed <- fresh_raw %>% odata_submission_parse(verbose = TRUE)
+  fresh_parsed <- fresh_raw %>% odata_submission_rectangle(verbose = TRUE)
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))
   testthat::expect_gte(nrow(fresh_parsed), nrow(fresh_raw_parsed))
 

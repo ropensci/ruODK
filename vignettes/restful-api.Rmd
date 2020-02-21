@@ -68,6 +68,7 @@ ruODK::ru_setup(
   tz = "Australia/Perth",
   verbose = TRUE
 )
+t <- fs::dir_create("media")
 ```
 
 ```{r load_canned_data, echo=FALSE}
@@ -232,8 +233,6 @@ In the following chuck, we illustrate common tasks:
 
 
 ```{r submission_export, eval=F}
-t <- fs::dir_create("media")
-
 # Predict filenames (with knowledge of form)
 fid <- ruODK::get_test_fid()
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
@@ -251,22 +250,28 @@ fs::dir_ls(t)
 fq_zip_data <- fid_csv %>% 
   readr::read_csv(na = c("", "NA", "na")) %>% # form uses "na" for NA
   janitor::clean_names(.) %>% 
-  attachment_link(.) %>% 
-  ru_datetime()
+  dplyr::mutate(id = meta_instance_id) %>% 
+  ruODK::handle_ru_datetimes(fq_form_schema) %>% 
+  ruODK::handle_ru_geopoints(fq_form_schema) %>% 
+  ruODK::handle_ru_attachments(fq_form_schema, local_dir = t)
 
 fq_zip_strata <- fid_csv_veg %>% 
   readr::read_csv(na = c("", "NA", "na")) %>%
-  janitor::clean_names(.) %>%
-  attachment_link(.) %>%
-  ru_datetime() %>%
-  dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
+  janitor::clean_names(.) %>% 
+  dplyr::mutate(id = parent_key) %>% 
+  # ruODK::handle_ru_datetimes(fq_form_schema) parent_key%>% # no dates
+  # ruODK::handle_ru_geopoints(fq_form_schema) %>%  # no geopoints
+  # ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>% # no attachm.
+  dplyr::left_join(fq_zip_data, by = c("parent_key" = "meta_instance_id"))
 
 fq_zip_taxa <- fid_csv_tae %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
-  janitor::clean_names(.) %>%
-  attachment_link(.) %>%
-  ru_datetime() %>%
-  dplyr::left_join(data_quadrat, by = c("parent_key" = "meta_instance_id"))
+  janitor::clean_names(.) %>% 
+  dplyr::mutate(id = parent_key) %>% 
+  # ruODK::handle_ru_datetimes(fq_form_schema) %>% 
+  # ruODK::handle_ru_geopoints(fq_form_schema) %>% 
+  # ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>%
+  dplyr::left_join(fq_zip_data, by = c("parent_key" = "meta_instance_id"))
 ```
 
 ```{r zip_view}
@@ -339,7 +344,7 @@ as e.g. JSON.
 listviewer::jsonedit(fq_submissions, mode = "code")
 ```
 
-## Rectangling the submissions
+## Rectangling and parsing the submissions
 For a more traditional analysis, we need the data in a rectangular shape.
 The unpredictably nested structure of the submission data (when containing 
 repeated subgroups) makes it challenging to do this in an automated fashion.
@@ -353,56 +358,24 @@ In the example shown above, the repeated `taxon_encounter` groups are named
 `jsonedit::listviewer()` widget.
 
 With one additional step we can flatten the nested lists and bind them into one
-dataframe, then sanitise the column names and parse datetimes like we did with
-the CSV export.
+dataframe, then sanitise the column names, handle datetimes, geopoints and 
+attachments, like we did with the CSV export.
 
 It appears this operation loses all but the last repeat of repeating groups.
-We should further also deparse locations (WKT) into latitude, longitude, 
-altitude and accuracy. 
 
 ```{r parse_submissions}
 sub_parsed <- fq_submissions %>% 
   purrr::map_df(rlist::list.flatten) %>%
-  janitor::clean_names(.) %>% 
-  ruODK::ru_datetime(.)
+  janitor::clean_names(.) %>%
+  dplyr::mutate(id = meta_instance_id) %>%
+  ruODK::handle_ru_datetimes(fq_form_schema) %>%
+  ruODK::handle_ru_geopoints(fq_form_schema) %>%
+  ruODK::handle_ru_attachments(fq_form_schema, local_dir = t)
 
 names(sub_parsed)
 head(sub_parsed)
-```
 
-# Attachments
-
-## List all attachments for one form
-
-```{r attachment_list, eval=F}
-fq_attachments <- ruODK::attachment_list(sl$instance_id)
-```
-
-```{r attachment_list_view}
-head(fq_attachments)
-```
-
-## Get attachments
-`ruODK::attachment_get` downloads the attachment files and links them similar
-to `ruODK::attachment_link` (which assumes that attachments have already been 
-downloaded).
-
-```{r attachment_get, eval=F}
-sub_att <- sub_parsed %>% 
-  dplyr::mutate(
-    location_quadrat_photo = ruODK::attachment_get(
-        meta_instance_id,
-        location_quadrat_photo,
-        local_dir = fs::path("media")
-    )
-    # same for all other attachments
-    # requires knowledge or introspection of form schema
-  )
-
-# Show attachment with relative path
-sub_att$location_quadrat_photo
-
-# List corresponding files
+# List attachment files
 fs::dir_ls(t, recurse = TRUE, glob = "*.jpg")
 ```
 
@@ -411,12 +384,5 @@ fs::dir_ls(t, recurse = TRUE, glob = "*.jpg")
 From here, we can use the separately created data tibbles and locally downloaded
 attachments to build visualisations as shown in the vignette "odata".
 
-The best course of action seems to be the data export to ZIP or use the OData API.
-
-# Future development
-
-In future versions of `ruODK`, we'll introspect `form_schema` to determine
-the names of repeating groups, the form field names of attachments (data type 
-"binary" in form schema), the form field names of date/time fields (data type 
-"dateTime"), and use this introspection to further automate the data extraction
-process shown above.
+The best pathway to retrieve submission data seems to be the data export to ZIP 
+or access via OData.

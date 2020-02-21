@@ -1,7 +1,7 @@
-context("test-odata_submission_parse.R")
+context("test-odata_submission_rectangle.R")
 
-test_that("parse_submission_works", {
-  data_parsed <- odata_submission_parse(fq_raw, verbose = TRUE)
+test_that("odata_submission_rectangle works", {
+  data_parsed <- odata_submission_rectangle(fq_raw, verbose = TRUE)
 
   # Field "device_id" is known part of fq_raw
   testthat::expect_equal(
@@ -14,4 +14,4 @@ test_that("parse_submission_works", {
 })
 
 # Tests code
-# usethis::edit_file("R/odata_submission_parse.R")
+# usethis::use_r("odata_submission_rectangle")

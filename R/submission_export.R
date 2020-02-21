@@ -75,35 +75,19 @@ submission_export <- function(local_dir = here::here(),
   if (fs::file_exists(pth)) {
     if (overwrite == TRUE) {
       if (verbose == TRUE) {
-        message(crayon::green(
-          glue::glue(
-            "{clisymbols::symbol$tick} ",
-            "Overwriting previous download: \"{pth}\"\n"
-          )
-        ))
+        ru_msg_success(glue::glue("Overwriting previous download: \"{pth}\""))
       }
     } else {
       if (verbose == TRUE) {
-        message(crayon::green(
-          glue::glue(
-            "{clisymbols::symbol$circle_filled} ",
-            "Keeping previous download: \"{pth}\"\n"
-          )
-        ))
+        ru_msg_noop(glue::glue("Keeping previous download: \"{pth}\""))
       }
       return(pth)
     }
   } else {
     if (verbose == TRUE) {
-      message(crayon::green(
-        glue::glue(
-          "{clisymbols::symbol$tick} ",
-          "Downloading submissions to: \"{pth}\"\n"
-        )
-      ))
+      ru_msg_success(glue::glue("Downloading submissions to: \"{pth}\""))
     }
   }
-
 
   httr::RETRY(
     "GET",

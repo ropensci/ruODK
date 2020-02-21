@@ -23,7 +23,8 @@ listcol_names <- function(tbl) {
 #'
 #' \lifecycle{stable}
 #'
-#' @details \code{\link{odata_submission_parse}}uses this function internally.
+#' @details \code{\link{odata_submission_rectangle}}uses this function
+#' internally.
 #' Interested users can use this function to break down `ruODK`'s automated
 #' steps into smaller components.
 #'
@@ -49,30 +50,12 @@ unnest_all <- function(nested_tbl,
   for (colname in listcol_names(nested_tbl)) {
     if (!(colname %in% names(nested_tbl))) {
       # # Diagnostic message
-      # if (verbose == TRUE) {
-      #   message(crayon::cyan(
-      #     glue::glue(
-      #       "{clisymbols::symbol$info}",
-      #       " Skipping renamed column \"{colname}\"\n"
-      #     )
-      #   ))
-      # }
+      # if (verbose == TRUE)
+      #   ru_msg_info(glue::glue("Skipping renamed column \"{colname}\""))
     } else {
       if (verbose == TRUE) {
-        message(crayon::cyan(
-          glue::glue(
-            "{clisymbols::symbol$info}",
-            " Unnesting column \"{colname}\"\n"
-          )
-        ))
+        ru_msg_info(glue::glue(" Unnesting column \"{colname}\"\n"))
       }
-
-      # If colname contains NULL, we have to supply ptype
-      # pt <- predict_ptype(colname, form_schema){}
-
-      # If colname is of type geopoint (form_schema knows), split_geopoint
-
-      # If colname is of type dateTime or date, ru_datetime
 
       suppressMessages(
         nested_tbl <- tidyr::unnest_wider(
@@ -86,12 +69,7 @@ unnest_all <- function(nested_tbl,
   }
   if (length(listcol_names(nested_tbl)) > 0) {
     if (verbose == TRUE) {
-      message(crayon::cyan(
-        glue::glue(
-          "{clisymbols::symbol$info}",
-          " Found more nested columns, unnesting again.\n"
-        )
-      ))
+      ru_msg_info("Found more nested columns, unnesting again.")
     }
     nested_tbl <- unnest_all(
       nested_tbl,
@@ -104,18 +82,13 @@ unnest_all <- function(nested_tbl,
 }
 
 
-#' Parse the output of \code{\link{odata_submission_get}(parse=FALSE)}
-#' into a tidy tibble and unnest all levels.
+#' Rectangle the output of \code{\link{odata_submission_get}(parse=FALSE)}
+#' into a tidy tibble and unnest all levels
 #'
 #' \lifecycle{maturing}
 #'
-#' Coming soon: [Better column names](https://github.com/dbca-wa/ruODK/issues/7)
-#'
 #' @param data A nested list of lists as given by
 #'   \code{\link{odata_submission_get}}.
-#' @param form_schema The output of \code{\link{form_schema}} for the given
-#'   data. \code{\link{odata_submission_get}(parse=TRUE)} automatically supplies
-#'   \code{form_schema} to \code{\link{odata_submission_parse}}.
 #' @param names_repair The argument `names_repair` for
 #'   \code{tidyr::unnest_wider}, default: "universal".
 #' @param names_sep The argument `names_sep` for
@@ -130,7 +103,7 @@ unnest_all <- function(nested_tbl,
 #' @examples
 #' \dontrun{
 #' # Using canned data
-#' data_parsed <- parse_submissions(fq_raw, verbose = TRUE)
+#' data_parsed <- odata_submission_rectangle(fq_raw, verbose = TRUE)
 #' # Field "device_id" is known part of fq_raw
 #' testthat::expect_equal(
 #'   data_parsed$device_id[[1]],
@@ -140,14 +113,17 @@ unnest_all <- function(nested_tbl,
 #' # fq_raw has two submissions
 #' testthat::expect_equal(length(fq_raw$value), nrow(data_parsed))
 #' }
-odata_submission_parse <- function(data,
-                                   form_schema = NULL,
-                                   names_repair = "universal",
-                                   names_sep = "_",
-                                   verbose = get_ru_verbose()) {
+odata_submission_rectangle <- function(data,
+                                       names_repair = "universal",
+                                       names_sep = "_",
+                                       verbose = get_ru_verbose()) {
   data %>%
     tibble::as_tibble(., .name_repair = names_repair) %>%
-    unnest_all(names_repair = names_repair, verbose = verbose) %>%
+    unnest_all(
+      names_repair = names_repair,
+      names_sep = names_sep,
+      verbose = verbose
+    ) %>%
     janitor::clean_names(.) %>%
     dplyr::rename_at(
       dplyr::vars(dplyr::starts_with("value_")),
@@ -157,4 +133,4 @@ odata_submission_parse <- function(data,
 
 
 # Tests
-# usethis::edit_file("tests/testthat/test-odata_submission_parse.R")
+# usethis::edit_file("tests/testthat/test-odata_submission_rectangle.R")

@@ -15,7 +15,7 @@ test_that("attachment_get works", {
   )
 
   fresh_parsed <- fresh_raw %>%
-    odata_submission_parse() %>%
+    odata_submission_rectangle() %>%
     dplyr::mutate(
       quadrat_photo = attachment_get(
         id,
@@ -31,7 +31,7 @@ test_that("attachment_get works", {
     )
 
   fresh_parsed_sep <- fresh_raw %>%
-    odata_submission_parse() %>%
+    odata_submission_rectangle() %>%
     dplyr::mutate(
       quadrat_photo = attachment_get(
         id,

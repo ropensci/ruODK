@@ -77,7 +77,7 @@ Other odata-api:
 \code{\link{odata_metadata_get}()},
 \code{\link{odata_service_get}()},
 \code{\link{odata_submission_get}()},
-\code{\link{odata_submission_parse}()},
+\code{\link{odata_submission_rectangle}()},
 \code{\link{unnest_all}()}
 }
 \concept{odata-api}

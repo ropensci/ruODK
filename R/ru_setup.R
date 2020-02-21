@@ -323,7 +323,9 @@ get_default_pw <- function() {
 get_default_tz <- function() {
   x <- Sys.getenv("RU_TIMEZONE", unset = "UTC")
   if (identical(x, "")) {
-    rlang::warn("No default timezone set. ru_setup()?")
+    rlang::warn(
+      "Timezone set to empty string, overriding default of 'UTC'. ru_setup()?"
+    )
   }
   x
 }
