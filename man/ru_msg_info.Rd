@@ -17,7 +17,9 @@ ru_msg_info("This is an info message.")
 }
 \seealso{
 Other helpers: 
+\code{\link{ru_msg_abort}()},
 \code{\link{ru_msg_noop}()},
-\code{\link{ru_msg_success}()}
+\code{\link{ru_msg_success}()},
+\code{\link{ru_msg_warn}()}
 }
 \concept{helpers}
