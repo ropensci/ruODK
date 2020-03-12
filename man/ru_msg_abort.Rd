@@ -13,7 +13,9 @@ ru_msg_abort(message)
 \lifecycle{stable}
 }
 \examples{
+\dontrun{
 ru_msg_abort("This is an error, abort.")
+}
 }
 \seealso{
 Other helpers: 

@@ -13,7 +13,9 @@ ru_msg_warn(message)
 \lifecycle{stable}
 }
 \examples{
+\dontrun{
 ru_msg_warn("This is a warning.")
+}
 }
 \seealso{
 Other helpers: 

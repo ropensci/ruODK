@@ -54,7 +54,9 @@ ru_msg_noop <- function(message) {
 #' @export
 #' @family helpers
 #' @examples
+#' \dontrun{
 #' ru_msg_warn("This is a warning.")
+#' }
 ru_msg_warn <- function(message) {
   x <- clisymbols::symbol$warning
   rlang::warn(crayon::yellow(glue::glue("{x} {message}\n")))
@@ -70,7 +72,9 @@ ru_msg_warn <- function(message) {
 #' @export
 #' @family helpers
 #' @examples
+#' \dontrun{
 #' ru_msg_abort("This is an error, abort.")
+#' }
 ru_msg_abort <- function(message) {
   x <- clisymbols::symbol$cross
   rlang::abort(crayon::red(glue::glue("{x} {message}\n")))
