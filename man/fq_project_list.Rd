@@ -5,7 +5,9 @@
 \name{fq_project_list}
 \alias{fq_project_list}
 \title{A tibble of project metadata.}
-\format{A tibble of project metadata.}
+\format{
+A tibble of project metadata.
+}
 \source{
 The output of \code{\link{project_list}}
 run on all projects on the configured ODK Central server.

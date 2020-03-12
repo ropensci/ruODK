@@ -5,7 +5,9 @@
 \name{fq_submission_list}
 \alias{fq_submission_list}
 \title{A tibble of submission metadata.}
-\format{A tibble of submission metadata.}
+\format{
+A tibble of submission metadata.
+}
 \source{
 The output of \code{\link{submission_list}}
 run on the test form

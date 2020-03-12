@@ -5,7 +5,9 @@
 \name{fq_attachments}
 \alias{fq_attachments}
 \title{A tibble of submission attachments.}
-\format{A tibble of submission attachments.}
+\format{
+A tibble of submission attachments.
+}
 \source{
 The output of \code{\link{attachment_list}}
 run on submissions of the test form

@@ -5,8 +5,12 @@
 \name{fq_form_schema}
 \alias{fq_form_schema}
 \title{JSON form schema for an ODK Central form.}
-\format{The output of `ruODK::form_schema()`, a tibble with columns "type",
-  "name" and "path" and one row per form field.}
+\format{
+The output of `ruODK::form_schema()`, a tibble with columns "type",
+  "name" and "path" and one row per form field.
+
+A tibble of form fields and field types.
+}
 \source{
 See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
   and `ruODK::form_schema()`.

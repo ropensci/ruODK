@@ -4,7 +4,9 @@
 \name{fq_project_detail}
 \alias{fq_project_detail}
 \title{A tibble of project metadata.}
-\format{A tibble of project metadata.}
+\format{
+A tibble of project metadata.
+}
 \source{
 The output of \code{\link{project_detail}}
 run on the project containing the test form

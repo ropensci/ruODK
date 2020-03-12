@@ -5,7 +5,9 @@
 \name{fq_form_list}
 \alias{fq_form_list}
 \title{A tibble of forms.}
-\format{A tibble of forms}
+\format{
+A tibble of forms
+}
 \source{
 The output of \code{\link{form_list}}.
 run on the project.

@@ -5,7 +5,9 @@
 \name{fq_form_detail}
 \alias{fq_form_detail}
 \title{A tibble of form metadata.}
-\format{A tibble of form metadata.}
+\format{
+A tibble of form metadata.
+}
 \source{
 The output of \code{\link{form_detail}}
 run on submissions of the test form

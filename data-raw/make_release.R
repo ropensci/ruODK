@@ -8,6 +8,10 @@ usethis::use_version(which = "dev")
 
 # Write code, add tests
 
+# Package dependencies:
+# Make sure that required versions are available on CRAN as binaries for all
+# tested = supported OS and R combinations!
+
 # regenerate test data
 source(here::here("data-raw/make_data.R"))
 

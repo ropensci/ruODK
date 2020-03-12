@@ -4,7 +4,9 @@
 \name{fq_svc}
 \alias{fq_svc}
 \title{OData service document for an ODK Central form.}
-\format{A tibble with one row per submission data endpoint.}
+\format{
+A tibble with one row per submission data endpoint.
+}
 \source{
 OData service document for
   `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`

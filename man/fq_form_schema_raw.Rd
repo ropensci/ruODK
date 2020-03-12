@@ -5,7 +5,9 @@
 \name{fq_form_schema_raw}
 \alias{fq_form_schema_raw}
 \title{A nested list of form fields and field types.}
-\format{A nested list of form fields and field types.}
+\format{
+A nested list of form fields and field types.
+}
 \source{
 The output of \code{\link{form_schema}(parse=FALSE)}
 run on the test form

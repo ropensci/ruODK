@@ -5,7 +5,9 @@
 \name{fq_submissions}
 \alias{fq_submissions}
 \title{A nested list of submission data.}
-\format{A nested list of submission data.}
+\format{
+A nested list of submission data.
+}
 \source{
 The output of \code{\link{submission_get}}
 run on the test form

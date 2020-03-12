@@ -5,7 +5,9 @@
 \name{fq_form_xml}
 \alias{fq_form_xml}
 \title{A nested list of a form definition.}
-\format{A nested list of a form definition.}
+\format{
+A nested list of a form definition.
+}
 \source{
 The output of \code{\link{form_xml}}
 run on the test form

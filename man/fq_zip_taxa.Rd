@@ -5,7 +5,9 @@
 \name{fq_zip_taxa}
 \alias{fq_zip_taxa}
 \title{A tibble of a repeated sub-group of records from a test form.}
-\format{A tibble of repeated sub-group of records from a test form.}
+\format{
+A tibble of repeated sub-group of records from a test form.
+}
 \source{
 \code{\link{submission_export}}
 run on the test form

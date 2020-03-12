@@ -4,7 +4,9 @@
 \name{fq_meta}
 \alias{fq_meta}
 \title{OData metadata document for an ODK Central form.}
-\format{A list of lists}
+\format{
+A list of lists
+}
 \source{
 See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 }

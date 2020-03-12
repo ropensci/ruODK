@@ -12,7 +12,7 @@
 ^ISSUE_TEMPLATE\.md$
 ^SUPPORT\.md$
 ^\.github$
-^\man-roxygen$
+^man-roxygen$
 ^appveyor\.yml$
 codemeta.json
 ^inst/joss/paper\.html$

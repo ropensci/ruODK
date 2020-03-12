@@ -5,7 +5,9 @@
 \name{fq_zip_data}
 \alias{fq_zip_data}
 \title{A tibble of the main data table of records from a test form.}
-\format{A tibble of main records from a test form.}
+\format{
+A tibble of main records from a test form.
+}
 \source{
 \code{\link{submission_export}}
 run on the test form
