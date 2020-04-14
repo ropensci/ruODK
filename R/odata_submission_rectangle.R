@@ -13,17 +13,11 @@ listcol_names <- function(tbl) {
     magrittr::extract2("variable")
 }
 
-#' Predict the column type based on optional form_schema
-#' This is stupid, we should map first, then parse
-# predict_ptype <- function(cn, fs=NULL){
-#  return("chr")
-# }
-
 #' Recursively unnest_wide all list columns in a tibble.
 #'
 #' \lifecycle{stable}
 #'
-#' @details \code{\link{odata_submission_rectangle}}uses this function
+#' @details \code{\link{odata_submission_rectangle}} uses this function
 #' internally.
 #' Interested users can use this function to break down `ruODK`'s automated
 #' steps into smaller components.
