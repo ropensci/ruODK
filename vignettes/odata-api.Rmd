@@ -168,11 +168,16 @@ The function `ruODK::odata_submission_get()` received the original XML response
 as a nested list of lists.
 To analyse and visualise the data, this nested list of lists must be transformed 
 into a rectangular shape.
-The function `ruODK::odata_submission_parse()` is used internally to recursively 
-unnest list columns using `tidyr::unnest_wider()`. 
+The function `ruODK::odata_submission_rectangle()` is used internally to 
+recursively unnest list columns using `tidyr::unnest_wider()`.
 Unnamed columns, notably the anonymous lat/lon/alt coordinates, are named 
 automatically to become unique (a feature of `tidyr::unnest_*()`), and then 
 sanitised using the helper `janitor::clean_names()`.
+
+By default, form group names are used as prefix to the field names. 
+This behaviour can be disabled by handing the argument `names_sep=None` to
+`tidyr::unnest_wider()` through running 
+`ruODK::odata_submission_get() %>% ruODK::odata_submission_rectangle(names_sep = None)`.
 
 Had we used `wkt=FALSE` in this example, we would have needed to  
 clean up the output further by renaming some columns, notably
@@ -190,11 +195,11 @@ When used manually, field names of media attachment fields can be (partially or
 fully) specified, see `??ruODK::attachment_get()`.
 
 The date formats are parsed from ISO8601 timestamps into POSIXct objects with
-`ruODK::parse_datetime()`. We use our local timezone (GMT+08) in this example.
+`ruODK::ru_datetime()`. We use our local timezone (GMT+08) in this example.
 When used through `ruODK::odata_submission_get()`, `ruODK` will introspect the
 form schema to detect and then parse date and datetime fields automatically.
 When used manually, field names of date and datetime fields can be (partially or 
-fully) specified, see `??ruODK::parse_datetime()`.
+fully) specified, see `??ruODK::ru_datetime()`.
 
 The repeated subgroup `taxon_encounter` is left joined to the main submission data
 to receive a (repeated) copy of the main submission data 
@@ -318,9 +323,9 @@ fq_data_diy <- tibble::tibble(value = fq_raw$value) %>%
 
 ## Spatial formats - how granular would you like your coordinates?
 If we run `odata_submission_get()` with `wkt=FALSE` (the default), we will
-receive GeoJSON. Point GeoJSON parses with `parse_submissions` into separate 
-columns for lat, lon, alt (soon accuracy). 
-This is useful for e.g. leaflet maps which want lat and lon separately, see 
+receive GeoJSON. Point GeoJSON parses with `odata_submission_get()` into separate 
+columns for `lat`, `lon`, `alt` (soon to include accuracy). 
+This is useful for e.g. leaflet maps which want `lat` and `lon` separately, see 
 example map below.
 
 If we run `odata_submission_get()` with `wkt=TRUE` (the default), we will

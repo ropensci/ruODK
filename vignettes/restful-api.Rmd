@@ -334,7 +334,7 @@ submissions in `data_quadrat`.
 The field `xml` contains the actual submission data including repeating groups.
 
 The structure is different to the output of `ruODK::odata_submission_get`,
-therefore `ruODK::odata_submission_parse` does not work for those, as
+therefore `ruODK::odata_submission_rectangle` does not work for those, as
 here we might have repeating groups included in a submission.
 
 This structure could be used for upload into data warehouses accepting nested data
@@ -382,7 +382,7 @@ fs::dir_ls(t, recurse = TRUE, glob = "*.jpg")
 # Outlook
 
 From here, we can use the separately created data tibbles and locally downloaded
-attachments to build visualisations as shown in the vignette "odata".
+attachments to build visualisations as shown in the [`vignette("odata-api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata.html).
 
 The best pathway to retrieve submission data seems to be the data export to ZIP 
 or access via OData.
