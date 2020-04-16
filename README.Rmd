@@ -232,7 +232,7 @@ on best practices and further readings for code contributions.
 ## Attribution
 `ruODK` was developed, and is maintained, by Florian Mayer for the Western Australian 
 [Department of Biodiversity, Conservation and Attractions (DBCA)](https://www.dbca.wa.gov.au/).
-The development was funded both by DBCA core funding and Offset funding through
+The development was funded both by DBCA core funding and external funds from
 the [North West Shelf Flatback Turtle Conservation Program](https://flatbacks.dbca.wa.gov.au/).
 
 To cite package `ruODK` in publications use:
