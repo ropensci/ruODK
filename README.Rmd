@@ -10,7 +10,10 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/",
   out.width = "100%")
 ```
-# `ruODK`: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Are you ODK?" width="120" />
+# `ruODK`: An R Client for the ODK Central API <img 
+src="man/figures/ruODK.png" 
+align="right" 
+alt="Especially in these trying times, it is important to ask: ruODK? width="120" />
 <!-- badges: start -->
 [![ROpenSci submission status](https://badges.ropensci.org/335_status.svg)](https://github.com/ropensci/software-review/issues/335)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -21,34 +24,36 @@ knitr::opts_chunk$set(
 [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 <!-- badges: end -->
-   
-Especially in these trying times, it is important to ask: "ruODK?"
 
-[OpenDataKit](https://opendatakit.org/) (ODK) is a free and open-source software 
-for collecting, managing, and using data in resource-constrained environments.
+`ruODK` is an R client to access and parse data from ODK Central.
 
-ODK consists of a range of [software packages and apps](https://opendatakit.org/software/).
+[OpenDataKit](https://getodk.org/) (ODK) is 
+[free-and open-source software](https://getodk.org/software/) 
+that helps millions of people collect data quickly, accurately, offline, 
+and at scale. The software is in active use in every country in the world and is 
+supported by a large and helpful community.
+
 `ruODK` assumes some familiarity of its users with the ODK ecosystem and workflows.
-For a detailed overview, read the extensive [ODK documentation](https://docs.opendatakit.org/)
-and visit the friendly [ODK forum](https://forum.opendatakit.org/).
+For a detailed overview, read the extensive [ODK documentation](https://docs.getodk.org/)
+and visit the friendly [ODK forum](https://forum.getodk.org/).
 
-[ODK Central](https://docs.opendatakit.org/central-intro/) is a cloud-based
+[ODK Central](https://docs.getodk.org/central-intro/) is a cloud-based
 data clearinghouse for digitally captured data, replacing the older software 
-[ODK Aggregate](https://docs.opendatakit.org/aggregate-intro/). 
+[ODK Aggregate](https://docs.getodk.org/aggregate-intro/). 
 ODK Central manages user accounts and permissions, stores form definitions, 
 and allows data collection clients like 
-[ODK Collect](https://docs.opendatakit.org/collect-intro/) to connect to it for 
+[ODK Collect](https://docs.getodk.org/collect-intro/) to connect to it for 
 form download and submission upload.
 
 ![An ODK setup with ODK Build, Central, Collect, and ruODK](
 https://www.lucidchart.com/publicSegments/view/952c1350-3003-48c1-a2c8-94bad74cdb46/image.png)
 
-A typical [ODK workflow](https://docs.opendatakit.org/#how-is-odk-used):
-An XForm is designed e.g. in [ODK Build](https://build.opendatakit.org/),
-[published to ODK Central](https://docs.opendatakit.org/central-forms/), 
+A typical [ODK workflow](https://docs.getodk.org/#how-is-odk-used):
+An XForm is designed e.g. in [ODK Build](https://build.getodk.org//),
+[published to ODK Central](https://docs.getodk.org/central-forms/), 
 and downloaded onto an Android device running ODK Collect.
 After data have been captured digitally using 
-[ODK Collect](https://docs.opendatakit.org/collect-intro/), the data are uploaded
+[ODK Collect](https://docs.getodk.org/collect-intro/), the data are uploaded
 and stored in ODK Central. The next step from there is to extract the data, 
 optionally upload it into another data warehouse, and then to analyse and 
 generate insight from it. 
@@ -59,7 +64,7 @@ with a comprehensive and interactive
 [documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
 
 `ruODK` is aimed at the technically minded researcher who wishes to access and
-use the data from ODK Central using the programming language R.
+process data from ODK Central using the programming language R.
 
 Benefits of using the R ecosystem in combination with ODK:
 
@@ -85,7 +90,7 @@ Benefits of using the R ecosystem in combination with ODK:
   
 `ruODK`'s use cases:
 
-*  Smaller projects: Example [rGeoCBI](https://dbca-wa.github.io/rGeoCBI/)
+*  Smaller projects: Example [rOzCBI](https://dbca-wa.github.io/rOzCBI/)
    1. Data collection: ODK Collect
    2. Data clearinghouse: ODK Central
    3. Data analysis and reporting: `Rmd` (ruODK)
@@ -128,26 +133,26 @@ remotes::install_github("dbca-wa/ruODK", dependencies = TRUE)
 ### Access to an ODK Central instance
 First, we need an ODK Central instance and some data to play with!
 
-Either ask in the [ODK forum](https://forum.opendatakit.org/) for an account in 
-the [ODK Central Sandbox](https://sandbox.central.opendatakit.org/),
-or follow the [setup instructions](https://docs.opendatakit.org/central-intro/)
+Either ask in the [ODK forum](https://forum.getodk.org/) for an account in 
+the [ODK Central Sandbox](https://sandbox.central.getodk.org/),
+or follow the [setup instructions](https://docs.getodk.org/central-intro/)
 to build and deploy your very own ODK Central instance.
 
 ### ODK Central setup
-The ODK Central [user manual](https://docs.opendatakit.org/central-using/) 
+The ODK Central [user manual](https://docs.getodk.org/central-using/) 
 provides up-to-date descriptions of the steps below.
 
-*  [Create a web user account](https://docs.opendatakit.org/central-users/#creating-a-web-user) 
+*  [Create a web user account](https://docs.getodk.org/central-users/#creating-a-web-user) 
    on an ODK Central instance. Your username will be an email address.
-*  [Create a project](https://docs.opendatakit.org/central-projects/) and give 
+*  [Create a project](https://docs.getodk.org/central-projects/) and give 
    the web user at least
-   [read permissions](https://docs.opendatakit.org/central-projects/#managing-project-managers).
+   [read permissions](https://docs.getodk.org/central-projects/#managing-project-managers).
 *  Create an XForm, e.g. using ODK Build, or use the 
    [example forms](https://github.com/dbca-wa/ruODK/tree/master/inst/extdata) 
    provided by `ruODK`. The `.odkbuild` versions can be loaded into 
-   [ODK Build](https://build.opendatakit.org/), while the `.xml` versions can be 
+   [ODK Build](https://build.getodk.org/), while the `.xml` versions can be 
    directly imported into ODK Central.
-*  [Publish the form](https://docs.opendatakit.org/central-forms/)
+*  [Publish the form](https://docs.getodk.org/central-forms/)
    to ODK Central.
 *  Collect some data for this form on ODK Collect and let ODK Collect submit the
    finalised forms to ODK Central.
@@ -158,7 +163,7 @@ ODK Central web user. Adjust verbosity to your liking.
   
 ```{r ru_setup_rmd, echo=FALSE, eval=TRUE}
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
+  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW"),
   tz = "Australia/Perth",
@@ -168,7 +173,7 @@ ruODK::ru_setup(
 
 ```{r ru_setup_demo, echo=TRUE, eval=FALSE}
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
+  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = "me@email.com",
   pw = "...",
   tz = "Australia/Perth",
