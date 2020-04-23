@@ -109,7 +109,7 @@ code are covered by tests, run the following to get a local coverage report of
 the package so you can see exactly what lines are not covered in the project.
 
 To run tests and build the vignettes, you'll need access to the 
-[ODK Central sandbox instance](https://sandbox.central.opendatakit.org/).
+[ODK Central sandbox instance](https://sandbox.central.getodk.org/).
 If you haven't got an account yet, create an [accont request issue](https://github.com/dbca-wa/ruODK/issues/new/choose)
 to request access to those two ODK Central instances.
 
@@ -117,7 +117,7 @@ You will need to use the following environment variables:
 
 ```r
 ruODK::ru_setup(
-  test_url = "https://sandbox.central.opendatakit.org",
+  test_url = "https://sandbox.central.getodk.org",
   test_pid = 14,
   test_fid = "build_Flora-Quadrat-0-4_1564384341",
   test_un = "you@email.com",
@@ -130,7 +130,7 @@ Keep these settings outside of version control, e.g. in your `~/.Renviron`.
 Note: `~/.Renviron` contains simple `key=value` assignments without `Sys.setenv()`.
 ```r
 # Required for testing
-ODKC_TEST_URL="https://sandbox.central.opendatakit.org"
+ODKC_TEST_URL="https://sandbox.central.getodk.org"
 ODKC_TEST_PID=14
 ODKC_TEST_FID="build_Flora-Quadrat-0-4_1564384341"
 ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698"

@@ -43,7 +43,7 @@ A tibble with one row per form and all form metadata as columns.
 # Set default credentials, see vignette "setup"
 ruODK::ru_setup(
   svc = paste0(
-    "https://sandbox.central.opendatakit.org/v1/projects/14/",
+    "https://sandbox.central.getodk.org/v1/projects/14/",
     "forms/build_Flora-Quadrat-0-2_1558575936.svc"
   ),
   un = "me@email.com",

@@ -46,11 +46,8 @@
 form_schema_parse <- function(fs,
                               path = "Submissions",
                               verbose = get_ru_verbose()) {
-  # 00. Recursion airbag
-  # if (!(is.list(fs) && "children" %in% names(fs))) return(NULL)
-
-  # 0. Spray R CMD check with WD-40
-  type <- name <- children <- NULL
+  # 0. Recursion airbag
+  if (!(is.list(fs))) ru_msg_info(glue::glue("Not a list:")); print(fs)
 
   # 1. Grab next level type/name pairs, append column "path".
   # This does not work recursively - if it did, we'd be done here.
@@ -59,7 +56,7 @@ form_schema_parse <- function(fs,
     rlist::list.stack(.) %>%
     dplyr::mutate(path = path)
 
-  if (verbose == TRUE) ru_msg_info(glue::glue("Found fields:\n{str(x)}"))
+  if (verbose == TRUE) ru_msg_info(glue::glue("Found fields:")); print(x)
 
   # 2. Recursively run form_schema_parse over nested elements.
   for (node in fs) {
@@ -79,7 +76,7 @@ form_schema_parse <- function(fs,
   # 3. Return combined type/name pairs as tibble
   if (verbose == TRUE) ru_msg_info(glue::glue("Returning data \"{str(x)}\""))
 
-  # 4. Predict ruodk_name
+  # 4. Predict ruodk_name happens in form_schema
   x %>%
     tibble::as_tibble()
 }

@@ -37,7 +37,7 @@ A numeric value for \code{pid} will be converted to character.}
 in \code{pid}. This will override the form ID from \code{svc}.}
 
 \item{url}{An ODK Central URL,
-e.g. "https://sandbox.central.opendatakit.org".
+e.g. "https://sandbox.central.getodk.org".
 This will override the ODK Central base URL from \code{svc}.}
 
 \item{un}{An ODK Central username which is the email of a "web user" in the
@@ -137,7 +137,7 @@ ru_setup(
   url = "https://odkcentral.dbca.wa.gov.au",
   un = "me@email.com",
   pw = "...",
-  test_url = "https://sandbox.central.opendatakit.org",
+  test_url = "https://sandbox.central.getodk.org",
   test_un = "me@email.com",
   test_pw = "...",
   test_pid = 14,

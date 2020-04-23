@@ -38,7 +38,7 @@ Read vignette "setup" for further information.
 usethis::edit_r_environ()
 ```
 
-<!-- 1b. Paste the following block usign your own, working credentials:  -->
+<!-- 1b. Paste the following block using your own, working credentials:  -->
 ```{r paste_env_vars, echo=FALSE, eval=FALSE}
 # ODK Central web user with "manager" role on project
 ODKC_UN="my@email.com"
@@ -74,7 +74,7 @@ library(ruODK)
 
 # Set ruODK defaults to an ODK Central form, choose own tz and verbosity
 ruODK::ru_setup(
-  svc=paste0("https://sandbox.central.opendatakit.org/v1/projects",
+  svc=paste0("https://sandbox.central.getodk.org/v1/projects",
              "/14/forms/build_Flora-Quadrat-0-4_1564384341.svc"),
   tz = "Australia/Perth",
   verbose = TRUE)

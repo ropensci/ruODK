@@ -52,7 +52,7 @@ prepend_uuid <- function(md5hash) {
 #' ruODK:::attachment_url("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
 #'   "filename.jpg",
 #'   pid = 1, fid = "form1",
-#'   url = "https://sandbox.central.opendatakit.com"
+#'   url = "https://sandbox.central.getodk.org"
 #' )
 attachment_url <- function(uuid,
                            fn,

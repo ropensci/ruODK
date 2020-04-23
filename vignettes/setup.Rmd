@@ -53,7 +53,7 @@ respective function calls, `ruODK` defaults to hide verbose messages.
 # ruODK user using OData service URL, username (an email), and password
 # Never use plaintext username and password, use Sys.getenv() instead
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
+  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
   un = Sys.getenv("ODKC_UN"), 
   pw = Sys.getenv("ODKC_PW"),
   tz = "Australia/Perth",
@@ -62,11 +62,11 @@ ruODK::ru_setup(
 
 # ruODK contributor
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
+  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
   un = Sys.getenv("ODKC_UN"), 
   pw = Sys.getenv("ODKC_PW"),
   tz = "Australia/Perth",
-  test_svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
+  test_svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
   test_fid_zip = "build_Spotlighting-0-6_1558333698",
   test_fid_att = "build_Flora-Quadrat-0-1_1558330379",
   test_un = Sys.getenv("ODKC_TEST_UN"), 
@@ -82,7 +82,7 @@ ruODK::ru_setup(
   un = Sys.getenv("ODKC_UN"), 
   pw = Sys.getenv("ODKC_PW"),
   tz = "Australia/Perth",
-  test_url = "https://sandbox.central.opendatakit.org",
+  test_url = "https://sandbox.central.getodk.org",
   test_un = Sys.getenv("ODKC_TEST_UN"), 
   test_pw = Sys.getenv("ODKC_TEST_PW"),
   test_pid = 14,
@@ -129,7 +129,7 @@ ODKC_FID="build_Flora-Quadrat-0-2_1558575936"
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
 ODKC_UN="me@email.com"
 ODKC_PW="..."
-ODKC_TEST_URL="https://sandbox.central.opendatakit.org"
+ODKC_TEST_URL="https://sandbox.central.getodk.org"
 ODKC_TEST_UN="me@email.com"
 ODKC_TEST_PW="..."
 ODKC_TEST_PID=14
@@ -148,7 +148,7 @@ you can set them through `Sys.setenv()`:
 Sys.setenv(ODKC_URL="https://odkcentral.dbca.wa.gov.au")
 Sys.setenv(ODKC_UN="me@mail.com")
 Sys.setenv(ODKC_PW="...")
-Sys.setenv(ODKC_TEST_URL="https://sandbox.central.opendatakit.org")
+Sys.setenv(ODKC_TEST_URL="https://sandbox.central.getodk.org")
 Sys.setenv(ODKC_TEST_UN="me@mail.com")
 Sys.setenv(ODKC_TEST_PW="...")
 Sys.setenv(ODKC_TEST_PID=14)

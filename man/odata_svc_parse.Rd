@@ -9,7 +9,7 @@ odata_svc_parse(svc)
 \arguments{
 \item{svc}{(character) The OData service URL of a form as provided by the
 ODK Central form submissions tab.
-Example: "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"}
+Example: "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"}
 }
 \value{
 A named list with three components (all of type character):

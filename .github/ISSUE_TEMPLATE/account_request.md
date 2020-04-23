@@ -7,7 +7,7 @@ assignees: florianm
 
 ---
 I want to run the tests and build the vignettes. 
-Please provide access to the ODK Central Sandbox <https://sandbox.central.opendatakit.org/>.
+Please provide access to the ODK Central Sandbox <https://sandbox.central.getodk.org/>.
 
 [ ] I have sent an email to the package maintainer requesting access.
 [ ] I have requested access to the ODK Central Sandbox in the [ODK Forum](https://forum.opendatakit.org/c/support).

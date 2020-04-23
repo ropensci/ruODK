@@ -78,7 +78,7 @@ print.ru_settings <- function(x, ...) {
 #' @param svc (character) The OData service URL of a form as provided by the
 #'   ODK Central form submissions tab.
 # nolint start
-#'   Example: "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
+#'   Example: "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
 # nolint end
 #' @export
 #' @family ru_settings
@@ -117,7 +117,7 @@ odata_svc_parse <- function(svc) {
 #' @param fid (optional, character) The alphanumeric ID of an existing form
 #'   in \code{pid}. This will override the form ID from \code{svc}.
 #' @param url An ODK Central URL,
-#'   e.g. "https://sandbox.central.opendatakit.org".
+#'   e.g. "https://sandbox.central.getodk.org".
 #'   This will override the ODK Central base URL from \code{svc}.
 #' @param un An ODK Central username which is the email of a "web user" in the
 #'   specified ODK Central instance \code{url} (optional, character).
@@ -197,7 +197,7 @@ odata_svc_parse <- function(svc) {
 #'   url = "https://odkcentral.dbca.wa.gov.au",
 #'   un = "me@email.com",
 #'   pw = "...",
-#'   test_url = "https://sandbox.central.opendatakit.org",
+#'   test_url = "https://sandbox.central.getodk.org",
 #'   test_un = "me@email.com",
 #'   test_pw = "...",
 #'   test_pid = 14,
@@ -482,7 +482,7 @@ yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
         "* Is the server online at {url}? Is the internet flaky? Retry!\n",
         "* Check ruODK::ru_settings() - credentials and defaults correct?\n",
         "* Run ru_setup() with working credentials and defaults.\n",
-        '* Read the vignette("setup", package = "ruODK") how to set up ruODK.'
+        '* Read the vignette("setup", package = "ruODK") how to set up ruODK'
       )
     )
 }

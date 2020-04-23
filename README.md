@@ -178,7 +178,7 @@ read-permitted ODK Central web user. Adjust verbosity to your liking.
     #> <ruODK settings>
     #>   Default ODK Central Project ID:  14 
     #>   Default ODK Central Form ID:  build_Flora-Quadrat-0-4_1564384341 
-    #>   Default ODK Central URL:  https://sandbox.central.opendatakit.org 
+    #>   Default ODK Central URL:  https://sandbox.central.getodk.org
     #>   Default ODK Central Username:  Florian.Mayer@dbca.wa.gov.au 
     #>   Default ODK Central Password: run ruODK::get_default_pw() to show 
     #>   Default Time Zone:  Australia/Perth 
@@ -187,14 +187,14 @@ read-permitted ODK Central web user. Adjust verbosity to your liking.
     #>   Test ODK Central Form ID (ZIP tests): build_Spotlighting-0-6_1558333698 
     #>   Test ODK Central Form ID (Attachment tests): build_Flora-Quadrat-0-1_1558330379 
     #>   Test ODK Central Form ID (Parsing tests): build_Turtle-Track-or-Nest-1-0_1569907666 
-    #>   Test ODK Central URL: https://sandbox.central.opendatakit.org 
+    #>   Test ODK Central URL: https://sandbox.central.getodk.org
     #>   Test ODK Central Username: Florian.Mayer@dbca.wa.gov.au 
     #>   Test ODK Central Password: run ruODK::get_test_pw() to show 
     #>   Verbose messages: TRUE
 
 ``` r
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
+  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = "me@email.com",
   pw = "...",
   tz = "Australia/Perth",

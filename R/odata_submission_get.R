@@ -83,10 +83,10 @@
 #' @template param-tz
 #' @template param-verbose
 #' @return A list of lists.
-#'
-#'   * `value` contains the submissions as list of lists.
-#'   * `@odata.context` is the URL of the metadata.
-#'   * `@odata.count` is the total number of rows in the table.
+#' \itemize{
+#'  \item `value` contains the submissions as list of lists.
+#'  \item `@odata.context` is the URL of the metadata.
+#'  \item `@odata.count` is the total number of rows in the table.
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}
@@ -99,7 +99,7 @@
 #' # Set default credentials, see vignette "setup"
 #' ruODK::ru_setup(
 #'   svc = paste0(
-#'     "https://sandbox.central.opendatakit.org/v1/projects/14/",
+#'     "https://sandbox.central.getodk.org/v1/projects/14/",
 #'     "forms/build_Flora-Quadrat-0-2_1558575936.svc"
 #'   ),
 #'   un = "me@email.com",

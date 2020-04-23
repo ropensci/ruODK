@@ -10,7 +10,7 @@
 suppressMessages(library(tidyverse))
 library(ruODK)
 ruODK::ru_setup(
-  svc = "https://sandbox.central.opendatakit.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
+  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
   un = ruODK::get_test_un(), pw = ruODK::get_test_pw()
 )
 

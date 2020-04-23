@@ -2,9 +2,7 @@
 % Please edit documentation in R/odata_submission_rectangle.R
 \name{unnest_all}
 \alias{unnest_all}
-\title{Predict the column type based on optional form_schema
-This is stupid, we should map first, then parse
-Recursively unnest_wide all list columns in a tibble.}
+\title{Recursively unnest_wide all list columns in a tibble.}
 \usage{
 unnest_all(
   nested_tbl,
@@ -36,7 +34,7 @@ The unnested tibble in wide format
 \lifecycle{stable}
 }
 \details{
-\code{\link{odata_submission_rectangle}}uses this function
+\code{\link{odata_submission_rectangle}} uses this function
 internally.
 Interested users can use this function to break down `ruODK`'s automated
 steps into smaller components.
