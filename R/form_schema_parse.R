@@ -61,12 +61,11 @@ form_schema_parse <- function(fs,
   # 2. Recursively run form_schema_parse over nested elements.
   for (node in fs) {
     # Recursion seatbelt: only step into lists containing "children".
-    if (is.list(node) &&
-      "children" %in% names(node) &&
-      "name" %in% names(node)) {
-      for (child in node) {
-        if (verbose == TRUE) ru_msg_info(glue::glue("Found child: {child}"))
+    if (is.list(node) &&  "children" %in% names(node)) {
+      for (child in node["children"]) {
         odata_table_path <- glue::glue("{path}.{node['name']}")
+        if (verbose == TRUE)
+          ru_msg_info(glue::glue("Found child: {child} at {odata_table_path}"))
         xxx <- form_schema_parse(child, path = odata_table_path)
         x <- rbind(x, xxx)
       }

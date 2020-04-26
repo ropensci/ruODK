@@ -412,6 +412,20 @@ get_ru_verbose <- function() {
   x
 }
 
+#' \lifecycle{stable}
+#' @export
+#' @rdname ru_settings
+get_default_odkc_version <- function(){
+  Sys.getenv("ODKC_VERSION", unset = 0.8)
+}
+
+#' \lifecycle{stable}
+#' @export
+#' @rdname ru_settings
+get_test_odkc_version <- function(){
+  Sys.getenv("ODKC_TEST_VERSION", unset = 0.8)
+}
+
 #' Abort on missing ODK Central credentials (url, username, password).
 #'
 #' \lifecycle{stable}
@@ -473,6 +487,7 @@ yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL) {
 #' @param fid A form ID (character, optional)
 #' @return The response object
 #' @family ru_settings
+#' @export
 yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
   response %>%
     httr::stop_for_status(

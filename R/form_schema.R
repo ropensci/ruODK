@@ -18,6 +18,8 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-odkcv
+#' @template param-verbose
 #' @return A nested list containing the form definition.
 #'   At the lowest nesting level, each form field consists of a list of two
 #'   nodes, `name` (the underlying field name) and `type` (the XForm field
@@ -48,57 +50,51 @@
 #' fs_defaults <- form_schema(pid = 1, fid = "build_xformsId")
 #'
 #' # With defaults
-#' fs_nested <- form_schema(
-#'   flatten = FALSE,
-#'   odata = FALSE
-#' )
+#' fs_nested <- form_schema(flatten = FALSE, odata = FALSE, parse = FALSE)
 #' listviewer::jsonedit(fs_nested)
 #'
-#' fs_flattened <- form_schema(
-#'   flatten = TRUE,
-#'   odata = FALSE
-#' )
+#' fs_flattened <- form_schema(flatten = TRUE, odata = FALSE, parse = FALSE)
 #' listviewer::jsonedit(fs_flattened)
 #'
 #' # form_schema returns a nested list. There's nothing to change about that.
 #' class(fs_nested)
-#' # > "list"
+#' #> "list"
 #'
-#' fs_flattened
-#' # > "list"
+#' class(fs_flattened)
+#' #> "list"
 #'
 #' # This assumes knowledge of that exact form being tested.
 #' # First node: type "structure" (a field group) named "meta".
 #' fs_nested[[1]]$type
-#' # > "structure"
+#' #> "structure"
 #'
 #' fs_nested[[1]]$name
-#' # > "meta"
+#' #> "meta"
 #'
 #' # The first node contains children, which means it's an XForm field group.
 #' names(fs_nested[[1]])
-#' # > "children" ...
+#' #> "name" "children" "type"
 #'
 #' # Next node: a "meta" field of type "string" capturing the  "instanceId".
 #' # First child node of "meta": type "string", name "instanceId".
 #' fs_nested[[1]]$children[[1]]$type
-#' # > "string"
+#' #> "string"
 #' fs_nested[[1]]$children[[1]]$name
-#' # > "instanceID"
+#' #> "instanceID"
 #'
 #' # In the flattened version, the field's and it's ancestors' names are the
 #' # components of "path".
 #' fs_flattened[[1]]$path
-#' # > "meta". "instanceId"
+#' #> "meta". "instanceId"
 #'
 #' fs_flattened[[1]]$type
-#' # > "string"
+#' #> "string"
 #'
 #' # Last node: a "meta" field capturing the datetime of form completion
 #' fs_flattened[[length(fs_flattened)]]$type
-#' # > "dateTime"
+#' #> "dateTime"
 #' fs_nested[[length(fs_nested)]]$type
-#' # > "dateTime"
+#' #> "dateTime"
 #'
 #' # Parsed into a tibble of form field type/name:
 #' # Useful to inform further parsing of submission data (attachments, dates)
@@ -120,34 +116,61 @@ form_schema <- function(flatten = FALSE,
                         fid = get_default_fid(),
                         url = get_default_url(),
                         un = get_default_un(),
-                        pw = get_default_pw()) {
+                        pw = get_default_pw(),
+                        odkc_version = get_default_odkc_version(),
+                        verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  fs <- httr::RETRY(
-    "GET",
-    glue::glue("{url}/v1/projects/{pid}/forms/{fid}.schema.json"),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    query = list(flatten = flatten, odata = odata)
-  ) %>%
-    yell_if_error(., url, un, pw) %>%
-    httr::content(.)
 
-  if (parse == TRUE) {
-    if (flatten == TRUE) {
-      rlang::warn(
-        glue::glue(
-          "clisymbols$symbol$cross",
-          "Cannot parse flattened form schema, ",
-          "returning unparsed and flattened.\n",
-          "Use flatten=FALSE with parse=TRUE for a parsed form_schema."
+  if (odkc_version < 0.8) {
+    url_v7 <- glue::glue("{url}/v1/projects/{pid}/forms/{fid}.schema.json")
+    if (verbose == TRUE)
+      ru_msg_info(glue::glue("Reading v0.7 form schema from {url_v7}"))
+
+    fs <- httr::RETRY(
+      "GET",
+      url_v7,
+      httr::add_headers("Accept" = "application/json"),
+      httr::authenticate(un, pw),
+      query = list(flatten = flatten, odata = odata)
+    ) %>%
+      ruODK:::yell_if_error(., url, un, pw) %>%
+      httr::content(.)
+
+    if (parse == TRUE) {
+      if (flatten == TRUE) {
+        ru_msg_warn(
+          'Cannot parse flattened form schema, returning unparsed and flattened.
+        Use flatten=FALSE with parse=TRUE for a parsed form_schema.'
         )
-      )
-      return(fs)
+        return(fs)
+      }
+      fsp <- form_schema_parse(fs, verbose = verbose) %>%
+        dplyr::mutate(ruodk_name = predict_ruodk_name(name, path))
+      return(fsp)
     }
-    return(form_schema_parse(fs) %>%
-      dplyr::mutate(ruodk_name = predict_ruodk_name(name, path)))
+    return(fs)
+  } else {
+    url_v8 <- glue::glue("{url}/v1/projects/{pid}/forms/{fid}/fields")
+    if (verbose == TRUE)
+      ru_msg_info(glue::glue("Reading v0.8 form fields from {url_v8}"))
+
+    httr::RETRY(
+      "GET",
+      url_v8,
+      httr::add_headers("Accept" = "application/json"),
+      httr::authenticate(un, pw),
+      query = list(flatten = flatten, odata = odata)
+    ) %>%
+      ruODK:::yell_if_error(., url, un, pw) %>%
+      httr::content(.) %>%
+      rlist::list.select(path, name, type) %>%
+      rlist::list.stack(.) %>%
+      dplyr::mutate(
+        ruodk_name = path %>%
+          stringr::str_remove("/") %>%
+          stringr::str_replace_all("/", "_")
+      )
   }
-  return(fs)
 }
 
 # Tests
