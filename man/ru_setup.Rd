@@ -12,6 +12,7 @@ ru_setup(
   un = NULL,
   pw = NULL,
   tz = NULL,
+  odkc_version = NULL,
   test_svc = NULL,
   test_pid = NULL,
   test_fid = NULL,
@@ -21,6 +22,7 @@ ru_setup(
   test_url = NULL,
   test_un = NULL,
   test_pw = NULL,
+  test_odkc_version = NULL,
   verbose = NULL
 )
 }

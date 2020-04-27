@@ -20,6 +20,7 @@ odata_submission_get(
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
+  odkc_version = get_default_odkc_version(),
   tz = get_default_tz(),
   verbose = get_ru_verbose()
 )
@@ -81,9 +82,11 @@ Default: \code{\link{get_default_fid}}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{url}{The ODK Central base URL without trailing slash.
-Default: \code{\link{get_default_url}}.
-Set default \code{url} through \code{ru_setup(url="...")}.
+\item{url}{The ODK Central version as decimal number (major.minor).
+`ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+Default: \code{\link{get_default_odkc_version}} or 0.8 if unset.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=0.8)}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).

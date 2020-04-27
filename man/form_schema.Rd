@@ -12,7 +12,9 @@ form_schema(
   fid = get_default_fid(),
   url = get_default_url(),
   un = get_default_un(),
-  pw = get_default_pw()
+  pw = get_default_pw(),
+  odkc_version = get_default_odkc_version(),
+  verbose = get_ru_verbose()
 )
 }
 \arguments{
@@ -41,9 +43,11 @@ Default: \code{\link{get_default_fid}}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{url}{The ODK Central base URL without trailing slash.
-Default: \code{\link{get_default_url}}.
-Set default \code{url} through \code{ru_setup(url="...")}.
+\item{url}{The ODK Central version as decimal number (major.minor).
+`ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+Default: \code{\link{get_default_odkc_version}} or 0.8 if unset.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=0.8)}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
@@ -55,6 +59,10 @@ See \code{vignette("Setup", package = "ruODK")}.}
 Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{verbose}{Whether to display debug messages or not.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+verbosity can be set globally or per function.}
 }
 \value{
 A nested list containing the form definition.
@@ -86,57 +94,51 @@ ruODK::ru_setup(
 fs_defaults <- form_schema(pid = 1, fid = "build_xformsId")
 
 # With defaults
-fs_nested <- form_schema(
-  flatten = FALSE,
-  odata = FALSE
-)
+fs_nested <- form_schema(flatten = FALSE, odata = FALSE, parse = FALSE)
 listviewer::jsonedit(fs_nested)
 
-fs_flattened <- form_schema(
-  flatten = TRUE,
-  odata = FALSE
-)
+fs_flattened <- form_schema(flatten = TRUE, odata = FALSE, parse = FALSE)
 listviewer::jsonedit(fs_flattened)
 
 # form_schema returns a nested list. There's nothing to change about that.
 class(fs_nested)
-# > "list"
+#> "list"
 
-fs_flattened
-# > "list"
+class(fs_flattened)
+#> "list"
 
 # This assumes knowledge of that exact form being tested.
 # First node: type "structure" (a field group) named "meta".
 fs_nested[[1]]$type
-# > "structure"
+#> "structure"
 
 fs_nested[[1]]$name
-# > "meta"
+#> "meta"
 
 # The first node contains children, which means it's an XForm field group.
 names(fs_nested[[1]])
-# > "children" ...
+#> "name" "children" "type"
 
 # Next node: a "meta" field of type "string" capturing the  "instanceId".
 # First child node of "meta": type "string", name "instanceId".
 fs_nested[[1]]$children[[1]]$type
-# > "string"
+#> "string"
 fs_nested[[1]]$children[[1]]$name
-# > "instanceID"
+#> "instanceID"
 
 # In the flattened version, the field's and it's ancestors' names are the
 # components of "path".
 fs_flattened[[1]]$path
-# > "meta". "instanceId"
+#> "meta". "instanceId"
 
 fs_flattened[[1]]$type
-# > "string"
+#> "string"
 
 # Last node: a "meta" field capturing the datetime of form completion
 fs_flattened[[length(fs_flattened)]]$type
-# > "dateTime"
+#> "dateTime"
 fs_nested[[length(fs_nested)]]$type
-# > "dateTime"
+#> "dateTime"
 
 # Parsed into a tibble of form field type/name:
 # Useful to inform further parsing of submission data (attachments, dates)

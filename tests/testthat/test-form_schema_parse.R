@@ -25,7 +25,7 @@ test_that("form_schema works with ODK Central v0.8", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
-    odkc_version = 0.8,
+    odkc_version = get_test_odkc_version(),
     verbose = TRUE
   )
 

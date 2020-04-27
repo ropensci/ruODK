@@ -17,6 +17,8 @@
 \alias{get_test_fid_att}
 \alias{get_test_fid_gap}
 \alias{get_ru_verbose}
+\alias{get_default_odkc_version}
+\alias{get_test_odkc_version}
 \title{Get or set \code{ruODK} settings.}
 \usage{
 ru_settings()
@@ -50,6 +52,10 @@ get_test_fid_att()
 get_test_fid_gap()
 
 get_ru_verbose()
+
+get_default_odkc_version()
+
+get_test_odkc_version()
 }
 \value{
 \code{\link{ru_settings}} prints your default ODK Central project ID,
@@ -72,6 +78,7 @@ ru_settings()
 \code{\link{get_default_un}},
 \code{\link{get_default_pw}},
 \code{\link{get_default_tz}},
+\code{\link{get_default_odkc_version}},
 \code{\link{get_test_pid}},
 \code{\link{get_test_fid}},
 \code{\link{get_test_fid_zip}},
@@ -80,6 +87,7 @@ ru_settings()
 \code{\link{get_test_url}},
 \code{\link{get_test_un}},
 \code{\link{get_test_pw}},
+\code{\link{get_test_odkc_version}},
 \code{\link{get_ru_verbose}}.
 
 Other ru_settings: 

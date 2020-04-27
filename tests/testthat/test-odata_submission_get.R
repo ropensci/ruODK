@@ -14,6 +14,7 @@ test_that("odata_submission_get skips download", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = TRUE,
     download = FALSE,
     local_dir = t
@@ -31,6 +32,7 @@ test_that("odata_submission_get works with one known dataset", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = FALSE
   )
   fresh_raw_parsed <- odata_submission_get(
@@ -39,6 +41,7 @@ test_that("odata_submission_get works with one known dataset", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = TRUE,
     verbose = TRUE,
     local_dir = t
@@ -75,6 +78,7 @@ test_that("odata_submission_get skip omits number of results", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = FALSE,
     table = fq_svc$name[2] # brittle: depends on form used
   )
@@ -87,6 +91,7 @@ test_that("odata_submission_get skip omits number of results", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = FALSE,
     table = fq_svc$name[2] # brittle: depends on form used
   )
@@ -103,6 +108,7 @@ test_that("odata_submission_get top limits number of results", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = FALSE
   )
   top_parsed <- top_raw %>% odata_submission_rectangle()
@@ -121,6 +127,7 @@ test_that("odata_submission_get count returns total number or rows", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = FALSE
   )
   x_parsed <- x_raw %>% odata_submission_rectangle()
@@ -142,6 +149,7 @@ test_that("odata_submission_get parses WKT geopoint", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = TRUE,
     verbose = TRUE
   )
@@ -151,6 +159,7 @@ test_that("odata_submission_get parses WKT geopoint", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = TRUE
   )
   fs

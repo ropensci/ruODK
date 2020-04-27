@@ -8,6 +8,7 @@ test_that("odata_submission_rectangle works with gaps in first submission", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
     parse = FALSE,
     verbose = TRUE
   )
@@ -19,6 +20,7 @@ test_that("odata_submission_rectangle works with gaps in first submission", {
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
+      odkc_version = get_test_odkc_version(),
       parse = TRUE,
       verbose = TRUE,
       local_dir = t

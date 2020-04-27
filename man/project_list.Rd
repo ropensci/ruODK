@@ -51,17 +51,16 @@ ruODK::ru_setup(
 )
 
 pl <- project_list()
-
-knitr::kable(p)
+knitr::kable(pl)
 
 # project_list returns a tibble
-class(p)
+class(pl)
 # > "tbl_df" "tbl" "data.frame"
 
 # columns are project metadata
-names(p)
-# > "id" "name" "forms" "app_users" "last_submission"
-# > "created_at" "updated_at" "archived"
+names(pl)
+#> "id" "name" "forms" "app_users" "created_at" "updated_at"
+#> "last_submission" "archived"
 }
 }
 \seealso{

@@ -80,6 +80,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-odkcv
 #' @template param-tz
 #' @template param-verbose
 #' @return A list of lists.
@@ -163,6 +164,7 @@ odata_submission_get <- function(table = "Submissions",
                                  url = get_default_url(),
                                  un = get_default_un(),
                                  pw = get_default_pw(),
+                                 odkc_version = get_default_odkc_version(),
                                  tz = get_default_tz(),
                                  verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw)
@@ -206,7 +208,8 @@ odata_submission_get <- function(table = "Submissions",
     fid = fid,
     url = url,
     un = un,
-    pw = pw
+    pw = pw,
+    odkc_version = odkc_version
   )
 
   #----------------------------------------------------------------------------#

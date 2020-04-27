@@ -15,6 +15,7 @@
 #' \code{\link{get_default_un}},
 #' \code{\link{get_default_pw}},
 #' \code{\link{get_default_tz}},
+#' \code{\link{get_default_odkc_version}},
 #' \code{\link{get_test_pid}},
 #' \code{\link{get_test_fid}},
 #' \code{\link{get_test_fid_zip}},
@@ -23,6 +24,7 @@
 #' \code{\link{get_test_url}},
 #' \code{\link{get_test_un}},
 #' \code{\link{get_test_pw}},
+#' \code{\link{get_test_odkc_version}},
 #' \code{\link{get_ru_verbose}}.
 #' @family ru_settings
 #' @examples
@@ -35,6 +37,7 @@ ru_settings <- function() {
     un = Sys.getenv("ODKC_UN", ""),
     pw = Sys.getenv("ODKC_PW", ""),
     tz = Sys.getenv("RU_TIMEZONE", "UTC"),
+    odkc_version = Sys.getenv("ODKC_VERSION", ""),
     test_pid = Sys.getenv("ODKC_TEST_PID", ""),
     test_fid = Sys.getenv("ODKC_TEST_FID", ""),
     test_fid_zip = Sys.getenv("ODKC_TEST_FID_ZIP", ""),
@@ -43,6 +46,7 @@ ru_settings <- function() {
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", ""),
+    odkc_version = Sys.getenv("ODKC_TEST_VERSION", ""),
     verbose = as.logical(Sys.getenv("RU_VERBOSE", FALSE))
   )
   structure(ops, class = "ru_settings")
@@ -57,6 +61,7 @@ print.ru_settings <- function(x, ...) {
   cat("  Default ODK Central Username: ", x$un, "\n")
   cat("  Default ODK Central Password: run ruODK::get_default_pw() to show \n")
   cat("  Default Time Zone: ", x$tz, "\n")
+  cat("  Default ODK Central Version: ", x$odkc_version, "\n")
   cat("  Test ODK Central Project ID:", x$test_pid, "\n")
   cat("  Test ODK Central Form ID:", x$test_fid, "\n")
   cat("  Test ODK Central Form ID (ZIP tests):", x$test_fid_zip, "\n")
@@ -65,6 +70,7 @@ print.ru_settings <- function(x, ...) {
   cat("  Test ODK Central URL:", x$test_url, "\n")
   cat("  Test ODK Central Username:", x$test_un, "\n")
   cat("  Test ODK Central Password: run ruODK::get_test_pw() to show \n")
+  cat("  Test ODK Central Version: ", x$odkc_test_version, "\n")
   cat("  Verbose messages:", x$verbose, "\n")
 }
 
@@ -122,6 +128,7 @@ odata_svc_parse <- function(svc) {
 #' @param un An ODK Central username which is the email of a "web user" in the
 #'   specified ODK Central instance \code{url} (optional, character).
 #' @param pw The password for user \code{un} (optional, character).
+#' @paran odkc_version The ODK Central version as major/minor version, e.g. 0.8.
 #' @param tz Global default time zone.
 #'   `ruODK`'s time zone is determined in order of precedence:
 #'
@@ -162,6 +169,9 @@ odata_svc_parse <- function(svc) {
 #'   privileged to view the test project(s) at \code{test_url}.
 #' @param test_pw (optional, character) The valid ODK Central password for
 #'   \code{test_un}.
+#'
+#' @paran test_odkc_version The ODK Central test server's version as major/minor
+#'   version, e.g. 0.8.
 #' @param verbose Global default for `ruODK` verbosity.
 #'   `ruODK` verbosity is determined in order of precedence:
 #'
@@ -213,6 +223,7 @@ ru_setup <- function(svc = NULL,
                      un = NULL,
                      pw = NULL,
                      tz = NULL,
+                     odkc_version = NULL,
                      test_svc = NULL,
                      test_pid = NULL,
                      test_fid = NULL,
@@ -222,6 +233,7 @@ ru_setup <- function(svc = NULL,
                      test_url = NULL,
                      test_un = NULL,
                      test_pw = NULL,
+                     test_odkc_version = NULL,
                      verbose = NULL) {
   if (!is.null(svc)) {
     odata_components <- odata_svc_parse(svc)
@@ -236,6 +248,7 @@ ru_setup <- function(svc = NULL,
   if (!is.null(un)) Sys.setenv("ODKC_UN" = un)
   if (!is.null(pw)) Sys.setenv("ODKC_PW" = pw)
   if (!is.null(tz)) Sys.setenv("RU_TIMEZONE" = tz)
+  if (!is.null(odkc_version)) Sys.setenv("ODKC_VERSION" = odkc_version)
 
   if (!is.null(test_svc)) {
     odata_components <- odata_svc_parse(test_svc)
@@ -252,6 +265,7 @@ ru_setup <- function(svc = NULL,
   if (!is.null(test_url)) Sys.setenv("ODKC_TEST_URL" = test_url)
   if (!is.null(test_un)) Sys.setenv("ODKC_TEST_UN" = test_un)
   if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
+  if (!is.null(test_odkc_version)) Sys.setenv("ODKC_TEST_VERSION" = test_odkc_version)
   if (!is.null(verbose)) Sys.setenv("RU_VERBOSE" = verbose)
 
   if (get_ru_verbose()) {
