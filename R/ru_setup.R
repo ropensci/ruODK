@@ -37,7 +37,7 @@ ru_settings <- function() {
     un = Sys.getenv("ODKC_UN", ""),
     pw = Sys.getenv("ODKC_PW", ""),
     tz = Sys.getenv("RU_TIMEZONE", "UTC"),
-    odkc_version = Sys.getenv("ODKC_VERSION", ""),
+    odkc_version = Sys.getenv("ODKC_VERSION", 0.8),
     test_pid = Sys.getenv("ODKC_TEST_PID", ""),
     test_fid = Sys.getenv("ODKC_TEST_FID", ""),
     test_fid_zip = Sys.getenv("ODKC_TEST_FID_ZIP", ""),
@@ -46,7 +46,7 @@ ru_settings <- function() {
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", ""),
-    odkc_version = Sys.getenv("ODKC_TEST_VERSION", ""),
+    odkc_version = Sys.getenv("ODKC_TEST_VERSION", 0.8),
     verbose = as.logical(Sys.getenv("RU_VERBOSE", FALSE))
   )
   structure(ops, class = "ru_settings")
