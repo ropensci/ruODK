@@ -26,7 +26,7 @@ the form path.
   # > "foo_bar"
   predict_ruodk_name("bar", "Submissions")
   # > "bar"
-  predict_ruodk_name("rockr", "Submissions.foo_fighters")
+  predict_ruodk_name("rock", "Submissions.foo_fighters")
   # > "foo_fighters_rock"
 }
 }
