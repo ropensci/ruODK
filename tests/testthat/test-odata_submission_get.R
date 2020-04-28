@@ -72,19 +72,19 @@ test_that("odata_submission_get skip omits number of results", {
     pw = get_test_pw()
   )
 
-  fresh_raw <- odata_submission_get(
+  fresh_parsed <- odata_submission_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version(),
-    parse = FALSE,
+    parse = TRUE,
+    download = FALSE,
     table = fq_svc$name[2] # brittle: depends on form used
   )
-  fresh_parsed <- fresh_raw %>% odata_submission_rectangle()
 
-  skip_raw <- odata_submission_get(
+  skip_parsed <- odata_submission_get(
     skip = 1,
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -92,19 +92,20 @@ test_that("odata_submission_get skip omits number of results", {
     un = get_test_un(),
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version(),
-    parse = FALSE,
+    parse = TRUE,
+    download = FALSE,
     table = fq_svc$name[2] # brittle: depends on form used
   )
-  skip_parsed <- skip_raw %>% odata_submission_rectangle()
 
-  ru_msg_info("odata_submission_get skip")
+  print("odata_submission_get without skip")
   print(fresh_parsed)
+  print("odata_submission_get with skip=1 should return one less record")
   print(skip_parsed)
   testthat::expect_true(nrow(fresh_parsed) == nrow(skip_parsed) + 1)
 })
 
 test_that("odata_submission_get top limits number of results", {
-  top_raw <- odata_submission_get(
+  top_parsed <- odata_submission_get(
     top = 1,
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -112,12 +113,11 @@ test_that("odata_submission_get top limits number of results", {
     un = get_test_un(),
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version(),
-    parse = FALSE
+    download = FALSE,
+    parse = TRUE
   )
-  top_parsed <- top_raw %>% odata_submission_rectangle()
 
-  ru_msg_info("odata_submission_get top")
-  print(top_raw)
+  print("odata_submission_get with top=1 should return one record")
   print(top_parsed)
 
   testthat::expect_true(nrow(top_parsed) == 1)
@@ -135,12 +135,13 @@ test_that("odata_submission_get count returns total number or rows", {
     un = get_test_un(),
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version(),
-    parse = FALSE
+    parse = FALSE,
+    download = FALSE
   )
   x_parsed <- x_raw %>% odata_submission_rectangle()
 
   ru_msg_info("odata_submission_get count")
-  print(x_raw)
+  print(x_raw$`@odata.count`)
   print(x_parsed)
 
   # Returned: one row
@@ -162,7 +163,7 @@ test_that("odata_submission_get parses WKT geopoint", {
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version(),
     parse = TRUE,
-    verbose = TRUE
+    download = FALSE
   )
 
   ru_msg_info("WKT test")
@@ -177,7 +178,7 @@ test_that("odata_submission_get parses WKT geopoint", {
   testthat::expect_true("perimeter_corner4_longitude" %in% names(df))
   testthat::expect_true("perimeter_corner4_altitude" %in% names(df))
 
-  ru_msg_info("df$location_corner1_longitude class: ")
+  print("df$location_corner1_longitude class: ")
   print(class(df$location_corner1_longitude))
   testthat::expect_equal(class(df$location_corner1_longitude), "numeric")
   testthat::expect_equal(class(df$perimeter_corner2_latitude), "numeric")
