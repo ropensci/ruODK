@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `ruODK`: An R Client for the ODK Central API \<img
+# `ruODK`: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Especially in these trying times, it is important to ask: ruODK?" width="120" />
 
-src=“man/figures/ruODK.png” align=“right” alt=“Especially in these
-trying times, it is important to ask: ruODK? width=”120" /\>
-<!-- badges: start --> [![ROpenSci submission
+<!-- badges: start -->
+
+[![ROpenSci submission
 status](https://badges.ropensci.org/335_status.svg)](https://github.com/ropensci/software-review/issues/335)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively

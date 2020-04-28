@@ -10,10 +10,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/",
   out.width = "100%")
 ```
-# `ruODK`: An R Client for the ODK Central API <img 
-src="man/figures/ruODK.png" 
-align="right" 
-alt="Especially in these trying times, it is important to ask: ruODK? width="120" />
+# `ruODK`: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Especially in these trying times, it is important to ask: ruODK?" width="120" />
 <!-- badges: start -->
 [![ROpenSci submission status](https://badges.ropensci.org/335_status.svg)](https://github.com/ropensci/software-review/issues/335)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
