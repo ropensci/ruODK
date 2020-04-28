@@ -49,12 +49,13 @@ specified ODK Central instance \code{url} (optional, character).}
 
 \item{tz}{Global default time zone.
   `ruODK`'s time zone is determined in order of precedence:
-
-    * Function parameter:
-      e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
-    * `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
-    * Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
-    * UTC (GMT+00)}
+\itemize{
+  \item Function parameter:
+    e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
+  \item `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
+  \item Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
+  \item UTC (GMT+00)
+ }}
 
 \item{odkc_version}{The ODK Central version as major/minor version, e.g. 0.8.}
 
@@ -103,13 +104,14 @@ privileged to view the test project(s) at \code{test_url}.}
 version, e.g. 0.8.}
 
 \item{verbose}{Global default for `ruODK` verbosity.
-  `ruODK` verbosity is determined in order of precedence:
-
-    * Function parameter:
-      e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
-    * `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
-    * Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
-    * `FALSE`.}
+ `ruODK` verbosity is determined in order of precedence:
+\itemize{
+   \item Function parameter:
+     e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
+   \item `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
+   \item Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
+   \item `FALSE`.
+}}
 }
 \description{
 Settings are returned invisibly and additionally printed depending on

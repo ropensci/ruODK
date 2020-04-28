@@ -93,6 +93,7 @@ form_schema_parse <- function(fs,
 #' @family utilities
 #' @keywords internal
 #' @examples
+#' \donttest{
 #' testthat::expect_equal(
 #'   predict_ruodk_name("bar", "Submissions.foo"), "foo_bar"
 #' )
@@ -102,6 +103,7 @@ form_schema_parse <- function(fs,
 #' testthat::expect_equal(
 #'   predict_ruodk_name("bar", "Submissions.foo_fighters"), "foo_fighters_bar"
 #' )
+#' }
 predict_ruodk_name <- function(name_str, path_str) {
   prefix <- path_str %>%
     stringr::str_remove("Submissions") %>%

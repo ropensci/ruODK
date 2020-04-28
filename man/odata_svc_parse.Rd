@@ -13,10 +13,11 @@ Example: "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Qu
 }
 \value{
 A named list with three components (all of type character):
-
-  * \code{url} The ODK Central base URL.
-  * \code{pid} The project ID.
-  * \code{fid} The form ID.
+\itemize{
+ \item \code{url} The ODK Central base URL.
+ \item \code{pid} The project ID.
+ \item\code{fid} The form ID.
+ }
 }
 \description{
 \lifecycle{stable}

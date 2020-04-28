@@ -89,10 +89,11 @@ print.ru_settings <- function(x, ...) {
 #' @export
 #' @family ru_settings
 #' @return A named list with three components (all of type character):
-#'
-#'   * \code{url} The ODK Central base URL.
-#'   * \code{pid} The project ID.
-#'   * \code{fid} The form ID.
+#' \itemize{
+#'  \item \code{url} The ODK Central base URL.
+#'  \item \code{pid} The project ID.
+#'  \item\code{fid} The form ID.
+#'  }
 odata_svc_parse <- function(svc) {
   parts <- httr::parse_url(svc)
   pth <- parts$path %>% stringr::str_split("/")
@@ -131,12 +132,13 @@ odata_svc_parse <- function(svc) {
 #' @param odkc_version The ODK Central version as major/minor version, e.g. 0.8.
 #' @param tz Global default time zone.
 #'   `ruODK`'s time zone is determined in order of precedence:
-#'
-#'     * Function parameter:
-#'       e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
-#'     * `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
-#'     * Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
-#'     * UTC (GMT+00)
+#' \itemize{
+#'   \item Function parameter:
+#'     e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
+#'   \item `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
+#'   \item Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
+#'   \item UTC (GMT+00)
+#'  }
 #' @param test_svc (optional, character) The OData service URL of a test form.
 #'   This parameter will set \code{test_pid}, \code{test_fid}, and
 #'   \code{test_url}. It is sufficient to supply \code{test_svc},
@@ -174,12 +176,13 @@ odata_svc_parse <- function(svc) {
 #'   version, e.g. 0.8.
 #' @param verbose Global default for `ruODK` verbosity.
 #'   `ruODK` verbosity is determined in order of precedence:
-#'
-#'     * Function parameter:
+#'  \itemize{
+#'     \item Function parameter:
 #'       e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
-#'     * `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
-#'     * Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
-#'     * `FALSE`.
+#'     \item `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
+#'     \item Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
+#'     \item `FALSE`.
+#'  }
 #' @family ru_settings
 #' @details
 #' \code{\link{ru_setup}} sets ODK Central connection details.

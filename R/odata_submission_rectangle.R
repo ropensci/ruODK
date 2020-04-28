@@ -125,6 +125,4 @@ odata_submission_rectangle <- function(data,
     )
 }
 
-
-# Tests
 # usethis::use_test("odata_submission_rectangle")
