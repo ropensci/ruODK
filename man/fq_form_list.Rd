@@ -25,7 +25,6 @@ Other included:
 \code{\link{fq_data_taxa}},
 \code{\link{fq_data}},
 \code{\link{fq_form_detail}},
-\code{\link{fq_form_schema_raw}},
 \code{\link{fq_form_schema}},
 \code{\link{fq_form_xml}},
 \code{\link{fq_meta}},

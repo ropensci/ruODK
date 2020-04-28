@@ -128,7 +128,7 @@ odata_svc_parse <- function(svc) {
 #' @param un An ODK Central username which is the email of a "web user" in the
 #'   specified ODK Central instance \code{url} (optional, character).
 #' @param pw The password for user \code{un} (optional, character).
-#' @paran odkc_version The ODK Central version as major/minor version, e.g. 0.8.
+#' @param odkc_version The ODK Central version as major/minor version, e.g. 0.8.
 #' @param tz Global default time zone.
 #'   `ruODK`'s time zone is determined in order of precedence:
 #'
@@ -170,7 +170,7 @@ odata_svc_parse <- function(svc) {
 #' @param test_pw (optional, character) The valid ODK Central password for
 #'   \code{test_un}.
 #'
-#' @paran test_odkc_version The ODK Central test server's version as major/minor
+#' @param test_odkc_version The ODK Central test server's version as major/minor
 #'   version, e.g. 0.8.
 #' @param verbose Global default for `ruODK` verbosity.
 #'   `ruODK` verbosity is determined in order of precedence:

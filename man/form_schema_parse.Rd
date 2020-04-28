@@ -12,7 +12,7 @@ form_schema_parse(fs, path = "Submissions", verbose = get_ru_verbose())
 \item{path}{The base path for form fields. Default: "Submissions".
 \code{\link{form_schema_parse}} recursively steps into deeper nesting
 levels, which are reflected as separate OData tables.
-The returned value in `path` reflects the XForm group name, which
+The returned value in `path` reflects the XForms group name, which
 translates to separate screens in ODK Collect.
 Non-repeating form groups will be flattened out into the main Submissions
 table. Repeating groups are available as separate OData tables.}

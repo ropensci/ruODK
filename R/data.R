@@ -257,19 +257,6 @@
 "fq_form_schema"
 
 
-#' A nested list of form fields and field types.
-#'
-#' \lifecycle{stable}
-#'
-#' @format A nested list of form fields and field types.
-#' @source The output of \code{\link{form_schema}(parse=FALSE)}
-#' run on the test form
-#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
-#' @family included
-#' @encoding UTF-8
-"fq_form_schema_raw"
-
-
 #' A nested list of a form definition.
 #'
 #' \lifecycle{stable}

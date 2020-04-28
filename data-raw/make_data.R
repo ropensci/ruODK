@@ -30,8 +30,7 @@ fq_project_list <- ruODK::project_list()
 fq_project_detail <- ruODK::project_detail()
 fq_form_list <- ruODK::form_list()
 fq_form_xml <- ruODK::form_xml(parse = FALSE)
-fq_form_schema_raw <- ruODK::form_schema(parse = FALSE)
-fq_form_schema <- ruODK::form_schema(parse = TRUE)
+fq_form_schema <- ruODK::form_schema()
 fq_form_detail <- ruODK::form_detail()
 
 
@@ -89,7 +88,6 @@ usethis::use_data(fq_project_list, overwrite = T)
 usethis::use_data(fq_project_detail, overwrite = T)
 usethis::use_data(fq_form_list, overwrite = T)
 usethis::use_data(fq_form_xml, overwrite = T)
-usethis::use_data(fq_form_schema_raw, overwrite = T)
 usethis::use_data(fq_form_schema, overwrite = T)
 usethis::use_data(fq_form_detail, overwrite = T)
 

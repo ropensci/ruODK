@@ -88,6 +88,7 @@
 #'  \item `value` contains the submissions as list of lists.
 #'  \item `@odata.context` is the URL of the metadata.
 #'  \item `@odata.count` is the total number of rows in the table.
+#' }
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}

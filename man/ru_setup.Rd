@@ -56,6 +56,8 @@ specified ODK Central instance \code{url} (optional, character).}
     * Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
     * UTC (GMT+00)}
 
+\item{odkc_version}{The ODK Central version as major/minor version, e.g. 0.8.}
+
 \item{test_svc}{(optional, character) The OData service URL of a test form.
 This parameter will set \code{test_pid}, \code{test_fid}, and
 \code{test_url}. It is sufficient to supply \code{test_svc},
@@ -96,6 +98,9 @@ privileged to view the test project(s) at \code{test_url}.}
 
 \item{test_pw}{(optional, character) The valid ODK Central password for
 \code{test_un}.}
+
+\item{test_odkc_version}{The ODK Central test server's version as major/minor
+version, e.g. 0.8.}
 
 \item{verbose}{Global default for `ruODK` verbosity.
   `ruODK` verbosity is determined in order of precedence:

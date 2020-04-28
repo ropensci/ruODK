@@ -32,7 +32,6 @@ Other included:
 \code{\link{fq_data}},
 \code{\link{fq_form_detail}},
 \code{\link{fq_form_list}},
-\code{\link{fq_form_schema_raw}},
 \code{\link{fq_form_schema}},
 \code{\link{fq_form_xml}},
 \code{\link{fq_project_detail}},

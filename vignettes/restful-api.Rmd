@@ -164,31 +164,15 @@ fq_form_xml
 
 ## Inspect form schema
 
-The nested list of lists returned by `form_schema` is the cleanest representation
-of the XForm definition available in R.
+The `form_schema` represents all form fields of the XForms definition.
 
-See the [ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json) and the examples of  `??ruODK::form_schema()` for more detail.
+See the 
+[ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/getting-form-schema-fields) 
+and the examples of `??ruODK::form_schema()` for more detail.
 
-```{r form_schema_raw, eval=FALSE}
-fq_form_schema_raw <- ruODK::form_schema(parse=FALSE)
-```
-
-```{r form_schema_raw_view, fig.width=7}
-listviewer::jsonedit(fq_form_schema_raw, mode="code")
-```
-
-The form schema tells us about form field data types (e.g. dates, geopoints, 
-binary attachments) and repeating groups. We need this knowledge to parse the 
-submission data into tidy tibbles later.
-
-Feel free to search this list for "binary" to find the field names of file 
-attachments. Similarly, search for "dateTime" to find field names of datetimes.
-
-Taking form schema one step further, we can also parse it into a `tibble` of
-form field types and names.
 
 ```{r form_schema, eval=FALSE}
-fq_form_schema <- ruODK::form_schema(parse=TRUE)
+fq_form_schema <- ruODK::form_schema()
 ```
 
 ```{r form_schema_view}

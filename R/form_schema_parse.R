@@ -16,7 +16,7 @@
 #' @param path The base path for form fields. Default: "Submissions".
 #'   \code{\link{form_schema_parse}} recursively steps into deeper nesting
 #'   levels, which are reflected as separate OData tables.
-#'   The returned value in `path` reflects the XForm group name, which
+#'   The returned value in `path` reflects the XForms group name, which
 #'   translates to separate screens in ODK Collect.
 #'   Non-repeating form groups will be flattened out into the main Submissions
 #'   table. Repeating groups are available as separate OData tables.
@@ -52,7 +52,7 @@ form_schema_parse <- function(fs,
   # 1. Grab next level type/name pairs, append column "path".
   # This does not work recursively - if it did, we'd be done here.
   x <- fs %>%
-    rlist::list.select(type, name) %>%
+    rlist::list.select(name, type) %>%
     rlist::list.stack(.) %>%
     dplyr::mutate(path = path)
 
@@ -76,14 +76,13 @@ form_schema_parse <- function(fs,
   if (verbose == TRUE) ru_msg_info(glue::glue("Returning data \"{str(x)}\""))
 
   # 4. Predict ruodk_name happens in form_schema
-  x %>%
-    tibble::as_tibble()
+  x %>% tibble::as_tibble()
 }
 
 #' Predict a field name after \code{tidyr::unnest_wider(names_sep="_")} prefixes
 #' the form path
 #'
-#' @param name_str An Xform field name string.
+#' @param name_str An Xforms field name string.
 #' @param path_str A path string,
 #'   e.g. "Submissions" or "Submissions.group_name".
 #' @return The name as built by \code{tidyr::unnest_wider(names_sep="_")}.

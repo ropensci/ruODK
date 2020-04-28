@@ -8,7 +8,7 @@ the form path}
 predict_ruodk_name(name_str, path_str)
 }
 \arguments{
-\item{name_str}{An Xform field name string.}
+\item{name_str}{An Xforms field name string.}
 
 \item{path_str}{A path string,
 e.g. "Submissions" or "Submissions.group_name".}

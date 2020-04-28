@@ -82,11 +82,9 @@ Default: \code{\link{get_default_fid}}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{url}{The ODK Central version as decimal number (major.minor).
-`ruODK` uses this parameter to adjust for breaking changes in ODK Central.
-Default: \code{\link{get_default_odkc_version}} or 0.8 if unset.
-Set default \code{get_default_odkc_version} through
-\code{ru_setup(odkc_version=0.8)}.
+\item{url}{The ODK Central base URL without trailing slash.
+Default: \code{\link{get_default_url}}.
+Set default \code{url} through \code{ru_setup(url="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
@@ -99,6 +97,13 @@ Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
+\item{odkc_version}{The ODK Central version as decimal number (major.minor).
+`ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+Default: \code{\link{get_default_odkc_version}} or 0.8 if unset.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=0.8)}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
 \item{tz}{A timezone to convert dates and times to.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 timezone can be set globally or per function.}
@@ -108,7 +113,12 @@ Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 verbosity can be set globally or per function.}
 }
 \value{
-
+A list of lists.
+\itemize{
+ \item `value` contains the submissions as list of lists.
+ \item `@odata.context` is the URL of the metadata.
+ \item `@odata.count` is the total number of rows in the table.
+}
 }
 \description{
 \lifecycle{maturing}
