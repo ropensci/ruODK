@@ -22,15 +22,12 @@ the form path.
 }
 \examples{
 \donttest{
-testthat::expect_equal(
-  predict_ruodk_name("bar", "Submissions.foo"), "foo_bar"
-)
-testthat::expect_equal(
-  predict_ruodk_name("bar", "Submissions"), "bar"
-)
-testthat::expect_equal(
-  predict_ruodk_name("bar", "Submissions.foo_fighters"), "foo_fighters_bar"
-)
+  predict_ruodk_name("bar", "Submissions.foo")
+  # > "foo_bar"
+  predict_ruodk_name("bar", "Submissions")
+  # > "bar"
+  predict_ruodk_name("rockr", "Submissions.foo_fighters")
+  # > "foo_fighters_rock"
 }
 }
 \seealso{
