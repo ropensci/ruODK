@@ -98,7 +98,7 @@ test_that("odata_submission_get skip omits number of results", {
   skip_parsed <- skip_raw %>% odata_submission_rectangle()
 
   ru_msg_info("odata_submission_get skip")
-  print(skip_raw)
+  print(fresh_parsed)
   print(skip_parsed)
   testthat::expect_true(nrow(fresh_parsed) == nrow(skip_parsed) + 1)
 })
@@ -135,7 +135,7 @@ test_that("odata_submission_get count returns total number or rows", {
     un = get_test_un(),
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version(),
-    parse = TRUE
+    parse = FALSE
   )
   x_parsed <- x_raw %>% odata_submission_rectangle()
 
@@ -164,16 +164,6 @@ test_that("odata_submission_get parses WKT geopoint", {
     parse = TRUE,
     verbose = TRUE
   )
-  fs <- form_schema(
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version(),
-    parse = TRUE
-  )
-  fs
 
   ru_msg_info("WKT test")
   print(df)
@@ -189,9 +179,9 @@ test_that("odata_submission_get parses WKT geopoint", {
 
   ru_msg_info("df$location_corner1_longitude class: ")
   print(class(df$location_corner1_longitude))
-  testthat::expect_true(is.numeric(df$location_corner1_longitude))
-  testthat::expect_true(is.numeric(df$perimeter_corner2_latitude))
-  testthat::expect_true(is.numeric(df$perimeter_corner3_altitude))
+  testthat::expect_equal(class(df$location_corner1_longitude), "numeric")
+  testthat::expect_equal(class(df$perimeter_corner2_latitude), "numeric")
+  testthat::expect_equal(class(df$perimeter_corner3_altitude), "numeric")
 })
 
 # Tests code
