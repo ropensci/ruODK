@@ -32,7 +32,7 @@ Form groups in turn can also contain form fields.
 
 \code{\link{form_schema_parse}} recursively unpacks the form and extracts the
 name and type of each field. This information then can be used to inform the
-user which columns require \code{\link{ru_datetime}},
+user which columns require \code{\link{handle_ru_datetimes}},
 \code{\link{attachment_get}}, or \code{\link{attachment_link}}, respectively.
 }
 \examples{
@@ -57,22 +57,28 @@ fsp \%>\% dplyr::filter(type == "geopoint")
 }
 }
 \seealso{
-Other restful-api: 
-\code{\link{attachment_link}()},
-\code{\link{attachment_list}()},
-\code{\link{audit_get}()},
-\code{\link{form_detail}()},
-\code{\link{form_list}()},
-\code{\link{form_schema}()},
-\code{\link{form_xml}()},
+Other utilities: 
+\code{\link{\%>\%}()},
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
+\code{\link{get_one_attachment}()},
 \code{\link{get_one_submission_attachment_list}()},
 \code{\link{get_one_submission}()},
-\code{\link{project_create}()},
-\code{\link{project_detail}()},
-\code{\link{project_list}()},
-\code{\link{submission_detail}()},
-\code{\link{submission_export}()},
-\code{\link{submission_get}()},
-\code{\link{submission_list}()}
+\code{\link{handle_ru_attachments}()},
+\code{\link{handle_ru_datetimes}()},
+\code{\link{handle_ru_geopoints}()},
+\code{\link{isodt_to_local}()},
+\code{\link{odata_submission_rectangle}()},
+\code{\link{predict_ruodk_name}()},
+\code{\link{prepend_uuid}()},
+\code{\link{ru_msg_abort}()},
+\code{\link{ru_msg_info}()},
+\code{\link{ru_msg_noop}()},
+\code{\link{ru_msg_success}()},
+\code{\link{ru_msg_warn}()},
+\code{\link{split_geopoint}()},
+\code{\link{strip_uuid}()},
+\code{\link{tidyeval}},
+\code{\link{unnest_all}()}
 }
-\concept{restful-api}
+\concept{utilities}

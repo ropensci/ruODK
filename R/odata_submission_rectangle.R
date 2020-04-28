@@ -35,8 +35,8 @@ listcol_names <- function(tbl) {
 #'   such as `latitude...1`.
 #' @template param-verbose
 #' @return The unnested tibble in wide format
-#' @family odata-api
-#' @export
+#' @family utilities
+#' @keywords internal
 unnest_all <- function(nested_tbl,
                        names_repair = "universal",
                        names_sep = "_",
@@ -77,7 +77,7 @@ unnest_all <- function(nested_tbl,
 
 
 #' Rectangle the output of \code{\link{odata_submission_get}(parse=FALSE)}
-#' into a tidy tibble and unnest all levels
+#' into a tidy tibble and unnest all levels.
 #'
 #' \lifecycle{maturing}
 #'
@@ -87,12 +87,12 @@ unnest_all <- function(nested_tbl,
 #'   \code{tidyr::unnest_wider}, default: "universal".
 #' @param names_sep The argument `names_sep` for
 #'   \code{tidyr::unnest_wider}, default: "_".
-#'   Unnested variables inside a list column will be prefixed by the list column
-#'   name, separated by `names_sep`. This avoids unsightly repaired names
-#'   such as `latitude...1`.
+#'   Un-nested variables inside a list column will be prefixed by the list
+#'   column name, separated by `names_sep`.
+#'   This avoids unsightly repaired names such as `latitude...1`.
 #' @template param-verbose
-#' @return The submissions as unnested tibble
-#' @family odata-api
+#' @return The submissions as un-nested tibble
+#' @family utilities
 #' @export
 #' @examples
 #' \dontrun{

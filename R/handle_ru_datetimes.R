@@ -1,4 +1,4 @@
-#' Parse datetimes of submission data according to a form schema
+#' Parse datetimes of submission data according to a form schema.
 #'
 #' \lifecycle{maturing}
 #'

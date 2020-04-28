@@ -2,7 +2,7 @@
 % Please edit documentation in R/split_geopoint.R
 \name{split_geopoint}
 \alias{split_geopoint}
-\title{Split a column of a dataframe containing a WKT POINT into lat, lon, alt}
+\title{Split a column of a dataframe containing a WKT POINT into lon, lat, alt.}
 \usage{
 split_geopoint(data, colname)
 }
@@ -12,10 +12,11 @@ split_geopoint(data, colname)
 \item{colname}{(chr) The name of the WKT POINT column}
 }
 \value{
-The given dataframe with the WKT POINT column <cn> replaced by three
-  columns, `<colname>_latitude`, `<colname>_longitude`, `<colname>_altitude`.
+The given dataframe with the WKT POINT column <colname> replaced by
+  three columns, `<colname>_longitude`, `<colname>_latitude`,
+  `<colname>_altitude`.
   The three new columns are prefixed with the original `colname` to avoid
-  naming conflicts with possible other geopoint columns.
+  naming conflicts with any other geopoint columns.
 }
 \description{
 \lifecycle{stable}
@@ -34,20 +35,34 @@ df <- tibble::tibble(
   )
 )
 df_split <- df \%>\% split_geopoint("loc")
-names(df_split) == c(
-  "stuff", "loc_latitude", "loc_longitude", "loc_altitude"
+testthat::expect_equal(
+  names(df_split),
+  c("stuff", "loc_longitude", "loc_latitude", "loc_altitude")
 )
 }
 \seealso{
 Other utilities: 
 \code{\link{\%>\%}()},
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
+\code{\link{form_schema_parse}()},
+\code{\link{get_one_attachment}()},
+\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission}()},
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_datetimes}()},
 \code{\link{handle_ru_geopoints}()},
 \code{\link{isodt_to_local}()},
+\code{\link{odata_submission_rectangle}()},
 \code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
+\code{\link{ru_msg_abort}()},
+\code{\link{ru_msg_info}()},
+\code{\link{ru_msg_noop}()},
+\code{\link{ru_msg_success}()},
+\code{\link{ru_msg_warn}()},
 \code{\link{strip_uuid}()},
-\code{\link{tidyeval}}
+\code{\link{tidyeval}},
+\code{\link{unnest_all}()}
 }
 \concept{utilities}

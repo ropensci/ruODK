@@ -18,10 +18,28 @@ ru_msg_abort("This is an error, abort.")
 }
 }
 \seealso{
-Other helpers: 
+Other utilities: 
+\code{\link{\%>\%}()},
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
+\code{\link{form_schema_parse}()},
+\code{\link{get_one_attachment}()},
+\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission}()},
+\code{\link{handle_ru_attachments}()},
+\code{\link{handle_ru_datetimes}()},
+\code{\link{handle_ru_geopoints}()},
+\code{\link{isodt_to_local}()},
+\code{\link{odata_submission_rectangle}()},
+\code{\link{predict_ruodk_name}()},
+\code{\link{prepend_uuid}()},
 \code{\link{ru_msg_info}()},
 \code{\link{ru_msg_noop}()},
 \code{\link{ru_msg_success}()},
-\code{\link{ru_msg_warn}()}
+\code{\link{ru_msg_warn}()},
+\code{\link{split_geopoint}()},
+\code{\link{strip_uuid}()},
+\code{\link{tidyeval}},
+\code{\link{unnest_all}()}
 }
-\concept{helpers}
+\concept{utilities}

@@ -52,13 +52,29 @@ ruODK:::attachment_url("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
 )
 }
 \seealso{
-Other odata-api: 
+Other utilities: 
+\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
+\code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
-\code{\link{odata_metadata_get}()},
-\code{\link{odata_service_get}()},
-\code{\link{odata_submission_get}()},
+\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission}()},
+\code{\link{handle_ru_attachments}()},
+\code{\link{handle_ru_datetimes}()},
+\code{\link{handle_ru_geopoints}()},
+\code{\link{isodt_to_local}()},
 \code{\link{odata_submission_rectangle}()},
+\code{\link{predict_ruodk_name}()},
+\code{\link{prepend_uuid}()},
+\code{\link{ru_msg_abort}()},
+\code{\link{ru_msg_info}()},
+\code{\link{ru_msg_noop}()},
+\code{\link{ru_msg_success}()},
+\code{\link{ru_msg_warn}()},
+\code{\link{split_geopoint}()},
+\code{\link{strip_uuid}()},
+\code{\link{tidyeval}},
 \code{\link{unnest_all}()}
 }
-\concept{odata-api}
+\concept{utilities}
+\keyword{internal}

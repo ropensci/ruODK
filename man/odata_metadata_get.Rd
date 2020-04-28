@@ -65,12 +65,7 @@ listviewer::jsonedit(meta)
 \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/metadata-document}
 
 Other odata-api: 
-\code{\link{attachment_get}()},
-\code{\link{attachment_url}()},
-\code{\link{get_one_attachment}()},
 \code{\link{odata_service_get}()},
-\code{\link{odata_submission_get}()},
-\code{\link{odata_submission_rectangle}()},
-\code{\link{unnest_all}()}
+\code{\link{odata_submission_get}()}
 }
 \concept{odata-api}

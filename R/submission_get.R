@@ -14,7 +14,7 @@
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
 # nolint end
-#' @family restful-api
+#' @family utilities
 #' @export
 #' @examples
 #' \dontrun{
@@ -63,7 +63,7 @@ get_one_submission <- function(iid,
     magrittr::extract2("data")
 }
 
-#' Get submissions for a list of submission instance IDs
+#' Get submissions for a list of submission instance IDs.
 #'
 #' Uses \code{\link{get_one_submission}} on a list of submission instance IDs
 #' (`iid`) as returned from \code{\link{submission_list}$instance_id}.

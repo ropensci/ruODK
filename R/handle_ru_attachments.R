@@ -1,4 +1,4 @@
-#' Download and link submission attachments according to a form schema
+#' Download and link submission attachments according to a form schema.
 #'
 #' \lifecycle{maturing}
 #'

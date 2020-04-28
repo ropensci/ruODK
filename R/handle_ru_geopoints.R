@@ -1,4 +1,4 @@
-#' Split all WKT geopoints of a submission tibble into their components
+#' Split all WKT geopoints of a submission tibble into their components.
 #'
 #' \lifecycle{maturing}
 #'

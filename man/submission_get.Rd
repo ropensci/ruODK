@@ -2,7 +2,7 @@
 % Please edit documentation in R/submission_get.R
 \name{submission_get}
 \alias{submission_get}
-\title{Get submissions for a list of submission instance IDs}
+\title{Get submissions for a list of submission instance IDs.}
 \usage{
 submission_get(
   iid,
@@ -73,11 +73,8 @@ Other restful-api:
 \code{\link{audit_get}()},
 \code{\link{form_detail}()},
 \code{\link{form_list}()},
-\code{\link{form_schema_parse}()},
 \code{\link{form_schema}()},
 \code{\link{form_xml}()},
-\code{\link{get_one_submission_attachment_list}()},
-\code{\link{get_one_submission}()},
 \code{\link{project_create}()},
 \code{\link{project_detail}()},
 \code{\link{project_list}()},

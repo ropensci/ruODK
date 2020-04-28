@@ -1,5 +1,5 @@
-#' Retrieve form submissions, parse data and dates, download and link
-#' attachments.
+#' Retrieve and rectangle form submissions, parse dates, geopoints, download and
+#' link attachments.
 #'
 #' \lifecycle{maturing}
 #'
@@ -8,16 +8,13 @@
 #' form groups, or from any other table as specified by parameter `table`.
 #'
 #'
-#' With parameter `parse=TRUE` (default), submission data is parsed into a
-#' tibble. Any fields of type `dateTime`` or `date`` are parsed into dates, with
-#' an optional parameter `tz` to specify the local timezone.
-#' A parameter `local_dir` (default: "media") specifies a local directory for
-#' downloaded attachment files. Already existing, previously downloaded
-#' attachments will be retained. The only remaining manual step is to optionally
-#' rename any point location coordinate parts into `latitude`, `longitude`,
-#' `altitude`, and `accuracy`, as well as to join subtables to the master table.
-#' The parameter `verbose` enables diagnostic messages along the download and
-#' parsing process.
+#' With parameter \code{parse=TRUE} (default), submission data is parsed into a
+#' tibble. Any fields of type \code{dateTime} or \code{date} are parsed into
+#' dates, with an optional parameter \code{tz} to specify the local timezone.
+#'
+#' A parameter \code{local_dir} (default: \code{media}) specifies a local
+#' directory for downloaded attachment files.
+#' Already existing, previously downloaded attachments will be retained.
 #'
 #' With parameter `wkt=TRUE`, spatial fields will be returned as WKT, rather
 #' than GeoJSON. In addition, fields of type `geopoint` will be split into
@@ -28,9 +25,15 @@
 #' of type `geopoint` to be split into their components without naming
 #' conflicts. Other spatial fields will be retained as WKT.
 #'
+#' The only remaining manual step is to optionally join any sub-tables to the
+#' master table.
+#'
+#' The parameter `verbose` enables diagnostic messages along the download and
+#' parsing process.
+#'
 #' With parameter `parse=FALSE`, submission data is presented as nested list,
-#' which is the R equivalent of the returned form JSON.
-#' From there, \code{\link{odata_submission_rectangle}} will rectangle the data
+#' which is the R equivalent of the JSON structure returned from the API.
+#' From there, \code{\link{odata_submission_rectangle}} can rectangle the data
 #' into a tibble, and subsequent lines of \code{\link{handle_ru_datetimes}},
 #' \code{\link{handle_ru_attachments}} and \code{\link{handle_ru_geopoints}}
 #' parse dates, download and link file attachments, and split geopoints into
@@ -54,7 +57,7 @@
 #'   Note, ODK Central currently only honours this parameter for Point
 #'   geometries.
 #'   Line and Polygon geometries are returned as "ODK WKT".
-#'   ruODK parses `geopoint` WKT into latitude, longitude, and altitude,
+#'   ruODK parses `geopoint` WKT into longitude, latitude, and altitude,
 #'   prefixed by the original field name to avoid naming conflicts.
 #' @param parse Whether to parse submission data based on form schema.
 #'   Dates and datetimes will be parsed into local time.
@@ -62,13 +65,13 @@
 #'   path.
 #'   Point locations will be split into components; GeoJSON (`wkt=FALSE`) will
 #'   be split into latitude, longitude, altitude and accuracy (with anonymous
-#'   field names), while WKT will be split into latitude, longitude, and
+#'   field names), while WKT will be split into longitude, latitude,and
 #'   altitude (missing accuracy) prefixed by the original field name.
 #'   Default: TRUE.
 #' @param download Whether to download attachments to `local_dir` or not.
 #'   If in the future, ODK Central supports hot-linking attachments,
-#'   this parameter will replace attachment filenames with their fully qualified
-#'   attachment URL.
+#'   this parameter will replace attachment file names with their fully
+#'   qualified attachment URL.
 #'   Default: TRUE.
 #' @param orders (vector of character) Orders of datetime elements for
 #'   lubridate.

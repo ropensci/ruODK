@@ -85,22 +85,28 @@ names(sub)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
 
-Other restful-api: 
-\code{\link{attachment_link}()},
-\code{\link{attachment_list}()},
-\code{\link{audit_get}()},
-\code{\link{form_detail}()},
-\code{\link{form_list}()},
+Other utilities: 
+\code{\link{\%>\%}()},
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
 \code{\link{form_schema_parse}()},
-\code{\link{form_schema}()},
-\code{\link{form_xml}()},
+\code{\link{get_one_attachment}()},
 \code{\link{get_one_submission_attachment_list}()},
-\code{\link{project_create}()},
-\code{\link{project_detail}()},
-\code{\link{project_list}()},
-\code{\link{submission_detail}()},
-\code{\link{submission_export}()},
-\code{\link{submission_get}()},
-\code{\link{submission_list}()}
+\code{\link{handle_ru_attachments}()},
+\code{\link{handle_ru_datetimes}()},
+\code{\link{handle_ru_geopoints}()},
+\code{\link{isodt_to_local}()},
+\code{\link{odata_submission_rectangle}()},
+\code{\link{predict_ruodk_name}()},
+\code{\link{prepend_uuid}()},
+\code{\link{ru_msg_abort}()},
+\code{\link{ru_msg_info}()},
+\code{\link{ru_msg_noop}()},
+\code{\link{ru_msg_success}()},
+\code{\link{ru_msg_warn}()},
+\code{\link{split_geopoint}()},
+\code{\link{strip_uuid}()},
+\code{\link{tidyeval}},
+\code{\link{unnest_all}()}
 }
-\concept{restful-api}
+\concept{utilities}

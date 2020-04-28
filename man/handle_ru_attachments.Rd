@@ -2,7 +2,7 @@
 % Please edit documentation in R/handle_ru_attachments.R
 \name{handle_ru_attachments}
 \alias{handle_ru_attachments}
-\title{Download and link submission attachments according to a form schema}
+\title{Download and link submission attachments according to a form schema.}
 \usage{
 handle_ru_attachments(
   data,
@@ -96,13 +96,26 @@ testthat::expect_true(fs::dir_ls(t) \%>\% length() > 0)
 \seealso{
 Other utilities: 
 \code{\link{\%>\%}()},
+\code{\link{attachment_get}()},
+\code{\link{attachment_url}()},
+\code{\link{form_schema_parse}()},
+\code{\link{get_one_attachment}()},
+\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission}()},
 \code{\link{handle_ru_datetimes}()},
 \code{\link{handle_ru_geopoints}()},
 \code{\link{isodt_to_local}()},
+\code{\link{odata_submission_rectangle}()},
 \code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
+\code{\link{ru_msg_abort}()},
+\code{\link{ru_msg_info}()},
+\code{\link{ru_msg_noop}()},
+\code{\link{ru_msg_success}()},
+\code{\link{ru_msg_warn}()},
 \code{\link{split_geopoint}()},
 \code{\link{strip_uuid}()},
-\code{\link{tidyeval}}
+\code{\link{tidyeval}},
+\code{\link{unnest_all}()}
 }
 \concept{utilities}

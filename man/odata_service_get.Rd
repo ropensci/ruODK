@@ -2,7 +2,7 @@
 % Please edit documentation in R/odata_service_get.R
 \name{odata_service_get}
 \alias{odata_service_get}
-\title{Retrieve service metadata from an OData URL ending in .svc as list of lists}
+\title{Retrieve service metadata from an OData URL ending in .svc as tibble.}
 \usage{
 odata_service_get(
   pid = get_default_pid(),
@@ -65,12 +65,7 @@ svc
 \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/service-document}
 
 Other odata-api: 
-\code{\link{attachment_get}()},
-\code{\link{attachment_url}()},
-\code{\link{get_one_attachment}()},
 \code{\link{odata_metadata_get}()},
-\code{\link{odata_submission_get}()},
-\code{\link{odata_submission_rectangle}()},
-\code{\link{unnest_all}()}
+\code{\link{odata_submission_get}()}
 }
 \concept{odata-api}

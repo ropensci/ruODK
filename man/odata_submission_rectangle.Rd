@@ -3,7 +3,7 @@
 \name{odata_submission_rectangle}
 \alias{odata_submission_rectangle}
 \title{Rectangle the output of \code{\link{odata_submission_get}(parse=FALSE)}
-into a tidy tibble and unnest all levels}
+into a tidy tibble and unnest all levels.}
 \usage{
 odata_submission_rectangle(
   data,
@@ -21,16 +21,16 @@ odata_submission_rectangle(
 
 \item{names_sep}{The argument `names_sep` for
 \code{tidyr::unnest_wider}, default: "_".
-Unnested variables inside a list column will be prefixed by the list column
-name, separated by `names_sep`. This avoids unsightly repaired names
-such as `latitude...1`.}
+Un-nested variables inside a list column will be prefixed by the list
+column name, separated by `names_sep`.
+This avoids unsightly repaired names such as `latitude...1`.}
 
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 verbosity can be set globally or per function.}
 }
 \value{
-The submissions as unnested tibble
+The submissions as un-nested tibble
 }
 \description{
 \lifecycle{maturing}
@@ -50,13 +50,28 @@ testthat::expect_equal(length(fq_raw$value), nrow(data_parsed))
 }
 }
 \seealso{
-Other odata-api: 
+Other utilities: 
+\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
+\code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
-\code{\link{odata_metadata_get}()},
-\code{\link{odata_service_get}()},
-\code{\link{odata_submission_get}()},
+\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission}()},
+\code{\link{handle_ru_attachments}()},
+\code{\link{handle_ru_datetimes}()},
+\code{\link{handle_ru_geopoints}()},
+\code{\link{isodt_to_local}()},
+\code{\link{predict_ruodk_name}()},
+\code{\link{prepend_uuid}()},
+\code{\link{ru_msg_abort}()},
+\code{\link{ru_msg_info}()},
+\code{\link{ru_msg_noop}()},
+\code{\link{ru_msg_success}()},
+\code{\link{ru_msg_warn}()},
+\code{\link{split_geopoint}()},
+\code{\link{strip_uuid}()},
+\code{\link{tidyeval}},
 \code{\link{unnest_all}()}
 }
-\concept{odata-api}
+\concept{utilities}

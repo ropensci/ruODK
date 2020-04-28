@@ -31,7 +31,7 @@
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
 # nolint end
-#' @family restful-api
+#' @family utilities
 #' @export
 #' @examples
 #' \dontrun{

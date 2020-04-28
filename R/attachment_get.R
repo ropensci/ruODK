@@ -7,7 +7,7 @@
 #' @param uuid A string which may contain any number of "uuid:"
 #' @return The string with every occurrence of "uuid:" deleted.
 #' @family utilities
-#' @export
+#' @keywords internal
 #' @examples
 #' strip_uuid("uuid:1234")
 #' strip_uuid("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
@@ -24,7 +24,7 @@ strip_uuid <- function(uuid) {
 #' @param md5hash A string, e.g. an md5 hash.
 #' @return The string with a prepended "uuid:"
 #' @family utilities
-#' @export
+#' @keywords internal
 #' @examples
 #' prepend_uuid("1234")
 #' prepend_uuid("d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
@@ -47,7 +47,8 @@ prepend_uuid <- function(md5hash) {
 #' @template param-fid
 #' @template param-url
 #' @return The inferred download URL.
-#' @family odata-api
+#' @family utilities
+#' @keywords internal
 #' @examples
 #' ruODK:::attachment_url("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
 #'   "filename.jpg",
@@ -81,7 +82,7 @@ attachment_url <- function(uuid,
 #' @template param-auth
 #' @template param-verbose
 #' @return The relative local path to the downloaded attachment or NA.
-#' @family odata-api
+#' @family utilities
 #' @export
 #' @examples
 #' \dontrun{
@@ -155,8 +156,9 @@ get_one_attachment <- function(pth,
 #'
 #' \lifecycle{stable}
 #'
-#' @details This function is vectorised and can handle either one or many
-#' records.
+#' @details This function is the workhorse for
+#' \code{\link{handle_ru_attachments}}.
+#' This function is vectorised and can handle either one or many records.
 #' Parameters submission_uuid and attachment_filename accept single or exactly
 #' the same number of multiple values.
 #' The other parameters are automatically repeated.
@@ -188,7 +190,7 @@ get_one_attachment <- function(pth,
 #' @template param-auth
 #' @template param-verbose
 #' @return The relative file path for the downloaded attachment(s)
-#' @family odata-api
+#' @family utilities
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}

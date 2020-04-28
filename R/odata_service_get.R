@@ -1,4 +1,4 @@
-#' Retrieve service metadata from an OData URL ending in .svc as list of lists
+#' Retrieve service metadata from an OData URL ending in .svc as tibble.
 #'
 #' \lifecycle{stable}
 #'

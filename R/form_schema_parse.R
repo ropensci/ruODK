@@ -9,7 +9,7 @@
 #'
 #' \code{\link{form_schema_parse}} recursively unpacks the form and extracts the
 #' name and type of each field. This information then can be used to inform the
-#' user which columns require \code{\link{ru_datetime}},
+#' user which columns require \code{\link{handle_ru_datetimes}},
 #' \code{\link{attachment_get}}, or \code{\link{attachment_link}}, respectively.
 #'
 #' @param fs The output of form_schema as nested list
@@ -21,7 +21,7 @@
 #'   Non-repeating form groups will be flattened out into the main Submissions
 #'   table. Repeating groups are available as separate OData tables.
 #' @template param-verbose
-#' @family restful-api
+#' @family utilities
 #' @export
 #' @examples
 #' \dontrun{
@@ -84,14 +84,14 @@ form_schema_parse <- function(fs,
 }
 
 #' Predict a field name after \code{tidyr::unnest_wider(names_sep="_")} prefixes
-#' the form path
+#' the form path.
 #'
 #' @param name_str An Xforms field name string.
 #' @param path_str A path string,
 #'   e.g. "Submissions" or "Submissions.group_name".
 #' @return The name as built by \code{tidyr::unnest_wider(names_sep="_")}.
 #' @family utilities
-#' @export
+#' @keywords internal
 #' @examples
 #' testthat::expect_equal(
 #'   predict_ruodk_name("bar", "Submissions.foo"), "foo_bar"
