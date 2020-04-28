@@ -28,6 +28,10 @@ A lubridate PosixCT datetime in the given timezone.
 \description{
 \lifecycle{stable}
 }
+\details{
+This function is used internally by \code{ruODK} to parse ISO timestamps
+to timezone-aware local times.
+}
 \seealso{
 Other utilities: 
 \code{\link{\%>\%}()},
@@ -36,9 +40,9 @@ Other utilities:
 \code{\link{handle_ru_geopoints}()},
 \code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
-\code{\link{ru_datetime}()},
 \code{\link{split_geopoint}()},
 \code{\link{strip_uuid}()},
 \code{\link{tidyeval}}
 }
 \concept{utilities}
+\keyword{internal}

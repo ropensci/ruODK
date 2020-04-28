@@ -34,15 +34,15 @@ components for all columns which are marked in the form schema as type
 }
 \examples{
 \dontrun{
- library(magrittr)
- data("fq_raw")
- data("fq_form_schema")
+library(magrittr)
+data("fq_raw")
+data("fq_form_schema")
 
- fq_with_geo <- fq_raw \%>\%
-   ruODK::odata_submission_rectangle() \%>\%
-   ruODK::handle_ru_geopoints(form_schema = fq_form_schema)
+fq_with_geo <- fq_raw \%>\%
+  ruODK::odata_submission_rectangle() \%>\%
+  ruODK::handle_ru_geopoints(form_schema = fq_form_schema)
 
- dplyr::glimpse(fq_with_geo)
+dplyr::glimpse(fq_with_geo)
 }
 }
 \seealso{
@@ -53,7 +53,6 @@ Other utilities:
 \code{\link{isodt_to_local}()},
 \code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
-\code{\link{ru_datetime}()},
 \code{\link{split_geopoint}()},
 \code{\link{strip_uuid}()},
 \code{\link{tidyeval}}

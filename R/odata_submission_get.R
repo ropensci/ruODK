@@ -254,6 +254,4 @@ odata_submission_get <- function(table = "Submissions",
   sub
 }
 
-# Tests
-
-# usethis::edit_file("tests/testthat/test-odata_submission_get.R")
+# usethis::use_test("odata_submission_get")

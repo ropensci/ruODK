@@ -45,8 +45,8 @@ test_that("form_schema v8 returns a tibble and ignores flatten and parse", {
 #   testthat::expect_equal(fs_flattened[[1]]$type, "string")
 #
 #   # Last node: a "meta" field capturing the datetime of form completion
-#   testthat::expect_equal(fs_flattened[[length(fs_flattened)]]$type, "dateTime")
-#   testthat::expect_equal(fs_nested[[length(fs_nested)]]$type, "dateTime")
+# testthat::expect_equal(fs_flattened[[length(fs_flattened)]]$type, "dateTime")
+# testthat::expect_equal(fs_nested[[length(fs_nested)]]$type, "dateTime")
 # })
 
 

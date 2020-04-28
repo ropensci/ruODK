@@ -4,19 +4,19 @@
 \alias{attachment_link}
 \title{Prefix attachment columns from CSV export with a local attachment file path.}
 \usage{
-attachment_link(data_tbl, att_path = "media", att_contains = "photo")
+attachment_link(data_tbl, form_schema, att_path = "media")
 }
 \arguments{
 \item{data_tbl}{The downloaded submissions from
 \code{\link{submission_export}} read into a `tibble` by
 \code{readr::read_csv}.}
 
+\item{form_schema}{The `form_schema` for the submissions.
+E.g. the output of `ruODK::form_schema()`.}
+
 \item{att_path}{A local path, default: "media" (as per .csv.zip export).
 Selected columns of the dataframe (containing attchment filenames) are
 prefixed with `att_path`, thus turning them into relative paths.}
-
-\item{att_contains}{A shared part of attachment fieldnames, default: "photo".
-Columns of the dataframe are selected by the presence of `att_contains`.}
 }
 \value{
 The dataframe with attachment columns modified to contain relative
@@ -42,6 +42,7 @@ ruODK::ru_setup(
 fid <- get_default_fid()
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
 fid_csv_tae <- fs::path(t, glue::glue("{fid}-taxon_encounter.csv"))
+fs <- form_schema()
 
 # Download the zip file
 se <- ruODK::submission_export(
@@ -57,9 +58,9 @@ fs::dir_ls(t)
 # Prepend attachments with media/ to turn into relative file paths
 data_quadrat <- fid_csv \%>\%
   readr::read_csv(na = c("", "NA", "na")) \%>\%
-  janitor::clean_names(.) \%>\%
-  attachment_link(.) \%>\%
-  ru_datetime(tz = "Australia/Perth")
+  janitor::clean_names() \%>\%
+  handle_ru_datetimes(fs) \%>\%
+  attachment_link(fs)
 }
 }
 \seealso{

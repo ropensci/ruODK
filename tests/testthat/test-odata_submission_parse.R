@@ -13,7 +13,6 @@ test_that("odata_submission_rectangle works with gaps in first submission", {
     verbose = TRUE
   )
 
-  testthat::expect_warning(
     fresh_raw_parsed <- odata_submission_get(
       pid = get_test_pid(),
       fid = get_test_fid_gap(),
@@ -25,7 +24,6 @@ test_that("odata_submission_rectangle works with gaps in first submission", {
       verbose = TRUE,
       local_dir = t
     )
-  )
 
   fresh_parsed <- fresh_raw %>% odata_submission_rectangle(verbose = TRUE)
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))

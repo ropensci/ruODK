@@ -1,4 +1,4 @@
-test_that("attachment_link works", {
+test_that("submission_export works", {
 
   # A fresh litterbox
   t <- tempdir()
@@ -18,6 +18,14 @@ test_that("attachment_link works", {
     pw = get_test_pw()
   )
 
+  fs <- form_schema(
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pid = get_test_pid(),
+    fid = fid
+  )
+
   # Comb through the litterbox
   f <- unzip(se, exdir = t)
 
@@ -25,14 +33,13 @@ test_that("attachment_link works", {
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
   testthat::expect_true(fs::file_exists(fid_csv))
 
-  # Test attachment_link - this saves another download of the ZIP file
-  # Tests usethis::edit_file("R/attachment_link.R")
   suppressWarnings(
     data_quadrat_csv <- fid_csv %>%
       readr::read_csv(na = c("", "NA", "na")) %>%
       janitor::clean_names(.) %>%
-      attachment_link(.) %>%
-      ru_datetime()
+      handle_ru_datetimes(fs) %>%
+      # handle_ru_geopoints(fs) %>% # no geopoints
+      attachment_link(fs)
   )
 
   # Test that filepath of attachment exists

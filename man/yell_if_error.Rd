@@ -40,3 +40,4 @@ Other ru_settings:
 \code{\link{yell_if_missing}()}
 }
 \concept{ru_settings}
+\keyword{internal}

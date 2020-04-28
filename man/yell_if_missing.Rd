@@ -44,3 +44,4 @@ Other ru_settings:
 \code{\link{yell_if_error}()}
 }
 \concept{ru_settings}
+\keyword{internal}

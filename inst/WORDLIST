@@ -24,7 +24,7 @@
 999z
 actee
 AmenazasRD
-Analyze
+Analyse
 api
 AppVeyor
 Arefin
@@ -95,6 +95,7 @@ GeoJSON
 geopoint
 geopoints
 geospatial
+getodk
 getters
 github
 googledrive
@@ -135,6 +136,7 @@ odata
 OData
 ODK
 odkbuild
+ODKC
 odkcentral
 opendata
 opendatakit
@@ -165,7 +167,6 @@ Rectangling
 Renviron
 repo
 RESTful
-rGeoCBI
 RJDBC
 RJSONIO
 rlang
@@ -173,6 +174,7 @@ RMarkdown
 Rmd
 Roadmap
 ROpenSci
+rOzCBI
 Rstudio
 RStudio
 ru
@@ -226,8 +228,8 @@ wkt
 WKT
 workdir
 www
-Xform
 XForm
+Xforms
 XForms
 XlsForm
 XlsForms

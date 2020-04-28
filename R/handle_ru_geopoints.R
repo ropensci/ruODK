@@ -19,15 +19,15 @@
 #' @family utilities
 #' @examples
 #' \dontrun{
-#'  library(magrittr)
-#'  data("fq_raw")
-#'  data("fq_form_schema")
+#' library(magrittr)
+#' data("fq_raw")
+#' data("fq_form_schema")
 #'
-#'  fq_with_geo <- fq_raw %>%
-#'    ruODK::odata_submission_rectangle() %>%
-#'    ruODK::handle_ru_geopoints(form_schema = fq_form_schema)
+#' fq_with_geo <- fq_raw %>%
+#'   ruODK::odata_submission_rectangle() %>%
+#'   ruODK::handle_ru_geopoints(form_schema = fq_form_schema)
 #'
-#'  dplyr::glimpse(fq_with_geo)
+#' dplyr::glimpse(fq_with_geo)
 #' }
 handle_ru_geopoints <- function(data,
                                 form_schema,

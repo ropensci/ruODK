@@ -5,11 +5,11 @@
 #' @param data_tbl The downloaded submissions from
 #'   \code{\link{submission_export}} read into a `tibble` by
 #'   \code{readr::read_csv}.
+#' @param form_schema The `form_schema` for the submissions.
+#'   E.g. the output of `ruODK::form_schema()`.
 #' @param att_path A local path, default: "media" (as per .csv.zip export).
 #'   Selected columns of the dataframe (containing attchment filenames) are
 #'   prefixed with `att_path`, thus turning them into relative paths.
-#' @param att_contains A shared part of attachment fieldnames, default: "photo".
-#'   Columns of the dataframe are selected by the presence of `att_contains`.
 #' @return The dataframe with attachment columns modified to contain relative
 #'   paths to the downloaded attachment files.
 #' @export
@@ -31,6 +31,7 @@
 #' fid <- get_default_fid()
 #' fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
 #' fid_csv_tae <- fs::path(t, glue::glue("{fid}-taxon_encounter.csv"))
+#' fs <- form_schema()
 #'
 #' # Download the zip file
 #' se <- ruODK::submission_export(
@@ -46,24 +47,26 @@
 #' # Prepend attachments with media/ to turn into relative file paths
 #' data_quadrat <- fid_csv %>%
 #'   readr::read_csv(na = c("", "NA", "na")) %>%
-#'   janitor::clean_names(.) %>%
-#'   attachment_link(.) %>%
-#'   ru_datetime(tz = "Australia/Perth")
+#'   janitor::clean_names() %>%
+#'   handle_ru_datetimes(fs) %>%
+#'   attachment_link(fs)
 #' }
 attachment_link <- function(data_tbl,
-                            att_path = "media",
-                            att_contains = "photo") {
+                            form_schema,
+                            att_path = "media") {
+  # Find attachment columns
+  # Caveat: if an attachment field has no submissions, it is dropped from data
+  att_cols <- form_schema %>%
+    dplyr::filter(type == "binary") %>%
+    magrittr::extract2("ruodk_name") %>%
+    intersect(names(data_tbl))
+
   data_tbl %>%
     dplyr::mutate_at(
-      dplyr::vars(tidyr::contains(att_contains)),
+      dplyr::vars(tidyselect::all_of(att_cols)),
       ~ fs::path(att_path, .)
     )
 
-  # TODO auto-detect field names of type "binary" (attachments) from form_schema
-  # att_cn <- form_schema(pid, fid, url = url, un = un, pw = pw) %>%
-  #   form_schema_parse(.) %>%
-  #   dplyr::filter(type == "binary") %>%
-  #   dplyr:select("name")
 }
 
 # Tests

@@ -265,7 +265,9 @@ ru_setup <- function(svc = NULL,
   if (!is.null(test_url)) Sys.setenv("ODKC_TEST_URL" = test_url)
   if (!is.null(test_un)) Sys.setenv("ODKC_TEST_UN" = test_un)
   if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
-  if (!is.null(test_odkc_version)) Sys.setenv("ODKC_TEST_VERSION" = test_odkc_version)
+  if (!is.null(test_odkc_version)) {
+    Sys.setenv("ODKC_TEST_VERSION" = test_odkc_version)
+  }
   if (!is.null(verbose)) Sys.setenv("RU_VERBOSE" = verbose)
 
   if (get_ru_verbose()) {
@@ -281,8 +283,9 @@ ru_setup <- function(svc = NULL,
 #' @rdname ru_settings
 get_default_pid <- function() {
   x <- Sys.getenv("ODKC_PID")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No default ODK Central Project ID set. ru_setup()?")
+  }
   x
 }
 
@@ -291,8 +294,9 @@ get_default_pid <- function() {
 #' @rdname ru_settings
 get_default_fid <- function() {
   x <- Sys.getenv("ODKC_FID")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No default ODK Central Form ID set. ru_setup()?")
+  }
   x
 }
 
@@ -301,8 +305,9 @@ get_default_fid <- function() {
 #' @rdname ru_settings
 get_default_url <- function() {
   x <- Sys.getenv("ODKC_URL")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No default ODK Central URL set. ru_setup()?")
+  }
   x
 }
 
@@ -311,8 +316,9 @@ get_default_url <- function() {
 #' @rdname ru_settings
 get_default_un <- function() {
   x <- Sys.getenv("ODKC_UN")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No default ODK Central username set. ru_setup()?")
+  }
   x
 }
 
@@ -321,8 +327,9 @@ get_default_un <- function() {
 #' @rdname ru_settings
 get_default_pw <- function() {
   x <- Sys.getenv("ODKC_PW")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No default ODK Central password set. ru_setup()?")
+  }
   x
 }
 
@@ -343,8 +350,9 @@ get_default_tz <- function() {
 #' @rdname ru_settings
 get_test_url <- function() {
   x <- Sys.getenv("ODKC_TEST_URL")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No test ODK Central URL set. ru_setup()?")
+  }
   x
 }
 
@@ -353,8 +361,9 @@ get_test_url <- function() {
 #' @rdname ru_settings
 get_test_un <- function() {
   x <- Sys.getenv("ODKC_TEST_UN")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No test ODK Central username set. ru_setup()?")
+  }
   x
 }
 
@@ -363,8 +372,9 @@ get_test_un <- function() {
 #' @rdname ru_settings
 get_test_pw <- function() {
   x <- Sys.getenv("ODKC_TEST_PW")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No test ODK Central password set. ru_setup()?")
+  }
   x
 }
 
@@ -373,8 +383,9 @@ get_test_pw <- function() {
 #' @rdname ru_settings
 get_test_pid <- function() {
   x <- Sys.getenv("ODKC_TEST_PID")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No test ODK Central project ID set. ru_setup()?")
+  }
   x
 }
 
@@ -383,8 +394,9 @@ get_test_pid <- function() {
 #' @rdname ru_settings
 get_test_fid <- function() {
   x <- Sys.getenv("ODKC_TEST_FID")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No test ODK Central form ID set. ru_setup()?")
+  }
   x
 }
 
@@ -393,8 +405,9 @@ get_test_fid <- function() {
 #' @rdname ru_settings
 get_test_fid_zip <- function() {
   x <- Sys.getenv("ODKC_TEST_FID_ZIP")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No test ODK Central ZIP form ID set. ru_setup()?")
+  }
   x
 }
 
@@ -403,8 +416,9 @@ get_test_fid_zip <- function() {
 #' @rdname ru_settings
 get_test_fid_att <- function() {
   x <- Sys.getenv("ODKC_TEST_FID_ATT")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No test ODK Central ATT form ID set. ru_setup()?")
+  }
   x
 }
 
@@ -413,8 +427,9 @@ get_test_fid_att <- function() {
 #' @rdname ru_settings
 get_test_fid_gap <- function() {
   x <- Sys.getenv("ODKC_TEST_FID_GAP")
-  if (identical(x, ""))
+  if (identical(x, "")) {
     ru_msg_warn("No test ODK Central GAP form ID set. ru_setup()?")
+  }
   x
 }
 
@@ -429,14 +444,14 @@ get_ru_verbose <- function() {
 #' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
-get_default_odkc_version <- function(){
+get_default_odkc_version <- function() {
   Sys.getenv("ODKC_VERSION", unset = 0.8)
 }
 
 #' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
-get_test_odkc_version <- function(){
+get_test_odkc_version <- function() {
   Sys.getenv("ODKC_TEST_VERSION", unset = 0.8)
 }
 
@@ -453,7 +468,7 @@ get_test_odkc_version <- function(){
 #'   for missing credentials and stop with a loud but informative yell.
 #' @param iid A submission instance ID (character, optional)
 #' @family ru_settings
-#' @export
+#' @keywords internal
 #' @examples
 #' testthat::expect_error(yell_if_missing("", "username", "password"))
 #' testthat::expect_error(yell_if_missing("url", "", "password"))
@@ -501,7 +516,7 @@ yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL) {
 #' @param fid A form ID (character, optional)
 #' @return The response object
 #' @family ru_settings
-#' @export
+#' @keywords internal
 yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
   response %>%
     httr::stop_for_status(

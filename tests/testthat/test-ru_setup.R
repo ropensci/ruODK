@@ -10,6 +10,7 @@ test_that("ru_setup does not update settings if given NULL", {
     un = NULL,
     pw = NULL,
     tz = NULL,
+    odkc_version = NULL,
     test_svc = NULL,
     test_pid = NULL,
     test_fid = NULL,
@@ -19,6 +20,7 @@ test_that("ru_setup does not update settings if given NULL", {
     test_url = NULL,
     test_un = NULL,
     test_pw = NULL,
+    test_odkc_version = NULL,
     verbose = NULL
   )
 
@@ -29,12 +31,14 @@ test_that("ru_setup does not update settings if given NULL", {
   # If env vars not set, default getters will issue warnings
   testthat::expect_equal(x$url, xx$url)
   testthat::expect_equal(x$un, xx$un)
-  testthat::expect_equal(x$pw, x$pw)
-  testthat::expect_equal(x$tz, x$tz)
+  testthat::expect_equal(x$pw, xx$pw)
+  testthat::expect_equal(x$odkc_version, xx$odkc_version)
+  testthat::expect_equal(x$tz, xx$tz)
   testthat::expect_equal(x$test_url, xx$test_url)
   testthat::expect_equal(x$test_un, xx$test_un)
   testthat::expect_equal(x$test_pw, xx$test_pw)
-  testthat::expect_equal(x$test_pid,xx$test_pid)
+  testthat::expect_equal(x$test_odkc_version, xx$test_odkc_version)
+  testthat::expect_equal(x$test_pid, xx$test_pid)
   testthat::expect_equal(x$test_fid, xx$test_fid)
   testthat::expect_equal(x$test_fid_zip, xx$test_fid_zip)
   testthat::expect_equal(x$test_fid_att, xx$test_fid_att)
@@ -49,10 +53,12 @@ test_that("ru_setup resets settings if given empty string", {
   un <- get_default_un()
   pw <- get_default_pw()
   tz <- get_default_tz()
+  odkcv <- get_default_odkc_version()
   verbose <- get_ru_verbose()
   test_url <- get_test_url()
   test_un <- get_test_un()
   test_pw <- get_test_pw()
+  test_odkcv <- get_test_odkc_version()
   test_pid <- get_test_pid()
   test_fid <- get_test_fid()
   test_fid_zip <- get_test_fid_zip()
@@ -67,6 +73,7 @@ test_that("ru_setup resets settings if given empty string", {
     un = "",
     pw = "",
     tz = "",
+    odkc_version = "",
     test_pid = "",
     test_fid = "",
     test_fid_zip = "",
@@ -75,6 +82,7 @@ test_that("ru_setup resets settings if given empty string", {
     test_url = "",
     test_un = "",
     test_pw = "",
+    test_odkc_version = "",
     verbose = FALSE
   )
   x <- ru_settings()
@@ -85,10 +93,12 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_default_url())
   testthat::expect_warning(get_default_un())
   testthat::expect_warning(get_default_pw())
+  # testthat::expect_warning(get_default_odkc_version())
   testthat::expect_warning(get_default_tz())
   testthat::expect_warning(get_test_url())
   testthat::expect_warning(get_test_un())
   testthat::expect_warning(get_test_pw())
+  # testthat::expect_warning(get_test_odkc_version())
   testthat::expect_warning(get_test_pid())
   testthat::expect_warning(get_test_fid())
   testthat::expect_warning(get_test_fid_zip())
@@ -116,9 +126,11 @@ test_that("ru_setup resets settings if given empty string", {
     un = un,
     pw = pw,
     tz = tz,
+    odkc_version = odkcv,
     test_url = test_url,
     test_un = test_un,
     test_pw = test_pw,
+    test_odkc_version = test_odkcv,
     test_pid = test_pid,
     test_fid = test_fid,
     test_fid_zip = test_fid_zip,

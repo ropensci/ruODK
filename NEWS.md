@@ -3,9 +3,11 @@ This version addresses ROpenSci reviewer comments from
 @karissawhiting and @jmt2080ad as well as ideas from 
 @OdiljonQurbon and @arestrom.
 
-This version is the RC for v0.7 to support ODK Central 0.7.
+This version is the RC for v0.8 to support ODK Central 0.8.
 
 ## Major fixes
+* New environment variables `ODKC_(TEST_)VERSION` allow `ruODK` to toggle
+  between deprecated/removed and new/added API endpoints, e.g. `form_schema` (#61)
 * Split and rename WKT POINT (ODK geopoint) fields with 
   `odata_submission_get(wkt=T)`. (#31 #7 HT @OdiljonQurbon)
 * `submission_get` now accepts a vector of (all or selected) submission instance 
@@ -34,6 +36,8 @@ This version is the RC for v0.7 to support ODK Central 0.7.
   (#33)
 * Update canned data (and `make-data.R`) to work with travis-built pkgdown site.
   (#52)
+* Remove nested list `form_schema_raw` which is only generated from legacy 
+  ODK Central (< 0.8) (#61)
 
 ## Documentation
 * Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK).

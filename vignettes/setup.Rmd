@@ -19,35 +19,38 @@ library(ruODK)
 ```
 
 # Configure ruODK
-`ruODK` functions work on a given ODK Central instance using a web user's 
+
+`ruODK` functions work on a given ODK Central instance using a web user's
 credentials (username and password). Some functions also require project and
 form IDs.
 
-`ruODK`'s functions accept these parameters either as explicit keyword arguments,
-or fall back to defaults.
+`ruODK`'s functions accept these parameters either as explicit keyword
+arguments, or fall back to defaults.
 
-Note: Always consider code to be public. Never use plain text credentials in code.
+Note: Always consider code to be public. Never use plain text credentials in
+code.
 
-`ruODK` suggests as best practice to set the defaults (or parts thereof) using 
+`ruODK` suggests as best practice to set the defaults (or parts thereof) using
 `ruODK::ru_setup()` or through permanently setting environment variables.
 
 ## Best practice: `ru_setup`
-`ruODK` provides helpers for settings, `ru_setup()` to set and `ru_settings()` 
+
+`ruODK` provides helpers for settings, `ru_setup()` to set and `ru_settings()`
 to get settings.
 
-While normal users of `ruODK` will only need a default pid, fid, url, username, 
+While normal users of `ruODK` will only need a default pid, fid, url, username,
 and password, contributors to `ruODK` can include optional test server settings
 which are required to run the test suite and build the vignettes.
 
 `ruODK` infers the base URL, project and form ID from the OData Service URL
 which is shown in ODK Central on the Form Submissions tab.
 
-Unless specified as function parameter, `ruODK` converts dates and times to the 
+Unless specified as function parameter, `ruODK` converts dates and times to the
 default timezone, in this example set to "Australia/Perth".
 
-Furthermore, some functions offer verbose messages, which can assist to
-debug unexpected behaviour. Unless specified in the settings, or in the 
-respective function calls, `ruODK` defaults to hide verbose messages.
+Furthermore, some functions offer verbose messages, which can assist to debug
+unexpected behaviour. Unless specified in the settings, or in the respective
+function calls, `ruODK` defaults to hide verbose messages.
 
 ```{r ru_setup}
 # ruODK user using OData service URL, username (an email), and password
@@ -95,8 +98,8 @@ ruODK::ru_setup(
 ruODK::ru_settings()
 ```
 
-Now we can call `ruODK` functions without specifying `url`, `un`, and `pw`, 
-and let `ruODK` fall back to the defaults:
+Now we can call `ruODK` functions without specifying `url`, `un`, and `pw`, and
+let `ruODK` fall back to the defaults:
 
 ```{r, eval=FALSE}
 ruODK::project_list()
@@ -104,17 +107,20 @@ ruODK::submission_list()
 ```
 
 ## Permanent defaults: Environment variables
-Read a great overview of R's startup process, and how environment variables
-are sourced at the beginning of a new session at [whattheyforgot.org](https://whattheyforgot.org/r-startup.html).
 
-`ruODK`'s functions default to the getters `ruODK::get_default_{pid,fid,url,un.pw}()`.
-These getters in turn look up their values from environment variables.
+Read a great overview of R's startup process, and how environment variables are
+sourced at the beginning of a new session at
+[whattheyforgot.org](https://whattheyforgot.org/r-startup.html).
+
+`ruODK`'s functions default to the getters
+`ruODK::get_default_{pid,fid,url,un.pw}()`. These getters in turn look up their
+values from environment variables.
 
 A convenient way to have often used environment variables available is to add
-them to `~/.Renviron` using `usethis::edit_r_environ(scope = "user")`.
-This loads them freshly into a new session, eliminating the need to run 
-`ru_setup()`. Note that the environment variables can be cleared or overwritten 
-through calling `ru_setup()` or `Sys.setenv()` with respective arguments.
+them to `~/.Renviron` using `usethis::edit_r_environ(scope = "user")`. This
+loads them freshly into a new session, eliminating the need to run `ru_setup()`.
+Note that the environment variables can be cleared or overwritten through
+calling `ru_setup()` or `Sys.setenv()` with respective arguments.
 
 `ru_setup()` will not change any omitted arguments.
 
@@ -122,16 +128,17 @@ through calling `ru_setup()` or `Sys.setenv()` with respective arguments.
 usethis::edit_r_environ(scope = "user")
 ```
 
-
 ```{r renviron, eval=FALSE}
 ODKC_PID=1
 ODKC_FID="build_Flora-Quadrat-0-2_1558575936"
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
 ODKC_UN="me@email.com"
 ODKC_PW="..."
+ODKC_VERSION=0.8
 ODKC_TEST_URL="https://sandbox.central.getodk.org"
 ODKC_TEST_UN="me@email.com"
 ODKC_TEST_PW="..."
+ODKC_TEST_VERSION=0.8
 ODKC_TEST_PID=14
 ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
 ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698"
@@ -140,9 +147,8 @@ RU_TIMEZONE="Australia/Perth"
 RU_VERBOSE=TRUE
 ```
 
-
-As an alternative to setting environment variables through `~/.Renviron`, 
-you can set them through `Sys.setenv()`:
+As an alternative to setting environment variables through `~/.Renviron`, you
+can set them through `Sys.setenv()`:
 
 ```{r setenv, eval=FALSE}
 Sys.setenv(ODKC_URL="https://odkcentral.dbca.wa.gov.au")
@@ -159,8 +165,8 @@ Sys.setenv(RU_TIMEZONE="Australia/Perth")
 Sys.setenv(RU_VERBOSE=TRUE)
 ```
 
-
 ## The hard way: Per function call
+
 We can supply those credentials to each `ruODK` function call.
 
 Note, including sensitive credentials in plain text into code is bad practice.
@@ -182,22 +188,21 @@ ruODK::project_list(
 )
 ```
 
-An example use case are the `ruODK` tests, which explicitly set `url`, `un`, 
-`pw`, `pid` and `fid` from the test variables 
-`ruODK::get_test_{url, un, pw, pid, fid}()`.
-Note that this uses functions instead of plain text versions of sensitive 
-credentials. Alternatively, variables could also be used to set credentials per
-function call.
+An example use case are the `ruODK` tests, which explicitly set `url`, `un`,
+`pw`, `pid` and `fid` from the test variables
+`ruODK::get_test_{url, un, pw, pid, fid}()`. Note that this uses functions
+instead of plain text versions of sensitive credentials. Alternatively,
+variables could also be used to set credentials per function call.
 
+## Moving across forms
 
-# Moving across forms
-`ruODK`'s functions default to the default values for project ID (`pid`),
-form ID (`fid`), base URL (`url`), username (`un`), and password (`pw`).
+`ruODK`'s functions default to the default values for project ID (`pid`), form
+ID (`fid`), base URL (`url`), username (`un`), and password (`pw`).
 
 A typical workflow is to run several functions of `ruODK` against one form (and
 the overarching project). By running `ru_setup()` with the form's OData service
-URL and a web user's username and password, subsequent functions can omit
-`pid`, `fid`, `url`, `un`, and `pw`.
+URL and a web user's username and password, subsequent functions can omit `pid`,
+`fid`, `url`, `un`, and `pw`.
 
 ```{r, eval=FALSE}
 # Server 1, Project 1, Form 1
@@ -243,3 +248,29 @@ ruODK::project_detail()
 ruODK::form_detail()
 ruODK::submission_list()
 ```
+
+## Legacy support for deprecated ODK Central features
+
+Users of the latest ODK Central version can safely ignore this section. Users of
+older ODK Central versions will be exposed to breaking changes coming from
+upstream ODK Central.
+
+Very occasionally, ODK Central will deprecate API endpoints. `ruODK` aims to
+keep up with the latest ODK Central API, and will adapt its behaviour to support
+both new and old, deprecated behaviour.
+
+As there is no corresponding API endpoint to determine the ODK Central version,
+`ruODK` has introduced the environment variables `ODKC_VERSION` and
+`ODKC_TEST_VERSION`. If unset, `ruODK` defaults to the latest ODK Central
+version, which is the version deployed to the ODK Central sandbox (on which
+`ruODK`'s package tests run).
+
+The numeric format of `major.minor` (e.g. `0.7` or `0.8`) future-proofs `ruODK`
+to be able to handle any other future breaking changes gracefully through the
+same variable.
+
+A recent example is the change of the API endpoint for `form_schema`, which
+replaced the `.schema.json` API in favour of the `/fields` API. This required
+`ruODK` to toggle its behaviour between the relatively involved un-nesting of
+the JSON schema (versions before 0.8) with parsing a clean, flat list of field
+names, types, and XForms paths (version 0.8 onward).

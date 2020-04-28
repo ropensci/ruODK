@@ -2,7 +2,7 @@
 % Please edit documentation in R/split_geopoint.R
 \name{split_geopoint}
 \alias{split_geopoint}
-\title{Split a column of a dataframe containing WKT POINT into lat, lon, alt.}
+\title{Split a column of a dataframe containing a WKT POINT into lat, lon, alt}
 \usage{
 split_geopoint(data, colname)
 }
@@ -18,7 +18,11 @@ The given dataframe with the WKT POINT column <cn> replaced by three
   naming conflicts with possible other geopoint columns.
 }
 \description{
-Split a column of a dataframe containing WKT POINT into lat, lon, alt.
+\lifecycle{stable}
+}
+\details{
+This function is used by \code{\link{handle_ru_geopoints}}
+on all \code{geopoint} fields as per \code{\link{form_schema}}.
 }
 \examples{
 df <- tibble::tibble(
@@ -43,7 +47,6 @@ Other utilities:
 \code{\link{isodt_to_local}()},
 \code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
-\code{\link{ru_datetime}()},
 \code{\link{strip_uuid}()},
 \code{\link{tidyeval}}
 }

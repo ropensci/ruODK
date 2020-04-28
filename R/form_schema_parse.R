@@ -47,7 +47,7 @@ form_schema_parse <- function(fs,
                               path = "Submissions",
                               verbose = get_ru_verbose()) {
   # 0. Recursion airbag
-  if (!(is.list(fs))) ru_msg_info(glue::glue("Not a list:")); print(fs)
+  # if (!(is.list(fs))) {ru_msg_info(glue::glue("Not a list:")); print(fs)}
 
   # 1. Grab next level type/name pairs, append column "path".
   # This does not work recursively - if it did, we'd be done here.
@@ -56,16 +56,20 @@ form_schema_parse <- function(fs,
     rlist::list.stack(.) %>%
     dplyr::mutate(path = path)
 
-  if (verbose == TRUE) ru_msg_info(glue::glue("Found fields:")); print(x)
+  if (verbose == TRUE) {
+    ru_msg_info(glue::glue("Found fields:"))
+    print(x)
+  }
 
   # 2. Recursively run form_schema_parse over nested elements.
   for (node in fs) {
     # Recursion seatbelt: only step into lists containing "children".
-    if (is.list(node) &&  "children" %in% names(node)) {
+    if (is.list(node) && "children" %in% names(node)) {
       for (child in node["children"]) {
         odata_table_path <- glue::glue("{path}.{node['name']}")
-        if (verbose == TRUE)
+        if (verbose == TRUE) {
           ru_msg_info(glue::glue("Found child: {child} at {odata_table_path}"))
+        }
         xxx <- form_schema_parse(child, path = odata_table_path)
         x <- rbind(x, xxx)
       }

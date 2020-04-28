@@ -237,7 +237,7 @@ fq_zip_data <- fid_csv %>%
   dplyr::mutate(id = meta_instance_id) %>% 
   ruODK::handle_ru_datetimes(fq_form_schema) %>% 
   ruODK::handle_ru_geopoints(fq_form_schema) %>% 
-  ruODK::handle_ru_attachments(fq_form_schema, local_dir = t)
+  ruODK::attachment_link(fq_form_schema)
 
 fq_zip_strata <- fid_csv_veg %>% 
   readr::read_csv(na = c("", "NA", "na")) %>%
@@ -245,7 +245,7 @@ fq_zip_strata <- fid_csv_veg %>%
   dplyr::mutate(id = parent_key) %>% 
   # ruODK::handle_ru_datetimes(fq_form_schema) parent_key%>% # no dates
   # ruODK::handle_ru_geopoints(fq_form_schema) %>%  # no geopoints
-  # ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>% # no attachm.
+  # ruODK::ruODK::attachment_link(fq_form_schema) %>% # no att.
   dplyr::left_join(fq_zip_data, by = c("parent_key" = "meta_instance_id"))
 
 fq_zip_taxa <- fid_csv_tae %>%
@@ -254,7 +254,7 @@ fq_zip_taxa <- fid_csv_tae %>%
   dplyr::mutate(id = parent_key) %>% 
   # ruODK::handle_ru_datetimes(fq_form_schema) %>% 
   # ruODK::handle_ru_geopoints(fq_form_schema) %>% 
-  # ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>%
+  # ruODK::ruODK::attachment_link(fq_form_schema) %>%
   dplyr::left_join(fq_zip_data, by = c("parent_key" = "meta_instance_id"))
 ```
 
@@ -366,7 +366,8 @@ fs::dir_ls(t, recurse = TRUE, glob = "*.jpg")
 # Outlook
 
 From here, we can use the separately created data tibbles and locally downloaded
-attachments to build visualisations as shown in the [`vignette("odata-api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata.html).
+attachments to build visualisations as shown in the 
+[`vignette("odata-api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata.html).
 
 The best pathway to retrieve submission data seems to be the data export to ZIP 
 or access via OData.

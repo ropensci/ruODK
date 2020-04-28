@@ -59,8 +59,8 @@ class(pl)
 
 # columns are project metadata
 names(pl)
-#> "id" "name" "forms" "app_users" "created_at" "updated_at"
-#> "last_submission" "archived"
+# > "id" "name" "forms" "app_users" "created_at" "updated_at"
+# > "last_submission" "archived"
 }
 }
 \seealso{

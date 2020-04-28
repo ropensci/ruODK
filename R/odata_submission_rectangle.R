@@ -127,4 +127,4 @@ odata_submission_rectangle <- function(data,
 
 
 # Tests
-# usethis::edit_file("tests/testthat/test-odata_submission_rectangle.R")
+# usethis::use_test("odata_submission_rectangle")

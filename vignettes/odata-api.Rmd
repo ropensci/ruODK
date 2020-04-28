@@ -52,7 +52,7 @@ as documented (with live examples in multiple programming languages) at the
 
 # Configure ruODK
 The OData service URL is shown in the form's "Submissions" tab >
-"Analyze via OData" on ODK Central. It contains base URL, project ID, and 
+"Analyse via OData" on ODK Central. It contains base URL, project ID, and 
 form ID and is used by `ruODK::ru_setup()`.
 
 ```{r ru_setup}
@@ -169,7 +169,7 @@ as a nested list of lists.
 To analyse and visualise the data, this nested list of lists must be transformed 
 into a rectangular shape.
 The function `ruODK::odata_submission_rectangle()` is used internally to 
-recursively unnest list columns using `tidyr::unnest_wider()`.
+recursively un-nest list columns using `tidyr::unnest_wider()`.
 Unnamed columns, notably the anonymous lat/lon/alt coordinates, are named 
 automatically to become unique (a feature of `tidyr::unnest_*()`), and then 
 sanitised using the helper `janitor::clean_names()`.
@@ -195,11 +195,9 @@ When used manually, field names of media attachment fields can be (partially or
 fully) specified, see `??ruODK::attachment_get()`.
 
 The date formats are parsed from ISO8601 timestamps into POSIXct objects with
-`ruODK::ru_datetime()`. We use our local timezone (GMT+08) in this example.
-When used through `ruODK::odata_submission_get()`, `ruODK` will introspect the
-form schema to detect and then parse date and datetime fields automatically.
-When used manually, field names of date and datetime fields can be (partially or 
-fully) specified, see `??ruODK::ru_datetime()`.
+`ruODK::handle_ru_datetimes()`. We use our local timezone (GMT+08) in this example.
+`ruODK` introspects the form schema to detect and then parse date and datetime 
+fields automatically.
 
 The repeated subgroup `taxon_encounter` is left joined to the main submission data
 to receive a (repeated) copy of the main submission data 
@@ -231,7 +229,7 @@ The result of this code chunk should be exactly the same as the compact version
 with `odata_submission_get(parse=TRUE)`.
 
 ```{r}
-# Candidates for ruODK::parse_datetime()
+# Candidates for ruODK::handle_ru_datetimes()
 fq_form_schema %>% 
   dplyr::filter(type %in% c("dateTime", "date")) %>% 
   knitr::kable(.)

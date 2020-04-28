@@ -4,7 +4,7 @@
 #' End_wait: 20
 
 # <<
-# Use your form's OData Service URL (Form > Submissions > Analyze data)
+# Use your form's OData Service URL (Form > Submissions > Analyse data)
 # Read vignette "setup" on setting username and password via .Renviron
 # <<
 suppressMessages(library(tidyverse))

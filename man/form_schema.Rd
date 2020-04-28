@@ -129,64 +129,74 @@ fs_defaults <- form_schema(pid = 1, fid = "build_xformsId")
 fs <- form_schema()
 
 # With defaults, ODK Central v0.7
-fs_nested <- form_schema(flatten = FALSE, odata = FALSE, parse = FALSE, odkc_version = 0.7)
+fs_nested <- form_schema(
+  flatten = FALSE,
+  odata = FALSE,
+  parse = FALSE,
+  odkc_version = 0.7
+)
 listviewer::jsonedit(fs_nested)
 
-fs_flattened <- form_schema(flatten = TRUE, odata = FALSE, parse = FALSE, odkc_version = 0.7)
+fs_flattened <- form_schema(
+  flatten = TRUE,
+  odata = FALSE,
+  parse = FALSE,
+  odkc_version = 0.7
+)
 listviewer::jsonedit(fs_flattened)
 
 # form_schema returns a nested list. There's nothing to change about that.
 class(fs_nested)
-#> "list"
+# > "list"
 
 class(fs_flattened)
-#> "list"
+# > "list"
 
 # This assumes knowledge of that exact form being tested.
 # First node: type "structure" (a field group) named "meta".
 fs_nested[[1]]$type
-#> "structure"
+# > "structure"
 
 fs_nested[[1]]$name
-#> "meta"
+# > "meta"
 
 # The first node contains children, which means it's an XForms field group.
 names(fs_nested[[1]])
-#> "name" "children" "type"
+# > "name" "children" "type"
 
 # Next node: a "meta" field of type "string" capturing the  "instanceId".
 # First child node of "meta": type "string", name "instanceId".
 fs_nested[[1]]$children[[1]]$type
-#> "string"
+# > "string"
 fs_nested[[1]]$children[[1]]$name
-#> "instanceID"
+# > "instanceID"
 
 # In the flattened version, the field's and it's ancestors' names are the
 # components of "path".
 fs_flattened[[1]]$path
-#> "meta". "instanceId"
+# > "meta". "instanceId"
 
 fs_flattened[[1]]$type
-#> "string"
+# > "string"
 
 # Last node: a "meta" field capturing the datetime of form completion
 fs_flattened[[length(fs_flattened)]]$type
-#> "dateTime"
+# > "dateTime"
 fs_nested[[length(fs_nested)]]$type
-#> "dateTime"
+# > "dateTime"
 
 # Parsed into a tibble of form field type/name:
 # Useful to inform further parsing of submission data (attachments, dates)
 fs <- form_schema(parse = TRUE, odkc_version = 0.7)
 fs <- form_schema(odkc_version = 0.8)
 
-# Attachments: use \\code{\\link{attachment_get}} on each of
+# Attachments: used by handle_ru_attachments
 fs \%>\% dplyr::filter(type == "binary")
 
-# dateTime: use \\code{\\link{ru_datetime}} on each of
+# dateTime: used by handle_ru_datetimes
 fs \%>\% dplyr::filter(type == "dateTime")
 
-# Point location: will be split into lat/lon/alt/acc
+# Point location: used by handle_ru_geopoints
 fs \%>\% dplyr::filter(type == "geopoint")
 }
 }

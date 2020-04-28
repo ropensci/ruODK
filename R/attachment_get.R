@@ -205,7 +205,7 @@ get_one_attachment <- function(pth,
 #'
 #' # Step 3: Get attachment field "my_photo"
 #' fresh_parsed <- fresh_raw %>%
-#'   odata_submission_parse() %>%
+#'   odata_submission_rectangle() %>%
 #'   dplyr::mutate(
 #'     my_photo = attachment_get(id,
 #'       my_photo,

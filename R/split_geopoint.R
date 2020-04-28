@@ -1,11 +1,17 @@
-#' Split a column of a dataframe containing WKT POINT into lat, lon, alt.
+#' Split a column of a dataframe containing a WKT POINT into lon, lat, alt
+#'
+#' \lifecycle{stable}
+#'
+#' @details This function is used by \code{\link{handle_ru_geopoints}}
+#' on all \code{geopoint} fields as per \code{\link{form_schema}}.
 #'
 #' @param data (dataframe) A dataframe with a column of type WKT POINT
 #' @param colname (chr) The name of the WKT POINT column
-#' @return The given dataframe with the WKT POINT column <cn> replaced by three
-#'   columns, `<colname>_latitude`, `<colname>_longitude`, `<colname>_altitude`.
+#' @return The given dataframe with the WKT POINT column <colname> replaced by
+#'   three columns, `<colname>_longitude`, `<colname>_latitude`,
+#'   `<colname>_altitude`.
 #'   The three new columns are prefixed with the original `colname` to avoid
-#'   naming conflicts with possible other geopoint columns.
+#'   naming conflicts with any other geopoint columns.
 #' @export
 #' @family utilities
 #' @examples
@@ -18,8 +24,9 @@
 #'   )
 #' )
 #' df_split <- df %>% split_geopoint("loc")
-#' names(df_split) == c(
-#'   "stuff", "loc_latitude", "loc_longitude", "loc_altitude"
+#' testthat::expect_equal(
+#'   names(df_split),
+#'   c("stuff", "loc_longitude", "loc_latitude", "loc_altitude")
 #' )
 split_geopoint <- function(data, colname) {
   lon <- glue::glue("{colname}_longitude") %>% as.character()

@@ -54,21 +54,11 @@ handle_ru_datetimes <- function(data,
     ru_msg_info(glue::glue("Found date/times: {x}."))
   }
 
-  # Parse each date/time column with ru_datetime
-  for (colname in dttm_cols) {
-    if (verbose == TRUE) {
-      ru_msg_info(glue::glue("Parsing \"{colname}\" with tz \"{tz}\"..."))
-    }
-
-    data <- data %>%
-      ruODK::ru_datetime(
-        orders = orders,
-        tz = tz,
-        col_contains = as.character(colname)
-      )
-  }
-
-  data
+  data %>%
+    dplyr::mutate_at(
+      dplyr::vars(tidyselect::all_of(dttm_cols)),
+      ~ isodt_to_local(., orders = orders, tz = tz)
+    )
 }
 
 # usethis::use_test("handle_ru_datetimes")
