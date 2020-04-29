@@ -65,9 +65,6 @@ test_that("odata_submission_get works with one known dataset", {
 
 test_that("odata_submission_get skip omits number of results", {
 
-  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
-
-
   fq_svc <- odata_service_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -105,11 +102,13 @@ test_that("odata_submission_get skip omits number of results", {
   print(fresh_parsed)
   print("odata_submission_get with skip=1 should return one less record")
   print(skip_parsed)
+
+
+  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
   testthat::expect_true(nrow(fresh_parsed) == nrow(skip_parsed) + 1)
 })
 
 test_that("odata_submission_get top limits number of results", {
-  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
 
   top_parsed <- odata_submission_get(
     top = 1,
@@ -126,16 +125,13 @@ test_that("odata_submission_get top limits number of results", {
   print("odata_submission_get with top=1 should return one record")
   print(top_parsed)
 
-  testthat::expect_true(nrow(top_parsed) == 1)
+  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
+  # testthat::expect_true(nrow(top_parsed) == 1)
 
 })
 
 
 test_that("odata_submission_get count returns total number or rows", {
-
-  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
-
-
   x_raw <- odata_submission_get(
     count = TRUE,
     top = 1,
@@ -152,22 +148,23 @@ test_that("odata_submission_get count returns total number or rows", {
   x_parsed <- x_raw %>% odata_submission_rectangle()
 
   ru_msg_info("odata_submission_get count")
-  print(x_raw$`@odata.count`)
+  print(x_raw)
   print(x_parsed)
 
+  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
+
   # Returned: one row
-  testthat::expect_true(nrow(x_parsed) == 1)
+  # testthat::expect_true(nrow(x_parsed) == 1)
 
   # Count: shows all records
-  testthat::expect_true("@odata.count" %in% names(x_raw))
-  testthat::expect_gte(x_raw$`@odata.count`, nrow(x_parsed))
+  # testthat::expect_true("@odata.count" %in% names(x_raw))
+  # testthat::expect_gte(x_raw$`@odata.count`, nrow(x_parsed))
 })
 
 
 test_that("odata_submission_get parses WKT geopoint", {
 
   testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
-
 
   df <- odata_submission_get(
     wkt = TRUE,
@@ -185,19 +182,19 @@ test_that("odata_submission_get parses WKT geopoint", {
   print(df)
   print(names(df))
 
-  testthat::expect_true("location_corner1_latitude" %in% names(df))
-  testthat::expect_true("location_corner1_longitude" %in% names(df))
-  testthat::expect_true("location_corner1_altitude" %in% names(df))
+  # testthat::expect_true("location_corner1_latitude" %in% names(df))
+  # testthat::expect_true("location_corner1_longitude" %in% names(df))
+  # testthat::expect_true("location_corner1_altitude" %in% names(df))
 
-  testthat::expect_true("perimeter_corner4_latitude" %in% names(df))
-  testthat::expect_true("perimeter_corner4_longitude" %in% names(df))
-  testthat::expect_true("perimeter_corner4_altitude" %in% names(df))
+  # testthat::expect_true("perimeter_corner4_latitude" %in% names(df))
+  # testthat::expect_true("perimeter_corner4_longitude" %in% names(df))
+  # testthat::expect_true("perimeter_corner4_altitude" %in% names(df))
 
   print("df$location_corner1_longitude class: ")
   print(class(df$location_corner1_longitude))
-  testthat::expect_equal(class(df$location_corner1_longitude), "numeric")
-  testthat::expect_equal(class(df$perimeter_corner2_latitude), "numeric")
-  testthat::expect_equal(class(df$perimeter_corner3_altitude), "numeric")
+  # testthat::expect_equal(class(df$location_corner1_longitude), "numeric")
+  # testthat::expect_equal(class(df$perimeter_corner2_latitude), "numeric")
+  # testthat::expect_equal(class(df$perimeter_corner3_altitude), "numeric")
 })
 
 # Tests code
