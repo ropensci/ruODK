@@ -2,7 +2,7 @@
 name: Feature request
 about: ruODK is missing something
 title: ''
-labels: enhancement
+labels: feature
 assignees: florianm
 
 ---

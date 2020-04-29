@@ -2,12 +2,12 @@
 name: Account request
 about: I'd like to run tests or build the vignettes
 title: 'Account request for ODK Central instances used by ruODK'
-labels: help-wanted
+labels: account-request
 assignees: florianm
 
 ---
 I want to run the tests and build the vignettes. 
 Please provide access to the ODK Central Sandbox <https://sandbox.central.getodk.org/>.
 
-[ ] I have sent an email to the package maintainer requesting access.
+[ ] I have sent an email to the `ruODK` package maintainer requesting access.
 [ ] I have requested access to the ODK Central Sandbox in the [ODK Forum](https://forum.opendatakit.org/c/support).
