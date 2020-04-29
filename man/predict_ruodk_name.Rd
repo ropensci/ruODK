@@ -21,7 +21,7 @@ Predict a field name after \code{tidyr::unnest_wider(names_sep="_")} prefixes
 the form path.
 }
 \examples{
-\donttest{
+\dontrun{
   predict_ruodk_name("bar", "Submissions.foo")
   # > "foo_bar"
   predict_ruodk_name("bar", "Submissions")

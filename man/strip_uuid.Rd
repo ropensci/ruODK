@@ -18,6 +18,12 @@ The string with every occurrence of "uuid:" deleted.
 \details{
 This is a helper function used by \code{\link{attachment_get}}.
 }
+\examples{
+\dontrun{
+strip_uuid("uuid:1234")
+strip_uuid("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
+}
+}
 \seealso{
 Other utilities: 
 \code{\link{\%>\%}()},

@@ -93,7 +93,7 @@ form_schema_parse <- function(fs,
 #' @family utilities
 #' @keywords internal
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'   predict_ruodk_name("bar", "Submissions.foo")
 #'   # > "foo_bar"
 #'   predict_ruodk_name("bar", "Submissions")
