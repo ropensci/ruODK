@@ -64,6 +64,10 @@ test_that("odata_submission_get works with one known dataset", {
 
 
 test_that("odata_submission_get skip omits number of results", {
+
+  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
+
+
   fq_svc <- odata_service_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -105,6 +109,8 @@ test_that("odata_submission_get skip omits number of results", {
 })
 
 test_that("odata_submission_get top limits number of results", {
+  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
+
   top_parsed <- odata_submission_get(
     top = 1,
     pid = get_test_pid(),
@@ -121,10 +127,15 @@ test_that("odata_submission_get top limits number of results", {
   print(top_parsed)
 
   testthat::expect_true(nrow(top_parsed) == 1)
+
 })
 
 
 test_that("odata_submission_get count returns total number or rows", {
+
+  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
+
+
   x_raw <- odata_submission_get(
     count = TRUE,
     top = 1,
@@ -154,6 +165,10 @@ test_that("odata_submission_get count returns total number or rows", {
 
 
 test_that("odata_submission_get parses WKT geopoint", {
+
+  testthat::skip() # https://github.com/dbca-wa/ruODK/issues/65
+
+
   df <- odata_submission_get(
     wkt = TRUE,
     pid = get_test_pid(),
