@@ -12,7 +12,7 @@ jobs:
     deploy:
       provider: script
       script: Rscript -e 'pkgdown::deploy_site_github()'
-      # skip_cleanup: true
+      skip_cleanup: true
       cleanup: false
   - r: devel
   - r: oldrel
