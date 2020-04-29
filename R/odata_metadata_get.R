@@ -36,7 +36,10 @@ odata_metadata_get <- function(pid = get_default_pid(),
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
-    glue::glue("{url}/v1/projects/{pid}/forms/{fid}.svc/$metadata"),
+    httr::modify_url(
+      url,
+      path = glue::glue("v1/projects/{pid}/forms/{fid}.svc/$metadata")
+    ),
     httr::add_headers(Accept = "application/xml"),
     httr::authenticate(un, pw)
   ) %>%

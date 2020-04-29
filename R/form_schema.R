@@ -163,7 +163,10 @@ form_schema <- function(flatten = FALSE,
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
 
   if (odkc_version < 0.8) {
-    url_v7 <- glue::glue("{url}/v1/projects/{pid}/forms/{fid}.schema.json")
+    url_v7 <- httr::modify_url(
+      url,
+      path = glue::glue("v1/projects/{pid}/forms/{fid}.schema.json")
+    )
     if (verbose == TRUE) {
       ru_msg_info(glue::glue("Reading v0.7 form schema from {url_v7}"))
     }
@@ -192,7 +195,10 @@ form_schema <- function(flatten = FALSE,
     }
     return(fs)
   } else {
-    url_v8 <- glue::glue("{url}/v1/projects/{pid}/forms/{fid}/fields")
+    url_v8 <- httr::modify_url(
+      url,
+      path = glue::glue("v1/projects/{pid}/forms/{fid}/fields")
+    )
     if (verbose == TRUE) {
       ru_msg_info(glue::glue("Reading v0.8 form fields from {url_v8}"))
     }

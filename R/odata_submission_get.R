@@ -183,9 +183,11 @@ odata_submission_get <- function(table = "Submissions",
 
   sub <- httr::RETRY(
     "GET",
-    glue::glue(
-      "{url}/v1/projects/{pid}/forms/{fid}.svc/{table}",
-      "?$skip={skip}&$top={top}&$count={count}&$wkt={wkt}"
+    httr::modify_url(
+      url,
+      path = glue::glue(
+        "v1/projects/{pid}/forms/{fid}.svc/{table}",
+        "?$skip={skip}&$top={top}&$count={count}&$wkt={wkt}")
     ),
     httr::add_headers(Accept = "application/json"),
     httr::authenticate(un, pw)

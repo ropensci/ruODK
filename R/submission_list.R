@@ -56,14 +56,18 @@ submission_list <- function(pid = get_default_pid(),
                             un = get_default_un(),
                             pw = get_default_pw()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions") %>%
-    httr::GET(
-      httr::add_headers(
-        "Accept" = "application/json",
-        "X-Extended-Metadata" = "true"
-      ),
-      httr::authenticate(un, pw)
-    ) %>%
+  url <- httr::modify_url(
+    url,
+    path = glue::glue("v1/projects/{pid}/forms/{fid}/submissions")
+  )
+  ru_msg_info(url)
+  httr::RETRY(
+    "GET",
+    url,
+    httr::add_headers("Accept" = "application/json",
+                      "X-Extended-Metadata" = "true"),
+    httr::authenticate(un, pw)
+  ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     {

@@ -46,7 +46,7 @@ project_list <- function(url = get_default_url(),
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
-    glue::glue("{url}/v1/projects/"),
+    httr::modify_url(url, path = glue::glue("v1/projects")),
     httr::add_headers(
       "Accept" = "application/xml",
       "X-Extended-Metadata" = "true"
@@ -72,5 +72,4 @@ project_list <- function(url = get_default_url(),
     }
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-project_list.R")
+# usethis::use_test("project_list")

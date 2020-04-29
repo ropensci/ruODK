@@ -93,7 +93,7 @@ audit_get <- function(action = NULL,
     Filter(Negate(is.null), .)
   httr::RETRY(
     "GET",
-    glue::glue("{url}/v1/audits"),
+    httr::modify_url(url, path = glue::glue("v1/audits")),
     httr::add_headers("Accept" = "application/json"),
     httr::authenticate(un, pw),
     query = qry

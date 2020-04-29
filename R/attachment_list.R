@@ -67,8 +67,11 @@ get_one_submission_attachment_list <- function(iid,
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
-    glue::glue(
-      "{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}/attachments"
+    httr::modify_url(
+      url,
+      path = glue::glue(
+        "v1/projects/{pid}/forms/{fid}/submissions/{iid}/attachments"
+      )
     ),
     httr::add_headers("Accept" = "application/json"),
     httr::authenticate(un, pw)

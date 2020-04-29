@@ -46,7 +46,7 @@ project_detail <- function(pid = get_default_pid(),
   yell_if_missing(url, un, pw, pid = pid)
   httr::RETRY(
     "GET",
-    glue::glue("{url}/v1/projects/{pid}"),
+    httr::modify_url(url, path = glue::glue("v1/projects/{pid}")),
     httr::add_headers(
       "Accept" = "application/xml",
       "X-Extended-Metadata" = "true"

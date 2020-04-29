@@ -24,7 +24,7 @@ This version is the RC for v0.8 to support ODK Central 0.8.
   `readr::parse_datetime()`. (#43)
 * Add a global default for verbosity. (#51 HT @arestrom)
 * Add a global default for time zone. (#53 HT @arestrom)
-
+* Use `httr::modify_url` to build URLs rather than `glue::glue` (#66)
 
 ## Dependencies
 * Moved `rlist` to Imports, as it is now used in `odata_submission_get()`. (#6)

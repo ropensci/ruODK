@@ -46,7 +46,10 @@ submission_detail <- function(iid,
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   httr::RETRY(
     "GET",
-    glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}"),
+    httr::modify_url(
+      url,
+      path = glue::glue("v1/projects/{pid}/forms/{fid}/submissions/{iid}")
+    ),
     httr::add_headers(
       "Accept" = "application/json; extended",
       "X-Extended-Metadata" = "true"

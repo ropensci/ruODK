@@ -66,6 +66,14 @@ test_that("attachment_url works", {
   expected_url <- glue::glue(
     "{url}/v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
   )
+  # https://github.com/dbca-wa/ruODK/issues/66
+  # Not using here because it breaks attachment_get
+  # expected_url <- httr::modify_url(
+  #   url,
+  #   path = glue::glue(
+  #     "v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
+  #   )
+  # )
   calculated_url <- ruODK:::attachment_url(uuid,
     fn,
     pid = pid,
