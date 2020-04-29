@@ -1,7 +1,9 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: R
-sudo: false
+language: r
+os: linux
+dist: xenial
+#sudo: false
 
 jobs:
   include:
@@ -10,7 +12,8 @@ jobs:
     deploy:
       provider: script
       script: Rscript -e 'pkgdown::deploy_site_github()'
-      skip_cleanup: true
+      # skip_cleanup: true
+      cleanup: false
   - r: devel
   - r: oldrel
 
