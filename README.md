@@ -178,7 +178,7 @@ read-permitted ODK Central web user. Adjust verbosity to your liking.
     #>   Default ODK Central Username:  Florian.Mayer@dbca.wa.gov.au 
     #>   Default ODK Central Password: run ruODK::get_default_pw() to show 
     #>   Default Time Zone:  Australia/Perth 
-    #>   Default ODK Central Version:  0.8 # ruODK dev 
+    #>   Default ODK Central Version:  0.8 
     #>   Test ODK Central Project ID: 14 
     #>   Test ODK Central Form ID: build_Flora-Quadrat-0-4_1564384341 
     #>   Test ODK Central Form ID (ZIP tests): build_Spotlighting-0-6_1558333698 
@@ -257,7 +257,7 @@ frmd %>% knitr::kable(.)
 ``` r
 # Form schema
 meta <- ruODK::form_schema()
-#> ℹ Reading v0.8 form fields from https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341/fields
+#> ℹ form schema v0.8
 meta %>% knitr::kable(.)
 ```
 
@@ -317,7 +317,7 @@ data <- ruODK::odata_submission_get(local_dir = fs::path("vignettes/media"))
 #> ✔ Downloaded submissions.
 #> ℹ Parsing submissions...
 #> ℹ Reading form schema...
-#> ℹ Reading v0.8 form fields from https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341/fields
+#> ℹ form schema v0.8
 #> ℹ Parsing submissions...
 #> New names:
 #> * `@odata.context` -> .odata.context
@@ -343,8 +343,6 @@ data <- ruODK::odata_submission_get(local_dir = fs::path("vignettes/media"))
 #> ℹ Unnesting column "value_perimeter_corner4_coordinates"
 #> ℹ Unnesting column "value_perimeter_corner4_properties"
 #> ℹ Found date/times: encounter_start_datetime, encounter_end_datetime.
-#> ℹ Parsing "encounter_start_datetime" with tz "Australia/Perth"...
-#> ℹ Parsing "encounter_end_datetime" with tz "Australia/Perth"...
 #> ℹ Found attachments: location_quadrat_photo, habitat_morphological_type_photo, perimeter_mudmap_photo.
 #> ℹ Downloading attachments...
 #> ℹ Using local directory "vignettes/media".
