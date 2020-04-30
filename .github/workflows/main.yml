@@ -20,13 +20,13 @@ jobs:
         config:
           # comment out lines if you do not want to build on certain platforms
           - { os: windows-latest, r: "release" }
-          - { os: windows-latest, r: "oldrelease" }
+          - { os: windows-latest, r: "oldrel" }
           - { os: windows-latest, r: "devel" }
           - { os: macOS-latest, r: "release"}
-          - { os: macOS-latest, r: "oldrelease"}
+          - { os: macOS-latest, r: "oldrel"}
           - { os: macOS-latest, r: "devel" }
           - { os: ubuntu-latest, r: "release", pkgdown: "true"}
-          - { os: ubuntu-latest, r: "oldrelease" }
+          - { os: ubuntu-latest, r: "oldrel" }
           # - { os: ubuntu-latest, r: "devel" } # fails on setup-r
 
     env:
