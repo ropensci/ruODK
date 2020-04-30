@@ -17,7 +17,8 @@ test_that("odata_submission_get skips download", {
     odkc_version = get_test_odkc_version(),
     parse = TRUE,
     download = FALSE,
-    local_dir = t
+    local_dir = t,
+    verbose = TRUE
   )
 
   # There should be no files in the download dir
