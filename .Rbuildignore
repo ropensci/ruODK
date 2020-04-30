@@ -19,3 +19,7 @@ codemeta.json
 ^inst/joss/paper\.pdf$
 ^install\.R$
 ^cran-comments\.md$
+^\.ccache$
+^clang-.*
+^gfortran.*
+^tic\.R$
