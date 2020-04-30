@@ -50,7 +50,7 @@ usethis::edit_file("NEWS.md")
 usethis::edit_file("inst/CITATION")
 #
 # Build site
-pkgdown::build_site()
+# pkgdown::build_site() # TravisCI builds pkgdown site
 #
 # Git commit, then tag and push
 v <- packageVersion("ruODK")
