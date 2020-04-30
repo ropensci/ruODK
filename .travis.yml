@@ -15,7 +15,7 @@ jobs:
       skip_cleanup: true
       cleanup: false
   - r: devel
-  - r: oldrel
+  # - r: oldrel # 403 from https://travis-ci.rstudio.org/ - thanks ...I guess
 
 cache: packages
 
