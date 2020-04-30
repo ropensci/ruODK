@@ -20,6 +20,8 @@ status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/ruODK?branch=
 [![Coverage
 status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
+[![R CMD Check via
+{tic}](https://github.com/dbca-wa/ruODK/workflows/R%20CMD%20Check%20via%20%7Btic%7D/badge.svg?branch=master)](https://github.com/dbca-wa/ruODK/actions)
 <!-- badges: end -->
 
 `ruODK` is an R client to access and parse data from ODK Central.
