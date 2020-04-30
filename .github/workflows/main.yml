@@ -20,10 +20,14 @@ jobs:
         config:
           # comment out lines if you do not want to build on certain platforms
           - { os: windows-latest, r: "release" }
-          - { os: macOS-latest, r: "release", pkgdown: "true" }
+          - { os: windows-latest, r: "oldrelease" }
+          - { os: windows-latest, r: "devel" }
+          - { os: macOS-latest, r: "release"}
+          - { os: macOS-latest, r: "oldrelease"}
           - { os: macOS-latest, r: "devel" }
-          - { os: ubuntu-latest, r: "release" }
-          - { os: ubuntu-latest, r: "devel" }
+          - { os: ubuntu-latest, r: "release", pkgdown: "true"}
+          - { os: ubuntu-latest, r: "oldrelease" }
+          # - { os: ubuntu-latest, r: "devel" } # fails on setup-r
 
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
@@ -178,9 +182,11 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
       - name: "[Stage] Before Deploy"
         run: |
           Rscript -e "tic::before_deploy()"
+        # R CMD INSTALL .
 
       - name: "[Stage] Deploy"
         run: Rscript -e "tic::deploy()"
