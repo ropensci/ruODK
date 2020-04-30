@@ -8,12 +8,12 @@ dist: xenial
 jobs:
   include:
   - r: release
-    before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
-    deploy:
-      provider: script
-      script: Rscript -e 'pkgdown::deploy_site_github()'
-      skip_cleanup: true
-      cleanup: false
+    # before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
+    # deploy:
+      # provider: script
+      # script: Rscript -e 'pkgdown::deploy_site_github()'
+      # skip_cleanup: true
+      # cleanup: false
   - r: devel
   # - r: oldrel # 403 from https://travis-ci.rstudio.org/ - thanks ...I guess
 
