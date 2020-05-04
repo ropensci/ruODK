@@ -20,7 +20,7 @@ jobs:
         config:
           # comment out lines if you do not want to build on certain platforms
           - { os: windows-latest, r: "release" }
-          - { os: windows-latest, r: "oldrel" }
+          # - { os: windows-latest, r: "oldrel" } # fails on install: rlang not avail for tic
           - { os: windows-latest, r: "devel" }
           - { os: macOS-latest, r: "release"}
           - { os: macOS-latest, r: "oldrel"}
