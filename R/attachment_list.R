@@ -70,7 +70,8 @@ get_one_submission_attachment_list <- function(iid,
     httr::modify_url(
       url,
       path = glue::glue(
-        "v1/projects/{pid}/forms/{fid}/submissions/{iid}/attachments"
+        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
+        "/submissions/{iid}/attachments"
       )
     ),
     httr::add_headers("Accept" = "application/json"),

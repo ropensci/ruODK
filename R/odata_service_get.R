@@ -38,7 +38,9 @@ odata_service_get <- function(pid = get_default_pid(),
     "GET",
     httr::modify_url(
       url,
-      path = glue::glue("v1/projects/{pid}/forms/{fid}.svc")
+      path = glue::glue(
+        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.svc"
+      )
     ),
     httr::add_headers(Accept = "application/json"),
     httr::authenticate(un, pw)

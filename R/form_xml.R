@@ -47,7 +47,9 @@ form_xml <- function(parse = TRUE,
     "GET",
     httr::modify_url(
       url,
-      path = glue::glue("v1/projects/{pid}/forms/{fid}.xml")
+      path = glue::glue(
+        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.xml"
+      )
     ),
     httr::add_headers("Accept" = "application/xml"),
     httr::authenticate(un, pw)

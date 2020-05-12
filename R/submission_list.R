@@ -58,7 +58,9 @@ submission_list <- function(pid = get_default_pid(),
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   url <- httr::modify_url(
     url,
-    path = glue::glue("v1/projects/{pid}/forms/{fid}/submissions")
+    path = glue::glue(
+      "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/submissions"
+    )
   )
   ru_msg_info(url)
   httr::RETRY(

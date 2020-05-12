@@ -67,7 +67,8 @@ attachment_url <- function(uuid,
                            fid = get_default_fid(),
                            url = get_default_url()) {
   glue::glue(
-    "{url}/v1/projects/{pid}/forms/{fid}/submissions/{uuid}/attachments/{fn}"
+    "{url}/v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
+    "/submissions/{uuid}/attachments/{fn}"
   )
   # See https://github.com/dbca-wa/ruODK/issues/66
   # This breaks attachment_get tests:

@@ -161,14 +161,17 @@ form_schema <- function(flatten = FALSE,
                         odkc_version = get_default_odkc_version(),
                         verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  if (verbose == TRUE) ru_msg_info(glue::glue("form schema v{odkc_version}"))
+  if (verbose == TRUE) ru_msg_info(glue::glue("Form schema v{odkc_version}"))
 
   if (odkc_version < 0.8) {
     fs <- httr::RETRY(
       "GET",
       httr::modify_url(
         url,
-        path = glue::glue("v1/projects/{pid}/forms/{fid}.schema.json")
+        path = glue::glue(
+          "v1/projects/{pid}/forms/",
+          "{URLencode(fid, reserved = TRUE)}.schema.json"
+          )
       ),
       httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw),
@@ -195,7 +198,9 @@ form_schema <- function(flatten = FALSE,
       "GET",
       httr::modify_url(
         url,
-        path = glue::glue("v1/projects/{pid}/forms/{fid}/fields")
+        path = glue::glue(
+          "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/fields"
+        )
       ),
       httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw),

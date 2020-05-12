@@ -54,7 +54,10 @@ get_one_submission <- function(iid,
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
   httr::RETRY(
     "GET",
-    glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions/{iid}.xml"),
+    glue::glue(
+      "{url}/v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/submissions/{iid}.xml"
+    ),
     httr::authenticate(un, pw)
   ) %>%
     yell_if_error(., url, un, pw) %>%

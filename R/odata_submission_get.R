@@ -186,7 +186,7 @@ odata_submission_get <- function(table = "Submissions",
     httr::modify_url(
       url,
       path = glue::glue(
-        "v1/projects/{pid}/forms/{fid}.svc/{table}",
+        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.svc/{table}",
         "?$skip={skip}&$top={top}&$count={count}&$wkt={wkt}")
     ),
     httr::add_headers(Accept = "application/json"),

@@ -70,7 +70,10 @@ submission_export <- function(local_dir = here::here(),
                               pw = get_default_pw(),
                               verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  pth <- fs::path(local_dir, glue::glue("{fid}.zip"))
+  pth <- fs::path(
+    local_dir,
+    glue::glue("{URLencode(fid, reserved = TRUE)}.zip")
+  )
 
   if (fs::file_exists(pth)) {
     if (overwrite == TRUE) {
@@ -93,7 +96,10 @@ submission_export <- function(local_dir = here::here(),
     "GET",
     httr::modify_url(
       url,
-      path = glue::glue("v1/projects/{pid}/forms/{fid}/submissions.csv.zip")
+      path = glue::glue(
+        "v1/projects/{pid}/forms/",
+        "{URLencode(fid, reserved = TRUE)}/submissions.csv.zip"
+      )
     ),
     httr::authenticate(un, pw),
     httr::write_disk(pth, overwrite = overwrite)
