@@ -106,8 +106,8 @@ test_that("odata_submission_get skip omits number of results", {
 
 
   # https://github.com/dbca-wa/ruODK/issues/65
-  # skip_on_travis()
-  # skip_on_appveyor()
+  skip_on_travis()
+  skip_on_appveyor()
   testthat::expect_true(nrow(fresh_parsed) == nrow(skip_parsed) + 1)
 })
 
@@ -129,8 +129,8 @@ test_that("odata_submission_get top limits number of results", {
   print(top_parsed)
 
   # https://github.com/dbca-wa/ruODK/issues/65
-  # skip_on_travis()
-  # skip_on_appveyor()
+  skip_on_travis()
+  skip_on_appveyor()
   testthat::expect_true(nrow(top_parsed) == 1)
 
 })
@@ -157,8 +157,8 @@ test_that("odata_submission_get count returns total number or rows", {
   print(x_parsed)
 
   # https://github.com/dbca-wa/ruODK/issues/65
-  # skip_on_travis()
-  # skip_on_appveyor()
+  skip_on_travis()
+  skip_on_appveyor()
 
   # Returned: one row
   testthat::expect_true(nrow(x_parsed) == 1)
@@ -188,8 +188,8 @@ test_that("odata_submission_get parses WKT geopoint", {
   print(names(df))
 
   # https://github.com/dbca-wa/ruODK/issues/65
-  # skip_on_travis()
-  # skip_on_appveyor()
+  skip_on_travis()
+  skip_on_appveyor()
 
   testthat::expect_true("location_corner1_latitude" %in% names(df))
   testthat::expect_true("location_corner1_longitude" %in% names(df))
