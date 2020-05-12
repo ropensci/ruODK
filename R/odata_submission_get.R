@@ -172,10 +172,6 @@ odata_submission_get <- function(table = "Submissions",
                                  tz = get_default_tz(),
                                  verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw)
-  skip <- skip %||% ""
-  top <- top %||% ""
-  count <- ifelse(count == FALSE, "false", "true")
-  wkt <- ifelse(wkt == FALSE, "false", "true")
 
   #----------------------------------------------------------------------------#
   # Download submissions
@@ -186,8 +182,14 @@ odata_submission_get <- function(table = "Submissions",
     httr::modify_url(
       url,
       path = glue::glue(
-        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.svc/{table}",
-        "?$skip={skip}&$top={top}&$count={count}&$wkt={wkt}")
+        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.svc/{table}"
+        )
+    ),
+    query = list(
+      `$skip` = skip %||% "",
+      `$top` = top %||% "",
+      `$count` = ifelse(count == FALSE, "false", "true"),
+      `$wkt` = ifelse(wkt == FALSE, "false", "true")
     ),
     httr::add_headers(Accept = "application/json"),
     httr::authenticate(un, pw)
@@ -200,8 +202,6 @@ odata_submission_get <- function(table = "Submissions",
   if (parse == FALSE) {
     if (verbose == TRUE) ru_msg_success("Returning unparsed submissions.")
     return(sub)
-  } else {
-    if (verbose == TRUE) ru_msg_info("Parsing submissions...")
   }
 
   #----------------------------------------------------------------------------#
