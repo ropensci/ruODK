@@ -16,6 +16,7 @@
 \alias{get_test_fid_zip}
 \alias{get_test_fid_att}
 \alias{get_test_fid_gap}
+\alias{get_test_fid_wkt}
 \alias{get_ru_verbose}
 \alias{get_default_odkc_version}
 \alias{get_test_odkc_version}
@@ -51,6 +52,8 @@ get_test_fid_att()
 
 get_test_fid_gap()
 
+get_test_fid_wkt()
+
 get_ru_verbose()
 
 get_default_odkc_version()
@@ -84,6 +87,7 @@ ru_settings()
 \code{\link{get_test_fid_zip}},
 \code{\link{get_test_fid_att}},
 \code{\link{get_test_fid_gap}},
+\code{\link{get_test_fid_wkt}},
 \code{\link{get_test_url}},
 \code{\link{get_test_un}},
 \code{\link{get_test_pw}},

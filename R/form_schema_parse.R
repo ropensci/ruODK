@@ -1,6 +1,6 @@
 #' Parse a form_schema into a tibble of fields with name, type, and path.
 #'
-#' \lifecycle{maturing}
+#' \lifecycle{stable}
 #'
 #' The `form_schema` is a nested list of lists containing the form definition.
 #' The form definition consists of fields (with a type and name), and form
@@ -68,7 +68,9 @@ form_schema_parse <- function(fs,
       for (child in node["children"]) {
         odata_table_path <- glue::glue("{path}.{node['name']}")
         if (verbose == TRUE) {
-          ru_msg_info(glue::glue("Found child: {child} at {odata_table_path}"))
+          ru_msg_info(
+            glue::glue("Found child: {child} at {odata_table_path}\n\n")
+          )
         }
         xxx <- form_schema_parse(child, path = odata_table_path)
         x <- rbind(x, xxx)

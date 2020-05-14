@@ -1,6 +1,6 @@
 #' Split all WKT geopoints of a submission tibble into their components.
 #'
-#' \lifecycle{maturing}
+#' \lifecycle{stable}
 #'
 #' @details For a given tibble of submissions, split WKT geopoints into their
 #' components for all columns which are marked in the form schema as type

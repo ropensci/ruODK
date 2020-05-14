@@ -9,6 +9,7 @@ odata_submission_rectangle(
   data,
   names_repair = "universal",
   names_sep = "_",
+  form_schema = NULL,
   verbose = get_ru_verbose()
 )
 }
@@ -25,6 +26,9 @@ Un-nested variables inside a list column will be prefixed by the list
 column name, separated by `names_sep`.
 This avoids unsightly repaired names such as `latitude...1`.}
 
+\item{form_schema}{An optional form_schema,
+like the output of \code{\link{form_schema}}.}
+
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 verbosity can be set globally or per function.}
@@ -33,7 +37,7 @@ verbosity can be set globally or per function.}
 The submissions as un-nested tibble
 }
 \description{
-\lifecycle{maturing}
+\lifecycle{stable}
 }
 \examples{
 \dontrun{

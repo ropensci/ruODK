@@ -1,6 +1,6 @@
 #' Download and link submission attachments according to a form schema.
 #'
-#' \lifecycle{maturing}
+#' \lifecycle{stable}
 #'
 #' @details For a given tibble of submissions, download and link attachments
 #' for all columns which are marked in the form schema as type "binary".

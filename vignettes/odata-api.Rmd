@@ -320,6 +320,8 @@ fq_data_diy <- tibble::tibble(value = fq_raw$value) %>%
 ```
 
 ## Spatial formats - how granular would you like your coordinates?
+
+<!-- TODO marker -->
 If we run `odata_submission_get()` with `wkt=FALSE` (the default), we will
 receive GeoJSON. Point GeoJSON parses with `odata_submission_get()` into separate 
 columns for `lat`, `lon`, `alt` (soon to include accuracy). 
@@ -332,11 +334,7 @@ non-deterministic length like lines and polygons.
 If encountering WKT, `parse_submissions` simply retains the WKT string 
 containing the respective entire geometry. 
 This can further be turned into spatially enabled objects. 
-
-Note that ODK Central currently only honours the `wkt` parameter for Point
-locations. Any other geometry will be returned as non-standard "ODK WKT".
-
-In future, we will add some examples for this use case here.
+<!-- TODO end -->
 
 # Visualise data
 This section provides some examples of standard data visualisations.

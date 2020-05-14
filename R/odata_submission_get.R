@@ -1,7 +1,7 @@
 #' Retrieve and rectangle form submissions, parse dates, geopoints, download and
 #' link attachments.
 #'
-#' \lifecycle{maturing}
+#' \lifecycle{stable}
 #'
 #' @details \code{\link{odata_submission_get}} downloads submissions from
 #' (default) the main form group (submission table) including any non-repeating
@@ -42,6 +42,12 @@
 #' longer, more manual pathway as an option to investigate and narrow down
 #' unexpected or unwanted behaviour.
 #'
+#' If the form contains geotraces or geoshapes, the defaults
+#' \code{wkt=FALSE, parse=TRUE} will result in an error when trying to unnest
+#' these arbitrarily long list columns and produce a warning
+#' to run \code{\link{odata_submission_get}} with either \code{wkt=TRUE} or
+#' \code{parse=FALSE}.
+#'
 #' @param table The submission EntityType, or in plain words, the table name.
 #'   Default: "Submissions" (the main table).
 #'   Change to "Submissions.GROUP_NAME" for repeating form groups.
@@ -54,11 +60,10 @@
 #'   response from ODK Central. Default: FALSE.
 #' @param wkt If TRUE, geospatial data will be returned as WKT (Well Known Text)
 #'   strings. Default: FALSE, returns GeoJSON structures.
-#'   Note, ODK Central currently only honours this parameter for Point
-#'   geometries.
-#'   Line and Polygon geometries are returned as "ODK WKT".
-#'   ruODK parses `geopoint` WKT into longitude, latitude, and altitude,
-#'   prefixed by the original field name to avoid naming conflicts.
+#'   Note that accuracy is only returned through GeoJSON.
+#'   \code{\link{handle_ru_geopoints}} parses `geopoint` WKT into
+#'   longitude, latitude, and altitude, prefixed by the original field name to
+#'   avoid naming conflicts between possibly multiple geopoints.
 #' @param parse Whether to parse submission data based on form schema.
 #'   Dates and datetimes will be parsed into local time.
 #'   Attachments will be downloaded, and the field updated to the local file
@@ -218,13 +223,21 @@ odata_submission_get <- function(table = "Submissions",
     odkc_version = odkc_version
   )
 
+  # WKT seatbelt
+  # if (wkt == FALSE &&
+  #     parse == TRUE &&
+  #     ("geotrace" %in% unique(fs$type) |
+  #      "geoshape" %in% unique(fs$type))) {
+  #   ru_msg_warn("Form has geotrace or geoshape, use either wkt=T or parse=F")
+  # }
+
   #----------------------------------------------------------------------------#
   # Parse submission data
   if (verbose == TRUE) ru_msg_info("Parsing submissions...")
 
   # Rectangle, handle date/times, attachments, geopoints.
   sub <- sub %>%
-    odata_submission_rectangle(verbose = verbose) %>%
+    odata_submission_rectangle(form_schema = fs, verbose = verbose) %>%
     handle_ru_datetimes(form_schema = fs, verbose = verbose) %>%
     {
       if (download == TRUE) {
@@ -245,8 +258,20 @@ odata_submission_get <- function(table = "Submissions",
       }
     } %>%
     {
-      if (wkt != FALSE) {
+      # input can be geojson or wkt, tell handlers through wkt=wkt
+      # handle_ru_geopoints(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
+      # keep original and add (name suffixed) lon/lat/alt/acc, sfg st point
+
+      # handle_ru_geotraces(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
+      # keep original and add (name suffixed) first point lon/lat/alt/acc, sfg, st line
+
+      # handle_ru_geoshapes(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
+      # keep original and add (name suffixed) first point lon/lat/alt/acc, sfg, st poly
+
+      if (wkt == TRUE) {
         handle_ru_geopoints(data = ., form_schema = fs, verbose = verbose)
+        # handle_ru_geotraces()
+        # handle_ru_geoshapes()
       } else {
         .
       }

@@ -8,6 +8,7 @@ unnest_all(
   nested_tbl,
   names_repair = "universal",
   names_sep = "_",
+  form_schema = NULL,
   verbose = get_ru_verbose()
 )
 }
@@ -21,7 +22,13 @@ unnest_all(
 \code{tidyr::unnest_wider}, default: "_".
 Unnested variables inside a list column will be prefixed by the list column
 name, separated by `names_sep`. This avoids unsightly repaired names
-such as `latitude...1`.}
+such as `latitude...1`. Set to \code{NULL} to disable prefixing.}
+
+\item{form_schema}{An optional form_schema,
+like the output of \code{\link{form_schema}}. If a form schema is supplied,
+location fields will not be unnested. While WKT location fields contain
+plain text and will never be unnested, GeoJSON location fields would cause
+errors during unnesting.}
 
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s

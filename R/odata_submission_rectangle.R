@@ -32,7 +32,12 @@ listcol_names <- function(tbl) {
 #'   \code{tidyr::unnest_wider}, default: "_".
 #'   Unnested variables inside a list column will be prefixed by the list column
 #'   name, separated by `names_sep`. This avoids unsightly repaired names
-#'   such as `latitude...1`.
+#'   such as `latitude...1`. Set to \code{NULL} to disable prefixing.
+#' @param form_schema An optional form_schema,
+#'   like the output of \code{\link{form_schema}}. If a form schema is supplied,
+#'   location fields will not be unnested. While WKT location fields contain
+#'   plain text and will never be unnested, GeoJSON location fields would cause
+#'   errors during unnesting.
 #' @template param-verbose
 #' @return The unnested tibble in wide format
 #' @family utilities
@@ -40,8 +45,29 @@ listcol_names <- function(tbl) {
 unnest_all <- function(nested_tbl,
                        names_repair = "universal",
                        names_sep = "_",
+                       form_schema = NULL,
                        verbose = get_ru_verbose()) {
-  for (colname in listcol_names(nested_tbl)) {
+
+  if (!is.null(form_schema)) {
+    keep_nested <- form_schema %>%
+      dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%
+      magrittr::extract2("ruodk_name") %>%
+      paste("value_", ., sep="")
+    if (verbose==TRUE){
+      x <- paste(keep_nested, collapse = ", ")
+      ru_msg_info(glue::glue("Not unnesting geo fields: {x}"))
+    }
+  } else {
+    keep_nested <- c()
+  }
+
+  cols_to_unnest <- setdiff(listcol_names(nested_tbl), keep_nested)
+  if (verbose==TRUE){
+    x <- paste(cols_to_unnest, collapse = ", ")
+    ru_msg_info(glue::glue("Unnesting: {x}"))
+  }
+
+  for (colname in cols_to_unnest) {
     if (!(colname %in% names(nested_tbl))) {
       # # Diagnostic message
       # if (verbose == TRUE)
@@ -61,14 +87,18 @@ unnest_all <- function(nested_tbl,
       )
     }
   }
-  if (length(listcol_names(nested_tbl)) > 0) {
+
+  cols_to_unnest <- setdiff(listcol_names(nested_tbl), keep_nested)
+  if (length(cols_to_unnest) > 0) {
     if (verbose == TRUE) {
-      ru_msg_info("Found more nested columns, unnesting again.")
+      x <- paste(cols_to_unnest, collapse = ", ")
+      ru_msg_info(glue::glue("Unnesting more list cols: {x}"))
     }
     nested_tbl <- unnest_all(
       nested_tbl,
       names_repair = names_repair,
       names_sep = names_sep,
+      form_schema = form_schema,
       verbose = verbose
     )
   }
@@ -79,7 +109,7 @@ unnest_all <- function(nested_tbl,
 #' Rectangle the output of \code{\link{odata_submission_get}(parse=FALSE)}
 #' into a tidy tibble and unnest all levels.
 #'
-#' \lifecycle{maturing}
+#' \lifecycle{stable}
 #'
 #' @param data A nested list of lists as given by
 #'   \code{\link{odata_submission_get}}.
@@ -90,6 +120,8 @@ unnest_all <- function(nested_tbl,
 #'   Un-nested variables inside a list column will be prefixed by the list
 #'   column name, separated by `names_sep`.
 #'   This avoids unsightly repaired names such as `latitude...1`.
+#' @param form_schema An optional form_schema,
+#'   like the output of \code{\link{form_schema}}.
 #' @template param-verbose
 #' @return The submissions as un-nested tibble
 #' @family utilities
@@ -110,12 +142,14 @@ unnest_all <- function(nested_tbl,
 odata_submission_rectangle <- function(data,
                                        names_repair = "universal",
                                        names_sep = "_",
+                                       form_schema = NULL,
                                        verbose = get_ru_verbose()) {
   data %>%
     tibble::as_tibble(., .name_repair = names_repair) %>%
     unnest_all(
       names_repair = names_repair,
       names_sep = names_sep,
+      form_schema = form_schema,
       verbose = verbose
     ) %>%
     janitor::clean_names(.) %>%

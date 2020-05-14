@@ -17,6 +17,7 @@ test_that("ru_setup does not update settings if given NULL", {
     test_fid_zip = NULL,
     test_fid_att = NULL,
     test_fid_gap = NULL,
+    test_fid_wkt = NULL,
     test_url = NULL,
     test_un = NULL,
     test_pw = NULL,
@@ -43,6 +44,7 @@ test_that("ru_setup does not update settings if given NULL", {
   testthat::expect_equal(x$test_fid_zip, xx$test_fid_zip)
   testthat::expect_equal(x$test_fid_att, xx$test_fid_att)
   testthat::expect_equal(x$test_fid_gap, xx$test_fid_gap)
+  testthat::expect_equal(x$test_fid_wkt, xx$test_fid_wkt)
   testthat::expect_equal(x$verbose, xx$verbose)
 })
 
@@ -64,6 +66,7 @@ test_that("ru_setup resets settings if given empty string", {
   test_fid_zip <- get_test_fid_zip()
   test_fid_att <- get_test_fid_att()
   test_fid_gap <- get_test_fid_gap()
+  test_fid_wkt <- get_test_fid_wkt()
 
   # Hammertime
   ru_setup(
@@ -79,6 +82,7 @@ test_that("ru_setup resets settings if given empty string", {
     test_fid_zip = "",
     test_fid_att = "",
     test_fid_gap = "",
+    test_fid_wkt = "",
     test_url = "",
     test_un = "",
     test_pw = "",
@@ -104,6 +108,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_test_fid_zip())
   testthat::expect_warning(get_test_fid_att())
   testthat::expect_warning(get_test_fid_gap())
+  testthat::expect_warning(get_test_fid_wkt())
 
   testthat::expect_equal(x$url, "")
   testthat::expect_equal(x$un, "")
@@ -117,6 +122,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_equal(x$test_fid_zip, "")
   testthat::expect_equal(x$test_fid_att, "")
   testthat::expect_equal(x$test_fid_gap, "")
+  testthat::expect_equal(x$test_fid_wkt, "")
   testthat::expect_equal(x$verbose, FALSE)
 
 
@@ -136,6 +142,7 @@ test_that("ru_setup resets settings if given empty string", {
     test_fid_zip = test_fid_zip,
     test_fid_att = test_fid_att,
     test_fid_gap = test_fid_gap,
+    test_fid_wkt = test_fid_wkt,
     verbose = TRUE
   )
 })

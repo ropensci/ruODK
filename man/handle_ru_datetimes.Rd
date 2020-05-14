@@ -40,7 +40,7 @@ The submissions tibble with all date/dateTime columns mutated as
   lubridate datetimes.
 }
 \description{
-\lifecycle{maturing}
+\lifecycle{stable}
 }
 \details{
 For a given tibble of submissions, parse all columns which are

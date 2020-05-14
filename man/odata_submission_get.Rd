@@ -42,11 +42,10 @@ response from ODK Central. Default: FALSE.}
 
 \item{wkt}{If TRUE, geospatial data will be returned as WKT (Well Known Text)
 strings. Default: FALSE, returns GeoJSON structures.
-Note, ODK Central currently only honours this parameter for Point
-geometries.
-Line and Polygon geometries are returned as "ODK WKT".
-ruODK parses `geopoint` WKT into longitude, latitude, and altitude,
-prefixed by the original field name to avoid naming conflicts.}
+Note that accuracy is only returned through GeoJSON.
+\code{\link{handle_ru_geopoints}} parses `geopoint` WKT into
+longitude, latitude, and altitude, prefixed by the original field name to
+avoid naming conflicts between possibly multiple geopoints.}
 
 \item{parse}{Whether to parse submission data based on form schema.
 Dates and datetimes will be parsed into local time.
@@ -121,7 +120,7 @@ A list of lists.
 }
 }
 \description{
-\lifecycle{maturing}
+\lifecycle{stable}
 }
 \details{
 \code{\link{odata_submission_get}} downloads submissions from
@@ -162,6 +161,12 @@ coordinates.
 As any of these steps might fail on unexpected errors, `ruODK` offers this
 longer, more manual pathway as an option to investigate and narrow down
 unexpected or unwanted behaviour.
+
+If the form contains geotraces or geoshapes, the defaults
+\code{wkt=FALSE, parse=TRUE} will result in an error when trying to unnest
+these arbitrarily long list columns and produce a warning
+to run \code{\link{odata_submission_get}} with either \code{wkt=TRUE} or
+\code{parse=FALSE}.
 }
 \examples{
 \dontrun{

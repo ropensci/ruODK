@@ -1,6 +1,6 @@
 #' Parse datetimes of submission data according to a form schema.
 #'
-#' \lifecycle{maturing}
+#' \lifecycle{stable}
 #'
 #' @details For a given tibble of submissions, parse all columns which are
 #' marked in the form schema as type "date" or "dateTime" using a set of

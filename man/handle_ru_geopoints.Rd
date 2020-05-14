@@ -25,7 +25,7 @@ The submissions tibble with all WKT geopoints split into their
   components by \code{\link{split_geopoint}}.
 }
 \description{
-\lifecycle{maturing}
+\lifecycle{stable}
 }
 \details{
 For a given tibble of submissions, split WKT geopoints into their

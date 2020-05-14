@@ -21,6 +21,7 @@
 #' \code{\link{get_test_fid_zip}},
 #' \code{\link{get_test_fid_att}},
 #' \code{\link{get_test_fid_gap}},
+#' \code{\link{get_test_fid_wkt}},
 #' \code{\link{get_test_url}},
 #' \code{\link{get_test_un}},
 #' \code{\link{get_test_pw}},
@@ -43,6 +44,7 @@ ru_settings <- function() {
     test_fid_zip = Sys.getenv("ODKC_TEST_FID_ZIP", ""),
     test_fid_att = Sys.getenv("ODKC_TEST_FID_ATT", ""),
     test_fid_gap = Sys.getenv("ODKC_TEST_FID_GAP", ""),
+    test_fid_wkt = Sys.getenv("ODKC_TEST_FID_WKT", ""),
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", ""),
@@ -67,6 +69,7 @@ print.ru_settings <- function(x, ...) {
   cat("  Test ODK Central Form ID (ZIP tests):", x$test_fid_zip, "\n")
   cat("  Test ODK Central Form ID (Attachment tests):", x$test_fid_att, "\n")
   cat("  Test ODK Central Form ID (Parsing tests):", x$test_fid_gap, "\n")
+  cat("  Test ODK Central Form ID (WKT tests):", x$test_fid_wkt, "\n")
   cat("  Test ODK Central URL:", x$test_url, "\n")
   cat("  Test ODK Central Username:", x$test_un, "\n")
   cat("  Test ODK Central Password: run ruODK::get_test_pw() to show \n")
@@ -165,6 +168,10 @@ odata_svc_parse <- function(svc) {
 #'   \code{test_svc}.
 #'   Provide the form ID of a form with gaps in the first submission.
 #'   This form is used to test parsing incomplete submissions.
+#' @param test_fid_wkt (optional, character) The alphanumeric ID of an existing
+#'   form in \code{test_pid}. This will override the form ID from
+#'   \code{test_svc}.
+#'   Provide the form ID of a form with geopoints, geotraces, and geoshapes.
 #' @param test_url (optional, character) A valid ODK Central URL for testing.
 #'   This will override the ODK Central base URL from \code{svc}.
 #' @param test_un (optional, character) A valid ODK Central username (email)
@@ -217,6 +224,8 @@ odata_svc_parse <- function(svc) {
 #'   test_fid = "build_Flora-Quadrat-0-2_1558575936",
 #'   test_fid_zip = "build_Spotlighting-0-6_1558333698",
 #'   test_fid_att = "build_Flora-Quadrat-0-1_1558330379",
+#'   test_fid_gap = "build_Turtle-Track-or-Nest-1-0_1569907666",
+#'   test_fid_wkt="build_Locations_1589344221",
 #'   verbose = TRUE
 #' )
 ru_setup <- function(svc = NULL,
@@ -233,6 +242,7 @@ ru_setup <- function(svc = NULL,
                      test_fid_zip = NULL,
                      test_fid_att = NULL,
                      test_fid_gap = NULL,
+                     test_fid_wkt=NULL,
                      test_url = NULL,
                      test_un = NULL,
                      test_pw = NULL,
@@ -265,6 +275,7 @@ ru_setup <- function(svc = NULL,
   if (!is.null(test_fid_zip)) Sys.setenv("ODKC_TEST_FID_ZIP" = test_fid_zip)
   if (!is.null(test_fid_att)) Sys.setenv("ODKC_TEST_FID_ATT" = test_fid_att)
   if (!is.null(test_fid_gap)) Sys.setenv("ODKC_TEST_FID_GAP" = test_fid_gap)
+  if (!is.null(test_fid_wkt)) Sys.setenv("ODKC_TEST_FID_WKT" = test_fid_wkt)
   if (!is.null(test_url)) Sys.setenv("ODKC_TEST_URL" = test_url)
   if (!is.null(test_un)) Sys.setenv("ODKC_TEST_UN" = test_un)
   if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
@@ -432,6 +443,17 @@ get_test_fid_gap <- function() {
   x <- Sys.getenv("ODKC_TEST_FID_GAP")
   if (identical(x, "")) {
     ru_msg_warn("No test ODK Central GAP form ID set. ru_setup()?")
+  }
+  x
+}
+
+#' \lifecycle{stable}
+#' @export
+#' @rdname ru_settings
+get_test_fid_wkt <- function() {
+  x <- Sys.getenv("ODKC_TEST_FID_WKT")
+  if (identical(x, "")) {
+    ru_msg_warn("No test ODK Central WKT form ID set. ru_setup()?")
   }
   x
 }

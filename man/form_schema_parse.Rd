@@ -22,7 +22,7 @@ Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 verbosity can be set globally or per function.}
 }
 \description{
-\lifecycle{maturing}
+\lifecycle{stable}
 }
 \details{
 The `form_schema` is a nested list of lists containing the form definition.
