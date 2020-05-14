@@ -25,7 +25,7 @@ test_that("handle_ru_geopoints produces coordinates", {
   testthat::expect_false(geopoint_fields[[1]] %in% names(fq_with_geo))
 })
 
-test_that("handle_ru_geopoints does all the things", {
+test_that("handle_ru_geopoints parses GeoJSON as list and WKT as character", {
 
   svc <- odata_service_get(
     pid = get_test_pid(),
