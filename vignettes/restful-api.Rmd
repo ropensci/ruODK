@@ -347,7 +347,9 @@ attachments, like we did with the CSV export.
 
 It appears this operation loses all but the last repeat of repeating groups.
 
-```{r parse_submissions}
+<!-- TODO update and eval=T after #69 -->
+
+```{r parse_submissions, eval=F}
 sub_parsed <- fq_submissions %>% 
   purrr::map_df(rlist::list.flatten) %>%
   janitor::clean_names(.) %>%
