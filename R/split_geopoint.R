@@ -24,7 +24,7 @@
 #'     "POINT (114.00 -31.56 23.56)"
 #'   )
 #' )
-#' df_split <- df %>% split_geopoint("loc")
+#' df_split <- df %>% split_geopoint("loc", wkt=TRUE)
 #' testthat::expect_equal(
 #'   names(df_split),
 #'   c("stuff", "loc", "loc_longitude", "loc_latitude", "loc_altitude")

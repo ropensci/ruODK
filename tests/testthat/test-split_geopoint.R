@@ -38,10 +38,5 @@ test_that("split_geopoint works with numeric coordinates", {
   testthat::expect_true(is.numeric(df_split$loc_altitude))
 })
 
-
-
-
-
-
 # Code
-# usethis::edit_file("R/split_geopoint.R")
+# usethis::use_r("split_geopoint")

@@ -1,4 +1,4 @@
-#' Split all WKT geopoints of a submission tibble into their components.
+#' Split all geopoints of a submission tibble into their components.
 #'
 #' \lifecycle{stable}
 #'
@@ -20,8 +20,9 @@
 #'   strings (if TRUE), default: FALSE.
 #'   See \code{\link{odata_submission_get}} parameter \code{wkt}.
 #' @template param-verbose
-#' @return The submissions tibble with all WKT geopoints split into their
-#'   components by \code{\link{split_geopoint}}.
+#' @return The submissions tibble with all geopoints retained in their original
+#'   format, plus columns of their coordinate components as provided by
+#'   \code{\link{split_geopoint}}.
 #' @export
 #' @family utilities
 #' @examples
@@ -51,7 +52,7 @@ handle_ru_geopoints <- function(data,
     ru_msg_info(glue::glue("Found geopoints: {x}."))
   }
 
-  for (colname in gp_cols) { # TODO use mutate_at
+  for (colname in gp_cols) {
     if (colname %in% names(data)) {
       if (verbose == TRUE) ru_msg_info(glue::glue("Parsing {colname}..."))
       data <- data %>% split_geopoint(as.character(colname), wkt = wkt)
