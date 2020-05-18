@@ -257,25 +257,16 @@ odata_submission_get <- function(table = "Submissions",
         .
       }
     } %>%
-    {
-      # input can be geojson or wkt, tell handlers through wkt=wkt
-      # handle_ru_geopoints(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
-      # keep original and add (name suffixed) lon/lat/alt/acc, sfg st point
+    # input can be geojson or wkt, tell handlers through wkt=wkt
+    # keep original and add (name suffixed) lon/lat/alt/acc, sfg st point
+    handle_ru_geopoints(form_schema = fs, wkt = wkt, verbose = verbose)
 
-      # handle_ru_geotraces(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
-      # keep original and add (name suffixed) first point lon/lat/alt/acc, sfg, st line
+    # handle_ru_geotraces(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
+    # keep original and add (name suffixed) first point lon/lat/alt/acc, sfg, st line
 
-      # handle_ru_geoshapes(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
-      # keep original and add (name suffixed) first point lon/lat/alt/acc, sfg, st poly
+    # handle_ru_geoshapes(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
+    # keep original and add (name suffixed) first point lon/lat/alt/acc, sfg, st poly
 
-      if (wkt == TRUE) {
-        handle_ru_geopoints(data = ., form_schema = fs, verbose = verbose)
-        # handle_ru_geotraces()
-        # handle_ru_geoshapes()
-      } else {
-        .
-      }
-    }
 
   #
   # End parse submission data

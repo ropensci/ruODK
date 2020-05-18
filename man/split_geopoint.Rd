@@ -4,16 +4,17 @@
 \alias{split_geopoint}
 \title{Split a column of a dataframe containing a WKT POINT into lon, lat, alt.}
 \usage{
-split_geopoint(data, colname)
+split_geopoint(data, colname, wkt = FALSE)
 }
 \arguments{
 \item{data}{(dataframe) A dataframe with a column of type WKT POINT}
 
-\item{colname}{(chr) The name of the WKT POINT column}
+\item{colname}{(chr) The name of the WKT POINT column.
+This column will be retained.}
 }
 \value{
-The given dataframe with the WKT POINT column <colname> replaced by
-  three columns, `<colname>_longitude`, `<colname>_latitude`,
+The given dataframe with the WKT POINT column <colname>, plus
+  three new columns, `<colname>_longitude`, `<colname>_latitude`,
   `<colname>_altitude`.
   The three new columns are prefixed with the original `colname` to avoid
   naming conflicts with any other geopoint columns.
@@ -37,7 +38,7 @@ df <- tibble::tibble(
 df_split <- df \%>\% split_geopoint("loc")
 testthat::expect_equal(
   names(df_split),
-  c("stuff", "loc_longitude", "loc_latitude", "loc_altitude")
+  c("stuff", "loc", "loc_longitude", "loc_latitude", "loc_altitude")
 )
 }
 \seealso{

@@ -6,9 +6,10 @@
 #' on all \code{geopoint} fields as per \code{\link{form_schema}}.
 #'
 #' @param data (dataframe) A dataframe with a column of type WKT POINT
-#' @param colname (chr) The name of the WKT POINT column
-#' @return The given dataframe with the WKT POINT column <colname> replaced by
-#'   three columns, `<colname>_longitude`, `<colname>_latitude`,
+#' @param colname (chr) The name of the WKT POINT column.
+#'   This column will be retained.
+#' @return The given dataframe with the WKT POINT column <colname>, plus
+#'   three new columns, `<colname>_longitude`, `<colname>_latitude`,
 #'   `<colname>_altitude`.
 #'   The three new columns are prefixed with the original `colname` to avoid
 #'   naming conflicts with any other geopoint columns.
@@ -26,20 +27,42 @@
 #' df_split <- df %>% split_geopoint("loc")
 #' testthat::expect_equal(
 #'   names(df_split),
-#'   c("stuff", "loc_longitude", "loc_latitude", "loc_altitude")
+#'   c("stuff", "loc", "loc_longitude", "loc_latitude", "loc_altitude")
 #' )
-split_geopoint <- function(data, colname) {
-  lon <- glue::glue("{colname}_longitude") %>% as.character()
-  lat <- glue::glue("{colname}_latitude") %>% as.character()
-  alt <- glue::glue("{colname}_altitude") %>% as.character()
-
-  data %>%
-    tidyr::extract(
-      colname,
-      c(lon, lat, alt),
-      "POINT \\(([^,]+) ([^)]+) ([^,]+)\\)",
-      convert = TRUE
-    )
+split_geopoint <- function(data, colname, wkt = FALSE) {
+  if (wkt == FALSE) {
+    # GeoJSON
+    # Extract coords into programmatically generated variable names
+    # Step 1: tidyr::hoist() extracts but can't assign with :=
+    data %>%
+      tidyr::hoist(
+        colname,
+        XXX_longitude = list("coordinates", 1L),
+        XXX_latitude = list("coordinates", 2L),
+        XXX_altitude = list("coordinates", 3L),
+        XXX_accuracy = list("properties", "accuracy"),
+        .remove = FALSE
+      ) %>%
+      # Step 2: dplyr::mutate_at() can programmatically manipulate vars
+      dplyr::rename_at(
+        dplyr::vars(dplyr::starts_with("XXX")),
+        list( ~ stringr::str_replace(., "XXX", colname))
+      )
+  } else{
+    # WKT
+    data %>%
+      tidyr::extract(
+        colname,
+        c(
+          glue::glue("{colname}_longitude") %>% as.character(),
+          glue::glue("{colname}_latitude") %>% as.character(),
+          glue::glue("{colname}_altitude") %>% as.character()
+        ),
+        "POINT \\(([^,]+) ([^)]+) ([^,]+)\\)",
+        remove = FALSE,
+        convert = TRUE
+      )
+  }
 }
 
 # Tests

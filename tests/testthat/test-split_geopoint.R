@@ -7,10 +7,10 @@ test_that("split_geopoint works with integer coordinates", {
       "POINT (114 -31 23)"
     )
   )
-  df_split <- df %>% split_geopoint("loc")
+  df_split <- df %>% split_geopoint("loc", wkt = TRUE)
   testthat::expect_equal(
     names(df_split),
-    c("stuff", "loc_longitude", "loc_latitude", "loc_altitude")
+    c("stuff", "loc", "loc_longitude", "loc_latitude", "loc_altitude")
   )
   testthat::expect_true(is.numeric(df_split$loc_latitude))
   testthat::expect_true(is.numeric(df_split$loc_longitude))
@@ -27,10 +27,10 @@ test_that("split_geopoint works with numeric coordinates", {
       "POINT (114.00 -31.56 23.56)"
     )
   )
-  df_split <- df %>% split_geopoint("loc")
+  df_split <- df %>% split_geopoint("loc", wkt = TRUE)
   testthat::expect_equal(
     names(df_split),
-    c("stuff", "loc_longitude", "loc_latitude", "loc_altitude")
+    c("stuff", "loc", "loc_longitude", "loc_latitude", "loc_altitude")
   )
 
   testthat::expect_true(is.numeric(df_split$loc_latitude))

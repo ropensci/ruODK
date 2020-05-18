@@ -167,42 +167,6 @@ test_that("odata_submission_get count returns total number or rows", {
 })
 
 
-test_that("odata_submission_get parses WKT geopoint", {
-
-  df <- odata_submission_get(
-    wkt = TRUE,
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version(),
-    parse = TRUE,
-    download = FALSE
-  )
-
-
-  # https://github.com/dbca-wa/ruODK/issues/65
-  # ru_msg_info("WKT test")
-  # print(df)
-  # print(names(df))
-  skip_on_travis()
-  skip_on_appveyor()
-
-  testthat::expect_true("location_corner1_latitude" %in% names(df))
-  testthat::expect_true("location_corner1_longitude" %in% names(df))
-  testthat::expect_true("location_corner1_altitude" %in% names(df))
-
-  testthat::expect_true("perimeter_corner4_latitude" %in% names(df))
-  testthat::expect_true("perimeter_corner4_longitude" %in% names(df))
-  testthat::expect_true("perimeter_corner4_altitude" %in% names(df))
-
-  print("df$location_corner1_longitude class: ")
-  print(class(df$location_corner1_longitude))
-  testthat::expect_equal(class(df$location_corner1_longitude), "numeric")
-  testthat::expect_equal(class(df$perimeter_corner2_latitude), "numeric")
-  testthat::expect_equal(class(df$perimeter_corner3_altitude), "numeric")
-})
 
 # Tests code
 # usethis::edit_file("R/odata_submission_get.R")

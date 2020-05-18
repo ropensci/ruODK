@@ -2,9 +2,13 @@
 #'
 #' \lifecycle{stable}
 #'
-#' @details For a given tibble of submissions, split WKT geopoints into their
-#' components for all columns which are marked in the form schema as type
-#' "geopoint".
+#' @details For a given tibble of submissions, find all columns which are listed
+#' in the form schema as type \code{geopoint}, and extract their components.
+#' Extracted components are longitude (X), latitude (Y), altitude (Z, where
+#' given), and accuracy (M, where given).
+#'
+#' The original column is retained to allow parsing into other spatially
+#' enabled formats.
 #' @param data Submissions rectangled into a tibble. E.g. the output of
 #'   ```
 #'   ruODK::odata_submission_get(parse = FALSE) %>%
@@ -12,6 +16,9 @@
 #'   ```
 #' @param form_schema The `form_schema` for the submissions.
 #'   E.g. the output of `ruODK::form_schema()`.
+#' @param wkt Whether to expect nested lists of GeoJSON (if FALSE) or WKT
+#'   strings (if TRUE), default: FALSE.
+#'   See \code{\link{odata_submission_get}} parameter \code{wkt}.
 #' @template param-verbose
 #' @return The submissions tibble with all WKT geopoints split into their
 #'   components by \code{\link{split_geopoint}}.
@@ -31,6 +38,7 @@
 #' }
 handle_ru_geopoints <- function(data,
                                 form_schema,
+                                wkt = FALSE,
                                 verbose = get_ru_verbose()) {
   # Find Geopoint columns
   gp_cols <- form_schema %>%
@@ -43,13 +51,13 @@ handle_ru_geopoints <- function(data,
     ru_msg_info(glue::glue("Found geopoints: {x}."))
   }
 
-  # Run split_geopoint on each geopoint column
-  for (colname in gp_cols) {
+  for (colname in gp_cols) { # TODO use mutate_at
     if (colname %in% names(data)) {
       if (verbose == TRUE) ru_msg_info(glue::glue("Parsing {colname}..."))
-      data <- data %>% split_geopoint(as.character(colname))
+      data <- data %>% split_geopoint(as.character(colname), wkt = wkt)
     }
   }
+
   data
 }
 

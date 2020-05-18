@@ -33,11 +33,7 @@ listcol_names <- function(tbl) {
 #'   Unnested variables inside a list column will be prefixed by the list column
 #'   name, separated by `names_sep`. This avoids unsightly repaired names
 #'   such as `latitude...1`. Set to \code{NULL} to disable prefixing.
-#' @param form_schema An optional form_schema,
-#'   like the output of \code{\link{form_schema}}. If a form schema is supplied,
-#'   location fields will not be unnested. While WKT location fields contain
-#'   plain text and will never be unnested, GeoJSON location fields would cause
-#'   errors during unnesting.
+#' @template param-fs
 #' @template param-verbose
 #' @return The unnested tibble in wide format
 #' @family utilities
@@ -120,8 +116,7 @@ unnest_all <- function(nested_tbl,
 #'   Un-nested variables inside a list column will be prefixed by the list
 #'   column name, separated by `names_sep`.
 #'   This avoids unsightly repaired names such as `latitude...1`.
-#' @param form_schema An optional form_schema,
-#'   like the output of \code{\link{form_schema}}.
+#' @template param-fs
 #' @template param-verbose
 #' @return The submissions as un-nested tibble
 #' @family utilities

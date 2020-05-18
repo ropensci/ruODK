@@ -4,7 +4,7 @@
 \alias{handle_ru_geopoints}
 \title{Split all WKT geopoints of a submission tibble into their components.}
 \usage{
-handle_ru_geopoints(data, form_schema, verbose = get_ru_verbose())
+handle_ru_geopoints(data, form_schema, wkt = FALSE, verbose = get_ru_verbose())
 }
 \arguments{
 \item{data}{Submissions rectangled into a tibble. E.g. the output of
@@ -15,6 +15,10 @@ ruODK::odata_submission_rectangle()
 
 \item{form_schema}{The `form_schema` for the submissions.
 E.g. the output of `ruODK::form_schema()`.}
+
+\item{wkt}{Whether to expect nested lists of GeoJSON (if FALSE) or WKT
+strings (if TRUE), default: FALSE.
+See \code{\link{odata_submission_get}} parameter \code{wkt}.}
 
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
@@ -28,9 +32,13 @@ The submissions tibble with all WKT geopoints split into their
 \lifecycle{stable}
 }
 \details{
-For a given tibble of submissions, split WKT geopoints into their
-components for all columns which are marked in the form schema as type
-"geopoint".
+For a given tibble of submissions, find all columns which are listed
+in the form schema as type \code{geopoint}, and extract their components.
+Extracted components are longitude (X), latitude (Y), altitude (Z, where
+given), and accuracy (M, where given).
+
+The original column is retained to allow parsing into other spatially
+enabled formats.
 }
 \examples{
 \dontrun{
