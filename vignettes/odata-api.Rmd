@@ -37,7 +37,11 @@ library(dplyr)
 library(ggplot2)
 library(ruODK)
 ```
-
+<!-- TODO split out vignettes -->
+<!-- * This vignette: the typical workflow -->
+<!-- * New vignette: spatial is not special -->
+<!-- * New vignette: DIY rectangling -->
+<!-- * New vignette: data visualisation (refer to that from odata and resful api) -->
 This vignette demonstrates `ruODK`'s workflow to extract data from ODK Central's
 OData service endpoint, and to prepare the data and the media attachments for
 further analysis and visualisation.
@@ -97,20 +101,22 @@ fq_svc <- ruODK::odata_service_get()
 ```
 
 The same data is included as example data `fq_svc`.
+
 ```{r view_service}
 fq_svc %>% knitr::kable(.)
 ```
 
 `ruODK` provides the names and urls of the service endpoints as `tibble`.
 We see the main data available under the url `Submissions`, and repeating 
-groups called `taxon_encounter` and `vegetation_stratum` in the ODK form under 
+form groups called `taxon_encounter` and `vegetation_stratum` in the ODK form under 
 the url `Submissions.taxon_encounter` and `Submissions.vegetation_stratum`, 
 respectively.
 
-The number and names of repeating subgroups of course depends on the ODK form.
+The main value we get out of the service document are these names of the 
+form groups, which can differ between forms.
 
 ## OData metadata document
-Next, let's get the metadata to review our data schema.
+Let's inspect the form metadata to review our data schema.
 While we can download the submission data without it, the metadata document 
 contains information about field data types and attachment names.
 
@@ -125,6 +131,7 @@ listviewer::jsonedit(fq_meta)
 As an alternative to the OData metadata document, ODK Central also offers
 form metadata as a much cleaner JSON document, which `ruODK` can read and parse
 into a clean `tibble` of field type, name, and path. 
+
 `ruODK` uses this introspection to parse submission data.
 
 ```{r form_schema, eval=FALSE}
@@ -138,13 +145,19 @@ fq_form_schema %>% knitr::kable(.)
 ## OData submission data documents
 Now let's download the form submissions and, separately, repeating form groups.
 `ruODK::odata_submission_get()` defaults to download the submission data,
-parse it into a tidy tibble, parses dates and datetimes, and finally downloads
-and links file attachments. 
+parse it into a tidy tibble, parses dates and datetimes, downloads
+and links file attachments, and handles spatial datatypes.
+
 This vignette is built with canned data, so the verbose messages are not shown.
-If we use `wkt=TRUE`, geopoint fields are automatically split into their
-individual coordinates and prefixed with their respective original field name.
-If we use `wkt=FALSE` (the default), geopoints will be split but receive
-anonymous names like `x10`, `x11`, `x12` which then need to be renamed.
+
+With `wkt=TRUE`, we'll receive spatial types as Well Known Text, which `ruODK` parses
+as plain text.
+With `wkt=FALSE` (the default), we'll receive spatial types as GeoJSON, which
+`ruODK` parses into a nested list.
+`ruODK` retains the original spatial field, and annotates the data with 
+extracted longitude, latitude, altitude, and (where given) accuracy.
+These additional fields are prefixed with the original field name to prevent 
+name collisions between possibly multiple location fields.
 
 ```{r load_odata, eval=FALSE}
 fq_data <- ruODK::odata_submission_get(
@@ -164,6 +177,10 @@ fq_data_taxa <- ruODK::odata_submission_get(
 ```
 
 # Detour: Data rectangling
+<!-- TODO: rewrite -->
+<!-- * odata_submission_get(parse=F) -->
+<!-- * odata_submission_rectangle(form_schema=fs) -->
+<!-- * handle_ru_{datetimes, attachments, geopoints, geotraces, geoshapes} -->
 The function `ruODK::odata_submission_get()` received the original XML response 
 as a nested list of lists.
 To analyse and visualise the data, this nested list of lists must be transformed 
@@ -178,11 +195,6 @@ By default, form group names are used as prefix to the field names.
 This behaviour can be disabled by handing the argument `names_sep=None` to
 `tidyr::unnest_wider()` through running 
 `ruODK::odata_submission_get() %>% ruODK::odata_submission_rectangle(names_sep = None)`.
-
-Had we used `wkt=FALSE` in this example, we would have needed to  
-clean up the output further by renaming some columns, notably
-the main coordinates from `x13` and `x14` to `longitude` and `latitude`.
-The position and name of anonymous coordinates depends on the respective dataset.
 
 The vectorised function `ruODK::attachment_get()` is then used internally 
 to download and link attachments like photos and other media to a local, 
@@ -257,6 +269,8 @@ fq_data <- fq_raw %>%
   ruODK::odata_submission_rectangle() %>%
   ruODK::handle_ru_datetimes(fq_form_schema) %>%
   ruODK::handle_ru_geopoints(fq_form_schema) %>%
+  ruODK::handle_ru_geotraces(fq_form_schema) %>%
+  ruODK::handle_ru_geoshapes(fq_form_schema) %>% 
   ruODK::handle_ru_attachments(fq_form_schema, local_dir = t)
 
 # Parse nested group "taxa"
@@ -264,6 +278,8 @@ fq_data_taxa <- fq_taxa %>%
   ruODK::odata_submission_rectangle() %>%
   ruODK::handle_ru_datetimes(fq_form_schema) %>%
   ruODK::handle_ru_geopoints(fq_form_schema) %>%
+  ruODK::handle_ru_geotraces(fq_form_schema) %>%
+  ruODK::handle_ru_geoshapes(fq_form_schema) %>% 
   ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 
@@ -272,6 +288,8 @@ fq_data_strata <- fq_strata %>%
   ruODK::odata_submission_rectangle() %>%
   ruODK::handle_ru_datetimes(fq_form_schema) %>%
   ruODK::handle_ru_geopoints(fq_form_schema) %>%
+  ruODK::handle_ru_geotraces(fq_form_schema) %>%
+  ruODK::handle_ru_geoshapes(fq_form_schema) %>% 
   ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 ```
@@ -319,28 +337,13 @@ fq_data_diy <- tibble::tibble(value = fq_raw$value) %>%
   invisible()
 ```
 
-## Spatial formats - how granular would you like your coordinates?
-
-<!-- TODO marker -->
-If we run `odata_submission_get()` with `wkt=FALSE` (the default), we will
-receive GeoJSON. Point GeoJSON parses with `odata_submission_get()` into separate 
-columns for `lat`, `lon`, `alt` (soon to include accuracy). 
-This is useful for e.g. leaflet maps which want `lat` and `lon` separately, see 
-example map below.
-
-If we run `odata_submission_get()` with `wkt=TRUE` (the default), we will
-not surprisingly receive WKT. This is useful for spatial objects with 
-non-deterministic length like lines and polygons. 
-If encountering WKT, `parse_submissions` simply retains the WKT string 
-containing the respective entire geometry. 
-This can further be turned into spatially enabled objects. 
-<!-- TODO end -->
-
 # Visualise data
+<!-- TODO: split out and show working examples for each vis (table, map, pivot, export) -->
+<!-- for each data type (date, point, trace, shape) -->
 This section provides some examples of standard data visualisations.
 
 ## Datatable
-Package `DT` provides an interactive (and searchable) datatable.
+The package `DT` provides an interactive (and searchable) datatable.
 
 ```{r vis_data}
 DT::datatable(fq_data)
@@ -493,7 +496,7 @@ To create a new RMarkdown document from the `ruODK` template,
 run `rmarkdown::draft("test.Rmd", "odata", package="ruODK")`.
 
 Users of RStudio can alternatively "Create a new RMarkdown document" 
-"From template" and select ruODK's template "ODK Central via OData".
+"From template" and select `ruODK`'s template "ODK Central via OData".
 
-Make sure to install a fresh version of `{ruODK}` to get the latest and greatest
+Make sure to install a fresh version of `ruODK` to get the latest and greatest
 template.
