@@ -123,6 +123,7 @@ Other utilities:
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_datetimes}()},
 \code{\link{handle_ru_geopoints}()},
+\code{\link{handle_ru_geotraces}()},
 \code{\link{isodt_to_local}()},
 \code{\link{odata_submission_rectangle}()},
 \code{\link{predict_ruodk_name}()},
@@ -133,6 +134,7 @@ Other utilities:
 \code{\link{ru_msg_success}()},
 \code{\link{ru_msg_warn}()},
 \code{\link{split_geopoint}()},
+\code{\link{split_geotrace}()},
 \code{\link{strip_uuid}()},
 \code{\link{tidyeval}},
 \code{\link{unnest_all}()}

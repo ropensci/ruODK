@@ -357,3 +357,58 @@
 #' @family included
 #' @encoding UTF-8
 "fq_zip_taxa"
+
+#' The form_schema of a form containing geofields in GeoJSON.
+#'
+#' \lifecycle{stable}
+#'
+#' @source \code{\link{form_schema}}
+#' run on the test form
+#' `system.file("extdata", "Locations.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"geo_fs"
+
+#' The unparsed submissions of a form containing geofields in GeoJSON.
+#'
+#' \lifecycle{stable}
+#'
+#' @source \code{\link{odata_submission_get}(wkt=FALSE, parse=FALSE)}
+#' run on the test form
+#' `system.file("extdata", "Locations.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"geo_gj_raw"
+
+#' The parsed submissions of a form containing geofields in GeoJSON.
+#'
+#' \lifecycle{stable}
+#'
+#' @source \code{\link{odata_submission_get}(wkt=FALSE, parse=TRUE)}
+#' run on the test form
+#' `system.file("extdata", "Locations.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"geo_gj"
+
+#' The unparsed submissions of a form containing geofields in WKT.
+#'
+#' \lifecycle{stable}
+#'
+#' @source \code{\link{odata_submission_get}(wkt=TRUE, parse=FALSE)}
+#' run on the test form
+#' `system.file("extdata", "Locations.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"geo_wkt_raw"
+
+#' The parsed submissions of a form containing geofields in WKT.
+#'
+#' \lifecycle{stable}
+#'
+#' @source \code{\link{odata_submission_get}(wkt=TRUE, parse=TRUE)}
+#' run on the test form
+#' `system.file("extdata", "Locations.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"geo_wkt"

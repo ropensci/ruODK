@@ -42,10 +42,7 @@ response from ODK Central. Default: FALSE.}
 
 \item{wkt}{If TRUE, geospatial data will be returned as WKT (Well Known Text)
 strings. Default: FALSE, returns GeoJSON structures.
-Note that accuracy is only returned through GeoJSON.
-\code{\link{handle_ru_geopoints}} parses `geopoint` WKT into
-longitude, latitude, and altitude, prefixed by the original field name to
-avoid naming conflicts between possibly multiple geopoints.}
+Note that accuracy is only returned through GeoJSON.}
 
 \item{parse}{Whether to parse submission data based on form schema.
 Dates and datetimes will be parsed into local time.

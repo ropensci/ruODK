@@ -6,7 +6,6 @@
 #' `ruODK` is "pipe-friendly" and re-exports `\%>\%` and `\%||\%`, but does not
 #'  require their use.
 #'
-#' @importFrom rlang %||%
 #' @keywords internal
 "_PACKAGE"
 

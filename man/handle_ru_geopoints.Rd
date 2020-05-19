@@ -2,7 +2,7 @@
 % Please edit documentation in R/handle_ru_geopoints.R
 \name{handle_ru_geopoints}
 \alias{handle_ru_geopoints}
-\title{Split all WKT geopoints of a submission tibble into their components.}
+\title{Split all geopoints of a submission tibble into their components.}
 \usage{
 handle_ru_geopoints(data, form_schema, wkt = FALSE, verbose = get_ru_verbose())
 }
@@ -16,17 +16,17 @@ ruODK::odata_submission_rectangle()
 \item{form_schema}{The `form_schema` for the submissions.
 E.g. the output of `ruODK::form_schema()`.}
 
-\item{wkt}{Whether to expect nested lists of GeoJSON (if FALSE) or WKT
-strings (if TRUE), default: FALSE.
-See \code{\link{odata_submission_get}} parameter \code{wkt}.}
+\item{wkt}{Whether geofields are GeoJSON (if FALSE) or WKT
+strings (if TRUE), default: FALSE.}
 
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 verbosity can be set globally or per function.}
 }
 \value{
-The submissions tibble with all WKT geopoints split into their
-  components by \code{\link{split_geopoint}}.
+The submissions tibble with all geopoints retained in their original
+  format, plus columns of their coordinate components as provided by
+  \code{\link{split_geopoint}}.
 }
 \description{
 \lifecycle{stable}
@@ -41,17 +41,24 @@ The original column is retained to allow parsing into other spatially
 enabled formats.
 }
 \examples{
-\dontrun{
 library(magrittr)
-data("fq_raw")
-data("fq_form_schema")
+data("gep_fs")
+data("geo_gj_raw")
+data("geo_wkt_raw")
 
-fq_with_geo <- fq_raw \%>\%
-  ruODK::odata_submission_rectangle() \%>\%
-  ruODK::handle_ru_geopoints(form_schema = fq_form_schema)
+# GeoJSON
+geo_gj_parsed <- geo_gj_raw \%>\%
+  ruODK::odata_submission_rectangle(form_schema = geo_fs) \%>\%
+  ruODK::handle_ru_geopoints(form_schema = geo_fs, wkt = FALSE)
 
-dplyr::glimpse(fq_with_geo)
-}
+dplyr::glimpse(geo_gj_parsed)
+
+# WKT
+geo_wkt_parsed <- geo_wkt_raw \%>\%
+  ruODK::odata_submission_rectangle(form_schema = geo_fs) \%>\%
+  ruODK::handle_ru_geopoints(form_schema = geo_fs, wkt = TRUE)
+
+dplyr::glimpse(geo_wkt_parsed)
 }
 \seealso{
 Other utilities: 
@@ -64,6 +71,7 @@ Other utilities:
 \code{\link{get_one_submission}()},
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_datetimes}()},
+\code{\link{handle_ru_geotraces}()},
 \code{\link{isodt_to_local}()},
 \code{\link{odata_submission_rectangle}()},
 \code{\link{predict_ruodk_name}()},
@@ -74,6 +82,7 @@ Other utilities:
 \code{\link{ru_msg_success}()},
 \code{\link{ru_msg_warn}()},
 \code{\link{split_geopoint}()},
+\code{\link{split_geotrace}()},
 \code{\link{strip_uuid}()},
 \code{\link{tidyeval}},
 \code{\link{unnest_all}()}

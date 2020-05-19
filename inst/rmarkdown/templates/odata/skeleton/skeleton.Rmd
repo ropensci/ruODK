@@ -93,18 +93,30 @@ ft %>% knitr::kable(.)
 <!-- 
 Get and parse submissions.
 
-Points parse nicely using WKT = TRUE. 
-Polygons and Lines parse better with WKT = FALSE (default).
-
 Repeat for each table name in form_tables$url. 
 
 Once happy with the parsing results, verbose can be set to FALSE.
+
+A note on geofields:
+
+Points (geopoint), Lines (geotrace), Polygons (geoshape) parse with either
+GeoJSON or WKT. If you want to further spatially enable the data, choose
+via parameter `wkt` the format that works best for you.
+
+`wkt=TRUE` returns strings of WKT which you can parse with e.g. 
+
+wkt_geoshape %>%
+    stringr::str_replace_all(",undefined NaN", "") %>%
+    rgeos::readWKT() %>%
+    sf::st_as_sfc()
+    
+`wkt=FALSE` returns GeoJSON, which parses to nested lists.
 -->
 ```{r dl_submissions}
 data <- ruODK::odata_submission_get(
   table = ft$url[1], 
   local_dir = loc, 
-  wkt = TRUE
+  wkt = TRUE # FALSE: return GeoJSON
 )
 
 data_sub1 <- ruODK::odata_submission_get(

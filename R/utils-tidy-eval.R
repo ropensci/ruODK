@@ -12,6 +12,6 @@
 #' @aliases          quo quos enquo sym syms ensym expr exprs enexpr quo_name
 #' @importFrom rlang quo quos enquo sym syms ensym expr exprs enexpr quo_name
 #' @importFrom tidyselect all_of any_of one_of contains ends_with starts_with everything
-#' @importFrom rlang UQ UQS .data :=
+#' @importFrom rlang UQ UQS .data := %||%
 #' @export  quo quos enquo sym syms ensym expr exprs enexpr quo_name
 NULL

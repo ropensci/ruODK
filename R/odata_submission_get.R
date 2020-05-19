@@ -61,9 +61,6 @@
 #' @param wkt If TRUE, geospatial data will be returned as WKT (Well Known Text)
 #'   strings. Default: FALSE, returns GeoJSON structures.
 #'   Note that accuracy is only returned through GeoJSON.
-#'   \code{\link{handle_ru_geopoints}} parses `geopoint` WKT into
-#'   longitude, latitude, and altitude, prefixed by the original field name to
-#'   avoid naming conflicts between possibly multiple geopoints.
 #' @param parse Whether to parse submission data based on form schema.
 #'   Dates and datetimes will be parsed into local time.
 #'   Attachments will be downloaded, and the field updated to the local file
@@ -223,19 +220,11 @@ odata_submission_get <- function(table = "Submissions",
     odkc_version = odkc_version
   )
 
-  # WKT seatbelt
-  # if (wkt == FALSE &&
-  #     parse == TRUE &&
-  #     ("geotrace" %in% unique(fs$type) |
-  #      "geoshape" %in% unique(fs$type))) {
-  #   ru_msg_warn("Form has geotrace or geoshape, use either wkt=T or parse=F")
-  # }
-
   #----------------------------------------------------------------------------#
   # Parse submission data
   if (verbose == TRUE) ru_msg_info("Parsing submissions...")
 
-  # Rectangle, handle date/times, attachments, geopoints.
+  # Rectangle, handle date/times, attachments, geopoints, geotraces, geoshapes.
   sub <- sub %>%
     odata_submission_rectangle(form_schema = fs, verbose = verbose) %>%
     handle_ru_datetimes(form_schema = fs, verbose = verbose) %>%
@@ -257,16 +246,17 @@ odata_submission_get <- function(table = "Submissions",
         .
       }
     } %>%
-    # input can be geojson or wkt, tell handlers through wkt=wkt
-    # keep original and add (name suffixed) lon/lat/alt/acc, sfg st point
-    handle_ru_geopoints(form_schema = fs, wkt = wkt, verbose = verbose)
-
-    # handle_ru_geotraces(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
-    # keep original and add (name suffixed) first point lon/lat/alt/acc, sfg, st line
-
-    # handle_ru_geoshapes(data = ., form_schema = fs, wkt = wkt, verbose = verbose)
-    # keep original and add (name suffixed) first point lon/lat/alt/acc, sfg, st poly
-
+    handle_ru_geopoints(
+      form_schema = fs,
+      wkt = wkt,
+      verbose = verbose
+    ) %>%
+    handle_ru_geotraces(
+      form_schema = fs,
+      wkt = wkt,
+      verbose = verbose
+    )
+    # %>% handle_ru_geoshapes(form_schema = fs, wkt = wkt, verbose = verbose)
 
   #
   # End parse submission data

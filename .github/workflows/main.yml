@@ -59,6 +59,7 @@ jobs:
       ODKC_TEST_FID_ZIP: ${{ secrets.ODKC_TEST_FID_ZIP }}
       ODKC_TEST_FID_ATT: ${{ secrets.ODKC_TEST_FID_ATT }}
       ODKC_TEST_FID_GAP: ${{ secrets.ODKC_TEST_FID_GAP }}
+      ODKC_TEST_FID_WKT: ${{ secrets.ODKC_TEST_FID_WKT }}
       ODKC_TEST_UN: ${{ secrets.ODKC_TEST_UN }}
       ODKC_TEST_PW: ${{ secrets.ODKC_TEST_PW }}
       ODKC_VERSION: ${{ secrets.ODKC_VERSION }}

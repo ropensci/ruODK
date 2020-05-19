@@ -25,6 +25,55 @@ fq_data_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], wkt = TRUE
 fq_data_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], wkt = TRUE) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 
+geo_fs <- form_schema(
+  pid = get_test_pid(),
+  fid = get_test_fid_wkt(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw()
+)
+
+geo_gj_raw <- odata_submission_get(
+  pid = get_test_pid(),
+  fid = get_test_fid_wkt(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw(),
+  odkc_version = get_test_odkc_version(),
+  parse = FALSE,
+  wkt = FALSE
+)
+geo_gj <- odata_submission_get(
+  pid = get_test_pid(),
+  fid = get_test_fid_wkt(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw(),
+  odkc_version = get_test_odkc_version(),
+  parse = TRUE,
+  wkt = FALSE
+)
+geo_wkt_raw <- odata_submission_get(
+  pid = get_test_pid(),
+  fid = get_test_fid_wkt(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw(),
+  odkc_version = get_test_odkc_version(),
+  parse = FALSE,
+  wkt = TRUE
+)
+geo_wkt <- odata_submission_get(
+  pid = get_test_pid(),
+  fid = get_test_fid_wkt(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw(),
+  odkc_version = get_test_odkc_version(),
+  parse = TRUE,
+  wkt = TRUE
+)
+
 # Used in vignette rest-api
 fq_project_list <- ruODK::project_list()
 fq_project_detail <- ruODK::project_detail()
@@ -83,6 +132,12 @@ usethis::use_data(fq_raw_taxa, overwrite = T)
 usethis::use_data(fq_data, overwrite = T)
 usethis::use_data(fq_data_strata, overwrite = T)
 usethis::use_data(fq_data_taxa, overwrite = T)
+
+usethis::use_data(geo_fs, overwrite = T)
+usethis::use_data(geo_gj_raw, overwrite = T)
+usethis::use_data(geo_gj, overwrite = T)
+usethis::use_data(geo_wkt_raw, overwrite = T)
+usethis::use_data(geo_wkt, overwrite = T)
 
 usethis::use_data(fq_project_list, overwrite = T)
 usethis::use_data(fq_project_detail, overwrite = T)

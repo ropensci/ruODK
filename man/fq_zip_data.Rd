@@ -39,7 +39,12 @@ Other included:
 \code{\link{fq_submissions}},
 \code{\link{fq_svc}},
 \code{\link{fq_zip_strata}},
-\code{\link{fq_zip_taxa}}
+\code{\link{fq_zip_taxa}},
+\code{\link{geo_fs}},
+\code{\link{geo_gj_raw}},
+\code{\link{geo_gj}},
+\code{\link{geo_wkt_raw}},
+\code{\link{geo_wkt}}
 }
 \concept{included}
 \keyword{datasets}

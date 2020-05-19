@@ -16,9 +16,7 @@
 #'   ```
 #' @param form_schema The `form_schema` for the submissions.
 #'   E.g. the output of `ruODK::form_schema()`.
-#' @param wkt Whether to expect nested lists of GeoJSON (if FALSE) or WKT
-#'   strings (if TRUE), default: FALSE.
-#'   See \code{\link{odata_submission_get}} parameter \code{wkt}.
+#' @template param-wkt
 #' @template param-verbose
 #' @return The submissions tibble with all geopoints retained in their original
 #'   format, plus columns of their coordinate components as provided by
@@ -26,33 +24,40 @@
 #' @export
 #' @family utilities
 #' @examples
-#' \dontrun{
 #' library(magrittr)
-#' data("fq_raw")
-#' data("fq_form_schema")
+#' data("gep_fs")
+#' data("geo_gj_raw")
+#' data("geo_wkt_raw")
 #'
-#' fq_with_geo <- fq_raw %>%
-#'   ruODK::odata_submission_rectangle() %>%
-#'   ruODK::handle_ru_geopoints(form_schema = fq_form_schema)
+#' # GeoJSON
+#' geo_gj_parsed <- geo_gj_raw %>%
+#'   ruODK::odata_submission_rectangle(form_schema = geo_fs) %>%
+#'   ruODK::handle_ru_geopoints(form_schema = geo_fs, wkt = FALSE)
 #'
-#' dplyr::glimpse(fq_with_geo)
-#' }
+#' dplyr::glimpse(geo_gj_parsed)
+#'
+#' # WKT
+#' geo_wkt_parsed <- geo_wkt_raw %>%
+#'   ruODK::odata_submission_rectangle(form_schema = geo_fs) %>%
+#'   ruODK::handle_ru_geopoints(form_schema = geo_fs, wkt = TRUE)
+#'
+#' dplyr::glimpse(geo_wkt_parsed)
 handle_ru_geopoints <- function(data,
                                 form_schema,
                                 wkt = FALSE,
                                 verbose = get_ru_verbose()) {
   # Find Geopoint columns
-  gp_cols <- form_schema %>%
+  geo_cols <- form_schema %>%
     dplyr::filter(type == "geopoint") %>%
     magrittr::extract2("ruodk_name") %>%
     intersect(names(data))
 
   if (verbose == TRUE) {
-    x <- paste(gp_cols, collapse = ", ")
+    x <- paste(geo_cols, collapse = ", ")
     ru_msg_info(glue::glue("Found geopoints: {x}."))
   }
 
-  for (colname in gp_cols) {
+  for (colname in geo_cols) {
     if (colname %in% names(data)) {
       if (verbose == TRUE) ru_msg_info(glue::glue("Parsing {colname}..."))
       data <- data %>% split_geopoint(as.character(colname), wkt = wkt)

@@ -1,0 +1,127 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>Locations</h:title>
+    <model>
+      <instance>
+        <data id="build_Locations_1589344221">
+          <meta>
+            <instanceID/>
+          </meta>
+          <device_id/>
+          <start_time/>
+          <username/>
+          <subscriber_id/>
+          <point>
+            <location_point_gps/>
+            <location_point_map/>
+            <location_point_manual/>
+          </point>
+          <path>
+            <location_path_gps/>
+            <location_path_map/>
+            <location_path_manual/>
+          </path>
+          <shape>
+            <location_shape_gps/>
+            <location_shape_map/>
+            <location_shape_manual/>
+          </shape>
+          <end_time/>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="English">
+          <text id="/data/point:label">
+            <value>Point</value>
+          </text>
+          <text id="/data/point/location_point_gps:label">
+            <value>Point (GPS)</value>
+          </text>
+          <text id="/data/point/location_point_map:label">
+            <value>Point (map)</value>
+          </text>
+          <text id="/data/point/location_point_manual:label">
+            <value>Point (manual)</value>
+          </text>
+          <text id="/data/path:label">
+            <value>Path</value>
+          </text>
+          <text id="/data/path/location_path_gps:label">
+            <value>Path (GPS)</value>
+          </text>
+          <text id="/data/path/location_path_map:label">
+            <value>Path (map)</value>
+          </text>
+          <text id="/data/path/location_path_manual:label">
+            <value>Path (manual)</value>
+          </text>
+          <text id="/data/shape:label">
+            <value>Shape</value>
+          </text>
+          <text id="/data/shape/location_shape_gps:label">
+            <value>Shape (GPS)</value>
+          </text>
+          <text id="/data/shape/location_shape_map:label">
+            <value>Shape (map)</value>
+          </text>
+          <text id="/data/shape/location_shape_manual:label">
+            <value>Shape (manual)</value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/device_id" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+      <bind nodeset="/data/start_time" type="dateTime" jr:preload="timestamp" jr:preloadParams="start"/>
+      <bind nodeset="/data/username" type="string" jr:preload="property" jr:preloadParams="username"/>
+      <bind nodeset="/data/subscriber_id" type="string" jr:preload="property" jr:preloadParams="subscriberid"/>
+      <bind nodeset="/data/point/location_point_gps" type="geopoint"/>
+      <bind nodeset="/data/point/location_point_map" type="geopoint"/>
+      <bind nodeset="/data/point/location_point_manual" type="geopoint"/>
+      <bind nodeset="/data/path/location_path_gps" type="geotrace"/>
+      <bind nodeset="/data/path/location_path_map" type="geotrace"/>
+      <bind nodeset="/data/path/location_path_manual" type="geotrace"/>
+      <bind nodeset="/data/shape/location_shape_gps" type="geoshape"/>
+      <bind nodeset="/data/shape/location_shape_map" type="geoshape"/>
+      <bind nodeset="/data/shape/location_shape_manual" type="geoshape"/>
+      <bind nodeset="/data/end_time" type="dateTime" jr:preload="timestamp" jr:preloadParams="end"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="/data/point" appearance="field-list">
+      <label ref="jr:itext('/data/point:label')"/>
+      <input ref="/data/point/location_point_gps">
+        <label ref="jr:itext('/data/point/location_point_gps:label')"/>
+      </input>
+      <input ref="/data/point/location_point_map" appearance="maps">
+        <label ref="jr:itext('/data/point/location_point_map:label')"/>
+      </input>
+      <input ref="/data/point/location_point_manual" appearance="placement-map">
+        <label ref="jr:itext('/data/point/location_point_manual:label')"/>
+      </input>
+    </group>
+    <group ref="/data/path" appearance="field-list">
+      <label ref="jr:itext('/data/path:label')"/>
+      <input ref="/data/path/location_path_gps">
+        <label ref="jr:itext('/data/path/location_path_gps:label')"/>
+      </input>
+      <input ref="/data/path/location_path_map" appearance="maps">
+        <label ref="jr:itext('/data/path/location_path_map:label')"/>
+      </input>
+      <input ref="/data/path/location_path_manual" appearance="placement-map">
+        <label ref="jr:itext('/data/path/location_path_manual:label')"/>
+      </input>
+    </group>
+    <group ref="/data/shape" appearance="field-list">
+      <label ref="jr:itext('/data/shape:label')"/>
+      <input ref="/data/shape/location_shape_gps">
+        <label ref="jr:itext('/data/shape/location_shape_gps:label')"/>
+      </input>
+      <input ref="/data/shape/location_shape_map" appearance="maps">
+        <label ref="jr:itext('/data/shape/location_shape_map:label')"/>
+      </input>
+      <input ref="/data/shape/location_shape_manual" appearance="placement-map">
+        <label ref="jr:itext('/data/shape/location_shape_manual:label')"/>
+      </input>
+    </group>
+  </h:body>
+</h:html>
