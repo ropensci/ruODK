@@ -23,7 +23,8 @@ test_that("submission_export works", {
     un = get_test_un(),
     pw = get_test_pw(),
     pid = get_test_pid(),
-    fid = fid
+    fid = fid,
+    odkc_version = get_test_odkc_version()
   )
 
   # Comb through the litterbox

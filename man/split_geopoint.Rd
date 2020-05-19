@@ -2,7 +2,7 @@
 % Please edit documentation in R/split_geopoint.R
 \name{split_geopoint}
 \alias{split_geopoint}
-\title{Split a column of a dataframe containing a WKT POINT into lon, lat, alt.}
+\title{Annotate a dataframe containing a geopoint column with lon, lat, alt.}
 \usage{
 split_geopoint(data, colname, wkt = FALSE)
 }
@@ -82,6 +82,7 @@ Other utilities:
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_datetimes}()},
 \code{\link{handle_ru_geopoints}()},
+\code{\link{handle_ru_geoshapes}()},
 \code{\link{handle_ru_geotraces}()},
 \code{\link{isodt_to_local}()},
 \code{\link{odata_submission_rectangle}()},
@@ -92,6 +93,7 @@ Other utilities:
 \code{\link{ru_msg_noop}()},
 \code{\link{ru_msg_success}()},
 \code{\link{ru_msg_warn}()},
+\code{\link{split_geoshape}()},
 \code{\link{split_geotrace}()},
 \code{\link{strip_uuid}()},
 \code{\link{tidyeval}},

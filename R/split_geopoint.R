@@ -1,4 +1,4 @@
-#' Split a column of a dataframe containing a WKT POINT into lon, lat, alt.
+#' Annotate a dataframe containing a geopoint column with lon, lat, alt.
 #'
 #' \lifecycle{stable}
 #'

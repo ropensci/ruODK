@@ -224,7 +224,7 @@ odata_submission_get <- function(table = "Submissions",
   # Parse submission data
   if (verbose == TRUE) ru_msg_info("Parsing submissions...")
 
-  # Rectangle, handle date/times, attachments, geopoints, geotraces, geoshapes.
+  # Rectangle, handle date/times, attachments, geopoints, geotraces, geoshapes
   sub <- sub %>%
     odata_submission_rectangle(form_schema = fs, verbose = verbose) %>%
     handle_ru_datetimes(form_schema = fs, verbose = verbose) %>%
@@ -246,17 +246,9 @@ odata_submission_get <- function(table = "Submissions",
         .
       }
     } %>%
-    handle_ru_geopoints(
-      form_schema = fs,
-      wkt = wkt,
-      verbose = verbose
-    ) %>%
-    handle_ru_geotraces(
-      form_schema = fs,
-      wkt = wkt,
-      verbose = verbose
-    )
-    # %>% handle_ru_geoshapes(form_schema = fs, wkt = wkt, verbose = verbose)
+    handle_ru_geopoints(form_schema = fs, wkt = wkt, verbose = verbose) %>%
+    handle_ru_geotraces(form_schema = fs, wkt = wkt, verbose = verbose) %>%
+    handle_ru_geoshapes(form_schema = fs, wkt = wkt, verbose = verbose)
 
   #
   # End parse submission data

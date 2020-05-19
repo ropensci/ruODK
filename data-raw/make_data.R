@@ -30,7 +30,8 @@ geo_fs <- form_schema(
   fid = get_test_fid_wkt(),
   url = get_test_url(),
   un = get_test_un(),
-  pw = get_test_pw()
+  pw = get_test_pw(),
+  odkc_version = get_test_odkc_version()
 )
 
 geo_gj_raw <- odata_submission_get(
