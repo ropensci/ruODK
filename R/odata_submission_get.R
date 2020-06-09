@@ -7,7 +7,6 @@
 #' (default) the main form group (submission table) including any non-repeating
 #' form groups, or from any other table as specified by parameter `table`.
 #'
-#'
 #' With parameter \code{parse=TRUE} (default), submission data is parsed into a
 #' tibble. Any fields of type \code{dateTime} or \code{date} are parsed into
 #' dates, with an optional parameter \code{tz} to specify the local timezone.
@@ -23,7 +22,12 @@
 #' `start_location_latitude`, `start_location_longitude`, and
 #' `start_location_altitude`. The field name prefix will allow multiple fields
 #' of type `geopoint` to be split into their components without naming
-#' conflicts. Other spatial fields will be retained as WKT.
+#' conflicts.
+#'
+#' Geotraces (lines) and gepshapes (polygons) will be retained in their original
+#' format, plus columns of their first point's coordinate components as
+#' provided by \code{\link{split_geotrace}} and \code{\link{split_geoshape}},
+#' respectively.
 #'
 #' The only remaining manual step is to optionally join any sub-tables to the
 #' master table.
@@ -35,18 +39,12 @@
 #' which is the R equivalent of the JSON structure returned from the API.
 #' From there, \code{\link{odata_submission_rectangle}} can rectangle the data
 #' into a tibble, and subsequent lines of \code{\link{handle_ru_datetimes}},
-#' \code{\link{handle_ru_attachments}} and \code{\link{handle_ru_geopoints}}
-#' parse dates, download and link file attachments, and split geopoints into
-#' coordinates.
-#' As any of these steps might fail on unexpected errors, `ruODK` offers this
-#' longer, more manual pathway as an option to investigate and narrow down
-#' unexpected or unwanted behaviour.
-#'
-#' If the form contains geotraces or geoshapes, the defaults
-#' \code{wkt=FALSE, parse=TRUE} will result in an error when trying to unnest
-#' these arbitrarily long list columns and produce a warning
-#' to run \code{\link{odata_submission_get}} with either \code{wkt=TRUE} or
-#' \code{parse=FALSE}.
+#' \code{\link{handle_ru_attachments}}, \code{\link{handle_ru_geopoints}},
+#' \code{\link{handle_ru_geotraces}}, and \code{\link{handle_ru_geoshapes}}
+#' parse dates, download and link file attachments, and extract coordinates from
+#' geofields.
+#' `ruODK` offers this longer, more manual pathway as an option to investigate
+#' and narrow down unexpected or unwanted behaviour.
 #'
 #' @param table The submission EntityType, or in plain words, the table name.
 #'   Default: "Submissions" (the main table).
@@ -69,9 +67,10 @@
 #'   be split into latitude, longitude, altitude and accuracy (with anonymous
 #'   field names), while WKT will be split into longitude, latitude,and
 #'   altitude (missing accuracy) prefixed by the original field name.
+#'   See details for the handling of geotraces and geoshapes.
 #'   Default: TRUE.
 #' @param download Whether to download attachments to `local_dir` or not.
-#'   If in the future, ODK Central supports hot-linking attachments,
+#'   If in the future ODK Central supports hot-linking attachments,
 #'   this parameter will replace attachment file names with their fully
 #'   qualified attachment URL.
 #'   Default: TRUE.
@@ -126,28 +125,6 @@
 #'   top = 1,
 #'   count = TRUE
 #' )
-#'
-#' # Point coordinates (lat, lon, alt, acc) need to be renamed
-#' data <- odata_submission_get(
-#'   table = form_tables$url[1],
-#'   wkt = FALSE
-#' ) %>%
-#'   dplyr::rename(
-#'     # Adjust coordinate colnames as needed
-#'     # longitude = x13,
-#'     # latitude = x14,
-#'     # altitude = x15,
-#'     # accuracy = x16
-#'   )
-#'
-#' # Parse point coordinates into WKT like "POINT (115.8840312 -31.9961844 0)"
-#' data <- odata_submission_get(
-#'   table = form_tables$url[1],
-#'   wkt = TRUE
-#' )
-#' # Columns of type "geopoint" will be split into lat lon alt (no accuracy) and
-#' # prefixed with the ODK geopoint field name. Use parse=FALSE to retain WKT.
-#' # Columns of other spatial types will remain WKT.
 #' }
 odata_submission_get <- function(table = "Submissions",
                                  skip = NULL,
