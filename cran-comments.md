@@ -1,22 +1,23 @@
 ## Test environments
-* GNU
-  * local machine 
-  * Ubuntu 19.04 "disco"
-  * R version 3.6.1 (2019-07-05)
-* GNU
-  * Travis CI
+* Local machine
+  * Ubuntu 19.10 "eoan"
+  * R version 4.0.0 (2020-04-24)
+* Travis CI
   * Ubuntu 16.04.6 LTS "xenial"
   * R versions:
-    * oldrel R version 3.5.3 (2017-01-27) 
-    * release R version 3.6.1 (2017-01-27)
-    * devel R Under development (unstable) (2019-09-19 r77195)
-* Windows
-  * AppVeyor CI
+    * oldrel
+    * release
+    * devel
+* AppVeyor CI
   * Windows Server 2012 R2 x64 (build 9600)
   * Platform: x86_64-w64-mingw32/x64 (64-bit)
   * R version 3.6.1 Patched (2019-09-14 r77193)
 * GitHub Actions
-  * Windows-latest
+  * Windows-latest (Windows Server 2019) with R devel, release, oldrel
+  * Windows Server 2016 with R devel, release, oldrel
+  * MacOS-lastest (MacOS Catalina 10.05)  with R devel, release, oldrel
+  * Ubuntu latest (Ubuntu 18.04)  with R release, oldrel (devel fails setup)
+  * Ubuntu 20.04  with R release, oldrel coming once supported
 
 ## R CMD check results
 
