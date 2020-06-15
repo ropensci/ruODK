@@ -10,10 +10,10 @@
 #'   This column will be retained.
 #' @template param-wkt
 #' @return The given dataframe with the WKT POINT column <colname>, plus
-#'   three new columns, `<colname>_longitude`, `<colname>_latitude`,
-#'   `<colname>_altitude`.
-#'   The three new columns are prefixed with the original `colname` to avoid
-#'   naming conflicts with any other geopoint columns.
+#'   three new columns, \code{<colname>_longitude}, \code{<colname>_latitude},
+#'   \code{<colname>_altitude}.
+#'   The three new columns are prefixed with the original \code{colname} to
+#'   avoid naming conflicts with any other geopoint columns.
 #'
 #' @export
 #' @family utilities
