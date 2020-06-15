@@ -369,7 +369,7 @@ fs::dir_ls(t, recurse = TRUE, glob = "*.jpg")
 
 From here, we can use the separately created data tibbles and locally downloaded
 attachments to build visualisations as shown in the 
-[`vignette("odata-api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata.html).
+[`vignette("odata-api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata-api.html).
 
 The best pathway to retrieve submission data seems to be the data export to ZIP 
 or access via OData.

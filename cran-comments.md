@@ -29,27 +29,38 @@
   
   New submission
   
-  Version contains large components (0.6.6.9000)
+  Version contains large components (0.6.6.9025)
   
   Package has help file(s) containing install/render-stage \Sexpr{} expressions but no prebuilt PDF manual.
   
-  Size of tarball: 56390108 bytes
-  
-❯ NOTE: Note: found 1 marked UTF-8 string
+  Size of tarball: 11927761 bytes
 
-❯ checking installed package size ... NOTE
-    installed size is 6.7Mb 
-    sub-directories of 1Mb or more: 
-    doc 4.2Mb help 1.6Mb
+> checking installed package size ... NOTE
+    installed size is  6.6Mb
+    sub-directories of 1Mb or more:
+      doc    4.2Mb
+      help   1.9Mb
 ```      
       
 * This is a new release.
-* Version: currently a development version, will be incremented across ruODK
-  features (patch), and kept in line with ODK Central versions (major and minor).
+* Version note about large components: 
+  v 0.6.6.0* is the development version, will be incremented across ruODK
+  features (patch), and kept in line with ODK Central versions (major and 
+  minor).
 * Package help contains `\Sexpr{}` which causes R CMD CHECK warnings. 
+* Possibly invalid URLs:
+  * The package comparison section in the README contains Markdown badges with 
+    CRAN links to packages that are not yet or not any more on CRAN. These
+    links are correct, and while they currently do not resolve, they will once
+    the packages are (re-)submitted to CRAN.
+  * The README contains an ODK Central form OData service URL to illustrate 
+    setting up ruODK. The URL redirects to a login screen if followed directly.
+    This is expected behaviour.
+    
 * The PDF version of the manual can be included on request, but is currently 
   not included as per advice from ROpenSci.
-* The example data contains UTF-8 strings. This is a realistic scenario.
+* The example data contains UTF-8 strings. This is a realistic scenario. 
+  The note has disappeared after the R version 4 release.
 * Installation size:
   * The vignette "odata-api" contains a leaflet map with popups showing embedded
     photos, a highly sought after use case.
@@ -59,8 +70,9 @@
     not to duplicate the expensive map.
   * The example images have been resized aggressively to 200x150 px.
   * Included images for branding and attribution are at lowest legible size.
-* All functionality supporting the current ODK Central release is covered by 
-  tests. The only exception is `form_schema{_parse}`, which supports a breaking 
+* Test coverage: All functionality supporting the current ODK Central release is 
+  covered by tests. 
+  The only exception is `form_schema{_parse}`, which supports a breaking 
   change between ODK Central 0.7 and 0.8. The test server runs ODK Central 0.8,
   a production server (used by the package author, but not accessible to other 
   maintainers) runs 0.7 successfully.
