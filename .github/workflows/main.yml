@@ -28,11 +28,11 @@ jobs:
           - { os: macOS-latest, r: "devel" } # macos-10.15
           - { os: macOS-latest, r: "release"}
           - { os: macOS-latest, r: "oldrel"}
-          # - { os: ubuntu-20.04, r: "devel" } # fails on setup-r
-          - { os: ubuntu-20.04, r: "release", pkgdown: "true"}
-          - { os: ubuntu-20.04, r: "oldrel" }
-          # - { os: ubuntu-latest, r: "devel" } # ubuntu-latest
-          - { os: ubuntu-latest, r: "release"}
+          # - { os: ubuntu-20.04, r: "devel" } # # not released yet
+          # - { os: ubuntu-20.04, r: "release"} # not released yet
+          # - { os: ubuntu-20.04, r: "oldrel" } # not released yet
+          # - { os: ubuntu-latest, r: "devel" } # fails setup-r
+          - { os: ubuntu-latest, r: "release", pkgdown: "true"} # ubuntu-18.04
           - { os: ubuntu-latest, r: "oldrel" }
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
