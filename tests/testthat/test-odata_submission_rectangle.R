@@ -15,9 +15,8 @@ test_that("odata_submission_rectangle works", {
 
 
 test_that("odata_submission_rectangle parses GeoJSON to nested list", {
-
-  data("geo_fs")      # parse T
-  data("geo_gj_raw")  # parse F, wkt F
+  data("geo_fs") # parse T
+  data("geo_gj_raw") # parse F, wkt F
   # data("geo_gj")      # parse T, wkt F
   # data("geo_wkt_raw") # parse F, wkt T
   # data("geo_wkt")     # parse T, wkt T
@@ -42,19 +41,18 @@ test_that("odata_submission_rectangle parses GeoJSON to nested list", {
   )
 
   # GeoJSON should be nested lists
-  for (i in seq_len(length(geo_fields))){
+  for (i in seq_len(length(geo_fields))) {
     testthat::expect_true(
       is.list(d[[geo_fields[i]]]),
       label = glue::glue(
         "GeoJSON field {geo_fields[i]} should be a nested list"
       )
-    )}
-
+    )
+  }
 })
 
 test_that("odata_submission_rectangle parses WKT as text", {
-
-  data("geo_fs")      # parse T
+  data("geo_fs") # parse T
   # data("geo_gj_raw")  # parse F, wkt F
   # data("geo_gj")      # parse T, wkt F
   data("geo_wkt_raw") # parse F, wkt T
@@ -72,19 +70,19 @@ test_that("odata_submission_rectangle parses WKT as text", {
   testthat::expect_true(
     length(geo_fields) > 0,
     label = glue::glue(
-        "test-handle_ru_geopoints needs test data",
-        "with at least one geo field. Form schema:\n\n",
-        "{knitr::kable(geo_fs)}"
-      )
+      "test-handle_ru_geopoints needs test data",
+      "with at least one geo field. Form schema:\n\n",
+      "{knitr::kable(geo_fs)}"
+    )
   )
 
   # WKT should be character strings
-  for (i in seq_len(length(geo_fields))){
+  for (i in seq_len(length(geo_fields))) {
     testthat::expect_true(
       is.character(d[[geo_fields[i]]]),
       label = glue::glue("WKT field {geo_fields[i]} should be character")
-    )}
-
+    )
+  }
 })
 
 # Tests code

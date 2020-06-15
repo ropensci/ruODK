@@ -45,7 +45,7 @@ test_that("split_geopoint works with GeoJSON", {
 
   # Find variable names of geopoints
   geo_fields <- geo_fs %>%
-    dplyr::filter(type  == "geopoint") %>%
+    dplyr::filter(type == "geopoint") %>%
     magrittr::extract2("ruodk_name")
 
   # Rectangle but don't parse submission data (GeoJSON and WKT)
@@ -98,7 +98,7 @@ test_that("split_geopoint works with WKT", {
 
   # Find variable names of geopoints
   geo_fields <- geo_fs %>%
-    dplyr::filter(type  == "geopoint") %>%
+    dplyr::filter(type == "geopoint") %>%
     magrittr::extract2("ruodk_name")
 
   # Rectangle but don't parse submission data (GeoJSON and WKT)

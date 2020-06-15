@@ -156,13 +156,13 @@ odata_submission_get <- function(table = "Submissions",
   # Download submissions
   if (verbose == TRUE) ru_msg_info("Downloading submissions...")
 
-    sub <- httr::RETRY(
+  sub <- httr::RETRY(
     "GET",
     httr::modify_url(
       url,
       path = glue::glue(
         "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.svc/{table}"
-        )
+      )
     ),
     query = list(
       `$skip` = skip %||% "",

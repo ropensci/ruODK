@@ -14,7 +14,7 @@ This version is the RC for v0.8 to support ODK Central 0.8.
   IDs (`iid`), similar to `odata_submission_get()`. (#38)
 * All `httr::GET()` are now replaced with `httr::RETRY("GET", ...)` (#48)
 * Refactor `odata_submission_parse()` into `odata_submission_rectangle()`,
-  `handle_ru_{geopoints, datetimes, attachments}`. (#54)
+  `handle_ru_{geopoints, geotraces, geoshapes, datetimes, attachments}`. (#54 #69)
 
 ## Minor fixes
 * Drop `. <- NULL` in favour of `utils::globalVariables(".")`. (#35)

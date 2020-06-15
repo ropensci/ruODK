@@ -171,7 +171,7 @@ form_schema <- function(flatten = FALSE,
         path = glue::glue(
           "v1/projects/{pid}/forms/",
           "{URLencode(fid, reserved = TRUE)}.schema.json"
-          )
+        )
       ),
       httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw),

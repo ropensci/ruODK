@@ -15,6 +15,8 @@
   * Windows Server 2012 R2 x64 (build 9600)
   * Platform: x86_64-w64-mingw32/x64 (64-bit)
   * R version 3.6.1 Patched (2019-09-14 r77193)
+* GitHub Actions
+  * Windows-latest
 
 ## R CMD check results
 
@@ -56,4 +58,8 @@
     not to duplicate the expensive map.
   * The example images have been resized aggressively to 200x150 px.
   * Included images for branding and attribution are at lowest legible size.
-  
+* All functionality supporting the current ODK Central release is covered by 
+  tests. The only exception is `form_schema{_parse}`, which supports a breaking 
+  change between ODK Central 0.7 and 0.8. The test server runs ODK Central 0.8,
+  a production server (used by the package author, but not accessible to other 
+  maintainers) runs 0.7 successfully.

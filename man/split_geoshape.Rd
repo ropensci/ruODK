@@ -39,7 +39,7 @@ data("geo_gj_raw")
 
 # Find variable names of geoshapes
 geo_fields <- geo_fs \%>\%
-  dplyr::filter(type  == "geoshape") \%>\%
+  dplyr::filter(type == "geoshape") \%>\%
   magrittr::extract2("ruodk_name")
 geo_fields[1] # First geoshape in data: shape_location_shape_gps
 
@@ -56,11 +56,14 @@ testthat::expect_true("shape_location_shape_gps_longitude" \%in\% cn_gj)
 testthat::expect_true("shape_location_shape_gps_latitude" \%in\% cn_gj)
 testthat::expect_true("shape_location_shape_gps_altitude" \%in\% cn_gj)
 testthat::expect_true(
-  is.numeric(gj_first_gt$shape_location_shape_gps_longitude))
+  is.numeric(gj_first_gt$shape_location_shape_gps_longitude)
+)
 testthat::expect_true(
-  is.numeric(gj_first_gt$shape_location_shape_gps_latitude))
+  is.numeric(gj_first_gt$shape_location_shape_gps_latitude)
+)
 testthat::expect_true(
-  is.numeric(gj_first_gt$shape_location_shape_gps_altitude))
+  is.numeric(gj_first_gt$shape_location_shape_gps_altitude)
+)
 
 wkt_first_gt <- split_geoshape(geo_wkt_rt, geo_fields[1], wkt = TRUE)
 cn_wkt <- names(wkt_first_gt)
@@ -68,11 +71,14 @@ testthat::expect_true("shape_location_shape_gps_longitude" \%in\% cn_wkt)
 testthat::expect_true("shape_location_shape_gps_latitude" \%in\% cn_wkt)
 testthat::expect_true("shape_location_shape_gps_altitude" \%in\% cn_wkt)
 testthat::expect_true(
-  is.numeric(wkt_first_gt$shape_location_shape_gps_longitude))
+  is.numeric(wkt_first_gt$shape_location_shape_gps_longitude)
+)
 testthat::expect_true(
-  is.numeric(wkt_first_gt$shape_location_shape_gps_latitude))
+  is.numeric(wkt_first_gt$shape_location_shape_gps_latitude)
+)
 testthat::expect_true(
-  is.numeric(wkt_first_gt$shape_location_shape_gps_altitude))
+  is.numeric(wkt_first_gt$shape_location_shape_gps_altitude)
+)
 }
 }
 \seealso{

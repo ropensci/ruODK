@@ -5,7 +5,7 @@ test_that("split_geoshape works with GeoJSON", {
 
   # Find variable names of geoshapes
   geo_fields <- geo_fs %>%
-    dplyr::filter(type  == "geoshape") %>%
+    dplyr::filter(type == "geoshape") %>%
     magrittr::extract2("ruodk_name")
 
   # Rectangle but don't parse submission data (GeoJSON and WKT)
@@ -58,7 +58,7 @@ test_that("split_geoshape works with WKT", {
 
   # Find variable names of geoshapes
   geo_fields <- geo_fs %>%
-    dplyr::filter(type  == "geoshape") %>%
+    dplyr::filter(type == "geoshape") %>%
     magrittr::extract2("ruodk_name")
 
   # Rectangle but don't parse submission data (GeoJSON and WKT)

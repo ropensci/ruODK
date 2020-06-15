@@ -26,7 +26,7 @@
 #'
 #' # Find variable names of geoshapes
 #' geo_fields <- geo_fs %>%
-#'   dplyr::filter(type  == "geoshape") %>%
+#'   dplyr::filter(type == "geoshape") %>%
 #'   magrittr::extract2("ruodk_name")
 #' geo_fields[1] # First geoshape in data: shape_location_shape_gps
 #'
@@ -43,11 +43,14 @@
 #' testthat::expect_true("shape_location_shape_gps_latitude" %in% cn_gj)
 #' testthat::expect_true("shape_location_shape_gps_altitude" %in% cn_gj)
 #' testthat::expect_true(
-#'   is.numeric(gj_first_gt$shape_location_shape_gps_longitude))
+#'   is.numeric(gj_first_gt$shape_location_shape_gps_longitude)
+#' )
 #' testthat::expect_true(
-#'   is.numeric(gj_first_gt$shape_location_shape_gps_latitude))
+#'   is.numeric(gj_first_gt$shape_location_shape_gps_latitude)
+#' )
 #' testthat::expect_true(
-#'   is.numeric(gj_first_gt$shape_location_shape_gps_altitude))
+#'   is.numeric(gj_first_gt$shape_location_shape_gps_altitude)
+#' )
 #'
 #' wkt_first_gt <- split_geoshape(geo_wkt_rt, geo_fields[1], wkt = TRUE)
 #' cn_wkt <- names(wkt_first_gt)
@@ -55,11 +58,14 @@
 #' testthat::expect_true("shape_location_shape_gps_latitude" %in% cn_wkt)
 #' testthat::expect_true("shape_location_shape_gps_altitude" %in% cn_wkt)
 #' testthat::expect_true(
-#'   is.numeric(wkt_first_gt$shape_location_shape_gps_longitude))
+#'   is.numeric(wkt_first_gt$shape_location_shape_gps_longitude)
+#' )
 #' testthat::expect_true(
-#'   is.numeric(wkt_first_gt$shape_location_shape_gps_latitude))
+#'   is.numeric(wkt_first_gt$shape_location_shape_gps_latitude)
+#' )
 #' testthat::expect_true(
-#'   is.numeric(wkt_first_gt$shape_location_shape_gps_altitude))
+#'   is.numeric(wkt_first_gt$shape_location_shape_gps_altitude)
+#' )
 #' }
 split_geoshape <- function(data, colname, wkt = FALSE) {
   if (wkt == FALSE) {
@@ -78,9 +84,9 @@ split_geoshape <- function(data, colname, wkt = FALSE) {
       # Step 2: dplyr::mutate_at() can programmatically manipulate variables
       dplyr::rename_at(
         dplyr::vars(dplyr::starts_with("XXX")),
-        list( ~ stringr::str_replace(., "XXX", colname))
+        list(~ stringr::str_replace(., "XXX", colname))
       )
-  } else{
+  } else {
     # WKT
     data %>%
       tidyr::extract(

@@ -51,7 +51,7 @@ submission_detail <- function(iid,
       path = glue::glue(
         "v1/projects/{pid}/forms/",
         "{URLencode(fid, reserved = TRUE)}/submissions/{iid}"
-        )
+      )
     ),
     httr::add_headers(
       "Accept" = "application/json; extended",

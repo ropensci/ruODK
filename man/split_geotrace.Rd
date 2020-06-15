@@ -39,7 +39,7 @@ data("geo_gj_raw")
 
 # Find variable names of geotraces
 geo_fields <- geo_fs \%>\%
-  dplyr::filter(type  == "geotrace") \%>\%
+  dplyr::filter(type == "geotrace") \%>\%
   magrittr::extract2("ruodk_name")
 geo_fields[1] # First geotrace in data: path_location_path_gps
 
@@ -52,17 +52,23 @@ geo_wkt_rt <- geo_wkt_raw \%>\%
 # Data with first geotrace split
 gj_first_gt <- split_geotrace(geo_gj_rt, geo_fields[1], wkt = FALSE)
 testthat::expect_true(
-  "path_location_path_gps_longitude" \%in\% names(gj_first_gt))
+  "path_location_path_gps_longitude" \%in\% names(gj_first_gt)
+)
 testthat::expect_true(
-  "path_location_path_gps_latitude" \%in\% names(gj_first_gt))
+  "path_location_path_gps_latitude" \%in\% names(gj_first_gt)
+)
 testthat::expect_true(
-  "path_location_path_gps_altitude" \%in\% names(gj_first_gt))
+  "path_location_path_gps_altitude" \%in\% names(gj_first_gt)
+)
 testthat::expect_true(
-  is.numeric(gj_first_gt$path_location_path_gps_longitude))
+  is.numeric(gj_first_gt$path_location_path_gps_longitude)
+)
 testthat::expect_true(
-  is.numeric(gj_first_gt$path_location_path_gps_latitude))
+  is.numeric(gj_first_gt$path_location_path_gps_latitude)
+)
 testthat::expect_true(
-  is.numeric(gj_first_gt$path_location_path_gps_altitude))
+  is.numeric(gj_first_gt$path_location_path_gps_altitude)
+)
 
 wkt_first_gt <- split_geotrace(geo_wkt_rt, geo_fields[1], wkt = TRUE)
 testthat::expect_true(

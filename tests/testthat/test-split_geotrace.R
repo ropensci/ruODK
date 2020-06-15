@@ -5,7 +5,7 @@ test_that("split_geotrace works with GeoJSON", {
 
   # Find variable names of geotraces
   geo_fields <- geo_fs %>%
-    dplyr::filter(type  == "geotrace") %>%
+    dplyr::filter(type == "geotrace") %>%
     magrittr::extract2("ruodk_name")
 
   # Rectangle but don't parse submission data (GeoJSON and WKT)
@@ -58,7 +58,7 @@ test_that("split_geotrace works with WKT", {
 
   # Find variable names of geotraces
   geo_fields <- geo_fs %>%
-    dplyr::filter(type  == "geotrace") %>%
+    dplyr::filter(type == "geotrace") %>%
     magrittr::extract2("ruodk_name")
 
   # Rectangle but don't parse submission data (GeoJSON and WKT)

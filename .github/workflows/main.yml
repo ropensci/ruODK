@@ -18,17 +18,21 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: windows-latest, r: "devel" }
+          # See https://github.com/actions/virtual-environments
+          - { os: windows-latest, r: "devel" } # windows-2019
           - { os: windows-latest, r: "release" }
           - { os: windows-latest, r: "oldrel" }
-          - { os: macOS-latest, r: "devel" }
+          - { os: windows-2016, r: "devel" }
+          - { os: windows-2016, r: "release" }
+          - { os: windows-2016, r: "oldrel" }
+          - { os: macOS-latest, r: "devel" } # macos-10.15
           - { os: macOS-latest, r: "release"}
           - { os: macOS-latest, r: "oldrel"}
-          # - { os: ubuntu-18.04, r: "devel" }
-          - { os: ubuntu-18.04, r: "release"}
-          - { os: ubuntu-18.04, r: "oldrel" }
-          # - { os: ubuntu-latest, r: "devel" } # fails on setup-r
-          - { os: ubuntu-latest, r: "release", pkgdown: "true"}
+          # - { os: ubuntu-20.04, r: "devel" } # fails on setup-r
+          - { os: ubuntu-20.04, r: "release", pkgdown: "true"}
+          - { os: ubuntu-20.04, r: "oldrel" }
+          # - { os: ubuntu-latest, r: "devel" } # ubuntu-latest
+          - { os: ubuntu-latest, r: "release"}
           - { os: ubuntu-latest, r: "oldrel" }
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries

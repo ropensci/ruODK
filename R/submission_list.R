@@ -66,8 +66,10 @@ submission_list <- function(pid = get_default_pid(),
   httr::RETRY(
     "GET",
     url,
-    httr::add_headers("Accept" = "application/json",
-                      "X-Extended-Metadata" = "true"),
+    httr::add_headers(
+      "Accept" = "application/json",
+      "X-Extended-Metadata" = "true"
+    ),
     httr::authenticate(un, pw)
   ) %>%
     yell_if_error(., url, un, pw) %>%

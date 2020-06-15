@@ -49,8 +49,11 @@ form_detail <- function(pid = get_default_pid(),
   httr::RETRY(
     "GET",
     httr::modify_url(url,
-                     path = glue::glue("v1/projects/{pid}/forms/",
-                                       "{URLencode(fid, reserved = TRUE)}")),
+      path = glue::glue(
+        "v1/projects/{pid}/forms/",
+        "{URLencode(fid, reserved = TRUE)}"
+      )
+    ),
     httr::add_headers(
       "Accept" = "application/xml",
       "X-Extended-Metadata" = "true"

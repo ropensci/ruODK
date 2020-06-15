@@ -65,7 +65,6 @@ test_that("odata_submission_get works with one known dataset", {
 
 
 test_that("odata_submission_get skip omits number of results", {
-
   fq_svc <- odata_service_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -110,7 +109,6 @@ test_that("odata_submission_get skip omits number of results", {
 })
 
 test_that("odata_submission_get top limits number of results", {
-
   top_parsed <- odata_submission_get(
     top = 1,
     pid = get_test_pid(),
@@ -130,7 +128,6 @@ test_that("odata_submission_get top limits number of results", {
   skip_on_travis()
   skip_on_appveyor()
   testthat::expect_true(nrow(top_parsed) == 1)
-
 })
 
 

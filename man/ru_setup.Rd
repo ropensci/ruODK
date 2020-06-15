@@ -160,7 +160,7 @@ ru_setup(
   test_fid_zip = "build_Spotlighting-0-6_1558333698",
   test_fid_att = "build_Flora-Quadrat-0-1_1558330379",
   test_fid_gap = "build_Turtle-Track-or-Nest-1-0_1569907666",
-  test_fid_wkt="build_Locations_1589344221",
+  test_fid_wkt = "build_Locations_1589344221",
   verbose = TRUE
 )
 }

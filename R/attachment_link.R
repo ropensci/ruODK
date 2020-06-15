@@ -66,7 +66,6 @@ attachment_link <- function(data_tbl,
       dplyr::vars(tidyselect::all_of(att_cols)),
       ~ fs::path(att_path, .)
     )
-
 }
 
 # Tests
