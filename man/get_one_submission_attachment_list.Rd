@@ -101,7 +101,6 @@ names(al)
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
 
 Other utilities: 
-\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
 \code{\link{form_schema_parse}()},

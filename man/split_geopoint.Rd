@@ -72,7 +72,6 @@ wkt_first_gt$point_location_point_gps_longitude
 }
 \seealso{
 Other utilities: 
-\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
 \code{\link{form_schema_parse}()},

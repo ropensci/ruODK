@@ -64,7 +64,6 @@ dplyr::glimpse(geo_wkt_parsed)
 }
 \seealso{
 Other utilities: 
-\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
 \code{\link{form_schema_parse}()},

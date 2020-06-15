@@ -58,7 +58,6 @@ fsp \%>\% dplyr::filter(type == "geopoint")
 }
 \seealso{
 Other utilities: 
-\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
 \code{\link{get_one_attachment}()},

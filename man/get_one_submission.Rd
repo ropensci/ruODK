@@ -86,7 +86,6 @@ names(sub)
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
 
 Other utilities: 
-\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
 \code{\link{form_schema_parse}()},

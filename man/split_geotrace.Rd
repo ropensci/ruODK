@@ -87,7 +87,6 @@ testthat::expect_true(
 }
 \seealso{
 Other utilities: 
-\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
 \code{\link{form_schema_parse}()},

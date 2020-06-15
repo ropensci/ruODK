@@ -58,7 +58,6 @@ testthat::expect_equal(length(fq_raw$value), nrow(data_parsed))
 }
 \seealso{
 Other utilities: 
-\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
 \code{\link{form_schema_parse}()},

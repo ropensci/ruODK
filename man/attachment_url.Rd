@@ -55,7 +55,6 @@ ruODK:::attachment_url("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
 }
 \seealso{
 Other utilities: 
-\code{\link{\%>\%}()},
 \code{\link{attachment_get}()},
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
