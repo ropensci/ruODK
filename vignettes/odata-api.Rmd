@@ -246,12 +246,12 @@ fq_form_schema %>%
   dplyr::filter(type %in% c("dateTime", "date")) %>% 
   knitr::kable(.)
 
-# Candidates for ruODK::attachment_get()
+# Candidates for ruODK::handle_ru_attachments()
 fq_form_schema %>% 
   dplyr::filter(type == "binary") %>% 
   knitr::kable(.)
 
-# Candidates for ruODK::split_geopoint
+# Candidates for ruODK::handle_ru_geopoints()
 fq_form_schema %>% 
   dplyr::filter(type == "geopoint") %>% 
   knitr::kable(.)

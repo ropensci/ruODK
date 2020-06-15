@@ -59,20 +59,28 @@ in one step using the OData Service URL.
 -->
 ```{r setup, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
-
-# All packages used in this example
-library(ckanr)
+# Data wrangling
 library(dplyr)
-library(DT)
 library(fs)
-library(googledrive)
-library(knitr)
-library(leaflet)
-library(readr)
-library(skimr)
 library(ruODK)
 
-# Set ruODK defaults to an ODK Central form, choose own tz and verbosity
+# Visualisation
+library(skimr)
+library(knitr)
+library(DT)
+library(leaflet)
+
+# Dissemination
+library(readr)
+# library(ckanr)
+# library(googledrive)
+
+# Spatial
+# library(stringr)
+# library(rgeos)
+# library(sf)
+
+# Set ruODK defaults to an ODK Central form, choose tz and verbosity
 ruODK::ru_setup(
   svc=paste0("https://sandbox.central.getodk.org/v1/projects",
              "/14/forms/build_Flora-Quadrat-0-4_1564384341.svc"),
@@ -110,13 +118,13 @@ wkt_geoshape %>%
     rgeos::readWKT() %>%
     sf::st_as_sfc()
     
-`wkt=FALSE` returns GeoJSON, which parses to nested lists.
+`wkt=FALSE` returns GeoJSON
 -->
 ```{r dl_submissions}
 data <- ruODK::odata_submission_get(
   table = ft$url[1], 
   local_dir = loc, 
-  wkt = TRUE # FALSE: return GeoJSON
+  wkt = TRUE
 )
 
 data_sub1 <- ruODK::odata_submission_get(
