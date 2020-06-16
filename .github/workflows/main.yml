@@ -125,10 +125,11 @@ jobs:
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-${{steps.datew.outputs.datew}}
 
       # install ccache and write config file
+      # install r-cran-stringr for ubuntu-16.04
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
         run: |
-          sudo apt install ccache libcurl4-openssl-dev
+          sudo apt install ccache libcurl4-openssl-dev r-cran-stringr
           mkdir -p ~/.R && echo -e 'CC=ccache gcc -std=gnu99\nCXX=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
 
       # install ccache and write config file
