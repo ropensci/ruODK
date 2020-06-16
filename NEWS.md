@@ -15,6 +15,8 @@ This version is the RC for v0.8 to support ODK Central 0.8.
 * All `httr::GET()` are now replaced with `httr::RETRY("GET", ...)` (#48)
 * Refactor `odata_submission_parse()` into `odata_submission_rectangle()`,
   `handle_ru_{geopoints, geotraces, geoshapes, datetimes, attachments}`. (#54 #69)
+* Maintain backwards compatibility to ODK Central v7 for changed spatial output
+  for geotrace and geoshape (#70)
 
 ## Minor fixes
 * Drop `. <- NULL` in favour of `utils::globalVariables(".")`. (#35)

@@ -13,7 +13,12 @@ test_that("split_geotrace works with GeoJSON", {
     odata_submission_rectangle(form_schema = geo_fs)
 
   # GeoJSON data with first geotrace split
-  gj_first_gt <- split_geotrace(geo_gj_rt, geo_fields[1], wkt = FALSE)
+  gj_first_gt <- split_geotrace(
+    geo_gj_rt,
+    geo_fields[1],
+    wkt = FALSE,
+    odkc_version = get_test_odkc_version()
+  )
 
   expect_true(
     geo_fields[1] %in% names(gj_first_gt),
@@ -66,7 +71,12 @@ test_that("split_geotrace works with WKT", {
     odata_submission_rectangle(form_schema = geo_fs)
 
   # GeoJSON data with first geotrace split
-  wkt_first_gt <- split_geotrace(geo_wkt_rt, geo_fields[1], wkt = TRUE)
+  wkt_first_gt <- split_geotrace(
+    geo_wkt_rt,
+    geo_fields[1],
+    wkt = TRUE,
+    odkc_version = get_test_odkc_version()
+  )
 
   expect_true(
     geo_fields[1] %in% names(wkt_first_gt),
@@ -102,6 +112,28 @@ test_that("split_geotrace works with WKT", {
     wkt_first_gt %>% magrittr::extract2(geofield_alt) %>% is.numeric(),
     label = "split_geotrace casts extracted WKT altitude to numeric"
   )
+})
+
+test_that("split_geotrace works with ODK Linestrings", {
+
+  # ODK Central v0.7 and lower ignore the WKT argument for geotrace and geoshape
+  # ruODK::odata_submission_get(wkt = TRUE, parse = TRUE)
+  # ruODK::odata_submission_get(wkt = FALSE, parse = FALSE) %>%
+  # ruODK::odata_submission_rectangle()
+  # First three points shown with truncated decimal places
+  odk_v7 <- tibble::tibble(
+      id = 1,
+      tx = "-14.80 128.40 10.9 5.9;-14.81 128.41 1.7 1.9;-14.82 128.42 1.9 1.7;"
+  )
+  odk_v7_split <- split_geotrace(odk_v7, "tx", odkc_version = 0.7)
+
+  expect_true("tx_longitude" %in% names(odk_v7_split))
+  expect_true("tx_latitude" %in% names(odk_v7_split))
+  expect_true("tx_altitude" %in% names(odk_v7_split))
+
+  expect_equal(odk_v7_split$tx_longitude, 128.40)
+  expect_equal(odk_v7_split$tx_latitude, -14.80)
+  expect_equal(odk_v7_split$tx_altitude, 10.9)
 })
 
 # usethis::use_r("split_geotrace")

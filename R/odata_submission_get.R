@@ -203,8 +203,14 @@ odata_submission_get <- function(table = "Submissions",
 
   # Rectangle, handle date/times, attachments, geopoints, geotraces, geoshapes
   sub <- sub %>%
-    odata_submission_rectangle(form_schema = fs, verbose = verbose) %>%
-    handle_ru_datetimes(form_schema = fs, verbose = verbose) %>%
+    odata_submission_rectangle(
+      form_schema = fs,
+      verbose = verbose
+    ) %>%
+    handle_ru_datetimes(
+      form_schema = fs,
+      verbose = verbose
+    ) %>%
     {
       if (download == TRUE) {
         fs::dir_create(local_dir)
@@ -223,9 +229,23 @@ odata_submission_get <- function(table = "Submissions",
         .
       }
     } %>%
-    handle_ru_geopoints(form_schema = fs, wkt = wkt, verbose = verbose) %>%
-    handle_ru_geotraces(form_schema = fs, wkt = wkt, verbose = verbose) %>%
-    handle_ru_geoshapes(form_schema = fs, wkt = wkt, verbose = verbose)
+    handle_ru_geopoints(
+      form_schema = fs,
+      wkt = wkt,
+      verbose = verbose
+    ) %>%
+    handle_ru_geotraces(
+      form_schema = fs,
+      wkt = wkt,
+      verbose = verbose,
+      odkc_version = odkc_version
+    ) %>%
+    handle_ru_geoshapes(
+      form_schema = fs,
+      wkt = wkt,
+      verbose = verbose,
+      odkc_version = odkc_version
+    )
 
   #
   # End parse submission data

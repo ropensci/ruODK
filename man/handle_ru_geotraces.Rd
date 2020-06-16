@@ -4,7 +4,13 @@
 \alias{handle_ru_geotraces}
 \title{Split all geotraces of a submission tibble into their components.}
 \usage{
-handle_ru_geotraces(data, form_schema, wkt = FALSE, verbose = get_ru_verbose())
+handle_ru_geotraces(
+  data,
+  form_schema,
+  wkt = FALSE,
+  odkc_version = get_default_odkc_version(),
+  verbose = get_ru_verbose()
+)
 }
 \arguments{
 \item{data}{Submissions rectangled into a tibble. E.g. the output of
@@ -18,6 +24,13 @@ E.g. the output of `ruODK::form_schema()`.}
 
 \item{wkt}{Whether geofields are GeoJSON (if FALSE) or WKT
 strings (if TRUE), default: FALSE.}
+
+\item{odkc_version}{The ODK Central version as decimal number (major.minor).
+`ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+Default: \code{\link{get_default_odkc_version}} or 0.8 if unset.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=0.8)}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s

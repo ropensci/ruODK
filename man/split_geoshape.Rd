@@ -5,7 +5,7 @@
 \title{Annotate a dataframe containing a geoshape column with lon, lat, alt of the
 geotrace's first point.}
 \usage{
-split_geoshape(data, colname, wkt = FALSE)
+split_geoshape(data, colname, wkt = FALSE, odkc_version = odkc_version)
 }
 \arguments{
 \item{data}{(dataframe) A dataframe with a geoshape column.}
@@ -15,6 +15,13 @@ This column will be retained.}
 
 \item{wkt}{Whether geofields are GeoJSON (if FALSE) or WKT
 strings (if TRUE), default: FALSE.}
+
+\item{odkc_version}{The ODK Central version as decimal number (major.minor).
+`ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+Default: \code{\link{get_default_odkc_version}} or 0.8 if unset.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=0.8)}.
+See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
 The given dataframe with the geoshape column <colname>, plus

@@ -17,6 +17,7 @@
 #' @param form_schema The `form_schema` for the submissions.
 #'   E.g. the output of `ruODK::form_schema()`.
 #' @template param-wkt
+#' @template param-odkcv
 #' @template param-verbose
 #' @return The submissions tibble with all geotraces retained in their original
 #'   format, plus columns of their first point's coordinate components as
@@ -47,6 +48,7 @@
 handle_ru_geotraces <- function(data,
                                 form_schema,
                                 wkt = FALSE,
+                                odkc_version = get_default_odkc_version(),
                                 verbose = get_ru_verbose()) {
   # Find Geotrace columns
   geo_cols <- form_schema %>%
@@ -62,7 +64,12 @@ handle_ru_geotraces <- function(data,
   for (colname in geo_cols) {
     if (colname %in% names(data)) {
       if (verbose == TRUE) ru_msg_info(glue::glue("Parsing {colname}..."))
-      data <- data %>% split_geotrace(as.character(colname), wkt = wkt)
+      data <- data %>%
+        split_geotrace(
+          as.character(colname),
+          wkt = wkt,
+          odkc_version = odkc_version
+        )
     }
   }
 
