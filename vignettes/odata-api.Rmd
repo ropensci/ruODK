@@ -192,9 +192,9 @@ automatically to become unique (a feature of `tidyr::unnest_*()`), and then
 sanitised using the helper `janitor::clean_names()`.
 
 By default, form group names are used as prefix to the field names. 
-This behaviour can be disabled by handing the argument `names_sep=None` to
+This behaviour can be disabled by handing the argument `names_sep=NULL` to
 `tidyr::unnest_wider()` through running 
-`ruODK::odata_submission_get() %>% ruODK::odata_submission_rectangle(names_sep = None)`.
+`ruODK::odata_submission_get() %>% ruODK::odata_submission_rectangle(names_sep = NULL)`.
 
 The vectorised function `ruODK::attachment_get()` is then used internally 
 to download and link attachments like photos and other media to a local, 
