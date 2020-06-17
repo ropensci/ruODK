@@ -129,7 +129,7 @@ jobs:
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
         run: |
-          sudo apt install ccache libcurl4-openssl-dev libicu-dev libxml2
+          sudo apt install ccache libcurl4-openssl-dev libicu-dev libxml2-dev
           mkdir -p ~/.R && echo -e 'CC=ccache gcc -std=gnu99\nCXX=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
 
       # install ccache and write config file
