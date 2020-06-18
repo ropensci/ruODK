@@ -28,7 +28,7 @@
 #' fl <- form_list()
 #'
 #' # The first form in the test project
-#' f <- form_detail(fl$fid[[1]])
+#' f <- form_detail(fid = fl$fid[[1]])
 #'
 #' # form_detail returns exactly one row
 #' nrow(f)
