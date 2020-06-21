@@ -31,12 +31,12 @@ jobs:
           # - { os: ubuntu-20.04, r: "devel" } # # not released yet
           # - { os: ubuntu-20.04, r: "release"} # not released yet
           # - { os: ubuntu-20.04, r: "oldrel" } # not released yet
-          # - { os: ubuntu-latest, r: "devel" } # fails setup-r
+          - { os: ubuntu-latest, r: "devel" } # fails setup-r
           - { os: ubuntu-latest, r: "release", pkgdown: "true"} # ubuntu-18.04
           - { os: ubuntu-latest, r: "oldrel" }
-          # - { os: ubuntu-16.04, r: "devel" } # fails setup-r
-          # - { os: ubuntu-16.04, r: "release"} # fails to install xml2
-          # - { os: ubuntu-16.04, r: "oldrel" } # fails to install xml2
+          - { os: ubuntu-16.04, r: "devel" } # fails setup-r
+          - { os: ubuntu-16.04, r: "release"} # fails to install xml2
+          - { os: ubuntu-16.04, r: "oldrel" } # fails to install xml2
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -173,12 +173,20 @@ jobs:
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
         run: Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
+      - name: "[Stage] Install (windows-oldrel)"
+        if: runner.os == 'Windows'
+        run: |
+          install.packages("backports", type = "source")
+        shell: Rscript {0}
+
       # macOS devel needs its own stage because we need to work with an options to suppress the usage of binaries
       - name: "[Stage] Prepare & Install (macOS-devel)"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
         run: |
           echo -e 'options(Ncpus = 4, pkgType = "source", repos = structure(c(CRAN = "https://cloud.r-project.org/")))' > $HOME/.Rprofile
           Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
+
+
 
       - name: "[Stage] Script"
         run: Rscript -e 'tic::script()'
