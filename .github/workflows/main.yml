@@ -21,22 +21,22 @@ jobs:
           # See https://github.com/actions/virtual-environments
           - { os: windows-latest, r: "devel" } # windows-2019
           - { os: windows-latest, r: "release" }
-          # - { os: windows-latest, r: "oldrel" } # fails to install 'htmltools', 'backports', 'isoband', 'ggplot2', 'rmarkdown'
+          - { os: windows-latest, r: "oldrel" } # fails to install 'htmltools', 'backports', 'isoband', 'ggplot2', 'rmarkdown'
           - { os: windows-2016, r: "devel" }
           - { os: windows-2016, r: "release" }
-          # - { os: windows-2016, r: "oldrel" }
+          - { os: windows-2016, r: "oldrel" }
           - { os: macOS-latest, r: "devel" } # macos-10.15
           - { os: macOS-latest, r: "release", pkgdown: "true"}
           - { os: macOS-latest, r: "oldrel"}
-          # - { os: ubuntu-20.04, r: "devel" } # # not released yet
-          # - { os: ubuntu-20.04, r: "release"} # not released yet
-          # - { os: ubuntu-20.04, r: "oldrel" } # not released yet
-          # - { os: ubuntu-latest, r: "devel" } # fails setup-r
-          # - { os: ubuntu-latest, r: "release"} # ubuntu-18.04 # segfaults on tic install
+          - { os: ubuntu-20.04, r: "devel" } # # not released yet
+          - { os: ubuntu-20.04, r: "release"} # not released yet
+          - { os: ubuntu-20.04, r: "oldrel" } # not released yet
+          - { os: ubuntu-latest, r: "devel" } # fails setup-r
+          - { os: ubuntu-latest, r: "release"} # ubuntu-18.04 # segfaults on tic install
           - { os: ubuntu-latest, r: "oldrel" }
-          # - { os: ubuntu-16.04, r: "devel" } # fails setup-r
+          - { os: ubuntu-16.04, r: "devel" } # fails setup-r
           - { os: ubuntu-16.04, r: "release"}
-          # - { os: ubuntu-16.04, r: "oldrel" } # fails on stringi / libicui-dev
+          - { os: ubuntu-16.04, r: "oldrel" } # fails on stringi / libicui-dev
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
