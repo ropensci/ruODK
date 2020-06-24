@@ -114,6 +114,12 @@ test_that("split_geotrace works with WKT", {
   )
 })
 
+test_that("split_geotrace works with no data", {
+  odk_empty <- tibble::tibble()
+  odk_split <- split_geotrace(odk_empty, "tx")
+  expect_s3_class(odk_split, class = c("tbl_df", "tbl", "data.frame"))
+})
+
 test_that("split_geotrace works with ODK Linestrings", {
 
   # ODK Central v0.7 and lower ignore the WKT argument for geotrace and geoshape

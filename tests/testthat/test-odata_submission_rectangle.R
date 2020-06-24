@@ -23,7 +23,14 @@ test_that("odata_submission_rectangle parses GeoJSON to nested list", {
 
   # Unparsed, rectangled, GeoJSON
   d <- geo_gj_raw %>%
-    odata_submission_rectangle(form_schema = geo_fs)
+    odata_submission_rectangle(form_schema = geo_fs, verbose = TRUE)
+
+  d2 <- geo_gj_raw %>%
+    odata_submission_rectangle(form_schema = geo_fs, verbose = TRUE) %>%
+    # Trigger verbose messages
+    handle_ru_geopoints(form_schema = geo_fs, verbose = TRUE) %>%
+    handle_ru_geotraces(form_schema = geo_fs, verbose = TRUE) %>%
+    handle_ru_geoshapes(form_schema = geo_fs, verbose = TRUE)
 
   geo_fields <- geo_fs %>%
     dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%

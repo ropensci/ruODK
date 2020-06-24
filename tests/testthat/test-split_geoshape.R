@@ -114,7 +114,13 @@ test_that("split_geoshape works with WKT", {
   )
 })
 
-test_that("split_geotrace works with ODK Linestrings", {
+test_that("split_geoshape works with no data", {
+  odk_empty <- tibble::tibble()
+  odk_split <- split_geoshape(odk_empty, "tx")
+  expect_s3_class(odk_split, class = c("tbl_df", "tbl", "data.frame"))
+})
+
+test_that("split_geoshape works with ODK Linestrings", {
 
   # ODK Central v0.7 and lower ignore the WKT argument for geotrace and geoshape
   # ruODK::odata_submission_get(wkt = TRUE, parse = TRUE)
@@ -126,7 +132,7 @@ test_that("split_geotrace works with ODK Linestrings", {
     tx = paste0("-14.80 128.40 10.9 5.9;-14.81 128.41 1.7 1.9;",
                 "-14.82 128.42 1.9 1.7;-14.80 128.40 10.9 5.9;")
   )
-  odk_v7_split <- split_geotrace(odk_v7, "tx", odkc_version = 0.7)
+  odk_v7_split <- split_geoshape(odk_v7, "tx", odkc_version = 0.7)
 
   expect_true("tx_longitude" %in% names(odk_v7_split))
   expect_true("tx_latitude" %in% names(odk_v7_split))
