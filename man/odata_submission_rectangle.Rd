@@ -17,14 +17,14 @@ odata_submission_rectangle(
 \item{data}{A nested list of lists as given by
 \code{\link{odata_submission_get}}.}
 
-\item{names_repair}{The argument `names_repair` for
+\item{names_repair}{The argument \code{names_repair} for
 \code{tidyr::unnest_wider}, default: "universal".}
 
-\item{names_sep}{The argument `names_sep` for
+\item{names_sep}{The argument \code{names_sep} for
 \code{tidyr::unnest_wider}, default: "_".
 Un-nested variables inside a list column will be prefixed by the list
-column name, separated by `names_sep`.
-This avoids unsightly repaired names such as `latitude...1`.}
+column name, separated by \code{names_sep}.
+This avoids unsightly repaired names such as \code{latitude...1}.}
 
 \item{form_schema}{An optional form_schema,
 like the output of \code{\link{form_schema}}. If a form schema is supplied,

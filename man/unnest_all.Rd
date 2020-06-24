@@ -15,14 +15,14 @@ unnest_all(
 \arguments{
 \item{nested_tbl}{A nested tibble}
 
-\item{names_repair}{The argument `names_repair` for
+\item{names_repair}{The argument \code{names_repair} for
 \code{tidyr::unnest_wider}, default: "universal".}
 
-\item{names_sep}{The argument `names_sep` for
+\item{names_sep}{The argument \code{names_sep} for
 \code{tidyr::unnest_wider}, default: "_".
-Unnested variables inside a list column will be prefixed by the list column
-name, separated by `names_sep`. This avoids unsightly repaired names
-such as `latitude...1`. Set to \code{NULL} to disable prefixing.}
+Un-nested variables inside a list column will be prefixed by the list
+column name, separated by \code{names_sep}. This avoids unsightly repaired
+names such as \code{latitude...1}. Set to \code{NULL} to disable prefixing.}
 
 \item{form_schema}{An optional form_schema,
 like the output of \code{\link{form_schema}}. If a form schema is supplied,
@@ -35,7 +35,7 @@ Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 verbosity can be set globally or per function.}
 }
 \value{
-The unnested tibble in wide format
+The un-nested tibble in wide format
 }
 \description{
 \lifecycle{stable}
@@ -43,7 +43,7 @@ The unnested tibble in wide format
 \details{
 \code{\link{odata_submission_rectangle}} uses this function
 internally.
-Interested users can use this function to break down `ruODK`'s automated
+Interested users can use this function to break down \code{ruODK}'s automated
 steps into smaller components.
 
 The quite verbose output of \code{tidyr::unnest_wider} is captured

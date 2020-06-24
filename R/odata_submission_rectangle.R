@@ -19,23 +19,23 @@ listcol_names <- function(tbl) {
 #'
 #' @details \code{\link{odata_submission_rectangle}} uses this function
 #' internally.
-#' Interested users can use this function to break down `ruODK`'s automated
+#' Interested users can use this function to break down \code{ruODK}'s automated
 #' steps into smaller components.
 #'
 #' The quite verbose output of \code{tidyr::unnest_wider} is captured
 #' and hidden from the user.
 #'
 #' @param nested_tbl A nested tibble
-#' @param names_repair The argument `names_repair` for
+#' @param names_repair The argument \code{names_repair} for
 #'   \code{tidyr::unnest_wider}, default: "universal".
-#' @param names_sep The argument `names_sep` for
+#' @param names_sep The argument \code{names_sep} for
 #'   \code{tidyr::unnest_wider}, default: "_".
-#'   Unnested variables inside a list column will be prefixed by the list column
-#'   name, separated by `names_sep`. This avoids unsightly repaired names
-#'   such as `latitude...1`. Set to \code{NULL} to disable prefixing.
+#'   Un-nested variables inside a list column will be prefixed by the list
+#'   column name, separated by \code{names_sep}. This avoids unsightly repaired
+#'   names such as \code{latitude...1}. Set to \code{NULL} to disable prefixing.
 #' @template param-fs
 #' @template param-verbose
-#' @return The unnested tibble in wide format
+#' @return The un-nested tibble in wide format
 #' @family utilities
 #' @keywords internal
 unnest_all <- function(nested_tbl,
@@ -114,7 +114,7 @@ unnest_all <- function(nested_tbl,
 #'   \code{tidyr::unnest_wider}, default: "_".
 #'   Un-nested variables inside a list column will be prefixed by the list
 #'   column name, separated by \code{names_sep}.
-#'   This avoids unsightly repaired names such as \codelatitude...1}.
+#'   This avoids unsightly repaired names such as \code{latitude...1}.
 #' @template param-fs
 #' @template param-verbose
 #' @return The submissions as un-nested tibble

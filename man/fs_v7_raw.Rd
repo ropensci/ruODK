@@ -2,19 +2,17 @@
 % Please edit documentation in R/data.R
 \docType{data}
 \encoding{UTF-8}
-\name{fq_form_detail}
-\alias{fq_form_detail}
-\title{A tibble of form metadata.}
+\name{fs_v7_raw}
+\alias{fs_v7_raw}
+\title{The unparsed XML form_schema of a form from ODK Central v0.6 as nested list.}
 \format{
-A tibble of form metadata.
+An object of class \code{list} of length 6.
 }
 \source{
-The output of \code{\link{form_detail}}
-run on submissions of the test form
-`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+\code{\link{form_schema}(odkc_version = 0.7, parse = FALSE)}
 }
 \usage{
-fq_form_detail
+fs_v7_raw
 }
 \description{
 \lifecycle{stable}
@@ -25,6 +23,7 @@ Other included:
 \code{\link{fq_data_strata}},
 \code{\link{fq_data_taxa}},
 \code{\link{fq_data}},
+\code{\link{fq_form_detail}},
 \code{\link{fq_form_list}},
 \code{\link{fq_form_schema}},
 \code{\link{fq_form_xml}},
@@ -40,7 +39,6 @@ Other included:
 \code{\link{fq_zip_data}},
 \code{\link{fq_zip_strata}},
 \code{\link{fq_zip_taxa}},
-\code{\link{fs_v7_raw}},
 \code{\link{fs_v7}},
 \code{\link{geo_fs}},
 \code{\link{geo_gj_raw}},
