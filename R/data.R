@@ -412,3 +412,21 @@
 #' @family included
 #' @encoding UTF-8
 "geo_wkt"
+
+#' The unparsed XML form_schema of a form from ODK Central v0.6 as nested list.
+#'
+#' \lifecycle{stable}
+#'
+#' @source \code{\link{form_schema}(odkc_version = 0.7, parse = FALSE)}
+#' @family included
+#' @encoding UTF-8
+"fs_v7_raw"
+
+#' The parsed XML form_schema of a form from ODK Central v0.6.
+#'
+#' \lifecycle{stable}
+#'
+#' @source \code{\link{form_schema_parse}(fs_v7_raw)}
+#' @family included
+#' @encoding UTF-8
+"fs_v7"

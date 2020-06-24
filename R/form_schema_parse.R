@@ -2,15 +2,23 @@
 #'
 #' \lifecycle{stable}
 #'
-#' The `form_schema` is a nested list of lists containing the form definition.
+#' This function is used by \code{\link{form_schema}} for older versions of
+#' ODK Central (pre 0.8). These return the form schema as XML, requiring the
+#' quite involved code of \code{\link{form_schema_parse}}, while newer ODK
+#' Central versions return JSON, which is parsed directly in
+#' \code{\link{form_schema}}.
+#'
+#' The `form_schema` returned from ODK Central versions < 0.8 is a nested list
+#' of lists containing the form definition.
 #' The form definition consists of fields (with a type and name), and form
 #' groups, which are rendered as separate ODK Collect screens.
 #' Form groups in turn can also contain form fields.
 #'
 #' \code{\link{form_schema_parse}} recursively unpacks the form and extracts the
-#' name and type of each field. This information then can be used to inform the
-#' user which columns require \code{\link{handle_ru_datetimes}},
-#' \code{\link{attachment_get}}, or \code{\link{attachment_link}}, respectively.
+#' name and type of each field. This information then informs
+#' \code{\link{handle_ru_attachments}}, \code{\link{handle_ru_datetimes}},
+#' \code{\link{handle_ru_geopoints}}, \code{\link{handle_ru_geotraces}}, and
+#' \code{\link{handle_ru_geoshapes}}.
 #'
 #' @param fs The output of form_schema as nested list
 #' @param path The base path for form fields. Default: "Submissions".
@@ -25,23 +33,14 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Option 1: in two steps
-#' fs <- form_schema(flatten = FALSE) # Default, but shown for clarity
+#' # Option 1: in two steps, ODKC Version 0.7
+#' fs <- form_schema(flatten = FALSE, parse=FALSE, odkc_version=0.7)
 #' fsp <- form_schema_parse(fs)
 #'
 #' # Option 2: in one go
 #' fsp <- form_schema(parse = TRUE)
 #'
 #' fsp
-#'
-#' # Attachments: use \\code{\\link{attachment_get}} on each of
-#' fsp %>% dplyr::filter(type == "binary")
-#'
-#' # dateTime: use \\code{\\link{ru_datetime}} on each of
-#' fsp %>% dplyr::filter(type == "dateTime")
-#'
-#' # Point location: will be split into lat/lon/alt/acc
-#' fsp %>% dplyr::filter(type == "geopoint")
 #' }
 form_schema_parse <- function(fs,
                               path = "Submissions",

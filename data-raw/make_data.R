@@ -25,6 +25,7 @@ fq_data_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], wkt = TRUE
 fq_data_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], wkt = TRUE) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 
+# Geofields
 geo_fs <- form_schema(
   pid = get_test_pid(),
   fid = get_test_fid_wkt(),
@@ -82,6 +83,14 @@ fq_form_list <- ruODK::form_list()
 fq_form_xml <- ruODK::form_xml(parse = FALSE)
 fq_form_schema <- ruODK::form_schema()
 fq_form_detail <- ruODK::form_detail()
+
+
+# V7 form schema
+# This requires access to an ODK Central v7 server
+# fs_v7_raw <- ruODK::form_schema(odkc_version = 0.7, parse = FALSE)
+# fs_v7 <- ruODK::form_schema_parse(fs_v7_raw)
+# usethis::use_data(fs_v7_raw, overwrite = T)
+# usethis::use_data(fs_v7, overwrite = T)
 
 
 fid <- ruODK::get_test_fid()
