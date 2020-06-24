@@ -108,13 +108,13 @@ unnest_all <- function(nested_tbl,
 #'
 #' @param data A nested list of lists as given by
 #'   \code{\link{odata_submission_get}}.
-#' @param names_repair The argument `names_repair` for
+#' @param names_repair The argument \code{names_repair} for
 #'   \code{tidyr::unnest_wider}, default: "universal".
-#' @param names_sep The argument `names_sep` for
+#' @param names_sep The argument \code{names_sep} for
 #'   \code{tidyr::unnest_wider}, default: "_".
 #'   Un-nested variables inside a list column will be prefixed by the list
-#'   column name, separated by `names_sep`.
-#'   This avoids unsightly repaired names such as `latitude...1`.
+#'   column name, separated by \code{names_sep}.
+#'   This avoids unsightly repaired names such as \codelatitude...1}.
 #' @template param-fs
 #' @template param-verbose
 #' @return The submissions as un-nested tibble
@@ -139,7 +139,7 @@ odata_submission_rectangle <- function(data,
                                        form_schema = NULL,
                                        verbose = get_ru_verbose()) {
   data %>%
-    tibble::as_tibble(., .name_repair = names_repair) %>%
+    {suppressMessages(tibble::as_tibble(data, .name_repair = names_repair))} %>%
     unnest_all(
       names_repair = names_repair,
       names_sep = names_sep,
