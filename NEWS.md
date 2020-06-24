@@ -1,7 +1,7 @@
 # `ruODK` (development version)
 This version addresses ROpenSci reviewer comments from 
-@karissawhiting and @jmt2080ad as well as ideas from 
-@OdiljonQurbon and @arestrom.
+@karissawhiting and @jmt2080ad as well as ideas and suggestions from 
+@OdiljonQurbon,  @arestrom and @dmenne.
 
 This version is the RC for v0.8 to support ODK Central 0.8.
 
@@ -27,6 +27,9 @@ This version is the RC for v0.8 to support ODK Central 0.8.
 * Add a global default for verbosity. (#51 HT @arestrom)
 * Add a global default for time zone. (#53 HT @arestrom)
 * Use `httr::modify_url` to build URLs rather than `glue::glue` (#66)
+* Silenced spurious messages from `tibble::as_tibble()` which is called from 
+  `odata_submission_rectangle()`. Use `ru_verbose` to toggle useful diagnostic
+  messages. (#79 HT @dmenne)
 
 ## Dependencies
 * Moved `rlist` to Imports, as it is now used in `odata_submission_get()`. (#6)
