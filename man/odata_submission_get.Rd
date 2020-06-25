@@ -27,35 +27,36 @@ odata_submission_get(
 }
 \arguments{
 \item{table}{The submission EntityType, or in plain words, the table name.
-Default: "Submissions" (the main table).
-Change to "Submissions.GROUP_NAME" for repeating form groups.
+Default: \code{Submissions} (the main table).
+Change to \code{Submissions.GROUP_NAME} for repeating form groups.
 The group name can be found through \code{\link{odata_service_get}}.}
 
 \item{skip}{The number of rows to be omitted from the results.
-Example: 10, default: NA (none skipped).}
+Example: 10, default: \code{NA} (none skipped).}
 
 \item{top}{The number of rows to return.
-Example: 100, default: NA (all returned).}
+Example: 100, default: \code{NA} (all returned).}
 
-\item{count}{If TRUE, an `@odata.count` property will be returned in the
-response from ODK Central. Default: FALSE.}
+\item{count}{If TRUE, an \code{@odata.count} property will be returned in the
+response from ODK Central. Default: \code{FALSE}.}
 
 \item{wkt}{If TRUE, geospatial data will be returned as WKT (Well Known Text)
-strings. Default: FALSE, returns GeoJSON structures.
+strings. Default: \code{FALSE}, returns GeoJSON structures.
 Note that accuracy is only returned through GeoJSON.}
 
 \item{parse}{Whether to parse submission data based on form schema.
 Dates and datetimes will be parsed into local time.
 Attachments will be downloaded, and the field updated to the local file
 path.
-Point locations will be split into components; GeoJSON (`wkt=FALSE`) will
-be split into latitude, longitude, altitude and accuracy (with anonymous
-field names), while WKT will be split into longitude, latitude,and
-altitude (missing accuracy) prefixed by the original field name.
+Point locations will be split into components; GeoJSON (\code{wkt=FALSE})
+will be split into latitude, longitude, altitude and accuracy
+(with anonymous field names), while WKT will be split into
+longitude, latitude,and altitude (missing accuracy) prefixed by
+the original field name.
 See details for the handling of geotraces and geoshapes.
 Default: TRUE.}
 
-\item{download}{Whether to download attachments to `local_dir` or not.
+\item{download}{Whether to download attachments to \code{local_dir} or not.
 If in the future ODK Central supports hot-linking attachments,
 this parameter will replace attachment file names with their fully
 qualified attachment URL.
@@ -67,7 +68,7 @@ Default:
 \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
 
 \item{local_dir}{The local folder to save the downloaded files to,
-default: "media".}
+default: \code{"media"}.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 Default: \code{\link{get_default_pid}}.
@@ -112,9 +113,9 @@ verbosity can be set globally or per function.}
 \value{
 A list of lists.
 \itemize{
- \item `value` contains the submissions as list of lists.
- \item `@odata.context` is the URL of the metadata.
- \item `@odata.count` is the total number of rows in the table.
+ \item \code{value} contains the submissions as list of lists.
+ \item \code{@odata.context} is the URL of the metadata.
+ \item \code{@odata.count} is the total number of rows in the table.
 }
 }
 \description{
@@ -150,19 +151,19 @@ respectively.
 The only remaining manual step is to optionally join any sub-tables to the
 master table.
 
-The parameter `verbose` enables diagnostic messages along the download and
+The parameter \code{verbose} enables diagnostic messages along the download and
 parsing process.
 
-With parameter `parse=FALSE`, submission data is presented as nested list,
-which is the R equivalent of the JSON structure returned from the API.
+With parameter \code{parse=FALSE}, submission data is presented as nested
+list, which is the R equivalent of the JSON structure returned from the API.
 From there, \code{\link{odata_submission_rectangle}} can rectangle the data
 into a tibble, and subsequent lines of \code{\link{handle_ru_datetimes}},
 \code{\link{handle_ru_attachments}}, \code{\link{handle_ru_geopoints}},
 \code{\link{handle_ru_geotraces}}, and \code{\link{handle_ru_geoshapes}}
 parse dates, download and link file attachments, and extract coordinates from
 geofields.
-`ruODK` offers this longer, more manual pathway as an option to investigate
-and narrow down unexpected or unwanted behaviour.
+\code{ruODK} offers this manual and explicit pathway as an option to
+investigate and narrow down unexpected or unwanted behaviour.
 }
 \examples{
 \dontrun{
