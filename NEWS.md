@@ -3,7 +3,7 @@ This version addresses ROpenSci reviewer comments from
 @karissawhiting and @jmt2080ad as well as ideas and suggestions from 
 @OdiljonQurbon,  @arestrom and @dmenne.
 
-This version is the RC for v0.8 to support ODK Central 0.8. 
+This version is the RC for v0.8 to support ODK Central 0.8.
 
 ## Major fixes
 * New environment variables `ODKC_(TEST_)VERSION` allow `ruODK` to toggle
