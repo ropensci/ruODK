@@ -163,7 +163,7 @@ form_schema <- function(flatten = FALSE,
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   if (verbose == TRUE) ru_msg_info(glue::glue("Form schema v{odkc_version}"))
 
-  if (odkc_version < 0.8) {
+  if (odkc_version < 0.8) { # nocov start
     fs <- httr::RETRY(
       "GET",
       httr::modify_url(
@@ -193,7 +193,7 @@ form_schema <- function(flatten = FALSE,
       return(fsp)
     }
     return(fs)
-  } else {
+  } else {# nocov end
     httr::RETRY(
       "GET",
       httr::modify_url(

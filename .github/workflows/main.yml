@@ -19,6 +19,7 @@ jobs:
       matrix:
         config:
           # See https://github.com/actions/virtual-environments
+          # Blue moon segfaults: https://github.com/ropensci/tic/issues/271
           - { os: windows-latest, r: "devel" } # windows-2019
           - { os: windows-latest, r: "release" }
           # - { os: windows-latest, r: "oldrel" } # fails on missing RTools for 3.6.3
@@ -32,7 +33,7 @@ jobs:
           # - { os: ubuntu-20.04, r: "release"} # not released yet
           # - { os: ubuntu-20.04, r: "oldrel" } # not released yet
           # - { os: ubuntu-latest, r: "devel" } # fails setup-r
-          - { os: ubuntu-latest, r: "release"} # ubuntu-18.04 # heisen-segfaults on tic install
+          - { os: ubuntu-latest, r: "release"} # ubuntu-18.04
           - { os: ubuntu-latest, r: "oldrel" }
           # - { os: ubuntu-16.04, r: "devel" } # fails setup-r
           - { os: ubuntu-16.04, r: "release"}
