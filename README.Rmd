@@ -121,11 +121,11 @@ Out of scope:
 
 ## Install
 
-You can install `ruODK` from GitHub with:
+You can install the development version (`main` branch) of `ruODK` with:
 
 ```{r gh-installation, eval = FALSE}
 if (!requireNamespace("remotes")) {install.packages("remotes")}
-remotes::install_github("dbca-wa/ruODK", dependencies = TRUE)
+remotes::install_github("dbca-wa/ruODK@main", dependencies = TRUE)
 ```
 
 ## ODK Central

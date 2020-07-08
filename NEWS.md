@@ -30,6 +30,7 @@ This version is the RC for v0.8 to support ODK Central 0.8.
 * Silenced spurious messages from `tibble::as_tibble()` which is called from 
   `odata_submission_rectangle()`. Use `ru_verbose` to toggle useful diagnostic
   messages. (#79 HT @dmenne)
+* Renamed `master` branch to `main`, updated docs (HT @arestrom #81)
 
 ## Dependencies
 * Moved `rlist` to Imports, as it is now used in `odata_submission_get()`. (#6)
@@ -53,7 +54,7 @@ This version is the RC for v0.8 to support ODK Central 0.8.
 * Add screencast to the README. HT to asciicast! (#45)
 * Improve logo - more turtles, but questionable photoshopping.
 * Add examples where missing. (#32)
-* Build pkgdown site via travis. (#52)
+* Build pkgdown site via GH actions. (#52)
 * Minor typographic changes: end every function title with a full stop.
 
 # `ruODK` 0.6.6

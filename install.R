@@ -4,7 +4,7 @@
 # Package management
 install.packages("remotes")
 install.packages("usethis")
-remotes::install_github("dbca-wa/ruODK", dependencies = TRUE)
+remotes::install_github("dbca-wa/ruODK@main", dependencies = TRUE)
 
 # Data wrangling
 install.packages("janitor")
