@@ -34,10 +34,10 @@ jobs:
           # - { os: ubuntu-20.04, r: "oldrel" } # not released yet
           # - { os: ubuntu-latest, r: "devel" } # fails setup-r
           - { os: ubuntu-latest, r: "release"} # ubuntu-18.04
-          - { os: ubuntu-latest, r: "oldrel" }
+          - { os: ubuntu-latest, r: "oldrel" } # rlist not avail > XML
           # - { os: ubuntu-16.04, r: "devel" } # fails setup-r
           - { os: ubuntu-16.04, r: "release"}
-          - { os: ubuntu-16.04, r: "oldrel" }
+          - { os: ubuntu-16.04, r: "oldrel" } # rlist not avail > XML
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -131,7 +131,7 @@ jobs:
       - name: "[Linux] ccache"
         if: runner.os == 'Linux'
         run: |
-          sudo apt install ccache libcurl4-openssl-dev
+          sudo apt install ccache libcurl4-openssl-dev libxml2-dev
           mkdir -p ~/.R && echo -e 'CC=ccache gcc -std=gnu99\nCXX=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
 
       # install ccache and write config file
