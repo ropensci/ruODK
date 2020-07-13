@@ -34,10 +34,10 @@ jobs:
           # - { os: ubuntu-20.04, r: "oldrel" } # not released yet
           # - { os: ubuntu-latest, r: "devel" } # fails setup-r
           - { os: ubuntu-latest, r: "release"} # ubuntu-18.04
-          - { os: ubuntu-latest, r: "oldrel" } # rlist not avail > XML
+          # - { os: ubuntu-latest, r: "oldrel" } # rlist not avail > XML
           # - { os: ubuntu-16.04, r: "devel" } # fails setup-r
           - { os: ubuntu-16.04, r: "release"}
-          - { os: ubuntu-16.04, r: "oldrel" } # rlist not avail > XML
+          # - { os: ubuntu-16.04, r: "oldrel" } # rlist not avail > XML
     env:
       # otherwise remotes::fun() errors cause the build to fail. Example: Unavailability of binaries
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -170,10 +170,10 @@ jobs:
           Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl', type = 'source')"
 
-      - name: "[Linux] Install XML for rlist"
-        if: runner.os == 'Linux' && matrix.config.r == 'oldrel'
-        run:
-          Rscript -e "install.packages('XML', type = 'source')"
+      # name: "[Linux] Install XML for rlist"
+      # if: runner.os == 'Linux' && matrix.config.r == 'oldrel'
+      # run: |
+      #   Rscript -e "install.packages('XML', type = 'source')"
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
