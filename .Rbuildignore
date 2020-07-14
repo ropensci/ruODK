@@ -23,4 +23,4 @@ codemeta.json
 ^clang-.*
 ^gfortran.*
 ^tic\.R$
-^Dockerfile$
+Dockerfile
