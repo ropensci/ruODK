@@ -171,8 +171,10 @@ test_that("handle_ru_* parses geotypes", {
 
   testthat::expect_equal(geo_gj_raw, geo_gj_raw_fresh)
   testthat::expect_equal(geo_gj, geo_gj_fresh)
-  testthat::expect_equal(geo_wkt_raw$value[[1]]$meta$instanceID,
-                         geo_wkt_raw_fresh$value[[1]]$meta$instanceID)
-  testthat::expect_equal(geo_wkt[1,]$id, geo_wkt_fresh[1,]$id)
+  testthat::expect_equal(
+    geo_wkt_raw$value[[1]]$meta$instanceID,
+    geo_wkt_raw_fresh$value[[1]]$meta$instanceID
+  )
+  testthat::expect_equal(geo_wkt[1, ]$id, geo_wkt_fresh[1, ]$id)
 })
 # usethis::use_r("handle_ru_geopoints")

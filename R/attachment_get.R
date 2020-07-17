@@ -70,7 +70,7 @@ attachment_url <- function(uuid,
     "{url}/v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
     "/submissions/{uuid}/attachments/{fn}"
   )
-  # See https://github.com/dbca-wa/ruODK/issues/66
+  # See https://github.com/ropensci/ruODK/issues/66
   # This breaks attachment_get tests:
   # httr::modify_url(
   #   url,

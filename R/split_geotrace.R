@@ -125,8 +125,10 @@ split_geotrace <- function(data,
         .remove = FALSE
       ) %>%
       # Step 2: dplyr::mutate_at() can programmatically manipulate variables
-      dplyr::rename_at(dplyr::vars(dplyr::starts_with("XXX")),
-                       list( ~ stringr::str_replace(., "XXX", colname)))
+      dplyr::rename_at(
+        dplyr::vars(dplyr::starts_with("XXX")),
+        list(~ stringr::str_replace(., "XXX", colname))
+      )
   } else {
     # Option 4: ODKC v0.8 WKT
     data %>%

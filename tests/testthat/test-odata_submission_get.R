@@ -98,7 +98,7 @@ test_that("odata_submission_get skip omits number of results", {
     table = fq_svc$name[2] # brittle: depends on form used
   )
 
-  # https://github.com/dbca-wa/ruODK/issues/65
+  # https://github.com/ropensci/ruODK/issues/65
   # print("odata_submission_get without skip")
   # print(fresh_parsed)
   # print("odata_submission_get with skip=1 should return one less record")
@@ -122,7 +122,7 @@ test_that("odata_submission_get top limits number of results", {
   )
 
 
-  # https://github.com/dbca-wa/ruODK/issues/65
+  # https://github.com/ropensci/ruODK/issues/65
   # print("odata_submission_get with top=1 should return one record")
   # print(top_parsed)
   skip_on_travis()
@@ -148,7 +148,7 @@ test_that("odata_submission_get count returns total number or rows", {
   x_parsed <- x_raw %>% odata_submission_rectangle()
 
 
-  # https://github.com/dbca-wa/ruODK/issues/65
+  # https://github.com/ropensci/ruODK/issues/65
   # ru_msg_info("odata_submission_get count")
   # print(x_raw)
   # print(x_parsed)

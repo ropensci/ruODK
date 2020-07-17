@@ -34,7 +34,7 @@
 #' @examples
 #' \dontrun{
 #' # Option 1: in two steps, ODKC Version 0.7
-#' fs <- form_schema(flatten = FALSE, parse=FALSE, odkc_version=0.7)
+#' fs <- form_schema(flatten = FALSE, parse = FALSE, odkc_version = 0.7)
 #' fsp <- form_schema_parse(fs)
 #'
 #' # Option 2: in one go

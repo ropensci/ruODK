@@ -139,7 +139,9 @@ odata_submission_rectangle <- function(data,
                                        form_schema = NULL,
                                        verbose = get_ru_verbose()) {
   data %>%
-    {suppressMessages(tibble::as_tibble(data, .name_repair = names_repair))} %>%
+    {
+      suppressMessages(tibble::as_tibble(data, .name_repair = names_repair))
+    } %>%
     unnest_all(
       names_repair = names_repair,
       names_sep = names_sep,

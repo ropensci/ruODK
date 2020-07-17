@@ -193,7 +193,7 @@ form_schema <- function(flatten = FALSE,
       return(fsp)
     }
     return(fs)
-  } else {# nocov end
+  } else { # nocov end
     httr::RETRY(
       "GET",
       httr::modify_url(

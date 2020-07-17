@@ -35,5 +35,5 @@ RUN install2.r --error \
   skimr \
   usethis
 
-RUN R -e "remotes::install_github('dbca-wa/ruODK@main', \
+RUN R -e "remotes::install_github('ropensci/ruODK@main', \
           dependencies = TRUE, ask=FALSE, update=FALSE)"

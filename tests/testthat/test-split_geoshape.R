@@ -129,8 +129,10 @@ test_that("split_geoshape works with ODK Linestrings", {
   # First three points shown with truncated decimal places
   odk_v7 <- tibble::tibble(
     id = 1,
-    tx = paste0("-14.80 128.40 10.9 5.9;-14.81 128.41 1.7 1.9;",
-                "-14.82 128.42 1.9 1.7;-14.80 128.40 10.9 5.9;")
+    tx = paste0(
+      "-14.80 128.40 10.9 5.9;-14.81 128.41 1.7 1.9;",
+      "-14.82 128.42 1.9 1.7;-14.80 128.40 10.9 5.9;"
+    )
   )
   odk_v7_split <- split_geoshape(odk_v7, "tx", odkc_version = 0.7)
 

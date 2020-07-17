@@ -14,12 +14,12 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![ROpenSci submission status](https://badges.ropensci.org/335_status.svg)](https://github.com/ropensci/software-review/issues/335)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/github/last-commit/dbca-wa/ruODK.svg)](https://github.com/dbca-wa/ruODK/commits/master)
-[![GitHub issues](https://img.shields.io/github/issues/dbca-wa/ruodk.svg?style=popout)](https://github.com/dbca-wa/ruODK/issues/)
-[![CI via {tic}](https://github.com/dbca-wa/ruODK/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/dbca-wa/ruODK/actions)
-[![Build Status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK)
+[![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/master)
+[![GitHub issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](https://github.com/ropensci/ruODK/issues/)
+[![CI via {tic}](https://github.com/ropensci/ruODK/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/ropensci/ruODK/actions)
+[![Build Status](https://travis-ci.org/ropensci/ruODK.svg?branch=master)](https://travis-ci.org/ropensci/ruODK)
 [![Build status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/master)
-[![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master)
+[![Coverage status](https://codecov.io/gh/ropensci/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/ruODK?branch=master)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 <!-- badges: end -->
 
@@ -125,7 +125,7 @@ You can install the development version (`main` branch) of `ruODK` with:
 
 ```{r gh-installation, eval = FALSE}
 if (!requireNamespace("remotes")) {install.packages("remotes")}
-remotes::install_github("dbca-wa/ruODK@main", dependencies = TRUE)
+remotes::install_github("ropensci/ruODK@main", dependencies = TRUE)
 ```
 
 ## ODK Central
@@ -147,7 +147,7 @@ provides up-to-date descriptions of the steps below.
    the web user at least
    [read permissions](https://docs.getodk.org/central-projects/#managing-project-managers).
 *  Create an XForm, e.g. using ODK Build, or use the 
-   [example forms](https://github.com/dbca-wa/ruODK/tree/master/inst/extdata) 
+   [example forms](https://github.com/ropensci/ruODK/tree/master/inst/extdata) 
    provided by `ruODK`. The `.odkbuild` versions can be loaded into 
    [ODK Build](https://build.getodk.org/), while the `.xml` versions can be 
    directly imported into ODK Central.
@@ -181,7 +181,7 @@ ruODK::ru_setup(
 ```
 
 For all available detailed options to configure `ruODK`, read 
-[`vignette("setup", package = "ruODK")`](https://dbca-wa.github.io/ruODK/articles/setup.html).
+[`vignette("setup", package = "ruODK")`](https://ropensci.github.io/ruODK/articles/setup.html).
 
 ## Use ruODK
 
@@ -213,9 +213,9 @@ data %>% knitr::kable(.)
 ```
 
 A more detailed walk-through with some data visualisation examples is available
-in the [`vignette("odata-api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/odata-api.html).
+in the [`vignette("odata-api", package="ruODK")`](https://ropensci.github.io/ruODK/articles/odata-api.html).
 
-See also [`vignette("restful-api", package="ruODK")`](https://dbca-wa.github.io/ruODK/articles/restful-api.html)
+See also [`vignette("restful-api", package="ruODK")`](https://ropensci.github.io/ruODK/articles/restful-api.html)
 for examples using the alternative RESTful API.
 
 ## Try ruODK
@@ -228,10 +228,10 @@ Create a new RMarkdown workbook from `ruODK` template "ODK Central via OData"
 and follow the instructions within.
 
 ## Contribute
-Contributions through [issues](https://github.com/dbca-wa/ruODK/issues) and PRs 
+Contributions through [issues](https://github.com/ropensci/ruODK/issues) and PRs 
 are welcome!
 
-See the [contributing guide](https://dbca-wa.github.io/ruODK/CONTRIBUTING.html)
+See the [contributing guide](https://ropensci.github.io/ruODK/CONTRIBUTING.html)
 on best practices and further readings for code contributions.
 
 ## Attribution
@@ -263,12 +263,12 @@ There are several other R packages interacting with the ODK ecosystem, and/or
 
 ### Comparison of ODK related software packages (non-ODK core)
 
-| Package                         | [`ruODK`](https://dbca-wa.github.io/ruODK/) | [`odkr`](https://validmeasures.org/odkr/) | [`odk`](https://cran.r-project.org/package=odk) | [`odkmeta`](https://github.com/nap2000/odkmeta) | [`koboloadeR`](https://unhcr.github.io/koboloadeR/docs/index.html) | [Pentaho Kettle tutorial](https://github.com/schemetrica/automating-data-delivery-odk-central)
+| Package                         | [`ruODK`](https://ropensci.github.io/ruODK/) | [`odkr`](https://validmeasures.org/odkr/) | [`odk`](https://cran.r-project.org/package=odk) | [`odkmeta`](https://github.com/nap2000/odkmeta) | [`koboloadeR`](https://unhcr.github.io/koboloadeR/docs/index.html) | [Pentaho Kettle tutorial](https://github.com/schemetrica/automating-data-delivery-odk-central)
 |------------------------------|---------------|---------------|---------------|---------------|---------------|---------------|
 | Elevator pitch               | "[ckanr](https://github.com/ropensci/ckanr) for ODK Central"  | "Drive ODK Briefcase through R" | "Export ODK Aggregate to SPSS" | "Export ODK Aggregate to STATA" | "Metapackage for the extended ODK ecosystem" | "What ruODK does, but as GUI" |
-| Last commit                  | [![Last-changedate](https://img.shields.io/github/last-commit/dbca-wa/ruODK.svg)](https://github.com/dbca-wa/ruODK/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/validmeasures/odkr.svg)](https://github.com/validmeasures/odkr/commits/master) |    Nov 2017    |  [![Last-changedate](https://img.shields.io/github/last-commit/nap2000/odkmeta.svg)](https://github.com/nap2000/odkmeta/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/unhcr/koboloadeR.svg)](https://github.com/unhcr/koboloadeR/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/schemetrica/automating-data-delivery-odk-central.svg)](https://github.com/schemetrica/automating-data-delivery-odk-central/commits/master) |
-| Website                      | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/dbca-wa/ruODK) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://dbca-wa.github.io/ruODK/) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/validmeasures/odkr) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://validmeasures.org/odkr/)   | [![docs](https://img.shields.io/static/v1?label=docs&message=rdrr.io&color=brightgreen)](https://rdrr.io/cran/odk/) |    [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/nap2000/odkmeta) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/unhcr/koboloadeR) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://unhcr.github.io/koboloadeR/docs/index.html) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/schemetrica/automating-data-delivery-odk-central) |
-| Test coverage             | [![CI via {tic}](https://github.com/dbca-wa/ruODK/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/dbca-wa/ruODK/actions) [![Build Status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK) [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master) [![Build status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/master) | [![codecov](https://codecov.io/gh/validmeasures/odkr/branch/master/graph/badge.svg)](https://codecov.io/gh/validmeasures/odkr) | ❌ | In repo | [![Travis build status](https://travis-ci.org/unhcr/koboloadeR.svg?branch=gh-pages)](https://travis-ci.org/unhcr/koboloadeR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/unhcr/koboloadeR?branch=gh-pages&svg=true)](https://ci.appveyor.com/project/unhcr/koboloadeR) [![codecov](https://codecov.io/gh/unhcr/koboloadeR/branch/gh-pages/graph/badge.svg)](https://codecov.io/gh/unhcr/koboloadeR) | NA |
+| Last commit                  | [![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/validmeasures/odkr.svg)](https://github.com/validmeasures/odkr/commits/master) |    Nov 2017    |  [![Last-changedate](https://img.shields.io/github/last-commit/nap2000/odkmeta.svg)](https://github.com/nap2000/odkmeta/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/unhcr/koboloadeR.svg)](https://github.com/unhcr/koboloadeR/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/schemetrica/automating-data-delivery-odk-central.svg)](https://github.com/schemetrica/automating-data-delivery-odk-central/commits/master) |
+| Website                      | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/ropensci/ruODK) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://ropensci.github.io/ruODK/) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/validmeasures/odkr) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://validmeasures.org/odkr/)   | [![docs](https://img.shields.io/static/v1?label=docs&message=rdrr.io&color=brightgreen)](https://rdrr.io/cran/odk/) |    [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/nap2000/odkmeta) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/unhcr/koboloadeR) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://unhcr.github.io/koboloadeR/docs/index.html) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/schemetrica/automating-data-delivery-odk-central) |
+| Test coverage             | [![CI via {tic}](https://github.com/ropensci/ruODK/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/ropensci/ruODK/actions) [![Build Status](https://travis-ci.org/ropensci/ruODK.svg?branch=master)](https://travis-ci.org/ropensci/ruODK) [![Coverage status](https://codecov.io/gh/ropensci/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/ruODK?branch=master) [![Build status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/master) | [![codecov](https://codecov.io/gh/validmeasures/odkr/branch/master/graph/badge.svg)](https://codecov.io/gh/validmeasures/odkr) | ❌ | In repo | [![Travis build status](https://travis-ci.org/unhcr/koboloadeR.svg?branch=gh-pages)](https://travis-ci.org/unhcr/koboloadeR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/unhcr/koboloadeR?branch=gh-pages&svg=true)](https://ci.appveyor.com/project/unhcr/koboloadeR) [![codecov](https://codecov.io/gh/unhcr/koboloadeR/branch/gh-pages/graph/badge.svg)](https://codecov.io/gh/unhcr/koboloadeR) | NA |
 | Working examples             | README, 3 vignettes, pkgdown, Rmd templates | README, pkgdown | CRAN PDF | README | README, 9 vignettes, shiny apps, pkgdown | Tutorial with screenshots |
 | Available on CRAN            | [![CRAN status](https://www.r-pkg.org/badges/version/ruODK)](https://cran.r-project.org/package=ruODK) | [![CRAN status](https://www.r-pkg.org/badges/version/odkr)](https://cran.r-project.org/package=odkr) |  [![version](http://www.r-pkg.org/badges/version/odk)](https://CRAN.R-project.org/package=odk)  | NA | [![CRAN status](https://www.r-pkg.org/badges/version/koboloadeR)](https://cran.r-project.org/package=koboloadeR) | NA |
 | Technologies            | Tidyverse R, XForms | Base R | Base R | Stata | R metapackage, XlsForms | Pentaho Kettle GUI |
@@ -298,12 +298,12 @@ manipulation steps can be used for many other use cases apart from ODK Central.
 
 ### Comparison of OData related R packages
 
-| Package                         | [`ruODK`](https://dbca-wa.github.io/ruODK/) | [`odataR`](https://github.com/HanOostdijk/odataR) | [`cbsodataR`](https://github.com/edwindj/cbsodataR) | [`OData`](https://cran.r-project.org/package=OData) | [OData JDBC R tutorial](https://www.cdata.com/kb/tech/odata-jdbc-r.rst)
+| Package                         | [`ruODK`](https://ropensci.github.io/ruODK/) | [`odataR`](https://github.com/HanOostdijk/odataR) | [`cbsodataR`](https://github.com/edwindj/cbsodataR) | [`OData`](https://cran.r-project.org/package=OData) | [OData JDBC R tutorial](https://www.cdata.com/kb/tech/odata-jdbc-r.rst)
 |------------------------------|---------------|---------------|---------------|---------------|--------------|
 | Elevator pitch               | "[ckanr](https://github.com/ropensci/ckanr) for ODK Central"  | "OData client for https://opendata.cbs.nl (and similar)" | "OData client for https://www.cbs.nl" | "Minimal OData example" | "Minimal RJDBC example" | 
-| Last commit                  | [![Last-changedate](https://img.shields.io/github/last-commit/dbca-wa/ruODK.svg)](https://github.com/dbca-wa/ruODK/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/HanOostdijk/odataR.svg)](https://github.com/HanOostdijk/odataR/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/edwindj/cbsodataR.svg)](https://github.com/edwindj/cbsodataR/commits/master) | Dec 2016 | ❓ |
-| Website | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/dbca-wa/ruODK) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://dbca-wa.github.io/ruODK/) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/HanOostdijk/odataR) | [![docs](https://img.shields.io/static/v1?label=code&message=CRAN&color=green)](https://cran.r-project.org/package=cbsodataR) [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/edwindj/cbsodataR) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://edwindj.github.io/cbsodataR/) | [![](https://img.shields.io/static/v1?label=code&message=CRAN&color=green)](https://cran.r-project.org/package=OData) | [![docs](https://img.shields.io/static/v1?label=docs&message=html&color=brightgreen)](https://www.cdata.com/kb/tech/odata-jdbc-r.rst) |
-| Test coverage            | [![CI via {tic}](https://github.com/dbca-wa/ruODK/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/dbca-wa/ruODK/actions) [![Build Status](https://travis-ci.org/dbca-wa/ruODK.svg?branch=master)](https://travis-ci.org/dbca-wa/ruODK) [![Build status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/master) [![Coverage status](https://codecov.io/gh/dbca-wa/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/dbca-wa/ruODK?branch=master) | ❌ | [![Travis-CI Build Status](https://travis-ci.org/edwindj/cbsodataR.png?branch=master)](https://travis-ci.org/edwindj/cbsodataR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/edwindj/cbsodatar?branch=master)](https://ci.appveyor.com/project/edwindj/cbsodatar) | ❌ | ❌ |
+| Last commit                  | [![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/HanOostdijk/odataR.svg)](https://github.com/HanOostdijk/odataR/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/edwindj/cbsodataR.svg)](https://github.com/edwindj/cbsodataR/commits/master) | Dec 2016 | ❓ |
+| Website | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/ropensci/ruODK) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://ropensci.github.io/ruODK/) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/HanOostdijk/odataR) | [![docs](https://img.shields.io/static/v1?label=code&message=CRAN&color=green)](https://cran.r-project.org/package=cbsodataR) [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/edwindj/cbsodataR) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://edwindj.github.io/cbsodataR/) | [![](https://img.shields.io/static/v1?label=code&message=CRAN&color=green)](https://cran.r-project.org/package=OData) | [![docs](https://img.shields.io/static/v1?label=docs&message=html&color=brightgreen)](https://www.cdata.com/kb/tech/odata-jdbc-r.rst) |
+| Test coverage            | [![CI via {tic}](https://github.com/ropensci/ruODK/workflows/R%20CMD%20Check%20via%20{tic}/badge.svg?branch=master)](https://github.com/ropensci/ruODK/actions) [![Build Status](https://travis-ci.org/ropensci/ruODK.svg?branch=master)](https://travis-ci.org/ropensci/ruODK) [![Build status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/master) [![Coverage status](https://codecov.io/gh/ropensci/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/ruODK?branch=master) | ❌ | [![Travis-CI Build Status](https://travis-ci.org/edwindj/cbsodataR.png?branch=master)](https://travis-ci.org/edwindj/cbsodataR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/edwindj/cbsodatar?branch=master)](https://ci.appveyor.com/project/edwindj/cbsodatar) | ❌ | ❌ |
 | Targets ODK Central | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Works with ODK Central | ✅ | ❓ |  ❓  | ❌ | ❌ |
 | Data wrangling helpers for post-processing | ✅ | some |  some  | ❌ | ❌ |

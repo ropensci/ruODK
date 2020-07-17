@@ -46,11 +46,11 @@ This version is the RC for v0.8 to support ODK Central 0.8.
   ODK Central (< 0.8) (#61)
 
 ## Documentation
-* Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK).
+* Updated workshop companion package [urODK](https://github.com/ropensci/urODK).
 * Rename vignettes to `odata-api` and `restful-api`. (#34)
 * Warn against using plain text credentials in vignette `setup`. (#34)
 * More documentation improvements at 
-  [#34](https://github.com/dbca-wa/ruODK/issues/34).
+  [#34](https://github.com/ropensci/ruODK/issues/34).
 * Add screencast to the README. HT to asciicast! (#45)
 * Improve logo - more turtles, but questionable photoshopping.
 * Add examples where missing. (#32)
@@ -118,7 +118,7 @@ This version is the RC for v0.8 to support ODK Central 0.8.
 *  Add comparison of similar software to README (#25)
 
 # `ruODK` 0.6.1
-*  ROpenSci submission review [milestone](https://github.com/dbca-wa/ruODK/milestone/3), 
+*  ROpenSci submission review [milestone](https://github.com/ropensci/ruODK/milestone/3), 
   [discussion](https://github.com/ropensci/software-review/issues/335).
 *  Updates to documentation (#13 #15 #17)
 *  Group function docs (#18)
@@ -186,7 +186,7 @@ This version is the RC for v0.8 to support ODK Central 0.8.
   function docs.
 
 ## TODO
-*  Implement remaining missing functions ([ticket](https://github.com/dbca-wa/ruODK/issues/9)).
+*  Implement remaining missing functions ([ticket](https://github.com/ropensci/ruODK/issues/9)).
 
 # `ruODK` 0.3.0
 *  Use tidyverse issue template

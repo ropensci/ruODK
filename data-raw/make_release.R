@@ -101,8 +101,8 @@ system(glue::glue("git push origin {v}"))
 # * `usethis::edit_r_environ()` to open ~/.Renviron >
 #   add `R_TRAVIS_ORG = "xxx"`, restart session
 # * `travis::use_travis_deploy(endpoint = ".org")`
-#   creates a deploy key on <https://github.com/dbca-wa/ruODK> > Settings >
+#   creates a deploy key on <https://github.com/https://github.com/ropensci/ruODK/issues/66/ruODK> > Settings >
 #   Deploy keys using the authentication from the Travis CI API token.
 #   Push a change or trigger a travis build.
-# * <https://github.com/dbca-wa/ruODK> > Settings > GitHub pages:
+# * <https://github.com/https://github.com/ropensci/ruODK/issues/66/ruODK> > Settings > GitHub pages:
 #   build from gh-pages branch.

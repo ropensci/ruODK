@@ -4,7 +4,7 @@ Where it seems over the top, common sense is appreciated, and every contribution
 is appreciated.
 
 ## Non-technical contributions to ruODK
-Feel free to [report issues](https://github.com/dbca-wa/ruODK/issues):
+Feel free to [report issues](https://github.com/ropensci/ruODK/issues):
 
 * Bug reports are for unplanned malfunctions.
 * Feature requests are for ideas and new features.
@@ -39,7 +39,7 @@ For more general info about contributing to `ruODK`, see the
 ### Prerequisites
 To test the package and build the vignettes, you will need valid credentials for
 the test server, currently the ODK Central Sandbox.
-Create an [accont request issue](https://github.com/dbca-wa/ruODK/issues/new/choose)
+Create an [accont request issue](https://github.com/ropensci/ruODK/issues/new/choose)
 to request access to those two ODK Central instances.
 
 Before you do a pull request, you should always file an issue and make sure
@@ -52,14 +52,14 @@ your basic proposal for fixing it. If you’ve found a bug, first create a minim
 #### Fork, clone, branch
 
 The first thing you'll need to do is to [fork](https://help.github.com/articles/fork-a-repo/) 
-the [`ruODK` GitHub repo](https://github.com/dbca-wa/ruODK), and 
+the [`ruODK` GitHub repo](https://github.com/ropensci/ruODK), and 
 then clone it locally. We recommend that you create a branch for each PR.
 
 #### Check
 
 Before changing anything, make sure the package still passes `R CMD check`
 locally for you. When in doubt, compare your `R CMD check` results with current
-results for [`ruODK` on Travis](https://travis-ci.org/dbca-wa/ruODK) (checks on Linux and/or 
+results for [`ruODK` on Travis](https://travis-ci.org/ropensci/ruODK) (checks on Linux and/or 
 MacOS) and, if applicable, AppVeyor (checks on Windows). You'll do this again
 before you finalize your pull request, but this baseline will make it easier to
 pinpoint any problems introduced by your changes.
@@ -110,7 +110,7 @@ the package so you can see exactly what lines are not covered in the project.
 
 To run tests and build the vignettes, you'll need access to the 
 [ODK Central sandbox instance](https://sandbox.central.getodk.org/).
-If you haven't got an account yet, create an [accont request issue](https://github.com/dbca-wa/ruODK/issues/new/choose)
+If you haven't got an account yet, create an [accont request issue](https://github.com/ropensci/ruODK/issues/new/choose)
 to request access to those two ODK Central instances.
 
 You will need to use the following environment variables:
