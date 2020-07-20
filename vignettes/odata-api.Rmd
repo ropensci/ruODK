@@ -3,7 +3,7 @@ title: "Accessing the OData API"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{odata}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 resource_files:
 - media/1568786958640.jpg
