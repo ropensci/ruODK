@@ -2,7 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-inst/doc
+inst/doc/*
 *.RData
 manual.tex
 manual-concordance.tex
