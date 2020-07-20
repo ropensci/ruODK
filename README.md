@@ -14,13 +14,13 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![GitHub
 issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](https://github.com/ropensci/ruODK/issues/)
 [![CI via
-{tic}](https://github.com/ropensci/ruODK/workflows/R%20CMD%20Check%20via%20%7Btic%7D/badge.svg?branch=master)](https://github.com/ropensci/ruODK/actions)
+{tic}](https://github.com/ropensci/ruODK/workflows/R%20CMD%20Check%20via%20%7Btic%7D/badge.svg?branch=main)](https://github.com/ropensci/ruODK/actions)
 [![Build
-Status](https://travis-ci.org/ropensci/ruODK.svg?branch=master)](https://travis-ci.org/ropensci/ruODK)
+Status](https://travis-ci.org/ropensci/ruODK.svg?branch=main)](https://travis-ci.org/ropensci/ruODK)
 [![Build
-status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/master)
+status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main)
 [![Coverage
-status](https://codecov.io/gh/ropensci/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/ruODK?branch=master)
+status](https://codecov.io/gh/ropensci/ruODK/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/ruODK?branch=main)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 <!-- badges: end -->
 
@@ -405,7 +405,8 @@ citation("ruODK")
 #> 
 #> To cite ruODK in publications use:
 #> 
-#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API. R package version 0.6.6. https://github.com/ropensci/ruODK
+#>   Florian W. Mayer (2019). ruODK: Client for the ODK Central API. R
+#>   package version 0.6.6. https://github.com/ropensci/ruODK
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
