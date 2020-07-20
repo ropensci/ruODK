@@ -3,7 +3,7 @@ title: "Accessing the RESTful API"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{api}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
