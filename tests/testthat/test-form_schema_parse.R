@@ -30,7 +30,8 @@ test_that("form_schema works with ODK Central v0.8", {
   )
 
   testthat::expect_true(tibble::is_tibble(fs))
-  testthat::expect_equal(names(fs), c("name", "type", "path", "ruodk_name"))
+  testthat::expect_equal(names(fs),
+                         c("path", "name", "type", "binary", "ruodk_name"))
   testthat::expect_true("encounter_start_datetime" %in% fs$name)
   testthat::expect_true("quadrat_photo" %in% fs$name)
 
@@ -44,7 +45,6 @@ test_that("form_schema works with ODK Central v0.8", {
   # fsp %>% dplyr::filter(type=="geopoint")
 })
 
-# TODO run this test against ODK Central v0.7
 test_that("form_schema_parse debug messages work", {
   data("fs_v7_raw")
   data("fs_v7")

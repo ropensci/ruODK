@@ -51,8 +51,9 @@ form_schema_parse <- function(fs,
   # 1. Grab next level type/name pairs, append column "path".
   # This does not work recursively - if it did, we'd be done here.
   x <- fs %>%
-    rlist::list.select(name, type) %>%
-    rlist::list.stack(.) %>%
+    tibble::tibble(xx = .) %>%
+    tidyr::unnest_wider(xx) %>%
+    dplyr::select("type", "name") %>%
     dplyr::mutate(path = path)
 
   if (verbose == TRUE) {

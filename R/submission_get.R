@@ -3,6 +3,12 @@
 #' This function is the workhorse for the vectorised function submission_get,
 #' which gets all submissions for a list of submission IDs.
 #'
+#' Note this function returns a nested list containing any repeating subgroups.
+#' As the presence and length of repeating subgroups is non-deterministic and
+#' entirely depends on the completeness of the submission data, we cannot
+#' rectangle them any further here. Rectangling requires knowledge of the form
+#' schema and the completeness of submission data.
+#'
 #' \lifecycle{stable}
 #'
 #' @template param-iid

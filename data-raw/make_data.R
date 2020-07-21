@@ -14,15 +14,18 @@ ruODK::ru_setup(
 t <- fs::dir_create("attachments")
 fq_svc <- ruODK::odata_service_get()
 fq_meta <- ruODK::odata_metadata_get()
-fq_fs <- ruODK::form_schema()
+fq_fs <- ruODK::form_schema(odkc_version = get_test_odkc_version())
 fq_raw <- ruODK::odata_submission_get(table = fq_svc$name[1], parse = FALSE)
 fq_raw_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], parse = FALSE)
 fq_raw_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], parse = FALSE)
 
-fq_data <- ruODK::odata_submission_get(table = fq_svc$name[1], wkt = TRUE, parse = T)
-fq_data_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], wkt = TRUE) %>%
+fq_data <- ruODK::odata_submission_get(
+  table = fq_svc$name[1], wkt = TRUE, parse = T, odkc_version = get_test_odkc_version())
+fq_data_strata <- ruODK::odata_submission_get(
+  table = fq_svc$name[2], wkt = TRUE, odkc_version = get_test_odkc_version()) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
-fq_data_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], wkt = TRUE) %>%
+fq_data_taxa <- ruODK::odata_submission_get(
+  table = fq_svc$name[3], wkt = TRUE, odkc_version = get_test_odkc_version()) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 
 # Geofields
@@ -81,7 +84,7 @@ fq_project_list <- ruODK::project_list()
 fq_project_detail <- ruODK::project_detail()
 fq_form_list <- ruODK::form_list()
 fq_form_xml <- ruODK::form_xml(parse = FALSE)
-fq_form_schema <- ruODK::form_schema()
+fq_form_schema <- ruODK::form_schema(odkc_version = get_test_odkc_version())
 fq_form_detail <- ruODK::form_detail()
 
 
@@ -91,7 +94,6 @@ fq_form_detail <- ruODK::form_detail()
 # fs_v7 <- ruODK::form_schema_parse(fs_v7_raw)
 # usethis::use_data(fs_v7_raw, overwrite = T)
 # usethis::use_data(fs_v7, overwrite = T)
-
 
 fid <- ruODK::get_test_fid()
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))

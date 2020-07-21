@@ -208,9 +208,8 @@ form_schema <- function(flatten = FALSE,
     ) %>%
       yell_if_error(., url, un, pw) %>%
       httr::content(.) %>%
-      rlist::list.select(name, type, path) %>%
-      rlist::list.stack(.) %>%
-      tibble::as_tibble() %>%
+      tibble::tibble(xx = .) %>%
+      tidyr::unnest_wider(xx) %>%
       dplyr::mutate(
         ruodk_name = path %>%
           stringr::str_remove("/") %>%

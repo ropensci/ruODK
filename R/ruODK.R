@@ -15,5 +15,6 @@ utils::globalVariables(c(
   "name",
   "path",
   "type",
-  "variable"
+  "variable",
+  "xx"
 ))
