@@ -66,6 +66,7 @@ test_that("attachment_url works", {
   expected_url <- glue::glue(
     "{url}/v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
   )
+  # nolint start
   # https://github.com/ropensci/ruODK/issues/66
   # Not using here because it breaks attachment_get
   # expected_url <- httr::modify_url(
@@ -74,6 +75,7 @@ test_that("attachment_url works", {
   #     "v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
   #   )
   # )
+  # nolint end
   calculated_url <- ruODK:::attachment_url(uuid,
     fn,
     pid = pid,
@@ -182,5 +184,4 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   ))
 })
 
-# Tests code
-# usethis::edit_file("R/attachment_get.R")
+# usethis::edit_file("R/attachment_get.R") # nolint

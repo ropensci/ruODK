@@ -1,4 +1,6 @@
 test_that("project_create works", {
+
+  # nolint start
   #  p <- project_create(
   #   "Test Project",
   #   url = Sys.getenv("ODKC_TEST_URL"),
@@ -15,6 +17,7 @@ test_that("project_create works", {
   #   "id", "name", "archived"
   # )
   # testthat::expect_equal(names(p), cn)
+  # nolint end
 
   testthat::expect_warning(
     project_create(
@@ -26,6 +29,4 @@ test_that("project_create works", {
   )
 })
 
-
-# Tests code
-# usethis::edit_file("R/project_create.R")
+# usethis::edit_file("R/project_create.R") # nolint

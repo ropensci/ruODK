@@ -9,7 +9,7 @@
 #' @examples
 #' ru_msg_info("This is an info message.")
 ru_msg_info <- function(message) {
-  x <- clisymbols::symbol$info
+  x <- clisymbols::symbol$info # nolint
   message(crayon::cyan(glue::glue("{x} {message}\n")))
 }
 
@@ -24,7 +24,7 @@ ru_msg_info <- function(message) {
 #' @examples
 #' ru_msg_success("This is a success message.")
 ru_msg_success <- function(message) {
-  x <- clisymbols::symbol$tick
+  x <- clisymbols::symbol$tick # nolint
   message(crayon::green(glue::glue("{x} {message}\n")))
 }
 
@@ -40,7 +40,7 @@ ru_msg_success <- function(message) {
 #' @examples
 #' ru_msg_noop("This is a noop message.")
 ru_msg_noop <- function(message) {
-  x <- clisymbols::symbol$circle_filled
+  x <- clisymbols::symbol$circle_filled # nolint
   message(crayon::green(glue::glue("{x} {message}\n")))
 }
 
@@ -58,7 +58,7 @@ ru_msg_noop <- function(message) {
 #' ru_msg_warn("This is a warning.")
 #' }
 ru_msg_warn <- function(message) {
-  x <- clisymbols::symbol$warning
+  x <- clisymbols::symbol$warning # nolint
   rlang::warn(crayon::yellow(glue::glue("{x} {message}\n")))
 }
 
@@ -76,6 +76,6 @@ ru_msg_warn <- function(message) {
 #' ru_msg_abort("This is an error, abort.")
 #' }
 ru_msg_abort <- function(message) {
-  x <- clisymbols::symbol$cross
+  x <- clisymbols::symbol$cross # nolint
   rlang::abort(crayon::red(glue::glue("{x} {message}\n")))
 }

@@ -1,11 +1,13 @@
 test_that(
   "handle_ru_geopoints annotates GeoJSON points with lon lat alt acc",
-  {
+  { # nolint
+    # nolint start
     data("geo_fs") # parse T
     # data("geo_gj_raw")  # parse F, wkt F
     data("geo_gj") # parse T, wkt F
     # data("geo_wkt_raw") # parse F, wkt T
     # data("geo_wkt")     # parse T, wkt T
+    # nolint end
 
     # Parsed, rectangled, GeoJSON, geopoints handled: geo_gj
     geo_fields <- geo_fs %>%
@@ -68,11 +70,8 @@ test_that(
 
 test_that(
   "handle_ru_geopoints annotates WKT points with lon lat alt (no acc)",
-  {
+  { # nolint
     data("geo_fs") # parse T
-    # data("geo_gj_raw")  # parse F, wkt F
-    # data("geo_gj")      # parse T, wkt F
-    # data("geo_wkt_raw") # parse F, wkt T
     data("geo_wkt") # parse T, wkt T
 
     # Parsed, rectangled, WKT, geopoints handled: geo_wkt
@@ -169,13 +168,13 @@ test_that("handle_ru_* parses geotypes", {
     wkt = TRUE
   )
 
-  # TODO investigate and fix:
-  # testthat::expect_equal(geo_gj_raw, geo_gj_raw_fresh)
-  # testthat::expect_equal(geo_gj, geo_gj_fresh)
+  testthat::expect_equal(geo_gj_raw, geo_gj_raw_fresh)
+  testthat::expect_equal(geo_gj, geo_gj_fresh)
   testthat::expect_equal(
     geo_wkt_raw$value[[1]]$meta$instanceID,
     geo_wkt_raw_fresh$value[[1]]$meta$instanceID
   )
   testthat::expect_equal(geo_wkt[1, ]$id, geo_wkt_fresh[1, ]$id)
 })
-# usethis::use_r("handle_ru_geopoints")
+
+# usethis::use_r("handle_ru_geopoints") # nolint

@@ -35,7 +35,7 @@ test_that("submission_get works", {
 
   # The columns are form fields or groups,
   # plus the submission data in column 'xml`
-  # names(sub)
+  # names(sub) # nolint
   cn <- c(
     "meta", "encounter_start_datetime", "reporter", "device_id", "location",
     "habitat", "vegetation_stratum", "vegetation_stratum", "vegetation_stratum",
@@ -50,6 +50,4 @@ test_that("submission_get works", {
   testthat::expect_true("encounter_end_datetime" %in% names(sub))
 })
 
-
-# Tests code
-# usethis::edit_file("R/submission_get.R")
+# usethis::edit_file("R/submission_get.R") # nolint

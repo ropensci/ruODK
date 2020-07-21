@@ -45,11 +45,13 @@
 form_schema_parse <- function(fs,
                               path = "Submissions",
                               verbose = get_ru_verbose()) {
+  # nolint start
   # 0. Recursion airbag
   # if (!(is.list(fs))) {ru_msg_info(glue::glue("Not a list:")); print(fs)}
 
   # 1. Grab next level type/name pairs, append column "path".
   # This does not work recursively - if it did, we'd be done here.
+  # nolint end
   x <- fs %>%
     tibble::tibble(xx = .) %>%
     tidyr::unnest_wider(xx) %>%
@@ -107,9 +109,8 @@ predict_ruodk_name <- function(name_str, path_str) {
   prefix <- path_str %>%
     stringr::str_remove("Submissions") %>%
     stringr::str_remove(".")
-  sep <- ifelse(prefix == "", "", "_")
+  sep <- ifelse(prefix == "", "", "_") # nolint
   glue::glue("{prefix}{sep}{name_str}") %>% as.character()
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-form_schema_parse.R")
+# usethis::edit_file("tests/testthat/test-form_schema_parse.R") # nolint

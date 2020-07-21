@@ -57,7 +57,7 @@ handle_ru_geotraces <- function(data,
     intersect(names(data))
 
   if (verbose == TRUE) {
-    x <- paste(geo_cols, collapse = ", ")
+    x <- paste(geo_cols, collapse = ", ") # nolint
     ru_msg_info(glue::glue("Found geotraces: {x}."))
   }
 
@@ -76,4 +76,4 @@ handle_ru_geotraces <- function(data,
   data
 }
 
-# usethis::use_test("handle_ru_geotraces")
+# usethis::use_test("handle_ru_geotraces") # nolint

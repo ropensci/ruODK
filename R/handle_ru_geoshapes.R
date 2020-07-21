@@ -57,7 +57,7 @@ handle_ru_geoshapes <- function(data,
     intersect(names(data))
 
   if (verbose == TRUE) {
-    x <- paste(geo_cols, collapse = ", ")
+    x <- paste(geo_cols, collapse = ", ") # nolint
     ru_msg_info(glue::glue("Found geoshapes: {x}."))
   }
 
@@ -75,4 +75,4 @@ handle_ru_geoshapes <- function(data,
   data
 }
 
-# usethis::use_test("handle_ru_geoshapes")
+# usethis::use_test("handle_ru_geoshapes") # nolint

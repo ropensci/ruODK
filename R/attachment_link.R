@@ -68,6 +68,7 @@ attachment_link <- function(data_tbl,
     )
 }
 
-# Tests
+# nolint start
 # usethis::edit_file("tests/testthat/test-attachment_link.R")
 # usethis::edit_file("tests/testthat/test-submission_export.R")
+# nolint end

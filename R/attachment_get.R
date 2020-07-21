@@ -70,6 +70,7 @@ attachment_url <- function(uuid,
     "{url}/v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
     "/submissions/{uuid}/attachments/{fn}"
   )
+  # nolint start
   # See https://github.com/ropensci/ruODK/issues/66
   # This breaks attachment_get tests:
   # httr::modify_url(
@@ -78,6 +79,7 @@ attachment_url <- function(uuid,
   #     "v1/projects/{pid}/forms/{fid}/submissions/{uuid}/attachments/{fn}"
   #   )
   # )
+  # nolint end
 }
 
 #' Download one media attachment.
@@ -267,5 +269,4 @@ attachment_get <- function(sid,
     as.character(.)
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-attachment_get.R")
+# usethis::edit_file("tests/testthat/test-attachment_get.R") # nolint

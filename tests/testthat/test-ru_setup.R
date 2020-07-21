@@ -97,12 +97,12 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_default_url())
   testthat::expect_warning(get_default_un())
   testthat::expect_warning(get_default_pw())
-  # testthat::expect_warning(get_default_odkc_version())
+  # testthat::expect_warning(get_default_odkc_version()) # nolint
   testthat::expect_warning(get_default_tz())
   testthat::expect_warning(get_test_url())
   testthat::expect_warning(get_test_un())
   testthat::expect_warning(get_test_pw())
-  # testthat::expect_warning(get_test_odkc_version())
+  # testthat::expect_warning(get_test_odkc_version()) # nolint
   testthat::expect_warning(get_test_pid())
   testthat::expect_warning(get_test_fid())
   testthat::expect_warning(get_test_fid_zip())
@@ -113,7 +113,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_equal(x$url, "")
   testthat::expect_equal(x$un, "")
   testthat::expect_equal(x$pw, "")
-  # testthat::expect_equal(x$tz, "")
+  # testthat::expect_equal(x$tz, "") # nolint
   testthat::expect_equal(x$test_url, "")
   testthat::expect_equal(x$test_un, "")
   testthat::expect_equal(x$test_pw, "")
@@ -150,7 +150,7 @@ test_that("ru_setup resets settings if given empty string", {
 test_that("get_default_tz warns and defaults to UTC if tz set to ''", {
 
   # tz0 <- get_default_tz()s
-  # testthat::expect_equal(tz0, "UTC") # TZ is not set in tests
+  # testthat::expect_equal(tz0, "UTC") # TZ is not set in tests # nolint
 
   # Override tz
   ru_setup(tz = "")
@@ -271,4 +271,4 @@ test_that("ru_settings prints only if verbose", {
   )
 })
 
-# usethis::edit_file("R/ru_setup.R")
+# usethis::edit_file("R/ru_setup.R") # nolint

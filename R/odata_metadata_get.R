@@ -51,5 +51,4 @@ odata_metadata_get <- function(pid = get_default_pid(),
     xml2::as_list(.)
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-odata_metadata_get.R")
+# usethis::edit_file("tests/testthat/test-odata_metadata_get.R") # nolint

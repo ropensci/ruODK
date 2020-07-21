@@ -212,7 +212,7 @@ odata_submission_get <- function(table = "Submissions",
       form_schema = fs,
       verbose = verbose
     ) %>%
-    {
+    { # nolint
       if (download == TRUE) {
         fs::dir_create(local_dir)
         handle_ru_attachments(
@@ -255,4 +255,4 @@ odata_submission_get <- function(table = "Submissions",
   sub
 }
 
-# usethis::use_test("odata_submission_get")
+# usethis::use_test("odata_submission_get") # nolint

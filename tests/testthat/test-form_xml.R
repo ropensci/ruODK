@@ -33,6 +33,4 @@ test_that("form_xml returns an xml_document with parse=FALSE", {
   testthat::expect_equal(class(fxml), c("xml_document", "xml_node"))
 })
 
-
-# Tests code
-# usethis::edit_file("R/form_xml.R")
+# usethis::edit_file("R/form_xml.R") # nolint

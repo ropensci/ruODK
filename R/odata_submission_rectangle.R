@@ -49,7 +49,7 @@ unnest_all <- function(nested_tbl,
       magrittr::extract2("ruodk_name") %>%
       paste("value_", ., sep = "")
     if (verbose == TRUE) {
-      x <- paste(keep_nested, collapse = ", ")
+      x <- paste(keep_nested, collapse = ", ") # nolint
       ru_msg_info(glue::glue("Not unnesting geo fields: {x}"))
     }
   } else {
@@ -64,9 +64,11 @@ unnest_all <- function(nested_tbl,
 
   for (colname in cols_to_unnest) {
     if (!(colname %in% names(nested_tbl))) {
+      # nolint start
       # # Diagnostic message
       # if (verbose == TRUE)
       #   ru_msg_info(glue::glue("Skipping renamed column \"{colname}\""))
+      # nolint end
     } else {
       if (verbose == TRUE) {
         ru_msg_info(glue::glue(" Unnesting column \"{colname}\"\n"))
@@ -139,7 +141,7 @@ odata_submission_rectangle <- function(data,
                                        form_schema = NULL,
                                        verbose = get_ru_verbose()) {
   data %>%
-    {
+    { # nolint
       suppressMessages(tibble::as_tibble(data, .name_repair = names_repair))
     } %>%
     unnest_all(
@@ -155,4 +157,4 @@ odata_submission_rectangle <- function(data,
     )
 }
 
-# usethis::use_test("odata_submission_rectangle")
+# usethis::use_test("odata_submission_rectangle") # nolint

@@ -29,5 +29,4 @@ test_that("submission_list works", {
   testthat::expect_equal(nrow(sl), form_list_nsub)
 })
 
-# Tests
-# usethis::edit_file("R/submission_list.R")
+# usethis::edit_file("R/submission_list.R") # nolint

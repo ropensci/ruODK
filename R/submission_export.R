@@ -109,5 +109,4 @@ submission_export <- function(local_dir = here::here(),
   pth
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-submission_export.R")
+# usethis::edit_file("tests/testthat/test-submission_export.R") # nolint

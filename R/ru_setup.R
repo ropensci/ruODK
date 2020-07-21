@@ -556,5 +556,6 @@ yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
     )
 }
 
-# Tests
+# nolint start
 # usethis::edit_file("tests/testthat/test-ru_setup.R")
+# nolint end

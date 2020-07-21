@@ -38,5 +38,4 @@ test_that("audit_get works", {
   testthat::expect_equal(names(logs_part), cn)
 })
 
-# Tests
-# usethis::edit_file("R/audit_get.R")
+# usethis::edit_file("R/audit_get.R") # nolint

@@ -218,5 +218,4 @@ form_schema <- function(flatten = FALSE,
   }
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-form_schema.R")
+# usethis::edit_file("tests/testthat/test-form_schema.R") # nolint

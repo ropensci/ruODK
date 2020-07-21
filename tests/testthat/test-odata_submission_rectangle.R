@@ -15,11 +15,13 @@ test_that("odata_submission_rectangle works", {
 
 
 test_that("odata_submission_rectangle parses GeoJSON to nested list", {
+  # nolint start
   data("geo_fs") # parse T
   data("geo_gj_raw") # parse F, wkt F
   # data("geo_gj")      # parse T, wkt F
   # data("geo_wkt_raw") # parse F, wkt T
   # data("geo_wkt")     # parse T, wkt T
+  # nolint end
 
   # Unparsed, rectangled, GeoJSON
   d <- geo_gj_raw %>%
@@ -60,10 +62,7 @@ test_that("odata_submission_rectangle parses GeoJSON to nested list", {
 
 test_that("odata_submission_rectangle parses WKT as text", {
   data("geo_fs") # parse T
-  # data("geo_gj_raw")  # parse F, wkt F
-  # data("geo_gj")      # parse T, wkt F
   data("geo_wkt_raw") # parse F, wkt T
-  # data("geo_wkt")     # parse T, wkt T
 
   # Unparsed, rectangled, GeoJSON
   d <- geo_wkt_raw %>%
@@ -92,5 +91,4 @@ test_that("odata_submission_rectangle parses WKT as text", {
   }
 })
 
-# Tests code
-# usethis::use_r("odata_submission_rectangle")
+# usethis::use_r("odata_submission_rectangle") # nolint

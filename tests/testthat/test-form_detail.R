@@ -30,5 +30,4 @@ test_that("form_detail works", {
   testthat::expect_equal(names(f), cn)
 })
 
-# Tests code
-# usethis::edit_file("R/form_detail.R")
+# usethis::edit_file("R/form_detail.R") # nolint

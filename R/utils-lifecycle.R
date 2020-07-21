@@ -7,4 +7,4 @@ lifecycle_shim <- function() {
   lifecycle::deprecate_soft(when = "1.0", what = "lifecycle_shim()")
 }
 
-# usethis::use_test("utils-lifecycle")
+# usethis::use_test("utils-lifecycle") # nolint

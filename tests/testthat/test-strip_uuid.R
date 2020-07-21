@@ -12,4 +12,4 @@ test_that("strip_uuid does its job even with weird clients", {
   )
 })
 
-# usethis::use_r("attachment_get")
+# usethis::use_r("attachment_get") # nolint

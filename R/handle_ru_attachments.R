@@ -64,7 +64,7 @@ handle_ru_attachments <- function(
 
 
   if (verbose == TRUE) {
-    x <- paste(att_cols, collapse = ", ")
+    x <- paste(att_cols, collapse = ", ") # nolint
     ru_msg_info(glue::glue("Found attachments: {x}."))
     ru_msg_info("Downloading attachments...")
   }
@@ -89,4 +89,4 @@ handle_ru_attachments <- function(
   data
 }
 
-# usethis::use_test("handle_ru_attachments")
+# usethis::use_test("handle_ru_attachments") # nolint

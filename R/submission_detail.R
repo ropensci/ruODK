@@ -61,7 +61,7 @@ submission_detail <- function(iid,
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    {
+    { # nolint
       tibble::tibble(
         instance_id = .$instanceId,
         submitter_id = .$submitter$id,
@@ -82,5 +82,4 @@ submission_detail <- function(iid,
     }
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-submission_detail.R")
+# usethis::edit_file("tests/testthat/test-submission_detail.R") # nolint

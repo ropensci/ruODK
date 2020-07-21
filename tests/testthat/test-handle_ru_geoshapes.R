@@ -101,7 +101,8 @@ test_that("handle_ru_geoshapes annotates WKT lines with lon lat alt (no acc)", {
       geofield_alt %in% names(geo_wkt),
       label = glue::glue("handle_ru_geoshapes appends {geofield_alt}")
     )
-    testthat::expect_false( # WKT has no accuracy
+    testthat::expect_false(
+      # WKT has no accuracy
       geofield_acc %in% names(geo_wkt),
       label = glue::glue("handle_ru_geoshapes appends {geofield_acc}")
     )
@@ -121,4 +122,4 @@ test_that("handle_ru_geoshapes annotates WKT lines with lon lat alt (no acc)", {
   }
 })
 
-# usethis::use_r("handle_ru_geoshapes")
+# usethis::use_r("handle_ru_geoshapes") # nolint

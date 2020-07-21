@@ -55,7 +55,7 @@ project_detail <- function(pid = get_default_pid(),
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    {
+    { # nolint
       tibble::tibble(
         id = .$id,
         name = .$name,
@@ -82,5 +82,4 @@ project_detail <- function(pid = get_default_pid(),
     }
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-project_detail.R")
+# usethis::edit_file("tests/testthat/test-project_detail.R") # nolint

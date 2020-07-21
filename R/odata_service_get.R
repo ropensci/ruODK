@@ -48,7 +48,7 @@ odata_service_get <- function(pid = get_default_pid(),
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     magrittr::extract2("value") %>%
-    {
+    { # nolint
       tibble::tibble(
         name = purrr::map_chr(., c("name")),
         kind = purrr::map_chr(., c("kind")),
@@ -57,5 +57,4 @@ odata_service_get <- function(pid = get_default_pid(),
     }
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-odata_service_get.R")
+# usethis::edit_file("tests/testthat/test-odata_service_get.R") # nolint

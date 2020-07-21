@@ -13,5 +13,4 @@ test_that("form_list works", {
   testthat::expect_equal(names(fl), cn)
 })
 
-# Tests code
-# usethis::edit_file("R/form_list.R")
+# usethis::edit_file("R/form_list.R") # nolint

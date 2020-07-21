@@ -123,10 +123,12 @@ test_that("split_geotrace works with no data", {
 test_that("split_geotrace works with ODK Linestrings", {
 
   # ODK Central v0.7 and lower ignore the WKT argument for geotrace and geoshape
+  # nolint start
   # ruODK::odata_submission_get(wkt = TRUE, parse = TRUE)
   # ruODK::odata_submission_get(wkt = FALSE, parse = FALSE) %>%
   # ruODK::odata_submission_rectangle()
   # First three points shown with truncated decimal places
+  # nolint end
   odk_v7 <- tibble::tibble(
     id = 1,
     tx = "-14.80 128.40 10.9 5.9;-14.81 128.41 1.7 1.9;-14.82 128.42 1.9 1.7;"
@@ -142,4 +144,4 @@ test_that("split_geotrace works with ODK Linestrings", {
   expect_equal(odk_v7_split$tx_altitude, 10.9)
 })
 
-# usethis::use_r("split_geotrace")
+# usethis::use_r("split_geotrace") # nolint

@@ -11,5 +11,4 @@ test_that("odata_metadata_get works", {
   testthat::expect_equal(class(md), "list")
 })
 
-# Tests code
-# usethis::edit_file("R/odata_metadata_get.R")
+# usethis::edit_file("R/odata_metadata_get.R") # nolint

@@ -62,7 +62,7 @@ form_detail <- function(pid = get_default_pid(),
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    {
+    { # nolint
       tibble::tibble(
         name = .$name,
         fid = .$xmlFormId,
@@ -87,5 +87,4 @@ form_detail <- function(pid = get_default_pid(),
     }
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-form_detail.R")
+# usethis::edit_file("tests/testthat/test-form_detail.R") # nolint

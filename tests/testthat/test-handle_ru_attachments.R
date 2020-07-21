@@ -23,5 +23,4 @@ test_that("handle_ru_attachments downloads files", {
   testthat::expect_true(fs::dir_ls(t) %>% length() > 0)
 })
 
-
-# usethis::use_r("handle_ru_attachments")
+# usethis::use_r("handle_ru_attachments") # nolint

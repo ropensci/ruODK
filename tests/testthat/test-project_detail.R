@@ -86,5 +86,4 @@ test_that("project_detail warns on wrong credentials", {
   )
 })
 
-# Tests
-# usethis::edit_file("R/project_detail.R")
+# usethis::edit_file("R/project_detail.R") # nolint

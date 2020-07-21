@@ -12,7 +12,7 @@ test_that("form_schema v8 returns a tibble and ignores flatten and parse", {
   testthat::expect_true(tibble::is_tibble(fs0))
 })
 
-#
+# nolint start
 #   fs1 <- form_schema(
 #     pid = get_test_pid(),
 #     fid = get_test_fid(),
@@ -83,3 +83,4 @@ test_that("form_schema v8 returns a tibble and ignores flatten and parse", {
 
 # Tests code
 # usethis::edit_file("R/form_schema.R")
+# nolint end

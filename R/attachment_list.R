@@ -79,7 +79,7 @@ get_one_submission_attachment_list <- function(iid,
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    {
+    { # nolint
       tibble::tibble(
         name = purrr::map_chr(., "name"),
         exists = purrr::map_lgl(., "exists")
@@ -141,5 +141,4 @@ attachment_list <- function(iid,
     dplyr::bind_rows()
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-attachment_list.R")
+# usethis::edit_file("tests/testthat/test-attachment_list.R") # nolint

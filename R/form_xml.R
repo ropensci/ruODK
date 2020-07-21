@@ -63,5 +63,6 @@ form_xml <- function(parse = TRUE,
   out %>% xml2::as_list(.)
 }
 
-# Tests
+# nolint start
 # usethis::edit_file("tests/testthat/test-form_xml.R")
+# nolint end

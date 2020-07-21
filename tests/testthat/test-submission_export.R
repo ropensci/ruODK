@@ -92,5 +92,4 @@ test_that("submission_export works", {
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
 })
 
-# Tests code
-# usethis::edit_file("R/submission_export.R")
+# usethis::edit_file("R/submission_export.R") # nolint

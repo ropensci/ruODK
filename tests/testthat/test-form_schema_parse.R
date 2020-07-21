@@ -37,6 +37,7 @@ test_that("form_schema works with ODK Central v0.8", {
   testthat::expect_true("encounter_start_datetime" %in% fs$name)
   testthat::expect_true("quadrat_photo" %in% fs$name)
 
+  # nolint start
   # # Attachments
   # fsp %>% dplyr::filter(type=="binary")
   #
@@ -45,6 +46,7 @@ test_that("form_schema works with ODK Central v0.8", {
   #
   # # Point location
   # fsp %>% dplyr::filter(type=="geopoint")
+  # nolint end
 })
 
 test_that("form_schema_parse debug messages work", {

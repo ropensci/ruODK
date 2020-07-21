@@ -93,5 +93,4 @@ split_geopoint <- function(data, colname, wkt = FALSE) {
   }
 }
 
-# Tests
-# usethis::use_test("split_geopoint")
+# usethis::use_test("split_geopoint") # nolint

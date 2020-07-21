@@ -55,7 +55,7 @@ project_list <- function(url = get_default_url(),
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    {
+    { # nolint
       tibble::tibble(
         id = purrr::map_int(., "id"),
         name = purrr::map_chr(., "name"),
@@ -72,4 +72,4 @@ project_list <- function(url = get_default_url(),
     }
 }
 
-# usethis::use_test("project_list")
+# usethis::use_test("project_list") # nolint

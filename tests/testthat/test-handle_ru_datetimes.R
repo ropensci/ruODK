@@ -7,7 +7,9 @@ test_that("handle_ru_datetimes produces datetimes", {
     ruODK::odata_submission_rectangle() %>%
     ruODK::handle_ru_datetimes(form_schema = fq_form_schema)
 
+  # nolint start
   # fq_with_dates %>% purrr::map(class)
+  # nolint end
 
   date_time_fields <- fq_form_schema %>%
     dplyr::filter(type == "dateTime") %>%
@@ -31,4 +33,4 @@ test_that("handle_ru_datetimes produces datetimes", {
   )
 })
 
-# usethis::use_r("handle_ru_datetimess")
+# usethis::use_r("handle_ru_datetimess") # nolint

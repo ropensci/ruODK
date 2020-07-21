@@ -100,7 +100,7 @@ audit_get <- function(action = NULL,
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    {
+    { # nolint
       tibble::tibble(
         actor_id = purrr::map_int(., "actorId", .default = NA),
         action = purrr::map_chr(., "action"),
@@ -112,5 +112,4 @@ audit_get <- function(action = NULL,
     }
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-audit_get.R")
+# usethis::edit_file("tests/testthat/test-audit_get.R") # nolint

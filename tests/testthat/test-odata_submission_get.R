@@ -98,11 +98,6 @@ test_that("odata_submission_get skip omits number of results", {
     table = fq_svc$name[2] # brittle: depends on form used
   )
 
-  # https://github.com/ropensci/ruODK/issues/65
-  # print("odata_submission_get without skip")
-  # print(fresh_parsed)
-  # print("odata_submission_get with skip=1 should return one less record")
-  # print(skip_parsed)
   skip_on_travis()
   skip_on_appveyor()
   testthat::expect_true(nrow(fresh_parsed) == nrow(skip_parsed) + 1)
@@ -121,10 +116,7 @@ test_that("odata_submission_get top limits number of results", {
     parse = TRUE
   )
 
-
   # https://github.com/ropensci/ruODK/issues/65
-  # print("odata_submission_get with top=1 should return one record")
-  # print(top_parsed)
   skip_on_travis()
   skip_on_appveyor()
   testthat::expect_true(nrow(top_parsed) == 1)
@@ -149,9 +141,6 @@ test_that("odata_submission_get count returns total number or rows", {
 
 
   # https://github.com/ropensci/ruODK/issues/65
-  # ru_msg_info("odata_submission_get count")
-  # print(x_raw)
-  # print(x_parsed)
   skip_on_travis()
   skip_on_appveyor()
 
@@ -163,7 +152,4 @@ test_that("odata_submission_get count returns total number or rows", {
   testthat::expect_gte(x_raw$`@odata.count`, nrow(x_parsed))
 })
 
-
-
-# Tests code
-# usethis::edit_file("R/odata_submission_get.R")
+# usethis::edit_file("R/odata_submission_get.R") # nolint

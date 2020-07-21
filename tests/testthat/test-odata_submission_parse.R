@@ -34,9 +34,9 @@ test_that("odata_submission_rectangle works with gaps in first submission", {
     c("POSIXct", "POSIXt")
   )
 
-  # local_files <- fresh_raw_parsed %>%
-  #   dplyr::filter(!is.null(location_quadrat_photo)) %>%
-  #   magrittr::extract2("location_quadrat_photo") %>%
-  #   as.character()
-  # purrr::map(local_files, ~ testthat::expect_true(fs::file_exists(.)))
 })
+
+# nolint start
+# usethis::use_r("odata_submission_get")
+# usethis::use_r("odata_submission_rectangle")
+# nolint end

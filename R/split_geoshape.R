@@ -80,11 +80,13 @@ split_geoshape <- function(
   } else if (odkc_version < 0.8) {
     # Option 2: ODK linestring
     # ODK Central <=0.7 ignores the WKT argument for geotrace and geoshape
+    # nolint start
     # ruODK::odata_submission_get(wkt = TRUE, parse = TRUE)
     # ruODK::odata_submission_get(wkt = FALSE, parse = FALSE) %>%
     # ruODK::odata_submission_rectangle()
     # First three points shown with truncated decimal places
     # v7gt <- "-14.8 128.4 10.9 5.9;-14.9 128.5 1.7 1.9;-15.0 128.6 1.9 1.7;"
+    # nolint end
     data %>%
       tidyr::extract(
         colname,
@@ -132,5 +134,4 @@ split_geoshape <- function(
   }
 }
 
-
-# usethis::use_test("split_geoshape")
+# usethis::use_test("split_geoshape") # nolint

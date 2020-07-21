@@ -41,6 +41,7 @@ project_create <- function(name,
                            pw = get_default_pw()) {
   ru_msg_warn("Not implemented.")
 
+  # nolint start
   # has_internet()
   # glue::glue("{url}/v1/projects/") %>%
   #   httr::POST(
@@ -62,8 +63,7 @@ project_create <- function(name,
   #       archived = ifelse(is.null(.$archived), FALSE, TRUE)
   #     )
   #   }
+  # nolint end
 }
 
-
-# Tests
-# usethis::edit_file("tests/testthat/test-project_create.R")
+# usethis::edit_file("tests/testthat/test-project_create.R") # nolint

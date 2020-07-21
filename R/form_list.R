@@ -49,7 +49,7 @@ form_list <- function(pid = get_default_pid(),
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    {
+    { # nolint
       tibble::tibble(
         name = purrr::map_chr(., "name"),
         fid = purrr::map_chr(., "xmlFormId"),
@@ -69,5 +69,4 @@ form_list <- function(pid = get_default_pid(),
     }
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-form_list.R")
+# usethis::edit_file("tests/testthat/test-form_list.R") # nolint

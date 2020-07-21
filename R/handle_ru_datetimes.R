@@ -50,7 +50,7 @@ handle_ru_datetimes <- function(data,
     intersect(names(data))
 
   if (verbose == TRUE) {
-    x <- paste(dttm_cols, collapse = ", ")
+    x <- paste(dttm_cols, collapse = ", ") # nolint
     ru_msg_info(glue::glue("Found date/times: {x}."))
   }
 
@@ -61,4 +61,4 @@ handle_ru_datetimes <- function(data,
     )
 }
 
-# usethis::use_test("handle_ru_datetimes")
+# usethis::use_test("handle_ru_datetimes") # nolint

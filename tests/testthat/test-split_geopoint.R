@@ -144,4 +144,4 @@ test_that("split_geopoint works with WKT", {
   )
 })
 
-# usethis::use_r("split_geopoint")
+# usethis::use_r("split_geopoint") # nolint

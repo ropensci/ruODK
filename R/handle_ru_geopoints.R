@@ -53,7 +53,7 @@ handle_ru_geopoints <- function(data,
     intersect(names(data))
 
   if (verbose == TRUE) {
-    x <- paste(geo_cols, collapse = ", ")
+    x <- paste(geo_cols, collapse = ", ") # nolint
     ru_msg_info(glue::glue("Found geopoints: {x}."))
   }
 
@@ -67,4 +67,4 @@ handle_ru_geopoints <- function(data,
   data
 }
 
-# usethis::use_test("handle_ru_geopoints")
+# usethis::use_test("handle_ru_geopoints") # nolint

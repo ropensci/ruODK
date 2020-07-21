@@ -74,7 +74,7 @@ submission_list <- function(pid = get_default_pid(),
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    {
+    { # nolint
       tibble::tibble(
         instance_id = purrr::map_chr(., "instanceId"),
         submitter_id = purrr::map_int(., c("submitter", "id"), .default = NA),
@@ -87,5 +87,4 @@ submission_list <- function(pid = get_default_pid(),
     }
 }
 
-# Tests
-# usethis::edit_file("tests/testthat/test-submission_list.R")
+# usethis::edit_file("tests/testthat/test-submission_list.R") # nolint
