@@ -33,8 +33,8 @@ jobs:
           # - { os: ubuntu-20.04, r: "release"} # not released yet
           # - { os: ubuntu-20.04, r: "oldrel" } # not released yet
           # - { os: ubuntu-latest, r: "devel" } # fails setup-r
-          #- { os: ubuntu-latest, r: "release"} # ubuntu-18.04 # heisensegfault
-          #- { os: ubuntu-latest, r: "oldrel" } # heisensegfault
+          - { os: ubuntu-latest, r: "release"} # ubuntu-18.04 # heisensegfault
+          - { os: ubuntu-latest, r: "oldrel" } # heisensegfault
           # - { os: ubuntu-16.04, r: "devel" } # fails setup-r
           - { os: ubuntu-16.04, r: "release"}
           - { os: ubuntu-16.04, r: "oldrel" }
@@ -100,39 +100,41 @@ jobs:
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
       # - cache R packages daily
       # - cache ccache weekly -> 'ccache' helps rebuilding the package cache faster
-      - name: "[Cache] Prepare daily timestamp for cache"
-        if: runner.os != 'Windows'
-        id: date
-        run: echo "::set-output name=date::$(date '+%d-%m')"
-
-      - name: "[Cache] Prepare weekly timestamp for cache"
-        if: runner.os != 'Windows'
-        id: datew
-        run: echo "::set-output name=datew::$(date '+%Y-%V')"
-
-      - name: "[Cache] Cache R packages"
-        if: runner.os != 'Windows'
-        uses: pat-s/always-upload-cache@v1.1.4
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
-
-      - name: "[Cache] Cache ccache"
-        if: runner.os != 'Windows'
-        uses: pat-s/always-upload-cache@v1.1.4
-        with:
-          path: ${{ env.CCACHE_DIR}}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-${{steps.datew.outputs.datew}}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-${{steps.datew.outputs.datew}}
-
-      # install ccache and write config file
-      # install libicu-dev libxml2-dev for ubuntu-16.04
-      - name: "[Linux] ccache"
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt install ccache libcurl4-openssl-dev libxml2-dev
-          mkdir -p ~/.R && echo -e 'CC=ccache gcc -std=gnu99\nCXX=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
+      #
+      # Heisensegfault testing: disable cache
+      # - name: "[Cache] Prepare daily timestamp for cache"
+      #   if: runner.os != 'Windows'
+      #   id: date
+      #   run: echo "::set-output name=date::$(date '+%d-%m')"
+      #
+      # - name: "[Cache] Prepare weekly timestamp for cache"
+      #   if: runner.os != 'Windows'
+      #   id: datew
+      #   run: echo "::set-output name=datew::$(date '+%Y-%V')"
+      #
+      # - name: "[Cache] Cache R packages"
+      #   if: runner.os != 'Windows'
+      #   uses: pat-s/always-upload-cache@v1.1.4
+      #   with:
+      #     path: ${{ env.R_LIBS_USER }}
+      #     key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+      #     restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+      #
+      # - name: "[Cache] Cache ccache"
+      #   if: runner.os != 'Windows'
+      #   uses: pat-s/always-upload-cache@v1.1.4
+      #   with:
+      #     path: ${{ env.CCACHE_DIR}}
+      #     key: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-${{steps.datew.outputs.datew}}
+      #     restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-ccache-${{steps.datew.outputs.datew}}
+      #
+      # # install ccache and write config file
+      # # install libicu-dev libxml2-dev for ubuntu-16.04
+      # - name: "[Linux] ccache"
+      #   if: runner.os == 'Linux'
+      #   run: |
+      #     sudo apt install ccache libcurl4-openssl-dev libxml2-dev
+      #     mkdir -p ~/.R && echo -e 'CC=ccache gcc -std=gnu99\nCXX=ccache g++\nFC=ccache gfortran\nF77=ccache gfortran' > $HOME/.R/Makevars
 
       # install ccache and write config file
       # mirror the setup described in https://github.com/rmacoslib/r-macos-rtools
@@ -169,11 +171,6 @@ jobs:
         run: |
           Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl', type = 'source')"
-
-      # name: "[Linux] Install XML for rlist"
-      # if: runner.os == 'Linux' && matrix.config.r == 'oldrel'
-      # run: |
-      #   Rscript -e "install.packages('XML', type = 'source')"
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
