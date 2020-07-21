@@ -1,11 +1,11 @@
 # installs dependencies, runs R CMD check, runs covr::codecov()
 do_package_checks(
-  # error_on="error",
+  error_on="error",
   args = c(
-    # "--no-manual",
+    "--no-manual",
     "--as-cran",
-    # "--no-vignettes",
-    # "--no-build-vignettes",
+    "--no-vignettes",
+    "--no-build-vignettes",
     "--no-multiarch"
   )
 )
