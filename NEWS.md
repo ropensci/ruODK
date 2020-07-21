@@ -8,6 +8,8 @@ This is the release on passing
 Thanks to the rOpenSci editors and reviewers @maelle, @karissawhiting and 
 @jmt2080ad, as well as to @OdiljonQurbon, @dickoa, @arestrom and @dmenne.
 
+A DOI was minted at <https://doi.org/10.5281/zenodo.3953159>.
+
 # `ruODK` 0.6.6
 This version addresses ROpenSci reviewer comments from @karissawhiting and 
 @jmt2080ad, contributions 

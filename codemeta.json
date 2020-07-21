@@ -8,10 +8,13 @@
   "description": "Utilities to access and tidy up data from ODK\n    Central's API.  ODK Central is OpenDataKit's clearinghouse for\n    digitally captured data <https://docs.opendatakit.org/central-intro/>.\n    ODK Central's API is documented at\n    <https://odkcentral.docs.apiary.io/>.",
   "name": "ruODK: An R Client for the ODK Central API",
   "codeRepository": "https://github.com/ropensci/ruODK",
-  "relatedLink": ["https://dbca-wa.github.io/ruODK/", "https://ropensci.github.io/ruODK/"],
+  "relatedLink": [
+    "https://dbca-wa.github.io/ruODK/",
+    "https://ropensci.github.io/ruODK/"
+  ],
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.6.6.9029",
+  "version": "0.9.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -197,6 +200,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=vcr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "webshot",
+      "name": "webshot",
+      "version": ">= 0.5.2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=webshot"
     }
   ],
   "softwareRequirements": [
@@ -377,19 +393,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "rlist",
-      "name": "rlist",
-      "version": ">= 0.4.6.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rlist"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "stringr",
       "name": "stringr",
       "version": ">= 1.4.0",
@@ -459,7 +462,7 @@
   "citation": [
     {
       "@type": "CreativeWork",
-      "datePublished": "2019",
+      "datePublished": "2020",
       "author": [
         {
           "@type": "Person",
@@ -469,12 +472,28 @@
       ],
       "name": "ruODK: Client for the ODK Central API",
       "url": "https://github.com/ropensci/ruODK",
-      "description": "R package version 0.6.6"
+      "description": "R package version 0.9.0"
     }
   ],
   "releaseNotes": "https://github.com/ropensci/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ruODK/blob/main/README.md",
-  "fileSize": "1005.28KB",
-  "contIntegration": ["https://travis-ci.org/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/master", "https://codecov.io/github/ropensci/ruODK?branch=master", "https://travis-ci.org/ropensci/ruODK", "https://codecov.io/github/ropensci/ruODK?branch=master", "https://ci.appveyor.com/project/florianm/ruodk/branch/master", "https://codecov.io/gh/validmeasures/odkr", "https://travis-ci.org/unhcr/koboloadeR", "https://ci.appveyor.com/project/unhcr/koboloadeR", "https://codecov.io/gh/unhcr/koboloadeR", "https://travis-ci.org/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/master", "https://codecov.io/github/ropensci/ruODK?branch=master", "https://travis-ci.org/edwindj/cbsodataR", "https://ci.appveyor.com/project/edwindj/cbsodatar"],
+  "fileSize": "1010.359KB",
+  "contIntegration": [
+    "https://travis-ci.org/ropensci/ruODK",
+    "https://ci.appveyor.com/project/florianm/ruodk/branch/master",
+    "https://codecov.io/github/ropensci/ruODK?branch=master",
+    "https://travis-ci.org/ropensci/ruODK",
+    "https://codecov.io/github/ropensci/ruODK?branch=master",
+    "https://ci.appveyor.com/project/florianm/ruodk/branch/master",
+    "https://codecov.io/gh/validmeasures/odkr",
+    "https://travis-ci.org/unhcr/koboloadeR",
+    "https://ci.appveyor.com/project/unhcr/koboloadeR",
+    "https://codecov.io/gh/unhcr/koboloadeR",
+    "https://travis-ci.org/ropensci/ruODK",
+    "https://ci.appveyor.com/project/florianm/ruodk/branch/master",
+    "https://codecov.io/github/ropensci/ruODK?branch=master",
+    "https://travis-ci.org/edwindj/cbsodataR",
+    "https://ci.appveyor.com/project/edwindj/cbsodatar"
+  ],
   "developmentStatus": "https://www.repostatus.org/#active"
 }

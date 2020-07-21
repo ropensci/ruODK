@@ -30,8 +30,10 @@ test_that("form_schema works with ODK Central v0.8", {
   )
 
   testthat::expect_true(tibble::is_tibble(fs))
-  testthat::expect_equal(names(fs),
-                         c("path", "name", "type", "binary", "ruodk_name"))
+  testthat::expect_equal(
+    names(fs),
+    c("path", "name", "type", "binary", "ruodk_name")
+  )
   testthat::expect_true("encounter_start_datetime" %in% fs$name)
   testthat::expect_true("quadrat_photo" %in% fs$name)
 

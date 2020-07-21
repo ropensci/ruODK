@@ -336,5 +336,5 @@ whose structure heavily depends on the completeness of the submissions.
 
 The other approach shown in 
 [`vignette("odata-api", package="ruODK")`](https://ropensci.github.io/ruODK/articles/odata-api.html) 
-yields rectangled data in several normalized tables, which is useful for 
+yields rectangled data in several normalised tables, which is useful for 
 analysis and visualisation.
