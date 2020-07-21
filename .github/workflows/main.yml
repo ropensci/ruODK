@@ -19,7 +19,6 @@ jobs:
       matrix:
         config:
           # See https://github.com/actions/virtual-environments
-          # Blue moon segfaults: https://github.com/ropensci/tic/issues/271
           - { os: windows-latest, r: "devel" } # windows-2019
           - { os: windows-latest, r: "release" }
           # - { os: windows-latest, r: "oldrel" } # fails on missing RTools for 3.6.3
@@ -27,14 +26,14 @@ jobs:
           - { os: windows-2016, r: "release" }
           # - { os: windows-2016, r: "oldrel" } # fails on missing RTools for 3.6.3
           # - { os: macOS-latest, r: "devel" } # macos-10.15 # fails on setup-r
-          - { os: macOS-latest, r: "release", pkgdown: "false"} # see docs.ropensci.org
+          - { os: macOS-latest, r: "release"}
           - { os: macOS-latest, r: "oldrel"}
           # - { os: ubuntu-20.04, r: "devel" } # # not released yet
           # - { os: ubuntu-20.04, r: "release"} # not released yet
           # - { os: ubuntu-20.04, r: "oldrel" } # not released yet
           # - { os: ubuntu-latest, r: "devel" } # fails setup-r
-          - { os: ubuntu-latest, r: "release"} # ubuntu-18.04 # heisensegfault
-          - { os: ubuntu-latest, r: "oldrel" } # heisensegfault
+          - { os: ubuntu-latest, r: "release"}
+          - { os: ubuntu-latest, r: "oldrel" }
           # - { os: ubuntu-16.04, r: "devel" } # fails setup-r
           - { os: ubuntu-16.04, r: "release"}
           - { os: ubuntu-16.04, r: "oldrel" }
@@ -112,6 +111,8 @@ jobs:
         id: datew
         run: echo "::set-output name=datew::$(date '+%Y-%V')"
 
+      # # Blue moon segfaults: https://github.com/ropensci/tic/issues/271
+      # # Solution: disable R pkg cache
       # - name: "[Cache] Cache R packages"
       #   if: runner.os != 'Windows'
       #   uses: pat-s/always-upload-cache@v1.1.4
@@ -206,4 +207,3 @@ jobs:
 
       - name: "[Stage] After Deploy"
         run: Rscript -e "tic::after_deploy()"
-
