@@ -1,7 +1,7 @@
 # `ruODK` (development version)
 * Development continues in the default branch `main`.
  
-#  `ruODK` 0.9.0
+# `ruODK` 0.9.0
 This is the release on passing 
 [rOpenSci peer review](https://github.com/ropensci/software-review/issues/335).
 
