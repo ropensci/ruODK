@@ -151,8 +151,8 @@ respectively.
 The only remaining manual step is to optionally join any sub-tables to the
 master table.
 
-The parameter \code{verbose} enables diagnostic messages along the download and
-parsing process.
+The parameter \code{verbose} enables diagnostic messages along the download
+and parsing process.
 
 With parameter \code{parse=FALSE}, submission data is presented as nested
 list, which is the R equivalent of the JSON structure returned from the API.

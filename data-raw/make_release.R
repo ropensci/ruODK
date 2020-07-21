@@ -38,7 +38,6 @@ devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
 # Add new feature to news if user-facing
 usethis::edit_file("NEWS.md")
 
-
 # Commit and push
 
 # -----------------------------------------------------------------------------#
@@ -50,7 +49,7 @@ usethis::edit_file("NEWS.md")
 usethis::edit_file("inst/CITATION")
 #
 # Build site
-# pkgdown::build_site() # TravisCI builds pkgdown site
+# pkgdown::build_site() # GHA builds pkgdown site
 #
 # Git commit, then tag and push
 v <- packageVersion("ruODK")
