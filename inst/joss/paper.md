@@ -2,9 +2,9 @@
 title: 'ruODK: An R Client for the ODK Central API'
 authors:
 - affiliation: 1
-  name: Florian W Mayer
+  name: Florian Wendelin Mayer
   orcid: 0000-0003-4269-4242
-date: "25 July 2019"
+date: "20 July 2020"
 output: pdf_document
 bibliography: paper.bib
 tags:
@@ -17,7 +17,7 @@ tags:
 - dataset
 affiliations:
 - index: 1
-  name: Department of Biodiversity, Conservation and Attraction, Western Australia
+  name: Department of Biodiversity, Conservation and Attractions, Western Australia
 ---
 ![ruODK logo](../../man/figures/ruODK.png)
 
@@ -50,7 +50,7 @@ The core workflow of ODK is:
 -  From there, it is the responsibility of the maintainers to export and further
   process and use the data.
 
-At the time of writing, [ODK Central](https://docs.opendatakit.org/central-intro/)
+At the time of writing, [ODK Central](https://docs.getodk.org/central-intro/)
 is being introduced as a replacement for ODK Aggregate.
 
 While the use of ODK Aggregate is well established, the use of ODK Central is new
@@ -84,8 +84,8 @@ automate data access and analysis (ruODK).
 -  To wrap "management" API endpoints. The ODK Central GUI already provides a 
   highly capable interface for the management of users, roles, permissions, 
   projects, and forms.
-  ODK Central is a [VueJS application](https://github.com/opendatakit/central-frontend/) 
-  working on the "management" API endpoints of the ODK Central backend.
+  ODK Central is a [VueJS application](https://github.com/getodk/central-frontend/) 
+  working on the "management" API endpoints of the ODK Central back-end.
 -  To provide extensive data visualisation capability. 
   We show only minimal examples of data visualisation and presentation, mainly 
   to illustrate the example data.
@@ -100,8 +100,9 @@ Here, it may be sufficient to export the entire set of submissions, analyse
 and visualise it, and generate some products such as a CSV export of the data,
 vector or raster figures and maps for publications, and a rendered report.
 
-The vignettes "odata" and "api" show examples of this use case. They differ in
-that the vignette "odata" uses the OData API, while the vignette "api" uses the
+The vignettes "odata-api" and "restful-api" show examples of this use case. 
+They differ in that the vignette "odata-api" retrieves submissions through the 
+OData API, while the vignette "restful-api" retrieves submissions through the 
 RESTful API.
 
 ## Larger projects
@@ -111,7 +112,7 @@ thousand submissions over a long, ongoing period of time.
 Such projects typically store their data in dedicated databases. There, the data
 can be value-added through QA/QC/review, through integration with other data
 sources, and through further data processing. This requires the data to be
-regularly and incrementally exported from ODK Central, tranformed into the target
+regularly and incrementally exported from ODK Central, transformed into the target
 data formats (which may differ from ODK Central's output), and loaded into the 
 target database.
 
