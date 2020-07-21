@@ -12,7 +12,7 @@ do_package_checks(
 
 get_stage("install") %>%
   add_step(
-    step_install_cran(c("readr"))
+    step_install_github(c("tidyverse/readr"))
   )
 
 if (ci_on_ghactions() && ci_has_env("BUILD_PKGDOWN")) {
