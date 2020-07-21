@@ -1,9 +1,21 @@
 # `ruODK` (development version)
-This version addresses ROpenSci reviewer comments from 
-@karissawhiting and @jmt2080ad as well as ideas and suggestions from 
-@OdiljonQurbon,  @arestrom and @dmenne.
+* Development continues in the default branch `main`.
+ 
+#  `ruODK` 0.9.0
+This is the release on passing 
+[rOpenSci peer review](https://github.com/ropensci/software-review/issues/335).
 
-This version is the RC for v0.8 to support ODK Central 0.8.
+Thanks to the rOpenSci editors and reviewers @maelle, @karissawhiting and 
+@jmt2080ad, as well as to @OdiljonQurbon, @dickoa, @arestrom and @dmenne.
+
+# `ruODK` 0.6.6
+This version addresses ROpenSci reviewer comments from @karissawhiting and 
+@jmt2080ad, contributions 
+from @dickoa, as well as ideas and suggestions from @OdiljonQurbon,  @arestrom 
+and @dmenne.
+
+This version supports ODK Central 0.9 while providing backwards compatibility
+for ODK Central <= 0.7.
 
 ## Major fixes
 * New environment variables `ODKC_(TEST_)VERSION` allow `ruODK` to toggle
@@ -34,16 +46,18 @@ This version is the RC for v0.8 to support ODK Central 0.8.
 
 ## Dependencies
 * Moved `rlist` to Imports, as it is now used in `odata_submission_get()`. (#6)
+* Dropped `rlist` dependency in favour of `tidyr`/`dplyr`. (#85)
 * Use development versions of `rlang`, `purrr` and `lifecycle` to get their
   latest bug fixes.
 
 ## Data
 * Use canned data in all vignettes, so they can build without authentication. 
   (#33)
-* Update canned data (and `make-data.R`) to work with travis-built pkgdown site.
+* Update canned data (and `make-data.R`) to work with CI-built pkgdown site.
   (#52)
 * Remove nested list `form_schema_raw` which is only generated from legacy 
   ODK Central (< 0.8) (#61)
+* Added ODK Central < v0.7 form schema for tests.
 
 ## Documentation
 * Updated workshop companion package [urODK](https://github.com/ropensci/urODK).
@@ -56,6 +70,15 @@ This version is the RC for v0.8 to support ODK Central 0.8.
 * Add examples where missing. (#32)
 * Build pkgdown site via GH actions. (#52)
 * Minor typographic changes: end every function title with a full stop.
+* Broken links and other inconsistencies fixed after contributions from the 
+  ODK Forum, @dickoa, @arestrom, @dmenne. 
+  Thanks for the first community feedback! (#76 #74 #79 #80 #81)
+
+# Docker
+* Added Dockerfile to build an RStudio Server image based on `rocker/geospatial`
+  with `ruODK` and dependencies installed.
+* Build a separate Dockerfile for [`urODK`](https://github.com/dbca-wa/urODK)
+  to launch a hosted RStudio instance in Binderhub. (#83)
 
 # `ruODK` 0.6.6
 * The big one has landed: `odata_submission_get()` now defaults to parse 
