@@ -55,6 +55,7 @@ jobs:
       SDKROOT: /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
       # use GITHUB_TOKEN from GitHub to workaround rate limits in {remotes}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # [Custom env]
       # ruODK test env variables
       ODKC_URL: ${{ secrets.ODKC_URL }}
       ODKC_UN: ${{ secrets.ODKC_UN }}
@@ -115,10 +116,13 @@ jobs:
           Rscript -e "if (!requireNamespace('remotes')) install.packages('remotes', type = 'source')"
           Rscript -e "if (getRversion() < '3.2' && !requireNamespace('curl')) install.packages('curl', type = 'source')"
 
-      # [ruODK] added libxml2-dev for xml2
       - name: "[Stage] [Linux] Install system deps"
         if: runner.os == 'Linux'
-        run: sudo apt install libcurl4-openssl-dev libxml2-dev
+        run: sudo apt install libcurl4-openssl-dev
+
+      - name: "[Custom block] [Stage] [Linux] Install additional system deps"
+        if: runner.os == 'Linux'
+        run: sudo apt install libxml2-dev
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
