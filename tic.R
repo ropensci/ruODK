@@ -11,9 +11,8 @@ do_package_checks(
 )
 
 get_stage("install") %>%
-  add_step(
-    step_install_github(c("tidyverse/readr"))
-  )
+  add_step(step_install_github(c("tidyverse/readr"))) %>%
+  add_step(step_install_cran("mapview"))
 
 if (ci_on_ghactions() && ci_has_env("BUILD_PKGDOWN")) {
   # creates pkgdown site and pushes to gh-pages branch
