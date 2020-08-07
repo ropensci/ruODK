@@ -122,7 +122,7 @@ jobs:
 
       - name: "[Custom block] [Stage] [Linux] Install additional system deps"
         if: runner.os == 'Linux'
-        run: sudo apt install libxml2-dev
+        run: sudo apt install libxml2-dev libjq-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev libicu-dev libv8-dev libjq-dev libprotobuf-dev protobuf-compiler
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
