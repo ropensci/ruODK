@@ -7,6 +7,7 @@ ruODK::ru_setup(
   svc = Sys.getenv("ODKC_TEST_SVC"),
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW"),
+  odkc_version = Sys.getenv("ODKC_TEST_VERSION"),
   tz = "Australia/Perth"
 )
 

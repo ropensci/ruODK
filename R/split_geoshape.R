@@ -117,6 +117,7 @@ split_geoshape <- function(
         dplyr::vars(dplyr::starts_with("XXX")),
         list(~ stringr::str_replace(., "XXX", colname))
       )
+      # TODO #88 drop last empty coord from colname
   } else {
     # WKT
     data %>%
@@ -130,6 +131,10 @@ split_geoshape <- function(
         "POLYGON \\(\\(([0-9\\.\\-]+) ([0-9\\.\\-]+) ([0-9\\.\\-]+)",
         remove = FALSE,
         convert = TRUE
+      ) %>%
+      dplyr::mutate_at(
+        dplyr::vars(colname),
+        list(~ stringr::str_replace_all(., ",undefined NaN", ""))
       )
   }
 }

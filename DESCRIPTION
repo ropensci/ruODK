@@ -1,7 +1,7 @@
 Type: Package
 Package: ruODK
 Title: An R Client for the ODK Central API
-Version: 0.9.0
+Version: 0.9.0.9000
 Authors@R: 
     c(person(given = c("Florian", "W."),
              family = "Mayer",
@@ -61,8 +61,10 @@ Suggests:
     knitr (>= 1.26),
     leaflet (>= 2.0.3),
     listviewer (>= 3.0.0),
+    mapview (>= 2.7.8),
     rmarkdown (>= 1.17),
     roxygen2 (>= 7.1.0),
+    sf (>= 0.9-5),
     testthat (>= 2.3.2),
     usethis (>= 1.6.0),
     vcr (>= 0.5.4),
