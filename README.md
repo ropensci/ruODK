@@ -7,20 +7,23 @@
 
 [![ROpenSci submission
 status](https://badges.ropensci.org/335_status.svg)](https://github.com/ropensci/software-review/issues/335)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3953159.svg)](https://doi.org/10.5281/zenodo.3953159)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3953158.svg)](https://doi.org/10.5281/zenodo.3953158)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/master)
 [![GitHub
 issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](https://github.com/ropensci/ruODK/issues/)
-![tic](https://github.com/ropensci/ruODK/workflows/tic/badge.svg)
-[![Build
-Status](https://travis-ci.org/ropensci/ruODK.svg?branch=main)](https://travis-ci.org/ropensci/ruODK)
-[![Build
-status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main)
-[![codecov](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
+[![CI - GitHub
+Actions](https://github.com/ropensci/ruODK/workflows/tic/badge.svg)](https://github.com/ropensci/ruODK/actions)
+[![CI -
+TravisCI](https://travis-ci.org/ropensci/ruODK.svg?branch=main)](https://travis-ci.org/ropensci/ruODK)
+[![CI -
+Appveyor](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main)
+[![Text
+coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
+[![Hosted RStudio with
+ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 <!-- badges: end -->
 
 `ruODK` is an R client to access and parse data from ODK Central.
@@ -406,7 +409,7 @@ citation("ruODK")
 #> To cite ruODK in publications use:
 #> 
 #>   Mayer, Florian Wendelin. (2020, July 21).  ruODK: An R Client for the
-#>   ODK Central API (Version 0.9.0).  Zenodo.
+#>   ODK Central API (Version 0.9.1).  Zenodo.
 #>   http://doi.org/10.5281/zenodo.3953159
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -414,7 +417,7 @@ citation("ruODK")
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.9.0},
+#>     note = {R package version 0.9.1},
 #>     year = {2020},
 #>     url = {https://github.com/ropensci/ruODK},
 #>   }

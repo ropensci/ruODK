@@ -10,6 +10,6 @@ citEntry(
   textVersion = paste(
     "Mayer, Florian Wendelin. (2020, July 21). ",
     "ruODK: An R Client for the ODK Central API (Version 0.9.1). ",
-    "Zenodo. http://doi.org/10.5281/zenodo.3953159"
+    "Zenodo. https://doi.org/10.5281/zenodo.3953158"
   )
 )
