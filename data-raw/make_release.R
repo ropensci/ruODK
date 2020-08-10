@@ -73,7 +73,7 @@ system(glue::glue("git push origin {v}"))
 # fs::file_delete("inst/extdoc/ruODK.pdf")
 # devtools::build_manual(path = "inst/extdoc") # rm > pdf
 # fs::file_move(fs::dir_ls("inst/extdoc/"), "inst/extdoc/ruODK.pdf") # rename pdf
-# tools::compactPDF("inst/extdoc/ruODK.pdf", gs_quality = "ebook") # compress pdf
+# tools::compactPDF("inst/extdoc/ruODK_0.9.1.pdf", gs_quality = "ebook") # compress pdf
 # usethis::edit_file("vignettes/manual.Rnw") # hit "Compile PDF"
 #
 # -----------------------------------------------------------------------------#
