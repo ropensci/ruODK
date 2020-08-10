@@ -2,22 +2,29 @@
 % Please edit documentation in R/data.R
 \docType{data}
 \encoding{UTF-8}
-\name{fq_form_xml}
-\alias{fq_form_xml}
-\title{A nested list of a form definition.}
+\name{geo_wkt88}
+\alias{geo_wkt88}
+\title{The parsed submissions of a form containing geofields in WKT
+with trailing empty coordinates present.}
 \format{
-A nested list of a form definition.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1 rows and 48 columns.
 }
 \source{
-The output of \code{\link{form_xml}}
+\code{\link{odata_submission_get}(wkt=TRUE, parse=TRUE)}
 run on the test form
-`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+`system.file("extdata", "Locations.xml", package = "ruODK")`.
 }
 \usage{
-fq_form_xml
+geo_wkt88
 }
 \description{
 \lifecycle{stable}
+}
+\details{
+This issue was fixed in #88.
+ODK Central versions 0.7 - 0.9 export geotraces and geoshapes with trailing
+empty coordinates. ruODK has a patch to drop trailing empty coordinates.
+This dataset is used to test the patch in ruODK.
 }
 \seealso{
 Other included: 
@@ -28,6 +35,7 @@ Other included:
 \code{\link{fq_form_detail}},
 \code{\link{fq_form_list}},
 \code{\link{fq_form_schema}},
+\code{\link{fq_form_xml}},
 \code{\link{fq_meta}},
 \code{\link{fq_project_detail}},
 \code{\link{fq_project_list}},
@@ -46,7 +54,6 @@ Other included:
 \code{\link{geo_gj88}},
 \code{\link{geo_gj_raw}},
 \code{\link{geo_gj}},
-\code{\link{geo_wkt88}},
 \code{\link{geo_wkt_raw}},
 \code{\link{geo_wkt}}
 }

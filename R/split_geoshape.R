@@ -69,17 +69,16 @@
 #' )
 #' }
 split_geoshape <- function(
-  data,
-  colname,
-  wkt = FALSE,
-  odkc_version = odkc_version
-) {
+                           data,
+                           colname,
+                           wkt = FALSE,
+                           odkc_version = odkc_version) {
   if (nrow(data) == 0) {
     # Option 1: Early exit - nothing to do
     return(data)
   } else if (odkc_version < 0.8) {
     # Option 2: ODK linestring
-    # ODK Central <=0.7 ignores the WKT argument for geotrace and geoshape
+    # ODK Central <=0.7 ignores the WKT argument for geotrace and geoshape.
     # nolint start
     # ruODK::odata_submission_get(wkt = TRUE, parse = TRUE)
     # ruODK::odata_submission_get(wkt = FALSE, parse = FALSE) %>%
@@ -116,8 +115,13 @@ split_geoshape <- function(
       dplyr::rename_at(
         dplyr::vars(dplyr::starts_with("XXX")),
         list(~ stringr::str_replace(., "XXX", colname))
+      ) %>%
+      # Drop last empty coordinate from colname, a list(NULL, NULL).
+      # Affects ODK Central Version 0.7-0.9.
+      dplyr::mutate_at(
+        dplyr::vars(colname),
+        list(~ purrr::map(., drop_null_coords))
       )
-      # TODO #88 drop last empty coord from colname
   } else {
     # WKT
     data %>%
@@ -132,6 +136,8 @@ split_geoshape <- function(
         remove = FALSE,
         convert = TRUE
       ) %>%
+      # Drop last empty coordinate from colname, a trailing ",undefined NaN".
+      # Affects ODK Central Version 0.7-0.9.
       dplyr::mutate_at(
         dplyr::vars(colname),
         list(~ stringr::str_replace_all(., ",undefined NaN", ""))

@@ -14,11 +14,10 @@
   ],
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "4.0.0",
     "url": "https://r-project.org"
   },
   "runtimePlatform": "R version 4.0.0 (2020-04-24)",
@@ -138,6 +137,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "mapview",
+      "name": "mapview",
+      "version": ">= 2.7.8",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=mapview"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
       "version": ">= 1.17",
@@ -161,6 +173,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=roxygen2"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "sf",
+      "name": "sf",
+      "version": ">= 0.9-5",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=sf"
     },
     {
       "@type": "SoftwareApplication",
@@ -472,28 +497,17 @@
       ],
       "name": "ruODK: Client for the ODK Central API",
       "url": "https://github.com/ropensci/ruODK",
-      "description": "R package version 0.9.0"
+      "description": "R package version 0.9.1"
     }
   ],
   "releaseNotes": "https://github.com/ropensci/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ruODK/blob/main/README.md",
-  "fileSize": "1010.359KB",
-  "contIntegration": [
-    "https://travis-ci.org/ropensci/ruODK",
-    "https://ci.appveyor.com/project/florianm/ruodk/branch/master",
-    "https://codecov.io/github/ropensci/ruODK?branch=master",
-    "https://travis-ci.org/ropensci/ruODK",
-    "https://codecov.io/github/ropensci/ruODK?branch=master",
-    "https://ci.appveyor.com/project/florianm/ruodk/branch/master",
-    "https://codecov.io/gh/validmeasures/odkr",
-    "https://travis-ci.org/unhcr/koboloadeR",
-    "https://ci.appveyor.com/project/unhcr/koboloadeR",
-    "https://codecov.io/gh/unhcr/koboloadeR",
-    "https://travis-ci.org/ropensci/ruODK",
-    "https://ci.appveyor.com/project/florianm/ruodk/branch/master",
-    "https://codecov.io/github/ropensci/ruODK?branch=master",
-    "https://travis-ci.org/edwindj/cbsodataR",
-    "https://ci.appveyor.com/project/edwindj/cbsodatar"
-  ],
-  "developmentStatus": "https://www.repostatus.org/#active"
+  "fileSize": "3126.119KB",
+  "contIntegration": ["https://travis-ci.org/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/ropensci/ruODK", "https://travis-ci.org/ropensci/ruODK", "https://codecov.io/gh/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/validmeasures/odkr", "https://travis-ci.org/unhcr/koboloadeR", "https://ci.appveyor.com/project/unhcr/koboloadeR", "https://codecov.io/gh/unhcr/koboloadeR", "https://travis-ci.org/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/ropensci/ruODK", "https://travis-ci.org/edwindj/cbsodataR", "https://ci.appveyor.com/project/edwindj/cbsodatar"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/335",
+    "provider": "https://ropensci.org"
+  }
 }

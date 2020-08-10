@@ -1,5 +1,16 @@
 # `ruODK` (development version)
 * Development continues in the default branch `main`.
+
+# `ruODK` 0.9.1
+## Major fixes
+ODK Central versions 0.7 to 0.9 export geotraces and geoshapes via OData with
+a trailing empty coordinate. `ruODK` removes any trailing empty coordinates from
+both GeoJSON and WKT formats. (#88, HT Timon Weitkamp for the bug report)
+
+## Documentation
+A new vignette "Spatial" demonstrates how to parse spatial data into native 
+formats, such as `sf`, and gives pointers on what to do next with them.
+
  
 # `ruODK` 0.9.0
 This is the release on passing 

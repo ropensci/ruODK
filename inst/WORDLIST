@@ -25,6 +25,7 @@
 8bb2
 978f
 999z
+acc
 actee
 AmenazasRD
 Amit
@@ -43,6 +44,7 @@ camelCase
 Carpark
 cbs
 changedate
+cheatsheet
 chr
 ckanr
 CMD
@@ -70,6 +72,7 @@ DCIM0001
 dir
 DIY
 Dockerfile
+doi
 DOI
 dttm
 Edmx
@@ -94,6 +97,8 @@ FloraQuadrat04
 floristic
 fn
 funder
+geo
+geofield
 geofields
 GeoJSON
 geopoint
@@ -101,6 +106,7 @@ geopoints
 geoshape
 geoshapes
 geospatial
+Geospatial
 geotrace
 geotraces
 Geotraces
@@ -109,7 +115,9 @@ getodk
 getters
 GH
 github
+gj
 googledrive
+gps
 Hadley
 http
 https
@@ -141,6 +149,7 @@ metapackage
 Metapackage
 mudmap
 Muntashir
+NaN
 nl
 NodeJS
 noop
@@ -191,16 +200,21 @@ Roadmap
 ropensci
 rOpenSci
 ROpenSci
+Rowlingson
 rOzCBI
+RSpatial
 Rstudio
 RStudio
 ru
 ruodk
 ruReady
+Sadler
 Scalability
 Schemetrica
 screencast
 select1
+SimpleFeature
+SimpleFeatures
 Simplifiy
 situ
 Stata
@@ -235,6 +249,7 @@ v1
 v7
 vectorised
 VueJS
+Weitkamp
 wfp
 whattheyforgot
 Wickam
@@ -248,3 +263,4 @@ XForms
 XlsForm
 XlsForms
 xml2
+zenodo

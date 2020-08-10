@@ -19,8 +19,8 @@ source(here::here("data-raw/make_data.R"))
 devtools::test()
 #
 # Docs
-lintr:::addin_lint_package()
 styler::style_pkg()
+lintr:::addin_lint_package()
 devtools::document(roclets = c("rd", "collate", "namespace"))
 spelling::spell_check_package()
 spelling::spell_check_files("README.Rmd", lang = "en_AU") # TODO update wordlist

@@ -391,6 +391,23 @@
 #' @encoding UTF-8
 "geo_gj"
 
+#' The parsed submissions of a form containing geofields in GeoJSON
+#' with trailing empty coordinates present.
+#'
+#' \lifecycle{stable}
+#'
+#' This issue was fixed in #88.
+#' ODK Central versions 0.7 - 0.9 export geotraces and geoshapes with trailing
+#' empty coordinates. ruODK has a patch to drop trailing empty coordinates.
+#' This dataset is used to test the patch in ruODK.
+#'
+#' @source \code{\link{odata_submission_get}(wkt=FALSE, parse=TRUE)}
+#' run on the test form
+#' `system.file("extdata", "Locations.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"geo_gj88"
+
 #' The unparsed submissions of a form containing geofields in WKT.
 #'
 #' \lifecycle{stable}
@@ -412,6 +429,23 @@
 #' @family included
 #' @encoding UTF-8
 "geo_wkt"
+
+#' The parsed submissions of a form containing geofields in WKT
+#' with trailing empty coordinates present.
+#'
+#' \lifecycle{stable}
+#'
+#' This issue was fixed in #88.
+#' ODK Central versions 0.7 - 0.9 export geotraces and geoshapes with trailing
+#' empty coordinates. ruODK has a patch to drop trailing empty coordinates.
+#' This dataset is used to test the patch in ruODK.
+#'
+#' @source \code{\link{odata_submission_get}(wkt=TRUE, parse=TRUE)}
+#' run on the test form
+#' `system.file("extdata", "Locations.xml", package = "ruODK")`.
+#' @family included
+#' @encoding UTF-8
+"geo_wkt88"
 
 #' The unparsed XML form_schema of a form from ODK Central v0.6 as nested list.
 #'

@@ -130,8 +130,13 @@ split_geotrace <- function(data,
       dplyr::rename_at(
         dplyr::vars(dplyr::starts_with("XXX")),
         list(~ stringr::str_replace(., "XXX", colname))
+      ) %>%
+      # Drop last empty coordinate from colname, a list(NULL, NULL).
+      # Affects ODK Central Version 0.7-0.9.
+      dplyr::mutate_at(
+        dplyr::vars(colname),
+        list(~ purrr::map(., drop_null_coords))
       )
-      # TODO #88 drop last empty coord from colname
   } else {
     # Option 4: ODKC v0.8 WKT
     data %>%

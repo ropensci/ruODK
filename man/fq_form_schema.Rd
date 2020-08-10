@@ -65,8 +65,10 @@ Other included:
 \code{\link{fs_v7_raw}},
 \code{\link{fs_v7}},
 \code{\link{geo_fs}},
+\code{\link{geo_gj88}},
 \code{\link{geo_gj_raw}},
 \code{\link{geo_gj}},
+\code{\link{geo_wkt88}},
 \code{\link{geo_wkt_raw}},
 \code{\link{geo_wkt}}
 
@@ -93,8 +95,10 @@ Other included:
 \code{\link{fs_v7_raw}},
 \code{\link{fs_v7}},
 \code{\link{geo_fs}},
+\code{\link{geo_gj88}},
 \code{\link{geo_gj_raw}},
 \code{\link{geo_gj}},
+\code{\link{geo_wkt88}},
 \code{\link{geo_wkt_raw}},
 \code{\link{geo_wkt}}
 }

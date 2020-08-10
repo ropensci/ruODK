@@ -74,6 +74,7 @@ local_fn <- get_one_attachment("media/filename.jpg", "filename.jpg", att_url)
 Other utilities: 
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
+\code{\link{drop_null_coords}()},
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_submission_attachment_list}()},
 \code{\link{get_one_submission}()},

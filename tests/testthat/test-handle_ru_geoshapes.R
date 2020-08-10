@@ -141,30 +141,32 @@ test_that("handle_ru_geoshapes removes last empty coordinate from WKT", {
       stringr::str_detect(geo_wkt[[geo_fields[i]]], bad_coord),
       label = glue::glue("WKT field {geo_fields[i]} contains \"{bad_coord}\"")
     )
-
   }
 })
 
-# TODO #88
-# test_that("handle_ru_geoshapes removes last empty coordinate from GJ", {
-#   data("geo_fs") # parse T
-#   data("geo_gj") # parse T, wkt T
-#
-#
-#   geo_fields <- geo_fs %>%
-#     # dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%
-#     dplyr::filter(type == "geoshape") %>%
-#     magrittr::extract2("ruodk_name")
-#
-#   for (i in seq_len(length(geo_fields))) {
-#
-#     # WKT geofields must not contain bad_coord
-#     testthat::expect_false(
-#       geo_gj[[geo_fields[i]]], # last coord is empty,
-#       label = glue::glue("GJ field {geo_fields[i]} contains empty coord")
-#     )
-#
-#   }
-# })
+test_that("handle_ru_geoshapes removes last empty coordinate from GJ", {
+  data("geo_fs") # parse T
+  data("geo_gj") # parse T, wkt T
+
+
+  geo_fields <- geo_fs %>%
+    # dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%
+    dplyr::filter(type == "geoshape") %>%
+    magrittr::extract2("ruodk_name")
+
+  for (i in seq_len(length(geo_fields))) {
+    len_coords <- length(geo_gj[[geo_fields[i]]][[1]]$coordinates)
+
+    # Cmpty coord is list(NULL, NULL) which compacts to list() of length 0
+    last_coord_compact <- purrr::compact(
+      geo_gj[[geo_fields[i]]][[1]]$coordinates[[len_coords]]
+    )
+    # WKT geofields must not contain bad_coord
+    testthat::expect_false(
+      length(last_coord_compact) == 0,
+      label = glue::glue("GJ field {geo_fields[i]} last coord is not empty")
+    )
+  }
+})
 
 # usethis::use_r("handle_ru_geoshapes") # nolint

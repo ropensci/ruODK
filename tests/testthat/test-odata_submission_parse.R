@@ -33,7 +33,6 @@ test_that("odata_submission_rectangle works with gaps in first submission", {
     class(fresh_raw_parsed$observation_start_time[1]),
     c("POSIXct", "POSIXt")
   )
-
 })
 
 # nolint start

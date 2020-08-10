@@ -115,6 +115,7 @@ fresh_parsed <- fresh_raw \%>\%
 
 Other utilities: 
 \code{\link{attachment_url}()},
+\code{\link{drop_null_coords}()},
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
 \code{\link{get_one_submission_attachment_list}()},
