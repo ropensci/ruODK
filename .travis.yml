@@ -2,20 +2,17 @@
 
 language: r
 os: linux
-dist: xenial
-#sudo: false
+dist: bionic
+
+apt_packages:
+  - libxml2-dev
+  - libudunits2-dev
 
 jobs:
   include:
   - r: release
-    # before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
-    # deploy:
-      # provider: script
-      # script: Rscript -e 'pkgdown::deploy_site_github()'
-      # skip_cleanup: true
-      # cleanup: false
   - r: devel
-  # - r: oldrel # 403 from https://travis-ci.rstudio.org/ - thanks ...I guess
+  - r: oldrel
 
 cache: packages
 
