@@ -11,6 +11,15 @@ test_that("form_list works", {
     "created_by_id", "created_by", "updated_at", "last_submission", "hash"
   )
   testthat::expect_equal(names(fl), cn)
+
+  # Testing #86 form_list should work with draft forms present.
+  # The above call to form_list worked so we test here that
+  # the test forms contain a draft form.
+  # Draft forms have a NA hash and version.
+  fl %>% dplyr::filter(
+    is.na(version) & is.na(hash)
+  ) %>% nrow() %>%
+    testthat::expect_gt(0)
 })
 
-# usethis::edit_file("R/form_list.R") # nolint
+# usethis::use_r("form_list") # nolint
