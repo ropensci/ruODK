@@ -6,7 +6,7 @@
 \alias{geo_gj}
 \title{The parsed submissions of a form containing geofields in GeoJSON.}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1 rows and 51 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2 rows and 52 columns.
 }
 \source{
 \code{\link{odata_submission_get}(wkt=FALSE, parse=TRUE)}

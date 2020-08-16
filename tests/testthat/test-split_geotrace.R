@@ -144,27 +144,30 @@ test_that("split_geotrace works with ODK Linestrings", {
   expect_equal(odk_v7_split$tx_altitude, 10.9)
 })
 
-test_that("handle_ru_geotraces removes last empty coordinate from WKT", {
-  data("geo_fs") # parse T
-  data("geo_wkt") # parse T, wkt T
-
-  bad_coord <- "undefined NaN"
-  # Parsed, rectangled, WKT, geofields handled: geo_wkt
-
-  geo_fields <- geo_fs %>%
-    # dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%
-    dplyr::filter(type == "geotrace") %>%
-    magrittr::extract2("ruodk_name")
-
-  for (i in seq_len(length(geo_fields))) {
-
-    # WKT geofields must not contain bad_coord
-    testthat::expect_false(
-      stringr::str_detect(geo_wkt[[geo_fields[i]]], bad_coord),
-      label = glue::glue("WKT field {geo_fields[i]} contains \"{bad_coord}\"")
-    )
-  }
-})
+# This test worked while https://github.com/getodk/central-backend/issues/282
+# was open.
+#
+# test_that("handle_ru_geotraces removes last empty coordinate from WKT", {
+#   data("geo_fs") # parse T
+#   data("geo_wkt") # parse T, wkt T
+#
+#   bad_coord <- "undefined NaN"
+#   # Parsed, rectangled, WKT, geofields handled: geo_wkt
+#
+#   geo_fields <- geo_fs %>%
+#     # dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%
+#     dplyr::filter(type == "geotrace") %>%
+#     magrittr::extract2("ruodk_name")
+#
+#   for (i in seq_len(length(geo_fields))) {
+#
+#     # WKT geofields must not contain bad_coord
+#     testthat::expect_false(
+#       stringr::str_detect(geo_wkt[[geo_fields[i]]], bad_coord),
+#       label = glue::glue("WKT field {geo_fields[i]} contains \"{bad_coord}\"")
+#     )
+#   }
+# })
 
 
 # usethis::use_r("split_geotrace") # nolint
