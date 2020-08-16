@@ -69,4 +69,4 @@ form_list <- function(pid = get_default_pid(),
     }
 }
 
-# usethis::edit_file("tests/testthat/test-form_list.R") # nolint
+# usethis::use_test("form_list") # nolint
