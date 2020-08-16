@@ -1,5 +1,10 @@
 # `ruODK` (development version)
 * Development continues in the default branch `main`.
+* Dropped Import of `tidyselect` in favour of using `dplyr::all_of()`.
+* `form_list` now handles draft forms with `NA` hash and version (#86, 
+  thanks @dmenne for the PR).
+* Temporarily turned off mapview popups in vignette "Spatial" while an upstream
+  bugfix is in progress (https://github.com/r-spatial/mapview/issues/312).
 
 # `ruODK` 0.9.1
 ## Major fixes
@@ -23,9 +28,8 @@ A DOI was minted at <https://doi.org/10.5281/zenodo.3953159>.
 
 # `ruODK` 0.6.6
 This version addresses ROpenSci reviewer comments from @karissawhiting and 
-@jmt2080ad, contributions 
-from @dickoa, as well as ideas and suggestions from @OdiljonQurbon,  @arestrom 
-and @dmenne.
+@jmt2080ad, contributions from @dickoa, as well as ideas and suggestions from 
+@OdiljonQurbon, @arestrom and @dmenne.
 
 This version supports ODK Central 0.9 while providing backwards compatibility
 for ODK Central <= 0.7.

@@ -63,7 +63,7 @@ attachment_link <- function(data_tbl,
 
   data_tbl %>%
     dplyr::mutate_at(
-      dplyr::vars(tidyselect::all_of(att_cols)),
+      dplyr::vars(dplyr::all_of(att_cols)),
       ~ fs::path(att_path, .)
     )
 }

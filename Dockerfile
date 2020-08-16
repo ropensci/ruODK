@@ -33,7 +33,11 @@ RUN install2.r --error \
   leaftime \
   reactable \
   skimr \
-  usethis
+  usethis \
+  mapview \
+  leafpop \
+  lattice \
+  sf
 
 RUN R -e "remotes::install_github('ropensci/ruODK@main', \
           dependencies = TRUE, ask=FALSE, update=FALSE)"

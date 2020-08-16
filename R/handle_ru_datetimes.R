@@ -56,7 +56,7 @@ handle_ru_datetimes <- function(data,
 
   data %>%
     dplyr::mutate_at(
-      dplyr::vars(tidyselect::all_of(dttm_cols)),
+      dplyr::vars(dplyr::all_of(dttm_cols)),
       ~ isodt_to_local(., orders = orders, tz = tz)
     )
 }
