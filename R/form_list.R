@@ -53,7 +53,7 @@ form_list <- function(pid = get_default_pid(),
       tibble::tibble(
         name = purrr::map_chr(., "name"),
         fid = purrr::map_chr(., "xmlFormId"),
-        version = purrr::map_chr(., "version"),
+        version = purrr::map_chr(., "version", .default = NA),
         state = purrr::map_chr(., "state"),
         submissions = purrr::map_chr(., "submissions"),
         created_at = purrr::map_chr(., "createdAt", .default = NA) %>%
@@ -64,7 +64,7 @@ form_list <- function(pid = get_default_pid(),
           isodt_to_local(),
         last_submission = purrr::map_chr(., "lastSubmission", .default = NA) %>%
           isodt_to_local(),
-        hash = purrr::map_chr(., "hash")
+        hash = purrr::map_chr(., "hash", .default = NA)
       )
     }
 }
