@@ -57,6 +57,14 @@ v <- packageVersion("ruODK")
 system(glue::glue("git tag -a {v} -m '{v}'"))
 system(glue::glue("git push origin {v}"))
 
+# Build Docker image
+dn <- "dbcawa/ruodk"
+dv <- packageVersion('ruODK')
+gp <- Sys.getenv("GITHUB_PAT")
+message(glue::glue("Building and pushing {dn}:{dv}..."))
+system(glue::glue("docker build . -t {dn} -t {dn}:{dv} ",
+                  "--build-arg GITHUB_PAT={gp} && docker push {dn}"))
+
 # -----------------------------------------------------------------------------#
 # Backyard
 #
