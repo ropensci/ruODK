@@ -33,12 +33,9 @@ jobs:
           - { os: ubuntu-20.04, r: "devel" }
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
-          - { os: ubuntu-latest, r: "devel" }
-          - { os: ubuntu-latest, r: "release"}
-          - { os: ubuntu-latest, r: "oldrel" }
-          # - { os: ubuntu-16.04, r: "devel" } # fails setup-r
-          #- { os: ubuntu-16.04, r: "release"} # SF requires GDAL < 2.0
-          #- { os: ubuntu-16.04, r: "oldrel" }
+          - { os: ubuntu-18.04, r: "devel" }
+          - { os: ubuntu-18.04, r: "release", pkgdown = TRUE}
+          - { os: ubuntu-18.04, r: "oldrel" }
 
     env:
       # otherwise remotes::fun() errors cause the build to fail.
@@ -149,7 +146,7 @@ jobs:
         run: Rscript -e 'tic::script()'
 
       - name: "[Stage] After Success"
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'release'
+        if: matrix.config.os == 'ubuntu-18.04' && matrix.config.r == 'release'
         run: Rscript -e "tic::after_success()"
 
       - name: "[Stage] Upload R CMD check artifacts"
