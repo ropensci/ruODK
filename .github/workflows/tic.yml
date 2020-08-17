@@ -27,13 +27,13 @@ jobs:
           - { os: windows-2016, r: "devel" }
           - { os: windows-2016, r: "release" }
           - { os: windows-2016, r: "oldrel" }
-          - { os: macOS-latest, r: "devel" } # needs gdal
-          - { os: macOS-latest, r: "release"} # needs gdal
-          - { os: macOS-latest, r: "oldrel"} # missing libfreetype.6.dylib ref from systemfonts
-          # - { os: ubuntu-20.04, r: "devel" } # # not released yet
-          # - { os: ubuntu-20.04, r: "release"} # not released yet
-          # - { os: ubuntu-20.04, r: "oldrel" } # not released yet
-          - { os: ubuntu-latest, r: "devel" } # fails setup-r
+          # - { os: macOS-latest, r: "devel" } # needs gdal
+          # - { os: macOS-latest, r: "release"} # needs gdal
+          - { os: macOS-latest, r: "oldrel"}
+          - { os: ubuntu-20.04, r: "devel" }
+          - { os: ubuntu-20.04, r: "release"}
+          - { os: ubuntu-20.04, r: "oldrel" }
+          - { os: ubuntu-latest, r: "devel" }
           - { os: ubuntu-latest, r: "release"}
           - { os: ubuntu-latest, r: "oldrel" }
           # - { os: ubuntu-16.04, r: "devel" } # fails setup-r
@@ -124,7 +124,7 @@ jobs:
         if: runner.os == 'Linux'
         run: sudo apt install libxml2-dev libjq-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev libicu-dev libv8-dev libjq-dev libprotobuf-dev protobuf-compiler
 
-      - name: "[Custom block] [Stage] [Linux] Install R pkgs (unbreak tidyr)"
+      - name: "[Custom block] [Linux] Install R pkgs (unbreak tidyr)"
         if: runner.os == 'Linux'
         run: Rscript -e "remotes::install_github('r-lib/cpp11')"
 
@@ -133,10 +133,10 @@ jobs:
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
         run: Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: "[Custom block] [Stage] [macOS-devel] Install system pkgs"
+      - name: "[Custom block][macOS-devel] Install system pkgs"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
         run: |
-          brew install udunits cairo gdal
+          brew install udunits cairo
 
       # macOS devel needs its own stage because we need to work with an option to suppress the usage of binaries
       - name: "[Stage] Prepare & Install (macOS-devel)"

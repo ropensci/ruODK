@@ -102,7 +102,7 @@ geo_sf_point <- geo_wkt %>% sf::st_as_sf(wkt="point_location_point_gps")
 # Mapview using sf
 # Remove the popup=NULL to get full attribute table as popup
 # See also mention under heading "Outlook"
-mapview::mapview(geo_sf_point, col.regions = sf::sf.colors(10), popup = NULL)
+mapview::mapview(geo_sf_point, col.regions = sf::sf.colors(10))
 # GGplot using sf
 ggplot2::ggplot() + 
   ggplot2::geom_sf(data = geo_sf_point, ggplot2::aes(fill = device_id))
