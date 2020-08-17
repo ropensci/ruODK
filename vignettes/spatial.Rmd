@@ -90,10 +90,9 @@ In addition, we can leave the `tbl_df` as non-spatial object, and instead
 use the separately extracted latitude, 
 longitude, altitude, and accuracy individually e.g. to plot a Leaflet map.
 
-
 <!--  
 mapview's popup is temporarily broken:
-https://github.com/r-spatial/mapview/issues/312
+  https://github.com/r-spatial/mapview/issues/312
 
 We disable the popup with `popup = NULL` until the mapview fix hits CRAN.
 -->
@@ -101,9 +100,12 @@ We disable the popup with `popup = NULL` until the mapview fix hits CRAN.
 ```{r, fig.width=9, fig.height=7}
 geo_sf_point <- geo_wkt %>% sf::st_as_sf(wkt="point_location_point_gps")
 # Mapview using sf
+# Remove the popup=NULL to get full attribute table as popup
+# See also mention under heading "Outlook"
 mapview::mapview(geo_sf_point, col.regions = sf::sf.colors(10), popup = NULL)
 # GGplot using sf
-ggplot2::ggplot() + ggplot2::geom_sf(data = geo_sf_point, ggplot2::aes(fill = device_id))
+ggplot2::ggplot() + 
+  ggplot2::geom_sf(data = geo_sf_point, ggplot2::aes(fill = device_id))
 # Leaflet using sf
 leaflet::leaflet(data = geo_sf_point) %>% 
   leaflet::addTiles() %>% 
