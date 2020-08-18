@@ -30,9 +30,9 @@ jobs:
           # - { os: macOS-latest, r: "devel" } # needs gdal
           # - { os: macOS-latest, r: "release"} # needs gdal
           # - { os: macOS-latest, r: "oldrel"} # needs freetype
-          - { os: ubuntu-20.04, r: "devel" }
-          - { os: ubuntu-20.04, r: "release"}
-          - { os: ubuntu-20.04, r: "oldrel" }
+          # - { os: ubuntu-20.04, r: "devel" } # worked, then broke without change
+          # - { os: ubuntu-20.04, r: "release"}
+          # - { os: ubuntu-20.04, r: "oldrel" }
           - { os: ubuntu-18.04, r: "devel" }
           - { os: ubuntu-18.04, r: "release"}
           - { os: ubuntu-18.04, r: "oldrel" }
@@ -119,7 +119,10 @@ jobs:
 
       - name: "[Custom block] [Stage] [Linux] Install additional system deps"
         if: runner.os == 'Linux'
-        run: sudo apt install libxml2-dev libjq-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev libicu-dev libv8-dev libjq-dev libprotobuf-dev protobuf-compiler
+        run: |
+          sudo apt install libxml2-dev libjq-dev libudunits2-dev libgdal-dev \
+          libgeos-dev libproj-dev libicu-dev libv8-dev libjq-dev libprotobuf-dev \
+          protobuf-compiler
 
       - name: "[Custom block] [Linux] Install R pkgs (unbreak tidyr)"
         if: runner.os == 'Linux'
