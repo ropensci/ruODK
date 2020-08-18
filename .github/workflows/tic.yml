@@ -34,7 +34,7 @@ jobs:
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
           - { os: ubuntu-18.04, r: "devel" }
-          - { os: ubuntu-18.04, r: "release", pkgdown: TRUE}
+          - { os: ubuntu-18.04, r: "release"}
           - { os: ubuntu-18.04, r: "oldrel" }
 
     env:
@@ -130,10 +130,15 @@ jobs:
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
         run: Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: "[Custom block][macOS-devel] Install system pkgs"
+      - name: "[Custom block] [macOS-devel][r-devl] Install system pkgs"
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
         run: |
-          brew install udunits cairo
+          brew install udunits cairo freetype
+
+      - name: "[Custom block] [macOS-devel][r-oldrel] Install system pkgs"
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'oldrel'
+        run: |
+          brew install freetype
 
       # macOS devel needs its own stage because we need to work with an option to suppress the usage of binaries
       - name: "[Stage] Prepare & Install (macOS-devel)"
