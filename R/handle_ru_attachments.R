@@ -17,6 +17,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @template param-verbose
 #' @return The submissions tibble with all attachments downloaded and linked to
 #'   a `local_dir`.
@@ -54,6 +55,7 @@ handle_ru_attachments <- function(
                                   url = get_default_url(),
                                   un = get_default_un(),
                                   pw = get_default_pw(),
+                                  retries = get_retries(),
                                   verbose = get_ru_verbose()) {
   # Find attachment columns
   # Caveat: if an attachment field has no submissions, it is dropped from data
@@ -82,7 +84,8 @@ handle_ru_attachments <- function(
         fid = fid,
         url = url,
         un = un,
-        pw = pw
+        pw = pw,
+        retries = retries
       )
     )
 

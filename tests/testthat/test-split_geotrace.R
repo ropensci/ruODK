@@ -170,4 +170,4 @@ test_that("split_geotrace works with ODK Linestrings", {
 # })
 
 
-# usethis::use_r("split_geotrace") # nolint
+# usethis::use_r("split_geotrace")  # nolint

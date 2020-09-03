@@ -5,7 +5,7 @@
 #' @export
 #' @return \code{\link{ru_settings}} prints your default ODK Central project ID,
 #'   form ID, url, username, and password, corresponding optional test
-#'   server as well as verbosity settings.
+#'   server as well as verbosity and HTTP request settings.
 #' \code{\link{ru_setup}} sets your production and test settings, while
 #' \code{get_(default/test)_*} get each of those respective settings.
 #' @seealso  \code{\link{ru_setup}},
@@ -16,6 +16,7 @@
 #' \code{\link{get_default_pw}},
 #' \code{\link{get_default_tz}},
 #' \code{\link{get_default_odkc_version}},
+#' \code{\link{get_retries}},
 #' \code{\link{get_test_pid}},
 #' \code{\link{get_test_fid}},
 #' \code{\link{get_test_fid_zip}},
@@ -39,6 +40,8 @@ ru_settings <- function() {
     pw = Sys.getenv("ODKC_PW", ""),
     tz = Sys.getenv("RU_TIMEZONE", "UTC"),
     odkc_version = Sys.getenv("ODKC_VERSION", 0.8),
+    retries = get_retries(),
+    verbose = as.logical(Sys.getenv("RU_VERBOSE", FALSE)),
     test_pid = Sys.getenv("ODKC_TEST_PID", ""),
     test_fid = Sys.getenv("ODKC_TEST_FID", ""),
     test_fid_zip = Sys.getenv("ODKC_TEST_FID_ZIP", ""),
@@ -48,8 +51,7 @@ ru_settings <- function() {
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", ""),
-    odkc_version = Sys.getenv("ODKC_TEST_VERSION", 0.8),
-    verbose = as.logical(Sys.getenv("RU_VERBOSE", FALSE))
+    test_odkc_version = Sys.getenv("ODKC_TEST_VERSION", 0.8)
   )
   structure(ops, class = "ru_settings")
 }
@@ -57,13 +59,15 @@ ru_settings <- function() {
 #' @export
 print.ru_settings <- function(x, ...) {
   cat("<ruODK settings>", sep = "\n")
-  cat("  Default ODK Central Project ID: ", x$pid, "\n")
-  cat("  Default ODK Central Form ID: ", x$fid, "\n")
-  cat("  Default ODK Central URL: ", x$url, "\n")
-  cat("  Default ODK Central Username: ", x$un, "\n")
+  cat("  Default ODK Central Project ID:", x$pid, "\n")
+  cat("  Default ODK Central Form ID:", x$fid, "\n")
+  cat("  Default ODK Central URL:", x$url, "\n")
+  cat("  Default ODK Central Username:", x$un, "\n")
   cat("  Default ODK Central Password: run ruODK::get_default_pw() to show \n")
-  cat("  Default Time Zone: ", x$tz, "\n")
-  cat("  Default ODK Central Version: ", x$odkc_version, "\n")
+  cat("  Default Time Zone:", x$tz, "\n")
+  cat("  Default ODK Central Version:", x$odkc_version, "\n")
+  cat("  Default HTTP GET retries:", x$retries, "\n")
+  cat("  Verbose messages:", x$verbose, "\n")
   cat("  Test ODK Central Project ID:", x$test_pid, "\n")
   cat("  Test ODK Central Form ID:", x$test_fid, "\n")
   cat("  Test ODK Central Form ID (ZIP tests):", x$test_fid_zip, "\n")
@@ -73,8 +77,7 @@ print.ru_settings <- function(x, ...) {
   cat("  Test ODK Central URL:", x$test_url, "\n")
   cat("  Test ODK Central Username:", x$test_un, "\n")
   cat("  Test ODK Central Password: run ruODK::get_test_pw() to show \n")
-  cat("  Test ODK Central Version: ", x$odkc_test_version, "\n")
-  cat("  Verbose messages:", x$verbose, "\n")
+  cat("  Test ODK Central Version:", x$test_odkc_version, "\n")
 }
 
 #------------------------------------------------------------------------------#
@@ -181,6 +184,7 @@ odata_svc_parse <- function(svc) {
 #'
 #' @param test_odkc_version The ODK Central test server's version as major/minor
 #'   version, e.g. 0.8.
+#' @template param-retries
 #' @param verbose Global default for `ruODK` verbosity.
 #'   `ruODK` verbosity is determined in order of precedence:
 #'  \itemize{
@@ -226,6 +230,7 @@ odata_svc_parse <- function(svc) {
 #'   test_fid_att = "build_Flora-Quadrat-0-1_1558330379",
 #'   test_fid_gap = "build_Turtle-Track-or-Nest-1-0_1569907666",
 #'   test_fid_wkt = "build_Locations_1589344221",
+#'   retries = 3,
 #'   verbose = TRUE
 #' )
 ru_setup <- function(svc = NULL,
@@ -236,6 +241,8 @@ ru_setup <- function(svc = NULL,
                      pw = NULL,
                      tz = NULL,
                      odkc_version = NULL,
+                     retries = NULL,
+                     verbose = NULL,
                      test_svc = NULL,
                      test_pid = NULL,
                      test_fid = NULL,
@@ -246,8 +253,8 @@ ru_setup <- function(svc = NULL,
                      test_url = NULL,
                      test_un = NULL,
                      test_pw = NULL,
-                     test_odkc_version = NULL,
-                     verbose = NULL) {
+                     test_odkc_version = NULL
+                     ) {
   if (!is.null(svc)) {
     odata_components <- odata_svc_parse(svc)
     Sys.setenv("ODKC_PID" = odata_components$pid)
@@ -262,6 +269,8 @@ ru_setup <- function(svc = NULL,
   if (!is.null(pw)) Sys.setenv("ODKC_PW" = pw)
   if (!is.null(tz)) Sys.setenv("RU_TIMEZONE" = tz)
   if (!is.null(odkc_version)) Sys.setenv("ODKC_VERSION" = odkc_version)
+  if (!is.null(retries)) Sys.setenv("RU_RETRIES" = retries)
+  if (!is.null(verbose)) Sys.setenv("RU_VERBOSE" = verbose)
 
   if (!is.null(test_svc)) {
     odata_components <- odata_svc_parse(test_svc)
@@ -282,7 +291,6 @@ ru_setup <- function(svc = NULL,
   if (!is.null(test_odkc_version)) {
     Sys.setenv("ODKC_TEST_VERSION" = test_odkc_version)
   }
-  if (!is.null(verbose)) Sys.setenv("RU_VERBOSE" = verbose)
 
   if (get_ru_verbose()) {
     print(ru_settings())
@@ -462,22 +470,29 @@ get_test_fid_wkt <- function() {
 #' @export
 #' @rdname ru_settings
 get_ru_verbose <- function() {
-  x <- as.logical(Sys.getenv("RU_VERBOSE", unset = FALSE))
-  x
+  Sys.getenv("RU_VERBOSE", unset = FALSE) %>% as.logical()
 }
 
 #' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_default_odkc_version <- function() {
-  Sys.getenv("ODKC_VERSION", unset = 0.8)
+  Sys.getenv("ODKC_VERSION", unset = 0.8) %>% as.double()
 }
 
 #' \lifecycle{stable}
 #' @export
 #' @rdname ru_settings
 get_test_odkc_version <- function() {
-  Sys.getenv("ODKC_TEST_VERSION", unset = 0.8)
+  Sys.getenv("ODKC_TEST_VERSION", unset = 0.8) %>% as.double()
+}
+
+#' \lifecycle{stable}
+#' @export
+#' @rdname ru_settings
+get_retries <- function() {
+  suppressWarnings(as.integer(Sys.getenv("RU_RETRIES", unset = 3))) %>%
+    tidyr::replace_na(1L)
 }
 
 #' Abort on missing ODK Central credentials (url, username, password).
@@ -556,6 +571,4 @@ yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
     )
 }
 
-# nolint start
-# usethis::use_test("ru_setup")
-# nolint end
+# usethis::use_test("ru_setup")  # nolint

@@ -13,6 +13,8 @@ ru_setup(
   pw = NULL,
   tz = NULL,
   odkc_version = NULL,
+  retries = NULL,
+  verbose = NULL,
   test_svc = NULL,
   test_pid = NULL,
   test_fid = NULL,
@@ -23,8 +25,7 @@ ru_setup(
   test_url = NULL,
   test_un = NULL,
   test_pw = NULL,
-  test_odkc_version = NULL,
-  verbose = NULL
+  test_odkc_version = NULL
 )
 }
 \arguments{
@@ -59,6 +60,20 @@ specified ODK Central instance \code{url} (optional, character).}
  }}
 
 \item{odkc_version}{The ODK Central version as major/minor version, e.g. 0.8.}
+
+\item{retries}{The number of attempts to retrieve a web resource.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+Default: 3.}
+
+\item{verbose}{Global default for `ruODK` verbosity.
+ `ruODK` verbosity is determined in order of precedence:
+\itemize{
+   \item Function parameter:
+     e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
+   \item `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
+   \item Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
+   \item `FALSE`.
+}}
 
 \item{test_svc}{(optional, character) The OData service URL of a test form.
 This parameter will set \code{test_pid}, \code{test_fid}, and
@@ -108,16 +123,6 @@ privileged to view the test project(s) at \code{test_url}.}
 
 \item{test_odkc_version}{The ODK Central test server's version as major/minor
 version, e.g. 0.8.}
-
-\item{verbose}{Global default for `ruODK` verbosity.
- `ruODK` verbosity is determined in order of precedence:
-\itemize{
-   \item Function parameter:
-     e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
-   \item `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
-   \item Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
-   \item `FALSE`.
-}}
 }
 \description{
 Settings are returned invisibly and additionally printed depending on
@@ -161,6 +166,7 @@ ru_setup(
   test_fid_att = "build_Flora-Quadrat-0-1_1558330379",
   test_fid_gap = "build_Turtle-Track-or-Nest-1-0_1569907666",
   test_fid_wkt = "build_Locations_1589344221",
+  retries = 3,
   verbose = TRUE
 )
 }

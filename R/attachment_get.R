@@ -97,6 +97,7 @@ attachment_url <- function(uuid,
 #'   \code{\link{attachment_url}}.
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @template param-verbose
 #' @return The relative local path to the downloaded attachment or NA.
 #' @family utilities
@@ -123,6 +124,7 @@ get_one_attachment <- function(pth,
                                url = get_default_url(),
                                un = get_default_un(),
                                pw = get_default_pw(),
+                               retries = get_retries(),
                                verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw)
   if (fs::file_exists(pth)) {
@@ -152,7 +154,8 @@ get_one_attachment <- function(pth,
     "GET",
     src,
     httr::authenticate(un, pw),
-    httr::write_disk(pth, overwrite = TRUE)
+    httr::write_disk(pth, overwrite = TRUE),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw)
 
@@ -205,6 +208,7 @@ get_one_attachment <- function(pth,
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @template param-verbose
 #' @return The relative file path for the downloaded attachment(s)
 #' @family utilities
@@ -243,6 +247,7 @@ attachment_get <- function(sid,
                            url = get_default_url(),
                            un = get_default_un(),
                            pw = get_default_pw(),
+                           retries = get_retries(),
                            verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   if (separate == TRUE) {
@@ -263,7 +268,8 @@ attachment_get <- function(sid,
     url = url,
     un = un,
     pw = pw,
-    verbose = verbose
+    verbose = verbose,
+    retries = retries
   ) %>%
     purrr::pmap(get_one_attachment) %>%
     as.character(.)

@@ -12,7 +12,8 @@ audit_get(
   offset = NULL,
   url = Sys.getenv("ODKC_URL"),
   un = Sys.getenv("ODKC_UN"),
-  pw = Sys.getenv("ODKC_PW")
+  pw = Sys.getenv("ODKC_PW"),
+  retries = get_retries()
 )
 }
 \arguments{
@@ -45,6 +46,10 @@ See \code{vignette("Setup", package = "ruODK")}.}
 Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{retries}{The number of attempts to retrieve a web resource.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+Default: 3.}
 }
 \value{
 A tibble containing server audit logs.

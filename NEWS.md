@@ -5,6 +5,7 @@
   thanks @dmenne for the PR).
 * Temporarily turned off mapview popups in vignette "Spatial" while an upstream
   bugfix is in progress (https://github.com/r-spatial/mapview/issues/312).
+* All calls to `httr::RETRY(times=)` are configurable via setting `retries`
 
 # `ruODK` 0.9.1
 ## Major fixes

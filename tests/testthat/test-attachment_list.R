@@ -35,4 +35,4 @@ test_that("attachment_list works", {
   testthat::expect_equal(names(al), cn)
 })
 
-# usethis::edit_file("R/attachment_list.R") # nolint
+usethis::edit_file("R/attachment_list.R") # nolint

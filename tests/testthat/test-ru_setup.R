@@ -11,6 +11,8 @@ test_that("ru_setup does not update settings if given NULL", {
     pw = NULL,
     tz = NULL,
     odkc_version = NULL,
+    verbose = NULL,
+    retries = NULL,
     test_svc = NULL,
     test_pid = NULL,
     test_fid = NULL,
@@ -21,8 +23,7 @@ test_that("ru_setup does not update settings if given NULL", {
     test_url = NULL,
     test_un = NULL,
     test_pw = NULL,
-    test_odkc_version = NULL,
-    verbose = NULL
+    test_odkc_version = NULL
   )
 
   # Get current (unchanged) settings
@@ -39,6 +40,7 @@ test_that("ru_setup does not update settings if given NULL", {
   testthat::expect_equal(x$test_un, xx$test_un)
   testthat::expect_equal(x$test_pw, xx$test_pw)
   testthat::expect_equal(x$test_odkc_version, xx$test_odkc_version)
+  testthat::expect_equal(x$retries, xx$retries)
   testthat::expect_equal(x$test_pid, xx$test_pid)
   testthat::expect_equal(x$test_fid, xx$test_fid)
   testthat::expect_equal(x$test_fid_zip, xx$test_fid_zip)
@@ -56,7 +58,9 @@ test_that("ru_setup resets settings if given empty string", {
   pw <- get_default_pw()
   tz <- get_default_tz()
   odkcv <- get_default_odkc_version()
+  retries <- get_retries()
   verbose <- get_ru_verbose()
+  retries <- get_retries()
   test_url <- get_test_url()
   test_un <- get_test_un()
   test_pw <- get_test_pw()
@@ -77,6 +81,8 @@ test_that("ru_setup resets settings if given empty string", {
     pw = "",
     tz = "",
     odkc_version = "",
+    retries = "",
+    verbose = FALSE,
     test_pid = "",
     test_fid = "",
     test_fid_zip = "",
@@ -86,8 +92,7 @@ test_that("ru_setup resets settings if given empty string", {
     test_url = "",
     test_un = "",
     test_pw = "",
-    test_odkc_version = "",
-    verbose = FALSE
+    test_odkc_version = ""
   )
   x <- ru_settings()
 
@@ -99,6 +104,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_default_pw())
   # testthat::expect_warning(get_default_odkc_version()) # nolint
   testthat::expect_warning(get_default_tz())
+  testthat::expect_equal(get_retries(), 1L) # fallback for empty RU_RETRIES
   testthat::expect_warning(get_test_url())
   testthat::expect_warning(get_test_un())
   testthat::expect_warning(get_test_pw())
@@ -133,6 +139,7 @@ test_that("ru_setup resets settings if given empty string", {
     pw = pw,
     tz = tz,
     odkc_version = odkcv,
+    retries = retries,
     test_url = test_url,
     test_un = test_un,
     test_pw = test_pw,
@@ -271,4 +278,23 @@ test_that("ru_settings prints only if verbose", {
   )
 })
 
+test_that("retries default to 1Lif empty or invalid", {
+   # Keep a memory of better times
+  retries <- get_retries()
+
+  # That's not a number
+  ru_setup(retries = "")
+  testthat::expect_equal(get_retries(), 1L)
+
+  # Not a number
+  ru_setup(retries = "a")
+  testthat::expect_equal(get_retries(), 1L)
+
+  # That's better
+  ru_setup(retries = 5)
+  testthat::expect_equal(get_retries(), 5L)
+
+  # Restore law and order
+  ru_setup(retries = retries)
+})
 # usethis::edit_file("R/ru_setup.R") # nolint

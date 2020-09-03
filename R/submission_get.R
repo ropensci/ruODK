@@ -16,6 +16,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A nested list of submission data.
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
@@ -56,7 +57,8 @@ get_one_submission <- function(iid,
                                fid = get_default_fid(),
                                url = get_default_url(),
                                un = get_default_un(),
-                               pw = get_default_pw()) {
+                               pw = get_default_pw(),
+                               retries = get_retries()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
   httr::RETRY(
     "GET",
@@ -64,7 +66,8 @@ get_one_submission <- function(iid,
       "{url}/v1/projects/{pid}/forms/",
       "{URLencode(fid, reserved = TRUE)}/submissions/{iid}.xml"
     ),
-    httr::authenticate(un, pw)
+    httr::authenticate(un, pw),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
@@ -86,6 +89,7 @@ get_one_submission <- function(iid,
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A nested list of submission data.
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
@@ -104,11 +108,12 @@ get_one_submission <- function(iid,
 #' subs <- submission_get(sl$instance_id)
 #' }
 submission_get <- function(iid,
-                           pid = ruODK::get_test_pid(),
-                           fid = ruODK::get_test_fid(),
-                           url = ruODK::get_test_url(),
-                           un = ruODK::get_test_un(),
-                           pw = ruODK::get_test_pw()) {
+                           pid = get_test_pid(),
+                           fid = get_test_fid(),
+                           url = get_test_url(),
+                           un = get_test_un(),
+                           pw = get_test_pw(),
+                           retries = get_retries()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
   tibble::tibble(
     iid = iid,
@@ -116,7 +121,8 @@ submission_get <- function(iid,
     fid = fid,
     url = url,
     un = un,
-    pw = pw
+    pw = pw,
+    retries = retries
   ) %>%
     purrr::pmap(ruODK::get_one_submission)
 }

@@ -7,6 +7,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return The form XML as a nested list.
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
@@ -41,7 +42,8 @@ form_xml <- function(parse = TRUE,
                      fid = get_default_fid(),
                      url = get_default_url(),
                      un = get_default_un(),
-                     pw = get_default_pw()) {
+                     pw = get_default_pw(),
+                     retries = get_retries()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   out <- httr::RETRY(
     "GET",
@@ -52,7 +54,8 @@ form_xml <- function(parse = TRUE,
       )
     ),
     httr::add_headers("Accept" = "application/xml"),
-    httr::authenticate(un, pw)
+    httr::authenticate(un, pw),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.)

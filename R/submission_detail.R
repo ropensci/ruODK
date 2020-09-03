@@ -7,6 +7,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A nested list of submission metadata.
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/getting-submission-details}
@@ -42,7 +43,8 @@ submission_detail <- function(iid,
                               fid = get_default_fid(),
                               url = get_default_url(),
                               un = get_default_un(),
-                              pw = get_default_pw()) {
+                              pw = get_default_pw(),
+                              retries = get_retries()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   httr::RETRY(
     "GET",
@@ -57,7 +59,8 @@ submission_detail <- function(iid,
       "Accept" = "application/json; extended",
       "X-Extended-Metadata" = "true"
     ),
-    httr::authenticate(un, pw)
+    httr::authenticate(un, pw),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

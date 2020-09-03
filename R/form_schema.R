@@ -33,6 +33,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @template param-odkcv
 #' @template param-verbose
 #' @return A tibble or nested list (v0.7) containing the form definition.
@@ -159,6 +160,7 @@ form_schema <- function(flatten = FALSE,
                         un = get_default_un(),
                         pw = get_default_pw(),
                         odkc_version = get_default_odkc_version(),
+                        retries = get_retries(),
                         verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   if (verbose == TRUE) ru_msg_info(glue::glue("Form schema v{odkc_version}"))
@@ -175,7 +177,8 @@ form_schema <- function(flatten = FALSE,
       ),
       httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw),
-      query = list(flatten = flatten, odata = odata)
+      query = list(flatten = flatten, odata = odata),
+      times = retries
     ) %>%
       yell_if_error(., url, un, pw) %>%
       httr::content(.)
@@ -204,7 +207,8 @@ form_schema <- function(flatten = FALSE,
       ),
       httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw),
-      query = list(flatten = flatten, odata = odata)
+      query = list(flatten = flatten, odata = odata),
+      times = retries
     ) %>%
       yell_if_error(., url, un, pw) %>%
       httr::content(.) %>%

@@ -87,6 +87,7 @@
 #' @template param-auth
 #' @template param-odkcv
 #' @template param-tz
+#' @template param-retries
 #' @template param-verbose
 #' @return A list of lists.
 #' \itemize{
@@ -150,6 +151,7 @@ odata_submission_get <- function(table = "Submissions",
                                  pw = get_default_pw(),
                                  odkc_version = get_default_odkc_version(),
                                  tz = get_default_tz(),
+                                 retries = get_retries(),
                                  verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw)
 
@@ -171,6 +173,7 @@ odata_submission_get <- function(table = "Submissions",
       `$count` = ifelse(count == FALSE, "false", "true"),
       `$wkt` = ifelse(wkt == FALSE, "false", "true")
     ),
+    times = retries,
     httr::add_headers(Accept = "application/json"),
     httr::authenticate(un, pw)
   ) %>%
@@ -195,7 +198,8 @@ odata_submission_get <- function(table = "Submissions",
     url = url,
     un = un,
     pw = pw,
-    odkc_version = odkc_version
+    odkc_version = odkc_version,
+    retries = retries
   )
 
   #----------------------------------------------------------------------------#
@@ -224,6 +228,7 @@ odata_submission_get <- function(table = "Submissions",
           url = url,
           un = un,
           pw = pw,
+          retries = retries,
           verbose = verbose
         )
       } else {

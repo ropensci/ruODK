@@ -10,7 +10,8 @@ submission_detail(
   fid = get_default_fid(),
   url = get_default_url(),
   un = get_default_un(),
-  pw = get_default_pw()
+  pw = get_default_pw(),
+  retries = get_retries()
 )
 }
 \arguments{
@@ -41,6 +42,10 @@ See \code{vignette("Setup", package = "ruODK")}.}
 Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{retries}{The number of attempts to retrieve a web resource.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+Default: 3.}
 }
 \value{
 A nested list of submission metadata.

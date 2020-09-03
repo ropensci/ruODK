@@ -19,6 +19,7 @@
 #' @param offset integer. The number of log entries to skip.
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A tibble containing server audit logs.
 #'  One row per audited action, columns are submission attributes:
 #'
@@ -81,7 +82,8 @@ audit_get <- function(action = NULL,
                       offset = NULL,
                       url = Sys.getenv("ODKC_URL"),
                       un = Sys.getenv("ODKC_UN"),
-                      pw = Sys.getenv("ODKC_PW")) {
+                      pw = Sys.getenv("ODKC_PW"),
+                      retries = get_retries()) {
   yell_if_missing(url, un, pw)
   qry <- list(
     action = action,
@@ -96,7 +98,8 @@ audit_get <- function(action = NULL,
     httr::modify_url(url, path = glue::glue("v1/audits")),
     httr::add_headers("Accept" = "application/json"),
     httr::authenticate(un, pw),
-    query = qry
+    query = qry,
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

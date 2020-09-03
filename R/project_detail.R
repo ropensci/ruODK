@@ -9,6 +9,7 @@
 #' @template param-pid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A tibble with exactly one row for the project and all project
 #'   metadata as columns as per ODK Central API docs.
 #'   Column names are renamed from ODK's `camelCase` to `snake_case`.
@@ -42,7 +43,8 @@
 project_detail <- function(pid = get_default_pid(),
                            url = get_default_url(),
                            un = get_default_un(),
-                           pw = get_default_pw()) {
+                           pw = get_default_pw(),
+                           retries = get_retries()) {
   yell_if_missing(url, un, pw, pid = pid)
   httr::RETRY(
     "GET",
@@ -51,7 +53,8 @@ project_detail <- function(pid = get_default_pid(),
       "Accept" = "application/xml",
       "X-Extended-Metadata" = "true"
     ),
-    httr::authenticate(un, pw)
+    httr::authenticate(un, pw),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

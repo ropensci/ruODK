@@ -20,6 +20,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A tibble containing some high-level details of the submission
 #'         attachments.
 #'         One row per submission attachment, columns are submission attributes:
@@ -63,7 +64,9 @@ get_one_submission_attachment_list <- function(iid,
                                                fid = get_default_fid(),
                                                url = get_default_url(),
                                                un = get_default_un(),
-                                               pw = get_default_pw()) {
+                                               pw = get_default_pw(),
+                                               retries = get_retries()
+                                               ) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
@@ -75,7 +78,8 @@ get_one_submission_attachment_list <- function(iid,
       )
     ),
     httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw)
+    httr::authenticate(un, pw),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
@@ -95,6 +99,7 @@ get_one_submission_attachment_list <- function(iid,
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A tibble containing some high-level details of the submission
 #'         attachments.
 #'         One row per submission attachment, columns are submission attributes:
@@ -127,7 +132,8 @@ attachment_list <- function(iid,
                             fid = get_default_fid(),
                             url = get_default_url(),
                             un = get_default_un(),
-                            pw = get_default_pw()) {
+                            pw = get_default_pw(),
+                            retries = get_retries()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
   tibble::tibble(
     iid = iid,
@@ -135,10 +141,11 @@ attachment_list <- function(iid,
     fid = fid,
     url = url,
     un = un,
-    pw = pw
+    pw = pw,
+    retries = retries
   ) %>%
     purrr::pmap(ruODK::get_one_submission_attachment_list) %>%
     dplyr::bind_rows()
 }
 
-# usethis::edit_file("tests/testthat/test-attachment_list.R") # nolint
+# usethis::use_test("attachment_list") # nolint

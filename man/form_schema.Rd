@@ -14,6 +14,7 @@ form_schema(
   un = get_default_un(),
   pw = get_default_pw(),
   odkc_version = get_default_odkc_version(),
+  retries = get_retries(),
   verbose = get_ru_verbose()
 )
 }
@@ -66,6 +67,10 @@ Default: \code{\link{get_default_odkc_version}} or 0.8 if unset.
 Set default \code{get_default_odkc_version} through
 \code{ru_setup(odkc_version=0.8)}.
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{retries}{The number of attempts to retrieve a web resource.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+Default: 3.}
 
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s

@@ -29,6 +29,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @template param-verbose
 #' @return The absolute path to the zip file named "`fid`.zip"
 #'         containing submissions as CSV,
@@ -68,6 +69,7 @@ submission_export <- function(local_dir = here::here(),
                               url = get_default_url(),
                               un = get_default_un(),
                               pw = get_default_pw(),
+                              retries = get_retries(),
                               verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   pth <- fs::path(
@@ -102,7 +104,8 @@ submission_export <- function(local_dir = here::here(),
       )
     ),
     httr::authenticate(un, pw),
-    httr::write_disk(pth, overwrite = overwrite)
+    httr::write_disk(pth, overwrite = overwrite),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.)

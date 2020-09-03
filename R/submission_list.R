@@ -5,6 +5,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A tibble containing some high-level details of the form submissions.
 #'         One row per submission, columns are submission attributes:
 #'
@@ -54,7 +55,8 @@ submission_list <- function(pid = get_default_pid(),
                             fid = get_default_fid(),
                             url = get_default_url(),
                             un = get_default_un(),
-                            pw = get_default_pw()) {
+                            pw = get_default_pw(),
+                            retries = get_retries()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   url <- httr::modify_url(
     url,
@@ -70,7 +72,8 @@ submission_list <- function(pid = get_default_pid(),
       "Accept" = "application/json",
       "X-Extended-Metadata" = "true"
     ),
-    httr::authenticate(un, pw)
+    httr::authenticate(un, pw),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

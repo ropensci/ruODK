@@ -45,7 +45,8 @@ test_that("odata_submission_get works with one known dataset", {
     odkc_version = get_test_odkc_version(),
     parse = TRUE,
     verbose = TRUE,
-    local_dir = t
+    local_dir = t,
+    download = TRUE
   )
   fresh_parsed <- fresh_raw %>% odata_submission_rectangle()
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))

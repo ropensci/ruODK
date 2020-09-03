@@ -6,6 +6,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A nested list containing Edmx (dataset schema definition) and
 #'   .attrs (Version).
 # nolint start
@@ -32,7 +33,8 @@ odata_metadata_get <- function(pid = get_default_pid(),
                                fid = get_default_fid(),
                                url = get_default_url(),
                                un = get_default_un(),
-                               pw = get_default_pw()) {
+                               pw = get_default_pw(),
+                               retries = get_retries()) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
@@ -44,7 +46,8 @@ odata_metadata_get <- function(pid = get_default_pid(),
       )
     ),
     httr::add_headers(Accept = "application/xml"),
-    httr::authenticate(un, pw)
+    httr::authenticate(un, pw),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

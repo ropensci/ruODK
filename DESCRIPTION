@@ -1,7 +1,7 @@
 Type: Package
 Package: ruODK
 Title: An R Client for the ODK Central API
-Version: 0.9.1.9000
+Version: 0.9.1.9001
 Authors@R: 
     c(person(given = c("Florian", "W."),
              family = "Mayer",
@@ -44,6 +44,7 @@ Imports:
     httr (>= 1.4.1),
     janitor (>= 2.0.1),
     lifecycle (>= 0.1.0),
+    fuzzyjoin (>= 0.1.6),
     lubridate (>= 1.7.8),
     magrittr (>= 1.5),
     purrr (>= 0.3.4),

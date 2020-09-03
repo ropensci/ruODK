@@ -6,11 +6,12 @@
 \usage{
 submission_get(
   iid,
-  pid = ruODK::get_test_pid(),
-  fid = ruODK::get_test_fid(),
-  url = ruODK::get_test_url(),
-  un = ruODK::get_test_un(),
-  pw = ruODK::get_test_pw()
+  pid = get_test_pid(),
+  fid = get_test_fid(),
+  url = get_test_url(),
+  un = get_test_un(),
+  pw = get_test_pw(),
+  retries = get_retries()
 )
 }
 \arguments{
@@ -41,6 +42,10 @@ See \code{vignette("Setup", package = "ruODK")}.}
 Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{retries}{The number of attempts to retrieve a web resource.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+Default: 3.}
 }
 \value{
 A nested list of submission data.

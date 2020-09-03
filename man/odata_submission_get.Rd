@@ -22,6 +22,7 @@ odata_submission_get(
   pw = get_default_pw(),
   odkc_version = get_default_odkc_version(),
   tz = get_default_tz(),
+  retries = get_retries(),
   verbose = get_ru_verbose()
 )
 }
@@ -105,6 +106,10 @@ See \code{vignette("Setup", package = "ruODK")}.}
 \item{tz}{A timezone to convert dates and times to.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 timezone can be set globally or per function.}
+
+\item{retries}{The number of attempts to retrieve a web resource.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+Default: 3.}
 
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s

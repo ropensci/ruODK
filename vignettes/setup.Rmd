@@ -146,6 +146,7 @@ ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698"
 ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379"
 RU_TIMEZONE="Australia/Perth"
 RU_VERBOSE=TRUE
+RU_RETRIES=3
 ```
 
 As an alternative to setting environment variables through `~/.Renviron`, you
@@ -164,6 +165,7 @@ Sys.setenv(ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698")
 Sys.setenv(ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379")
 Sys.setenv(RU_TIMEZONE="Australia/Perth")
 Sys.setenv(RU_VERBOSE=TRUE)
+Sys.setenv(RU_RETRIES=3)
 ```
 
 ## The hard way: Per function call

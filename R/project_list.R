@@ -9,6 +9,7 @@
 #'
 #' @template param-url
 #' @template param-auth
+#' @template param-retries
 #' @return A tibble with one row per project and all project metadata
 #'         as columns as per ODK Central API docs.
 # nolint start
@@ -42,7 +43,8 @@
 #' }
 project_list <- function(url = get_default_url(),
                          un = get_default_un(),
-                         pw = get_default_pw()) {
+                         pw = get_default_pw(),
+                         retries = get_retries()) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
@@ -51,7 +53,8 @@ project_list <- function(url = get_default_url(),
       "Accept" = "application/xml",
       "X-Extended-Metadata" = "true"
     ),
-    httr::authenticate(un, pw)
+    httr::authenticate(un, pw),
+    times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

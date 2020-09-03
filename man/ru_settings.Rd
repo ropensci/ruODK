@@ -20,6 +20,7 @@
 \alias{get_ru_verbose}
 \alias{get_default_odkc_version}
 \alias{get_test_odkc_version}
+\alias{get_retries}
 \title{Get or set \code{ruODK} settings.}
 \usage{
 ru_settings()
@@ -59,11 +60,13 @@ get_ru_verbose()
 get_default_odkc_version()
 
 get_test_odkc_version()
+
+get_retries()
 }
 \value{
 \code{\link{ru_settings}} prints your default ODK Central project ID,
   form ID, url, username, and password, corresponding optional test
-  server as well as verbosity settings.
+  server as well as verbosity and HTTP request settings.
 \code{\link{ru_setup}} sets your production and test settings, while
 \code{get_(default/test)_*} get each of those respective settings.
 }
@@ -82,6 +85,7 @@ ru_settings()
 \code{\link{get_default_pw}},
 \code{\link{get_default_tz}},
 \code{\link{get_default_odkc_version}},
+\code{\link{get_retries}},
 \code{\link{get_test_pid}},
 \code{\link{get_test_fid}},
 \code{\link{get_test_fid_zip}},
