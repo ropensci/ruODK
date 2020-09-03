@@ -5,7 +5,7 @@
   thanks @dmenne for the PR).
 * Temporarily turned off mapview popups in vignette "Spatial" while an upstream
   bugfix is in progress (https://github.com/r-spatial/mapview/issues/312).
-* All calls to `httr::RETRY(times=)` are configurable via setting `retries`
+* All calls to `httr::RETRY(times=)` are configurable via setting `retries`. (#94)
 
 # `ruODK` 0.9.1
 ## Major fixes
@@ -37,7 +37,7 @@ for ODK Central <= 0.7.
 
 ## Major fixes
 * New environment variables `ODKC_(TEST_)VERSION` allow `ruODK` to toggle
-  between deprecated/removed and new/added API endpoints, e.g. `form_schema` (#61)
+  between deprecated/removed and new/added API endpoints, e.g. `form_schema`. (#61)
 * Split and rename WKT POINT (ODK geopoint) fields with 
   `odata_submission_get(wkt=T)`. (#31 #7 HT @OdiljonQurbon)
 * `submission_get` now accepts a vector of (all or selected) submission instance 
