@@ -44,13 +44,18 @@ unnest_all <- function(nested_tbl,
                        form_schema = NULL,
                        verbose = get_ru_verbose()) {
   if (!is.null(form_schema)) {
-    keep_nested <- form_schema %>%
+    geofield_names <- form_schema %>%
       dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%
-      magrittr::extract2("ruodk_name") %>%
-      paste("value_", ., sep = "")
-    if (verbose == TRUE) {
-      x <- paste(keep_nested, collapse = ", ") # nolint
-      ru_msg_info(glue::glue("Not unnesting geo fields: {x}"))
+      magrittr::extract2("ruodk_name")
+
+    if (length(geofield_names) == 0)  {
+      keep_nested <- c()
+    } else {
+      keep_nested <- paste("value_", geofield_names, sep = "")
+      if (verbose == TRUE) {
+        x <- paste(keep_nested, collapse = ", ") # nolint
+        ru_msg_info(glue::glue("Not unnesting geo fields: {x}"))
+      }
     }
   } else {
     keep_nested <- c()

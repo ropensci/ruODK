@@ -46,8 +46,7 @@
 #' testthat::expect_true(fs::dir_ls(t) %>% length() > 0)
 #' }
 #'
-handle_ru_attachments <- function(
-                                  data,
+handle_ru_attachments <- function(data,
                                   form_schema,
                                   local_dir = "media",
                                   pid = get_default_pid(),
@@ -63,7 +62,6 @@ handle_ru_attachments <- function(
     dplyr::filter(type == "binary") %>%
     magrittr::extract2("ruodk_name") %>%
     intersect(names(data))
-
 
   if (verbose == TRUE) {
     x <- paste(att_cols, collapse = ", ") # nolint

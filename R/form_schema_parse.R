@@ -110,7 +110,9 @@ predict_ruodk_name <- function(name_str, path_str) {
     stringr::str_remove("Submissions") %>%
     stringr::str_remove(".")
   sep <- ifelse(prefix == "", "", "_") # nolint
-  glue::glue("{prefix}{sep}{name_str}") %>% as.character()
+  glue::glue("{prefix}{sep}{name_str}") %>%
+    as.character() %>%
+    janitor::make_clean_names()
 }
 
 # usethis::edit_file("tests/testthat/test-form_schema_parse.R") # nolint
