@@ -278,7 +278,7 @@ test_that("ru_settings prints only if verbose", {
   )
 })
 
-test_that("retries default to 1Lif empty or invalid", {
+test_that("retries default to 1L if empty or invalid", {
    # Keep a memory of better times
   retries <- get_retries()
 

@@ -6,11 +6,11 @@
 \usage{
 submission_get(
   iid,
-  pid = get_test_pid(),
-  fid = get_test_fid(),
-  url = get_test_url(),
-  un = get_test_un(),
-  pw = get_test_pw(),
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
   retries = get_retries()
 )
 }
