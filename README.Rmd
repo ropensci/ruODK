@@ -24,6 +24,8 @@ knitr::opts_chunk$set(
 [![Hosted RStudio with ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 <!-- badges: end -->
 
+Especially in these trying times, it is important to ask "r u ODK?".
+
 `ruODK` is an R client to access and parse data from ODK Central.
 
 [OpenDataKit](https://getodk.org/) (ODK) is 
@@ -31,6 +33,8 @@ knitr::opts_chunk$set(
 that helps millions of people collect data quickly, accurately, offline, 
 and at scale. The software is in active use in every country in the world and is 
 supported by a large and helpful community.
+
+`ruODK` is a community contribution to the ODK ecosystem, but not directly affiliated with ODK.
 
 `ruODK` assumes some familiarity of its users with the ODK ecosystem and workflows.
 For a detailed overview, read the extensive [ODK documentation](https://docs.getodk.org/)
@@ -88,6 +92,7 @@ Benefits of using the R ecosystem in combination with ODK:
    ODK Central data in R: **data munging** the ODK Central API output into tidy 
    R formats.
   
+<!-- TODO: vignette "workflows" -->
 `ruODK`'s use cases:
 
 *  Smaller projects: Example [rOzCBI](https://dbca-wa.github.io/rOzCBI/)
@@ -258,71 +263,7 @@ the conservation of the biodiversity of Western Australia, and in doing so,
 caring for country.
 
 ## Package functionality
+See [`vignette("comparison", package="ruODK")`](https://ropensci.github.io/ruODK/articles/comparison.html)
+for a comprehensive comparison of ruODK to other software packages from
+both an ODK and an OData angle.
 
-There are several other R packages interacting with the ODK ecosystem, and/or
-[OData](https://www.odata.org/).
-
-### Comparison of ODK related software packages (non-ODK core)
-
-| Package                         | [`ruODK`](https://ropensci.github.io/ruODK/) | [`odkr`](https://validmeasures.org/odkr/) | [`odk`](https://cran.r-project.org/package=odk) | [`odkmeta`](https://github.com/nap2000/odkmeta) | [`koboloadeR`](https://unhcr.github.io/koboloadeR/docs/index.html) | [Pentaho Kettle tutorial](https://github.com/schemetrica/automating-data-delivery-odk-central)
-|------------------------------|---------------|---------------|---------------|---------------|---------------|---------------|
-| Elevator pitch               | "[ckanr](https://github.com/ropensci/ckanr) for ODK Central"  | "Drive ODK Briefcase through R" | "Export ODK Aggregate to SPSS" | "Export ODK Aggregate to STATA" | "Metapackage for the extended ODK ecosystem" | "What ruODK does, but as GUI" |
-| Last commit                  | [![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/validmeasures/odkr.svg)](https://github.com/validmeasures/odkr/commits/master) |    Nov 2017    |  [![Last-changedate](https://img.shields.io/github/last-commit/nap2000/odkmeta.svg)](https://github.com/nap2000/odkmeta/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/unhcr/koboloadeR.svg)](https://github.com/unhcr/koboloadeR/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/schemetrica/automating-data-delivery-odk-central.svg)](https://github.com/schemetrica/automating-data-delivery-odk-central/commits/master) |
-| Website                      | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/ropensci/ruODK) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://docs.ropensci.org/ruODK/) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/validmeasures/odkr) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://validmeasures.org/odkr/)   | [![docs](https://img.shields.io/static/v1?label=docs&message=rdrr.io&color=brightgreen)](https://rdrr.io/cran/odk/) |    [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/nap2000/odkmeta) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/unhcr/koboloadeR) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://unhcr.github.io/koboloadeR/docs/index.html) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/schemetrica/automating-data-delivery-odk-central) |
-| Test coverage             | ![tic](https://github.com/ropensci/ruODK/workflows/tic/badge.svg) [![Build Status](https://travis-ci.org/ropensci/ruODK.svg?branch=main)](https://travis-ci.org/ropensci/ruODK) [![codecov](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK) [![Build status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/main?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main) | [![codecov](https://codecov.io/gh/validmeasures/odkr/branch/master/graph/badge.svg)](https://codecov.io/gh/validmeasures/odkr) | ❌ | In repo | [![Travis build status](https://travis-ci.org/unhcr/koboloadeR.svg?branch=gh-pages)](https://travis-ci.org/unhcr/koboloadeR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/unhcr/koboloadeR?branch=gh-pages&svg=true)](https://ci.appveyor.com/project/unhcr/koboloadeR) [![codecov](https://codecov.io/gh/unhcr/koboloadeR/branch/gh-pages/graph/badge.svg)](https://codecov.io/gh/unhcr/koboloadeR) | NA |
-| Working examples             | README, 3 vignettes, pkgdown, Rmd templates | README, pkgdown | CRAN PDF | README | README, 9 vignettes, shiny apps, pkgdown | Tutorial with screenshots |
-| Available on CRAN            | [![CRAN status](https://www.r-pkg.org/badges/version/ruODK)](https://cran.r-project.org/package=ruODK) | [![CRAN status](https://www.r-pkg.org/badges/version/odkr)](https://cran.r-project.org/package=odkr) |  [![version](http://www.r-pkg.org/badges/version/odk)](https://CRAN.R-project.org/package=odk)  | NA | [![CRAN status](https://www.r-pkg.org/badges/version/koboloadeR)](https://cran.r-project.org/package=koboloadeR) | NA |
-| Technologies            | Tidyverse R, XForms | Base R | Base R | Stata | R metapackage, XlsForms | Pentaho Kettle GUI |
-| External dependencies        | None | Java, ODK Briefcase | SPSS | Stata | Java, ODK Briefcase, wraps `odkr` | [Pentaho Kettle](http://www.ibridge.be/), Java |
-| Affiliation                  | [DBCA WA](https://www.dbca.wa.gov.au/science) / [ROpenSci](https://github.com/ropensci/software-review/issues/335) | [Valid Measues](https://github.com/validmeasures) |  [Muntashir-Al-Arefin](https://stackoverflow.com/users/8875690/muntashir-al-arefin) | [ODK Central developer Matt White](https://github.com/matthew-white) | [UNHCR](https://github.com/unhcr) | [Schemetrica](https://github.com/schemetrica) |
-| Covers ODK Central OData API        | ✅  |  ❌ |  ❌  | ❌  | ❌ | ✅  |
-| Covers ODK Central REST API         | ✅  |  ❌ |  ❌  | ❌  | ❌ | ❌  |
-| Covers ODK Central bulk export      | ✅  |  ❌ |  ❌  | ✅  | ❌ | ✅  |  
-| Covers ODK Central OpenRosa API     | ❌  no need, gets all data through OData/REST API |  ✅  via ODK Briefcase |  ❌  | ❌  | ✅  via ODK Briefcase  | ✅  |  
-| Data post-processing                | ✅  |  ✅ |  ❌ | ✅  | ✅ | ✅  |  
-| Data visualisation examples         | ✅  |  ❌ | ❌  | ❌  | ✅  | ❌ |  
- 
-In summary:
-
-`ruODK` provides a dependency-free interface to ODK Central.
-
-`koboloadeR` is a metapackage containing lots of ancillary packages, with some
-heavy dependencies on Java and ODK Briefcase (which in turn can access ODK Central).
-Although built around the XlsForm standard and paradigm, `koboloadeR` is well worth 
-exploring as a larger context to data wrangling in the ODK ecosystem.
-
-Schemetrica's tutorial illustrates data ETL from ODK Central and deserves a special
-mention, as it is both very recent and aimed specifically against ODK Central.
-The GUI paradigm of Pentaho Kettle addresses a different audience to the scripting
-paradigm of `ruODK`. It should be mentioned that Kettle's composable data 
-manipulation steps can be used for many other use cases apart from ODK Central.
-
-### Comparison of OData related R packages
-
-| Package                         | [`ruODK`](https://ropensci.github.io/ruODK/) | [`odataR`](https://github.com/HanOostdijk/odataR) | [`cbsodataR`](https://github.com/edwindj/cbsodataR) | [`OData`](https://cran.r-project.org/package=OData) | [OData JDBC R tutorial](https://www.cdata.com/kb/tech/odata-jdbc-r.rst)
-|------------------------------|---------------|---------------|---------------|---------------|--------------|
-| Elevator pitch               | "[ckanr](https://github.com/ropensci/ckanr) for ODK Central"  | "OData client for https://opendata.cbs.nl (and similar)" | "OData client for https://www.cbs.nl" | "Minimal OData example" | "Minimal RJDBC example" | 
-| Last commit                  | [![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/HanOostdijk/odataR.svg)](https://github.com/HanOostdijk/odataR/commits/master) | [![Last-changedate](https://img.shields.io/github/last-commit/edwindj/cbsodataR.svg)](https://github.com/edwindj/cbsodataR/commits/master) | Dec 2016 | ❓ |
-| Website | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/ropensci/ruODK) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://ropensci.github.io/ruODK/) | [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/HanOostdijk/odataR) | [![docs](https://img.shields.io/static/v1?label=code&message=CRAN&color=green)](https://cran.r-project.org/package=cbsodataR) [![](https://img.shields.io/static/v1?label=code&message=GitHub&color=brightgreen)](https://github.com/edwindj/cbsodataR) [![docs](https://img.shields.io/static/v1?label=docs&message=pkgdown&color=brightgreen)](https://edwindj.github.io/cbsodataR/) | [![](https://img.shields.io/static/v1?label=code&message=CRAN&color=green)](https://cran.r-project.org/package=OData) | [![docs](https://img.shields.io/static/v1?label=docs&message=html&color=brightgreen)](https://www.cdata.com/kb/tech/odata-jdbc-r.rst) |
-| Test coverage            | ![tic](https://github.com/ropensci/ruODK/workflows/tic/badge.svg) [![Build Status](https://travis-ci.org/ropensci/ruODK.svg?branch=main)](https://travis-ci.org/ropensci/ruODK) [![Build status](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/main?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main) [![codecov](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK) | ❌ | [![Travis-CI Build Status](https://travis-ci.org/edwindj/cbsodataR.png?branch=master)](https://travis-ci.org/edwindj/cbsodataR) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/edwindj/cbsodatar?branch=master)](https://ci.appveyor.com/project/edwindj/cbsodatar) | ❌ | ❌ |
-| Targets ODK Central | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Works with ODK Central | ✅ | ❓ |  ❓  | ❌ | ❌ |
-| Data wrangling helpers for post-processing | ✅ | some |  some  | ❌ | ❌ |
-| Actively maintained to work against ODK Central | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Technologies | R, httr, xml2, tidyr, purrr | R, jsonlite, tidyverse | R, tidyverse | R, XML, RJSONIO | R, RJDBC, Java |
-| External dependencies | ✅  None  |  ✅  None   | ✅  None | ✅  None | ❌ JDBC, Java | 
-| Available on CRAN     | [![CRAN status](https://www.r-pkg.org/badges/version/ruODK)](https://cran.r-project.org/package=ruODK) | [![CRAN status](https://www.r-pkg.org/badges/version/odataR)](https://cran.r-project.org/package=odataR) |  [![version](http://www.r-pkg.org/badges/version/cbsodataR)](https://CRAN.R-project.org/package=cbsodataR) | [![version](http://www.r-pkg.org/badges/version/OData)](https://CRAN.R-project.org/package=OData) |  NA |
-
-In summary: 
-
-`ruODK` is the only R package explicitly aimed at ODK Central's OData and 
-RESTful API, as well as providing context and helpers around specific recurring 
-data wrangling tasks.
-
-The value of OData lies in its self-descriptive nature, which allows tools to 
-introspect the data structures and types. Both GUI-driven tools like MS PowerBI
-and `ruODK` use this introspection to assist users in wrangling their own data.
-
-The script-based approach of `ruODK` allows to automate the data extraction, 
-transformation, and reporting pipeline, and therefore provide reproducible 
-reporting.
