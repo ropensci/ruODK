@@ -281,20 +281,30 @@ test_that("ru_settings prints only if verbose", {
 test_that("retries default to 1L if empty or invalid", {
    # Keep a memory of better times
   retries <- get_retries()
+  ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
+  ru_msg_info(glue::glue("get_retries(): {get_retries()}"))
 
   # That's not a number
   ru_setup(retries = "")
+  ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
+  ru_msg_info(glue::glue("get_retries(): {get_retries()}"))
   testthat::expect_equal(get_retries(), 1L)
 
   # Not a number
   ru_setup(retries = "a")
+  ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
+  ru_msg_info(glue::glue("get_retries(): {get_retries()}"))
   testthat::expect_equal(get_retries(), 1L)
 
   # That's better
   ru_setup(retries = 5)
+  ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
+  ru_msg_info(glue::glue("get_retries(): {get_retries()}"))
   testthat::expect_equal(get_retries(), 5L)
 
   # Restore law and order
   ru_setup(retries = retries)
+  ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
+  ru_msg_info(glue::glue("get_retries(): {get_retries()}"))
 })
 # usethis::edit_file("R/ru_setup.R") # nolint

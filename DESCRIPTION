@@ -59,6 +59,7 @@ Suggests:
     DT (>= 0.9),
     ggplot2 (>= 3.2.1),
     knitr (>= 1.26),
+    lattice,
     leaflet (>= 2.0.3),
     listviewer (>= 3.0.0),
     leafpop (>= 0.0.5),
