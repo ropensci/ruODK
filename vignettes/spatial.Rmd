@@ -1,6 +1,8 @@
 ---
 title: "Spatial data"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    self_contained: false
 vignette: >
   %\VignetteIndexEntry{spatial}
   %\VignetteEngine{knitr::rmarkdown}
@@ -46,6 +48,7 @@ library(ruODK)
 # Visualisation
 library(leaflet)
 library(ggplot2)
+library(lattice)
 library(mapview)
 
 # Spatial

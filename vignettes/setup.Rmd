@@ -1,6 +1,8 @@
 ---
 title: "Setup"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    self_contained: false
 vignette: >
   %\VignetteIndexEntry{setup}
   %\VignetteEngine{knitr::rmarkdown}

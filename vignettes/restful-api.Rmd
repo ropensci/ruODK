@@ -1,6 +1,8 @@
 ---
 title: "Accessing the RESTful API"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    self_contained: false
 vignette: >
   %\VignetteIndexEntry{api}
   %\VignetteEngine{knitr::rmarkdown}
