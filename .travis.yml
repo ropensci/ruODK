@@ -10,6 +10,6 @@ before_install:
   - sudo apt-get install --yes libudunits2-dev libproj-dev libgeos-dev libgdal-dev libxml2-dev
 jobs:
   include:
-  - r: release
+  #- r: release
   - r: devel
   - r: oldrel
