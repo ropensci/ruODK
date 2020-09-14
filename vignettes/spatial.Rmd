@@ -5,7 +5,7 @@ output:
     self_contained: false
 vignette: >
   %\VignetteIndexEntry{spatial}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 

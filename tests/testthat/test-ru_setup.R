@@ -104,7 +104,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_default_pw())
   # testthat::expect_warning(get_default_odkc_version()) # nolint
   testthat::expect_warning(get_default_tz())
-  testthat::expect_equal(get_retries(), 1L) # fallback for empty RU_RETRIES
+  testthat::expect_equal(get_retries(), 3L) # fallback for empty RU_RETRIES
   testthat::expect_warning(get_test_url())
   testthat::expect_warning(get_test_un())
   testthat::expect_warning(get_test_pw())
@@ -279,6 +279,7 @@ test_that("ru_settings prints only if verbose", {
 })
 
 test_that("retries default to 1L if empty or invalid", {
+
    # Keep a memory of better times
   retries <- get_retries()
   ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
@@ -288,13 +289,13 @@ test_that("retries default to 1L if empty or invalid", {
   ru_setup(retries = "")
   ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
   ru_msg_info(glue::glue("get_retries(): {get_retries()}"))
-  testthat::expect_equal(get_retries(), 1L)
+  testthat::expect_equal(get_retries(), 3L)
 
   # Not a number
   ru_setup(retries = "a")
   ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
   ru_msg_info(glue::glue("get_retries(): {get_retries()}"))
-  testthat::expect_equal(get_retries(), 1L)
+  testthat::expect_equal(get_retries(), 3L)
 
   # That's better
   ru_setup(retries = 5)

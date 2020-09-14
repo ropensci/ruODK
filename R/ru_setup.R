@@ -492,7 +492,7 @@ get_test_odkc_version <- function() {
 #' @rdname ru_settings
 get_retries <- function() {
   suppressWarnings(as.integer(Sys.getenv("RU_RETRIES", unset = 3))) %>%
-    tidyr::replace_na(1L)
+    tidyr::replace_na(3L)
 }
 
 #' Abort on missing ODK Central credentials (url, username, password).
