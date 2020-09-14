@@ -27,9 +27,9 @@ jobs:
           - { os: windows-2016, r: "devel" }
           - { os: windows-2016, r: "release" }
           - { os: windows-2016, r: "oldrel" }
-          - { os: macOS-latest, r: "devel" } # needs gdal
-          - { os: macOS-latest, r: "release"} # needs gdal
-          - { os: macOS-latest, r: "oldrel"} # needs freetype
+          #- { os: macOS-latest, r: "devel" } # needs gdal
+          #- { os: macOS-latest, r: "release"} # needs gdal
+          #- { os: macOS-latest, r: "oldrel"} # needs freetype
           - { os: ubuntu-20.04, r: "devel" } # worked, then broke without change
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
