@@ -7,7 +7,14 @@ assignees: florianm
 
 ---
 I want to run the tests and build the vignettes. 
-Please provide access to the ODK Central Sandbox <https://sandbox.central.getodk.org/>.
+Please provide access to the ODK Central test instance for ruODK <https://ruodk.getodk.cloud/>.
 
 [ ] I have sent an email to the `ruODK` package maintainer requesting access.
-[ ] I have requested access to the ODK Central Sandbox in the [ODK Forum](https://forum.opendatakit.org/c/support).
+[ ] I will not use the server to run production campaigns.
+
+<!-- 
+  This account request is to interact with ruODK's development.
+  
+  If you'd like to evaluate ODK Central for your own purposes, 
+  visit <https://getodk.org/> to request a free cloud trial. 
+-->

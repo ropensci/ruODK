@@ -138,8 +138,7 @@ remotes::install_github("ropensci/ruODK@main", dependencies = TRUE)
 ### Access to an ODK Central instance
 First, we need an ODK Central instance and some data to play with!
 
-Either ask in the [ODK forum](https://forum.getodk.org/) for an account in 
-the [ODK Central Sandbox](https://sandbox.central.getodk.org/),
+Either [request a free trial](https://getodk.org/#odk-cloud)
 or follow the [setup instructions](https://docs.getodk.org/central-intro/)
 to build and deploy your very own ODK Central instance.
 
@@ -201,7 +200,7 @@ proj <- ruODK::project_list()
 proj %>% head() %>% knitr::kable(.)
 # List forms of default project
 frms <- ruODK::form_list()
-frms %>% knitr::kable(.)
+frms %>% head() %>% knitr::kable(.)
 # Form details of default form
 frmd <- ruODK::form_detail()
 frmd %>% knitr::kable(.)
