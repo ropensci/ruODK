@@ -48,7 +48,7 @@ unnest_all <- function(nested_tbl,
       dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%
       magrittr::extract2("ruodk_name")
 
-    if (length(geofield_names) == 0)  {
+    if (length(geofield_names) == 0) {
       keep_nested <- c()
     } else {
       keep_nested <- paste("value_", geofield_names, sep = "")

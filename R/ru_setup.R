@@ -253,8 +253,7 @@ ru_setup <- function(svc = NULL,
                      test_url = NULL,
                      test_un = NULL,
                      test_pw = NULL,
-                     test_odkc_version = NULL
-                     ) {
+                     test_odkc_version = NULL) {
   if (!is.null(svc)) {
     odata_components <- odata_svc_parse(svc)
     Sys.setenv("ODKC_PID" = odata_components$pid)

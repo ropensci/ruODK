@@ -47,6 +47,7 @@ library(ruODK)
 
 # Visualisation
 library(leaflet)
+library(leafem)
 library(ggplot2)
 library(lattice)
 library(mapview)
@@ -134,15 +135,17 @@ mapview::mapview(geo_sf_line, col.regions = sf::sf.colors(10), popup = NULL)
 # GGplot using sf
 ggplot2::ggplot() + 
   ggplot2::geom_sf(data = geo_sf_line, ggplot2::aes(fill = device_id))
-# Leaflet using first extracted coordinate compoments from plain tbl_df
-# Note this represents the geotrace (line) with a simple point
+# You can show either first extracted coordinate components from plain tbl_df
+# or show the full polygons using {leafem}
+# See https://r-spatial.github.io/mapview/articles/articles/mapview_06-add.html
 leaflet::leaflet(data = geo_wkt) %>% 
   leaflet::addTiles() %>% 
   leaflet::addMarkers(
     lng = ~ path_location_path_gps_longitude,
     lat = ~ path_location_path_gps_latitude,
     label = ~ device_id, 
-    popup = ~ device_id)
+    popup = ~ device_id)%>% 
+  leafem::addFeatures(geo_sf_line, label = ~device_id, popup = ~ device_id)
 ```
 
 ## Map geoshapes (polygons)
@@ -155,15 +158,17 @@ mapview::mapview(geo_sf_poly, col.regions = sf::sf.colors(10), popup = NULL)
 # GGplot using sf
 ggplot2::ggplot() + 
   ggplot2::geom_sf(data = geo_sf_poly, ggplot2::aes(fill = device_id))
-# Leaflet using first extracted coordinate compoments from plain tbl_df
-# Note this represents the geoshape (polygon) with a simple point
+# You can show either first extracted coordinate components from plain tbl_df
+# or show the full polygons using {leafem}
+# See https://r-spatial.github.io/mapview/articles/articles/mapview_06-add.html
 leaflet::leaflet(data = geo_wkt) %>% 
   leaflet::addTiles() %>% 
   leaflet::addMarkers(
     lng = ~ shape_location_shape_gps_longitude,
     lat = ~ shape_location_shape_gps_latitude,
     label = ~ device_id, 
-    popup = ~ device_id)
+    popup = ~ device_id) %>% 
+  leafem::addFeatures(geo_sf_poly, label = ~device_id, popup = ~ device_id)
 ```
 
 # Outlook
@@ -176,7 +181,9 @@ The [sf cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/sf.pdf)
 deserves a spatial mention.
 Review the options for 
 [mapview popups](https://r-spatial.github.io/mapview/articles/articles/mapview_04-popups.html) 
-which are turned off in this quick demo.
+which are turned off in this quick demo, and the whole 
+[mapview](https://r-spatial.github.io/mapview/index.html) homepage for a comprehensive
+overview of mapview.
 
 There are several other good entry points for all things R and spatial, 
 including but not limited to:

@@ -65,8 +65,7 @@ get_one_submission_attachment_list <- function(iid,
                                                url = get_default_url(),
                                                un = get_default_un(),
                                                pw = get_default_pw(),
-                                               retries = get_retries()
-                                               ) {
+                                               retries = get_retries()) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",

@@ -1,7 +1,7 @@
 Type: Package
 Package: ruODK
 Title: An R Client for the ODK Central API
-Version: 0.9.1.9002
+Version: 0.9.1.9003
 Authors@R: 
     c(person(given = c("Florian", "W."),
              family = "Mayer",
@@ -44,7 +44,6 @@ Imports:
     httr (>= 1.4.1),
     janitor (>= 2.0.1),
     lifecycle (>= 0.1.0),
-    fuzzyjoin (>= 0.1.6),
     lubridate (>= 1.7.8),
     magrittr (>= 1.5),
     purrr (>= 0.3.4),
@@ -63,6 +62,7 @@ Suggests:
     leaflet (>= 2.0.3),
     listviewer (>= 3.0.0),
     leafpop (>= 0.0.5),
+    leafem,
     mapview (>= 2.9.0),
     rmarkdown (>= 1.17),
     roxygen2 (>= 7.1.0),

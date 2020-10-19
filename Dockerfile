@@ -27,6 +27,7 @@ RUN install2.r --error \
   bitops \
   ckanr \
   googledrive \
+  fuzzyjoin \
   leaflet \
   leaflet.extras \
   leaflet.providers \
@@ -36,6 +37,7 @@ RUN install2.r --error \
   usethis \
   mapview \
   leafpop \
+  leafem \
   lattice \
   sf
 

@@ -16,9 +16,11 @@ test_that("form_list works", {
   # The above call to form_list worked so we test here that
   # the test forms contain a draft form.
   # Draft forms have a NA hash and version.
-  fl %>% dplyr::filter(
-    is.na(version) & is.na(hash)
-  ) %>% nrow() %>%
+  fl %>%
+    dplyr::filter(
+      is.na(version) & is.na(hash)
+    ) %>%
+    nrow() %>%
     testthat::expect_gt(0)
 })
 

@@ -280,7 +280,7 @@ test_that("ru_settings prints only if verbose", {
 
 test_that("retries default to 1L if empty or invalid", {
 
-   # Keep a memory of better times
+  # Keep a memory of better times
   retries <- get_retries()
   ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
   ru_msg_info(glue::glue("get_retries(): {get_retries()}"))

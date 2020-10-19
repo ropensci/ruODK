@@ -14,13 +14,13 @@
   ],
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.9.1",
+  "version": "0.9.1.9003",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.0 (2020-04-24)",
+  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
   "author": [
     {
       "@type": "Person",
@@ -111,6 +111,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "lattice",
+      "name": "lattice",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lattice"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "leaflet",
       "name": "leaflet",
       "version": ">= 2.0.3",
@@ -137,9 +149,34 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "leafpop",
+      "name": "leafpop",
+      "version": ">= 0.0.5",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=leafpop"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "leafem",
+      "name": "leafem",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=leafem"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "mapview",
       "name": "mapview",
-      "version": ">= 2.7.8",
+      "version": ">= 2.9.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -353,6 +390,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "fuzzyjoin",
+      "name": "fuzzyjoin",
+      "version": ">= 0.1.6",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=fuzzyjoin"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
       "version": ">= 1.7.8",
@@ -457,19 +507,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "tidyselect",
-      "name": "tidyselect",
-      "version": ">= 1.0.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=tidyselect"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "xml2",
       "name": "xml2",
       "version": ">= 1.2.2",
@@ -502,8 +539,8 @@
   ],
   "releaseNotes": "https://github.com/ropensci/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ruODK/blob/main/README.md",
-  "fileSize": "3126.119KB",
-  "contIntegration": ["https://travis-ci.org/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/ropensci/ruODK", "https://travis-ci.org/ropensci/ruODK", "https://codecov.io/gh/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/validmeasures/odkr", "https://travis-ci.org/unhcr/koboloadeR", "https://ci.appveyor.com/project/unhcr/koboloadeR", "https://codecov.io/gh/unhcr/koboloadeR", "https://travis-ci.org/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/ropensci/ruODK", "https://travis-ci.org/edwindj/cbsodataR", "https://ci.appveyor.com/project/edwindj/cbsodatar"],
+  "fileSize": "10771.493KB",
+  "contIntegration": ["https://travis-ci.org/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/ropensci/ruODK"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "review": {
     "@type": "Review",
