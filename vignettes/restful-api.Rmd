@@ -53,7 +53,7 @@ We haven't yet found a strong use case to automate those functions -
 ODK Central (driven by humans) does those jobs beautifully on an expected scale.
 
 # Setup ruODK
-See [`vignette("Setup", package = "ruODK")`](https://ropensci.github.io/ruODK/articles/setup.html) 
+See [`vignette("Setup", package = "ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html) 
 for detailed options to configure `ruODK`.
 
 Here, we'll grab the OData service URL from the form used in this vignette,
@@ -338,6 +338,6 @@ Complex forms with repeating sub-groups will result in highly nested lists,
 whose structure heavily depends on the completeness of the submissions.
 
 The other approach shown in 
-[`vignette("odata-api", package="ruODK")`](https://ropensci.github.io/ruODK/articles/odata-api.html) 
+[`vignette("odata-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html) 
 yields rectangled data in several normalised tables, which is useful for 
 analysis and visualisation.

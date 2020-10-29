@@ -76,26 +76,26 @@ R.
 
 Benefits of using the R ecosystem in combination with ODK:
 
-  - Scalability: Both R and ODK are free and open source software.
+-   Scalability: Both R and ODK are free and open source software.
     Scaling to many users does not incur license fees.
-  - Ubiquity: R is known to many scientists and is widely taught at
+-   Ubiquity: R is known to many scientists and is widely taught at
     universities.
-  - Automation: The entire data access and analysis workflow can be
+-   Automation: The entire data access and analysis workflow can be
     automated through R scripts.
-  - Reproducible reporting (e.g. 
+-   Reproducible reporting (e.g. 
     [Sweave](https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr),
     [RMarkdown](https://rmarkdown.rstudio.com/)), interactive web apps
     ([Shiny](https://shiny.rstudio.com/)), workflow scaling
     ([drake](https://docs.ropensci.org/drake/)).
-  - Rstudio-as-a-Service (RaaS) at
+-   Rstudio-as-a-Service (RaaS) at
     [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 
 `ruODK`’s scope:
 
-  - To wrap all ODK Central API endpoints with a focus on **data
+-   To wrap all ODK Central API endpoints with a focus on **data
     access**.
-  - To provide working examples of interacting with the ODK Central API.
-  - To provide convenience helpers for the day to day tasks when working
+-   To provide working examples of interacting with the ODK Central API.
+-   To provide convenience helpers for the day to day tasks when working
     with ODK Central data in R: **data munging** the ODK Central API
     output into tidy R formats.
 
@@ -103,7 +103,7 @@ Benefits of using the R ecosystem in combination with ODK:
 
 `ruODK`’s use cases:
 
-  - Smaller projects: Example
+-   Smaller projects: Example
     [rOzCBI](https://dbca-wa.github.io/rOzCBI/)
     1.  Data collection: ODK Collect
     2.  Data clearinghouse: ODK Central
@@ -111,7 +111,7 @@ Benefits of using the R ecosystem in combination with ODK:
     4.  Publishing and dissemination:
         [`ckanr`](https://docs.ropensci.org/ckanr/),
         [`CKAN`](https://ckan.org/)
-  - Larger projects:
+-   Larger projects:
     1.  Data collection: ODK Collect
     2.  Data clearinghouse: ODK Central
     3.  ETL pipeline into data warehouses: `Rmd` (ruODK)
@@ -123,14 +123,14 @@ Benefits of using the R ecosystem in combination with ODK:
 
 Out of scope:
 
-  - To wrap “management” API endpoints. ODK Central is a [VueJS/NodeJS
+-   To wrap “management” API endpoints. ODK Central is a [VueJS/NodeJS
     application](https://github.com/opendatakit/central-frontend/) which
     provides a comprehensive graphical user interface for the management
     of users, roles, permissions, projects, and forms.
-  - To provide extensive data visualisation. We show only minimal
+-   To provide extensive data visualisation. We show only minimal
     examples of data visualisation and presentation, mainly to
     illustrate the example data. Once the data is in your hands as tidy
-    tibbles… urODK\!
+    tibbles… urODK!
 
 ## A quick preview
 
@@ -149,7 +149,7 @@ remotes::install_github("ropensci/ruODK@main", dependencies = TRUE)
 
 ### Access to an ODK Central instance
 
-First, we need an ODK Central instance and some data to play with\!
+First, we need an ODK Central instance and some data to play with!
 
 Either [request a free trial](https://getodk.org/#odk-cloud) or follow
 the [setup instructions](https://docs.getodk.org/central-intro/) to
@@ -160,20 +160,20 @@ build and deploy your very own ODK Central instance.
 The ODK Central [user manual](https://docs.getodk.org/central-using/)
 provides up-to-date descriptions of the steps below.
 
-  - [Create a web user
+-   [Create a web user
     account](https://docs.getodk.org/central-users/#creating-a-web-user)
     on an ODK Central instance. Your username will be an email address.
-  - [Create a project](https://docs.getodk.org/central-projects/) and
+-   [Create a project](https://docs.getodk.org/central-projects/) and
     give the web user at least [read
     permissions](https://docs.getodk.org/central-projects/#managing-project-managers).
-  - Create an XForm, e.g. using ODK Build, or use the [example
+-   Create an XForm, e.g. using ODK Build, or use the [example
     forms](https://github.com/ropensci/ruODK/tree/master/inst/extdata)
     provided by `ruODK`. The `.odkbuild` versions can be loaded into
     [ODK Build](https://build.getodk.org/), while the `.xml` versions
     can be directly imported into ODK Central.
-  - [Publish the form](https://docs.getodk.org/central-forms/) to ODK
+-   [Publish the form](https://docs.getodk.org/central-forms/) to ODK
     Central.
-  - Collect some data for this form on ODK Collect and let ODK Collect
+-   Collect some data for this form on ODK Collect and let ODK Collect
     submit the finalised forms to ODK Central.
 
 ## Configure `ruODK`
@@ -213,8 +213,7 @@ ruODK::ru_setup(
 ```
 
 For all available detailed options to configure `ruODK`, read
-[`vignette("setup", package =
-"ruODK")`](https://ropensci.github.io/ruODK/articles/setup.html).
+[`vignette("setup", package = "ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html).
 
 ## Use ruODK
 
@@ -230,7 +229,7 @@ proj %>% head() %>% knitr::kable(.)
 ```
 
 |  id | name                            | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
-| --: | :------------------------------ | ----: | ---------: | :------------------ | :---------- | :------------------ | :------- |
+|----:|:--------------------------------|------:|-----------:|:--------------------|:------------|:--------------------|:---------|
 | 115 | 1Computer\_Scince\_UZ\_Training |     1 |          5 | 2020-09-18 15:59:11 | NA          | NA                  | FALSE    |
 |  59 | 1Horizon test project           |     1 |          6 | 2020-01-13 20:45:32 | NA          | 2020-09-14 07:08:29 | FALSE    |
 |  57 | AB’s                            |     1 |          1 | 2020-01-06 08:56:00 | NA          | NA                  | FALSE    |
@@ -245,8 +244,8 @@ frms %>% head() %>% knitr::kable(.)
 ```
 
 | name                            | fid                                  | version | state   | submissions | created\_at         | created\_by\_id | created\_by                    | updated\_at         | last\_submission    | hash                             |
-| :------------------------------ | :----------------------------------- | :------ | :------ | :---------- | :------------------ | --------------: | :----------------------------- | :------------------ | :------------------ | :------------------------------- |
-| Field data collection September | 2                                    |         | open    | 1           | 2020-10-16 10:13:40 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 10:16:15 | 2020-10-16 10:22:39 | 889ef491773157acc87b1fb3b849f3e7 |
+|:--------------------------------|:-------------------------------------|:--------|:--------|:------------|:--------------------|----------------:|:-------------------------------|:--------------------|:--------------------|:---------------------------------|
+| Field data collection September | 2                                    |         | open    | 6           | 2020-10-16 10:13:40 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 14:52:01 | 2020-10-19 23:23:44 | 889ef491773157acc87b1fb3b849f3e7 |
 | Flora Quadrat 0.1               | build\_Flora-Quadrat-0-1\_1558330379 |         | closing | 1           | 2019-05-20 13:33:15 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 10:16:15 | 2019-05-20 13:44:20 | 4f0036619468ef05b572631b04b94f06 |
 | Flora Quadrat 0.2               | build\_Flora-Quadrat-0-2\_1558575936 |         | open    | 2           | 2019-05-23 09:46:08 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 10:16:15 | 2019-05-23 11:12:16 | 14e269a2374132392c275117efbe67b6 |
 | Flora Quadrat 0.3               | build\_Flora-Quadrat-0-3\_1559119570 |         | open    | 1           | 2019-05-29 16:48:15 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 10:16:15 | 2019-05-29 16:55:59 | d5a80cefb1895eefcd0cb86a12d8acb4 |
@@ -260,7 +259,7 @@ frmd %>% knitr::kable(.)
 ```
 
 | name              | fid                                  | version | state | submissions | created\_at              | created\_by\_id | created\_by                    | updated\_at              | last\_submission         | hash                             |
-| :---------------- | :----------------------------------- | :------ | :---- | ----------: | :----------------------- | --------------: | :----------------------------- | :----------------------- | :----------------------- | :------------------------------- |
+|:------------------|:-------------------------------------|:--------|:------|------------:|:-------------------------|----------------:|:-------------------------------|:-------------------------|:-------------------------|:---------------------------------|
 | Flora Quadrat 0.4 | build\_Flora-Quadrat-0-4\_1564384341 |         | open  |           2 | 2019-08-19T07:58:28.212Z |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16T02:16:15.738Z | 2019-09-18T08:51:07.482Z | 1bb959d541ac6990e3f74893e38c855b |
 
 ``` r
@@ -271,7 +270,7 @@ meta %>% knitr::kable(.)
 ```
 
 | path                                                       | name                                  | type      | binary | ruodk\_name                                                |
-| :--------------------------------------------------------- | :------------------------------------ | :-------- | :----- | :--------------------------------------------------------- |
+|:-----------------------------------------------------------|:--------------------------------------|:----------|:-------|:-----------------------------------------------------------|
 | /meta                                                      | meta                                  | structure | NA     | meta                                                       |
 | /meta/instanceID                                           | instanceID                            | string    | NA     | meta\_instance\_id                                         |
 | /encounter\_start\_datetime                                | encounter\_start\_datetime            | dateTime  | NA     | encounter\_start\_datetime                                 |
@@ -314,7 +313,7 @@ srv %>% knitr::kable(.)
 ```
 
 | name                            | kind      | url                             |
-| :------------------------------ | :-------- | :------------------------------ |
+|:--------------------------------|:----------|:--------------------------------|
 | Submissions                     | EntitySet | Submissions                     |
 | Submissions.vegetation\_stratum | EntitySet | Submissions.vegetation\_stratum |
 | Submissions.taxon\_encounter    | EntitySet | Submissions.taxon\_encounter    |
@@ -363,16 +362,16 @@ data %>% dplyr::select(-"odata_context") %>% knitr::kable(.)
 ```
 
 | id                                        | encounter\_start\_datetime | reporter      | device\_id       | encounter\_end\_datetime | system\_submission\_date | system\_submitter\_id | system\_submitter\_name | system\_attachments\_present | system\_attachments\_expected | meta\_instance\_id                        | location\_area\_name     | location\_quadrat\_photo          | location\_corner1\_longitude | location\_corner1\_latitude | location\_corner1\_altitude | location\_corner1\_accuracy | location\_corner1                                              | habitat\_morphological\_type | habitat\_morphological\_type\_photo | vegetation\_stratum\_odata\_navigation\_link                                 | perimeter\_corner2\_longitude | perimeter\_corner2\_latitude | perimeter\_corner2\_altitude | perimeter\_corner2\_accuracy | perimeter\_corner2                                             | perimeter\_corner3\_longitude | perimeter\_corner3\_latitude | perimeter\_corner3\_altitude | perimeter\_corner3\_accuracy | perimeter\_corner3                                             | perimeter\_corner4\_longitude | perimeter\_corner4\_latitude | perimeter\_corner4\_altitude | perimeter\_corner4\_accuracy | perimeter\_corner4                                             | perimeter\_mudmap\_photo          | taxon\_encounter\_odata\_navigation\_link                                 |
-| :---------------------------------------- | :------------------------- | :------------ | :--------------- | :----------------------- | :----------------------- | :-------------------- | :---------------------- | ---------------------------: | ----------------------------: | :---------------------------------------- | :----------------------- | :-------------------------------- | ---------------------------: | --------------------------: | --------------------------: | --------------------------: | :------------------------------------------------------------- | :--------------------------- | :---------------------------------- | :--------------------------------------------------------------------------- | ----------------------------: | ---------------------------: | ---------------------------: | ---------------------------: | :------------------------------------------------------------- | ----------------------------: | ---------------------------: | ---------------------------: | ---------------------------: | :------------------------------------------------------------- | ----------------------------: | ---------------------------: | ---------------------------: | ---------------------------: | :------------------------------------------------------------- | :-------------------------------- | :------------------------------------------------------------------------ |
-| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 2019-09-18 16:12:21        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 16:40:46      | 2019-09-18T08:51:07.482Z | 241                   | flora                   |                            4 |                             4 | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | vignettes/media/1568794395624.jpg |                     115.8846 |                  \-31.99606 |                     6.40451 |                       4.288 | Point , 115.88456271 , -31.99605811 , 6.40451049804688, 4.288  | mid-slope                    | vignettes/media/1568794560256.jpg   | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/vegetation\_stratum |                      115.8844 |                   \-31.99623 |                  \-26.305695 |                        4.288 | Point , 115.88435548 , -31.99622531 , -26.3056945800781, 4.288 |                      115.8844 |                   \-31.99615 |                  \-17.897552 |                        4.288 | Point , 115.88436077 , -31.99614759 , -17.8975524902344, 4.288 |                      115.8843 |                   \-31.99610 |                  \-27.759338 |                        4.288 | Point , 115.88432984 , -31.99610179 , -27.7593383789062, 4.288 | NA                                | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/taxon\_encounter |
-| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18 14:08:43        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 14:18:53      | 2019-09-18T06:20:25.781Z | 241                   | flora                   |                            8 |                             8 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | vignettes/media/1568786958640.jpg |                     115.8843 |                  \-31.99615 |                  \-17.37241 |                       4.288 | Point , 115.88433971 , -31.99614843 , -17.3724060058594, 4.288 | flat                         | vignettes/media/1568787004467.jpg   | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/vegetation\_stratum |                      115.8844 |                   \-31.99620 |                   \-8.662476 |                        4.288 | Point , 115.88438584 , -31.99620073 , -8.6624755859375, 4.288  |                      115.8844 |                   \-31.99622 |                   \-6.266144 |                        4.288 | Point , 115.88440369 , -31.99622144 , -6.26614379882812, 4.288 |                      115.8844 |                   \-31.99621 |                   \-6.597748 |                        4.288 | Point , 115.88438399 , -31.99620546 , -6.59774780273438, 4.288 | vignettes/media/1568787172983.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/taxon\_encounter |
+|:------------------------------------------|:---------------------------|:--------------|:-----------------|:-------------------------|:-------------------------|:----------------------|:------------------------|-----------------------------:|------------------------------:|:------------------------------------------|:-------------------------|:----------------------------------|-----------------------------:|----------------------------:|----------------------------:|----------------------------:|:---------------------------------------------------------------|:-----------------------------|:------------------------------------|:-----------------------------------------------------------------------------|------------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|:---------------------------------------------------------------|------------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|:---------------------------------------------------------------|------------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|:---------------------------------------------------------------|:----------------------------------|:--------------------------------------------------------------------------|
+| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 2019-09-18 16:12:21        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 16:40:46      | 2019-09-18T08:51:07.482Z | 241                   | flora                   |                            4 |                             4 | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | vignettes/media/1568794395624.jpg |                     115.8846 |                   -31.99606 |                     6.40451 |                       4.288 | Point , 115.88456271 , -31.99605811 , 6.40451049804688, 4.288  | mid-slope                    | vignettes/media/1568794560256.jpg   | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/vegetation\_stratum |                      115.8844 |                    -31.99623 |                   -26.305695 |                        4.288 | Point , 115.88435548 , -31.99622531 , -26.3056945800781, 4.288 |                      115.8844 |                    -31.99615 |                   -17.897552 |                        4.288 | Point , 115.88436077 , -31.99614759 , -17.8975524902344, 4.288 |                      115.8843 |                    -31.99610 |                   -27.759338 |                        4.288 | Point , 115.88432984 , -31.99610179 , -27.7593383789062, 4.288 | NA                                | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/taxon\_encounter |
+| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18 14:08:43        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 14:18:53      | 2019-09-18T06:20:25.781Z | 241                   | flora                   |                            8 |                             8 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | vignettes/media/1568786958640.jpg |                     115.8843 |                   -31.99615 |                   -17.37241 |                       4.288 | Point , 115.88433971 , -31.99614843 , -17.3724060058594, 4.288 | flat                         | vignettes/media/1568787004467.jpg   | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/vegetation\_stratum |                      115.8844 |                    -31.99620 |                    -8.662476 |                        4.288 | Point , 115.88438584 , -31.99620073 , -8.6624755859375, 4.288  |                      115.8844 |                    -31.99622 |                    -6.266144 |                        4.288 | Point , 115.88440369 , -31.99622144 , -6.26614379882812, 4.288 |                      115.8844 |                    -31.99621 |                    -6.597748 |                        4.288 | Point , 115.88438399 , -31.99620546 , -6.59774780273438, 4.288 | vignettes/media/1568787172983.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/taxon\_encounter |
 
 A more detailed walk-through with some data visualisation examples is
-available in the [`vignette("odata-api",
-package="ruODK")`](https://ropensci.github.io/ruODK/articles/odata-api.html).
+available in the
+[`vignette("odata-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html).
 
-See also [`vignette("restful-api",
-package="ruODK")`](https://ropensci.github.io/ruODK/articles/restful-api.html)
+See also
+[`vignette("restful-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/restful-api.html)
 for examples using the alternative RESTful API.
 
 ## Try ruODK
@@ -389,10 +388,10 @@ OData” and follow the instructions within.
 ## Contribute
 
 Contributions through [issues](https://github.com/ropensci/ruODK/issues)
-and PRs are welcome\!
+and PRs are welcome!
 
 See the [contributing
-guide](https://ropensci.github.io/ruODK/CONTRIBUTING.html) on best
+guide](https://docs.ropensci.org/ruODK/CONTRIBUTING.html) on best
 practices and further readings for code contributions.
 
 ## Attribution
@@ -440,7 +439,7 @@ in doing so, caring for country.
 
 ## Package functionality
 
-See [`vignette("comparison",
-package="ruODK")`](https://ropensci.github.io/ruODK/articles/comparison.html)
+See
+[`vignette("comparison", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/comparison.html)
 for a comprehensive comparison of ruODK to other software packages from
 both an ODK and an OData angle.
