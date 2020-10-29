@@ -165,7 +165,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
 
   # gets basic schema
   frm_schema <- form_schema(
-    flatten, odata, parseE, pid,
+    flatten, odata, parse, pid,
     fid, url, un,
     pw, odkc_version,
     retries, verbose
