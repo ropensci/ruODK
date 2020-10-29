@@ -1,28 +1,25 @@
-library(xml2)
-
-
-# the function below uses the exact function signature as form_schema()
-# in that sense, you could replace any call to form_schema by form_schema_ext
-# it gets in addition to the form_schema columns, the common label, and the multilanguage labels if available
-# it gets also the choice list and labels, in multilanguage if existing
-
-#' Show the schema of one form.
+#library(xml2)
+#' Show the extended schema of one form.
 #'
-#' \lifecycle{stable}
+#' \lifecycle{experimental}
 #'
 #' @details ODK Central has introduced a new API endpoint in version 0.8 which
 #' returns a parsed and flattened list of fields. This replaces the nested
-#' form schema which is challenging to parse.
+#' form schema which is challenging to parse. This list is returned 
+#' by \code{\link{form_schema}}.
+#' 
+#' However this still misses important elements, in particular \code{labels} and
+#' \code{choice lists}.
+#' 
+#' \code{\link{form_schema_ext}} returns the same object as \code{\link{form_schema}}
+#' adding \code{labels} and \code{choice lists} in all languages available. This is 
+#' done by using the return value from \code{\link{form_xml}}
+#' 
+#' It has the exact function signature as \code{\link{form_schema}}. 
+#' In that sense, any call to \code{\link{form_schema}} can be replaced 
+#' by \code{\link{form_schema_ext}}
 #'
-#' While users of newest ODK Central versions ( > 0.8) can ignore the legacy
-#' support for ODK Central's earlier form schema API, users of ODK Central
-#' version < 0.8 can set an environment variable \code{ODKC_VERSION} to their
-#' ODKC's version in format \code{<major>.<minor>} e.g. \code{0.7}.
-#' This variable caters for future breaking changes.
-#'
-#' Either way, \code{\link{form_schema}} will always return a tibble with
-#' columns \code{name}, \code{type}, \code{path} and \code{ruodk_name}.
-#'
+#' 
 #' @param flatten Whether to flatten the resulting list of lists (TRUE) or not
 #'   (FALSE, default). Only applies to ODK Central version < 0.8.
 #' @param odata Whether to sanitise the field names to match the way they will
