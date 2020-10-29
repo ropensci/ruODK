@@ -38,10 +38,14 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
   # iterate thorugh labels
   for (i in 1:length(raw_labels)){
     
+    
+    ## reads label
+    this_rawlabel <-raw_labels[i]
+    
     ## path
     # gets ref from parent, without leading "/data"
     this_path <-  sub("/data", "",
-                      xml_attr(xml_parent(raw_labels[i]), "ref"), 
+                      xml_attr(xml_parent(this_rawlabel), "ref"), 
                       6)
     
     # ensure this is a valid path
@@ -54,10 +58,6 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
       # adds path
       extension[nrow(extension), 'path'] <- this_path
       
-      
-      ## reads label
-      this_rawlabel <-raw_labels[i]
-      
       # first checks if it is multi-language label
       multi_lang <- xml_has_attr(this_rawlabel, "ref")
       
@@ -69,19 +69,21 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
         # iterate through translations
         for (j in 1:length(translations)) {
           
+          this_translation <- translations[j]
+          
           # first check this is a regular text labels. Questions in ODK can have video, image and audio "labels", 
           # which will be skipped. This is identified by the presence of the 'form' attribute:
-          is_regular_label <- !xml_has_attr(xml_find_first(translations[j],"./value"), "form")
+          is_regular_label <- !xml_has_attr(xml_find_first(this_translation,"./value"), "form")
           
           if (is_regular_label) {
             # reads the parent node to identify language:
-            translation_parent<- xml_parent(translations[j])
+            translation_parent<- xml_parent(this_translation)
             this_lang <- gsub(" ", "_", tolower(xml_attr(translation_parent, "lang")))
             
             # decide if 'default' language or specific language
             if (this_lang == "default") {
               # if 'default' language, save under column 'label':
-              extension[nrow(extension), 'label'] <- xml_text(xml_find_first(translations[j],"./value"))
+              extension[nrow(extension), 'label'] <- xml_text(xml_find_first(this_translation,"./value"))
             }
             else {
               # check if language already exists in the datafram
@@ -93,7 +95,7 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
               }
               
               # adds the first value content of the translation
-              extension[nrow(extension), paste0("label_",this_lang)] <- xml_text(xml_find_first(translations[j],"./value"))
+              extension[nrow(extension), paste0("label_",this_lang)] <- xml_text(xml_find_first(this_translation,"./value"))
             }
             
           }
@@ -126,12 +128,15 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
         # iterate through choice list:
         for (jj in 1:length(choice_items)) {
           
+          ## reads choice item
+          this_choiceitem <- choice_items[jj]
+          
           #value
-          this_choicevalue<-xml_text(xml_find_first(choice_items[jj], "./value"))
+          this_choicevalue<-xml_text(xml_find_first(this_choiceitem "./value"))
           choice_values[jj]<-this_choicevalue
           
           # raw label
-          this_rawchoicelabel <- xml_find_first(choice_items[jj], "./label")
+          this_rawchoicelabel <- xml_find_first(this_choiceitem, "./label")
           
           # first checks if it is multi-language choice label
           multi_lang_choice <- xml_has_attr(this_rawchoicelabel, "ref")
@@ -144,19 +149,22 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
             # iterate through choice translations
             for (kk in 1:length(choice_translations)) {
               
+              # read translation
+              this_choicetranslation <- choice_translations[kk]
+              
               # first check this is a regular text labels. Questions in ODK can have video, image and audio "labels", 
               # which will be skipped. This is identified by the presence of the 'form' attribute:
-              is_regular_choicelabel <- !xml_has_attr(xml_find_first(choice_translations[kk],"./value"), "form")
+              is_regular_choicelabel <- !xml_has_attr(xml_find_first(this_choicetranslation,"./value"), "form")
               
               if (is_regular_choicelabel) {
                 # reads the parent node to identify language:
-                choice_translation_parent<- xml_parent(choice_translations[kk])
+                choice_translation_parent<- xml_parent(this_choicetranslation)
                 this_choicelang <- gsub(" ", "_", tolower(xml_attr(choice_translation_parent, "lang")))
                 
                 # decide if 'default' language or specific language
                 if (this_choicelang == "default") {
                   # if 'default' language, save under 'choice':
-                  choice_labels[['base']][jj] <- xml_text(xml_find_first(choice_translations[kk],"./value"))
+                  choice_labels[['base']][jj] <- xml_text(xml_find_first(this_choicetranslation,"./value"))
                 }
                 else {
                   # check if language already exists in the dataframe
@@ -168,7 +176,7 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
                   }
                   
                   # adds the first value content of the translation
-                  choice_labels[[paste0("choices_",this_choicelang)]][jj] <- xml_text(xml_find_first(choice_translations[kk],"./value"))
+                  choice_labels[[paste0("choices_",this_choicelang)]][jj] <- xml_text(xml_find_first(this_choicetranslation,"./value"))
                 }
                 
               }
