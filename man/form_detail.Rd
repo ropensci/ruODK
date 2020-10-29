@@ -86,6 +86,7 @@ Other restful-api:
 \code{\link{attachment_list}()},
 \code{\link{audit_get}()},
 \code{\link{form_list}()},
+\code{\link{form_schema_ext}()},
 \code{\link{form_schema}()},
 \code{\link{form_xml}()},
 \code{\link{project_create}()},
