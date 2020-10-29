@@ -131,7 +131,7 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
           this_choiceitem <- choice_items[jj]
           
           #value
-          this_choicevalue<-xml_text(xml_find_first(this_choiceitem "./value"))
+          this_choicevalue<-xml_text(xml_find_first(this_choiceitem, "./value"))
           choice_values[jj]<-this_choicevalue
           
           # raw label
