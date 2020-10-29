@@ -57,12 +57,12 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
       # adds path
       extension[nrow(extension), 'path'] <- this_path
       
-      # first checks if it is multi-language label
-      multi_lang <- xml_has_attr(this_rawlabel, "ref")
+      # first checks if label is mapped with a translation function
+      has_translation <- xml_has_attr(this_rawlabel, "ref")
       
-      if (multi_lang) {
-        # if multi-language, finds all translations related to this path:
         id <- paste0("/data", this_path, ":label")
+      if (has_translation) {
+        # finds all translations related to this path:
         translations <- all_translations[xml_attr(all_translations, "id") == id]
         
         # iterate through translations
@@ -137,11 +137,11 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
           # raw label
           this_rawchoicelabel <- xml_find_first(this_choiceitem, "./label")
           
-          # first checks if it is multi-language choice label
-          multi_lang_choice <- xml_has_attr(this_rawchoicelabel, "ref")
+          # first checks if choice label is mapped with a translation function
+          has_translation_choice <- xml_has_attr(this_rawchoicelabel, "ref")
           
-          if (multi_lang_choice) {
             id_choice <- paste0("/data", this_path,"/",this_choicevalue, ":label")
+          if (has_translation_choice) {
             choice_translations <- all_translations[xml_attr(all_translations, "id") == id_choice]
             
             
