@@ -124,6 +124,8 @@ split_geoshape <- function(
       )
   } else {
     # WKT
+    # No accuracy in geotrace/shape yet
+    # See ODK central-backend at /lib/data/json.js
     data %>%
       tidyr::extract(
         colname,

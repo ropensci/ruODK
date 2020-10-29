@@ -186,7 +186,7 @@ ruODK::ru_setup(
 ```
 
 For all available detailed options to configure `ruODK`, read 
-[`vignette("setup", package = "ruODK")`](https://ropensci.github.io/ruODK/articles/setup.html).
+[`vignette("setup", package = "ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html).
 
 ## Use ruODK
 
@@ -218,9 +218,9 @@ data %>% dplyr::select(-"odata_context") %>% knitr::kable(.)
 ```
 
 A more detailed walk-through with some data visualisation examples is available
-in the [`vignette("odata-api", package="ruODK")`](https://ropensci.github.io/ruODK/articles/odata-api.html).
+in the [`vignette("odata-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html).
 
-See also [`vignette("restful-api", package="ruODK")`](https://ropensci.github.io/ruODK/articles/restful-api.html)
+See also [`vignette("restful-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/restful-api.html)
 for examples using the alternative RESTful API.
 
 ## Try ruODK
@@ -236,7 +236,7 @@ and follow the instructions within.
 Contributions through [issues](https://github.com/ropensci/ruODK/issues) and PRs 
 are welcome!
 
-See the [contributing guide](https://ropensci.github.io/ruODK/CONTRIBUTING.html)
+See the [contributing guide](https://docs.ropensci.org/ruODK/CONTRIBUTING.html)
 on best practices and further readings for code contributions.
 
 ## Attribution
@@ -262,7 +262,7 @@ the conservation of the biodiversity of Western Australia, and in doing so,
 caring for country.
 
 ## Package functionality
-See [`vignette("comparison", package="ruODK")`](https://ropensci.github.io/ruODK/articles/comparison.html)
+See [`vignette("comparison", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/comparison.html)
 for a comprehensive comparison of ruODK to other software packages from
 both an ODK and an OData angle.
 
