@@ -1,3 +1,6 @@
+* `form_schema_ext()` Shows the extended schema of one form, including (multi-language)
+  labels and choice lists. (#77, @mtyszler)
+
 # `ruODK` (development version)
 * Development continues in the default branch `main`.
 * Dropped Import of `tidyselect` in favour of using `dplyr::all_of()`.
