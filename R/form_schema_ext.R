@@ -45,8 +45,7 @@ form_schema_ext <-  function (flatten = FALSE, odata = FALSE, parse = TRUE, pid 
     ## path
     # gets ref from parent, without leading "/data"
     this_path <-  sub("/data", "",
-                      xml_attr(xml_parent(this_rawlabel), "ref"), 
-                      6)
+                      xml_attr(xml_parent(this_rawlabel), "ref"))
     
     # ensure this is a valid path
     if (!is.na(this_path)) {
