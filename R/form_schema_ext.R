@@ -13,7 +13,7 @@
 #'
 #' \code{\link{form_schema_ext}} returns the same object as \code{\link{form_schema}}
 #' adding \code{labels} and \code{choice lists} in all languages available. This is
-#' done by using the return value from \code{\link{form_xml}}
+#' done by using the return object from \code{\link{form_xml}}
 #'
 #' It has the exact function signature as \code{\link{form_schema}}.
 #' In that sense, any call to \code{\link{form_schema}} can be replaced
