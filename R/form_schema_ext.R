@@ -145,7 +145,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
   raw_labels <- xml2::xml_find_all(frm_xml, "//label")
 
   # iterate thorugh labels
-  for (i in 1:length(raw_labels)) {
+  for (i in seq_along(raw_labels)) {
 
 
     ## reads label
@@ -180,7 +180,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
           xml2::xml_attr(all_translations, "id") == id]
 
         # iterate through translations
-        for (j in 1:length(translations)) {
+        for (j in seq_along(translations)) {
           this_translation <- translations[j]
 
           # First check this is a regular text labels. 
@@ -248,7 +248,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
         choice_labels <- list()
 
         # iterate through choice list:
-        for (jj in 1:length(choice_items)) {
+        for (jj in seq_along(choice_items)) {
 
           ## reads choice item
           this_choiceitem <- choice_items[jj]
@@ -280,7 +280,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
 
 
             # iterate through choice translations
-            for (kk in 1:length(choice_translations)) {
+            for (kk in seq_along(choice_translations)) {
 
               # read translation
               this_choicetranslation <- choice_translations[kk]
