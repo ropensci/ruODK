@@ -9,7 +9,7 @@
 #' by \code{\link{form_schema}}.
 #'
 #' However this still misses important elements, in particular \code{labels} and
-#' \code{choice lists}.
+#' \code{choice_lists}.
 #'
 #' \code{\link{form_schema_ext}} returns the same object as \code{\link{form_schema}}
 #' adding \code{labels} and \code{choice lists} in all languages available. This is
