@@ -44,16 +44,8 @@
 #' @template param-retries
 #' @template param-odkcv
 #' @template param-verbose
-#' @return A tibble or nested list (v0.7) containing the form definition.
-#'   At the lowest nesting level, each form field consists of a list of two
-#'   nodes, `name` (the underlying field name) and `type` (the XForms field
-#'   type, as in "string", "select1", "geopoint", "binary" and so on).
-#'   These fields are nested in lists of tuples `name` (the XForms screen name),
-#'   `children` (the fields as described above), `type` ("structure" for non-
-#'   repeating screens, "repeat" for repeating screens).
-#'   A list with `name` "meta" may precede the structure, if several metadata
-#'   fields are captured (e.g. "instanceId", form start datetimes etc.).
-#'   In all cases for ODK Central 0.8, and with default parameters
+#' @return A tibble containing the form definition.
+#'   For ODK Central 0.8, and with default parameters
 #'   (\code{parse=TRUE}) for ODK Central 0.7, \code{\link{form_schema}} returns
 #'   a tibble with the columns:
 #'
