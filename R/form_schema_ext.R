@@ -18,6 +18,9 @@
 #' It has the exact function signature as \code{\link{form_schema}}.
 #' In that sense, any call to \code{\link{form_schema}} can be replaced
 #' by \code{\link{form_schema_ext}}
+#' 
+#' This function, however, has been prepared with ODK Center version 0.8 or higher.
+#' If you use with earlier version, a warning will be given.
 #'
 #'
 #' @param flatten Whether to flatten the resulting list of lists (TRUE) or not
