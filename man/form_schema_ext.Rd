@@ -122,7 +122,7 @@ In that sense, any call to \code{\link{form_schema}} can be replaced
 by \code{\link{form_schema_ext}}
 
 This function, however, has been prepared with ODK Center version 0.8 or higher.
-If you use with earlier version, a warning will be given.
+If you use it with an earlier version, a warning will be given.
 }
 \examples{
 \dontrun{
@@ -138,9 +138,13 @@ ruODK::ru_setup(
 
 
 # With current ODK Central (v0.8)
+# get extended schema:
 fsx <- form_schema_ext()
+
+# print choice list in english:
 fsx[fsx$name == "morphological_type", "choices_english"][[1]]
 
+# view the extended schema:
 View(fsx)
 
 }
