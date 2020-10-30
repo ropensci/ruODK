@@ -90,15 +90,20 @@ A tibble containing the form definition.
     \code{\link{odata_submission_get}}, prefixed by the path, additionally
     cleaned with \code{\link[janitor]{make_clean_names}} to match the
     cleaned column names from \code{\link{odata_submission_rectangle}}.
-  \item \code{label} The field label as given in the form schema. If specific languages are available, 
-    this column will return the \code{default} language or it will be empty if this is not specified.
-  \item \code{label\emph{_lang}} The field label in languange \emph{_lang} as given in the form schema.
-  \item \code{choices} A list of lists containing at least \code{values} and, if available, 
-    \code{labels} of the choices as given in the form schema. If specific languages are available, 
-    this column will return the \code{default} language or it will be empty if this is not specified.
-  \item \code{choices\emph{_lang}} A list of lists containing at least \code{values} and, if available, 
-    \code{labels} of the choices in language \emph{_lang} as given in the form schema
-  
+  \item \code{label} The field label as given in the form schema.
+    If specific languages are available,
+    this column will return the \code{default} language or it will be empty
+    if this is not specified.
+  \item \code{label\emph{_lang}} The field label in languange \emph{_lang} as
+    given in the form schema.
+  \item \code{choices} A list of lists containing at least \code{values} and,
+    if available, \code{labels} of the choices as given in the form schema.
+    If specific languages are available, this column will return the
+    \code{default} language or it will be empty if this is not specified.
+  \item \code{choices\emph{_lang}} A list of lists containing at least
+    \code{values} and, if available, \code{labels} of the choices in language
+    \emph{_lang} as given in the form schema
+
   }
 }
 \description{
@@ -113,16 +118,17 @@ by \code{\link{form_schema}}.
 However this still misses important elements, in particular \code{labels} and
 \code{choice_lists}.
 
-\code{\link{form_schema_ext}} returns the same object as \code{\link{form_schema}}
-adding \code{labels} and \code{choice lists} in all languages available. This is
-done by using the return object from \code{\link{form_xml}}
+\code{\link{form_schema_ext}} returns the same object as
+\code{\link{form_schema}}
+adding \code{labels} and \code{choice lists} in all languages available.
+This is done by using the return object from \code{\link{form_xml}}
 
 It has the exact function signature as \code{\link{form_schema}}.
 In that sense, any call to \code{\link{form_schema}} can be replaced
 by \code{\link{form_schema_ext}}
 
-This function, however, has been prepared with ODK Center version 0.8 or higher.
-If you use it with an earlier version, a warning will be given.
+This function, however, has been prepared with ODK Center version 0.8 or
+higher. If you use it with an earlier version, a warning will be given.
 }
 \examples{
 \dontrun{
@@ -146,7 +152,6 @@ fsx[fsx$name == "morphological_type", "choices_english"][[1]]
 
 # view the extended schema:
 View(fsx)
-
 }
 }
 \seealso{
