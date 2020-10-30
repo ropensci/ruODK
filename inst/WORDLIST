@@ -11,6 +11,7 @@ CMD
 CSVs
 Carpark
 Cecile
+Center
 DCIM
 DIY
 DOI
@@ -188,6 +189,8 @@ io
 jpg
 jsonlite
 kwargs
+lang
+languange
 lat
 lifecycle
 ll
