@@ -57,6 +57,15 @@
 #'     \code{\link{odata_submission_get}}, prefixed by the path, additionally
 #'     cleaned with \code{\link[janitor]{make_clean_names}} to match the
 #'     cleaned column names from \code{\link{odata_submission_rectangle}}.
+#'   \item \code{label} The field label as given in the form schema. If specific languages are available, 
+#'     this column will return the \code{default} language or it will be empty if this is not specified.
+#'   \item \code{label\emph{_lang}} The field label in languange \emph{_lang} as given in the form schema.
+#'   \item \code{choices} A list of lists containing at least \code{values} and, if available, 
+#'     \code{labels} of the choices as given in the form schema. If specific languages are available, 
+#'     this column will return the \code{default} language or it will be empty if this is not specified.
+#'   \item \code{choices\emph{_lang}} A list of lists containing at least \code{values} and, if available, 
+#'     \code{labels} of the choices in language \emph{_lang} as given in the form schema
+#'   
 #'   }
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/getting-form-schema-fields}
