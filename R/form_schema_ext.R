@@ -162,6 +162,12 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
                             fid = get_default_fid(), url = get_default_url(), un = get_default_un(),
                             pw = get_default_pw(), odkc_version = get_default_odkc_version(),
                             retries = get_retries(), verbose = get_ru_verbose()) {
+  
+  # version warning:
+  if (odkc_version < 0.8){
+    warning("Form Schema Extended works better with ODK Central 0.8 and above",
+            immediate. = TRUE)
+  }
 
   # gets basic schema
   frm_schema <- form_schema(
