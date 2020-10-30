@@ -77,16 +77,8 @@ Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 verbosity can be set globally or per function.}
 }
 \value{
-A tibble or nested list (v0.7) containing the form definition.
-  At the lowest nesting level, each form field consists of a list of two
-  nodes, `name` (the underlying field name) and `type` (the XForms field
-  type, as in "string", "select1", "geopoint", "binary" and so on).
-  These fields are nested in lists of tuples `name` (the XForms screen name),
-  `children` (the fields as described above), `type` ("structure" for non-
-  repeating screens, "repeat" for repeating screens).
-  A list with `name` "meta" may precede the structure, if several metadata
-  fields are captured (e.g. "instanceId", form start datetimes etc.).
-  In all cases for ODK Central 0.8, and with default parameters
+A tibble containing the form definition.
+  For ODK Central 0.8, and with default parameters
   (\code{parse=TRUE}) for ODK Central 0.7, \code{\link{form_schema}} returns
   a tibble with the columns:
 
@@ -98,6 +90,15 @@ A tibble or nested list (v0.7) containing the form definition.
     \code{\link{odata_submission_get}}, prefixed by the path, additionally
     cleaned with \code{\link[janitor]{make_clean_names}} to match the
     cleaned column names from \code{\link{odata_submission_rectangle}}.
+  \item \code{label} The field label as given in the form schema. If specific languages are available, 
+    this column will return the \code{default} language or it will be empty if this is not specified.
+  \item \code{label\emph{_lang}} The field label in languange \emph{_lang} as given in the form schema.
+  \item \code{choices} A list of lists containing at least \code{values} and, if available, 
+    \code{labels} of the choices as given in the form schema. If specific languages are available, 
+    this column will return the \code{default} language or it will be empty if this is not specified.
+  \item \code{choices\emph{_lang}} A list of lists containing at least \code{values} and, if available, 
+    \code{labels} of the choices in language \emph{_lang} as given in the form schema
+  
   }
 }
 \description{
@@ -110,15 +111,18 @@ form schema which is challenging to parse. This list is returned
 by \code{\link{form_schema}}.
 
 However this still misses important elements, in particular \code{labels} and
-\code{choice lists}.
+\code{choice_lists}.
 
 \code{\link{form_schema_ext}} returns the same object as \code{\link{form_schema}}
 adding \code{labels} and \code{choice lists} in all languages available. This is
-done by using the return value from \code{\link{form_xml}}
+done by using the return object from \code{\link{form_xml}}
 
 It has the exact function signature as \code{\link{form_schema}}.
 In that sense, any call to \code{\link{form_schema}} can be replaced
 by \code{\link{form_schema_ext}}
+
+This function, however, has been prepared with ODK Center version 0.8 or higher.
+If you use with earlier version, a warning will be given.
 }
 \examples{
 \dontrun{
@@ -132,88 +136,21 @@ ruODK::ru_setup(
   pw = "..."
 )
 
-# With explicit pid and fid
-fs_defaults <- form_schema(pid = 1, fid = "build_xformsId")
 
 # With current ODK Central (v0.8)
-fs <- form_schema()
+fsx <- form_schema_ext()
+fsx[fsx$name == "morphological_type", "choices_english"][[1]]
 
-# With defaults, ODK Central v0.7
-fs_nested <- form_schema(
-  flatten = FALSE,
-  odata = FALSE,
-  parse = FALSE,
-  odkc_version = 0.7
-)
-listviewer::jsonedit(fs_nested)
+View(fsx)
 
-fs_flattened <- form_schema(
-  flatten = TRUE,
-  odata = FALSE,
-  parse = FALSE,
-  odkc_version = 0.7
-)
-listviewer::jsonedit(fs_flattened)
-
-# form_schema returns a nested list. There's nothing to change about that.
-class(fs_nested)
-# > "list"
-
-class(fs_flattened)
-# > "list"
-
-# This assumes knowledge of that exact form being tested.
-# First node: type "structure" (a field group) named "meta".
-fs_nested[[1]]$type
-# > "structure"
-
-fs_nested[[1]]$name
-# > "meta"
-
-# The first node contains children, which means it's an XForms field group.
-names(fs_nested[[1]])
-# > "name" "children" "type"
-
-# Next node: a "meta" field of type "string" capturing the  "instanceId".
-# First child node of "meta": type "string", name "instanceId".
-fs_nested[[1]]$children[[1]]$type
-# > "string"
-fs_nested[[1]]$children[[1]]$name
-# > "instanceID"
-
-# In the flattened version, the field's and it's ancestors' names are the
-# components of "path".
-fs_flattened[[1]]$path
-# > "meta". "instanceId"
-
-fs_flattened[[1]]$type
-# > "string"
-
-# Last node: a "meta" field capturing the datetime of form completion
-fs_flattened[[length(fs_flattened)]]$type
-# > "dateTime"
-fs_nested[[length(fs_nested)]]$type
-# > "dateTime"
-
-# Parsed into a tibble of form field type/name:
-# Useful to inform further parsing of submission data (attachments, dates)
-fs <- form_schema(parse = TRUE, odkc_version = 0.7)
-fs <- form_schema(odkc_version = 0.8)
-
-# Attachments: used by handle_ru_attachments
-fs \%>\% dplyr::filter(type == "binary")
-
-# dateTime: used by handle_ru_datetimes
-fs \%>\% dplyr::filter(type == "dateTime")
-
-# Point location: used by handle_ru_geopoints
-fs \%>\% dplyr::filter(type == "geopoint")
 }
 }
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/getting-form-schema-fields}
 
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json}
+
+\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
 
 Other restful-api: 
 \code{\link{attachment_link}()},
