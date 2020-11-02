@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 01T12
 01z
 14e269a2374132392c275117efbe67b6
@@ -22,15 +23,29 @@
 8bb2
 978f
 999z
+=======
+AB
+AK
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 AmenazasRD
 Amit
 AppVeyor
 Appveyor
 Arefin
 Binderhub
+<<<<<<< HEAD
 CMD
 Carpark
 DCIM0001
+=======
+CI
+CMD
+CSVs
+Carpark
+Cecile
+Center
+DCIM
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 DIY
 DOI
 Datatable
@@ -40,11 +55,16 @@ Edmx
 EntitySet
 EntityType
 Flatback
+<<<<<<< HEAD
 FloraQuadrat04
+=======
+FloraQuadrat
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 GH
 GeoJSON
 Geospatial
 Geotraces
+<<<<<<< HEAD
 Gimenez
 Hadley
 ISO8601
@@ -56,6 +76,17 @@ LINESTRING
 Linestring
 Linestrings
 MD5
+=======
+GitHub
+HT
+IDs
+JDBC
+JSON
+LINESTRING
+Linestring
+Linestrings
+M
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 Measues
 Metapackage
 Muntashir
@@ -73,7 +104,11 @@ PRs
 Pentaho
 PosixCT
 PowerBI
+<<<<<<< HEAD
 Quadrat
+=======
+QA
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 README
 READMEs
 RESTful
@@ -83,15 +118,25 @@ RMarkdown
 ROpenSci
 RSpatial
 RStudio
+<<<<<<< HEAD
 RaaS
 Rectangling
 Renviron
 Rmd
 Roadmap
+=======
+RU
+RaaS
+Rectangling
+Refactor
+Renviron
+Rmd
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 Rowlingson
 Rstudio
 STATA
 Sadler
+<<<<<<< HEAD
 Scalability
 Schemetrica
 Scince
@@ -102,12 +147,33 @@ Stata
 Tidyverse
 TravisCI
 UNHCR
+=======
+Schemetrica
+Scince
+Setup
+SimpleFeature
+SimpleFeatures
+Simplifiy
+Spellchecks
+Stata
+Ste
+TIMEZONE
+Tidyverse
+TravisCI
+UNHCR
+URLs
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 UUID
 UUIDs
 UZ
 Un
 VueJS
+<<<<<<< HEAD
 WIP
+=======
+W
+WA
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 WKT
 Wickam
 XForm
@@ -115,38 +181,60 @@ XForms
 Xforms
 XlsForm
 XlsForms
+<<<<<<< HEAD
 acc
 actee
 api
+=======
+ac
+acb
+acc
+actee
+alt
+api
+app
+apps
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 asciicast
 att
 attchment
 attrs
 barcode
+<<<<<<< HEAD
+=======
+bb
+bc
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 bugfix
+ca
 camelCase
+<<<<<<< HEAD
+=======
+cb
+ceaa
+cefb
+cf
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 changedate
 cheatsheet
 chr
 ckanr
+<<<<<<< HEAD
+=======
+clearinghouse
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 codecov
 colname
 compat
 composable
-corner1
-corner2
-corner3
-corner4
 crosslinks
 csv
-d5a80cefb1895eefcd0cb86a12d8acb4
-d5e78a78
-d9c9a3bc7b69
 datatable
 datatypes
 dateTime
 datetime
 datetimes
+<<<<<<< HEAD
 dcde716efb4f
 dir
 doi
@@ -154,15 +242,33 @@ dttm
 enexpr
 enquo
 ensym
+=======
+db
+dcde
+dir
+doi
+dttm
+eefcd
+ef
+efb
+efbe
+enexpr
+enquo
+ensym
+etc
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 eval
 expr
 exprs
 extdata
-f73d2e1221ceaa06
+fb
 fid
+<<<<<<< HEAD
 filename1
 filename2
 filename3
+=======
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 floristic
 fn
 funder
@@ -178,42 +284,80 @@ geotrace
 geotraces
 gepshapes
 getodk
+<<<<<<< HEAD
 getters
+=======
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 github
 gj
 googledrive
 gps
+<<<<<<< HEAD
 http
+=======
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 https
 httr
 idential
 imagemagick
 instanceID
 instanceId
+<<<<<<< HEAD
+=======
+introspect
+introspects
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 io
 jpg
 jsonlite
 kwargs
-level3
+lang
+languange
+lat
 lifecycle
+<<<<<<< HEAD
+=======
+ll
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 lon
 lubridate
+m
 mapview
+<<<<<<< HEAD
 md5
 metapackage
 mudmap
+=======
+max
+md
+metapackage
+mudmap
+munging
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 noop
 nvis
 odata
 odkbuild
 odkc
+<<<<<<< HEAD
+=======
+offline
+org
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 permissioning
 photoshopping
 pid
 pkgdown
+<<<<<<< HEAD
 pre
 purrr
 quadrat
+=======
+popup
+popups
+purrr
+quo
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 quos
 quosures
 rOpenSci
@@ -227,7 +371,14 @@ ru
 ruReady
 ruodk
 screencast
+<<<<<<< HEAD
 select1
+=======
+screenshots
+searchable
+setup
+sf
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 situ
 subfolder
 subfolders
@@ -239,22 +390,35 @@ tibble
 tibbles
 tidyr
 tidyverse
+<<<<<<< HEAD
+=======
+timezone
+tuples
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 un
 unnest
 unnested
 unnesting
 unnests
-unparsed
 urODK
+urls
 uuid
 uuids
+<<<<<<< HEAD
 v0
 v1
 v7
+=======
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 vectorised
 wfp
 whattheyforgot
 wkt
 workdir
+<<<<<<< HEAD
 xml2
+=======
+workflow
+workflows
+>>>>>>> e8bad069050b4a4df2ca7c430341b62216f0ba30
 zenodo
