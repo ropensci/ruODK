@@ -109,11 +109,9 @@ geo_sf_point <- geo_wkt %>% sf::st_as_sf(wkt="point_location_point_gps")
 # ODK Collect captures WGS84 (EPSG:4326)
 sf::st_crs(geo_sf_point) <- 4326
 # Mapview using sf
-# Remove the popup=NULL to get full attribute table as popup
 # See also further information under heading "Outlook"
 mapview::mapview(geo_sf_point, 
                  col.regions = sf::sf.colors(10),
-                 popup = NULL,
                  map.types = c("Esri.WorldShadedRelief", "OpenTopoMap.AU"))
 # GGplot using sf
 ggplot2::ggplot() + 
@@ -141,7 +139,7 @@ geo_sf_line <- geo_wkt %>% sf::st_as_sf(wkt="path_location_path_gps")
 # ODK Collect captures WGS84 (EPSG:4326)
 sf::st_crs(geo_sf_line) <- 4326
 # Mapview using sf
-mapview::mapview(geo_sf_line, col.regions = sf::sf.colors(10), popup = NULL)
+mapview::mapview(geo_sf_line, col.regions = sf::sf.colors(10))
 # GGplot using sf
 ggplot2::ggplot() + 
   ggplot2::geom_sf(data = geo_sf_line, ggplot2::aes(fill = device_id))
@@ -166,7 +164,7 @@ geo_sf_poly <- geo_wkt %>% sf::st_as_sf(wkt="shape_location_shape_gps")
 # ODK Collect captures WGS84 (EPSG:4326)
 sf::st_crs(geo_sf_poly) <- 4326
 # Mapview using sf
-mapview::mapview(geo_sf_poly, col.regions = sf::sf.colors(10), popup = NULL)
+mapview::mapview(geo_sf_poly, col.regions = sf::sf.colors(10))
 # GGplot using sf
 ggplot2::ggplot() + 
   ggplot2::geom_sf(data = geo_sf_poly, ggplot2::aes(fill = device_id))
@@ -194,8 +192,8 @@ deserves a spatial mention.
 Review the options for 
 [mapview popups](https://r-spatial.github.io/mapview/articles/articles/mapview_04-popups.html) 
 which are turned off in this quick demo, and the whole 
-[mapview](https://r-spatial.github.io/mapview/index.html) homepage for a comprehensive
-overview of mapview.
+[mapview](https://r-spatial.github.io/mapview/index.html) homepage for a 
+comprehensive overview of mapview.
 
 There are several other good entry points for all things R and spatial, 
 including but not limited to:
@@ -206,6 +204,9 @@ including but not limited to:
   by [Barry Rowlingson](http://barry.rowlingson.com/)
 * [GIS with R](https://www.jessesadler.com/post/gis-with-r-intro/) 
   by [Jesse Sadler](https://www.jessesadler.com/page/cv/)
+* GIS and mapping by [Olivier Gimenez](https://oliviergimenez.github.io/): 
+  [Slides](https://oliviergimenez.github.io/intro_spatialR/) and
+  [code](https://github.com/oliviergimenez/intro_spatialR)
   
 The above list of examples and resources is far from comprehensive.
 Feel free to [contribute or suggest](https://github.com/ropensci/ruODK/issues) 

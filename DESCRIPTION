@@ -59,12 +59,12 @@ Suggests:
     DT (>= 0.9),
     ggplot2 (>= 3.2.1),
     knitr (>= 1.26),
-    lattice,
+    lattice (>= 0.20-41),
     leaflet (>= 2.0.3),
     listviewer (>= 3.0.0),
     leafpop (>= 0.0.5),
-    leafem,
-    mapview (>= 2.9.0),
+    leafem (>= 0.1.3),
+    mapview (>= 2.9.4),
     rmarkdown (>= 1.17),
     roxygen2 (>= 7.1.0),
     sf (>= 0.9-5),
@@ -72,6 +72,8 @@ Suggests:
     usethis (>= 1.6.0),
     vcr (>= 0.5.4),
     webshot (>= 0.5.2)
+Remotes:
+    r-spatial/mapview
 VignetteBuilder: 
     knitr
 RdMacros: 
