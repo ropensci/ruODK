@@ -27,8 +27,8 @@ jobs:
           - { os: windows-2016, r: "devel" }
           - { os: windows-2016, r: "release" }
           - { os: windows-2016, r: "oldrel" }
-          - { os: macOS-latest, r: "devel" } # needs gdal
-          - { os: macOS-latest, r: "release"} # needs gdal
+          - { os: macOS-latest, r: "devel" }
+          - { os: macOS-latest, r: "release"}
           - { os: macOS-latest, r: "oldrel"} # needs freetype
           - { os: ubuntu-20.04, r: "devel" } # broken proj4 < sf < leafem
           - { os: ubuntu-20.04, r: "release"}
@@ -133,8 +133,8 @@ jobs:
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
         run: Rscript -e "remotes::install_github('ropensci/tic')" -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: "[Custom block] [macOS-devel][r-devl] Install system pkgs"
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
+      - name: "[Custom block] [macOS-devel][r-devel] Install system pkgs"
+        if: matrix.config.os == 'macOS-latest'
         run: |
           brew install udunits cairo freetype
 
