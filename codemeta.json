@@ -14,13 +14,13 @@
   ],
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.9.1.9003",
+  "version": "0.9.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
+  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
   "author": [
     {
       "@type": "Person",
@@ -113,6 +113,7 @@
       "@type": "SoftwareApplication",
       "identifier": "lattice",
       "name": "lattice",
+      "version": ">= 0.20-41",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -164,6 +165,7 @@
       "@type": "SoftwareApplication",
       "identifier": "leafem",
       "name": "leafem",
+      "version": ">= 0.1.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -176,14 +178,14 @@
       "@type": "SoftwareApplication",
       "identifier": "mapview",
       "name": "mapview",
-      "version": ">= 2.9.0",
+      "version": ">= 2.9.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=mapview"
+      "sameAs": "https://github.com/r-spatial/mapview"
     },
     {
       "@type": "SoftwareApplication",
@@ -539,7 +541,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ruODK/blob/main/README.md",
-  "fileSize": "10771.493KB",
+  "fileSize": "3662.064KB",
   "contIntegration": ["https://travis-ci.org/ropensci/ruODK", "https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/ropensci/ruODK"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "review": {
