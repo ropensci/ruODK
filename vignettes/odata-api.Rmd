@@ -34,7 +34,7 @@ library(ruODK)
 <!-- * This vignette: the typical workflow -->
 <!-- * New vignette: spatial is not special -->
 <!-- * New vignette: DIY rectangling -->
-<!-- * New vignette: data visualisation (refer to that from odata and resful api) -->
+<!-- * New vignette: data visualisation (refer to that from odata and restful api) -->
 This vignette demonstrates `ruODK`'s workflow to extract data from ODK Central's
 OData service endpoint, and to prepare the data and the media attachments for
 further analysis and visualisation.
@@ -52,7 +52,7 @@ The OData service URL is shown in the form's "Submissions" tab >
 "Analyse via OData" on ODK Central. It contains base URL, project ID, and 
 form ID and is used by `ruODK::ru_setup()`.
 
-```{r ru_setup}
+```{r ru_setup_demo, eval=FALSE}
 # ODK Central's OData URL contains base URL, project ID, and form ID
 # ODK Central credentials can live in .Renviron, see vignette "setup"
 ruODK::ru_setup(
@@ -66,6 +66,13 @@ ruODK::ru_setup(
 # File attachment download location
 loc <- fs::path("media")
 
+```
+
+This vignette shows how to access data, but under the bonnet uses the 
+included package data. This allows to rebuild the vignette offline and without
+credentials to the originating ODK Central server.
+
+```{r use_pkg_data}
 # Canned data
 data("fq_svc")
 data("fq_form_schema")
