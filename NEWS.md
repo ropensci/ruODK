@@ -1,17 +1,20 @@
-* `form_schema_ext()` Shows the extended schema of one form, including (multi-language)
-  labels and choice lists. (#77, @mtyszler)
-
 # `ruODK` (development version)
 
 # `ruODK` 0.9.2
+## Major fixes
+* `form_schema_ext()` Shows the extended schema of one form, including 
+  (multi-language) labels and choice lists. (#77, thanks @mtyszler for the PR)
 * Development continues in the default branch `main`.
-* Dropped Import of `tidyselect` in favour of using `dplyr::all_of()`.
+## Minor fixes
 * `form_list` now handles draft forms with `NA` hash and version (#86, 
   thanks @dmenne for the PR).
-* Temporarily turned off mapview popups in vignette "Spatial" while an upstream
-  bugfix is in progress (https://github.com/r-spatial/mapview/issues/312).
+* Migrate package tests to a new ODK Central instance and update contributing 
+  guidelines with new settings. (#14)
+* Drop Import of `tidyselect` in favour of using `dplyr::all_of()`.
 * All calls to `httr::RETRY(times=)` are configurable via setting `retries`. (#94)
-* Migrate package tests and update contributing guidelines with new settings. WIP (#14)
+## Documentation
+* Mapview popups in vignette "Spatial" are back after an upstream
+  bugfix is in progress (https://github.com/r-spatial/mapview/issues/312).
 
 # `ruODK` 0.9.1
 ## Major fixes
