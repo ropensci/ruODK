@@ -31,6 +31,7 @@ Other contributors:
   \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) [reviewer]
   \item Karissa Whiting (\href{https://orcid.org/0000-0002-4683-1868}{ORCID}) [reviewer]
   \item Jason Taylor [reviewer]
+  \item Marcelo Tyszler (\href{https://orcid.org/0000-0002-4573-0002}{ORCID}) [contributor]
   \item DBCA [copyright holder, funder]
   \item NWSFTCP [funder]
 }

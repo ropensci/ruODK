@@ -83,11 +83,11 @@
 #' \dontrun{
 #' # Set default credentials, see vignette "setup"
 #' ruODK::ru_setup(
-#'   url = get_test_url(),s
-#'   pid = get_test_pid(),
+#'   url = ruODK::get_test_url(),
+#'   pid = ruODK::get_test_pid(),
 #'   fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset="I8n_label_choices"),
-#'   un = "me@email.com",
-#'   pw = "..."
+#'   un = ruODK::get_test_un(),
+#'   pw = ruODK::get_test_pw()
 #' )
 #'
 #'
@@ -96,10 +96,10 @@
 #' fsx <- form_schema_ext()
 #'
 #' # print choice list in english:
-#' fsx[fsx$name == "morphological_type", "choices_english"][[1]]
+#' fsx[fsx$name == "test_yn", "choices_english_(en)"][[1]]
 #'
 #' # view the extended schema:
-#' View(fsx)
+#' fsx
 #' }
 form_schema_ext <- function(flatten = FALSE,
                             odata = FALSE,
