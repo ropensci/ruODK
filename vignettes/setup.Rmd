@@ -59,43 +59,14 @@ function calls, `ruODK` defaults to hide verbose messages.
 # ruODK user using OData service URL, username (an email), and password
 # Never use plaintext username and password, use Sys.getenv() instead
 ruODK::ru_setup(
-  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
+  svc = Sys.getenv("ODKC_SVC"), 
   un = Sys.getenv("ODKC_UN"), 
   pw = Sys.getenv("ODKC_PW"),
   tz = "Australia/Perth",
   verbose = TRUE
 )
 
-# ruODK contributor
-ruODK::ru_setup(
-  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
-  un = Sys.getenv("ODKC_UN"), 
-  pw = Sys.getenv("ODKC_PW"),
-  tz = "Australia/Perth",
-  test_svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc", 
-  test_fid_zip = "build_Spotlighting-0-6_1558333698",
-  test_fid_att = "build_Flora-Quadrat-0-1_1558330379",
-  test_un = Sys.getenv("ODKC_TEST_UN"), 
-  test_pw = Sys.getenv("ODKC_TEST_PW")
-)
-
-# ruODK contributor using base URL, project ID, and form ID
-# Same effect as above, but more typing
-ruODK::ru_setup(
-  pid = 1,
-  fid = "build_Flora-Quadrat-0-4_1564384341",
-  url = "https://odkcentral.dbca.wa.gov.au",
-  un = Sys.getenv("ODKC_UN"), 
-  pw = Sys.getenv("ODKC_PW"),
-  tz = "Australia/Perth",
-  test_url = "https://sandbox.central.getodk.org",
-  test_un = Sys.getenv("ODKC_TEST_UN"), 
-  test_pw = Sys.getenv("ODKC_TEST_PW"),
-  test_pid = 14,
-  test_fid = "build_Flora-Quadrat-0-4_1564384341",
-  test_fid_zip = "build_Spotlighting-0-6_1558333698",
-  test_fid_att = "build_Flora-Quadrat-0-1_1558330379"
-)
+# ruODK contributors: see contributing guidelines for .Renviron variables
 
 # Review settings
 ruODK::ru_settings()
@@ -138,36 +109,42 @@ ODKC_URL="https://odkcentral.dbca.wa.gov.au"
 ODKC_UN="me@email.com"
 ODKC_PW="..."
 ODKC_VERSION=0.8
-ODKC_TEST_URL="https://sandbox.central.getodk.org"
-ODKC_TEST_UN="me@email.com"
-ODKC_TEST_PW="..."
-ODKC_TEST_VERSION=0.8
-ODKC_TEST_PID=14
-ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936"
-ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698"
-ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379"
-RU_TIMEZONE="Australia/Perth"
+
+# Test settings
+ODKC_TEST_SVC="https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc"
+ODKC_TEST_URL="https://odkc.dbca.wa.gov.au"
+ODKC_TEST_PID=2
+ODKC_TEST_PID_ENC=3
+ODKC_TEST_PP="ThePassphrase"
+ODKC_TEST_FID="Flora-Quadrat-04"
+ODKC_TEST_FID_ZIP="Spotlighting-06"
+ODKC_TEST_FID_ATT="Flora-Quadrat-04-att"
+ODKC_TEST_FID_GAP="Flora-Quadrat-04-gap"
+ODKC_TEST_FID_WKT="Locations"
+ODKC_TEST_FID_I8N0="I8n_no_lang"
+ODKC_TEST_FID_I8N1="I8n_label_lng"
+ODKC_TEST_FID_I8N2="I8n_label_choices"
+ODKC_TEST_FID_ENC="Locations"
+ODKC_TEST_VERSION=1.0
 RU_VERBOSE=TRUE
+RU_TIMEZONE="Australia/Perth"
 RU_RETRIES=3
+ODKC_TEST_UN="..."
+ODKC_TEST_PW="..."
 ```
 
 As an alternative to setting environment variables through `~/.Renviron`, you
 can set them through `Sys.setenv()`:
 
 ```{r setenv, eval=FALSE}
-Sys.setenv(ODKC_URL="https://odkcentral.dbca.wa.gov.au")
+Sys.setenv(ODKC_URL="https://odkc.dbca.wa.gov.au")
 Sys.setenv(ODKC_UN="me@mail.com")
 Sys.setenv(ODKC_PW="...")
-Sys.setenv(ODKC_TEST_URL="https://sandbox.central.getodk.org")
-Sys.setenv(ODKC_TEST_UN="me@mail.com")
+Sys.setenv(ODKC_TEST_URL="...")
+Sys.setenv(ODKC_TEST_UN="...")
 Sys.setenv(ODKC_TEST_PW="...")
-Sys.setenv(ODKC_TEST_PID=14)
-Sys.setenv(ODKC_TEST_FID="build_Flora-Quadrat-0-2_1558575936")
-Sys.setenv(ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698")
-Sys.setenv(ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379")
-Sys.setenv(RU_TIMEZONE="Australia/Perth")
-Sys.setenv(RU_VERBOSE=TRUE)
-Sys.setenv(RU_RETRIES=3)
+Sys.setenv(ODKC_TEST_PID=2)
+# continue for the remaining test variables shown above
 ```
 
 ## The hard way: Per function call
