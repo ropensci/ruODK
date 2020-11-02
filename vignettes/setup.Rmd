@@ -55,7 +55,7 @@ Furthermore, some functions offer verbose messages, which can assist to debug
 unexpected behaviour. Unless specified in the settings, or in the respective
 function calls, `ruODK` defaults to hide verbose messages.
 
-```{r ru_setup}
+```{r ru_setup, eval=FALSE}
 # ruODK user using OData service URL, username (an email), and password
 # Never use plaintext username and password, use Sys.getenv() instead
 ruODK::ru_setup(
