@@ -1,4 +1,3 @@
-# library(xml2)
 #' Show the extended schema of one form.
 #'
 #' \lifecycle{experimental}
@@ -14,24 +13,24 @@
 #' \code{\link{form_schema_ext}} returns the same object as
 #' \code{\link{form_schema}}
 #' adding \code{labels} and \code{choice lists} in all languages available.
-#' This is done by using the return object from \code{\link{form_xml}}
+#' This is done by using the return object from \code{\link{form_xml}}.
 #'
 #' It has the exact function signature as \code{\link{form_schema}}.
 #' In that sense, any call to \code{\link{form_schema}} can be replaced
 #' by \code{\link{form_schema_ext}}
 #'
-#' This function, however, has been prepared with ODK Center version 0.8 or
+#' This function, however, has been prepared with ODK Central version 0.8 or
 #' higher. If you use it with an earlier version, a warning will be given.
 #'
 #'
-#' @param flatten Whether to flatten the resulting list of lists (TRUE) or not
-#'   (FALSE, default). Only applies to ODK Central version < 0.8.
+#' @param flatten Whether to flatten the resulting list of lists (\code{TRUE})
+#'   or not (\code{FALSE}, default). Only applies to ODK Central version < 0.8.
 #' @param odata Whether to sanitise the field names to match the way they will
 #'   be outputted for OData. While the original field names as given in the
 #'   XForms definition may be used as-is for CSV output, OData has some
 #'   restrictions related to the domain-qualified identifier syntax it uses.
 #'   Only applies to ODK Central version < 0.8.
-#'   Default: FALSE.
+#'   Default: \code{FALSE}.
 #' @param parse Whether to parse the form schema into a tibble of form field
 #'   type and name. This uses \code{\link{form_schema_parse}} internally.
 #'   If used together with `flatten=TRUE`, \code{\link{form_schema}} will raise
@@ -84,10 +83,9 @@
 #' \dontrun{
 #' # Set default credentials, see vignette "setup"
 #' ruODK::ru_setup(
-#'   svc = paste0(
-#'     "https://sandbox.central.getodk.org/v1/projects/14/",
-#'     "forms/build_Flora-Quadrat-0-2_1558575936.svc"
-#'   ),
+#'   url = get_test_url(),s
+#'   pid = get_test_pid(),
+#'   fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset="I8n_label_choices"),
 #'   un = "me@email.com",
 #'   pw = "..."
 #' )
@@ -103,40 +101,58 @@
 #' # view the extended schema:
 #' View(fsx)
 #' }
-form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = get_default_pid(),
-                            fid = get_default_fid(), url = get_default_url(), un = get_default_un(),
-                            pw = get_default_pw(), odkc_version = get_default_odkc_version(),
-                            retries = get_retries(), verbose = get_ru_verbose()) {
+form_schema_ext <- function(flatten = FALSE,
+                            odata = FALSE,
+                            parse = TRUE,
+                            pid = get_default_pid(),
+                            fid = get_default_fid(),
+                            url = get_default_url(),
+                            un = get_default_un(),
+                            pw = get_default_pw(),
+                            odkc_version = get_default_odkc_version(),
+                            retries = get_retries(),
+                            verbose = get_ru_verbose()) {
 
   # version warning:
   if (odkc_version < 0.8) {
-    warning("Form Schema Extended works better with ODK Central 0.8 and above",
-      immediate. = TRUE
-    )
+    "Form Schema Extended works better with ODK Central 0.8 and above" %>%
+    ru_msg_warn()
   }
 
   # gets basic schema
   frm_schema <- form_schema(
-    flatten, odata, parse, pid,
-    fid, url, un,
-    pw, odkc_version,
-    retries, verbose
+    flatten = flatten,
+    odata = odata,
+    parse = parse,
+    url = url,
+    pid = pid,
+    fid = fid,
+    un = un,
+    pw = pw,
+    odkc_version = odkc_version,
+    retries = retries,
+    verbose = verbose
   )
 
   # gets xml representation
-  frm_xml <- xml2::as_xml_document(form_xml(
-    parse, pid, fid,
-    url, un, pw,
-    retries
-  ))
-
+  frm_xml <- form_xml(
+    parse = parse,
+    url = url,
+    pid = pid,
+    fid = fid,
+    un = un,
+    pw = pw,
+    retries = retries
+  ) %>%
+    xml2::as_xml_document()
 
   ### parse translations:
   all_translations <- xml2::xml_find_all(frm_xml, "//text")
 
   # initialize dataframe
   extension <- data.frame(
-    path = character(0), label = character(0),
+    path = character(0),
+    label = character(0),
     stringsAsFactors = FALSE
   )
 
@@ -147,12 +163,11 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
   # iterate thorugh labels
   for (i in seq_along(raw_labels)) {
 
-
-    ## reads label
+    ## read label
     this_rawlabel <- raw_labels[i]
 
     ## path
-    # gets ref from parent, without leading "/data"
+    # get ref from parent, without leading "/data"
     this_path <- sub(
       "/data", "",
       xml2::xml_attr(xml2::xml_parent(this_rawlabel), "ref")
@@ -162,17 +177,17 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
     if (!is.na(this_path)) {
 
 
-      # adds new empty row:
+      # add new empty row:
       extension[nrow(extension) + 1, ] <- rep(NA, ncol(extension))
 
-      # adds path
+      # add path
       extension[nrow(extension), "path"] <- this_path
 
-      # first checks if label is mapped with a translation function
+      # first check if label is mapped with a translation function
       has_translation <- xml2::xml_has_attr(this_rawlabel, "ref")
 
       if (has_translation) {
-        # finds all translations related to this path:
+        # find all translations related to this path:
         id <- sub(
           "')",
           "",
@@ -196,7 +211,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
           )
 
           if (is_regular_label) {
-            # reads the parent node to identify language:
+            # read the parent node to identify language:
             translation_parent <- xml2::xml_parent(this_translation)
             this_lang <- gsub(" ", "_", tolower(xml2::xml_attr(
               translation_parent, "lang"
@@ -225,7 +240,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
                 )
               }
 
-              # adds the first value content of the translation
+              # add the first value content of the translation
               extension[
                 nrow(extension),
                 paste0("label_", this_lang)
@@ -242,7 +257,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
       }
 
       ### PART 1.1: parse choice labels
-      ## checks existence of  choice list:
+      ## check existence of  choice list:
       choice_items <- xml2::xml_find_all(
         xml2::xml_parent(this_rawlabel), "./item"
       )
@@ -265,7 +280,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
         # iterate through choice list:
         for (jj in seq_along(choice_items)) {
 
-          ## reads choice item
+          ## read choice item
           this_choiceitem <- choice_items[jj]
 
           # value
@@ -279,7 +294,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
             this_choiceitem, "./label"
           )
 
-          # first checks if choice label is mapped with a translation function
+          # first check if choice label is mapped with a translation function
           has_translation_choice <- xml2::xml_has_attr(
             this_rawchoicelabel, "ref"
           )
@@ -306,14 +321,16 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
               # read translation
               this_choicetranslation <- choice_translations[kk]
 
-              # first check this is a regular text labels. Questions in ODK can have video, image and audio "labels",
-              # which will be skipped. This is identified by the presence of the 'form' attribute:
+              # first check this is a regular text labels.
+              # Questions in ODK can have video, image and audio "labels",
+              # which will be skipped.
+              # This is identified by the presence of the 'form' attribute:
               is_regular_choicelabel <- !xml2::xml_has_attr(
                 xml2::xml_find_first(this_choicetranslation, "./value"), "form"
               )
 
               if (is_regular_choicelabel) {
-                # reads the parent node to identify language:
+                # read the parent node to identify language:
                 choice_translation_parent <- xml2::xml_parent(
                   this_choicetranslation
                 )
@@ -342,7 +359,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
                     )
                   }
 
-                  # adds the first value content of the translation
+                  # add the first value content of the translation
                   choice_labels[[paste0(
                     "choices_",
                     this_choicelang
@@ -360,7 +377,7 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
           }
         }
 
-        # add to the extended table:
+        # add to the extended table
         for (this_choicelang in names(choice_labels)) {
           these_choicelabels <- choice_labels[[this_choicelang]]
 
@@ -381,11 +398,10 @@ form_schema_ext <- function(flatten = FALSE, odata = FALSE, parse = TRUE, pid = 
   }
 
 
-  # join:
+  # join
   fs_ext <- frm_schema %>% dplyr::left_join(extension, by = "path")
 
-  ##
   return(fs_ext)
 }
 
-# usethis::edit_file("tests/testthat/test-form_schema_ext.R") # nolint
+# usethis::use_test("form_schema_ext") # nolint

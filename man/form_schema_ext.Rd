@@ -19,15 +19,15 @@ form_schema_ext(
 )
 }
 \arguments{
-\item{flatten}{Whether to flatten the resulting list of lists (TRUE) or not
-(FALSE, default). Only applies to ODK Central version < 0.8.}
+\item{flatten}{Whether to flatten the resulting list of lists (\code{TRUE})
+or not (\code{FALSE}, default). Only applies to ODK Central version < 0.8.}
 
 \item{odata}{Whether to sanitise the field names to match the way they will
 be outputted for OData. While the original field names as given in the
 XForms definition may be used as-is for CSV output, OData has some
 restrictions related to the domain-qualified identifier syntax it uses.
 Only applies to ODK Central version < 0.8.
-Default: FALSE.}
+Default: \code{FALSE}.}
 
 \item{parse}{Whether to parse the form schema into a tibble of form field
 type and name. This uses \code{\link{form_schema_parse}} internally.
@@ -121,23 +121,22 @@ However this still misses important elements, in particular \code{labels} and
 \code{\link{form_schema_ext}} returns the same object as
 \code{\link{form_schema}}
 adding \code{labels} and \code{choice lists} in all languages available.
-This is done by using the return object from \code{\link{form_xml}}
+This is done by using the return object from \code{\link{form_xml}}.
 
 It has the exact function signature as \code{\link{form_schema}}.
 In that sense, any call to \code{\link{form_schema}} can be replaced
 by \code{\link{form_schema_ext}}
 
-This function, however, has been prepared with ODK Center version 0.8 or
+This function, however, has been prepared with ODK Central version 0.8 or
 higher. If you use it with an earlier version, a warning will be given.
 }
 \examples{
 \dontrun{
 # Set default credentials, see vignette "setup"
 ruODK::ru_setup(
-  svc = paste0(
-    "https://sandbox.central.getodk.org/v1/projects/14/",
-    "forms/build_Flora-Quadrat-0-2_1558575936.svc"
-  ),
+  url = get_test_url(),s
+  pid = get_test_pid(),
+  fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset="I8n_label_choices"),
   un = "me@email.com",
   pw = "..."
 )
