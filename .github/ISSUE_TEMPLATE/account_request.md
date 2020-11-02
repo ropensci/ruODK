@@ -1,12 +1,12 @@
 ---
 name: Account request
-about: I'd like to run tests or build the vignettes
-title: 'Account request for ODK Central instances used by ruODK'
+about: I'd like to run the ruODK package tests
+title: 'Account request for ODK Central test instance for ruODK package tests'
 labels: account-request
 assignees: florianm
 
 ---
-I want to run the tests and build the vignettes. 
+I would like to run the tests.
 Please provide access to the ODK Central test instance for ruODK <https://odkc.dbca.wa.gov.au/>.
 
 [ ] I have sent an email to the `ruODK` package maintainer requesting access.
