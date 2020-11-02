@@ -6,7 +6,7 @@
 \alias{geo_wkt}
 \title{The parsed submissions of a form containing geofields in WKT.}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2 rows and 49 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1 rows and 47 columns.
 }
 \source{
 \code{\link{odata_submission_get}(wkt=TRUE, parse=TRUE)}

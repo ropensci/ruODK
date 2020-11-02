@@ -8,18 +8,11 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-- media/1568786958640.jpg
-- media/1568787004467.jpg
-- media/1568787172983.jpg
-- media/1568787220913.jpg
-- media/1568787333689.jpg
-- media/1568787380833.jpg
-- media/1568787456664.jpg
-- media/1568787504877.jpg
-- media/1568794395624.jpg
-- media/1568794560256.jpg
-- media/1568795382633.jpg
-- media/1568795579890.jpg
+- media/1604290006239.jpg
+- media/1604290049411.jpg
+- media/1604290379613.jpg
+- media/1604290400891.jpg
+- media/1604290499008.jpg
 ---
 
 ```{r setup, include = FALSE}
@@ -66,8 +59,7 @@ form ID and is used by `ruODK::ru_setup()`.
 # ODK Central's OData URL contains base URL, project ID, and form ID
 # ODK Central credentials can live in .Renviron, see vignette "setup"
 ruODK::ru_setup(
-  svc = paste0("https://sandbox.central.getodk.org/v1/projects/14/",
-               "forms/build_Flora-Quadrat-0-4_1564384341.svc"),
+  svc = Sys.getenv("ODKC_TEST_SVC"),
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW"),
   tz = "Australia/Perth",
@@ -374,7 +366,6 @@ leaflet::leaflet(width = 800, height = 600) %>%
     popup = ~ glue::glue(
       "<h3>{location_area_name}</h3>",
       "Survey start {encounter_start_datetime}</br>",
-      "Reporter {reporter}</br>",
       "Device {device_id}</br>",
       "<h5>Site</h5>",
       '<div><img src="{location_quadrat_photo}"',
@@ -409,7 +400,6 @@ leaflet::leaflet(width = 800, height = 600) %>%
     popup = ~ glue::glue(
       "<h3>{field_name}</h3>",
       "Survey start {encounter_start_datetime}</br>",
-      "Reporter {reporter}</br>",
       "Device {device_id}</br>",
       "<h5>Taxon</h5>",
       '<div><img src="media/{photo_in_situ}"',

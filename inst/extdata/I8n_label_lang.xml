@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:odk="http://www.opendatakit.org/xforms" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <h:head>
+        <h:title>I8n label lang</h:title>
+        <model odk:xforms-version="1.0.0">
+            <itext>
+                <translation lang="English (en)"><text id="/data/some_text:label">
+                        <value>This is a basic fill in the blank question.</value>
+                    </text><text id="/data/text_image_audio_video_test:label">
+                        <value>This question shows how to use translations and media types.</value>
+                    </text><text id="/data/a_integer:label">
+                        <value>Enter a integer:</value>
+                    </text><text id="/data/a_decimal:label">
+                        <value>Enter a decimal:</value>
+                    </text><text id="/data/calculate_test_output:label">
+                        <value>The sum of the integer and decimal: <output value=" /data/calculate " /></value>
+                    </text><text id="/data/test_yn:label">
+                        <value>What do you think?</value>
+                    </text></translation>
+                <translation default="true()" lang="default"><text id="/data/some_text:label">
+                        <value>This is a basic fill in the blank question.</value>
+                    </text><text id="/data/text_image_audio_video_test:label">
+                        <value>This question shows how to use translations and media types.</value>
+                    </text><text id="/data/a_integer:label">
+                        <value>Enter a integer:</value>
+                    </text><text id="/data/a_decimal:label">
+                        <value>Enter a decimal:</value>
+                    </text><text id="/data/calculate_test_output:label">
+                        <value>The sum of the integer and decimal: <output value=" /data/calculate " /></value>
+                    </text><text id="/data/test_yn:label">
+                        <value>What do you think?</value>
+                    </text></translation>
+                <translation lang="French (fr)"><text id="/data/some_text:label">
+                        <value>Ceci est une réponse de base à la question vide.</value>
+                    </text><text id="/data/text_image_audio_video_test:label">
+                        <value>Cette question montre comment utiliser les traductions et les types de supports.</value>
+                    </text><text id="/data/a_integer:label">
+                        <value>Entrez un entier:</value>
+                    </text><text id="/data/a_decimal:label">
+                        <value>Entrez un entier:</value>
+                    </text><text id="/data/calculate_test_output:label">
+                        <value>La somme de l'entier et de la décimale: $ {calculate}</value>
+                    </text><text id="/data/test_yn:label">
+                        <value>Qu'est-ce que tu penses?</value>
+                    </text></translation>
+            </itext>
+            <instance><data id="I8n_label_lng">
+                    <some_text />
+                    <text_image_audio_video_test />
+                    <a_integer>123</a_integer>
+                    <a_decimal />
+                    <calculate />
+                    <calculate_test_output />
+                    <test_yn />
+                    <meta>
+                    <instanceID />
+                    </meta>
+                </data></instance>
+            <bind nodeset="/data/some_text" type="string" />
+            <bind nodeset="/data/text_image_audio_video_test" readonly="true()" type="string" />
+            <bind nodeset="/data/a_integer" type="int" />
+            <bind constraint=". &lt;=  /data/a_integer " jr:constraintMsg="You can set the toast that appears when a constraint is violated." nodeset="/data/a_decimal" type="decimal" />
+            <bind calculate=" /data/a_integer + /data/a_decimal " nodeset="/data/calculate" type="string" />
+            <bind nodeset="/data/calculate_test_output" readonly="true()" type="string" />
+            <bind nodeset="/data/test_yn" type="string" />
+            <bind jr:preload="uid" nodeset="/data/meta/instanceID" readonly="true()" type="string" />
+        </model>
+    </h:head>
+    <h:body><input ref="/data/some_text"><label ref="jr:itext('/data/some_text:label')" />
+        <hint>Hints provide additional information about a question that is displayed less prominently.</hint></input><input ref="/data/text_image_audio_video_test"><label ref="jr:itext('/data/text_image_audio_video_test:label')" />
+        <hint>In order to select a different translation press your phone's menu button and you should see a "Change Language" button. In order to add mediafiles put them in your phone's odk/forms/[formname]-media folder.</hint></input><input ref="/data/a_integer"><label ref="jr:itext('/data/a_integer:label')" /></input><input ref="/data/a_decimal"><label ref="jr:itext('/data/a_decimal:label')" />
+        <hint>This question has a constraint so that the decimal must be less that the integer.</hint></input><input ref="/data/calculate_test_output"><label ref="jr:itext('/data/calculate_test_output:label')" /></input>
+        <select1 ref="/data/test_yn"><label ref="jr:itext('/data/test_yn:label')" />
+            <hint>This question has a constraint so that the decimal must be less that the integer.</hint>
+            <item><label>Yes</label>
+                <value>0</value>
+            </item>
+            <item><label>No</label>
+                <value>1</value>
+            </item>
+            <item><label>Maybe</label>
+                <value>99</value>
+            </item>
+        </select1>
+    </h:body>
+</h:html>

@@ -7,7 +7,7 @@ assignees: florianm
 
 ---
 I want to run the tests and build the vignettes. 
-Please provide access to the ODK Central test instance for ruODK <https://ruodk.getodk.cloud/>.
+Please provide access to the ODK Central test instance for ruODK <https://odkc.dbca.wa.gov.au/>.
 
 [ ] I have sent an email to the `ruODK` package maintainer requesting access.
 [ ] I will not use the server to run production campaigns.

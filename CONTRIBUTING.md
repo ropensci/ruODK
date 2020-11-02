@@ -104,48 +104,43 @@ devtools::document(roclets = c("rd", "collate", "namespace"))
 #### Test
 
 We use [testthat](https://cran.r-project.org/package=testthat). Contributions
-with test cases are easier to accept. If you are not sure what parts of your
-code are covered by tests, run the following to get a local coverage report of
-the package so you can see exactly what lines are not covered in the project.
+with test cases are easier to review and verify. 
 
 To run tests and build the vignettes, you'll need access to the 
-[ODK Central sandbox instance](https://sandbox.central.getodk.org/).
+[ruODK test server](https://odkc.dbca.wa.gov.au/).
 If you haven't got an account yet, create an [accont request issue](https://github.com/ropensci/ruODK/issues/new/choose)
-to request access to those two ODK Central instances.
+to request access to this ODK Central instance.
 
-You will need to use the following environment variables:
+The tests require the following additions to your `.Renviron`:
 
-```r
-ruODK::ru_setup(
-  test_url = "https://sandbox.central.getodk.org",
-  test_pid = 14,
-  test_fid = "build_Flora-Quadrat-0-4_1564384341",
-  test_un = "you@email.com",
-  test_pw = "...",
-  tz = "Australia/Perth" # or any valid timezone
-)
-```
-
-Keep these settings outside of version control, e.g. in your `~/.Renviron`.
-Note: `~/.Renviron` contains simple `key=value` assignments without `Sys.setenv()`.
 ```r
 # Required for testing
-ODKC_TEST_URL="https://sandbox.central.getodk.org"
-ODKC_TEST_PID=14
-ODKC_TEST_FID="build_Flora-Quadrat-0-4_1564384341"
-ODKC_TEST_FID_ZIP="build_Spotlighting-0-6_1558333698"
-ODKC_TEST_FID_ATT="build_Flora-Quadrat-0-1_1558330379"
-ODKC_TEST_FID_GAP="build_Turtle-Track-or-Nest-1-0_1569907666"
-ODKC_TEST_FID_WKT="build_Locations_1589344221"
-ODKC_TEST_UN="your@email.com"
+ODKC_TEST_SVC="https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc"
+ODKC_TEST_URL="https://odkc.dbca.wa.gov.au"
+ODKC_TEST_PID=2
+ODKC_TEST_PID_ENC=3
+ODKC_TEST_PP="ThePassphrase"
+ODKC_TEST_FID="Flora-Quadrat-04"
+ODKC_TEST_FID_ZIP="Spotlighting-06"
+ODKC_TEST_FID_ATT="Flora-Quadrat-04-att"
+ODKC_TEST_FID_GAP="Flora-Quadrat-04-gap"
+ODKC_TEST_FID_WKT="Locations"
+ODKC_TEST_FID_I8N0="I8n_no_lang"
+ODKC_TEST_FID_I8N1="I8n_label_lng"
+ODKC_TEST_FID_I8N2="I8n_label_choices"
+ODKC_TEST_FID_ENC="Locations"
+ODKC_TEST_VERSION=1.0
+RU_VERBOSE=TRUE
+RU_TIMEZONE="Australia/Perth"
+RU_RETRIES=3
+ODKC_TEST_UN="..."
 ODKC_TEST_PW="..."
-RU_TIMEZOME="Australia/Perth"
 
-# Useful for day to day use - use your own settings
-ODKC_URL="https://odkcentral.dbca.wa.gov.au"
+# Your ruODK default settings for everyday use
+ODKC_URL="..."
 ODKC_PID=1
-ODKC_FID="build_Predator-or-Disturbance-1-1_1559789410"
-ODKC_UN="your@email.com"
+ODKC_FID="..."
+ODKC_UN="..."
 ODKC_PW="..."
 ```
 

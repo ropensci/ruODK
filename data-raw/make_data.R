@@ -8,7 +8,7 @@ ruODK::ru_setup(
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW"),
   odkc_version = Sys.getenv("ODKC_TEST_VERSION"),
-  tz = "Australia/Perth"
+  tz = Sys.getenv("RU_TIMEZONE")
 )
 
 # Used in vignette odata-api

@@ -30,7 +30,7 @@ test_that("odata_submission_rectangle works with gaps in first submission", {
   testthat::expect_gte(nrow(fresh_parsed), nrow(fresh_raw_parsed))
 
   testthat::expect_equal(
-    class(fresh_raw_parsed$observation_start_time[1]),
+    class(fresh_raw_parsed$encounter_start_datetime[1]),
     c("POSIXct", "POSIXt")
   )
 })

@@ -30,21 +30,30 @@ test_that("submission_get works", {
 
 
   # The details for one submission return exactly one row
-  testthat::expect_equal(length(sub), 15)
-  testthat::expect_equal(length(subs), 2) # number of submissions
+  testthat::expect_equal(length(sub), 13)
+  testthat::expect_equal(length(subs), 1) # number of submissions
 
   # The columns are form fields or groups,
   # plus the submission data in column 'xml`
   # names(sub) # nolint
   cn <- c(
-    "meta", "encounter_start_datetime", "reporter", "device_id", "location",
-    "habitat", "vegetation_stratum", "vegetation_stratum", "vegetation_stratum",
-    "vegetation_stratum", "vegetation_stratum", "perimeter", "taxon_encounter",
-    "taxon_encounter", "encounter_end_datetime"
+    "meta",
+    "encounter_start_datetime",
+    "reporter",
+    "device_id",
+    "location",
+    "habitat",
+    "vegetation_stratum",
+    "vegetation_stratum",
+    "vegetation_stratum",
+    "perimeter",
+    "taxon_encounter",
+    "taxon_encounter",
+    "encounter_end_datetime"
   )
   testthat::expect_equal(names(sub), cn)
   testthat::expect_true("encounter_start_datetime" %in% names(sub))
-  testthat::expect_true("perimeter" %in% names(sub))
+  testthat::expect_true("habitat" %in% names(sub))
   testthat::expect_true("vegetation_stratum" %in% names(sub))
   testthat::expect_true("taxon_encounter" %in% names(sub))
   testthat::expect_true("encounter_end_datetime" %in% names(sub))

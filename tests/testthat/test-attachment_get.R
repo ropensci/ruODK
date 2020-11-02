@@ -64,7 +64,7 @@ test_that("attachment_url works", {
   fid <- get_test_fid()
 
   expected_url <- glue::glue(
-    "{url}/v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
+    "{url}/v1/projects/{pid}/forms/{fid}/submissions/{uuid}/attachments/{fn}"
   )
   # nolint start
   # https://github.com/ropensci/ruODK/issues/66
@@ -92,8 +92,8 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   fs::dir_ls(t) %>% fs::file_delete()
 
   # Brittle: depends on data collected for example form
-  uuid <- "uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f"
-  fn <- "1568786958640.jpg"
+  uuid <- "uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28"
+  fn <- "1604290049411.jpg"
 
   url <- get_test_url()
   pid <- get_test_pid()
