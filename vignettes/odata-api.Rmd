@@ -3,9 +3,8 @@ title: "Accessing the OData API"
 output: 
   rmarkdown::html_vignette:
     self_contained: false
-    check_title: false
 vignette: >
-  %\VignetteIndexEntry{odata}
+  %\VignetteIndexEntry{Accessing the OData API}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
@@ -18,6 +17,10 @@ resource_files:
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+```{r pkgs}
+# This vignette requires the following packages:
 library(DT)
 library(leaflet)
 library(listviewer)

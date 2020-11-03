@@ -3,9 +3,8 @@ title: "Comparison of related software packages"
 output: 
   rmarkdown::html_vignette:
     self_contained: false
-    check_title: false
 vignette: >
-  %\VignetteIndexEntry{comparison}
+  %\VignetteIndexEntry{Comparison of related software packages}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

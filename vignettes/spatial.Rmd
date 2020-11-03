@@ -3,9 +3,8 @@ title: "Spatial data"
 output: 
   rmarkdown::html_vignette:
     self_contained: false
-    check_title: false
 vignette: >
-  %\VignetteIndexEntry{spatial}
+  %\VignetteIndexEntry{Spatial data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

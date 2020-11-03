@@ -3,9 +3,8 @@ title: "Accessing the RESTful API"
 output: 
   rmarkdown::html_vignette:
     self_contained: false
-    check_title: false
 vignette: >
-  %\VignetteIndexEntry{api}
+  %\VignetteIndexEntry{Accessing the RESTful API}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

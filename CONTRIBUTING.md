@@ -193,6 +193,11 @@ you'll be taken to when you go to create a new PR. If the PR is related to an
 issue, provide the issue number and slug in the _description_ using 
 auto-linking syntax (e.g. `#15`).
 
+#### Check the docs
+Double check the output of the 
+[rOpenSci documentation CI](https://dev.ropensci.org/job/ruODK/lastBuild/console) 
+for any breakages or error messages.
+
 #### Review, revise, repeat
 
 The latency period between submitting your PR and its review may vary. 
