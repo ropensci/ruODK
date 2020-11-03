@@ -18,7 +18,6 @@ knitr::opts_chunk$set(
 [![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](https://github.com/ropensci/ruODK/issues/)
 [![CI - GitHub Actions](https://github.com/ropensci/ruODK/workflows/tic/badge.svg)](https://github.com/ropensci/ruODK/actions)
-[![CI - TravisCI](https://travis-ci.org/ropensci/ruODK.svg?branch=main)](https://travis-ci.org/ropensci/ruODK)
 [![CI - Appveyor](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main)
 [![Text coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
 [![Hosted RStudio with ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
@@ -167,7 +166,7 @@ ODK Central web user. Adjust verbosity to your liking.
   
 ```{r ru_setup_rmd, echo=FALSE, eval=TRUE}
 ruODK::ru_setup(
-  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
+  svc = Sys.getenv("ODKC_TEST_SVC"),
   un = Sys.getenv("ODKC_TEST_UN"),
   pw = Sys.getenv("ODKC_TEST_PW"),
   tz = "Australia/Perth",
@@ -177,7 +176,7 @@ ruODK::ru_setup(
 
 ```{r ru_setup_demo, echo=TRUE, eval=FALSE}
 ruODK::ru_setup(
-  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
+  svc = "https://my.odkcentral.getodk.org/v1/projects/14/forms/myform.svc",
   un = "me@email.com",
   pw = "...",
   tz = "Australia/Perth",

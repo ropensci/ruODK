@@ -17,8 +17,6 @@ issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](h
 [![CI - GitHub
 Actions](https://github.com/ropensci/ruODK/workflows/tic/badge.svg)](https://github.com/ropensci/ruODK/actions)
 [![CI -
-TravisCI](https://travis-ci.org/ropensci/ruODK.svg?branch=main)](https://travis-ci.org/ropensci/ruODK)
-[![CI -
 Appveyor](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main)
 [![Text
 coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
@@ -182,29 +180,29 @@ Set up `ruODK` with an OData Service URL and credentials of a
 read-permitted ODK Central web user. Adjust verbosity to your liking.
 
     #> <ruODK settings>
-    #>   Default ODK Central Project ID: 14 
-    #>   Default ODK Central Form ID: build_Flora-Quadrat-0-4_1564384341 
-    #>   Default ODK Central URL: https://sandbox.central.getodk.org 
+    #>   Default ODK Central Project ID: 2 
+    #>   Default ODK Central Form ID: Flora-Quadrat-04 
+    #>   Default ODK Central URL: https://odkc.dbca.wa.gov.au 
     #>   Default ODK Central Username: Florian.Mayer@dbca.wa.gov.au 
     #>   Default ODK Central Password: run ruODK::get_default_pw() to show 
     #>   Default Time Zone: Australia/Perth 
     #>   Default ODK Central Version: 0.7 
     #>   Default HTTP GET retries: 3 
     #>   Verbose messages: TRUE 
-    #>   Test ODK Central Project ID: 14 
-    #>   Test ODK Central Form ID: build_Flora-Quadrat-0-4_1564384341 
-    #>   Test ODK Central Form ID (ZIP tests): build_Spotlighting-0-6_1558333698 
-    #>   Test ODK Central Form ID (Attachment tests): build_Flora-Quadrat-0-1_1558330379 
-    #>   Test ODK Central Form ID (Parsing tests): build_Turtle-Track-or-Nest-1-0_1569907666 
-    #>   Test ODK Central Form ID (WKT tests): build_Locations_1589344221 
-    #>   Test ODK Central URL: https://sandbox.central.getodk.org 
+    #>   Test ODK Central Project ID: 2 
+    #>   Test ODK Central Form ID: Flora-Quadrat-04 
+    #>   Test ODK Central Form ID (ZIP tests): Spotlighting-06 
+    #>   Test ODK Central Form ID (Attachment tests): Flora-Quadrat-04-att 
+    #>   Test ODK Central Form ID (Parsing tests): Flora-Quadrat-04-gap 
+    #>   Test ODK Central Form ID (WKT tests): Locations 
+    #>   Test ODK Central URL: https://odkc.dbca.wa.gov.au 
     #>   Test ODK Central Username: Florian.Mayer@dbca.wa.gov.au 
     #>   Test ODK Central Password: run ruODK::get_test_pw() to show 
-    #>   Test ODK Central Version: 0.8
+    #>   Test ODK Central Version: 1.0
 
 ``` r
 ruODK::ru_setup(
-  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
+  svc = "https://my.odkcentral.getodk.org/v1/projects/14/forms/myform.svc",
   un = "me@email.com",
   pw = "...",
   tz = "Australia/Perth",
@@ -228,14 +226,11 @@ proj <- ruODK::project_list()
 proj %>% head() %>% knitr::kable(.)
 ```
 
-|  id | name                            | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
-|----:|:--------------------------------|------:|-----------:|:--------------------|:------------|:--------------------|:---------|
-| 115 | 1Computer\_Scince\_UZ\_Training |     1 |          5 | 2020-09-18 15:59:11 | NA          | NA                  | FALSE    |
-|  59 | 1Horizon test project           |     1 |          6 | 2020-01-13 20:45:32 | NA          | 2020-09-14 07:08:29 | FALSE    |
-|  57 | AB’s                            |     1 |          1 | 2020-01-06 08:56:00 | NA          | NA                  | FALSE    |
-| 102 | AK\_Ste-Cecile                  |     1 |          2 | 2020-08-24 22:57:56 | NA          | NA                  | FALSE    |
-|   8 | AmenazasRD                      |     1 |          2 | 2019-04-14 14:21:00 | NA          | 2020-04-21 14:23:06 | FALSE    |
-|  88 | Amit-wfp-test                   |     3 |          1 | 2020-06-12 10:09:57 | NA          | 2020-06-12 13:03:00 | FALSE    |
+|  id | name                          | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
+|----:|:------------------------------|------:|-----------:|:--------------------|:------------|:--------------------|:---------|
+|   1 | DBCA                          |     7 |          8 | 2020-09-15 11:50:06 | NA          | 2020-11-03 07:17:02 | FALSE    |
+|   2 | ruODK package tests           |    10 |          1 | 2020-10-31 19:11:50 | NA          | 2020-11-02 12:41:14 | FALSE    |
+|   3 | ruODK package tests encrypted |     1 |          1 | 2020-10-31 19:12:57 | NA          | 2020-11-02 15:26:38 | FALSE    |
 
 ``` r
 # List forms of default project
@@ -243,14 +238,14 @@ frms <- ruODK::form_list()
 frms %>% head() %>% knitr::kable(.)
 ```
 
-| name                            | fid                                  | version | state   | submissions | created\_at         | created\_by\_id | created\_by                    | updated\_at         | last\_submission    | hash                             |
-|:--------------------------------|:-------------------------------------|:--------|:--------|:------------|:--------------------|----------------:|:-------------------------------|:--------------------|:--------------------|:---------------------------------|
-| Field data collection September | 2                                    |         | open    | 6           | 2020-10-16 10:13:40 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 14:52:01 | 2020-10-19 23:23:44 | 889ef491773157acc87b1fb3b849f3e7 |
-| Flora Quadrat 0.1               | build\_Flora-Quadrat-0-1\_1558330379 |         | closing | 1           | 2019-05-20 13:33:15 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 10:16:15 | 2019-05-20 13:44:20 | 4f0036619468ef05b572631b04b94f06 |
-| Flora Quadrat 0.2               | build\_Flora-Quadrat-0-2\_1558575936 |         | open    | 2           | 2019-05-23 09:46:08 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 10:16:15 | 2019-05-23 11:12:16 | 14e269a2374132392c275117efbe67b6 |
-| Flora Quadrat 0.3               | build\_Flora-Quadrat-0-3\_1559119570 |         | open    | 1           | 2019-05-29 16:48:15 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 10:16:15 | 2019-05-29 16:55:59 | d5a80cefb1895eefcd0cb86a12d8acb4 |
-| Flora Quadrat 0.4               | build\_Flora-Quadrat-0-4\_1564384341 |         | open    | 2           | 2019-08-19 15:58:28 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 10:16:15 | 2019-09-18 16:51:07 | 1bb959d541ac6990e3f74893e38c855b |
-| Locations                       | build\_Locations\_no\_submissions    | NA      | open    | 0           | 2020-08-16 15:00:55 |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16 10:16:15 | NA                  | NA                               |
+| name                        | fid                  | version | state | submissions | created\_at         | created\_by\_id | created\_by   | updated\_at         | last\_submission    | hash                             |
+|:----------------------------|:---------------------|:--------|:------|:------------|:--------------------|----------------:|:--------------|:--------------------|:--------------------|:---------------------------------|
+| Flora Quadrat 0.4           | Flora-Quadrat-04     |         | open  | 1           | 2020-11-02 10:56:21 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:19:45 | 434ff9e1e33fc8bb35148c0cc6979708 |
+| Flora Quadrat 0.4 (gap)     | Flora-Quadrat-04-gap |         | open  | 2           | 2020-11-02 11:15:29 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:36:09 | 241c4759564ea039b4404b6892025500 |
+| Flora Quadrat 0.4 (one att) | Flora-Quadrat-04-att |         | open  | 1           | 2020-11-02 11:13:13 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:36:10 | 2cb6a4b3d7f05ab055f3da89d0958b14 |
+| I8n label and choices       | I8n\_label\_choices  |         | open  | 2           | 2020-11-02 11:29:48 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:41:14 | bc4dff584ab2e0b0dd2c50eb1c2c7aa4 |
+| I8n label lang              | I8n\_label\_lng      |         | open  | 1           | 2020-11-02 11:38:37 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:39:58 | 7e912580b246796c8477cfcd4c5dceab |
+| I8n no lang                 | I8n\_no\_lang        |         | open  | 1           | 2020-11-02 11:29:27 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:39:27 | 44a38dfee1e7c7b6622a489e379e479f |
 
 ``` r
 # Form details of default form
@@ -258,14 +253,14 @@ frmd <- ruODK::form_detail()
 frmd %>% knitr::kable(.)
 ```
 
-| name              | fid                                  | version | state | submissions | created\_at              | created\_by\_id | created\_by                    | updated\_at              | last\_submission         | hash                             |
-|:------------------|:-------------------------------------|:--------|:------|------------:|:-------------------------|----------------:|:-------------------------------|:-------------------------|:-------------------------|:---------------------------------|
-| Flora Quadrat 0.4 | build\_Flora-Quadrat-0-4\_1564384341 |         | open  |           2 | 2019-08-19T07:58:28.212Z |              57 | <florian.mayer@dbca.wa.gov.au> | 2020-10-16T02:16:15.738Z | 2019-09-18T08:51:07.482Z | 1bb959d541ac6990e3f74893e38c855b |
+| name              | fid              | version | state | submissions | created\_at              | created\_by\_id | created\_by   | updated\_at              | last\_submission         | hash                             |
+|:------------------|:-----------------|:--------|:------|------------:|:-------------------------|----------------:|:--------------|:-------------------------|:-------------------------|:---------------------------------|
+| Flora Quadrat 0.4 | Flora-Quadrat-04 |         | open  |           1 | 2020-11-02T02:56:21.085Z |               5 | Florian Mayer | 2020-11-02T03:54:42.522Z | 2020-11-02T04:19:45.451Z | 434ff9e1e33fc8bb35148c0cc6979708 |
 
 ``` r
 # Form schema: defaults to version 0.8
 meta <- ruODK::form_schema(odkc_version = get_test_odkc_version())
-#> ℹ Form schema v0.8
+#> ℹ Form schema v1
 meta %>% knitr::kable(.)
 ```
 
@@ -325,7 +320,7 @@ data <- ruODK::odata_submission_get(local_dir = fs::path("vignettes/media"),
 #> ℹ Downloading submissions...
 #> ✔ Downloaded submissions.
 #> ℹ Reading form schema...
-#> ℹ Form schema v0.8
+#> ℹ Form schema v1
 #> ℹ Parsing submissions...
 #> ℹ Not unnesting geo fields: value_location_corner1, value_perimeter_corner2, value_perimeter_corner3, value_perimeter_corner4, value_taxon_encounter_taxon_encounter_location
 #> ℹ Unnesting: value
@@ -342,14 +337,11 @@ data <- ruODK::odata_submission_get(local_dir = fs::path("vignettes/media"),
 #> ℹ Found attachments: location_quadrat_photo, habitat_morphological_type_photo, perimeter_mudmap_photo.
 #> ℹ Downloading attachments...
 #> ℹ Using local directory "vignettes/media".
-#> ◉ File already downloaded, keeping "vignettes/media/1568794395624.jpg".
-#> ◉ File already downloaded, keeping "vignettes/media/1568786958640.jpg".
+#> ◉ File already downloaded, keeping "vignettes/media/1604290006239.jpg".
 #> ℹ Using local directory "vignettes/media".
-#> ◉ File already downloaded, keeping "vignettes/media/1568794560256.jpg".
-#> ◉ File already downloaded, keeping "vignettes/media/1568787004467.jpg".
+#> ◉ File already downloaded, keeping "vignettes/media/1604290049411.jpg".
 #> ℹ Using local directory "vignettes/media".
-#> ◯ Filename is NA, skipping download.
-#> ◉ File already downloaded, keeping "vignettes/media/1568787172983.jpg".
+#> ◉ File already downloaded, keeping "vignettes/media/1604290379613.jpg".
 #> ℹ Found geopoints: location_corner1, perimeter_corner2, perimeter_corner3, perimeter_corner4.
 #> ℹ Parsing location_corner1...
 #> ℹ Parsing perimeter_corner2...
@@ -361,10 +353,9 @@ data <- ruODK::odata_submission_get(local_dir = fs::path("vignettes/media"),
 data %>% dplyr::select(-"odata_context") %>% knitr::kable(.)
 ```
 
-| id                                        | encounter\_start\_datetime | reporter      | device\_id       | encounter\_end\_datetime | system\_submission\_date | system\_submitter\_id | system\_submitter\_name | system\_attachments\_present | system\_attachments\_expected | meta\_instance\_id                        | location\_area\_name     | location\_quadrat\_photo          | location\_corner1\_longitude | location\_corner1\_latitude | location\_corner1\_altitude | location\_corner1\_accuracy | location\_corner1                                              | habitat\_morphological\_type | habitat\_morphological\_type\_photo | vegetation\_stratum\_odata\_navigation\_link                                 | perimeter\_corner2\_longitude | perimeter\_corner2\_latitude | perimeter\_corner2\_altitude | perimeter\_corner2\_accuracy | perimeter\_corner2                                             | perimeter\_corner3\_longitude | perimeter\_corner3\_latitude | perimeter\_corner3\_altitude | perimeter\_corner3\_accuracy | perimeter\_corner3                                             | perimeter\_corner4\_longitude | perimeter\_corner4\_latitude | perimeter\_corner4\_altitude | perimeter\_corner4\_accuracy | perimeter\_corner4                                             | perimeter\_mudmap\_photo          | taxon\_encounter\_odata\_navigation\_link                                 |
-|:------------------------------------------|:---------------------------|:--------------|:-----------------|:-------------------------|:-------------------------|:----------------------|:------------------------|-----------------------------:|------------------------------:|:------------------------------------------|:-------------------------|:----------------------------------|-----------------------------:|----------------------------:|----------------------------:|----------------------------:|:---------------------------------------------------------------|:-----------------------------|:------------------------------------|:-----------------------------------------------------------------------------|------------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|:---------------------------------------------------------------|------------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|:---------------------------------------------------------------|------------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|:---------------------------------------------------------------|:----------------------------------|:--------------------------------------------------------------------------|
-| uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | 2019-09-18 16:12:21        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 16:40:46      | 2019-09-18T08:51:07.482Z | 241                   | flora                   |                            4 |                             4 | uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69 | Kensington Carpark 01    | vignettes/media/1568794395624.jpg |                     115.8846 |                   -31.99606 |                     6.40451 |                       4.288 | Point , 115.88456271 , -31.99605811 , 6.40451049804688, 4.288  | mid-slope                    | vignettes/media/1568794560256.jpg   | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/vegetation\_stratum |                      115.8844 |                    -31.99623 |                   -26.305695 |                        4.288 | Point , 115.88435548 , -31.99622531 , -26.3056945800781, 4.288 |                      115.8844 |                    -31.99615 |                   -17.897552 |                        4.288 | Point , 115.88436077 , -31.99614759 , -17.8975524902344, 4.288 |                      115.8843 |                    -31.99610 |                   -27.759338 |                        4.288 | Point , 115.88432984 , -31.99610179 , -27.7593383789062, 4.288 | NA                                | Submissions(‘uuid:d5e78a78-34db-483d-978f-d9c9a3bc7b69’)/taxon\_encounter |
-| uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | 2019-09-18 14:08:43        | Florian Mayer | f73d2e1221ceaa06 | 2019-09-18 14:18:53      | 2019-09-18T06:20:25.781Z | 241                   | flora                   |                            8 |                             8 | uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f | Kensington Planter Box 1 | vignettes/media/1568786958640.jpg |                     115.8843 |                   -31.99615 |                   -17.37241 |                       4.288 | Point , 115.88433971 , -31.99614843 , -17.3724060058594, 4.288 | flat                         | vignettes/media/1568787004467.jpg   | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/vegetation\_stratum |                      115.8844 |                    -31.99620 |                    -8.662476 |                        4.288 | Point , 115.88438584 , -31.99620073 , -8.6624755859375, 4.288  |                      115.8844 |                    -31.99622 |                    -6.266144 |                        4.288 | Point , 115.88440369 , -31.99622144 , -6.26614379882812, 4.288 |                      115.8844 |                    -31.99621 |                    -6.597748 |                        4.288 | Point , 115.88438399 , -31.99620546 , -6.59774780273438, 4.288 | vignettes/media/1568787172983.jpg | Submissions(‘uuid:529cb189-8bb2-4cf1-9041-dcde716efb4f’)/taxon\_encounter |
+| id                                        | encounter\_start\_datetime | device\_id       | encounter\_end\_datetime | system\_submission\_date | system\_submitter\_id | system\_submitter\_name | system\_attachments\_present | system\_attachments\_expected | meta\_instance\_id                        | location\_area\_name | location\_quadrat\_photo          | location\_corner1\_longitude | location\_corner1\_latitude | location\_corner1\_altitude | location\_corner1\_accuracy | location\_corner1                                            | habitat\_morphological\_type | habitat\_morphological\_type\_photo | vegetation\_stratum\_odata\_navigation\_link                                 | perimeter\_corner2\_longitude | perimeter\_corner2\_latitude | perimeter\_corner2\_altitude | perimeter\_corner2\_accuracy | perimeter\_corner2                                           | perimeter\_corner3\_longitude | perimeter\_corner3\_latitude | perimeter\_corner3\_altitude | perimeter\_corner3\_accuracy | perimeter\_corner3                                           | perimeter\_corner4\_longitude | perimeter\_corner4\_latitude | perimeter\_corner4\_altitude | perimeter\_corner4\_accuracy | perimeter\_corner4                                           | perimeter\_mudmap\_photo          | taxon\_encounter\_odata\_navigation\_link                                 |
+|:------------------------------------------|:---------------------------|:-----------------|:-------------------------|:-------------------------|:----------------------|:------------------------|-----------------------------:|------------------------------:|:------------------------------------------|:---------------------|:----------------------------------|-----------------------------:|----------------------------:|----------------------------:|----------------------------:|:-------------------------------------------------------------|:-----------------------------|:------------------------------------|:-----------------------------------------------------------------------------|------------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|:-------------------------------------------------------------|------------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|:-------------------------------------------------------------|------------------------------:|-----------------------------:|-----------------------------:|-----------------------------:|:-------------------------------------------------------------|:----------------------------------|:--------------------------------------------------------------------------|
+| uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28 | 2020-11-02 12:06:19        | 5afb51f35ba0c572 | 2020-11-02 12:15:48      | 2020-11-02T04:19:45.451Z | 53                    | ruODK                   |                            5 |                             5 | uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28 | Test site 1          | vignettes/media/1604290006239.jpg |                     115.8844 |                   -31.99596 |                       -12.7 |                       4.625 | Point , 115.8843989 , -31.9959554 , -12.6999998092651, 4.625 | flat                         | vignettes/media/1604290049411.jpg   | Submissions(‘uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28’)/vegetation\_stratum |                      115.8843 |                    -31.99579 |                        -21.2 |                        4.861 | Point , 115.8842726 , -31.9957893 , -21.1999988555908, 4.861 |                      115.8843 |                    -31.99582 |                        -21.2 |                        4.655 | Point , 115.8843031 , -31.9958188 , -21.1999988555908, 4.655 |                      115.8846 |                    -31.99614 |                        -12.7 |                        4.913 | Point , 115.8845949 , -31.9961397 , -12.6999998092651, 4.913 | vignettes/media/1604290379613.jpg | Submissions(‘uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28’)/taxon\_encounter |
 
 A more detailed walk-through with some data visualisation examples is
 available in the
