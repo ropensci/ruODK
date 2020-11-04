@@ -22,7 +22,7 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
 
 * This is a new release.
 * Possibly invalid URLs:
@@ -37,13 +37,6 @@
   not included as per advice from ROpenSci.
 * The example data contains UTF-8 strings. This is a realistic scenario. 
   The note has disappeared after the R version 4 release.
-* Installation size:
-  * The vignette "odata-api" contains a leaflet map with popups showing embedded
-    photos, a highly sought after use case.
-    The third party dependencies, especially leaflet-awesomemarkers (for map 
-    popups), add over 3MB. 
-  * The example images have been resized aggressively to 200x150 px.
-  * Included images for branding and attribution are at lowest legible size.
 * Test coverage: All functionality supporting the current ODK Central release is 
   covered by tests. 
   The only exception is `form_schema{_parse}`, which supports a breaking 

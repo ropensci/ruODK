@@ -40,7 +40,7 @@ ODK Central offers no less than three different ways to access data:
 * viewing ODK Central data through `ruODK`'s RESTful API functions.
 
 While the `vignette("odata", package="ruODK")` 
-(online [here](https://ropensci.github.io/ruODK/articles/odata-api.html)) 
+(online [here](https://docs.ropensci.org/ruODK/articles/odata-api.html)) 
 illustrates the first option, this vignette demonstrates the remaining two.
 
 Not implemented (yet) are the "managing ODK Central" functions which create, 

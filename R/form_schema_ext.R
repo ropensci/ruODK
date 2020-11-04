@@ -61,15 +61,15 @@
 #'     If specific languages are available,
 #'     this column will return the \code{default} language or it will be empty
 #'     if this is not specified.
-#'   \item \code{label\emph{_lang}} The field label in languange \emph{_lang} as
+#'   \item \code{label_lang} The field label in languange \emph{_lang} as
 #'     given in the form schema.
 #'   \item \code{choices} A list of lists containing at least \code{values} and,
 #'     if available, \code{labels} of the choices as given in the form schema.
 #'     If specific languages are available, this column will return the
 #'     \code{default} language or it will be empty if this is not specified.
-#'   \item \code{choices\emph{_lang}} A list of lists containing at least
+#'   \item \code{choices_lang} A list of lists containing at least
 #'     \code{values} and, if available, \code{labels} of the choices in language
-#'     \emph{_lang} as given in the form schema
+#'     \emph{_lang} as given in the form schema.
 #'
 #'   }
 # nolint start
