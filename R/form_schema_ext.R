@@ -85,7 +85,7 @@
 #' ruODK::ru_setup(
 #'   url = ruODK::get_test_url(),
 #'   pid = ruODK::get_test_pid(),
-#'   fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset="I8n_label_choices"),
+#'   fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
 #'   un = ruODK::get_test_un(),
 #'   pw = ruODK::get_test_pw()
 #' )
@@ -116,7 +116,7 @@ form_schema_ext <- function(flatten = FALSE,
   # version warning:
   if (odkc_version < 0.8) {
     "Form Schema Extended works better with ODK Central 0.8 and above" %>%
-    ru_msg_warn()
+      ru_msg_warn()
   }
 
   # gets basic schema
@@ -157,10 +157,10 @@ form_schema_ext <- function(flatten = FALSE,
   )
 
 
-  ### PART 1: parse labels:
+  ### PART 1: parse labels
   raw_labels <- xml2::xml_find_all(frm_xml, "//label")
 
-  # iterate thorugh labels
+  # iterate through labels
   for (i in seq_along(raw_labels)) {
 
     ## read label
@@ -396,7 +396,6 @@ form_schema_ext <- function(flatten = FALSE,
       }
     }
   }
-
 
   # join
   fs_ext <- frm_schema %>% dplyr::left_join(extension, by = "path")

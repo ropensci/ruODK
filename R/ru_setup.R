@@ -261,6 +261,9 @@ ru_setup <- function(svc = NULL,
     Sys.setenv("ODKC_URL" = odata_components$url)
   }
 
+  # nolint start
+  # The linter "undesirable_function_linter" would warn against changing global
+  # state, which is exactly how ruODK persists settings and preferences.
   if (!is.null(pid)) Sys.setenv("ODKC_PID" = as.character(pid))
   if (!is.null(fid)) Sys.setenv("ODKC_FID" = fid)
   if (!is.null(url)) Sys.setenv("ODKC_URL" = url)
@@ -290,6 +293,7 @@ ru_setup <- function(svc = NULL,
   if (!is.null(test_odkc_version)) {
     Sys.setenv("ODKC_TEST_VERSION" = test_odkc_version)
   }
+  # nolint end
 
   if (get_ru_verbose()) {
     print(ru_settings())

@@ -1,5 +1,4 @@
 test_that("split_geotrace works with GeoJSON", {
-  library(magrittr)
   data("geo_fs")
   data("geo_gj_raw")
 
@@ -57,7 +56,6 @@ test_that("split_geotrace works with GeoJSON", {
 })
 
 test_that("split_geotrace works with WKT", {
-  library(magrittr)
   data("geo_fs")
   data("geo_wkt_raw")
 
@@ -144,6 +142,7 @@ test_that("split_geotrace works with ODK Linestrings", {
   expect_equal(odk_v7_split$tx_altitude, 10.9)
 })
 
+# nolint start
 # This test worked while https://github.com/getodk/central-backend/issues/282
 # was open.
 #
@@ -168,6 +167,6 @@ test_that("split_geotrace works with ODK Linestrings", {
 #     )
 #   }
 # })
-
+# nolint end
 
 # usethis::use_r("split_geotrace")  # nolint

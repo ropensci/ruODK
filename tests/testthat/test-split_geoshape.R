@@ -1,5 +1,4 @@
 test_that("split_geoshape works with GeoJSON", {
-  library(magrittr)
   data("geo_fs")
   data("geo_gj_raw")
 
@@ -57,7 +56,6 @@ test_that("split_geoshape works with GeoJSON", {
 })
 
 test_that("split_geoshape works with WKT", {
-  library(magrittr)
   data("geo_fs")
   data("geo_wkt_raw")
 

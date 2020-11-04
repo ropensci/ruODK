@@ -39,7 +39,6 @@ test_that("split_geopoint works with numeric coordinates", {
 })
 
 test_that("split_geopoint works with GeoJSON", {
-  library(magrittr)
   data("geo_fs")
   data("geo_gj_raw")
 
@@ -92,7 +91,6 @@ test_that("split_geopoint works with GeoJSON", {
 })
 
 test_that("split_geopoint works with WKT", {
-  library(magrittr)
   data("geo_fs")
   data("geo_wkt_raw")
 

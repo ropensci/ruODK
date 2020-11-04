@@ -49,7 +49,7 @@ unnest_all <- function(nested_tbl,
       magrittr::extract2("ruodk_name")
 
     if (length(geofield_names) == 0) {
-      keep_nested <- c()
+      keep_nested <- vector()
     } else {
       keep_nested <- paste("value_", geofield_names, sep = "")
       if (verbose == TRUE) {
@@ -58,7 +58,7 @@ unnest_all <- function(nested_tbl,
       }
     }
   } else {
-    keep_nested <- c()
+    keep_nested <- vector()
   }
 
   cols_to_unnest <- setdiff(listcol_names(nested_tbl), keep_nested)

@@ -1,4 +1,9 @@
 # `ruODK` (development version)
+## Major fixes
+## Minor fixes
+## Documentation
+## Maintenance
+* Automatd code reviews by codefactor.io
 
 # `ruODK` 0.9.2
 ## Major fixes

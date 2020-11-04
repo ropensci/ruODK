@@ -122,6 +122,7 @@ test_that("handle_ru_geoshapes annotates WKT lines with lon lat alt (no acc)", {
   }
 })
 
+# nolint start
 # Fixed upstream with https://github.com/getodk/central-backend/issues/282
 # test_that("handle_ru_geoshapes removes last empty coordinate from WKT", {
 #   data("geo_fs") # parse T
@@ -169,5 +170,6 @@ test_that("handle_ru_geoshapes annotates WKT lines with lon lat alt (no acc)", {
 #     )
 #   }
 # })
+# nolint end
 
 # usethis::use_r("handle_ru_geoshapes") # nolint

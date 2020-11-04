@@ -53,11 +53,11 @@ odata_service_get <- function(pid = get_default_pid(),
     magrittr::extract2("value") %>%
     { # nolint
       tibble::tibble(
-        name = purrr::map_chr(., c("name")),
-        kind = purrr::map_chr(., c("kind")),
-        url = purrr::map_chr(., c("url"))
+        name = purrr::map_chr(., "name"),
+        kind = purrr::map_chr(., "kind"),
+        url = purrr::map_chr(., "url")
       )
     }
 }
 
-# usethis::edit_file("tests/testthat/test-odata_service_get.R") # nolint
+# usethis::use_test("odata_service_get") # nolint

@@ -1,5 +1,4 @@
 test_that("handle_ru_attachments downloads files", {
-  library(magrittr)
   data("fq_raw")
   data("fq_form_schema")
 

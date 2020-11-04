@@ -20,6 +20,7 @@ Actions](https://github.com/ropensci/ruODK/workflows/tic/badge.svg)](https://git
 Appveyor](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main)
 [![Text
 coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
+[![CodeFactor](https://www.codefactor.io/repository/github/ropensci/ruodk/badge)](https://www.codefactor.io/repository/github/ropensci/ruodk)
 [![Hosted RStudio with
 ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 <!-- badges: end -->
@@ -228,7 +229,7 @@ proj %>% head() %>% knitr::kable(.)
 
 |  id | name                          | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
 |----:|:------------------------------|------:|-----------:|:--------------------|:------------|:--------------------|:---------|
-|   1 | DBCA                          |     7 |          8 | 2020-09-15 11:50:06 | NA          | 2020-11-03 07:17:02 | FALSE    |
+|   1 | DBCA                          |     7 |          9 | 2020-09-15 11:50:06 | NA          | 2020-11-04 07:03:51 | FALSE    |
 |   2 | ruODK package tests           |    10 |          1 | 2020-10-31 19:11:50 | NA          | 2020-11-02 12:41:14 | FALSE    |
 |   3 | ruODK package tests encrypted |     1 |          1 | 2020-10-31 19:12:57 | NA          | 2020-11-02 15:26:38 | FALSE    |
 

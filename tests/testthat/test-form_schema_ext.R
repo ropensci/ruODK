@@ -17,7 +17,7 @@ test_that("form_schema_ext v8 returns a tibble with defaults", {
 test_that("form_schema_ext v8 in a form with no languages", {
   fsx <- form_schema_ext(
     pid = get_test_pid(),
-    fid = Sys.getenv("ODKC_TEST_FID_I8N0", unset="I8n_no_lang"),
+    fid = Sys.getenv("ODKC_TEST_FID_I8N0", unset = "I8n_no_lang"),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
@@ -31,7 +31,7 @@ test_that("form_schema_ext v8 in a form with no languages", {
 test_that("form_schema_ext v8 in a form with label languages", {
   fsx <- form_schema_ext(
     pid = get_test_pid(),
-    fid = Sys.getenv("ODKC_TEST_FID_I8N1", unset="I8n_label_lng"),
+    fid = Sys.getenv("ODKC_TEST_FID_I8N1", unset = "I8n_label_lng"),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
@@ -45,7 +45,7 @@ test_that("form_schema_ext v8 in a form with label languages", {
 test_that("form_schema_ext v8 in a form with label and choices languages", {
   fsx <- form_schema_ext(
     pid = get_test_pid(),
-    fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset="I8n_label_choices"),
+    fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),

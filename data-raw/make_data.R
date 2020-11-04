@@ -2,7 +2,6 @@
 # ODK Central example data
 #
 library(magrittr)
-library(ruODK)
 ruODK::ru_setup(
   svc = Sys.getenv("ODKC_TEST_SVC"),
   un = Sys.getenv("ODKC_TEST_UN"),
