@@ -134,9 +134,9 @@ form_schema_ext <- function(flatten = FALSE,
     verbose = verbose
   )
 
-  # gets xml representation
+  # get xml representation
   frm_xml <- form_xml(
-    parse = parse,
+    parse = FALSE,
     url = url,
     pid = pid,
     fid = fid,
@@ -144,9 +144,9 @@ form_schema_ext <- function(flatten = FALSE,
     pw = pw,
     retries = retries
   ) %>%
-    xml2::as_xml_document()
+    xml2::xml_ns_strip()
 
-  ### parse translations:
+  ### parse translations
   all_translations <- xml2::xml_find_all(frm_xml, "//text")
 
   # initialize dataframe
