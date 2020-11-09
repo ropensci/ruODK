@@ -165,9 +165,11 @@ form_schema <- function(flatten = FALSE,
                         retries = get_retries(),
                         verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  if (verbose == TRUE) ru_msg_info(glue::glue("Form schema v{odkc_version}"))
+  if (verbose == TRUE)
+    ru_msg_info(glue::glue("Form schema v{odkc_version}"))
 
-  if (odkc_version < 0.8) { # nocov start
+  if (odkc_version < 0.8) {
+    # nocov start
     fs <- httr::RETRY(
       "GET",
       httr::modify_url(
@@ -198,8 +200,9 @@ form_schema <- function(flatten = FALSE,
       return(fsp)
     }
     return(fs)
-  } else { # nocov end
-    httr::RETRY(
+  } else {
+    # nocov end
+    fs <- httr::RETRY(
       "GET",
       httr::modify_url(
         url,
@@ -216,12 +219,54 @@ form_schema <- function(flatten = FALSE,
       httr::content(.) %>%
       tibble::tibble(xx = .) %>%
       tidyr::unnest_wider(xx) %>%
-      dplyr::mutate(
-        ruodk_name = path %>%
-          stringr::str_remove("/") %>%
-          stringr::str_replace_all("/", "_") %>%
-          janitor::make_clean_names()
-      )
+      {
+        if ("path" %in% names(.)) {
+          dplyr::mutate(
+            .,
+            ruodk_name = path %>%
+              stringr::str_remove("/") %>%
+              stringr::str_replace_all("/", "_") %>%
+              janitor::make_clean_names()
+          )
+        } else{
+          .
+        }
+      }
+
+    # If the form is a draft form, fs is an empty tibble.
+    # In this case, fall back to the draft form schema API path.
+    if (nrow(fs) == 0){
+      if (verbose == TRUE)
+        "The form \"{fid}\" is an unpublished draft form." %>%
+        glue::glue() %>% ru_msg_info()
+
+      fs <- httr::RETRY(
+        "GET",
+        httr::modify_url(
+          url,
+          path = glue::glue(
+            "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
+            "/draft/fields"
+          )
+        ),
+        httr::add_headers("Accept" = "application/json"),
+        httr::authenticate(un, pw),
+        query = list(flatten = flatten, odata = odata),
+        times = retries
+      ) %>%
+        yell_if_error(., url, un, pw) %>%
+        httr::content(.) %>%
+        tibble::tibble(xx = .) %>%
+        tidyr::unnest_wider(xx) %>%
+        dplyr::mutate(
+          ruodk_name = path %>%
+            stringr::str_remove("/") %>%
+            stringr::str_replace_all("/", "_") %>%
+            janitor::make_clean_names()
+        )
+    }
+
+    fs
   }
 }
 

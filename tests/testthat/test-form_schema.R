@@ -12,7 +12,37 @@ test_that("form_schema v8 returns a tibble and ignores flatten and parse", {
   testthat::expect_true(tibble::is_tibble(fs0))
 })
 
+test_that("form_schema works with unpublished draft forms", {
+  testthat::expect_message(
+    form_schema(
+      pid = get_test_pid(),
+      fid = "Locations_draft",
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version(),
+      verbose = TRUE
+    )
+  )
+
+  fs1 <- form_schema(
+    flatten = FALSE,
+    parse = FALSE,
+    pid = get_test_pid(),
+    fid = "Locations_draft",
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    verbose = TRUE
+  )
+  testthat::expect_true(tibble::is_tibble(fs1))
+  testthat::expect_true(nrow(fs1) > 0)
+
+})
+
 # nolint start
+# Tests for form schema v0.7
 #   fs1 <- form_schema(
 #     pid = get_test_pid(),
 #     fid = get_test_fid(),

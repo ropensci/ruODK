@@ -1,9 +1,10 @@
 # `ruODK` (development version)
 ## Major fixes
 ## Minor fixes
+* Form schema now also works on draft forms (#103, HT @dmenne).
 ## Documentation
 ## Maintenance
-* Automatd code reviews by codefactor.io
+* Automated code reviews by codefactor.io
 
 # `ruODK` 0.9.2
 ## Major fixes
