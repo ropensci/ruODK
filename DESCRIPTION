@@ -28,11 +28,10 @@ Authors@R:
              role = c("cph", "fnd")),
       person(given = "NWSFTCP",
              role = "fnd"))
-Description: Utilities to access and tidy up data from ODK
-    Central's API.  ODK Central is OpenDataKit's clearinghouse for
-    digitally captured data <https://docs.getodk.org/central-intro/>.
-    ODK Central's API is documented at
-    <https://odkcentral.docs.apiary.io/>.
+Description: Access and tidy up data from the 'ODK Central' API.  
+    'ODK Central' is a clearinghouse for digitally captured data 
+    <https://docs.getodk.org/central-intro/>.
+    The 'ODK Central' API is documented at <https://odkcentral.docs.apiary.io/>.
 License: GPL-3
 URL: https://docs.ropensci.org/ruODK,
     https://github.com/ropensci/ruODK

@@ -30,7 +30,7 @@ jobs:
           - { os: macOS-latest, r: "devel" } # vignettes fail to build
           - { os: macOS-latest, r: "release"}
           - { os: macOS-latest, r: "oldrel"} # needs freetype
-          - { os: ubuntu-20.04, r: "devel" } # broken proj4 < sf < leafem
+          - { os: ubuntu-20.04, r: "devel" } # libicui8n.so.65 not found
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
           - { os: ubuntu-18.04, r: "devel" }
