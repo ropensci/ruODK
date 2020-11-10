@@ -1,17 +1,11 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
-  "description": "Utilities to access and tidy up data from ODK\n    Central's API.  ODK Central is OpenDataKit's clearinghouse for\n    digitally captured data <https://docs.getodk.org/central-intro/>.\n    ODK Central's API is documented at\n    <https://odkcentral.docs.apiary.io/>.",
+  "description": "Access and tidy up data from the 'ODK Central' API.  \n    'ODK Central' is a clearinghouse for digitally captured data \n    <https://docs.getodk.org/central-intro/>.\n    The 'ODK Central' API is documented at <https://odkcentral.docs.apiary.io/>.",
   "name": "ruODK: An R Client for the ODK Central API",
   "codeRepository": "https://github.com/ropensci/ruODK",
-  "relatedLink": [
-    "https://ropensci.github.io/ruODK/",
-    "https://docs.ropensci.org/ruODK"
-  ],
+  "relatedLink": "https://docs.ropensci.org/ruODK",
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
   "version": "0.9.3",
@@ -107,7 +101,7 @@
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
-      "version": ">= 1.26",
+      "version": ">=\n        1.26",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -146,7 +140,7 @@
       "@type": "SoftwareApplication",
       "identifier": "listviewer",
       "name": "listviewer",
-      "version": ">= 3.0.0",
+      "version": ">=\n        3.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -185,7 +179,7 @@
       "@type": "SoftwareApplication",
       "identifier": "mapview",
       "name": "mapview",
-      "version": ">= 2.9.4",
+      "version": ">=\n        2.9.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -224,7 +218,7 @@
       "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
-      "version": ">= 0.9-5",
+      "version": ">=\n        0.9-5",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -263,7 +257,7 @@
       "@type": "SoftwareApplication",
       "identifier": "vcr",
       "name": "vcr",
-      "version": ">= 0.5.4",
+      "version": ">=\n        0.5.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -375,7 +369,7 @@
       "@type": "SoftwareApplication",
       "identifier": "janitor",
       "name": "janitor",
-      "version": ">= 2.0.1",
+      "version": ">=\n        2.0.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -518,7 +512,7 @@
   "applicationCategory": "DataAccess",
   "keywords": ["database", "open-data", "opendatakit", "odk", "api", "data", "dataset", "odata", "odata-client", "r"],
   "readme": "https://github.com/ropensci/ruODK/blob/main/README.md",
-  "fileSize": "3702.082KB",
+  "fileSize": "3340.44KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -534,8 +528,5 @@
       "url": "https://github.com/ropensci/ruODK",
       "description": "R package version 0.9.1"
     }
-  ],
-  "releaseNotes": "https://github.com/ropensci/ruODK/blob/master/NEWS.md",
-  "contIntegration": ["https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/ropensci/ruODK"],
-  "developmentStatus": "https://www.repostatus.org/#active"
+  ]
 }
