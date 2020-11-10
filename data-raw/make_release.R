@@ -21,6 +21,14 @@ source(here::here("data-raw/make_data.R"))
 # -----------------------------------------------------------------------------#
 # Build PDF manual
 # -----------------------------------------------------------------------------#
+# vignettes/manual.Rnw:
+# \documentclass{article}
+# \usepackage{pdfpages}
+# %\VignetteIndexEntry{manual}
+# \begin{document}
+# \SweaveOpts{concordance=TRUE}
+# \includepdf[pages=-, fitpaper=true]{../inst/extdoc/ruODK.pdf}
+# \end{document}
 fs::file_delete("inst/extdoc/*.pdf")
 devtools::build_manual(path = "inst/extdoc") # rm > pdf
 fs::file_move(fs::dir_ls("inst/extdoc/"), "inst/extdoc/ruODK.pdf") # rename pdf
