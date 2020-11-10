@@ -5,7 +5,6 @@
 ## Data
 ## Maintenance
 
- 
 # `ruODK` 0.9.3
 This is a point release to create a new RStudio Server image.
 ## Minor fixes
