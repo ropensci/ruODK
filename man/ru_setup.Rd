@@ -129,7 +129,7 @@ Settings are returned invisibly and additionally printed depending on
 \code{\link{get_ru_verbose}}.
 }
 \details{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 
 
 \code{\link{ru_setup}} sets ODK Central connection details.

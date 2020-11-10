@@ -1,6 +1,6 @@
 #' OData service document for an ODK Central form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The OData response for the metadata of an ODK Central form.
 #'
@@ -18,7 +18,7 @@
 
 #' OData metadata document for an ODK Central form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The OData response for the metadata of an ODK Central form.
 #'
@@ -35,7 +35,7 @@
 
 #' JSON form schema for an ODK Central form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The parsed form schema of an ODK Central form.
 #'
@@ -59,7 +59,7 @@
 
 #' OData submission data for an ODK Central form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The OData response for the submissions of an ODK Central form.
 #' This form represents a Flora Quadrat, which is a ca 50 by 50 m quadrat of
@@ -83,7 +83,7 @@
 
 #' OData submission data for a subgroup of an ODK Central form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The OData response for the subgroup of an ODK Central form.
 #'
@@ -105,7 +105,7 @@
 
 #' OData submission data for a subgroup of an ODK Central form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The OData response for a subgroup of an ODK Central form.
 #'
@@ -129,7 +129,7 @@
 
 #' Parsed submission data for an ODK Central form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The parsed OData response for the submissions of an ODK Central form.
 #' This form represents a Flora Quadrat, which is a ca 50 by 50 m quadrat of
@@ -156,7 +156,7 @@
 
 #' Parsed submission data for a subgroup of an ODK Central form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The parsed OData response for the subgroup of an ODK Central form.
 #'
@@ -181,7 +181,7 @@
 
 #' Parsed submission data for a subgroup of an ODK Central form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' The parsed OData response for a subgroup of an ODK Central form.
 #'
@@ -208,7 +208,7 @@
 
 #' A tibble of submission attachments.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of submission attachments.
 #' @source The output of \code{\link{attachment_list}}
@@ -221,7 +221,7 @@
 
 #' A tibble of form metadata.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of form metadata.
 #' @source The output of \code{\link{form_detail}}
@@ -234,7 +234,7 @@
 
 #' A tibble of forms.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of forms
 #' @source The output of \code{\link{form_list}}.
@@ -246,7 +246,7 @@
 
 #' A tibble of form fields and field types.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of form fields and field types.
 #' @source The output of \code{\link{form_schema}}
@@ -259,7 +259,7 @@
 
 #' A nested list of a form definition.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A nested list of a form definition.
 #' @source The output of \code{\link{form_xml}}
@@ -272,7 +272,7 @@
 
 #' A tibble of project metadata.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of project metadata.
 #' @source The output of \code{\link{project_detail}}
@@ -284,7 +284,7 @@
 
 #' A tibble of project metadata.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of project metadata.
 #' @source The output of \code{\link{project_list}}
@@ -296,7 +296,7 @@
 
 #' A tibble of submission metadata.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of submission metadata.
 #' @source The output of \code{\link{submission_list}}
@@ -309,7 +309,7 @@
 
 #' A nested list of submission data.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A nested list of submission data.
 #' @source The output of \code{\link{submission_get}}
@@ -322,7 +322,7 @@
 
 #' A tibble of the main data table of records from a test form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of main records from a test form.
 #' @source \code{\link{submission_export}}
@@ -335,7 +335,7 @@
 
 #' A tibble of a repeated sub-group of records from a test form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of repeated sub-group of records from a test form.
 #' @source \code{\link{submission_export}}
@@ -348,7 +348,7 @@
 
 #' A tibble of a repeated sub-group of records from a test form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @format A tibble of repeated sub-group of records from a test form.
 #' @source \code{\link{submission_export}}
@@ -360,7 +360,7 @@
 
 #' The form_schema of a form containing geofields in GeoJSON.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @source \code{\link{form_schema}}
 #' run on the test form
@@ -371,7 +371,7 @@
 
 #' The unparsed submissions of a form containing geofields in GeoJSON.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @source \code{\link{odata_submission_get}(wkt=FALSE, parse=FALSE)}
 #' run on the test form
@@ -382,7 +382,7 @@
 
 #' The parsed submissions of a form containing geofields in GeoJSON.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @source \code{\link{odata_submission_get}(wkt=FALSE, parse=TRUE)}
 #' run on the test form
@@ -394,7 +394,7 @@
 #' The parsed submissions of a form containing geofields in GeoJSON
 #' with trailing empty coordinates present.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' This issue was fixed in #88.
 #' ODK Central versions 0.7 - 0.9 export geotraces and geoshapes with trailing
@@ -410,7 +410,7 @@
 
 #' The unparsed submissions of a form containing geofields in WKT.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @source \code{\link{odata_submission_get}(wkt=TRUE, parse=FALSE)}
 #' run on the test form
@@ -421,7 +421,7 @@
 
 #' The parsed submissions of a form containing geofields in WKT.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @source \code{\link{odata_submission_get}(wkt=TRUE, parse=TRUE)}
 #' run on the test form
@@ -433,7 +433,7 @@
 #' The parsed submissions of a form containing geofields in WKT
 #' with trailing empty coordinates present.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' This issue was fixed in #88.
 #' ODK Central versions 0.7 - 0.9 export geotraces and geoshapes with trailing
@@ -449,7 +449,7 @@
 
 #' The unparsed XML form_schema of a form from ODK Central v0.6 as nested list.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @source \code{\link{form_schema}(odkc_version = 0.7, parse = FALSE)}
 #' @family included
@@ -458,7 +458,7 @@
 
 #' The parsed XML form_schema of a form from ODK Central v0.6.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @source \code{\link{form_schema_parse}(fs_v7_raw)}
 #' @family included

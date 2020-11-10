@@ -34,7 +34,7 @@ A tibble with one row per project and all project metadata
         as columns as per ODK Central API docs.
 }
 \description{
-\lifecycle{experimental}
+`r lifecycle::badge("experimental")`
 }
 \examples{
 \dontrun{

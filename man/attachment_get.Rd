@@ -73,7 +73,7 @@ verbosity can be set globally or per function.}
 The relative file path for the downloaded attachment(s)
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 This function is the workhorse for

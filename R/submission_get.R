@@ -9,7 +9,7 @@
 #' rectangle them any further here. Rectangling requires knowledge of the form
 #' schema and the completeness of submission data.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @template param-iid
 #' @template param-pid

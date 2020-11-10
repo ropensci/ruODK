@@ -5,7 +5,7 @@
 #' \code{\link{project_list}} will fail with incorrect or missing
 #' authentication.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @template param-url
 #' @template param-auth

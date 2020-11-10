@@ -1,10 +1,17 @@
 # `ruODK` (development version)
 ## Major fixes
 ## Minor fixes
-* Form schema now also works on draft forms (#103, HT @dmenne).
 ## Documentation
+## Data
 ## Maintenance
-* Automated code reviews by codefactor.io
+
+ 
+# `ruODK` 0.9.3
+This is a point release to create a new RStudio Server image.
+## Minor fixes
+* Form schema now also works on draft forms (#103, HT @dmenne).
+## Maintenance
+* Automated code reviews by <codefactor.io>.
 
 # `ruODK` 0.9.2
 ## Major fixes
@@ -93,7 +100,7 @@ for ODK Central <= 0.7.
 * Added ODK Central < v0.7 form schema for tests.
 
 ## Documentation
-* Updated workshop companion package [urODK](https://github.com/ropensci/urODK).
+* Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK).
 * Rename vignettes to `odata-api` and `restful-api`. (#34)
 * Warn against using plain text credentials in vignette `setup`. (#34)
 * More documentation improvements at 

@@ -16,7 +16,7 @@ run on the project.
 fq_form_list
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \seealso{
 Other included: 

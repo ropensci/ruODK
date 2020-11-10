@@ -13,7 +13,7 @@ prepend_uuid(md5hash)
 The string with a prepended "uuid:"
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 This is the inverse of the helper function \code{\link{strip_uuid}}.

@@ -53,7 +53,7 @@ A tibble containing some high-level details of the form submissions.
         * updated_at: time of submission update on server, dttm or NA
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

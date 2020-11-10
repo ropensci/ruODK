@@ -5,13 +5,11 @@
 
 <!-- badges: start -->
 
-[![ROpenSci submission
-status](https://badges.ropensci.org/335_status.svg)](https://github.com/ropensci/software-review/issues/335)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3953158.svg)](https://doi.org/10.5281/zenodo.3953158)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/master)
+[![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/main)
 [![GitHub
 issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](https://github.com/ropensci/ruODK/issues/)
 [![CI - GitHub
@@ -227,11 +225,12 @@ proj <- ruODK::project_list()
 proj %>% head() %>% knitr::kable(.)
 ```
 
-|  id | name                          | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
-|----:|:------------------------------|------:|-----------:|:--------------------|:------------|:--------------------|:---------|
-|   1 | DBCA                          |     7 |          9 | 2020-09-15 11:50:06 | NA          | 2020-11-04 07:03:51 | FALSE    |
-|   2 | ruODK package tests           |    10 |          1 | 2020-10-31 19:11:50 | NA          | 2020-11-02 12:41:14 | FALSE    |
-|   3 | ruODK package tests encrypted |     1 |          1 | 2020-10-31 19:12:57 | NA          | 2020-11-02 15:26:38 | FALSE    |
+|  id | name                             | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
+|----:|:---------------------------------|------:|-----------:|:--------------------|:------------|:--------------------|:---------|
+|   1 | DBCA                             |     8 |          9 | 2020-09-15 11:50:06 | NA          | 2020-11-10 10:08:23 | FALSE    |
+|   4 | Fire Management and Plant Health |     5 |          2 | 2020-11-06 11:12:16 | NA          | 2020-11-06 11:47:21 | FALSE    |
+|   2 | ruODK package tests              |    10 |          1 | 2020-10-31 19:11:50 | NA          | 2020-11-02 12:41:14 | FALSE    |
+|   3 | ruODK package tests encrypted    |     1 |          1 | 2020-10-31 19:12:57 | NA          | 2020-11-02 15:26:38 | FALSE    |
 
 ``` r
 # List forms of default project

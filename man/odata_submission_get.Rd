@@ -124,7 +124,7 @@ A list of lists.
 }
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 \code{\link{odata_submission_get}} downloads submissions from

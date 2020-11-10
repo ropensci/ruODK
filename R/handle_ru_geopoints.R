@@ -1,6 +1,6 @@
 #' Split all geopoints of a submission tibble into their components.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @details For a given tibble of submissions, find all columns which are listed
 #' in the form schema as type \code{geopoint}, and extract their components.

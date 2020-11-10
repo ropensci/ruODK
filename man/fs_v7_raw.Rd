@@ -15,7 +15,7 @@ An object of class \code{list} of length 6.
 fs_v7_raw
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \seealso{
 Other included: 

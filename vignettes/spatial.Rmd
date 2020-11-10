@@ -194,7 +194,7 @@ comprehensive overview of mapview.
 There are several other good entry points for all things R and spatial, 
 including but not limited to:
 
-* The [R Spatial CRAN Task View](https://cran.r-project.org/web/views/Spatial.html)
+* The [R Spatial CRAN Task View](https://cran.r-project.org/view=Spatial)
 * The [RSpatial](https://rspatial.org/) website
 * [Geospatial data in R and beyond](https://www.maths.lancs.ac.uk/~rowlings/Teaching/UseR2012/) 
   by [Barry Rowlingson](http://barry.rowlingson.com/)

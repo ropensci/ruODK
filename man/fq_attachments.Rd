@@ -17,7 +17,7 @@ run on submissions of the test form
 fq_attachments
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \seealso{
 Other included: 

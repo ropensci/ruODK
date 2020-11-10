@@ -298,7 +298,7 @@ fq_data_strata <- fq_strata %>%
 
 Note: A manually resized version of the original photos in this example live in
 the package source under [`articles/media`
-](https://github.com/ropensci/ruODK/tree/gh-pages/articles/media). 
+](https://github.com/ropensci/ruODK/tree/main/vignettes/media). 
 To minimise package size, they were resized with imagemagick:
 
 ```{sh, eval=FALSE}

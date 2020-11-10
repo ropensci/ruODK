@@ -23,7 +23,7 @@ The dataframe with attachment columns modified to contain relative
   paths to the downloaded attachment files.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

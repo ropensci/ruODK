@@ -107,7 +107,7 @@ A tibble containing the form definition.
   }
 }
 \description{
-\lifecycle{experimental}
+`r lifecycle::badge("experimental")`
 }
 \details{
 ODK Central has introduced a new API endpoint in version 0.8 which

@@ -52,7 +52,7 @@ While the API endpoint will return all details for one project,
 authentication.
 }
 \details{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

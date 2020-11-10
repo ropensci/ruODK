@@ -1,6 +1,6 @@
 #' Parse an ISO8601 datetime string to a timezone aware datetime.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' This function is used internally by \code{ruODK} to parse ISO timestamps
 #' to timezone-aware local times.

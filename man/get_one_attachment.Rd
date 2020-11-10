@@ -51,7 +51,7 @@ verbosity can be set globally or per function.}
 The relative local path to the downloaded attachment or NA.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 This is a helper function used by \code{\link{attachment_get}}.

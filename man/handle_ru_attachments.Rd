@@ -68,7 +68,7 @@ The submissions tibble with all attachments downloaded and linked to
   a `local_dir`.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 For a given tibble of submissions, download and link attachments

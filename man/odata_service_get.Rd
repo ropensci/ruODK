@@ -48,7 +48,7 @@ A tibble with one row per submission data endpoint.
         Columns: name, kind, url.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

@@ -1,6 +1,6 @@
 #' Strip the leading "uuid:" from a UUID hash.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' This is a helper function used by \code{\link{attachment_get}}.
 #'
@@ -19,7 +19,7 @@ strip_uuid <- function(uuid) {
 
 #' Prepend a leading "uuid:" to any string, e.g. an md5 hash.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' This is the inverse of the helper function \code{\link{strip_uuid}}.
 #'
@@ -38,7 +38,7 @@ prepend_uuid <- function(md5hash) {
 
 #' Build the download URL for one or many submission UUIDs and filenames.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' This is a helper function used by \code{\link{attachment_get}}.
 #' This function is vectorised and accepts single values or vectors for uuid and
@@ -84,7 +84,7 @@ attachment_url <- function(uuid,
 
 #' Download one media attachment.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' This is a helper function used by \code{\link{attachment_get}}.
 #' This function is not vectorised, but mapped by \code{\link{attachment_get}}
@@ -174,7 +174,7 @@ get_one_attachment <- function(pth,
 
 #' Download attachments and return the local path.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @details This function is the workhorse for
 #' \code{\link{handle_ru_attachments}}.

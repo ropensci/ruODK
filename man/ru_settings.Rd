@@ -71,7 +71,7 @@ get_retries()
 \code{get_(default/test)_*} get each of those respective settings.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 ru_settings()

@@ -51,7 +51,7 @@ Default: 3.}
 A nested list of submission metadata.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

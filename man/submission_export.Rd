@@ -83,7 +83,7 @@ uuids to download them one by one via \code{\link{submission_get}}.
 Download attachments as listed for each submission
 (\code{\link{attachment_list}}).
 
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

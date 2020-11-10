@@ -1,6 +1,6 @@
 #' Print a blue info message with an info symbol.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param message <chr> A message to print
 #' @return NULL
@@ -15,7 +15,7 @@ ru_msg_info <- function(message) {
 
 #' Print a green success message with a tick symbol.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param message <chr> A message to print
 #' @return NULL
@@ -31,7 +31,7 @@ ru_msg_success <- function(message) {
 
 #' Print a green noop message with a filled circle symbol.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param message <chr> A message to print
 #' @return NULL
@@ -47,7 +47,7 @@ ru_msg_noop <- function(message) {
 
 #' rlang::warn() with a yellow warning message with a warning symbol.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param message <chr> A message to print
 #' @return NULL
@@ -65,7 +65,7 @@ ru_msg_warn <- function(message) {
 
 #' rlang::abort() with a red error message with a cross symbol.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param message <chr> A message to print
 #' @return NULL

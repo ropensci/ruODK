@@ -41,7 +41,7 @@ While the API endpoint will return all projects,
 authentication.
 }
 \details{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

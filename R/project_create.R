@@ -1,6 +1,6 @@
 #' Create a new project.
 #'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param name The desired name of the project. Can contain whitespace.
 #' @template param-url

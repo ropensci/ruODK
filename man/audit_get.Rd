@@ -65,7 +65,7 @@ A tibble containing server audit logs.
  * logged_at: dttm. Time of action on server.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 Parameters to filter the audit logs:

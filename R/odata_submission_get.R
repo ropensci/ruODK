@@ -1,7 +1,7 @@
 #' Retrieve and rectangle form submissions, parse dates, geopoints, download and
 #' link attachments.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @details \code{\link{odata_submission_get}} downloads submissions from
 #' (default) the main form group (submission table) including any non-repeating

@@ -1,6 +1,6 @@
 #' A functional to extract names of list columns from a tibble.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param tbl A tibble, possibly with list columns
 #' @keywords internal
@@ -15,7 +15,7 @@ listcol_names <- function(tbl) {
 
 #' Recursively unnest_wide all list columns in a tibble.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @details \code{\link{odata_submission_rectangle}} uses this function
 #' internally.
@@ -111,7 +111,7 @@ unnest_all <- function(nested_tbl,
 #' Rectangle the output of \code{\link{odata_submission_get}(parse=FALSE)}
 #' into a tidy tibble and unnest all levels.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param data A nested list of lists as given by
 #'   \code{\link{odata_submission_get}}.

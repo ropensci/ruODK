@@ -31,7 +31,7 @@ The given dataframe with the geoshape column <colname>, plus
   avoid naming conflicts with any other geoshape columns.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 This function is used by \code{\link{handle_ru_geopoints}}

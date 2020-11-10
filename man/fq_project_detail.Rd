@@ -16,7 +16,7 @@ run on the project containing the test form
 fq_project_detail
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \seealso{
 Other included: 

@@ -1,6 +1,6 @@
 #' Show metadata for one submission.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @template param-iid
 #' @template param-pid

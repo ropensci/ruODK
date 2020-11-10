@@ -50,7 +50,7 @@ Default: 3.}
 The form XML as a nested list.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

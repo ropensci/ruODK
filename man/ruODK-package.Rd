@@ -9,7 +9,7 @@
 \code{\link{ruODK}} is an R Client for the ODK Central API.
 
   Please see the `ruODK` website for full documentation:
-  <https://ropensci.github.io/ruODK/>
+  <https://docs.ropensci.org/ruODK/>
 
 `ruODK` is "pipe-friendly" and re-exports `\%>\%` and `\%||\%`, but does not
  require their use.
@@ -17,7 +17,7 @@
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://ropensci.github.io/ruODK/}
+  \item \url{https://docs.ropensci.org/ruODK}
   \item \url{https://github.com/ropensci/ruODK}
   \item Report bugs at \url{https://github.com/ropensci/ruODK/issues}
 }

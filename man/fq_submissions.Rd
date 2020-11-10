@@ -18,7 +18,7 @@ using submission instance IDs from \code{\link{submission_list}}.
 fq_submissions
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \seealso{
 Other included: 

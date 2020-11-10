@@ -47,7 +47,7 @@ Default: 3.}
 A tibble with one row and all form metadata as columns.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

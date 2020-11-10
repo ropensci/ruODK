@@ -13,7 +13,7 @@ strip_uuid(uuid)
 The string with every occurrence of "uuid:" deleted.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 This is a helper function used by \code{\link{attachment_get}}.

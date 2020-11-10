@@ -1,6 +1,7 @@
 #' List all submissions of one form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
+#'
 #' @template param-pid
 #' @template param-fid
 #' @template param-url

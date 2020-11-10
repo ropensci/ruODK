@@ -38,7 +38,7 @@ verbosity can be set globally or per function.}
 The un-nested tibble in wide format
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 \code{\link{odata_submission_rectangle}} uses this function

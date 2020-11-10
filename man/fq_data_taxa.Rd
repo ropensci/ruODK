@@ -17,7 +17,7 @@ See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 fq_data_taxa
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 The parsed OData response for a subgroup of an ODK Central form.

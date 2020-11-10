@@ -10,7 +10,7 @@ ru_msg_abort(message)
 \item{message}{<chr> A message to print}
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

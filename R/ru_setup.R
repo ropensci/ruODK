@@ -1,6 +1,6 @@
 #' Get or set \code{ruODK} settings.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @export
 #' @return \code{\link{ru_settings}} prints your default ODK Central project ID,
@@ -85,7 +85,7 @@ print.ru_settings <- function(x, ...) {
 #
 #' Retrieve URL, project ID, and form ID from an ODK Central OData service URL
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param svc (character) The OData service URL of a form as provided by the
 #'   ODK Central form submissions tab.
@@ -118,7 +118,7 @@ odata_svc_parse <- function(svc) {
 #' Settings are returned invisibly and additionally printed depending on
 #' \code{\link{get_ru_verbose}}.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @export
 #' @param svc (optional, character) The OData service URL of a form.
@@ -303,7 +303,7 @@ ru_setup <- function(svc = NULL,
 #------------------------------------------------------------------------------#
 # Getters
 #
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_default_pid <- function() {
@@ -314,7 +314,7 @@ get_default_pid <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_default_fid <- function() {
@@ -325,7 +325,7 @@ get_default_fid <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_default_url <- function() {
@@ -336,7 +336,7 @@ get_default_url <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_default_un <- function() {
@@ -347,7 +347,7 @@ get_default_un <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_default_pw <- function() {
@@ -358,7 +358,7 @@ get_default_pw <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_default_tz <- function() {
@@ -370,7 +370,7 @@ get_default_tz <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_url <- function() {
@@ -381,7 +381,7 @@ get_test_url <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_un <- function() {
@@ -392,7 +392,7 @@ get_test_un <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_pw <- function() {
@@ -403,7 +403,7 @@ get_test_pw <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_pid <- function() {
@@ -414,7 +414,7 @@ get_test_pid <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_fid <- function() {
@@ -425,7 +425,7 @@ get_test_fid <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_fid_zip <- function() {
@@ -436,7 +436,7 @@ get_test_fid_zip <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_fid_att <- function() {
@@ -447,7 +447,7 @@ get_test_fid_att <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_fid_gap <- function() {
@@ -458,7 +458,7 @@ get_test_fid_gap <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_fid_wkt <- function() {
@@ -469,28 +469,28 @@ get_test_fid_wkt <- function() {
   x
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_ru_verbose <- function() {
   Sys.getenv("RU_VERBOSE", unset = FALSE) %>% as.logical()
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_default_odkc_version <- function() {
   Sys.getenv("ODKC_VERSION", unset = 0.8) %>% as.double()
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_odkc_version <- function() {
   Sys.getenv("ODKC_TEST_VERSION", unset = 0.8) %>% as.double()
 }
 
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_retries <- function() {
@@ -500,7 +500,7 @@ get_retries <- function() {
 
 #' Abort on missing ODK Central credentials (url, username, password).
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param url A URL (character)
 #' @param un A username (character)
@@ -544,7 +544,7 @@ yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL) {
 
 #' Warn about failed web requests and give helpful troubleshooting tips.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' A wrapper around \code{httr::stop_for_status} with a more helpful error
 #' message.

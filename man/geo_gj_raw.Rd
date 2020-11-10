@@ -17,7 +17,7 @@ run on the test form
 geo_gj_raw
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \seealso{
 Other included: 

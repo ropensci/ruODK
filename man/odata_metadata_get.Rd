@@ -48,7 +48,7 @@ A nested list containing Edmx (dataset schema definition) and
   .attrs (Version).
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

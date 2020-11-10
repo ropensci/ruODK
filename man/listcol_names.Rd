@@ -13,6 +13,6 @@ listcol_names(tbl)
 A vector of list column names
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \keyword{internal}

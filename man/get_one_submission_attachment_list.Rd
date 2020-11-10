@@ -57,7 +57,7 @@ A tibble containing some high-level details of the submission
           server.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 When a Submission is created, either over the OpenRosa or the REST interface,

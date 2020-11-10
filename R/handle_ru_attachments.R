@@ -1,6 +1,6 @@
 #' Download and link submission attachments according to a form schema.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @details For a given tibble of submissions, download and link attachments
 #' for all columns which are marked in the form schema as type "binary".

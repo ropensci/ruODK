@@ -18,7 +18,7 @@ run on the test form
 geo_wkt88
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 This issue was fixed in #88.

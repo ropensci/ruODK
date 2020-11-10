@@ -1,6 +1,6 @@
 #' Show the extended schema of one form.
 #'
-#' \lifecycle{experimental}
+#' `r lifecycle::badge("experimental")`
 #'
 #' @details ODK Central has introduced a new API endpoint in version 0.8 which
 #' returns a parsed and flattened list of fields. This replaces the nested
@@ -113,11 +113,13 @@ form_schema_ext <- function(flatten = FALSE,
                             retries = get_retries(),
                             verbose = get_ru_verbose()) {
 
-  # version warning:
+  # version warning
+  # nocov start
   if (odkc_version < 0.8) {
     "Form Schema Extended works better with ODK Central 0.8 and above" %>%
       ru_msg_warn()
   }
+  # nocov end
 
   # gets basic schema
   frm_schema <- form_schema(

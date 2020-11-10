@@ -1,6 +1,6 @@
 #' Show the XML representation of one form as list.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param parse Whether to parse the XML into a nested list, default: TRUE
 #' @template param-pid

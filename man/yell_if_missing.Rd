@@ -20,7 +20,7 @@ yell_if_missing(url, un, pw, pid = NULL, fid = NULL, iid = NULL)
 \item{iid}{A submission instance ID (character, optional)}
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 This is a helper function to pat down \code{\link{ruODK}} functions

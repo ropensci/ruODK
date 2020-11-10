@@ -40,7 +40,7 @@ verbosity can be set globally or per function.}
 The submissions as un-nested tibble
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

@@ -61,7 +61,7 @@ entirely depends on the completeness of the submission data, we cannot
 rectangle them any further here. Rectangling requires knowledge of the form
 schema and the completeness of submission data.
 
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 \dontrun{

@@ -26,7 +26,7 @@ timezone can be set globally or per function.}
 A lubridate PosixCT datetime in the given timezone.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 This function is used internally by \code{ruODK} to parse ISO timestamps

@@ -1,6 +1,6 @@
 #' List all forms.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @template param-pid
 #' @template param-url

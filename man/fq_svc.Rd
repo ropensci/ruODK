@@ -15,7 +15,7 @@ OData service document for
 fq_svc
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 The OData response for the metadata of an ODK Central form.

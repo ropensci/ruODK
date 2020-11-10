@@ -29,7 +29,7 @@ The submissions tibble with all geopoints retained in their original
   \code{\link{split_geopoint}}.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 For a given tibble of submissions, find all columns which are listed

@@ -1,7 +1,7 @@
 Type: Package
 Package: ruODK
 Title: An R Client for the ODK Central API
-Version: 0.9.2.9002
+Version: 0.9.3
 Authors@R: 
     c(person(given = c("Florian", "W."),
              family = "Mayer",
@@ -30,11 +30,11 @@ Authors@R:
              role = "fnd"))
 Description: Utilities to access and tidy up data from ODK
     Central's API.  ODK Central is OpenDataKit's clearinghouse for
-    digitally captured data <https://docs.opendatakit.org/central-intro/>.
+    digitally captured data <https://docs.getodk.org/central-intro/>.
     ODK Central's API is documented at
     <https://odkcentral.docs.apiary.io/>.
 License: GPL-3
-URL: https://ropensci.github.io/ruODK/,
+URL: https://docs.ropensci.org/ruODK,
     https://github.com/ropensci/ruODK
 BugReports: https://github.com/ropensci/ruODK/issues
 Depends: 
@@ -75,8 +75,6 @@ Suggests:
     usethis (>= 1.6.0),
     vcr (>= 0.5.4),
     webshot (>= 0.5.2)
-Remotes:
-    r-spatial/mapview
 VignetteBuilder: 
     knitr
 RdMacros: 

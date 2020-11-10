@@ -4,7 +4,7 @@
 #' \code{\link{project_detail}} will fail with incorrect or missing
 #' authentication.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @template param-pid
 #' @template param-url

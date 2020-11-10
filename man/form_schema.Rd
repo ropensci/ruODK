@@ -101,7 +101,7 @@ A tibble or nested list (v0.7) containing the form definition.
   }
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 ODK Central has introduced a new API endpoint in version 0.8 which

@@ -1,7 +1,7 @@
 #' Annotate a dataframe containing a geotrace column with lon, lat, alt of the
 #' geotrace's first point.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @details This function is used by \code{\link{handle_ru_geopoints}}
 #' on all \code{geopoint} fields as per \code{\link{form_schema}}.

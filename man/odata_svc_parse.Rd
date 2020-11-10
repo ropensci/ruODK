@@ -20,7 +20,7 @@ A named list with three components (all of type character):
  }
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \seealso{
 Other ru_settings: 

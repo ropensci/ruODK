@@ -1,6 +1,6 @@
 #' Parse a form_schema into a tibble of fields with name, type, and path.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' This function is used by \code{\link{form_schema}} for older versions of
 #' ODK Central (pre 0.8). These return the form schema as XML, requiring the

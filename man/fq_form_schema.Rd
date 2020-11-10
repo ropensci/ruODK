@@ -25,9 +25,9 @@ fq_form_schema
 fq_form_schema
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 The parsed form schema of an ODK Central form.

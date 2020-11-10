@@ -1,6 +1,6 @@
 #' Prefix attachment columns from CSV export with a local attachment file path.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param data_tbl The downloaded submissions from
 #'   \code{\link{submission_export}} read into a `tibble` by

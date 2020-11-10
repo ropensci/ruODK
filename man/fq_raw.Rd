@@ -14,7 +14,7 @@ See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
 fq_raw
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 The OData response for the submissions of an ODK Central form.

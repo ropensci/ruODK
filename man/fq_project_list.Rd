@@ -16,7 +16,7 @@ run on all projects on the configured ODK Central server.
 fq_project_list
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \seealso{
 Other included: 

@@ -42,7 +42,7 @@ The submissions tibble with all geoshapes retained in their original
   provided by \code{\link{split_geoshape}}.
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 For a given tibble of submissions, find all columns which are listed

@@ -1,6 +1,6 @@
 #' Show the schema of one form.
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @details ODK Central has introduced a new API endpoint in version 0.8 which
 #' returns a parsed and flattened list of fields. This replaces the nested
@@ -165,8 +165,9 @@ form_schema <- function(flatten = FALSE,
                         retries = get_retries(),
                         verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  if (verbose == TRUE)
+  if (verbose == TRUE) {
     ru_msg_info(glue::glue("Form schema v{odkc_version}"))
+  }
 
   if (odkc_version < 0.8) {
     # nocov start
@@ -219,7 +220,7 @@ form_schema <- function(flatten = FALSE,
       httr::content(.) %>%
       tibble::tibble(xx = .) %>%
       tidyr::unnest_wider(xx) %>%
-      {
+      { # nolint
         if ("path" %in% names(.)) {
           dplyr::mutate(
             .,
@@ -228,17 +229,19 @@ form_schema <- function(flatten = FALSE,
               stringr::str_replace_all("/", "_") %>%
               janitor::make_clean_names()
           )
-        } else{
+        } else {
           .
         }
       }
 
     # If the form is a draft form, fs is an empty tibble.
     # In this case, fall back to the draft form schema API path.
-    if (nrow(fs) == 0){
-      if (verbose == TRUE)
+    if (nrow(fs) == 0) {
+      if (verbose == TRUE) {
         "The form \"{fid}\" is an unpublished draft form." %>%
-        glue::glue() %>% ru_msg_info()
+          glue::glue() %>%
+          ru_msg_info()
+      }
 
       fs <- httr::RETRY(
         "GET",
@@ -270,4 +273,4 @@ form_schema <- function(flatten = FALSE,
   }
 }
 
-# usethis::edit_file("tests/testthat/test-form_schema.R") # nolint
+# usethis::use_test("form_schema") # nolint

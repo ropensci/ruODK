@@ -22,7 +22,7 @@ Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 verbosity can be set globally or per function.}
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \details{
 This function is used by \code{\link{form_schema}} for older versions of

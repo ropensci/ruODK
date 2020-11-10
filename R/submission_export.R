@@ -19,7 +19,7 @@
 #' Download attachments as listed for each submission
 #' (\code{\link{attachment_list}}).
 #'
-#' \lifecycle{stable}
+#' `r lifecycle::badge("stable")`
 #'
 #' @param local_dir The local folder to save the downloaded files to,
 #'                  default: \code{here::here}.

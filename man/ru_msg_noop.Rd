@@ -10,7 +10,7 @@ ru_msg_noop(message)
 \item{message}{<chr> A message to print}
 }
 \description{
-\lifecycle{stable}
+`r lifecycle::badge("stable")`
 }
 \examples{
 ru_msg_noop("This is a noop message.")
