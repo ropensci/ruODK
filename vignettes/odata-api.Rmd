@@ -23,7 +23,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 # This vignette requires the following packages:
 library(DT)
 library(leaflet)
-library(listviewer)
+# library(listviewer)
 library(magrittr)
 library(tibble)
 library(tidyr)

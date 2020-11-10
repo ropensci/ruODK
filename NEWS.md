@@ -11,6 +11,8 @@ This is a point release to create a new RStudio Server image.
 * Form schema now also works on draft forms (#103, HT @dmenne).
 ## Maintenance
 * Automated code reviews by <codefactor.io>.
+* GitHub Actions welcomes Ubuntu 20.04 LTS and MacOS X back to the passing 
+  environments.
 
 # `ruODK` 0.9.2
 ## Major fixes
