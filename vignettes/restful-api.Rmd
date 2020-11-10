@@ -324,7 +324,11 @@ This structure could be used for upload into data warehouses accepting nested da
 as e.g. JSON.
 
 ```{r view_submission_data, fig.width=7}
-listviewer::jsonedit(fq_submissions, mode = "code")
+if (requireNamespace("listviewer")) {
+  listviewer::jsonedit(fq_submissions, mode = "code")
+} else {
+  ru_msg_info("Please install package listviewer!")
+}
 ```
 
 # Outlook

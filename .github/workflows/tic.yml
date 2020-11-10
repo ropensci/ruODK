@@ -27,10 +27,10 @@ jobs:
           - { os: windows-2016, r: "devel" }
           - { os: windows-2016, r: "release" }
           - { os: windows-2016, r: "oldrel" }
-          - { os: macOS-latest, r: "devel" } # vignettes fail to build
+          - { os: macOS-latest, r: "devel" }
           - { os: macOS-latest, r: "release"}
-          - { os: macOS-latest, r: "oldrel"} # needs freetype
-          - { os: ubuntu-20.04, r: "devel" } # libicui8n.so.65 not found
+          # - { os: macOS-latest, r: "oldrel"} # vign spatial > systemfonts > libfreetype.6.dylib
+          - { os: ubuntu-20.04, r: "devel" }
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
           - { os: ubuntu-18.04, r: "devel" }

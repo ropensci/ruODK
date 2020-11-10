@@ -127,7 +127,11 @@ fq_meta <- ruODK::odata_metadata_get()
 ```
 
 ```{r view_metadata, fig.width=7}
-listviewer::jsonedit(fq_meta)
+if (requireNamespace("listviewer")) {
+  listviewer::jsonedit(fq_meta)
+} else {
+  ru_msg_info("Please install package listviewer!")
+}
 ```
 
 As an alternative to the OData metadata document, ODK Central also offers

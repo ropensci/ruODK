@@ -1,21 +1,21 @@
 ## Test environments
 * Local machine
-  * R version 4.0.3 (2020-10-10)
-  * Platform: x86_64-pc-linux-gnu (64-bit)
   * Running under: Ubuntu 20.04.1 LTS
+  * Platform: x86_64-pc-linux-gnu (64-bit)
+  * R version 4.0.3 (2020-10-10)
 * Travis CI
   * Ubuntu 16.04.6 LTS "xenial"
   * R devel, release, oldrel
 * AppVeyor CI
-  * R version 4.0.3 Patched (2020-11-08 r79411)
-  * Platform: x86_64-w64-mingw32/x64 (64-bit)
   * Running under: Windows Server 2012 R2 x64 (build 9600)
+  * Platform: x86_64-w64-mingw32/x64 (64-bit)
+  * R version 4.0.3 Patched (2020-11-08 r79411)
 * GitHub Actions: R devel, release, oldrel for each of
   * Windows-latest (Windows Server 2019)
   * Windows Server 2016
-  * MacOS-lastest (MacOS Catalina 10.05)
-  * Ubuntu 18.04
+  * MacOS-lastest (MacOS X Catalina 10.05)
   * Ubuntu 20.04
+  * Ubuntu 18.04
 
 ## R CMD check results
 
