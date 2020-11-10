@@ -128,7 +128,7 @@ jobs:
         if: matrix.config.os == 'macOS-latest'
         run: |
           rm '/usr/local/bin/gfortran'
-          brew install pkg-config gdal proj geos udunits cairo
+          brew install gdal proj geos udunits cairo libpng
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
