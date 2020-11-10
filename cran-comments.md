@@ -5,14 +5,11 @@
   * Running under: Ubuntu 20.04.1 LTS
 * Travis CI
   * Ubuntu 16.04.6 LTS "xenial"
-  * R versions:
-    * oldrel
-    * release
-    * devel
+  * R devel, release, oldrel
 * AppVeyor CI
-  * Windows Server 2012 R2 x64 (build 9600)
+  * R version 4.0.3 Patched (2020-11-08 r79411)
   * Platform: x86_64-w64-mingw32/x64 (64-bit)
-  * R version 3.6.1 Patched (2019-09-14 r77193)
+  * Running under: Windows Server 2012 R2 x64 (build 9600)
 * GitHub Actions: R devel, release, oldrel for each of
   * Windows-latest (Windows Server 2019)
   * Windows Server 2016

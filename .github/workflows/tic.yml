@@ -124,10 +124,6 @@ jobs:
           libgeos-dev libproj-dev libicu-dev libv8-dev libjq-dev libprotobuf-dev \
           protobuf-compiler
 
-      - name: "[Custom block] [Linux] Install R pkgs (unbreak tidyr)"
-        if: runner.os == 'Linux'
-        run: Rscript -e "remotes::install_github('r-lib/cpp11')"
-
       - name: "[Custom block] [macOS-devel][r-devel] Install system pkgs"
         if: matrix.config.os == 'macOS-latest'
         run: |
