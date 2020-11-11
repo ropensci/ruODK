@@ -1,31 +1,30 @@
 test_that("attachment_list works", {
-
   vcr::use_cassette("test_attachment_list0", {
-  sl <- submission_list(
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw()
-  )
+    sl <- submission_list(
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
 
-  al <- get_one_submission_attachment_list(
-    sl$instance_id[[1]],
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw()
-  )
+    al <- get_one_submission_attachment_list(
+      sl$instance_id[[1]],
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
 
-  all <- attachment_list(
-    sl$instance_id,
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw()
-  )
+    all <- attachment_list(
+      sl$instance_id,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
   })
 
   # attachment_list returns a tibble

@@ -8,7 +8,9 @@ invisible(vcr::vcr_configure(
     "pw" = get_test_pw()
   ),
   dir = "fixtures",
-  record = "all"
+  write_disk_path = "files",
+  record = "all",
+  log = TRUE
 ))
 vcr::check_cassette_names()
 

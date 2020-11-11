@@ -113,15 +113,15 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   )
 
   # Happy path: get one attachment should work
-    fn_local <- get_one_attachment(
-      pth,
-      fn,
-      src,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      verbose = TRUE
-    )
+  fn_local <- get_one_attachment(
+    pth,
+    fn,
+    src,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    verbose = TRUE
+  )
   testthat::expect_true(fs::file_exists(pth))
   first_dl_time <- fs::file_info(fn_local)$modification_time
   testthat::expect_equal(fn_local, as.character(pth))
@@ -162,7 +162,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     verbose = TRUE
   )
 
-  testthat::expect_equal(gg,as.character(pth))
+  testthat::expect_equal(gg, as.character(pth))
   testthat::expect_equal(first_dl_time, fs::file_info(pth)$modification_time)
 
   # Now make sure pth doesn't exist
@@ -177,7 +177,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     verbose = TRUE
   )
 
-  gg <-get_one_attachment(
+  gg <- get_one_attachment(
     pth2,
     NA,
     src,
