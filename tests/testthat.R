@@ -8,7 +8,6 @@ invisible(vcr::vcr_configure(
     "pw" = get_test_pw()
   ),
   dir = "fixtures",
-  match_requests_on = c('query', 'headers', 'uri', 'method'),
   record = "all"
 ))
 vcr::check_cassette_names()
