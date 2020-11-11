@@ -8,7 +8,7 @@ test_that("odata_submission_get skips download", {
     fs::file_delete()
 
   # Get submissions, do not download attachments
-  vcr::use_cassette("test_fid_odata_submission", {
+  vcr::use_cassette("test_odata_submission_get0", {
   fresh_raw <- odata_submission_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -73,7 +73,7 @@ test_that("odata_submission_get skip omits number of results", {
   skip_on_travis()
   skip_on_appveyor()
 
-  vcr::use_cassette("test_fid_odata_service", {
+  vcr::use_cassette("test_odata_submission_get1", {
   fq_svc <- odata_service_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -82,7 +82,7 @@ test_that("odata_submission_get skip omits number of results", {
     pw = get_test_pw()
   )})
 
-  vcr::use_cassette("test_fid_odata_submission_table2", {
+  vcr::use_cassette("test_odata_submission_get2", {
   fresh_parsed <- odata_submission_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -95,7 +95,7 @@ test_that("odata_submission_get skip omits number of results", {
     table = fq_svc$name[2] # brittle: depends on form used
   )})
 
-  vcr::use_cassette("test_fid_odata_submission_table_skip", {
+  vcr::use_cassette("test_odata_submission_get3", {
   skip_parsed <- odata_submission_get(
     skip = 1,
     pid = get_test_pid(),
@@ -114,7 +114,7 @@ test_that("odata_submission_get skip omits number of results", {
 })
 
 test_that("odata_submission_get top limits number of results", {
-  vcr::use_cassette("test_fid_odata_submission_top", {
+  vcr::use_cassette("test_odata_submission_get4", {
   top_parsed <- odata_submission_get(
     top = 1,
     pid = get_test_pid(),
@@ -135,7 +135,7 @@ test_that("odata_submission_get top limits number of results", {
 
 
 test_that("odata_submission_get count returns total number or rows", {
-  vcr::use_cassette("test_fid_odata_submission_count", {
+  vcr::use_cassette("test_odata_submission_get5", {
   x_raw <- odata_submission_get(
     count = TRUE,
     top = 1,

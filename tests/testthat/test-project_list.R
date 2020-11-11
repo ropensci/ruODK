@@ -1,6 +1,6 @@
 test_that("project_list works", {
   # TODO enable vcr for all tests once vcr works with httr basicauth
-  vcr::use_cassette("project_list", {
+  vcr::use_cassette("test_project_list0", {
     p <- project_list(
       url = get_test_url(),
       un = get_test_un(),

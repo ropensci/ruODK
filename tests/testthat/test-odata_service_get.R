@@ -1,7 +1,7 @@
 context("test-odata_service_get.R")
 
 test_that("odata_service_get works", {
-  vcr::use_cassette("test_fid_odata_service", {
+  vcr::use_cassette("test_odata_service_get0", {
   svc <- odata_service_get(
     get_test_pid(),
     get_test_fid(),

@@ -1,0 +1,160 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc/$metadata
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/xml
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/xml; charset=utf-8
+      date: Wed, 11 Nov 2020 06:05:40 GMT
+      etag: W/"1af1-RimHBtm/NxLxQJ85lvRi+fOzPCs"
+      odata-version: '4.0'
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+          <edmx:DataServices>
+            <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="org.opendatakit.submission">
+              <ComplexType Name="metadata">
+                <Property Name="submissionDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="submitterId" Type="Edm.String"/>
+                <Property Name="submitterName" Type="Edm.String"/>
+                <Property Name="attachmentsPresent" Type="Edm.Int64"/>
+                <Property Name="attachmentsExpected" Type="Edm.Int64"/>
+                <Property Name="status" Type="org.opendatakit.submission.Status"/>
+              </ComplexType>
+              <EnumType Name="Status">
+                <Member Name="NotDecrypted"/>
+                <Member Name="MissingEncryptedFormData"/>
+              </EnumType>
+            </Schema>
+            <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="org.opendatakit.user.Flora_Quadrat_04">
+              <EntityType Name="Submissions">
+                <Key><PropertyRef Name="__id"/></Key>
+                <Property Name="__id" Type="Edm.String"/>
+                <Property Name="__system" Type="org.opendatakit.submission.metadata"/>
+                <Property Name="meta" Type="org.opendatakit.user.Flora_Quadrat_04.meta"/>
+                <Property Name="encounter_start_datetime" Type="Edm.DateTimeOffset"/>
+                <Property Name="reporter" Type="Edm.String"/>
+                <Property Name="device_id" Type="Edm.String"/>
+                <Property Name="location" Type="org.opendatakit.user.Flora_Quadrat_04.location"/>
+                <Property Name="habitat" Type="org.opendatakit.user.Flora_Quadrat_04.habitat"/>
+                <NavigationProperty Name="vegetation_stratum" Type="Collection(org.opendatakit.user.Flora_Quadrat_04.Submissions.vegetation_stratum)"/>
+                <Property Name="perimeter" Type="org.opendatakit.user.Flora_Quadrat_04.perimeter"/>
+                <NavigationProperty Name="taxon_encounter" Type="Collection(org.opendatakit.user.Flora_Quadrat_04.Submissions.taxon_encounter)"/>
+                <Property Name="encounter_end_datetime" Type="Edm.DateTimeOffset"/>
+              </EntityType>
+              <EntityType Name="Submissions.vegetation_stratum">
+                <Key><PropertyRef Name="__id"/></Key>
+                <Property Name="__id" Type="Edm.String"/>
+                <Property Name="__Submissions-id" Type="Edm.String"/>
+                <Property Name="nvis_level3_broad_floristic_group" Type="Edm.String"/>
+                <Property Name="max_height_m" Type="Edm.Decimal"/>
+                <Property Name="foliage_cover" Type="Edm.String"/>
+                <Property Name="dominant_species_1" Type="Edm.String"/>
+                <Property Name="dominant_species_2" Type="Edm.String"/>
+                <Property Name="dominant_species_3" Type="Edm.String"/>
+                <Property Name="dominant_species_4" Type="Edm.String"/>
+              </EntityType>
+              <EntityType Name="Submissions.taxon_encounter">
+                <Key><PropertyRef Name="__id"/></Key>
+                <Property Name="__id" Type="Edm.String"/>
+                <Property Name="__Submissions-id" Type="Edm.String"/>
+                <Property Name="field_name" Type="Edm.String"/>
+                <Property Name="photo_in_situ" Type="Edm.String"/>
+                <Property Name="taxon_encounter_location" Type="Edm.GeographyPoint"/>
+                <Property Name="life_form" Type="Edm.String"/>
+                <Property Name="voucher_specimen_barcode" Type="Edm.String"/>
+                <Property Name="voucher_specimen_label" Type="Edm.String"/>
+              </EntityType>
+              <ComplexType Name="meta">
+                <Property Name="instanceID" Type="Edm.String"/>
+              </ComplexType>
+              <ComplexType Name="location">
+                <Property Name="area_name" Type="Edm.String"/>
+                <Property Name="quadrat_photo" Type="Edm.String"/>
+                <Property Name="corner1" Type="Edm.GeographyPoint"/>
+              </ComplexType>
+              <ComplexType Name="habitat">
+                <Property Name="morphological_type" Type="Edm.String"/>
+                <Property Name="morphological_type_photo" Type="Edm.String"/>
+              </ComplexType>
+              <ComplexType Name="perimeter">
+                <Property Name="corner2" Type="Edm.GeographyPoint"/>
+                <Property Name="corner3" Type="Edm.GeographyPoint"/>
+                <Property Name="corner4" Type="Edm.GeographyPoint"/>
+                <Property Name="mudmap_photo" Type="Edm.String"/>
+              </ComplexType>
+              <EntityContainer Name="Flora-Quadrat-04">
+                <EntitySet Name="Submissions" EntityType="org.opendatakit.user.Flora_Quadrat_04.Submissions">
+                  <Annotation Term="Org.OData.Capabilities.V1.ConformanceLevel" EnumMember="Org.OData.Capabilities.V1.ConformanceLevelType/Minimal"/>
+                  <Annotation Term="Org.OData.Capabilities.V1.BatchSupported" Bool="false"/>
+                  <Annotation Term="Org.OData.Capabilities.V1.CountRestrictions">
+                    <Record><PropertyValue Property="Countable" Bool="true"/></Record>
+                  </Annotation>
+                  <Annotation Term="Org.OData.Capabilities.V1.FilterFunctions">
+                    <Record>
+                      <PropertyValue Property="NonCountableProperties">
+                        <Collection>
+                          <String>eq</String>
+                        </Collection>
+                      </PropertyValue>
+                    </Record>
+                  </Annotation>
+                  <Annotation Term="Org.OData.Capabilities.V1.FilterFunctions">
+                    <Record>
+                      <PropertyValue Property="Filterable" Bool="true"/>
+                      <PropertyValue Property="RequiresFilter" Bool="false"/>
+                      <PropertyValue Property="NonFilterableProperties">
+                        <Collection>
+                          <PropertyPath>meta</PropertyPath>
+                          <PropertyPath>encounter_start_datetime</PropertyPath>
+                          <PropertyPath>reporter</PropertyPath>
+                          <PropertyPath>device_id</PropertyPath>
+                          <PropertyPath>location</PropertyPath>
+                          <PropertyPath>habitat</PropertyPath>
+                          <PropertyPath>vegetation_stratum</PropertyPath>
+                          <PropertyPath>perimeter</PropertyPath>
+                          <PropertyPath>taxon_encounter</PropertyPath>
+                          <PropertyPath>encounter_end_datetime</PropertyPath>
+                        </Collection>
+                      </PropertyValue>
+                    </Record>
+                  </Annotation>
+                  <Annotation Term="Org.OData.Capabilities.V1.SortRestrictions">
+                    <Record><PropertyValue Property="Sortable" Bool="false"/></Record>
+                  </Annotation>
+                  <Annotation Term="Org.OData.Capabilities.V1.ExpandRestrictions">
+                    <Record><PropertyValue Property="Expandable" Bool="false"/></Record>
+                  </Annotation>
+                </EntitySet>
+                <EntitySet Name="Submissions.vegetation_stratum" EntityType="org.opendatakit.user.Flora_Quadrat_04.Submissions.vegetation_stratum">
+                </EntitySet>
+                <EntitySet Name="Submissions.taxon_encounter" EntityType="org.opendatakit.user.Flora_Quadrat_04.Submissions.taxon_encounter">
+                </EntitySet>
+              </EntityContainer>
+            </Schema>
+          </edmx:DataServices>
+        </edmx:Edmx>
+  recorded_at: 2020-11-11 06:06:35 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

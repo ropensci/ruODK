@@ -1,14 +1,13 @@
 test_that("submission_detail works", {
-  vcr::use_cassette("test_pid_submission_list", {
+  vcr::use_cassette("test_submission_detail0", {
   sl <- submission_list(
     pid = get_test_pid(),
     fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
-  )})
+  )
 
-  vcr::use_cassette("test_pid_submission_detail", {
   sub <- submission_detail(
     sl$instance_id[[1]],
     pid = get_test_pid(),

@@ -1,5 +1,5 @@
 test_that("form_xml returns a nested list with parse defaults", {
-  vcr::use_cassette("test_fid_form_xml", {
+  vcr::use_cassette("test_fid_form_xml0", {
   fxml <- form_xml(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -11,7 +11,7 @@ test_that("form_xml returns a nested list with parse defaults", {
 })
 
 test_that("form_xml returns a nested list with parse=TRUE", {
-  vcr::use_cassette("test_fid_form_xml", {
+  vcr::use_cassette("test_fid_form_xml1", {
   fxml <- form_xml(
     parse = TRUE,
     pid = get_test_pid(),
@@ -24,7 +24,7 @@ test_that("form_xml returns a nested list with parse=TRUE", {
 })
 
 test_that("form_xml returns an xml_document with parse=FALSE", {
-  vcr::use_cassette("test_fid_form_xml", {
+  vcr::use_cassette("test_fid_form_xml2", {
   fxml <- form_xml(
     parse = FALSE,
     pid = get_test_pid(),

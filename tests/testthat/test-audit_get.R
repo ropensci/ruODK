@@ -1,5 +1,5 @@
 test_that("audit_get works", {
-  vcr::use_cassette("audit_get", {
+  vcr::use_cassette("test_audit_get0", {
   logs <- audit_get(
     url = get_test_url(),
     un = get_test_un(),

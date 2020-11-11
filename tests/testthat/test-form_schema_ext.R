@@ -1,5 +1,5 @@
 test_that("form_schema_ext v8 returns a tibble with defaults", {
-  vcr::use_cassette("test_pid_form_schema_ext", {
+  vcr::use_cassette("test_form_schema_ext0", {
   fsx <- form_schema_ext(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -16,7 +16,7 @@ test_that("form_schema_ext v8 returns a tibble with defaults", {
 })
 
 test_that("form_schema_ext v8 in a form with no languages", {
-  vcr::use_cassette("test_pid_form_schema_ext_I8N0", {
+  vcr::use_cassette("test_form_schema_ext1", {
   fsx <- form_schema_ext(
     pid = get_test_pid(),
     fid = Sys.getenv("ODKC_TEST_FID_I8N0", unset = "I8n_no_lang"),
@@ -31,7 +31,7 @@ test_that("form_schema_ext v8 in a form with no languages", {
 })
 
 test_that("form_schema_ext v8 in a form with label languages", {
-  vcr::use_cassette("test_pid_form_schema_ext_I8N1", {
+  vcr::use_cassette("test_form_schema_ext2", {
   fsx <- form_schema_ext(
     pid = get_test_pid(),
     fid = Sys.getenv("ODKC_TEST_FID_I8N1", unset = "I8n_label_lng"),
@@ -46,7 +46,7 @@ test_that("form_schema_ext v8 in a form with label languages", {
 })
 
 test_that("form_schema_ext v8 in a form with label and choices languages", {
-  vcr::use_cassette("test_pid_form_schema_ext_I8N2", {
+  vcr::use_cassette("test_form_schema_ext3", {
   fsx <- form_schema_ext(
     pid = get_test_pid(),
     fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),

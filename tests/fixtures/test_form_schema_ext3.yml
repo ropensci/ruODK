@@ -1,0 +1,171 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/I8n_label_choices/fields?flatten=FALSE&odata=FALSE
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/json
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8
+      date: Wed, 11 Nov 2020 06:05:32 GMT
+      etag: W/"2b6-7MpRREPy5M23KgOeg+DuWNXx0AE"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: '[{"path":"/some_text","name":"some_text","type":"string","binary":null},{"path":"/text_image_audio_video_test","name":"text_image_audio_video_test","type":"string","binary":null},{"path":"/a_integer","name":"a_integer","type":"int","binary":null},{"path":"/a_decimal","name":"a_decimal","type":"decimal","binary":null},{"path":"/calculate","name":"calculate","type":"string","binary":null},{"path":"/calculate_test_output","name":"calculate_test_output","type":"string","binary":null},{"path":"/test_yn","name":"test_yn","type":"string","binary":null},{"path":"/meta","name":"meta","type":"structure","binary":null},{"path":"/meta/instanceID","name":"instanceID","type":"string","binary":null}]'
+  recorded_at: 2020-11-11 06:06:27 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/I8n_label_choices.xml
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/xml
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/xml; charset=utf-8
+      date: Wed, 11 Nov 2020 06:05:32 GMT
+      etag: W/"1b5b-US6cYHvq/vqyCP3TQNx15lxs4Ds"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        <?xml version="1.0"?>
+        <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:odk="http://www.opendatakit.org/xforms" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <h:head>
+                <h:title>I8n label and choices</h:title>
+                <model odk:xforms-version="1.0.0">
+                    <itext>
+                        <translation lang="English (en)"><text id="/data/some_text:label">
+                                <value>This is a basic fill in the blank question.</value>
+                            </text><text id="/data/text_image_audio_video_test:label">
+                                <value>This question shows how to use translations and media types.</value>
+                            </text><text id="/data/a_integer:label">
+                                <value>Enter a integer:</value>
+                            </text><text id="/data/a_decimal:label">
+                                <value>Enter a decimal:</value>
+                            </text><text id="/data/calculate_test_output:label">
+                                <value>The sum of the integer and decimal: <output value=" /data/calculate " /></value>
+                            </text><text id="/data/test_yn:label">
+                                <value>What do you think?</value>
+                            </text><text id="/data/test_yn/0:label">
+                                <value>Yes</value>
+                            </text><text id="/data/test_yn/1:label">
+                                <value>No</value>
+                            </text><text id="/data/test_yn/99:label">
+                                <value>Maybe</value>
+                            </text></translation>
+                        <translation default="true()" lang="default"><text id="/data/some_text:label">
+                                <value>This is a basic fill in the blank question.</value>
+                            </text><text id="/data/text_image_audio_video_test:label">
+                                <value>This question shows how to use translations and media types.</value>
+                            </text><text id="/data/a_integer:label">
+                                <value>Enter a integer:</value>
+                            </text><text id="/data/a_decimal:label">
+                                <value>Enter a decimal:</value>
+                            </text><text id="/data/calculate_test_output:label">
+                                <value>The sum of the integer and decimal: <output value=" /data/calculate " /></value>
+                            </text><text id="/data/test_yn:label">
+                                <value>What do you think?</value>
+                            </text><text id="/data/test_yn/0:label">
+                                <value>-</value>
+                            </text><text id="/data/test_yn/1:label">
+                                <value>-</value>
+                            </text><text id="/data/test_yn/99:label">
+                                <value>-</value>
+                            </text></translation>
+                        <translation lang="French (fr)"><text id="/data/some_text:label">
+                                <value>Ceci est une réponse de base à la question vide.</value>
+                            </text><text id="/data/text_image_audio_video_test:label">
+                                <value>Cette question montre comment utiliser les traductions et les types de supports.</value>
+                            </text><text id="/data/a_integer:label">
+                                <value>Entrez un entier:</value>
+                            </text><text id="/data/a_decimal:label">
+                                <value>Entrez un entier:</value>
+                            </text><text id="/data/calculate_test_output:label">
+                                <value>La somme de l'entier et de la décimale: $ {calculate}</value>
+                            </text><text id="/data/test_yn:label">
+                                <value>Qu'est-ce que tu penses?</value>
+                            </text><text id="/data/test_yn/0:label">
+                                <value>Oui</value>
+                            </text><text id="/data/test_yn/1:label">
+                                <value>Non</value>
+                            </text><text id="/data/test_yn/99:label">
+                                <value>peut-être</value>
+                            </text></translation>
+                    </itext>
+                    <instance><data id="I8n_label_choices">
+                            <some_text />
+                            <text_image_audio_video_test />
+                            <a_integer>123</a_integer>
+                            <a_decimal />
+                            <calculate />
+                            <calculate_test_output />
+                            <test_yn />
+                            <meta>
+                            <instanceID />
+                            </meta>
+                        </data></instance>
+                    <bind nodeset="/data/some_text" type="string" />
+                    <bind nodeset="/data/text_image_audio_video_test" readonly="true()" type="string" />
+                    <bind nodeset="/data/a_integer" type="int" />
+                    <bind constraint=". &lt;=  /data/a_integer " jr:constraintMsg="You can set the toast that appears when a constraint is violated." nodeset="/data/a_decimal" type="decimal" />
+                    <bind calculate=" /data/a_integer + /data/a_decimal " nodeset="/data/calculate" type="string" />
+                    <bind nodeset="/data/calculate_test_output" readonly="true()" type="string" />
+                    <bind nodeset="/data/test_yn" type="string" />
+                    <bind jr:preload="uid" nodeset="/data/meta/instanceID" readonly="true()" type="string" />
+                </model>
+            </h:head>
+            <h:body><input ref="/data/some_text"><label ref="jr:itext('/data/some_text:label')" />
+                <hint>Hints provide additional information about a question that is displayed less prominently.</hint></input><input ref="/data/text_image_audio_video_test"><label ref="jr:itext('/data/text_image_audio_video_test:label')" />
+                <hint>In order to select a different translation press your phone's menu button and you should see a "Change Language" button. In order to add mediafiles put them in your phone's odk/forms/[formname]-media folder.</hint></input><input ref="/data/a_integer"><label ref="jr:itext('/data/a_integer:label')" /></input><input ref="/data/a_decimal"><label ref="jr:itext('/data/a_decimal:label')" />
+                <hint>This question has a constraint so that the decimal must be less that the integer.</hint></input><input ref="/data/calculate_test_output"><label ref="jr:itext('/data/calculate_test_output:label')" /></input>
+                <select1 ref="/data/test_yn"><label ref="jr:itext('/data/test_yn:label')" />
+                    <hint>This question has a constraint so that the decimal must be less that the integer.</hint>
+                    <item><label ref="jr:itext('/data/test_yn/0:label')" />
+                        <value>0</value>
+                    </item>
+                    <item><label ref="jr:itext('/data/test_yn/1:label')" />
+                        <value>1</value>
+                    </item>
+                    <item><label ref="jr:itext('/data/test_yn/99:label')" />
+                        <value>99</value>
+                    </item>
+                </select1>
+            </h:body>
+        </h:html>
+  recorded_at: 2020-11-11 06:06:27 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

@@ -1,5 +1,5 @@
 test_that("project_detail works", {
-  vcr::use_cassette("test_pid_project_detail", {
+  vcr::use_cassette("test_project_detail0", {
   p <- project_detail(
     get_test_pid(),
     url = get_test_url(),

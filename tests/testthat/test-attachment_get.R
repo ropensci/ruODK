@@ -1,11 +1,11 @@
-context("test-attachment_get.R")
-
 test_that("attachment_get works", {
+  # This test downloads files
+  skip_on_cran()
+
   t <- tempdir()
 
   fs::dir_ls(t) %>% fs::file_delete()
 
-  vcr::use_cassette("test_fid", {
   fresh_raw <- odata_submission_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -13,7 +13,7 @@ test_that("attachment_get works", {
     un = get_test_un(),
     pw = get_test_pw(),
     parse = FALSE
-  )})
+  )
 
   fresh_parsed <- fresh_raw %>%
     odata_submission_rectangle() %>%

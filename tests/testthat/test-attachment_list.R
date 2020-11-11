@@ -1,8 +1,6 @@
-context("test-attachment_list.R")
-
 test_that("attachment_list works", {
 
-  vcr::use_cassette("submission_list", {
+  vcr::use_cassette("test_attachment_list0", {
   sl <- submission_list(
     pid = get_test_pid(),
     fid = get_test_fid(),

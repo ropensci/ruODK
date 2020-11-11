@@ -1,0 +1,35 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/json
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8; odata.metadata=minimal
+      date: Wed, 11 Nov 2020 06:05:45 GMT
+      etag: W/"16d-WLGPb41H8z09a+jpiYUtvCEFcpA"
+      odata-version: '4.0'
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc/$metadata","value":[{"name":"Submissions","kind":"EntitySet","url":"Submissions"},{"name":"Submissions.vegetation_stratum","kind":"EntitySet","url":"Submissions.vegetation_stratum"},{"name":"Submissions.taxon_encounter","kind":"EntitySet","url":"Submissions.taxon_encounter"}]}'
+  recorded_at: 2020-11-11 06:06:40 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

@@ -1,0 +1,69 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04/submissions
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/json
+      X-Extended-Metadata: 'true'
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8
+      date: Wed, 11 Nov 2020 06:06:20 GMT
+      etag: W/"114-jMOoz9W4jx1FzSyJsY3oC1nGBVk"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: '[{"instanceId":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","submitter":{"id":53,"type":"field_key","displayName":"ruODK","createdAt":"2020-11-02T02:04:58.884Z","updatedAt":null},"deviceId":"android_id:5afb51f35ba0c572","createdAt":"2020-11-02T04:19:45.451Z","updatedAt":null}]'
+  recorded_at: 2020-11-11 06:07:16 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04/submissions/uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/json; extended
+      X-Extended-Metadata: 'true'
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8
+      date: Wed, 11 Nov 2020 06:06:21 GMT
+      etag: W/"112-W7e7OhnnQRD2b4ZjJcBAODcZE1w"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"instanceId":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","submitter":{"id":53,"type":"field_key","displayName":"ruODK","createdAt":"2020-11-02T02:04:58.884Z","updatedAt":null},"deviceId":"android_id:5afb51f35ba0c572","createdAt":"2020-11-02T04:19:45.451Z","updatedAt":null}'
+  recorded_at: 2020-11-11 06:07:16 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
