@@ -4,12 +4,12 @@ library(vcr)
 
 invisible(vcr::vcr_configure(
   filter_sensitive_data = list(
-    "un" = get_test_un(),
-    "pw" = get_test_pw()
+    "<<un>>" = get_test_un(),
+    "<<pw>>" = get_test_pw()
   ),
   dir = "fixtures",
   write_disk_path = "files",
-  record = "all",
+  record = "once",
   log = TRUE
 ))
 vcr::check_cassette_names()
