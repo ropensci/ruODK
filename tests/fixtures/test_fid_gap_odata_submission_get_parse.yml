@@ -1,0 +1,71 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04-gap.svc/Submissions?%24skip=&%24top=&%24count=false&%24wkt=false
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/json
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8
+      date: Wed, 11 Nov 2020 03:26:06 GMT
+      odata-version: '4.0'
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      vary: Accept-Encoding
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"value":[{"__id":"uuid:03f30cbb-98cc-4f57-95e7-a076053363ef","encounter_start_datetime":"2020-11-02T12:30:51.701+08:00","reporter":null,"device_id":"5afb51f35ba0c572","encounter_end_datetime":"2020-11-02T12:33:24.779+08:00","__system":{"submissionDate":"2020-11-02T04:36:09.877Z","submitterId":"53","submitterName":"ruODK","attachmentsPresent":0,"attachmentsExpected":0,"status":null},"meta":{"instanceID":"uuid:03f30cbb-98cc-4f57-95e7-a076053363ef"},"location":{"area_name":"Second
+        quadrat complete record","quadrat_photo":null,"corner1":{"type":"Point","coordinates":[115.8844465,-31.9957221,-21.19999885559082],"properties":{"accuracy":4.271}}},"habitat":{"morphological_type":"flat","morphological_type_photo":null},"vegetation_stratum@odata.navigationLink":"Submissions(''uuid:03f30cbb-98cc-4f57-95e7-a076053363ef'')/vegetation_stratum","perimeter":{"corner2":null,"corner3":null,"corner4":null,"mudmap_photo":null},"taxon_encounter@odata.navigationLink":"Submissions(''uuid:03f30cbb-98cc-4f57-95e7-a076053363ef'')/taxon_encounter"},{"__id":"uuid:62164717-c383-4ba6-929b-1adfe35de955","encounter_start_datetime":"2020-11-02T12:27:59.725+08:00","reporter":null,"device_id":"5afb51f35ba0c572","encounter_end_datetime":"2020-11-02T12:28:43.594+08:00","__system":{"submissionDate":"2020-11-02T04:36:09.361Z","submitterId":"53","submitterName":"ruODK","attachmentsPresent":0,"attachmentsExpected":0,"status":null},"meta":{"instanceID":"uuid:62164717-c383-4ba6-929b-1adfe35de955"},"location":{"area_name":"Test
+        quadrat with incomplete data","quadrat_photo":null,"corner1":{"type":"Point","coordinates":[115.8845424,-31.9956795,-21],"properties":{"accuracy":4.54}}},"habitat":{"morphological_type":null,"morphological_type_photo":null},"perimeter":{"corner2":null,"corner3":null,"corner4":null,"mudmap_photo":null}}],"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04-gap.svc/$metadata#Submissions"}'
+  recorded_at: 2020-11-11 03:27:02 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04-gap/fields?flatten=FALSE&odata=FALSE
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/json
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8
+      date: Wed, 11 Nov 2020 03:26:07 GMT
+      etag: W/"bdf-C11XpUCPNjdiK9lUpOOOsqklGbw"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      vary: Accept-Encoding
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: '[{"path":"/meta","name":"meta","type":"structure","binary":null},{"path":"/meta/instanceID","name":"instanceID","type":"string","binary":null},{"path":"/encounter_start_datetime","name":"encounter_start_datetime","type":"dateTime","binary":null},{"path":"/reporter","name":"reporter","type":"string","binary":null},{"path":"/device_id","name":"device_id","type":"string","binary":null},{"path":"/location","name":"location","type":"structure","binary":null},{"path":"/location/area_name","name":"area_name","type":"string","binary":null},{"path":"/location/quadrat_photo","name":"quadrat_photo","type":"binary","binary":true},{"path":"/location/corner1","name":"corner1","type":"geopoint","binary":null},{"path":"/habitat","name":"habitat","type":"structure","binary":null},{"path":"/habitat/morphological_type","name":"morphological_type","type":"select1","binary":null},{"path":"/habitat/morphological_type_photo","name":"morphological_type_photo","type":"binary","binary":true},{"path":"/vegetation_stratum","name":"vegetation_stratum","type":"repeat","binary":null},{"path":"/vegetation_stratum/nvis_level3_broad_floristic_group","name":"nvis_level3_broad_floristic_group","type":"select1","binary":null},{"path":"/vegetation_stratum/max_height_m","name":"max_height_m","type":"decimal","binary":null},{"path":"/vegetation_stratum/foliage_cover","name":"foliage_cover","type":"select1","binary":null},{"path":"/vegetation_stratum/dominant_species_1","name":"dominant_species_1","type":"string","binary":null},{"path":"/vegetation_stratum/dominant_species_2","name":"dominant_species_2","type":"string","binary":null},{"path":"/vegetation_stratum/dominant_species_3","name":"dominant_species_3","type":"string","binary":null},{"path":"/vegetation_stratum/dominant_species_4","name":"dominant_species_4","type":"string","binary":null},{"path":"/perimeter","name":"perimeter","type":"structure","binary":null},{"path":"/perimeter/corner2","name":"corner2","type":"geopoint","binary":null},{"path":"/perimeter/corner3","name":"corner3","type":"geopoint","binary":null},{"path":"/perimeter/corner4","name":"corner4","type":"geopoint","binary":null},{"path":"/perimeter/mudmap_photo","name":"mudmap_photo","type":"binary","binary":true},{"path":"/taxon_encounter","name":"taxon_encounter","type":"repeat","binary":null},{"path":"/taxon_encounter/field_name","name":"field_name","type":"string","binary":null},{"path":"/taxon_encounter/photo_in_situ","name":"photo_in_situ","type":"binary","binary":true},{"path":"/taxon_encounter/taxon_encounter_location","name":"taxon_encounter_location","type":"geopoint","binary":null},{"path":"/taxon_encounter/life_form","name":"life_form","type":"select1","binary":null},{"path":"/taxon_encounter/voucher_specimen_barcode","name":"voucher_specimen_barcode","type":"barcode","binary":null},{"path":"/taxon_encounter/voucher_specimen_label","name":"voucher_specimen_label","type":"string","binary":null},{"path":"/encounter_end_datetime","name":"encounter_end_datetime","type":"dateTime","binary":null}]'
+  recorded_at: 2020-11-11 03:27:02 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0

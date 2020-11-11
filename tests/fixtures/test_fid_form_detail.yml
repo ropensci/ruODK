@@ -1,0 +1,37 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/xml
+      X-Extended-Metadata: 'true'
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8
+      date: Wed, 11 Nov 2020 03:25:45 GMT
+      etag: W/"304-tdlvksuGisSzCVqo/lxkAELyA1Y"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"version":"","hash":"434ff9e1e33fc8bb35148c0cc6979708","sha":"206cf55b28adcd82db91bc5c11012524654c5bd1","sha256":"bb3b86a93ab3f6f5a16a6daa693c19a0c04f3deb68e50cf1bacd7c37efd9024a","keyId":null,"draftToken":null,"enketoId":"0qMx3193aZ6fjofIspxVfTbFqW1sdXp","publishedAt":"2020-11-02T02:56:25.092Z","projectId":2,"xmlFormId":"Flora-Quadrat-04","state":"open","name":"Flora
+        Quadrat 0.4","enketoOnceId":"9a79d82d85851d2cb940bfcf535c1d301b5a928fbc5d4c1d472b5862f69d7a6d","createdAt":"2020-11-02T02:56:21.085Z","updatedAt":"2020-11-02T03:54:42.522Z","submissions":1,"lastSubmission":"2020-11-02T04:19:45.451Z","excelContentType":null,"createdBy":{"id":5,"type":"user","displayName":"Florian
+        Mayer","createdAt":"2020-10-19T07:59:34.890Z","updatedAt":"2020-10-20T02:04:34.832Z"}}'
+  recorded_at: 2020-11-11 03:26:40 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.0
