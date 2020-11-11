@@ -1,4 +1,6 @@
 test_that("submission_export works", {
+  # This test downloads files
+  skip_on_cran()
 
   # A fresh litterbox
   t <- tempdir()

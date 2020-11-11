@@ -1,4 +1,5 @@
 test_that("audit_get works", {
+  vcr::use_cassette("audit_get", {
   logs <- audit_get(
     url = get_test_url(),
     un = get_test_un(),
@@ -24,7 +25,7 @@ test_that("audit_get works", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
-  )
+  )})
 
   # submission_list returns a tibble
   testthat::expect_equal(class(logs), c("tbl_df", "tbl", "data.frame"))

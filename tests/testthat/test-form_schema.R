@@ -1,4 +1,5 @@
 test_that("form_schema v8 returns a tibble and ignores flatten and parse", {
+  vcr::use_cassette("test_fid_form_schema", {
   fs0 <- form_schema(
     flatten = FALSE,
     parse = FALSE,
@@ -8,11 +9,12 @@ test_that("form_schema v8 returns a tibble and ignores flatten and parse", {
     un = get_test_un(),
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version()
-  )
+  )})
   testthat::expect_true(tibble::is_tibble(fs0))
 })
 
 test_that("form_schema works with unpublished draft forms", {
+  vcr::use_cassette("test_fid_form_schema_draft", {
   testthat::expect_message(
     form_schema(
       pid = get_test_pid(),
@@ -23,8 +25,9 @@ test_that("form_schema works with unpublished draft forms", {
       odkc_version = get_test_odkc_version(),
       verbose = TRUE
     )
-  )
+  )})
 
+  vcr::use_cassette("test_fid_form_schema_draft", {
   fs1 <- form_schema(
     flatten = FALSE,
     parse = FALSE,
@@ -35,7 +38,7 @@ test_that("form_schema works with unpublished draft forms", {
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version(),
     verbose = TRUE
-  )
+  )})
   testthat::expect_true(tibble::is_tibble(fs1))
   testthat::expect_true(nrow(fs1) > 0)
 })

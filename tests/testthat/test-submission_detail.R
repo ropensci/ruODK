@@ -1,12 +1,14 @@
 test_that("submission_detail works", {
+  vcr::use_cassette("test_pid_submission_list", {
   sl <- submission_list(
     pid = get_test_pid(),
     fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
-  )
+  )})
 
+  vcr::use_cassette("test_pid_submission_detail", {
   sub <- submission_detail(
     sl$instance_id[[1]],
     pid = get_test_pid(),
@@ -14,7 +16,7 @@ test_that("submission_detail works", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
-  )
+  )})
 
   # submission_detail returns a tibble
   testthat::expect_equal(class(sub), c("tbl_df", "tbl", "data.frame"))

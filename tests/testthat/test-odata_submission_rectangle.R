@@ -1,6 +1,7 @@
 context("test-odata_submission_rectangle.R")
 
 test_that("odata_submission_rectangle works", {
+  data("fq_raw")
   data_parsed <- odata_submission_rectangle(fq_raw, verbose = TRUE)
 
   # Field "device_id" is known part of fq_raw
@@ -92,6 +93,7 @@ test_that("odata_submission_rectangle parses WKT as text", {
 })
 
 test_that("odata_submission_rectangle works on non-spatial forms", {
+  vcr::use_cassette("test_fid_I8N2_form_schema", {
   fs <- form_schema(
     pid = get_test_pid(),
     fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
@@ -99,7 +101,8 @@ test_that("odata_submission_rectangle works on non-spatial forms", {
     un = get_test_un(),
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version()
-  )
+  )})
+  vcr::use_cassette("test_fid_I8N2_form_schema_noparse", {
   sub_raw <- odata_submission_get(
     pid = get_test_pid(),
     fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
@@ -108,7 +111,7 @@ test_that("odata_submission_rectangle works on non-spatial forms", {
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version(),
     parse = FALSE
-  )
+  )})
   sub <- sub_raw %>%
     odata_submission_rectangle(form_schema = fs, verbose = TRUE)
 

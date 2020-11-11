@@ -5,6 +5,7 @@ test_that("attachment_get works", {
 
   fs::dir_ls(t) %>% fs::file_delete()
 
+  vcr::use_cassette("test_fid", {
   fresh_raw <- odata_submission_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -12,7 +13,7 @@ test_that("attachment_get works", {
     un = get_test_un(),
     pw = get_test_pw(),
     parse = FALSE
-  )
+  )})
 
   fresh_parsed <- fresh_raw %>%
     odata_submission_rectangle() %>%
@@ -87,6 +88,10 @@ test_that("attachment_url works", {
 })
 
 test_that("get_one_attachment handles repeat download and NA filenames", {
+  # This test checks behaviour upon multiple downloads of the same file.
+  # Uncached, real-life behaviour is preferred here.
+  skip_on_cran()
+
   t <- tempdir()
   testthat::expect_true(fs::dir_exists(t))
   fs::dir_ls(t) %>% fs::file_delete()
@@ -108,15 +113,15 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   )
 
   # Happy path: get one attachment should work
-  fn_local <- get_one_attachment(
-    pth,
-    fn,
-    src,
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    verbose = TRUE
-  )
+    fn_local <- get_one_attachment(
+      pth,
+      fn,
+      src,
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      verbose = TRUE
+    )
   testthat::expect_true(fs::file_exists(pth))
   first_dl_time <- fs::file_info(fn_local)$modification_time
   testthat::expect_equal(fn_local, as.character(pth))
@@ -146,18 +151,18 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     pw = get_test_pw(),
     verbose = TRUE
   )
-  testthat::expect_equal(
-    get_one_attachment(
-      pth,
-      NA,
-      src,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      verbose = TRUE
-    ),
-    as.character(pth)
+
+  gg <- get_one_attachment(
+    pth,
+    NA,
+    src,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    verbose = TRUE
   )
+
+  testthat::expect_equal(gg,as.character(pth))
   testthat::expect_equal(first_dl_time, fs::file_info(pth)$modification_time)
 
   # Now make sure pth doesn't exist
@@ -171,17 +176,17 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     pw = get_test_pw(),
     verbose = TRUE
   )
-  testthat::expect_true(is.na(
-    get_one_attachment(
-      pth2,
-      NA,
-      src,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      verbose = TRUE
-    )
-  ))
+
+  gg <-get_one_attachment(
+    pth2,
+    NA,
+    src,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    verbose = TRUE
+  )
+  testthat::expect_true(is.na(gg))
 })
 
 # usethis::edit_file("R/attachment_get.R") # nolint

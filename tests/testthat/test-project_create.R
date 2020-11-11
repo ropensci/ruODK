@@ -22,9 +22,9 @@ test_that("project_create works", {
   testthat::expect_warning(
     project_create(
       "Test Project",
-      url = Sys.getenv("ODKC_TEST_URL"),
-      un = Sys.getenv("ODKC_TEST_UN"),
-      pw = Sys.getenv("ODKC_TEST_PW")
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
     ), "Not implemented."
   )
 })

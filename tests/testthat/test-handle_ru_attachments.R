@@ -1,4 +1,7 @@
 test_that("handle_ru_attachments downloads files", {
+  # This test downloads files
+  skip_on_cran()
+
   data("fq_raw")
   data("fq_form_schema")
 

@@ -1,10 +1,11 @@
 test_that("project_detail works", {
+  vcr::use_cassette("test_pid_project_detail", {
   p <- project_detail(
     get_test_pid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw()
-  )
+  )})
   testthat::expect_true(nrow(p) == 1)
   testthat::expect_true("name" %in% names(p))
 

@@ -16,6 +16,7 @@ test_that("predict_ruodk_name works", {
 })
 
 test_that("form_schema works with ODK Central v0.8", {
+  vcr::use_cassette("test_fid_form_schema", {
   fs <- form_schema(
     flatten = FALSE,
     parse = FALSE,
@@ -27,7 +28,7 @@ test_that("form_schema works with ODK Central v0.8", {
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version(),
     verbose = TRUE
-  )
+  )})
 
   testthat::expect_true(tibble::is_tibble(fs))
   testthat::expect_equal(
