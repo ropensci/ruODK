@@ -10,7 +10,7 @@ invisible(vcr::vcr_configure(
   dir = "fixtures",
   write_disk_path = "files",
   record = "once",
-  log = TRUE
+  log = FALSE
 ))
 vcr::check_cassette_names()
 
