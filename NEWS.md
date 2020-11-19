@@ -5,6 +5,14 @@
 ## Data
 ## Maintenance
 
+# `ruODK` 0.9.4
+## Major fixes
+* `form_schema_ext` performance enhancement (#106, thanks @mtyszler).
+## Maintenance
+* Tests use vcr to cache server response (#104).
+  Delete the local cache `tests/fixtures` to re-generate the vcr cache, or 
+  enjoy much faster running tests using cached server response.
+
 # `ruODK` 0.9.3
 This is a point release to create a new RStudio Server image.
 ## Minor fixes
