@@ -78,7 +78,8 @@ test_that("form_schema_ext v8 in a form with no languages and choice filter", {
       # pw = get_test_pw(),
       # odkc_version = get_test_odkc_version()
     )
-    question_with_choice_list <- fsx %>% subset(name == "choice_filter_question_2") 
+    question_with_choice_list <- fsx %>% subset(
+      name == "choice_filter_question_2")
   })
   testthat::expect_true(tibble::is_tibble(fsx))
   testthat::expect_true("label" %in% names(fsx))
@@ -86,7 +87,8 @@ test_that("form_schema_ext v8 in a form with no languages and choice filter", {
   testthat::expect_false(is.na(question_with_choice_list$choices))
 })
 
-test_that("form_schema_ext v8 in a form with label and choices languages and choice filter", {
+test_that(
+  "form_schema_ext v8 in a form with label and choices languages and choice filter", {
   vcr::use_cassette("test_form_schema_ext3", {
     fsx <- form_schema_ext(
       # pid = get_test_pid(),
@@ -96,7 +98,7 @@ test_that("form_schema_ext v8 in a form with label and choices languages and cho
       # pw = get_test_pw(),
       # odkc_version = get_test_odkc_version()
     )
-    question_with_choice_list <- fsx %>% subset(name == "choice_filter_question_2") 
+    question_with_choice_list <- fsx %>% subset(name == "choice_filter_question_2")
   })
   testthat::expect_true(tibble::is_tibble(fsx))
   testthat::expect_true("label" %in% names(fsx))
