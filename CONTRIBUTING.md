@@ -37,15 +37,47 @@ For more general info about contributing to `ruODK`, see the
 [Resources](#resources) at the end of this document.
 
 ### Prerequisites
-To test the package and build the vignettes, you will need valid credentials for
-the test server, currently the ODK Central Sandbox.
-Create an [accont request issue](https://github.com/ropensci/ruODK/issues/new/choose)
-to request access to those two ODK Central instances.
+To test the package, you will need valid credentials for the ODK Central instance 
+used as a test server.
+Create an [accont request issue](https://github.com/ropensci/ruODK/issues/new/choose).
 
 Before you do a pull request, you should always file an issue and make sure
-the maintainers agree that it’s a problem, and is happy with
-your basic proposal for fixing it. If you’ve found a bug, first create a minimal
+the maintainers agree that it is a problem, and is happy with your basic proposal 
+for fixing it. 
+If you have found a bug, follow the issue template to create a minimal
 [reprex](https://www.tidyverse.org/help/#reprex).
+
+### Checklists
+Some changes have intricate internal and external dependencies, which are easy
+to miss and break. These checklists aim to avoid these pitfalls.
+
+Test and update reverse dependencies (wastdr, urODK, etlTurtleNesting, 
+turtleviewer etc.).
+
+#### Adding a dependency
+* Update DESCRIPTION
+* Update GH Actions install workflows - do R package deps have system deps? Can GHA install them in all environments?
+* Update Dockerfile
+* Update urODK binder install.R
+* Update installation instructions
+
+#### Renaming a vignette
+* Search-replace all links to the vignette throughout 
+  * ruODK, 
+  * urODK, 
+  * ODK Central "OData" modal
+  * ODK Central docs
+
+#### Adding or updating a test form
+* Update tests
+* Update examples
+* Update packaged data if test form submissions are included
+* Add new cassette to vcr cache for each test using the test form
+
+#### Adding or updating package data
+* Update tests using the package data
+* Update examples
+* Update README if showing package data
 
 ### PR process
 
@@ -57,15 +89,13 @@ then clone it locally. We recommend that you create a branch for each PR.
 
 #### Check
 
-Before changing anything, make sure the package still passes `R CMD check`
-locally for you. When in doubt, compare your `R CMD check` results with current
-results for [`ruODK` on Travis](https://travis-ci.org/ropensci/ruODK) (checks on Linux and/or 
-MacOS) and, if applicable, AppVeyor (checks on Windows). You'll do this again
-before you finalize your pull request, but this baseline will make it easier to
-pinpoint any problems introduced by your changes.
+Before changing anything, make sure the package still passes the below listed
+flavours of `R CMD check` locally for you. 
 
 ```r
-devtools::check()
+goodpractice::goodpractice(quiet = FALSE, )
+devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
+chk <- rcmdcheck::rcmdcheck(args = c("--as-cran"))
 ```
 
 #### Style
@@ -81,6 +111,11 @@ better to file an issue or a separate PR to fix that first.
 
 ```r
 styler::style_pkg()
+lintr:::addin_lint_package()
+devtools::document(roclets = c("rd", "collate", "namespace"))
+spelling::spell_check_package()
+spelling::spell_check_files("README.Rmd", lang = "en_AU")
+spelling::update_wordlist()
 ```
 
 #### Document
@@ -97,8 +132,14 @@ roxygen2 being used.
 
 ```r
 spelling::spell_check_package()
+spelling::spell_check_files("README.Rmd", lang = "en_AU")
 spelling::update_wordlist()
-devtools::document(roclets = c("rd", "collate", "namespace"))
+codemetar::write_codemeta("ruODK")
+if (fs::file_info("README.md")$modification_time <
+  fs::file_info("README.Rmd")$modification_time) {
+  rmarkdown::render("README.Rmd", encoding = "UTF-8", clean = TRUE)
+  if (fs::file_exists("README.html")) fs::file_delete("README.html")
+}
 ```
 
 #### Test
@@ -233,3 +274,10 @@ abide by its terms.
 The steps to prepare a new `ruODK` release are in `data-raw/make_release.R`.
 It is not necessary to run them as a contributor, but immensely convenient for
 the maintainer to have them there in one place.
+
+## Package maintenance
+The code steps run by the package maintainer to prepare a release live at
+`data-raw/make_release.R`. Being an R file, rather than a Markdown file like
+this document, makes it easier to execute individual lines.
+
+Pushing the Docker image requires privileged access to the Docker repository.
