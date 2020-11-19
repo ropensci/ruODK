@@ -67,4 +67,46 @@ test_that("form_schema_ext v8 in a form with label and choices languages", {
   testthat::expect_true("choices_english_(en)" %in% names(fsx))
   testthat::expect_true("choices_french_(fr)" %in% names(fsx))
 })
+
+test_that("form_schema_ext v8 in a form with no languages and choice filter", {
+  vcr::use_cassette("test_form_schema_ext4", {
+    fsx <- form_schema_ext(
+      # pid = get_test_pid(),
+      # fid = Sys.getenv("CHANGETHIS", unset = "CHANGETHIS"),
+      # url = get_test_url(),
+      # un = get_test_un(),
+      # pw = get_test_pw(),
+      # odkc_version = get_test_odkc_version()
+    )
+    question_with_choice_list <- fsx %>% subset(name == "choice_filter_question_2") 
+  })
+  testthat::expect_true(tibble::is_tibble(fsx))
+  testthat::expect_true("label" %in% names(fsx))
+  testthat::expect_true("choices" %in% names(fsx))
+  testthat::expect_false(is.na(question_with_choice_list$choices))
+})
+
+test_that("form_schema_ext v8 in a form with label and choices languages and choice filter", {
+  vcr::use_cassette("test_form_schema_ext3", {
+    fsx <- form_schema_ext(
+      # pid = get_test_pid(),
+      # fid = Sys.getenv("CHANGETHIS", unset = "CHANGETHIS"),
+      # url = get_test_url(),
+      # un = get_test_un(),
+      # pw = get_test_pw(),
+      # odkc_version = get_test_odkc_version()
+    )
+    question_with_choice_list <- fsx %>% subset(name == "choice_filter_question_2") 
+  })
+  testthat::expect_true(tibble::is_tibble(fsx))
+  testthat::expect_true("label" %in% names(fsx))
+  testthat::expect_true("choices" %in% names(fsx))
+  testthat::expect_true("label_english_(en)" %in% names(fsx))
+  testthat::expect_true("label_french_(fr)" %in% names(fsx))
+  testthat::expect_true("choices_english_(en)" %in% names(fsx))
+  testthat::expect_true("choices_french_(fr)" %in% names(fsx))
+  testthat::expect_false(is.na(question_with_choice_list$`choices_english_(en)`))
+})
+
+
 # usethis::edit_file("R/form_schema_ext.R") # nolint
