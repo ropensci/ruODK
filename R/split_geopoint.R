@@ -34,7 +34,7 @@
 #' )
 #'
 #' # With package data
-#' data("gep_fs")
+#' data("geo_fs")
 #' data("geo_wkt_raw")
 #' data("geo_gj_raw")
 #'

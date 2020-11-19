@@ -42,7 +42,7 @@ enabled formats.
 }
 \examples{
 library(magrittr)
-data("gep_fs")
+data("geo_fs")
 data("geo_gj_raw")
 data("geo_wkt_raw")
 
@@ -61,7 +61,7 @@ geo_wkt_parsed <- geo_wkt_raw \%>\%
 dplyr::glimpse(geo_wkt_parsed)
 }
 \seealso{
-Other utilities: 
+Other utilities:
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
 \code{\link{drop_null_coords}()},
