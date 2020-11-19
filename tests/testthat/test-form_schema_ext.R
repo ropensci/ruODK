@@ -89,7 +89,7 @@ test_that("form_schema_ext v8 in a form with no languages and choice filter", {
 
 test_that(
   "form_schema_ext v8 in a form with label and choices languages and choice filter", {
-  vcr::use_cassette("test_form_schema_ext3", {
+  vcr::use_cassette("test_form_schema_ext5", {
     fsx <- form_schema_ext(
       # pid = get_test_pid(),
       # fid = Sys.getenv("CHANGETHIS", unset = "CHANGETHIS"),
