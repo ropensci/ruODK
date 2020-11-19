@@ -71,12 +71,12 @@ test_that("form_schema_ext v8 in a form with label and choices languages", {
 test_that("form_schema_ext v8 in a form with no languages and choice filter", {
   vcr::use_cassette("test_form_schema_ext4", {
     fsx <- form_schema_ext(
-      # pid = get_test_pid(),
-      # fid = Sys.getenv("CHANGETHIS", unset = "CHANGETHIS"),
-      # url = get_test_url(),
-      # un = get_test_un(),
-      # pw = get_test_pw(),
-      # odkc_version = get_test_odkc_version()
+      pid = get_test_pid(),
+      fid = Sys.getenv("CHANGETHIS", unset = "CHANGETHIS"),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version()
     )
     question_with_choice_list <- fsx %>% subset(
       name == "choice_filter_question_2"
@@ -96,12 +96,12 @@ test_that(
   {
     vcr::use_cassette("test_form_schema_ext5", {
       fsx <- form_schema_ext(
-        # pid = get_test_pid(),
-        # fid = Sys.getenv("CHANGETHIS", unset = "CHANGETHIS"),
-        # url = get_test_url(),
-        # un = get_test_un(),
-        # pw = get_test_pw(),
-        # odkc_version = get_test_odkc_version()
+        pid = get_test_pid(),
+        fid = Sys.getenv("CHANGETHIS", unset = "CHANGETHIS"),
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = get_test_pw(),
+        odkc_version = get_test_odkc_version()
       )
       question_with_choice_list <- fsx %>% subset(
         name == "choice_filter_question_2"
