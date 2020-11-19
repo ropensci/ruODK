@@ -397,6 +397,171 @@ form_schema_ext <- function(flatten = FALSE,
           )))
         }
       }
+      
+      ### PART 1.2: parse complex choice labels, 
+      # i.e. in the presence of choice filters
+      
+      ## check existence of  choice itemset:
+      choice_itemset <- xml2::xml_find_all(
+        xml2::xml_parent(this_rawlabel), "./itemset"
+      )
+      
+      
+      if (length(choice_itemset) > 0) {
+        
+        # identify value node
+        choicevalue_node <- xml2::xml_attr(
+          xml2::xml_find_first(choice_itemset, "./value"),
+          "ref"
+        )
+        
+        # identify label node
+        choicelabel_node <- xml2::xml_attr(
+          xml2::xml_find_first(choice_itemset, "./label"),
+          "ref"
+        )
+        
+        # check if labels have translations
+        has_translation_choice <- grepl("jr:itext",choicelabel_node)
+        
+        if(has_translation_choice) {
+          #update choicelabel_node
+          choicelabel_node <- sub(
+            ")",
+            "",
+            sub(
+              "jr:itext\\(",
+              "",
+              choicelabel_node
+            )
+          )
+        }
+        
+        # extract content from the itemset:
+        choice_nodeset<-xml2::xml_attr(choice_itemset, "nodeset")
+        choice_nodeset_id <-substr(choice_nodeset,
+                                   regexpr("\\(", choice_nodeset)[1]+1,
+                                   regexpr(")", choice_nodeset)[1]-1)
+        choice_itemset_content<-xml2::xml_find_all(frm_xml,
+                                                   paste0(".//instance[@id=",
+                                                          choice_nodeset_id,
+                                                          "]//item"))
+        
+        
+        # check if 'choices' column already exist
+        if (!("choices" %in% colnames(extension))) {
+          
+          # if not, create new column
+          extension <- cbind(extension, data.frame(
+            choices = rep(NA, nrow(extension))
+          ))
+        }
+        
+        # initialize lists
+        choice_values <- list()
+        choice_labels <- list()
+        
+        # iterate through choice list:
+        for (jj in seq_along(choice_itemset_content)) {
+          
+          ## read choice item
+          this_choiceitem <- choice_itemset_content[jj]
+          
+          # value
+          this_choicevalue <- xml2::xml_text(
+            xml2::xml_find_first(this_choiceitem, paste0("./",choicevalue_node))
+          )
+          choice_values[jj] <- this_choicevalue
+          
+          if (has_translation_choice) {
+            id_choice <- xml2::xml_text(
+              xml2::xml_find_first(this_choiceitem, paste0("./",choicelabel_node))
+            )
+            
+            choice_translations <- all_translations[
+              all_translations_ids == id_choice
+              ]
+            
+            
+            # iterate through choice translations
+            for (kk in seq_along(choice_translations)) {
+              
+              # read translation
+              this_choicetranslation <- choice_translations[kk]
+              
+              # first check this is a regular text labels.
+              # Questions in ODK can have video, image and audio "labels",
+              # which will be skipped.
+              # This is identified by the presence of the 'form' attribute:
+              is_regular_choicelabel <- !xml2::xml_has_attr(
+                xml2::xml_find_first(this_choicetranslation, "./value"), "form"
+              )
+              
+              if (is_regular_choicelabel) {
+                # read the parent node to identify language:
+                choice_translation_parent <- xml2::xml_parent(
+                  this_choicetranslation
+                )
+                this_choicelang <- gsub(" ", "_", tolower(xml2::xml_attr(
+                  choice_translation_parent, "lang"
+                )))
+                
+                # decide if 'default' language or specific language
+                if (this_choicelang == "default") {
+                  # if 'default' language, save under 'choice':
+                  choice_labels[["base"]][jj] <- xml2::xml_text(
+                    xml2::xml_find_first(this_choicetranslation, "./value")
+                  )
+                }
+                else {
+                  # check if language already exists in the dataframe
+                  if (!(paste0("choices_", this_choicelang) %in%
+                        colnames(extension))) {
+                    
+                    # if not, create new column
+                    extension <- cbind(extension, data.frame(
+                      new_choicelang = rep(NA, nrow(extension))
+                    ))
+                    colnames(extension)[ncol(extension)] <- paste0(
+                      "choices_", this_choicelang
+                    )
+                  }
+                  
+                  # add the first value content of the translation
+                  choice_labels[[paste0(
+                    "choices_",
+                    this_choicelang
+                  )]][jj] <- xml2::xml_text(
+                    xml2::xml_find_first(
+                      this_choicetranslation, "./value"
+                    )
+                  )
+                }
+              }
+            }
+          }
+          else {
+            #choice_labels[["base"]][jj] <- xml2::xml_text(this_rawchoicelabel)
+          }
+        }
+        
+        # add to the extended table
+        for (this_choicelang in names(choice_labels)) {
+          these_choicelabels <- choice_labels[[this_choicelang]]
+          
+          if (this_choicelang == "base") {
+            this_choicelang_colname <- "choices"
+          }
+          else {
+            this_choicelang_colname <- this_choicelang
+          }
+          
+          extension[nrow(extension), this_choicelang_colname] <- list(list(list(
+            values = unlist(choice_values),
+            labels = unlist(these_choicelabels)
+          )))
+        }
+      }
     }
   }
 
