@@ -541,7 +541,12 @@ form_schema_ext <- function(flatten = FALSE,
             }
           }
           else {
-            #choice_labels[["base"]][jj] <- xml2::xml_text(this_rawchoicelabel)
+            choice_labels[["base"]][jj] <- xml2::xml_text(
+              xml2::xml_find_first(this_choiceitem, 
+                                   paste0("./",choicelabel_node)
+                                   )
+            )
+
           }
         }
         
