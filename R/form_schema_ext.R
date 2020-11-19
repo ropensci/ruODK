@@ -66,10 +66,14 @@
 #'   \item \code{choices} A list of lists containing at least \code{values} and,
 #'     if available, \code{labels} of the choices as given in the form schema.
 #'     If specific languages are available, this column will return the
-#'     \code{default} language or it will be empty if this is not specified.
+#'     \code{default} language or it will be empty if this is not specified. 
+#'     Please notice that whenever choice filters are applied, this will return
+#'     the unfiltered choice list.
 #'   \item \code{choices_lang} A list of lists containing at least
 #'     \code{values} and, if available, \code{labels} of the choices in language
 #'     \emph{_lang} as given in the form schema.
+#'     Please notice that whenever choice filters are applied, this will return
+#'     the unfiltered choice list.
 #'
 #'   }
 # nolint start
