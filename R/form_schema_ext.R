@@ -150,6 +150,7 @@ form_schema_ext <- function(flatten = FALSE,
 
   ### parse translations
   all_translations <- xml2::xml_find_all(frm_xml, "//text")
+  all_translations_ids <-xml2::xml_attr(all_translations, "id")
 
   # initialize dataframe
   extension <- data.frame(
@@ -196,7 +197,7 @@ form_schema_ext <- function(flatten = FALSE,
           sub("jr:itext\\('", "", xml2::xml_attr(this_rawlabel, "ref"))
         )
         translations <- all_translations[
-          xml2::xml_attr(all_translations, "id") == id
+          all_translations_ids == id
         ]
 
         # iterate through translations
@@ -312,9 +313,9 @@ form_schema_ext <- function(flatten = FALSE,
               )
             )
 
-            choice_translations <- all_translations[xml2::xml_attr(
-              all_translations, "id"
-            ) == id_choice]
+            choice_translations <- all_translations[
+              all_translations_ids == id_choice
+            ]
 
 
             # iterate through choice translations
