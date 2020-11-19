@@ -153,6 +153,11 @@ format, plus columns of their first point's coordinate components as
 provided by \code{\link{split_geotrace}} and \code{\link{split_geoshape}},
 respectively.
 
+Entirely unpopulated form fields, as well as notes and form groups, will be
+excluded from the resulting tibble.
+Submitting at least one complete form instance will prevent the accidental
+exclusion of an otherwise mostly empty form field.
+
 The only remaining manual step is to optionally join any sub-tables to the
 master table.
 
