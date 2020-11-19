@@ -1,8 +1,10 @@
 test_that("project_list works", {
   vcr::use_cassette("test_project_list0", {
-    p <- project_list(url = get_test_url(),
-                      un = get_test_un(),
-                      pw = get_test_pw())
+    p <- project_list(
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
   })
   testthat::expect_true(nrow(p) > 0)
 
@@ -28,9 +30,11 @@ test_that("project_list works", {
 
 test_that("project_list fails on missing crendentials", {
   vcr::use_cassette("test_project_list1", {
-    testthat::expect_error(p <- project_list(url = NULL,
-                                             un = NULL,
-                                             pw = NULL))
+    testthat::expect_error(p <- project_list(
+      url = NULL,
+      un = NULL,
+      pw = NULL
+    ))
   })
 })
 
@@ -92,19 +96,28 @@ test_that("project_list aborts on missing credentials", {
 
 test_that("project_list warns on wrong credentials", {
   vcr::use_cassette("test_project_list8", {
-  testthat::expect_error(p <- project_list(url = "wrong_url",
-                                           un = get_test_un(),
-                                           pw = get_test_pw()))})
+    testthat::expect_error(p <- project_list(
+      url = "wrong_url",
+      un = get_test_un(),
+      pw = get_test_pw()
+    ))
+  })
 
   vcr::use_cassette("test_project_list9", {
-  testthat::expect_error(p <- project_list(url = get_test_url(),
-                                           un = "wrong_username",
-                                           pw = get_test_pw()))})
+    testthat::expect_error(p <- project_list(
+      url = get_test_url(),
+      un = "wrong_username",
+      pw = get_test_pw()
+    ))
+  })
 
   vcr::use_cassette("test_project_listA", {
-  testthat::expect_error(p <- project_list(url = get_test_url(),
-                                           un = get_test_un(),
-                                           pw = "wrong_password"))})
+    testthat::expect_error(p <- project_list(
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = "wrong_password"
+    ))
+  })
 })
 
 # usethis::edit_file("R/project_list.R") # nolint

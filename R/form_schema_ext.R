@@ -150,7 +150,7 @@ form_schema_ext <- function(flatten = FALSE,
 
   ### parse translations
   all_translations <- xml2::xml_find_all(frm_xml, "//text")
-  all_translations_ids <-xml2::xml_attr(all_translations, "id")
+  all_translations_ids <- xml2::xml_attr(all_translations, "id")
 
   # initialize dataframe
   extension <- data.frame(

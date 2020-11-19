@@ -46,9 +46,11 @@ JDBC
 JOSS
 JSON
 LINESTRING
+LTS
 Linestring
 Linestrings
 MD5
+MacOS
 Mapview
 Metapackage
 Muntashir
@@ -169,7 +171,6 @@ geotraces
 gepshapes
 getodk
 getters
-github
 gj
 googledrive
 gps
@@ -244,6 +245,7 @@ uuids
 v0
 v1
 v7
+vcr
 vectorised
 whattheyforgot
 wkt

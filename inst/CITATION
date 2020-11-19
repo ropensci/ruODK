@@ -4,12 +4,12 @@ citEntry(
   entry    = "Misc",
   title    = "ruODK: Client for the ODK Central API",
   author   = "Florian W. Mayer",
-  note = "R package version 0.9.3",
+  note = "R package version 0.9.4",
   year     = 2020,
   url      = "https://github.com/ropensci/ruODK",
   textVersion = paste(
-    "Mayer, Florian Wendelin. (2020, July 21). ",
-    "ruODK: An R Client for the ODK Central API (Version 0.9.3). ",
+    "Mayer, Florian Wendelin. (2020, Nov 19). ",
+    "ruODK: An R Client for the ODK Central API (Version 0.9.4). ",
     "Zenodo. https://doi.org/10.5281/zenodo.3953158"
   )
 )

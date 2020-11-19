@@ -26,40 +26,41 @@ test_that("attachment_get works", {
   # This could stem from the use of attachment_get() inside a dplyr::mutate().
   #
   # vcr::use_cassette("test_attachment_get1", {
-    fresh_parsed <- fresh_raw %>%
-      odata_submission_rectangle() %>%
-      dplyr::mutate(
-        quadrat_photo = attachment_get( # HTTPS request downloads a file
-          id,
-          location_quadrat_photo,
-          local_dir = t,
-          pid = get_test_pid(),
-          fid = get_test_fid(),
-          url = get_test_url(),
-          un = get_test_un(),
-          pw = get_test_pw(),
-          verbose = TRUE
-        )
+  fresh_parsed <- fresh_raw %>%
+    odata_submission_rectangle() %>%
+    dplyr::mutate(
+      # HTTPS request downloads a file
+      quadrat_photo = attachment_get(
+        id,
+        location_quadrat_photo,
+        local_dir = t,
+        pid = get_test_pid(),
+        fid = get_test_fid(),
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = get_test_pw(),
+        verbose = TRUE
       )
+    )
   # })
 
   # vcr::use_cassette("test_attachment_get2", {
-    fresh_parsed_sep <- fresh_raw %>%
-      odata_submission_rectangle() %>%
-      dplyr::mutate(
-        quadrat_photo = attachment_get(
-          id,
-          location_quadrat_photo,
-          local_dir = t,
-          separate = TRUE,
-          pid = get_test_pid(),
-          fid = get_test_fid(),
-          url = get_test_url(),
-          un = get_test_un(),
-          pw = get_test_pw(),
-          verbose = TRUE
-        )
+  fresh_parsed_sep <- fresh_raw %>%
+    odata_submission_rectangle() %>%
+    dplyr::mutate(
+      quadrat_photo = attachment_get(
+        id,
+        location_quadrat_photo,
+        local_dir = t,
+        separate = TRUE,
+        pid = get_test_pid(),
+        fid = get_test_fid(),
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = get_test_pw(),
+        verbose = TRUE
       )
+    )
   # })
 
   # Attachment paths should be character, not e.g. list (pmap outputs lists)
@@ -78,8 +79,10 @@ test_that("attachment_url works", {
   pid <- get_test_pid()
   fid <- get_test_fid()
 
-  expected_url <-
-    glue::glue("{url}/v1/projects/{pid}/forms/{fid}/submissions/{uuid}/attachments/{fn}")
+  expected_url <- glue::glue(
+    "{url}/v1/projects/{pid}/forms/{fid}/",
+    "submissions/{uuid}/attachments/{fn}"
+  )
   # nolint start
   # https://github.com/ropensci/ruODK/issues/66
   # Not using here because it breaks attachment_get
@@ -91,10 +94,11 @@ test_that("attachment_url works", {
   # )
   # nolint end
   calculated_url <- ruODK:::attachment_url(uuid,
-                                           fn,
-                                           pid = pid,
-                                           fid = fid,
-                                           url = url)
+    fn,
+    pid = pid,
+    fid = fid,
+    url = url
+  )
 
   testthat::expect_equal(calculated_url, expected_url)
 })
@@ -118,10 +122,11 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
 
   pth <- fs::path(t, fn)
   src <- ruODK:::attachment_url(uuid,
-                                fn,
-                                pid = pid,
-                                fid = fid,
-                                url = url)
+    fn,
+    pid = pid,
+    fid = fid,
+    url = url
+  )
 
   # Happy path: get one attachment should work
   fn_local <- get_one_attachment(
