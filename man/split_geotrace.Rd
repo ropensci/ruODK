@@ -110,7 +110,7 @@ testthat::expect_true(
 }
 }
 \seealso{
-Other utilities:
+Other utilities: 
 \code{\link{attachment_get}()},
 \code{\link{attachment_url}()},
 \code{\link{drop_null_coords}()},
