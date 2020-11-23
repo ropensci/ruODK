@@ -17,7 +17,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Mon, 23 Nov 2020 04:09:42 GMT
+      date: Mon, 23 Nov 2020 05:06:45 GMT
       odata-version: '4.0'
       server: nginx
       strict-transport-security:
@@ -32,5 +32,5 @@ http_interactions:
       file: no
       string: '{"value":[{"__id":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","encounter_start_datetime":"2020-11-02T12:06:19.314+08:00","reporter":null,"device_id":"5afb51f35ba0c572","encounter_end_datetime":"2020-11-02T12:15:48.463+08:00","__system":{"submissionDate":"2020-11-02T04:19:45.451Z","submitterId":"53","submitterName":"ruODK","attachmentsPresent":5,"attachmentsExpected":5,"status":null},"meta":{"instanceID":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28"},"location":{"area_name":"Test
         site 1","quadrat_photo":"1604290006239.jpg","corner1":{"type":"Point","coordinates":[115.8843989,-31.9959554,-12.699999809265137],"properties":{"accuracy":4.625}}},"habitat":{"morphological_type":"flat","morphological_type_photo":"1604290049411.jpg"},"vegetation_stratum@odata.navigationLink":"Submissions(''uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28'')/vegetation_stratum","perimeter":{"corner2":{"type":"Point","coordinates":[115.8842726,-31.9957893,-21.19999885559082],"properties":{"accuracy":4.861}},"corner3":{"type":"Point","coordinates":[115.8843031,-31.9958188,-21.19999885559082],"properties":{"accuracy":4.655}},"corner4":{"type":"Point","coordinates":[115.8845949,-31.9961397,-12.699999809265137],"properties":{"accuracy":4.913}},"mudmap_photo":"1604290379613.jpg"},"taxon_encounter@odata.navigationLink":"Submissions(''uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28'')/taxon_encounter"}],"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc/$metadata#Submissions"}'
-  recorded_at: 2020-11-23 04:10:53 GMT
+  recorded_at: 2020-11-23 05:07:56 GMT
   recorded_with: vcr/0.5.4, webmockr/0.7.0

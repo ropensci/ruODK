@@ -17,7 +17,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Mon, 23 Nov 2020 04:00:12 GMT
+      date: Mon, 23 Nov 2020 05:07:17 GMT
       etag: W/"2b6-7MpRREPy5M23KgOeg+DuWNXx0AE"
       server: nginx
       strict-transport-security:
@@ -30,5 +30,5 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '[{"path":"/some_text","name":"some_text","type":"string","binary":null},{"path":"/text_image_audio_video_test","name":"text_image_audio_video_test","type":"string","binary":null},{"path":"/a_integer","name":"a_integer","type":"int","binary":null},{"path":"/a_decimal","name":"a_decimal","type":"decimal","binary":null},{"path":"/calculate","name":"calculate","type":"string","binary":null},{"path":"/calculate_test_output","name":"calculate_test_output","type":"string","binary":null},{"path":"/test_yn","name":"test_yn","type":"string","binary":null},{"path":"/meta","name":"meta","type":"structure","binary":null},{"path":"/meta/instanceID","name":"instanceID","type":"string","binary":null}]'
-  recorded_at: 2020-11-23 04:01:22 GMT
+  recorded_at: 2020-11-23 05:08:28 GMT
   recorded_with: vcr/0.5.4, webmockr/0.7.0
