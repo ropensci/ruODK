@@ -52,7 +52,7 @@ if (fs::file_info("README.md")$modification_time <
 }
 #
 # Checks
-goodpractice::goodpractice(quiet = FALSE, )
+goodpractice::goodpractice(quiet = FALSE)
 devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
 chk <- rcmdcheck::rcmdcheck(args = c("--as-cran"))
 

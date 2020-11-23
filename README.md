@@ -227,9 +227,9 @@ proj %>% head() %>% knitr::kable(.)
 
 |  id | name                             | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
 |----:|:---------------------------------|------:|-----------:|:--------------------|:------------|:--------------------|:---------|
-|   1 | DBCA                             |    10 |         12 | 2020-09-15 11:50:06 | NA          | 2020-11-19 06:47:30 | FALSE    |
+|   1 | DBCA                             |    10 |         12 | 2020-09-15 11:50:06 | NA          | 2020-11-23 13:58:47 | FALSE    |
 |   4 | Fire Management and Plant Health |     5 |          2 | 2020-11-06 11:12:16 | NA          | 2020-11-06 11:47:21 | FALSE    |
-|   2 | ruODK package tests              |    10 |          1 | 2020-10-31 19:11:50 | NA          | 2020-11-02 12:41:14 | FALSE    |
+|   2 | ruODK package tests              |    12 |          1 | 2020-10-31 19:11:50 | NA          | 2020-11-02 12:41:14 | FALSE    |
 |   3 | ruODK package tests encrypted    |     1 |          1 | 2020-10-31 19:12:57 | NA          | 2020-11-02 15:26:38 | FALSE    |
 
 ``` r
@@ -238,14 +238,14 @@ frms <- ruODK::form_list()
 frms %>% head() %>% knitr::kable(.)
 ```
 
-| name                        | fid                  | version | state | submissions | created\_at         | created\_by\_id | created\_by   | updated\_at         | last\_submission    | hash                             |
-|:----------------------------|:---------------------|:--------|:------|:------------|:--------------------|----------------:|:--------------|:--------------------|:--------------------|:---------------------------------|
-| Flora Quadrat 0.4           | Flora-Quadrat-04     |         | open  | 1           | 2020-11-02 10:56:21 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:19:45 | 434ff9e1e33fc8bb35148c0cc6979708 |
-| Flora Quadrat 0.4 (gap)     | Flora-Quadrat-04-gap |         | open  | 2           | 2020-11-02 11:15:29 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:36:09 | 241c4759564ea039b4404b6892025500 |
-| Flora Quadrat 0.4 (one att) | Flora-Quadrat-04-att |         | open  | 1           | 2020-11-02 11:13:13 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:36:10 | 2cb6a4b3d7f05ab055f3da89d0958b14 |
-| I8n label and choices       | I8n\_label\_choices  |         | open  | 2           | 2020-11-02 11:29:48 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:41:14 | bc4dff584ab2e0b0dd2c50eb1c2c7aa4 |
-| I8n label lang              | I8n\_label\_lng      |         | open  | 1           | 2020-11-02 11:38:37 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:39:58 | 7e912580b246796c8477cfcd4c5dceab |
-| I8n no lang                 | I8n\_no\_lang        |         | open  | 1           | 2020-11-02 11:29:27 |               5 | Florian Mayer | 2020-11-02 11:54:42 | 2020-11-02 12:39:27 | 44a38dfee1e7c7b6622a489e379e479f |
+| name                              | fid                     | version | state | submissions | created\_at         | created\_by\_id | created\_by   | updated\_at         | last\_submission    | hash                             |
+|:----------------------------------|:------------------------|:--------|:------|:------------|:--------------------|----------------:|:--------------|:--------------------|:--------------------|:---------------------------------|
+| Flora Quadrat 0.4                 | Flora-Quadrat-04        |         | open  | 1           | 2020-11-02 10:56:21 |               5 | Florian Mayer | 2020-11-23 13:25:03 | 2020-11-02 12:19:45 | 434ff9e1e33fc8bb35148c0cc6979708 |
+| Flora Quadrat 0.4 (gap)           | Flora-Quadrat-04-gap    |         | open  | 2           | 2020-11-02 11:15:29 |               5 | Florian Mayer | 2020-11-23 13:25:03 | 2020-11-02 12:36:09 | 241c4759564ea039b4404b6892025500 |
+| Flora Quadrat 0.4 (one att)       | Flora-Quadrat-04-att    |         | open  | 1           | 2020-11-02 11:13:13 |               5 | Florian Mayer | 2020-11-23 13:25:03 | 2020-11-02 12:36:10 | 2cb6a4b3d7f05ab055f3da89d0958b14 |
+| I8n label and choices             | I8n\_label\_choices     |         | open  | 2           | 2020-11-02 11:29:48 |               5 | Florian Mayer | 2020-11-23 13:25:03 | 2020-11-02 12:41:14 | bc4dff584ab2e0b0dd2c50eb1c2c7aa4 |
+| I8n label lang                    | I8n\_label\_lng         |         | open  | 1           | 2020-11-02 11:38:37 |               5 | Florian Mayer | 2020-11-23 13:25:03 | 2020-11-02 12:39:58 | 7e912580b246796c8477cfcd4c5dceab |
+| I8n label lang with choice filter | I8n\_lang\_choicefilter |         | open  | 0           | 2020-11-23 13:23:36 |               5 | Florian Mayer | 2020-11-23 13:25:03 | NA                  | 369a921eb94672dabbd395a035819d65 |
 
 ``` r
 # Form details of default form
@@ -255,7 +255,7 @@ frmd %>% knitr::kable(.)
 
 | name              | fid              | version | state | submissions | created\_at              | created\_by\_id | created\_by   | updated\_at              | last\_submission         | hash                             |
 |:------------------|:-----------------|:--------|:------|------------:|:-------------------------|----------------:|:--------------|:-------------------------|:-------------------------|:---------------------------------|
-| Flora Quadrat 0.4 | Flora-Quadrat-04 |         | open  |           1 | 2020-11-02T02:56:21.085Z |               5 | Florian Mayer | 2020-11-02T03:54:42.522Z | 2020-11-02T04:19:45.451Z | 434ff9e1e33fc8bb35148c0cc6979708 |
+| Flora Quadrat 0.4 | Flora-Quadrat-04 |         | open  |           1 | 2020-11-02T02:56:21.085Z |               5 | Florian Mayer | 2020-11-23T05:25:03.426Z | 2020-11-02T04:19:45.451Z | 434ff9e1e33fc8bb35148c0cc6979708 |
 
 ``` r
 # Form schema: defaults to version 0.8
@@ -401,8 +401,7 @@ citation("ruODK")
 #> 
 #> To cite ruODK in publications use:
 #> 
-#>   Mayer, Florian Wendelin. (2020, July 21).  ruODK: An R Client for the
-#>   ODK Central API (Version 0.9.3).  Zenodo.
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version 0.9.5).  Zenodo.
 #>   https://doi.org/10.5281/zenodo.3953158
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -410,7 +409,7 @@ citation("ruODK")
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.9.3},
+#>     note = {R package version 0.9.5},
 #>     year = {2020},
 #>     url = {https://github.com/ropensci/ruODK},
 #>   }

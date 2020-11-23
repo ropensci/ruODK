@@ -1,5 +1,12 @@
 # `ruODK` (development version)
 ## Major fixes
+## Minor fixes
+## Documentation
+## Data
+## Maintenance
+
+# `ruODK` 0.9.5
+## Major fixes
 * `form_schema_ext` retrieves choice lists when choice filters are present
    (#105,  @mtyszler).
 ## Minor fixes
