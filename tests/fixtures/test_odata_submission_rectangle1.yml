@@ -17,7 +17,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Wed, 11 Nov 2020 06:05:51 GMT
+      date: Mon, 23 Nov 2020 04:00:12 GMT
       odata-version: '4.0'
       server: nginx
       strict-transport-security:
@@ -32,5 +32,5 @@ http_interactions:
       file: no
       string: '{"value":[{"__id":"uuid:e2309c82-c908-4a41-a898-dfe16b41d94b","some_text":"Test
         2","text_image_audio_video_test":null,"a_integer":123,"a_decimal":10,"calculate":"133","calculate_test_output":null,"test_yn":"1","__system":{"submissionDate":"2020-11-02T04:41:14.761Z","submitterId":"53","submitterName":"ruODK","attachmentsPresent":0,"attachmentsExpected":0,"status":null},"meta":{"instanceID":"uuid:e2309c82-c908-4a41-a898-dfe16b41d94b"}},{"__id":"uuid:2c0b6cf8-2486-464b-bde8-f789f527f623","some_text":"Test","text_image_audio_video_test":null,"a_integer":123,"a_decimal":10,"calculate":"133","calculate_test_output":null,"test_yn":"99","__system":{"submissionDate":"2020-11-02T04:40:19.975Z","submitterId":"53","submitterName":"ruODK","attachmentsPresent":0,"attachmentsExpected":0,"status":null},"meta":{"instanceID":"uuid:2c0b6cf8-2486-464b-bde8-f789f527f623"}}],"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/I8n_label_choices.svc/$metadata#Submissions"}'
-  recorded_at: 2020-11-11 06:06:46 GMT
+  recorded_at: 2020-11-23 04:01:23 GMT
   recorded_with: vcr/0.5.4, webmockr/0.7.0

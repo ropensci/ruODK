@@ -17,7 +17,7 @@ http_interactions:
       message: 'Client error: (404) Not Found'
     headers:
       server: nginx
-      date: Wed, 11 Nov 2020 11:47:43 GMT
+      date: Mon, 23 Nov 2020 04:00:13 GMT
       content-type: application/json; charset=utf-8
       x-powered-by: Express
       etag: W/"4c-ShTrjQvXJDA49Wfxw7ES7C6cQFg"
@@ -27,7 +27,7 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"message":"Could not find the resource you were looking for.","code":404.1}'
-  recorded_at: 2020-11-11 11:48:43 GMT
+  recorded_at: 2020-11-23 04:01:27 GMT
   recorded_with: vcr/0.5.4, webmockr/0.7.0
 - request:
     method: get
@@ -47,7 +47,7 @@ http_interactions:
       message: 'Client error: (404) Not Found'
     headers:
       server: nginx
-      date: Wed, 11 Nov 2020 11:47:44 GMT
+      date: Mon, 23 Nov 2020 04:00:14 GMT
       content-type: application/json; charset=utf-8
       x-powered-by: Express
       etag: W/"4c-ShTrjQvXJDA49Wfxw7ES7C6cQFg"
@@ -57,7 +57,7 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"message":"Could not find the resource you were looking for.","code":404.1}'
-  recorded_at: 2020-11-11 11:48:43 GMT
+  recorded_at: 2020-11-23 04:01:27 GMT
   recorded_with: vcr/0.5.4, webmockr/0.7.0
 - request:
     method: get
@@ -77,7 +77,7 @@ http_interactions:
       message: 'Client error: (404) Not Found'
     headers:
       server: nginx
-      date: Wed, 11 Nov 2020 11:47:48 GMT
+      date: Mon, 23 Nov 2020 04:00:17 GMT
       content-type: application/json; charset=utf-8
       x-powered-by: Express
       etag: W/"4c-ShTrjQvXJDA49Wfxw7ES7C6cQFg"
@@ -87,5 +87,5 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"message":"Could not find the resource you were looking for.","code":404.1}'
-  recorded_at: 2020-11-11 11:48:43 GMT
+  recorded_at: 2020-11-23 04:01:28 GMT
   recorded_with: vcr/0.5.4, webmockr/0.7.0

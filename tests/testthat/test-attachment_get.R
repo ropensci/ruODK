@@ -83,16 +83,7 @@ test_that("attachment_url works", {
     "{url}/v1/projects/{pid}/forms/{fid}/",
     "submissions/{uuid}/attachments/{fn}"
   )
-  # nolint start
-  # https://github.com/ropensci/ruODK/issues/66
-  # Not using here because it breaks attachment_get
-  # expected_url <- httr::modify_url(
-  #   url,
-  #   path = glue::glue(
-  #     "v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
-  #   )
-  # )
-  # nolint end
+
   calculated_url <- ruODK:::attachment_url(uuid,
     fn,
     pid = pid,
