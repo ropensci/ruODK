@@ -9,7 +9,7 @@ Feel free to [report issues](https://github.com/ropensci/ruODK/issues):
 * Bug reports are for unplanned malfunctions.
 * Feature requests are for ideas and new features.
 * Account requests are for getting access to the ODK Central instances run by DBCA
-  (DBCA business only) or the public demo server (contributors, to run tests).
+  (DBCA campaigns only) or the CI server (contributors, to run tests).
 
 ## Technical contributions to `ruODK`
 
