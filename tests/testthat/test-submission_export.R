@@ -23,7 +23,8 @@ test_that("submission_export works", {
       fid = fid,
       url = get_test_url(),
       un = get_test_un(),
-      pw = get_test_pw()
+      pw = get_test_pw(),
+      pp = get_test_pp()
     ),
     msg_dl
   )
@@ -39,7 +40,8 @@ test_that("submission_export works", {
       fid = fid,
       url = get_test_url(),
       un = get_test_un(),
-      pw = get_test_pw()
+      pw = get_test_pw(),
+      pp = get_test_pp()
     ),
     msg_keep
   )
@@ -58,7 +60,8 @@ test_that("submission_export works", {
       fid = fid,
       url = get_test_url(),
       un = get_test_un(),
-      pw = get_test_pw()
+      pw = get_test_pw(),
+      pp = get_test_pp()
     ),
     msg_chuck
   )
@@ -78,7 +81,8 @@ test_that("submission_export works", {
       fid = fid,
       url = get_test_url(),
       un = get_test_un(),
-      pw = get_test_pw()
+      pw = get_test_pw(),
+      pp = get_test_pp()
     ),
     msg_keep
   )
