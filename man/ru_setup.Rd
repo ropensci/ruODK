@@ -25,6 +25,7 @@ ru_setup(
   test_url = NULL,
   test_un = NULL,
   test_pw = NULL,
+  test_pp = NULL,
   test_odkc_version = NULL
 )
 }
@@ -120,6 +121,8 @@ privileged to view the test project(s) at \code{test_url}.}
 
 \item{test_pw}{(optional, character) The valid ODK Central password for
 \code{test_un}.}
+
+\item{test_pp}{(optional, character) The valid passphrase to decrypt the data of encrypted project \code{test_pid} for download.}
 
 \item{test_odkc_version}{The ODK Central test server's version as major/minor
 version, e.g. 0.8.}
