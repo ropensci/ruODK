@@ -98,4 +98,23 @@ test_that("submission_export works", {
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
 })
 
+test_that("submission_export works with encryption", {
+
+  vcr::use_cassette("test_submission_export0", {
+    se <- submission_export(
+      local_dir = t,
+      overwrite = FALSE,
+      verbose = TRUE,
+      pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+      fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      pp = get_test_pp()
+    )
+  })
+
+  testthat::expect_true(fs::is_file(se))
+
+})
 # usethis::edit_file("R/submission_export.R") # nolint
