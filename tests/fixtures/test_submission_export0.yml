@@ -1,1 +1,67 @@
-
+http_interactions:
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/3/forms/Locations/submissions/keys
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: ''
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8
+      date: Thu, 10 Dec 2020 08:31:15 GMT
+      etag: W/"212-SnGAuv1DVlwymVoFEzLuB0VydTc"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: no
+      string: '[{"id":1,"public":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlnoZj4fmlImHy6bu2U+g7HBH4SjbOdqxgFpbZuD10dwUT8Vkja45tKn2+HKHYxbOT6zzUsN3GE55maM0C2xXcC9SZYb4Aykp3EYbzgW+B03yd8aKgMEhHK4AnG4iG1WqzzG6TnP/6vWoAOYZ+KX9dnVsmjS6EOpihlhzPZ8Ckrpbzze7AyMoFrpFpMJH/ChNunKK7ij+CV35PX4oNOgGa/0gNX21NvqpEJN6StV7zas7nvGrrAU49/wBzpq4KksCbs6tDxlnW6zuENpzuDTjjvQHCMw5QdtoyNfzM4J8Qeaf8jig+4kbYLUMSwHnGSIXVKf0VlgELXlz5KkyoVchMwIDAQAB","managed":true,"hint":"The
+        Passphrase is The Passphrase without whitespace ","createdAt":"2020-11-02T03:40:53.992Z"}]'
+  recorded_at: 2020-12-10 08:31:17 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.4
+- request:
+    method: post
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/3/forms/Locations/submissions.csv.zip
+    body:
+      encoding: ''
+      string: '{"1":"ThePassphrase"}'
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: application/json
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-disposition: attachment; filename="Locations.zip"
+      content-type: application/zip
+      date: Thu, 10 Dec 2020 08:31:15 GMT
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+      x-ua-compatible: chrome=1
+    body:
+      encoding: UTF-8
+      file: yes
+      string: /home/florianm/projects/ruODK/tests/files/Locations.zip
+  recorded_at: 2020-12-10 08:31:17 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.4

@@ -17,7 +17,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8; odata.metadata=minimal
-      date: Mon, 23 Nov 2020 05:07:07 GMT
+      date: Thu, 10 Dec 2020 08:22:51 GMT
       etag: W/"16d-WLGPb41H8z09a+jpiYUtvCEFcpA"
       odata-version: '4.0'
       server: nginx
@@ -31,5 +31,5 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc/$metadata","value":[{"name":"Submissions","kind":"EntitySet","url":"Submissions"},{"name":"Submissions.vegetation_stratum","kind":"EntitySet","url":"Submissions.vegetation_stratum"},{"name":"Submissions.taxon_encounter","kind":"EntitySet","url":"Submissions.taxon_encounter"}]}'
-  recorded_at: 2020-11-23 05:08:17 GMT
-  recorded_with: vcr/0.5.4, webmockr/0.7.0
+  recorded_at: 2020-12-10 08:22:53 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.4

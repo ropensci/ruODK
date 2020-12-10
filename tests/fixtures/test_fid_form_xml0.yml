@@ -17,7 +17,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/xml; charset=utf-8
-      date: Mon, 23 Nov 2020 05:06:59 GMT
+      date: Thu, 10 Dec 2020 08:22:44 GMT
       etag: W/"920b-IGz1WyitzYLbkbxcEQElJGVMW9E"
       server: nginx
       strict-transport-security:
@@ -459,5 +459,5 @@ http_interactions:
         \           <hint ref=\"jr:itext('/data/taxon_encounter/voucher_specimen_label:hint')\"/>\r\n
         \         </input>\r\n        </group>\r\n      </repeat>\r\n    </group>\r\n
         \ </h:body>\r\n</h:html>\r\n"
-  recorded_at: 2020-11-23 05:08:10 GMT
-  recorded_with: vcr/0.5.4, webmockr/0.7.0
+  recorded_at: 2020-12-10 08:22:45 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.7.4

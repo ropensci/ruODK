@@ -60,6 +60,7 @@ Suggests:
     covr (>= 3.4.0),
     DT (>= 0.9),
     ggplot2 (>= 3.2.1),
+    here (>= 1.0.0),
     knitr (>= 1.26),
     lattice (>= 0.20-41),
     leaflet (>= 2.0.3),
