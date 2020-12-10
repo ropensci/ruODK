@@ -196,4 +196,4 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   testthat::expect_true(is.na(gg))
 })
 
-# usethis::edit_file("R/attachment_get.R") # nolint
+# usethis::use_r("attachment_get") # nolint

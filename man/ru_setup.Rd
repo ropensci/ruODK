@@ -122,7 +122,8 @@ privileged to view the test project(s) at \code{test_url}.}
 \item{test_pw}{(optional, character) The valid ODK Central password for
 \code{test_un}.}
 
-\item{test_pp}{(optional, character) The valid passphrase to decrypt the data of encrypted project \code{test_pid} for download.}
+\item{test_pp}{(optional, character) The valid passphrase to decrypt the
+data of encrypted project \code{test_pid} for download. Only used for tests.}
 
 \item{test_odkc_version}{The ODK Central test server's version as major/minor
 version, e.g. 0.8.}
@@ -163,6 +164,7 @@ ru_setup(
   test_url = "https://sandbox.central.getodk.org",
   test_un = "me@email.com",
   test_pw = "...",
+  test_pp = "...",
   test_pid = 14,
   test_fid = "build_Flora-Quadrat-0-2_1558575936",
   test_fid_zip = "build_Spotlighting-0-6_1558333698",

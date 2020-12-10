@@ -275,4 +275,4 @@ attachment_get <- function(sid,
     as.character(.)
 }
 
-# usethis::edit_file("tests/testthat/test-attachment_get.R") # nolint
+# usethis::use_test("attachment_get") # nolint
