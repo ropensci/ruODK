@@ -5,6 +5,29 @@
 ## Data
 ## Maintenance
 
+# `ruODK` 0.9.6
+## Major fixes
+* Support encryption (#30 #110, @Thaliehln).
+  * Note that `ruODK` only supports one passphrase. When switching between
+    multiple encrypted forms, it would make sense to store the different 
+    passphrases in separate environment variables, and refer to these environment
+    variables explicitly in function calls.
+  * The updated ruODK::submission_export should now export data 
+    from both encrypted projects and non-encrypted projects.
+    The HTTP method is changed from GET to POST and encryption key ID / 
+    passphrase are provided via POST body using a JSON format. 
+    Encrypted forms can be extracted and inspected like non-encrypted forms:
+    
+```{r, eval=FALSE}
+se <- submission_export()
+t <- tempdir()
+f <- unzip(se, exdir = t)
+fs::dir_ls(t)
+fid <- get_test_fid()
+sub <- fs::path(t, glue::glue("Locations.csv")) %>% readr::read_csv()
+sub %>% knitr::kable(.)
+```
+
 # `ruODK` 0.9.5
 ## Major fixes
 * `form_schema_ext` retrieves choice lists when choice filters are present

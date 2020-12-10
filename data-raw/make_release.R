@@ -76,5 +76,7 @@ dn <- "dbcawa/ruodk"
 dv <- packageVersion("ruODK")
 gp <- Sys.getenv("GITHUB_PAT")
 message(glue::glue("Building and pushing {dn}:{dv}..."))
-system(glue::glue("docker build . -t {dn} -t {dn}:{dv} ",
-                  "--build-arg GITHUB_PAT={gp} && docker push {dn}"))
+system(glue::glue(
+  "docker build . -t {dn} -t {dn}:{dv} ",
+  "--build-arg GITHUB_PAT={gp} && docker push {dn}"
+))
