@@ -26,6 +26,7 @@
 #' \code{\link{get_test_url}},
 #' \code{\link{get_test_un}},
 #' \code{\link{get_test_pw}},
+#' \code{\link{get_test_pp}},
 #' \code{\link{get_test_odkc_version}},
 #' \code{\link{get_ru_verbose}}.
 #' @family ru_settings
@@ -51,6 +52,7 @@ ru_settings <- function() {
     test_url = Sys.getenv("ODKC_TEST_URL", ""),
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", ""),
+    test_pp = Sys.getenv("ODKC_TEST_PP", ""),
     test_odkc_version = Sys.getenv("ODKC_TEST_VERSION", 0.8)
   )
   structure(ops, class = "ru_settings")
@@ -77,6 +79,7 @@ print.ru_settings <- function(x, ...) {
   cat("  Test ODK Central URL:", x$test_url, "\n")
   cat("  Test ODK Central Username:", x$test_un, "\n")
   cat("  Test ODK Central Password: run ruODK::get_test_pw() to show \n")
+  cat("  Test ODK Central Passphrase: run ruODK::get_test_pp() to show \n")
   cat("  Test ODK Central Version:", x$test_odkc_version, "\n")
 }
 
@@ -181,6 +184,7 @@ odata_svc_parse <- function(svc) {
 #'   privileged to view the test project(s) at \code{test_url}.
 #' @param test_pw (optional, character) The valid ODK Central password for
 #'   \code{test_un}.
+#' @param test_pp (optional, character) The valid passphrase to decrypt the data of encrypted project \code{test_pid} for download.
 #'
 #' @param test_odkc_version The ODK Central test server's version as major/minor
 #'   version, e.g. 0.8.
@@ -253,6 +257,7 @@ ru_setup <- function(svc = NULL,
                      test_url = NULL,
                      test_un = NULL,
                      test_pw = NULL,
+                     test_pp = NULL,
                      test_odkc_version = NULL) {
   if (!is.null(svc)) {
     odata_components <- odata_svc_parse(svc)
@@ -465,6 +470,17 @@ get_test_fid_wkt <- function() {
   x <- Sys.getenv("ODKC_TEST_FID_WKT")
   if (identical(x, "")) {
     ru_msg_warn("No test ODK Central WKT form ID set. ru_setup()?")
+  }
+  x
+}
+
+#' `r lifecycle::badge("stable")`
+#' @export
+#' @rdname ru_settings
+get_test_pp <- function() {
+  x <- Sys.getenv("ODKC_TEST_PP")
+  if (identical(x, "")) {
+    ru_msg_warn("No test ODK Central passphrase set. ru_setup()?")
   }
   x
 }

@@ -19,6 +19,8 @@
 #' Download attachments as listed for each submission
 #' (\code{\link{attachment_list}}).
 #'
+#' If the submissions are encrypted
+#'
 #' `r lifecycle::badge("stable")`
 #'
 #' @param local_dir The local folder to save the downloaded files to,
@@ -49,7 +51,8 @@
 #'     "forms/build_Flora-Quadrat-0-2_1558575936.svc"
 #'   ),
 #'   un = "me@email.com",
-#'   pw = "..."
+#'   pw = "...",
+#'   pp = "..."
 #' )
 #'
 #' se <- submission_export()
@@ -69,6 +72,7 @@ submission_export <- function(local_dir = here::here(),
                               url = get_default_url(),
                               un = get_default_un(),
                               pw = get_default_pw(),
+                              pp = get_test_pp(),
                               retries = get_retries(),
                               verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
@@ -94,15 +98,38 @@ submission_export <- function(local_dir = here::here(),
     }
   }
 
-  httr::RETRY(
+  # List encryption keys
+  encryption_keys <- httr::RETRY(
     "GET",
     httr::modify_url(
       url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/submissions.csv.zip"
-      )
+      path = glue::glue("v1/projects/{pid}/forms/",
+                        "{URLencode(fid, reserved = TRUE)}/submissions/keys")
     ),
+    httr::authenticate(un, pw),
+    times = retries
+  ) %>%
+    yell_if_error(., url, un, pw) %>%
+    httr::content(.)
+
+  body <- NULL
+  # Create body containing encryption key and passphrase associated with the request
+  if (length(encryption_keys) > 0) {
+    body <- vector(mode = "list", length = length(1))
+    names(body) <- encryption_keys[[1]]$id
+    body[[encryption_keys[[1]]$id]] <- pp
+  }
+
+  # Export form submissions to CSV via POST
+  httr::RETRY(
+    "POST",
+    httr::modify_url(
+      url,
+      path = glue::glue("v1/projects/{pid}/forms/",
+                        "{URLencode(fid, reserved = TRUE)}/submissions.csv.zip")
+    ),
+    body = body,
+    encode = "json",
     httr::authenticate(un, pw),
     httr::write_disk(pth, overwrite = overwrite),
     times = retries

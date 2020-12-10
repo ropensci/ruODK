@@ -12,6 +12,7 @@ submission_export(
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
+  pp = get_test_pp(),
   retries = get_retries(),
   verbose = get_ru_verbose()
 )
@@ -83,6 +84,8 @@ uuids to download them one by one via \code{\link{submission_get}}.
 Download attachments as listed for each submission
 (\code{\link{attachment_list}}).
 
+If the submissions are encrypted
+
 `r lifecycle::badge("stable")`
 }
 \examples{
@@ -94,7 +97,8 @@ ruODK::ru_setup(
     "forms/build_Flora-Quadrat-0-2_1558575936.svc"
   ),
   un = "me@email.com",
-  pw = "..."
+  pw = "...",
+  pp = "..."
 )
 
 se <- submission_export()
