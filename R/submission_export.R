@@ -31,6 +31,7 @@
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
+#' @template param-pp
 #' @template param-retries
 #' @template param-verbose
 #' @return The absolute path to the zip file named "`fid`.zip"
@@ -72,7 +73,7 @@ submission_export <- function(local_dir = here::here(),
                               url = get_default_url(),
                               un = get_default_un(),
                               pw = get_default_pw(),
-                              pp = get_test_pp(),
+                              pp = NULL,
                               retries = get_retries(),
                               verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
@@ -103,8 +104,10 @@ submission_export <- function(local_dir = here::here(),
     "GET",
     httr::modify_url(
       url,
-      path = glue::glue("v1/projects/{pid}/forms/",
-                        "{URLencode(fid, reserved = TRUE)}/submissions/keys")
+      path = glue::glue(
+        "v1/projects/{pid}/forms/",
+        "{URLencode(fid, reserved = TRUE)}/submissions/keys"
+      )
     ),
     httr::authenticate(un, pw),
     times = retries
@@ -113,7 +116,8 @@ submission_export <- function(local_dir = here::here(),
     httr::content(.)
 
   body <- NULL
-  # Create body containing encryption key and passphrase associated with the request
+  # Create body containing encryption key and passphrase
+  # associated with the request
   if (length(encryption_keys) > 0) {
     body <- vector(mode = "list", length = length(1))
     names(body) <- encryption_keys[[1]]$id
@@ -125,8 +129,10 @@ submission_export <- function(local_dir = here::here(),
     "POST",
     httr::modify_url(
       url,
-      path = glue::glue("v1/projects/{pid}/forms/",
-                        "{URLencode(fid, reserved = TRUE)}/submissions.csv.zip")
+      path = glue::glue(
+        "v1/projects/{pid}/forms/",
+        "{URLencode(fid, reserved = TRUE)}/submissions.csv.zip"
+      )
     ),
     body = body,
     encode = "json",
@@ -139,4 +145,4 @@ submission_export <- function(local_dir = here::here(),
   pth
 }
 
-# usethis::edit_file("tests/testthat/test-submission_export.R") # nolint
+# usethis::use_test("submission_export") # nolint

@@ -12,7 +12,7 @@ submission_export(
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
-  pp = get_test_pp(),
+  pp = NULL,
   retries = get_retries(),
   verbose = get_ru_verbose()
 )
@@ -47,6 +47,11 @@ See \code{vignette("Setup", package = "ruODK")}.}
 \item{pw}{The ODK Central password.
 Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{pp}{The passphrase for an encrypted form.
+Default: NULL.
+Passphrases can be stored e.g. as environment variables.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
