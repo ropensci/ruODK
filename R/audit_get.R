@@ -115,4 +115,4 @@ audit_get <- function(action = NULL,
     }
 }
 
-# usethis::edit_file("tests/testthat/test-audit_get.R") # nolint
+# usethis::use_test("audit_get") # nolint

@@ -1,10 +1,18 @@
 test_that("attachment_get works", {
-  # This test downloads files
-  skip_on_cran()
+  # This is needed to run the tests for this file only
+  if (is.null(vcr::vcr_configuration()$write_disk_path)){
+    vcr::vcr_configure(write_disk_path = "../files")
+  }
 
-  t <- fs::path("../files")
+  wdp <- vcr::vcr_configuration()$write_disk_path
+  testthat::expect_true(
+    fs::is_dir(wdp),
+    label = glue::glue("VCR write_disk_path must exist: {wdp}")
+  )
 
-  fs::dir_ls(t) %>% fs::file_delete()
+  t <- fs::path(wdp, "attachment_get")
+  fs::dir_create(t)
+  # fs::dir_ls(t) %>% fs::file_delete()
 
   vcr::use_cassette("test_attachment_get0", {
     fresh_raw <- odata_submission_get(
@@ -17,15 +25,7 @@ test_that("attachment_get works", {
     )
   })
 
-  # The following request fails with vcr:
-  #
-  # Error: Problem with `mutate()` input `quadrat_photo`.
-  # x if writing to disk, write_disk_path must be given; see ?vcr_configure
-  # ℹ Input `quadrat_photo` is `attachment_get(...)`.
-  #
-  # This could stem from the use of attachment_get() inside a dplyr::mutate().
-  #
-  # vcr::use_cassette("test_attachment_get1", {
+  vcr::use_cassette("test_attachment_get1", {
   fresh_parsed <- fresh_raw %>%
     odata_submission_rectangle() %>%
     dplyr::mutate(
@@ -42,9 +42,9 @@ test_that("attachment_get works", {
         verbose = TRUE
       )
     )
-  # })
+  })
 
-  # vcr::use_cassette("test_attachment_get2", {
+  vcr::use_cassette("test_attachment_get2", {
   fresh_parsed_sep <- fresh_raw %>%
     odata_submission_rectangle() %>%
     dplyr::mutate(
@@ -61,7 +61,7 @@ test_that("attachment_get works", {
         verbose = TRUE
       )
     )
-  # })
+  })
 
   # Attachment paths should be character, not e.g. list (pmap outputs lists)
   testthat::expect_equal(class(fresh_parsed$quadrat_photo), "character")

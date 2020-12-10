@@ -85,4 +85,4 @@ submission_detail <- function(iid,
     }
 }
 
-# usethis::edit_file("tests/testthat/test-submission_detail.R") # nolint
+# usethis::use_test("submission_detail") # nolint

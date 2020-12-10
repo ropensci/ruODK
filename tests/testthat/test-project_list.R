@@ -120,4 +120,4 @@ test_that("project_list warns on wrong credentials", {
   })
 })
 
-# usethis::edit_file("R/project_list.R") # nolint
+# usethis::use_r("project_list") # nolint

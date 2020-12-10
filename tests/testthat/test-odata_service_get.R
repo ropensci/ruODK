@@ -16,4 +16,4 @@ test_that("odata_service_get works", {
   testthat::expect_equal(names(svc), cn)
 })
 
-# usethis::edit_file("R/odata_service_get.R") # nolint
+# usethis::use_r("odata_service_get") # nolint

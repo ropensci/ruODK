@@ -170,4 +170,4 @@ test_that("odata_submission_get count returns total number or rows", {
   testthat::expect_gte(x_raw$`@odata.count`, nrow(x_parsed))
 })
 
-# usethis::edit_file("R/odata_submission_get.R") # nolint
+# usethis::use_r("odata_submission_get") # nolint

@@ -33,4 +33,4 @@ test_that("submission_detail works", {
   testthat::expect_equal(names(sub), cn)
 })
 
-# usethis::edit_file("R/submission_detail.R") # nolint
+# usethis::use_r("submission_detail") # nolint

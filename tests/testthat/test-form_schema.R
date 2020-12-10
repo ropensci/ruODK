@@ -116,6 +116,5 @@ test_that("form_schema works with unpublished draft forms", {
 #   )
 # })
 
-# Tests code
-# usethis::edit_file("R/form_schema.R")
+# usethis::use_r("form_schema")
 # nolint end

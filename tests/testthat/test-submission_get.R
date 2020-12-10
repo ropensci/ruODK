@@ -65,4 +65,4 @@ test_that("submission_get works", {
   testthat::expect_true("encounter_end_datetime" %in% names(sub))
 })
 
-# usethis::edit_file("R/submission_get.R") # nolint
+# usethis::use_r("submission_get") # nolint

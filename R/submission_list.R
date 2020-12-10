@@ -91,4 +91,4 @@ submission_list <- function(pid = get_default_pid(),
     }
 }
 
-# usethis::edit_file("tests/testthat/test-submission_list.R") # nolint
+# usethis::use_test("submission_list") # nolint

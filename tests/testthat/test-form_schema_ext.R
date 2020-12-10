@@ -118,4 +118,4 @@ test_that("form_schema_ext v8 with label, choices, lang, and choice filter", {
 })
 
 
-# usethis::edit_file("R/form_schema_ext.R") # nolint
+# usethis::use_r("form_schema_ext") # nolint
