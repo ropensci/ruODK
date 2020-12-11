@@ -79,6 +79,13 @@ turtleviewer etc.).
 * Update examples
 * Update README if showing package data
 
+#### Adding a settings variable
+* Update ru_setup, ru_settings, update and add to settings tests
+* Update .Renviron
+* Update GitHub secrets
+* Update tic.yml (add new env vars)
+* Update vignette "Setup"
+
 ### PR process
 
 #### Fork, clone, branch
