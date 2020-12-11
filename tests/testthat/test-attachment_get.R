@@ -1,20 +1,22 @@
 test_that("attachment_get works", {
   # This is needed to run the tests for this file only
-  if (is.null(vcr::vcr_configuration()$write_disk_path)){
-    vcr::vcr_configure(write_disk_path = "../files")
-  }
+  # if (is.null(vcr::vcr_configuration()$write_disk_path)) {
+  #   vcr::vcr_configure(write_disk_path = "../files")
+  # }
 
-  wdp <- vcr::vcr_configuration()$write_disk_path
-  testthat::expect_true(
-    fs::is_dir(wdp),
-    label = glue::glue("VCR write_disk_path must exist: {wdp}")
-  )
+  # wdp <- vcr::vcr_configuration()$write_disk_path
+  # testthat::expect_true(
+  #   fs::is_dir(wdp),
+  #   label = glue::glue("VCR write_disk_path must exist: {wdp}")
+  # )
 
-  t <- fs::path(wdp, "attachment_get")
-  fs::dir_create(t)
+  # t <- fs::path(wdp, "attachment_get")
+  # fs::dir_create(t)
   # fs::dir_ls(t) %>% fs::file_delete()
 
-  vcr::use_cassette("test_attachment_get0", {
+  t <- tempdir()
+
+  # vcr::use_cassette("test_attachment_get0", {
     fresh_raw <- odata_submission_get(
       pid = get_test_pid(),
       fid = get_test_fid(),
@@ -23,45 +25,45 @@ test_that("attachment_get works", {
       pw = get_test_pw(),
       parse = FALSE
     )
-  })
+  # })
 
-  vcr::use_cassette("test_attachment_get1", {
-  fresh_parsed <- fresh_raw %>%
-    odata_submission_rectangle() %>%
-    dplyr::mutate(
-      # HTTPS request downloads a file
-      quadrat_photo = attachment_get(
-        id,
-        location_quadrat_photo,
-        local_dir = t,
-        pid = get_test_pid(),
-        fid = get_test_fid(),
-        url = get_test_url(),
-        un = get_test_un(),
-        pw = get_test_pw(),
-        verbose = TRUE
+  # vcr::use_cassette("test_attachment_get1", {
+    fresh_parsed <- fresh_raw %>%
+      odata_submission_rectangle() %>%
+      dplyr::mutate(
+        # HTTPS request downloads a file
+        quadrat_photo = attachment_get(
+          id,
+          location_quadrat_photo,
+          local_dir = t,
+          pid = get_test_pid(),
+          fid = get_test_fid(),
+          url = get_test_url(),
+          un = get_test_un(),
+          pw = get_test_pw(),
+          verbose = TRUE
+        )
       )
-    )
-  })
+  # })
 
-  vcr::use_cassette("test_attachment_get2", {
-  fresh_parsed_sep <- fresh_raw %>%
-    odata_submission_rectangle() %>%
-    dplyr::mutate(
-      quadrat_photo = attachment_get(
-        id,
-        location_quadrat_photo,
-        local_dir = t,
-        separate = TRUE,
-        pid = get_test_pid(),
-        fid = get_test_fid(),
-        url = get_test_url(),
-        un = get_test_un(),
-        pw = get_test_pw(),
-        verbose = TRUE
+  # vcr::use_cassette("test_attachment_get2", {
+    fresh_parsed_sep <- fresh_raw %>%
+      odata_submission_rectangle() %>%
+      dplyr::mutate(
+        quadrat_photo = attachment_get(
+          id,
+          location_quadrat_photo,
+          local_dir = t,
+          separate = TRUE,
+          pid = get_test_pid(),
+          fid = get_test_fid(),
+          url = get_test_url(),
+          un = get_test_un(),
+          pw = get_test_pw(),
+          verbose = TRUE
+        )
       )
-    )
-  })
+  # })
 
   # Attachment paths should be character, not e.g. list (pmap outputs lists)
   testthat::expect_equal(class(fresh_parsed$quadrat_photo), "character")

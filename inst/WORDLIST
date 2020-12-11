@@ -142,6 +142,7 @@ datatypes
 dateTime
 datetime
 datetimes
+decrypt
 dir
 doi
 dttm
