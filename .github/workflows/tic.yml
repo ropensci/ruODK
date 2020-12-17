@@ -29,7 +29,7 @@ jobs:
           - { os: windows-2016, r: "oldrel" }
           - { os: macOS-latest, r: "devel" }
           - { os: macOS-latest, r: "release"}
-          # - { os: macOS-latest, r: "oldrel"} # vign spatial > systemfonts > libfreetype.6.dylib
+          - { os: macOS-latest, r: "oldrel"} # vign spatial > systemfonts > libfreetype.6.dylib
           - { os: ubuntu-20.04, r: "devel" }
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
@@ -125,13 +125,13 @@ jobs:
         run: |
           sudo apt install libxml2-dev libjq-dev libudunits2-dev libgdal-dev \
           libgeos-dev libproj-dev libicu-dev libv8-dev libjq-dev libprotobuf-dev \
-          protobuf-compiler
+          protobuf-compiler libgit2
 
       - name: "[Custom block] [macOS-devel][r-devel] Install system pkgs"
         if: matrix.config.os == 'macOS-latest'
         run: |
           rm '/usr/local/bin/gfortran'
-          brew install gdal proj geos udunits cairo libpng
+          brew install gdal proj geos udunits cairo libpng libgit2
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
