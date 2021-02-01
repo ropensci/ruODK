@@ -18,8 +18,8 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Thu, 10 Dec 2020 08:23:04 GMT
-      etag: W/"357-vcj5lR6TQC6gDKwz+07LEC9yDQQ"
+      date: Mon, 01 Feb 2021 03:20:41 GMT
+      etag: W/"364-aTef5JlSi5ZMd5YuCJh6xU73Kyc"
       server: nginx
       strict-transport-security:
       - max-age=31536000
@@ -30,7 +30,7 @@ http_interactions:
     body:
       encoding: UTF-8
       file: no
-      string: '{"verbs":["backup.create","backup.terminate","config.read","field_key.create","field_key.delete","field_key.list","form.create","form.delete","form.list","form.read","form.update","project.create","project.delete","project.read","project.update","session.end","submission.create","submission.read","submission.list","user.create","user.list","user.password.invalidate","user.read","user.update","submission.update","role.create","role.update","role.delete","assignment.list","assignment.create","assignment.delete","user.delete","audit.read","public_link.create","public_link.list","public_link.read","public_link.update","public_link.delete"],"id":2,"name":"ruODK
+      string: '{"verbs":["backup.create","backup.terminate","config.read","field_key.create","field_key.delete","field_key.list","form.create","form.delete","form.list","form.read","form.update","project.create","project.delete","project.read","project.update","session.end","submission.create","submission.read","submission.list","user.create","user.list","user.password.invalidate","user.read","user.update","submission.update","role.create","role.update","role.delete","assignment.list","assignment.create","assignment.delete","user.delete","audit.read","public_link.create","public_link.list","public_link.read","public_link.update","public_link.delete","backup.run"],"id":2,"name":"ruODK
         package tests","archived":null,"keyId":null,"forms":12,"lastSubmission":"2020-11-02T04:41:14.761Z","appUsers":1,"createdAt":"2020-10-31T11:11:50.035Z","updatedAt":"2020-11-23T05:25:03.426Z"}'
-  recorded_at: 2020-12-10 08:23:06 GMT
-  recorded_with: vcr/0.5.4, webmockr/0.7.4
+  recorded_at: 2021-02-01 03:20:41 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

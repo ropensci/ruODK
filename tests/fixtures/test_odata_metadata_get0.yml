@@ -17,7 +17,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/xml; charset=utf-8
-      date: Thu, 10 Dec 2020 08:22:51 GMT
+      date: Mon, 01 Feb 2021 03:20:29 GMT
       etag: W/"1af1-RimHBtm/NxLxQJ85lvRi+fOzPCs"
       odata-version: '4.0'
       server: nginx
@@ -156,5 +156,5 @@ http_interactions:
             </Schema>
           </edmx:DataServices>
         </edmx:Edmx>
-  recorded_at: 2020-12-10 08:22:52 GMT
-  recorded_with: vcr/0.5.4, webmockr/0.7.4
+  recorded_at: 2021-02-01 03:20:30 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
