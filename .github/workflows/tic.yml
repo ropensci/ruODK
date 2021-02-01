@@ -29,7 +29,7 @@ jobs:
           - { os: windows-2016, r: "oldrel" }
           - { os: macOS-latest, r: "devel" }
           - { os: macOS-latest, r: "release"}
-          - { os: macOS-latest, r: "oldrel"} # vign spatial > systemfonts > libfreetype.6.dylib
+          # - { os: macOS-latest, r: "oldrel"} # vign spatial > systemfonts > libfreetype.6.dylib
           - { os: ubuntu-20.04, r: "devel" }
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
@@ -132,7 +132,7 @@ jobs:
       - name: "[Custom block] [macOS-devel][r-devel] Install system pkgs"
         if: matrix.config.os == 'macOS-latest'
         run: |
-          rm '/usr/local/bin/gfortran'
+          rm '/usr/local/bin/gfortran' || true
           brew install freetype
           brew link --overwrite freetype
           brew install gdal proj geos udunits cairo libpng libgit2
