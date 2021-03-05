@@ -5,6 +5,13 @@
 ## Data
 ## Maintenance
 
+# `ruODK` 0.9.7
+## Major fixes
+## Minor fixes
+## Documentation
+## Data
+## Maintenance
+
 # `ruODK` 0.9.6
 ## Major fixes
 * Support encryption (#30 #110, @Thaliehln).

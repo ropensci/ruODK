@@ -1,7 +1,7 @@
 Type: Package
 Package: ruODK
 Title: An R Client for the ODK Central API
-Version: 0.9.6
+Version: 0.9.7
 Authors@R: 
     c(person(given = c("Florian", "W."),
              family = "Mayer",
@@ -24,6 +24,10 @@ Authors@R:
              family = "Tyszler",
              role = "ctb",
              comment = c(ORCID = "0000-0002-4573-0002")),
+      person(given = "Hélène",
+             family = "Langet",
+             role = "ctb",
+             comment = c(ORCID = "0000-0002-6758-2397")),             
       person(given = "DBCA",
              role = c("cph", "fnd")),
       person(given = "NWSFTCP",
