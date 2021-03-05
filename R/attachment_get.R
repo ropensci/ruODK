@@ -126,7 +126,18 @@ get_one_attachment <- function(pth,
                                pw = get_default_pw(),
                                retries = get_retries(),
                                verbose = get_ru_verbose()) {
-  yell_if_missing(url, un, pw)
+  # Early exit if there's nothing to download
+  if (is.na(fn)) {
+    if (verbose == TRUE) {
+      message(crayon::green(
+        glue::glue(
+          "{clisymbols::symbol$circle} [{Sys.time()}] ",
+          "Filename is NA, skipping download.\n"
+        )
+      ))
+    }
+    return(NA)
+  }
   if (fs::file_exists(pth)) {
     if (verbose == TRUE) {
       message(crayon::green(
@@ -138,18 +149,8 @@ get_one_attachment <- function(pth,
     }
     return(pth %>% as.character())
   }
-  if (is.na(fn)) {
-    if (verbose == TRUE) {
-      message(crayon::green(
-        glue::glue(
-          "{clisymbols::symbol$circle} ",
-          "Filename is NA, skipping download.\n"
-        )
-      ))
-    }
-    return(NA)
-  }
 
+  yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
     src,
