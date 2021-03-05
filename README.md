@@ -228,10 +228,12 @@ proj %>% head() %>% knitr::kable(.)
 
 |  id | name                             | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
 |----:|:---------------------------------|------:|-----------:|:--------------------|:------------|:--------------------|:---------|
-|   1 | DBCA                             |    12 |         13 | 2020-09-15 11:50:06 | NA          | 2020-12-11 09:50:31 | FALSE    |
+|   1 | DBCA                             |    12 |         14 | 2020-09-15 11:50:06 | NA          | 2021-02-28 10:42:38 | FALSE    |
 |   4 | Fire Management and Plant Health |     5 |          2 | 2020-11-06 11:12:16 | NA          | 2020-11-06 11:47:21 | FALSE    |
+|   6 | Kingston Spotlighting            |     3 |          3 | 2021-02-16 14:01:19 | NA          | 2021-02-16 14:36:52 | FALSE    |
 |   2 | ruODK package tests              |    12 |          1 | 2020-10-31 19:11:50 | NA          | 2020-11-02 12:41:14 | FALSE    |
 |   3 | ruODK package tests encrypted    |     1 |          1 | 2020-10-31 19:12:57 | NA          | 2020-11-02 15:26:38 | FALSE    |
+|   5 | Sandbox                          |     2 |          1 | 2020-12-14 15:36:46 | NA          | 2021-01-27 07:35:06 | FALSE    |
 
 ``` r
 # List forms of default project
@@ -402,8 +404,9 @@ citation("ruODK")
 #> 
 #> To cite ruODK in publications use:
 #> 
-#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version 0.9.5).
-#>   Zenodo. https://doi.org/10.5281/zenodo.3953158
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the
+#>   ODK Central API (Version 0.9.5).  Zenodo.
+#>   https://doi.org/10.5281/zenodo.3953158
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 

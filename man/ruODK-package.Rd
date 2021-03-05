@@ -32,6 +32,7 @@ Other contributors:
   \item Karissa Whiting (\href{https://orcid.org/0000-0002-4683-1868}{ORCID}) [reviewer]
   \item Jason Taylor [reviewer]
   \item Marcelo Tyszler (\href{https://orcid.org/0000-0002-4573-0002}{ORCID}) [contributor]
+  \item Hélène Langet (\href{https://orcid.org/0000-0002-6758-2397}{ORCID}) [contributor]
   \item DBCA [copyright holder, funder]
   \item NWSFTCP [funder]
 }

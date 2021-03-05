@@ -264,4 +264,3 @@ caring for country.
 See [`vignette("comparison", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/comparison.html)
 for a comprehensive comparison of ruODK to other software packages from
 both an ODK and an OData angle.
-
