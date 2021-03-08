@@ -7,6 +7,9 @@
 
 # `ruODK` 0.9.7
 ## Major fixes
+* `odata_submission_get()` bugfix: `handle_ru_attachments()` 
+  now finds and downloads media attachments from both main submissions and 
+  nested form groups. (#114)
 ## Minor fixes
 ## Documentation
 ## Data

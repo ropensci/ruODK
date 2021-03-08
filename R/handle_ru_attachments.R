@@ -58,34 +58,65 @@ handle_ru_attachments <- function(data,
                                   verbose = get_ru_verbose()) {
   # Find attachment columns
   # Caveat: if an attachment field has no submissions, it is dropped from data
-  att_cols <- form_schema %>%
+  # This works for the main table "Submissions"
+  att_cols_main <- form_schema %>%
     dplyr::filter(type == "binary") %>%
     magrittr::extract2("ruodk_name") %>%
     intersect(names(data))
 
-  if (verbose == TRUE) {
-    x <- paste(att_cols, collapse = ", ") # nolint
-    ru_msg_info(glue::glue("Found attachments: {x}."))
-    ru_msg_info("Downloading attachments...")
+  if (length(att_cols_main) > 0) {
+    if (verbose == TRUE) {
+      x <- paste(att_cols_main, collapse = ", ") # nolint
+      ru_msg_info(glue::glue("Found attachments in main Submissions table: {x}."))
+      ru_msg_info("Downloading attachments...")
+    }
+    data <- data %>%
+      dplyr::mutate_at(
+        dplyr::vars(att_cols_main),
+        ~ ruODK::attachment_get(
+          id,
+          .,
+          local_dir = local_dir,
+          verbose = verbose,
+          pid = pid,
+          fid = fid,
+          url = url,
+          un = un,
+          pw = pw,
+          retries = retries
+        )
+      )
   }
 
-  # Download each attachment column and link attachments to relative file path
-  data <- data %>%
-    dplyr::mutate_at(
-      dplyr::vars(att_cols),
-      ~ ruODK::attachment_get(
-        id,
-        .,
-        local_dir = local_dir,
-        verbose = verbose,
-        pid = pid,
-        fid = fid,
-        url = url,
-        un = un,
-        pw = pw,
-        retries = retries
+  # This fetches the attachment cols of any nested subtable "Submissions.GROUP"
+  att_cols_sub <- form_schema %>%
+    dplyr::filter(type == "binary") %>%
+    magrittr::extract2("name") %>%
+    intersect(names(data))
+
+  if (length(att_cols_sub) > 0) {
+    if (verbose == TRUE) {
+      x <- paste(att_cols_sub, collapse = ", ") # nolint
+      ru_msg_info(glue::glue("Found attachments in nested sub-table: {x}."))
+      ru_msg_info("Downloading attachments...")
+    }
+    data <- data %>%
+      dplyr::mutate_at(
+        dplyr::vars(att_cols_sub),
+        ~ ruODK::attachment_get(
+          submissions_id,
+          .,
+          local_dir = local_dir,
+          verbose = verbose,
+          pid = pid,
+          fid = fid,
+          url = url,
+          un = un,
+          pw = pw,
+          retries = retries
+        )
       )
-    )
+  }
 
   data
 }

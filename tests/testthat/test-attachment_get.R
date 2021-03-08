@@ -153,7 +153,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   # Not happy, but tolerant: keep file at pth if exists
   get_one_attachment(
     pth,
-    NA,
+    fn,
     src,
     url = get_test_url(),
     un = get_test_un(),
@@ -163,7 +163,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
 
   gg <- get_one_attachment(
     pth,
-    NA,
+    fn,
     src,
     url = get_test_url(),
     un = get_test_un(),
