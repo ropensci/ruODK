@@ -10,6 +10,10 @@
 * `odata_submission_get()` bugfix: `handle_ru_attachments()` 
   now finds and downloads media attachments from both main submissions and 
   nested form groups. (#114)
+* `odata_submission_get()` bugfix: missing media attachments (due to upload 
+  error from ODK Collect to ODK Central) are tolerated without interrupting the
+  batch download. A diagnostic warning message will be emitted for each failed
+  download. (#114)
 ## Minor fixes
 ## Documentation
 ## Data
