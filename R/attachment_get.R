@@ -133,34 +133,25 @@ get_one_attachment <- function(pth,
   # Early exit if there's nothing to download
   if (is.na(fn)) {
     if (verbose == TRUE) {
-      message(crayon::green(
-        glue::glue(
-          "{clisymbols::symbol$circle} [{Sys.time()}] ",
-          "Filename is NA, skipping download.\n"
-        )
-      ))
+      "Filename is NA, skipping download.\n" %>%
+        glue::glue() %>%
+        ru_msg_noop()
     }
     return(NA)
   }
 
-  # HTTP 404.1 on file download saves the JSON error message as 76B file
-  # If the download fails, inspect src and try to curl the plain API call.
-  # nolint start
-  # https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-attachments/downloading-an-attachment
-  # nolitn end
+  # HTTP 404.1 on file download saves the JSON error message as 76B file.
   if (fs::file_exists(pth) && fs::file_size(pth) != 76) {
     if (verbose == TRUE) {
-      message(crayon::green(
-        glue::glue(
-          "{clisymbols::symbol$circle_filled} ",
-          "File already downloaded, keeping \"{pth}\".\n"
-        )
-      ))
+      'File already downloaded, keeping "{pth}".\n' %>%
+        glue::glue() %>%
+        ru_msg_noop()
     }
     return(pth %>% as.character())
   }
 
   yell_if_missing(url, un, pw)
+
   res <- httr::RETRY(
     "GET",
     src,
@@ -170,30 +161,35 @@ get_one_attachment <- function(pth,
     terminate_on = c(404)
   ) %>%
     httr::warn_for_status(
-      task=glue::glue(
-        "download media attachment {src}.\n",
+      # If the download fails, inspect src and try to curl the plain API call.
+      # nolint start
+      # https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-attachments/downloading-an-attachment
+      # nolint end
+      task = glue::glue(
+        "download media attachment {fn}.\n",
         "Troubleshooting tips:\n",
-        "* Is the server online at {url}? Is the internet flaky? Retry!\n",
-        "* Check ruODK::ru_settings() - credentials and defaults correct?\n",
-        "* Run ru_setup() with working credentials and defaults.\n",
-        '* Read the vignette("setup", package = "ruODK") how to set up ruODK\n',
-        "* Run the following command in a Terminal to see whether the file exists:\n",
-        "  curl --include {src} -u {un} -p --output file.jpg\n",
-        "  cat file.jpg"
+        "* Does the file resource {fn} exist? Run in a Terminal:\n",
+        "  curl -ipu {un} {src} | cat\n",
+        "* Is {fn} an expected attachment of this submission? Run:\n",
+        '  curl -ipu {un} {stringr::str_replace(src, fn, "")}\n',
       )
     )
 
-  if (verbose == TRUE) {
-    message(crayon::green(
-      glue::glue(
-        "{clisymbols::symbol$tick} ",
-        "File saved to \"{pth}\".\n"
-      )
-    ))
+  if (fs::file_exists(pth)) {
+    if (verbose == TRUE) {
+      'File saved to "{pth}".\n' %>%
+        glue::glue() %>%
+        ru_msg_success()
+    }
+    return(pth %>% as.character())
+  } else {
+    if (verbose == TRUE) {
+      "File not found.\n" %>%
+        glue::glue() %>%
+        ru_msg_success()
+    }
+    return(NA)
   }
-
-
-  return(pth %>% as.character())
 }
 
 #' Download attachments and return the local path.
@@ -288,7 +284,13 @@ attachment_get <- function(sid,
   tibble::tibble(
     pth = fs::path(dest_dir, fn),
     fn = fn,
-    src = attachment_url(sid, fn, pid = pid, fid = fid, url = url),
+    src = attachment_url(
+      sid,
+      fn,
+      pid = pid,
+      fid = fid,
+      url = url
+    ),
     url = url,
     un = un,
     pw = pw,

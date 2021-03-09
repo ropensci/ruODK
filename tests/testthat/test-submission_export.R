@@ -99,9 +99,9 @@ test_that("submission_export works", {
 })
 
 test_that("submission_export works with encryption", {
-
   skip_on_cran()
 
+  # nolint start
   # # This is needed to run the tests for this file only
   # if (is.null(vcr::vcr_configuration()$write_disk_path)) {
   #   vcr::vcr_configure(write_disk_path = "../files")
@@ -112,20 +112,21 @@ test_that("submission_export works with encryption", {
   #   fs::is_dir(wdp),
   #   label = glue::glue("VCR write_disk_path must exist: {wdp}")
   # )
+  # nolint end
 
   t <- tempdir()
   # vcr::use_cassette("test_submission_export0", {
-    se <- submission_export(
-      local_dir = t,
-      overwrite = FALSE,
-      pid = Sys.getenv("ODKC_TEST_PID_ENC"),
-      fid = Sys.getenv("ODKC_TEST_FID_ENC"),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      pp = get_test_pp(),
-      verbose = TRUE
-    )
+  se <- submission_export(
+    local_dir = t,
+    overwrite = FALSE,
+    pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+    fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pp = get_test_pp(),
+    verbose = TRUE
+  )
   # })
 
   testthat::expect_true(

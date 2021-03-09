@@ -11,13 +11,13 @@
   "relatedLink": "https://docs.ropensci.org/ruODK",
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
+  "runtimePlatform": "R version 4.0.4 (2021-02-15)",
   "author": [
     {
       "@type": "Person",
@@ -33,6 +33,12 @@
       "givenName": "Marcelo",
       "familyName": "Tyszler",
       "@id": "https://orcid.org/0000-0002-4573-0002"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Hélène",
+      "familyName": "Langet",
+      "@id": "https://orcid.org/0000-0002-6758-2397"
     }
   ],
   "copyrightHolder": [
@@ -528,7 +534,7 @@
   "applicationCategory": "DataAccess",
   "keywords": ["database", "open-data", "opendatakit", "odk", "api", "data", "dataset", "odata", "odata-client", "r"],
   "readme": "https://github.com/ropensci/ruODK/blob/main/README.md",
-  "fileSize": "6841.247KB",
+  "fileSize": "12320.544KB",
   "citation": [
     {
       "@type": "CreativeWork",
