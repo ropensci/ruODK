@@ -133,5 +133,87 @@ test_that("submission_export works with encryption", {
     fs::is_file(se),
     label = glue::glue("Submission ZIP must be a file: {se}")
   )
+
+
+})
+
+test_that("submission_export warns of missing credentials", {
+
+  t <- tempdir()
+
+  testthat::expect_error(
+    se <- submission_export(
+      pid = "",
+      fid = Sys.getenv("ODKC_TEST_FID"),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+
+      overwrite = FALSE,
+      local_dir = t,
+      verbose = TRUE
+    )
+  )
+
+  testthat::expect_error(
+    se <- submission_export(
+      pid = Sys.getenv("ODKC_TEST_PID"),
+      fid = "",
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+
+      overwrite = FALSE,
+      local_dir = t,
+      pp = get_test_pp(),
+      verbose = TRUE
+    )
+  )
+
+  testthat::expect_error(
+    se <- submission_export(
+      pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+      fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+      url = "",
+      un = get_test_un(),
+      pw = get_test_pw(),
+
+      overwrite = FALSE,
+      local_dir = t,
+      pp = get_test_pp(),
+      verbose = TRUE
+    )
+  )
+
+  testthat::expect_error(
+    se <- submission_export(
+      pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+      fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+      url = get_test_url(),
+      un = "",
+      pw = get_test_pw(),
+
+      overwrite = FALSE,
+      local_dir = t,
+      pp = get_test_pp(),
+      verbose = TRUE
+    )
+  )
+
+  testthat::expect_error(
+    se <- submission_export(
+      pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+      fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = "",
+
+      overwrite = FALSE,
+      local_dir = t,
+      pp = get_test_pp(),
+      verbose = TRUE
+    )
+  )
+
 })
 # usethis::use_r("submission_export") # nolint

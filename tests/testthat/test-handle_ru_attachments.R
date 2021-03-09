@@ -18,7 +18,7 @@ test_that("handle_ru_attachments downloads files", {
       url = ruODK::get_test_url(),
       un = ruODK::get_test_un(),
       pw = ruODK::get_test_pw(),
-      verbose = ruODK::get_ru_verbose()
+      verbose = TRUE
     )
 
   # There should be files in local_dir

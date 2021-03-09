@@ -24,7 +24,8 @@ test_that("attachment_get works", {
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
-    parse = FALSE
+    parse = FALSE,
+    verbose = TRUE
   )
   # })
 
