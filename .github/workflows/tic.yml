@@ -51,7 +51,8 @@ jobs:
       # macOS >= 10.15.4 linking
       SDKROOT: /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
       # use GITHUB_TOKEN from GitHub to workaround rate limits in {remotes}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # GH secret names GITHUB_PAT and GITHUB_TOKEN and GITHUB_* are protected
+      GITHUB_PAT: ${{ secrets.GHTKN }}
       # [Custom env]
       # ruODK test env variables
       ODKC_URL: ${{ secrets.ODKC_URL }}
