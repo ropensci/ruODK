@@ -2,9 +2,9 @@
 title: "Setup"
 output: 
   rmarkdown::html_vignette:
-    self_contained: false
+    self_contained: true
 vignette: >
-  %\VignetteIndexEntry{setup}
+  %\VignetteIndexEntry{Setup}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}  
 ---

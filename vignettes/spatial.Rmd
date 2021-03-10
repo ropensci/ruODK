@@ -2,7 +2,7 @@
 title: "Spatial data"
 output: 
   rmarkdown::html_vignette:
-    self_contained: false
+    self_contained: true
 vignette: >
   %\VignetteIndexEntry{Spatial data}
   %\VignetteEngine{knitr::rmarkdown}
@@ -51,7 +51,7 @@ library(mapview)
 # Spatial
 library(sf)
 # Fix https://github.com/r-spatial/mapview/issues/313
-mapviewOptions(fgb = FALSE)
+mapview::mapviewOptions(fgb = FALSE)
 ```
 
 ## Data

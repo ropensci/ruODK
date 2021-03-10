@@ -2,7 +2,7 @@
 title: "Accessing the OData API"
 output: 
   rmarkdown::html_vignette:
-    self_contained: false
+    self_contained: true
 vignette: >
   %\VignetteIndexEntry{Accessing the OData API}
   %\VignetteEngine{knitr::rmarkdown}
