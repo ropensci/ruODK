@@ -2,7 +2,7 @@
 title: "Comparison of related software packages"
 output: 
   rmarkdown::html_vignette:
-    self_contained: true
+    self_contained: false
 vignette: >
   %\VignetteIndexEntry{Comparison of related software packages}
   %\VignetteEngine{knitr::rmarkdown}

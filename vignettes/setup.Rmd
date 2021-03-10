@@ -2,7 +2,7 @@
 title: "Setup"
 output: 
   rmarkdown::html_vignette:
-    self_contained: true
+    self_contained: false
 vignette: >
   %\VignetteIndexEntry{Setup}
   %\VignetteEngine{knitr::rmarkdown}

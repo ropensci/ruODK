@@ -2,7 +2,7 @@
 title: "Spatial data"
 output: 
   rmarkdown::html_vignette:
-    self_contained: true
+    self_contained: false
 vignette: >
   %\VignetteIndexEntry{Spatial data}
   %\VignetteEngine{knitr::rmarkdown}
