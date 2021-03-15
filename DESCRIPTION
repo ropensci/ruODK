@@ -74,7 +74,7 @@ Suggests:
     mapview (>= 2.9.4),
     rmarkdown (>= 1.17),
     roxygen2 (>= 7.1.0),
-    sf (>= 0.9-5),
+    sf (>= 0.9-7),
     testthat (>= 2.3.2),
     usethis (>= 1.6.0),
     vcr (>= 0.5.4),
@@ -89,4 +89,7 @@ LazyData: true
 RoxygenNote: 7.1.1
 X-schema.org-applicationCategory: Data Access
 X-schema.org-keywords: database, open-data, opendatakit, odk, api, data, dataset
-Remotes: r-spatial/mapview
+Remotes: 
+    r-spatial/leafem,
+    r-spatial/mapview,
+    r-spatial/sf

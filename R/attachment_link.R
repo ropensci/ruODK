@@ -71,4 +71,7 @@ attachment_link <- function(data_tbl,
 # nolint start
 # usethis::use_test("attachment_link")
 # usethis::use_test("submission_export")
+# covr::file_coverage("R/attachment_link.R",
+#   test_files = c("tests/testthat/test-attachment_link.R",
+#                  "tests/testthat/test-submission_export.R"))
 # nolint end
