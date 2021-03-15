@@ -116,10 +116,11 @@ submission_export <- function(local_dir = here::here(),
   # Create body containing encryption key and passphrase
   # associated with the request
   if (length(encryption_keys) > 0) {
-    body <- vector(mode = "list", length = length(1))
-    names(body) <- encryption_keys[[1]]$id
-    body[[encryption_keys[[1]]$id]] <- pp
+    body <- list()
+    var <- toString(encryption_keys[[1]]$id)
+    body[[var]] <- pp
   }
+  print(body)
 
   # Export form submissions to CSV via POST
   httr::RETRY(
