@@ -183,12 +183,18 @@ get_one_attachment <- function(pth,
     }
     return(pth %>% as.character())
   } else {
+    # nocov start
+    # nolint start
+    # This is hard to test, as it requires a form with a missing attachment.
+    # This only ever happens on exotic upload errors.
+    # nolint end
     if (verbose == TRUE) {
       "File not found.\n" %>%
         glue::glue() %>%
         ru_msg_success()
     }
     return(NA)
+    # nocov end
   }
 }
 
