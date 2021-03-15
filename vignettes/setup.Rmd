@@ -90,6 +90,9 @@ sourced at the beginning of a new session at
 `ruODK::get_default_{pid,fid,url,un.pw}()`. These getters in turn look up their
 values from environment variables.
 
+The getters and setters are documented in the "Settings" family of the 
+[ruODK function reference](https://docs.ropensci.org/ruODK/reference/index.html).
+
 A convenient way to have often used environment variables available is to add
 them to `~/.Renviron` using `usethis::edit_r_environ(scope = "user")`. This
 loads them freshly into a new session, eliminating the need to run `ru_setup()`.
@@ -108,6 +111,7 @@ ODKC_FID="build_Flora-Quadrat-0-2_1558575936"
 ODKC_URL="https://odkcentral.dbca.wa.gov.au"
 ODKC_UN="me@email.com"
 ODKC_PW="..."
+ODKC_PP="..."
 ODKC_VERSION=0.8
 
 # Test settings
@@ -142,6 +146,7 @@ can set them through `Sys.setenv()`:
 Sys.setenv(ODKC_URL="https://odkc.dbca.wa.gov.au")
 Sys.setenv(ODKC_UN="me@mail.com")
 Sys.setenv(ODKC_PW="...")
+Sys.setenv(ODKC_PP="...")
 Sys.setenv(ODKC_TEST_URL="...")
 Sys.setenv(ODKC_TEST_UN="...")
 Sys.setenv(ODKC_TEST_PW="...")
@@ -173,8 +178,8 @@ ruODK::project_list(
 ```
 
 An example use case are the `ruODK` tests, which explicitly set `url`, `un`,
-`pw`, `pid` and `fid` from the test variables
-`ruODK::get_test_{url, un, pw, pid, fid}()`. Note that this uses functions
+`pw`, `pp`, `pid` and `fid` from the test variables
+`ruODK::get_test_{url, un, pw, pp, pid, fid}()`. Note that this uses functions
 instead of plain text versions of sensitive credentials. Alternatively,
 variables could also be used to set credentials per function call.
 

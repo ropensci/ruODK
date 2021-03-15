@@ -9,6 +9,7 @@ test_that("ru_setup does not update settings if given NULL", {
     url = NULL,
     un = NULL,
     pw = NULL,
+    pp = NULL,
     tz = NULL,
     odkc_version = NULL,
     verbose = NULL,
@@ -35,6 +36,7 @@ test_that("ru_setup does not update settings if given NULL", {
   testthat::expect_equal(x$url, xx$url)
   testthat::expect_equal(x$un, xx$un)
   testthat::expect_equal(x$pw, xx$pw)
+  testthat::expect_equal(x$pp, xx$pp)
   testthat::expect_equal(x$odkc_version, xx$odkc_version)
   testthat::expect_equal(x$tz, xx$tz)
   testthat::expect_equal(x$test_url, xx$test_url)
@@ -58,6 +60,7 @@ test_that("ru_setup resets settings if given empty string", {
   url <- get_default_url()
   un <- get_default_un()
   pw <- get_default_pw()
+  pp <- get_default_pp()
   tz <- get_default_tz()
   odkcv <- get_default_odkc_version()
   retries <- get_retries()
@@ -82,6 +85,7 @@ test_that("ru_setup resets settings if given empty string", {
     url = "",
     un = "",
     pw = "",
+    pp = "",
     tz = "",
     odkc_version = "",
     retries = "",
@@ -106,6 +110,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_default_url())
   testthat::expect_warning(get_default_un())
   testthat::expect_warning(get_default_pw())
+  testthat::expect_warning(get_default_pp())
   # testthat::expect_warning(get_default_odkc_version()) # nolint
   testthat::expect_warning(get_default_tz())
   testthat::expect_equal(get_retries(), 3L) # fallback for empty RU_RETRIES
@@ -124,6 +129,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_equal(x$url, "")
   testthat::expect_equal(x$un, "")
   testthat::expect_equal(x$pw, "")
+  testthat::expect_equal(x$pp, "")
   # testthat::expect_equal(x$tz, "") # nolint
   testthat::expect_equal(x$test_url, "")
   testthat::expect_equal(x$test_un, "")
@@ -143,6 +149,7 @@ test_that("ru_setup resets settings if given empty string", {
     url = url,
     un = un,
     pw = pw,
+    pp = pp,
     tz = tz,
     odkc_version = odkcv,
     retries = retries,

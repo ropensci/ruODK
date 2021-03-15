@@ -14,6 +14,7 @@
 #' \code{\link{get_default_url}},
 #' \code{\link{get_default_un}},
 #' \code{\link{get_default_pw}},
+#' \code{\link{get_default_pp}},
 #' \code{\link{get_default_tz}},
 #' \code{\link{get_default_odkc_version}},
 #' \code{\link{get_retries}},
@@ -39,6 +40,7 @@ ru_settings <- function() {
     url = Sys.getenv("ODKC_URL", ""),
     un = Sys.getenv("ODKC_UN", ""),
     pw = Sys.getenv("ODKC_PW", ""),
+    pp = Sys.getenv("ODKC_PP", ""),
     tz = Sys.getenv("RU_TIMEZONE", "UTC"),
     odkc_version = Sys.getenv("ODKC_VERSION", 0.8),
     retries = get_retries(),
@@ -66,6 +68,7 @@ print.ru_settings <- function(x, ...) {
   cat("  Default ODK Central URL:", x$url, "\n")
   cat("  Default ODK Central Username:", x$un, "\n")
   cat("  Default ODK Central Password: run ruODK::get_default_pw() to show \n")
+  cat("  Default ODK Central Passphrase: run ruODK::get_default_pp() to show \n")
   cat("  Default Time Zone:", x$tz, "\n")
   cat("  Default ODK Central Version:", x$odkc_version, "\n")
   cat("  Default HTTP GET retries:", x$retries, "\n")
@@ -138,6 +141,7 @@ odata_svc_parse <- function(svc) {
 #' @param un An ODK Central username which is the email of a "web user" in the
 #'   specified ODK Central instance \code{url} (optional, character).
 #' @param pw The password for user \code{un} (optional, character).
+#' @param pp The passphrase (optional, character) for an encrypted form.
 #' @param odkc_version The ODK Central version as major/minor version, e.g. 0.8.
 #' @param tz Global default time zone.
 #'   `ruODK`'s time zone is determined in order of precedence:
@@ -225,6 +229,7 @@ odata_svc_parse <- function(svc) {
 #'   url = "https://odkcentral.dbca.wa.gov.au",
 #'   un = "me@email.com",
 #'   pw = "...",
+#'   pp = "...",
 #'   test_url = "https://sandbox.central.getodk.org",
 #'   test_un = "me@email.com",
 #'   test_pw = "...",
@@ -244,6 +249,7 @@ ru_setup <- function(svc = NULL,
                      url = NULL,
                      un = NULL,
                      pw = NULL,
+                     pp = NULL,
                      tz = NULL,
                      odkc_version = NULL,
                      retries = NULL,
@@ -275,6 +281,7 @@ ru_setup <- function(svc = NULL,
   if (!is.null(url)) Sys.setenv("ODKC_URL" = url)
   if (!is.null(un)) Sys.setenv("ODKC_UN" = un)
   if (!is.null(pw)) Sys.setenv("ODKC_PW" = pw)
+  if (!is.null(pp)) Sys.setenv("ODKC_PP" = pp)
   if (!is.null(tz)) Sys.setenv("RU_TIMEZONE" = tz)
   if (!is.null(odkc_version)) Sys.setenv("ODKC_VERSION" = odkc_version)
   if (!is.null(retries)) Sys.setenv("RU_RETRIES" = retries)
@@ -361,6 +368,17 @@ get_default_pw <- function() {
   x <- Sys.getenv("ODKC_PW")
   if (identical(x, "")) {
     ru_msg_warn("No default ODK Central password set. ru_setup()?")
+  }
+  x
+}
+
+#' `r lifecycle::badge("stable")`
+#' @export
+#' @rdname ru_settings
+get_default_pp <- function() {
+  x <- Sys.getenv("ODKC_PP")
+  if (identical(x, "")) {
+    ru_msg_warn("No default ODK Central passphrase set. ru_setup()?")
   }
   x
 }

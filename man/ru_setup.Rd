@@ -11,6 +11,7 @@ ru_setup(
   url = NULL,
   un = NULL,
   pw = NULL,
+  pp = NULL,
   tz = NULL,
   odkc_version = NULL,
   retries = NULL,
@@ -49,6 +50,8 @@ This will override the ODK Central base URL from \code{svc}.}
 specified ODK Central instance \code{url} (optional, character).}
 
 \item{pw}{The password for user \code{un} (optional, character).}
+
+\item{pp}{The passphrase (optional, character) for an encrypted form.}
 
 \item{tz}{Global default time zone.
   `ruODK`'s time zone is determined in order of precedence:
@@ -161,6 +164,7 @@ ru_setup(
   url = "https://odkcentral.dbca.wa.gov.au",
   un = "me@email.com",
   pw = "...",
+  pp = "...",
   test_url = "https://sandbox.central.getodk.org",
   test_un = "me@email.com",
   test_pw = "...",

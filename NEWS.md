@@ -5,6 +5,14 @@
 ## Data
 ## Maintenance
 
+# `ruODK` 0.9.8
+## Major fixes
+## Minor fixes
+* Add support for passphrase to the `ru_setup` family (#116)
+## Documentation
+## Data
+## Maintenance
+
 # `ruODK` 0.9.7
 ## Major fixes
 * `odata_submission_get()` bugfix: `handle_ru_attachments()` 
