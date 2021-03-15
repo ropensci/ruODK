@@ -9,18 +9,19 @@ test_that("odata_submission_get skips download", {
 
   # Get submissions, do not download attachments
   vcr::use_cassette("test_odata_submission_get0", {
-  fresh_raw <- odata_submission_get(
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version(),
-    parse = TRUE,
-    download = FALSE,
-    local_dir = t,
-    verbose = TRUE
-  )})
+    fresh_raw <- odata_submission_get(
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version(),
+      parse = TRUE,
+      download = FALSE,
+      local_dir = t,
+      verbose = TRUE
+    )
+  })
 
   # There should be no files in the download dir
   testthat::expect_equal(t %>% fs::dir_ls(), character(0))
@@ -74,40 +75,43 @@ test_that("odata_submission_get skip omits number of results", {
   skip_on_appveyor()
 
   vcr::use_cassette("test_odata_submission_get1", {
-  fq_svc <- odata_service_get(
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw()
-  )})
+    fq_svc <- odata_service_get(
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  })
 
   vcr::use_cassette("test_odata_submission_get2", {
-  fresh_parsed <- odata_submission_get(
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version(),
-    parse = TRUE,
-    download = FALSE,
-    table = fq_svc$name[2] # brittle: depends on form used
-  )})
+    fresh_parsed <- odata_submission_get(
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version(),
+      parse = TRUE,
+      download = FALSE,
+      table = fq_svc$name[2] # brittle: depends on form used
+    )
+  })
 
   vcr::use_cassette("test_odata_submission_get3", {
-  skip_parsed <- odata_submission_get(
-    skip = 1,
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version(),
-    parse = TRUE,
-    download = FALSE,
-    table = fq_svc$name[2] # brittle: depends on form used
-  )})
+    skip_parsed <- odata_submission_get(
+      skip = 1,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version(),
+      parse = TRUE,
+      download = FALSE,
+      table = fq_svc$name[2] # brittle: depends on form used
+    )
+  })
 
 
   testthat::expect_true(nrow(fresh_parsed) == nrow(skip_parsed) + 1)
@@ -115,17 +119,18 @@ test_that("odata_submission_get skip omits number of results", {
 
 test_that("odata_submission_get top limits number of results", {
   vcr::use_cassette("test_odata_submission_get4", {
-  top_parsed <- odata_submission_get(
-    top = 1,
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version(),
-    download = FALSE,
-    parse = TRUE
-  )})
+    top_parsed <- odata_submission_get(
+      top = 1,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version(),
+      download = FALSE,
+      parse = TRUE
+    )
+  })
 
   # https://github.com/ropensci/ruODK/issues/65
   skip_on_travis()
@@ -136,19 +141,20 @@ test_that("odata_submission_get top limits number of results", {
 
 test_that("odata_submission_get count returns total number or rows", {
   vcr::use_cassette("test_odata_submission_get5", {
-  x_raw <- odata_submission_get(
-    count = TRUE,
-    top = 1,
-    wkt = TRUE,
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version(),
-    parse = FALSE,
-    download = FALSE
-  )})
+    x_raw <- odata_submission_get(
+      count = TRUE,
+      top = 1,
+      wkt = TRUE,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version(),
+      parse = FALSE,
+      download = FALSE
+    )
+  })
   x_parsed <- x_raw %>% odata_submission_rectangle()
 
 
@@ -164,4 +170,4 @@ test_that("odata_submission_get count returns total number or rows", {
   testthat::expect_gte(x_raw$`@odata.count`, nrow(x_parsed))
 })
 
-# usethis::edit_file("R/odata_submission_get.R") # nolint
+# usethis::use_r("odata_submission_get") # nolint

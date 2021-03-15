@@ -127,4 +127,4 @@ submission_get <- function(iid,
     purrr::pmap(ruODK::get_one_submission)
 }
 
-# usethis::edit_file("tests/testthat/test-submission_get.R") # nolint
+# usethis::use_test("submission_get") # nolint

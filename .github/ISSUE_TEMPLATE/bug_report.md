@@ -16,6 +16,11 @@ assignees: florianm
      please include a minimal reproducible example 
      ([reprex](https://reprex.tidyverse.org/), see also 
      <https://www.tidyverse.org/help/#reprex>). 
+     
+     Note: If this issue involves an authenticated web request, 
+     do not include your credentials, server address, or any identifying
+     information. The failing function and the (sanitised) error output alone
+     will be a welcome help to narrow down the problem.
 -->
 
 ```{r}

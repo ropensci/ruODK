@@ -29,4 +29,4 @@ test_that("project_create works", {
   )
 })
 
-# usethis::edit_file("R/project_create.R") # nolint
+# usethis::use_r("project_create") # nolint

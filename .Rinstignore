@@ -1,0 +1,3 @@
+tests/files/.*[.]csv$
+tests/files/.*[.]zip$
+tests/files/.*[.]jpg$

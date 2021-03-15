@@ -1,21 +1,22 @@
 test_that("submission_detail works", {
   vcr::use_cassette("test_submission_detail0", {
-  sl <- submission_list(
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw()
-  )
+    sl <- submission_list(
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
 
-  sub <- submission_detail(
-    sl$instance_id[[1]],
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw()
-  )})
+    sub <- submission_detail(
+      sl$instance_id[[1]],
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  })
 
   # submission_detail returns a tibble
   testthat::expect_equal(class(sub), c("tbl_df", "tbl", "data.frame"))
@@ -32,4 +33,4 @@ test_that("submission_detail works", {
   testthat::expect_equal(names(sub), cn)
 })
 
-# usethis::edit_file("R/submission_detail.R") # nolint
+# usethis::use_r("submission_detail") # nolint

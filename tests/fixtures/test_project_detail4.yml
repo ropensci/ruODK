@@ -1,0 +1,91 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/111111
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/xml
+      X-Extended-Metadata: 'true'
+  response:
+    status:
+      status_code: 404
+      category: Client error
+      reason: Not Found
+      message: 'Client error: (404) Not Found'
+    headers:
+      server: nginx
+      date: Mon, 08 Mar 2021 05:23:39 GMT
+      content-type: application/json; charset=utf-8
+      x-powered-by: Express
+      etag: W/"4c-ShTrjQvXJDA49Wfxw7ES7C6cQFg"
+      strict-transport-security: max-age=63072000
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"message":"Could not find the resource you were looking for.","code":404.1}'
+  recorded_at: 2021-03-08 05:23:44 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/111111
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/xml
+      X-Extended-Metadata: 'true'
+  response:
+    status:
+      status_code: 404
+      category: Client error
+      reason: Not Found
+      message: 'Client error: (404) Not Found'
+    headers:
+      server: nginx
+      date: Mon, 08 Mar 2021 05:23:40 GMT
+      content-type: application/json; charset=utf-8
+      x-powered-by: Express
+      etag: W/"4c-ShTrjQvXJDA49Wfxw7ES7C6cQFg"
+      strict-transport-security: max-age=63072000
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"message":"Could not find the resource you were looking for.","code":404.1}'
+  recorded_at: 2021-03-08 05:23:44 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/111111
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Content-Type: ''
+      Accept: application/xml
+      X-Extended-Metadata: 'true'
+  response:
+    status:
+      status_code: 404
+      category: Client error
+      reason: Not Found
+      message: 'Client error: (404) Not Found'
+    headers:
+      server: nginx
+      date: Mon, 08 Mar 2021 05:23:44 GMT
+      content-type: application/json; charset=utf-8
+      x-powered-by: Express
+      etag: W/"4c-ShTrjQvXJDA49Wfxw7ES7C6cQFg"
+      strict-transport-security: max-age=63072000
+      content-encoding: gzip
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"message":"Could not find the resource you were looking for.","code":404.1}'
+  recorded_at: 2021-03-08 05:23:44 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

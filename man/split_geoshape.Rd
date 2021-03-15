@@ -40,7 +40,7 @@ on all \code{geopoint} fields as per \code{\link{form_schema}}.
 \examples{
 \dontrun{
 library(magrittr)
-data("gep_fs")
+data("geo_fs")
 data("geo_wkt_raw")
 data("geo_gj_raw")
 

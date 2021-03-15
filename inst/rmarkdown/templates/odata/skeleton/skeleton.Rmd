@@ -9,7 +9,7 @@ output:
     toc_float: true
     fig_width: 10
     fig_height: 6
-    code_folding: hide
+    code_folding: show
     theme: lumen
   pdf_document:
     latex_engine: xelatex
@@ -40,7 +40,7 @@ usethis::edit_r_environ()
 
 <!-- 1b. Paste the following block using your own, working credentials:  -->
 ```{r paste_env_vars, echo=FALSE, eval=FALSE}
-# ODK Central web user with "manager" role on project
+# ODK Central web user with read-permitted role on project
 ODKC_UN="my@email.com"
 ODKC_PW="my-odkc-password"
 
@@ -60,6 +60,7 @@ in one step using the OData Service URL.
 ```{r setup, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 # Data wrangling
+# library(stringr)
 library(dplyr)
 library(fs)
 library(ruODK)
@@ -68,23 +69,22 @@ library(ruODK)
 library(skimr)
 library(knitr)
 library(DT)
-library(leaflet)
 
 # Dissemination
 library(readr)
 # library(ckanr)
 # library(googledrive)
 
-# Spatial
-# library(stringr)
+# Spatial: see also vignette "spatial"
+library(leaflet)
 # library(rgeos)
 # library(sf)
 
-# Set ruODK defaults to an ODK Central form, choose tz and verbosity
+# Set ruODK defaults to an ODK Central form's OData Service URL
 ruODK::ru_setup(
-  svc=paste0("https://sandbox.central.getodk.org/v1/projects",
-             "/14/forms/build_Flora-Quadrat-0-4_1564384341.svc"),
-  tz = "Australia/Perth",
+  svc=paste0("https://my-odkc-instance.com/v1/projects/1/forms/form_id.svc"),
+  tz = "Australia/Perth", # your local timezone
+  odkc_version = 1.0,     # your ODKC version, only needed if <=0.7
   verbose = TRUE)
 
 loc <- fs::path("media")
@@ -100,25 +100,9 @@ ft %>% knitr::kable(.)
 
 <!-- 
 Get and parse submissions.
-
-Repeat for each table name in form_tables$url. 
-
+Repeat for each form table name in ft$url. 
 Once happy with the parsing results, verbose can be set to FALSE.
-
-A note on geofields:
-
-Points (geopoint), Lines (geotrace), Polygons (geoshape) parse with either
-GeoJSON or WKT. If you want to further spatially enable the data, choose
-via parameter `wkt` the format that works best for you.
-
-`wkt=TRUE` returns strings of WKT which you can parse with e.g. 
-
-wkt_geoshape %>%
-    stringr::str_replace_all(",undefined NaN", "") %>%
-    rgeos::readWKT() %>%
-    sf::st_as_sfc()
-    
-`wkt=FALSE` returns GeoJSON
+See vignette "spatial" for more operations on geo fields.
 -->
 ```{r dl_submissions}
 data <- ruODK::odata_submission_get(
@@ -149,7 +133,9 @@ data_sub2 <- ruODK::odata_submission_get(
 ```
 
 # Analyse and visualise data
-<!-- Summarise, analyse, visualise the tibble(s) data (, data_sub1, data_sub2) -->
+<!-- 
+  Summarise, analyse, visualise the tibble(s) data (, data_sub1, data_sub2) 
+-->
 ```{r data_vis}
 skimr::skim(data)
 dplyr::glimpse(data)
@@ -166,8 +152,8 @@ leaflet::leaflet(width = 800, height = 600) %>%
     # 
     # # Adjust to your coordinate field names
     # 
-    lng = ~location_corner1_longitude, 
-    lat = ~location_corner1_latitude, 
+    lng = ~location_longitude, 
+    lat = ~location_latitude, 
     icon = leaflet::makeAwesomeIcon(text = "Q", markerColor = "red"),
     # 
     # # With your own field names
@@ -182,6 +168,8 @@ leaflet::leaflet(width = 800, height = 600) %>%
     #   '<div><img src="{habitat_morphological_type_photo}"',
     #   ' height="150px" alt="My photo"></img></div>'
     # ),
+    # 
+    # # If there are many submissions, cluster markers for performance:
     clusterOptions = leaflet::markerClusterOptions()
   ) %>%
   leaflet::addLayersControl(
@@ -228,7 +216,7 @@ zip(zipfile = zip_fn, files = fs::dir_ls(loc))
 #------------------------------------------------------------------------------#
 # CKAN
 #
-# Upload to a CKAN data catalogue (need url and API key of a write permitted user)
+# Upload to a CKAN data catalogue (needs url and API key of a write permitted user)
 # See ROpenSci package ckanr
 ckanr::ckanr_setup(url = Sys.getenv("CKAN_URL"), key = Sys.getenv("CKAN_KEY"))
 ckan_ds_name <- "my-ckan-dataset-slug"
@@ -241,16 +229,23 @@ res_data_sub1 <- ckanr::resource_create(
   package_id = d$id, name="Nested data table 1", upload = data_sub1_fn)
 res_data_sub2 <- ckanr::resource_create(
   package_id = d$id, name="Nested data table 2", upload = data_sub2_fn)
+# add remaining tables
+if (fs::file_exists(rep_fn)){
 res_report <- ckanr::resource_create(
   package_id = d$id, name="Data report", upload = rep_fn)
+}
+
+if (fs::file_exists(zip_fn)){
 res_zip <- ckanr::resource_create(
   package_id = d$id, name="All data and attachments", upload = zip_fn)
-
+}
 # Paste res_data_main$id over RID and keep here, repeat for each resource
 r <- ckanr::resource_update(res_data_main$id, path = data_fn)
 r <- ckanr::resource_update(res_data_sub1$id, path = data_sub1_fn)
 r <- ckanr::resource_update(res_data_sub2$id, path = data_sub2_fn)
-r <- ckanr::resource_update(res_report$id, path = res_report)
+if (fs::file_exists(rep_fn)){
+  r <- ckanr::resource_update(res_report$id, path = rep_fn)
+}
 r <- ckanr::resource_update(res_zip$id, path = zip_fn)
 
 #------------------------------------------------------------------------------#
@@ -262,7 +257,9 @@ googledrive::drive_auth(use_oob = TRUE)
 # Upload to Google Drive
 gd_fn <- "My Google Drive folder name"
 googledrive::drive_ls(gd_fn) %>% googledrive::drive_rm(.)  # Wipe older outputs
-googledrive::drive_upload(rep_fn, path=rep_fn)             # Report as HTML
+if (fs::file_exists(rep_fn)){
+  googledrive::drive_upload(rep_fn, path=rep_fn)             # Report as HTML
+}
 googledrive::drive_upload(data_fn, path=data_fn)           # Main data as CSV
 googledrive::drive_upload(data_sub1_fn, path=data_sub1_fn) # Sub table 1 as CSV
 googledrive::drive_upload(data_sub2_fn, path=data_sub2_fn) # Sub table 2 as CSV

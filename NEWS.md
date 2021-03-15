@@ -5,6 +5,68 @@
 ## Data
 ## Maintenance
 
+# `ruODK` 0.9.8
+## Major fixes
+## Minor fixes
+* Add support for passphrase to the `ru_setup` family (#116)
+## Documentation
+## Data
+## Maintenance
+
+# `ruODK` 0.9.7
+## Major fixes
+* `odata_submission_get()` bugfix: `handle_ru_attachments()` 
+  now finds and downloads media attachments from both main submissions and 
+  nested form groups. (#114)
+* `odata_submission_get()` bugfix: missing media attachments (due to upload 
+  error from ODK Collect to ODK Central) are tolerated without interrupting the
+  batch download. A diagnostic warning message will be emitted for each failed
+  download. (#114)
+## Minor fixes
+## Documentation
+## Data
+## Maintenance
+
+# `ruODK` 0.9.6
+## Major fixes
+* Support encryption (#30 #110, @Thaliehln).
+  * Note that `ruODK` only supports one passphrase. When switching between
+    multiple encrypted forms, it would make sense to store the different 
+    passphrases in separate environment variables, and refer to these environment
+    variables explicitly in function calls.
+  * The updated ruODK::submission_export should now export data 
+    from both encrypted projects and non-encrypted projects.
+    The HTTP method is changed from GET to POST and encryption key ID / 
+    passphrase are provided via POST body using a JSON format. 
+    Encrypted forms can be extracted and inspected like non-encrypted forms:
+    
+```{r, eval=FALSE}
+se <- submission_export()
+t <- tempdir()
+f <- unzip(se, exdir = t)
+fs::dir_ls(t)
+fid <- get_test_fid()
+sub <- fs::path(t, glue::glue("Locations.csv")) %>% readr::read_csv()
+sub %>% knitr::kable(.)
+```
+
+# `ruODK` 0.9.5
+## Major fixes
+* `form_schema_ext` retrieves choice lists when choice filters are present
+   (#105,  @mtyszler).
+## Minor fixes
+## Documentation
+## Data
+## Maintenance
+
+# `ruODK` 0.9.4
+## Major fixes
+* `form_schema_ext` performance enhancement (#106, thanks @mtyszler).
+## Maintenance
+* Tests use vcr to cache server response (#104).
+  Delete the local cache `tests/fixtures` to re-generate the vcr cache, or 
+  enjoy much faster running tests using cached server response.
+
 # `ruODK` 0.9.3
 This is a point release to create a new RStudio Server image.
 ## Minor fixes

@@ -85,4 +85,4 @@ project_detail <- function(pid = get_default_pid(),
     }
 }
 
-# usethis::edit_file("tests/testthat/test-project_detail.R") # nolint
+# usethis::use_test("project_detail") # nolint

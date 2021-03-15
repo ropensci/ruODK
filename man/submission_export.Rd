@@ -12,7 +12,7 @@ submission_export(
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
-  pp = get_test_pp(),
+  pp = NULL,
   retries = get_retries(),
   verbose = get_ru_verbose()
 )
@@ -47,6 +47,11 @@ See \code{vignette("Setup", package = "ruODK")}.}
 \item{pw}{The ODK Central password.
 Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{pp}{The passphrase for an encrypted form.
+Default: NULL.
+Passphrases can be stored e.g. as environment variables.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
@@ -92,10 +97,7 @@ If the submissions are encrypted
 \dontrun{
 # Set default credentials, see vignette "setup"
 ruODK::ru_setup(
-  svc = paste0(
-    "https://sandbox.central.getodk.org/v1/projects/14/",
-    "forms/build_Flora-Quadrat-0-2_1558575936.svc"
-  ),
+  svc = "....svc",
   un = "me@email.com",
   pw = "...",
   pp = "..."

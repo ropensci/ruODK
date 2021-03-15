@@ -9,6 +9,7 @@ test_that("ru_setup does not update settings if given NULL", {
     url = NULL,
     un = NULL,
     pw = NULL,
+    pp = NULL,
     tz = NULL,
     odkc_version = NULL,
     verbose = NULL,
@@ -23,6 +24,7 @@ test_that("ru_setup does not update settings if given NULL", {
     test_url = NULL,
     test_un = NULL,
     test_pw = NULL,
+    test_pp = NULL,
     test_odkc_version = NULL
   )
 
@@ -34,11 +36,13 @@ test_that("ru_setup does not update settings if given NULL", {
   testthat::expect_equal(x$url, xx$url)
   testthat::expect_equal(x$un, xx$un)
   testthat::expect_equal(x$pw, xx$pw)
+  testthat::expect_equal(x$pp, xx$pp)
   testthat::expect_equal(x$odkc_version, xx$odkc_version)
   testthat::expect_equal(x$tz, xx$tz)
   testthat::expect_equal(x$test_url, xx$test_url)
   testthat::expect_equal(x$test_un, xx$test_un)
   testthat::expect_equal(x$test_pw, xx$test_pw)
+  testthat::expect_equal(x$test_pp, xx$test_pp)
   testthat::expect_equal(x$test_odkc_version, xx$test_odkc_version)
   testthat::expect_equal(x$retries, xx$retries)
   testthat::expect_equal(x$test_pid, xx$test_pid)
@@ -56,6 +60,7 @@ test_that("ru_setup resets settings if given empty string", {
   url <- get_default_url()
   un <- get_default_un()
   pw <- get_default_pw()
+  pp <- get_default_pp()
   tz <- get_default_tz()
   odkcv <- get_default_odkc_version()
   retries <- get_retries()
@@ -64,6 +69,7 @@ test_that("ru_setup resets settings if given empty string", {
   test_url <- get_test_url()
   test_un <- get_test_un()
   test_pw <- get_test_pw()
+  test_pp <- get_test_pp()
   test_odkcv <- get_test_odkc_version()
   test_pid <- get_test_pid()
   test_fid <- get_test_fid()
@@ -79,6 +85,7 @@ test_that("ru_setup resets settings if given empty string", {
     url = "",
     un = "",
     pw = "",
+    pp = "",
     tz = "",
     odkc_version = "",
     retries = "",
@@ -92,6 +99,7 @@ test_that("ru_setup resets settings if given empty string", {
     test_url = "",
     test_un = "",
     test_pw = "",
+    test_pp = "",
     test_odkc_version = ""
   )
   x <- ru_settings()
@@ -102,12 +110,14 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_warning(get_default_url())
   testthat::expect_warning(get_default_un())
   testthat::expect_warning(get_default_pw())
+  testthat::expect_warning(get_default_pp())
   # testthat::expect_warning(get_default_odkc_version()) # nolint
   testthat::expect_warning(get_default_tz())
   testthat::expect_equal(get_retries(), 3L) # fallback for empty RU_RETRIES
   testthat::expect_warning(get_test_url())
   testthat::expect_warning(get_test_un())
   testthat::expect_warning(get_test_pw())
+  testthat::expect_warning(get_test_pp())
   # testthat::expect_warning(get_test_odkc_version()) # nolint
   testthat::expect_warning(get_test_pid())
   testthat::expect_warning(get_test_fid())
@@ -119,10 +129,12 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_equal(x$url, "")
   testthat::expect_equal(x$un, "")
   testthat::expect_equal(x$pw, "")
+  testthat::expect_equal(x$pp, "")
   # testthat::expect_equal(x$tz, "") # nolint
   testthat::expect_equal(x$test_url, "")
   testthat::expect_equal(x$test_un, "")
   testthat::expect_equal(x$test_pw, "")
+  testthat::expect_equal(x$test_pp, "")
   testthat::expect_equal(x$test_pid, "")
   testthat::expect_equal(x$test_fid, "")
   testthat::expect_equal(x$test_fid_zip, "")
@@ -137,12 +149,14 @@ test_that("ru_setup resets settings if given empty string", {
     url = url,
     un = un,
     pw = pw,
+    pp = pp,
     tz = tz,
     odkc_version = odkcv,
     retries = retries,
     test_url = test_url,
     test_un = test_un,
     test_pw = test_pw,
+    test_pp = test_pp,
     test_odkc_version = test_odkcv,
     test_pid = test_pid,
     test_fid = test_fid,
@@ -308,4 +322,4 @@ test_that("retries default to 1L if empty or invalid", {
   ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
   ru_msg_info(glue::glue("get_retries(): {get_retries()}"))
 })
-# usethis::edit_file("R/ru_setup.R") # nolint
+# usethis::use_r("ru_setup") # nolint

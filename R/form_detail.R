@@ -90,4 +90,4 @@ form_detail <- function(pid = get_default_pid(),
     }
 }
 
-# usethis::edit_file("tests/testthat/test-form_detail.R") # nolint
+# usethis::use_test("form_detail") # nolint

@@ -7,6 +7,7 @@
 \alias{get_default_url}
 \alias{get_default_un}
 \alias{get_default_pw}
+\alias{get_default_pp}
 \alias{get_default_tz}
 \alias{get_test_url}
 \alias{get_test_un}
@@ -35,6 +36,8 @@ get_default_url()
 get_default_un()
 
 get_default_pw()
+
+get_default_pp()
 
 get_default_tz()
 
@@ -86,6 +89,7 @@ ru_settings()
 \code{\link{get_default_url}},
 \code{\link{get_default_un}},
 \code{\link{get_default_pw}},
+\code{\link{get_default_pp}},
 \code{\link{get_default_tz}},
 \code{\link{get_default_odkc_version}},
 \code{\link{get_retries}},

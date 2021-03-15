@@ -1,11 +1,8 @@
 ## Test environments
 * Local machine
-  * Running under: Ubuntu 20.04.1 LTS
+  * Running under: Ubuntu 20.04.2 LTS
   * Platform: x86_64-pc-linux-gnu (64-bit)
-  * R version 4.0.3 (2020-10-10)
-* Travis CI
-  * Ubuntu 16.04.6 LTS "xenial"
-  * R devel, release, oldrel
+  * R version 4.0.4 (2021-02-15)
 * AppVeyor CI
   * Running under: Windows Server 2012 R2 x64 (build 9600)
   * Platform: x86_64-w64-mingw32/x64 (64-bit)
@@ -27,8 +24,8 @@ Resolved NOTE comments:
 * Possibly invalid URLs:
   * The package comparison section in the README contains Markdown badges with 
     CRAN links to packages that are not yet or not any more on CRAN. These
-    links are correct, and while they currently do not resolve, they will once
-    the packages are (re-)submitted to CRAN. Currently removed.
+    links are correct, and while they currently do not resolve, they will do so 
+    once the packages are (re-)submitted to CRAN. Currently removed.
   * The README contains an ODK Central form OData service URL to illustrate 
     setting up ruODK. The URL redirects to a login screen if followed directly.
     This is expected behaviour. Currently not appearing as warning.

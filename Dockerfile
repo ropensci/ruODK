@@ -1,6 +1,6 @@
-FROM rocker/geospatial:4.0.2
+FROM rocker/geospatial:4.0.3
 LABEL maintainer=Florian.Mayer@dbca.wa.gov.au
-LABEL description="rocker/geospatial:4.0.2 for DBCA"
+LABEL description="rocker/geospatial:4.0.3 for DBCA"
 
 # Build this image with
 # docker build . -t dbcawa/ruodk:latest --build-arg GITHUB_PAT="..."
@@ -42,4 +42,4 @@ RUN install2.r --error \
   sf
 
 RUN R -e "remotes::install_github('ropensci/ruODK@main', \
-          dependencies = TRUE, ask=FALSE, update=FALSE)"
+          dependencies = TRUE, ask=FALSE, update=TRUE)"

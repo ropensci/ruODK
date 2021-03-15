@@ -1,23 +1,39 @@
 test_that("attachment_get works", {
-  # This test downloads files
-  skip_on_cran()
+  # nolint start
+  # This is needed to run the tests for this file only
+  # if (is.null(vcr::vcr_configuration()$write_disk_path)) {
+  #   vcr::vcr_configure(write_disk_path = "../files")
+  # }
 
+  # wdp <- vcr::vcr_configuration()$write_disk_path
+  # testthat::expect_true(
+  #   fs::is_dir(wdp),
+  #   label = glue::glue("VCR write_disk_path must exist: {wdp}")
+  # )
+
+  # t <- fs::path(wdp, "attachment_get")
+  # fs::dir_create(t)
+  # fs::dir_ls(t) %>% fs::file_delete()
+  # nolint end
   t <- tempdir()
 
-  fs::dir_ls(t) %>% fs::file_delete()
-
+  # vcr::use_cassette("test_attachment_get0", {  # nolint
   fresh_raw <- odata_submission_get(
     pid = get_test_pid(),
     fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
-    parse = FALSE
+    parse = FALSE,
+    verbose = TRUE
   )
+  # })
 
+  # vcr::use_cassette("test_attachment_get1", {  # nolint
   fresh_parsed <- fresh_raw %>%
     odata_submission_rectangle() %>%
     dplyr::mutate(
+      # HTTPS request downloads a file  # nolint
       quadrat_photo = attachment_get(
         id,
         location_quadrat_photo,
@@ -30,7 +46,9 @@ test_that("attachment_get works", {
         verbose = TRUE
       )
     )
+  # }) # nolint
 
+  # vcr::use_cassette("test_attachment_get2", {  # nolint
   fresh_parsed_sep <- fresh_raw %>%
     odata_submission_rectangle() %>%
     dplyr::mutate(
@@ -47,6 +65,7 @@ test_that("attachment_get works", {
         verbose = TRUE
       )
     )
+  # })  # nolint
 
   # Attachment paths should be character, not e.g. list (pmap outputs lists)
   testthat::expect_equal(class(fresh_parsed$quadrat_photo), "character")
@@ -65,18 +84,10 @@ test_that("attachment_url works", {
   fid <- get_test_fid()
 
   expected_url <- glue::glue(
-    "{url}/v1/projects/{pid}/forms/{fid}/submissions/{uuid}/attachments/{fn}"
+    "{url}/v1/projects/{pid}/forms/{fid}/",
+    "submissions/{uuid}/attachments/{fn}"
   )
-  # nolint start
-  # https://github.com/ropensci/ruODK/issues/66
-  # Not using here because it breaks attachment_get
-  # expected_url <- httr::modify_url(
-  #   url,
-  #   path = glue::glue(
-  #     "v1/projects/14/forms/{fid}/submissions/{uuid}/attachments/{fn}"
-  #   )
-  # )
-  # nolint end
+
   calculated_url <- ruODK:::attachment_url(uuid,
     fn,
     pid = pid,
@@ -113,15 +124,15 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   )
 
   # Happy path: get one attachment should work
-    fn_local <- get_one_attachment(
-      pth,
-      fn,
-      src,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      verbose = TRUE
-    )
+  fn_local <- get_one_attachment(
+    pth,
+    fn,
+    src,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    verbose = TRUE
+  )
   testthat::expect_true(fs::file_exists(pth))
   first_dl_time <- fs::file_info(fn_local)$modification_time
   testthat::expect_equal(fn_local, as.character(pth))
@@ -144,7 +155,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   # Not happy, but tolerant: keep file at pth if exists
   get_one_attachment(
     pth,
-    NA,
+    fn,
     src,
     url = get_test_url(),
     un = get_test_un(),
@@ -154,7 +165,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
 
   gg <- get_one_attachment(
     pth,
-    NA,
+    fn,
     src,
     url = get_test_url(),
     un = get_test_un(),
@@ -162,7 +173,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     verbose = TRUE
   )
 
-  testthat::expect_equal(gg,as.character(pth))
+  testthat::expect_equal(gg, as.character(pth))
   testthat::expect_equal(first_dl_time, fs::file_info(pth)$modification_time)
 
   # Now make sure pth doesn't exist
@@ -177,7 +188,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     verbose = TRUE
   )
 
-  gg <-get_one_attachment(
+  gg <- get_one_attachment(
     pth2,
     NA,
     src,
@@ -189,4 +200,4 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   testthat::expect_true(is.na(gg))
 })
 
-# usethis::edit_file("R/attachment_get.R") # nolint
+# usethis::use_r("attachment_get") # nolint

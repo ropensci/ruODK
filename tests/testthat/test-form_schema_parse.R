@@ -17,18 +17,19 @@ test_that("predict_ruodk_name works", {
 
 test_that("form_schema works with ODK Central v0.8", {
   vcr::use_cassette("test_form_schema_parse0", {
-  fs <- form_schema(
-    flatten = FALSE,
-    parse = FALSE,
-    odata = FALSE,
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version(),
-    verbose = TRUE
-  )})
+    fs <- form_schema(
+      flatten = FALSE,
+      parse = FALSE,
+      odata = FALSE,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version(),
+      verbose = TRUE
+    )
+  })
 
   testthat::expect_true(tibble::is_tibble(fs))
   testthat::expect_equal(

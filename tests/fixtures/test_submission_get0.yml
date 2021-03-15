@@ -18,7 +18,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Wed, 11 Nov 2020 06:06:22 GMT
+      date: Mon, 08 Mar 2021 05:24:15 GMT
       etag: W/"114-jMOoz9W4jx1FzSyJsY3oC1nGBVk"
       server: nginx
       strict-transport-security:
@@ -31,5 +31,5 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '[{"instanceId":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","submitter":{"id":53,"type":"field_key","displayName":"ruODK","createdAt":"2020-11-02T02:04:58.884Z","updatedAt":null},"deviceId":"android_id:5afb51f35ba0c572","createdAt":"2020-11-02T04:19:45.451Z","updatedAt":null}]'
-  recorded_at: 2020-11-11 06:07:17 GMT
-  recorded_with: vcr/0.5.4, webmockr/0.7.0
+  recorded_at: 2021-03-08 05:24:15 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

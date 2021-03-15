@@ -1,11 +1,12 @@
 test_that("project_detail works", {
   vcr::use_cassette("test_project_detail0", {
-  p <- project_detail(
-    get_test_pid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw()
-  )})
+    p <- project_detail(
+      get_test_pid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  })
   testthat::expect_true(nrow(p) == 1)
   testthat::expect_true("name" %in% names(p))
 
@@ -21,70 +22,84 @@ test_that("project_detail works", {
 })
 
 test_that("project_detail aborts on missing credentials", {
-  testthat::expect_error(
-    p <- project_detail(
-      get_test_pid(),
-      url = "",
-      un = get_test_un(),
-      pw = get_test_pw()
+  vcr::use_cassette("test_project_detail1", {
+    testthat::expect_error(
+      p <- project_detail(
+        get_test_pid(),
+        url = "",
+        un = get_test_un(),
+        pw = get_test_pw()
+      )
     )
-  )
+  })
 
-  testthat::expect_error(
-    p <- project_detail(
-      get_test_pid(),
-      url = get_test_url(),
-      un = "",
-      pw = get_test_pw()
+  vcr::use_cassette("test_project_detail2", {
+    testthat::expect_error(
+      p <- project_detail(
+        get_test_pid(),
+        url = get_test_url(),
+        un = "",
+        pw = get_test_pw()
+      )
     )
-  )
+  })
 
-  testthat::expect_error(
-    p <- project_detail(
-      get_test_pid(),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = ""
+  vcr::use_cassette("test_project_detail3", {
+    testthat::expect_error(
+      p <- project_detail(
+        get_test_pid(),
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = ""
+      )
     )
-  )
+  })
 })
 
 test_that("project_detail warns on wrong credentials", {
-  testthat::expect_error(
-    p <- project_detail(
-      111111,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
+  vcr::use_cassette("test_project_detail4", {
+    testthat::expect_error(
+      p <- project_detail(
+        111111,
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = get_test_pw()
+      )
     )
-  )
+  })
 
-  testthat::expect_error(
-    p <- project_detail(
-      get_test_pid(),
-      url = "wrong_url",
-      un = get_test_un(),
-      pw = get_test_pw()
+  vcr::use_cassette("test_project_detail5", {
+    testthat::expect_error(
+      p <- project_detail(
+        get_test_pid(),
+        url = "wrong_url",
+        un = get_test_un(),
+        pw = get_test_pw()
+      )
     )
-  )
+  })
 
-  testthat::expect_error(
-    p <- project_detail(
-      get_test_pid(),
-      url = get_test_url(),
-      un = "wrong_username",
-      pw = get_test_pw()
+  vcr::use_cassette("test_project_detail6", {
+    testthat::expect_error(
+      p <- project_detail(
+        get_test_pid(),
+        url = get_test_url(),
+        un = "wrong_username",
+        pw = get_test_pw()
+      )
     )
-  )
+  })
 
-  testthat::expect_error(
-    p <- project_detail(
-      get_test_pid(),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = "wroing_password"
+  vcr::use_cassette("test_project_detail7", {
+    testthat::expect_error(
+      p <- project_detail(
+        get_test_pid(),
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = "wroing_password"
+      )
     )
-  )
+  })
 })
 
-# usethis::edit_file("R/project_detail.R") # nolint
+# usethis::use_r("project_detail") # nolint

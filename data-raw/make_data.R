@@ -1,7 +1,7 @@
 # -----------------------------------------------------------------------------#
 # ODK Central example data
 #
-library(magrittr)
+library(ruODK)
 ruODK::ru_setup(
   svc = Sys.getenv("ODKC_TEST_SVC"),
   un = Sys.getenv("ODKC_TEST_UN"),
@@ -14,7 +14,7 @@ ruODK::ru_setup(
 t <- fs::dir_create("attachments")
 fq_svc <- ruODK::odata_service_get()
 fq_meta <- ruODK::odata_metadata_get()
-fq_fs <- ruODK::form_schema(odkc_version = get_test_odkc_version())
+fq_fs <- ruODK::form_schema(odkc_version = ruODK::get_test_odkc_version())
 fq_raw <- ruODK::odata_submission_get(table = fq_svc$name[1], parse = FALSE)
 fq_raw_strata <- ruODK::odata_submission_get(table = fq_svc$name[2], parse = FALSE)
 fq_raw_taxa <- ruODK::odata_submission_get(table = fq_svc$name[3], parse = FALSE)

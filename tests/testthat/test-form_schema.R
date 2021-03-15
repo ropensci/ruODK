@@ -1,22 +1,38 @@
 test_that("form_schema v8 returns a tibble and ignores flatten and parse", {
   vcr::use_cassette("test_form_schema0", {
-  fs0 <- form_schema(
-    flatten = FALSE,
-    parse = FALSE,
-    pid = get_test_pid(),
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version()
-  )})
+    fs0 <- form_schema(
+      flatten = FALSE,
+      parse = FALSE,
+      pid = get_test_pid(),
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version()
+    )
+  })
   testthat::expect_true(tibble::is_tibble(fs0))
 })
 
 test_that("form_schema works with unpublished draft forms", {
   vcr::use_cassette("test_form_schema1", {
-  testthat::expect_message(
-    form_schema(
+    testthat::expect_message(
+      form_schema(
+        pid = get_test_pid(),
+        fid = "Locations_draft",
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = get_test_pw(),
+        odkc_version = get_test_odkc_version(),
+        verbose = TRUE
+      )
+    )
+  })
+
+  vcr::use_cassette("test_form_schema2", {
+    fs1 <- form_schema(
+      flatten = FALSE,
+      parse = FALSE,
       pid = get_test_pid(),
       fid = "Locations_draft",
       url = get_test_url(),
@@ -25,20 +41,7 @@ test_that("form_schema works with unpublished draft forms", {
       odkc_version = get_test_odkc_version(),
       verbose = TRUE
     )
-  )})
-
-  vcr::use_cassette("test_form_schema2", {
-  fs1 <- form_schema(
-    flatten = FALSE,
-    parse = FALSE,
-    pid = get_test_pid(),
-    fid = "Locations_draft",
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    odkc_version = get_test_odkc_version(),
-    verbose = TRUE
-  )})
+  })
   testthat::expect_true(tibble::is_tibble(fs1))
   testthat::expect_true(nrow(fs1) > 0)
 })
@@ -113,6 +116,5 @@ test_that("form_schema works with unpublished draft forms", {
 #   )
 # })
 
-# Tests code
-# usethis::edit_file("R/form_schema.R")
+# usethis::use_r("form_schema")
 # nolint end

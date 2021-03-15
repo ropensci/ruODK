@@ -66,4 +66,4 @@ project_create <- function(name,
   # nolint end
 }
 
-# usethis::edit_file("tests/testthat/test-project_create.R") # nolint
+# usethis::use_test("project_create") # nolint

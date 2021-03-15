@@ -115,4 +115,4 @@ predict_ruodk_name <- function(name_str, path_str) {
     janitor::make_clean_names()
 }
 
-# usethis::edit_file("tests/testthat/test-form_schema_parse.R") # nolint
+# usethis::use_test("form_schema_parse") # nolint
