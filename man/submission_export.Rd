@@ -7,6 +7,8 @@
 submission_export(
   local_dir = here::here(),
   overwrite = TRUE,
+  media = TRUE,
+  repeats = TRUE,
   pid = get_default_pid(),
   fid = get_default_fid(),
   url = get_default_url(),
@@ -14,6 +16,7 @@ submission_export(
   pw = get_default_pw(),
   pp = NULL,
   retries = get_retries(),
+  odkc_version = get_default_odkc_version(),
   verbose = get_ru_verbose()
 )
 }
@@ -23,6 +26,18 @@ default: \code{here::here}.}
 
 \item{overwrite}{Whether to overwrite previously downloaded zip files,
 default: FALSE}
+
+\item{media}{Whether to include media attachments, default: TRUE.
+This feature only has effect on ODK Central v1.1 and higher.
+Setting this feature to FALSE with an odkc_version < 1.1 and will display a
+verbose noop message, but still return all media attachments.}
+
+\item{repeats}{Whether to include repeat data (if TRUE), or whether
+to return the root table only (FALSE). Default: TRUE.
+Requesting `repeats=FALSE` will also omit any media, and override the
+parameter `media`.
+Setting this feature to FALSE with an odkc_version < 1.1 and will display a
+verbose noop message, but still include all repeat data.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 Default: \code{\link{get_default_pid}}.
@@ -58,15 +73,26 @@ See \code{vignette("Setup", package = "ruODK")}.}
 This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 Default: 3.}
 
+\item{odkc_version}{The ODK Central version as decimal number (major.minor).
+`ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+Default: \code{\link{get_default_odkc_version}} or 0.8 if unset.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=0.8)}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
 \item{verbose}{Whether to display debug messages or not.
 Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
 verbosity can be set globally or per function.}
 }
 \value{
-The absolute path to the zip file named "`fid`.zip"
-        containing submissions as CSV,
-        plus separate CSVs for any repeating groups,
-        plus any attachments in a subfolder `media`.
+The absolute path to the exported ZIP file named after the form ID.
+        The exported ZIP file will have the extension `.zip` unless only the
+        root table was requested (with `repeats=FALSE`), in which case the
+        exported file will have the extension `.csv`.
+        In contrast to ODK Central, which exports to `submissions.csv(.zip)`,
+        the exported ZIP file is named after
+        the form to avoid accidentally overwriting the ZIP export from
+        another form.
 }
 \description{
 To export all the Submission data associated with a Form, just add .csv.zip

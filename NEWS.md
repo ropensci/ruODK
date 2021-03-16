@@ -5,13 +5,21 @@
 ## Data
 ## Maintenance
 
-# `ruODK` 0.9.8
+# `ruODK` 0.9.9
 ## Major fixes
+* `submission_export` now supports ODK Central v1.1 features to omit media
+  attachments (`media = FALSE`), and to omit repeat data (`include_repeats=FALSE`).
+  Calling `submission_export` on an older version of ODK Central 
+  (as determined through `get_default_odkc_version()`) with these new parameters
+  will emit a (verbose only) "noop" message and not act further on them.
+## Minor fixes
+* Bugfix to `submission_export` on encrypted forms with multiple encryption 
+  keys. (Thanks @Thaliehln #117 #30)
+
+# `ruODK` 0.9.8
 ## Minor fixes
 * Add support for passphrase to the `ru_setup` family (#116)
-## Documentation
-## Data
-## Maintenance
+
 
 # `ruODK` 0.9.7
 ## Major fixes

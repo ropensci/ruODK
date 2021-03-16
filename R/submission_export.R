@@ -27,17 +27,32 @@
 #'                  default: \code{here::here}.
 #' @param overwrite Whether to overwrite previously downloaded zip files,
 #'                 default: FALSE
+#' @param media Whether to include media attachments, default: TRUE.
+#'   This feature only has effect on ODK Central v1.1 and higher.
+#'   Setting this feature to FALSE with an odkc_version < 1.1 and will display a
+#'   verbose noop message, but still return all media attachments.
+#' @param repeats Whether to include repeat data (if TRUE), or whether
+#'   to return the root table only (FALSE). Default: TRUE.
+#'   Requesting `repeats=FALSE` will also omit any media, and override the
+#'   parameter `media`.
+#'   Setting this feature to FALSE with an odkc_version < 1.1 and will display a
+#'   verbose noop message, but still include all repeat data.
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
 #' @template param-auth
 #' @template param-pp
 #' @template param-retries
+#' @template param-odkcv
 #' @template param-verbose
-#' @return The absolute path to the zip file named "`fid`.zip"
-#'         containing submissions as CSV,
-#'         plus separate CSVs for any repeating groups,
-#'         plus any attachments in a subfolder `media`.
+#' @return The absolute path to the exported ZIP file named after the form ID.
+#'         The exported ZIP file will have the extension `.zip` unless only the
+#'         root table was requested (with `repeats=FALSE`), in which case the
+#'         exported file will have the extension `.csv`.
+#'         In contrast to ODK Central, which exports to `submissions.csv(.zip)`,
+#'         the exported ZIP file is named after
+#'         the form to avoid accidentally overwriting the ZIP export from
+#'         another form.
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv}
 # nolint end
@@ -65,6 +80,8 @@
 #' }
 submission_export <- function(local_dir = here::here(),
                               overwrite = TRUE,
+                              media = TRUE,
+                              repeats = TRUE,
                               pid = get_default_pid(),
                               fid = get_default_fid(),
                               url = get_default_url(),
@@ -72,27 +89,59 @@ submission_export <- function(local_dir = here::here(),
                               pw = get_default_pw(),
                               pp = NULL,
                               retries = get_retries(),
+                              odkc_version = get_default_odkc_version(),
                               verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
+
+  url_ext <- ".csv.zip"
+  file_ext <- ".zip"
+
+  if (odkc_version >= 1.1) {
+    if (media == FALSE) {
+      url_ext <- ".csv.zip?attachments=false"
+    }
+    if (repeats == FALSE) {
+      url_ext <- ".csv"
+      file_ext <- ".csv"
+    }
+  } else {
+    if (media == FALSE) {
+      "Omitting media attachments requires ODK Central v1.1 or higher" %>%
+      ru_msg_noop()
+    }
+    if (repeats == FALSE) {
+      "Omitting repeat data requires ODK Central v1.1 or higher" %>%
+      ru_msg_noop()
+    }
+  }
+
+  url_pth <- glue::glue(
+    "v1/projects/{pid}/forms/",
+    "{URLencode(fid, reserved = TRUE)}/submissions{url_ext}"
+  )
+
   pth <- fs::path(
     local_dir,
-    glue::glue("{URLencode(fid, reserved = TRUE)}.zip")
+    glue::glue("{URLencode(fid, reserved = TRUE)}{file_ext}")
   )
 
   if (fs::file_exists(pth)) {
     if (overwrite == TRUE) {
       if (verbose == TRUE) {
-        ru_msg_success(glue::glue("Overwriting previous download: \"{pth}\""))
+        "Overwriting previous download: \"{pth}\"" %>%
+          glue::glue() %>% ru_msg_success()
       }
     } else {
       if (verbose == TRUE) {
-        ru_msg_noop(glue::glue("Keeping previous download: \"{pth}\""))
+        "Keeping previous download: \"{pth}\"" %>%
+          glue::glue() %>% ru_msg_noop()
       }
       return(pth)
     }
   } else {
     if (verbose == TRUE) {
-      ru_msg_success(glue::glue("Downloading submissions to: \"{pth}\""))
+      "Downloading submissions from {url_pth} to {pth}" %>%
+        glue::glue() %>% ru_msg_success()
     }
   }
 
@@ -119,19 +168,17 @@ submission_export <- function(local_dir = here::here(),
     body <- list()
     var <- toString(encryption_keys[[1]]$id)
     body[[var]] <- pp
+
+    if (verbose == TRUE) {
+      "Found multiple encryption keys for form {fid}, using the first key." %>%
+        glue::glue() %>% ru_msg_info()
+    }
   }
-  print(body)
 
   # Export form submissions to CSV via POST
   httr::RETRY(
     "POST",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/submissions.csv.zip"
-      )
-    ),
+    httr::modify_url(url, path = url_pth),
     body = body,
     encode = "json",
     httr::authenticate(un, pw),

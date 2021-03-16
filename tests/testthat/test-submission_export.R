@@ -6,12 +6,14 @@ test_that("submission_export works", {
   t <- tempdir()
 
   # High expectations
-  fid <- get_test_fid_zip() # small and without attachments
-  pth <- fs::path(t, glue::glue("{fid}.zip"))
-  fid_csv <- fs::path(t, glue::glue("{fid}.csv"))
-  msg_dl <- glue::glue("Downloading submissions to: \"{pth}\"\n")
-  msg_keep <- glue::glue("Keeping previous download: \"{pth}\"\n")
-  msg_chuck <- glue::glue("Overwriting previous download: \"{pth}\"\n")
+  pth <- fs::path(
+    t,
+    glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.zip")
+  )
+  fid_csv <- fs::path(
+    t,
+    glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.csv")
+  )
 
   # Once you drink Tequila, you're feeling really good
   testthat::expect_message(
@@ -20,13 +22,13 @@ test_that("submission_export works", {
       overwrite = FALSE,
       verbose = TRUE,
       pid = get_test_pid(),
-      fid = fid,
+      fid = get_test_fid_zip(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
       pp = get_test_pp()
     ),
-    msg_dl
+    regexp = "Downloading submissions"
   )
   dl1 <- fs::file_info(se)$modification_time
 
@@ -37,13 +39,13 @@ test_that("submission_export works", {
       overwrite = FALSE,
       verbose = TRUE,
       pid = get_test_pid(),
-      fid = fid,
+      fid = get_test_fid_zip(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
       pp = get_test_pp()
     ),
-    msg_keep
+    regexp = "Keeping previous download"
   )
 
   # Repeated download with overwrite = FALSE retains file
@@ -57,13 +59,13 @@ test_that("submission_export works", {
       overwrite = TRUE,
       verbose = TRUE,
       pid = get_test_pid(),
-      fid = fid,
+      fid = get_test_fid_zip(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
       pp = get_test_pp()
     ),
-    msg_chuck
+    regexp = "Overwriting previous download"
   )
 
   # Repeated download with overwrite = TRUE replaces file
@@ -78,13 +80,13 @@ test_that("submission_export works", {
       overwrite = FALSE,
       verbose = TRUE,
       pid = get_test_pid(),
-      fid = fid,
+      fid = get_test_fid_zip(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
       pp = get_test_pp()
     ),
-    msg_keep
+    regexp = "Keeping previous download"
   )
 
   # Repeated download with overwrite = FALSE retains file
@@ -144,7 +146,7 @@ test_that("submission_export warns of missing credentials", {
   testthat::expect_error(
     se <- submission_export(
       pid = "",
-      fid = Sys.getenv("ODKC_TEST_FID"),
+      fid = get_test_fid(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
@@ -157,7 +159,7 @@ test_that("submission_export warns of missing credentials", {
 
   testthat::expect_error(
     se <- submission_export(
-      pid = Sys.getenv("ODKC_TEST_PID"),
+      pid = get_test_pid(),
       fid = "",
       url = get_test_url(),
       un = get_test_un(),
@@ -216,4 +218,146 @@ test_that("submission_export warns of missing credentials", {
   )
 
 })
+
+test_that("submission_export excludes media", {
+  # This test downloads files
+  skip_on_cran()
+
+  # A fresh litterbox
+  t <- tempdir()
+
+  media_and_repeats <- submission_export(
+    local_dir = t,
+    overwrite = TRUE,
+    verbose = TRUE,
+    media = TRUE,
+    repeats = TRUE,
+    pid = get_test_pid(),
+    odkc_version = 1.1,
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pp = get_test_pp()
+  )
+
+  fsize_media_and_repeats <- fs::file_info(media_and_repeats)$size
+
+  no_media_and_repeats <- submission_export(
+    local_dir = t,
+    overwrite = TRUE,
+    verbose = TRUE,
+    media = FALSE,
+    repeats = TRUE,
+    pid = get_test_pid(),
+    odkc_version = 1.1,
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pp = get_test_pp()
+  )
+
+  fsize_no_media_and_repeats <- fs::file_info(no_media_and_repeats)$size
+
+  testthat::expect_true(
+    fsize_media_and_repeats > fsize_no_media_and_repeats,
+    label = "submission_export omitting media should result in smaller ZIP"
+  )
+
+  suppressWarnings(
+  no_media_no_repeats <- submission_export(
+    local_dir = t,
+    overwrite = TRUE,
+    verbose = TRUE,
+    media = FALSE,
+    repeats = FALSE,
+    pid = get_test_pid(),
+    odkc_version = 1.1,
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pp = get_test_pp()
+  ))
+
+  testthat::expect_true(
+    tools::file_ext(no_media_no_repeats) == "csv",
+    label = "submission_export(repeats=FALSE) should return a CSV"
+  )
+
+  suppressWarnings(
+  media_no_repeats <- submission_export(
+    local_dir = t,
+    overwrite = TRUE,
+    verbose = TRUE,
+    media = TRUE,
+    repeats = FALSE,
+    pid = get_test_pid(),
+    odkc_version = 1.1,
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pp = get_test_pp()
+  ))
+
+  testthat::expect_true(
+    tools::file_ext(media_no_repeats) == "csv",
+    label = "submission_export(repeats=FALSE, media=TRUE) should return a CSV"
+  )
+
+  wrong_version_no_warning <- submission_export(
+    local_dir = t,
+    overwrite = TRUE,
+    verbose = TRUE,
+    media = TRUE,
+    repeats = TRUE,
+    pid = get_test_pid(),
+    odkc_version = 1.0, # should cause message
+    fid = get_test_fid_zip(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pp = get_test_pp()
+  )
+
+  testthat::expect_message(
+    submission_export(
+      local_dir = t,
+      overwrite = FALSE,
+      verbose = TRUE,
+      media = FALSE, # won't work on old ODKC
+      repeats = TRUE,
+      pid = get_test_pid(),
+      odkc_version = 1.0, # should cause message
+      fid = get_test_fid_zip(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      pp = get_test_pp()
+    ),
+    regexp = "Omitting media attachments"
+  )
+
+  testthat::expect_message(
+    submission_export(
+      local_dir = t,
+      overwrite = FALSE,
+      verbose = TRUE,
+      media = TRUE,
+      repeats = FALSE, # won't work on old ODKC
+      pid = get_test_pid(),
+      odkc_version = 1.0, # should cause message
+      fid = get_test_fid_zip(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      pp = get_test_pp()
+    ),
+    regexp = "Omitting repeat data"
+  )
+
+})
+
 # usethis::use_r("submission_export") # nolint
