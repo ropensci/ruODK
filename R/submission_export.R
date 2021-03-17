@@ -107,11 +107,11 @@ submission_export <- function(local_dir = here::here(),
   } else {
     if (media == FALSE) {
       "Omitting media attachments requires ODK Central v1.1 or higher" %>%
-      ru_msg_noop()
+        ru_msg_noop()
     }
     if (repeats == FALSE) {
       "Omitting repeat data requires ODK Central v1.1 or higher" %>%
-      ru_msg_noop()
+        ru_msg_noop()
     }
   }
 
@@ -129,19 +129,22 @@ submission_export <- function(local_dir = here::here(),
     if (overwrite == TRUE) {
       if (verbose == TRUE) {
         "Overwriting previous download: \"{pth}\"" %>%
-          glue::glue() %>% ru_msg_success()
+          glue::glue() %>%
+          ru_msg_success()
       }
     } else {
       if (verbose == TRUE) {
         "Keeping previous download: \"{pth}\"" %>%
-          glue::glue() %>% ru_msg_noop()
+          glue::glue() %>%
+          ru_msg_noop()
       }
       return(pth)
     }
   } else {
     if (verbose == TRUE) {
       "Downloading submissions from {url_pth} to {pth}" %>%
-        glue::glue() %>% ru_msg_success()
+        glue::glue() %>%
+        ru_msg_success()
     }
   }
 
@@ -171,7 +174,8 @@ submission_export <- function(local_dir = here::here(),
 
     if (verbose == TRUE) {
       "Found multiple encryption keys for form {fid}, using the first key." %>%
-        glue::glue() %>% ru_msg_info()
+        glue::glue() %>%
+        ru_msg_info()
     }
   }
 

@@ -63,7 +63,7 @@ specified ODK Central instance \code{url} (optional, character).}
   \item UTC (GMT+00)
  }}
 
-\item{odkc_version}{The ODK Central version as major/minor version, e.g. 0.8.}
+\item{odkc_version}{The ODK Central version as major/minor version, e.g. 1.1.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
 This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
@@ -129,7 +129,7 @@ privileged to view the test project(s) at \code{test_url}.}
 data of encrypted project \code{test_pid} for download. Only used for tests.}
 
 \item{test_odkc_version}{The ODK Central test server's version as major/minor
-version, e.g. 0.8.}
+version, e.g. 1.1.}
 }
 \description{
 Settings are returned invisibly and additionally printed depending on

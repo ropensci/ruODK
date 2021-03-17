@@ -135,12 +135,9 @@ test_that("submission_export works with encryption", {
     fs::is_file(se),
     label = glue::glue("Submission ZIP must be a file: {se}")
   )
-
-
 })
 
 test_that("submission_export warns of missing credentials", {
-
   t <- tempdir()
 
   testthat::expect_error(
@@ -216,7 +213,6 @@ test_that("submission_export warns of missing credentials", {
       verbose = TRUE
     )
   )
-
 })
 
 test_that("submission_export excludes media", {
@@ -266,20 +262,21 @@ test_that("submission_export excludes media", {
   )
 
   suppressWarnings(
-  no_media_no_repeats <- submission_export(
-    local_dir = t,
-    overwrite = TRUE,
-    verbose = TRUE,
-    media = FALSE,
-    repeats = FALSE,
-    pid = get_test_pid(),
-    odkc_version = 1.1,
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    pp = get_test_pp()
-  ))
+    no_media_no_repeats <- submission_export(
+      local_dir = t,
+      overwrite = TRUE,
+      verbose = TRUE,
+      media = FALSE,
+      repeats = FALSE,
+      pid = get_test_pid(),
+      odkc_version = 1.1,
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      pp = get_test_pp()
+    )
+  )
 
   testthat::expect_true(
     tools::file_ext(no_media_no_repeats) == "csv",
@@ -287,20 +284,21 @@ test_that("submission_export excludes media", {
   )
 
   suppressWarnings(
-  media_no_repeats <- submission_export(
-    local_dir = t,
-    overwrite = TRUE,
-    verbose = TRUE,
-    media = TRUE,
-    repeats = FALSE,
-    pid = get_test_pid(),
-    odkc_version = 1.1,
-    fid = get_test_fid(),
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = get_test_pw(),
-    pp = get_test_pp()
-  ))
+    media_no_repeats <- submission_export(
+      local_dir = t,
+      overwrite = TRUE,
+      verbose = TRUE,
+      media = TRUE,
+      repeats = FALSE,
+      pid = get_test_pid(),
+      odkc_version = 1.1,
+      fid = get_test_fid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      pp = get_test_pp()
+    )
+  )
 
   testthat::expect_true(
     tools::file_ext(media_no_repeats) == "csv",
@@ -357,7 +355,6 @@ test_that("submission_export excludes media", {
     ),
     regexp = "Omitting repeat data"
   )
-
 })
 
 # usethis::use_r("submission_export") # nolint

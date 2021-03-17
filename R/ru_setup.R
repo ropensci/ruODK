@@ -42,7 +42,7 @@ ru_settings <- function() {
     pw = Sys.getenv("ODKC_PW", ""),
     pp = Sys.getenv("ODKC_PP", ""),
     tz = Sys.getenv("RU_TIMEZONE", "UTC"),
-    odkc_version = Sys.getenv("ODKC_VERSION", 0.8),
+    odkc_version = Sys.getenv("ODKC_VERSION", 1.1),
     retries = get_retries(),
     verbose = as.logical(Sys.getenv("RU_VERBOSE", FALSE)),
     test_pid = Sys.getenv("ODKC_TEST_PID", ""),
@@ -55,7 +55,7 @@ ru_settings <- function() {
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", ""),
     test_pp = Sys.getenv("ODKC_TEST_PP", ""),
-    test_odkc_version = Sys.getenv("ODKC_TEST_VERSION", 0.8)
+    test_odkc_version = Sys.getenv("ODKC_TEST_VERSION", 1.1)
   )
   structure(ops, class = "ru_settings")
 }
@@ -142,7 +142,7 @@ odata_svc_parse <- function(svc) {
 #'   specified ODK Central instance \code{url} (optional, character).
 #' @param pw The password for user \code{un} (optional, character).
 #' @param pp The passphrase (optional, character) for an encrypted form.
-#' @param odkc_version The ODK Central version as major/minor version, e.g. 0.8.
+#' @param odkc_version The ODK Central version as major/minor version, e.g. 1.1.
 #' @param tz Global default time zone.
 #'   `ruODK`'s time zone is determined in order of precedence:
 #' \itemize{
@@ -191,7 +191,7 @@ odata_svc_parse <- function(svc) {
 #' @param test_pp (optional, character) The valid passphrase to decrypt the
 #'   data of encrypted project \code{test_pid} for download. Only used for tests.
 #' @param test_odkc_version The ODK Central test server's version as major/minor
-#'   version, e.g. 0.8.
+#'   version, e.g. 1.1.
 #' @template param-retries
 #' @param verbose Global default for `ruODK` verbosity.
 #'   `ruODK` verbosity is determined in order of precedence:
@@ -516,14 +516,14 @@ get_ru_verbose <- function() {
 #' @export
 #' @rdname ru_settings
 get_default_odkc_version <- function() {
-  Sys.getenv("ODKC_VERSION", unset = 0.8) %>% as.double()
+  Sys.getenv("ODKC_VERSION", unset = 1.1) %>% as.double()
 }
 
 #' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
 get_test_odkc_version <- function() {
-  Sys.getenv("ODKC_TEST_VERSION", unset = 0.8) %>% as.double()
+  Sys.getenv("ODKC_TEST_VERSION", unset = 1.1) %>% as.double()
 }
 
 #' `r lifecycle::badge("stable")`

@@ -5,6 +5,19 @@
 ## Data
 ## Maintenance
 
+# `ruODK` 0.9.10
+This is a "everything so far works" release. 
+There are a few ODK Central API endpoints waiting to be implemented still.
+
+## Major fixes
+## Minor fixes
+* Default ODK Central version bumped to current release (1.1)
+## Documentation
+* PDF manual updated
+* Welcoming new contributors Marcelo (@mtyszler) and Hélène (@Thaliehln)
+## Data
+## Maintenance
+
 # `ruODK` 0.9.9
 ## Major fixes
 * `submission_export` now supports ODK Central v1.1 features to omit media

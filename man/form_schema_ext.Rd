@@ -63,9 +63,9 @@ See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{odkc_version}{The ODK Central version as decimal number (major.minor).
 `ruODK` uses this parameter to adjust for breaking changes in ODK Central.
-Default: \code{\link{get_default_odkc_version}} or 0.8 if unset.
+Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
 Set default \code{get_default_odkc_version} through
-\code{ru_setup(odkc_version=0.8)}.
+\code{ru_setup(odkc_version=1.1)}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{retries}{The number of attempts to retrieve a web resource.

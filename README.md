@@ -184,8 +184,9 @@ read-permitted ODK Central web user. Adjust verbosity to your liking.
     #>   Default ODK Central URL: https://odkc.dbca.wa.gov.au 
     #>   Default ODK Central Username: Florian.Mayer@dbca.wa.gov.au 
     #>   Default ODK Central Password: run ruODK::get_default_pw() to show 
+    #>   Default ODK Central Passphrase: run ruODK::get_default_pp() to show 
     #>   Default Time Zone: Australia/Perth 
-    #>   Default ODK Central Version: 0.7 
+    #>   Default ODK Central Version: 1.1 
     #>   Default HTTP GET retries: 3 
     #>   Verbose messages: TRUE 
     #>   Test ODK Central Project ID: 2 
@@ -198,7 +199,7 @@ read-permitted ODK Central web user. Adjust verbosity to your liking.
     #>   Test ODK Central Username: Florian.Mayer@dbca.wa.gov.au 
     #>   Test ODK Central Password: run ruODK::get_test_pw() to show 
     #>   Test ODK Central Passphrase: run ruODK::get_test_pp() to show 
-    #>   Test ODK Central Version: 1.0
+    #>   Test ODK Central Version: 1.1
 
 ``` r
 ruODK::ru_setup(
@@ -261,9 +262,9 @@ frmd %>% knitr::kable(.)
 | Flora Quadrat 0.4 | Flora-Quadrat-04 |         | open  |           1 | 2020-11-02T02:56:21.085Z |               5 | Florian Mayer | 2020-11-23T05:25:03.426Z | 2020-11-02T04:19:45.451Z | 434ff9e1e33fc8bb35148c0cc6979708 |
 
 ``` r
-# Form schema: defaults to version 0.8
+# Form schema: defaults to version 1.1
 meta <- ruODK::form_schema(odkc_version = get_test_odkc_version())
-#> ℹ Form schema v1
+#> ℹ Form schema v1.1
 meta %>% knitr::kable(.)
 ```
 
@@ -323,7 +324,7 @@ data <- ruODK::odata_submission_get(local_dir = fs::path("vignettes/media"),
 #> ℹ Downloading submissions...
 #> ✔ Downloaded submissions.
 #> ℹ Reading form schema...
-#> ℹ Form schema v1
+#> ℹ Form schema v1.1
 #> ℹ Parsing submissions...
 #> ℹ Not unnesting geo fields: value_location_corner1, value_perimeter_corner2, value_perimeter_corner3, value_perimeter_corner4, value_taxon_encounter_taxon_encounter_location
 #> ℹ Unnesting: value
@@ -404,7 +405,8 @@ citation("ruODK")
 #> 
 #> To cite ruODK in publications use:
 #> 
-#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version 0.9.5).  Zenodo.
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the
+#>   ODK Central API (Version 0.9.5).  Zenodo.
 #>   https://doi.org/10.5281/zenodo.3953158
 #> 
 #> A BibTeX entry for LaTeX users is
