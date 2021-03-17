@@ -17,6 +17,9 @@ There are a few ODK Central API endpoints waiting to be implemented still.
 * Welcoming new contributors Marcelo (@mtyszler) and Hélène (@Thaliehln)
 ## Data
 ## Maintenance
+* Updated Zenodo archive at <https://zenodo.org/record/4609910>
+* Updated Docker image at <https://hub.docker.com/u/dbcawa/ruodk> 
+  (RStudio server with ruODK)
 
 # `ruODK` 0.9.9
 ## Major fixes
