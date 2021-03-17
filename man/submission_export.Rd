@@ -14,7 +14,7 @@ submission_export(
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
-  pp = NULL,
+  pp = get_default_pp(),
   retries = get_retries(),
   odkc_version = get_default_odkc_version(),
   verbose = get_ru_verbose()
