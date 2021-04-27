@@ -39,7 +39,8 @@
 #' names(f)
 #'
 #' # > "name" "fid" "version" "state" "submissions" "created_at"
-#' # > "created_by_id" "created_by" "updated_at" "last_submission" "hash"
+#' # > "created_by_id" "created_by" "updated_at" "published_at"
+#' # > "last_submission" "hash"
 #' }
 form_detail <- function(pid = get_default_pid(),
                         fid = get_default_fid(),
@@ -79,6 +80,11 @@ form_detail <- function(pid = get_default_pid(),
           is.null(.$updatedAt),
           NA_character_,
           .$updatedAt
+        ),
+        published_at = ifelse(
+          is.null(.$publishedAt),
+          NA_character_,
+          .$publishedAt
         ),
         last_submission = ifelse(
           is.null(.$lastSubmission),

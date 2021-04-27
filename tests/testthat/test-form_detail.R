@@ -27,7 +27,8 @@ test_that("form_detail works", {
   testthat::expect_true("fid" %in% names(f))
   cn <- c(
     "name", "fid", "version", "state", "submissions", "created_at",
-    "created_by_id", "created_by", "updated_at", "last_submission", "hash"
+    "created_by_id", "created_by", "updated_at", "published_at",
+    "last_submission", "hash"
   )
   testthat::expect_equal(names(f), cn)
 })

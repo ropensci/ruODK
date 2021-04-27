@@ -5,6 +5,17 @@
 ## Data
 ## Maintenance
 
+# `ruODK` 0.9.11
+## Major fixes
+## Minor fixes
+* Add `published_at` to `form_list` and `form_detail`, update examples, tests, 
+  test fixtures to show that draft forms can be detected by a NA `published_at`
+  in ODK Central versions having form drafts, and by NA `hash` and `version`
+  in ODK Central versions before form drafts.
+## Documentation
+## Data
+## Maintenance
+
 # `ruODK` 0.9.10
 This is a "everything so far works" release. 
 There are a few ODK Central API endpoints waiting to be implemented still.

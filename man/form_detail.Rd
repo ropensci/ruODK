@@ -75,7 +75,8 @@ nrow(f)
 names(f)
 
 # > "name" "fid" "version" "state" "submissions" "created_at"
-# > "created_by_id" "created_by" "updated_at" "last_submission" "hash"
+# > "created_by_id" "created_by" "updated_at" "published_at"
+# > "last_submission" "hash"
 }
 }
 \seealso{

@@ -63,6 +63,13 @@ fl <- form_list(pid = 1)
 
 class(fl)
 # > c("tbl_df", "tbl", "data.frame")
+
+# Filter out draft forms (published_at=NA)
+only_published_forms <- fl \%>\% dplyr::filter(is.na(published_at))
+
+# Note: older ODK Central versions < 1.1 have published_at = NA for both
+# published and draft forms. Drafts have NA for version and hash.
+only_published_forms <- fl \%>\% dplyr::filter(is.na(version) & is.na(hash))
 }
 }
 \seealso{

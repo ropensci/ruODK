@@ -33,6 +33,13 @@
 #'
 #' class(fl)
 #' # > c("tbl_df", "tbl", "data.frame")
+#'
+#' # Filter out draft forms (published_at=NA)
+#' only_published_forms <- fl %>% dplyr::filter(is.na(published_at))
+#'
+#' # Note: older ODK Central versions < 1.1 have published_at = NA for both
+#' # published and draft forms. Drafts have NA for version and hash.
+#' only_published_forms <- fl %>% dplyr::filter(is.na(version) & is.na(hash))
 #' }
 form_list <- function(pid = get_default_pid(),
                       url = get_default_url(),
@@ -64,6 +71,8 @@ form_list <- function(pid = get_default_pid(),
         created_by_id = purrr::map_int(., c("createdBy", "id")),
         created_by = purrr::map_chr(., c("createdBy", "displayName")),
         updated_at = purrr::map_chr(., "updatedAt", .default = NA) %>%
+          isodt_to_local(),
+        published_at = purrr::map_chr(., "publishedAt", .default = NA) %>%
           isodt_to_local(),
         last_submission = purrr::map_chr(., "lastSubmission", .default = NA) %>%
           isodt_to_local(),
