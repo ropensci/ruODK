@@ -29,7 +29,7 @@ jobs:
           - { os: windows-2016, r: "oldrel" }
           - { os: macOS-latest, r: "devel" }
           - { os: macOS-latest, r: "release"}
-          - { os: macOS-latest, r: "oldrel"} # vign spatial > systemfonts > libfreetype.6.dylib
+          - { os: macOS-latest, r: "oldrel"}
           - { os: ubuntu-20.04, r: "devel" }
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
@@ -128,15 +128,9 @@ jobs:
           libgeos-dev libproj-dev libicu-dev libv8-dev libjq-dev libprotobuf-dev \
           protobuf-compiler libgit2-dev
 
-      # libfreetype.so.6 not found on macOS-devel / r-oldrel
-      # https://stackoverflow.com/a/28488213/2813717
       - name: "[Custom block] [macOS-devel][r-devel] Install system pkgs"
-        if: matrix.config.os == 'macOS-latest'
-        run: |
-          rm '/usr/local/bin/gfortran' || true
-          brew install freetype
-          brew link --overwrite freetype
-          brew install gdal libproj proj geos udunits cairo libpng libgit2
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
+        run: brew install gdal libproj proj geos udunits cairo libpng libgit2
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
