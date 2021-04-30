@@ -136,7 +136,7 @@ jobs:
           rm '/usr/local/bin/gfortran' || true
           brew install freetype
           brew link --overwrite freetype
-          brew install gdal proj geos udunits cairo libpng libgit2
+          brew install gdal libproj proj geos udunits cairo libpng libgit2
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
