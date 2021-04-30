@@ -43,16 +43,13 @@ library(ruODK)
 
 # Visualisation
 library(leaflet)
-# library(leafem)
 library(ggplot2)
 library(lattice)
-library(mapview)
 
 # Spatial
-can_run <- require(sf) && require(leafem)
-# library(sf)
+can_run <- require(sf) && require(leafem) && require(mapview)
 # Fix https://github.com/r-spatial/mapview/issues/313
-mapview::mapviewOptions(fgb = FALSE)
+if(require(mapview)) mapview::mapviewOptions(fgb = FALSE)
 ```
 
 ## Data
