@@ -71,20 +71,8 @@ names(pl)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects}
 
-Other restful-api: 
-\code{\link{attachment_link}()},
-\code{\link{attachment_list}()},
-\code{\link{audit_get}()},
-\code{\link{form_detail}()},
-\code{\link{form_list}()},
-\code{\link{form_schema_ext}()},
-\code{\link{form_schema}()},
-\code{\link{form_xml}()},
+Other project-management: 
 \code{\link{project_create}()},
-\code{\link{project_detail}()},
-\code{\link{submission_detail}()},
-\code{\link{submission_export}()},
-\code{\link{submission_get}()},
-\code{\link{submission_list}()}
+\code{\link{project_detail}()}
 }
-\concept{restful-api}
+\concept{project-management}

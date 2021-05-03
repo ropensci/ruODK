@@ -4,10 +4,14 @@
 \alias{ru_msg_warn}
 \title{rlang::warn() with a yellow warning message with a warning symbol.}
 \usage{
-ru_msg_warn(message)
+ru_msg_warn(message, verbose = get_ru_verbose())
 }
 \arguments{
 \item{message}{<chr> A message to print}
+
+\item{verbose}{Whether to display debug messages or not.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+verbosity can be set globally or per function.}
 }
 \description{
 `r lifecycle::badge("stable")`

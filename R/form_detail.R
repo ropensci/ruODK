@@ -11,7 +11,7 @@
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form}
 # nolint end
-#' @family restful-api
+#' @family form-management
 #' @export
 #' @examples
 #' \dontrun{

@@ -4,10 +4,14 @@
 \alias{ru_msg_noop}
 \title{Print a green noop message with a filled circle symbol.}
 \usage{
-ru_msg_noop(message)
+ru_msg_noop(message, verbose = get_ru_verbose())
 }
 \arguments{
 \item{message}{<chr> A message to print}
+
+\item{verbose}{Whether to display debug messages or not.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+verbosity can be set globally or per function.}
 }
 \description{
 `r lifecycle::badge("stable")`

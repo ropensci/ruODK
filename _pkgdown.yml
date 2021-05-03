@@ -8,6 +8,15 @@ reference:
 - title: Utilities
   contents:
   - has_concept("utilities")
+- title: Project management
+  contents:
+  - has_concept("project-management")
+- title: Form management
+  contents:
+  - has_concept("form-management")
+- title: User management
+  contents:
+  - has_concept("user-management")
 - title: Settings
   contents:
   - has_concept("ru_settings")

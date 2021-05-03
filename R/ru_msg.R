@@ -3,12 +3,14 @@
 #' `r lifecycle::badge("stable")`
 #'
 #' @param message <chr> A message to print
+#' @template param-verbose
 #' @return NULL
 #' @export
 #' @family utilities
 #' @examples
 #' ru_msg_info("This is an info message.")
-ru_msg_info <- function(message) {
+ru_msg_info <- function(message, verbose = get_ru_verbose()) {
+  if (verbose == FALSE) return(NULL)
   x <- clisymbols::symbol$info # nolint
   message(crayon::cyan(glue::glue("{x} {message}\n")))
 }
@@ -18,12 +20,14 @@ ru_msg_info <- function(message) {
 #' `r lifecycle::badge("stable")`
 #'
 #' @param message <chr> A message to print
+#' @template param-verbose
 #' @return NULL
 #' @export
 #' @family utilities
 #' @examples
 #' ru_msg_success("This is a success message.")
-ru_msg_success <- function(message) {
+ru_msg_success <- function(message, verbose = get_ru_verbose()) {
+  if (verbose == FALSE) return(NULL)
   x <- clisymbols::symbol$tick # nolint
   message(crayon::green(glue::glue("{x} {message}\n")))
 }
@@ -34,12 +38,14 @@ ru_msg_success <- function(message) {
 #' `r lifecycle::badge("stable")`
 #'
 #' @param message <chr> A message to print
+#' @template param-verbose
 #' @return NULL
 #' @export
 #' @family utilities
 #' @examples
 #' ru_msg_noop("This is a noop message.")
-ru_msg_noop <- function(message) {
+ru_msg_noop <- function(message, verbose = get_ru_verbose()) {
+  if (verbose == FALSE) return(NULL)
   x <- clisymbols::symbol$circle_filled # nolint
   message(crayon::green(glue::glue("{x} {message}\n")))
 }
@@ -50,6 +56,7 @@ ru_msg_noop <- function(message) {
 #' `r lifecycle::badge("stable")`
 #'
 #' @param message <chr> A message to print
+#' @template param-verbose
 #' @return NULL
 #' @export
 #' @family utilities
@@ -57,7 +64,8 @@ ru_msg_noop <- function(message) {
 #' \dontrun{
 #' ru_msg_warn("This is a warning.")
 #' }
-ru_msg_warn <- function(message) {
+ru_msg_warn <- function(message, verbose = get_ru_verbose()) {
+  if (verbose == FALSE) return(NULL)
   x <- clisymbols::symbol$warning # nolint
   rlang::warn(crayon::yellow(glue::glue("{x} {message}\n")))
 }

@@ -12,7 +12,7 @@
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
 # nolint end
-#' @family restful-api
+#' @family form-management
 #' @export
 #' @examples
 #' \dontrun{

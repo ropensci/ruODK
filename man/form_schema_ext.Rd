@@ -164,20 +164,10 @@ fsx
 
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
 
-Other restful-api: 
-\code{\link{attachment_link}()},
-\code{\link{attachment_list}()},
-\code{\link{audit_get}()},
+Other form-management: 
 \code{\link{form_detail}()},
 \code{\link{form_list}()},
 \code{\link{form_schema}()},
-\code{\link{form_xml}()},
-\code{\link{project_create}()},
-\code{\link{project_detail}()},
-\code{\link{project_list}()},
-\code{\link{submission_detail}()},
-\code{\link{submission_export}()},
-\code{\link{submission_get}()},
-\code{\link{submission_list}()}
+\code{\link{form_xml}()}
 }
-\concept{restful-api}
+\concept{form-management}

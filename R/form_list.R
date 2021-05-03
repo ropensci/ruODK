@@ -10,7 +10,7 @@
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
 # nolint end
-#' @family restful-api
+#' @family form-management
 #' @importFrom httr add_headers authenticate content GET
 #' @export
 #' @examples

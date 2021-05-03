@@ -75,20 +75,10 @@ only_published_forms <- fl \%>\% dplyr::filter(is.na(version) & is.na(hash))
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
 
-Other restful-api: 
-\code{\link{attachment_link}()},
-\code{\link{attachment_list}()},
-\code{\link{audit_get}()},
+Other form-management: 
 \code{\link{form_detail}()},
 \code{\link{form_schema_ext}()},
 \code{\link{form_schema}()},
-\code{\link{form_xml}()},
-\code{\link{project_create}()},
-\code{\link{project_detail}()},
-\code{\link{project_list}()},
-\code{\link{submission_detail}()},
-\code{\link{submission_export}()},
-\code{\link{submission_get}()},
-\code{\link{submission_list}()}
+\code{\link{form_xml}()}
 }
-\concept{restful-api}
+\concept{form-management}

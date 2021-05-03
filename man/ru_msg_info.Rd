@@ -4,10 +4,14 @@
 \alias{ru_msg_info}
 \title{Print a blue info message with an info symbol.}
 \usage{
-ru_msg_info(message)
+ru_msg_info(message, verbose = get_ru_verbose())
 }
 \arguments{
 \item{message}{<chr> A message to print}
+
+\item{verbose}{Whether to display debug messages or not.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+verbosity can be set globally or per function.}
 }
 \description{
 `r lifecycle::badge("stable")`

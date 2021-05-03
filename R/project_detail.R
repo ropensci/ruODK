@@ -20,7 +20,7 @@
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details}
 # nolint end
-#' @family restful-api
+#' @family project-management
 #' @export
 #' @examples
 #' \dontrun{
