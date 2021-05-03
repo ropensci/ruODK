@@ -1,4 +1,4 @@
-#' List all users
+#' List all users.
 #'
 #' `r lifecycle::badge("maturing")`
 #'
@@ -23,11 +23,13 @@
 #'
 #' @param qry A query string to filter users by. The query string is not case
 #'   sensitive and can contain special characters, such as `@`.
+#'
 #'   The query string must be at least 5 alphabetic characters long to
 #'   return good enough matches.
 #'   E.g. `janet` will match a user with display name `Janette Doe`.
 #'   E.g., `@dbca.wa` will match users with an email from `dbca.wa.gov.au`,
 #'   whereas `@dbca.w` or `@dbca` will return no matches.
+#'
 #'   Default: `NULL`.
 #' @template param-url
 #' @template param-auth
@@ -35,7 +37,7 @@
 #' @template param-orders
 #' @template param-tz
 #' @template param-verbose
-#' @return TODO
+#' @return A tibble with user details as per the ODK Central API docs.
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/accounts-and-users/users/listing-all-users}
 # nolint end

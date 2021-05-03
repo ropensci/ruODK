@@ -89,7 +89,7 @@ print.ru_settings <- function(x, ...) {
 #------------------------------------------------------------------------------#
 # Helpers
 #
-#' Retrieve URL, project ID, and form ID from an ODK Central OData service URL
+#' Retrieve URL, project ID, and form ID from an ODK Central OData service URL.
 #'
 #' `r lifecycle::badge("stable")`
 #'

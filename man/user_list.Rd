@@ -2,7 +2,7 @@
 % Please edit documentation in R/user_list.R
 \name{user_list}
 \alias{user_list}
-\title{List all users}
+\title{List all users.}
 \usage{
 user_list(
   qry = NULL,
@@ -17,48 +17,64 @@ user_list(
 }
 \arguments{
 \item{qry}{A query string to filter users by. The query string is not case
-sensitive and can contain special characters, such as `@`.
-The query string must be at least 5 alphabetic characters long to
-return good enough matches.
-E.g. `janet` will match a user with display name `Janette Doe`.
-E.g., `@dbca.wa` will match users with an email from `dbca.wa.gov.au`,
-whereas `@dbca.w` or `@dbca` will return no matches.
-Default: `NULL`.}
+  sensitive and can contain special characters, such as `@`.
+
+  The query string must be at least 5 alphabetic characters long to
+  return good enough matches.
+  E.g. `janet` will match a user with display name `Janette Doe`.
+  E.g., `@dbca.wa` will match users with an email from `dbca.wa.gov.au`,
+  whereas `@dbca.w` or `@dbca` will return no matches.
+
+  Default: `NULL`.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{\link{get_default_url}}.
-Set default \code{url} through \code{ru_setup(url="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+  Default: \code{\link{get_default_url}}.
+
+  Set default \code{url} through \code{ru_setup(url="...")}.
+
+  See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{\link{get_default_un}}.
-Set default \code{un} through \code{ru_setup(un="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+          Default: \code{\link{get_default_un}}.
+
+          Set default \code{un} through \code{ru_setup(un="...")}.
+
+          See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{\link{get_default_pw}}.
-Set default \code{pw} through \code{ru_setup(pw="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+          Default: \code{\link{get_default_pw}}.
+
+          Set default \code{pw} through \code{ru_setup(pw="...")}.
+
+          See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
-This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
-Default: 3.}
+
+  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+
+  Default: 3.}
 
 \item{orders}{(vector of character) Orders of datetime elements for
-lubridate.
-Default:
-\code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
+  lubridate.
+
+  Default:
+  \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
 
 \item{tz}{A timezone to convert dates and times to.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-timezone can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  timezone can be set globally or per function.}
 
 \item{verbose}{Whether to display debug messages or not.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-verbosity can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  verbosity can be set globally or per function.}
 }
 \value{
-TODO
+A tibble with user details as per the ODK Central API docs.
 }
 \description{
 `r lifecycle::badge("maturing")`

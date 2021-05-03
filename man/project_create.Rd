@@ -15,19 +15,28 @@ project_create(
 \item{name}{The desired name of the project. Can contain whitespace.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{\link{get_default_url}}.
-Set default \code{url} through \code{ru_setup(url="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+  Default: \code{\link{get_default_url}}.
+
+  Set default \code{url} through \code{ru_setup(url="...")}.
+
+  See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{\link{get_default_un}}.
-Set default \code{un} through \code{ru_setup(un="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+          Default: \code{\link{get_default_un}}.
+
+          Set default \code{un} through \code{ru_setup(un="...")}.
+
+          See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{\link{get_default_pw}}.
-Set default \code{pw} through \code{ru_setup(pw="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+          Default: \code{\link{get_default_pw}}.
+
+          Set default \code{pw} through \code{ru_setup(pw="...")}.
+
+          See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
 A tibble with one row per project and all project metadata

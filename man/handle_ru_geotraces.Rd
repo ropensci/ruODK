@@ -26,15 +26,19 @@ E.g. the output of `ruODK::form_schema()`.}
 strings (if TRUE), default: FALSE.}
 
 \item{odkc_version}{The ODK Central version as decimal number (major.minor).
-`ruODK` uses this parameter to adjust for breaking changes in ODK Central.
-Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
-Set default \code{get_default_odkc_version} through
-\code{ru_setup(odkc_version=1.1)}.
-See \code{vignette("Setup", package = "ruODK")}.}
+  `ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+
+  Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
+
+  Set default \code{get_default_odkc_version} through
+  \code{ru_setup(odkc_version=1.1)}.
+
+  See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{verbose}{Whether to display debug messages or not.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-verbosity can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  verbosity can be set globally or per function.}
 }
 \value{
 The submissions tibble with all geotraces retained in their original

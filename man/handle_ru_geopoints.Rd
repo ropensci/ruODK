@@ -20,8 +20,9 @@ E.g. the output of `ruODK::form_schema()`.}
 strings (if TRUE), default: FALSE.}
 
 \item{verbose}{Whether to display debug messages or not.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-verbosity can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  verbosity can be set globally or per function.}
 }
 \value{
 The submissions tibble with all geopoints retained in their original

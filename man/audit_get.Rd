@@ -33,23 +33,34 @@ E.g. `2000-01-01z` or `2000-12-31T23:59.999z`, `2000-01-01T12:12:12+08` or
 \item{offset}{integer. The number of log entries to skip.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{\link{get_default_url}}.
-Set default \code{url} through \code{ru_setup(url="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+  Default: \code{\link{get_default_url}}.
+
+  Set default \code{url} through \code{ru_setup(url="...")}.
+
+  See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{\link{get_default_un}}.
-Set default \code{un} through \code{ru_setup(un="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+          Default: \code{\link{get_default_un}}.
+
+          Set default \code{un} through \code{ru_setup(un="...")}.
+
+          See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{\link{get_default_pw}}.
-Set default \code{pw} through \code{ru_setup(pw="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+          Default: \code{\link{get_default_pw}}.
+
+          Set default \code{pw} through \code{ru_setup(pw="...")}.
+
+          See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
-This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
-Default: 3.}
+
+  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+
+  Default: 3.}
 }
 \value{
 A tibble containing server audit logs.

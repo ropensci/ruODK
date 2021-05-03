@@ -29,27 +29,39 @@ field `id`, whereas nested sub-tables contain the submission id in the
 field `submissions_id`.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{\link{get_default_url}}.
-Set default \code{url} through \code{ru_setup(url="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+  Default: \code{\link{get_default_url}}.
+
+  Set default \code{url} through \code{ru_setup(url="...")}.
+
+  See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{un}{The ODK Central username (an email address).
-Default: \code{\link{get_default_un}}.
-Set default \code{un} through \code{ru_setup(un="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+          Default: \code{\link{get_default_un}}.
+
+          Set default \code{un} through \code{ru_setup(un="...")}.
+
+          See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pw}{The ODK Central password.
-Default: \code{\link{get_default_pw}}.
-Set default \code{pw} through \code{ru_setup(pw="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+          Default: \code{\link{get_default_pw}}.
+
+          Set default \code{pw} through \code{ru_setup(pw="...")}.
+
+          See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
-This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
-Default: 3.}
+
+  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+
+  Default: 3.}
 
 \item{verbose}{Whether to display debug messages or not.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-verbosity can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  verbosity can be set globally or per function.}
 }
 \value{
 The relative local path to the downloaded attachment or NA.

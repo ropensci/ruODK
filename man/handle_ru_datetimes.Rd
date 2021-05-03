@@ -23,17 +23,20 @@ ruODK::odata_submission_rectangle()
 E.g. the output of `ruODK::form_schema()`.}
 
 \item{orders}{(vector of character) Orders of datetime elements for
-lubridate.
-Default:
-\code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
+  lubridate.
+
+  Default:
+  \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
 
 \item{tz}{A timezone to convert dates and times to.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-timezone can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  timezone can be set globally or per function.}
 
 \item{verbose}{Whether to display debug messages or not.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-verbosity can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  verbosity can be set globally or per function.}
 }
 \value{
 The submissions tibble with all date/dateTime columns mutated as

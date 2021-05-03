@@ -19,19 +19,28 @@ attachment_url(
 attachment filenames.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
-Default: \code{\link{get_default_pid}}.
-Set default \code{pid} through \code{ru_setup(pid="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+  Default: \code{\link{get_default_pid}}.
+
+  Set default \code{pid} through \code{ru_setup(pid="...")}.
+
+  See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
-Default: \code{\link{get_default_fid}}.
-Set default \code{fid} through \code{ru_setup(fid="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+  Default: \code{\link{get_default_fid}}.
+
+  Set default \code{fid} through \code{ru_setup(fid="...")}.
+
+  See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
-Default: \code{\link{get_default_url}}.
-Set default \code{url} through \code{ru_setup(url="...")}.
-See \code{vignette("Setup", package = "ruODK")}.}
+
+  Default: \code{\link{get_default_url}}.
+
+  Set default \code{url} through \code{ru_setup(url="...")}.
+
+  See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
 The inferred download URL.

@@ -10,8 +10,9 @@ ru_msg_success(message, verbose = get_ru_verbose())
 \item{message}{<chr> A message to print}
 
 \item{verbose}{Whether to display debug messages or not.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-verbosity can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  verbosity can be set globally or per function.}
 }
 \description{
 `r lifecycle::badge("stable")`

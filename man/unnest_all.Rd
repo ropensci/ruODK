@@ -31,8 +31,9 @@ plain text and will never be unnested, GeoJSON location fields would cause
 errors during unnesting.}
 
 \item{verbose}{Whether to display debug messages or not.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-verbosity can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  verbosity can be set globally or per function.}
 }
 \value{
 The un-nested tibble in wide format

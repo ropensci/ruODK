@@ -18,8 +18,9 @@ Non-repeating form groups will be flattened out into the main Submissions
 table. Repeating groups are available as separate OData tables.}
 
 \item{verbose}{Whether to display debug messages or not.
-Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-verbosity can be set globally or per function.}
+
+  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+  verbosity can be set globally or per function.}
 }
 \description{
 `r lifecycle::badge("stable")`

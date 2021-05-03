@@ -2,7 +2,7 @@
 % Please edit documentation in R/ru_setup.R
 \name{odata_svc_parse}
 \alias{odata_svc_parse}
-\title{Retrieve URL, project ID, and form ID from an ODK Central OData service URL}
+\title{Retrieve URL, project ID, and form ID from an ODK Central OData service URL.}
 \usage{
 odata_svc_parse(svc)
 }

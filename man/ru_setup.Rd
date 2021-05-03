@@ -66,8 +66,10 @@ specified ODK Central instance \code{url} (optional, character).}
 \item{odkc_version}{The ODK Central version as major/minor version, e.g. 1.1.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
-This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
-Default: 3.}
+
+  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+
+  Default: 3.}
 
 \item{verbose}{Global default for `ruODK` verbosity.
  `ruODK` verbosity is determined in order of precedence:
