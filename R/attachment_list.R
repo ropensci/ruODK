@@ -36,15 +36,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Set default credentials, see vignette "setup"
-#' ruODK::ru_setup(
-#'   svc = paste0(
-#'     "https://sandbox.central.getodk.org/v1/projects/14/",
-#'     "forms/build_Flora-Quadrat-0-2_1558575936.svc"
-#'   ),
-#'   un = "me@email.com",
-#'   pw = "..."
-#' )
+#' # See vignette("setup") for setup and authentication options
+#' # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 #'
 #' sl <- submission_list()
 #'
@@ -110,7 +103,7 @@ get_one_submission_attachment_list <- function(iid,
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
 # nolint end
-#' @family restful-api
+#' @family submission-management
 #' @export
 #' @examples
 #' \dontrun{

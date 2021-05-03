@@ -88,6 +88,7 @@ subs <- submission_get(sl$instance_id)
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
 
 Other submission-management: 
+\code{\link{attachment_list}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_list}()}

@@ -1,5 +1,7 @@
 ---
 title: "Accessing the OData API"
+description: >
+  Accessing submission data via the OData pathway.
 output: 
   rmarkdown::html_vignette:
     self_contained: false
@@ -57,7 +59,8 @@ form ID and is used by `ruODK::ru_setup()`.
 
 ```{r ru_setup_demo, eval=FALSE}
 # ODK Central's OData URL contains base URL, project ID, and form ID
-# ODK Central credentials can live in .Renviron, see vignette "setup"
+# ODK Central credentials can live in .Renviron
+# See vignette("setup") for setup and authentication options.
 ruODK::ru_setup(
   svc = Sys.getenv("ODKC_TEST_SVC"),
   un = Sys.getenv("ODKC_TEST_UN"),
@@ -68,7 +71,6 @@ ruODK::ru_setup(
 
 # File attachment download location
 loc <- fs::path("media")
-
 ```
 
 This vignette shows how to access data, but under the bonnet uses the 

@@ -120,6 +120,7 @@ nrow(sl) == form_list_nsub
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form}
 
 Other submission-management: 
+\code{\link{attachment_list}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_get}()}

@@ -31,7 +31,7 @@ You will need:
 <!--
 Step 1: Setup ruODK, ckanr
 Secrets are set as environment variables to keep them outside of this document. 
-Read vignette "setup" for further information.
+Read vignette("setup") for setup and authentication options.
 -->
 <!-- 1a. Open the .Renviron file:  -->
 ```{r edit_renviron, echo=FALSE, eval=FALSE}

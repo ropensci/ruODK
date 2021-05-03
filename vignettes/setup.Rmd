@@ -1,5 +1,7 @@
 ---
 title: "Setup"
+description: >
+  Provide sensitive credentials to ruODK through different pathways.
 output: 
   rmarkdown::html_vignette:
     self_contained: false

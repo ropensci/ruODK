@@ -138,15 +138,8 @@ columns \code{name}, \code{type}, \code{path} and \code{ruodk_name}.
 }
 \examples{
 \dontrun{
-# Set default credentials, see vignette "setup"
-ruODK::ru_setup(
-  svc = paste0(
-    "https://sandbox.central.getodk.org/v1/projects/14/",
-    "forms/build_Flora-Quadrat-0-2_1558575936.svc"
-  ),
-  un = "me@email.com",
-  pw = "..."
-)
+# See vignette("setup") for setup and authentication options
+# ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
 # With explicit pid and fid
 fs_defaults <- form_schema(pid = 1, fid = "build_xformsId")

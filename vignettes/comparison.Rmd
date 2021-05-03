@@ -1,5 +1,7 @@
 ---
 title: "Comparison of related software packages"
+description: >
+  An overview of related software packages in the ODK / OData space.
 output: 
   rmarkdown::html_vignette:
     self_contained: false

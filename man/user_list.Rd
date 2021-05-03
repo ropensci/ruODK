@@ -98,12 +98,8 @@ have no permission to \code{user.list}.
 }
 \examples{
 \dontrun{
-# See vignette "setup" for authentication options
-ruODK::ru_setup(
-  svc = "....svc",
-  un = "me@email.com",
-  pw = "..."
-)
+# See vignette("setup") for setup and authentication options
+# ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
 # All users
 ul <- user_list()

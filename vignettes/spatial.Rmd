@@ -1,5 +1,7 @@
 ---
 title: "Spatial data"
+description: >
+  Examples and conversation starters for spatial data.
 output: 
   rmarkdown::html_vignette:
     self_contained: false
@@ -49,6 +51,7 @@ library(lattice)
 # Spatial
 can_run <- require(sf) && require(leafem) && require(mapview)
 # Fix https://github.com/r-spatial/mapview/issues/313
+# option 'fgb' requires GDAL >= 3.1.0
 if(require(mapview)) mapview::mapviewOptions(fgb = FALSE)
 ```
 

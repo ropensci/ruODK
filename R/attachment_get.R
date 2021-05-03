@@ -54,13 +54,16 @@ prepend_uuid <- function(md5hash) {
 #' @family utilities
 #' @keywords internal
 #' @examples
-#' \dontrun{
-#' ruODK:::attachment_url("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
+#' # See vignette("setup") for setup and authentication options
+#' # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
+#'
+#' ruODK:::attachment_url(
+#'   "uuid:d3bcefea",
 #'   "filename.jpg",
-#'   pid = 1, fid = "form1",
-#'   url = "https://sandbox.central.getodk.org"
+#'   pid = 1,
+#'   fid = "form1",
+#'   url = "https://my.odkcentral.org"
 #' )
-#' }
 attachment_url <- function(uuid,
                            fn,
                            pid = get_default_pid(),
@@ -109,7 +112,8 @@ attachment_url <- function(uuid,
 #' @examples
 #' \dontrun{
 #' # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
-#' ruODK::ru_setup(svc = "...")
+#' # See vignette("setup") for setup and authentication options
+#' # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 #'
 #' # Step 2: Construct attachment_url
 #' att_url <- ruODK:::attachment_url(
@@ -237,8 +241,9 @@ get_one_attachment <- function(pth,
 #' @export
 #' @examples
 #' \dontrun{
-#' # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
-#' ruODK::ru_setup(svc = "...")
+#' # See vignette("setup") for setup and authentication options
+#' # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
+#'
 #' a_local_dir <- here::here()
 #'
 #' # Step 2: Get unparsed submissions

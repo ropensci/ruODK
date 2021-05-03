@@ -155,17 +155,10 @@ higher. If you use it with an earlier version, a warning will be given.
 }
 \examples{
 \dontrun{
-# Set default credentials, see vignette "setup"
-ruODK::ru_setup(
-  url = ruODK::get_test_url(),
-  pid = ruODK::get_test_pid(),
-  fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
-  un = ruODK::get_test_un(),
-  pw = ruODK::get_test_pw()
-)
+# See vignette("setup") for setup and authentication options
+# ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
-
-# With current ODK Central (v0.8)
+# With current ODK Central (>0.7)
 # get extended schema:
 fsx <- form_schema_ext()
 

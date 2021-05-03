@@ -143,13 +143,8 @@ If the submissions are encrypted
 }
 \examples{
 \dontrun{
-# Set default credentials, see vignette "setup"
-ruODK::ru_setup(
-  svc = "....svc",
-  un = "me@email.com",
-  pw = "...",
-  pp = "..."
-)
+# See vignette("setup") for setup and authentication options
+# ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
 se <- submission_export()
 
@@ -166,6 +161,7 @@ sub \%>\% knitr::kable(.)
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv}
 
 Other submission-management: 
+\code{\link{attachment_list}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_get}()},
 \code{\link{submission_list}()}

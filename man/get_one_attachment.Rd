@@ -75,7 +75,8 @@ to a tibble of input parameters.
 \examples{
 \dontrun{
 # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
-ruODK::ru_setup(svc = "...")
+# See vignette("setup") for setup and authentication options
+# ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
 # Step 2: Construct attachment_url
 att_url <- ruODK:::attachment_url(

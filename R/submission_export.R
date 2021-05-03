@@ -60,13 +60,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Set default credentials, see vignette "setup"
-#' ruODK::ru_setup(
-#'   svc = "....svc",
-#'   un = "me@email.com",
-#'   pw = "...",
-#'   pp = "..."
-#' )
+#' # See vignette("setup") for setup and authentication options
+#' # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 #'
 #' se <- submission_export()
 #'

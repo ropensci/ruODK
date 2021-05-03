@@ -5,6 +5,20 @@
 ## Data
 ## Maintenance
 
+# `ruODK` 0.10.0
+## Major fixes
+## Minor fixes
+* Make `ru_msg_*` conditional to `get_ru_verbose()`.
+## Documentation
+* Reference re-ordered into topics.
+* Re-worded the example preamble on setup.
+* Added metadata to pkgdown config.
+* Enable Markdown docs. Embedded lifecycle badges should work. R CMD Check does
+  not complain which is nice.
+## Data
+## Maintenance
+* Prepare to cover remaining API endpoints.
+
 # `ruODK` 0.9.11
 ## Major fixes
 ## Minor fixes

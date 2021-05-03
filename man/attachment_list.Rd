@@ -93,7 +93,10 @@ all <- attachment_list(sl$instance_id)
 
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
 
-Other restful-api: 
-\code{\link{audit_get}()}
+Other submission-management: 
+\code{\link{submission_detail}()},
+\code{\link{submission_export}()},
+\code{\link{submission_get}()},
+\code{\link{submission_list}()}
 }
-\concept{restful-api}
+\concept{submission-management}

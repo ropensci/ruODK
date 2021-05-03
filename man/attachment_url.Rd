@@ -54,13 +54,16 @@ This function is vectorised and accepts single values or vectors for uuid and
 fn.
 }
 \examples{
-\dontrun{
-ruODK:::attachment_url("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0",
+# See vignette("setup") for setup and authentication options
+# ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
+
+ruODK:::attachment_url(
+  "uuid:d3bcefea",
   "filename.jpg",
-  pid = 1, fid = "form1",
-  url = "https://sandbox.central.getodk.org"
+  pid = 1,
+  fid = "form1",
+  url = "https://my.odkcentral.org"
 )
-}
 }
 \seealso{
 Other utilities: 

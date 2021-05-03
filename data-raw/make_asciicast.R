@@ -5,12 +5,12 @@
 
 # <<
 # Use your form's OData Service URL (Form > Submissions > Analyse data)
-# Read vignette "setup" on setting username and password via .Renviron
+# Read vignette("setup") on setting username and password via .Renviron
 # <<
 suppressMessages(library(tidyverse))
 library(ruODK)
 ruODK::ru_setup(
-  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
+  svc = "https://myodk.org/v1/projects/14/forms/Flora-Quadrat.svc",
   un = ruODK::get_test_un(), pw = ruODK::get_test_pw()
 )
 

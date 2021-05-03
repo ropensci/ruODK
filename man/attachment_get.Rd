@@ -109,8 +109,9 @@ workdir/media/filename3.jpg
 }
 \examples{
 \dontrun{
-# Step 1: Setup ruODK with OData Service URL (has url, pid, fid)
-ruODK::ru_setup(svc = "...")
+# See vignette("setup") for setup and authentication options
+# ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
+
 a_local_dir <- here::here()
 
 # Step 2: Get unparsed submissions
@@ -134,7 +135,7 @@ fresh_parsed <- fresh_raw \%>\%
 
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
 
-Other utilities: 
+Other utilities:
 \code{\link{attachment_link}()},
 \code{\link{attachment_url}()},
 \code{\link{drop_null_coords}()},
