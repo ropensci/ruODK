@@ -137,9 +137,12 @@ uuids to download them one by one via \code{\link{submission_get}}.
 Download attachments as listed for each submission
 (\code{\link{attachment_list}}).
 
-If the submissions are encrypted
+For encrypted forms, we default to one try by default, as multiple retries
+with an incorrect passphrase can crash ODK Central.
+This is being investigated in
+\href{https://github.com/ropensci/ruODK/issues/30}{issue #30}.
 
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 }
 \examples{
 \dontrun{

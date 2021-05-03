@@ -19,9 +19,12 @@
 #' Download attachments as listed for each submission
 #' (\code{\link{attachment_list}}).
 #'
-#' If the submissions are encrypted
+#' For encrypted forms, we default to one try by default, as multiple retries
+#' with an incorrect passphrase can crash ODK Central.
+#' This is being investigated in
+#' [issue #30](https://github.com/ropensci/ruODK/issues/30).
 #'
-#' `r lifecycle::badge("stable")`
+#' `r lifecycle::badge("maturing")`
 #'
 #' @param local_dir The local folder to save the downloaded files to,
 #'                  default: \code{here::here}.
@@ -162,6 +165,9 @@ submission_export <- function(local_dir = here::here(),
     "Found multiple encryption keys for form {fid}, using the first key." %>%
       glue::glue() %>%
       ru_msg_info(verbose = verbose)
+
+    # Patch https://github.com/ropensci/ruODK/issues/30
+    retries <- 1
   }
 
   # Export form submissions to CSV via POST

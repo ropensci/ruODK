@@ -5,6 +5,16 @@
 ## Data
 ## Maintenance
 
+# `ruODK` 0.10.1
+## Major fixes
+* `submission_export` is reported to crash ODK Central if an incorrect 
+  passphrase is given. Retries are set to 1 for encrypted forms. 
+  (#30, thanks @Thaliehln)
+## Minor fixes
+## Documentation
+## Data
+## Maintenance
+
 # `ruODK` 0.10.0
 ## Major fixes
 ## Minor fixes
