@@ -80,7 +80,6 @@ all <- attachment_list(sl$instance_id)
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
 
 Other restful-api: 
-\code{\link{attachment_link}()},
 \code{\link{audit_get}()}
 }
 \concept{restful-api}

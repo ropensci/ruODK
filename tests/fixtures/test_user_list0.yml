@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://odkcentral.dbca.wa.gov.au/v1/users
+    uri: https://odkc.dbca.wa.gov.au/v1/users
     body:
       encoding: ''
       string: ''
@@ -17,8 +17,8 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Mon, 03 May 2021 03:58:37 GMT
-      etag: W/"e8e-yEn3M9sOOWrRkNiPTzaR1isXcsc"
+      date: Mon, 03 May 2021 06:00:21 GMT
+      etag: W/"a21-Um8cNKewa2hAtDxtxxij7PRuYy0"
       server: nginx
       strict-transport-security:
       - max-age=31536000
@@ -29,28 +29,22 @@ http_interactions:
     body:
       encoding: UTF-8
       file: no
-      string: '[{"id":81,"type":"user","displayName":"Adrienne Markey","createdAt":"2020-07-08T06:29:43.399Z","updatedAt":null,"email":"Adrienne.Markey@dbca.wa.gov.au"},{"id":38,"type":"user","displayName":"Ben
-        Corey","createdAt":"2019-06-27T04:29:44.087Z","updatedAt":"2019-06-28T03:03:24.822Z","email":"ben.corey@dbca.wa.gov.au"},{"id":59,"type":"user","displayName":"Brooke
-        Shields","createdAt":"2019-10-08T06:36:47.384Z","updatedAt":"2019-10-08T06:37:03.181Z","email":"Brooke.Shields@dbca.wa.gov.au"},{"id":31,"type":"user","displayName":"Colin
-        Ward","createdAt":"2019-06-07T05:45:21.437Z","updatedAt":"2019-06-27T04:30:24.025Z","email":"colin.ward@dbca.wa.gov.au"},{"id":71,"type":"user","displayName":"Emer
-        O''Gara","createdAt":"2020-01-16T02:47:28.674Z","updatedAt":null,"email":"emer.ogara@dbca.wa.gov.au"},{"id":5,"type":"user","displayName":"Florian
-        Mayer","createdAt":"2019-06-05T09:36:38.178Z","updatedAt":"2019-06-06T03:08:03.245Z","email":"florian.mayer@dbca.wa.gov.au"},{"id":62,"type":"user","displayName":"Florian
-        Mayer (Gmail)","createdAt":"2019-10-24T07:45:39.797Z","updatedAt":null,"email":"florian.wendelin.mayer@gmail.com"},{"id":61,"type":"user","displayName":"Graham
-        Loewenthal","createdAt":"2019-10-24T02:20:10.605Z","updatedAt":"2019-10-24T02:24:44.335Z","email":"graham.loewenthal@dbca.wa.gov.au"},{"id":56,"type":"user","displayName":"Judith
-        Harvey","createdAt":"2019-10-08T03:36:37.095Z","updatedAt":"2019-10-08T03:36:54.436Z","email":"Judith.Harvey@dbca.wa.gov.au"},{"id":73,"type":"user","displayName":"Katinka
-        Ruthrof","createdAt":"2020-01-16T02:47:55.360Z","updatedAt":null,"email":"katinka.ruthrof@dbca.wa.gov.au"},{"id":52,"type":"user","displayName":"Kym
-        Ottewell","createdAt":"2019-10-07T07:21:05.237Z","updatedAt":"2019-10-07T07:21:21.126Z","email":"kym.ottewell@dbca.wa.gov.au"},{"id":48,"type":"user","displayName":"Maëlle
-        Salmon","createdAt":"2019-08-28T11:23:41.231Z","updatedAt":"2019-08-28T11:24:58.138Z","email":"maelle.salmon@yahoo.se"},{"id":79,"type":"user","displayName":"Margaret
-        Langley","createdAt":"2020-07-07T05:13:35.639Z","updatedAt":null,"email":"Margaret.Langley@dbca.wa.gov.au"},{"id":12,"type":"user","displayName":"Marika
-        Maxwell","createdAt":"2019-06-06T03:21:43.783Z","updatedAt":"2019-06-06T03:23:22.758Z","email":"marika.maxwell@dbca.wa.gov.au"},{"id":51,"type":"user","displayName":"Matt
-        Cavana","createdAt":"2019-10-07T06:03:56.549Z","updatedAt":"2019-10-07T06:05:02.697Z","email":"matt.cavana@dbca.wa.gov.au"},{"id":13,"type":"user","displayName":"Mike
-        Lyons","createdAt":"2019-06-06T03:22:03.440Z","updatedAt":"2019-06-06T03:23:39.894Z","email":"mike.lyons@dbca.wa.gov.au"},{"id":60,"type":"user","displayName":"Peter
-        Novak","createdAt":"2019-10-09T04:27:43.501Z","updatedAt":"2019-10-09T04:28:17.624Z","email":"peter.novak@dbca.wa.gov.au"},{"id":45,"type":"user","displayName":"Ryan
-        Douglas","createdAt":"2019-08-01T04:51:25.513Z","updatedAt":"2019-08-01T04:52:47.098Z","email":"ryan.douglas@dbca.wa.gov.au"},{"id":84,"type":"user","displayName":"Sarah
-        McDonald","createdAt":"2020-08-06T03:56:46.604Z","updatedAt":null,"email":"sarah.mcdonald@dbca.wa.gov.au"},{"id":44,"type":"user","displayName":"Suzie
-        Glac","createdAt":"2019-07-22T08:12:08.308Z","updatedAt":"2019-07-22T08:12:35.435Z","email":"suzie.glac@dbca.wa.gov.au"},{"id":53,"type":"user","displayName":"Tania
-        Pinnell","createdAt":"2019-10-07T23:58:39.798Z","updatedAt":null,"email":"tania.pinnell@dbca.wa.gov.au"},{"id":89,"type":"user","displayName":"Tilo
-        Massenbauer","createdAt":"2020-09-17T08:23:46.492Z","updatedAt":null,"email":"tilomass@gmail.com"},{"id":67,"type":"user","displayName":"Valerie
-        Densmore","createdAt":"2020-01-07T07:07:31.979Z","updatedAt":null,"email":"valerie.densmore@dbca.wa.gov.au"}]'
-  recorded_at: 2021-05-03 03:58:38 GMT
+      string: '[{"id":8,"type":"user","displayName":"Brendan Cale","createdAt":"2020-10-19T08:04:41.733Z","updatedAt":null,"email":"brendan.cale@dbca.wa.gov.au"},{"id":115,"type":"user","displayName":"Colin
+        Ward","createdAt":"2021-02-16T06:37:29.632Z","updatedAt":null,"email":"Colin.Ward@dbca.wa.gov.au"},{"id":24,"type":"user","displayName":"Corrine
+        Douglas","createdAt":"2020-10-20T02:19:20.325Z","updatedAt":null,"email":"Corrine.Douglas@dbca.wa.gov.au"},{"id":73,"type":"user","displayName":"Emer
+        O''Gara","createdAt":"2020-11-06T03:12:40.979Z","updatedAt":null,"email":"emer.ogara@dbca.wa.gov.au"},{"id":5,"type":"user","displayName":"Florian
+        Mayer","createdAt":"2020-10-19T07:59:34.890Z","updatedAt":"2020-10-20T02:04:34.832Z","email":"florian.mayer@dbca.wa.gov.au"},{"id":10,"type":"user","displayName":"Florian
+        Mayer (GMail)","createdAt":"2020-10-19T08:05:42.369Z","updatedAt":null,"email":"florian.wendelin.mayer@gmail.com"},{"id":51,"type":"user","displayName":"Helene
+        Langet","createdAt":"2020-10-31T11:11:27.946Z","updatedAt":null,"email":"helene.langet@swisstph.ch"},{"id":46,"type":"user","displayName":"Jesse
+        Murdoch","createdAt":"2020-10-27T02:20:26.068Z","updatedAt":null,"email":"jesse.murdoch@dbca.wa.gov.au"},{"id":44,"type":"user","displayName":"Julian
+        Tonti-Filippini","createdAt":"2020-10-23T04:26:50.609Z","updatedAt":null,"email":"julian.tonti-filippini@dbca.wa.gov.au"},{"id":75,"type":"user","displayName":"Katinka
+        Ruthrof","createdAt":"2020-11-06T03:13:04.210Z","updatedAt":null,"email":"katinka.ruthrof@dbca.wa.gov.au"},{"id":109,"type":"user","displayName":"Marika
+        Maxwell","createdAt":"2021-02-02T01:57:07.470Z","updatedAt":null,"email":"marika.maxwell@dbca.wa.gov.au"},{"id":22,"type":"user","displayName":"Ryan
+        Douglas","createdAt":"2020-10-20T02:05:12.436Z","updatedAt":null,"email":"Ryan.Douglas@dbca.wa.gov.au"},{"id":48,"type":"user","displayName":"Sabrina
+        Fossette-Halot","createdAt":"2020-10-27T02:21:12.946Z","updatedAt":null,"email":"sabrina.fossette-halot@dbca.wa.gov.au"},{"id":96,"type":"user","displayName":"Sarah
+        McDonald","createdAt":"2020-11-19T06:08:34.060Z","updatedAt":null,"email":"sarah.mcdonald@dbca.wa.gov.au"},{"id":77,"type":"user","displayName":"Tilo
+        Massenbauer","createdAt":"2020-11-06T03:13:23.108Z","updatedAt":null,"email":"tilomass@gmail.com"},{"id":68,"type":"user","displayName":"Marcelo
+        Tyszler","createdAt":"2020-11-02T07:09:01.456Z","updatedAt":null,"email":"tyszler.jobs@gmail.com"},{"id":80,"type":"user","displayName":"Valerie
+        Densmore","createdAt":"2020-11-06T03:14:29.921Z","updatedAt":null,"email":"valerie.densmore@dbca.wa.gov.au"}]'
+  recorded_at: 2021-05-03 06:00:21 GMT
   recorded_with: vcr/0.6.0, webmockr/0.8.0

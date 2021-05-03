@@ -61,6 +61,7 @@ testthat::expect_equal(len_coords_repaired + 1, len_coords)
 \seealso{
 Other utilities: 
 \code{\link{attachment_get}()},
+\code{\link{attachment_link}()},
 \code{\link{attachment_url}()},
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},

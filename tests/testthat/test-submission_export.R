@@ -4,6 +4,7 @@ test_that("submission_export works", {
 
   # A fresh litterbox
   t <- tempdir()
+  fs::dir_ls(t) %>% fs::file_delete()
 
   # High expectations
   pth <- fs::path(
@@ -117,6 +118,7 @@ test_that("submission_export works with encryption", {
   # nolint end
 
   t <- tempdir()
+  fs::dir_ls(t) %>% fs::file_delete()
   # vcr::use_cassette("test_submission_export0", {
   se <- submission_export(
     local_dir = t,
@@ -139,6 +141,7 @@ test_that("submission_export works with encryption", {
 
 test_that("submission_export warns of missing credentials", {
   t <- tempdir()
+  fs::dir_ls(t) %>% fs::file_delete()
 
   testthat::expect_error(
     se <- submission_export(
@@ -221,6 +224,7 @@ test_that("submission_export excludes media", {
 
   # A fresh litterbox
   t <- tempdir()
+  fs::dir_ls(t) %>% fs::file_delete()
 
   media_and_repeats <- submission_export(
     local_dir = t,
@@ -323,7 +327,7 @@ test_that("submission_export excludes media", {
   testthat::expect_message(
     submission_export(
       local_dir = t,
-      overwrite = FALSE,
+      overwrite = TRUE,
       verbose = TRUE,
       media = FALSE, # won't work on old ODKC
       repeats = TRUE,
@@ -341,7 +345,7 @@ test_that("submission_export excludes media", {
   testthat::expect_message(
     submission_export(
       local_dir = t,
-      overwrite = FALSE,
+      overwrite = TRUE,
       verbose = TRUE,
       media = TRUE,
       repeats = FALSE, # won't work on old ODKC

@@ -33,6 +33,7 @@ predict_ruodk_name("rock", "Submissions.foo_fighters")
 \seealso{
 Other utilities: 
 \code{\link{attachment_get}()},
+\code{\link{attachment_link}()},
 \code{\link{attachment_url}()},
 \code{\link{drop_null_coords}()},
 \code{\link{form_schema_parse}()},

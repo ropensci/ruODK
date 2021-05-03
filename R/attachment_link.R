@@ -13,7 +13,7 @@
 #' @return The dataframe with attachment columns modified to contain relative
 #'   paths to the downloaded attachment files.
 #' @export
-#' @family restful-api
+#' @family utilities
 #' @examples
 #' \dontrun{
 #' t <- tempdir()

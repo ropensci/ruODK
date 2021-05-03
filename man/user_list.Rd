@@ -10,7 +10,6 @@ user_list(
   un = get_default_un(),
   pw = get_default_pw(),
   retries = get_retries(),
-  odkc_version = get_default_odkc_version(),
   orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
   tz = get_default_tz(),
   verbose = get_ru_verbose()
@@ -26,6 +25,11 @@ E.g., `@dbca.wa` will match users with an email from `dbca.wa.gov.au`,
 whereas `@dbca.w` or `@dbca` will return no matches.
 Default: `NULL`.}
 
+\item{url}{The ODK Central base URL without trailing slash.
+Default: \code{\link{get_default_url}}.
+Set default \code{url} through \code{ru_setup(url="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
+
 \item{un}{The ODK Central username (an email address).
 Default: \code{\link{get_default_un}}.
 Set default \code{un} through \code{ru_setup(un="...")}.
@@ -39,13 +43,6 @@ See \code{vignette("Setup", package = "ruODK")}.}
 \item{retries}{The number of attempts to retrieve a web resource.
 This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 Default: 3.}
-
-\item{odkc_version}{The ODK Central version as decimal number (major.minor).
-`ruODK` uses this parameter to adjust for breaking changes in ODK Central.
-Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
-Set default \code{get_default_odkc_version} through
-\code{ru_setup(odkc_version=1.1)}.
-See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{orders}{(vector of character) Orders of datetime elements for
 lubridate.

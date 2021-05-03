@@ -29,9 +29,9 @@
 #'   E.g., `@dbca.wa` will match users with an email from `dbca.wa.gov.au`,
 #'   whereas `@dbca.w` or `@dbca` will return no matches.
 #'   Default: `NULL`.
+#' @template param-url
 #' @template param-auth
 #' @template param-retries
-#' @template param-odkcv
 #' @template param-orders
 #' @template param-tz
 #' @template param-verbose
@@ -71,7 +71,6 @@ user_list <- function(qry = NULL,
                       un = get_default_un(),
                       pw = get_default_pw(),
                       retries = get_retries(),
-                      odkc_version = get_default_odkc_version(),
                       orders = c(
                         "YmdHMS",
                         "YmdHMSz",

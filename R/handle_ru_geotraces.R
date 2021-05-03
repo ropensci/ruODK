@@ -56,10 +56,8 @@ handle_ru_geotraces <- function(data,
     magrittr::extract2("ruodk_name") %>%
     intersect(names(data))
 
-  if (verbose == TRUE) {
-    x <- paste(geo_cols, collapse = ", ") # nolint
-    "Found geotraces: {x}." %>% glue::glue() %>% ru_msg_info(verbose = verbose)
-  }
+  x <- paste(geo_cols, collapse = ", ") # nolint
+  "Found geotraces: {x}." %>% glue::glue() %>% ru_msg_info(verbose = verbose)
 
   for (colname in geo_cols) {
     if (colname %in% names(data)) {

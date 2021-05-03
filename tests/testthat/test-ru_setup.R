@@ -89,7 +89,7 @@ test_that("ru_setup resets settings if given empty string", {
     tz = "",
     odkc_version = "",
     retries = "",
-    verbose = FALSE,
+    verbose = TRUE,
     test_pid = "",
     test_fid = "",
     test_fid_zip = "",
@@ -141,7 +141,7 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_equal(x$test_fid_att, "")
   testthat::expect_equal(x$test_fid_gap, "")
   testthat::expect_equal(x$test_fid_wkt, "")
-  testthat::expect_equal(x$verbose, FALSE)
+  testthat::expect_equal(x$verbose, TRUE)
 
 
   # Reset

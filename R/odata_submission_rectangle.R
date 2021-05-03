@@ -68,8 +68,7 @@ unnest_all <- function(nested_tbl,
     if (!(colname %in% names(nested_tbl))) {
       # nolint start
       # # Diagnostic message
-      # if (verbose == TRUE)
-      #   ru_msg_info(glue::glue("Skipping renamed column \"{colname}\""))
+      # "Skipping renamed column \"{colname}\"" %>% glue::glue %>% ru_msg_info()
       # nolint end
     } else {
       " Unnesting column \"{colname}\"\n" %>%

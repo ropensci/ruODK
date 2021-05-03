@@ -119,6 +119,7 @@ fresh_parsed <- fresh_raw \%>\%
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
 
 Other utilities: 
+\code{\link{attachment_link}()},
 \code{\link{attachment_url}()},
 \code{\link{drop_null_coords}()},
 \code{\link{form_schema_parse}()},

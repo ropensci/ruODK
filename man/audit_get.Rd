@@ -115,7 +115,6 @@ names(logs)
 \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries}
 
 Other restful-api: 
-\code{\link{attachment_link}()},
 \code{\link{attachment_list}()}
 }
 \concept{restful-api}

@@ -27,6 +27,7 @@ prepend_uuid("d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
 \seealso{
 Other utilities: 
 \code{\link{attachment_get}()},
+\code{\link{attachment_link}()},
 \code{\link{attachment_url}()},
 \code{\link{drop_null_coords}()},
 \code{\link{form_schema_parse}()},

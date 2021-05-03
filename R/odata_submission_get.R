@@ -162,7 +162,7 @@ odata_submission_get <- function(table = "Submissions",
 
   #----------------------------------------------------------------------------#
   # Download submissions
-  u_msg_info("Downloading submissions...", verbose = verbose)
+  ru_msg_info("Downloading submissions...", verbose = verbose)
 
   sub <- httr::RETRY(
     "GET",

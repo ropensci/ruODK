@@ -127,25 +127,19 @@ submission_export <- function(local_dir = here::here(),
 
   if (fs::file_exists(pth)) {
     if (overwrite == TRUE) {
-      if (verbose == TRUE) {
         "Overwriting previous download: \"{pth}\"" %>%
           glue::glue() %>%
-          ru_msg_success()
-      }
+          ru_msg_success(verbose = verbose)
     } else {
-      if (verbose == TRUE) {
         "Keeping previous download: \"{pth}\"" %>%
           glue::glue() %>%
-          ru_msg_noop()
-      }
+          ru_msg_noop(verbose = verbose)
       return(pth)
     }
   } else {
-    if (verbose == TRUE) {
       "Downloading submissions from {url_pth} to {pth}" %>%
         glue::glue() %>%
-        ru_msg_success()
-    }
+        ru_msg_success(verbose = verbose)
   }
 
   # List encryption keys
@@ -172,11 +166,9 @@ submission_export <- function(local_dir = here::here(),
     var <- toString(encryption_keys[[1]]$id)
     body[[var]] <- pp
 
-    if (verbose == TRUE) {
-      "Found multiple encryption keys for form {fid}, using the first key." %>%
-        glue::glue() %>%
-        ru_msg_info()
-    }
+    "Found multiple encryption keys for form {fid}, using the first key." %>%
+      glue::glue() %>%
+      ru_msg_info(verbose = verbose)
   }
 
   # Export form submissions to CSV via POST

@@ -49,11 +49,9 @@ handle_ru_datetimes <- function(data,
     magrittr::extract2("ruodk_name") %>%
     intersect(names(data))
 
-  if (verbose == TRUE) {
-    x <- paste(dttm_cols, collapse = ", ") # nolint
-    "Found date/times: {x}." %>%
-      glue::glue() %>% ru_msg_info(verbose = verbose)
-  }
+  x <- paste(dttm_cols, collapse = ", ") # nolint
+  "Found date/times: {x}." %>%
+    glue::glue() %>% ru_msg_info(verbose = verbose)
 
   data %>%
     dplyr::mutate_at(
