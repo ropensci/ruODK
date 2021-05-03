@@ -13,40 +13,38 @@ handle_ru_geotraces(
 )
 }
 \arguments{
-\item{data}{Submissions rectangled into a tibble. E.g. the output of
-```
-ruODK::odata_submission_get(parse = FALSE) %>%
+\item{data}{Submissions rectangled into a tibble. E.g. the output of\preformatted{ruODK::odata_submission_get(parse = FALSE) \%>\%
 ruODK::odata_submission_rectangle(form_schema = ...)
-```}
+}}
 
-\item{form_schema}{The `form_schema` for the submissions.
-E.g. the output of `ruODK::form_schema()`.}
+\item{form_schema}{The \code{form_schema} for the submissions.
+E.g. the output of \code{ruODK::form_schema()}.}
 
 \item{wkt}{Whether geofields are GeoJSON (if FALSE) or WKT
 strings (if TRUE), default: FALSE.}
 
 \item{odkc_version}{The ODK Central version as decimal number (major.minor).
-  `ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+\code{ruODK} uses this parameter to adjust for breaking changes in ODK Central.
 
-  Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
+Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
 
-  Set default \code{get_default_odkc_version} through
-  \code{ru_setup(odkc_version=1.1)}.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=1.1)}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{verbose}{Whether to display debug messages or not.
 
-  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-  verbosity can be set globally or per function.}
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+verbosity can be set globally or per function.}
 }
 \value{
 The submissions tibble with all geotraces retained in their original
-  format, plus columns of their first point's coordinate components as
-  provided by \code{\link{split_geotrace}}.
+format, plus columns of their first point's coordinate components as
+provided by \code{\link{split_geotrace}}.
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 For a given tibble of submissions, find all columns which are listed

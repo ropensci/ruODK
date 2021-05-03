@@ -93,3 +93,4 @@ Remotes:
     r-spatial/leafem,
     r-spatial/mapview,
     r-spatial/sf
+Roxygen: list(markdown = TRUE)

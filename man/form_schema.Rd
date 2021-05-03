@@ -31,98 +31,96 @@ Default: FALSE.}
 
 \item{parse}{Whether to parse the form schema into a tibble of form field
 type and name. This uses \code{\link{form_schema_parse}} internally.
-If used together with `flatten=TRUE`, \code{\link{form_schema}} will raise
+If used together with \code{flatten=TRUE}, \code{\link{form_schema}} will raise
 a warning and return the unparsed, flattened form schema.
 Only applies to ODK Central version < 0.8.
 Default: TRUE.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 
-  Default: \code{\link{get_default_pid}}.
+Default: \code{\link{get_default_pid}}.
 
-  Set default \code{pid} through \code{ru_setup(pid="...")}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
 
-  Default: \code{\link{get_default_fid}}.
+Default: \code{\link{get_default_fid}}.
 
-  Set default \code{fid} through \code{ru_setup(fid="...")}.
+Set default \code{fid} through \code{ru_setup(fid="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
-  Default: \code{\link{get_default_url}}.
+Default: \code{\link{get_default_url}}.
 
-  Set default \code{url} through \code{ru_setup(url="...")}.
+Set default \code{url} through \code{ru_setup(url="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{un}{The ODK Central username (an email address).
+\item{un}{The ODK Central username (an email address).\preformatted{      Default: \code{\link{get_default_un}}.
 
-          Default: \code{\link{get_default_un}}.
+      Set default \code{un} through \code{ru_setup(un="...")}.
 
-          Set default \code{un} through \code{ru_setup(un="...")}.
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
-          See \code{vignette("Setup", package = "ruODK")}.}
+\item{pw}{The ODK Central password.\preformatted{      Default: \code{\link{get_default_pw}}.
 
-\item{pw}{The ODK Central password.
+      Set default \code{pw} through \code{ru_setup(pw="...")}.
 
-          Default: \code{\link{get_default_pw}}.
-
-          Set default \code{pw} through \code{ru_setup(pw="...")}.
-
-          See \code{vignette("Setup", package = "ruODK")}.}
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
 \item{odkc_version}{The ODK Central version as decimal number (major.minor).
-  `ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+\code{ruODK} uses this parameter to adjust for breaking changes in ODK Central.
 
-  Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
+Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
 
-  Set default \code{get_default_odkc_version} through
-  \code{ru_setup(odkc_version=1.1)}.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=1.1)}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
 
-  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 
-  Default: 3.}
+Default: 3.}
 
 \item{verbose}{Whether to display debug messages or not.
 
-  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-  verbosity can be set globally or per function.}
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+verbosity can be set globally or per function.}
 }
 \value{
 A tibble or nested list (v0.7) containing the form definition.
-  At the lowest nesting level, each form field consists of a list of two
-  nodes, `name` (the underlying field name) and `type` (the XForms field
-  type, as in "string", "select1", "geopoint", "binary" and so on).
-  These fields are nested in lists of tuples `name` (the XForms screen name),
-  `children` (the fields as described above), `type` ("structure" for non-
-  repeating screens, "repeat" for repeating screens).
-  A list with `name` "meta" may precede the structure, if several metadata
-  fields are captured (e.g. "instanceId", form start datetimes etc.).
-  In all cases for ODK Central 0.8, and with default parameters
-  (\code{parse=TRUE}) for ODK Central 0.7, \code{\link{form_schema}} returns
-  a tibble with the columns:
+At the lowest nesting level, each form field consists of a list of two
+nodes, \code{name} (the underlying field name) and \code{type} (the XForms field
+type, as in "string", "select1", "geopoint", "binary" and so on).
+These fields are nested in lists of tuples \code{name} (the XForms screen name),
+\code{children} (the fields as described above), \code{type} ("structure" for non-
+repeating screens, "repeat" for repeating screens).
+A list with \code{name} "meta" may precede the structure, if several metadata
+fields are captured (e.g. "instanceId", form start datetimes etc.).
+In all cases for ODK Central 0.8, and with default parameters
+(\code{parse=TRUE}) for ODK Central 0.7, \code{\link{form_schema}} returns
+a tibble with the columns:
 
-  \itemize{
-  \item \code{name} The field name as given in the form schema.
-  \item \code{type} The field type, e.g. "string", "select1", etc.
-  \item \code{path} The XForms path of the field,
-  \item \code{ruodk_name} The predicted field name as generated by
-    \code{\link{odata_submission_get}}, prefixed by the path, additionally
-    cleaned with \code{\link[janitor]{make_clean_names}} to match the
-    cleaned column names from \code{\link{odata_submission_rectangle}}.
-  }
+\itemize{
+\item \code{name} The field name as given in the form schema.
+\item \code{type} The field type, e.g. "string", "select1", etc.
+\item \code{path} The XForms path of the field,
+\item \code{ruodk_name} The predicted field name as generated by
+\code{\link{odata_submission_get}}, prefixed by the path, additionally
+cleaned with \code{\link[janitor]{make_clean_names}} to match the
+cleaned column names from \code{\link{odata_submission_rectangle}}.
+}
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 ODK Central has introduced a new API endpoint in version 0.8 which

@@ -8,7 +8,7 @@ drop_null_coords(x)
 }
 \arguments{
 \item{x}{A GeoJSON geometry parsed as nested list.
-E.g. `geo_gj$path_location_path_gps`.}
+E.g. \code{geo_gj$path_location_path_gps}.}
 }
 \value{
 The nested list minus the last element (if NULL).
@@ -16,7 +16,7 @@ The nested list minus the last element (if NULL).
 \description{
 This helper patches a bug/feature in ODK Central (versions 0.7-0.9), where
 geotrace / geoshape GeoJSON contains a last coordinate pair with NULL
-lat/lon (no alt/acc), and WKT ends in `, undefined NaN`.
+lat/lon (no alt/acc), and WKT ends in \verb{, undefined NaN}.
 }
 \details{
 While \code{\link{split_geotrace}} and \code{\link{split_geoshape}} modify
@@ -24,7 +24,7 @@ the WKT inline, it is more maintainable to separate the GeoJSON cleaner
 into this function.
 
 This helper drops the last element of a GeoJSON coordinate list if it is
-`list(NULL, NULL)`.
+\code{list(NULL, NULL)}.
 }
 \examples{
 # A snapshot of geo data with trailing empty coordinates.

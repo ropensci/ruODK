@@ -8,22 +8,22 @@ attachment_link(data_tbl, form_schema, att_path = "media")
 }
 \arguments{
 \item{data_tbl}{The downloaded submissions from
-\code{\link{submission_export}} read into a `tibble` by
+\code{\link{submission_export}} read into a \code{tibble} by
 \code{readr::read_csv}.}
 
-\item{form_schema}{The `form_schema` for the submissions.
-E.g. the output of `ruODK::form_schema()`.}
+\item{form_schema}{The \code{form_schema} for the submissions.
+E.g. the output of \code{ruODK::form_schema()}.}
 
 \item{att_path}{A local path, default: "media" (as per .csv.zip export).
 Selected columns of the dataframe (containing attchment filenames) are
-prefixed with `att_path`, thus turning them into relative paths.}
+prefixed with \code{att_path}, thus turning them into relative paths.}
 }
 \value{
 The dataframe with attachment columns modified to contain relative
-  paths to the downloaded attachment files.
+paths to the downloaded attachment files.
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \examples{
 \dontrun{

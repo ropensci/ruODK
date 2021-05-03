@@ -23,7 +23,7 @@ yell_if_error(response, url, un, pw, pid = NULL, fid = NULL)
 The response object
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 A wrapper around \code{httr::stop_for_status} with a more helpful error

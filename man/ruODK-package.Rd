@@ -8,11 +8,11 @@
 \description{
 \code{\link{ruODK}} is an R Client for the ODK Central API.
 
-  Please see the `ruODK` website for full documentation:
-  <https://docs.ropensci.org/ruODK/>
+Please see the \code{ruODK} website for full documentation:
+\url{https://docs.ropensci.org/ruODK/}
 
-`ruODK` is "pipe-friendly" and re-exports `\%>\%` and `\%||\%`, but does not
- require their use.
+\code{ruODK} is "pipe-friendly" and re-exports \verb{\\\%>\\\%} and \verb{\\\%||\\\%}, but does not
+require their use.
 }
 \seealso{
 Useful links:

@@ -2,7 +2,7 @@
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' @param message <chr> A message to print
+#' @param message (chr) A message to print
 #' @template param-verbose
 #' @return NULL
 #' @export
@@ -19,7 +19,7 @@ ru_msg_info <- function(message, verbose = get_ru_verbose()) {
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' @param message <chr> A message to print
+#' @param message (chr) A message to print
 #' @template param-verbose
 #' @return NULL
 #' @export
@@ -37,7 +37,7 @@ ru_msg_success <- function(message, verbose = get_ru_verbose()) {
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' @param message <chr> A message to print
+#' @param message (chr) A message to print
 #' @template param-verbose
 #' @return NULL
 #' @export
@@ -55,7 +55,7 @@ ru_msg_noop <- function(message, verbose = get_ru_verbose()) {
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' @param message <chr> A message to print
+#' @param message (chr) A message to print
 #' @template param-verbose
 #' @return NULL
 #' @export
@@ -75,7 +75,7 @@ ru_msg_warn <- function(message, verbose = get_ru_verbose()) {
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' @param message <chr> A message to print
+#' @param message (chr) A message to print
 #' @return NULL
 #' @export
 #' @family utilities

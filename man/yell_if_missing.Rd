@@ -20,11 +20,11 @@ yell_if_missing(url, un, pw, pid = NULL, fid = NULL, iid = NULL)
 \item{iid}{A submission instance ID (character, optional)}
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 This is a helper function to pat down \code{\link{ruODK}} functions
-  for missing credentials and stop with a loud but informative yell.
+for missing credentials and stop with a loud but informative yell.
 }
 \examples{
 testthat::expect_error(yell_if_missing("", "username", "password"))

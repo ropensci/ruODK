@@ -20,14 +20,14 @@ Default: \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz")}.}
 
 \item{tz}{A timezone to convert dates and times to.
 
-  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-  timezone can be set globally or per function.}
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+timezone can be set globally or per function.}
 }
 \value{
 A lubridate PosixCT datetime in the given timezone.
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 This function is used internally by \code{ruODK} to parse ISO timestamps

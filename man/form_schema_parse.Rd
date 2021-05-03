@@ -12,18 +12,18 @@ form_schema_parse(fs, path = "Submissions", verbose = get_ru_verbose())
 \item{path}{The base path for form fields. Default: "Submissions".
 \code{\link{form_schema_parse}} recursively steps into deeper nesting
 levels, which are reflected as separate OData tables.
-The returned value in `path` reflects the XForms group name, which
+The returned value in \code{path} reflects the XForms group name, which
 translates to separate screens in ODK Collect.
 Non-repeating form groups will be flattened out into the main Submissions
 table. Repeating groups are available as separate OData tables.}
 
 \item{verbose}{Whether to display debug messages or not.
 
-  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-  verbosity can be set globally or per function.}
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+verbosity can be set globally or per function.}
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 This function is used by \code{\link{form_schema}} for older versions of
@@ -32,7 +32,7 @@ quite involved code of \code{\link{form_schema_parse}}, while newer ODK
 Central versions return JSON, which is parsed directly in
 \code{\link{form_schema}}.
 
-The `form_schema` returned from ODK Central versions < 0.8 is a nested list
+The \code{form_schema} returned from ODK Central versions < 0.8 is a nested list
 of lists containing the form definition.
 The form definition consists of fields (with a type and name), and form
 groups, which are rendered as separate ODK Collect screens.

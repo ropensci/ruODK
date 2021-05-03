@@ -34,14 +34,14 @@ errors during unnesting.}
 
 \item{verbose}{Whether to display debug messages or not.
 
-  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-  verbosity can be set globally or per function.}
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+verbosity can be set globally or per function.}
 }
 \value{
 The submissions as un-nested tibble
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \examples{
 \dontrun{

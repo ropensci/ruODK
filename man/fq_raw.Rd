@@ -8,13 +8,13 @@
 A list of lists
 }
 \source{
-See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
+See \code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}
 }
 \usage{
 fq_raw
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 The OData response for the submissions of an ODK Central form.
@@ -22,8 +22,8 @@ This form represents a Flora Quadrat, which is a ca 50 by 50 m quadrat of
 a uniform plant community.
 
 The XML and .odkbuild versions for this form are available as
-`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
-and `system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")`,
+\code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}
+and \code{system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")},
 respectively.
 
 This data is kept up to date with the data used in vignettes and package

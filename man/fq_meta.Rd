@@ -8,13 +8,13 @@
 A list of lists
 }
 \source{
-See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
+See \code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}
 }
 \usage{
 fq_meta
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 The OData response for the metadata of an ODK Central form.

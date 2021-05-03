@@ -16,14 +16,14 @@ This column will be retained.}
 strings (if TRUE), default: FALSE.}
 }
 \value{
-The given dataframe with the WKT POINT column <colname>, plus
-  three new columns, \code{<colname>_longitude}, \code{<colname>_latitude},
-  \code{<colname>_altitude}.
-  The three new columns are prefixed with the original \code{colname} to
-  avoid naming conflicts with any other geopoint columns.
+The given dataframe with the WKT POINT column colname, plus
+three new columns, \code{colname_longitude}, \code{colname_latitude},
+\code{colname_altitude}.
+The three new columns are prefixed with the original \code{colname} to
+avoid naming conflicts with any other geopoint columns.
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 This function is used by \code{\link{handle_ru_geopoints}}

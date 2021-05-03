@@ -17,24 +17,24 @@ This column will be retained.}
 strings (if TRUE), default: FALSE.}
 
 \item{odkc_version}{The ODK Central version as decimal number (major.minor).
-  `ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+\code{ruODK} uses this parameter to adjust for breaking changes in ODK Central.
 
-  Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
+Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
 
-  Set default \code{get_default_odkc_version} through
-  \code{ru_setup(odkc_version=1.1)}.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=1.1)}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 }
 \value{
-The given dataframe with the geoshape column <colname>, plus
-  three new columns, \code{<colname>_longitude}, \code{<colname>_latitude},
-  \code{<colname>_altitude}.
-  The three new columns are prefixed with the original \code{colname} to
-  avoid naming conflicts with any other geoshape columns.
+The given dataframe with the geoshape column colname, plus
+three new columns, \code{colname_longitude}, \code{colname_latitude},
+\code{colname_altitude}.
+The three new columns are prefixed with the original \code{colname} to
+avoid naming conflicts with any other geoshape columns.
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 This function is used by \code{\link{handle_ru_geopoints}}

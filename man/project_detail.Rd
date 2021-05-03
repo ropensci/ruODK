@@ -15,50 +15,49 @@ project_detail(
 \arguments{
 \item{pid}{The numeric ID of the project, e.g.: 2.
 
-  Default: \code{\link{get_default_pid}}.
+Default: \code{\link{get_default_pid}}.
 
-  Set default \code{pid} through \code{ru_setup(pid="...")}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
-  Default: \code{\link{get_default_url}}.
+Default: \code{\link{get_default_url}}.
 
-  Set default \code{url} through \code{ru_setup(url="...")}.
+Set default \code{url} through \code{ru_setup(url="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{un}{The ODK Central username (an email address).
+\item{un}{The ODK Central username (an email address).\preformatted{      Default: \code{\link{get_default_un}}.
 
-          Default: \code{\link{get_default_un}}.
+      Set default \code{un} through \code{ru_setup(un="...")}.
 
-          Set default \code{un} through \code{ru_setup(un="...")}.
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
-          See \code{vignette("Setup", package = "ruODK")}.}
+\item{pw}{The ODK Central password.\preformatted{      Default: \code{\link{get_default_pw}}.
 
-\item{pw}{The ODK Central password.
+      Set default \code{pw} through \code{ru_setup(pw="...")}.
 
-          Default: \code{\link{get_default_pw}}.
-
-          Set default \code{pw} through \code{ru_setup(pw="...")}.
-
-          See \code{vignette("Setup", package = "ruODK")}.}
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
 \item{retries}{The number of attempts to retrieve a web resource.
 
-  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 
-  Default: 3.}
+Default: 3.}
 }
 \value{
 A tibble with exactly one row for the project and all project
-  metadata as columns as per ODK Central API docs.
-  Column names are renamed from ODK's `camelCase` to `snake_case`.
-  Values differ to values returned by ODK Central API:
-
-  * archived: FALSE (if NULL) else TRUE
-  * dates: NA if NULL
+metadata as columns as per ODK Central API docs.
+Column names are renamed from ODK's \code{camelCase} to \code{snake_case}.
+Values differ to values returned by ODK Central API:
+\itemize{
+\item archived: FALSE (if NULL) else TRUE
+\item dates: NA if NULL
+}
 }
 \description{
 While the API endpoint will return all details for one project,
@@ -66,7 +65,7 @@ While the API endpoint will return all details for one project,
 authentication.
 }
 \details{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \examples{
 \dontrun{

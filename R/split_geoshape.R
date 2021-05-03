@@ -11,9 +11,9 @@
 #'   This column will be retained.
 #' @template param-wkt
 #' @template param-odkcv
-#' @return The given dataframe with the geoshape column <colname>, plus
-#'   three new columns, \code{<colname>_longitude}, \code{<colname>_latitude},
-#'   \code{<colname>_altitude}.
+#' @return The given dataframe with the geoshape column colname, plus
+#'   three new columns, \code{colname_longitude}, \code{colname_latitude},
+#'   \code{colname_altitude}.
 #'   The three new columns are prefixed with the original \code{colname} to
 #'   avoid naming conflicts with any other geoshape columns.
 #' @export

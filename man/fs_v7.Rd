@@ -15,7 +15,7 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 fs_v7
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \seealso{
 Other included: 

@@ -34,89 +34,87 @@ verbose noop message, but still return all media attachments.}
 
 \item{repeats}{Whether to include repeat data (if TRUE), or whether
 to return the root table only (FALSE). Default: TRUE.
-Requesting `repeats=FALSE` will also omit any media, and override the
-parameter `media`.
+Requesting \code{repeats=FALSE} will also omit any media, and override the
+parameter \code{media}.
 Setting this feature to FALSE with an odkc_version < 1.1 and will display a
 verbose noop message, but still include all repeat data.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 
-  Default: \code{\link{get_default_pid}}.
+Default: \code{\link{get_default_pid}}.
 
-  Set default \code{pid} through \code{ru_setup(pid="...")}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
 
-  Default: \code{\link{get_default_fid}}.
+Default: \code{\link{get_default_fid}}.
 
-  Set default \code{fid} through \code{ru_setup(fid="...")}.
+Set default \code{fid} through \code{ru_setup(fid="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
-  Default: \code{\link{get_default_url}}.
+Default: \code{\link{get_default_url}}.
 
-  Set default \code{url} through \code{ru_setup(url="...")}.
+Set default \code{url} through \code{ru_setup(url="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{un}{The ODK Central username (an email address).
+\item{un}{The ODK Central username (an email address).\preformatted{      Default: \code{\link{get_default_un}}.
 
-          Default: \code{\link{get_default_un}}.
+      Set default \code{un} through \code{ru_setup(un="...")}.
 
-          Set default \code{un} through \code{ru_setup(un="...")}.
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
-          See \code{vignette("Setup", package = "ruODK")}.}
+\item{pw}{The ODK Central password.\preformatted{      Default: \code{\link{get_default_pw}}.
 
-\item{pw}{The ODK Central password.
+      Set default \code{pw} through \code{ru_setup(pw="...")}.
 
-          Default: \code{\link{get_default_pw}}.
-
-          Set default \code{pw} through \code{ru_setup(pw="...")}.
-
-          See \code{vignette("Setup", package = "ruODK")}.}
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
 \item{pp}{The passphrase for an encrypted form.
 
-  Default: NULL.
+Default: NULL.
 
-  Passphrases can be stored e.g. as environment variables.
+Passphrases can be stored e.g. as environment variables.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
 
-  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 
-  Default: 3.}
+Default: 3.}
 
 \item{odkc_version}{The ODK Central version as decimal number (major.minor).
-  `ruODK` uses this parameter to adjust for breaking changes in ODK Central.
+\code{ruODK} uses this parameter to adjust for breaking changes in ODK Central.
 
-  Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
+Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
 
-  Set default \code{get_default_odkc_version} through
-  \code{ru_setup(odkc_version=1.1)}.
+Set default \code{get_default_odkc_version} through
+\code{ru_setup(odkc_version=1.1)}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{verbose}{Whether to display debug messages or not.
 
-  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-  verbosity can be set globally or per function.}
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+verbosity can be set globally or per function.}
 }
 \value{
 The absolute path to the exported ZIP file named after the form ID.
-        The exported ZIP file will have the extension `.zip` unless only the
-        root table was requested (with `repeats=FALSE`), in which case the
-        exported file will have the extension `.csv`.
-        In contrast to ODK Central, which exports to `submissions.csv(.zip)`,
-        the exported ZIP file is named after
-        the form to avoid accidentally overwriting the ZIP export from
-        another form.
+The exported ZIP file will have the extension \code{.zip} unless only the
+root table was requested (with \code{repeats=FALSE}), in which case the
+exported file will have the extension \code{.csv}.
+In contrast to ODK Central, which exports to \code{submissions.csv(.zip)},
+the exported ZIP file is named after
+the form to avoid accidentally overwriting the ZIP export from
+another form.
 }
 \description{
 To export all the Submission data associated with a Form, just add .csv.zip
@@ -126,9 +124,9 @@ included Submissions.
 }
 \details{
 The file will be downloaded to the project root unless specified otherwise
-(via `local_dir`). Subsequently, the zip file can be extracted.
-Attachment filenames (e.g. "12345.jpg") should be prepended with `media`
-(resulting in e.g. `media/12345.jpg`) in order to represent the relative
+(via \code{local_dir}). Subsequently, the zip file can be extracted.
+Attachment filenames (e.g. "12345.jpg") should be prepended with \code{media}
+(resulting in e.g. \verb{media/12345.jpg}) in order to represent the relative
 path to the actual attachment file (as extracted from the zip file).
 
 This function downloads all submissions and attachments in one go.
@@ -141,7 +139,7 @@ Download attachments as listed for each submission
 
 If the submissions are encrypted
 
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \examples{
 \dontrun{

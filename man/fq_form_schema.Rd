@@ -6,18 +6,18 @@
 \alias{fq_form_schema}
 \title{JSON form schema for an ODK Central form.}
 \format{
-The output of `ruODK::form_schema()`, a tibble with columns "type",
-  "name" and "path" and one row per form field.
+The output of \code{ruODK::form_schema()}, a tibble with columns "type",
+"name" and "path" and one row per form field.
 
 A tibble of form fields and field types.
 }
 \source{
-See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
-  and `ruODK::form_schema()`.
+See \code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}
+and \code{ruODK::form_schema()}.
 
 The output of \code{\link{form_schema}}
 run on the test form
-`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+\code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}.
 }
 \usage{
 fq_form_schema
@@ -25,9 +25,9 @@ fq_form_schema
 fq_form_schema
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 The parsed form schema of an ODK Central form.

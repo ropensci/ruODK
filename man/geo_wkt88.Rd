@@ -12,13 +12,13 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 \source{
 \code{\link{odata_submission_get}(wkt=TRUE, parse=TRUE)}
 run on the test form
-`system.file("extdata", "Locations.xml", package = "ruODK")`.
+\code{system.file("extdata", "Locations.xml", package = "ruODK")}.
 }
 \usage{
 geo_wkt88
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 This issue was fixed in #88.

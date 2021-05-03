@@ -11,14 +11,14 @@ A nested list of submission data.
 \source{
 The output of \code{\link{submission_get}}
 run on the test form
-`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
+\code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}
 using submission instance IDs from \code{\link{submission_list}}.
 }
 \usage{
 fq_submissions
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \seealso{
 Other included: 

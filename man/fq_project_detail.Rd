@@ -10,13 +10,13 @@ A tibble of project metadata.
 \source{
 The output of \code{\link{project_detail}}
 run on the project containing the test form
-`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+\code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}.
 }
 \usage{
 fq_project_detail
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \seealso{
 Other included: 

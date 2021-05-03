@@ -11,13 +11,13 @@ A tibble of main records from a test form.
 \source{
 \code{\link{submission_export}}
 run on the test form
-`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+\code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}.
 }
 \usage{
 fq_zip_data
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \seealso{
 Other included: 

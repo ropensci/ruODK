@@ -13,37 +13,35 @@ handle_ru_datetimes(
 )
 }
 \arguments{
-\item{data}{Submissions rectangled into a tibble. E.g. the output of
-```
-ruODK::odata_submission_get(parse = FALSE) %>%
+\item{data}{Submissions rectangled into a tibble. E.g. the output of\preformatted{ruODK::odata_submission_get(parse = FALSE) \%>\%
 ruODK::odata_submission_rectangle()
-```}
+}}
 
-\item{form_schema}{The `form_schema` for the submissions.
-E.g. the output of `ruODK::form_schema()`.}
+\item{form_schema}{The \code{form_schema} for the submissions.
+E.g. the output of \code{ruODK::form_schema()}.}
 
 \item{orders}{(vector of character) Orders of datetime elements for
-  lubridate.
+lubridate.
 
-  Default:
-  \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
+Default:
+\code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
 
 \item{tz}{A timezone to convert dates and times to.
 
-  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-  timezone can be set globally or per function.}
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+timezone can be set globally or per function.}
 
 \item{verbose}{Whether to display debug messages or not.
 
-  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-  verbosity can be set globally or per function.}
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+verbosity can be set globally or per function.}
 }
 \value{
 The submissions tibble with all date/dateTime columns mutated as
-  lubridate datetimes.
+lubridate datetimes.
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 For a given tibble of submissions, parse all columns which are

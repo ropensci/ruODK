@@ -71,13 +71,13 @@ get_retries()
 }
 \value{
 \code{\link{ru_settings}} prints your default ODK Central project ID,
-  form ID, url, username, and password, corresponding optional test
-  server as well as verbosity and HTTP request settings.
+form ID, url, username, and password, corresponding optional test
+server as well as verbosity and HTTP request settings.
 \code{\link{ru_setup}} sets your production and test settings, while
 \code{get_(default/test)_*} get each of those respective settings.
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \examples{
 ru_settings()

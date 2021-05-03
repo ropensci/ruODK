@@ -9,9 +9,9 @@
 #' @param colname (chr) The name of the geopoint column.
 #'   This column will be retained.
 #' @template param-wkt
-#' @return The given dataframe with the WKT POINT column <colname>, plus
-#'   three new columns, \code{<colname>_longitude}, \code{<colname>_latitude},
-#'   \code{<colname>_altitude}.
+#' @return The given dataframe with the WKT POINT column colname, plus
+#'   three new columns, \code{colname_longitude}, \code{colname_latitude},
+#'   \code{colname_altitude}.
 #'   The three new columns are prefixed with the original \code{colname} to
 #'   avoid naming conflicts with any other geopoint columns.
 #'

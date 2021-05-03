@@ -6,18 +6,18 @@
 \title{Parsed submission data for an ODK Central form.}
 \format{
 The output of \code{\link{odata_submission_get}} for a set of example
-  data. A tidy tibble referencing the attachments included in the vignettes
-  and documentation at a relative path `attachments/media/<filename>.<ext>`.
+data. A tidy tibble referencing the attachments included in the vignettes
+and documentation at a relative path \verb{attachments/media/<filename>.<ext>}.
 }
 \source{
-See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
-  and \code{\link{odata_submission_get}}.
+See \code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}
+and \code{\link{odata_submission_get}}.
 }
 \usage{
 fq_data
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 The parsed OData response for the submissions of an ODK Central form.
@@ -25,8 +25,8 @@ This form represents a Flora Quadrat, which is a ca 50 by 50 m quadrat of
 a uniform plant community.
 
 The XML and .odkbuild versions for this form are available as
-`system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
-and `system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")`,
+\code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}
+and \code{system.file("extdata", "FloraQuadrat04.odkbuild", package = "ruODK")},
 respectively.
 
 This data is kept up to date with the data used in vignettes and package

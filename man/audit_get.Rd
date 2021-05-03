@@ -23,8 +23,8 @@ for the full list of available actions.}
 
 \item{start}{string. The ISO8601 timestamp of the earliest log entry to
 return.
-E.g. `2000-01-01z` or `2000-12-31T23:59.999z`, `2000-01-01T12:12:12+08` or
-`2000-01-01+08`.}
+E.g. \verb{2000-01-01z} or \verb{2000-12-31T23:59.999z}, \verb{2000-01-01T12:12:12+08} or
+\code{2000-01-01+08}.}
 
 \item{end}{string. The ISO8601 timestamp of the last log entry to return.}
 
@@ -34,53 +34,52 @@ E.g. `2000-01-01z` or `2000-12-31T23:59.999z`, `2000-01-01T12:12:12+08` or
 
 \item{url}{The ODK Central base URL without trailing slash.
 
-  Default: \code{\link{get_default_url}}.
+Default: \code{\link{get_default_url}}.
 
-  Set default \code{url} through \code{ru_setup(url="...")}.
+Set default \code{url} through \code{ru_setup(url="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{un}{The ODK Central username (an email address).
+\item{un}{The ODK Central username (an email address).\preformatted{      Default: \code{\link{get_default_un}}.
 
-          Default: \code{\link{get_default_un}}.
+      Set default \code{un} through \code{ru_setup(un="...")}.
 
-          Set default \code{un} through \code{ru_setup(un="...")}.
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
-          See \code{vignette("Setup", package = "ruODK")}.}
+\item{pw}{The ODK Central password.\preformatted{      Default: \code{\link{get_default_pw}}.
 
-\item{pw}{The ODK Central password.
+      Set default \code{pw} through \code{ru_setup(pw="...")}.
 
-          Default: \code{\link{get_default_pw}}.
-
-          Set default \code{pw} through \code{ru_setup(pw="...")}.
-
-          See \code{vignette("Setup", package = "ruODK")}.}
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
 \item{retries}{The number of attempts to retrieve a web resource.
 
-  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 
-  Default: 3.}
+Default: 3.}
 }
 \value{
 A tibble containing server audit logs.
- One row per audited action, columns are submission attributes:
-
- * actor_id: integer. The ID of the actor, if any, that initiated the
-   action.
- * action: string. The action that was taken.
- * actee_id: uuid, string. The ID of the permissioning object against
-   which the action was taken.
- * details: list. Additional details about the action that vary
-   according to the type of action.
- * logged_at: dttm. Time of action on server.
+One row per audited action, columns are submission attributes:
+\itemize{
+\item actor_id: integer. The ID of the actor, if any, that initiated the
+action.
+\item action: string. The action that was taken.
+\item actee_id: uuid, string. The ID of the permissioning object against
+which the action was taken.
+\item details: list. Additional details about the action that vary
+according to the type of action.
+\item logged_at: dttm. Time of action on server.
+}
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 Parameters to filter the audit logs:
-`action=form.create&start=2000-01-01z&end=2000-12-31T23%3A59.999z`
+\verb{action=form.create&start=2000-01-01z&end=2000-12-31T23\%3A59.999z}
 }
 \examples{
 \dontrun{

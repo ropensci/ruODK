@@ -28,70 +28,68 @@ e.g. "1558330537199.jpg".}
 default: "media".}
 
 \item{separate}{(logical) Whether to separate locally downloaded files into
-a subfolder named after the submission uuid within `local_dir`,
+a subfolder named after the submission uuid within \code{local_dir},
 default: FALSE.
 The defaults mirror the behaviour of \code{\link{submission_export}}, which
-keeps all attachment files together in a folder `media`.
+keeps all attachment files together in a folder \code{media}.
 Enable this option if downloaded files collide on idential names. This can
 happen if two data collection devices by chance generate the same filename
-for two respective media files, e.g. `DCIM0001.jpg`.}
+for two respective media files, e.g. \code{DCIM0001.jpg}.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 
-  Default: \code{\link{get_default_pid}}.
+Default: \code{\link{get_default_pid}}.
 
-  Set default \code{pid} through \code{ru_setup(pid="...")}.
+Set default \code{pid} through \code{ru_setup(pid="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{fid}{The alphanumeric form ID, e.g. "build_Spotlighting-0-8_1559885147".
 
-  Default: \code{\link{get_default_fid}}.
+Default: \code{\link{get_default_fid}}.
 
-  Set default \code{fid} through \code{ru_setup(fid="...")}.
+Set default \code{fid} through \code{ru_setup(fid="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
-  Default: \code{\link{get_default_url}}.
+Default: \code{\link{get_default_url}}.
 
-  Set default \code{url} through \code{ru_setup(url="...")}.
+Set default \code{url} through \code{ru_setup(url="...")}.
 
-  See \code{vignette("Setup", package = "ruODK")}.}
+See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{un}{The ODK Central username (an email address).
+\item{un}{The ODK Central username (an email address).\preformatted{      Default: \code{\link{get_default_un}}.
 
-          Default: \code{\link{get_default_un}}.
+      Set default \code{un} through \code{ru_setup(un="...")}.
 
-          Set default \code{un} through \code{ru_setup(un="...")}.
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
-          See \code{vignette("Setup", package = "ruODK")}.}
+\item{pw}{The ODK Central password.\preformatted{      Default: \code{\link{get_default_pw}}.
 
-\item{pw}{The ODK Central password.
+      Set default \code{pw} through \code{ru_setup(pw="...")}.
 
-          Default: \code{\link{get_default_pw}}.
-
-          Set default \code{pw} through \code{ru_setup(pw="...")}.
-
-          See \code{vignette("Setup", package = "ruODK")}.}
+      See \code{vignette("Setup", package = "ruODK")}.
+}}
 
 \item{retries}{The number of attempts to retrieve a web resource.
 
-  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 
-  Default: 3.}
+Default: 3.}
 
 \item{verbose}{Whether to display debug messages or not.
 
-  Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
-  verbosity can be set globally or per function.}
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+verbosity can be set globally or per function.}
 }
 \value{
 The relative file path for the downloaded attachment(s)
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 This function is the workhorse for
@@ -101,7 +99,7 @@ Parameters submission_uuid and attachment_filename accept single or exactly
 the same number of multiple values.
 The other parameters are automatically repeated.
 
-The media attachments are downloaded into a folder given by `local_dir`:
+The media attachments are downloaded into a folder given by \code{local_dir}:
 
 workdir/media/filename1.jpg
 

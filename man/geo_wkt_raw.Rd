@@ -11,13 +11,13 @@ An object of class \code{list} of length 2.
 \source{
 \code{\link{odata_submission_get}(wkt=TRUE, parse=FALSE)}
 run on the test form
-`system.file("extdata", "Locations.xml", package = "ruODK")`.
+\code{system.file("extdata", "Locations.xml", package = "ruODK")}.
 }
 \usage{
 geo_wkt_raw
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \seealso{
 Other included: 

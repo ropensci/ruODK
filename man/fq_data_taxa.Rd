@@ -6,18 +6,18 @@
 \title{Parsed submission data for a subgroup of an ODK Central form.}
 \format{
 The output of \code{\link{odata_submission_get}} for a set of example
-  data. A tidy tibble referencing the attachments included in the vignettes
-  and documentation at a relative path `attachments/media/<filename>.<ext>`.
+data. A tidy tibble referencing the attachments included in the vignettes
+and documentation at a relative path \verb{attachments/media/<filename>.<ext>}.
 }
 \source{
-See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
-  and \code{\link{odata_submission_get}}.
+See \code{system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")}
+and \code{\link{odata_submission_get}}.
 }
 \usage{
 fq_data_taxa
 }
 \description{
-`r lifecycle::badge("stable")`
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
 The parsed OData response for a subgroup of an ODK Central form.

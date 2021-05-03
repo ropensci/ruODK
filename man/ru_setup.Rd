@@ -54,31 +54,31 @@ specified ODK Central instance \code{url} (optional, character).}
 \item{pp}{The passphrase (optional, character) for an encrypted form.}
 
 \item{tz}{Global default time zone.
-  `ruODK`'s time zone is determined in order of precedence:
+\code{ruODK}'s time zone is determined in order of precedence:
 \itemize{
-  \item Function parameter:
-    e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
-  \item `ruODK` setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
-  \item Environment variable `RU_TIMEZONE` (e.g. set in `.Renviron`)
-  \item UTC (GMT+00)
- }}
+\item Function parameter:
+e.g. \code{\link{odata_submission_get}(tz = "Australia/Perth")}
+\item \code{ruODK} setting: \code{\link{ru_setup}(tz = "Australia/Perth")}
+\item Environment variable \code{RU_TIMEZONE} (e.g. set in \code{.Renviron})
+\item UTC (GMT+00)
+}}
 
 \item{odkc_version}{The ODK Central version as major/minor version, e.g. 1.1.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
 
-  This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 
-  Default: 3.}
+Default: 3.}
 
-\item{verbose}{Global default for `ruODK` verbosity.
- `ruODK` verbosity is determined in order of precedence:
+\item{verbose}{Global default for \code{ruODK} verbosity.
+\code{ruODK} verbosity is determined in order of precedence:
 \itemize{
-   \item Function parameter:
-     e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
-   \item `ruODK` setting: \code{\link{ru_setup}(verbose = TRUE)}
-   \item Environment variable `RU_VERBOSE` (e.g. set in `.Renviron`)
-   \item `FALSE`.
+\item Function parameter:
+e.g. \code{\link{odata_submission_get}(verbose = TRUE)}
+\item \code{ruODK} setting: \code{\link{ru_setup}(verbose = TRUE)}
+\item Environment variable \code{RU_VERBOSE} (e.g. set in \code{.Renviron})
+\item \code{FALSE}.
 }}
 
 \item{test_svc}{(optional, character) The OData service URL of a test form.
@@ -138,12 +138,11 @@ Settings are returned invisibly and additionally printed depending on
 \code{\link{get_ru_verbose}}.
 }
 \details{
-`r lifecycle::badge("stable")`
-
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 \code{\link{ru_setup}} sets ODK Central connection details.
-  \code{\link{ruODK}}'s functions default to use the default project ID,
-  form ID, URL, username, and password unless specified explicitly.
+\code{\link{ruODK}}'s functions default to use the default project ID,
+form ID, URL, username, and password unless specified explicitly.
 
 Any parameters not specified will remain unchanged. It is therefore possible
 to set up username and password initially with
@@ -153,8 +152,8 @@ ODK Central conveniently provides the OData service URL in the form
 submission tab, which in turn contains base URL, project ID, and form ID.
 
 \code{\link{ruODK}}'s automated tests require a valid ODK Central URL, and a
-  privileged username and password of a "web user" on that ODK Central
-  instance, as well as an existing project and form.
+privileged username and password of a "web user" on that ODK Central
+instance, as well as an existing project and form.
 }
 \examples{
 # `ruODK` users only need default settings to their ODK Central:
