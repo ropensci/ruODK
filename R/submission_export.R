@@ -107,11 +107,11 @@ submission_export <- function(local_dir = here::here(),
   } else {
     if (media == FALSE) {
       "Omitting media attachments requires ODK Central v1.1 or higher" %>%
-        ru_msg_noop()
+        ru_msg_noop(verbose = verbose)
     }
     if (repeats == FALSE) {
       "Omitting repeat data requires ODK Central v1.1 or higher" %>%
-        ru_msg_noop()
+        ru_msg_noop(verbose = verbose)
     }
   }
 
@@ -127,19 +127,17 @@ submission_export <- function(local_dir = here::here(),
 
   if (fs::file_exists(pth)) {
     if (overwrite == TRUE) {
-        "Overwriting previous download: \"{pth}\"" %>%
-          glue::glue() %>%
-          ru_msg_success(verbose = verbose)
+      "Overwriting previous download: \"{pth}\"" %>%
+        glue::glue() %>% ru_msg_success(verbose = verbose)
     } else {
-        "Keeping previous download: \"{pth}\"" %>%
-          glue::glue() %>%
-          ru_msg_noop(verbose = verbose)
+      "Keeping previous download: \"{pth}\"" %>%
+        glue::glue() %>% ru_msg_success(verbose = verbose)
+
       return(pth)
     }
   } else {
-      "Downloading submissions from {url_pth} to {pth}" %>%
-        glue::glue() %>%
-        ru_msg_success(verbose = verbose)
+    "Downloading submissions from {url_pth} to {pth}" %>%
+      glue::glue() %>% ru_msg_success(verbose = verbose)
   }
 
   # List encryption keys

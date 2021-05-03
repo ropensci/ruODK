@@ -327,7 +327,7 @@ test_that("submission_export excludes media", {
   testthat::expect_message(
     submission_export(
       local_dir = t,
-      overwrite = TRUE,
+      overwrite = FALSE, # else "overwrite" message
       verbose = TRUE,
       media = FALSE, # won't work on old ODKC
       repeats = TRUE,
@@ -345,7 +345,7 @@ test_that("submission_export excludes media", {
   testthat::expect_message(
     submission_export(
       local_dir = t,
-      overwrite = TRUE,
+      overwrite = FALSE, # else "overwrite" message
       verbose = TRUE,
       media = TRUE,
       repeats = FALSE, # won't work on old ODKC
@@ -359,6 +359,8 @@ test_that("submission_export excludes media", {
     ),
     regexp = "Omitting repeat data"
   )
+
+  fs::dir_ls(t) %>% fs::file_delete()
 })
 
 # usethis::use_r("submission_export") # nolint
