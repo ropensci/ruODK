@@ -5,3 +5,10 @@ manual.synctex.gz
 manual.tex
 *.R
 manual.Rnw
+comparison_files
+*.aux
+*.pdf
+odata-api_files
+restful-api_files
+setup_files
+spatial_files
