@@ -66,10 +66,6 @@ data_quadrat <- fid_csv \%>\%
 \seealso{
 Other restful-api: 
 \code{\link{attachment_list}()},
-\code{\link{audit_get}()},
-\code{\link{submission_detail}()},
-\code{\link{submission_export}()},
-\code{\link{submission_get}()},
-\code{\link{submission_list}()}
+\code{\link{audit_get}()}
 }
 \concept{restful-api}

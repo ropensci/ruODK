@@ -165,9 +165,7 @@ form_schema <- function(flatten = FALSE,
                         retries = get_retries(),
                         verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  if (verbose == TRUE) {
-    ru_msg_info(glue::glue("Form schema v{odkc_version}"))
-  }
+  ru_msg_info(glue::glue("Form schema v{odkc_version}"), verbose = verbose)
 
   if (odkc_version < 0.8) {
     # nocov start
@@ -192,7 +190,8 @@ form_schema <- function(flatten = FALSE,
       if (flatten == TRUE) {
         ru_msg_warn(
           "Cannot parse flattened form schema, returning unparsed and flattened.
-           Use flatten=FALSE with parse=TRUE for a parsed form_schema."
+           Use flatten=FALSE with parse=TRUE for a parsed form_schema.",
+          verbose = verbose
         )
         return(fs)
       }
@@ -237,11 +236,9 @@ form_schema <- function(flatten = FALSE,
     # If the form is a draft form, fs is an empty tibble.
     # In this case, fall back to the draft form schema API path.
     if (nrow(fs) == 0) {
-      if (verbose == TRUE) {
         "The form \"{fid}\" is an unpublished draft form." %>%
           glue::glue() %>%
-          ru_msg_info()
-      }
+          ru_msg_info(verbose = verbose)
 
       fs <- httr::RETRY(
         "GET",

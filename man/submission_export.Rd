@@ -143,12 +143,9 @@ sub \%>\% knitr::kable(.)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv}
 
-Other restful-api: 
-\code{\link{attachment_link}()},
-\code{\link{attachment_list}()},
-\code{\link{audit_get}()},
+Other submission-management: 
 \code{\link{submission_detail}()},
 \code{\link{submission_get}()},
 \code{\link{submission_list}()}
 }
-\concept{restful-api}
+\concept{submission-management}

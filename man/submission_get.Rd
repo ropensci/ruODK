@@ -72,12 +72,9 @@ subs <- submission_get(sl$instance_id)
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
 
-Other restful-api: 
-\code{\link{attachment_link}()},
-\code{\link{attachment_list}()},
-\code{\link{audit_get}()},
+Other submission-management: 
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_list}()}
 }
-\concept{restful-api}
+\concept{submission-management}

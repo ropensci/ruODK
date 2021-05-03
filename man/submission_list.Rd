@@ -10,7 +10,9 @@ submission_list(
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
-  retries = get_retries()
+  retries = get_retries(),
+  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  tz = get_default_tz()
 )
 }
 \arguments{
@@ -42,6 +44,15 @@ See \code{vignette("Setup", package = "ruODK")}.}
 \item{retries}{The number of attempts to retrieve a web resource.
 This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 Default: 3.}
+
+\item{orders}{(vector of character) Orders of datetime elements for
+lubridate.
+Default:
+\code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
+
+\item{tz}{A timezone to convert dates and times to.
+Read `vignette("setup", package = "ruODK")` to learn how `ruODK`'s
+timezone can be set globally or per function.}
 }
 \value{
 A tibble containing some high-level details of the form submissions.
@@ -92,12 +103,9 @@ nrow(sl) == form_list_nsub
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form}
 
-Other restful-api: 
-\code{\link{attachment_link}()},
-\code{\link{attachment_list}()},
-\code{\link{audit_get}()},
+Other submission-management: 
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_get}()}
 }
-\concept{restful-api}
+\concept{submission-management}

@@ -52,20 +52,17 @@ unnest_all <- function(nested_tbl,
       keep_nested <- vector()
     } else {
       keep_nested <- paste("value_", geofield_names, sep = "")
-      if (verbose == TRUE) {
-        x <- paste(keep_nested, collapse = ", ") # nolint
-        ru_msg_info(glue::glue("Not unnesting geo fields: {x}"))
-      }
+      x <- paste(keep_nested, collapse = ", ") # nolint
+      "Not unnesting geo fields: {x}" %>%
+        glue::glue() %>% ru_msg_info(verbose = verbose)
     }
   } else {
     keep_nested <- vector()
   }
 
   cols_to_unnest <- setdiff(listcol_names(nested_tbl), keep_nested)
-  if (verbose == TRUE) {
-    x <- paste(cols_to_unnest, collapse = ", ")
-    ru_msg_info(glue::glue("Unnesting: {x}"))
-  }
+  x <- paste(cols_to_unnest, collapse = ", ")
+  "Unnesting: {x}" %>% glue::glue() %>% ru_msg_info(verbose = verbose)
 
   for (colname in cols_to_unnest) {
     if (!(colname %in% names(nested_tbl))) {
@@ -75,9 +72,8 @@ unnest_all <- function(nested_tbl,
       #   ru_msg_info(glue::glue("Skipping renamed column \"{colname}\""))
       # nolint end
     } else {
-      if (verbose == TRUE) {
-        ru_msg_info(glue::glue(" Unnesting column \"{colname}\"\n"))
-      }
+      " Unnesting column \"{colname}\"\n" %>%
+        glue::glue() %>% ru_msg_info(verbose = verbose)
 
       suppressMessages(
         nested_tbl <- tidyr::unnest_wider(
@@ -92,10 +88,10 @@ unnest_all <- function(nested_tbl,
 
   cols_to_unnest <- setdiff(listcol_names(nested_tbl), keep_nested)
   if (length(cols_to_unnest) > 0) {
-    if (verbose == TRUE) {
-      x <- paste(cols_to_unnest, collapse = ", ")
-      ru_msg_info(glue::glue("Unnesting more list cols: {x}"))
-    }
+    x <- paste(cols_to_unnest, collapse = ", ")
+    "Unnesting more list cols: {x}" %>%
+      glue::glue() %>% ru_msg_info(verbose = verbose)
+
     nested_tbl <- unnest_all(
       nested_tbl,
       names_repair = names_repair,
@@ -146,7 +142,8 @@ odata_submission_rectangle <- function(data,
                                        form_schema = NULL,
                                        verbose = get_ru_verbose()) {
   data %>%
-    { # nolint
+    {
+      # nolint
       suppressMessages(tibble::as_tibble(data, .name_repair = names_repair))
     } %>%
     unnest_all(
@@ -156,10 +153,8 @@ odata_submission_rectangle <- function(data,
       verbose = verbose
     ) %>%
     janitor::clean_names(.) %>%
-    dplyr::rename_at(
-      dplyr::vars(dplyr::starts_with("value_")),
-      ~ stringr::str_remove(., "value_")
-    )
+    dplyr::rename_at(dplyr::vars(dplyr::starts_with("value_")),
+                     ~ stringr::str_remove(., "value_"))
 }
 
 # usethis::use_test("odata_submission_rectangle") # nolint

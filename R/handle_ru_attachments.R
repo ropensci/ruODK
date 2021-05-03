@@ -65,11 +65,10 @@ handle_ru_attachments <- function(data,
     intersect(names(data))
 
   if (length(att_cols_main) > 0) {
-    if (verbose == TRUE) {
       x <- paste(att_cols_main, collapse = ", ") # nolint
-      ru_msg_info(glue::glue("Found attachments in main Submissions table: {x}."))
-      ru_msg_info("Downloading attachments...")
-    }
+      "Found attachments in main Submissions table: {x}." %>%
+        glue::glue() %>% ru_msg_info(verbose = verbose)
+      ru_msg_info("Downloading attachments...", verbose = verbose)
     data <- data %>%
       dplyr::mutate_at(
         dplyr::vars(att_cols_main),
@@ -95,11 +94,10 @@ handle_ru_attachments <- function(data,
     intersect(names(data))
 
   if (length(att_cols_sub) > 0) {
-    if (verbose == TRUE) {
       x <- paste(att_cols_sub, collapse = ", ") # nolint
-      ru_msg_info(glue::glue("Found attachments in nested sub-table: {x}."))
-      ru_msg_info("Downloading attachments...")
-    }
+      "Found attachments in nested sub-table: {x}." %>%
+        glue::glue() %>% ru_msg_info(verbose = verbose)
+      ru_msg_info("Downloading attachments...", verbose = verbose)
     data <- data %>%
       dplyr::mutate_at(
         dplyr::vars(att_cols_sub),

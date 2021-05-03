@@ -5,18 +5,21 @@ reference:
 - title: RESTful API
   contents:
   - has_concept("restful-api")
-- title: Utilities
-  contents:
-  - has_concept("utilities")
 - title: Project management
   contents:
   - has_concept("project-management")
 - title: Form management
   contents:
   - has_concept("form-management")
+- title: Submission management
+  contents:
+  - has_concept("submission-management")
 - title: User management
   contents:
   - has_concept("user-management")
+- title: Utilities
+  contents:
+  - has_concept("utilities")
 - title: Settings
   contents:
   - has_concept("ru_settings")

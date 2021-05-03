@@ -56,14 +56,13 @@ handle_ru_geoshapes <- function(data,
     magrittr::extract2("ruodk_name") %>%
     intersect(names(data))
 
-  if (verbose == TRUE) {
     x <- paste(geo_cols, collapse = ", ") # nolint
-    ru_msg_info(glue::glue("Found geoshapes: {x}."))
-  }
+"Found geoshapes: {x}." %>% glue::glue() %>% ru_msg_info(verbose = verbose)
+
 
   for (colname in geo_cols) {
     if (colname %in% names(data)) {
-      if (verbose == TRUE) ru_msg_info(glue::glue("Parsing {colname}..."))
+      "Parsing {colname}..." %>% glue::glue() %>% ru_msg_info(verbose = verbose)
       data <- data %>% split_geoshape(
         as.character(colname),
         wkt = wkt,

@@ -12,7 +12,7 @@
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/getting-submission-details}
 # nolint end
-#' @family restful-api
+#' @family submission-management
 #' @export
 #' @examples
 #' \dontrun{
@@ -34,9 +34,10 @@
 #' nrow(sub)
 #' # > 1
 #'
-#' # The columns are metadata about the submission
+#' # The columns are metadata about the submission and the submitter
 #' names(sub)
-#' # > "instance_id" "submitter_id" "submitter" "created_at" "updated_at"
+#' # > "instance_id" "submitter_id" "submitter_type" "submitter_display_name"
+#' # > "submitter_created_at" "device_id" "created_at"
 #' }
 submission_detail <- function(iid,
                               pid = get_default_pid(),

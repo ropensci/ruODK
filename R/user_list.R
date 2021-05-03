@@ -105,7 +105,7 @@ user_list <- function(qry = NULL,
     times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.)%>%
+    httr::content(.) %>%
     tibble::tibble(.) %>%
     tidyr::unnest_wider(".", names_repair = "universal") %>%
     janitor::clean_names() %>%

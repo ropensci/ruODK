@@ -7,6 +7,8 @@
 #' @template param-url
 #' @template param-auth
 #' @template param-retries
+#' @template param-orders
+#' @template param-tz
 #' @return A tibble containing some high-level details of the form submissions.
 #'         One row per submission, columns are submission attributes:
 #'
@@ -17,7 +19,7 @@
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form}
 # nolint end
-#' @family restful-api
+#' @family submission-management
 #' @export
 #' @examples
 #' \dontrun{
@@ -57,7 +59,16 @@ submission_list <- function(pid = get_default_pid(),
                             url = get_default_url(),
                             un = get_default_un(),
                             pw = get_default_pw(),
-                            retries = get_retries()) {
+                            retries = get_retries(),
+                            orders = c(
+                              "YmdHMS",
+                              "YmdHMSz",
+                              "Ymd HMS",
+                              "Ymd HMSz",
+                              "Ymd",
+                              "ymd"
+                            ),
+                            tz = get_default_tz()) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   url <- httr::modify_url(
     url,
@@ -65,7 +76,6 @@ submission_list <- function(pid = get_default_pid(),
       "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/submissions"
     )
   )
-  ru_msg_info(url)
   httr::RETRY(
     "GET",
     url,
@@ -78,17 +88,16 @@ submission_list <- function(pid = get_default_pid(),
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    { # nolint
-      tibble::tibble(
-        instance_id = purrr::map_chr(., "instanceId"),
-        submitter_id = purrr::map_int(., c("submitter", "id"), .default = NA),
-        device_id = purrr::map_chr(., "deviceId", .default = NA),
-        created_at = purrr::map_chr(., "createdAt", .default = NA) %>%
-          isodt_to_local(),
-        updated_at = purrr::map_chr(., "updated_at", .default = NA) %>%
-          isodt_to_local(),
-      )
-    }
+    tibble::tibble(.) %>%
+    tidyr::unnest_wider(".", names_repair = "universal") %>%
+    tidyr::unnest_wider(
+      "submitter", names_repair = "universal", names_sep = "_"
+    ) %>%
+    janitor::clean_names() %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::contains("at")), # assume datetimes are named "_at"
+      ~ isodt_to_local(., orders = orders, tz = tz)
+    )
 }
 
 # usethis::use_test("submission_list") # nolint

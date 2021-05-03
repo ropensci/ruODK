@@ -69,11 +69,8 @@ form_schema_parse <- function(fs,
     if (is.list(node) && "children" %in% names(node)) {
       for (child in node["children"]) {
         odata_table_path <- glue::glue("{path}.{node['name']}")
-        if (verbose == TRUE) {
-          ru_msg_info(
-            glue::glue("Found child: {child} at {odata_table_path}\n\n")
-          )
-        }
+        "Found child: {child} at {odata_table_path}\n\n" %>%
+            glue::glue() %>% ru_msg_info(verbose = verbose)
         xxx <- form_schema_parse(child, path = odata_table_path)
         x <- rbind(x, xxx)
       }
@@ -81,7 +78,8 @@ form_schema_parse <- function(fs,
   }
 
   # 3. Return combined type/name pairs as tibble
-  if (verbose == TRUE) ru_msg_info(glue::glue("Returning data \"{str(x)}\""))
+  "Returning data \"{str(x)}\"" %>%
+    glue::glue() %>% ru_msg_info(verbose = verbose)
 
   # 4. Predict ruodk_name happens in form_schema
   x %>% tibble::as_tibble()

@@ -132,21 +132,17 @@ get_one_attachment <- function(pth,
                                verbose = get_ru_verbose()) {
   # Early exit if there's nothing to download
   if (is.na(fn)) {
-    if (verbose == TRUE) {
-      "Filename is NA, skipping download.\n" %>%
-        glue::glue() %>%
-        ru_msg_noop()
-    }
+    "Filename is NA, skipping download.\n" %>%
+      glue::glue() %>%
+      ru_msg_noop(verbose = verbose)
     return(NA)
   }
 
   # HTTP 404.1 on file download saves the JSON error message as 76B file.
   if (fs::file_exists(pth) && fs::file_size(pth) != 76) {
-    if (verbose == TRUE) {
-      'File already downloaded, keeping "{pth}".\n' %>%
-        glue::glue() %>%
-        ru_msg_noop()
-    }
+    'File already downloaded, keeping "{pth}".\n' %>%
+      glue::glue() %>%
+      ru_msg_noop(verbose = verbose)
     return(pth %>% as.character())
   }
 
@@ -176,11 +172,9 @@ get_one_attachment <- function(pth,
     )
 
   if (fs::file_exists(pth)) {
-    if (verbose == TRUE) {
-      'File saved to "{pth}".\n' %>%
-        glue::glue() %>%
-        ru_msg_success()
-    }
+    'File saved to "{pth}".\n' %>%
+      glue::glue() %>%
+      ru_msg_success(verbose = verbose)
     return(pth %>% as.character())
   } else {
     # nocov start
@@ -188,11 +182,9 @@ get_one_attachment <- function(pth,
     # This is hard to test, as it requires a form with a missing attachment.
     # This only ever happens on exotic upload errors.
     # nolint end
-    if (verbose == TRUE) {
-      "File not found.\n" %>%
-        glue::glue() %>%
-        ru_msg_success()
-    }
+    "File not found.\n" %>%
+      glue::glue() %>%
+      ru_msg_success(verbose = verbose)
     return(NA)
     # nocov end
   }

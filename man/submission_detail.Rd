@@ -73,20 +73,18 @@ sub <- submission_detail(sl$instance_id[[1]])
 nrow(sub)
 # > 1
 
-# The columns are metadata about the submission
+# The columns are metadata about the submission and the submitter
 names(sub)
-# > "instance_id" "submitter_id" "submitter" "created_at" "updated_at"
+# > "instance_id" "submitter_id" "submitter_type" "submitter_display_name"
+# > "submitter_created_at" "device_id" "created_at"
 }
 }
 \seealso{
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/getting-submission-details}
 
-Other restful-api: 
-\code{\link{attachment_link}()},
-\code{\link{attachment_list}()},
-\code{\link{audit_get}()},
+Other submission-management: 
 \code{\link{submission_export}()},
 \code{\link{submission_get}()},
 \code{\link{submission_list}()}
 }
-\concept{restful-api}
+\concept{submission-management}

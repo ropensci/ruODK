@@ -162,7 +162,7 @@ odata_submission_get <- function(table = "Submissions",
 
   #----------------------------------------------------------------------------#
   # Download submissions
-  if (verbose == TRUE) ru_msg_info("Downloading submissions...")
+  u_msg_info("Downloading submissions...", verbose = verbose)
 
   sub <- httr::RETRY(
     "GET",
@@ -185,16 +185,16 @@ odata_submission_get <- function(table = "Submissions",
     yell_if_error(., url, un, pw) %>%
     httr::content(.)
 
-  if (verbose == TRUE) ru_msg_success("Downloaded submissions.")
+  ru_msg_success("Downloaded submissions.", verbose = verbose)
 
   if (parse == FALSE) {
-    if (verbose == TRUE) ru_msg_success("Returning unparsed submissions.")
+    ru_msg_success("Returning unparsed submissions.", verbose = verbose)
     return(sub)
   }
 
   #----------------------------------------------------------------------------#
   # Get form schema
-  if (verbose == TRUE) ru_msg_info("Reading form schema...")
+  ru_msg_info("Reading form schema...", verbose = verbose)
 
   fs <- form_schema(
     parse = TRUE,
@@ -209,7 +209,7 @@ odata_submission_get <- function(table = "Submissions",
 
   #----------------------------------------------------------------------------#
   # Parse submission data
-  if (verbose == TRUE) ru_msg_info("Parsing submissions...")
+  ru_msg_info("Parsing submissions...", verbose = verbose)
 
   # Rectangle, handle date/times, attachments, geopoints, geotraces, geoshapes
   sub <- sub %>%
@@ -261,7 +261,7 @@ odata_submission_get <- function(table = "Submissions",
   #
   # End parse submission data
   #----------------------------------------------------------------------------#
-  if (verbose == TRUE) ru_msg_success("Returning parsed submissions.")
+  ru_msg_success("Returning parsed submissions.", verbose = verbose)
   sub
 }
 

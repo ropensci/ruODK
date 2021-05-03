@@ -20,9 +20,20 @@ test_that("submission_list works", {
 
   # Submission attributes are the tibble's columns
   cn <- c(
-    "instance_id", "submitter_id", "device_id", "created_at", "updated_at"
+    "instance_id",
+    "submitter_id",
+    "submitter_type",
+    "submitter_display_name",
+    "submitter_created_at",
+    "device_id",
+    "created_at"
   )
   testthat::expect_equal(names(sl), cn)
+  purrr::map(cn,
+             ~ testthat::expect_true(
+               . %in% names(sl),
+               label = glue::glue("Column {.} missing from submission_list")
+             ))
 
   # Number of submissions (rows) is same as advertised in form_list
   form_list_nsub <- fl %>%

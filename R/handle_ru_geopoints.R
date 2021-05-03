@@ -52,15 +52,14 @@ handle_ru_geopoints <- function(data,
     magrittr::extract2("ruodk_name") %>%
     intersect(names(data))
 
-  if (verbose == TRUE) {
-    x <- paste(geo_cols, collapse = ", ") # nolint
-    ru_msg_info(glue::glue("Found geopoints: {x}."))
-  }
+  x <- paste(geo_cols, collapse = ", ") # nolint
+  "Found geopoints: {x}." %>% glue::glue() %>% ru_msg_info(verbose = verbose)
 
   for (colname in geo_cols) {
     if (colname %in% names(data)) {
-      if (verbose == TRUE) ru_msg_info(glue::glue("Parsing {colname}..."))
-      data <- data %>% split_geopoint(as.character(colname), wkt = wkt)
+      "Parsing {colname}..." %>% glue::glue() %>% ru_msg_info(verbose = verbose)
+      data <-
+        data %>% split_geopoint(as.character(colname), wkt = wkt)
     }
   }
 

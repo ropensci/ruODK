@@ -94,7 +94,7 @@ get_one_submission <- function(iid,
 # nolint start
 #' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
 # nolint end
-#' @family restful-api
+#' @family submission-management
 #' @export
 #' @examples
 #' \dontrun{
