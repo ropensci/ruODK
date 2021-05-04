@@ -7,10 +7,11 @@
 
 # `ruODK` 0.10.1
 ## Major fixes
-* `submission_export` is reported to crash ODK Central if an incorrect 
-  passphrase is given. Retries are set to 1 for encrypted forms. 
-  (#30, thanks @Thaliehln)
+* `submission_export` now terminates immediately if an incorrect passphrase is 
+  given. ODK Central can exceed memory limits if `submission_export` is run 
+  repeatedly with an incorrect passphrase. (#30, thanks @Thaliehln)
 ## Minor fixes
+* Add `encryption_key_list`
 ## Documentation
 ## Data
 ## Maintenance
