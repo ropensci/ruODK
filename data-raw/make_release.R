@@ -29,10 +29,13 @@ source(here::here("data-raw/make_data.R"))
 # \SweaveOpts{concordance=TRUE}
 # \includepdf[pages=-, fitpaper=true]{../inst/extdoc/ruODK.pdf}
 # \end{document}
-fs::file_delete("inst/extdoc/*.pdf")
+fs::dir_ls("inst/extdoc/", glob = "*.pdf") %>% fs::file_delete()
 devtools::build_manual(path = "inst/extdoc")
 tools::compactPDF(fs::dir_ls("inst/extdoc/"), gs_quality = "ebook")
-fs::file_move(fs::dir_ls("inst/extdoc/"), "inst/extdoc/ruODK.pdf")
+purrr::map(
+  fs::dir_ls("inst/extdoc/", glob = "*.pdf"),
+  ~ fs::file_move(., "inst/extdoc/ruODK.pdf")
+)
 
 # -----------------------------------------------------------------------------#
 # Style, lint, spellcheck
