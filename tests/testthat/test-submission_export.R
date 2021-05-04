@@ -133,28 +133,28 @@ test_that("submission_export works with encryption", {
                         label = glue::glue("Submission ZIP must be a file: {se}"))
 })
 
-
-test_that(
-  "submission_export with wrong passphphrase does not blow up the server", {
-    skip_on_cran()
-
-    t <- tempdir()
-    fs::dir_ls(t) %>% fs::file_delete()
-
-    testthat::expect_error(
-      leeeeroy_jeeenkins <- submission_export(
-        local_dir = t,
-        overwrite = FALSE,
-        pid = Sys.getenv("ODKC_TEST_PID_ENC"),
-        fid = Sys.getenv("ODKC_TEST_FID_ENC"),
-        url = get_test_url(),
-        un = get_test_un(),
-        pw = get_test_pw(),
-        pp = "this is the wrong passphrase",
-        verbose = TRUE
-      )
-    )
-})
+# Seems it did just that when run from 11 separate GH Actions envs
+# test_that(
+#   "submission_export with wrong passphphrase does not blow up the server", {
+#     skip_on_cran()
+#
+#     t <- tempdir()
+#     fs::dir_ls(t) %>% fs::file_delete()
+#
+#     testthat::expect_error(
+#       leeeeroy_jeeenkins <- submission_export(
+#         local_dir = t,
+#         overwrite = FALSE,
+#         pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+#         fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+#         url = get_test_url(),
+#         un = get_test_un(),
+#         pw = get_test_pw(),
+#         pp = "this is the wrong passphrase",
+#         verbose = TRUE
+#       )
+#     )
+# })
 
 test_that("submission_export warns of missing credentials", {
   t <- tempdir()
