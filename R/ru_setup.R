@@ -605,7 +605,8 @@ yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
         "* Is the server online at {url}? Is the internet flaky? Retry!\n",
         "* Check ruODK::ru_settings() - credentials and defaults correct?\n",
         "* Run ru_setup() with working credentials and defaults.\n",
-        '* Read the vignette("setup", package = "ruODK") how to set up ruODK'
+        '* Read the vignette("setup", package = "ruODK") how to set up ruODK.',
+        "* If an encrypted form returns HTTP 500: Wrong passphrase?",
       )
     )
 }
