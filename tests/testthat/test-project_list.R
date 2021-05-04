@@ -16,13 +16,20 @@ test_that("project_list works", {
     "id",
     "name",
     "forms",
+    "last_submission",
     "app_users",
     "created_at",
     "updated_at",
-    "last_submission",
+    "key_id",
     "archived"
   )
-  testthat::expect_equal(names(p), cn)
+  purrr::map(
+    cn,
+    ~ testthat::expect_true(
+      . %in% names(p),
+      label = glue::glue("Column {.} missing from project_list")
+    )
+  )
 })
 
 # All other functions use the same authentication on the ODK Central side.

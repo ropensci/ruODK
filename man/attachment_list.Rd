@@ -94,6 +94,7 @@ all <- attachment_list(sl$instance_id)
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
 
 Other submission-management: 
+\code{\link{encryption_key_list}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_get}()},

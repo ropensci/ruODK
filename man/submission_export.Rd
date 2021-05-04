@@ -117,12 +117,14 @@ the form to avoid accidentally overwriting the ZIP export from
 another form.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+}
+\details{
 To export all the Submission data associated with a Form, just add .csv.zip
 to the end of the listing URL. The response will be a zip file containing one
 or more CSV files, as well as all multimedia attachments associated with the
 included Submissions.
-}
-\details{
+
 The file will be downloaded to the project root unless specified otherwise
 (via \code{local_dir}). Subsequently, the zip file can be extracted.
 Attachment filenames (e.g. "12345.jpg") should be prepended with \code{media}
@@ -141,8 +143,6 @@ For encrypted forms, we default to one try by default, as multiple retries
 with an incorrect passphrase can crash ODK Central.
 This is being investigated in
 \href{https://github.com/ropensci/ruODK/issues/30}{issue #30}.
-
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 }
 \examples{
 \dontrun{
@@ -165,6 +165,7 @@ sub \%>\% knitr::kable(.)
 
 Other submission-management: 
 \code{\link{attachment_list}()},
+\code{\link{encryption_key_list}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_get}()},
 \code{\link{submission_list}()}

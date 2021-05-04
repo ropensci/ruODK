@@ -1,5 +1,7 @@
 #' Export all form submissions including repeats and attachments to CSV.
 #'
+#' `r lifecycle::badge("maturing")`
+#'
 #' To export all the Submission data associated with a Form, just add .csv.zip
 #' to the end of the listing URL. The response will be a zip file containing one
 #' or more CSV files, as well as all multimedia attachments associated with the
@@ -23,8 +25,6 @@
 #' with an incorrect passphrase can crash ODK Central.
 #' This is being investigated in
 #' [issue #30](https://github.com/ropensci/ruODK/issues/30).
-#'
-#' `r lifecycle::badge("maturing")`
 #'
 #' @param local_dir The local folder to save the downloaded files to,
 #'                  default: \code{here::here}.
@@ -142,35 +142,21 @@ submission_export <- function(local_dir = here::here(),
   }
 
   # List encryption keys
-  encryption_keys <- httr::RETRY(
-    "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/submissions/keys"
-      )
-    ),
-    httr::authenticate(un, pw),
-    times = retries
-  ) %>%
-    yell_if_error(., url, un, pw) %>%
-    httr::content(.)
+  encryption_keys <- encryption_key_list(
+    url = url,
+    pid = pid,
+    fid = fid,
+    retries = retries
+  )
 
   body <- NULL
-  # Create body containing encryption key and passphrase
-  # associated with the request
-  if (length(encryption_keys) > 0) {
+
+  if (nrow(encryption_keys) > 0) {
     body <- list()
-    var <- toString(encryption_keys[[1]]$id)
+    var <- toString(encryption_keys$id[[1]])
     body[[var]] <- pp
-
-    "Found multiple encryption keys for form {fid}, using the first key." %>%
-      glue::glue() %>%
-      ru_msg_info(verbose = verbose)
-
-    # Patch https://github.com/ropensci/ruODK/issues/30
-    retries <- 1
+    glue::glue("Found {nrow(encryption_keys)} encryption keys for form {fid},",
+               " using the first key.") %>% ru_msg_info(verbose = verbose)
   }
 
   # Export form submissions to CSV via POST
@@ -181,7 +167,14 @@ submission_export <- function(local_dir = here::here(),
     encode = "json",
     httr::authenticate(un, pw),
     httr::write_disk(pth, overwrite = overwrite),
-    times = retries
+    times = retries,
+    quiet = verbose,
+    # See discussion at https://github.com/ropensci/ruODK/issues/30
+    # Sending multiple RETRY requests with incorrect passphrase can exceed
+    # server memory limits.
+    # Terminate retries immediately if ODK Central returns HTTP status 500
+    # on wrong passphrases.
+    terminate_on = c(500)
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.)

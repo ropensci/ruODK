@@ -8,7 +8,9 @@ project_list(
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
-  retries = get_retries()
+  retries = get_retries(),
+  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  tz = get_default_tz()
 )
 }
 \arguments{
@@ -39,6 +41,17 @@ See \code{vignette("Setup", package = "ruODK")}.}
 This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 
 Default: 3.}
+
+\item{orders}{(vector of character) Orders of datetime elements for
+lubridate.
+
+Default:
+\code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd")}.}
+
+\item{tz}{A timezone to convert dates and times to.
+
+Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
+timezone can be set globally or per function.}
 }
 \value{
 A tibble with one row per project and all project metadata

@@ -10,6 +10,8 @@
 #' @template param-url
 #' @template param-auth
 #' @template param-retries
+#' @template param-orders
+#' @template param-tz
 #' @return A tibble with one row per project and all project metadata
 #'         as columns as per ODK Central API docs.
 # nolint start
@@ -37,35 +39,40 @@
 project_list <- function(url = get_default_url(),
                          un = get_default_un(),
                          pw = get_default_pw(),
-                         retries = get_retries()) {
+                         retries = get_retries(),
+                         orders = c("YmdHMS",
+                                    "YmdHMSz",
+                                    "Ymd HMS",
+                                    "Ymd HMSz",
+                                    "Ymd",
+                                    "ymd"),
+                         tz = get_default_tz()) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
     httr::modify_url(url, path = glue::glue("v1/projects")),
-    httr::add_headers(
-      "Accept" = "application/xml",
-      "X-Extended-Metadata" = "true"
-    ),
+    httr::add_headers("Accept" = "application/xml",
+                      "X-Extended-Metadata" = "true"),
     httr::authenticate(un, pw),
     times = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    { # nolint
-      tibble::tibble(
-        id = purrr::map_int(., "id"),
-        name = purrr::map_chr(., "name"),
-        forms = purrr::map_int(., "forms"),
-        app_users = purrr::map_int(., "appUsers"),
-        created_at = purrr::map_chr(., "createdAt", .default = NA) %>%
-          isodt_to_local(),
-        updated_at = purrr::map_chr(., "updated_at", .default = NA) %>%
-          isodt_to_local(),
-        last_submission = purrr::map_chr(., "lastSubmission", .default = NA) %>%
-          isodt_to_local(),
-        archived = purrr::map_lgl(., "archived", .default = FALSE)
-      )
+    tibble::tibble(.) %>%
+    tidyr::unnest_wider(".", names_repair = "universal") %>%
+    janitor::clean_names(.) %>%
+    dplyr::mutate_at(
+      dplyr::vars("last_submission", "created_at", "updated_at"),
+      ~ isodt_to_local(., orders = orders, tz = tz)
+    ) %>%
+    {
+      if ("archived" %in% names(.)) {
+        dplyr::mutate(., archived = tidyr::replace_na(archived, FALSE))
+      } else {
+        .
+      }
     }
+
 }
 
 # usethis::use_test("project_list") # nolint

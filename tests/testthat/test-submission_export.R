@@ -7,14 +7,10 @@ test_that("submission_export works", {
   fs::dir_ls(t) %>% fs::file_delete()
 
   # High expectations
-  pth <- fs::path(
-    t,
-    glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.zip")
-  )
-  fid_csv <- fs::path(
-    t,
-    glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.csv")
-  )
+  pth <- fs::path(t,
+                  glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.zip"))
+  fid_csv <- fs::path(t,
+                      glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.csv"))
 
   # Once you drink Tequila, you're feeling really good
   testthat::expect_message(
@@ -133,10 +129,31 @@ test_that("submission_export works with encryption", {
   )
   # })
 
-  testthat::expect_true(
-    fs::is_file(se),
-    label = glue::glue("Submission ZIP must be a file: {se}")
-  )
+  testthat::expect_true(fs::is_file(se),
+                        label = glue::glue("Submission ZIP must be a file: {se}"))
+})
+
+
+test_that(
+  "submission_export with wrong passphphrase does not blow up the server", {
+    skip_on_cran()
+
+    t <- tempdir()
+    fs::dir_ls(t) %>% fs::file_delete()
+
+    testthat::expect_error(
+      leeeeroy_jeeenkins <- submission_export(
+        local_dir = t,
+        overwrite = FALSE,
+        pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+        fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+        url = get_test_url(),
+        un = get_test_un(),
+        pw = get_test_pw(),
+        pp = "this is the wrong passphrase",
+        verbose = TRUE
+      )
+    )
 })
 
 test_that("submission_export warns of missing credentials", {
@@ -253,12 +270,11 @@ test_that("submission_export excludes media", {
     pp = get_test_pp()
   )
 
-  fsize_no_media_and_repeats <- fs::file_info(no_media_and_repeats)$size
+  fsize_no_media_and_repeats <-
+    fs::file_info(no_media_and_repeats)$size
 
-  testthat::expect_true(
-    fsize_media_and_repeats > fsize_no_media_and_repeats,
-    label = "submission_export omitting media should result in smaller ZIP"
-  )
+  testthat::expect_true(fsize_media_and_repeats > fsize_no_media_and_repeats,
+                        label = "submission_export omitting media should result in smaller ZIP")
 
   suppressWarnings(
     no_media_no_repeats <- submission_export(
@@ -277,10 +293,8 @@ test_that("submission_export excludes media", {
     )
   )
 
-  testthat::expect_true(
-    tools::file_ext(no_media_no_repeats) == "csv",
-    label = "submission_export(repeats=FALSE) should return a CSV"
-  )
+  testthat::expect_true(tools::file_ext(no_media_no_repeats) == "csv",
+                        label = "submission_export(repeats=FALSE) should return a CSV")
 
   suppressWarnings(
     media_no_repeats <- submission_export(
@@ -299,10 +313,8 @@ test_that("submission_export excludes media", {
     )
   )
 
-  testthat::expect_true(
-    tools::file_ext(media_no_repeats) == "csv",
-    label = "submission_export(repeats=FALSE, media=TRUE) should return a CSV"
-  )
+  testthat::expect_true(tools::file_ext(media_no_repeats) == "csv",
+                        label = "submission_export(repeats=FALSE, media=TRUE) should return a CSV")
 
   wrong_version_no_warning <- submission_export(
     local_dir = t,
@@ -311,7 +323,8 @@ test_that("submission_export excludes media", {
     media = TRUE,
     repeats = TRUE,
     pid = get_test_pid(),
-    odkc_version = 1.0, # should cause message
+    odkc_version = 1.0,
+    # should cause message
     fid = get_test_fid_zip(),
     url = get_test_url(),
     un = get_test_un(),
@@ -322,12 +335,15 @@ test_that("submission_export excludes media", {
   testthat::expect_message(
     submission_export(
       local_dir = t,
-      overwrite = FALSE, # else "overwrite" message
+      overwrite = FALSE,
+      # else "overwrite" message
       verbose = TRUE,
-      media = FALSE, # won't work on old ODKC
+      media = FALSE,
+      # won't work on old ODKC
       repeats = TRUE,
       pid = get_test_pid(),
-      odkc_version = 1.0, # should cause message
+      odkc_version = 1.0,
+      # should cause message
       fid = get_test_fid_zip(),
       url = get_test_url(),
       un = get_test_un(),
@@ -340,12 +356,15 @@ test_that("submission_export excludes media", {
   testthat::expect_message(
     submission_export(
       local_dir = t,
-      overwrite = FALSE, # else "overwrite" message
+      overwrite = FALSE,
+      # else "overwrite" message
       verbose = TRUE,
       media = TRUE,
-      repeats = FALSE, # won't work on old ODKC
+      repeats = FALSE,
+      # won't work on old ODKC
       pid = get_test_pid(),
-      odkc_version = 1.0, # should cause message
+      odkc_version = 1.0,
+      # should cause message
       fid = get_test_fid_zip(),
       url = get_test_url(),
       un = get_test_un(),
