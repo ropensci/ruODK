@@ -57,11 +57,15 @@ handle_ru_geotraces <- function(data,
     intersect(names(data))
 
   x <- paste(geo_cols, collapse = ", ") # nolint
-  "Found geotraces: {x}." %>% glue::glue() %>% ru_msg_info(verbose = verbose)
+  "Found geotraces: {x}." %>%
+    glue::glue() %>%
+    ru_msg_info(verbose = verbose)
 
   for (colname in geo_cols) {
     if (colname %in% names(data)) {
-      "Parsing {colname}..." %>% glue::glue() %>% ru_msg_info(verbose = verbose)
+      "Parsing {colname}..." %>%
+        glue::glue() %>%
+        ru_msg_info(verbose = verbose)
       data <- data %>%
         split_geotrace(
           as.character(colname),

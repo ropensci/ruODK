@@ -29,11 +29,13 @@ test_that("submission_list works", {
     "created_at"
   )
   testthat::expect_equal(names(sl), cn)
-  purrr::map(cn,
-             ~ testthat::expect_true(
-               . %in% names(sl),
-               label = glue::glue("Column {.} missing from submission_list")
-             ))
+  purrr::map(
+    cn,
+    ~ testthat::expect_true(
+      . %in% names(sl),
+      label = glue::glue("Column {.} missing from submission_list")
+    )
+  )
 
   # Number of submissions (rows) is same as advertised in form_list
   form_list_nsub <- fl %>%

@@ -150,7 +150,6 @@ test_that("submission_export warns of missing credentials", {
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
-
       overwrite = FALSE,
       local_dir = t,
       verbose = TRUE
@@ -164,7 +163,6 @@ test_that("submission_export warns of missing credentials", {
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
-
       overwrite = FALSE,
       local_dir = t,
       pp = get_test_pp(),
@@ -179,7 +177,6 @@ test_that("submission_export warns of missing credentials", {
       url = "",
       un = get_test_un(),
       pw = get_test_pw(),
-
       overwrite = FALSE,
       local_dir = t,
       pp = get_test_pp(),
@@ -194,7 +191,6 @@ test_that("submission_export warns of missing credentials", {
       url = get_test_url(),
       un = "",
       pw = get_test_pw(),
-
       overwrite = FALSE,
       local_dir = t,
       pp = get_test_pp(),
@@ -209,7 +205,6 @@ test_that("submission_export warns of missing credentials", {
       url = get_test_url(),
       un = get_test_un(),
       pw = "",
-
       overwrite = FALSE,
       local_dir = t,
       pp = get_test_pp(),

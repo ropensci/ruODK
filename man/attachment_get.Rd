@@ -135,7 +135,7 @@ fresh_parsed <- fresh_raw \%>\%
 
 \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
 
-Other utilities:
+Other utilities: 
 \code{\link{attachment_link}()},
 \code{\link{attachment_url}()},
 \code{\link{drop_null_coords}()},
@@ -152,11 +152,6 @@ Other utilities:
 \code{\link{odata_submission_rectangle}()},
 \code{\link{predict_ruodk_name}()},
 \code{\link{prepend_uuid}()},
-\code{\link{ru_msg_abort}()},
-\code{\link{ru_msg_info}()},
-\code{\link{ru_msg_noop}()},
-\code{\link{ru_msg_success}()},
-\code{\link{ru_msg_warn}()},
 \code{\link{split_geopoint}()},
 \code{\link{split_geoshape}()},
 \code{\link{split_geotrace}()},

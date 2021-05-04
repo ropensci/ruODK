@@ -91,7 +91,8 @@ submission_list <- function(pid = get_default_pid(),
     tibble::tibble(.) %>%
     tidyr::unnest_wider(".", names_repair = "universal") %>%
     tidyr::unnest_wider(
-      "submitter", names_repair = "universal", names_sep = "_"
+      "submitter",
+      names_repair = "universal", names_sep = "_"
     ) %>%
     janitor::clean_names() %>%
     dplyr::mutate_at(

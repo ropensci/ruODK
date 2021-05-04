@@ -279,7 +279,8 @@ attachment_get <- function(sid,
     dest_dir <- fs::path(local_dir)
   }
   "Using local directory \"{dest_dir}\".\n" %>%
-    glue::glue() %>% ru_msg_info(verbose = verbose)
+    glue::glue() %>%
+    ru_msg_info(verbose = verbose)
 
   fs::dir_create(dest_dir)
 

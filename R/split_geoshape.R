@@ -68,8 +68,7 @@
 #'   is.numeric(wkt_first_gt$shape_location_shape_gps_altitude)
 #' )
 #' }
-split_geoshape <- function(
-                           data,
+split_geoshape <- function(data,
                            colname,
                            wkt = FALSE,
                            odkc_version = odkc_version) {

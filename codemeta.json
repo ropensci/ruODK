@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
   "description": "Access and tidy up data from the 'ODK Central' API.  \n    'ODK Central' is a clearinghouse for digitally captured data \n    <https://docs.getodk.org/central-intro/>.\n    The 'ODK Central' API is documented at <https://odkcentral.docs.apiary.io/>.",
@@ -8,13 +11,13 @@
   "relatedLink": "https://docs.ropensci.org/ruODK",
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.9.9",
+  "version": "0.10.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.4 (2021-02-15)",
+  "runtimePlatform": "R version 4.0.5 (2021-03-31)",
   "author": [
     {
       "@type": "Person",
@@ -531,7 +534,7 @@
   "applicationCategory": "DataAccess",
   "keywords": ["database", "open-data", "opendatakit", "odk", "api", "data", "dataset", "odata", "odata-client", "r"],
   "readme": "https://github.com/ropensci/ruODK/blob/main/README.md",
-  "fileSize": "3381.772KB",
+  "fileSize": "34535.963KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -547,5 +550,8 @@
       "url": "https://github.com/ropensci/ruODK",
       "description": "R package version 0.9.5"
     }
-  ]
+  ],
+  "releaseNotes": "https://github.com/ropensci/ruODK/blob/master/NEWS.md",
+  "contIntegration": ["https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/ropensci/ruODK"],
+  "developmentStatus": "https://www.repostatus.org/#active"
 }

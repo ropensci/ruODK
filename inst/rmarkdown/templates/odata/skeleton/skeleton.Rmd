@@ -101,6 +101,7 @@ ft %>% knitr::kable(.)
 <!-- 
 Get and parse submissions.
 Repeat for each form table name in ft$url. 
+The `submissions_id` of a nested table links to the main table's `id`.
 Once happy with the parsing results, verbose can be set to FALSE.
 See vignette "spatial" for more operations on geo fields.
 -->
@@ -258,7 +259,7 @@ googledrive::drive_auth(use_oob = TRUE)
 gd_fn <- "My Google Drive folder name"
 googledrive::drive_ls(gd_fn) %>% googledrive::drive_rm(.)  # Wipe older outputs
 if (fs::file_exists(rep_fn)){
-  googledrive::drive_upload(rep_fn, path=rep_fn)             # Report as HTML
+  googledrive::drive_upload(rep_fn, path=rep_fn)           # Report as HTML
 }
 googledrive::drive_upload(data_fn, path=data_fn)           # Main data as CSV
 googledrive::drive_upload(data_sub1_fn, path=data_sub1_fn) # Sub table 1 as CSV

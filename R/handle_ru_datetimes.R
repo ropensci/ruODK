@@ -51,7 +51,8 @@ handle_ru_datetimes <- function(data,
 
   x <- paste(dttm_cols, collapse = ", ") # nolint
   "Found date/times: {x}." %>%
-    glue::glue() %>% ru_msg_info(verbose = verbose)
+    glue::glue() %>%
+    ru_msg_info(verbose = verbose)
 
   data %>%
     dplyr::mutate_at(

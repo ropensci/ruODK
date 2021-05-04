@@ -107,7 +107,8 @@ se <- ruODK::submission_export(local_dir = ".", overwrite = FALSE, verbose = TRU
 f <- unzip(se, exdir = t)
 # Prepend attachments with media/ to turn into relative file paths
 fq_zip_data <- fid_csv %>%
-  readr::read_csv(na = c("", "NA", "na")) %>% # form uses "na" for NA
+  readr::read_csv(na = c("", "NA", "na")) %>%
+  # form uses "na" for NA
   janitor::clean_names(.) %>%
   dplyr::mutate(id = meta_instance_id) %>%
   ruODK::handle_ru_datetimes(fq_form_schema) %>%

@@ -39,7 +39,7 @@ For more general info about contributing to `ruODK`, see the
 ### Prerequisites
 To test the package, you will need valid credentials for the ODK Central instance 
 used as a test server.
-Create an [accont request issue](https://github.com/ropensci/ruODK/issues/new/choose).
+Create an [account request issue](https://github.com/ropensci/ruODK/issues/new/choose).
 
 Before you do a pull request, you should always file an issue and make sure
 the maintainers agree that it is a problem, and is happy with your basic proposal 
@@ -51,8 +51,7 @@ If you have found a bug, follow the issue template to create a minimal
 Some changes have intricate internal and external dependencies, which are easy
 to miss and break. These checklists aim to avoid these pitfalls.
 
-Test and update reverse dependencies (wastdr, urODK, etlTurtleNesting, 
-turtleviewer etc.).
+Test and update reverse dependencies (wastdr, urODK, etlTurtleNesting, etc.).
 
 #### Adding a dependency
 * Update DESCRIPTION

@@ -54,7 +54,8 @@ unnest_all <- function(nested_tbl,
       keep_nested <- paste("value_", geofield_names, sep = "")
       x <- paste(keep_nested, collapse = ", ") # nolint
       "Not unnesting geo fields: {x}" %>%
-        glue::glue() %>% ru_msg_info(verbose = verbose)
+        glue::glue() %>%
+        ru_msg_info(verbose = verbose)
     }
   } else {
     keep_nested <- vector()
@@ -62,7 +63,9 @@ unnest_all <- function(nested_tbl,
 
   cols_to_unnest <- setdiff(listcol_names(nested_tbl), keep_nested)
   x <- paste(cols_to_unnest, collapse = ", ")
-  "Unnesting: {x}" %>% glue::glue() %>% ru_msg_info(verbose = verbose)
+  "Unnesting: {x}" %>%
+    glue::glue() %>%
+    ru_msg_info(verbose = verbose)
 
   for (colname in cols_to_unnest) {
     if (!(colname %in% names(nested_tbl))) {
@@ -72,7 +75,8 @@ unnest_all <- function(nested_tbl,
       # nolint end
     } else {
       " Unnesting column \"{colname}\"\n" %>%
-        glue::glue() %>% ru_msg_info(verbose = verbose)
+        glue::glue() %>%
+        ru_msg_info(verbose = verbose)
 
       suppressMessages(
         nested_tbl <- tidyr::unnest_wider(
@@ -89,7 +93,8 @@ unnest_all <- function(nested_tbl,
   if (length(cols_to_unnest) > 0) {
     x <- paste(cols_to_unnest, collapse = ", ")
     "Unnesting more list cols: {x}" %>%
-      glue::glue() %>% ru_msg_info(verbose = verbose)
+      glue::glue() %>%
+      ru_msg_info(verbose = verbose)
 
     nested_tbl <- unnest_all(
       nested_tbl,
@@ -152,8 +157,10 @@ odata_submission_rectangle <- function(data,
       verbose = verbose
     ) %>%
     janitor::clean_names(.) %>%
-    dplyr::rename_at(dplyr::vars(dplyr::starts_with("value_")),
-                     ~ stringr::str_remove(., "value_"))
+    dplyr::rename_at(
+      dplyr::vars(dplyr::starts_with("value_")),
+      ~ stringr::str_remove(., "value_")
+    )
 }
 
 # usethis::use_test("odata_submission_rectangle") # nolint

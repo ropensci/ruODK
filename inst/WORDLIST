@@ -1,12 +1,10 @@
-01T12
-01z
 02T02
 02T04
 085Z
+092Z
 23T05
 241c4759564ea039b4404b6892025500
 2cb6a4b3d7f05ab055f3da89d0958b14
-31T23
 369a921eb94672dabbd395a035819d65
 426Z
 434ff9e1e33fc8bb35148c0cc6979708
@@ -16,7 +14,6 @@
 5afb51f35ba0c572
 7e912580b246796c8477cfcd4c5dceab
 8aaa
-999z
 AppVeyor
 Appveyor
 Arefin
@@ -24,7 +21,6 @@ Binderhub
 Bugfix
 CMD
 CodeFactor
-DCIM0001
 DIY
 DOI
 Datatable
@@ -34,7 +30,6 @@ Edmx
 EntitySet
 EntityType
 Flatback
-FloraQuadrat04
 GH
 GeoJSON
 Geospatial
@@ -56,7 +51,6 @@ Mapview
 Metapackage
 Muntashir
 NVIS
-NaN
 NodeJS
 ODK
 ODKC
@@ -82,7 +76,6 @@ RStudio
 RaaS
 RapidSurveys
 Rectangling
-Renviron
 Rmd
 Roadmap
 Rowlingson
@@ -109,6 +102,7 @@ XForms
 Xforms
 XlsForm
 XlsForms
+Zenodo
 acc
 actee
 af5f667a2f28
@@ -120,7 +114,6 @@ attrs
 barcode
 bc4dff584ab2e0b0dd2c50eb1c2c7aa4
 bugfix
-camelCase
 changedate
 cheatsheet
 choicefilter
@@ -131,6 +124,7 @@ codefactor
 colname
 compat
 composable
+config
 corner1
 corner2
 corner3
@@ -143,16 +137,11 @@ datatypes
 dateTime
 datetime
 datetimes
+dbcawa
 decrypt
-dir
 doi
 dttm
-enexpr
-enquo
-ensym
 eval
-expr
-exprs
 extdata
 fid
 filename1
@@ -161,7 +150,6 @@ filename3
 floristic
 fn
 funder
-geo
 geofield
 geofields
 geopoint
@@ -174,10 +162,7 @@ geotraces
 gepshapes
 getodk
 getters
-gj
 googledrive
-gps
-http
 https
 httr
 idential
@@ -211,7 +196,6 @@ pkgdown
 pre
 purrr
 quadrat
-quos
 quosures
 rOpenSci
 rOzCBI
@@ -219,7 +203,6 @@ rectangled
 rectangling
 repo
 rlang
-ropensci
 ru
 ruReady
 ruodk
@@ -231,12 +214,11 @@ subfolder
 subfolders
 subresource
 svc
-sym
-syms
 tibble
 tibbles
 tidyr
 tidyverse
+trigram
 un
 unnest
 unnested
@@ -252,7 +234,6 @@ v7
 vcr
 vectorised
 whattheyforgot
-wkt
 workdir
 xml2
 zenodo

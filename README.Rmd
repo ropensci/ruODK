@@ -33,7 +33,8 @@ that helps millions of people collect data quickly, accurately, offline,
 and at scale. The software is in active use in every country in the world and is 
 supported by a large and helpful community.
 
-`ruODK` is a community contribution to the ODK ecosystem, but not directly affiliated with ODK.
+`ruODK` is a community contribution to the ODK ecosystem, but not directly 
+affiliated with ODK.
 
 `ruODK` assumes some familiarity of its users with the ODK ecosystem and workflows.
 For a detailed overview, read the extensive [ODK documentation](https://docs.getodk.org/)

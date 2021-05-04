@@ -1,6 +1,6 @@
 home:
   title: An R Client for the ODK Central API
-  description: R, you, and ODK: Interact with ODK Central from R
+  description: R, you, and ODK - Interact with ODK Central from R
 template:
   opengraph:
     image:
@@ -12,30 +12,60 @@ template:
       card: summary_large_image
 reference:
 - title: OData API
+  desc: >
+    Top-level functions to retrieve and parse data via the OData API.
+    These functions alone are enough to retrieve all submissions with their
+    nested tables and attachments and parse their datatypes.
+    See `vignette("odata-api")` for a walkthrough.
   contents:
   - has_concept("odata-api")
 - title: Projects
+  desc: "Functions to manage projects."
   contents:
   - has_concept("project-management")
 - title: Forms
+  desc: >
+    Functions to manage forms.
+    Once their implementation is completed,
+    these functions can be used to manage the life cycle of forms from drafts
+    to published forms, their retirement, form permissions, as well as form
+    attachments.
   contents:
   - has_concept("form-management")
-- title: Submission management
+- title: Submissions
+  desc: >
+    Functions to manage submissions and their attachments.
+    This family of functions provides an alternative way to the OData family.
+    Specifically, submissions include nested tables in each record.
+    See `vignette("restful-api")` for a walkthrough.
   contents:
   - has_concept("submission-management")
 - title: Users
+  desc: "Functions to operate on users, roles, and their permissions."
   contents:
   - has_concept("user-management")
 - title: Server
+  desc: "Functions related to server management."
   contents:
   - has_concept("server-management")
 - title: Utilities
+  desc: >
+    Functions to assist with retrieval and parsing of submissions and their
+    attachments. These functions are used from within top-level functions.
+    The typical workflow does not call these explicitly.
   contents:
   - has_concept("utilities")
+- title: Messaging
+  desc: "Custom handlers for messages, warnings, and errors."
+  contents:
+  - has_concept("messaging")
 - title: Settings
+  desc: "Functions to manage ruODK settings."
   contents:
   - has_concept("ru_settings")
 - title: Example data
+  desc: >
+    Datasets included in ruODK, used in unit tests, code examples and vignettes.
   contents:
   - has_concept("included")
 authors:

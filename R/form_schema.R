@@ -229,9 +229,9 @@ form_schema <- function(flatten = FALSE,
     # If the form is a draft form, fs is an empty tibble.
     # In this case, fall back to the draft form schema API path.
     if (nrow(fs) == 0) {
-        "The form \"{fid}\" is an unpublished draft form." %>%
-          glue::glue() %>%
-          ru_msg_info(verbose = verbose)
+      "The form \"{fid}\" is an unpublished draft form." %>%
+        glue::glue() %>%
+        ru_msg_info(verbose = verbose)
 
       fs <- httr::RETRY(
         "GET",

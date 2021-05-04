@@ -4,7 +4,7 @@
 #'
 #' Currently, there are no paging or filtering options, so listing Users will
 #' get you every User in the system, every time.
-#' Optionally, a q querystring parameter may be provided to filter the returned
+#' Optionally, a q query string parameter may be provided to filter the returned
 #' users by any given string.
 #' The search is performed via a trigram similarity index over both the Email
 #' and Display Name fields, and results are ordered by match score, best matches
@@ -14,7 +14,7 @@
 #' even for actors who cannot user.list.
 #' The request must still authenticate as a valid Actor.
 #' This allows non-Administrators to choose a user for an action
-#' (eg. grant rights) without allowing full search.
+#' (e.g. grant rights) without allowing full search.
 #'
 #'
 #' Actors who cannot `user.list` will always receive [] with a 200 OK response.
@@ -54,12 +54,12 @@
 #'
 #' # Search users
 #' # Given a user with display name "Janette Doe" and email "@org.com.au"
-#' user_list(qry="jan")     # no results, query string too short
-#' user_list(qry="jane")    # no results, query string too short
-#' user_list(qry="janet")   # returns Janette
-#' user_list(qry="@org")    # no results, query string too short
-#' user_list(qry="@org.c")  # no results, query string too short
-#' user_list(qry="@org.co") # returns all users matching "@org.co"
+#' user_list(qry = "jan") # no results, query string too short
+#' user_list(qry = "jane") # no results, query string too short
+#' user_list(qry = "janet") # returns Janette
+#' user_list(qry = "@org") # no results, query string too short
+#' user_list(qry = "@org.c") # no results, query string too short
+#' user_list(qry = "@org.co") # returns all users matching "@org.co"
 #'
 #' # Actor not allowed to user.list
 #' user_list() # If this is empty, you might not have permissions to list users
@@ -81,14 +81,17 @@ user_list <- function(qry = NULL,
                       verbose = get_ru_verbose()) {
   yell_if_missing(url, un, pw)
 
-  if(!is.null(qry)) {
+  if (!is.null(qry)) {
     "Returning users with display name or email matching \"{qry}\"" %>%
-    glue::glue() %>% ru_msg_info(verbose = verbose)
+      glue::glue() %>%
+      ru_msg_info(verbose = verbose)
 
-    if(nchar(qry)<5) glue::glue(
-      "Short query strings might not return any matches, ",
-      "provide a query string containing at least 5 alphanumeric characters."
-    ) %>% ru_msg_warn(verbose = verbose)
+    if (nchar(qry) < 5) {
+      glue::glue(
+        "Short query strings might not return any matches, ",
+        "provide a query string containing at least 5 alphanumeric characters."
+      ) %>% ru_msg_warn(verbose = verbose)
+    }
   }
 
   # TODO warn if requesting user (un) has no permissions to user.list
@@ -97,7 +100,7 @@ user_list <- function(qry = NULL,
 
   httr::RETRY(
     "GET",
-    httr::modify_url(url, path = glue::glue("v1/users"), query = list(q=qry)),
+    httr::modify_url(url, path = glue::glue("v1/users"), query = list(q = qry)),
     httr::authenticate(un, pw),
     times = retries
   ) %>%

@@ -39,7 +39,7 @@ fs::file_move(fs::dir_ls("inst/extdoc/"), "inst/extdoc/ruODK.pdf")
 # -----------------------------------------------------------------------------#
 styler::style_pkg()
 lintr:::addin_lint_package()
-devtools::document(roclets = c("rd", "collate", "namespace"))
+devtools::document(roclets = c("rd", "collate", "namespace", "vignette"))
 spelling::spell_check_package()
 spelling::spell_check_files("README.Rmd", lang = "en_AU")
 spelling::update_wordlist()

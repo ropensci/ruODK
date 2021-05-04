@@ -33,30 +33,6 @@
 "fq_meta"
 
 
-#' JSON form schema for an ODK Central form.
-#'
-#' `r lifecycle::badge("stable")`
-#'
-#' The parsed form schema of an ODK Central form.
-#'
-#' This data is kept up to date with the data used in vignettes and package
-#' tests. The data is comprised of test records with nonsensical data.
-#' The forms used to capture this data are development versions of real-world
-#' forms.
-#'
-#' This data is used to build vignettes offline and without the need for
-#' credentials to an ODK Central server. The test suite ensures that the
-#' "canned" data is identical to the "live" data.
-#'
-#' @format The output of `ruODK::form_schema()`, a tibble with columns "type",
-#'   "name" and "path" and one row per form field.
-#'
-#' @source See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
-#'   and `ruODK::form_schema()`.
-#' @family included
-"fq_form_schema"
-
-
 #' OData submission data for an ODK Central form.
 #'
 #' `r lifecycle::badge("stable")`
@@ -244,16 +220,27 @@
 "fq_form_list"
 
 
-#' A tibble of form fields and field types.
+#' JSON form schema for an ODK Central form.
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' @format A tibble of form fields and field types.
-#' @source The output of \code{\link{form_schema}}
-#' run on the test form
-#' `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`.
+#' The parsed form schema of an ODK Central form.
+#'
+#' This data is kept up to date with the data used in vignettes and package
+#' tests. The data is comprised of test records with nonsensical data.
+#' The forms used to capture this data are development versions of real-world
+#' forms.
+#'
+#' This data is used to build vignettes offline and without the need for
+#' credentials to an ODK Central server. The test suite ensures that the
+#' "canned" data is identical to the "live" data.
+#'
+#' @format The output of `ruODK::form_schema()`, a tibble with columns "type",
+#'   "name" and "path" and one row per form field.
+#'
+#' @source See `system.file("extdata", "FloraQuadrat04.xml", package = "ruODK")`
+#'   and `ruODK::form_schema()`.
 #' @family included
-#' @encoding UTF-8
 "fq_form_schema"
 
 

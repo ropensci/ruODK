@@ -126,16 +126,19 @@ submission_export <- function(local_dir = here::here(),
   if (fs::file_exists(pth)) {
     if (overwrite == TRUE) {
       "Overwriting previous download: \"{pth}\"" %>%
-        glue::glue() %>% ru_msg_success(verbose = verbose)
+        glue::glue() %>%
+        ru_msg_success(verbose = verbose)
     } else {
       "Keeping previous download: \"{pth}\"" %>%
-        glue::glue() %>% ru_msg_success(verbose = verbose)
+        glue::glue() %>%
+        ru_msg_success(verbose = verbose)
 
       return(pth)
     }
   } else {
     "Downloading submissions from {url_pth} to {pth}" %>%
-      glue::glue() %>% ru_msg_success(verbose = verbose)
+      glue::glue() %>%
+      ru_msg_success(verbose = verbose)
   }
 
   # List encryption keys

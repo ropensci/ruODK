@@ -23,33 +23,10 @@ ru_msg_warn("This is a warning.")
 }
 }
 \seealso{
-Other utilities: 
-\code{\link{attachment_get}()},
-\code{\link{attachment_link}()},
-\code{\link{attachment_url}()},
-\code{\link{drop_null_coords}()},
-\code{\link{form_schema_parse}()},
-\code{\link{get_one_attachment}()},
-\code{\link{get_one_submission_attachment_list}()},
-\code{\link{get_one_submission}()},
-\code{\link{handle_ru_attachments}()},
-\code{\link{handle_ru_datetimes}()},
-\code{\link{handle_ru_geopoints}()},
-\code{\link{handle_ru_geoshapes}()},
-\code{\link{handle_ru_geotraces}()},
-\code{\link{isodt_to_local}()},
-\code{\link{odata_submission_rectangle}()},
-\code{\link{predict_ruodk_name}()},
-\code{\link{prepend_uuid}()},
+Other messaging: 
 \code{\link{ru_msg_abort}()},
 \code{\link{ru_msg_info}()},
 \code{\link{ru_msg_noop}()},
-\code{\link{ru_msg_success}()},
-\code{\link{split_geopoint}()},
-\code{\link{split_geoshape}()},
-\code{\link{split_geotrace}()},
-\code{\link{strip_uuid}()},
-\code{\link{tidyeval}},
-\code{\link{unnest_all}()}
+\code{\link{ru_msg_success}()}
 }
-\concept{utilities}
+\concept{messaging}
