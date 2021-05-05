@@ -95,3 +95,5 @@ ru_msg_abort <- function(message) {
   x <- clisymbols::symbol$cross # nolint
   rlang::abort(crayon::red(glue::glue("{x} {message}\n")))
 }
+
+# usethis::use_test("ru_msg") # nolint
