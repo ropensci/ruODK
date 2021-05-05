@@ -21,10 +21,17 @@
 #' Download attachments as listed for each submission
 #' (\code{\link{attachment_list}}).
 #'
-#' For encrypted forms, we default to one try by default, as multiple retries
-#' with an incorrect passphrase can crash ODK Central.
-#' This is being investigated in
-#' [issue #30](https://github.com/ropensci/ruODK/issues/30).
+#' \section{Encryption}
+#' ODK Central supports two modes of encryption - learn about them
+#' [here](https://odkcentral.docs.apiary.io/#reference/encryption).
+#' `ruODK` supports project managed encryption, however the support is limited
+#' to exactly one encryption key. The supplied passphrase will be used against
+#' the first returned encryption key. Remaining encryption keys are ignored by
+#' `ruODK`.
+#'
+#' If an incorrect passphrase is given, the request is terminated immediately.
+#' It has been reported that multiple requests with incorrect passphrases
+#' can crash ODK Central.
 #'
 #' @param local_dir The local folder to save the downloaded files to,
 #'                  default: \code{here::here}.
@@ -155,8 +162,10 @@ submission_export <- function(local_dir = here::here(),
     body <- list()
     var <- toString(encryption_keys$id[[1]])
     body[[var]] <- pp
-    glue::glue("Found {nrow(encryption_keys)} encryption keys for form {fid},",
-               " using the first key.") %>% ru_msg_info(verbose = verbose)
+    glue::glue(
+      "Found {nrow(encryption_keys)} encryption keys for form {fid},",
+      " using the first key with the supplied passphrase.") %>%
+      ru_msg_info(verbose = verbose)
   }
 
   # Export form submissions to CSV via POST

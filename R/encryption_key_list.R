@@ -4,9 +4,10 @@
 #'
 #' This endpoint provides a listing of all known encryption keys needed to
 #' decrypt all Submissions for a given Form. It will return at least the
-#' base64RsaPublicKey property (as public) of all known versions of the form
-#' that have submissions against them. If managed keys are being used and a
-#' hint was provided, that will be returned as well.
+#' `base64RsaPublicKey` property (as column `public`) of all known versions
+#' of the form that have submissions against them.
+#' If managed keys are being used and a hint was provided, that will be returned
+#' as well.
 #'
 #' @template param-pid
 #' @template param-fid

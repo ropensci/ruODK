@@ -139,10 +139,17 @@ uuids to download them one by one via \code{\link{submission_get}}.
 Download attachments as listed for each submission
 (\code{\link{attachment_list}}).
 
-For encrypted forms, we default to one try by default, as multiple retries
-with an incorrect passphrase can crash ODK Central.
-This is being investigated in
-\href{https://github.com/ropensci/ruODK/issues/30}{issue #30}.
+\section{Encryption}
+ODK Central supports two modes of encryption - learn about them
+\href{https://odkcentral.docs.apiary.io/#reference/encryption}{here}.
+\code{ruODK} supports project managed encryption, however the support is limited
+to exactly one encryption key. The supplied passphrase will be used against
+the first returned encryption key. Remaining encryption keys are ignored by
+\code{ruODK}.
+
+If an incorrect passphrase is given, the request is terminated immediately.
+It has been reported that multiple requests with incorrect passphrases
+can crash ODK Central.
 }
 \examples{
 \dontrun{
