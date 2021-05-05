@@ -65,4 +65,32 @@ test_that("submission_get works", {
   testthat::expect_true("encounter_end_datetime" %in% names(sub))
 })
 
+test_that("submission_get handles encrypted forms gracefully", {
+
+
+  vcr::use_cassette("test_submission_get3", {
+    sl <- submission_list(
+      pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+      fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+    )
+  })
+
+  vcr::use_cassette("test_submission_get4", {
+    subs <- submission_get(
+      sl$instance_id,
+      pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+      fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  })
+
+  testthat::expect_true("base64EncryptedKey" %in% names(subs[[1]]))
+  testthat::expect_true("encryptedXmlFile" %in% names(subs[[1]]))
+  testthat::expect_equal(attr(subs[[1]], "encrypted"), "yes")
+})
 # usethis::use_r("submission_get") # nolint

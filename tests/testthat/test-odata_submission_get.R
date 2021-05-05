@@ -57,10 +57,8 @@ test_that("odata_submission_get works with one known dataset", {
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))
   testthat::expect_gte(nrow(fresh_parsed), nrow(fresh_raw_parsed))
 
-  testthat::expect_equal(
-    class(fresh_raw_parsed$encounter_start_datetime),
-    c("POSIXct", "POSIXt")
-  )
+  testthat::expect_equal(class(fresh_raw_parsed$encounter_start_datetime),
+                         c("POSIXct", "POSIXt"))
 
   local_files <- fresh_raw_parsed %>%
     dplyr::filter(!is.null(location_quadrat_photo)) %>%
@@ -168,6 +166,28 @@ test_that("odata_submission_get count returns total number or rows", {
   # Count: shows all records
   testthat::expect_true("@odata.count" %in% names(x_raw))
   testthat::expect_gte(x_raw$`@odata.count`, nrow(x_parsed))
+})
+
+test_that("odata_submission_get handles encrypted forms gracefully", {
+  t <- tempdir()
+  fs::dir_ls(t) %>% fs::file_delete()
+  vcr::use_cassette("test_odata_submission_get6", {
+  se <- odata_submission_get(
+    local_dir = t,
+    pid = Sys.getenv("ODKC_TEST_PID_ENC"),
+    fid = Sys.getenv("ODKC_TEST_FID_ENC"),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    # pp = get_test_pp(),
+    verbose = TRUE
+  )
+  })
+
+  # se is not decrypted
+  testthat::expect_s3_class(se, "tbl_df")
+  testthat::expect_true("system_status" %in% names(se))
+  testthat::expect_equal(se$system_status[[1]], "NotDecrypted")
 })
 
 # usethis::use_r("odata_submission_get") # nolint
