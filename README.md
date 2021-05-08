@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `ruODK`: An R Client for the ODK Central API <img src="man/figures/ruODK.png" align="right" alt="Especially in these trying times, it is important to ask: ruODK?" width="120" />
+# `ruODK`: An R Client for the ODK Central API <img src="man/figures/ruODK2.png" align="right" alt="Especially in these trying times, it is important to ask: ruODK?" width="120" />
 
 <!-- badges: start -->
 
@@ -227,14 +227,14 @@ proj <- ruODK::project_list()
 proj %>% head() %>% knitr::kable(.)
 ```
 
-|  id | name                             | forms | app\_users | created\_at         | updated\_at | last\_submission    | archived |
-|----:|:---------------------------------|------:|-----------:|:--------------------|:------------|:--------------------|:---------|
-|   1 | DBCA                             |    12 |         14 | 2020-09-15 11:50:06 | NA          | 2021-04-19 08:05:48 | FALSE    |
-|   4 | Fire Management and Plant Health |     5 |          2 | 2020-11-06 11:12:16 | NA          | 2020-11-06 11:47:21 | FALSE    |
-|   6 | Kingston Spotlighting            |     3 |          3 | 2021-02-16 14:01:19 | NA          | 2021-03-24 11:32:15 | FALSE    |
-|   2 | ruODK package tests              |    12 |          1 | 2020-10-31 19:11:50 | NA          | 2020-11-02 12:41:14 | FALSE    |
-|   3 | ruODK package tests encrypted    |     1 |          1 | 2020-10-31 19:12:57 | NA          | 2020-11-02 15:26:38 | FALSE    |
-|   5 | Sandbox                          |     2 |          1 | 2020-12-14 15:36:46 | NA          | 2021-04-09 18:34:33 | FALSE    |
+|  id | name                             | forms | last\_submission    | app\_users | created\_at         | updated\_at         | key\_id | archived |
+|----:|:---------------------------------|------:|:--------------------|-----------:|:--------------------|:--------------------|--------:|:---------|
+|   1 | DBCA                             |    12 | 2021-04-19 08:05:48 |         14 | 2020-09-15 11:50:06 | 2021-04-29 11:54:19 |      NA | FALSE    |
+|   4 | Fire Management and Plant Health |     5 | 2020-11-06 11:47:21 |          2 | 2020-11-06 11:12:16 | 2020-11-06 11:43:20 |      NA | FALSE    |
+|   6 | Kingston Spotlighting            |     3 | 2021-03-24 11:32:15 |          3 | 2021-02-16 14:01:19 | 2021-02-16 14:40:31 |      NA | FALSE    |
+|   2 | ruODK package tests              |    12 | 2020-11-02 12:41:14 |          1 | 2020-10-31 19:11:50 | 2020-11-23 13:25:03 |      NA | FALSE    |
+|   3 | ruODK package tests encrypted    |     1 | 2020-11-02 15:26:38 |          1 | 2020-10-31 19:12:57 | 2020-11-02 15:23:17 |       1 | FALSE    |
+|   5 | Sandbox                          |     2 | 2021-04-09 18:34:33 |          1 | 2020-12-14 15:36:46 | 2020-12-16 11:16:29 |      NA | FALSE    |
 
 ``` r
 # List forms of default project
@@ -403,9 +403,9 @@ To cite package `ruODK` in publications use:
 ``` r
 citation("ruODK")
 #> 
-#> To cite ruODK in publications use:
+#> To cite ruODK in publications use (with the respective version number:
 #> 
-#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version 0.9.5).  Zenodo.
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version 0.10.1).  Zenodo.
 #>   https://doi.org/10.5281/zenodo.3953158
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -413,7 +413,7 @@ citation("ruODK")
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.9.5},
+#>     note = {R package version 0.10.1},
 #>     year = {2020},
 #>     url = {https://github.com/ropensci/ruODK},
 #>   }

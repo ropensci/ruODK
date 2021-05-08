@@ -2,26 +2,27 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' To export all the Submission data associated with a Form, just add .csv.zip
-#' to the end of the listing URL. The response will be a zip file containing one
-#' or more CSV files, as well as all multimedia attachments associated with the
-#' included Submissions.
+#' This function exports all the Submission data associated with a Form as one
+#' zip file containing one or more CSV files, as well as all multimedia
+#' attachments associated with the included Submissions.
 #'
+#' For an incremental download of a subset of submissions, use
+#' \code{\link{submission_list}} or \code{\link{odata_submission_get}} with
+#' filter queries.
+#'
+#' ### Contents
+#' The inclusion of subtables (from repeating form groups) can be toggled
+#' through `repeats`, whereas the inclusion of media attachments can be toggled
+#' through `media`.
+#'
+#' ### Download location
 #' The file will be downloaded to the project root unless specified otherwise
 #' (via `local_dir`). Subsequently, the zip file can be extracted.
 #' Attachment filenames (e.g. "12345.jpg") should be prepended with `media`
 #' (resulting in e.g. `media/12345.jpg`) in order to represent the relative
 #' path to the actual attachment file (as extracted from the zip file).
 #'
-#' This function downloads all submissions and attachments in one go.
-#' For incremental download of a subset of submissions, use
-#' \code{\link{submission_list}},
-#' choose the submissions of interest (e.g. by submission date), and use their
-#' uuids to download them one by one via \code{\link{submission_get}}.
-#' Download attachments as listed for each submission
-#' (\code{\link{attachment_list}}).
-#'
-#' \section{Encryption}
+#' ### Encryption
 #' ODK Central supports two modes of encryption - learn about them
 #' [here](https://odkcentral.docs.apiary.io/#reference/encryption).
 #' `ruODK` supports project managed encryption, however the support is limited
@@ -164,7 +165,8 @@ submission_export <- function(local_dir = here::here(),
     body[[var]] <- pp
     glue::glue(
       "Found {nrow(encryption_keys)} encryption keys for form {fid},",
-      " using the first key with the supplied passphrase.") %>%
+      " using the first key with the supplied passphrase."
+    ) %>%
       ru_msg_info(verbose = verbose)
   }
 

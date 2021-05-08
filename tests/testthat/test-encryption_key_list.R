@@ -8,11 +8,13 @@ test_that("encryption_key_list works", {
       pw = get_test_pw()
     )
 
-    cn <- c("id",
-            "public",
-            "managed",
-            "hint",
-            "created_at")
+    cn <- c(
+      "id",
+      "public",
+      "managed",
+      "hint",
+      "created_at"
+    )
 
     purrr::map(
       cn,
@@ -25,4 +27,4 @@ test_that("encryption_key_list works", {
 })
 
 
-# usethis::use_r("encryption_key_list")
+# usethis::use_r("encryption_key_list") # nolint

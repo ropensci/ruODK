@@ -63,19 +63,15 @@ Set default \code{url} through \code{ru_setup(url="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{un}{The ODK Central username (an email address).\preformatted{      Default: \code{\link{get_default_un}}.
+\item{un}{The ODK Central username (an email address).
+Default: \code{\link{get_default_un}}.
+Set default \code{un} through \code{ru_setup(un="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-      Set default \code{un} through \code{ru_setup(un="...")}.
-
-      See \code{vignette("Setup", package = "ruODK")}.
-}}
-
-\item{pw}{The ODK Central password.\preformatted{      Default: \code{\link{get_default_pw}}.
-
-      Set default \code{pw} through \code{ru_setup(pw="...")}.
-
-      See \code{vignette("Setup", package = "ruODK")}.
-}}
+\item{pw}{The ODK Central password.
+Default: \code{\link{get_default_pw}}.
+Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{pp}{The passphrase for an encrypted form.
 
@@ -120,26 +116,31 @@ another form.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 }
 \details{
-To export all the Submission data associated with a Form, just add .csv.zip
-to the end of the listing URL. The response will be a zip file containing one
-or more CSV files, as well as all multimedia attachments associated with the
-included Submissions.
+This function exports all the Submission data associated with a Form as one
+zip file containing one or more CSV files, as well as all multimedia
+attachments associated with the included Submissions.
+
+For an incremental download of a subset of submissions, use
+\code{\link{submission_list}} or \code{\link{odata_submission_get}} with
+filter queries.
+\subsection{Contents}{
+
+The inclusion of subtables (from repeating form groups) can be toggled
+through \code{repeats}, whereas the inclusion of media attachments can be toggled
+through \code{media}.
+}
+
+\subsection{Download location}{
 
 The file will be downloaded to the project root unless specified otherwise
 (via \code{local_dir}). Subsequently, the zip file can be extracted.
 Attachment filenames (e.g. "12345.jpg") should be prepended with \code{media}
 (resulting in e.g. \verb{media/12345.jpg}) in order to represent the relative
 path to the actual attachment file (as extracted from the zip file).
+}
 
-This function downloads all submissions and attachments in one go.
-For incremental download of a subset of submissions, use
-\code{\link{submission_list}},
-choose the submissions of interest (e.g. by submission date), and use their
-uuids to download them one by one via \code{\link{submission_get}}.
-Download attachments as listed for each submission
-(\code{\link{attachment_list}}).
+\subsection{Encryption}{
 
-\section{Encryption}
 ODK Central supports two modes of encryption - learn about them
 \href{https://odkcentral.docs.apiary.io/#reference/encryption}{here}.
 \code{ruODK} supports project managed encryption, however the support is limited
@@ -150,6 +151,7 @@ the first returned encryption key. Remaining encryption keys are ignored by
 If an incorrect passphrase is given, the request is terminated immediately.
 It has been reported that multiple requests with incorrect passphrases
 can crash ODK Central.
+}
 }
 \examples{
 \dontrun{

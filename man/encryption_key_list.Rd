@@ -40,19 +40,15 @@ Set default \code{url} through \code{ru_setup(url="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{un}{The ODK Central username (an email address).\preformatted{      Default: \code{\link{get_default_un}}.
+\item{un}{The ODK Central username (an email address).
+Default: \code{\link{get_default_un}}.
+Set default \code{un} through \code{ru_setup(un="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
-      Set default \code{un} through \code{ru_setup(un="...")}.
-
-      See \code{vignette("Setup", package = "ruODK")}.
-}}
-
-\item{pw}{The ODK Central password.\preformatted{      Default: \code{\link{get_default_pw}}.
-
-      Set default \code{pw} through \code{ru_setup(pw="...")}.
-
-      See \code{vignette("Setup", package = "ruODK")}.
-}}
+\item{pw}{The ODK Central password.
+Default: \code{\link{get_default_pw}}.
+Set default \code{pw} through \code{ru_setup(pw="...")}.
+See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{retries}{The number of attempts to retrieve a web resource.
 
@@ -96,10 +92,10 @@ x <- encryption_key_list(
   url = get_test_url(),
   un = get_test_un(),
   pw = get_test_pw()
- )
+)
 
 names(x)
-#> [1] "id" "public" "managed" "hint" "created_at"
+# > [1] "id" "public" "managed" "hint" "created_at"
 }
 }
 \seealso{

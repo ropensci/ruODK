@@ -66,8 +66,6 @@ test_that("submission_get works", {
 })
 
 test_that("submission_get handles encrypted forms gracefully", {
-
-
   vcr::use_cassette("test_submission_get3", {
     sl <- submission_list(
       pid = Sys.getenv("ODKC_TEST_PID_ENC"),

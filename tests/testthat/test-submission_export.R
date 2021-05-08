@@ -7,10 +7,14 @@ test_that("submission_export works", {
   fs::dir_ls(t) %>% fs::file_delete()
 
   # High expectations
-  pth <- fs::path(t,
-                  glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.zip"))
-  fid_csv <- fs::path(t,
-                      glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.csv"))
+  pth <- fs::path(
+    t,
+    glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.zip")
+  )
+  fid_csv <- fs::path(
+    t,
+    glue::glue("{URLencode(get_test_fid_zip(), reserved = TRUE)}.csv")
+  )
 
   # Once you drink Tequila, you're feeling really good
   testthat::expect_message(
@@ -130,9 +134,11 @@ test_that("submission_export works with encryption", {
   # })
 
   testthat::expect_true(fs::is_file(se),
-                        label = glue::glue("Submission ZIP must be a file: {se}"))
+    label = glue::glue("Submission ZIP must be a file: {se}")
+  )
 })
 
+# nolint start
 # Seems it did just that when run from 11 separate GH Actions envs
 # test_that(
 #   "submission_export with wrong passphphrase does not blow up the server", {
@@ -155,6 +161,7 @@ test_that("submission_export works with encryption", {
 #       )
 #     )
 # })
+# # nolint end
 
 test_that("submission_export warns of missing credentials", {
   t <- tempdir()
@@ -274,7 +281,8 @@ test_that("submission_export excludes media", {
     fs::file_info(no_media_and_repeats)$size
 
   testthat::expect_true(fsize_media_and_repeats > fsize_no_media_and_repeats,
-                        label = "submission_export omitting media should result in smaller ZIP")
+    label = "submission_export omitting media should result in smaller ZIP"
+  )
 
   suppressWarnings(
     no_media_no_repeats <- submission_export(
@@ -294,7 +302,8 @@ test_that("submission_export excludes media", {
   )
 
   testthat::expect_true(tools::file_ext(no_media_no_repeats) == "csv",
-                        label = "submission_export(repeats=FALSE) should return a CSV")
+    label = "submission_export(repeats=FALSE) should return a CSV"
+  )
 
   suppressWarnings(
     media_no_repeats <- submission_export(
@@ -314,7 +323,8 @@ test_that("submission_export excludes media", {
   )
 
   testthat::expect_true(tools::file_ext(media_no_repeats) == "csv",
-                        label = "submission_export(repeats=FALSE, media=TRUE) should return a CSV")
+    label = "submission_export(repeats=FALSE, media=TRUE) should return a CSV"
+  )
 
   wrong_version_no_warning <- submission_export(
     local_dir = t,

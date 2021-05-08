@@ -40,19 +40,23 @@ project_list <- function(url = get_default_url(),
                          un = get_default_un(),
                          pw = get_default_pw(),
                          retries = get_retries(),
-                         orders = c("YmdHMS",
-                                    "YmdHMSz",
-                                    "Ymd HMS",
-                                    "Ymd HMSz",
-                                    "Ymd",
-                                    "ymd"),
+                         orders = c(
+                           "YmdHMS",
+                           "YmdHMSz",
+                           "Ymd HMS",
+                           "Ymd HMSz",
+                           "Ymd",
+                           "ymd"
+                         ),
                          tz = get_default_tz()) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
     httr::modify_url(url, path = glue::glue("v1/projects")),
-    httr::add_headers("Accept" = "application/xml",
-                      "X-Extended-Metadata" = "true"),
+    httr::add_headers(
+      "Accept" = "application/xml",
+      "X-Extended-Metadata" = "true"
+    ),
     httr::authenticate(un, pw),
     times = retries
   ) %>%
@@ -72,7 +76,6 @@ project_list <- function(url = get_default_url(),
         .
       }
     }
-
 }
 
 # usethis::use_test("project_list") # nolint

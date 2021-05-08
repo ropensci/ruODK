@@ -4,7 +4,7 @@ home:
 template:
   opengraph:
     image:
-      src: man/figures/ruODK.png
+      src: man/figures/ruODK2.png
       alt: "An R Client for the ODK Central API"
     twitter:
       creator: "@florianm"

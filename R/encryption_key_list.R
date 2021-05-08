@@ -33,10 +33,10 @@
 #'   url = get_test_url(),
 #'   un = get_test_un(),
 #'   pw = get_test_pw()
-#'  )
+#' )
 #'
 #' names(x)
-#' #> [1] "id" "public" "managed" "hint" "created_at"
+#' # > [1] "id" "public" "managed" "hint" "created_at"
 #' }
 encryption_key_list <- function(pid = get_default_pid(),
                                 fid = get_default_fid(),
@@ -52,7 +52,7 @@ encryption_key_list <- function(pid = get_default_pid(),
                                   "Ymd",
                                   "ymd"
                                 ),
-                                tz = get_default_tz()){
+                                tz = get_default_tz()) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
