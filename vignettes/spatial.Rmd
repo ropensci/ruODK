@@ -47,6 +47,7 @@ library(ruODK)
 library(leaflet)
 library(ggplot2)
 library(lattice)
+# library(tmap) # Suggested but not included here yet
 
 # Spatial
 can_run <- require(sf) && require(leafem) && require(mapview)
@@ -191,6 +192,9 @@ Review the options for
 which are turned off in this quick demo, and the whole 
 [mapview](https://r-spatial.github.io/mapview/index.html) homepage for a 
 comprehensive overview of mapview.
+See the [vignette "Get started"](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html)
+of the powerful visualisation package `tmap`, which supports `sf` objects and
+produces both printable and static maps as well as interactive `leaflet` maps.
 
 There are several other good entry points for all things R and spatial, 
 including but not limited to:
