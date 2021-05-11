@@ -11,6 +11,7 @@ odata_submission_get(
   top = NULL,
   count = FALSE,
   wkt = FALSE,
+  filter = NULL,
   parse = TRUE,
   download = TRUE,
   orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
@@ -44,6 +45,18 @@ response from ODK Central. Default: \code{FALSE}.}
 \item{wkt}{If TRUE, geospatial data will be returned as WKT (Well Known Text)
 strings. Default: \code{FALSE}, returns GeoJSON structures.
 Note that accuracy is only returned through GeoJSON.}
+
+\item{filter}{If provided, will filter responses to those matching the query.
+For an \code{odkc_version} below 1.1, this parameter will be discarded.
+In ODK Central v1.1, only the fields \code{system/submitterId} and
+\code{system/submissionDate} are available to reference.
+In ODK Central v1.2, other fields may become available.
+The operators \code{lt}, \code{lte}, \code{eq}, \code{neq}, \code{gte}, \code{gt}, \code{not}, \code{and}, and \code{or}
+are supported, and the built-in functions
+\code{now}, \code{year}, \code{month}, \code{day}, \code{hour}, \code{minute}, \code{second.}
+\code{ruODK} does not validate the query string given to \code{filter}.
+It is highly recommended to refer to the ODK Central API documentation
+for filter options and capabilities.}
 
 \item{parse}{Whether to parse submission data based on form schema.
 Dates and datetimes will be parsed into local time.
@@ -208,6 +221,16 @@ data <- odata_submission_get(
   skip = 1,
   top = 1,
   count = TRUE
+)
+
+# Filter submissions
+data <- odata_submission_get(
+  table = form_tables$url[1],
+  filter = "year(__system/submissionDate) lt year(now())"
+)
+data <- odata_submission_get(
+  table = form_tables$url[1],
+  filter = "year(__system/submissionDate) lt 2020"
 )
 }
 }

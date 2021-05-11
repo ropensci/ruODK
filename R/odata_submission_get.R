@@ -64,6 +64,17 @@
 #' @param wkt If TRUE, geospatial data will be returned as WKT (Well Known Text)
 #'   strings. Default: \code{FALSE}, returns GeoJSON structures.
 #'   Note that accuracy is only returned through GeoJSON.
+#' @param filter If provided, will filter responses to those matching the query.
+#'   For an `odkc_version` below 1.1, this parameter will be discarded.
+#'   In ODK Central v1.1, only the fields `system/submitterId` and
+#'   `system/submissionDate` are available to reference.
+#'   In ODK Central v1.2, other fields may become available.
+#'   The operators `lt`, `lte`, `eq`, `neq`, `gte`, `gt`, `not`, `and`, and `or`
+#'   are supported, and the built-in functions
+#'   `now`, `year`, `month`, `day`, `hour`, `minute`, `second.`
+#'   `ruODK` does not validate the query string given to `filter`.
+#'   It is highly recommended to refer to the ODK Central API documentation
+#'   for filter options and capabilities.
 #' @param parse Whether to parse submission data based on form schema.
 #'   Dates and datetimes will be parsed into local time.
 #'   Attachments will be downloaded, and the field updated to the local file
@@ -125,12 +136,23 @@
 #'   top = 1,
 #'   count = TRUE
 #' )
+#'
+#' # Filter submissions
+#' data <- odata_submission_get(
+#'   table = form_tables$url[1],
+#'   filter = "year(__system/submissionDate) lt year(now())"
+#' )
+#' data <- odata_submission_get(
+#'   table = form_tables$url[1],
+#'   filter = "year(__system/submissionDate) lt 2020"
+#' )
 #' }
 odata_submission_get <- function(table = "Submissions",
                                  skip = NULL,
                                  top = NULL,
                                  count = FALSE,
                                  wkt = FALSE,
+                                 filter = NULL,
                                  parse = TRUE,
                                  download = TRUE,
                                  orders = c(
@@ -157,6 +179,18 @@ odata_submission_get <- function(table = "Submissions",
   # Download submissions
   ru_msg_info("Downloading submissions...", verbose = verbose)
 
+  qry <- list(
+    `$skip` = skip %||% "",
+    `$top` = top %||% "",
+    `$count` = ifelse(count == FALSE, "false", "true"),
+    `$wkt` = ifelse(wkt == FALSE, "false", "true")
+    # `$filter` = ifelse(odkc_version>=1.1, filter %||% "", "")
+  )
+
+  if(odkc_version>=1.1 && !is.null(filter) && filter != "") {
+    qry$`$filter` <- as.character(filter)
+  }
+
   sub <- httr::RETRY(
     "GET",
     httr::modify_url(
@@ -165,12 +199,7 @@ odata_submission_get <- function(table = "Submissions",
         "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.svc/{table}"
       )
     ),
-    query = list(
-      `$skip` = skip %||% "",
-      `$top` = top %||% "",
-      `$count` = ifelse(count == FALSE, "false", "true"),
-      `$wkt` = ifelse(wkt == FALSE, "false", "true")
-    ),
+    query = qry,
     times = retries,
     httr::add_headers(Accept = "application/json"),
     httr::authenticate(un, pw)

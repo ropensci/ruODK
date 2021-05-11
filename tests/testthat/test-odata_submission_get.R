@@ -192,4 +192,90 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
   testthat::expect_equal(se$system_status[[1]], "NotDecrypted")
 })
 
+test_that("odata_submission_get filter works", {
+  vcr::use_cassette("test_odata_submission_get7", {
+
+  x_all <- odata_submission_get(
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    parse = TRUE,
+    download = FALSE
+  )
+
+  x_all_filter_null <- odata_submission_get(
+    filter = NULL, # the default
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    parse = TRUE,
+    download = FALSE
+  )
+
+  x_all_filter_emptystring <- odata_submission_get(
+    filter = "", # the default
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    parse = TRUE,
+    download = FALSE
+  )
+
+  # Some submissions in 2020
+  x_2020 <- odata_submission_get(
+    filter = "year(__system/submissionDate) eq 2020", # the default
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    parse = TRUE,
+    download = FALSE
+  )
+
+  # No submissions in 2019
+  x_2019 <- odata_submission_get(
+    filter = "year(__system/submissionDate) eq 2019", # the default
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    parse = TRUE,
+    download = FALSE
+  )
+
+  })
+
+  testthat::expect_equal(
+    x_all, x_all_filter_emptystring,
+    label = "filter=\"\" should return unfiltered submissions"
+  )
+  testthat::expect_equal(
+    x_all, x_all_filter_null,
+    label = "filter=NULL should return unfiltered submissions"
+  )
+
+  testthat::expect_equal(
+    nrow(x_2020), 1,
+    label = "Filter for submissions in year 2020 should return one record"
+  )
+
+  testthat::expect_equal(
+    nrow(x_2019), 0,
+    label = "Filter for submissions in year 2019 should return no records"
+  )
+})
+
 # usethis::use_r("odata_submission_get") # nolint
