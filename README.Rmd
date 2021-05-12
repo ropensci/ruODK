@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![GitHub issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](https://github.com/ropensci/ruODK/issues/)
 [![CI - GitHub Actions](https://github.com/ropensci/ruODK/workflows/tic/badge.svg)](https://github.com/ropensci/ruODK/actions)
 [![CI - Appveyor](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main)
-[![Text coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
+[![Test coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
 [![CodeFactor](https://www.codefactor.io/repository/github/ropensci/ruodk/badge)](https://www.codefactor.io/repository/github/ropensci/ruodk)
 [![Hosted RStudio with ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 <!-- badges: end -->
@@ -110,7 +110,6 @@ Benefits of using the R ecosystem in combination with ODK:
    5. Reporting: `Rmd`
    6. Publishing and dissemination: [`ckanr`](https://docs.ropensci.org/ckanr/),
       [`CKAN`](https://ckan.org/)
-      
   
 Out of scope:
 
@@ -126,12 +125,15 @@ Out of scope:
 <img src="man/figures/odata.svg" alt="ruODK screencast" width="100%" />
 
 ## Install
-
 You can install the development version (`main` branch) of `ruODK` with:
 
 ```{r gh-installation, eval = FALSE}
 if (!requireNamespace("remotes")) install.packages("remotes")
-remotes::install_github("ropensci/ruODK@main", dependencies = TRUE)
+remotes::install_github(
+   "ropensci/ruODK@main", 
+   dependencies = TRUE, 
+   upgrade = "always",
+   build_vignettes = TRUE)
 ```
 
 ## ODK Central
@@ -162,63 +164,12 @@ provides up-to-date descriptions of the steps below.
    finalised forms to ODK Central.
 
 ## Configure `ruODK`
-Set up `ruODK` with an OData Service URL and credentials of a read-permitted
-ODK Central web user. Adjust verbosity to your liking.
-  
-```{r ru_setup_rmd, echo=FALSE, eval=TRUE}
-ruODK::ru_setup(
-  svc = Sys.getenv("ODKC_TEST_SVC"),
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW"),
-  tz = "Australia/Perth",
-  verbose = TRUE
-)
-```
-
-```{r ru_setup_demo, echo=TRUE, eval=FALSE}
-ruODK::ru_setup(
-  svc = "https://my.odkcentral.getodk.org/v1/projects/14/forms/myform.svc",
-  un = "me@email.com",
-  pw = "...",
-  tz = "Australia/Perth",
-  verbose = TRUE # great for demo or debugging
-)
-```
-
-For all available detailed options to configure `ruODK`, read 
+For all available detailed options to configure authentication for `ruODK`, read 
 [`vignette("setup", package = "ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html).
 
 ## Use ruODK
-
-A quick example browsing projects, forms, submissions, and accessing the data:
-
-```{r odata_example, eval=T, message=TRUE}
-library(ruODK)
-# Part 1: Data discovery ------------------------------------------------------#
-# List projects
-proj <- ruODK::project_list()
-proj %>% head() %>% knitr::kable(.)
-# List forms of default project
-frms <- ruODK::form_list()
-frms %>% head() %>% knitr::kable(.)
-# Form details of default form
-frmd <- ruODK::form_detail()
-frmd %>% knitr::kable(.)
-# Form schema: defaults to version 1.1
-meta <- ruODK::form_schema(odkc_version = get_test_odkc_version())
-meta %>% knitr::kable(.)
-# Part 2: Data access ---------------------------------------------------------#
-# Form tables
-srv <- ruODK::odata_service_get()
-srv %>% knitr::kable(.)
-# Form submissions
-data <- ruODK::odata_submission_get(local_dir = fs::path("vignettes/media"),
-                                    odkc_version = get_test_odkc_version())
-data %>% dplyr::select(-"odata_context") %>% knitr::kable(.)
-```
-
-A more detailed walk-through with some data visualisation examples is available
-in the [`vignette("odata-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html).
+A detailed walk-through with some data visualisation examples is available in the 
+[`vignette("odata-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html).
 
 See also [`vignette("restful-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/restful-api.html)
 for examples using the alternative RESTful API.
