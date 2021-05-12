@@ -1,0 +1,146 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/users
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: ''
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8
+      date: Wed, 12 May 2021 04:18:09 GMT
+      etag: W/"a21-Um8cNKewa2hAtDxtxxij7PRuYy0"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      vary: Accept-Encoding
+      x-content-type-options: nosniff
+      x-powered-by: Express
+    body:
+      encoding: UTF-8
+      file: no
+      string: '[{"id":8,"type":"user","displayName":"Brendan Cale","createdAt":"2020-10-19T08:04:41.733Z","updatedAt":null,"email":"brendan.cale@dbca.wa.gov.au"},{"id":115,"type":"user","displayName":"Colin
+        Ward","createdAt":"2021-02-16T06:37:29.632Z","updatedAt":null,"email":"Colin.Ward@dbca.wa.gov.au"},{"id":24,"type":"user","displayName":"Corrine
+        Douglas","createdAt":"2020-10-20T02:19:20.325Z","updatedAt":null,"email":"Corrine.Douglas@dbca.wa.gov.au"},{"id":73,"type":"user","displayName":"Emer
+        O''Gara","createdAt":"2020-11-06T03:12:40.979Z","updatedAt":null,"email":"emer.ogara@dbca.wa.gov.au"},{"id":5,"type":"user","displayName":"Florian
+        Mayer","createdAt":"2020-10-19T07:59:34.890Z","updatedAt":"2020-10-20T02:04:34.832Z","email":"florian.mayer@dbca.wa.gov.au"},{"id":10,"type":"user","displayName":"Florian
+        Mayer (GMail)","createdAt":"2020-10-19T08:05:42.369Z","updatedAt":null,"email":"florian.wendelin.mayer@gmail.com"},{"id":51,"type":"user","displayName":"Helene
+        Langet","createdAt":"2020-10-31T11:11:27.946Z","updatedAt":null,"email":"helene.langet@swisstph.ch"},{"id":46,"type":"user","displayName":"Jesse
+        Murdoch","createdAt":"2020-10-27T02:20:26.068Z","updatedAt":null,"email":"jesse.murdoch@dbca.wa.gov.au"},{"id":44,"type":"user","displayName":"Julian
+        Tonti-Filippini","createdAt":"2020-10-23T04:26:50.609Z","updatedAt":null,"email":"julian.tonti-filippini@dbca.wa.gov.au"},{"id":75,"type":"user","displayName":"Katinka
+        Ruthrof","createdAt":"2020-11-06T03:13:04.210Z","updatedAt":null,"email":"katinka.ruthrof@dbca.wa.gov.au"},{"id":109,"type":"user","displayName":"Marika
+        Maxwell","createdAt":"2021-02-02T01:57:07.470Z","updatedAt":null,"email":"marika.maxwell@dbca.wa.gov.au"},{"id":22,"type":"user","displayName":"Ryan
+        Douglas","createdAt":"2020-10-20T02:05:12.436Z","updatedAt":null,"email":"Ryan.Douglas@dbca.wa.gov.au"},{"id":48,"type":"user","displayName":"Sabrina
+        Fossette-Halot","createdAt":"2020-10-27T02:21:12.946Z","updatedAt":null,"email":"sabrina.fossette-halot@dbca.wa.gov.au"},{"id":96,"type":"user","displayName":"Sarah
+        McDonald","createdAt":"2020-11-19T06:08:34.060Z","updatedAt":null,"email":"sarah.mcdonald@dbca.wa.gov.au"},{"id":77,"type":"user","displayName":"Tilo
+        Massenbauer","createdAt":"2020-11-06T03:13:23.108Z","updatedAt":null,"email":"tilomass@gmail.com"},{"id":68,"type":"user","displayName":"Marcelo
+        Tyszler","createdAt":"2020-11-02T07:09:01.456Z","updatedAt":null,"email":"tyszler.jobs@gmail.com"},{"id":80,"type":"user","displayName":"Valerie
+        Densmore","createdAt":"2020-11-06T03:14:29.921Z","updatedAt":null,"email":"valerie.densmore@dbca.wa.gov.au"}]'
+  recorded_at: 2021-05-12 04:18:10 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.8.0
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/users?q=Bre
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: ''
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-length: '2'
+      content-type: application/json; charset=utf-8
+      date: Wed, 12 May 2021 04:18:09 GMT
+      etag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+    body:
+      encoding: UTF-8
+      file: no
+      string: '[]'
+  recorded_at: 2021-05-12 04:18:10 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.8.0
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/users?q=Bre
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: ''
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-length: '2'
+      content-type: application/json; charset=utf-8
+      date: Wed, 12 May 2021 04:18:10 GMT
+      etag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+    body:
+      encoding: UTF-8
+      file: no
+      string: '[]'
+  recorded_at: 2021-05-12 04:18:10 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.8.0
+- request:
+    method: get
+    uri: https://odkc.dbca.wa.gov.au/v1/users?q=Brend
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: ''
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      content-encoding: gzip
+      content-type: application/json; charset=utf-8
+      date: Wed, 12 May 2021 04:18:10 GMT
+      etag: W/"93-uIrJ6epzfoX/KRYE+nzg9LDA6v0"
+      server: nginx
+      strict-transport-security:
+      - max-age=31536000
+      - max-age=63072000
+      x-content-type-options: nosniff
+      x-powered-by: Express
+    body:
+      encoding: UTF-8
+      file: no
+      string: '[{"id":8,"type":"user","displayName":"Brendan Cale","createdAt":"2020-10-19T08:04:41.733Z","updatedAt":null,"email":"brendan.cale@dbca.wa.gov.au"}]'
+  recorded_at: 2021-05-12 04:18:10 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.8.0

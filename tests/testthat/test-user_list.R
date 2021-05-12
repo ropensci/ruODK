@@ -1,6 +1,10 @@
 test_that("user_list returns list of users", {
   vcr::use_cassette("test_user_list0", {
-    ul <- user_list()
+    ul <- user_list(
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
     testthat::expect_s3_class(ul, "tbl_df")
 
     cn <- c(
@@ -26,7 +30,11 @@ test_that("user_list returns filtered list of users", {
   vcr::use_cassette("test_user_list1", {
 
     # Use the first user's name to generate search strings
-    ul <- user_list()
+    ul <- user_list(
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
     ss3 <- substr(ul$display_name[[1]], 1, 3) # too short
     ss5 <- substr(ul$display_name[[1]], 1, 5) # long enough
 
