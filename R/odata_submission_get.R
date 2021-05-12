@@ -74,7 +74,9 @@
 #'   `now`, `year`, `month`, `day`, `hour`, `minute`, `second.`
 #'   `ruODK` does not validate the query string given to `filter`.
 #'   It is highly recommended to refer to the ODK Central API documentation
-#'   for filter options and capabilities.
+#'   as well as the
+#'   [OData spec on filters](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948).
+#'   for filter options and capabilities
 #' @param parse Whether to parse submission data based on form schema.
 #'   Dates and datetimes will be parsed into local time.
 #'   Attachments will be downloaded, and the field updated to the local file

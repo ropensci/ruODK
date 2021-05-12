@@ -56,7 +56,9 @@ are supported, and the built-in functions
 \code{now}, \code{year}, \code{month}, \code{day}, \code{hour}, \code{minute}, \code{second.}
 \code{ruODK} does not validate the query string given to \code{filter}.
 It is highly recommended to refer to the ODK Central API documentation
-for filter options and capabilities.}
+as well as the
+\href{https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948}{OData spec on filters}.
+for filter options and capabilities}
 
 \item{parse}{Whether to parse submission data based on form schema.
 Dates and datetimes will be parsed into local time.
