@@ -11,6 +11,7 @@
 
 utils::globalVariables(c(
   ".",
+  "archived",
   "children",
   "name",
   "path",
