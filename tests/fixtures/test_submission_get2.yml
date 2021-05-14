@@ -17,7 +17,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/xml; charset=utf-8
-      date: Mon, 08 Mar 2021 05:24:16 GMT
+      date: Thu, 13 May 2021 05:11:48 GMT
       etag: W/"ba8-Ktd4CquF+VWi04bCN7CDUbjIxZA"
       server: nginx
       strict-transport-security:
@@ -25,7 +25,6 @@ http_interactions:
       - max-age=63072000
       x-content-type-options: nosniff
       x-powered-by: Express
-      x-ua-compatible: chrome=1
     body:
       encoding: UTF-8
       file: no
@@ -46,5 +45,5 @@ http_interactions:
         115.8844306 -16.5325927734375 4.832</taxon_encounter_location><life_form>w2.1_mallee</life_form><voucher_specimen_barcode>NHA70209-01</voucher_specimen_barcode><voucher_specimen_label>Specimen1</voucher_specimen_label></taxon_encounter><taxon_encounter><field_name>Shrub
         1</field_name><photo_in_situ>1604290499008.jpg</photo_in_situ><taxon_encounter_location>-31.9959848
         115.8844333 -16.799999237060547 4.841</taxon_encounter_location><life_form>w3.0_shrub</life_form><voucher_specimen_barcode>14724808</voucher_specimen_barcode><voucher_specimen_label>Specimen2</voucher_specimen_label></taxon_encounter><encounter_end_datetime>2020-11-02T12:15:48.463+08:00</encounter_end_datetime></data>
-  recorded_at: 2021-03-08 05:24:16 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2021-05-13 05:11:48 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.8.0

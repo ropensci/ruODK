@@ -18,7 +18,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Mon, 08 Mar 2021 05:23:38 GMT
+      date: Thu, 13 May 2021 05:11:05 GMT
       etag: W/"364-aTef5JlSi5ZMd5YuCJh6xU73Kyc"
       server: nginx
       strict-transport-security:
@@ -26,11 +26,10 @@ http_interactions:
       - max-age=63072000
       x-content-type-options: nosniff
       x-powered-by: Express
-      x-ua-compatible: chrome=1
     body:
       encoding: UTF-8
       file: no
       string: '{"verbs":["backup.create","backup.terminate","config.read","field_key.create","field_key.delete","field_key.list","form.create","form.delete","form.list","form.read","form.update","project.create","project.delete","project.read","project.update","session.end","submission.create","submission.read","submission.list","user.create","user.list","user.password.invalidate","user.read","user.update","submission.update","role.create","role.update","role.delete","assignment.list","assignment.create","assignment.delete","user.delete","audit.read","public_link.create","public_link.list","public_link.read","public_link.update","public_link.delete","backup.run"],"id":2,"name":"ruODK
         package tests","archived":null,"keyId":null,"forms":12,"lastSubmission":"2020-11-02T04:41:14.761Z","appUsers":1,"createdAt":"2020-10-31T11:11:50.035Z","updatedAt":"2020-11-23T05:25:03.426Z"}'
-  recorded_at: 2021-03-08 05:23:39 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2021-05-13 05:11:05 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.8.0

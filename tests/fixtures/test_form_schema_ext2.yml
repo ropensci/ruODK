@@ -17,7 +17,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Mon, 08 Mar 2021 05:23:16 GMT
+      date: Thu, 13 May 2021 05:10:33 GMT
       etag: W/"2b6-7MpRREPy5M23KgOeg+DuWNXx0AE"
       server: nginx
       strict-transport-security:
@@ -25,13 +25,12 @@ http_interactions:
       - max-age=63072000
       x-content-type-options: nosniff
       x-powered-by: Express
-      x-ua-compatible: chrome=1
     body:
       encoding: UTF-8
       file: no
       string: '[{"path":"/some_text","name":"some_text","type":"string","binary":null},{"path":"/text_image_audio_video_test","name":"text_image_audio_video_test","type":"string","binary":null},{"path":"/a_integer","name":"a_integer","type":"int","binary":null},{"path":"/a_decimal","name":"a_decimal","type":"decimal","binary":null},{"path":"/calculate","name":"calculate","type":"string","binary":null},{"path":"/calculate_test_output","name":"calculate_test_output","type":"string","binary":null},{"path":"/test_yn","name":"test_yn","type":"string","binary":null},{"path":"/meta","name":"meta","type":"structure","binary":null},{"path":"/meta/instanceID","name":"instanceID","type":"string","binary":null}]'
-  recorded_at: 2021-03-08 05:23:17 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2021-05-13 05:10:34 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/I8n_label_lng.xml
@@ -50,7 +49,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/xml; charset=utf-8
-      date: Mon, 08 Mar 2021 05:23:17 GMT
+      date: Thu, 13 May 2021 05:10:34 GMT
       etag: W/"1746-U4Qa2sksR7TnVAOdK2+MrqwyVtM"
       server: nginx
       strict-transport-security:
@@ -58,7 +57,6 @@ http_interactions:
       - max-age=63072000
       x-content-type-options: nosniff
       x-powered-by: Express
-      x-ua-compatible: chrome=1
     body:
       encoding: UTF-8
       file: no
@@ -149,5 +147,5 @@ http_interactions:
                 </select1>
             </h:body>
         </h:html>
-  recorded_at: 2021-03-08 05:23:17 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2021-05-13 05:10:34 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.8.0

@@ -258,6 +258,7 @@ test_that("odata_submission_get filter works", {
 
   })
 
+  ru_msg_warn(glue::glue("Debug: unfiltered data has {nrow(x_all)} records with columns {paste(names(x_all), collapse=', ')}"))
   testthat::expect_equal(
     x_all, x_all_filter_emptystring,
     label = "filter=\"\" should return unfiltered submissions"
@@ -267,11 +268,13 @@ test_that("odata_submission_get filter works", {
     label = "filter=NULL should return unfiltered submissions"
   )
 
+  ru_msg_warn(glue::glue("Debug: 2020 data has {nrow(x_2020)} records with columns {paste(names(x_2020), collapse=', ')}"))
   testthat::expect_equal(
     nrow(x_2020), 1,
     label = "Filter for submissions in year 2020 should return one record"
   )
 
+  ru_msg_warn(glue::glue("Debug: 2019 data has {nrow(x_2019)} records with columns {paste(names(x_2019), collapse=', ')}"))
   testthat::expect_equal(
     nrow(x_2019), 0,
     label = "Filter for submissions in year 2019 should return no records"
