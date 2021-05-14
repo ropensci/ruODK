@@ -23,8 +23,11 @@ get_stage("install") %>%
   # libicui8n not found: fixed by stringi forced install
   add_step(step_install_github("gagolews/stringi", dependencies = TRUE, force = TRUE))
 
-if (ci_on_ghactions() && ci_has_env("BUILD_PKGDOWN")) {
-  # creates pkgdown site and pushes to gh-pages branch
-  # only for the runner with the "BUILD_PKGDOWN" env var set
-  do_pkgdown()
-}
+# # rOpenSci build their own docs, see build at
+# # https://dev.ropensci.org/job/ruODK/lastBuild/console
+#
+# if (ci_on_ghactions() && ci_has_env("BUILD_PKGDOWN")) {
+#   # creates pkgdown site and pushes to gh-pages branch
+#   # only for the runner with the "BUILD_PKGDOWN" env var set
+#   do_pkgdown()
+# }

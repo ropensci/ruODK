@@ -205,7 +205,8 @@ test_that("odata_submission_get filter works", {
     parse = TRUE,
     download = FALSE
   )
-
+  })
+  vcr::use_cassette("test_odata_submission_get8", {
   x_all_filter_null <- odata_submission_get(
     filter = NULL, # the default
     pid = get_test_pid(),
@@ -217,7 +218,8 @@ test_that("odata_submission_get filter works", {
     parse = TRUE,
     download = FALSE
   )
-
+  })
+  vcr::use_cassette("test_odata_submission_get9", {
   x_all_filter_emptystring <- odata_submission_get(
     filter = "", # the default
     pid = get_test_pid(),
@@ -229,7 +231,8 @@ test_that("odata_submission_get filter works", {
     parse = TRUE,
     download = FALSE
   )
-
+  })
+  vcr::use_cassette("test_odata_submission_get10", {
   # Some submissions in 2020
   x_2020 <- odata_submission_get(
     filter = "year(__system/submissionDate) eq 2020", # the default
@@ -242,7 +245,8 @@ test_that("odata_submission_get filter works", {
     parse = TRUE,
     download = FALSE
   )
-
+  })
+  vcr::use_cassette("test_odata_submission_get11", {
   # No submissions in 2019
   x_2019 <- odata_submission_get(
     filter = "year(__system/submissionDate) eq 2019", # the default
@@ -258,7 +262,6 @@ test_that("odata_submission_get filter works", {
 
   })
 
-  ru_msg_warn(glue::glue("Debug: unfiltered data has {nrow(x_all)} records with columns {paste(names(x_all), collapse=', ')}"))
   testthat::expect_equal(
     x_all, x_all_filter_emptystring,
     label = "filter=\"\" should return unfiltered submissions"
@@ -268,13 +271,16 @@ test_that("odata_submission_get filter works", {
     label = "filter=NULL should return unfiltered submissions"
   )
 
-  ru_msg_warn(glue::glue("Debug: 2020 data has {nrow(x_2020)} records with columns {paste(names(x_2020), collapse=', ')}"))
   testthat::expect_equal(
     nrow(x_2020), 1,
     label = "Filter for submissions in year 2020 should return one record"
   )
 
-  ru_msg_warn(glue::glue("Debug: 2019 data has {nrow(x_2019)} records with columns {paste(names(x_2019), collapse=', ')}"))
+  if (nrow(x_2019) > 0){
+    ru_msg_warn(glue::glue(
+      "Debug: 2019 data has {nrow(x_2019)} records ",
+      "with columns {paste(names(x_2019), collapse=', ')}"))
+  }
   testthat::expect_equal(
     nrow(x_2019), 0,
     label = "Filter for submissions in year 2019 should return no records"
