@@ -13,16 +13,19 @@ RUN apt-get update && \
     apt remove -y libvorbis0a && \
     apt-get -y install --no-install-recommends \
     python3-venv python3-dev \
-    # DBCA package deps:
+    # ruODK deps:
+    libxml2-dev libjq-dev libudunits2-dev libgdal-dev \
+    libgeos-dev libproj-dev libicu-dev libv8-dev libjq-dev libprotobuf-dev \
+    protobuf-compiler libgit2-dev \
+    # DBCA deps:
     rsync mdbtools cargo libavfilter-dev libfontconfig1-dev libopenblas-dev \
     freetds-common libct4 libsybdb5 freetds-bin freetds-common freetds-dev \
-    libct4 libsybdb5 tdsodbc unixodbc && \
-    apt-get purge && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    libct4 libsybdb5 tdsodbc unixodbc
+    #&& apt-get purge && #apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # R packages ------------------------------------------------------------------#
 RUN install2.r --error \
+  proj4 \
   caTools \
   bitops \
   ckanr \
@@ -32,8 +35,10 @@ RUN install2.r --error \
   leaflet.extras \
   leaflet.providers \
   leaftime \
+  listviewer \
   reactable \
   skimr \
+  stringi \
   usethis \
   mapview \
   leafpop \
