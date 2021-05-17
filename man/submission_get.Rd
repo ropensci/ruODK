@@ -68,6 +68,12 @@ By giving the list of \code{iid} to download explicitly, that list can be
 modified using information not accessible to \code{ruODK},
 e.g. \code{iid} can be restricted to "only not already downloaded submissions".
 }
+\details{
+Forms with submission audit enabled will also receive the submission audit
+as \code{audit.csv}. This will overwrite all previous \code{audit.csv} files.
+To get the combined submission audit logs as one single, concatenated
+\code{audit.csv} file, use \code{submission_export}.
+}
 \examples{
 \dontrun{
 # Step 1: Setup ruODK with OData Service URL (has url, pid, fid)

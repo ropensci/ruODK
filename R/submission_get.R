@@ -76,6 +76,11 @@ get_one_submission <- function(iid,
 #' modified using information not accessible to `ruODK`,
 #' e.g. `iid` can be restricted to "only not already downloaded submissions".
 #'
+#' Forms with submission audit enabled will also receive the submission audit
+#' as `audit.csv`. This will overwrite all previous `audit.csv` files.
+#' To get the combined submission audit logs as one single, concatenated
+#' `audit.csv` file, use `submission_export`.
+#'
 #' @param iid A list of submission instance IDs, e.g. from
 #'   \code{\link{submission_list}$instance_id}.
 #' @template param-pid
