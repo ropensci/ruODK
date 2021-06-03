@@ -189,6 +189,8 @@ odata_submission_get <- function(table = "Submissions",
     # `$filter` = ifelse(odkc_version>=1.1, filter %||% "", "")
   )
 
+  qry<-qry[qry!=""]
+  
   if(odkc_version>=1.1 && !is.null(filter) && filter != "") {
     qry$`$filter` <- as.character(filter)
   }
