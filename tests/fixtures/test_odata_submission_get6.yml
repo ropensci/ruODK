@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://odkc.dbca.wa.gov.au/v1/projects/3/forms/Locations.svc/Submissions?%24skip=&%24top=&%24count=false&%24wkt=false
+    uri: https://odkc.dbca.wa.gov.au/v1/projects/3/forms/Locations.svc/Submissions?%24count=false&%24wkt=false
     body:
       encoding: ''
       string: ''
@@ -17,7 +17,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Thu, 13 May 2021 05:10:56 GMT
+      date: Fri, 04 Jun 2021 02:29:48 GMT
       odata-version: '4.0'
       server: nginx
       strict-transport-security:
@@ -30,7 +30,7 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"value":[{"__id":"uuid:fff511d0-368b-4ee7-89b0-faa8322c5981","__system":{"submissionDate":"2020-11-02T07:26:38.111Z","submitterId":"70","submitterName":"ruODK","attachmentsPresent":1,"attachmentsExpected":1,"status":"NotDecrypted"}}],"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/3/forms/Locations.svc/$metadata#Submissions"}'
-  recorded_at: 2021-05-13 05:10:56 GMT
+  recorded_at: 2021-06-04 02:29:49 GMT
   recorded_with: vcr/0.6.0, webmockr/0.8.0
 - request:
     method: get
@@ -50,7 +50,7 @@ http_interactions:
     headers:
       content-encoding: gzip
       content-type: application/json; charset=utf-8
-      date: Thu, 13 May 2021 05:10:56 GMT
+      date: Fri, 04 Jun 2021 02:29:48 GMT
       etag: W/"632-HEZYiEylnxwykAvXZ35QMBzXQVs"
       server: nginx
       strict-transport-security:
@@ -63,5 +63,5 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '[{"path":"/meta","name":"meta","type":"structure","binary":null},{"path":"/meta/instanceID","name":"instanceID","type":"string","binary":null},{"path":"/device_id","name":"device_id","type":"string","binary":null},{"path":"/start_time","name":"start_time","type":"dateTime","binary":null},{"path":"/username","name":"username","type":"string","binary":null},{"path":"/subscriber_id","name":"subscriber_id","type":"string","binary":null},{"path":"/point","name":"point","type":"structure","binary":null},{"path":"/point/location_point_gps","name":"location_point_gps","type":"geopoint","binary":null},{"path":"/point/location_point_map","name":"location_point_map","type":"geopoint","binary":null},{"path":"/point/location_point_manual","name":"location_point_manual","type":"geopoint","binary":null},{"path":"/path","name":"path","type":"structure","binary":null},{"path":"/path/location_path_gps","name":"location_path_gps","type":"geotrace","binary":null},{"path":"/path/location_path_map","name":"location_path_map","type":"geotrace","binary":null},{"path":"/path/location_path_manual","name":"location_path_manual","type":"geotrace","binary":null},{"path":"/shape","name":"shape","type":"structure","binary":null},{"path":"/shape/location_shape_gps","name":"location_shape_gps","type":"geoshape","binary":null},{"path":"/shape/location_shape_map","name":"location_shape_map","type":"geoshape","binary":null},{"path":"/shape/location_shape_manual","name":"location_shape_manual","type":"geoshape","binary":null},{"path":"/end_time","name":"end_time","type":"dateTime","binary":null}]'
-  recorded_at: 2021-05-13 05:10:56 GMT
+  recorded_at: 2021-06-04 02:29:49 GMT
   recorded_with: vcr/0.6.0, webmockr/0.8.0

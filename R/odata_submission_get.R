@@ -157,14 +157,12 @@ odata_submission_get <- function(table = "Submissions",
                                  filter = NULL,
                                  parse = TRUE,
                                  download = TRUE,
-                                 orders = c(
-                                   "YmdHMS",
-                                   "YmdHMSz",
-                                   "Ymd HMS",
-                                   "Ymd HMSz",
-                                   "Ymd",
-                                   "ymd"
-                                 ),
+                                 orders = c("YmdHMS",
+                                            "YmdHMSz",
+                                            "Ymd HMS",
+                                            "Ymd HMSz",
+                                            "Ymd",
+                                            "ymd"),
                                  local_dir = "media",
                                  pid = get_default_pid(),
                                  fid = get_default_fid(),
@@ -182,14 +180,21 @@ odata_submission_get <- function(table = "Submissions",
   ru_msg_info("Downloading submissions...", verbose = verbose)
 
   qry <- list(
-    `$skip` = skip %||% "",
-    `$top` = top %||% "",
     `$count` = ifelse(count == FALSE, "false", "true"),
     `$wkt` = ifelse(wkt == FALSE, "false", "true")
-    # `$filter` = ifelse(odkc_version>=1.1, filter %||% "", "")
   )
 
-  if(odkc_version>=1.1 && !is.null(filter) && filter != "") {
+  if (!is.null(skip)) {
+    qry$`$skip` <- as.integer(skip)
+    "Skipping first {skip} records" %>%
+      glue::glue() %>% ru_msg_info(verbose = verbose)
+  }
+  if (!is.null(top)) {
+    qry$`$top` <- as.integer(top)
+    "Limiting to max {top} records" %>%
+      glue::glue() %>% ru_msg_info(verbose = verbose)
+  }
+  if (odkc_version >= 1.1 && !is.null(filter) && filter != "") {
     qry$`$filter` <- as.character(filter)
   }
 
@@ -237,15 +242,12 @@ odata_submission_get <- function(table = "Submissions",
 
   # Rectangle, handle date/times, attachments, geopoints, geotraces, geoshapes
   sub <- sub %>%
-    odata_submission_rectangle(
-      form_schema = fs,
-      verbose = verbose
-    ) %>%
-    handle_ru_datetimes(
-      form_schema = fs,
-      verbose = verbose
-    ) %>%
-    { # nolint
+    odata_submission_rectangle(form_schema = fs,
+                               verbose = verbose) %>%
+    handle_ru_datetimes(form_schema = fs,
+                        verbose = verbose) %>%
+    {
+      # nolint
       if (download == TRUE) {
         fs::dir_create(local_dir)
         handle_ru_attachments(
@@ -264,11 +266,9 @@ odata_submission_get <- function(table = "Submissions",
         .
       }
     } %>%
-    handle_ru_geopoints(
-      form_schema = fs,
-      wkt = wkt,
-      verbose = verbose
-    ) %>%
+    handle_ru_geopoints(form_schema = fs,
+                        wkt = wkt,
+                        verbose = verbose) %>%
     handle_ru_geotraces(
       form_schema = fs,
       wkt = wkt,

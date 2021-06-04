@@ -282,10 +282,10 @@ test_that("odata_submission_get filter works", {
       "with columns {paste(names(x_2019), collapse=', ')}"))
   }
   # TODO: this works locally but not on GHA.
-  # testthat::expect_equal(
-  #   nrow(x_2019), 0,
-  #   label = "Filter for submissions in year 2019 should return no records"
-  # )
+  testthat::expect_equal(
+    nrow(x_2019), 0,
+    label = "Filter for submissions in year 2019 should return no records"
+  )
 })
 
 # usethis::use_r("odata_submission_get") # nolint

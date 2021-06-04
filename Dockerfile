@@ -1,12 +1,8 @@
-FROM rocker/geospatial:4.0.5
+FROM rocker/geospatial:4.0.5 as builder_base
 LABEL maintainer=Florian.Mayer@dbca.wa.gov.au
 LABEL description="rocker/geospatial:4.0.5 for DBCA"
-
 # Build this image with
 # docker build . -t dbcawa/ruodk:latest --build-arg GITHUB_PAT="..."
-
-ARG GITHUB_PAT
-ENV GITHUB_PAT=${GITHUB_PAT}
 
 # System dependencies ---------------------------------------------------------#
 RUN apt-get update && \
@@ -24,6 +20,9 @@ RUN apt-get update && \
     #&& apt-get purge && #apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # R packages ------------------------------------------------------------------#
+FROM builder_base as r_libs
+ARG GITHUB_PAT
+ENV GITHUB_PAT=$GITHUB_PAT
 RUN install2.r --error \
   proj4 \
   caTools \
@@ -46,5 +45,6 @@ RUN install2.r --error \
   lattice \
   sf
 
+FROM r_libs
 RUN R -e "remotes::install_github('ropensci/ruODK@main', \
           dependencies = TRUE, ask=FALSE, update=TRUE)"
