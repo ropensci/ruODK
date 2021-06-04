@@ -179,24 +179,34 @@ odata_submission_get <- function(table = "Submissions",
   # Download submissions
   ru_msg_info("Downloading submissions...", verbose = verbose)
 
+  # Building the query
+  # Some query parameters are always valid to include
   qry <- list(
     `$count` = ifelse(count == FALSE, "false", "true"),
     `$wkt` = ifelse(wkt == FALSE, "false", "true")
   )
 
+  # Some query parameters are only valid if non-NULL
   if (!is.null(skip)) {
     qry$`$skip` <- as.integer(skip)
-    "Skipping first {skip} records" %>%
+    "Skipping first {as.integer(skip)} records" %>%
       glue::glue() %>% ru_msg_info(verbose = verbose)
   }
   if (!is.null(top)) {
     qry$`$top` <- as.integer(top)
-    "Limiting to max {top} records" %>%
+    "Limiting to max {as.integer(top)} records" %>%
       glue::glue() %>% ru_msg_info(verbose = verbose)
   }
+  # Some query parameters are only supported in later ODKC versions
   if (odkc_version >= 1.1 && !is.null(filter) && filter != "") {
     qry$`$filter` <- as.character(filter)
+    "Filtering records with {as.character(filter)}" %>%
+      glue::glue() %>% ru_msg_info(verbose = verbose)
   }
+
+  # Catch-all seatbelt for https://github.com/ropensci/ruODK/issues/126
+  # Thanks @mtyszler
+  qry <- qry[qry!=""]
 
   sub <- httr::RETRY(
     "GET",

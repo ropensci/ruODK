@@ -21,10 +21,10 @@ jobs:
       matrix:
         config:
           # See https://github.com/actions/virtual-environments
-          - { os: windows-latest, r: "devel" } # windows-2019
+          # - { os: windows-latest, r: "devel" } # tic not available
           - { os: windows-latest, r: "release" }
           - { os: windows-latest, r: "oldrel" }
-          - { os: windows-2016, r: "devel" }
+          # - { os: windows-2016, r: "devel" } # tic not available
           - { os: windows-2016, r: "release" }
           - { os: windows-2016, r: "oldrel" }
           # - { os: macOS-latest, r: "devel" }

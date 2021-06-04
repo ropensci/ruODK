@@ -8,7 +8,8 @@
 # `ruODK` 0.10.2
 ## Major fixes
 * Fix ODK Central v1.2 time out on NULL query parameters `skip` and `top`. 
-  ruODK now only supplies non-NULL query parameters.
+  ruODK now only supplies non-NULL query parameters and has an additional
+  seat-belt to drop any query parameter that is an empty string.
   (#126, thanks @yanokwa, @mtyszler, @thaliehln)
 ## Minor fixes
 ## Documentation
