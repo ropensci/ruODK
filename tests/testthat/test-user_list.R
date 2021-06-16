@@ -43,13 +43,24 @@ test_that("user_list returns filtered list of users", {
       # reason: provided query string
       testthat::expect_warning(
         # reason: query string too short
-        ul_flt3 <- user_list(qry = ss3, verbose = TRUE)
+        ul_flt3 <- user_list( url = get_test_url(),
+                              un = get_test_un(),
+                              pw = get_test_pw(),
+                              qry = ss3,
+                              verbose = TRUE)
       )
     )
 
     # No warning here
-    ul_flt3 <- user_list(qry = ss3, verbose = FALSE)
-    ul_flt5 <- user_list(qry = ss5)
+    ul_flt3 <- user_list(url = get_test_url(),
+                         un = get_test_un(),
+                         pw = get_test_pw(),
+                         qry = ss3,
+                         verbose = FALSE)
+    ul_flt5 <- user_list(url = get_test_url(),
+                         un = get_test_un(),
+                         pw = get_test_pw(),
+                         qry = ss5)
 
     testthat::expect_gte(
       nrow(ul_flt3),

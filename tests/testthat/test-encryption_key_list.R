@@ -27,4 +27,4 @@ test_that("encryption_key_list works", {
 })
 
 
-# usethis::use_r("encryption_key_list") # nolint
+# usethis::use_r("encryption_key_list")  # nolint

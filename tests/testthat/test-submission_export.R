@@ -161,7 +161,7 @@ test_that("submission_export works with encryption", {
 #       )
 #     )
 # })
-# # nolint end
+# nolint end
 
 test_that("submission_export warns of missing credentials", {
   t <- tempdir()
