@@ -135,7 +135,17 @@ Out of scope:
 
 ## Install
 
-You can install the development version (`main` branch) of `ruODK` with:
+You can install the latest release of `ruODK` from the [rOpenSci
+R-Universe](https://ropensci.r-universe.dev):
+
+``` r
+# Enable the rOpenSci universe
+options(repos = c(ropensci = 'https://ropensci.r-universe.dev',
+                  CRAN = 'https://cloud.r-project.org'))
+install.packages('ruODK')
+```
+
+Alternativey, you can install the development version (`main` branch):
 
 ``` r
 if (!requireNamespace("remotes")) install.packages("remotes")
@@ -145,6 +155,16 @@ remotes::install_github(
    upgrade = "always",
    build_vignettes = TRUE)
 ```
+
+If the install fails, read the error messages carefully and install any
+unmet dependency (system libraries or R packages).
+
+If the install fails on building the vignettes, you can set
+`build_vignettes=FALSE` and read the vignettes from the online docs
+instead.
+
+If the installation still fails, feel free to submit a [bug
+report](https://github.com/ropensci/ruODK/issues/new/choose).
 
 ## ODK Central
 

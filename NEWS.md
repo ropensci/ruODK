@@ -1,7 +1,9 @@
-# `ruODK` (development version)
+# `ruODK` 0.10.2.9000 (development version)
 ## Major fixes
 ## Minor fixes
 ## Documentation
+* Update installation instructions with source install from rOpenSci R-Universe
+  and troubleshooting (#128, thanks @yanokwa)
 ## Data
 ## Maintenance
 
