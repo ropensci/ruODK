@@ -1,5 +1,5 @@
 test_that("user_list returns list of users", {
-  vcr::use_cassette("test_user_list0", {
+  # vcr::use_cassette("test_user_list0", {
     ul <- user_list(
       url = get_test_url(),
       un = get_test_un(),
@@ -23,11 +23,11 @@ test_that("user_list returns list of users", {
         label = glue::glue("Column {.} missing from user_list")
       )
     )
-  })
+  # })
 })
 
 test_that("user_list returns filtered list of users", {
-  vcr::use_cassette("test_user_list1", {
+  # vcr::use_cassette("test_user_list1", {
 
     # Use the first user's name to generate search strings
     ul <- user_list(
@@ -73,7 +73,7 @@ test_that("user_list returns filtered list of users", {
       1,
       label = "Sufficiently long search strings (5 char) should return matches"
     )
-  })
+  # })
 })
 
 # usethis::use_r("user_list")  # nolint
