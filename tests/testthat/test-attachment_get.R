@@ -1,4 +1,5 @@
 test_that("attachment_get works", {
+  skip_on_cran()
   # nolint start
   # This is needed to run the tests for this file only
   # if (is.null(vcr::vcr_configuration()$write_disk_path)) {
