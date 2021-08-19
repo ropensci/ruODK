@@ -24,33 +24,35 @@ test_that("split_geotrace works with GeoJSON", {
     label = "split_geotrace retains original GeoJSON field"
   )
 
-  geofield_lon <- glue::glue("{geo_fields[1]}_longitude")
-  geofield_lat <- glue::glue("{geo_fields[1]}_latitude")
-  geofield_alt <- glue::glue("{geo_fields[1]}_altitude")
+  geofield_lon_gt <- glue::glue("{geo_fields[1]}_longitude")
+  geofield_lat_gt <- glue::glue("{geo_fields[1]}_latitude")
+  geofield_alt_gt <- glue::glue("{geo_fields[1]}_altitude")
 
   expect_true(
-    geofield_lon %in% names(gj_first_gt),
+    geofield_lon_gt %in% names(gj_first_gt),
     label = "split_geotrace extracts GeoJSON longitude"
   )
   expect_true(
-    geofield_lat %in% names(gj_first_gt),
+    geofield_lat_gt %in% names(gj_first_gt),
     label = "split_geotrace extracts GeoJSON latitude"
   )
   expect_true(
-    geofield_alt %in% names(gj_first_gt),
+    geofield_alt_gt %in% names(gj_first_gt),
     label = "split_geotrace extracts GeoJSON altitude"
   )
 
+
+
   expect_true(
-    gj_first_gt %>% magrittr::extract2(geofield_lon) %>% is.numeric(),
+    gj_first_gt %>% magrittr::extract2(geofield_lon_gt) %>% is.numeric(),
     label = "split_geotrace casts extracted GeoJSON longitude to numeric"
   )
   expect_true(
-    gj_first_gt %>% magrittr::extract2(geofield_lat) %>% is.numeric(),
+    gj_first_gt %>% magrittr::extract2(geofield_lat_gt) %>% is.numeric(),
     label = "split_geotrace casts extracted GeoJSON latitude to numeric"
   )
   expect_true(
-    gj_first_gt %>% magrittr::extract2(geofield_alt) %>% is.numeric(),
+    gj_first_gt %>% magrittr::extract2(geofield_alt_gt) %>% is.numeric(),
     label = "split_geotrace casts extracted GeoJSON altitude to numeric"
   )
 })

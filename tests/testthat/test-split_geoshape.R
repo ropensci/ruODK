@@ -12,7 +12,7 @@ test_that("split_geoshape works with GeoJSON", {
     odata_submission_rectangle(form_schema = geo_fs)
 
   # GeoJSON data with first geoshape split
-  gj_first_gt <- split_geoshape(
+  gj_first_gs <- split_geoshape(
     geo_gj_rt,
     geo_fields[1],
     wkt = FALSE,
@@ -20,41 +20,41 @@ test_that("split_geoshape works with GeoJSON", {
   )
 
   expect_true(
-    geo_fields[1] %in% names(gj_first_gt),
+    geo_fields[1] %in% names(gj_first_gs),
     label = "split_geoshape retains original GeoJSON field"
   )
 
-  geofield_lon <- glue::glue("{geo_fields[1]}_longitude")
-  geofield_lat <- glue::glue("{geo_fields[1]}_latitude")
-  geofield_alt <- glue::glue("{geo_fields[1]}_altitude")
+  geofield_lon_gs <- glue::glue("{geo_fields[1]}_longitude")
+  geofield_lat_gs <- glue::glue("{geo_fields[1]}_latitude")
+  geofield_alt_gs <- glue::glue("{geo_fields[1]}_altitude")
 
   expect_true(
-    geofield_lon %in% names(gj_first_gt),
+    geofield_lon_gs %in% names(gj_first_gs),
     label = "split_geoshape extracts GeoJSON longitude"
   )
   expect_true(
-    geofield_lat %in% names(gj_first_gt),
+    geofield_lat_gs %in% names(gj_first_gs),
     label = "split_geoshape extracts GeoJSON latitude"
   )
   expect_true(
-    geofield_alt %in% names(gj_first_gt),
+    geofield_alt_gs %in% names(gj_first_gs),
     label = "split_geoshape extracts GeoJSON altitude"
   )
 
   # TODO FIXME
   # https://github.com/ropensci/ruODK/issues/131
-  # expect_true(
-  #   gj_first_gt %>% magrittr::extract2(geofield_lon) %>% is.numeric(),
-  #   label = "split_geoshape casts extracted GeoJSON longitude to numeric"
-  # )
-  # expect_true(
-  #   gj_first_gt %>% magrittr::extract2(geofield_lat) %>% is.numeric(),
-  #   label = "split_geoshape casts extracted GeoJSON latitude to numeric"
-  # )
-  # expect_true(
-  #   gj_first_gt %>% magrittr::extract2(geofield_alt) %>% is.numeric(),
-  #   label = "split_geoshape casts extracted GeoJSON altitude to numeric"
-  # )
+  expect_true(
+    gj_first_gs %>% magrittr::extract2(geofield_lon_gs) %>% is.numeric(),
+    label = "split_geoshape casts extracted GeoJSON longitude to numeric"
+  )
+  expect_true(
+    gj_first_gs %>% magrittr::extract2(geofield_lat_gs) %>% is.numeric(),
+    label = "split_geoshape casts extracted GeoJSON latitude to numeric"
+  )
+  expect_true(
+    gj_first_gs %>% magrittr::extract2(geofield_alt_gs) %>% is.numeric(),
+    label = "split_geoshape casts extracted GeoJSON altitude to numeric"
+  )
 })
 
 test_that("split_geoshape works with WKT", {
