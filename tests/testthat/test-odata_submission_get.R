@@ -194,7 +194,6 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
 
 test_that("odata_submission_get filter works", {
   vcr::use_cassette("test_odata_submission_get7", {
-
     x_all <- odata_submission_get(
       pid = get_test_pid(),
       fid = get_test_fid(),
@@ -259,7 +258,6 @@ test_that("odata_submission_get filter works", {
       parse = TRUE,
       download = FALSE
     )
-
   })
 
   testthat::expect_equal(
@@ -276,15 +274,16 @@ test_that("odata_submission_get filter works", {
     label = "Filter for submissions in year 2020 should return one record"
   )
 
-  if (nrow(x_2019) > 0){
+  if (nrow(x_2019) > 0) {
     ru_msg_warn(glue::glue(
       "Debug: 2019 data has {as.character(nrow(x_2019))} records ",
-      "with columns {paste(names(x_2019), collapse=', ')}"))
+      "with columns {paste(names(x_2019), collapse=', ')}"
+    ))
   }
   # TODO: this works locally but not on GHA.
   # testthat::expect_equal(
-    # nrow(x_2019), 0,
-    # label = "Filter for submissions in year 2019 should return no records"
+  # nrow(x_2019), 0,
+  # label = "Filter for submissions in year 2019 should return no records"
   # )
 })
 
