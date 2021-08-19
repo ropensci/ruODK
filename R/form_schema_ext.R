@@ -223,8 +223,7 @@ form_schema_ext <- function(flatten = FALSE,
               extension[nrow(extension), "label"] <- xml2::xml_text(
                 xml2::xml_find_first(this_translation, "./value")
               )
-            }
-            else {
+            } else {
               # check if language already exists in the datafram
               if (!(paste0("label_", this_lang) %in% colnames(extension))) {
 
@@ -250,8 +249,7 @@ form_schema_ext <- function(flatten = FALSE,
             }
           }
         }
-      }
-      else {
+      } else {
         # extract content
         extension[nrow(extension), "label"] <- xml2::xml_text(this_rawlabel)
       }
@@ -344,8 +342,7 @@ form_schema_ext <- function(flatten = FALSE,
                   choice_labels[["base"]][jj] <- xml2::xml_text(
                     xml2::xml_find_first(this_choicetranslation, "./value")
                   )
-                }
-                else {
+                } else {
                   # check if language already exists in the dataframe
                   if (!(paste0("choices_", this_choicelang) %in%
                     colnames(extension))) {
@@ -371,8 +368,7 @@ form_schema_ext <- function(flatten = FALSE,
                 }
               }
             }
-          }
-          else {
+          } else {
             choice_labels[["base"]][jj] <- xml2::xml_text(this_rawchoicelabel)
           }
         }
@@ -383,8 +379,7 @@ form_schema_ext <- function(flatten = FALSE,
 
           if (this_choicelang == "base") {
             this_choicelang_colname <- "choices"
-          }
-          else {
+          } else {
             this_choicelang_colname <- this_choicelang
           }
 
@@ -515,8 +510,7 @@ form_schema_ext <- function(flatten = FALSE,
                   choice_labels[["base"]][jj] <- xml2::xml_text(
                     xml2::xml_find_first(this_choicetranslation, "./value")
                   )
-                }
-                else {
+                } else {
                   # check if language already exists in the dataframe
                   if (!(paste0("choices_", this_choicelang) %in%
                     colnames(extension))) {
@@ -542,8 +536,7 @@ form_schema_ext <- function(flatten = FALSE,
                 }
               }
             }
-          }
-          else {
+          } else {
             choice_labels[["base"]][jj] <- xml2::xml_text(
               xml2::xml_find_first(
                 this_choiceitem,
@@ -559,8 +552,7 @@ form_schema_ext <- function(flatten = FALSE,
 
           if (this_choicelang == "base") {
             this_choicelang_colname <- "choices"
-          }
-          else {
+          } else {
             this_choicelang_colname <- this_choicelang
           }
 

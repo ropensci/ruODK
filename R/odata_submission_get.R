@@ -157,12 +157,14 @@ odata_submission_get <- function(table = "Submissions",
                                  filter = NULL,
                                  parse = TRUE,
                                  download = TRUE,
-                                 orders = c("YmdHMS",
-                                            "YmdHMSz",
-                                            "Ymd HMS",
-                                            "Ymd HMSz",
-                                            "Ymd",
-                                            "ymd"),
+                                 orders = c(
+                                   "YmdHMS",
+                                   "YmdHMSz",
+                                   "Ymd HMS",
+                                   "Ymd HMSz",
+                                   "Ymd",
+                                   "ymd"
+                                 ),
                                  local_dir = "media",
                                  pid = get_default_pid(),
                                  fid = get_default_fid(),
@@ -190,23 +192,26 @@ odata_submission_get <- function(table = "Submissions",
   if (!is.null(skip)) {
     qry$`$skip` <- as.integer(skip)
     "Skipping first {as.integer(skip)} records" %>%
-      glue::glue() %>% ru_msg_info(verbose = verbose)
+      glue::glue() %>%
+      ru_msg_info(verbose = verbose)
   }
   if (!is.null(top)) {
     qry$`$top` <- as.integer(top)
     "Limiting to max {as.integer(top)} records" %>%
-      glue::glue() %>% ru_msg_info(verbose = verbose)
+      glue::glue() %>%
+      ru_msg_info(verbose = verbose)
   }
   # Some query parameters are only supported in later ODKC versions
   if (odkc_version >= 1.1 && !is.null(filter) && filter != "") {
     qry$`$filter` <- as.character(filter)
     "Filtering records with {as.character(filter)}" %>%
-      glue::glue() %>% ru_msg_info(verbose = verbose)
+      glue::glue() %>%
+      ru_msg_info(verbose = verbose)
   }
 
   # Catch-all seatbelt for https://github.com/ropensci/ruODK/issues/126
   # Thanks @mtyszler
-  qry <- qry[qry!=""]
+  qry <- qry[qry != ""]
 
   sub <- httr::RETRY(
     "GET",
@@ -252,10 +257,14 @@ odata_submission_get <- function(table = "Submissions",
 
   # Rectangle, handle date/times, attachments, geopoints, geotraces, geoshapes
   sub <- sub %>%
-    odata_submission_rectangle(form_schema = fs,
-                               verbose = verbose) %>%
-    handle_ru_datetimes(form_schema = fs,
-                        verbose = verbose) %>%
+    odata_submission_rectangle(
+      form_schema = fs,
+      verbose = verbose
+    ) %>%
+    handle_ru_datetimes(
+      form_schema = fs,
+      verbose = verbose
+    ) %>%
     {
       # nolint
       if (download == TRUE) {
@@ -276,9 +285,11 @@ odata_submission_get <- function(table = "Submissions",
         .
       }
     } %>%
-    handle_ru_geopoints(form_schema = fs,
-                        wkt = wkt,
-                        verbose = verbose) %>%
+    handle_ru_geopoints(
+      form_schema = fs,
+      wkt = wkt,
+      verbose = verbose
+    ) %>%
     handle_ru_geotraces(
       form_schema = fs,
       wkt = wkt,
