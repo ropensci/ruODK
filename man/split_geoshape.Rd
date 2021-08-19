@@ -5,7 +5,12 @@
 \title{Annotate a dataframe containing a geoshape column with lon, lat, alt of the
 geotrace's first point.}
 \usage{
-split_geoshape(data, colname, wkt = FALSE, odkc_version = odkc_version)
+split_geoshape(
+  data,
+  colname,
+  wkt = FALSE,
+  odkc_version = get_default_odkc_version()
+)
 }
 \arguments{
 \item{data}{(dataframe) A dataframe with a geoshape column.}
