@@ -22,7 +22,9 @@ test_that("project_detail works", {
 })
 
 test_that("project_detail aborts on missing credentials", {
-  vcr::use_cassette("test_project_detail1", {
+
+  skip_on_cran()
+
     testthat::expect_error(
       p <- project_detail(
         get_test_pid(),
@@ -31,9 +33,7 @@ test_that("project_detail aborts on missing credentials", {
         pw = get_test_pw()
       )
     )
-  })
 
-  vcr::use_cassette("test_project_detail2", {
     testthat::expect_error(
       p <- project_detail(
         get_test_pid(),
@@ -42,9 +42,7 @@ test_that("project_detail aborts on missing credentials", {
         pw = get_test_pw()
       )
     )
-  })
 
-  vcr::use_cassette("test_project_detail3", {
     testthat::expect_error(
       p <- project_detail(
         get_test_pid(),
@@ -53,11 +51,11 @@ test_that("project_detail aborts on missing credentials", {
         pw = ""
       )
     )
-  })
 })
 
 test_that("project_detail warns on wrong credentials", {
-  vcr::use_cassette("test_project_detail4", {
+  skip_on_cran()
+
     testthat::expect_error(
       p <- project_detail(
         111111,
@@ -66,9 +64,7 @@ test_that("project_detail warns on wrong credentials", {
         pw = get_test_pw()
       )
     )
-  })
 
-  vcr::use_cassette("test_project_detail5", {
     testthat::expect_error(
       p <- project_detail(
         get_test_pid(),
@@ -77,7 +73,6 @@ test_that("project_detail warns on wrong credentials", {
         pw = get_test_pw()
       )
     )
-  })
 
   vcr::use_cassette("test_project_detail6", {
     testthat::expect_error(
@@ -96,7 +91,7 @@ test_that("project_detail warns on wrong credentials", {
         get_test_pid(),
         url = get_test_url(),
         un = get_test_un(),
-        pw = "wroing_password"
+        pw = "wrong_password"
       )
     )
   })

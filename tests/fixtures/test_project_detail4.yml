@@ -17,18 +17,26 @@ http_interactions:
       message: 'Client error: (404) Not Found'
     headers:
       server: nginx
-      date: Thu, 13 May 2021 05:11:05 GMT
       content-type: application/json; charset=utf-8
       x-powered-by: Express
       etag: W/"4c-ShTrjQvXJDA49Wfxw7ES7C6cQFg"
-      strict-transport-security: max-age=63072000
+      cache-control: private
       content-encoding: gzip
+      accept-ranges: bytes
+      date: Wed, 18 Aug 2021 09:50:43 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12621-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629280243.254562,VS0,VE582
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '{"message":"Could not find the resource you were looking for.","code":404.1}'
-  recorded_at: 2021-05-13 05:11:10 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-18 09:50:47 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects/111111
@@ -47,18 +55,26 @@ http_interactions:
       message: 'Client error: (404) Not Found'
     headers:
       server: nginx
-      date: Thu, 13 May 2021 05:11:06 GMT
       content-type: application/json; charset=utf-8
       x-powered-by: Express
       etag: W/"4c-ShTrjQvXJDA49Wfxw7ES7C6cQFg"
-      strict-transport-security: max-age=63072000
+      cache-control: private
       content-encoding: gzip
+      accept-ranges: bytes
+      date: Wed, 18 Aug 2021 09:50:45 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12621-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629280245.956546,VS0,VE556
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '{"message":"Could not find the resource you were looking for.","code":404.1}'
-  recorded_at: 2021-05-13 05:11:10 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-18 09:50:47 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects/111111
@@ -77,15 +93,23 @@ http_interactions:
       message: 'Client error: (404) Not Found'
     headers:
       server: nginx
-      date: Thu, 13 May 2021 05:11:10 GMT
       content-type: application/json; charset=utf-8
       x-powered-by: Express
       etag: W/"4c-ShTrjQvXJDA49Wfxw7ES7C6cQFg"
-      strict-transport-security: max-age=63072000
+      cache-control: private
       content-encoding: gzip
+      accept-ranges: bytes
+      date: Wed, 18 Aug 2021 09:50:47 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12621-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629280247.590076,VS0,VE582
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '{"message":"Could not find the resource you were looking for.","code":404.1}'
-  recorded_at: 2021-05-13 05:11:10 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-18 09:50:47 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
