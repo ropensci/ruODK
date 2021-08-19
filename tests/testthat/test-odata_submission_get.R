@@ -189,7 +189,8 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
   # se is not decrypted
   testthat::expect_s3_class(se, "tbl_df")
   testthat::expect_true("system_status" %in% names(se))
-  testthat::expect_equal(se$system_status[[1]], "NotDecrypted")
+  testthat::expect_equal(stringr::str_to_lower(se$system_status[[1]]),
+                         stringr::str_to_lower("NotDecrypted"))
 })
 
 test_that("odata_submission_get filter works", {

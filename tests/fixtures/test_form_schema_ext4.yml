@@ -15,23 +15,28 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/json; charset=utf-8
-      date: Thu, 13 May 2021 05:10:35 GMT
-      etag: W/"119d-3qrWdsskFf1bSLrUqD1FplsWNkM"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      vary: Accept-Encoding
-      x-content-type-options: nosniff
+      content-type: application/json; charset=utf-8
       x-powered-by: Express
+      etag: W/"119d-3qrWdsskFf1bSLrUqD1FplsWNkM"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:30 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342870.805406,VS0,VE325
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '[{"path":"/select_example_filter","name":"select_example_filter","type":"string","binary":null},{"path":"/some_text","name":"some_text","type":"string","binary":null},{"path":"/choice_filter_example","name":"choice_filter_example","type":"structure","binary":null},{"path":"/choice_filter_example/choice_filter_question_1","name":"choice_filter_question_1","type":"string","binary":null},{"path":"/choice_filter_example/choice_filter_question_2","name":"choice_filter_question_2","type":"string","binary":null},{"path":"/a_integer","name":"a_integer","type":"int","binary":null},{"path":"/a_decimal","name":"a_decimal","type":"decimal","binary":null},{"path":"/calculate","name":"calculate","type":"string","binary":null},{"path":"/calculate_test_output","name":"calculate_test_output","type":"string","binary":null},{"path":"/select_example","name":"select_example","type":"string","binary":null},{"path":"/required_text","name":"required_text","type":"string","binary":null},{"path":"/acknowledge_test","name":"acknowledge_test","type":"string","binary":null},{"path":"/skip_example","name":"skip_example","type":"string","binary":null},{"path":"/skipable_question","name":"skipable_question","type":"string","binary":null},{"path":"/group_test","name":"group_test","type":"structure","binary":null},{"path":"/group_test/field_list_note","name":"field_list_note","type":"string","binary":null},{"path":"/group_test/select_multiple_1","name":"select_multiple_1","type":"string","binary":null},{"path":"/group_test/select_multiple_2","name":"select_multiple_2","type":"string","binary":null},{"path":"/table_list_example","name":"table_list_example","type":"structure","binary":null},{"path":"/table_list_example/generated_table_list_label_22","name":"generated_table_list_label_22","type":"string","binary":null},{"path":"/table_list_example/reserved_name_for_field_list_labels_23","name":"reserved_name_for_field_list_labels_23","type":"string","binary":null},{"path":"/table_list_example/table_list_question_1","name":"table_list_question_1","type":"string","binary":null},{"path":"/table_list_example/table_list_question_2","name":"table_list_question_2","type":"string","binary":null},{"path":"/select_appearance_note","name":"select_appearance_note","type":"string","binary":null},{"path":"/labeled_select_group","name":"labeled_select_group","type":"structure","binary":null},{"path":"/labeled_select_group/label_test","name":"label_test","type":"string","binary":null},{"path":"/labeled_select_group/list-nolabel_test","name":"list-nolabel_test","type":"string","binary":null},{"path":"/compact_test","name":"compact_test","type":"string","binary":null},{"path":"/data_types_note","name":"data_types_note","type":"string","binary":null},{"path":"/date_test","name":"date_test","type":"date","binary":null},{"path":"/time_test","name":"time_test","type":"time","binary":null},{"path":"/datetime_test","name":"datetime_test","type":"dateTime","binary":null},{"path":"/geopoint_test","name":"geopoint_test","type":"geopoint","binary":null},{"path":"/barcode_test","name":"barcode_test","type":"barcode","binary":null},{"path":"/image_test","name":"image_test","type":"binary","binary":true},{"path":"/audio_test","name":"audio_test","type":"binary","binary":true},{"path":"/video_test","name":"video_test","type":"binary","binary":true},{"path":"/metadata_note","name":"metadata_note","type":"string","binary":null},{"path":"/start","name":"start","type":"dateTime","binary":null},{"path":"/start_test_output","name":"start_test_output","type":"string","binary":null},{"path":"/end","name":"end","type":"dateTime","binary":null},{"path":"/end_test_output","name":"end_test_output","type":"string","binary":null},{"path":"/today","name":"today","type":"date","binary":null},{"path":"/today_test_output","name":"today_test_output","type":"string","binary":null},{"path":"/deviceid","name":"deviceid","type":"string","binary":null},{"path":"/deviceid_test_output","name":"deviceid_test_output","type":"string","binary":null},{"path":"/simserial","name":"simserial","type":"string","binary":null},{"path":"/simserial_test_output","name":"simserial_test_output","type":"string","binary":null},{"path":"/phonenumber","name":"phonenumber","type":"string","binary":null},{"path":"/phonenumber_test_output","name":"phonenumber_test_output","type":"string","binary":null},{"path":"/meta","name":"meta","type":"structure","binary":null},{"path":"/meta/instanceID","name":"instanceID","type":"string","binary":null}]'
-  recorded_at: 2021-05-13 05:10:36 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:30 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/I8n_no_lang_choicefilter.xml
@@ -48,16 +53,22 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/xml; charset=utf-8
-      date: Thu, 13 May 2021 05:10:36 GMT
-      etag: W/"33c2-UEZPtauMhhJFnEoG9TyOzEWd2Bg"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/xml; charset=utf-8
       x-powered-by: Express
+      etag: W/"33c2-UEZPtauMhhJFnEoG9TyOzEWd2Bg"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:30 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342870.199772,VS0,VE325
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
@@ -184,5 +195,5 @@ http_interactions:
         and carrier this might not be recordable.</hint></input><input ref="/data/phonenumber_test_output"><label>phonenumber:
         <output value=" /data/phonenumber "/></label><hint>Depending on your device
         and carrier this might not be recordable.</hint></input></h:body></h:html>'
-  recorded_at: 2021-05-13 05:10:36 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:30 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

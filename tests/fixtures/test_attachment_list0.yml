@@ -16,22 +16,28 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/json; charset=utf-8
-      date: Thu, 13 May 2021 05:10:23 GMT
-      etag: W/"114-jMOoz9W4jx1FzSyJsY3oC1nGBVk"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/json; charset=utf-8
       x-powered-by: Express
+      etag: W/"138-8Z6aMV8R9qRXFegaq2FgPhhg5oM"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:15 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342856.560794,VS0,VE320
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
-      string: '[{"instanceId":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","submitter":{"id":53,"type":"field_key","displayName":"ruODK","createdAt":"2020-11-02T02:04:58.884Z","updatedAt":null},"deviceId":"android_id:5afb51f35ba0c572","createdAt":"2020-11-02T04:19:45.451Z","updatedAt":null}]'
-  recorded_at: 2021-05-13 05:10:24 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+      string: '[{"instanceId":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","submitterId":53,"deviceId":"android_id:5afb51f35ba0c572","createdAt":"2020-11-02T04:19:45.451Z","updatedAt":null,"reviewState":null,"submitter":{"id":53,"type":"field_key","displayName":"ruODK","createdAt":"2020-11-02T02:04:58.884Z","updatedAt":null}}]'
+  recorded_at: 2021-08-19 03:14:17 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04/submissions/uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28/attachments
@@ -48,22 +54,28 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/json; charset=utf-8
-      date: Thu, 13 May 2021 05:10:24 GMT
-      etag: W/"d8-R5uTYb94fvxv3+rZykx3KxOcfpA"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/json; charset=utf-8
       x-powered-by: Express
+      etag: W/"d8-R5uTYb94fvxv3+rZykx3KxOcfpA"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:16 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342856.005774,VS0,VE866
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '[{"name":"1604290006239.jpg","exists":true},{"name":"1604290049411.jpg","exists":true},{"name":"1604290379613.jpg","exists":true},{"name":"1604290400891.jpg","exists":true},{"name":"1604290499008.jpg","exists":true}]'
-  recorded_at: 2021-05-13 05:10:24 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:17 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04/submissions/uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28/attachments
@@ -80,19 +92,25 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/json; charset=utf-8
-      date: Thu, 13 May 2021 05:10:24 GMT
-      etag: W/"d8-R5uTYb94fvxv3+rZykx3KxOcfpA"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/json; charset=utf-8
       x-powered-by: Express
+      etag: W/"d8-R5uTYb94fvxv3+rZykx3KxOcfpA"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:17 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342857.988006,VS0,VE329
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '[{"name":"1604290006239.jpg","exists":true},{"name":"1604290049411.jpg","exists":true},{"name":"1604290379613.jpg","exists":true},{"name":"1604290400891.jpg","exists":true},{"name":"1604290499008.jpg","exists":true}]'
-  recorded_at: 2021-05-13 05:10:24 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:17 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

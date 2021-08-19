@@ -15,17 +15,23 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/xml; charset=utf-8
-      date: Thu, 13 May 2021 05:10:47 GMT
-      etag: W/"1af1-RimHBtm/NxLxQJ85lvRi+fOzPCs"
-      odata-version: '4.0'
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/xml; charset=utf-8
       x-powered-by: Express
+      odata-version: '4.0'
+      etag: W/"1c6b-pUcbOjbzvjiQhs94n1sFhHEryl8"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:45 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342885.021978,VS0,VE330
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
@@ -41,10 +47,19 @@ http_interactions:
                 <Property Name="attachmentsPresent" Type="Edm.Int64"/>
                 <Property Name="attachmentsExpected" Type="Edm.Int64"/>
                 <Property Name="status" Type="org.opendatakit.submission.Status"/>
+                <Property Name="reviewState" Type="org.opendatakit.submission.ReviewState"/>
+                <Property Name="deviceId" Type="Edm.String"/>
+                <Property Name="edits" Type="Edm.Int64"/>
               </ComplexType>
               <EnumType Name="Status">
-                <Member Name="NotDecrypted"/>
-                <Member Name="MissingEncryptedFormData"/>
+                <Member Name="notDecrypted"/>
+                <Member Name="missingEncryptedFormData"/>
+              </EnumType>
+              <EnumType Name="ReviewState">
+                <Member Name="hasIssues"/>
+                <Member Name="edited"/>
+                <Member Name="rejected"/>
+                <Member Name="approved"/>
               </EnumType>
             </Schema>
             <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="org.opendatakit.user.Flora_Quadrat_04">
@@ -155,5 +170,5 @@ http_interactions:
             </Schema>
           </edmx:DataServices>
         </edmx:Edmx>
-  recorded_at: 2021-05-13 05:10:47 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:45 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

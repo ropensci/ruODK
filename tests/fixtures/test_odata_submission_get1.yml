@@ -15,20 +15,26 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/json; charset=utf-8; odata.metadata=minimal
-      date: Fri, 04 Jun 2021 02:29:43 GMT
-      etag: W/"16d-WLGPb41H8z09a+jpiYUtvCEFcpA"
-      odata-version: '4.0'
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/json; charset=utf-8; odata.metadata=minimal
       x-powered-by: Express
+      odata-version: '4.0'
+      etag: W/"16d-WLGPb41H8z09a+jpiYUtvCEFcpA"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:50 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342890.230705,VS0,VE317
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '{"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc/$metadata","value":[{"name":"Submissions","kind":"EntitySet","url":"Submissions"},{"name":"Submissions.vegetation_stratum","kind":"EntitySet","url":"Submissions.vegetation_stratum"},{"name":"Submissions.taxon_encounter","kind":"EntitySet","url":"Submissions.taxon_encounter"}]}'
-  recorded_at: 2021-06-04 02:29:43 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:50 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

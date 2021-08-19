@@ -15,22 +15,28 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/json; charset=utf-8
-      date: Thu, 13 May 2021 05:10:34 GMT
-      etag: W/"2b6-7MpRREPy5M23KgOeg+DuWNXx0AE"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/json; charset=utf-8
       x-powered-by: Express
+      etag: W/"2b6-7MpRREPy5M23KgOeg+DuWNXx0AE"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:29 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342869.913734,VS0,VE357
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '[{"path":"/some_text","name":"some_text","type":"string","binary":null},{"path":"/text_image_audio_video_test","name":"text_image_audio_video_test","type":"string","binary":null},{"path":"/a_integer","name":"a_integer","type":"int","binary":null},{"path":"/a_decimal","name":"a_decimal","type":"decimal","binary":null},{"path":"/calculate","name":"calculate","type":"string","binary":null},{"path":"/calculate_test_output","name":"calculate_test_output","type":"string","binary":null},{"path":"/test_yn","name":"test_yn","type":"string","binary":null},{"path":"/meta","name":"meta","type":"structure","binary":null},{"path":"/meta/instanceID","name":"instanceID","type":"string","binary":null}]'
-  recorded_at: 2021-05-13 05:10:35 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:29 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/I8n_label_choices.xml
@@ -47,16 +53,22 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/xml; charset=utf-8
-      date: Thu, 13 May 2021 05:10:35 GMT
-      etag: W/"1b5b-US6cYHvq/vqyCP3TQNx15lxs4Ds"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/xml; charset=utf-8
       x-powered-by: Express
+      etag: W/"1b5b-US6cYHvq/vqyCP3TQNx15lxs4Ds"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:29 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342869.353161,VS0,VE323
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
@@ -165,5 +177,5 @@ http_interactions:
                 </select1>
             </h:body>
         </h:html>
-  recorded_at: 2021-05-13 05:10:35 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:29 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

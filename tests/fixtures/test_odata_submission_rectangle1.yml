@@ -23,12 +23,12 @@ http_interactions:
       cache-control: private
       content-encoding: gzip
       accept-ranges: bytes
-      date: Wed, 18 Aug 2021 09:49:25 GMT
+      date: Thu, 19 Aug 2021 03:15:03 GMT
       via: 1.1 varnish
-      x-served-by: cache-per12623-PER
+      x-served-by: cache-per12627-PER
       x-cache: MISS
       x-cache-hits: '0'
-      x-timer: S1629280165.527140,VS0,VE643
+      x-timer: S1629342903.471580,VS0,VE446
       vary: Accept-Encoding
       strict-transport-security: max-age=31557600
     body:
@@ -36,5 +36,5 @@ http_interactions:
       file: no
       string: '{"value":[{"__id":"uuid:e2309c82-c908-4a41-a898-dfe16b41d94b","some_text":"Test
         2","text_image_audio_video_test":null,"a_integer":123,"a_decimal":10,"calculate":"133","calculate_test_output":null,"test_yn":"1","__system":{"submissionDate":"2020-11-02T04:41:14.761Z","submitterId":"53","submitterName":"ruODK","attachmentsPresent":0,"attachmentsExpected":0,"status":null,"reviewState":null,"deviceId":"android_id:5afb51f35ba0c572","edits":0},"meta":{"instanceID":"uuid:e2309c82-c908-4a41-a898-dfe16b41d94b"}},{"__id":"uuid:2c0b6cf8-2486-464b-bde8-f789f527f623","some_text":"Test","text_image_audio_video_test":null,"a_integer":123,"a_decimal":10,"calculate":"133","calculate_test_output":null,"test_yn":"99","__system":{"submissionDate":"2020-11-02T04:40:19.975Z","submitterId":"53","submitterName":"ruODK","attachmentsPresent":0,"attachmentsExpected":0,"status":null,"reviewState":null,"deviceId":"android_id:5afb51f35ba0c572","edits":0},"meta":{"instanceID":"uuid:2c0b6cf8-2486-464b-bde8-f789f527f623"}}],"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/I8n_label_choices.svc/$metadata#Submissions"}'
-  recorded_at: 2021-08-18 09:49:25 GMT
+  recorded_at: 2021-08-19 03:15:03 GMT
   recorded_with: vcr/1.0.2, webmockr/0.8.0

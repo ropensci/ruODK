@@ -23,17 +23,17 @@ http_interactions:
       cache-control: private
       content-encoding: gzip
       accept-ranges: bytes
-      date: Wed, 18 Aug 2021 09:49:24 GMT
+      date: Thu, 19 Aug 2021 03:15:03 GMT
       via: 1.1 varnish
-      x-served-by: cache-per12623-PER
+      x-served-by: cache-per12627-PER
       x-cache: MISS
       x-cache-hits: '0'
-      x-timer: S1629280164.119206,VS0,VE315
+      x-timer: S1629342903.020412,VS0,VE336
       vary: Accept-Encoding
       strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '[{"path":"/some_text","name":"some_text","type":"string","binary":null},{"path":"/text_image_audio_video_test","name":"text_image_audio_video_test","type":"string","binary":null},{"path":"/a_integer","name":"a_integer","type":"int","binary":null},{"path":"/a_decimal","name":"a_decimal","type":"decimal","binary":null},{"path":"/calculate","name":"calculate","type":"string","binary":null},{"path":"/calculate_test_output","name":"calculate_test_output","type":"string","binary":null},{"path":"/test_yn","name":"test_yn","type":"string","binary":null},{"path":"/meta","name":"meta","type":"structure","binary":null},{"path":"/meta/instanceID","name":"instanceID","type":"string","binary":null}]'
-  recorded_at: 2021-08-18 09:49:24 GMT
+  recorded_at: 2021-08-19 03:15:03 GMT
   recorded_with: vcr/1.0.2, webmockr/0.8.0

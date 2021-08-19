@@ -19,25 +19,24 @@ http_interactions:
       server: nginx
       content-type: application/json; charset=utf-8
       x-powered-by: Express
-      etag: W/"114-jMOoz9W4jx1FzSyJsY3oC1nGBVk"
+      etag: W/"138-8Z6aMV8R9qRXFegaq2FgPhhg5oM"
       x-content-type-options: nosniff
+      cache-control: private
       content-encoding: gzip
       accept-ranges: bytes
-      date: Sun, 01 Aug 2021 05:40:20 GMT
+      date: Thu, 19 Aug 2021 03:15:36 GMT
       via: 1.1 varnish
-      age: '31'
-      x-served-by: cache-per12621-PER
-      x-cache: HIT
-      x-cache-hits: '1'
-      x-timer: S1627796421.782165,VS0,VE0
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342936.922177,VS0,VE870
       vary: Accept-Encoding
       strict-transport-security: max-age=31557600
-      content-length: '217'
     body:
       encoding: UTF-8
       file: no
-      string: '[{"instanceId":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","submitter":{"id":53,"type":"field_key","displayName":"ruODK","createdAt":"2020-11-02T02:04:58.884Z","updatedAt":null},"deviceId":"android_id:5afb51f35ba0c572","createdAt":"2020-11-02T04:19:45.451Z","updatedAt":null}]'
-  recorded_at: 2021-08-01 05:40:20 GMT
+      string: '[{"instanceId":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","submitterId":53,"deviceId":"android_id:5afb51f35ba0c572","createdAt":"2020-11-02T04:19:45.451Z","updatedAt":null,"reviewState":null,"submitter":{"id":53,"type":"field_key","displayName":"ruODK","createdAt":"2020-11-02T02:04:58.884Z","updatedAt":null}}]'
+  recorded_at: 2021-08-19 03:15:38 GMT
   recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
@@ -59,23 +58,22 @@ http_interactions:
       server: nginx
       content-type: application/json; charset=utf-8
       x-powered-by: Express
-      etag: W/"112-W7e7OhnnQRD2b4ZjJcBAODcZE1w"
+      etag: W/"136-Gar54DFKgUZX7IiKcg1glRGY2qY"
       x-content-type-options: nosniff
+      cache-control: private
       content-encoding: gzip
       accept-ranges: bytes
-      date: Sun, 01 Aug 2021 05:40:20 GMT
+      date: Thu, 19 Aug 2021 03:15:38 GMT
       via: 1.1 varnish
-      age: '31'
-      x-served-by: cache-per12621-PER
-      x-cache: HIT
-      x-cache-hits: '1'
-      x-timer: S1627796421.883173,VS0,VE0
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342937.886472,VS0,VE1569
       vary: Accept-Encoding
       strict-transport-security: max-age=31557600
-      content-length: '214'
     body:
       encoding: UTF-8
       file: no
-      string: '{"instanceId":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","submitter":{"id":53,"type":"field_key","displayName":"ruODK","createdAt":"2020-11-02T02:04:58.884Z","updatedAt":null},"deviceId":"android_id:5afb51f35ba0c572","createdAt":"2020-11-02T04:19:45.451Z","updatedAt":null}'
-  recorded_at: 2021-08-01 05:40:20 GMT
+      string: '{"instanceId":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","submitterId":53,"deviceId":"android_id:5afb51f35ba0c572","createdAt":"2020-11-02T04:19:45.451Z","updatedAt":null,"reviewState":null,"submitter":{"id":53,"type":"field_key","displayName":"ruODK","createdAt":"2020-11-02T02:04:58.884Z","updatedAt":null}}'
+  recorded_at: 2021-08-19 03:15:38 GMT
   recorded_with: vcr/1.0.2, webmockr/0.8.0

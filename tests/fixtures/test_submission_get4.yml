@@ -15,21 +15,27 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/xml; charset=utf-8
-      date: Thu, 13 May 2021 05:11:49 GMT
-      etag: W/"459-MV2+EblTFgBF8ir/x91Gcg8+c18"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/xml; charset=utf-8
       x-powered-by: Express
+      etag: W/"459-MV2+EblTFgBF8ir/x91Gcg8+c18"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:15:51 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342951.951322,VS0,VE348
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: |-
         <data id="Locations" version="[encrypted:AXWHCx0e]" encrypted="yes" xmlns="http://www.opendatakit.org/xforms/encrypted"><base64EncryptedKey>NEGUzTRVw8qvwResHehHCAOzvbyjPtw1PIoHvDrt4KW1LuDuvka1qkTYB6d2J+fitKHWQSHyRK7ctBMqg4zeBNoWSvNIPv+zWnZeudDRYn/WfGmlt5otty6H4T2EJfCM5afe26gFzggIm0kRFHsFC59bP/qX3ZeTMqyhKfpKfxiXljBPCXDcdxMPu9UJO7gyaGHVHBtBcg3LwPQO1ZtCh3QG8G+gsJ4pCWu/lQF4zGo1PjkmC4JkYAg6ADpwugQiJ6+RVWorxpbj0QN0CJmtfvxMCAzPC2jlkasGANVtPbS1zGM65SlUKSFq/ZSXgaFubYVLtJeUhRvWAzhQywqTdA==</base64EncryptedKey><orx:meta xmlns:orx="http://openrosa.org/xforms"><orx:instanceID>uuid:fff511d0-368b-4ee7-89b0-faa8322c5981</orx:instanceID></orx:meta>
         <encryptedXmlFile>submission.xml.enc</encryptedXmlFile><base64EncryptedElementSignature>i7X/YgnB4ReYdsLz18D1DnZfbY648aZlWRqFLOYx/P5MEZFJJilFFXXKmiDQXnQPNsd0fxJf4AXVn8/lg754ydffF2XFaVAKfdat0etXtADe5Ydj95gcBUyFn1zCK7bht+3Hc2/j/hu2ztK32eW5K4atTQdmbgWf4XnWtIw4VTBs1hICOqR6UNP3tmdEIMTHPvzxNOv3IKnP/oY1JdIVmOaW4v81Ao4NXmQjfy7bgNUcC9MMJdDB/pGfdY6BgsJ5ILKc8xySUgBDvdndUH9hIyiZoMu7zTON8c+BI3TrWovXURkUy5aRYxEwudYwThQAkzM55cT/JemM1Xy4y2i7bw==</base64EncryptedElementSignature></data>
-  recorded_at: 2021-05-13 05:11:49 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:15:51 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

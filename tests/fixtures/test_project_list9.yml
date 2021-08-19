@@ -17,18 +17,25 @@ http_interactions:
       message: 'Client error: (401) Unauthorized'
     headers:
       server: nginx
-      date: Thu, 13 May 2021 05:11:28 GMT
       content-type: application/json; charset=utf-8
-      content-length: '80'
       x-powered-by: Express
       etag: W/"50-ZRrLMzj8S67I1VD1Vnbql2PHY1Y"
-      strict-transport-security: max-age=63072000
+      cache-control: private
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:15:24 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342924.005261,VS0,VE821
+      strict-transport-security: max-age=31557600
+      content-length: '80'
     body:
       encoding: UTF-8
       file: no
       string: '{"message":"Could not authenticate with the provided credentials.","code":401.2}'
-  recorded_at: 2021-05-13 05:11:33 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:15:28 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects
@@ -47,18 +54,25 @@ http_interactions:
       message: 'Client error: (401) Unauthorized'
     headers:
       server: nginx
-      date: Thu, 13 May 2021 05:11:30 GMT
       content-type: application/json; charset=utf-8
-      content-length: '80'
       x-powered-by: Express
       etag: W/"50-ZRrLMzj8S67I1VD1Vnbql2PHY1Y"
-      strict-transport-security: max-age=63072000
+      cache-control: private
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:15:26 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342926.889760,VS0,VE809
+      strict-transport-security: max-age=31557600
+      content-length: '80'
     body:
       encoding: UTF-8
       file: no
       string: '{"message":"Could not authenticate with the provided credentials.","code":401.2}'
-  recorded_at: 2021-05-13 05:11:33 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:15:28 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects
@@ -77,15 +91,22 @@ http_interactions:
       message: 'Client error: (401) Unauthorized'
     headers:
       server: nginx
-      date: Thu, 13 May 2021 05:11:33 GMT
       content-type: application/json; charset=utf-8
-      content-length: '80'
       x-powered-by: Express
       etag: W/"50-ZRrLMzj8S67I1VD1Vnbql2PHY1Y"
-      strict-transport-security: max-age=63072000
+      cache-control: private
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:15:28 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342928.784018,VS0,VE560
+      strict-transport-security: max-age=31557600
+      content-length: '80'
     body:
       encoding: UTF-8
       file: no
       string: '{"message":"Could not authenticate with the provided credentials.","code":401.2}'
-  recorded_at: 2021-05-13 05:11:33 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:15:28 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

@@ -15,25 +15,30 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/json; charset=utf-8
-      date: Fri, 04 Jun 2021 02:29:47 GMT
-      odata-version: '4.0'
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      vary: Accept-Encoding
-      x-content-type-options: nosniff
+      content-type: application/json; charset=utf-8
       x-powered-by: Express
+      odata-version: '4.0'
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:54 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342894.544904,VS0,VE632
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
-      string: '{"value":[{"__id":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","encounter_start_datetime":"2020-11-02T12:06:19.314+08:00","reporter":null,"device_id":"5afb51f35ba0c572","encounter_end_datetime":"2020-11-02T12:15:48.463+08:00","__system":{"submissionDate":"2020-11-02T04:19:45.451Z","submitterId":"53","submitterName":"ruODK","attachmentsPresent":5,"attachmentsExpected":5,"status":null},"meta":{"instanceID":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28"},"location":{"area_name":"Test
+      string: '{"value":[{"__id":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","encounter_start_datetime":"2020-11-02T12:06:19.314+08:00","reporter":null,"device_id":"5afb51f35ba0c572","encounter_end_datetime":"2020-11-02T12:15:48.463+08:00","__system":{"submissionDate":"2020-11-02T04:19:45.451Z","submitterId":"53","submitterName":"ruODK","attachmentsPresent":5,"attachmentsExpected":5,"status":null,"reviewState":null,"deviceId":"android_id:5afb51f35ba0c572","edits":0},"meta":{"instanceID":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28"},"location":{"area_name":"Test
         site 1","quadrat_photo":"1604290006239.jpg","corner1":"POINT (115.8843989
-        -31.9959554 -12.699999809265137)"},"habitat":{"morphological_type":"flat","morphological_type_photo":"1604290049411.jpg"},"vegetation_stratum@odata.navigationLink":"Submissions(''uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28'')/vegetation_stratum","perimeter":{"corner2":"POINT
+        -31.9959554 -12.699999809265137)"},"habitat":{"morphological_type":"flat","morphological_type_photo":"1604290049411.jpg"},"vegetation_stratum@odata.navigationLink":"Submissions(''uuid%3A469f71d3-d7aa-4c74-8aaa-af5f667a2f28'')/vegetation_stratum","perimeter":{"corner2":"POINT
         (115.8842726 -31.9957893 -21.19999885559082)","corner3":"POINT (115.8843031
         -31.9958188 -21.19999885559082)","corner4":"POINT (115.8845949 -31.9961397
-        -12.699999809265137)","mudmap_photo":"1604290379613.jpg"},"taxon_encounter@odata.navigationLink":"Submissions(''uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28'')/taxon_encounter"}],"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc/$metadata#Submissions","@odata.count":1}'
-  recorded_at: 2021-06-04 02:29:48 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+        -12.699999809265137)","mudmap_photo":"1604290379613.jpg"},"taxon_encounter@odata.navigationLink":"Submissions(''uuid%3A469f71d3-d7aa-4c74-8aaa-af5f667a2f28'')/taxon_encounter"}],"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc/$metadata#Submissions","@odata.count":1}'
+  recorded_at: 2021-08-19 03:14:54 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

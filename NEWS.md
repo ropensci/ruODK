@@ -1,4 +1,16 @@
-# `ruODK` 0.10.2.9000 (development version)
+# `ruODK` 1.2.0
+## Major fixes
+* ODK Central returns Geoshapes as Multipolygon. `split_geoshape` adjusted for
+  `odkce_version` >= 1.2. (#131)
+* `readr::parse_datetime` stopped supporting timezone "Z". (#130)
+## Minor fixes
+## Documentation
+## Data
+* All data refreshed from test server running ODK Central 1.2.
+## Maintenance
+
+
+# `ruODK` 0.10.2
 ## Major fixes
 ## Minor fixes
 ## Documentation

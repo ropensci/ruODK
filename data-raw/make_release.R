@@ -53,6 +53,10 @@ if (fs::file_info("README.md")$modification_time <
   if (fs::file_exists("README.html")) fs::file_delete("README.html")
 }
 #
+# Wipe cached server responses (vcr cassettes)
+# If tests are run against outdated vcr cassettes, new server behaviour
+# may not be detected
+fs::dir_ls(here::here("tests/fixtures/"), glob = "*.yml") %>% fs::file_delete()
 # Checks
 pkgdown::build_site() # Simulate
 goodpractice::goodpractice(quiet = FALSE)

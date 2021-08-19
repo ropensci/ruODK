@@ -15,16 +15,22 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/xml; charset=utf-8
-      date: Thu, 13 May 2021 05:10:40 GMT
-      etag: W/"920b-IGz1WyitzYLbkbxcEQElJGVMW9E"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/xml; charset=utf-8
       x-powered-by: Express
+      etag: W/"920b-IGz1WyitzYLbkbxcEQElJGVMW9E"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:34 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342874.956233,VS0,VE328
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
@@ -458,5 +464,5 @@ http_interactions:
         \           <hint ref=\"jr:itext('/data/taxon_encounter/voucher_specimen_label:hint')\"/>\r\n
         \         </input>\r\n        </group>\r\n      </repeat>\r\n    </group>\r\n
         \ </h:body>\r\n</h:html>\r\n"
-  recorded_at: 2021-05-13 05:10:40 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:34 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

@@ -15,29 +15,34 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/json; charset=utf-8
-      date: Fri, 04 Jun 2021 02:29:43 GMT
-      odata-version: '4.0'
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      vary: Accept-Encoding
-      x-content-type-options: nosniff
+      content-type: application/json; charset=utf-8
       x-powered-by: Express
+      odata-version: '4.0'
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:50 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342891.642275,VS0,VE354
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
-      string: '{"value":[{"__id":"582ede2c67350e6f7bc5132efa023511eadc40cb","__Submissions-id":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","nvis_level3_broad_floristic_group":"c1.0_surface_crusts","max_height_m":0.1,"foliage_cover":"5-0","dominant_species_1":"Lichen
+      string: '{"value":[{"nvis_level3_broad_floristic_group":"c1.0_surface_crusts","max_height_m":0.1,"foliage_cover":"5-0","dominant_species_1":"Lichen
         sp 1","dominant_species_2":"Lichen sp 2","dominant_species_3":"Lichen sp 3","dominant_species_4":"Lichen
-        sp 4"},{"__id":"d82d70d62b06f7c55e808ce38d0b4f9bb8263c25","__Submissions-id":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","nvis_level3_broad_floristic_group":"w3.0_shrub","max_height_m":0.5,"foliage_cover":"30-10","dominant_species_1":"Shrub
+        sp 4","__id":"582ede2c67350e6f7bc5132efa023511eadc40cb","__Submissions-id":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28"},{"nvis_level3_broad_floristic_group":"w3.0_shrub","max_height_m":0.5,"foliage_cover":"30-10","dominant_species_1":"Shrub
         sp 1","dominant_species_2":"Shrub sp 2","dominant_species_3":"Shrub sp 3","dominant_species_4":"Shrub
-        sp 4"},{"__id":"010466aa295fd5c0c250e23a8fcd0bc4e7f77673","__Submissions-id":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28","nvis_level3_broad_floristic_group":"w2.1_mallee","max_height_m":2,"foliage_cover":"5-0","dominant_species_1":"Mallee
+        sp 4","__id":"d82d70d62b06f7c55e808ce38d0b4f9bb8263c25","__Submissions-id":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28"},{"nvis_level3_broad_floristic_group":"w2.1_mallee","max_height_m":2,"foliage_cover":"5-0","dominant_species_1":"Mallee
         sp 1","dominant_species_2":"Mallee sp 2","dominant_species_3":"Mallee sp 3","dominant_species_4":"Mallee
-        sp 4"}],"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc/$metadata#Submissions.vegetation_stratum"}'
-  recorded_at: 2021-06-04 02:29:44 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+        sp 4","__id":"010466aa295fd5c0c250e23a8fcd0bc4e7f77673","__Submissions-id":"uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28"}],"@odata.context":"https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc/$metadata#Submissions.vegetation_stratum"}'
+  recorded_at: 2021-08-19 03:14:51 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
 - request:
     method: get
     uri: https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04/fields?flatten=FALSE&odata=FALSE
@@ -54,20 +59,25 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/json; charset=utf-8
-      date: Fri, 04 Jun 2021 02:29:44 GMT
-      etag: W/"bdf-C11XpUCPNjdiK9lUpOOOsqklGbw"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      vary: Accept-Encoding
-      x-content-type-options: nosniff
+      content-type: application/json; charset=utf-8
       x-powered-by: Express
+      etag: W/"bdf-C11XpUCPNjdiK9lUpOOOsqklGbw"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:14:51 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342891.026588,VS0,VE313
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
       string: '[{"path":"/meta","name":"meta","type":"structure","binary":null},{"path":"/meta/instanceID","name":"instanceID","type":"string","binary":null},{"path":"/encounter_start_datetime","name":"encounter_start_datetime","type":"dateTime","binary":null},{"path":"/reporter","name":"reporter","type":"string","binary":null},{"path":"/device_id","name":"device_id","type":"string","binary":null},{"path":"/location","name":"location","type":"structure","binary":null},{"path":"/location/area_name","name":"area_name","type":"string","binary":null},{"path":"/location/quadrat_photo","name":"quadrat_photo","type":"binary","binary":true},{"path":"/location/corner1","name":"corner1","type":"geopoint","binary":null},{"path":"/habitat","name":"habitat","type":"structure","binary":null},{"path":"/habitat/morphological_type","name":"morphological_type","type":"select1","binary":null},{"path":"/habitat/morphological_type_photo","name":"morphological_type_photo","type":"binary","binary":true},{"path":"/vegetation_stratum","name":"vegetation_stratum","type":"repeat","binary":null},{"path":"/vegetation_stratum/nvis_level3_broad_floristic_group","name":"nvis_level3_broad_floristic_group","type":"select1","binary":null},{"path":"/vegetation_stratum/max_height_m","name":"max_height_m","type":"decimal","binary":null},{"path":"/vegetation_stratum/foliage_cover","name":"foliage_cover","type":"select1","binary":null},{"path":"/vegetation_stratum/dominant_species_1","name":"dominant_species_1","type":"string","binary":null},{"path":"/vegetation_stratum/dominant_species_2","name":"dominant_species_2","type":"string","binary":null},{"path":"/vegetation_stratum/dominant_species_3","name":"dominant_species_3","type":"string","binary":null},{"path":"/vegetation_stratum/dominant_species_4","name":"dominant_species_4","type":"string","binary":null},{"path":"/perimeter","name":"perimeter","type":"structure","binary":null},{"path":"/perimeter/corner2","name":"corner2","type":"geopoint","binary":null},{"path":"/perimeter/corner3","name":"corner3","type":"geopoint","binary":null},{"path":"/perimeter/corner4","name":"corner4","type":"geopoint","binary":null},{"path":"/perimeter/mudmap_photo","name":"mudmap_photo","type":"binary","binary":true},{"path":"/taxon_encounter","name":"taxon_encounter","type":"repeat","binary":null},{"path":"/taxon_encounter/field_name","name":"field_name","type":"string","binary":null},{"path":"/taxon_encounter/photo_in_situ","name":"photo_in_situ","type":"binary","binary":true},{"path":"/taxon_encounter/taxon_encounter_location","name":"taxon_encounter_location","type":"geopoint","binary":null},{"path":"/taxon_encounter/life_form","name":"life_form","type":"select1","binary":null},{"path":"/taxon_encounter/voucher_specimen_barcode","name":"voucher_specimen_barcode","type":"barcode","binary":null},{"path":"/taxon_encounter/voucher_specimen_label","name":"voucher_specimen_label","type":"string","binary":null},{"path":"/encounter_end_datetime","name":"encounter_end_datetime","type":"dateTime","binary":null}]'
-  recorded_at: 2021-06-04 02:29:44 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:14:51 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0

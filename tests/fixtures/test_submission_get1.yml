@@ -15,16 +15,22 @@ http_interactions:
       reason: OK
       message: 'Success: (200) OK'
     headers:
-      content-encoding: gzip
-      content-type: application/xml; charset=utf-8
-      date: Thu, 13 May 2021 05:11:47 GMT
-      etag: W/"ba8-Ktd4CquF+VWi04bCN7CDUbjIxZA"
       server: nginx
-      strict-transport-security:
-      - max-age=31536000
-      - max-age=63072000
-      x-content-type-options: nosniff
+      content-type: application/xml; charset=utf-8
       x-powered-by: Express
+      etag: W/"ba8-Ktd4CquF+VWi04bCN7CDUbjIxZA"
+      x-content-type-options: nosniff
+      cache-control: private
+      content-encoding: gzip
+      accept-ranges: bytes
+      date: Thu, 19 Aug 2021 03:15:49 GMT
+      via: 1.1 varnish
+      x-served-by: cache-per12627-PER
+      x-cache: MISS
+      x-cache-hits: '0'
+      x-timer: S1629342950.631606,VS0,VE332
+      vary: Accept-Encoding
+      strict-transport-security: max-age=31557600
     body:
       encoding: UTF-8
       file: no
@@ -45,5 +51,5 @@ http_interactions:
         115.8844306 -16.5325927734375 4.832</taxon_encounter_location><life_form>w2.1_mallee</life_form><voucher_specimen_barcode>NHA70209-01</voucher_specimen_barcode><voucher_specimen_label>Specimen1</voucher_specimen_label></taxon_encounter><taxon_encounter><field_name>Shrub
         1</field_name><photo_in_situ>1604290499008.jpg</photo_in_situ><taxon_encounter_location>-31.9959848
         115.8844333 -16.799999237060547 4.841</taxon_encounter_location><life_form>w3.0_shrub</life_form><voucher_specimen_barcode>14724808</voucher_specimen_barcode><voucher_specimen_label>Specimen2</voucher_specimen_label></taxon_encounter><encounter_end_datetime>2020-11-02T12:15:48.463+08:00</encounter_end_datetime></data>
-  recorded_at: 2021-05-13 05:11:47 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.8.0
+  recorded_at: 2021-08-19 03:15:50 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.0
