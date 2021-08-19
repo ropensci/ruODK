@@ -164,6 +164,9 @@ test_that("submission_export works with encryption", {
 # nolint end
 
 test_that("submission_export warns of missing credentials", {
+
+  skip_on_cran()
+
   t <- tempdir()
   fs::dir_ls(t) %>% fs::file_delete()
 
@@ -238,6 +241,7 @@ test_that("submission_export warns of missing credentials", {
 })
 
 test_that("submission_export excludes media", {
+
   # This test downloads files
   skip_on_cran()
 
