@@ -1,4 +1,5 @@
 test_that("submission_detail works", {
+  skip_on_cran()
   vcr::use_cassette("test_submission_detail0", {
     sl <- submission_list(
       pid = get_test_pid(),

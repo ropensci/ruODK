@@ -1,4 +1,6 @@
 test_that("ru_setup does not update settings if given NULL", {
+  skip_on_cran()
+
   xx <- ru_settings()
 
   # This does not change settings
@@ -55,6 +57,8 @@ test_that("ru_setup does not update settings if given NULL", {
 })
 
 test_that("ru_setup resets settings if given empty string", {
+
+  skip_on_cran()
 
   # Keep original test settings
   url <- get_default_url()
@@ -169,6 +173,7 @@ test_that("ru_setup resets settings if given empty string", {
 })
 
 test_that("get_default_tz warns and defaults to UTC if tz set to ''", {
+  skip_on_cran()
 
   # tz0 <- get_default_tz()s
   # testthat::expect_equal(tz0, "UTC") # TZ is not set in tests # nolint
@@ -189,6 +194,7 @@ test_that("get_default_tz warns and defaults to UTC if tz set to ''", {
 
 test_that("ru_setup sets pid, fid, url if given service url", {
 
+  skip_on_cran()
   # Save sane state
   test_pid <- get_test_pid()
   test_fid <- get_test_fid()
@@ -224,6 +230,8 @@ test_that("ru_setup sets pid, fid, url if given service url", {
 })
 
 test_that("ru_setup sets individual settings", {
+  skip_on_cran()
+
   ru_setup(verbose = FALSE)
   testthat::expect_equal(get_ru_verbose(), FALSE)
 
@@ -293,6 +301,7 @@ test_that("ru_settings prints only if verbose", {
 })
 
 test_that("retries default to 1L if empty or invalid", {
+  skip_on_cran()
 
   # Keep a memory of better times
   retries <- get_retries()
