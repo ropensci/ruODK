@@ -1,3 +1,18 @@
+# `ruODK` 1.2.0.0000
+We are shaping up to a release targetting the ODK Central 1.2 release.
+ODK Central is undergoing some bug fixes and patches, while ruODK's test server
+will be migrated to another instance. The latter is required to enable tests
+which create/update/delete entities in ODK Central.
+
+## Major fixes
+## Minor fixes
+## Documentation
+## Data
+## Maintenance
+* All DEPENDS and SUGGESTS bumped to latest available under R release.
+* The minimum supported version is `rversions::r_oldrel()`: 4.0.5 (2021-03-31).
+* ruODK is developed under `rversions::r_release()`: 4.1.1 (2021-08-10).
+
 # `ruODK` 1.2.0
 ## Major fixes
 * ODK Central returns Geoshapes as Multipolygon. `split_geoshape` adjusted for
