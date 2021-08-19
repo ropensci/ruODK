@@ -65,14 +65,14 @@ submission_detail <- function(iid,
         submitter = .$submitter$displayName,
         created_at = readr::parse_datetime(
           .$createdAt,
-          format = "%Y-%m-%dT%H:%M:%OS%Z"
+          format = "%Y-%m-%dT%H:%M:%OSZ"
         ),
         updated_at = ifelse(
           is.null(.$updatedAt),
           NA,
           readr::parse_datetime(
             .$updatedAt,
-            format = "%Y-%m-%dT%H:%M:%OS%Z"
+            format = "%Y-%m-%dT%H:%M:%OSZ"
           )
         )
       )
