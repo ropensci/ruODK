@@ -1,6 +1,7 @@
 test_that("submission_export works", {
   # This test downloads files
   skip_on_cran()
+  skip_on_ci()
 
   # A fresh litterbox
   t <- tempdir()
@@ -103,6 +104,7 @@ test_that("submission_export works", {
 
 test_that("submission_export works with encryption", {
   skip_on_cran()
+  skip_on_ci()
 
   # nolint start
   # # This is needed to run the tests for this file only
@@ -166,6 +168,7 @@ test_that("submission_export works with encryption", {
 test_that("submission_export warns of missing credentials", {
 
   skip_on_cran()
+  skip_on_ci()
 
   t <- tempdir()
   fs::dir_ls(t) %>% fs::file_delete()
@@ -244,6 +247,7 @@ test_that("submission_export excludes media", {
 
   # This test downloads files
   skip_on_cran()
+  skip_on_ci()
 
   # A fresh litterbox
   t <- tempdir()
