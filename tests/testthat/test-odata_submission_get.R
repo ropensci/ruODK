@@ -29,7 +29,8 @@ test_that("odata_submission_get skips download", {
 
 test_that("odata_submission_get works with one known dataset", {
   # This test downloads files
-  skip_on_cran()
+  skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
+
 
   t <- tempdir()
   fresh_raw <- odata_submission_get(

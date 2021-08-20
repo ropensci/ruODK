@@ -1,7 +1,6 @@
 test_that("submission_export works", {
   # This test downloads files
-  skip_on_cran()
-  skip_on_ci()
+  skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
 
   # A fresh litterbox
   t <- tempdir()
@@ -103,7 +102,7 @@ test_that("submission_export works", {
 })
 
 test_that("submission_export works with encryption", {
-  skip_on_cran()
+    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
   skip_on_ci()
 
   # nolint start
@@ -144,7 +143,7 @@ test_that("submission_export works with encryption", {
 # Seems it did just that when run from 11 separate GH Actions envs
 # test_that(
 #   "submission_export with wrong passphphrase does not blow up the server", {
-#     skip_on_cran()
+#       skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
 #
 #     t <- tempdir()
 #     fs::dir_ls(t) %>% fs::file_delete()
@@ -167,7 +166,7 @@ test_that("submission_export works with encryption", {
 
 test_that("submission_export warns of missing credentials", {
 
-  skip_on_cran()
+    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
   skip_on_ci()
 
   t <- tempdir()
@@ -246,7 +245,7 @@ test_that("submission_export warns of missing credentials", {
 test_that("submission_export excludes media", {
 
   # This test downloads files
-  skip_on_cran()
+    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
   skip_on_ci()
 
   # A fresh litterbox

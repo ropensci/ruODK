@@ -1,5 +1,5 @@
 test_that("attachment_get works", {
-  skip_on_cran()
+    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
   # nolint start
   # This is needed to run the tests for this file only
   # if (is.null(vcr::vcr_configuration()$write_disk_path)) {
@@ -102,7 +102,7 @@ test_that("attachment_url works", {
 test_that("get_one_attachment handles repeat download and NA filenames", {
   # This test checks behaviour upon multiple downloads of the same file.
   # Uncached, real-life behaviour is preferred here.
-  skip_on_cran()
+    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
 
   t <- tempdir()
   testthat::expect_true(fs::dir_exists(t))

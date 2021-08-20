@@ -1,5 +1,6 @@
 test_that("submission_detail works", {
-  skip_on_cran()
+  skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
+
   vcr::use_cassette("test_submission_detail0", {
     sl <- submission_list(
       pid = get_test_pid(),
