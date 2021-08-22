@@ -22,7 +22,9 @@ test_that("project_detail works", {
 })
 
 test_that("project_detail aborts on missing credentials", {
-    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
 
   testthat::expect_error(
     p <- project_detail(
@@ -53,7 +55,9 @@ test_that("project_detail aborts on missing credentials", {
 })
 
 test_that("project_detail warns on wrong credentials", {
-    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
 
   testthat::expect_error(
     p <- project_detail(

@@ -1,5 +1,7 @@
 test_that("user_list returns list of users", {
-    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
   # vcr::use_cassette("test_user_list0", {
   ul <- user_list(
     url = get_test_url(),
@@ -28,7 +30,7 @@ test_that("user_list returns list of users", {
 })
 
 test_that("user_list returns filtered list of users", {
-    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
   # vcr::use_cassette("test_user_list1", {
 
   # Use the first user's name to generate search strings

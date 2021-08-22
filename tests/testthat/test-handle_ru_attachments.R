@@ -1,6 +1,8 @@
 test_that("handle_ru_attachments downloads files", {
   # This test downloads files
-    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
 
   data("fq_raw")
   data("fq_form_schema")
@@ -27,7 +29,9 @@ test_that("handle_ru_attachments downloads files", {
 
 test_that("handle_ru_attachments downloads files from subtables", {
   # This test downloads files
-    skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
 
   data("fq_raw")
   data("fq_raw_taxa")

@@ -145,7 +145,7 @@ split_geoshape <- function(data,
         dplyr::vars(colname),
         list(~ purrr::map(., drop_null_coords))
       )
-  }else {
+  } else {
     # WKT
     # No accuracy in geotrace/shape yet
     # See ODK central-backend at /lib/data/json.js

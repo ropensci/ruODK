@@ -29,7 +29,7 @@ test_that("odata_submission_get skips download", {
 
 test_that("odata_submission_get works with one known dataset", {
   # This test downloads files
-  skip_if(Sys.getenv("ODKC_TEST_URL"), message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
 
 
   t <- tempdir()
@@ -119,6 +119,8 @@ test_that("odata_submission_get skip omits number of results", {
 })
 
 test_that("odata_submission_get top limits number of results", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+
   vcr::use_cassette("test_odata_submission_get4", {
     top_parsed <- odata_submission_get(
       top = 1,
@@ -141,6 +143,8 @@ test_that("odata_submission_get top limits number of results", {
 
 
 test_that("odata_submission_get count returns total number or rows", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+
   vcr::use_cassette("test_odata_submission_get5", {
     x_raw <- odata_submission_get(
       count = TRUE,
@@ -172,6 +176,8 @@ test_that("odata_submission_get count returns total number or rows", {
 })
 
 test_that("odata_submission_get handles encrypted forms gracefully", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+
   t <- tempdir()
   fs::dir_ls(t) %>% fs::file_delete()
   vcr::use_cassette("test_odata_submission_get6", {
@@ -190,11 +196,15 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
   # se is not decrypted
   testthat::expect_s3_class(se, "tbl_df")
   testthat::expect_true("system_status" %in% names(se))
-  testthat::expect_equal(stringr::str_to_lower(se$system_status[[1]]),
-                         stringr::str_to_lower("NotDecrypted"))
+  testthat::expect_equal(
+    stringr::str_to_lower(se$system_status[[1]]),
+    stringr::str_to_lower("NotDecrypted")
+  )
 })
 
 test_that("odata_submission_get filter works", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+
   vcr::use_cassette("test_odata_submission_get7", {
     x_all <- odata_submission_get(
       pid = get_test_pid(),
