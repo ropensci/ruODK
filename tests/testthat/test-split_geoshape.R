@@ -41,7 +41,6 @@ test_that("split_geoshape works with GeoJSON", {
     label = "split_geoshape extracts GeoJSON altitude"
   )
 
-  # TODO FIXME
   # https://github.com/ropensci/ruODK/issues/131
   expect_true(
     gj_first_gs %>% magrittr::extract2(geofield_lon_gs) %>% is.numeric(),
