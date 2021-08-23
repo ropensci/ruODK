@@ -1,0 +1,53 @@
+{
+  "@context": "https://schema.org",
+  "type": "SoftwareSourceCode",
+  "author": {
+    "id": "https://orcid.org/0000-0003-4269-4242",
+    "type": "Person",
+    "email": "Florian.Mayer@dbca.wa.gov.au",
+    "familyName": "Mayer",
+    "givenName": [
+      "Florian",
+      "W."
+    ]
+  },
+  "codeRepository": "https://github.com/ropensci/ruODK",
+  "contributor": [
+    {
+      "id": "https://orcid.org/0000-0002-4573-0002",
+      "type": "Person",
+      "familyName": "Tyszler",
+      "givenName": "Marcelo"
+    },
+    {
+      "id": "https://orcid.org/0000-0002-6758-2397",
+      "type": "Person",
+      "familyName": "Langet",
+      "givenName": "Hélène"
+    }
+  ],
+  "copyrightHolder": {
+    "type": "Organization",
+    "name": "DBCA"
+  },
+  "description": "Access and tidy up data from the 'ODK Central' API.  \n    'ODK Central' is a clearinghouse for digitally captured data \n    <https://docs.getodk.org/central-intro/>.\n    The 'ODK Central' API is documented at <https://odkcentral.docs.apiary.io/>.",
+  "funder": [
+    {
+      "type": "Organization",
+      "name": "DBCA"
+    },
+    {
+      "type": "Organization",
+      "name": "NWSFTCP"
+    }
+  ],
+  "license": "https://spdx.org/licenses/GPL-3.0",
+  "name": "ruODK: An R Client for the ODK Central API",
+  "programmingLanguage": {
+    "type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
+  "version": "1.2.0.2"
+}

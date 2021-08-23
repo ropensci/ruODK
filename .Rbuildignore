@@ -24,3 +24,4 @@ codemeta.json
 ^gfortran.*
 ^tic\.R$
 ^Dockerfile$
+^codemeta\.json$
