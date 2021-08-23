@@ -1,5 +1,6 @@
 test_that("submission_get works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+          message = "Test server not configured")
 
   vcr::use_cassette("test_submission_get0", {
     sl <- submission_list(
@@ -68,7 +69,8 @@ test_that("submission_get works", {
 })
 
 test_that("submission_get handles encrypted forms gracefully", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+          message = "Test server not configured")
 
   vcr::use_cassette("test_submission_get3", {
     sl <- submission_list(

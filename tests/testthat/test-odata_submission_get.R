@@ -190,7 +190,8 @@ test_that("odata_submission_get count returns total number or rows", {
 })
 
 test_that("odata_submission_get handles encrypted forms gracefully", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+          message = "Test server not configured")
 
   t <- tempdir()
   fs::dir_ls(t) %>% fs::file_delete()
@@ -217,7 +218,8 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
 })
 
 test_that("odata_submission_get filter works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+          message = "Test server not configured")
 
   vcr::use_cassette("test_odata_submission_get7", {
     x_all <- odata_submission_get(
@@ -306,11 +308,11 @@ test_that("odata_submission_get filter works", {
       "with columns {paste(names(x_2019), collapse=', ')}"
     ))
   }
+  # nolint start
   # TODO: this works locally but not on GHA.
-  # testthat::expect_equal(
-  # nrow(x_2019), 0,
-  # label = "Filter for submissions in year 2019 should return no records"
-  # )
+  # testthat::expect_equal(nrow(x_2019), 0,
+  # label = "Filter for submissions in year 2019 should return no records")
+  # nolint end
 })
 
 # usethis::use_r("odata_submission_get") # nolint

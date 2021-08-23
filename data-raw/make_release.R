@@ -46,7 +46,7 @@ devtools::document(roclets = c("rd", "collate", "namespace", "vignette"))
 spelling::spell_check_package()
 spelling::spell_check_files("README.Rmd", lang = "en_AU")
 spelling::update_wordlist()
-codemetar::write_codemeta("ruODK")
+codemetar::write_codemeta("ruODK", write_minimeta = TRUE)
 if (fs::file_info("README.md")$modification_time <
   fs::file_info("README.Rmd")$modification_time) {
   rmarkdown::render("README.Rmd", encoding = "UTF-8", clean = TRUE)

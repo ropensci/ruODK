@@ -145,7 +145,8 @@ options(repos = c(ropensci = 'https://ropensci.r-universe.dev',
 install.packages('ruODK')
 ```
 
-Alternativey, you can install the development version (`main` branch):
+Alternatively, you can install the development version from the `main`
+branch.
 
 ``` r
 if (!requireNamespace("remotes")) install.packages("remotes")
