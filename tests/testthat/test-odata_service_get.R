@@ -1,6 +1,10 @@
 context("test-odata_service_get.R")
 
 test_that("odata_service_get works", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_odata_service_get0", {
     svc <- odata_service_get(
       get_test_pid(),

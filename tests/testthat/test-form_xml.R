@@ -1,4 +1,8 @@
 test_that("form_xml returns a nested list with parse defaults", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_fid_form_xml0", {
     fxml <- form_xml(
       pid = get_test_pid(),
@@ -12,6 +16,10 @@ test_that("form_xml returns a nested list with parse defaults", {
 })
 
 test_that("form_xml returns a nested list with parse=TRUE", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_fid_form_xml1", {
     fxml <- form_xml(
       parse = TRUE,
@@ -26,6 +34,10 @@ test_that("form_xml returns a nested list with parse=TRUE", {
 })
 
 test_that("form_xml returns an xml_document with parse=FALSE", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_fid_form_xml2", {
     fxml <- form_xml(
       parse = FALSE,

@@ -1,6 +1,10 @@
 context("test-odata_submission_rectangle.R")
 
 test_that("odata_submission_rectangle works with gaps in first submission", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   t <- tempdir()
 
   vcr::use_cassette("test_odata_submission_parse0", {

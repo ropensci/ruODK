@@ -16,6 +16,10 @@ test_that("predict_ruodk_name works", {
 })
 
 test_that("form_schema works with ODK Central v0.8", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_form_schema_parse0", {
     fs <- form_schema(
       flatten = FALSE,

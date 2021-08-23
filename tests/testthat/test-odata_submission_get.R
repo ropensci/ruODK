@@ -1,6 +1,10 @@
 context("test-odata_submission_get.R")
 
 test_that("odata_submission_get skips download", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   # A guaranteed empty download directory
   t <- tempdir()
   t %>%
@@ -29,8 +33,10 @@ test_that("odata_submission_get skips download", {
 
 test_that("odata_submission_get works with one known dataset", {
   # This test downloads files
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
 
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
 
   t <- tempdir()
   fresh_raw <- odata_submission_get(
@@ -72,6 +78,10 @@ test_that("odata_submission_get works with one known dataset", {
 
 
 test_that("odata_submission_get skip omits number of results", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   skip_on_travis()
   skip_on_appveyor()
 
@@ -119,7 +129,9 @@ test_that("odata_submission_get skip omits number of results", {
 })
 
 test_that("odata_submission_get top limits number of results", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
 
   vcr::use_cassette("test_odata_submission_get4", {
     top_parsed <- odata_submission_get(
@@ -143,7 +155,9 @@ test_that("odata_submission_get top limits number of results", {
 
 
 test_that("odata_submission_get count returns total number or rows", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "", message = "Test server not configured")
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
 
   vcr::use_cassette("test_odata_submission_get5", {
     x_raw <- odata_submission_get(

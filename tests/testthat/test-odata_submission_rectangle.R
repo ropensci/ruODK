@@ -16,6 +16,13 @@ test_that("odata_submission_rectangle works", {
 
 
 test_that("odata_submission_rectangle parses GeoJSON to nested list", {
+
+  # submission_rectangle calls form_schema and fails without credentials
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+
   # nolint start
   data("geo_fs") # parse T
   data("geo_gj_raw") # parse F, wkt F
@@ -62,6 +69,10 @@ test_that("odata_submission_rectangle parses GeoJSON to nested list", {
 })
 
 test_that("odata_submission_rectangle parses WKT as text", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   data("geo_fs") # parse T
   data("geo_wkt_raw") # parse F, wkt T
 
@@ -93,6 +104,11 @@ test_that("odata_submission_rectangle parses WKT as text", {
 })
 
 test_that("odata_submission_rectangle works on non-spatial forms", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+
   vcr::use_cassette("test_odata_submission_rectangle0", {
     fs <- form_schema(
       pid = get_test_pid(),

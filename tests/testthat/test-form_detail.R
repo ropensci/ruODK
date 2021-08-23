@@ -1,4 +1,7 @@
 test_that("form_detail works", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
 
   # The test project has a list of forms
   vcr::use_cassette("test_form_detail0", {

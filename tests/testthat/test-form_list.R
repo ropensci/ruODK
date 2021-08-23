@@ -1,4 +1,8 @@
 test_that("form_list works", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_form_list0", {
     fl <- form_list(
       get_test_pid(),

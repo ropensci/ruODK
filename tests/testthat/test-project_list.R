@@ -1,4 +1,8 @@
 test_that("project_list works", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_project_list0", {
     p <- project_list(
       url = get_test_url(),

@@ -1,4 +1,8 @@
 test_that("form_schema_ext v8 returns a tibble with defaults", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_form_schema_ext0", {
     fsx <- form_schema_ext(
       pid = get_test_pid(),
@@ -17,6 +21,10 @@ test_that("form_schema_ext v8 returns a tibble with defaults", {
 })
 
 test_that("form_schema_ext v8 in a form with no languages", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_form_schema_ext1", {
     fsx <- form_schema_ext(
       pid = get_test_pid(),
@@ -33,6 +41,9 @@ test_that("form_schema_ext v8 in a form with no languages", {
 })
 
 test_that("form_schema_ext v8 in a form with label languages", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
   vcr::use_cassette("test_form_schema_ext2", {
     fsx <- form_schema_ext(
       pid = get_test_pid(),
@@ -49,6 +60,10 @@ test_that("form_schema_ext v8 in a form with label languages", {
 })
 
 test_that("form_schema_ext v8 in a form with label and choices languages", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_form_schema_ext3", {
     fsx <- form_schema_ext(
       pid = get_test_pid(),
@@ -69,6 +84,10 @@ test_that("form_schema_ext v8 in a form with label and choices languages", {
 })
 
 test_that("form_schema_ext v8 in a form with no languages and choice filter", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_form_schema_ext4", {
     fsx <- form_schema_ext(
       pid = get_test_pid(),
@@ -92,6 +111,10 @@ test_that("form_schema_ext v8 in a form with no languages and choice filter", {
 })
 
 test_that("form_schema_ext v8 with label, choices, lang, and choice filter", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_form_schema_ext5", {
     fsx <- form_schema_ext(
       pid = get_test_pid(),

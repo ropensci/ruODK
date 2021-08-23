@@ -1,4 +1,8 @@
 test_that("project_detail works", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_project_detail0", {
     p <- project_detail(
       get_test_pid(),

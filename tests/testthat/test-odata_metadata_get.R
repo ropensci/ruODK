@@ -1,6 +1,10 @@
 context("test-odata_metadata_get.R")
 
 test_that("odata_metadata_get works", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_odata_metadata_get0", {
     md <- odata_metadata_get(
       get_test_pid(),

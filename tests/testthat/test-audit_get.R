@@ -1,4 +1,8 @@
 test_that("audit_get works", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_audit_get0", {
     logs <- audit_get(
       url = get_test_url(),

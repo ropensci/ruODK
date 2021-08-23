@@ -1,4 +1,8 @@
 test_that("form_schema v8 returns a tibble and ignores flatten and parse", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
   vcr::use_cassette("test_form_schema0", {
     fs0 <- form_schema(
       flatten = FALSE,
