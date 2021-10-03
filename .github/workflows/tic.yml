@@ -26,8 +26,8 @@ jobs:
           - { os: windows-latest, r: "oldrel" }
           - { os: windows-2016, r: "devel" }
           - { os: windows-2016, r: "release" }
-          - { os: windows-2016, r: "oldrel" } # all windows are having a bad hair day
-          - { os: macOS-latest, r: "devel" }
+          - { os: windows-2016, r: "oldrel" }
+          # - { os: macOS-latest, r: "devel" } # openssl doesn't install
           - { os: macOS-latest, r: "release"}
           - { os: macOS-latest, r: "oldrel"}
           - { os: ubuntu-20.04, r: "devel" }
