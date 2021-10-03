@@ -3,7 +3,6 @@ test_that("encryption_key_list works", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_encryption_key_list0", {
     x <- encryption_key_list(
       pid = Sys.getenv("ODKC_TEST_PID_ENC"),
       fid = Sys.getenv("ODKC_TEST_FID_ENC"),
@@ -27,7 +26,6 @@ test_that("encryption_key_list works", {
         label = glue::glue("Column {.} missing from encryption_key_list")
       )
     )
-  })
 })
 
 

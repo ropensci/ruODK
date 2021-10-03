@@ -3,13 +3,11 @@ test_that("project_list works", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_project_list0", {
     p <- project_list(
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
   testthat::expect_true(nrow(p) > 0)
 
   # project_list returns a tibble
@@ -113,21 +111,17 @@ test_that("project_list warns on wrong URL", {
 
 
 test_that("project_list warns on wrong credentials", {
-  vcr::use_cassette("test_project_list9", {
     testthat::expect_error(p <- project_list(
       url = get_test_url(),
       un = "wrong_username",
       pw = get_test_pw()
     ))
-  })
 
-  vcr::use_cassette("test_project_listA", {
     testthat::expect_error(p <- project_list(
       url = get_test_url(),
       un = get_test_un(),
       pw = "wrong_password"
     ))
-  })
 })
 
 # usethis::use_r("project_list") # nolint

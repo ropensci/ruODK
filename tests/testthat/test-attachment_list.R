@@ -3,7 +3,6 @@ test_that("attachment_list works", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_attachment_list0", {
     sl <- submission_list(
       pid = get_test_pid(),
       fid = get_test_fid(),
@@ -29,7 +28,6 @@ test_that("attachment_list works", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
   # attachment_list returns a tibble
   testthat::expect_equal(class(al), c("tbl_df", "tbl", "data.frame"))

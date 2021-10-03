@@ -20,7 +20,6 @@ test_that("form_schema works with ODK Central v0.8", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_form_schema_parse0", {
     fs <- form_schema(
       flatten = FALSE,
       parse = FALSE,
@@ -33,7 +32,6 @@ test_that("form_schema works with ODK Central v0.8", {
       odkc_version = get_test_odkc_version(),
       verbose = TRUE
     )
-  })
 
   testthat::expect_true(tibble::is_tibble(fs))
   testthat::expect_equal(

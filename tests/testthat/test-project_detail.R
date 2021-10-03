@@ -3,14 +3,12 @@ test_that("project_detail works", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_project_detail0", {
     p <- project_detail(
       get_test_pid(),
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
   testthat::expect_true(nrow(p) == 1)
   testthat::expect_true("name" %in% names(p))
 
@@ -81,7 +79,6 @@ test_that("project_detail warns on wrong credentials", {
     )
   )
 
-  vcr::use_cassette("test_project_detail6", {
     testthat::expect_error(
       p <- project_detail(
         get_test_pid(),
@@ -90,9 +87,7 @@ test_that("project_detail warns on wrong credentials", {
         pw = get_test_pw()
       )
     )
-  })
 
-  vcr::use_cassette("test_project_detail7", {
     testthat::expect_error(
       p <- project_detail(
         get_test_pid(),
@@ -101,7 +96,6 @@ test_that("project_detail warns on wrong credentials", {
         pw = "wrong_password"
       )
     )
-  })
 })
 
 # usethis::use_r("project_detail") # nolint

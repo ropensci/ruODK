@@ -108,8 +108,6 @@ test_that("odata_submission_rectangle works on non-spatial forms", {
     message = "Test server not configured"
   )
 
-
-  vcr::use_cassette("test_odata_submission_rectangle0", {
     fs <- form_schema(
       pid = get_test_pid(),
       fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
@@ -118,9 +116,7 @@ test_that("odata_submission_rectangle works on non-spatial forms", {
       pw = get_test_pw(),
       odkc_version = get_test_odkc_version()
     )
-  })
 
-  vcr::use_cassette("test_odata_submission_rectangle1", {
     sub_raw <- odata_submission_get(
       pid = get_test_pid(),
       fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
@@ -130,7 +126,6 @@ test_that("odata_submission_rectangle works on non-spatial forms", {
       odkc_version = get_test_odkc_version(),
       parse = FALSE
     )
-  })
 
   sub <- sub_raw %>%
     odata_submission_rectangle(form_schema = fs, verbose = TRUE)

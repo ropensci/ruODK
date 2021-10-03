@@ -4,7 +4,6 @@ test_that("form_detail works", {
   )
 
   # The test project has a list of forms
-  vcr::use_cassette("test_form_detail0", {
     fl <- form_list(
       get_test_pid(),
       url = get_test_url(),
@@ -20,7 +19,6 @@ test_that("form_detail works", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
   # form_detail returns exactly one row
   testthat::expect_true(nrow(f) == 1)

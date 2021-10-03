@@ -2,7 +2,6 @@ test_that("submission_get works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
           message = "Test server not configured")
 
-  vcr::use_cassette("test_submission_get0", {
     sl <- submission_list(
       pid = get_test_pid(),
       fid = get_test_fid(),
@@ -10,9 +9,7 @@ test_that("submission_get works", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
-  vcr::use_cassette("test_submission_get1", {
     sub <- get_one_submission(
       sl$instance_id[[1]],
       pid = get_test_pid(),
@@ -21,9 +18,7 @@ test_that("submission_get works", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
-  vcr::use_cassette("test_submission_get2", {
     subs <- submission_get(
       sl$instance_id,
       pid = get_test_pid(),
@@ -32,7 +27,6 @@ test_that("submission_get works", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
   testthat::expect_equal(class(sub), "list")
   testthat::expect_equal(class(subs), "list")
@@ -72,7 +66,6 @@ test_that("submission_get handles encrypted forms gracefully", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
           message = "Test server not configured")
 
-  vcr::use_cassette("test_submission_get3", {
     sl <- submission_list(
       pid = Sys.getenv("ODKC_TEST_PID_ENC"),
       fid = Sys.getenv("ODKC_TEST_FID_ENC"),
@@ -80,9 +73,7 @@ test_that("submission_get handles encrypted forms gracefully", {
       un = get_test_un(),
       pw = get_test_pw(),
     )
-  })
 
-  vcr::use_cassette("test_submission_get4", {
     subs <- submission_get(
       sl$instance_id,
       pid = Sys.getenv("ODKC_TEST_PID_ENC"),
@@ -91,7 +82,6 @@ test_that("submission_get handles encrypted forms gracefully", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
   testthat::expect_true("base64EncryptedKey" %in% names(subs[[1]]))
   testthat::expect_true("encryptedXmlFile" %in% names(subs[[1]]))

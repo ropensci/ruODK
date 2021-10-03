@@ -5,7 +5,6 @@ test_that("odata_service_get works", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_odata_service_get0", {
     svc <- odata_service_get(
       get_test_pid(),
       get_test_fid(),
@@ -13,7 +12,6 @@ test_that("odata_service_get works", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
   testthat::expect_equal(class(svc), c("tbl_df", "tbl", "data.frame"))
   cn <- c("name", "kind", "url")

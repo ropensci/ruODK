@@ -5,7 +5,6 @@ test_that("odata_metadata_get works", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_odata_metadata_get0", {
     md <- odata_metadata_get(
       get_test_pid(),
       get_test_fid(),
@@ -13,7 +12,6 @@ test_that("odata_metadata_get works", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
   testthat::expect_equal(class(md), "list")
 })
 

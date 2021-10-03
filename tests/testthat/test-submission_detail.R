@@ -2,7 +2,6 @@ test_that("submission_detail works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
           message = "Test server not configured")
 
-  vcr::use_cassette("test_submission_detail0", {
     sl <- submission_list(
       pid = get_test_pid(),
       fid = get_test_fid(),
@@ -19,7 +18,6 @@ test_that("submission_detail works", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
   # submission_detail returns a tibble
   testthat::expect_equal(class(sub), c("tbl_df", "tbl", "data.frame"))

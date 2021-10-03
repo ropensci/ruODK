@@ -3,7 +3,6 @@ test_that("audit_get works", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_audit_get0", {
     logs <- audit_get(
       url = get_test_url(),
       un = get_test_un(),
@@ -30,7 +29,6 @@ test_that("audit_get works", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
   # submission_list returns a tibble
   testthat::expect_equal(class(logs), c("tbl_df", "tbl", "data.frame"))

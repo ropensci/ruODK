@@ -12,7 +12,6 @@ test_that("odata_submission_get skips download", {
     fs::file_delete()
 
   # Get submissions, do not download attachments
-  vcr::use_cassette("test_odata_submission_get0", {
     fresh_raw <- odata_submission_get(
       pid = get_test_pid(),
       fid = get_test_fid(),
@@ -25,7 +24,6 @@ test_that("odata_submission_get skips download", {
       local_dir = t,
       verbose = TRUE
     )
-  })
 
   # There should be no files in the download dir
   testthat::expect_equal(t %>% fs::dir_ls(), character(0))
@@ -85,7 +83,6 @@ test_that("odata_submission_get skip omits number of results", {
   skip_on_travis()
   skip_on_appveyor()
 
-  vcr::use_cassette("test_odata_submission_get1", {
     fq_svc <- odata_service_get(
       pid = get_test_pid(),
       fid = get_test_fid(),
@@ -93,9 +90,7 @@ test_that("odata_submission_get skip omits number of results", {
       un = get_test_un(),
       pw = get_test_pw()
     )
-  })
 
-  vcr::use_cassette("test_odata_submission_get2", {
     fresh_parsed <- odata_submission_get(
       pid = get_test_pid(),
       fid = get_test_fid(),
@@ -107,9 +102,7 @@ test_that("odata_submission_get skip omits number of results", {
       download = FALSE,
       table = fq_svc$name[2] # brittle: depends on form used
     )
-  })
 
-  vcr::use_cassette("test_odata_submission_get3", {
     skip_parsed <- odata_submission_get(
       skip = 1,
       pid = get_test_pid(),
@@ -122,8 +115,6 @@ test_that("odata_submission_get skip omits number of results", {
       download = FALSE,
       table = fq_svc$name[2] # brittle: depends on form used
     )
-  })
-
 
   testthat::expect_true(nrow(fresh_parsed) == nrow(skip_parsed) + 1)
 })
@@ -133,7 +124,6 @@ test_that("odata_submission_get top limits number of results", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_odata_submission_get4", {
     top_parsed <- odata_submission_get(
       top = 1,
       pid = get_test_pid(),
@@ -145,7 +135,6 @@ test_that("odata_submission_get top limits number of results", {
       download = FALSE,
       parse = TRUE
     )
-  })
 
   # https://github.com/ropensci/ruODK/issues/65
   skip_on_travis()
@@ -159,7 +148,6 @@ test_that("odata_submission_get count returns total number or rows", {
     message = "Test server not configured"
   )
 
-  vcr::use_cassette("test_odata_submission_get5", {
     x_raw <- odata_submission_get(
       count = TRUE,
       top = 1,
@@ -173,7 +161,6 @@ test_that("odata_submission_get count returns total number or rows", {
       parse = FALSE,
       download = FALSE
     )
-  })
   x_parsed <- x_raw %>% odata_submission_rectangle()
 
 
@@ -195,7 +182,6 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
 
   t <- tempdir()
   fs::dir_ls(t) %>% fs::file_delete()
-  vcr::use_cassette("test_odata_submission_get6", {
     se <- odata_submission_get(
       local_dir = t,
       pid = Sys.getenv("ODKC_TEST_PID_ENC"),
@@ -206,7 +192,6 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
       # pp = get_test_pp(),
       verbose = TRUE
     )
-  })
 
   # se is not decrypted
   testthat::expect_s3_class(se, "tbl_df")
@@ -221,7 +206,6 @@ test_that("odata_submission_get filter works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
           message = "Test server not configured")
 
-  vcr::use_cassette("test_odata_submission_get7", {
     x_all <- odata_submission_get(
       pid = get_test_pid(),
       fid = get_test_fid(),
@@ -232,8 +216,6 @@ test_that("odata_submission_get filter works", {
       parse = TRUE,
       download = FALSE
     )
-  })
-  vcr::use_cassette("test_odata_submission_get8", {
     x_all_filter_null <- odata_submission_get(
       filter = NULL, # the default
       pid = get_test_pid(),
@@ -245,8 +227,6 @@ test_that("odata_submission_get filter works", {
       parse = TRUE,
       download = FALSE
     )
-  })
-  vcr::use_cassette("test_odata_submission_get9", {
     x_all_filter_emptystring <- odata_submission_get(
       filter = "", # the default
       pid = get_test_pid(),
@@ -258,8 +238,6 @@ test_that("odata_submission_get filter works", {
       parse = TRUE,
       download = FALSE
     )
-  })
-  vcr::use_cassette("test_odata_submission_get10", {
     # Some submissions in 2020
     x_2020 <- odata_submission_get(
       filter = "year(__system/submissionDate) eq 2020", # the default
@@ -272,8 +250,6 @@ test_that("odata_submission_get filter works", {
       parse = TRUE,
       download = FALSE
     )
-  })
-  vcr::use_cassette("test_odata_submission_get11", {
     # No submissions in 2019
     x_2019 <- odata_submission_get(
       filter = "year(__system/submissionDate) eq 2019", # the default
@@ -286,7 +262,6 @@ test_that("odata_submission_get filter works", {
       parse = TRUE,
       download = FALSE
     )
-  })
 
   testthat::expect_equal(
     x_all, x_all_filter_emptystring,
