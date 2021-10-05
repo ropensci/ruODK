@@ -117,9 +117,7 @@ sf::st_crs(geo_sf_point) <- 4326
 ### Mapview using sf
 See also further information under heading "Outlook".
 ```{r}
-mapview::mapview(geo_sf_point, 
-                 col.regions = sf::sf.colors(10),
-                 map.types = c("Esri.WorldShadedRelief", "OpenTopoMap.AU"))
+mapview::mapview(geo_sf_point, col.regions = sf::sf.colors(10))
 ```
 
 ### GGplot using sf
@@ -166,6 +164,7 @@ mapview::mapview(geo_sf_line, col.regions = sf::sf.colors(10))
 ggplot2::ggplot() + 
   ggplot2::geom_sf(data = geo_sf_line, ggplot2::aes(fill = device_id))
 ```
+
 ### Leaflet using sf and extracted coordinates
 You can show either first extracted coordinate components from plain `tbl_df`
 or show the full polygons using `{leafem}`.
@@ -219,20 +218,21 @@ leaflet::leaflet(data = geo_wkt) %>%
 
 # Outlook
 The above examples show how to turn spatial data into an `sf` object, and give
-very rudimentary visualisation examples.
+very rudimentary visualisation examples to bridge the gap between
+spatial data coming from ODK and creating maps and further spatial analyses in R.
 
-See the [sf homepage](https://r-spatial.github.io/sf/) for more
-context and examples. 
+See the [sf homepage](https://r-spatial.github.io/sf/) for more context and examples. 
 The [sf cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/sf.pdf) 
 deserves a spatial mention.
+
 Review the options for 
-[mapview popups](https://r-spatial.github.io/mapview/articles/articles/mapview_04-popups.html) 
-which are turned off in this quick demo, and the whole 
-[mapview](https://r-spatial.github.io/mapview/index.html) homepage for a 
+[mapview popups](https://r-spatial.github.io/mapview/articles/articles/mapview_04-popups.html)
+and the whole [mapview](https://r-spatial.github.io/mapview/index.html) homepage for a 
 comprehensive overview of mapview.
-See the [vignette "Get started"](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html)
-of the powerful visualisation package [`tmap`](https://cran.r-project.org/package=tmap), 
-which supports `sf` objects and produces both printable and static maps as well as interactive `leaflet` maps.
+
+The powerful visualisation package [`tmap`](https://cran.r-project.org/package=tmap)
+supports `sf` objects and produces both printable and static maps as well as interactive `leaflet` maps.
+See the [vignette "Get started"](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html).
 
 There are several other good entry points for all things R and spatial, 
 including but not limited to:
