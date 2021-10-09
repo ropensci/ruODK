@@ -27,15 +27,15 @@ jobs:
           - { os: windows-2016, r: "devel" }
           - { os: windows-2016, r: "release" }
           - { os: windows-2016, r: "oldrel" }
-          # - { os: macOS-latest, r: "devel" } # openssl doesn't install
+          - { os: macOS-latest, r: "devel" } # openssl doesn't install
           - { os: macOS-latest, r: "release"}
           - { os: macOS-latest, r: "oldrel"}
           - { os: ubuntu-20.04, r: "devel" }
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
-          # - { os: ubuntu-18.04, r: "devel" } # sf fails to install
-          # - { os: ubuntu-18.04, r: "release" }
-          # - { os: ubuntu-18.04, r: "oldrel" }
+          - { os: ubuntu-18.04, r: "devel" } # sf fails to install
+          - { os: ubuntu-18.04, r: "release" }
+          - { os: ubuntu-18.04, r: "oldrel" }
 
     env:
       # otherwise remotes::fun() errors cause the build to fail.
@@ -128,8 +128,8 @@ jobs:
           libgeos-dev libproj-dev libicu-dev libv8-dev libprotobuf-dev \
           protobuf-compiler libgit2-dev
 
-      - name: "[Custom block] [macOS-devel][r-devel] Install system pkgs"
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
+      - name: "[Custom block] [macOS-devel][r-devel/rel/oldrel] Install system pkgs"
+        if: matrix.config.os == 'macOS-latest' #&& matrix.config.r == 'devel'
         run: brew install gdal proj geos udunits cairo libpng libgit2
 
       - name: "[Stage] Install"
