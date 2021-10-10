@@ -282,9 +282,9 @@ Australia and their continuing connection to the land, waters and
 community. We pay our respects to them, their culture and to their
 Elders past and present.
 
-This software was created both as a contribution to the ODK ecosystem
-and for the conservation of the biodiversity of Western Australia, and
-in doing so, caring for country.
+This software was created on Whadjuk boodja (ground) both as a
+contribution to the ODK ecosystem and for the conservation of the
+biodiversity of Western Australia, and in doing so, caring for country.
 
 ## Package functionality
 
