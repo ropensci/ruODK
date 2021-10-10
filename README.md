@@ -150,21 +150,30 @@ branch.
 
 ``` r
 if (!requireNamespace("remotes")) install.packages("remotes")
+# Full install
 remotes::install_github(
    "ropensci/ruODK@main", 
    dependencies = TRUE, 
    upgrade = "always",
    build_vignettes = TRUE)
+
+# Minimal install without vignettes
+remotes::install_github(
+   "ropensci/ruODK@main", 
+   dependencies = TRUE, 
+   upgrade = "ask",
+   build_vignettes = FALSE)
 ```
 
 If the install fails, read the error messages carefully and install any
-unmet dependency (system libraries or R packages).
+unmet dependencies (system libraries or R packages).
 
 If the install fails on building the vignettes, you can set
 `build_vignettes=FALSE` and read the vignettes from the online docs
 instead.
 
-If the installation still fails, feel free to submit a [bug
+If the installation still fails, or the above does not make any sense,
+feel free to submit a [bug
 report](https://github.com/ropensci/ruODK/issues/new/choose).
 
 ## ODK Central
@@ -251,7 +260,7 @@ citation("ruODK")
 #> To cite ruODK in publications use (with the respective version number:
 #> 
 #>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the
-#>   ODK Central API (Version 0.10.1).  Zenodo.
+#>   ODK Central API (Version X.X.X).  Zenodo.
 #>   https://doi.org/10.5281/zenodo.3953158
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -259,7 +268,7 @@ citation("ruODK")
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
-#>     note = {R package version 0.10.1},
+#>     note = {R package version X.X.X},
 #>     year = {2020},
 #>     url = {https://github.com/ropensci/ruODK},
 #>   }

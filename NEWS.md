@@ -1,3 +1,24 @@
+# `ruODK` 1.3.0
+This release supports ODK Central 1.3.0 and represents an over-due version
+bump to reflect the supported ODK Central version.
+The test server is now updated to ODK Central 1.3.0, and all tests pass.
+
+There are still some newer and as yet unsupported API endpoints in ODK Central, 
+which serve administrative purposes of the front-end. Contributions are welcome,
+get started on [these issues](https://github.com/ropensci/ruODK/milestone/2)
+and the contributing guide. As ruODK focuses on data retrieval, these
+administrative endpoints are non-critical to ruODK's purpose.
+
+## Major fixes
+## Minor fixes
+## Documentation
+## Data
+* Packaged data has been re-created to represent the latest server outputs.
+## Maintenance
+* All tests pass, GitHub Actions is as per usual brittle at the installation 
+  step.
+  
+
 # `ruODK` 1.2.0.0000
 We are shaping up to a release targetting the ODK Central 1.2 release.
 ODK Central is undergoing some bug fixes and patches, while ruODK's test server
