@@ -98,6 +98,7 @@ split_geoshape <- function(data,
         convert = TRUE
       )
   } else if (wkt == FALSE && odkc_version < 1.2) {
+    # nocov start
     # GeoJSON
     # Task: Extract coordinates into programmatically generated variable names
     # Step 1: tidyr::hoist() extracts but can't assign with :=
@@ -121,6 +122,7 @@ split_geoshape <- function(data,
         dplyr::vars(colname),
         list(~ purrr::map(., drop_null_coords))
       )
+    # nocov end
   } else if (wkt == FALSE && odkc_version >= 1.2) {
     # GeoJSON
     # Task: Extract coordinates into programmatically generated variable names

@@ -228,10 +228,13 @@ form_schema <- function(flatten = FALSE,
 
     # If the form is a draft form, fs is an empty tibble.
     # In this case, fall back to the draft form schema API path.
+    # TODO refactor to DRY: param draft <lgl> Default FALSE (pushlished)
+    # governs whether URL path contains /draft/fields or /fields
     if (nrow(fs) == 0) {
       "The form \"{fid}\" is an unpublished draft form." %>%
         glue::glue() %>%
         ru_msg_info(verbose = verbose)
+      # TODO fs <- form_schema(..., draft=TRUE)
 
       fs <- httr::RETRY(
         "GET",
