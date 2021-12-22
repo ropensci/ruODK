@@ -29,6 +29,8 @@
 #'   a warning and return the unparsed, flattened form schema.
 #'   Only applies to ODK Central version < 0.8.
 #'   Default: TRUE.
+#' @param draft Whether the form is published (FALSE) or a draft (TRUE).
+#'   Default: TRUE.
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
@@ -149,6 +151,7 @@
 form_schema <- function(flatten = FALSE,
                         odata = FALSE,
                         parse = TRUE,
+                        draft = FALSE,
                         pid = get_default_pid(),
                         fid = get_default_fid(),
                         url = get_default_url(),
@@ -195,14 +198,19 @@ form_schema <- function(flatten = FALSE,
     return(fs)
   } else {
     # nocov end
+    if (draft == FALSE){
+      pth <- glue::glue(
+        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/fields"
+      )
+    } else {
+      pth <- glue::glue(
+        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/draft/fields"
+      )
+    }
+
     fs <- httr::RETRY(
       "GET",
-      httr::modify_url(
-        url,
-        path = glue::glue(
-          "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/fields"
-        )
-      ),
+      httr::modify_url(url, path = pth),
       httr::add_headers("Accept" = "application/json"),
       httr::authenticate(un, pw),
       query = list(flatten = flatten, odata = odata),
@@ -228,38 +236,54 @@ form_schema <- function(flatten = FALSE,
 
     # If the form is a draft form, fs is an empty tibble.
     # In this case, fall back to the draft form schema API path.
-    # TODO refactor to DRY: param draft <lgl> Default FALSE (pushlished)
-    # governs whether URL path contains /draft/fields or /fields
     if (nrow(fs) == 0) {
+
+      # Recursion stop
+      if (draft==TRUE) {
+        ru_msg_warn("This form is a draft without any fields.")
+        return(NULL)
+      }
+
       "The form \"{fid}\" is an unpublished draft form." %>%
         glue::glue() %>%
         ru_msg_info(verbose = verbose)
-      # TODO fs <- form_schema(..., draft=TRUE)
 
-      fs <- httr::RETRY(
-        "GET",
-        httr::modify_url(
-          url,
-          path = glue::glue(
-            "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
-            "/draft/fields"
-          )
-        ),
-        httr::add_headers("Accept" = "application/json"),
-        httr::authenticate(un, pw),
-        query = list(flatten = flatten, odata = odata),
-        times = retries
-      ) %>%
-        yell_if_error(., url, un, pw) %>%
-        httr::content(.) %>%
-        tibble::tibble(xx = .) %>%
-        tidyr::unnest_wider(xx) %>%
-        dplyr::mutate(
-          ruodk_name = path %>%
-            stringr::str_remove("/") %>%
-            stringr::str_replace_all("/", "_") %>%
-            janitor::make_clean_names()
-        )
+      fs <- form_schema(flatten = flatten,
+                        odata = odata,
+                        parse = parse,
+                        draft = TRUE,
+                        pid = pid,
+                        fid = fid,
+                        url = url,
+                        un = un,
+                        pw = pw,
+                        odkc_version = odkc_version,
+                        retries = retries,
+                        verbose = verbose)
+      # fs <- httr::RETRY(
+      #   "GET",
+      #   httr::modify_url(
+      #     url,
+      #     path = glue::glue(
+      #       "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
+      #       "/draft/fields"
+      #     )
+      #   ),
+      #   httr::add_headers("Accept" = "application/json"),
+      #   httr::authenticate(un, pw),
+      #   query = list(flatten = flatten, odata = odata),
+      #   times = retries
+      # ) %>%
+      #   yell_if_error(., url, un, pw) %>%
+      #   httr::content(.) %>%
+      #   tibble::tibble(xx = .) %>%
+      #   tidyr::unnest_wider(xx) %>%
+      #   dplyr::mutate(
+      #     ruodk_name = path %>%
+      #       stringr::str_remove("/") %>%
+      #       stringr::str_replace_all("/", "_") %>%
+      #       janitor::make_clean_names()
+      #   )
     }
 
     fs
