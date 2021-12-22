@@ -84,6 +84,5 @@ dv <- packageVersion("ruODK")
 gp <- Sys.getenv("GITHUB_PAT")
 message(glue::glue("Building and pushing {dn}:{dv}..."))
 system(glue::glue(
-  "docker build . -t {dn}:latest -t {dn}:{dv} ",
-  "--build-arg GITHUB_PAT={gp} && docker push {dn}"
+  "docker build . -t {dn}:latest -t {dn}:{dv} --build-arg GITHUB_PAT={gp} && docker push {dn}"
 ))

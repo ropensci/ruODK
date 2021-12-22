@@ -24,7 +24,6 @@ FROM builder_base as r_libs
 ARG GITHUB_PAT
 ENV GITHUB_PAT=$GITHUB_PAT
 RUN install2.r --error \
-  proj4 \
   caTools \
   bitops \
   ckanr \
@@ -33,18 +32,7 @@ RUN install2.r --error \
   leaflet \
   leaflet.extras \
   leaflet.providers \
-  leaftime \
-  listviewer \
-  reactable \
-  skimr \
-  stringi \
-  usethis \
-  mapview \
-  leafpop \
-  leafem \
-  lattice \
-  sf
+  leaftime
 
 FROM r_libs
-RUN R -e "remotes::install_github('ropensci/ruODK@main', \
-          dependencies = TRUE, ask=FALSE, update=TRUE)"
+RUN R -e "remotes::install_github('ropensci/ruODK@main', force = TRUE, ask=FALSE, upgrade='always', dependencies = c('Depends', 'Imports', 'Suggests'))"
