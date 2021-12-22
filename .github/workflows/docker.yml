@@ -9,7 +9,7 @@ on:
 name: docker
 
 env:
-  IMAGE_NAME: ruODK
+  IMAGE_NAME: ruodk
 
 jobs:
   # Push image to GitHub Packages.
