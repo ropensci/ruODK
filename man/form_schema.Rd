@@ -8,6 +8,7 @@ form_schema(
   flatten = FALSE,
   odata = FALSE,
   parse = TRUE,
+  draft = FALSE,
   pid = get_default_pid(),
   fid = get_default_fid(),
   url = get_default_url(),
@@ -34,6 +35,9 @@ type and name. This uses \code{\link{form_schema_parse}} internally.
 If used together with \code{flatten=TRUE}, \code{\link{form_schema}} will raise
 a warning and return the unparsed, flattened form schema.
 Only applies to ODK Central version < 0.8.
+Default: TRUE.}
+
+\item{draft}{Whether the form is published (FALSE) or a draft (TRUE).
 Default: TRUE.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
