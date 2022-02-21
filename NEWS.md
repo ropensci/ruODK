@@ -1,3 +1,12 @@
+# `ruODK` 1.3.5
+## Minor fixes
+* `split_geopoint` is now robust against all NULL columns.
+  `split_geotrace` and `split_geoshape` are possibly affected.
+## Data
+* Packaged data has been re-created to represent the latest server outputs.
+## Maintenance
+* New Suggest depencency `terra` (through `mapview`)
+
 # `ruODK` 1.3.0
 This release supports ODK Central 1.3.0 and represents an over-due version
 bump to reflect the supported ODK Central version.

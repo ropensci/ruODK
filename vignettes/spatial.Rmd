@@ -55,7 +55,7 @@ library(lattice)
 # library(tmap) # Suggested but not included here yet
 
 # Spatial
-can_run <- require(sf) && require(leafem) && require(mapview)
+can_run <- require(sf) && require(leafem) && require(mapview) && require(terra)
 # Fix https://github.com/r-spatial/mapview/issues/313
 # See also https://github.com/r-spatial/mapview/issues/312
 # option 'fgb' requires GDAL >= 3.1.0
@@ -116,7 +116,7 @@ sf::st_crs(geo_sf_point) <- 4326
 
 ### Mapview using sf
 See also further information under heading "Outlook".
-```{r}
+```{r, eval=can_run}
 mapview::mapview(geo_sf_point, col.regions = sf::sf.colors(10))
 ```
 
@@ -155,7 +155,7 @@ sf::st_crs(geo_sf_line) <- 4326
 ```
 
 ### Mapview using sf
-```{r}
+```{r, eval=can_run}
 mapview::mapview(geo_sf_line, col.regions = sf::sf.colors(10))
 ```
 
@@ -191,7 +191,7 @@ sf::st_crs(geo_sf_poly) <- 4326
 ```
 
 ### Mapview using sf
-```{r}
+```{r, eval=can_run}
 mapview::mapview(geo_sf_poly, col.regions = sf::sf.colors(10))
 ```
 

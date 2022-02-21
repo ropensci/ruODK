@@ -25,10 +25,13 @@ test_that("submission_list works", {
     "submitter_id",
     "device_id",
     "created_at",
+    "updated_at",
+    "review_state",
     "submitter_id_2",
     "submitter_type",
     "submitter_display_name",
-    "submitter_created_at"
+    "submitter_created_at",
+    "submitter_updated_at"
   )
   testthat::expect_equal(names(sl), cn)
   purrr::map(

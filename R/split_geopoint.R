@@ -58,11 +58,24 @@
 #' wkt_first_gt$point_location_point_gps_longitude
 #' }
 split_geopoint <- function(data, colname, wkt = FALSE) {
+  col_class <- data %>%
+    magrittr::extract2(colname) %>%
+    class()
+
+
+
   if (wkt == FALSE) {
+    if(col_class != "list") {
+      "[split_geopoint] Skipping NULL column {colname} of class {col_class}" %>%
+        glue::glue() %>% ru_msg_noop()
+      return(data)
+    }
+
     # GeoJSON
     # Task: Extract coordinates into programmatically generated variable names
     # Step 1: tidyr::hoist() extracts but can't assign with :=
     data %>%
+      # TODO hoist fails on NULL columns
       tidyr::hoist(
         colname,
         XXX_longitude = list("coordinates", 1L),
@@ -78,6 +91,11 @@ split_geopoint <- function(data, colname, wkt = FALSE) {
       )
   } else {
     # WKT
+    if(col_class != "character") {
+    "[split_geopoint] Skipping NULL column {colname}, of class {col_class}" %>%
+      glue::glue() %>% ru_msg_noop()
+    return(data)
+  }
     data %>%
       tidyr::extract(
         colname,
