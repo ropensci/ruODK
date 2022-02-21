@@ -121,20 +121,20 @@ mapview::mapview(geo_sf_point, col.regions = sf::sf.colors(10))
 ```
 
 ### GGplot using sf
-```{r}
+```{r, eval=can_run}
 ggplot2::ggplot() + 
   ggplot2::geom_sf(data = geo_sf_point, ggplot2::aes(fill = device_id))
 ```
 
 ### Leaflet using sf
-```{r}
+```{r, eval=can_run}
 leaflet::leaflet(data = geo_sf_point) %>% 
   leaflet::addTiles() %>% 
   leaflet::addMarkers(label = ~ device_id, popup = ~ device_id)
 ```
 
 ### Leaflet using extracted coordinate components in tbl_df
-```{r}
+```{r, eval=can_run}
 leaflet::leaflet(data = geo_wkt) %>% 
   leaflet::addTiles() %>% 
   leaflet::addMarkers(
@@ -160,7 +160,7 @@ mapview::mapview(geo_sf_line, col.regions = sf::sf.colors(10))
 ```
 
 ### GGplot using sf
-```{r}
+```{r, eval=can_run}
 ggplot2::ggplot() + 
   ggplot2::geom_sf(data = geo_sf_line, ggplot2::aes(fill = device_id))
 ```
@@ -170,7 +170,7 @@ You can show either first extracted coordinate components from plain `tbl_df`
 or show the full polygons using `{leafem}`.
 See the mapview article on [extra functionality](https://r-spatial.github.io/mapview/articles/articles/mapview_06-add.html).
 
-```{r}
+```{r, eval=can_run}
 leaflet::leaflet(data = geo_wkt) %>% 
   leaflet::addTiles() %>% 
   leaflet::addMarkers(
@@ -196,7 +196,7 @@ mapview::mapview(geo_sf_poly, col.regions = sf::sf.colors(10))
 ```
 
 ### GGplot using sf
-```{r}
+```{r, eval=can_run}
 ggplot2::ggplot() + 
   ggplot2::geom_sf(data = geo_sf_poly, ggplot2::aes(fill = device_id))
 ```
@@ -205,7 +205,7 @@ ggplot2::ggplot() +
 You can show either first extracted coordinate components from plain `tbl_df`
 or show the full polygons using `{leafem}`.
 See the mapview article on [extra functionality](https://r-spatial.github.io/mapview/articles/articles/mapview_06-add.html).
-```{r}
+```{r, eval=can_run}
 leaflet::leaflet(data = geo_wkt) %>% 
   leaflet::addTiles() %>% 
   leaflet::addMarkers(
