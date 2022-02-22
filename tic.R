@@ -12,6 +12,7 @@ do_package_checks(
 
 if(ci_get_env("matrix.config.os") == "macOS-latest"){
   get_stage("install") %>%
+    add_step(step_install_cran("proj4")) %>%
     add_step(step_install_github("r-spatial/leafem", dependencies = TRUE)) %>%
     add_step(step_install_cran("terra"))
 }
