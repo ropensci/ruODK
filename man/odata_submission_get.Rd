@@ -11,6 +11,7 @@ odata_submission_get(
   top = NULL,
   count = FALSE,
   wkt = FALSE,
+  expand = FALSE,
   filter = NULL,
   parse = TRUE,
   download = TRUE,
@@ -46,6 +47,13 @@ response from ODK Central. Default: \code{FALSE}.}
 strings. Default: \code{FALSE}, returns GeoJSON structures.
 Note that accuracy is only returned through GeoJSON.}
 
+\item{expand}{If TRUE, all subtables will be expanded and included with
+column names containing the number of the repeat, the group name, and the
+field name. This parameter is supported from ODK Central v1.2 onwards and
+will be ignored on earlier versions of ODK Central. The version is inferred
+from the parameter \code{odkc_version}.
+Default: FALSE.}
+
 \item{filter}{If provided, will filter responses to those matching the query.
 For an \code{odkc_version} below 1.1, this parameter will be discarded.
 In ODK Central v1.1, only the fields \code{system/submitterId} and
@@ -58,7 +66,7 @@ are supported, and the built-in functions
 It is highly recommended to refer to the ODK Central API documentation
 as well as the
 \href{https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948}{OData spec on filters}.
-for filter options and capabilities}
+for filter options and capabilities.}
 
 \item{parse}{Whether to parse submission data based on form schema.
 Dates and datetimes will be parsed into local time.

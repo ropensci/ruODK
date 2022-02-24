@@ -280,14 +280,54 @@ test_that("odata_submission_get filter works", {
   if (nrow(x_2019) > 0) {
     ru_msg_warn(glue::glue(
       "Debug: 2019 data has {as.character(nrow(x_2019))} records ",
-      "with columns {paste(names(x_2019), collapse=', ')}"
+      "with columns {cat(names(x_2019))}."
     ))
   }
   # nolint start
   # TODO: this works locally but not on GHA.
-  # testthat::expect_equal(nrow(x_2019), 0,
-  # label = "Filter for submissions in year 2019 should return no records")
+  testthat::expect_equal(nrow(x_2019), 0,
+  label = "Filter for submissions in year 2019 should return no records")
   # nolint end
+})
+
+test_that("odata_submission_get expand works", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+          message = "Test server not configured"
+  )
+
+  x_expanded <- odata_submission_get(
+    expand = TRUE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    download = FALSE,
+    parse = TRUE
+  )
+
+  x <- odata_submission_get(
+    expand = FALSE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    download = FALSE,
+    parse = TRUE
+  )
+
+  purrr::map(
+    names(x),
+    ~ testthat::expect_true(
+      . %in% names(x_expanded),
+      label = glue::glue("Column {.} from unexpanded submissions",
+                         " missing from expanded submissions")
+    )
+  )
+
 })
 
 # usethis::use_r("odata_submission_get") # nolint

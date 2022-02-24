@@ -1,3 +1,8 @@
+# `ruODK` 1.3.6
+## Minor fixes
+* `odata_submission_get` supports parameter `expand` to expand all repeat 
+  repetitions.
+
 # `ruODK` 1.3.5
 ## Minor fixes
 * `split_geopoint` is now robust against all NULL columns.

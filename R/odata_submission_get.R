@@ -64,6 +64,12 @@
 #' @param wkt If TRUE, geospatial data will be returned as WKT (Well Known Text)
 #'   strings. Default: \code{FALSE}, returns GeoJSON structures.
 #'   Note that accuracy is only returned through GeoJSON.
+#' @param expand If TRUE, all subtables will be expanded and included with
+#'   column names containing the number of the repeat, the group name, and the
+#'   field name. This parameter is supported from ODK Central v1.2 onwards and
+#'   will be ignored on earlier versions of ODK Central. The version is inferred
+#'   from the parameter `odkc_version`.
+#'   Default: FALSE.
 #' @param filter If provided, will filter responses to those matching the query.
 #'   For an `odkc_version` below 1.1, this parameter will be discarded.
 #'   In ODK Central v1.1, only the fields `system/submitterId` and
@@ -76,7 +82,7 @@
 #'   It is highly recommended to refer to the ODK Central API documentation
 #'   as well as the
 #'   [OData spec on filters](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948).
-#'   for filter options and capabilities
+#'   for filter options and capabilities.
 #' @param parse Whether to parse submission data based on form schema.
 #'   Dates and datetimes will be parsed into local time.
 #'   Attachments will be downloaded, and the field updated to the local file
@@ -154,6 +160,7 @@ odata_submission_get <- function(table = "Submissions",
                                  top = NULL,
                                  count = FALSE,
                                  wkt = FALSE,
+                                 expand = FALSE,
                                  filter = NULL,
                                  parse = TRUE,
                                  download = TRUE,
@@ -205,6 +212,13 @@ odata_submission_get <- function(table = "Submissions",
   if (odkc_version >= 1.1 && !is.null(filter) && filter != "") {
     qry$`$filter` <- as.character(filter)
     "Filtering records with {as.character(filter)}" %>%
+      glue::glue() %>%
+      ru_msg_info(verbose = verbose)
+  }
+
+  if (odkc_version >= 1.2 && !is.null(expand) && expand == TRUE) {
+    qry$`$expand` <- '*'
+    "Expanding all nested repeats" %>%
       glue::glue() %>%
       ru_msg_info(verbose = verbose)
   }
@@ -309,5 +323,7 @@ odata_submission_get <- function(table = "Submissions",
   ru_msg_success("Returning parsed submissions.", verbose = verbose)
   sub
 }
+
+
 
 # usethis::use_test("odata_submission_get") # nolint
