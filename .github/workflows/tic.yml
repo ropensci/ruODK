@@ -29,7 +29,7 @@ jobs:
           - { os: windows-2016, r: "oldrel" }
           # - { os: macOS-latest, r: "devel" } # tic not available as of 2022/02/21
           - { os: macOS-latest, r: "release"}
-          - { os: macOS-latest, r: "oldrel"}
+          # - { os: macOS-latest, r: "oldrel"}
           - { os: ubuntu-20.04, r: "devel" }
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
