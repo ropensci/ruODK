@@ -84,7 +84,7 @@ VignetteBuilder:
 RdMacros: 
     lifecycle
 Encoding: UTF-8
-Language: en_AU
+Language: en-AU
 LazyData: true
 RoxygenNote: 7.1.2
 X-schema.org-applicationCategory: Data Access
