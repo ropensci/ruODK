@@ -1,4 +1,9 @@
 # ruODK 1.3.7
+## Minor fixes
+* Improve issue template for bug reports
+* Upgrade test server to ODK Central 1.4.2
+* Refresh packaged data (new Central brings new fields), update tests
+* Improve GitHub Action for Docker build
 
 # `ruODK` 1.3.6
 ## Minor fixes
