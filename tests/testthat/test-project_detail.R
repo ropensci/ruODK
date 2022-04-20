@@ -3,12 +3,12 @@ test_that("project_detail works", {
     message = "Test server not configured"
   )
 
-    p <- project_detail(
-      get_test_pid(),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  p <- project_detail(
+    get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
   testthat::expect_true(nrow(p) == 1)
   testthat::expect_true("name" %in% names(p))
 
@@ -79,23 +79,23 @@ test_that("project_detail warns on wrong credentials", {
     )
   )
 
-    testthat::expect_error(
-      p <- project_detail(
-        get_test_pid(),
-        url = get_test_url(),
-        un = "wrong_username",
-        pw = get_test_pw()
-      )
+  testthat::expect_error(
+    p <- project_detail(
+      get_test_pid(),
+      url = get_test_url(),
+      un = "wrong_username",
+      pw = get_test_pw()
     )
+  )
 
-    testthat::expect_error(
-      p <- project_detail(
-        get_test_pid(),
-        url = get_test_url(),
-        un = get_test_un(),
-        pw = "wrong_password"
-      )
+  testthat::expect_error(
+    p <- project_detail(
+      get_test_pid(),
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = "wrong_password"
     )
+  )
 })
 
 # usethis::use_r("project_detail") # nolint

@@ -217,7 +217,7 @@ odata_submission_get <- function(table = "Submissions",
   }
 
   if (odkc_version >= 1.2 && !is.null(expand) && expand == TRUE) {
-    qry$`$expand` <- '*'
+    qry$`$expand` <- "*"
     "Expanding all nested repeats" %>%
       glue::glue() %>%
       ru_msg_info(verbose = verbose)

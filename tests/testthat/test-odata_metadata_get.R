@@ -5,13 +5,13 @@ test_that("odata_metadata_get works", {
     message = "Test server not configured"
   )
 
-    md <- odata_metadata_get(
-      get_test_pid(),
-      get_test_fid(),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  md <- odata_metadata_get(
+    get_test_pid(),
+    get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
   testthat::expect_equal(class(md), "list")
 })
 

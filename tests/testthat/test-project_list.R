@@ -3,11 +3,11 @@ test_that("project_list works", {
     message = "Test server not configured"
   )
 
-    p <- project_list(
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  p <- project_list(
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
   testthat::expect_true(nrow(p) > 0)
 
   # project_list returns a tibble
@@ -61,7 +61,8 @@ test_that("project_list fails on missing URL", {
 
 test_that("project_list fails on missing username", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
   testthat::expect_error(p <- project_list(
     url = get_test_url(),
     un = NULL,
@@ -71,7 +72,8 @@ test_that("project_list fails on missing username", {
 
 test_that("project_list fails on missing password", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
   testthat::expect_error(p <- project_list(
     url = get_test_url(),
     un = get_test_un(),
@@ -81,7 +83,8 @@ test_that("project_list fails on missing password", {
 
 test_that("project_list aborts on missing credentials", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
   testthat::expect_error(p <- project_list(
     url = "",
     un = get_test_un(),
@@ -111,17 +114,17 @@ test_that("project_list warns on wrong URL", {
 
 
 test_that("project_list warns on wrong credentials", {
-    testthat::expect_error(p <- project_list(
-      url = get_test_url(),
-      un = "wrong_username",
-      pw = get_test_pw()
-    ))
+  testthat::expect_error(p <- project_list(
+    url = get_test_url(),
+    un = "wrong_username",
+    pw = get_test_pw()
+  ))
 
-    testthat::expect_error(p <- project_list(
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = "wrong_password"
-    ))
+  testthat::expect_error(p <- project_list(
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = "wrong_password"
+  ))
 })
 
 # usethis::use_r("project_list") # nolint

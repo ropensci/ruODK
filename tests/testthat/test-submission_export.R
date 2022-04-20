@@ -1,7 +1,8 @@
 test_that("submission_export works", {
   # This test downloads files
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
 
   # A fresh litterbox
   t <- tempdir()
@@ -104,7 +105,8 @@ test_that("submission_export works", {
 
 test_that("submission_export works with encryption", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
   skip_on_ci()
 
   # nolint start
@@ -168,7 +170,8 @@ test_that("submission_export works with encryption", {
 
 test_that("submission_export warns of missing credentials", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
   skip_on_ci()
 
   t <- tempdir()
@@ -248,7 +251,8 @@ test_that("submission_export excludes media", {
 
   # This test downloads files
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
   skip_on_ci()
 
   # A fresh litterbox

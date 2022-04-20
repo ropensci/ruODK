@@ -1,6 +1,7 @@
 test_that("ru_setup does not update settings if given NULL", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
 
   xx <- ru_settings()
 
@@ -59,7 +60,8 @@ test_that("ru_setup does not update settings if given NULL", {
 
 test_that("ru_setup resets settings if given empty string", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
 
   # Keep original test settings
   url <- get_default_url()
@@ -175,7 +177,8 @@ test_that("ru_setup resets settings if given empty string", {
 
 test_that("get_default_tz warns and defaults to UTC if tz set to ''", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
 
   # tz0 <- get_default_tz()s
   # testthat::expect_equal(tz0, "UTC") # TZ is not set in tests # nolint
@@ -196,7 +199,8 @@ test_that("get_default_tz warns and defaults to UTC if tz set to ''", {
 
 test_that("ru_setup sets pid, fid, url if given service url", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
   # Save sane state
   test_pid <- get_test_pid()
   test_fid <- get_test_fid()
@@ -233,7 +237,8 @@ test_that("ru_setup sets pid, fid, url if given service url", {
 
 test_that("ru_setup sets individual settings", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
 
   ru_setup(verbose = FALSE)
   testthat::expect_equal(get_ru_verbose(), FALSE)
@@ -256,7 +261,8 @@ test_that("ru_setup sets individual settings", {
 
 test_that("ru_settings prints nicely", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
 
   x <- ru_settings()
   testthat::expect_equal(class(x), "ru_settings")
@@ -299,7 +305,8 @@ test_that("odata_svc_parse works", {
 
 test_that("ru_settings prints only if verbose", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
 
   testthat::expect_output(ru_setup(verbose = TRUE))
 
@@ -311,7 +318,8 @@ test_that("ru_settings prints only if verbose", {
 
 test_that("retries default to 1L if empty or invalid", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
 
   # Keep a memory of better times
   retries <- get_retries()

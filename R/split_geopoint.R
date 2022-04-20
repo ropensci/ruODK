@@ -65,9 +65,10 @@ split_geopoint <- function(data, colname, wkt = FALSE) {
 
 
   if (wkt == FALSE) {
-    if(col_class != "list") {
+    if (col_class != "list") {
       "[split_geopoint] Skipping NULL column {colname} of class {col_class}" %>%
-        glue::glue() %>% ru_msg_noop()
+        glue::glue() %>%
+        ru_msg_noop()
       return(data)
     }
 
@@ -91,11 +92,12 @@ split_geopoint <- function(data, colname, wkt = FALSE) {
       )
   } else {
     # WKT
-    if(col_class != "character") {
-    "[split_geopoint] Skipping NULL column {colname}, of class {col_class}" %>%
-      glue::glue() %>% ru_msg_noop()
-    return(data)
-  }
+    if (col_class != "character") {
+      "[split_geopoint] Skipping NULL column {colname}, of class {col_class}" %>%
+        glue::glue() %>%
+        ru_msg_noop()
+      return(data)
+    }
     data %>%
       tidyr::extract(
         colname,

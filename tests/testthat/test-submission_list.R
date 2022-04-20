@@ -1,21 +1,22 @@
 test_that("submission_list works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
 
-    sl <- submission_list(
-      get_test_pid(),
-      get_test_fid(),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  sl <- submission_list(
+    get_test_pid(),
+    get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
 
-    fl <- form_list(
-      get_test_pid(),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  fl <- form_list(
+    get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
   # submission_list returns a tibble
   testthat::expect_equal(class(sl), c("tbl_df", "tbl", "data.frame"))
 

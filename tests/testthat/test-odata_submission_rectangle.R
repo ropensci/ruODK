@@ -108,24 +108,24 @@ test_that("odata_submission_rectangle works on non-spatial forms", {
     message = "Test server not configured"
   )
 
-    fs <- form_schema(
-      pid = get_test_pid(),
-      fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      odkc_version = get_test_odkc_version()
-    )
+  fs <- form_schema(
+    pid = get_test_pid(),
+    fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
 
-    sub_raw <- odata_submission_get(
-      pid = get_test_pid(),
-      fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      odkc_version = get_test_odkc_version(),
-      parse = FALSE
-    )
+  sub_raw <- odata_submission_get(
+    pid = get_test_pid(),
+    fid = Sys.getenv("ODKC_TEST_FID_I8N2", unset = "I8n_label_choices"),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    parse = FALSE
+  )
 
   sub <- sub_raw %>%
     odata_submission_rectangle(form_schema = fs, verbose = TRUE)

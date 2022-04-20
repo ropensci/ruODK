@@ -3,32 +3,32 @@ test_that("audit_get works", {
     message = "Test server not configured"
   )
 
-    logs <- audit_get(
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  logs <- audit_get(
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
 
-    # With search parameters
-    logs_pars <- audit_get(
-      action = "project.update",
-      start = "2019-08-01Z",
-      end = "2019-08-31Z",
-      limit = 100,
-      offset = 0,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  # With search parameters
+  logs_pars <- audit_get(
+    action = "project.update",
+    start = "2019-08-01Z",
+    end = "2019-08-31Z",
+    limit = 100,
+    offset = 0,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
 
-    logs_part <- audit_get(
-      action = "project.update",
-      limit = 100,
-      offset = 0,
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  logs_part <- audit_get(
+    action = "project.update",
+    limit = 100,
+    offset = 0,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
 
   # submission_list returns a tibble
   testthat::expect_equal(class(logs), c("tbl_df", "tbl", "data.frame"))

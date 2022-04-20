@@ -4,21 +4,21 @@ test_that("form_detail works", {
   )
 
   # The test project has a list of forms
-    fl <- form_list(
-      get_test_pid(),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  fl <- form_list(
+    get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
 
-    # The first form in the test project
-    f <- form_detail(
-      get_test_pid(),
-      fl$fid[[1]],
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw()
-    )
+  # The first form in the test project
+  f <- form_detail(
+    get_test_pid(),
+    fl$fid[[1]],
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
 
   # form_detail returns exactly one row
   testthat::expect_true(nrow(f) == 1)

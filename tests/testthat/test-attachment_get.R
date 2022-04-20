@@ -1,6 +1,7 @@
 test_that("attachment_get works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured")
+    message = "Test server not configured"
+  )
   # nolint start
   # This is needed to run the tests for this file only
   # if (is.null(vcr::vcr_configuration()$write_disk_path)) {

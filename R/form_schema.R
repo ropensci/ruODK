@@ -198,7 +198,7 @@ form_schema <- function(flatten = FALSE,
     return(fs)
   } else {
     # nocov end
-    if (draft == FALSE){
+    if (draft == FALSE) {
       pth <- glue::glue(
         "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/fields"
       )
@@ -239,7 +239,7 @@ form_schema <- function(flatten = FALSE,
     if (nrow(fs) == 0) {
 
       # Recursion stop
-      if (draft==TRUE) {
+      if (draft == TRUE) {
         ru_msg_warn("This form is a draft without any fields.")
         return(NULL)
       }
@@ -248,18 +248,20 @@ form_schema <- function(flatten = FALSE,
         glue::glue() %>%
         ru_msg_info(verbose = verbose)
 
-      fs <- form_schema(flatten = flatten,
-                        odata = odata,
-                        parse = parse,
-                        draft = TRUE,
-                        pid = pid,
-                        fid = fid,
-                        url = url,
-                        un = un,
-                        pw = pw,
-                        odkc_version = odkc_version,
-                        retries = retries,
-                        verbose = verbose)
+      fs <- form_schema(
+        flatten = flatten,
+        odata = odata,
+        parse = parse,
+        draft = TRUE,
+        pid = pid,
+        fid = fid,
+        url = url,
+        un = un,
+        pw = pw,
+        odkc_version = odkc_version,
+        retries = retries,
+        verbose = verbose
+      )
       # fs <- httr::RETRY(
       #   "GET",
       #   httr::modify_url(
