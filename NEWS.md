@@ -1,3 +1,5 @@
+# ruODK 1.3.8
+
 # ruODK 1.3.7
 ## Minor fixes
 * Improve issue template for bug reports

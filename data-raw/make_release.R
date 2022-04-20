@@ -69,7 +69,7 @@ chk <- rcmdcheck::rcmdcheck(args = c("--as-cran"))
 # Release package
 # -----------------------------------------------------------------------------#
 # Code and docs tested, working, committed
-usethis::use_version()
+usethis::use_version("patch")
 usethis::edit_file("NEWS.md")
 usethis::edit_file("inst/CITATION")
 
