@@ -1,3 +1,5 @@
+# ruODK 1.3.7
+
 # `ruODK` 1.3.6
 ## Minor fixes
 * `odata_submission_get` supports parameter `expand` to expand all repeat 
