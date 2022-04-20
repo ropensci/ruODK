@@ -164,33 +164,44 @@ If the install fails on building the vignettes, you can set
 If the installation still fails, or the above does not make any sense, 
 feel free to submit a [bug report](https://github.com/ropensci/ruODK/issues/new/choose).
 
-You can also run `ruODK` from the pre-built 
-[ruODK Docker image](https://github.com/ropensci/ruODK/pkgs/container/ruodk) 
-through RStudio Server or a plain Bash / R shell.
+You can also run `ruODK` using Docker.
+
+There are two ways to get the Docker image: 
+
+* Download the pre-built 
+[ruODK Docker image](https://github.com/ropensci/ruODK/pkgs/container/ruodk) or 
+* build the image locally with your own GitHub Personal Access Token (PAT).
 
 ```
-# Get the latest image (members of rOpenSci only)
+# Download
 docker pull ghcr.io/ropensci/ruodk:latest
 
-# Build the latest image locally with your own GitHub Personal Access Token (PAT)
+# Build
 git clone git@github.com:ropensci/ruODK.git
 cd ruODK
 docker build . -t <myorg>/ruodk:latest --build-arg GITHUB_PAT="..."
+```
 
-# Run RStudio Server on http://0.0.0.0:8787/ as user rstudio with a chosen password
-docker run -e PASSWORD=<YOUR_PASS> -p 8787:8787 ghcr.io/ropensci/ruodk:latest
+Then you can run the image in three ways:
 
-# Run a Bash shell
+* RStudio Server running on <http://0.0.0.0:8787/> as user `rstudio` with a 
+  chosen password (here: `ruodk`),
+* with a Bash shell (from within you can run R or poke around in the system), or
+* with an R shell.
+
+```
+# RStudio Server
+docker run -e PASSWORD=ruodk -p 8787:8787 ghcr.io/ropensci/ruodk:latest
+
+# Bash shell
 docker run -it ghcr.io/ropensci/ruodk:latest /bin/bash -c "export TERM=xterm; exec bash"
 
-# Run an R shell
+# R shell
 docker run -it ghcr.io/ropensci/ruodk:latest /bin/bash -c "export TERM=xterm; exec R"
 ```
 
 If you don't want to install and run Docker yourself, you can use the hosted version on
-[BinderHub](https://mybinder.readthedocs.io/) on good days<sup>*</sup> by clicking on  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio).
-
-<sup>*</sup> the image build is sometimes broken or times out on launch
+[BinderHub](https://mybinder.readthedocs.io/) by clicking on  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio).
 
 ## ODK Central
 ### Access to an ODK Central instance
