@@ -27,9 +27,9 @@ jobs:
           # - { os: windows-2016, r: "devel" }
           # - { os: windows-2016, r: "release" }
           # - { os: windows-2016, r: "oldrel" }
-          - { os: macOS-latest, r: "devel" } # tic not available as of 2022/02/21
+          # - { os: macOS-latest, r: "devel" }
           - { os: macOS-latest, r: "release"}
-          - { os: macOS-latest, r: "oldrel"}
+          # - { os: macOS-latest, r: "oldrel"}
           - { os: ubuntu-20.04, r: "devel" }
           - { os: ubuntu-20.04, r: "release"}
           - { os: ubuntu-20.04, r: "oldrel" }
@@ -130,7 +130,7 @@ jobs:
 
       - name: "[Custom block] [macOS-devel] [r-devel/rel/oldrel] Install system pkgs"
         if: matrix.config.os == 'macOS-latest' #&& matrix.config.r == 'devel'
-        run: brew install gdal proj geos udunits cairo libpng libgit2
+        run: brew install gdal proj geos udunits cairo libpng libgit2 sqlite
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
