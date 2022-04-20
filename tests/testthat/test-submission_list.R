@@ -31,7 +31,8 @@ test_that("submission_list works", {
     "submitter_type",
     "submitter_display_name",
     "submitter_created_at",
-    "submitter_updated_at"
+    "submitter_updated_at",
+    "submitter_deleted_at"
   )
   testthat::expect_equal(names(sl), cn)
   purrr::map(

@@ -6,7 +6,7 @@
 \alias{geo_fs}
 \title{The form_schema of a form containing geofields in GeoJSON.}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 19 rows and 5 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 19 rows and 6 columns.
 }
 \source{
 \code{\link{form_schema}}

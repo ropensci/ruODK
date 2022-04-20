@@ -15,43 +15,44 @@ test_that("predict_ruodk_name works", {
   )
 })
 
-test_that("form_schema works with ODK Central v0.8", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-    message = "Test server not configured"
-  )
-
-    fs <- form_schema(
-      flatten = FALSE,
-      parse = FALSE,
-      odata = FALSE,
-      pid = get_test_pid(),
-      fid = get_test_fid(),
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      odkc_version = get_test_odkc_version(),
-      verbose = TRUE
-    )
-
-  testthat::expect_true(tibble::is_tibble(fs))
-  testthat::expect_equal(
-    names(fs),
-    c("path", "name", "type", "binary", "ruodk_name")
-  )
-  testthat::expect_true("encounter_start_datetime" %in% fs$name)
-  testthat::expect_true("quadrat_photo" %in% fs$name)
-
-  # nolint start
-  # # Attachments
-  # fsp %>% dplyr::filter(type=="binary")
-  #
-  # # dateYime
-  # fsp %>% dplyr::filter(type=="dateTime")
-  #
-  # # Point location
-  # fsp %>% dplyr::filter(type=="geopoint")
-  # nolint end
-})
+# This test is retired, as the current test server runs at v1.4+
+# test_that("form_schema works with ODK Central v0.8", {
+#   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+#     message = "Test server not configured"
+#   )
+#
+#     fs <- form_schema(
+#       flatten = FALSE,
+#       parse = FALSE,
+#       odata = FALSE,
+#       pid = get_test_pid(),
+#       fid = get_test_fid(),
+#       url = get_test_url(),
+#       un = get_test_un(),
+#       pw = get_test_pw(),
+#       odkc_version = get_test_odkc_version(),
+#       verbose = TRUE
+#     )
+#
+#   testthat::expect_true(tibble::is_tibble(fs))
+#   testthat::expect_equal(
+#     names(fs),
+#     c("path", "name", "type", "binary", "ruodk_name")
+#   )
+#   testthat::expect_true("encounter_start_datetime" %in% fs$name)
+#   testthat::expect_true("quadrat_photo" %in% fs$name)
+#
+#   # nolint start
+#   # # Attachments
+#   # fsp %>% dplyr::filter(type=="binary")
+#   #
+#   # # dateYime
+#   # fsp %>% dplyr::filter(type=="dateTime")
+#   #
+#   # # Point location
+#   # fsp %>% dplyr::filter(type=="geopoint")
+#   # nolint end
+# })
 
 test_that("form_schema_parse debug messages work", {
   data("fs_v7_raw")
