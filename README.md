@@ -180,8 +180,13 @@ You can also run `ruODK` from the pre-built [ruODK Docker
 image](https://github.com/ropensci/ruODK/pkgs/container/ruodk) through
 RStudio Server or a plain Bash / R shell.
 
-    # Get the latest image
+    # Get the latest image (members of rOpenSci only)
     docker pull ghcr.io/ropensci/ruodk:latest
+    
+    # Build the latest image locally with your own GitHub Personal Access Token (PAT)
+    git clone git@github.com:ropensci/ruODK.git
+    cd ruODK
+    docker build . -t <myorg>/ruodk:latest --build-arg GITHUB_PAT="..."
     
     # Run RStudio Server on http://0.0.0.0:8787/ as user rstudio with a chosen password
     docker run -e PASSWORD=<YOUR_PASS> -p 8787:8787 ghcr.io/ropensci/ruodk:latest
@@ -192,9 +197,12 @@ RStudio Server or a plain Bash / R shell.
     # Run an R shell
     docker run -it ghcr.io/ropensci/ruodk:latest /bin/bash -c "export TERM=xterm; exec R"
 
-If you don’t want to install and run Docker yourself, use the hosted
-version on [BinderHub](https://mybinder.readthedocs.io/) by clicking on
+If you don’t want to install and run Docker yourself, you can use the
+hosted version on [BinderHub](https://mybinder.readthedocs.io/) on good
+days<sup>\*</sup> by clicking on
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio).
+
+<sup>\*</sup> the image build is sometimes broken or times out on launch
 
 ## ODK Central
 
