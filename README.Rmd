@@ -115,7 +115,7 @@ Benefits of using the R ecosystem in combination with ODK:
 Out of scope:
 
 *  To wrap "management" API endpoints. ODK Central is a
-   [VueJS/NodeJS application](https://github.com/opendatakit/central-frontend/) 
+   [VueJS/NodeJS application](https://github.com/getodk/central-frontend/) 
    which provides a comprehensive graphical user interface for the management of 
    users, roles, permissions, projects, and forms.
 *  To provide extensive data visualisation. We show only minimal examples of data 
@@ -163,6 +163,27 @@ If the install fails on building the vignettes, you can set
 
 If the installation still fails, or the above does not make any sense, 
 feel free to submit a [bug report](https://github.com/ropensci/ruODK/issues/new/choose).
+
+You can also run `ruODK` from the pre-built 
+[ruODK Docker image](https://github.com/ropensci/ruODK/pkgs/container/ruodk) 
+through RStudio Server or a plain Bash / R shell.
+
+```
+# Get the latest image
+docker pull ghcr.io/ropensci/ruodk:latest
+
+# Run RStudio Server on http://0.0.0.0:8787/ as user rstudio with a chosen password
+docker run -e PASSWORD=<YOUR_PASS> -p 8787:8787 ghcr.io/ropensci/ruodk:latest
+
+# Run a Bash shell
+docker run -it ghcr.io/ropensci/ruodk:latest /bin/bash -c "export TERM=xterm; exec bash"
+
+# Run an R shell
+docker run -it ghcr.io/ropensci/ruodk:latest /bin/bash -c "export TERM=xterm; exec R"
+```
+
+If you don't want to install and run Docker yourself, use the hosted version on
+[BinderHub](https://mybinder.readthedocs.io/) by clicking on  [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio).
 
 ## ODK Central
 ### Access to an ODK Central instance

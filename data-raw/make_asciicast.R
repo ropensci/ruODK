@@ -1,4 +1,6 @@
 #' Title: ruODK walkthough
+#' Author_img_url: ../man/figures/ruODK2.png
+#' Cols: 120
 #' Typing_speed: 0.05
 #' Empty_wait: 1
 #' End_wait: 20
@@ -10,8 +12,9 @@
 suppressMessages(library(tidyverse))
 library(ruODK)
 ruODK::ru_setup(
-  svc = "https://myodk.org/v1/projects/14/forms/Flora-Quadrat.svc",
-  un = ruODK::get_test_un(), pw = ruODK::get_test_pw()
+  svc = Sys.getenv("ODKC_TEST_SVC"),
+  un = ruODK::get_test_un(),
+  pw = ruODK::get_test_pw()
 )
 
 # <<
@@ -46,8 +49,7 @@ fq_data_taxa <- ruODK::odata_submission_get(
 # <<
 # View data
 # <<
-skimr::skim(fq_data)
-dplyr::glimpse(fq_data)
+names(fq_data)
 head(fq_data)
 head(fq_data_strata)
 head(fq_data_taxa)

@@ -73,26 +73,26 @@ R.
 
 Benefits of using the R ecosystem in combination with ODK:
 
--   Scalability: Both R and ODK are free and open source software.
+  - Scalability: Both R and ODK are free and open source software.
     Scaling to many users does not incur license fees.
--   Ubiquity: R is known to many scientists and is widely taught at
+  - Ubiquity: R is known to many scientists and is widely taught at
     universities.
--   Automation: The entire data access and analysis workflow can be
+  - Automation: The entire data access and analysis workflow can be
     automated through R scripts.
--   Reproducible reporting (e.g. 
+  - Reproducible reporting (e.g. 
     [Sweave](https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr),
     [RMarkdown](https://rmarkdown.rstudio.com/)), interactive web apps
     ([Shiny](https://shiny.rstudio.com/)), workflow scaling
     ([drake](https://docs.ropensci.org/drake/)).
--   Rstudio-as-a-Service (RaaS) at
+  - Rstudio-as-a-Service (RaaS) at
     [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
 
 `ruODK`’s scope:
 
--   To wrap all ODK Central API endpoints with a focus on **data
+  - To wrap all ODK Central API endpoints with a focus on **data
     access**.
--   To provide working examples of interacting with the ODK Central API.
--   To provide convenience helpers for the day to day tasks when working
+  - To provide working examples of interacting with the ODK Central API.
+  - To provide convenience helpers for the day to day tasks when working
     with ODK Central data in R: **data munging** the ODK Central API
     output into tidy R formats.
 
@@ -100,7 +100,7 @@ Benefits of using the R ecosystem in combination with ODK:
 
 `ruODK`’s use cases:
 
--   Smaller projects: Example
+  - Smaller projects: Example
     [rOzCBI](https://dbca-wa.github.io/rOzCBI/)
     1.  Data collection: ODK Collect
     2.  Data clearinghouse: ODK Central
@@ -108,7 +108,7 @@ Benefits of using the R ecosystem in combination with ODK:
     4.  Publishing and dissemination:
         [`ckanr`](https://docs.ropensci.org/ckanr/),
         [`CKAN`](https://ckan.org/)
--   Larger projects:
+  - Larger projects:
     1.  Data collection: ODK Collect
     2.  Data clearinghouse: ODK Central
     3.  ETL pipeline into data warehouses: `Rmd` (ruODK)
@@ -120,14 +120,14 @@ Benefits of using the R ecosystem in combination with ODK:
 
 Out of scope:
 
--   To wrap “management” API endpoints. ODK Central is a [VueJS/NodeJS
-    application](https://github.com/opendatakit/central-frontend/) which
+  - To wrap “management” API endpoints. ODK Central is a [VueJS/NodeJS
+    application](https://github.com/getodk/central-frontend/) which
     provides a comprehensive graphical user interface for the management
     of users, roles, permissions, projects, and forms.
--   To provide extensive data visualisation. We show only minimal
+  - To provide extensive data visualisation. We show only minimal
     examples of data visualisation and presentation, mainly to
     illustrate the example data. Once the data is in your hands as tidy
-    tibbles… urODK!
+    tibbles… urODK\!
 
 ## A quick preview
 
@@ -176,11 +176,31 @@ If the installation still fails, or the above does not make any sense,
 feel free to submit a [bug
 report](https://github.com/ropensci/ruODK/issues/new/choose).
 
+You can also run `ruODK` from the pre-built [ruODK Docker
+image](https://github.com/ropensci/ruODK/pkgs/container/ruodk) through
+RStudio Server or a plain Bash / R shell.
+
+    # Get the latest image
+    docker pull ghcr.io/ropensci/ruodk:latest
+    
+    # Run RStudio Server on http://0.0.0.0:8787/ as user rstudio with a chosen password
+    docker run -e PASSWORD=<YOUR_PASS> -p 8787:8787 ghcr.io/ropensci/ruodk:latest
+    
+    # Run a Bash shell
+    docker run -it ghcr.io/ropensci/ruodk:latest /bin/bash -c "export TERM=xterm; exec bash"
+    
+    # Run an R shell
+    docker run -it ghcr.io/ropensci/ruodk:latest /bin/bash -c "export TERM=xterm; exec R"
+
+If you don’t want to install and run Docker yourself, use the hosted
+version on [BinderHub](https://mybinder.readthedocs.io/) by clicking on
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio).
+
 ## ODK Central
 
 ### Access to an ODK Central instance
 
-First, we need an ODK Central instance and some data to play with!
+First, we need an ODK Central instance and some data to play with\!
 
 Either [request a free trial](https://getodk.org/#odk-cloud) or follow
 the [setup instructions](https://docs.getodk.org/central-intro/) to
@@ -191,36 +211,36 @@ build and deploy your very own ODK Central instance.
 The ODK Central [user manual](https://docs.getodk.org/central-using/)
 provides up-to-date descriptions of the steps below.
 
--   [Create a web user
+  - [Create a web user
     account](https://docs.getodk.org/central-users/#creating-a-web-user)
     on an ODK Central instance. Your username will be an email address.
--   [Create a project](https://docs.getodk.org/central-projects/) and
+  - [Create a project](https://docs.getodk.org/central-projects/) and
     give the web user at least [read
     permissions](https://docs.getodk.org/central-projects/#managing-project-managers).
--   Create an XForm, e.g. using ODK Build, or use the [example
+  - Create an XForm, e.g. using ODK Build, or use the [example
     forms](https://github.com/ropensci/ruODK/tree/master/inst/extdata)
     provided by `ruODK`. The `.odkbuild` versions can be loaded into
     [ODK Build](https://build.getodk.org/), while the `.xml` versions
     can be directly imported into ODK Central.
--   [Publish the form](https://docs.getodk.org/central-forms/) to ODK
+  - [Publish the form](https://docs.getodk.org/central-forms/) to ODK
     Central.
--   Collect some data for this form on ODK Collect and let ODK Collect
+  - Collect some data for this form on ODK Collect and let ODK Collect
     submit the finalised forms to ODK Central.
 
 ## Configure `ruODK`
 
 For all available detailed options to configure authentication for
-`ruODK`, read
-[`vignette("setup", package = "ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html).
+`ruODK`, read [`vignette("setup", package =
+"ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html).
 
 ## Use ruODK
 
 A detailed walk-through with some data visualisation examples is
-available in the
-[`vignette("odata-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html).
+available in the [`vignette("odata-api",
+package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html).
 
-See also
-[`vignette("restful-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/restful-api.html)
+See also [`vignette("restful-api",
+package="ruODK")`](https://docs.ropensci.org/ruODK/articles/restful-api.html)
 for examples using the alternative RESTful API.
 
 ## Try ruODK
@@ -237,7 +257,7 @@ OData” and follow the instructions within.
 ## Contribute
 
 Contributions through [issues](https://github.com/ropensci/ruODK/issues)
-and PRs are welcome!
+and PRs are welcome\!
 
 See the [contributing
 guide](https://docs.ropensci.org/ruODK/CONTRIBUTING.html) on best
@@ -288,7 +308,7 @@ biodiversity of Western Australia, and in doing so, caring for country.
 
 ## Package functionality
 
-See
-[`vignette("comparison", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/comparison.html)
+See [`vignette("comparison",
+package="ruODK")`](https://docs.ropensci.org/ruODK/articles/comparison.html)
 for a comprehensive comparison of ruODK to other software packages from
 both an ODK and an OData angle.
