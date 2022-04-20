@@ -15,12 +15,12 @@ test_that("predict_ruodk_name works", {
   )
 })
 
+# nolint start
 # This test is retired, as the current test server runs at v1.4+
 # test_that("form_schema works with ODK Central v0.8", {
 #   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
 #     message = "Test server not configured"
 #   )
-#
 #     fs <- form_schema(
 #       flatten = FALSE,
 #       parse = FALSE,
@@ -33,7 +33,6 @@ test_that("predict_ruodk_name works", {
 #       odkc_version = get_test_odkc_version(),
 #       verbose = TRUE
 #     )
-#
 #   testthat::expect_true(tibble::is_tibble(fs))
 #   testthat::expect_equal(
 #     names(fs),
@@ -41,8 +40,6 @@ test_that("predict_ruodk_name works", {
 #   )
 #   testthat::expect_true("encounter_start_datetime" %in% fs$name)
 #   testthat::expect_true("quadrat_photo" %in% fs$name)
-#
-#   # nolint start
 #   # # Attachments
 #   # fsp %>% dplyr::filter(type=="binary")
 #   #
@@ -51,8 +48,8 @@ test_that("predict_ruodk_name works", {
 #   #
 #   # # Point location
 #   # fsp %>% dplyr::filter(type=="geopoint")
-#   # nolint end
 # })
+# nolint end
 
 test_that("form_schema_parse debug messages work", {
   data("fs_v7_raw")

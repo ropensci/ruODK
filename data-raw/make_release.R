@@ -38,13 +38,13 @@ purrr::map(
 )
 
 # -----------------------------------------------------------------------------#
-# Style, lint, spellcheck
+# Style, lint, spell check
 # -----------------------------------------------------------------------------#
 styler::style_pkg()
 lintr:::addin_lint_package()
 devtools::document(roclets = c("rd", "collate", "namespace", "vignette"))
 spelling::spell_check_package()
-spelling::spell_check_files("README.Rmd", lang = "en_AU")
+spelling::spell_check_files("README.Rmd", lang = "en-AU")
 spelling::update_wordlist()
 codemetar::write_codemeta("../ruODK", write_minimeta = TRUE)
 if (fs::file_info("README.md")$modification_time <
@@ -73,16 +73,17 @@ usethis::use_version()
 usethis::edit_file("NEWS.md")
 usethis::edit_file("inst/CITATION")
 
-# Git commit, then tag and push
+# Tag and push
+devtools::document()
 v <- packageVersion("ruODK")
 system(glue::glue("git tag -a v{v} -m 'v{v}'"))
-system(glue::glue("git push origin v{v}"))
+system(glue::glue("git push && git push --tags"))
 
-# Build Docker image
-dn <- "dbcawa/ruodk"
-dv <- packageVersion("ruODK")
-gp <- Sys.getenv("GITHUB_PAT")
-message(glue::glue("Building and pushing {dn}:{dv}..."))
-system(glue::glue(
-  "docker build . -t {dn}:latest -t {dn}:{dv} --build-arg GITHUB_PAT={gp} && docker push {dn}"
-))
+# Build Docker image - now happens on pushing tags beginning with "v"
+# dn <- "dbcawa/ruodk"
+# dv <- packageVersion("ruODK")
+# gp <- Sys.getenv("GITHUB_PAT")
+# message(glue::glue("Building and pushing {dn}:{dv}..."))
+# system(glue::glue(
+#   "docker build . -t {dn}:latest -t {dn}:{dv} --build-arg GITHUB_PAT={gp} && docker push {dn}"
+# ))

@@ -13,6 +13,7 @@ ETL
 Edmx
 EntityType
 Flatback
+GGplot
 GH
 GeoJSON
 Geoshapes
@@ -80,6 +81,7 @@ UUIDs
 Un
 VueJS
 WKT
+Whadjuk
 Wickam
 XForm
 XForms
@@ -93,6 +95,7 @@ api
 asciicast
 attchment
 attrs
+boodja
 bugfix
 changedate
 cheatsheet
@@ -113,6 +116,8 @@ datetime
 datetimes
 dbcawa
 decrypt
+depencency
+df
 doi
 dttm
 eval
@@ -157,6 +162,7 @@ noop
 odata
 odkbuild
 odkc
+onwards
 permissioning
 photoshopping
 pid
@@ -183,6 +189,7 @@ subresource
 subtables
 svc
 targetting
+tbl
 tibble
 tibbles
 tidyr

@@ -30,7 +30,7 @@
     "type": "Organization",
     "name": "DBCA"
   },
-  "description": "Access and tidy up data from the 'ODK Central' API.  \n    'ODK Central' is a clearinghouse for digitally captured data \n    <https://docs.getodk.org/central-intro/>.\n    The 'ODK Central' API is documented at <https://odkcentral.docs.apiary.io/>.",
+  "description": "Access and tidy up data from the 'ODK Central' API. 'ODK Central' is a clearinghouse for digitally captured data <https://docs.getodk.org/central-intro/>. The 'ODK Central' API is documented at <https://odkcentral.docs.apiary.io/>.",
   "funder": [
     {
       "type": "Organization",
@@ -48,6 +48,6 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
-  "version": "1.2.0.2"
+  "runtimePlatform": "R version 4.1.3 (2022-03-10)",
+  "version": "1.3.7"
 }
