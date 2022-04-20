@@ -8,7 +8,7 @@ LABEL description="rocker/geospatial:4.1.3 with ruODK"
 RUN apt-get update && \
     apt remove -y libvorbis0a && \
     apt-get -y install --no-install-recommends \
-    python3-venv python3-dev \
+    python3-venv python3-dev python3-pip \
     # ruODK deps:
     libxml2-dev libjq-dev libudunits2-dev libgdal-dev \
     libgeos-dev libproj-dev libicu-dev libv8-dev libjq-dev libprotobuf-dev \
