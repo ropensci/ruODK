@@ -1,6 +1,6 @@
-FROM rocker/geospatial:4.1.1 as builder_base
+FROM rocker/geospatial:4.1.3 as builder_base
 LABEL maintainer=Florian.Mayer@dbca.wa.gov.au
-LABEL description="rocker/geospatial:4.1.1 with ruODK and extras for DBCA"
+LABEL description="rocker/geospatial:4.1.3 with ruODK"
 # Build this image with
 # docker build . -t dbcawa/ruodk:latest --build-arg GITHUB_PAT="..."
 
