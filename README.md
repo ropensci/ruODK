@@ -20,7 +20,7 @@ Appveyor](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/ma
 coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
 [![CodeFactor](https://www.codefactor.io/repository/github/ropensci/ruodk/badge)](https://www.codefactor.io/repository/github/ropensci/ruodk)
 [![Hosted RStudio with
-ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
+ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=lab)
 <!-- badges: end -->
 
 Especially in these trying times, it is important to ask “r u ODK?”.
@@ -85,7 +85,7 @@ Benefits of using the R ecosystem in combination with ODK:
     ([Shiny](https://shiny.rstudio.com/)), workflow scaling
     ([drake](https://docs.ropensci.org/drake/)).
   - Rstudio-as-a-Service (RaaS) at
-    [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
+    [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=lab)
 
 `ruODK`’s scope:
 
@@ -217,7 +217,7 @@ Then you can run the image in three ways:
 If you don’t want to install and run Docker yourself, you can use the
 hosted version on [BinderHub](https://mybinder.readthedocs.io/) by
 clicking on
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio).
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=lab).
 
 ## ODK Central
 
@@ -268,11 +268,11 @@ for examples using the alternative RESTful API.
 
 ## Try ruODK
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=rstudio)
-will launch a disposable, hosted RStudio instance with `ruODK` installed
-and the companion package [`urODK`](https://github.com/dbca-wa/urODK)
-opened as starting point for a hands-on workshop or instant demo of
-`ruODK` usage.
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dbca-wa/urODK/master?urlpath=lab)
+will launch a disposable, hosted JupyterLab instance with `ruODK`
+installed and the companion package
+[`urODK`](https://github.com/dbca-wa/urODK) opened as starting point for
+a hands-on workshop or instant demo of `ruODK` usage.
 
 Create a new RMarkdown workbook from `ruODK` template “ODK Central via
 OData” and follow the instructions within.
