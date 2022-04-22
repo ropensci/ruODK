@@ -76,8 +76,7 @@ usethis::edit_file("inst/CITATION")
 # Tag and push
 devtools::document()
 v <- packageVersion("ruODK")
-system(glue::glue("git tag -a v{v} -m 'v{v}'"))
-system(glue::glue("git push && git push --tags"))
+system(glue::glue("git tag -a v{v} -m 'v{v}' && git push && git push --tags"))
 
 # Build Docker image - now happens on pushing tags beginning with "v"
 # dn <- "dbcawa/ruodk"

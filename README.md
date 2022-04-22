@@ -185,28 +185,26 @@ You can also run `ruODK` through hosted or self-built Docker images.
 In decreasing order of simplicity:
 
   - Launch a hosted RStudio Server [![Hosted RStudio with
-    ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio),
-  - launch a hosted JupyterLab server (with all kernel options
+    ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
+
+  - Launch a hosted JupyterLab server (with all kernel options
     available) [![Hosted JupyterLab with
-    ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=lab),
-  - download the pre-built [ruODK Docker
+    ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=lab)
+
+  - Download the pre-built [ruODK Docker
     image](https://github.com/ropensci/ruODK/pkgs/container/ruodk) based
-    on the last tagged ruODK version, or
-  - build the latest ruODK version locally with your own GitHub Personal
-    Access Token (PAT).
-
-<!-- end list -->
-
-    # Step1, option 1: Download
-    docker pull ghcr.io/ropensci/ruodk:latest
+    on the last tagged `ruODK` version
     
-    # Step 1, option 2: Build
-    git clone git@github.com:ropensci/ruODK.git
-    cd ruODK
-    docker build . -t <myorg>/ruodk:latest --build-arg GITHUB_PAT="..."
+        docker pull ghcr.io/ropensci/ruodk:latest
+        docker run ghcr.io/ropensci/ruodk:latest
+
+  - Build the latest `ruODK` version locally with your own GitHub
+    Personal Access Token (PAT)
     
-    # Step 2: Run
-    docker run -p 8888:8888 <myorg>/ruodk:latest
+        git clone git@github.com:ropensci/ruODK.git
+        cd ruODK
+        docker build . -t <myorg>/ruodk:latest --build-arg GITHUB_PAT="..."
+        docker run -p 8888:8888 <myorg>/ruodk:latest
 
 The running Docker image will print a URL you can click on. The URL will
 open [JupyterLab](https://jupyter.org/) in your browser. From there, you
