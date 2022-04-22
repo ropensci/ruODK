@@ -1,3 +1,5 @@
+# ruODK 1.3.9
+
 # ruODK 1.3.8
 
 # ruODK 1.3.7
