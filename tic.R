@@ -10,9 +10,14 @@ do_package_checks(
   )
 )
 
+# failed: ‘terra’, ‘sf’, ‘raster’, ‘leafpop’, ‘leaflet’, ‘satellite’, ‘leafem’
 if(ci_get_env("matrix.config.os") == "macOS-latest"){
   get_stage("install") %>%
     add_step(step_install_cran("proj4")) %>%
+    add_step(step_install_github("r-spatial/sf", dependencies = TRUE, force = TRUE)) %>%
+    add_step(step_install_cran("raster")) %>%
+    add_step(step_install_cran("leaflet")) %>%
+    add_step(step_install_cran("leafpop")) %>%
     add_step(step_install_github("r-spatial/leafem", dependencies = TRUE)) %>%
     add_step(step_install_cran("terra"))
 }

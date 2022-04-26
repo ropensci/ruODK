@@ -131,9 +131,9 @@ jobs:
           libgeos-dev libproj-dev libicu-dev libv8-dev libprotobuf-dev \
           protobuf-compiler libgit2-dev
 
-      - name: "[Custom block] [macOS-devel] [r-devel/rel/oldrel] Install system pkgs"
+      - name: "[Custom block] [macOS-latest] [r-devel/rel/oldrel] Install system pkgs"
         if: matrix.config.os == 'macOS-latest' #&& matrix.config.r == 'devel'
-        run: brew install gdal proj geos udunits cairo libpng libgit2 sqlite
+        run: brew install gdal proj geos udunits libgit2
 
       - name: "[Stage] Install"
         if: matrix.config.os != 'macOS-latest' || matrix.config.r != 'devel'
