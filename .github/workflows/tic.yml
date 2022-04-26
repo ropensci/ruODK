@@ -21,7 +21,7 @@ jobs:
       matrix:
         config:
           # See https://github.com/actions/virtual-environments
-          - { os: windows-latest, r: "devel" }
+          - { os: windows-latest, r: "devel" } # dependencies 'git2r', 'usethis' are not available for package 'tic'
           - { os: windows-latest, r: "release" }
           - { os: windows-latest, r: "oldrel" }
           # - { os: windows-2016, r: "devel" }
