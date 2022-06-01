@@ -19,7 +19,7 @@ Appveyor](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/ma
 [![Test
 coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
 [![CodeFactor](https://www.codefactor.io/repository/github/ropensci/ruodk/badge)](https://www.codefactor.io/repository/github/ropensci/ruodk)
-[![Hosted JuyterLab with
+[![Hosted JupyterLab with
 ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=lab)
 [![Hosted RStudio with
 ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
@@ -75,26 +75,26 @@ R.
 
 Benefits of using the R ecosystem in combination with ODK:
 
-  - Scalability: Both R and ODK are free and open source software.
+-   Scalability: Both R and ODK are free and open source software.
     Scaling to many users does not incur license fees.
-  - Ubiquity: R is known to many scientists and is widely taught at
+-   Ubiquity: R is known to many scientists and is widely taught at
     universities.
-  - Automation: The entire data access and analysis workflow can be
+-   Automation: The entire data access and analysis workflow can be
     automated through R scripts.
-  - Reproducible reporting (e.g. 
+-   Reproducible reporting (e.g. 
     [Sweave](https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr),
     [RMarkdown](https://rmarkdown.rstudio.com/)), interactive web apps
     ([Shiny](https://shiny.rstudio.com/)), workflow scaling
     ([drake](https://docs.ropensci.org/drake/)).
-  - Rstudio-as-a-Service (RaaS) at [![Hosted RStudio with
+-   Rstudio-as-a-Service (RaaS) at [![Hosted RStudio with
     ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
 
 `ruODK`’s scope:
 
-  - To wrap all ODK Central API endpoints with a focus on **data
+-   To wrap all ODK Central API endpoints with a focus on **data
     access**.
-  - To provide working examples of interacting with the ODK Central API.
-  - To provide convenience helpers for the day to day tasks when working
+-   To provide working examples of interacting with the ODK Central API.
+-   To provide convenience helpers for the day to day tasks when working
     with ODK Central data in R: **data munging** the ODK Central API
     output into tidy R formats.
 
@@ -102,7 +102,7 @@ Benefits of using the R ecosystem in combination with ODK:
 
 `ruODK`’s use cases:
 
-  - Smaller projects: Example
+-   Smaller projects: Example
     [rOzCBI](https://dbca-wa.github.io/rOzCBI/)
     1.  Data collection: ODK Collect
     2.  Data clearinghouse: ODK Central
@@ -110,7 +110,7 @@ Benefits of using the R ecosystem in combination with ODK:
     4.  Publishing and dissemination:
         [`ckanr`](https://docs.ropensci.org/ckanr/),
         [`CKAN`](https://ckan.org/)
-  - Larger projects:
+-   Larger projects:
     1.  Data collection: ODK Collect
     2.  Data clearinghouse: ODK Central
     3.  ETL pipeline into data warehouses: `Rmd` (ruODK)
@@ -122,14 +122,14 @@ Benefits of using the R ecosystem in combination with ODK:
 
 Out of scope:
 
-  - To wrap “management” API endpoints. ODK Central is a [VueJS/NodeJS
+-   To wrap “management” API endpoints. ODK Central is a [VueJS/NodeJS
     application](https://github.com/getodk/central-frontend/) which
     provides a comprehensive graphical user interface for the management
     of users, roles, permissions, projects, and forms.
-  - To provide extensive data visualisation. We show only minimal
+-   To provide extensive data visualisation. We show only minimal
     examples of data visualisation and presentation, mainly to
     illustrate the example data. Once the data is in your hands as tidy
-    tibbles… urODK\!
+    tibbles… urODK!
 
 ## A quick preview
 
@@ -184,23 +184,23 @@ You can also run `ruODK` through hosted or self-built Docker images.
 
 In decreasing order of simplicity:
 
-  - Launch a hosted RStudio Server [![Hosted RStudio with
+-   Launch a hosted RStudio Server [![Hosted RStudio with
     ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
 
-  - Launch a hosted JupyterLab server (with all kernel options
+-   Launch a hosted JupyterLab server (with all kernel options
     available) [![Hosted JupyterLab with
     ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=lab)
 
-  - Download the pre-built [ruODK Docker
+-   Download the pre-built [ruODK Docker
     image](https://github.com/ropensci/ruODK/pkgs/container/ruodk) based
     on the last tagged `ruODK` version
-    
+
         docker pull ghcr.io/ropensci/ruodk:latest
         docker run ghcr.io/ropensci/ruodk:latest
 
-  - Build the latest `ruODK` version locally with your own GitHub
+-   Build the latest `ruODK` version locally with your own GitHub
     Personal Access Token (PAT)
-    
+
         git clone git@github.com:ropensci/ruODK.git
         cd ruODK
         docker build . -t <myorg>/ruodk:latest --build-arg GITHUB_PAT="..."
@@ -214,17 +214,17 @@ shell.
 ## Configure `ruODK`
 
 For all available detailed options to configure authentication for
-`ruODK`, read [`vignette("setup", package =
-"ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html).
+`ruODK`, read
+[`vignette("setup", package = "ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html).
 
 ## Use `ruODK`
 
 A detailed walk-through with some data visualisation examples is
-available in the [`vignette("odata-api",
-package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html).
+available in the
+[`vignette("odata-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html).
 
-See also [`vignette("restful-api",
-package="ruODK")`](https://docs.ropensci.org/ruODK/articles/restful-api.html)
+See also
+[`vignette("restful-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/restful-api.html)
 for examples using the alternative RESTful API.
 
 `urODK`, a sing-along `ruODK` workshop about you, R, and ODK, is
@@ -234,7 +234,7 @@ ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci
 ## Contribute
 
 Contributions through [issues](https://github.com/ropensci/ruODK/issues)
-and PRs are welcome\!
+and PRs are welcome!
 
 See the [contributing
 guide](https://docs.ropensci.org/ruODK/CONTRIBUTING.html) on best
@@ -285,7 +285,7 @@ biodiversity of Western Australia, and in doing so, caring for country.
 
 ## Package functionality
 
-See [`vignette("comparison",
-package="ruODK")`](https://docs.ropensci.org/ruODK/articles/comparison.html)
+See
+[`vignette("comparison", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/comparison.html)
 for a comprehensive comparison of ruODK to other software packages from
 both an ODK and an OData angle.

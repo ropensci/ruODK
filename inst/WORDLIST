@@ -23,8 +23,8 @@ Gimenez
 Hadley
 ISO8601
 JDBC
-JOSS
 JSON
+JupyterLab
 LINESTRING
 LTS
 Linestring
@@ -38,7 +38,8 @@ Muntashir
 NVIS
 NodeJS
 ODK
-ODKC
+ODK's
+ODKC's
 OData
 ORCID
 OpenDataKit
@@ -48,7 +49,6 @@ PRs
 Pentaho
 PosixCT
 PowerBI
-Quadrat
 README
 READMEs
 RESTful
@@ -67,8 +67,8 @@ Rowlingson
 Rstudio
 STATA
 Sadler
-Scalability
 Schemetrica
+Schemetrica's
 SimpleFeature
 SimpleFeatures
 Simplifiy
@@ -82,14 +82,13 @@ Un
 VueJS
 WKT
 Whadjuk
-Wickam
+Wickam's
 XForm
 XForms
 Xforms
 XlsForm
 XlsForms
 Zenodo
-acc
 actee
 api
 asciicast
@@ -115,14 +114,12 @@ dateTime
 datetime
 datetimes
 dbcawa
-decrypt
 depencency
 df
 doi
 dttm
 eval
 extdata
-fid
 filename1
 filename2
 filename3
@@ -136,6 +133,7 @@ geoshape
 geoshapes
 geospatial
 geotrace
+geotrace's
 geotraces
 gepshapes
 getodk
@@ -150,7 +148,6 @@ io
 jpg
 jsonlite
 kwargs
-lang
 languange
 lifecycle
 lon
@@ -162,14 +159,12 @@ noop
 odata
 odkbuild
 odkc
-onwards
 permissioning
 photoshopping
 pid
 pkgdown
 pre
 purrr
-quadrat
 quosures
 rOpenSci
 rOzCBI
@@ -178,6 +173,7 @@ rectangling
 repo
 rlang
 ru
+ruODK's
 ruReady
 ruodk
 screencast
@@ -194,7 +190,6 @@ tibble
 tibbles
 tidyr
 tidyverse
-trigram
 un
 unnest
 unnested
@@ -207,8 +202,8 @@ v0
 v1
 v7
 vcr
-vectorised
 whattheyforgot
 workdir
 xml2
 zenodo
+’s
