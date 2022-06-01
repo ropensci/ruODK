@@ -42,6 +42,7 @@ test_that("form_schema works with unpublished draft forms", {
   )
   testthat::expect_true(tibble::is_tibble(fs1))
   testthat::expect_true(nrow(fs1) > 0)
+  testthat::expect_equal(ncol(fs1), 6)
 })
 
 # nolint start
