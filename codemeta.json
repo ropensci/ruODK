@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/ropensci/ruODK",
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.3.7",
+  "version": "1.3.10",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.1.3 (2022-03-10)",
+  "runtimePlatform": "R version 4.2.0 (2022-04-22)",
   "author": [
     {
       "@type": "Person",
@@ -531,7 +531,7 @@
   },
   "applicationCategory": "DataAccess",
   "keywords": ["database", "open-data", "opendatakit", "odk", "api", "data", "dataset", "odata", "odata-client", "odk-central", "rstats", "r-package"],
-  "fileSize": "12793.351KB",
+  "fileSize": "13346.363KB",
   "citation": [
     {
       "@type": "CreativeWork",

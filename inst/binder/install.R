@@ -1,6 +1,6 @@
-options(repos = c(ropensci = 'https://ropensci.r-universe.dev',
-                  MRAN = 'https://mran.microsoft.com/snapshot/2020-07-16',
-                  CRAN = 'https://cloud.r-project.org'))
+options(repos = c(ropensci = "https://ropensci.r-universe.dev",
+                  MRAN = "https://mran.microsoft.com/snapshot/2020-07-16",
+                  CRAN = "https://cloud.r-project.org"))
 
 # install.packages("remotes")
 # install.packages("rmarkdown")
@@ -17,7 +17,7 @@ install.packages("bitops")
 install.packages("ckanr")
 install.packages("googledrive")
 
-install.packages('ruODK')
+install.packages("ruODK")
 # remotes::install_github(
 #   'ropensci/ruODK@main',
 #   force = TRUE,
