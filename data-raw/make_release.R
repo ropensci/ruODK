@@ -4,7 +4,7 @@
 # Implement new features
 #
 # Starting from a clean code base, create new dev version
-usethis::use_version(which = "dev")
+usethis::use_version(which = "patch")
 # Write code, add tests
 # Add new feature to news if user-facing
 usethis::edit_file("NEWS.md")

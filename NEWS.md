@@ -1,4 +1,7 @@
-# ruODK (development version)
+# ruODK 1.3.11
+* Update `project_list`, `submission_list` and `` columns to reflect Central 1.5 API output.
+* Update `submission_list` columns to reflect Central 1.5 API output.
+
 
 # ruODK 1.3.10
 
