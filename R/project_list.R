@@ -64,9 +64,13 @@ project_list <- function(url = get_default_url(),
     httr::content(.) %>%
     tibble::tibble(.) %>%
     tidyr::unnest_wider(".", names_repair = "universal") %>%
+    # tidyr::unnest_wider(
+    #   "verbs",
+    #   names_repair = "universal", names_sep = "_"
+    # ) %>%
     janitor::clean_names(.) %>%
     dplyr::mutate_at(
-      dplyr::vars("last_submission", "created_at", "updated_at"),
+      dplyr::vars("last_submission", "created_at", "updated_at", "deleted_at"),
       ~ isodt_to_local(., orders = orders, tz = tz)
     ) %>%
     {

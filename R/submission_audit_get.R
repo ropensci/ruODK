@@ -1,5 +1,7 @@
 #' Download server audit logs for one submission.
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' This function is the workhorse for the vectorised function
 #' submission_audit_get,
 #' which gets all server audit logs for a list of submission IDs.
@@ -72,6 +74,8 @@ get_one_submission_audit <- function(iid,
 
 #' Get submission audits for a list of submission instance IDs.
 #'
+#' `r lifecycle::badge("experimental")`
+#'
 #' Uses \code{\link{get_one_submission_audit}} on a list of submission
 #' instance IDs
 #' (`iid`) as returned from \code{\link{submission_list}$instance_id}.
@@ -104,7 +108,7 @@ get_one_submission_audit <- function(iid,
 #' sl <- submission_list()
 #'
 #' # Step 3: Get submission audit logs
-#' subs <- submission_get(sl$instance_id)
+#' sa <- submission_audit_get(sl$instance_id)
 #' }
 submission_audit_get <- function(iid,
                                  pid = get_default_pid(),

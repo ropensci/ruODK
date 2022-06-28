@@ -62,14 +62,16 @@ Default: 3.}
 A nested list of submission audit logs.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+}
+\details{
 Uses \code{\link{get_one_submission_audit}} on a list of submission
 instance IDs
 (\code{iid}) as returned from \code{\link{submission_list}$instance_id}.
 By giving the list of \code{iid} to download explicitly, that list can be
 modified using information not accessible to \code{ruODK},
 e.g. \code{iid} can be restricted to "only not already downloaded submissions".
-}
-\details{
+
 To get the combined submission audit logs for one form
 as one single, concatenated \code{audit.csv} file, use \code{submission_export}.
 }
@@ -82,7 +84,7 @@ ruODK::ru_setup(svc = "...")
 sl <- submission_list()
 
 # Step 3: Get submission audit logs
-subs <- submission_get(sl$instance_id)
+sa <- submission_audit_get(sl$instance_id)
 }
 }
 \seealso{

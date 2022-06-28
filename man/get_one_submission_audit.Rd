@@ -62,11 +62,13 @@ Default: 3.}
 A nested list of submission data.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+}
+\details{
 This function is the workhorse for the vectorised function
 submission_audit_get,
 which gets all server audit logs for a list of submission IDs.
-}
-\details{
+
 Note this function returns a nested list containing any repeating subgroups.
 As the presence and length of repeating subgroups is non-deterministic and
 entirely depends on the completeness of the submission data, we cannot
