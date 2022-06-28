@@ -20,6 +20,10 @@ test_that("submission_list works", {
   # submission_list returns a tibble
   testthat::expect_equal(class(sl), c("tbl_df", "tbl", "data.frame"))
 
+  # https://github.com/ropensci/ruODK/issues/138
+  # review_state was incorrectly picked up by mutate_at looking for "_at" dates
+  testthat::expect_equal(class(sl$review_state), "character")
+
   # Submission attributes are the tibble's columns
   cn <- c(
     "instance_id",
