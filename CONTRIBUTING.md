@@ -51,19 +51,18 @@ If you have found a bug, follow the issue template to create a minimal
 Some changes have intricate internal and external dependencies, which are easy
 to miss and break. These checklists aim to avoid these pitfalls.
 
-Test and update reverse dependencies (wastdr, urODK, etlTurtleNesting, etc.).
+Test and update reverse dependencies (wastdr, etlTurtleNesting, etc.).
 
 #### Adding a dependency
 * Update DESCRIPTION
 * Update GH Actions install workflows - do R package deps have system deps? Can GHA install them in all environments?
 * Update Dockerfile
-* Update urODK binder install.R
+* Update binder install.R
 * Update installation instructions
 
 #### Renaming a vignette
 * Search-replace all links to the vignette throughout 
   * ruODK, 
-  * urODK, 
   * ODK Central "OData" modal
   * ODK Central docs
 

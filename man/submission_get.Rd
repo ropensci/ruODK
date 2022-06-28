@@ -73,6 +73,9 @@ Forms with submission audit enabled will also receive the submission audit
 as \code{audit.csv}. This will overwrite all previous \code{audit.csv} files.
 To get the combined submission audit logs as one single, concatenated
 \code{audit.csv} file, use \code{submission_export}.
+Note that the submission audit is different from the server audit.
+The submission audit logs the actions of the enumerator in ODK Collect,
+whereas the form audit logs the actions of the project manager in ODK Central.
 }
 \examples{
 \dontrun{
@@ -92,6 +95,7 @@ subs <- submission_get(sl$instance_id)
 Other submission-management: 
 \code{\link{attachment_list}()},
 \code{\link{encryption_key_list}()},
+\code{\link{submission_audit_get}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_list}()}

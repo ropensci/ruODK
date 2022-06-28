@@ -61,10 +61,12 @@ Default: 3.}
 \value{
 A tibble containing some high-level details of the submission
 attachments.
-One row per submission attachment, columns are submission attributes:\preformatted{    * name: The attachment filename, e.g. 12345.jpg
+One row per submission attachment, columns are submission attributes:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    * name: The attachment filename, e.g. 12345.jpg
     * exists: Whether the attachment for that submission exists on the
       server.
-}
+}\if{html}{\out{</div>}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
@@ -115,6 +117,7 @@ Other utilities:
 \code{\link{drop_null_coords}()},
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
+\code{\link{get_one_submission_audit}()},
 \code{\link{get_one_submission}()},
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_datetimes}()},

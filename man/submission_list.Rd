@@ -69,11 +69,13 @@ timezone can be set globally or per function.}
 }
 \value{
 A tibble containing some high-level details of the form submissions.
-One row per submission, columns are submission attributes:\preformatted{    * instance_id: uuid, string. The unique ID for each submission.
+One row per submission, columns are submission attributes:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    * instance_id: uuid, string. The unique ID for each submission.
     * submitter_id: user ID, integer.
     * created_at: time of submission upload, dttm
     * updated_at: time of submission update on server, dttm or NA
-}
+}\if{html}{\out{</div>}}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
@@ -118,6 +120,7 @@ nrow(sl) == form_list_nsub
 Other submission-management: 
 \code{\link{attachment_list}()},
 \code{\link{encryption_key_list}()},
+\code{\link{submission_audit_get}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_get}()}

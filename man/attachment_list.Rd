@@ -61,10 +61,12 @@ Default: 3.}
 \value{
 A tibble containing some high-level details of the submission
 attachments.
-One row per submission attachment, columns are submission attributes:\preformatted{    * name: The attachment filename, e.g. 12345.jpg
+One row per submission attachment, columns are submission attributes:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    * name: The attachment filename, e.g. 12345.jpg
     * exists: Whether the attachment for that submission exists on the
       server.
-}
+}\if{html}{\out{</div>}}
 }
 \description{
 List all attachments for a list of submission instances.
@@ -91,6 +93,7 @@ all <- attachment_list(sl$instance_id)
 
 Other submission-management: 
 \code{\link{encryption_key_list}()},
+\code{\link{submission_audit_get}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_get}()},

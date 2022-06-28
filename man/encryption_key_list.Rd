@@ -103,6 +103,7 @@ names(x)
 
 Other submission-management: 
 \code{\link{attachment_list}()},
+\code{\link{submission_audit_get}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_get}()},

@@ -6,9 +6,15 @@
 #' @template param-url
 #' @template param-auth
 #' @template param-retries
-#' @return A tibble with one row per form and all form metadata as columns.
+#' @template param-orders
+#' @template param-tz
+#' @return A tibble with one row per form and all given form metadata as columns.
+#'   Column names are sanitized into `snake_case`.
+#'   Nested columns (review start and created by) are flattened and prefixed.
+#'   The column `xml_form_id` is replicated as `fid` according to `ruODK` naming
+#'   standards.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/forms}
+#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms/forms/list-all-forms}
 # nolint end
 #' @family form-management
 #' @importFrom httr add_headers authenticate content GET
@@ -38,7 +44,16 @@ form_list <- function(pid = get_default_pid(),
                       url = get_default_url(),
                       un = get_default_un(),
                       pw = get_default_pw(),
-                      retries = get_retries()) {
+                      retries = get_retries(),
+                      orders = c(
+                        "YmdHMS",
+                        "YmdHMSz",
+                        "Ymd HMS",
+                        "Ymd HMSz",
+                        "Ymd",
+                        "ymd"
+                      ),
+                      tz = get_default_tz()) {
   yell_if_missing(url, un, pw, pid = pid)
   httr::RETRY(
     "GET",
@@ -52,26 +67,22 @@ form_list <- function(pid = get_default_pid(),
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    { # nolint
-      tibble::tibble(
-        name = purrr::map_chr(., "name"),
-        fid = purrr::map_chr(., "xmlFormId"),
-        version = purrr::map_chr(., "version", .default = NA),
-        state = purrr::map_chr(., "state"),
-        submissions = purrr::map_chr(., "submissions"),
-        created_at = purrr::map_chr(., "createdAt", .default = NA) %>%
-          isodt_to_local(),
-        created_by_id = purrr::map_int(., c("createdBy", "id")),
-        created_by = purrr::map_chr(., c("createdBy", "displayName")),
-        updated_at = purrr::map_chr(., "updatedAt", .default = NA) %>%
-          isodt_to_local(),
-        published_at = purrr::map_chr(., "publishedAt", .default = NA) %>%
-          isodt_to_local(),
-        last_submission = purrr::map_chr(., "lastSubmission", .default = NA) %>%
-          isodt_to_local(),
-        hash = purrr::map_chr(., "hash", .default = NA)
-      )
-    }
+    tibble::tibble(.) %>%
+    tidyr::unnest_wider(".", names_repair = "universal") %>%
+    tidyr::unnest_wider(
+      "reviewStates",
+      names_repair = "universal", names_sep = "_"
+    ) %>%
+    tidyr::unnest_wider(
+      "createdBy",
+      names_repair = "universal", names_sep = "_"
+    ) %>%
+    janitor::clean_names() %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::contains("_at")), # assume datetimes are named "_at"
+      ~ isodt_to_local(., orders = orders, tz = tz)
+    ) %>%
+    dplyr::mutate(fid = xml_form_id)
 }
 
 # usethis::use_test("form_list") # nolint

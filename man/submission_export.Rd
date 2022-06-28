@@ -175,6 +175,7 @@ sub \%>\% knitr::kable(.)
 Other submission-management: 
 \code{\link{attachment_list}()},
 \code{\link{encryption_key_list}()},
+\code{\link{submission_audit_get}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_get}()},
 \code{\link{submission_list}()}

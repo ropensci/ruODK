@@ -36,6 +36,7 @@ test_that("submission_list works", {
     "submitter_deleted_at"
   )
   testthat::expect_equal(names(sl), cn)
+  # testthat::expect_equal(class(sl$review_state), "logical")
   purrr::map(
     cn,
     ~ testthat::expect_true(

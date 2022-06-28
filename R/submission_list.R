@@ -96,7 +96,7 @@ submission_list <- function(pid = get_default_pid(),
     ) %>%
     janitor::clean_names() %>%
     dplyr::mutate_at(
-      dplyr::vars(dplyr::contains("at")), # assume datetimes are named "_at"
+      dplyr::vars(dplyr::contains("_at")), # assume datetimes are named "_at"
       ~ isodt_to_local(., orders = orders, tz = tz)
     )
 }

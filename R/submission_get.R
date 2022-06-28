@@ -80,6 +80,9 @@ get_one_submission <- function(iid,
 #' as `audit.csv`. This will overwrite all previous `audit.csv` files.
 #' To get the combined submission audit logs as one single, concatenated
 #' `audit.csv` file, use `submission_export`.
+#' Note that the submission audit is different from the server audit.
+#' The submission audit logs the actions of the enumerator in ODK Collect,
+#' whereas the form audit logs the actions of the project manager in ODK Central.
 #'
 #' @param iid A list of submission instance IDs, e.g. from
 #'   \code{\link{submission_list}$instance_id}.

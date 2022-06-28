@@ -18,9 +18,11 @@ handle_ru_attachments(
 )
 }
 \arguments{
-\item{data}{Submissions rectangled into a tibble. E.g. the output of\preformatted{ruODK::odata_submission_get(parse = FALSE) \%>\%
+\item{data}{Submissions rectangled into a tibble. E.g. the output of
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ruODK::odata_submission_get(parse = FALSE) \%>\%
 ruODK::odata_submission_rectangle()
-}}
+}\if{html}{\out{</div>}}}
 
 \item{form_schema}{The \code{form_schema} for the submissions.
 E.g. the output of \code{ruODK::form_schema()}.}
@@ -117,6 +119,7 @@ Other utilities:
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
 \code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission_audit}()},
 \code{\link{get_one_submission}()},
 \code{\link{handle_ru_datetimes}()},
 \code{\link{handle_ru_geopoints}()},
