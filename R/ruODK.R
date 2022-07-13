@@ -17,5 +17,6 @@ utils::globalVariables(c(
   "path",
   "type",
   "variable",
-  "xx"
+  "xx",
+  "xml_form_id"
 ))
