@@ -72,9 +72,9 @@
 #'   Default: FALSE.
 #' @param filter If provided, will filter responses to those matching the query.
 #'   For an `odkc_version` below 1.1, this parameter will be discarded.
-#'   In ODK Central v1.1, only the fields `system/submitterId` and
-#'   `system/submissionDate` are available to reference.
-#'   In ODK Central v1.2, other fields may become available.
+#'   As of ODK Central v1.5, the fields `system/submitterId`,
+#'   `system/submissionDate`, `__system/updatedAt`  and `__system/reviewState`
+#'   are available to reference.
 #'   The operators `lt`, `lte`, `eq`, `neq`, `gte`, `gt`, `not`, `and`, and `or`
 #'   are supported, and the built-in functions
 #'   `now`, `year`, `month`, `day`, `hour`, `minute`, `second.`
@@ -154,6 +154,12 @@
 #'   table = form_tables$url[1],
 #'   filter = "year(__system/submissionDate) lt 2020"
 #' )
+#'
+#' # To include all of the month of January, you need to filter by either
+#' # filter = "__system/submissionDate le 2020-01-31T23:59:59.999Z"
+#' # or
+#' # filter = "__system/submissionDate lt 2020-02-01".
+#' # Instead of timezone UTC ("Z"), you can also filter by any other timezone.
 #' }
 odata_submission_get <- function(table = "Submissions",
                                  skip = NULL,

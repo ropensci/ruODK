@@ -56,9 +56,9 @@ Default: FALSE.}
 
 \item{filter}{If provided, will filter responses to those matching the query.
 For an \code{odkc_version} below 1.1, this parameter will be discarded.
-In ODK Central v1.1, only the fields \code{system/submitterId} and
-\code{system/submissionDate} are available to reference.
-In ODK Central v1.2, other fields may become available.
+As of ODK Central v1.5, the fields \code{system/submitterId},
+\code{system/submissionDate}, \verb{__system/updatedAt}  and \verb{__system/reviewState}
+are available to reference.
 The operators \code{lt}, \code{lte}, \code{eq}, \code{neq}, \code{gte}, \code{gt}, \code{not}, \code{and}, and \code{or}
 are supported, and the built-in functions
 \code{now}, \code{year}, \code{month}, \code{day}, \code{hour}, \code{minute}, \code{second.}
@@ -242,6 +242,12 @@ data <- odata_submission_get(
   table = form_tables$url[1],
   filter = "year(__system/submissionDate) lt 2020"
 )
+
+# To include all of the month of January, you need to filter by either
+# filter = "__system/submissionDate le 2020-01-31T23:59:59.999Z"
+# or
+# filter = "__system/submissionDate lt 2020-02-01".
+# Instead of timezone UTC ("Z"), you can also filter by any other timezone.
 }
 }
 \seealso{
