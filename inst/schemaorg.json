@@ -48,6 +48,6 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.0 (2022-04-22)",
-  "version": "1.3.10"
+  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "version": "1.3.12"
 }

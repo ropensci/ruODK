@@ -39,7 +39,7 @@ test_that("project_list works", {
 
 test_that("project_list works with missing deleted_at", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+    message = "Test server not configured"
   )
 
   p <- project_list(
