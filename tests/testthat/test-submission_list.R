@@ -45,7 +45,7 @@ test_that("submission_list works", {
     cn,
     ~ testthat::expect_true(
       . %in% names(sl),
-      label = glue::glue("Column {.} missing from submission_list")
+      label = glue::glue("Column {.} in submission_list")
     )
   )
 

@@ -69,9 +69,11 @@ project_list <- function(url = get_default_url(),
     #   names_repair = "universal", names_sep = "_"
     # ) %>%
     janitor::clean_names(.) %>%
-    dplyr::mutate_at(
-      dplyr::vars("last_submission", "created_at", "updated_at", "deleted_at"),
-      ~ isodt_to_local(., orders = orders, tz = tz)
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::contains("last_submission|created_at|updated_at|deleted_at"),
+        ~ isodt_to_local(., orders = orders, tz = tz)
+      )
     ) %>%
     {
       if ("archived" %in% names(.)) {
