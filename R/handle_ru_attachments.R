@@ -72,7 +72,7 @@ handle_ru_attachments <- function(data,
     ru_msg_info("Downloading attachments...", verbose = verbose)
     data <- data %>%
       dplyr::mutate_at(
-        dplyr::vars(att_cols_main),
+        dplyr::all_of(att_cols_main),
         ~ ruODK::attachment_get(
           id,
           .,
@@ -102,7 +102,7 @@ handle_ru_attachments <- function(data,
     ru_msg_info("Downloading attachments...", verbose = verbose)
     data <- data %>%
       dplyr::mutate_at(
-        dplyr::vars(att_cols_sub),
+        dplyr::all_of(att_cols_sub),
         ~ ruODK::attachment_get(
           submissions_id,
           .,
