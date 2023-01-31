@@ -103,7 +103,7 @@ split_geotrace <- function(data,
     # nolint end
     data %>%
       tidyr::extract(
-        colname,
+        dplyr::all_of(colname),
         c(
           glue::glue("{colname}_latitude") %>% as.character(),
           glue::glue("{colname}_longitude") %>% as.character(),
@@ -119,7 +119,7 @@ split_geotrace <- function(data,
     # Step 1: tidyr::hoist() extracts but can't assign with :=
     data %>%
       tidyr::hoist(
-        colname,
+        dplyr::all_of(colname),
         XXX_longitude = list("coordinates", 1L, 1L),
         XXX_latitude = list("coordinates", 1L, 2L),
         XXX_altitude = list("coordinates", 1L, 3L),
@@ -128,20 +128,20 @@ split_geotrace <- function(data,
       ) %>%
       # Step 2: dplyr::mutate_at() can programmatically manipulate variables
       dplyr::rename_at(
-        dplyr::vars(dplyr::starts_with("XXX")),
+        dplyr::vars(dplyr::any_of(dplyr::starts_with("XXX"))),
         list(~ stringr::str_replace(., "XXX", colname))
       ) %>%
       # Drop last empty coordinate from colname, a list(NULL, NULL).
       # Affects ODK Central Version 0.7-0.9.
       dplyr::mutate_at(
-        dplyr::vars(colname),
+        dplyr::vars(dplyr::all_of(colname)),
         list(~ purrr::map(., drop_null_coords))
       )
   } else {
     # Option 4: ODKC v0.8 WKT
     data %>%
       tidyr::extract(
-        colname,
+        dplyr::all_of(colname),
         c(
           glue::glue("{colname}_longitude") %>% as.character(),
           glue::glue("{colname}_latitude") %>% as.character(),
@@ -152,7 +152,7 @@ split_geotrace <- function(data,
         convert = TRUE
       ) %>%
       dplyr::mutate_at(
-        dplyr::vars(colname),
+        dplyr::vars(dplyr::all_of(colname)),
         list(~ stringr::str_replace_all(., ",undefined NaN", ""))
       )
   }

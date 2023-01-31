@@ -62,8 +62,6 @@ split_geopoint <- function(data, colname, wkt = FALSE) {
     magrittr::extract2(colname) %>%
     class()
 
-
-
   if (wkt == FALSE) {
     if (col_class != "list") {
       "[split_geopoint] Skipping NULL column {colname} of class {col_class}" %>%
@@ -87,7 +85,7 @@ split_geopoint <- function(data, colname, wkt = FALSE) {
       ) %>%
       # Step 2: dplyr::mutate_at() can programmatically manipulate variables
       dplyr::rename_at(
-        dplyr::vars(dplyr::starts_with("XXX")),
+        dplyr::vars(dplyr::any_of(dplyr::starts_with("XXX"))),
         list(~ stringr::str_replace(., "XXX", colname))
       )
   } else {
@@ -100,7 +98,7 @@ split_geopoint <- function(data, colname, wkt = FALSE) {
     }
     data %>%
       tidyr::extract(
-        colname,
+        dplyr::all_of(colname),
         c(
           glue::glue("{colname}_longitude") %>% as.character(),
           glue::glue("{colname}_latitude") %>% as.character(),

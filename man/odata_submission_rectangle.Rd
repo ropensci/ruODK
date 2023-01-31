@@ -43,6 +43,10 @@ The submissions as un-nested tibble
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
+\details{
+This function cleans names with \code{janitor::clean_names()} and drops the
+prefix \code{value_}.
+}
 \examples{
 \dontrun{
 # Using canned data

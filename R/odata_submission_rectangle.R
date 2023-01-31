@@ -81,7 +81,7 @@ unnest_all <- function(nested_tbl,
       suppressMessages(
         nested_tbl <- tidyr::unnest_wider(
           nested_tbl,
-          colname,
+          dplyr::all_of(colname),
           names_repair = names_repair,
           names_sep = names_sep
         )
@@ -112,6 +112,9 @@ unnest_all <- function(nested_tbl,
 #' into a tidy tibble and unnest all levels.
 #'
 #' `r lifecycle::badge("stable")`
+#'
+#' This function cleans names with `janitor::clean_names()` and drops the
+#' prefix `value_`.
 #'
 #' @param data A nested list of lists as given by
 #'   \code{\link{odata_submission_get}}.
