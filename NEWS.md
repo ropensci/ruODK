@@ -1,4 +1,17 @@
 # ruODK 1.4.0
+This release fixes a few compatibility issues and bumps dependencies to R (4.1) 
+and imported/suggested packages. 
+Upgrade carefully and revert to 1.3.12 if things go awry.
+
+* Update to new tidyselect syntax: Using vectors of names to select makes 
+  tidyselect complain (WARN, soon ERROR). We wrap all programmatic selections of 
+  variable names in `dplyr::all_of()` where we expect a single variable to be 
+  selected, and `dplyr::any_of()` where we select using fuzzy matching 
+  (e.g. `dplyr::starts_with()`). (#146)
+* Make `ruODK::form_list()` robust against `reviewState` missing from outdated
+  Central versions. (#145, HT @dpagendam and #143, HT @collinschwantes)
+  There will be more such tripwires - please do submit a bug report if you find
+  a discrepancy between Central API and ruODK's parsing.
 
 # ruODK 1.3.12
 
