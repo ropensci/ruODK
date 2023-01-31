@@ -59,13 +59,18 @@ can_run <- require(sf) && require(leafem) && require(mapview) && require(terra)
 # Fix https://github.com/r-spatial/mapview/issues/313
 # See also https://github.com/r-spatial/mapview/issues/312
 # option 'fgb' requires GDAL >= 3.1.0
-if(require(mapview)) mapview::mapviewOptions(
-  fgb = FALSE,
-  basemaps = c("Esri.WorldImagery", 
-               "Esri.WorldShadedRelief", 
-               "OpenTopoMap",
-               "OpenStreetMap"),
-  layers.control.pos = "topright")
+if (require(mapview)) {
+  mapview::mapviewOptions(
+    fgb = FALSE,
+    basemaps = c(
+      "Esri.WorldImagery",
+      "Esri.WorldShadedRelief",
+      "OpenTopoMap",
+      "OpenStreetMap"
+    ),
+    layers.control.pos = "topright"
+  )
+}
 ```
 
 ## Data
@@ -82,11 +87,12 @@ ruODK::ru_setup(
   url = get_test_url(),
   pid = get_test_pid(),
   fid = get_test_fid_wkt(),
-  un = get_test_un(), 
+  un = get_test_un(),
   pw = get_test_pw(),
   odkc_version = 0.8,
   tz = "Australia/Perth",
-  verbose = TRUE)
+  verbose = TRUE
+)
 data_wkt <- ruODK::odata_submission_get(wkt = TRUE)
 data_gj <- ruODK::odata_submission_get(wkt = FALSE)
 ```
@@ -109,7 +115,7 @@ use the separately extracted latitude, longitude, altitude, and accuracy
 individually e.g. to plot a Leaflet map.
 
 ```{r, fig.width=9, fig.height=7, eval=can_run}
-geo_sf_point <- geo_wkt %>% sf::st_as_sf(wkt="point_location_point_gps")
+geo_sf_point <- geo_wkt %>% sf::st_as_sf(wkt = "point_location_point_gps")
 # ODK Collect captures WGS84 (EPSG:4326)
 sf::st_crs(geo_sf_point) <- 4326
 ```
@@ -122,26 +128,27 @@ mapview::mapview(geo_sf_point, col.regions = sf::sf.colors(10))
 
 ### GGplot using sf
 ```{r, eval=can_run}
-ggplot2::ggplot() + 
+ggplot2::ggplot() +
   ggplot2::geom_sf(data = geo_sf_point, ggplot2::aes(fill = device_id))
 ```
 
 ### Leaflet using sf
 ```{r, eval=can_run}
-leaflet::leaflet(data = geo_sf_point) %>% 
-  leaflet::addTiles() %>% 
-  leaflet::addMarkers(label = ~ device_id, popup = ~ device_id)
+leaflet::leaflet(data = geo_sf_point) %>%
+  leaflet::addTiles() %>%
+  leaflet::addMarkers(label = ~device_id, popup = ~device_id)
 ```
 
 ### Leaflet using extracted coordinate components in tbl_df
 ```{r, eval=can_run}
-leaflet::leaflet(data = geo_wkt) %>% 
-  leaflet::addTiles() %>% 
+leaflet::leaflet(data = geo_wkt) %>%
+  leaflet::addTiles() %>%
   leaflet::addMarkers(
-    lng = ~ point_location_point_gps_longitude,
-    lat = ~ point_location_point_gps_latitude,
-    label = ~ device_id, 
-    popup = ~ device_id)
+    lng = ~point_location_point_gps_longitude,
+    lat = ~point_location_point_gps_latitude,
+    label = ~device_id,
+    popup = ~device_id
+  )
 ```
 
 
@@ -149,7 +156,7 @@ leaflet::leaflet(data = geo_wkt) %>%
 We use `sf::st_as_sf` on a text column containing a WKT geotrace.
 
 ```{r, fig.width=9, fig.height=7, eval=can_run}
-geo_sf_line <- geo_wkt %>% sf::st_as_sf(wkt="path_location_path_gps")
+geo_sf_line <- geo_wkt %>% sf::st_as_sf(wkt = "path_location_path_gps")
 # ODK Collect captures WGS84 (EPSG:4326)
 sf::st_crs(geo_sf_line) <- 4326
 ```
@@ -161,7 +168,7 @@ mapview::mapview(geo_sf_line, col.regions = sf::sf.colors(10))
 
 ### GGplot using sf
 ```{r, eval=can_run}
-ggplot2::ggplot() + 
+ggplot2::ggplot() +
   ggplot2::geom_sf(data = geo_sf_line, ggplot2::aes(fill = device_id))
 ```
 
@@ -171,21 +178,22 @@ or show the full polygons using `{leafem}`.
 See the mapview article on [extra functionality](https://r-spatial.github.io/mapview/articles/articles/mapview_06-add.html).
 
 ```{r, eval=can_run}
-leaflet::leaflet(data = geo_wkt) %>% 
-  leaflet::addTiles() %>% 
+leaflet::leaflet(data = geo_wkt) %>%
+  leaflet::addTiles() %>%
   leaflet::addMarkers(
-    lng = ~ path_location_path_gps_longitude,
-    lat = ~ path_location_path_gps_latitude,
-    label = ~ device_id, 
-    popup = ~ device_id)%>% 
-  leafem::addFeatures(geo_sf_line, label = ~ device_id, popup = ~ device_id)
+    lng = ~path_location_path_gps_longitude,
+    lat = ~path_location_path_gps_latitude,
+    label = ~device_id,
+    popup = ~device_id
+  ) %>%
+  leafem::addFeatures(geo_sf_line, label = ~device_id, popup = ~device_id)
 ```
 
 ## Map geoshapes (polygons)
 Again, we'll use `sf::st_as_sf` but select a WKT geoshape column.
 
 ```{r, fig.width=9, fig.height=7, eval=can_run}
-geo_sf_poly <- geo_wkt %>% sf::st_as_sf(wkt="shape_location_shape_gps")
+geo_sf_poly <- geo_wkt %>% sf::st_as_sf(wkt = "shape_location_shape_gps")
 # ODK Collect captures WGS84 (EPSG:4326)
 sf::st_crs(geo_sf_poly) <- 4326
 ```
@@ -197,7 +205,7 @@ mapview::mapview(geo_sf_poly, col.regions = sf::sf.colors(10))
 
 ### GGplot using sf
 ```{r, eval=can_run}
-ggplot2::ggplot() + 
+ggplot2::ggplot() +
   ggplot2::geom_sf(data = geo_sf_poly, ggplot2::aes(fill = device_id))
 ```
 
@@ -206,14 +214,15 @@ You can show either first extracted coordinate components from plain `tbl_df`
 or show the full polygons using `{leafem}`.
 See the mapview article on [extra functionality](https://r-spatial.github.io/mapview/articles/articles/mapview_06-add.html).
 ```{r, eval=can_run}
-leaflet::leaflet(data = geo_wkt) %>% 
-  leaflet::addTiles() %>% 
+leaflet::leaflet(data = geo_wkt) %>%
+  leaflet::addTiles() %>%
   leaflet::addMarkers(
-    lng = ~ shape_location_shape_gps_longitude,
-    lat = ~ shape_location_shape_gps_latitude,
-    label = ~ device_id, 
-    popup = ~ device_id) %>% 
-  leafem::addFeatures(geo_sf_poly, label = ~ device_id, popup = ~ device_id)
+    lng = ~shape_location_shape_gps_longitude,
+    lat = ~shape_location_shape_gps_latitude,
+    label = ~device_id,
+    popup = ~device_id
+  ) %>%
+  leafem::addFeatures(geo_sf_poly, label = ~device_id, popup = ~device_id)
 ```
 
 # Outlook

@@ -8,7 +8,7 @@
 #' @template param-retries
 #' @template param-orders
 #' @template param-tz
-#' @return A tibble with one row per form and all given form metadata as columns.
+#' @return A tibble with one row per form and all given form metadata as cols.
 #'   Column names are sanitized into `snake_case`.
 #'   Nested columns (review start and created by) are flattened and prefixed.
 #'   The column `xml_form_id` is replicated as `fid` according to `ruODK` naming

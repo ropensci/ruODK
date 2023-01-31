@@ -558,13 +558,13 @@ get_retries <- function() {
 #' testthat::expect_error(yell_if_missing("", "", "", "", ""))
 #' testthat::expect_error(yell_if_missing("", "", "", "", "", ""))
 yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL) {
-  if (is.null(url) | identical(url, "")) {
+  if (is.null(url) || identical(url, "")) {
     ru_msg_abort("Missing ODK Central URL. ru_setup()?")
   }
-  if (is.null(un) | identical(un, "")) {
+  if (is.null(un) || identical(un, "")) {
     ru_msg_abort("Missing ODK Central username. ru_setup()?")
   }
-  if (is.null(pw) | identical(pw, "")) {
+  if (is.null(pw) || identical(pw, "")) {
     ru_msg_abort("Missing ODK Central password. ru_setup()?")
   }
   if (!is.null(pid) && identical(pid, "")) {

@@ -120,7 +120,6 @@ test_that("split_geoshape works with no data", {
 })
 
 test_that("split_geoshape works with ODK Linestrings", {
-
   # ODK Central v0.7 and lower ignore the WKT argument for geotrace and geoshape
   # nolint start
   # ruODK::odata_submission_get(wkt = TRUE, parse = TRUE)

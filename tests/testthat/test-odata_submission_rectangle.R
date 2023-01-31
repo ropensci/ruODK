@@ -16,7 +16,6 @@ test_that("odata_submission_rectangle works", {
 
 
 test_that("odata_submission_rectangle parses GeoJSON to nested list", {
-
   # submission_rectangle calls form_schema and fails without credentials
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"

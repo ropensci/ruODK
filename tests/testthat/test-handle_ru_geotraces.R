@@ -13,7 +13,6 @@ test_that("handle_ru_geotraces annotates GeoJSON lines with lon lat alt acc", {
     magrittr::extract2("ruodk_name")
 
   for (i in seq_len(length(geo_fields))) {
-
     # GeoJSON should still exist  after handle_ru_geotraces as nested lists
     testthat::expect_true(
       is.list(geo_gj[[geo_fields[i]]]),
@@ -76,7 +75,6 @@ test_that("handle_ru_geotraces annotates WKT lines with lon lat alt (no acc)", {
     magrittr::extract2("ruodk_name")
 
   for (i in seq_len(length(geo_fields))) {
-
     # GeoJSON should still exist after handle_ru_geotraces as nested lists
     testthat::expect_true(
       is.character(geo_wkt[[geo_fields[i]]]),

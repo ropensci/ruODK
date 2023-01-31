@@ -59,7 +59,7 @@ Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
 timezone can be set globally or per function.}
 }
 \value{
-A tibble with one row per form and all given form metadata as columns.
+A tibble with one row per form and all given form metadata as cols.
 Column names are sanitized into \code{snake_case}.
 Nested columns (review start and created by) are flattened and prefixed.
 The column \code{xml_form_id} is replicated as \code{fid} according to \code{ruODK} naming

@@ -73,7 +73,7 @@ t <- fs::dir_create("media")
 ```
 
 ```{r load_canned_data, echo=FALSE}
-# We load canned data, so end users can build vignettes without authenticated 
+# We load canned data, so end users can build vignettes without authenticated
 # calls to ODK Central
 data("fq_project_list")
 data("fq_project_detail")
@@ -114,7 +114,9 @@ fq_project_detail <- ruODK::project_detail()
 
 ```{r project_detail_show}
 # Project details (without verbs)
-fq_project_detail %>% dplyr::select(-"verbs") %>%  knitr::kable(.)
+fq_project_detail %>%
+  dplyr::select(-"verbs") %>%
+  knitr::kable(.)
 
 # Available verbs
 fq_project_detail$verbs[[1]] %>% unlist(.)
@@ -155,14 +157,14 @@ If the original XML is needed rather than the R equivalent (nested list),
 we can use `ruODK::form_xml` with parameter `parse=FALSE`:
 
 ```{r form_xml, eval=F}
-fq_form_xml <- ruODK::form_xml(parse=FALSE)
+fq_form_xml <- ruODK::form_xml(parse = FALSE)
 ```
 
 ```{r form_xml_show}
-if (require(listviewer)){
+if (require(listviewer)) {
   listviewer::jsonedit(fq_form_xml)
 } else {
- ru_msg_warn("Install package listviewer to browse the form XML.")  
+  ru_msg_warn("Install package listviewer to browse the form XML.")
 }
 ```
 
@@ -235,18 +237,18 @@ f <- unzip(se, exdir = t)
 fs::dir_ls(t)
 
 # Prepend attachments with media/ to turn into relative file paths
-fq_zip_data <- fid_csv %>% 
+fq_zip_data <- fid_csv %>%
   readr::read_csv(na = c("", "NA", "na")) %>% # form uses "na" for NA
-  janitor::clean_names(.) %>% 
-  dplyr::mutate(id = meta_instance_id) %>% 
-  ruODK::handle_ru_datetimes(fq_form_schema) %>% 
-  ruODK::handle_ru_geopoints(fq_form_schema) %>% 
+  janitor::clean_names(.) %>%
+  dplyr::mutate(id = meta_instance_id) %>%
+  ruODK::handle_ru_datetimes(fq_form_schema) %>%
+  ruODK::handle_ru_geopoints(fq_form_schema) %>%
   ruODK::attachment_link(fq_form_schema)
 
-fq_zip_strata <- fid_csv_veg %>% 
+fq_zip_strata <- fid_csv_veg %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
-  janitor::clean_names(.) %>% 
-  dplyr::mutate(id = parent_key) %>% 
+  janitor::clean_names(.) %>%
+  dplyr::mutate(id = parent_key) %>%
   # ruODK::handle_ru_datetimes(fq_form_schema) parent_key%>% # no dates
   # ruODK::handle_ru_geopoints(fq_form_schema) %>%  # no geopoints
   # ruODK::ruODK::attachment_link(fq_form_schema) %>% # no att.
@@ -254,10 +256,10 @@ fq_zip_strata <- fid_csv_veg %>%
 
 fq_zip_taxa <- fid_csv_tae %>%
   readr::read_csv(na = c("", "NA", "na")) %>%
-  janitor::clean_names(.) %>% 
-  dplyr::mutate(id = parent_key) %>% 
-  # ruODK::handle_ru_datetimes(fq_form_schema) %>% 
-  # ruODK::handle_ru_geopoints(fq_form_schema) %>% 
+  janitor::clean_names(.) %>%
+  dplyr::mutate(id = parent_key) %>%
+  # ruODK::handle_ru_datetimes(fq_form_schema) %>%
+  # ruODK::handle_ru_geopoints(fq_form_schema) %>%
   # ruODK::ruODK::attachment_link(fq_form_schema) %>%
   dplyr::left_join(fq_zip_data, by = c("parent_key" = "meta_instance_id"))
 ```

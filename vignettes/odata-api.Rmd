@@ -169,19 +169,21 @@ name collisions between possibly multiple location fields.
 
 ```{r load_odata, eval=FALSE}
 fq_data <- ruODK::odata_submission_get(
-  table = fq_svc$name[1], 
+  table = fq_svc$name[1],
   local_dir = loc,
-  wkt=TRUE)
+  wkt = TRUE
+)
 
 fq_data_strata <- ruODK::odata_submission_get(
-  table = fq_svc$name[2], 
+  table = fq_svc$name[2],
   local_dir = loc
 )
 
 fq_data_taxa <- ruODK::odata_submission_get(
-  table = fq_svc$name[3], 
+  table = fq_svc$name[3],
   local_dir = loc,
-  wkt=TRUE)
+  wkt = TRUE
+)
 ```
 
 # Detour: Data rectangling
@@ -250,18 +252,18 @@ with `odata_submission_get(parse=TRUE)`.
 
 ```{r}
 # Candidates for ruODK::handle_ru_datetimes()
-fq_form_schema %>% 
-  dplyr::filter(type %in% c("dateTime", "date")) %>% 
+fq_form_schema %>%
+  dplyr::filter(type %in% c("dateTime", "date")) %>%
   knitr::kable(.)
 
 # Candidates for ruODK::handle_ru_attachments()
-fq_form_schema %>% 
-  dplyr::filter(type == "binary") %>% 
+fq_form_schema %>%
+  dplyr::filter(type == "binary") %>%
   knitr::kable(.)
 
 # Candidates for ruODK::handle_ru_geopoints()
-fq_form_schema %>% 
-  dplyr::filter(type == "geopoint") %>% 
+fq_form_schema %>%
+  dplyr::filter(type == "geopoint") %>%
   knitr::kable(.)
 ```
 
@@ -278,26 +280,26 @@ fq_data <- fq_raw %>%
   ruODK::handle_ru_datetimes(fq_form_schema) %>%
   ruODK::handle_ru_geopoints(fq_form_schema) %>%
   ruODK::handle_ru_geotraces(fq_form_schema) %>%
-  ruODK::handle_ru_geoshapes(fq_form_schema) %>% 
+  ruODK::handle_ru_geoshapes(fq_form_schema) %>%
   ruODK::handle_ru_attachments(fq_form_schema, local_dir = t)
 
 # Parse nested group "taxa"
-fq_data_taxa <- fq_taxa %>% 
+fq_data_taxa <- fq_taxa %>%
   ruODK::odata_submission_rectangle() %>%
   ruODK::handle_ru_datetimes(fq_form_schema) %>%
   ruODK::handle_ru_geopoints(fq_form_schema) %>%
   ruODK::handle_ru_geotraces(fq_form_schema) %>%
-  ruODK::handle_ru_geoshapes(fq_form_schema) %>% 
+  ruODK::handle_ru_geoshapes(fq_form_schema) %>%
   ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 
 # Parse nested group "strata"
-fq_data_strata <- fq_strata %>% 
+fq_data_strata <- fq_strata %>%
   ruODK::odata_submission_rectangle() %>%
   ruODK::handle_ru_datetimes(fq_form_schema) %>%
   ruODK::handle_ru_geopoints(fq_form_schema) %>%
   ruODK::handle_ru_geotraces(fq_form_schema) %>%
-  ruODK::handle_ru_geoshapes(fq_form_schema) %>% 
+  ruODK::handle_ru_geoshapes(fq_form_schema) %>%
   ruODK::handle_ru_attachments(fq_form_schema, local_dir = t) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 ```
@@ -372,7 +374,7 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
     data = fq_data,
-    lng = ~location_corner1_longitude, 
+    lng = ~location_corner1_longitude,
     lat = ~location_corner1_latitude,
     icon = leaflet::makeAwesomeIcon(text = "Q", markerColor = "red"),
     label = ~ glue::glue("{location_area_name} {encounter_start_datetime}"),
@@ -406,8 +408,8 @@ leaflet::leaflet(width = 800, height = 600) %>%
   leaflet::clearBounds() %>%
   leaflet::addAwesomeMarkers(
     data = fq_data_taxa,
-    lng = ~ location_corner1_longitude, 
-    lat = ~ location_corner1_latitude,
+    lng = ~location_corner1_longitude,
+    lat = ~location_corner1_latitude,
     icon = leaflet::makeAwesomeIcon(text = "T", markerColor = "green"),
     label = ~ glue::glue("{field_name} {encounter_start_datetime}"),
     popup = ~ glue::glue(
@@ -435,19 +437,19 @@ for more ideas on data exploration.
 
 ```{r eda, fig.height=5, fig.width=7}
 # How many submissions per device?
-fq_data %>% 
-  dplyr::group_by(meta_instance_id) %>% 
-  dplyr::tally() %>% 
+fq_data %>%
+  dplyr::group_by(meta_instance_id) %>%
+  dplyr::tally() %>%
   knitr::kable()
 
 # How many species sightings per life form?
-fq_data_taxa %>% 
-  dplyr::group_by(life_form) %>% 
-  dplyr::tally() %>% 
+fq_data_taxa %>%
+  dplyr::group_by(life_form) %>%
+  dplyr::tally() %>%
   knitr::kable()
 
 # GGplot of a pivot table
-fq_data_taxa  %>%
+fq_data_taxa %>%
   dplyr::group_by(life_form) %>%
   dplyr::tally() %>%
   ggplot2::ggplot(ggplot2::aes(x = life_form, y = n)) +
@@ -464,19 +466,22 @@ fq_data_taxa  %>%
 fq_data_taxa %>%
   ggplot2::ggplot(
     ggplot2::aes(
-      x=encounter_start_datetime, 
-      y=field_name, 
-      colour=life_form,
-      shape=meta_instance_id)) + 
+      x = encounter_start_datetime,
+      y = field_name,
+      colour = life_form,
+      shape = meta_instance_id
+    )
+  ) +
   ggplot2::labs(
-    title="Title", 
-    subtitle="Subtitle", 
-    x="Observation date", 
-    y="Species", 
-    colour="Life form",
-    shape="Data collection device") +
-  ggplot2::geom_point() + 
-  ggplot2::theme_classic() + 
+    title = "Title",
+    subtitle = "Subtitle",
+    x = "Observation date",
+    y = "Species",
+    colour = "Life form",
+    shape = "Data collection device"
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::theme_classic() +
   ggplot2::theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 

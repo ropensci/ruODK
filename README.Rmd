@@ -8,7 +8,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/",
-  out.width = "100%")
+  out.width = "100%"
+)
 ```
 # `ruODK`: An R Client for the ODK Central API <img src="man/figures/ruODK2.png" align="right" alt="Especially in these trying times, it is important to ask: ruODK?" width="120" />
 
@@ -132,9 +133,11 @@ You can install the latest release of `ruODK` from the
 
 ```{r r-universe, eval = FALSE}
 # Enable the rOpenSci universe
-options(repos = c(ropensci = 'https://ropensci.r-universe.dev',
-                  CRAN = 'https://cloud.r-project.org'))
-install.packages('ruODK')
+options(repos = c(
+  ropensci = "https://ropensci.r-universe.dev",
+  CRAN = "https://cloud.r-project.org"
+))
+install.packages("ruODK")
 ```
 
 Alternatively, you can install the development version from the `main` branch.
@@ -143,17 +146,19 @@ Alternatively, you can install the development version from the `main` branch.
 if (!requireNamespace("remotes")) install.packages("remotes")
 # Full install
 remotes::install_github(
-   "ropensci/ruODK@main", 
-   dependencies = TRUE, 
-   upgrade = "always",
-   build_vignettes = TRUE)
+  "ropensci/ruODK@main",
+  dependencies = TRUE,
+  upgrade = "always",
+  build_vignettes = TRUE
+)
 
 # Minimal install without vignettes
 remotes::install_github(
-   "ropensci/ruODK@main", 
-   dependencies = TRUE, 
-   upgrade = "ask",
-   build_vignettes = FALSE)
+  "ropensci/ruODK@main",
+  dependencies = TRUE,
+  upgrade = "ask",
+  build_vignettes = FALSE
+)
 ```
 
 If the install fails, read the error messages carefully and install any unmet

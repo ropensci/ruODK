@@ -61,8 +61,8 @@ function calls, `ruODK` defaults to hide verbose messages.
 # ruODK user using OData service URL, username (an email), and password
 # Never use plaintext username and password, use Sys.getenv() instead
 ruODK::ru_setup(
-  svc = Sys.getenv("ODKC_SVC"), 
-  un = Sys.getenv("ODKC_UN"), 
+  svc = Sys.getenv("ODKC_SVC"),
+  un = Sys.getenv("ODKC_UN"),
   pw = Sys.getenv("ODKC_PW"),
   tz = "Australia/Perth",
   verbose = TRUE
@@ -108,51 +108,51 @@ usethis::edit_r_environ(scope = "user")
 ```
 
 ```{r renviron, eval=FALSE}
-ODKC_PID=1
-ODKC_FID="build_Flora-Quadrat-0-2_1558575936"
-ODKC_URL="https://odkcentral.dbca.wa.gov.au"
-ODKC_UN="me@email.com"
-ODKC_PW="..."
-ODKC_PP="..."
-ODKC_VERSION=0.8
+ODKC_PID <- 1
+ODKC_FID <- "build_Flora-Quadrat-0-2_1558575936"
+ODKC_URL <- "https://odkcentral.dbca.wa.gov.au"
+ODKC_UN <- "me@email.com"
+ODKC_PW <- "..."
+ODKC_PP <- "..."
+ODKC_VERSION <- 0.8
 
 # Test settings
-ODKC_TEST_SVC="https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc"
-ODKC_TEST_URL="https://odkc.dbca.wa.gov.au"
-ODKC_TEST_PID=2
-ODKC_TEST_PID_ENC=3
-ODKC_TEST_PP="ThePassphrase"
-ODKC_TEST_FID="Flora-Quadrat-04"
-ODKC_TEST_FID_ZIP="Spotlighting-06"
-ODKC_TEST_FID_ATT="Flora-Quadrat-04-att"
-ODKC_TEST_FID_GAP="Flora-Quadrat-04-gap"
-ODKC_TEST_FID_WKT="Locations"
-ODKC_TEST_FID_I8N0="I8n_no_lang"
-ODKC_TEST_FID_I8N1="I8n_label_lng"
-ODKC_TEST_FID_I8N2="I8n_label_choices"
-ODKC_TEST_FID_I8N3="I8n_no_lang_choicefilter"
-ODKC_TEST_FID_I8N4="I8n_lang_choicefilter"
-ODKC_TEST_FID_ENC="Locations"
-ODKC_TEST_VERSION=1.0
-RU_VERBOSE=TRUE
-RU_TIMEZONE="Australia/Perth"
-RU_RETRIES=3
-ODKC_TEST_UN="..."
-ODKC_TEST_PW="..."
+ODKC_TEST_SVC <- "https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc"
+ODKC_TEST_URL <- "https://odkc.dbca.wa.gov.au"
+ODKC_TEST_PID <- 2
+ODKC_TEST_PID_ENC <- 3
+ODKC_TEST_PP <- "ThePassphrase"
+ODKC_TEST_FID <- "Flora-Quadrat-04"
+ODKC_TEST_FID_ZIP <- "Spotlighting-06"
+ODKC_TEST_FID_ATT <- "Flora-Quadrat-04-att"
+ODKC_TEST_FID_GAP <- "Flora-Quadrat-04-gap"
+ODKC_TEST_FID_WKT <- "Locations"
+ODKC_TEST_FID_I8N0 <- "I8n_no_lang"
+ODKC_TEST_FID_I8N1 <- "I8n_label_lng"
+ODKC_TEST_FID_I8N2 <- "I8n_label_choices"
+ODKC_TEST_FID_I8N3 <- "I8n_no_lang_choicefilter"
+ODKC_TEST_FID_I8N4 <- "I8n_lang_choicefilter"
+ODKC_TEST_FID_ENC <- "Locations"
+ODKC_TEST_VERSION <- 1.0
+RU_VERBOSE <- TRUE
+RU_TIMEZONE <- "Australia/Perth"
+RU_RETRIES <- 3
+ODKC_TEST_UN <- "..."
+ODKC_TEST_PW <- "..."
 ```
 
 As an alternative to setting environment variables through `~/.Renviron`, you
 can set them through `Sys.setenv()`:
 
 ```{r setenv, eval=FALSE}
-Sys.setenv(ODKC_URL="https://odkc.dbca.wa.gov.au")
-Sys.setenv(ODKC_UN="me@mail.com")
-Sys.setenv(ODKC_PW="...")
-Sys.setenv(ODKC_PP="...")
-Sys.setenv(ODKC_TEST_URL="...")
-Sys.setenv(ODKC_TEST_UN="...")
-Sys.setenv(ODKC_TEST_PW="...")
-Sys.setenv(ODKC_TEST_PID=2)
+Sys.setenv(ODKC_URL = "https://odkc.dbca.wa.gov.au")
+Sys.setenv(ODKC_UN = "me@mail.com")
+Sys.setenv(ODKC_PW = "...")
+Sys.setenv(ODKC_PP = "...")
+Sys.setenv(ODKC_TEST_URL = "...")
+Sys.setenv(ODKC_TEST_UN = "...")
+Sys.setenv(ODKC_TEST_PW = "...")
+Sys.setenv(ODKC_TEST_PID = 2)
 # continue for the remaining test variables shown above
 ```
 
@@ -166,16 +166,16 @@ This option is shown only for completeness.
 ```{r, eval=FALSE}
 # Use ruODK without ru_setup
 ruODK::project_list(
-  url="https://my-odkc.com", 
-  un = Sys.getenv("ODKC_UN"), 
+  url = "https://my-odkc.com",
+  un = Sys.getenv("ODKC_UN"),
   pw = Sys.getenv("ODKC_PW")
 )
 
 # Tests use default test settings explicitly
 ruODK::project_list(
-  url=ruODK::get_test_url(),
-  un=ruODK::get_test_un(), 
-  pw=ruODK::get_test_pw()
+  url = ruODK::get_test_url(),
+  un = ruODK::get_test_un(),
+  pw = ruODK::get_test_pw()
 )
 ```
 
@@ -199,7 +199,7 @@ URL and a web user's username and password, subsequent functions can omit `pid`,
 # Server 1, Project 1, Form 1
 ruODK::ru_setup(
   svc = "https://central1.org/v1/projects/1/forms/form1.svc",
-  un = Sys.getenv("ODKC_UN"), 
+  un = Sys.getenv("ODKC_UN"),
   pw = Sys.getenv("ODKC_PW")
 )
 
@@ -224,7 +224,7 @@ ruODK::submission_list()
 # Server 2, Project 11, Form 12
 ruODK::ru_setup(
   svc = "https://central2.org/v1/projects/11/forms/form12.svc",
-  un = Sys.getenv("ODKC_UN2"), 
+  un = Sys.getenv("ODKC_UN2"),
   pw = Sys.getenv("ODKC_PW2")
 )
 

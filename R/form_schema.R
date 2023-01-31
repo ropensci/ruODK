@@ -239,7 +239,6 @@ form_schema <- function(flatten = FALSE,
     # If the form is a draft form, fs is an empty tibble.
     # In this case, fall back to the draft form schema API path.
     if (nrow(fs) == 0) {
-
       # Recursion stop
       if (draft == TRUE) {
         ru_msg_warn("This form is a draft without any fields.")

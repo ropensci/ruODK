@@ -248,7 +248,6 @@ test_that("submission_export warns of missing credentials", {
 })
 
 test_that("submission_export excludes media", {
-
   # This test downloads files
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"

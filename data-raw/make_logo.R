@@ -21,7 +21,7 @@ hexSticker::sticker(
   p_family = "knewave", p_color = darkred,
   h_fill = "#aaaaaa", h_color = darkred,
   # url = "docs.ropensci.org/ruODK", u_size = 4, u_color = "#ffffff",
-  white_around_sticker = T,
+  white_around_sticker = TRUE,
   filename = ruodklogo
 )
 
@@ -32,6 +32,6 @@ hexSticker::sticker(
   h_fill = "#000000", h_color = "#000000",
   url = "docs.ropensci.org/ruODK",
   u_size = 6, u_color = "#ffffff", u_x = 1.05, u_y = 0.1,
-  white_around_sticker = T,
+  white_around_sticker = TRUE,
   filename = ruodklogo2
 )
