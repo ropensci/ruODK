@@ -69,17 +69,29 @@ form_list <- function(pid = get_default_pid(),
     httr::content(.) %>%
     tibble::tibble(.) %>%
     tidyr::unnest_wider(".", names_repair = "universal") %>%
-    tidyr::unnest_wider(
-      "reviewStates",
-      names_repair = "universal", names_sep = "_"
-    ) %>%
-    tidyr::unnest_wider(
-      "createdBy",
+    {
+      if ("reviewStates" %in% colnames(.)) {
+        # nolint start
+        # https://github.com/ropensci/ruODK/issues/145
+        # Older Central versions have no variable reviewStates
+        # nolint end
+        tidyr::unnest_wider(
+          .,
+          "reviewStates",
+          names_repair = "universal",
+          names_sep = "_"
+        )
+      } else {
+        .
+      }
+    } %>%
+    tidyr::unnest_wider("createdBy",
       names_repair = "universal", names_sep = "_"
     ) %>%
     janitor::clean_names() %>%
     dplyr::mutate_at(
-      dplyr::vars(dplyr::contains("_at")), # assume datetimes are named "_at"
+      dplyr::vars(dplyr::contains("_at")),
+      # assume datetimes are named "_at"
       ~ isodt_to_local(., orders = orders, tz = tz)
     ) %>%
     dplyr::mutate(fid = xml_form_id)
