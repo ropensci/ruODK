@@ -32,6 +32,7 @@ test_that("submission_list works", {
     "created_at",
     "updated_at",
     "review_state",
+    "user_agent",  # new
     "submitter_id_2",
     "submitter_type",
     "submitter_display_name",
