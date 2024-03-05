@@ -34,6 +34,11 @@ jobs:
       RU_RETRIES: ${{ secrets.RU_RETRIES }}
       ODKC_TEST_UN: ${{ secrets.ODKC_TEST_UN }}
       ODKC_TEST_PW: ${{ secrets.ODKC_TEST_PW }}
+      ODKC_URL: ${{ secrets.ODKC_URL }}
+      ODKC_UN: ${{ secrets.ODKC_UN }}
+      ODKC_PW: ${{ secrets.ODKC_PW }}
+      ODKC_PP: ${{ secrets.ODKC_PP }}
+      ODKC_VERSION: ${{ secrets.ODKC_VERSION }}
 
     steps:
       - uses: actions/checkout@v4
