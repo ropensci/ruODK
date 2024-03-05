@@ -23,7 +23,7 @@ test_that("encryption_key_list works", {
     cn,
     ~ testthat::expect_true(
       . %in% names(x),
-      label = glue::glue("Column {.} missing from encryption_key_list")
+      label = glue::glue("Column {.} present in encryption_key_list")
     )
   )
 })

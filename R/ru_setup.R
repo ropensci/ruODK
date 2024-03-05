@@ -42,7 +42,7 @@ ru_settings <- function() {
     pw = Sys.getenv("ODKC_PW", ""),
     pp = Sys.getenv("ODKC_PP", ""),
     tz = Sys.getenv("RU_TIMEZONE", "UTC"),
-    odkc_version = Sys.getenv("ODKC_VERSION", 1.1),
+    odkc_version = Sys.getenv("ODKC_VERSION", "2023.4.0"),
     retries = get_retries(),
     verbose = as.logical(Sys.getenv("RU_VERBOSE", FALSE)),
     test_pid = Sys.getenv("ODKC_TEST_PID", ""),
@@ -55,7 +55,7 @@ ru_settings <- function() {
     test_un = Sys.getenv("ODKC_TEST_UN", ""),
     test_pw = Sys.getenv("ODKC_TEST_PW", ""),
     test_pp = Sys.getenv("ODKC_TEST_PP", ""),
-    test_odkc_version = Sys.getenv("ODKC_TEST_VERSION", 1.1)
+    test_odkc_version = Sys.getenv("ODKC_TEST_VERSION", "2023.4.0")
   )
   structure(ops, class = "ru_settings")
 }
@@ -512,18 +512,182 @@ get_ru_verbose <- function() {
   Sys.getenv("RU_VERBOSE", unset = FALSE) %>% as.logical()
 }
 
+
+#' Parse a given ODK Central version string or number into a `semver`.
+#'
 #' `r lifecycle::badge("stable")`
+#'
+#' Past versions of ruODK advised to set ODKC_VERSION to a floating point number
+#' indicating major and minor versions, e.g. `ODKC_VERSION=0.7` or
+#' `ODKC_VERSION=1.5`.
+#'
+#' ODK Central has since switched to semantic versioning, e.g.
+#' `ODKC_VERSION=ODKC_VERSION=`.
+#'
+#' To preserve backwards compatibility, ruODK handles both formats gracefully,
+#' but emits a helpful warning to update the version string if the older format
+#' is detected, or the version string is missing the minor or patch version.
+#'
+#' @param v A string (e.g. "ODKC_VERSION=") or number (e.g. 0.8, 1.5) of a
+#'   complete or partial semver, or a semver of class "svlist".
+#' @param env_var A string indicating which environment variable was targeted.
+#'   This is used in the warning to advise which environment variable to update.
+#'   If set to an empty string, the warning message is suppressed.
+#'   Default: "ODKC_VERSION".
+#' @return semver::svlist The version as semver of major, minor, and patch.
+#'
 #' @export
-#' @rdname ru_settings
-get_default_odkc_version <- function() {
-  Sys.getenv("ODKC_VERSION", unset = 1.1) %>% as.double()
+#' @import semver
+#' @family ru_settings
+#' @examples
+#' parse_odkc_version("1.2.3")
+#'
+#' # Warn: too short
+#' parse_odkc_version("1")
+#' parse_odkc_version("1.2")
+#'
+#' # Warn: too long
+#' parse_odkc_version("1.2.3.4")
+#'
+#' # Warn: otherwise invalid
+#' parse_odkc_version("1.2.")
+#' parse_odkc_version(".2.3")
+#'
+parse_odkc_version <- function(v, env_var = "ODKC_VERSION") {
+  # If the given version is already a semver, return it as is
+  # This may fail when run in testthat, where semver svlists are somehow
+  # transformed to character and then not recognised as pointers here.
+  if (rlang::inherits_any(v, c("svlist", "svptr"))) {
+    return(v)
+  }
+
+  # If not, convert to string and proceed
+  v_string <- as.character(v)
+
+  v_invalid <- FALSE
+  emit_warning <- env_var != ""
+
+  # The version string should start and end with a digit
+  if (!stringr::str_detect(v_string, "^[0-9]")) {
+    v_string <- paste0("0", v_string)
+    v_invalid <- TRUE
+  }
+  if (!stringr::str_detect(v_string, "[0-9]$")) {
+    v_string <- paste0(v_string, "0")
+    v_invalid <- TRUE
+  }
+
+  # The version string should have two decimal points
+  decimals_found <- stringr::str_count(v_string, pattern = "\\.")
+  decimals_missing <- max(2 - decimals_found, 0)
+
+  # Create repaired version
+  v_repaired <- v_string
+
+  # If the version string is missing components (minor, patch), add ".0"
+  if (decimals_found < 2) {
+    for (x in 1:decimals_missing) {
+      v_repaired <- stringr::str_c(v_repaired, ".0")
+    }
+    v_invalid <- TRUE
+  }
+
+  # If the version string has too many components, discard them
+  if (decimals_found > 2) {
+    v_repaired <- stringr::str_replace(
+      v_string,
+      "^(([^.]*\\.){2}[^.]*)\\..*$", "\\1"
+    )
+    v_invalid <- TRUE
+  }
+
+  # If the version needed repair and unless silenced, emit helpful advice
+  if (v_invalid == TRUE && emit_warning == TRUE) {
+    ru_msg_warn(glue::glue(
+      "Please update your environment variable {env_var} ",
+      "from \"{v_string}\" to \"{v_repaired}\"."
+    ))
+  }
+
+  # Parse what is now a valid semver string to semver
+  v_semver <- semver::parse_version(v_repaired)
+  v_semver
 }
 
 #' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
+get_default_odkc_version <- function() {
+  Sys.getenv("ODKC_VERSION", unset = "2023.5.1")
+}
+
+#' Show whether a given semver is greater than a baseline version.
+#'
+#' @param sv The semver to compare as character
+#'    ("2023.5.1", 1.5.0", "1.5"), or numeric (1.5).
+#'    The value is always parsed with `semver::parse_semver()`.
+#'    Default: get_default_odkc_version().
+#' @param to The semver to compare to as string. Although semver can parse
+#'    complete version strings, `to` is still parsed by `parse_odkc_version()`
+#'    to ensure it is complete with major, minor, and patch version components.
+#' @returns A boolean indicating whether the given semver `sv` is greater than
+#'    the baseline semver `to`.
+#' @family ru_settings
+#' @export
+#' @examples
+#' get_default_odkc_version() |> semver_gt("0.8.0")
+#' "2024.1.1" |>
+#'   parse_odkc_version() |>
+#'   semver_gt("2024.1.0")
+#' "2024.1.1" |>
+#'   parse_odkc_version() |>
+#'   semver_gt("2024.1.1")
+#' "2024.1.1" |>
+#'   parse_odkc_version() |>
+#'   semver_gt("2024.1.2")
+semver_gt <- function(sv = get_default_odkc_version(), to = "1.5.0") {
+  base_version <- parse_odkc_version(sv, env_var = "")
+  to_version <- parse_odkc_version(to, env_var = "")
+  base_version[[1]] > to_version[[1]]
+}
+
+
+#' Show whether a given semver is lesser than a baseline version.
+#'
+#' @param sv The semver to compare as character
+#'    ("2023.5.1", 1.5.0", "1.5"), or numeric (1.5).
+#'    The value is always parsed with `semver::parse_semver()`.
+#'    Default: get_default_odkc_version().
+#' @param to The semver to compare to as string. Although semver can parse
+#'    complete version strings, `to` is still parsed by `parse_odkc_version()`
+#'    to ensure it is complete with major, minor, and patch version components.
+#' @returns A boolean indicating whether the given semver `sv` is greater than
+#'    the baseline semver `to`.
+#' @family ru_settings
+#' @export
+#' @examples
+#' get_default_odkc_version() |> semver_lt("0.8.0")
+#' "2024.1.1" |>
+#'   parse_odkc_version() |>
+#'   semver_lt("2024.1.0")
+#' "2024.1.1" |>
+#'   parse_odkc_version() |>
+#'   semver_lt("2024.1.1")
+#' "2024.1.1" |>
+#'   parse_odkc_version() |>
+#'   semver_lt("2024.1.2")
+semver_lt <- function(sv = get_default_odkc_version(), to = "1.5.0") {
+  base_version <- parse_odkc_version(sv, env_var = "")
+  to_version <- parse_odkc_version(to, env_var = "")
+  base_version[[1]] < to_version[[1]]
+}
+
+
+#' `r lifecycle::badge("stable")`
+#' @export
+#' @rdname ru_settings
 get_test_odkc_version <- function() {
-  Sys.getenv("ODKC_TEST_VERSION", unset = 1.1) %>% as.double()
+  Sys.getenv("ODKC_TEST_VERSION", unset = "2023.5.1")
 }
 
 #' `r lifecycle::badge("stable")`

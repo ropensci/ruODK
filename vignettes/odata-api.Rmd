@@ -10,11 +10,11 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-- media/1604290006239.jpg
-- media/1604290049411.jpg
-- media/1604290379613.jpg
-- media/1604290400891.jpg
-- media/1604290499008.jpg
+- media/1701678074209.jpg
+- media/1701678107041.jpg
+- media/1701678512568.jpg
+- media/1701678535420.jpg
+- media/1701678592627.jpg
 ---
 
 ```{r setup, include = FALSE}

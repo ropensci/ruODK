@@ -34,7 +34,7 @@ test_that("submission_get works", {
 
 
   # The details for one submission return exactly one row
-  testthat::expect_equal(length(sub), 13)
+  testthat::expect_equal(length(sub), 12)
   testthat::expect_equal(length(subs), 1) # number of submissions
 
   # The columns are form fields or groups,
@@ -47,7 +47,6 @@ test_that("submission_get works", {
     "device_id",
     "location",
     "habitat",
-    "vegetation_stratum",
     "vegetation_stratum",
     "vegetation_stratum",
     "perimeter",

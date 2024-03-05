@@ -91,7 +91,8 @@ split_geotrace <- function(data,
   if (nrow(data) == 0) {
     # Option 1: Early exit - nothing to do
     return(data)
-  } else if (odkc_version < 0.8) {
+  } else if (semver_lt(odkc_version, "0.8.0")) {
+    # odkc_version < 0.8
     # nolint start
     # Option 2: ODK linestring
     # ODK Central <=0.7 ignores the WKT argument for geotrace and geoshape

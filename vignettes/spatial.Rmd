@@ -89,7 +89,7 @@ ruODK::ru_setup(
   fid = get_test_fid_wkt(),
   un = get_test_un(),
   pw = get_test_pw(),
-  odkc_version = 0.8,
+  odkc_version = "2023.5.1",
   tz = "Australia/Perth",
   verbose = TRUE
 )

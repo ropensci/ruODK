@@ -6,7 +6,7 @@
 #' returns a parsed and flattened list of fields. This replaces the nested
 #' form schema which is challenging to parse.
 #'
-#' While users of newest ODK Central versions ( > 0.8) can ignore the legacy
+#' While users of newer ODK Central versions (> 0.8) can ignore the legacy
 #' support for ODK Central's earlier form schema API, users of ODK Central
 #' version < 0.8 can set an environment variable \code{ODKC_VERSION} to their
 #' ODKC's version in format \code{<major>.<minor>} e.g. \code{0.7}.
@@ -165,7 +165,7 @@ form_schema <- function(flatten = FALSE,
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   ru_msg_info(glue::glue("Form schema v{odkc_version}"), verbose = verbose)
 
-  if (odkc_version < 0.8) {
+  if (semver_lt(odkc_version, "0.8.0")) {
     # nocov start
     fs <- httr::RETRY(
       "GET",

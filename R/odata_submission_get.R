@@ -215,14 +215,16 @@ odata_submission_get <- function(table = "Submissions",
       ru_msg_info(verbose = verbose)
   }
   # Some query parameters are only supported in later ODKC versions
-  if (odkc_version >= 1.1 && !is.null(filter) && filter != "") {
+  # ODKC >= 1.1
+  if (semver_gt(odkc_version, "1.0.0") && !is.null(filter) && filter != "") {
     qry$`$filter` <- as.character(filter)
     "Filtering records with {as.character(filter)}" %>%
       glue::glue() %>%
       ru_msg_info(verbose = verbose)
   }
 
-  if (odkc_version >= 1.2 && !is.null(expand) && expand == TRUE) {
+  # ODKC_VERSION >= 1.2
+  if (semver_gt(odkc_version, "1.1.0") && !is.null(expand) && expand == TRUE) {
     qry$`$expand` <- "*"
     "Expanding all nested repeats" %>%
       glue::glue() %>%

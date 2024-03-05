@@ -34,9 +34,9 @@ forms.
 \seealso{
 Other included: 
 \code{\link{fq_attachments}},
+\code{\link{fq_data}},
 \code{\link{fq_data_strata}},
 \code{\link{fq_data_taxa}},
-\code{\link{fq_data}},
 \code{\link{fq_form_detail}},
 \code{\link{fq_form_list}},
 \code{\link{fq_form_schema}},
@@ -52,15 +52,15 @@ Other included:
 \code{\link{fq_zip_data}},
 \code{\link{fq_zip_strata}},
 \code{\link{fq_zip_taxa}},
-\code{\link{fs_v7_raw}},
 \code{\link{fs_v7}},
+\code{\link{fs_v7_raw}},
 \code{\link{geo_fs}},
+\code{\link{geo_gj}},
 \code{\link{geo_gj88}},
 \code{\link{geo_gj_raw}},
-\code{\link{geo_gj}},
+\code{\link{geo_wkt}},
 \code{\link{geo_wkt88}},
-\code{\link{geo_wkt_raw}},
-\code{\link{geo_wkt}}
+\code{\link{geo_wkt_raw}}
 }
 \concept{included}
 \keyword{datasets}

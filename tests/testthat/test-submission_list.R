@@ -32,13 +32,14 @@ test_that("submission_list works", {
     "created_at",
     "updated_at",
     "review_state",
-    "user_agent",  # new
+    "user_agent",
     "submitter_id_2",
     "submitter_type",
     "submitter_display_name",
     "submitter_created_at",
     "submitter_updated_at",
-    "submitter_deleted_at"
+    "submitter_deleted_at",
+    "current_version"
   )
   testthat::expect_equal(names(sl), cn)
   # testthat::expect_equal(class(sl$review_state), "logical")

@@ -86,7 +86,7 @@ class(fxml)
 Other form-management: 
 \code{\link{form_detail}()},
 \code{\link{form_list}()},
-\code{\link{form_schema_ext}()},
-\code{\link{form_schema}()}
+\code{\link{form_schema}()},
+\code{\link{form_schema_ext}()}
 }
 \concept{form-management}

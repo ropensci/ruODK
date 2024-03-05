@@ -112,16 +112,16 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   testthat::expect_true(fs::dir_exists(t))
   fs::dir_ls(t) %>% fs::file_delete()
 
-  # Brittle: depends on data collected for example form
-  uuid <- "uuid:469f71d3-d7aa-4c74-8aaa-af5f667a2f28"
-  fn <- "1604290049411.jpg"
-
   url <- get_test_url()
   pid <- get_test_pid()
   fid <- get_test_fid()
-
+  iid <- ruODK::submission_list(pid = pid, fid = fid)$instance_id
+  att_list <- ruODK::attachment_list(pid = pid, fid = fid, iid = iid)
+  fn <- att_list$name[1]
   pth <- fs::path(t, fn)
-  src <- ruODK:::attachment_url(uuid,
+
+  src <- ruODK:::attachment_url(
+    iid,
     fn,
     pid = pid,
     fid = fid,

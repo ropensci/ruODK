@@ -108,7 +108,10 @@ ru_settings()
 
 Other ru_settings: 
 \code{\link{odata_svc_parse}()},
+\code{\link{parse_odkc_version}()},
 \code{\link{ru_setup}()},
+\code{\link{semver_gt}()},
+\code{\link{semver_lt}()},
 \code{\link{yell_if_error}()},
 \code{\link{yell_if_missing}()}
 }

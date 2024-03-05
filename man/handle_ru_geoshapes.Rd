@@ -25,13 +25,15 @@ E.g. the output of \code{ruODK::form_schema()}.}
 \item{wkt}{Whether geofields are GeoJSON (if FALSE) or WKT
 strings (if TRUE), default: FALSE.}
 
-\item{odkc_version}{The ODK Central version as decimal number (major.minor).
+\item{odkc_version}{The ODK Central version as a semantic version string
+(year.minor.patch), e.g. "2023.5.1". The version is shown on ODK Central's
+version page \verb{/version.txt}. Discard the "v".
 \code{ruODK} uses this parameter to adjust for breaking changes in ODK Central.
 
-Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
+Default: \code{\link{get_default_odkc_version}} or "2023.5.1" if unset.
 
 Set default \code{get_default_odkc_version} through
-\code{ru_setup(odkc_version=1.1)}.
+\code{ru_setup(odkc_version="2023.5.1")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
 
@@ -87,9 +89,9 @@ Other utilities:
 \code{\link{drop_null_coords}()},
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
+\code{\link{get_one_submission}()},
 \code{\link{get_one_submission_attachment_list}()},
 \code{\link{get_one_submission_audit}()},
-\code{\link{get_one_submission}()},
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_datetimes}()},
 \code{\link{handle_ru_geopoints}()},

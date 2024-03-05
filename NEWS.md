@@ -1,3 +1,16 @@
+# ruODK 1.4.2
+This release migrates the `ruODK` test suite to a new test server 
+`ruodk.getodk.cloud` which was generously sponsored by GetODK.
+
+This release makes `ruODK` aware of the new ODK Central semantic version format:
+Update your ODK Central version in `.Renviron` or in the credential
+helper of your choice to the new format `ODKC_VERSION=2023.5.1` (with your 
+current version). See the updated vignette "setup".
+
+## Major changes
+* Handle the new ODK Central semantic versioning (#150)
+* Migrate to new test server (#149)
+
 # ruODK 1.4.0
 This release fixes a few compatibility issues and bumps dependencies to R (4.1) 
 and imported/suggested packages. 
@@ -67,7 +80,6 @@ administrative endpoints are non-critical to ruODK's purpose.
 * All tests pass, GitHub Actions is as per usual brittle at the installation 
   step.
   
-
 # `ruODK` 1.2.0.0000
 We are shaping up to a release targetting the ODK Central 1.2 release.
 ODK Central is undergoing some bug fixes and patches, while ruODK's test server
@@ -347,7 +359,7 @@ for ODK Central <= 0.7.
   ODK Forum, @dickoa, @arestrom, @dmenne. 
   Thanks for the first community feedback! (#76 #74 #79 #80 #81)
 
-# Docker
+## Docker
 * Added Dockerfile to build an RStudio Server image based on `rocker/geospatial`
   with `ruODK` and dependencies installed.
 * Build a separate Dockerfile for [`urODK`](https://github.com/dbca-wa/urODK)

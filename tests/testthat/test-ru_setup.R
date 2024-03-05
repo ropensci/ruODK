@@ -349,4 +349,19 @@ test_that("retries default to 1L if empty or invalid", {
   ru_msg_info(glue::glue("Env var retries: {Sys.getenv('RU_RETRIES')}"))
   ru_msg_info(glue::glue("get_retries(): {get_retries()}"))
 })
+
+testthat::test_that("semver_gt compares ODKC versions", {
+  testthat::expect_true("2024.1.1" |> semver_gt("2020.1.0"))
+  testthat::expect_true("2024.1.1" |> semver_gt("2020.1.1"))
+  testthat::expect_false("2024.1.1" |> semver_gt("2024.1.2"))
+  testthat::expect_true(get_test_odkc_version() |> semver_gt("0.8.0"))
+})
+
+testthat::test_that("semver_lt compares ODKC versions", {
+  testthat::expect_false("2024.1.1" |> semver_lt("2020.1.0"))
+  testthat::expect_false("2024.1.1" |> semver_lt("2020.1.1"))
+  testthat::expect_true("2024.1.1" |> semver_lt("2024.1.2"))
+  testthat::expect_false(get_default_odkc_version() |> semver_lt("0.8.0"))
+})
+
 # usethis::use_r("ru_setup") # nolint

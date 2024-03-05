@@ -160,24 +160,22 @@ to request access to this ODK Central instance.
 The tests require the following additions to your `.Renviron`:
 
 ```r
-# Required for testing
-ODKC_TEST_SVC="https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc"
-ODKC_TEST_URL="https://odkc.dbca.wa.gov.au"
-ODKC_TEST_PID=2
-ODKC_TEST_PID_ENC=3
+# ODK Test server
+ODKC_TEST_SVC="https://ruodk.getodk.cloud/v1/projects/1/forms/Flora-Quadrat-04.svc"
+ODKC_TEST_URL="https://ruodk.getodk.cloud"
+ODKC_TEST_PID=1
+ODKC_TEST_PID_ENC=2
 ODKC_TEST_PP="ThePassphrase"
 ODKC_TEST_FID="Flora-Quadrat-04"
-ODKC_TEST_FID_ZIP="Spotlighting-06"
+ODKC_TEST_FID_ZIP="Locations"
 ODKC_TEST_FID_ATT="Flora-Quadrat-04-att"
 ODKC_TEST_FID_GAP="Flora-Quadrat-04-gap"
 ODKC_TEST_FID_WKT="Locations"
 ODKC_TEST_FID_I8N0="I8n_no_lang"
 ODKC_TEST_FID_I8N1="I8n_label_lng"
 ODKC_TEST_FID_I8N2="I8n_label_choices"
-ODKC_TEST_FID_I8N3="I8n_no_lang_choicefilter"
-ODKC_TEST_FID_I8N4="I8n_lang_choicefilter"
 ODKC_TEST_FID_ENC="Locations"
-ODKC_TEST_VERSION=1.0
+ODKC_TEST_VERSION="2023.5.1"
 RU_VERBOSE=TRUE
 RU_TIMEZONE="Australia/Perth"
 RU_RETRIES=3

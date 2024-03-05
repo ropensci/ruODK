@@ -256,7 +256,7 @@ test_that("submission_export excludes media", {
 
   # A fresh litterbox
   t <- tempdir()
-  fs::dir_ls(t) %>% fs::file_delete()
+  fs::dir_ls(t) |> fs::file_delete()
 
   media_and_repeats <- submission_export(
     local_dir = t,
@@ -265,7 +265,7 @@ test_that("submission_export excludes media", {
     media = TRUE,
     repeats = TRUE,
     pid = get_test_pid(),
-    odkc_version = 1.1,
+    odkc_version = get_test_odkc_version(),
     fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
@@ -282,7 +282,7 @@ test_that("submission_export excludes media", {
     media = FALSE,
     repeats = TRUE,
     pid = get_test_pid(),
-    odkc_version = 1.1,
+    odkc_version = get_test_odkc_version(),
     fid = get_test_fid(),
     url = get_test_url(),
     un = get_test_un(),
@@ -305,7 +305,7 @@ test_that("submission_export excludes media", {
       media = FALSE,
       repeats = FALSE,
       pid = get_test_pid(),
-      odkc_version = 1.1,
+      odkc_version = get_test_odkc_version(),
       fid = get_test_fid(),
       url = get_test_url(),
       un = get_test_un(),
@@ -326,7 +326,7 @@ test_that("submission_export excludes media", {
       media = TRUE,
       repeats = FALSE,
       pid = get_test_pid(),
-      odkc_version = 1.1,
+      odkc_version = get_test_odkc_version(),
       fid = get_test_fid(),
       url = get_test_url(),
       un = get_test_un(),
@@ -346,7 +346,7 @@ test_that("submission_export excludes media", {
     media = TRUE,
     repeats = TRUE,
     pid = get_test_pid(),
-    odkc_version = 1.0,
+    odkc_version = "1.0.0",
     # should cause message
     fid = get_test_fid_zip(),
     url = get_test_url(),
@@ -365,7 +365,7 @@ test_that("submission_export excludes media", {
       # won't work on old ODKC
       repeats = TRUE,
       pid = get_test_pid(),
-      odkc_version = 1.0,
+      odkc_version = get_test_odkc_version(),
       # should cause message
       fid = get_test_fid_zip(),
       url = get_test_url(),
@@ -373,7 +373,7 @@ test_that("submission_export excludes media", {
       pw = get_test_pw(),
       pp = get_test_pp()
     ),
-    regexp = "Omitting media attachments"
+    regexp = "Keeping previous download"
   )
 
   testthat::expect_message(
@@ -386,8 +386,8 @@ test_that("submission_export excludes media", {
       repeats = FALSE,
       # won't work on old ODKC
       pid = get_test_pid(),
-      odkc_version = 1.0,
-      # should cause message
+      odkc_version = "1.0.0",
+      # should cause message with odkc_version <= 1.1
       fid = get_test_fid_zip(),
       url = get_test_url(),
       un = get_test_un(),

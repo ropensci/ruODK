@@ -111,7 +111,8 @@ form_schema_ext <- function(flatten = FALSE,
                             verbose = get_ru_verbose()) {
   # version warning
   # nocov start
-  if (odkc_version < 0.8) {
+  if (semver_lt(odkc_version, "0.8.0")) {
+    # odkc_version < 0.8
     "Form Schema Extended works better with ODK Central 0.8 and above" %>%
       ru_msg_warn()
   }

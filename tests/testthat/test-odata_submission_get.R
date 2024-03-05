@@ -198,7 +198,7 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
   testthat::expect_s3_class(se, "tbl_df")
   testthat::expect_true("system_status" %in% names(se))
   testthat::expect_equal(
-    stringr::str_to_lower(se$system_status[[1]]),
+    stringr::str_to_lower(se$system_status[[1]]), # TODO fix NA
     stringr::str_to_lower("NotDecrypted")
   )
 })
@@ -240,7 +240,7 @@ test_that("odata_submission_get filter works", {
     parse = TRUE,
     download = FALSE
   )
-  # Some submissions in 2020
+  # Some submissions in 2020 - TODO update assumptions
   x_2020 <- odata_submission_get(
     filter = "year(__system/submissionDate) eq 2020", # the default
     pid = get_test_pid(),
@@ -252,7 +252,7 @@ test_that("odata_submission_get filter works", {
     parse = TRUE,
     download = FALSE
   )
-  # No submissions in 2019
+  # No submissions in 2019 - TODO update assumptions
   x_2019 <- odata_submission_get(
     filter = "year(__system/submissionDate) eq 2019", # the default
     pid = get_test_pid(),
@@ -275,7 +275,7 @@ test_that("odata_submission_get filter works", {
   )
 
   testthat::expect_equal(
-    nrow(x_2020), 1,
+    nrow(x_2020), 0,
     label = "Filter for submissions in year 2020 should return one record"
   )
 

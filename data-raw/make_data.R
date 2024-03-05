@@ -199,7 +199,7 @@ ymlthis::yml_resource_files(
 # let's mogrify all
 # fs::dir_ls(here::here("media"), glob="*.jpg") %>%
 # fs::file_copy(here::here("vignettes/media/"), overwrite = TRUE)
-# system("find vignettes/media -type f -exec mogrify -resize 200x150 {} \\;")
+# system("find ./vignettes/media -type f -exec mogrify -resize 200x150 {} \\;")
 
 # Cleanup temp files
 fs::dir_delete(here::here("media"))

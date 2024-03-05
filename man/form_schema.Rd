@@ -74,13 +74,15 @@ Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{odkc_version}{The ODK Central version as decimal number (major.minor).
+\item{odkc_version}{The ODK Central version as a semantic version string
+(year.minor.patch), e.g. "2023.5.1". The version is shown on ODK Central's
+version page \verb{/version.txt}. Discard the "v".
 \code{ruODK} uses this parameter to adjust for breaking changes in ODK Central.
 
-Default: \code{\link{get_default_odkc_version}} or 1.1 if unset.
+Default: \code{\link{get_default_odkc_version}} or "2023.5.1" if unset.
 
 Set default \code{get_default_odkc_version} through
-\code{ru_setup(odkc_version=1.1)}.
+\code{ru_setup(odkc_version="2023.5.1")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
 
@@ -129,7 +131,7 @@ ODK Central has introduced a new API endpoint in version 0.8 which
 returns a parsed and flattened list of fields. This replaces the nested
 form schema which is challenging to parse.
 
-While users of newest ODK Central versions ( > 0.8) can ignore the legacy
+While users of newer ODK Central versions (> 0.8) can ignore the legacy
 support for ODK Central's earlier form schema API, users of ODK Central
 version < 0.8 can set an environment variable \code{ODKC_VERSION} to their
 ODKC's version in format \code{<major>.<minor>} e.g. \code{0.7}.

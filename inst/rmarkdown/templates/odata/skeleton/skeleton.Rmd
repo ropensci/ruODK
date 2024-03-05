@@ -84,7 +84,7 @@ library(leaflet)
 ruODK::ru_setup(
   svc=paste0("https://my-odkc-instance.com/v1/projects/1/forms/form_id.svc"),
   tz = "Australia/Perth", # your local timezone
-  odkc_version = 1.0,     # your ODKC version, only needed if <=0.7
+  odkc_version = "2023.5.1", # your ODKC version, only needed for older versions
   verbose = TRUE)
 
 loc <- fs::path("media")

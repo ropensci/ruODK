@@ -75,7 +75,7 @@ split_geoshape <- function(data,
   if (nrow(data) == 0) {
     # Option 1: Early exit - nothing to do
     return(data)
-  } else if (odkc_version < 0.8) {
+  } else if (semver_lt(odkc_version, "0.8.0")) {
     # Option 2: ODK linestring
     # ODK Central <=0.7 ignores the WKT argument for geotrace and geoshape.
     # nolint start
@@ -97,7 +97,8 @@ split_geoshape <- function(data,
         remove = FALSE,
         convert = TRUE
       )
-  } else if (wkt == FALSE && odkc_version < 1.2) {
+  } else if (wkt == FALSE && semver_lt(odkc_version, "1.2.0")) {
+    # odkc_version < 1.2
     # nocov start
     # GeoJSON
     # Task: Extract coordinates into programmatically generated variable names
@@ -123,7 +124,8 @@ split_geoshape <- function(data,
         list(~ purrr::map(., drop_null_coords))
       )
     # nocov end
-  } else if (wkt == FALSE && odkc_version >= 1.2) {
+  } else if (wkt == FALSE && semver_gt(odkc_version, "1.1.0")) {
+    # ODKC_VERSION >= 1.2
     # GeoJSON
     # Task: Extract coordinates into programmatically generated variable names
     # Step 1: tidyr::hoist() extracts but can't assign with :=

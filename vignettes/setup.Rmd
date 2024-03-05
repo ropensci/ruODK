@@ -89,7 +89,7 @@ sourced at the beginning of a new session at
 [whattheyforgot.org](https://whattheyforgot.org/r-startup.html).
 
 `ruODK`'s functions default to the getters
-`ruODK::get_default_{pid,fid,url,un.pw}()`. These getters in turn look up their
+`ruODK::get_default_{pid,fid,url,un,pw}()`. These getters in turn look up their
 values from environment variables.
 
 The getters and setters are documented in the "Settings" family of the 
@@ -109,18 +109,18 @@ usethis::edit_r_environ(scope = "user")
 
 ```{r renviron, eval=FALSE}
 ODKC_PID <- 1
-ODKC_FID <- "build_Flora-Quadrat-0-2_1558575936"
-ODKC_URL <- "https://odkcentral.dbca.wa.gov.au"
+ODKC_FID <- "form_id"
+ODKC_URL <- "https://my-instance.getodk.cloud"
 ODKC_UN <- "me@email.com"
 ODKC_PW <- "..."
 ODKC_PP <- "..."
-ODKC_VERSION <- 0.8
+ODKC_VERSION <- "2023.5.1"
 
-# Test settings
-ODKC_TEST_SVC <- "https://odkc.dbca.wa.gov.au/v1/projects/2/forms/Flora-Quadrat-04.svc"
-ODKC_TEST_URL <- "https://odkc.dbca.wa.gov.au"
-ODKC_TEST_PID <- 2
-ODKC_TEST_PID_ENC <- 3
+# ODK Test server
+ODKC_TEST_SVC <- "https://ruodk.getodk.cloud/v1/projects/1/forms/Flora-Quadrat-04.svc"
+ODKC_TEST_URL <- "https://ruodk.getodk.cloud"
+ODKC_TEST_PID <- 1
+ODKC_TEST_PID_ENC <- 2
 ODKC_TEST_PP <- "ThePassphrase"
 ODKC_TEST_FID <- "Flora-Quadrat-04"
 ODKC_TEST_FID_ZIP <- "Spotlighting-06"
@@ -130,10 +130,8 @@ ODKC_TEST_FID_WKT <- "Locations"
 ODKC_TEST_FID_I8N0 <- "I8n_no_lang"
 ODKC_TEST_FID_I8N1 <- "I8n_label_lng"
 ODKC_TEST_FID_I8N2 <- "I8n_label_choices"
-ODKC_TEST_FID_I8N3 <- "I8n_no_lang_choicefilter"
-ODKC_TEST_FID_I8N4 <- "I8n_lang_choicefilter"
 ODKC_TEST_FID_ENC <- "Locations"
-ODKC_TEST_VERSION <- 1.0
+ODKC_TEST_VERSION <- "2023.5.1"
 RU_VERBOSE <- TRUE
 RU_TIMEZONE <- "Australia/Perth"
 RU_RETRIES <- 3
@@ -142,33 +140,43 @@ ODKC_TEST_PW <- "..."
 ```
 
 As an alternative to setting environment variables through `~/.Renviron`, you
-can set them through `Sys.setenv()`:
+can set them through `Sys.setenv()` or through `ruODK::ru_setup()`:
 
 ```{r setenv, eval=FALSE}
-Sys.setenv(ODKC_URL = "https://odkc.dbca.wa.gov.au")
+Sys.setenv(ODKC_URL = "https://my-instance.getodk.cloud")
 Sys.setenv(ODKC_UN = "me@mail.com")
 Sys.setenv(ODKC_PW = "...")
 Sys.setenv(ODKC_PP = "...")
-Sys.setenv(ODKC_TEST_URL = "...")
-Sys.setenv(ODKC_TEST_UN = "...")
-Sys.setenv(ODKC_TEST_PW = "...")
-Sys.setenv(ODKC_TEST_PID = 2)
-# continue for the remaining test variables shown above
+# add settings as needed
+# Reload R session to take effect
+
+ruODK::ru_setup(
+  svc = "ODK service URL contains ODKC URL, project and form IDs",
+  un = "...",
+  pw = "..."
+)
+# Takes effect immediately
 ```
 
 ## The hard way: Per function call
 
 We can supply those credentials to each `ruODK` function call.
-
-Note, including sensitive credentials in plain text into code is bad practice.
-This option is shown only for completeness.
+Credentials can be sourced from environment variables (to prevent hard-coding
+them) or from other secure sources.
 
 ```{r, eval=FALSE}
 # Use ruODK without ru_setup
 ruODK::project_list(
-  url = "https://my-odkc.com",
-  un = Sys.getenv("ODKC_UN"),
-  pw = Sys.getenv("ODKC_PW")
+  url = Sys.getenv("ODKC_URL_1"),
+  un = Sys.getenv("ODKC_UN_1"),
+  pw = Sys.getenv("ODKC_PW_1")
+)
+
+# Use another server
+ruODK::project_list(
+  url = Sys.getenv("ODKC_URL_2"),
+  un = Sys.getenv("ODKC_UN_2"),
+  pw = Sys.getenv("ODKC_PW_2")
 )
 
 # Tests use default test settings explicitly
@@ -253,12 +261,12 @@ both new and old, deprecated behaviour.
 As there is no corresponding API endpoint to determine the ODK Central version,
 `ruODK` has introduced the environment variables `ODKC_VERSION` and
 `ODKC_TEST_VERSION`. If unset, `ruODK` defaults to the latest ODK Central
-version, which is the version deployed to the ODK Central sandbox (on which
-`ruODK`'s package tests run).
+version, which is the version deployed to the ODK Central test server.
 
-The numeric format of `major.minor` (e.g. `0.7` or `0.8`) future-proofs `ruODK`
-to be able to handle any other future breaking changes gracefully through the
-same variable.
+`ruODK` gracefully handles both the current semantic versioning version format 
+("year.minor.patch", e.g. "2023.5.1") and the older numeric format (e.g. 0.7, 
+1.2). If the `ODKC_VERSION` needs repair, `ruODK` will emit a helpful warning 
+advising the correct format for the given version.
 
 A recent example is the change of the API endpoint for `form_schema`, which
 replaced the `.schema.json` API in favour of the `/fields` API. This required

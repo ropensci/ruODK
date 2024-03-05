@@ -102,7 +102,8 @@ submission_export <- function(local_dir = here::here(),
   url_ext <- ".csv.zip"
   file_ext <- ".zip"
 
-  if (odkc_version >= 1.1) {
+  if (semver_gt(odkc_version, "1.0.0")) {
+    # odkc_version >= 1.1
     if (media == FALSE) {
       url_ext <- ".csv.zip?attachments=false"
     }
@@ -152,6 +153,8 @@ submission_export <- function(local_dir = here::here(),
   # List encryption keys
   encryption_keys <- encryption_key_list(
     url = url,
+    un = un,
+    pw = pw,
     pid = pid,
     fid = fid,
     retries = retries
