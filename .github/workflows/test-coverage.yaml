@@ -11,6 +11,7 @@ name: test-coverage
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
+    environment: ci
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
@@ -34,6 +35,11 @@ jobs:
       RU_RETRIES: ${{ secrets.RU_RETRIES }}
       ODKC_TEST_UN: ${{ secrets.ODKC_TEST_UN }}
       ODKC_TEST_PW: ${{ secrets.ODKC_TEST_PW }}
+      ODKC_URL: ${{ secrets.ODKC_TEST_URL }}
+      ODKC_UN: ${{ secrets.ODKC_TEST_UN }}
+      ODKC_PW: ${{ secrets.ODKC_TEST_PW }}
+      ODKC_PP: ${{ secrets.ODKC_TEST_PP }}
+      ODKC_VERSION: ${{ secrets.ODKC_TEST_VERSION }}
 
     steps:
       - uses: actions/checkout@v4
