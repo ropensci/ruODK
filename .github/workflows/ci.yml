@@ -16,8 +16,8 @@ jobs:
       matrix:
         include:
           - {os: windows-latest}
-          #- {os: macOS-latest}
-          #- {os: ubuntu-latest} # times out on package download hitting rate limit
+          - {os: macOS-latest}
+          - {os: ubuntu-latest} # times out on package download hitting rate limit
 
     runs-on: ${{ matrix.os }}
 
