@@ -11,11 +11,30 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ubuntu-latest
-    environment: ci
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
       ODKC_TEST_URL: ${{ secrets.ODKC_TEST_URL }}
+      ODKC_TEST_SVC: ${{ secrets.ODKC_TEST_SVC }}
+      ODKC_TEST_PID: ${{ secrets.ODKC_TEST_PID }}
+      ODKC_TEST_PID_ENC: ${{ secrets.ODKC_TEST_PID_ENC }}
+      ODKC_TEST_PP: ${{ secrets.ODKC_TEST_PP }}
+      ODKC_TEST_FID: ${{ secrets.ODKC_TEST_FID }}
+      ODKC_TEST_FID_ZIP: ${{ secrets.ODKC_TEST_FID_ZIP }}
+      ODKC_TEST_FID_ATT: ${{ secrets.ODKC_TEST_FID_ATT }}
+      ODKC_TEST_FID_GAP: ${{ secrets.ODKC_TEST_FID_GAP }}
+      ODKC_TEST_FID_WKT: ${{ secrets.ODKC_TEST_FID_WKT }}
+      ODKC_TEST_FID_I8N0: ${{ secrets.ODKC_TEST_FID_I8N0 }}
+      ODKC_TEST_FID_I8N1: ${{ secrets.ODKC_TEST_FID_I8N1 }}
+      ODKC_TEST_FID_I8N2: ${{ secrets.ODKC_TEST_FID_I8N2 }}
+      ODKC_TEST_FID_ENC: ${{ secrets.ODKC_TEST_FID_ENC }}
+      ODKC_TEST_VERSION: ${{ secrets.ODKC_TEST_VERSION }}
+      RU_VERBOSE: ${{ secrets.RU_VERBOSE }}
+      RU_TIMEZONE: ${{ secrets.RU_TIMEZONE }}
+      RU_RETRIES: ${{ secrets.RU_RETRIES }}
+      ODKC_TEST_UN: ${{ secrets.ODKC_TEST_UN }}
+      ODKC_TEST_PW: ${{ secrets.ODKC_TEST_PW }}
+
     steps:
       - uses: actions/checkout@v4
 
