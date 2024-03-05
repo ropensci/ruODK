@@ -23,6 +23,7 @@ coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](htt
 ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=lab)
 [![Hosted RStudio with
 ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
+[![R-CMD-check](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Especially in these trying times, it is important to ask “r u ODK?”.
@@ -261,8 +262,7 @@ To cite package `ruODK` in publications use:
 citation("ruODK")
 #> To cite ruODK in publications use (with the respective version number:
 #> 
-#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the
-#>   ODK Central API (Version X.X.X).  Zenodo.
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version X.X.X).  Zenodo.
 #>   https://doi.org/10.5281/zenodo.5559164
 #> 
 #> A BibTeX entry for LaTeX users is
