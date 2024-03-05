@@ -9,15 +9,17 @@ on:
 env:
   USE_BSPM: "true"
   _R_CHECK_FORCE_SUGGESTS_: "false"
+  _R_CHECK_CRAN_INCOMING_: "false"
 
 jobs:
   ci:
+    environment: ci
     strategy:
       matrix:
         include:
           - {os: windows-latest}
           - {os: macOS-latest}
-          - {os: ubuntu-latest} # times out on package download hitting rate limit
+          - {os: ubuntu-latest}
 
     runs-on: ${{ matrix.os }}
 
