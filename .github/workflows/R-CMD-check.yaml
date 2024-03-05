@@ -10,11 +10,12 @@ name: R-CMD-check
 
 jobs:
   R-CMD-check:
-    environment: ci
     runs-on: ubuntu-latest
+    environment: ci
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      ODKC_TEST_URL: ${{ secrets.ODKC_TEST_URL }}
     steps:
       - uses: actions/checkout@v4
 
