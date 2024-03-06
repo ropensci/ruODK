@@ -14,16 +14,14 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](https://github.com/ropensci/ruODK/issues/)
 [![CI - GitHub
 Actions](https://github.com/ropensci/ruODK/workflows/tic/badge.svg)](https://github.com/ropensci/ruODK/actions)
-[![CI -
-Appveyor](https://ci.appveyor.com/api/projects/status/1cs19xx0t64bmd2q/branch/master?svg=true)](https://ci.appveyor.com/project/florianm/ruodk/branch/main)
-[![Test
-coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://codecov.io/gh/ropensci/ruODK)
 [![CodeFactor](https://www.codefactor.io/repository/github/ropensci/ruodk/badge)](https://www.codefactor.io/repository/github/ropensci/ruodk)
 [![Hosted JupyterLab with
 ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=lab)
 [![Hosted RStudio with
 ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
 [![R-CMD-check](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/ruODK?branch=main)
 <!-- badges: end -->
 
 Especially in these trying times, it is important to ask “r u ODK?”.
@@ -262,7 +260,8 @@ To cite package `ruODK` in publications use:
 citation("ruODK")
 #> To cite ruODK in publications use (with the respective version number:
 #> 
-#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version X.X.X).  Zenodo.
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the
+#>   ODK Central API (Version X.X.X).  Zenodo.
 #>   https://doi.org/10.5281/zenodo.5559164
 #> 
 #> A BibTeX entry for LaTeX users is
