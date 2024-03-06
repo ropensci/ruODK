@@ -624,7 +624,7 @@ get_default_odkc_version <- function() {
 #' Show whether a given semver is greater than a baseline version.
 #'
 #' @param sv The semver to compare as character
-#'    ("2023.5.1", 1.5.0", "1.5"), or numeric (1.5).
+#'    ("2023.5.1", "1.5.0", "1.5"), or numeric (1.5).
 #'    The value is always parsed with `semver::parse_semver()`.
 #'    Default: get_default_odkc_version().
 #' @param to The semver to compare to as string. Although semver can parse
@@ -655,7 +655,7 @@ semver_gt <- function(sv = get_default_odkc_version(), to = "1.5.0") {
 #' Show whether a given semver is lesser than a baseline version.
 #'
 #' @param sv The semver to compare as character
-#'    ("2023.5.1", 1.5.0", "1.5"), or numeric (1.5).
+#'    ("2023.5.1", "1.5.0", "1.5"), or numeric (1.5).
 #'    The value is always parsed with `semver::parse_semver()`.
 #'    Default: get_default_odkc_version().
 #' @param to The semver to compare to as string. Although semver can parse

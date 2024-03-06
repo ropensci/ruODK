@@ -8,7 +8,7 @@ semver_lt(sv = get_default_odkc_version(), to = "1.5.0")
 }
 \arguments{
 \item{sv}{The semver to compare as character
-("2023.5.1", 1.5.0", "1.5"), or numeric (1.5).
+("2023.5.1", "1.5.0", "1.5"), or numeric (1.5).
 The value is always parsed with \code{semver::parse_semver()}.
 Default: get_default_odkc_version().}
 

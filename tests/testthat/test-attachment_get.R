@@ -113,8 +113,11 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   fs::dir_ls(t) %>% fs::file_delete()
 
   url <- get_test_url()
+  un <- get_test_un()
+  pw <- get_test_pw()
   pid <- get_test_pid()
   fid <- get_test_fid()
+  ruODK::ru_setup(url=url, un=un, pw=pw)
   iid <- ruODK::submission_list(pid = pid, fid = fid)$instance_id
   att_list <- ruODK::attachment_list(pid = pid, fid = fid, iid = iid)
   fn <- att_list$name[1]
