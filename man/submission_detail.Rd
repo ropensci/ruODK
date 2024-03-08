@@ -84,7 +84,7 @@ names(sub)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/getting-submission-details}
+\url{https://docs.getodk.org/central-api-submission-management/#getting-submission-metadata}
 
 Other submission-management: 
 \code{\link{attachment_list}()},

@@ -80,7 +80,7 @@ names(pl)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/listing-projects}
+\url{https://docs.getodk.org/central-api-project-management/#listing-projects}
 
 Other project-management: 
 \code{\link{project_create}()},

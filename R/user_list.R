@@ -39,7 +39,7 @@
 #' @template param-verbose
 #' @return A tibble with user details as per the ODK Central API docs.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/accounts-and-users/users/listing-all-users}
+#' @seealso \url{https://docs.getodk.org/central-api-accounts-and-users/#listing-all-users}
 # nolint end
 #' @seealso \url{https://www.postgresql.org/docs/9.6/pgtrgm.html}
 #' @family user-management

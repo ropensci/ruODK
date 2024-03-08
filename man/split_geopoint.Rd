@@ -39,7 +39,7 @@ df_wkt <- tibble::tibble(
     "POINT (114.01 -31.56 23.56)"
   )
 )
-df_wkt_split <- df \%>\% split_geopoint("loc", wkt = TRUE)
+df_wkt_split <- df |> split_geopoint("loc", wkt = TRUE)
 testthat::expect_equal(
   names(df_wkt_split),
   c("stuff", "loc", "loc_longitude", "loc_latitude", "loc_altitude")
@@ -51,15 +51,15 @@ data("geo_wkt_raw")
 data("geo_gj_raw")
 
 # Find variable names of geopoints
-geo_fields <- geo_fs \%>\%
-  dplyr::filter(type == "geopoint") \%>\%
+geo_fields <- geo_fs |>
+  dplyr::filter(type == "geopoint") |>
   magrittr::extract2("ruodk_name")
 geo_fields[1] # First geotrace in data: point_location_point_gps
 
 # Rectangle but don't parse submission data (GeoJSON and WKT)
-geo_gj_rt <- geo_gj_raw \%>\%
+geo_gj_rt <- geo_gj_raw |>
   odata_submission_rectangle(form_schema = geo_fs)
-geo_wkt_rt <- geo_wkt_raw \%>\%
+geo_wkt_rt <- geo_wkt_raw |>
   odata_submission_rectangle(form_schema = geo_fs)
 
 # Data with first geopoint split

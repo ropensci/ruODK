@@ -77,9 +77,8 @@
 #'
 #'   }
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/getting-form-schema-fields}
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json}
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#retrieving-form-xml}
 # nolint end
 #' @family form-management
 #' @export

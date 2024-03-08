@@ -71,7 +71,7 @@ svc
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/service-document}
+\url{https://docs.getodk.org/central-api-odata-endpoints/#service-document}
 
 Other odata-api: 
 \code{\link{odata_metadata_get}()},

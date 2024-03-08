@@ -96,7 +96,7 @@ print.ru_settings <- function(x, ...) {
 #' @param svc (character) The OData service URL of a form as provided by the
 #'   ODK Central form submissions tab.
 # nolint start
-#'   Example: "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-2_1558575936.svc"
+#'   Example: "https://URL/v1/projects/PID/forms/FID.svc"
 # nolint end
 #' @export
 #' @family ru_settings
@@ -189,7 +189,8 @@ odata_svc_parse <- function(svc) {
 #' @param test_pw (optional, character) The valid ODK Central password for
 #'   \code{test_un}.
 #' @param test_pp (optional, character) The valid passphrase to decrypt the
-#'   data of encrypted project \code{test_pid} for download. Only used for tests.
+#'   data of encrypted project \code{test_pid} for download,
+#'   only used for tests.
 #' @param test_odkc_version The ODK Central test server's version as major/minor
 #'   version, e.g. 1.1.
 #' @template param-retries

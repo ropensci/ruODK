@@ -7,7 +7,7 @@
 #'
 #' @param action string. The action to filter the logs, e.g. "user.create".
 # nolint start
-#'   See \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/}
+#'   See \url{https://docs.getodk.org/central-api-system-endpoints/#getting-audit-log-entries}
 # nolint end
 #'   for the full list of available actions.
 #' @param start string. The ISO8601 timestamp of the earliest log entry to
@@ -32,7 +32,7 @@
 #'    according to the type of action.
 #'  * logged_at: dttm. Time of action on server.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries}
+#' @seealso \url{https://docs.getodk.org/central-api-system-endpoints/#getting-audit-log-entries}
 # nolint end
 #' @family server-management
 #' @export

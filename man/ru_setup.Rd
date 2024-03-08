@@ -128,7 +128,8 @@ privileged to view the test project(s) at \code{test_url}.}
 \code{test_un}.}
 
 \item{test_pp}{(optional, character) The valid passphrase to decrypt the
-data of encrypted project \code{test_pid} for download. Only used for tests.}
+data of encrypted project \code{test_pid} for download,
+only used for tests.}
 
 \item{test_odkc_version}{The ODK Central test server's version as major/minor
 version, e.g. 1.1.}

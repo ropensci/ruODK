@@ -2,8 +2,8 @@
 # Hex sticker
 #
 # remotes::install_github("GuangchuangYu/hexSticker")
-# library(hexSticker)
-# library(showtext)
+library(hexSticker)
+library(showtext)
 sysfonts::font_add_google("Knewave", "knewave")
 # sysfonts::font_add_google("Prosto One", "prosto")
 # sysfonts::font_add_google("Concert One", "concert")

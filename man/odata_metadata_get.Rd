@@ -71,7 +71,7 @@ listviewer::jsonedit(meta)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/metadata-document}
+\url{https://docs.getodk.org/central-api-odata-endpoints/#metadata-document}
 
 Other odata-api: 
 \code{\link{odata_service_get}()},

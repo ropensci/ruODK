@@ -9,7 +9,7 @@
 #' @template param-retries
 #' @return A tibble with one row and all form metadata as columns.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#getting-form-details}
 # nolint end
 #' @family form-management
 #' @export

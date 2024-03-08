@@ -224,9 +224,7 @@ fs \%>\% dplyr::filter(type == "geopoint")
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/getting-form-schema-fields}
-
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-schema-json}
+\url{https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields}
 
 Other form-management: 
 \code{\link{form_detail}()},

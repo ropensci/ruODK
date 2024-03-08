@@ -81,7 +81,7 @@ class(fxml)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
+\url{https://docs.getodk.org/central-api-form-management/#retrieving-form-xml}
 
 Other form-management: 
 \code{\link{form_detail}()},

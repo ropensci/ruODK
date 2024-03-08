@@ -4,7 +4,7 @@ This release migrates the `ruODK` test suite to a new test server
 
 This release makes `ruODK` aware of the new ODK Central semantic version format:
 Update your ODK Central version in `.Renviron` or in the credential
-helper of your choice to the new format `ODKC_VERSION=2023.5.1` (with your 
+helper of your choice to the new format `ODKC_VERSION="2023.5.1"` (with your 
 current version). See the updated vignette "setup".
 
 ## Major changes

@@ -75,7 +75,8 @@ To get the combined submission audit logs as one single, concatenated
 \code{audit.csv} file, use \code{submission_export}.
 Note that the submission audit is different from the server audit.
 The submission audit logs the actions of the enumerator in ODK Collect,
-whereas the form audit logs the actions of the project manager in ODK Central.
+whereas the form audit logs the actions of the project manager in
+ODK Central.
 }
 \examples{
 \dontrun{
@@ -90,7 +91,7 @@ subs <- submission_get(sl$instance_id)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
+\url{https://docs.getodk.org/central-api-submission-management/#retrieving-submission-xml}
 
 Other submission-management: 
 \code{\link{attachment_list}()},

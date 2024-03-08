@@ -81,7 +81,10 @@
 #'   `ruODK` does not validate the query string given to `filter`.
 #'   It is highly recommended to refer to the ODK Central API documentation
 #'   as well as the
-#'   [OData spec on filters](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948).
+# nolint start
+#'   [OData spec on filters](
+#'   https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948).
+# nolint end
 #'   for filter options and capabilities.
 #' @param parse Whether to parse submission data based on form schema.
 #'   Dates and datetimes will be parsed into local time.
@@ -120,8 +123,8 @@
 #'  \item \code{@odata.count} is the total number of rows in the table.
 #' }
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service}
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}
+#' @seealso \url{https://docs.getodk.org/central-api-odata-endpoints/#odata-form-service}
+#' @seealso \url{https://docs.getodk.org/central-api-odata-endpoints/#data-document}
 # nolint end
 #' @family odata-api
 #' @importFrom rlang %||%

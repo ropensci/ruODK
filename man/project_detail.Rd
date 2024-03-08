@@ -76,7 +76,7 @@ pd \%>\%
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/getting-project-details}
+\url{https://docs.getodk.org/central-api-project-management/#getting-project-details}
 
 Other project-management: 
 \code{\link{project_create}()},

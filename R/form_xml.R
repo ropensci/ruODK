@@ -10,7 +10,7 @@
 #' @template param-retries
 #' @return The form XML as a nested list.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/retrieving-form-xml}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#retrieving-form-xml}
 # nolint end
 #' @family form-management
 #' @export

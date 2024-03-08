@@ -114,7 +114,7 @@ user_list() # If this is empty, you might not have permissions to list users
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/accounts-and-users/users/listing-all-users}
+\url{https://docs.getodk.org/central-api-accounts-and-users/#listing-all-users}
 
 \url{https://www.postgresql.org/docs/9.6/pgtrgm.html}
 }

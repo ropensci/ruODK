@@ -101,7 +101,7 @@ names(sub)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
+\url{https://docs.getodk.org/central-api-submission-management/#retrieving-audit-logs}
 
 Other utilities: 
 \code{\link{attachment_get}()},

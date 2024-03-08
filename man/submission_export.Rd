@@ -144,7 +144,7 @@ path to the actual attachment file (as extracted from the zip file).
 \subsection{Encryption}{
 
 ODK Central supports two modes of encryption - learn about them
-\href{https://odkcentral.docs.apiary.io/#reference/encryption}{here}.
+\href{https://docs.getodk.org/central-api-encryption/}{here}.
 \code{ruODK} supports project managed encryption, however the support is limited
 to exactly one encryption key. The supplied passphrase will be used against
 the first returned encryption key. Remaining encryption keys are ignored by
@@ -172,7 +172,7 @@ sub \%>\% knitr::kable(.)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv}
+\url{https://docs.getodk.org/central-api-submission-management/#exporting-form-submissions-to-csv}
 
 Other submission-management: 
 \code{\link{attachment_list}()},

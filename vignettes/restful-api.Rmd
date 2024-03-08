@@ -126,7 +126,7 @@ Nothing apart from the verbs is new compared to the data returned by
 `ruODK::project_list`.
 
 To learn more about the functionality behind the verbs, refer to the interactive 
-[ODK Central API documentation](https://odkcentral.docs.apiary.io/#reference/project-management).
+[ODK Central API documentation](https://docs.getodk.org/central-api/).
 
 To retrieve data from ODK Central, the functions shown below will suffice.
 
@@ -173,7 +173,7 @@ if (require(listviewer)) {
 The `form_schema` represents all form fields of the XForms definition.
 
 See the 
-[ODK Central API docs](https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form/getting-form-schema-fields) 
+[ODK Central API docs](https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields) 
 and the examples of `??ruODK::form_schema()` for more detail.
 
 

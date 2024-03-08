@@ -99,12 +99,14 @@ fq_form_schema <- ruODK::form_schema(odkc_version = get_test_odkc_version())
 fq_form_detail <- ruODK::form_detail()
 
 
+# nolint start
 # V7 form schema
 # This requires access to an ODK Central v7 server
 # fs_v7_raw <- ruODK::form_schema(odkc_version = 0.7, parse = FALSE)
 # fs_v7 <- ruODK::form_schema_parse(fs_v7_raw)
 # usethis::use_data(fs_v7_raw, overwrite = T)
 # usethis::use_data(fs_v7, overwrite = T)
+# nolint end
 
 fid <- ruODK::get_test_fid()
 fid_csv <- fs::path(t, glue::glue("{fid}.csv"))

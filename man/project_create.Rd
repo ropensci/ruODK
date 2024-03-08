@@ -57,7 +57,7 @@ names(p)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/project-management/projects/creating-a-project}
+\url{https://docs.getodk.org/central-api-project-management/#creating-a-project}
 
 Other project-management: 
 \code{\link{project_detail}()},

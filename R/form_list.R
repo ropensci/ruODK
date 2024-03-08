@@ -14,7 +14,7 @@
 #'   The column `xml_form_id` is replicated as `fid` according to `ruODK` naming
 #'   standards.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms/forms/list-all-forms}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#list-all-forms}
 # nolint end
 #' @family form-management
 #' @importFrom httr add_headers authenticate content GET

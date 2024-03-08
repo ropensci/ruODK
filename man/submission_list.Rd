@@ -112,7 +112,7 @@ nrow(sl) == form_list_nsub
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form}
+\url{https://docs.getodk.org/central-api-submission-management/#listing-all-submissions-on-a-form}
 
 Other submission-management: 
 \code{\link{attachment_list}()},

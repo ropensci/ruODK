@@ -30,7 +30,7 @@
     "type": "Organization",
     "name": "DBCA"
   },
-  "description": "Access and tidy up data from the 'ODK Central' API. 'ODK Central' is a clearinghouse for digitally captured data <https://docs.getodk.org/central-intro/>. The 'ODK Central' API is documented at <https://odkcentral.docs.apiary.io/>.",
+  "description": "Access and tidy up data from the 'ODK Central' API. 'ODK Central' is a clearinghouse for digitally captured data <https://docs.getodk.org/central-intro/>. The 'ODK Central' API is documented at <https://docs.getodk.org/central-api/>.",
   "funder": [
     {
       "type": "Organization",

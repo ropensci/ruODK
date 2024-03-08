@@ -18,7 +18,7 @@ audit_get(
 }
 \arguments{
 \item{action}{string. The action to filter the logs, e.g. "user.create".
-See \url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/}
+See \url{https://docs.getodk.org/central-api-system-endpoints/#getting-audit-log-entries}
 for the full list of available actions.}
 
 \item{start}{string. The ISO8601 timestamp of the earliest log entry to
@@ -111,6 +111,6 @@ names(logs)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/system-endpoints/server-audit-logs/getting-audit-log-entries}
+\url{https://docs.getodk.org/central-api-system-endpoints/#getting-audit-log-entries}
 }
 \concept{server-management}

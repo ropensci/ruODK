@@ -2,19 +2,19 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
-  "description": "Access and tidy up data from the 'ODK Central' API. 'ODK Central' is a clearinghouse for digitally captured data <https://docs.getodk.org/central-intro/>. The 'ODK Central' API is documented at <https://odkcentral.docs.apiary.io/>.",
+  "description": "Access and tidy up data from the 'ODK Central' API. 'ODK Central' is a clearinghouse for digitally captured data <https://docs.getodk.org/central-intro/>. 'ODK Central' and its API are documented at <https://docs.getodk.org/>.",
   "name": "ruODK: An R Client for the ODK Central API",
   "relatedLink": "https://docs.ropensci.org/ruODK",
   "codeRepository": "https://github.com/ropensci/ruODK",
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.3.12",
+  "version": "1.4.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "runtimePlatform": "R version 4.3.2 (2023-10-31 ucrt)",
   "author": [
     {
       "@type": "Person",
@@ -68,7 +68,7 @@
       "@type": "SoftwareApplication",
       "identifier": "covr",
       "name": "covr",
-      "version": ">= 3.5.1",
+      "version": ">= 3.6.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -81,7 +81,7 @@
       "@type": "SoftwareApplication",
       "identifier": "DT",
       "name": "DT",
-      "version": ">= 0.18",
+      "version": ">= 0.27",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -94,7 +94,7 @@
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
-      "version": ">= 3.3.5",
+      "version": ">= 3.4.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -120,7 +120,7 @@
       "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
-      "version": ">= 1.33",
+      "version": ">= 1.42",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -133,7 +133,7 @@
       "@type": "SoftwareApplication",
       "identifier": "lattice",
       "name": "lattice",
-      "version": ">= 0.20-44",
+      "version": ">= 0.20-45",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -146,7 +146,7 @@
       "@type": "SoftwareApplication",
       "identifier": "leaflet",
       "name": "leaflet",
-      "version": ">= 2.0.4.1",
+      "version": ">= 2.1.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -185,7 +185,7 @@
       "@type": "SoftwareApplication",
       "identifier": "leafem",
       "name": "leafem",
-      "version": ">= 0.1.7",
+      "version": ">= 0.2.0.9012",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -198,7 +198,7 @@
       "@type": "SoftwareApplication",
       "identifier": "mapview",
       "name": "mapview",
-      "version": ">= 2.10.1",
+      "version": ">= 2.11.0.9005",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -211,7 +211,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
-      "version": ">= 2.10",
+      "version": ">= 2.20",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -224,7 +224,7 @@
       "@type": "SoftwareApplication",
       "identifier": "roxygen2",
       "name": "roxygen2",
-      "version": ">= 7.1.1",
+      "version": ">= 7.2.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -237,7 +237,7 @@
       "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
-      "version": ">= 1.0-2",
+      "version": ">= 1.0-9",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -250,7 +250,7 @@
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
-      "version": ">= 1.5-21",
+      "version": ">= 1.7-3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -263,7 +263,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">= 3.0.4",
+      "version": ">= 3.1.6",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -276,7 +276,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tmap",
       "name": "tmap",
-      "version": ">= 3.3-2",
+      "version": ">= 3.3-3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -289,7 +289,7 @@
       "@type": "SoftwareApplication",
       "identifier": "usethis",
       "name": "usethis",
-      "version": ">= 2.0.1",
+      "version": ">= 2.1.6",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -304,7 +304,7 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 4.0"
+      "version": ">= 4.1"
     },
     "2": {
       "@type": "SoftwareApplication",
@@ -323,7 +323,7 @@
       "@type": "SoftwareApplication",
       "identifier": "crayon",
       "name": "crayon",
-      "version": ">= 1.4.1",
+      "version": ">= 1.5.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -336,7 +336,7 @@
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
-      "version": ">= 1.0.7",
+      "version": ">= 1.0.10",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -349,7 +349,7 @@
       "@type": "SoftwareApplication",
       "identifier": "fs",
       "name": "fs",
-      "version": ">= 1.5.0",
+      "version": ">= 1.6.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -362,7 +362,7 @@
       "@type": "SoftwareApplication",
       "identifier": "glue",
       "name": "glue",
-      "version": ">= 1.4.2",
+      "version": ">= 1.6.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -375,7 +375,7 @@
       "@type": "SoftwareApplication",
       "identifier": "httr",
       "name": "httr",
-      "version": ">= 1.4.2",
+      "version": ">= 1.4.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -401,7 +401,7 @@
       "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
-      "version": ">= 1.0.0",
+      "version": ">= 1.0.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -414,7 +414,7 @@
       "@type": "SoftwareApplication",
       "identifier": "lubridate",
       "name": "lubridate",
-      "version": ">= 1.7.10",
+      "version": ">= 1.9.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -427,7 +427,7 @@
       "@type": "SoftwareApplication",
       "identifier": "magrittr",
       "name": "magrittr",
-      "version": ">= 2.0.1",
+      "version": ">= 2.0.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -440,7 +440,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
-      "version": ">= 0.3.4",
+      "version": ">= 1.0.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -453,7 +453,7 @@
       "@type": "SoftwareApplication",
       "identifier": "readr",
       "name": "readr",
-      "version": ">= 2.0.1",
+      "version": ">= 2.1.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -466,7 +466,7 @@
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
-      "version": ">= 0.4.11",
+      "version": ">= 1.0.6",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -479,7 +479,7 @@
       "@type": "SoftwareApplication",
       "identifier": "stringr",
       "name": "stringr",
-      "version": ">= 1.4.0",
+      "version": ">= 1.5.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -490,9 +490,22 @@
     },
     "16": {
       "@type": "SoftwareApplication",
+      "identifier": "semver",
+      "name": "semver",
+      "version": ">= 0.2.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=semver"
+    },
+    "17": {
+      "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
-      "version": ">= 3.1.3",
+      "version": ">= 3.1.8",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -501,11 +514,11 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "17": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
-      "version": ">= 1.1.3",
+      "version": ">= 1.3.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -514,11 +527,11 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyr"
     },
-    "18": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "xml2",
       "name": "xml2",
-      "version": ">= 1.3.2",
+      "version": ">= 1.3.3",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -531,7 +544,7 @@
   },
   "applicationCategory": "DataAccess",
   "keywords": ["database", "open-data", "opendatakit", "odk", "api", "data", "dataset", "odata", "odata-client", "odk-central", "rstats", "r-package"],
-  "fileSize": "13351.283KB",
+  "fileSize": "16434.814KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -550,6 +563,6 @@
   ],
   "releaseNotes": "https://github.com/ropensci/ruODK/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/ruODK/blob/main/README.md",
-  "contIntegration": ["https://github.com/ropensci/ruODK/actions", "https://ci.appveyor.com/project/florianm/ruodk/branch/main", "https://codecov.io/gh/ropensci/ruODK"],
+  "contIntegration": ["https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ropensci/ruODK?branch=main"],
   "developmentStatus": "https://www.repostatus.org/#active"
 }

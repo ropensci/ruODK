@@ -18,12 +18,11 @@ knitr::opts_chunk$set(
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Last-changedate](https://img.shields.io/github/last-commit/ropensci/ruODK.svg)](https://github.com/ropensci/ruODK/commits/main)
 [![GitHub issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](https://github.com/ropensci/ruODK/issues/)
-[![CI - GitHub Actions](https://github.com/ropensci/ruODK/workflows/tic/badge.svg)](https://github.com/ropensci/ruODK/actions)
+[![Tests](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml)
+[![Test coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/ruODK?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/ropensci/ruodk/badge)](https://www.codefactor.io/repository/github/ropensci/ruodk)
 [![Hosted JupyterLab with ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=lab)
 [![Hosted RStudio with ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
-[![R-CMD-check](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/ruODK?branch=main)
 <!-- badges: end -->
 
 Especially in these trying times, it is important to ask "r u ODK?".
@@ -67,7 +66,7 @@ generate insight from it.
 While data can be retrieved in bulk through the GUI, ODK Central's API provides 
 access to its data and functionality through both an OData and a RESTful API 
 with a comprehensive and interactive 
-[documentation](https://odkcentral.docs.apiary.io/#reference/odata-endpoints).
+[documentation](https://docs.getodk.org/central-api-odata-endpoints/).
 
 `ruODK` is aimed at the technically minded researcher who wishes to access and
 process data from ODK Central using the programming language R.

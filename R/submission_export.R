@@ -24,7 +24,7 @@
 #'
 #' ### Encryption
 #' ODK Central supports two modes of encryption - learn about them
-#' [here](https://odkcentral.docs.apiary.io/#reference/encryption).
+#' [here](https://docs.getodk.org/central-api-encryption/).
 #' `ruODK` supports project managed encryption, however the support is limited
 #' to exactly one encryption key. The supplied passphrase will be used against
 #' the first returned encryption key. Remaining encryption keys are ignored by
@@ -65,7 +65,7 @@
 #'         the form to avoid accidentally overwriting the ZIP export from
 #'         another form.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/exporting-form-submissions-to-csv}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#exporting-form-submissions-to-csv}
 # nolint end
 #' @family submission-management
 #' @export

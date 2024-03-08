@@ -22,7 +22,7 @@
 #' @template param-retries
 #' @return A nested list of submission data.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#retrieving-audit-logs}
 # nolint end
 #' @family utilities
 #' @export
@@ -95,7 +95,7 @@ get_one_submission_audit <- function(iid,
 #' @template param-retries
 #' @return A nested list of submission audit logs.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#retrieving-submission-xml}
 # nolint end
 #' @family submission-management
 #' @export

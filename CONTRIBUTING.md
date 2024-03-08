@@ -98,7 +98,7 @@ Before changing anything, make sure the package still passes the below listed
 flavours of `R CMD check` locally for you. 
 
 ```r
-goodpractice::goodpractice(quiet = FALSE, )
+goodpractice::goodpractice(quiet = FALSE)
 devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
 chk <- rcmdcheck::rcmdcheck(args = c("--as-cran"))
 ```

@@ -253,9 +253,9 @@ data <- odata_submission_get(
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service}
+\url{https://docs.getodk.org/central-api-odata-endpoints/#odata-form-service}
 
-\url{https://odkcentral.docs.apiary.io/#reference/odata-endpoints/odata-form-service/data-document}
+\url{https://docs.getodk.org/central-api-odata-endpoints/#data-document}
 
 Other odata-api: 
 \code{\link{odata_metadata_get}()},

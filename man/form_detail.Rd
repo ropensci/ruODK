@@ -84,7 +84,7 @@ names(f)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-individual-form}
+\url{https://docs.getodk.org/central-api-form-management/#getting-form-details}
 
 Other form-management: 
 \code{\link{form_list}()},

@@ -106,9 +106,9 @@ names(al)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
+\url{https://docs.getodk.org/central-api-submission-management/#listing-expected-submission-attachments}
 
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
+\url{https://docs.getodk.org/central-api-form-management/#listing-form-attachments}
 
 Other utilities: 
 \code{\link{attachment_get}()},

@@ -127,9 +127,9 @@ fresh_parsed <- fresh_raw \%>\%
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}
+\url{https://docs.getodk.org/central-api-form-management/#downloading-a-form-attachment}
 
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
+\url{https://docs.getodk.org/central-api-submission-management/#downloading-an-attachment}
 
 Other utilities: 
 \code{\link{attachment_link}()},

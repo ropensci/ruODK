@@ -88,7 +88,7 @@ sa <- submission_audit_get(sl$instance_id)
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
+\url{https://docs.getodk.org/central-api-submission-management/#retrieving-submission-xml}
 
 Other submission-management: 
 \code{\link{attachment_list}()},

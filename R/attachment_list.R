@@ -29,8 +29,8 @@
 #'         * exists: Whether the attachment for that submission exists on the
 #'           server.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#listing-expected-submission-attachments}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#listing-form-attachments}
 # nolint end
 #' @family utilities
 #' @export
@@ -100,8 +100,8 @@ get_one_submission_attachment_list <- function(iid,
 #'         * exists: Whether the attachment for that submission exists on the
 #'           server.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/listing-expected-submission-attachments}
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/listing-expected-form-attachments}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#listing-expected-submission-attachments}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#listing-form-attachments}
 # nolint end
 #' @family submission-management
 #' @export

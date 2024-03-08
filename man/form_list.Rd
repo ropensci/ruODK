@@ -91,7 +91,7 @@ only_published_forms <- fl \%>\% dplyr::filter(is.na(version) & is.na(hash))
 }
 }
 \seealso{
-\url{https://odkcentral.docs.apiary.io/#reference/forms/forms/list-all-forms}
+\url{https://docs.getodk.org/central-api-form-management/#list-all-forms}
 
 Other form-management: 
 \code{\link{form_detail}()},

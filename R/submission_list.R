@@ -17,7 +17,7 @@
 #'         * created_at: time of submission upload, dttm
 #'         * updated_at: time of submission update on server, dttm or NA
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-all-submissions-on-a-form}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#listing-all-submissions-on-a-form}
 # nolint end
 #' @family submission-management
 #' @export

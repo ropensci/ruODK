@@ -163,7 +163,7 @@ get_one_attachment <- function(pth,
     httr::warn_for_status(
       # If the download fails, inspect src and try to curl the plain API call.
       # nolint start
-      # https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-attachments/downloading-an-attachment
+      # https://docs.getodk.org/central-api-submission-management/#downloading-an-attachment
       # nolint end
       task = glue::glue(
         "download media attachment {fn}.\n",
@@ -235,8 +235,8 @@ get_one_attachment <- function(pth,
 #' @return The relative file path for the downloaded attachment(s)
 #' @family utilities
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/'-form-attachments/downloading-a-form-attachment}
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/attachments/downloading-an-attachment}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#downloading-a-form-attachment}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#downloading-an-attachment}
 # nolint end
 #' @export
 #' @examples

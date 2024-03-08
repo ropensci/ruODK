@@ -18,7 +18,8 @@
 #' @template param-tz
 #' @return A tibble of encryption keys.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/listing-encryption-keys}
+#' @seealso \url{https://docs.getodk.org/central-api-encryption/}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#listing-encryption-keys}
 # nolint end
 #' @family submission-management
 #' @export

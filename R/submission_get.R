@@ -19,7 +19,7 @@
 #' @template param-retries
 #' @return A nested list of submission data.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#retrieving-submission-xml}
 # nolint end
 #' @family utilities
 #' @export
@@ -82,7 +82,8 @@ get_one_submission <- function(iid,
 #' `audit.csv` file, use `submission_export`.
 #' Note that the submission audit is different from the server audit.
 #' The submission audit logs the actions of the enumerator in ODK Collect,
-#' whereas the form audit logs the actions of the project manager in ODK Central.
+#' whereas the form audit logs the actions of the project manager in
+#' ODK Central.
 #'
 #' @param iid A list of submission instance IDs, e.g. from
 #'   \code{\link{submission_list}$instance_id}.
@@ -93,7 +94,7 @@ get_one_submission <- function(iid,
 #' @template param-retries
 #' @return A nested list of submission data.
 # nolint start
-#' @seealso \url{https://odkcentral.docs.apiary.io/#reference/forms-and-submissions/submissions/retrieving-submission-xml}
+#' @seealso \url{https://docs.getodk.org/central-api-submission-management/#retrieving-submission-xml}
 # nolint end
 #' @family submission-management
 #' @export
