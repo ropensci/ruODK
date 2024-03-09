@@ -23,6 +23,14 @@ reference:
   desc: "Functions to manage projects."
   contents:
   - has_concept("project-management")
+- title: Datasets
+  desc: "Functions to manage datasets of entities."
+  contents:
+  - has_concept("dataset-management")
+- title: Entities
+  desc: "Functions to manage entities."
+  contents:
+  - has_concept("entity-management")
 - title: Forms
   desc: >
     Functions to manage forms.
