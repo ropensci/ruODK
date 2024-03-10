@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset_detail.R
 \name{dataset_detail}
 \alias{dataset_detail}
-\title{List all datasets of one project.}
+\title{Show dataset details.}
 \usage{
 dataset_detail(
   pid = get_default_pid(),
@@ -80,15 +80,11 @@ response. Since this nested list is so deeply nested and irregularly shaped
 it is not trivial to rectangle the result into a tibble.
 }
 \description{
-While the API endpoint will return all datasets for one project,
-\code{\link{dataset_list}} will fail with incorrect or missing
-authentication.
-}
-\details{
 A Dataset is a named collection of Entities that have the same properties.
 A Dataset can be linked to Forms as Attachments. This will make it available
 to clients as an automatically-updating CSV.
-
+}
+\details{
 This function is supported from ODK Central v2022.3 and will warn if the
 given odkc_version is lower.
 
@@ -112,6 +108,7 @@ ds1$properties |> purrr::list_transpose() |> tibble::as_tibble()
 \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 
 Other dataset-management: 
-\code{\link{dataset_list}()}
+\code{\link{dataset_list}()},
+\code{\link{dataset_update}()}
 }
 \concept{dataset-management}

@@ -1,8 +1,4 @@
-#' List all datasets of one project.
-#'
-#' While the API endpoint will return all datasets for one project,
-#' \code{\link{dataset_list}} will fail with incorrect or missing
-#' authentication.
+#' Show dataset details.
 #'
 #' A Dataset is a named collection of Entities that have the same properties.
 #' A Dataset can be linked to Forms as Attachments. This will make it available
