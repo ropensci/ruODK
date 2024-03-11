@@ -4,7 +4,7 @@ test_that("dataset_list works", {
   )
 
   ru_setup(
-    pid = get_default_pid(),
+    pid = get_test_pid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
@@ -38,7 +38,7 @@ test_that("dataset_list warns if odkc_version too low", {
   )
 
   ru_setup(
-    pid = get_default_pid(),
+    pid = get_test_pid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),

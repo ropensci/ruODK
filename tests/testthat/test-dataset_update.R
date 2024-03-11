@@ -1,7 +1,7 @@
 test_that("dataset_update works", {
 
   ru_setup(
-    pid = get_default_pid(),
+    pid = get_test_pid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
@@ -30,7 +30,7 @@ test_that("dataset_update warns if odkc_version too low", {
           message = "Test server not configured"
   )
   ru_setup(
-    pid = get_default_pid(),
+    pid = get_test_pid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
