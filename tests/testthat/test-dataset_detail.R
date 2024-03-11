@@ -1,17 +1,17 @@
 test_that("dataset_detail works", {
 
-  ds <- dataset_list(pid = get_default_pid(),
-                     url = get_test_url(),
-                     un = get_test_un(),
-                     pw = get_test_pw(),
-                     odkc_version = get_test_odkc_version())
+  ru_setup(
+    pid = get_default_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
 
-  ds1 <- dataset_detail(pid = get_default_pid(),
-                        did = ds$name[1],
-                        url = get_test_url(),
-                        un = get_test_un(),
-                        pw = get_test_pw(),
-                        odkc_version = get_test_odkc_version())
+  ds <- dataset_list()
+  did <- ds$name[1]
+
+  ds1 <- dataset_detail(did = did)
 
   # dataset_detail returns a list
   testthat::expect_is(ds1, "list")
@@ -35,30 +35,21 @@ test_that("dataset_detail warns if odkc_version too low", {
           message = "Test server not configured"
   )
 
-  ds <- dataset_list(pid = get_default_pid(),
-                     url = get_test_url(),
-                     un = get_test_un(),
-                     pw = get_test_pw(),
-                     odkc_version = "2022.3")
-
-  ds1 <- dataset_detail(
-    pid = get_test_pid(),
-    did = ds$name[1],
+  ru_setup(
+    pid = get_default_pid(),
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
-    odkc_version = "2022.3"
+    odkc_version = get_test_odkc_version()
   )
 
+  ds <- dataset_list()
+  did <- ds$name[1]
+
+  ds1 <- dataset_detail(did = did)
+
   testthat::expect_warning(
-    ds1 <- dataset_detail(
-      pid = get_test_pid(),
-      did = ds$name[1],
-      url = get_test_url(),
-      un = get_test_un(),
-      pw = get_test_pw(),
-      odkc_version = "1.5.3"
-    )
+    ds1 <- dataset_detail(did = did, odkc_version = "1.5.3")
   )
 
 })
