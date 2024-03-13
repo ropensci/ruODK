@@ -23,8 +23,17 @@ reference:
   desc: "Functions to manage projects."
   contents:
   - has_concept("project-management")
-- title: Datasets
-  desc: "Functions to manage datasets of entities."
+- title: Entity Lists
+  desc: >
+    An Entity List is a named collection of Entities that have the  same
+    properties.
+    In the ODK Central API and in the related ODK XForms specification,
+    collections of Entities are referred to as Datasets.
+    The term "Entity List" is used for this concept in the Central frontend UI,
+    user documentation, and all other text intended for end users who are not
+    developers.
+    ruODK uses the term "dataset_" in functions relating to Entity Lists or
+    Datasets.
   contents:
   - has_concept("dataset-management")
 - title: Entities
