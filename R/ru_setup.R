@@ -637,15 +637,9 @@ get_default_odkc_version <- function() {
 #' @export
 #' @examples
 #' get_default_odkc_version() |> semver_gt("0.8.0")
-#' "2024.1.1" |>
-#'   parse_odkc_version() |>
-#'   semver_gt("2024.1.0")
-#' "2024.1.1" |>
-#'   parse_odkc_version() |>
-#'   semver_gt("2024.1.1")
-#' "2024.1.1" |>
-#'   parse_odkc_version() |>
-#'   semver_gt("2024.1.2")
+#' "2024.1.1" |> semver_gt("2024.1.0")
+#' "2024.1.1" |> semver_gt("2024.1.1")
+#' "2024.1.1" |> semver_gt("2024.1.2")
 semver_gt <- function(sv = get_default_odkc_version(), to = "1.5.0") {
   base_version <- parse_odkc_version(sv, env_var = "")
   to_version <- parse_odkc_version(to, env_var = "")
@@ -668,15 +662,9 @@ semver_gt <- function(sv = get_default_odkc_version(), to = "1.5.0") {
 #' @export
 #' @examples
 #' get_default_odkc_version() |> semver_lt("0.8.0")
-#' "2024.1.1" |>
-#'   parse_odkc_version() |>
-#'   semver_lt("2024.1.0")
-#' "2024.1.1" |>
-#'   parse_odkc_version() |>
-#'   semver_lt("2024.1.1")
-#' "2024.1.1" |>
-#'   parse_odkc_version() |>
-#'   semver_lt("2024.1.2")
+#' "2024.1.1" |> semver_lt("2024.1.0")
+#' "2024.1.1" |> semver_lt("2024.1.1")
+#' "2024.1.1" |> semver_lt("2024.1.2")
 semver_lt <- function(sv = get_default_odkc_version(), to = "1.5.0") {
   base_version <- parse_odkc_version(sv, env_var = "")
   to_version <- parse_odkc_version(to, env_var = "")
