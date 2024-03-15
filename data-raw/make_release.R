@@ -48,7 +48,7 @@ spelling::spell_check_files("README.Rmd", lang = "en-AU")
 spelling::update_wordlist()
 codemetar::write_codemeta("../ruODK", write_minimeta = TRUE)
 if (fs::file_info("README.md")$modification_time <
-      fs::file_info("README.Rmd")$modification_time) {
+  fs::file_info("README.Rmd")$modification_time) {
   rmarkdown::render("README.Rmd", encoding = "UTF-8", clean = TRUE)
   if (fs::file_exists("README.html")) fs::file_delete("README.html")
 }

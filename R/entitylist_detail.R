@@ -10,8 +10,6 @@
 #' This function is supported from ODK Central v2022.3 and will warn if the
 #' given odkc_version is lower.
 #'
-#' `r lifecycle::badge("maturing")`
-#'
 #' @template param-pid
 #' @template param-did
 #' @template param-url

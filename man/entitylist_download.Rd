@@ -11,6 +11,8 @@ entitylist_download(
   un = get_default_un(),
   pw = get_default_pw(),
   local_dir = here::here(),
+  filter = NULL,
+  etag = NULL,
   overwrite = TRUE,
   retries = get_retries(),
   odkc_version = get_default_odkc_version(),
@@ -49,9 +51,22 @@ Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{local_dir}{The local folder to save the downloaded files to,
-default: \code{here::here}.}
+default: \code{here::here}.
+If the folder does not exist it will be created.}
 
-\item{overwrite}{Whether to overwrite previously downloaded zip files,
+\item{filter}{(str) A valid filter string.
+Default: NULL (no filtering, all entities returned).}
+
+\item{etag}{(str) The etag value from a previous call to
+\code{entitylist_download()}. The value must be stripped of the \verb{W/\\"} and \verb{\\"},
+which is the format of the etag returned by \code{entitylist_download()}.
+If provided, only new entities will be returned.
+If the same \code{local_dir} is chosen and \code{overwrite} is set to \code{TRUE},
+the downloaded CSV will also be overwritte, losing the Entities downloaded
+earlier.
+Default: NULL (no filtering, all entities returned).}
+
+\item{overwrite}{Whether to overwrite previously downloaded file,
 default: FALSE}
 
 \item{retries}{The number of attempts to retrieve a web resource.
@@ -89,14 +104,23 @@ Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
 verbosity can be set globally or per function.}
 }
 \value{
-The path to the downloaded CSV.
+A list of four items:
+\itemize{
+\item entities (tbl_df) The Entity List as tibble
+\item http_status (int) The HTTP status code of the response.
+200 if OK, 304 if a given etag finds no new entities created.
+\item etag (str) The ETag to use in subsequent calls to \code{entitylist_download()}
+\item downloaded_to (fs_path) The path to the downloaded CSV file
+\item downloaded_on (POSIXct) The time of download in the local timezome
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 }
 \details{
-The downloaded file is named "entities.csv". The download location defaults
-to the current workdir, but can be modified to a folder name.
+The downloaded CSV file is named after the entity list name.
+The download location defaults to the current workdir, but can be modified
+to a different folder path which will be created if it doesn't exist.
 
 An Entity List is a named collection of Entities that have the same
 properties.
@@ -112,19 +136,26 @@ Dataset (Entity List )/Entity Properties themselves.
 If any Property for an given Entity is blank (e.g. it was not captured by
 that Form or was left blank), that field of the CSV is blank.
 
-The \verb{$filter} querystring parameter can be used to filter on system-level
-properties, similar to how filtering in the OData Dataset (Entity List)
-Service works.
+The ODK Central \verb{$filter} querystring parameter can be used to filter on
+system-level properties, similar to how filtering in the OData Dataset
+(Entity List) Service works.
+Of the \href{https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948}{OData filter specs}
+ODK Central implements a \href{https://docs.getodk.org/central-api-odata-endpoints/#data-document}{growing set of features }.
+\code{ruODK} provides the parameter \code{filter} (str) which, if set, will be passed
+on to the ODK Central endpoint as is.
 
-This endpoint supports \code{ETag} header, which can be used to avoid downloading
-the same content more than once. When an API consumer calls this endpoint,
-the endpoint returns a value in the \code{ETag} header.
-If you pass that value in the \code{If-None-Match} header of a subsequent request,
+The ODK Central endpoint supports the \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag}{\code{ETag} header }, which can
+be used to avoid downloading the same content more than once.
+When an API consumer calls this endpoint, the endpoint returns a value in
+the \code{ETag} header.
+If you pass that value in the \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match}{\code{If-None-Match} header }
+of a subsequent request,
 then if the Entity List has not been changed since the previous request,
 you will receive 304 Not Modified response; otherwise you'll get the new
 data.
-
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+\code{ruODK} provides the parameter \code{etag} which can be set from the output of
+a previous call to \code{entitylist_download()}. \code{ruODK} strips the \verb{W/\\"} and
+\verb{\\"} from the returned etag and expects the stripped etag as parameter.
 }
 \examples{
 \dontrun{
@@ -133,10 +164,28 @@ data.
 
 ds <- entitylist_list(pid = get_default_pid())
 ds1 <- entitylist_download(pid = get_default_pid(), did = ds$name[1])
+# ds1$entities
+# ds1$etag
+# ds1$downloaded_to
+# ds1$downloaded_on
+
+ds2 <- entitylist_download(
+  pid = get_default_pid(),
+  did = ds$name[1],
+  etag = ds1$etag
+)
+# ds2$http_status == 304
+
+newest_entity_date <- as.Date(max(ds1$entities$`__createdAt`))
+ds3 <- entitylist_download(
+  pid = get_default_pid(),
+  did = ds$name[1],
+  filter = glue::glue("__createdAt le {newest_entity_date}")
+)
 }
 }
 \seealso{
-\url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
+\url{https://docs.getodk.org/central-api-dataset-management/#datasets}
 
 Other entity-management: 
 \code{\link{entitylist_detail}()},

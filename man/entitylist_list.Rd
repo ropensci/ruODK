@@ -94,8 +94,6 @@ its relation to Entities better than the term Dataset.
 
 This function is supported from ODK Central v2022.3 and will warn if the
 given odkc_version is lower.
-
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 }
 \examples{
 \dontrun{

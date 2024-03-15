@@ -127,6 +127,10 @@ submission_export <- function(local_dir = here::here(),
     "{URLencode(fid, reserved = TRUE)}/submissions{url_ext}"
   )
 
+  if (!fs::dir_exists(local_dir)) {
+    fs::dir_create(local_dir)
+  }
+
   pth <- fs::path(
     local_dir,
     glue::glue("{URLencode(fid, reserved = TRUE)}{file_ext}")
