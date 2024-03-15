@@ -5,8 +5,7 @@ test_that("entitylist_download works", {
 
   # skip_on_ci()
 
-  tempd <- tempdir()
-  fs::dir_ls(tempd) %>% fs::file_delete()
+  tempd <- fs::path(tempdir(), "new_dir")
 
   ru_setup(
     pid = get_test_pid(),
@@ -58,6 +57,9 @@ test_that("entitylist_download works", {
 
   # The returned file path is the same as from the first download
   testthat::expect_equal(ds1$downloaded_to, ds2$downloaded_to)
+
+  # Clean up
+  fs::dir_ls(tempd) %>% fs::file_delete()
 })
 
 
@@ -130,7 +132,7 @@ test_that("entitylist_download filter works", {
   # testthat::expect_true(nrow(ds2$entities))
 })
 
-test_that("entitylist_download warns if did is missing", {
+test_that("entitylist_download errors if did is missing", {
   testthat::expect_error(
     entitylist_download()
   )

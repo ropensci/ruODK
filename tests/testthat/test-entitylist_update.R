@@ -23,6 +23,11 @@ test_that("entitylist_update works", {
   testthat::expect_true(ds1$approvalRequired == ds3$approvalRequired)
 })
 
+test_that("entitylist_update errors if did is missing", {
+  testthat::expect_error(
+    entitylist_update()
+  )
+})
 
 test_that("entitylist_update warns if odkc_version too low", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",

@@ -37,6 +37,11 @@ test_that("entitylist_detail works", {
   )
 })
 
+test_that("entitylist_detail errors if did is missing", {
+  testthat::expect_error(
+    entitylist_detail()
+  )
+})
 
 test_that("entitylist_detail warns if odkc_version too low", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",

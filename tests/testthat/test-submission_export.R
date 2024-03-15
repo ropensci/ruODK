@@ -5,8 +5,7 @@ test_that("submission_export works", {
   )
 
   # A fresh litterbox
-  t <- tempdir()
-  fs::dir_ls(t) %>% fs::file_delete()
+  t <- fs::path(tempdir(), "new_dir")
 
   # High expectations
   pth <- fs::path(
@@ -101,6 +100,9 @@ test_that("submission_export works", {
 
   # Find the payload
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
+
+  # Clean up
+  fs::dir_ls(t) %>% fs::file_delete()
 })
 
 test_that("submission_export works with encryption", {
