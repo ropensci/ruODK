@@ -1,6 +1,6 @@
-test_that("dataset_list works", {
+test_that("entitylist_list works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+    message = "Test server not configured"
   )
 
   ru_setup(
@@ -11,7 +11,7 @@ test_that("dataset_list works", {
     odkc_version = get_test_odkc_version()
   )
 
-  ds <- dataset_list()
+  ds <- entitylist_list()
   testthat::expect_true(nrow(ds) > 0)
   testthat::expect_true("name" %in% names(ds))
 
@@ -32,9 +32,9 @@ test_that("dataset_list works", {
 })
 
 
-test_that("dataset_list warns if odkc_version too low", {
+test_that("entitylist_list warns if odkc_version too low", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+    message = "Test server not configured"
   )
 
   ru_setup(
@@ -45,13 +45,14 @@ test_that("dataset_list warns if odkc_version too low", {
     odkc_version = get_test_odkc_version()
   )
 
-  ds <- dataset_list()
+  ds <- entitylist_list()
   did <- ds$name[1]
 
-  ds1 <- dataset_list()
+  ds1 <- entitylist_list()
 
   testthat::expect_warning(
-    ds1 <- dataset_list(odkc_version = "1.5.3")
+    ds1 <- entitylist_list(odkc_version = "1.5.3")
   )
-
 })
+
+# usethis::use_r("entitylist_list") # nolint

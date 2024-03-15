@@ -36,26 +36,41 @@ Git and GitHub.
 For more general info about contributing to `ruODK`, see the 
 [Resources](#resources) at the end of this document.
 
+### Naming conventions
+ruODK names functions after ODK Central endpoints. If there are aliases, such as
+"Dataset" and "Entity List", choose the alias that is shown to Central users
+(here, choose "Entity List") over internally used terms.
+
+Function names combine the object name (`project`, `form`, `submission`, 
+`attachment`, `entitylist`, `entity`, etc.) with the action (`list`, `detail`, 
+`patch`) as snake case, e.g. `project_list()`. 
+In case of any uncertainty, discussion is welcome.
+
+In contrast, `pyODK` uses a class based approach with the pluralised object name 
+separated from the action `client.entity_lists.list()`.
+
+Documentation should capitalise ODK Central object names: Project, Form, 
+Submission, Entity.
+
 ### Prerequisites
-To test the package, you will need valid credentials for the ODK Central instance 
-used as a test server.
-Create an [account request issue](https://github.com/ropensci/ruODK/issues/new/choose).
+To test the package, you will need valid credentials for an existing ODK Central 
+instance to be used as a test server.
 
 Before you do a pull request, you should always file an issue and make sure
 the maintainers agree that it is a problem, and is happy with your basic proposal 
 for fixing it. 
 If you have found a bug, follow the issue template to create a minimal
-[reprex](https://www.tidyverse.org/help/#reprex).
+[reprex](https://www.tidyverse.org/help/#reprex) if you can do so without
+revealing sensitive information. Never include credentials in your reprex.
 
 ### Checklists
 Some changes have intricate internal and external dependencies, which are easy
 to miss and break. These checklists aim to avoid these pitfalls.
 
-Test and update reverse dependencies (wastdr, etlTurtleNesting, etc.).
-
 #### Adding a dependency
 * Update DESCRIPTION
-* Update GH Actions install workflows - do R package deps have system deps? Can GHA install them in all environments?
+* Update GH Actions install workflows - do R package deps have system deps? 
+  Can GHA install them in all environments?
 * Update Dockerfile
 * Update binder install.R
 * Update installation instructions

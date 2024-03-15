@@ -62,13 +62,13 @@ are used by `ruODK`'s other functions (unless specified otherwise).
 
 ```{r ru_setup}
 library(ruODK)
-ruODK::ru_setup(
-  svc = "https://sandbox.central.getodk.org/v1/projects/14/forms/build_Flora-Quadrat-0-4_1564384341.svc",
-  un = Sys.getenv("ODKC_TEST_UN"),
-  pw = Sys.getenv("ODKC_TEST_PW"),
-  tz = "Australia/Perth",
-  verbose = TRUE
-)
+# ruODK::ru_setup(
+#   svc = "Form OData Service URL",
+#   un = Sys.getenv("ODKC_TEST_UN"),
+#   pw = Sys.getenv("ODKC_TEST_PW"),
+#   tz = "Australia/Perth",
+#   verbose = TRUE
+# )
 t <- fs::dir_create("media")
 ```
 
@@ -311,14 +311,17 @@ In order to import each submission, we need to retrieve the data by
 
 ```{r submission_data, eval=F}
 # One submission
-fq_one_submission <- ruODK::get_one_submission(fq_submission_list$instance_id[[1]])
+fq_one_submission <- ruODK::get_one_submission(
+  fq_submission_list$instance_id[[1]]
+)
 
 # Multiple submissions
 fq_submissions <- ruODK::submission_get(fq_submission_list$instance_id)
 ```
 
 ## Parse submissions
-The data in `sub` is one row of the bulk downloaded submissions in `data_quadrat`.
+The data in `sub` is one row of the bulk downloaded submissions in 
+`data_quadrat`.
 The data in `submissions` represents all (or let's pretend, the selected) 
 submissions in `data_quadrat`.
 The field `xml` contains the actual submission data including repeating groups.
@@ -327,8 +330,8 @@ The structure is different to the output of `ruODK::odata_submission_get`,
 therefore `ruODK::odata_submission_rectangle` does not work for those, as
 here we might have repeating groups included in a submission.
 
-This structure could be used for upload into data warehouses accepting nested data
-as e.g. JSON.
+This structure could be used for upload into data warehouses accepting nested 
+data as e.g. JSON.
 
 ```{r view_submission_data, fig.width=7}
 if (requireNamespace("listviewer")) {

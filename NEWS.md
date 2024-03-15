@@ -1,3 +1,7 @@
+# ruODK 1.5.0
+## Major changes
+* Support Entities and Entity Lists (Datasets) (#152)
+
 # ruODK 1.4.2
 This release migrates the `ruODK` test suite to a new test server 
 `ruodk.getodk.cloud` which was generously sponsored by GetODK.
@@ -16,9 +20,9 @@ This release fixes a few compatibility issues and bumps dependencies to R (4.1)
 and imported/suggested packages. 
 Upgrade carefully and revert to 1.3.12 if things go awry.
 
-* Update to new tidyselect syntax: Using vectors of names to select makes 
-  tidyselect complain (WARN, soon ERROR). We wrap all programmatic selections of 
-  variable names in `dplyr::all_of()` where we expect a single variable to be 
+* Update to new `tidyselect` syntax: Using vectors of names to select makes 
+  `tidyselect` complain (WARN, soon ERROR). We wrap all programmatic selections 
+  of variable names in `dplyr::all_of()` where we expect a single variable to be 
   selected, and `dplyr::any_of()` where we select using fuzzy matching 
   (e.g. `dplyr::starts_with()`). (#146)
 * Make `ruODK::form_list()` robust against `reviewState` missing from outdated

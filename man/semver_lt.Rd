@@ -25,15 +25,9 @@ Show whether a given semver is lesser than a baseline version.
 }
 \examples{
 get_default_odkc_version() |> semver_lt("0.8.0")
-"2024.1.1" |>
-  parse_odkc_version() |>
-  semver_lt("2024.1.0")
-"2024.1.1" |>
-  parse_odkc_version() |>
-  semver_lt("2024.1.1")
-"2024.1.1" |>
-  parse_odkc_version() |>
-  semver_lt("2024.1.2")
+"2024.1.1" |> semver_lt("2024.1.0")
+"2024.1.1" |> semver_lt("2024.1.1")
+"2024.1.1" |> semver_lt("2024.1.2")
 }
 \seealso{
 Other ru_settings: 
