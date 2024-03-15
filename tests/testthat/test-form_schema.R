@@ -21,6 +21,7 @@ test_that("form_schema works with unpublished draft forms", {
     form_schema(
       pid = get_test_pid(),
       fid = "Locations_draft",
+      draft = TRUE,
       url = get_test_url(),
       un = get_test_un(),
       pw = get_test_pw(),
@@ -34,6 +35,7 @@ test_that("form_schema works with unpublished draft forms", {
     parse = FALSE,
     pid = get_test_pid(),
     fid = "Locations_draft",
+    draft = TRUE,
     url = get_test_url(),
     un = get_test_un(),
     pw = get_test_pw(),
