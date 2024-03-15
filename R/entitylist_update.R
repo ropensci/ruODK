@@ -1,5 +1,7 @@
 #' Update Entity List details.
 #'
+#' `r lifecycle::badge("maturing")`
+#'
 #' You can only update `approvalRequired` using this endpoint.
 #' The  approvalRequired flag controls the Entity creation flow;
 #' if it is true then the Submission must be approved before an Entity can be

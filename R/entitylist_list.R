@@ -1,5 +1,7 @@
 #' List all Entity Lists of one Project.
 #'
+#' `r lifecycle::badge("maturing")`
+#'
 #' While the API endpoint will return all Entity Lists for one Project,
 #' \code{\link{entitylist_list}} will fail with incorrect or missing
 #' authentication.

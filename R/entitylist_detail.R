@@ -1,5 +1,7 @@
 #' Show Entity List details.
 #'
+#' `r lifecycle::badge("maturing")`
+#'
 #' An Entity List is a named collection of Entities that have the same
 #' properties.
 #' Entity List can be linked to Forms as Attachments.

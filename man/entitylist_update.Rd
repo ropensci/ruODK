@@ -88,6 +88,9 @@ Since this nested list is so deeply nested and irregularly shaped
 it is not trivial to rectangle the result into a tibble.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+}
+\details{
 You can only update \code{approvalRequired} using this endpoint.
 The  approvalRequired flag controls the Entity creation flow;
 if it is true then the Submission must be approved before an Entity can be
@@ -96,8 +99,7 @@ Submission is received by the ODK Central.
 By default \code{approvalRequired} is false for the Entity Lists created after
 v2023.3. Entity Lists created prior to that will have approvalRequired set to
 true.
-}
-\details{
+
 An Entity List is a named collection of Entities that have the same
 properties.
 An Entity List can be linked to Forms as Attachments.
@@ -113,19 +115,19 @@ given odkc_version is lower.
 # See vignette("setup") for setup and authentication options
 # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
-pid = get_default_pid()
+pid <- get_default_pid()
 
 ds <- entitylist_list(pid = pid)
 
-did =  ds$name[1]
+did <- ds$name[1]
 
 ds1 <- entitylist_detail(pid = pid, did = did)
-ds1$approvalRequired  # FALSE
+ds1$approvalRequired # FALSE
 
-ds2 <- entitylist_update(pid = pid, did = did, approval_required=TRUE)
+ds2 <- entitylist_update(pid = pid, did = did, approval_required = TRUE)
 ds2$approvalRequired # TRUE
 
-ds3 <- entitylist_update(pid = pid, did = did, approval_required=FALSE)
+ds3 <- entitylist_update(pid = pid, did = did, approval_required = FALSE)
 ds3$approvalRequired # FALSE
 }
 }
