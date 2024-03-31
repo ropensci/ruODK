@@ -30,23 +30,10 @@
 #' After that, the conflict field will be null until a new conflicting version
 #' is received.
 #'
-#' ## Structure
-#' The response from ODK Central from this endpoint is irregular and dynamic.
-#' `ruODK` preserves the original structure as not to introduce additional
-#' complexity. If a use case exists to decompose the original structure further
-#' please create a GitHub issue.
-#'
-#' ## Names
-#' Names are cleaned at the top level only. List columns contain original
-#' `camelCase` names.
-#'
-#' ## Authentication
-#' `entity_detail()` will fail with incorrect or missing authentication.
-#'
-#' ## Compatibility
-#' This function is supported from ODK Central v2022.3 and will warn if the
-#' given `odkc_version` is lower.
-#'
+#' @template tpl-structure-nested
+#' @template tpl-names-cleaned-top-level
+#' @template tpl-auth-missing
+#' @template tpl-compat-2022-3
 #' @template param-pid
 #' @template param-did
 #' @template param-eid

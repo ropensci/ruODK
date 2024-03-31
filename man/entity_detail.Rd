@@ -115,31 +115,6 @@ If an Entity has a conflict, it can be marked as resolved.
 After that, the conflict field will be null until a new conflicting version
 is received.
 }
-
-\subsection{Structure}{
-
-The response from ODK Central from this endpoint is irregular and dynamic.
-\code{ruODK} preserves the original structure as not to introduce additional
-complexity. If a use case exists to decompose the original structure further
-please create a GitHub issue.
-}
-
-\subsection{Names}{
-
-Names are cleaned at the top level only. List columns contain original
-\code{camelCase} names.
-}
-
-\subsection{Authentication}{
-
-\code{entity_detail()} will fail with incorrect or missing authentication.
-}
-
-\subsection{Compatibility}{
-
-This function is supported from ODK Central v2022.3 and will warn if the
-given \code{odkc_version} is lower.
-}
 }
 \examples{
 \dontrun{

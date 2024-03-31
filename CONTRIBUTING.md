@@ -67,6 +67,36 @@ revealing sensitive information. Never include credentials in your reprex.
 Some changes have intricate internal and external dependencies, which are easy
 to miss and break. These checklists aim to avoid these pitfalls.
 
+#### Adding a function
+Discuss and agree on function naming with the `pyODK` developers.
+
+In the function documentation, include the following components:
+
+* Title
+* Lifecycle badge
+* Documentation from the official ODK Central API docs
+* Additional paragraphs (see e.g. `entity_detail.R`): Factor out commonly used 
+  text fragments into `man-roxygen` fragments.
+* Link the relevant ODK Central API docs and surround the link with `# nolint start / end` mufflers for linter warnings about the line length.
+* Link to the correct reference family topic. If adding a new topic, 
+  update `pkgdown.yml`.
+* List all parameters and export the function as usual.
+* Add examples showing basic usage inside a `\dontrun{}` block. Examples have
+  no access to the test server and will only work for internal helpers which
+  do not access the ODK Central API.
+  
+Inside the function:
+
+* Gatecheck for missing parameters via `yell_if_missing`.
+* Gatecheck for the minimum ODK Central version.
+* Prepare lengthy components of the `httr` call if it improves legibility.
+* Use the native R pipe where possible. `ruODK` still re-exports the magrittr pipe.
+* Parse response content as `utf-8`.
+* Clean column names with `janitor::clean_names()`.
+
+Link to tests:
+* Add a commented out `# usethis::use_test("entity_detail")  # nolint` to functions and a commented out `# usethis::use_r("entity_detail")  # nolint` to tests. This serves both to create the correct files and as a convenient shortcut between both.
+
 #### Adding a dependency
 * Update DESCRIPTION
 * Update GH Actions install workflows - do R package deps have system deps? 
