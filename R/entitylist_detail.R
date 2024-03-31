@@ -80,8 +80,7 @@ entitylist_detail <- function(pid = get_default_pid(),
       )
     ),
     httr::add_headers(
-      "Accept" = "application/json",
-      "X-Extended-Metadata" = "true"
+      "Accept" = "application/json"
     ),
     httr::authenticate(un, pw),
     times = retries

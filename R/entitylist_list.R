@@ -24,9 +24,9 @@
 #' @template param-odkcv
 #' @template param-orders
 #' @template param-tz
-#' @return A tibble with exactly one row for each dataset of the given project
-#'   as per ODK Central API docs.
-#'   Column names are renamed from ODK's `camelCase` to `snake_case`.
+#' @return A tibble with exactly one row for each Entity List of the given
+#'   Project as per ODK Central API docs.
+#'   Column names are renamed from ODK Central's `camelCase` to `snake_case`.
 # nolint start
 #' @seealso \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 # nolint end
@@ -35,7 +35,7 @@
 #' @examples
 #' \dontrun{
 #' # See vignette("setup") for setup and authentication options
-#' # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
+#' # ruODK::ru_setup(svc = "... .svc", un = "me@email.com", pw = "...")
 #'
 #' ds <- entitylist_list(pid = get_default_pid())
 #'

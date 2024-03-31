@@ -72,9 +72,9 @@ Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
 timezone can be set globally or per function.}
 }
 \value{
-A tibble with exactly one row for each dataset of the given project
-as per ODK Central API docs.
-Column names are renamed from ODK's \code{camelCase} to \code{snake_case}.
+A tibble with exactly one row for each Entity List of the given
+Project as per ODK Central API docs.
+Column names are renamed from ODK Central's \code{camelCase} to \code{snake_case}.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -98,7 +98,7 @@ given odkc_version is lower.
 \examples{
 \dontrun{
 # See vignette("setup") for setup and authentication options
-# ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
+# ruODK::ru_setup(svc = "... .svc", un = "me@email.com", pw = "...")
 
 ds <- entitylist_list(pid = get_default_pid())
 
@@ -109,6 +109,8 @@ ds |> knitr::kable()
 \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 
 Other entity-management: 
+\code{\link{entity_detail}()},
+\code{\link{entity_list}()},
 \code{\link{entitylist_detail}()},
 \code{\link{entitylist_download}()}
 }
