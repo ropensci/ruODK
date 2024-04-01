@@ -7,6 +7,7 @@
 entity_list(
   pid = get_default_pid(),
   did = NULL,
+  deleted = FALSE,
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
@@ -26,6 +27,9 @@ Set default \code{pid} through \code{ru_setup(pid="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{did}{(chr) The name of the Entity List, internally called Dataset.}
+
+\item{deleted}{(bool) Whether to get only deleted entities (\code{TRUE}) or not
+(\code{FALSE}). Default: \code{FALSE}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
@@ -86,15 +90,10 @@ Column names are renamed from ODK's \code{camelCase} to \code{snake_case}.
 This function returns a list of the Entities of a kind (belonging to an
 Entity List or Dataset).
 Please note that this endpoint only returns metadata of the entities, not the
-data. If you want to get the data of all entities then please refer to OData
-Dataset Service
+data. If you want to get the data of all entities then please refer to the
+OData Dataset Service.
 
-You can provide ?deleted=true to get only deleted entities.
-
-\code{entity_list()} will fail with incorrect or missing authentication.
-
-This function is supported from ODK Central v2022.3 and will warn if the
-given odkc_version is lower.
+You can get only deleted entities with \code{deleted=TRUE}.
 }
 \examples{
 \dontrun{

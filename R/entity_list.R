@@ -5,18 +5,17 @@
 #' This function returns a list of the Entities of a kind (belonging to an
 #' Entity List or Dataset).
 #' Please note that this endpoint only returns metadata of the entities, not the
-#' data. If you want to get the data of all entities then please refer to OData
-#' Dataset Service
+#' data. If you want to get the data of all entities then please refer to the
+#' OData Dataset Service.
 #'
-#' You can provide ?deleted=true to get only deleted entities.
+#' You can get only deleted entities with `deleted=TRUE`.
 #'
-#' `entity_list()` will fail with incorrect or missing authentication.
-#'
-#' This function is supported from ODK Central v2022.3 and will warn if the
-#' given odkc_version is lower.
-#'
+#' @template tpl-auth-missing
+#' @template tpl-compat-2022-3
 #' @template param-pid
 #' @template param-did
+#' @param deleted (bool) Whether to get only deleted entities (`TRUE`) or not
+#'   (`FALSE`). Default: `FALSE`.
 #' @template param-url
 #' @template param-auth
 #' @template param-retries
@@ -36,36 +35,37 @@
 #' # See vignette("setup") for setup and authentication options
 #' # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 #'
-#'  el <- entitylist_list()
+#' el <- entitylist_list()
 #'
-#'  # Entity List name (dataset ID)
-#'  did <- el$name[1]
+#' # Entity List name (dataset ID)
+#' did <- el$name[1]
 #'
-#'  # All Entities of Entity List
-#'  en <- entity_list(did = el$name[1])
+#' # All Entities of Entity List
+#' en <- entity_list(did = el$name[1])
 #'
-#'  # The UUID of the first Entity
-#'  eid <- en$uuid[1]
+#' # The UUID of the first Entity
+#' eid <- en$uuid[1]
 #'
-#'  # The current version of the first Entity
-#'  ev <- en$current_version_version[1]
+#' # The current version of the first Entity
+#' ev <- en$current_version_version[1]
 #' }
 entity_list <- function(pid = get_default_pid(),
-                            did = NULL,
-                            url = get_default_url(),
-                            un = get_default_un(),
-                            pw = get_default_pw(),
-                            retries = get_retries(),
-                            odkc_version = get_default_odkc_version(),
-                            orders = c(
-                              "YmdHMS",
-                              "YmdHMSz",
-                              "Ymd HMS",
-                              "Ymd HMSz",
-                              "Ymd",
-                              "ymd"
-                            ),
-                            tz = get_default_tz()) {
+                        did = NULL,
+                        deleted = FALSE,
+                        url = get_default_url(),
+                        un = get_default_un(),
+                        pw = get_default_pw(),
+                        retries = get_retries(),
+                        odkc_version = get_default_odkc_version(),
+                        orders = c(
+                          "YmdHMS",
+                          "YmdHMSz",
+                          "Ymd HMS",
+                          "Ymd HMSz",
+                          "Ymd",
+                          "ymd"
+                        ),
+                        tz = get_default_tz()) {
   yell_if_missing(url, un, pw, pid = pid)
 
   if (is.null(did)) {
@@ -79,6 +79,10 @@ entity_list <- function(pid = get_default_pid(),
   pth <- glue::glue(
     "v1/projects/{pid}/datasets/{URLencode(did, reserved = TRUE)}/entities"
   )
+
+  if (deleted == TRUE) {
+    pth <- glue::glue("{pth}?deleted=true")
+  }
 
   httr::RETRY(
     "GET",

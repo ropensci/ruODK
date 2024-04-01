@@ -1,6 +1,6 @@
 test_that("entity_list works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+    message = "Test server not configured"
   )
 
   ru_setup(
@@ -18,7 +18,7 @@ test_that("entity_list works", {
 
   testthat::expect_s3_class(en, "tbl_df")
 
-  cn <-  c(
+  cn <- c(
     "uuid",
     "created_at",
     "creator_id",

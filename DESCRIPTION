@@ -1,12 +1,12 @@
 Type: Package
 Package: ruODK
 Title: An R Client for the ODK Central API
-Version: 1.4.9.9004
+Version: 1.4.9.9005
 Authors@R: 
     c(person(given = c("Florian", "W."),
              family = "Mayer",
              role = c("aut", "cre"),
-             email = "Florian.Mayer@dbca.wa.gov.au",
+             email = "Florian.Mayer@dpc.wa.gov.au",
              comment = c(ORCID = "0000-0003-4269-4242")),
       person(given = "Maëlle",
              family = "Salmon",
@@ -33,9 +33,12 @@ Authors@R:
       person(given = "NWSFTCP",
              role = "fnd"))
 Description: Access and tidy up data from the 'ODK Central' API.  
-    'ODK Central' is a clearinghouse for digitally captured data 
+    'ODK Central' is a clearinghouse for digitally captured data using ODK 
     <https://docs.getodk.org/central-intro/>.
-    'ODK Central' and its API are documented at <https://docs.getodk.org/>.
+    It manages user accounts and permissions, stores form definitions, and 
+    allows data collection clients like 'ODK Collect' to connect to it for form 
+    download and submission upload. The 'ODK Central' API is documented at 
+    <https://docs.getodk.org/central-api/>.
 License: GPL-3
 URL: https://docs.ropensci.org/ruODK,
     https://github.com/ropensci/ruODK

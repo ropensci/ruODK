@@ -55,7 +55,7 @@ test_that("entitylist_detail errors if did is missing", {
 
 test_that("entitylist_detail warns if odkc_version too low", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+    message = "Test server not configured"
   )
 
   ru_setup(

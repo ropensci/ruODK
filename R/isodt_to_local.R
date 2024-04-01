@@ -22,9 +22,8 @@
 isodt_to_local <- function(datetime_string,
                            orders = c("YmdHMS", "YmdHMSz"),
                            tz = get_default_tz(),
-                           quiet=TRUE
-                           ) {
+                           quiet = TRUE) {
   datetime_string %>%
-    lubridate::parse_date_time(orders = orders, quiet=quiet) %>%
+    lubridate::parse_date_time(orders = orders, quiet = quiet) %>%
     lubridate::with_tz(., tzone = tz)
 }
