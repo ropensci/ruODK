@@ -58,7 +58,7 @@
 #' ds3$approvalRequired # FALSE
 #' }
 entitylist_update <- function(pid = get_default_pid(),
-                              did = NULL,
+                              did = "",
                               approval_required = FALSE,
                               url = get_default_url(),
                               un = get_default_un(),
@@ -97,7 +97,8 @@ entitylist_update <- function(pid = get_default_pid(),
     times = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr::content(encoding = "utf-8") |>
+    janitor::clean_names()
 }
 
 # usethis::use_test("entitylist_update") # nolint

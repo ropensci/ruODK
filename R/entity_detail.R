@@ -70,8 +70,8 @@
 #' ev <- en$current_version_version[1]
 #' }
 entity_detail <- function(pid = get_default_pid(),
-                          did = NULL,
-                          eid = NULL,
+                          did = "",
+                          eid = "",
                           url = get_default_url(),
                           un = get_default_un(),
                           pw = get_default_pw(),

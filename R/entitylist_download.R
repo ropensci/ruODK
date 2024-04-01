@@ -112,7 +112,7 @@
 #' )
 #' }
 entitylist_download <- function(pid = get_default_pid(),
-                                did = NULL,
+                                did = "",
                                 url = get_default_url(),
                                 un = get_default_un(),
                                 pw = get_default_pw(),

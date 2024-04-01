@@ -6,8 +6,8 @@
 \usage{
 entity_detail(
   pid = get_default_pid(),
-  did = NULL,
-  eid = NULL,
+  did = "",
+  eid = "",
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
@@ -26,10 +26,14 @@ Set default \code{pid} through \code{ru_setup(pid="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{did}{(chr) The name of the Entity List, internally called Dataset.}
+\item{did}{(chr) The name of the Entity List, internally called Dataset.
+The function will error if this parameter is not given.
+Default: "".}
 
 \item{eid}{(chr) The UUID of an Entity, which can be retrieved by
-\code{entity_list()}.}
+\code{entity_list()}.
+The function will error if this parameter is not given.
+Default: "".}
 
 \item{url}{The ODK Central base URL without trailing slash.
 

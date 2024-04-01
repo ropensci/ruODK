@@ -6,7 +6,7 @@
 \usage{
 entity_list(
   pid = get_default_pid(),
-  did = NULL,
+  did = "",
   deleted = FALSE,
   url = get_default_url(),
   un = get_default_un(),
@@ -26,7 +26,9 @@ Set default \code{pid} through \code{ru_setup(pid="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{did}{(chr) The name of the Entity List, internally called Dataset.}
+\item{did}{(chr) The name of the Entity List, internally called Dataset.
+The function will error if this parameter is not given.
+Default: "".}
 
 \item{deleted}{(lgl) Whether to get only deleted entities (\code{TRUE}) or not
 (\code{FALSE}). Default: \code{FALSE}.}

@@ -50,7 +50,7 @@
 #' ev <- en$current_version_version[1]
 #' }
 entity_list <- function(pid = get_default_pid(),
-                        did = NULL,
+                        did = "",
                         deleted = FALSE,
                         url = get_default_url(),
                         un = get_default_un(),

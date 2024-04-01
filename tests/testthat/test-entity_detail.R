@@ -47,13 +47,13 @@ test_that("entity_detail works", {
   testthat::expect_is(ev, "integer")
 })
 
-test_that("entitylist_detail errors if did is missing", {
+test_that("entity_detail errors if did is missing", {
   testthat::expect_error(
-    entitylist_detail()
+    entity_detail()
   )
 })
 
-test_that("entitylist_detail warns if odkc_version too low", {
+test_that("entity_detail warns if odkc_version too low", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
@@ -66,15 +66,22 @@ test_that("entitylist_detail warns if odkc_version too low", {
     odkc_version = get_test_odkc_version()
   )
 
-  ds <- entitylist_list()
-  did <- ds$name[1]
+  el <- entitylist_list()
 
-  ds1 <- entitylist_detail(did = did)
+  # Entity List name (dataset ID)
+  did <- el$name[1]
 
-  testthat::expect_warning(
-    ds1 <- entitylist_detail(did = did, odkc_version = "1.5.3")
+  # All Entities of Entity List
+  en <- entity_list(did = el$name[1])
+
+  # Entity detail
+  ed <- entity_detail(did = el$name[1], eid = en$uuid[1])
+
+  # Expect error with missing eid
+  testthat::expect_error(
+    entity_detail(did = el$name[1])
   )
 })
 
 
-# usethis::use_e("entity_detail")  # nolint
+# usethis::use_r("entity_detail")  # nolint

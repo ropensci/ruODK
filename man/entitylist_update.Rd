@@ -6,7 +6,7 @@
 \usage{
 entitylist_update(
   pid = get_default_pid(),
-  did = NULL,
+  did = "",
   approval_required = FALSE,
   url = get_default_url(),
   un = get_default_un(),
@@ -26,7 +26,9 @@ Set default \code{pid} through \code{ru_setup(pid="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{did}{(chr) The name of the Entity List, internally called Dataset.}
+\item{did}{(chr) The name of the Entity List, internally called Dataset.
+The function will error if this parameter is not given.
+Default: "".}
 
 \item{approval_required}{(lgl) The value to set \code{approvalRequired} to.
 If TRUE, a Submission must be approved before an Entity is created,
