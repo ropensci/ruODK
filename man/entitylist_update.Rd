@@ -28,11 +28,11 @@ See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{did}{(chr) The name of the Entity List, internally called Dataset.}
 
-\item{approval_required}{(lgl) The value to set approvalRequired to.
-If TRUE, a submission must be approved before an entity is created,
-if FALSE, an entity is created as soon as the submission is received by
+\item{approval_required}{(lgl) The value to set \code{approvalRequired} to.
+If TRUE, a Submission must be approved before an Entity is created,
+if FALSE, an Entity is created as soon as the Submission is received by
 ODK Central.
-Default: FALSE.}
+Default: \code{FALSE}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
@@ -92,23 +92,13 @@ it is not trivial to rectangle the result into a tibble.
 }
 \details{
 You can only update \code{approvalRequired} using this endpoint.
-The  approvalRequired flag controls the Entity creation flow;
+The  \code{approvalRequired} flag controls the Entity creation flow;
 if it is true then the Submission must be approved before an Entity can be
 created from it and if it is false then an Entity is created as soon as the
 Submission is received by the ODK Central.
 By default \code{approvalRequired} is false for the Entity Lists created after
-v2023.3. Entity Lists created prior to that will have approvalRequired set to
-true.
-
-An Entity List is a named collection of Entities that have the same
-properties.
-An Entity List can be linked to Forms as Attachments.
-This will make it available to clients as an automatically-updating CSV.
-
-This function is supported from ODK Central v2022.3 and will warn if the
-given odkc_version is lower.
-
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+v2023.3. Entity Lists created prior to that will have \code{approvalRequired} set
+to true.
 }
 \examples{
 \dontrun{

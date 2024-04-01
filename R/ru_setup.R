@@ -710,7 +710,9 @@ get_retries <- function() {
 #' testthat::expect_error(yell_if_missing("", "", "", ""))
 #' testthat::expect_error(yell_if_missing("", "", "", "", ""))
 #' testthat::expect_error(yell_if_missing("", "", "", "", "", ""))
-yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL) {
+#' testthat::expect_error(yell_if_missing("", "", "", "", "", "", ""))
+#' testthat::expect_error(yell_if_missing("", "", "", "", "", "", "", ""))
+yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL, did = NULL, eid = NULL) {
   if (is.null(url) || identical(url, "")) {
     ru_msg_abort("Missing ODK Central URL. ru_setup()?")
   }
@@ -728,6 +730,12 @@ yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL) {
   }
   if (!is.null(iid) && identical(iid, "")) {
     ru_msg_abort("Missing ODK Central submission instance ID.")
+  }
+  if (!is.null(did) && identical(did, "")) {
+    ru_msg_abort("Missing ODK Central Entity List (dataset) name.")
+  }
+  if (!is.null(eid) && identical(eid, "")) {
+    ru_msg_abort("Missing ODK Central Entity UUID.")
   }
 }
 

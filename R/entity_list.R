@@ -14,7 +14,7 @@
 #' @template tpl-compat-2022-3
 #' @template param-pid
 #' @template param-did
-#' @param deleted (bool) Whether to get only deleted entities (`TRUE`) or not
+#' @param deleted (lgl) Whether to get only deleted entities (`TRUE`) or not
 #'   (`FALSE`). Default: `FALSE`.
 #' @template param-url
 #' @template param-auth
@@ -66,11 +66,7 @@ entity_list <- function(pid = get_default_pid(),
                           "ymd"
                         ),
                         tz = get_default_tz()) {
-  yell_if_missing(url, un, pw, pid = pid)
-
-  if (is.null(did)) {
-    ru_msg_abort("entity_list requires the Entity List name as 'did=\"name\"'.")
-  }
+  yell_if_missing(url, un, pw, pid = pid, did = did)
 
   if (odkc_version |> semver_lt("2022.3")) {
     ru_msg_warn("entity_list is supported from v2022.3")

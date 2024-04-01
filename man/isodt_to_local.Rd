@@ -24,7 +24,7 @@ Default: \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz")}.}
 Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
 timezone can be set globally or per function.}
 
-\item{quiet}{(bool) Used in \code{lubridate::parse_date_time(quiet=quiet)} to
+\item{quiet}{(lgl) Used in \code{lubridate::parse_date_time(quiet=quiet)} to
 suppress warnings from attempting to parse all empty values or columns.
 Run with \code{quiet=FALSE} to show any \code{lubridate} warnings.}
 }

@@ -82,30 +82,25 @@ it is not trivial to rectangle the result into a tibble.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 }
-\details{
-An Entity List is a named collection of Entities that have the same
-properties.
-Entity List can be linked to Forms as Attachments.
-This will make it available to clients as an automatically-updating CSV.
-
-This function is supported from ODK Central v2022.3 and will warn if the
-given odkc_version is lower.
-}
 \examples{
 \dontrun{
 # See vignette("setup") for setup and authentication options
 # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
 ds <- entitylist_list(pid = get_default_pid())
+
 ds1 <- entitylist_detail(pid = get_default_pid(), did = ds$name[1])
 
 ds1 |> listviewer::jsonedit()
-ds1$linkedForms |>
+
+ds1$linked_forms |>
   purrr::list_transpose() |>
   tibble::as_tibble()
-ds1$sourceForms |>
+
+ds1$source_forms |>
   purrr::list_transpose() |>
   tibble::as_tibble()
+
 ds1$properties |>
   purrr::list_transpose() |>
   tibble::as_tibble()

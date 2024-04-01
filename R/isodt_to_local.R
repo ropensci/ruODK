@@ -13,7 +13,7 @@
 #'   `lubridate`.
 #'   Default: \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz")}.
 #' @template param-tz
-#' @param quiet (bool) Used in `lubridate::parse_date_time(quiet=quiet)` to
+#' @param quiet (lgl) Used in `lubridate::parse_date_time(quiet=quiet)` to
 #'   suppress warnings from attempting to parse all empty values or columns.
 #'   Run with `quiet=FALSE` to show any `lubridate` warnings.
 #' @return A `lubridate` PosixCT datetime in the given timezone.

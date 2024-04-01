@@ -4,7 +4,16 @@
 \alias{yell_if_missing}
 \title{Abort on missing ODK Central credentials (url, username, password).}
 \usage{
-yell_if_missing(url, un, pw, pid = NULL, fid = NULL, iid = NULL)
+yell_if_missing(
+  url,
+  un,
+  pw,
+  pid = NULL,
+  fid = NULL,
+  iid = NULL,
+  did = NULL,
+  eid = NULL
+)
 }
 \arguments{
 \item{url}{A URL (character)}
@@ -35,6 +44,8 @@ testthat::expect_error(yell_if_missing("", "", ""))
 testthat::expect_error(yell_if_missing("", "", "", ""))
 testthat::expect_error(yell_if_missing("", "", "", "", ""))
 testthat::expect_error(yell_if_missing("", "", "", "", "", ""))
+testthat::expect_error(yell_if_missing("", "", "", "", "", "", ""))
+testthat::expect_error(yell_if_missing("", "", "", "", "", "", "", ""))
 }
 \seealso{
 Other ru_settings: 

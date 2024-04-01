@@ -2,21 +2,13 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' While the API endpoint will return all Entity Lists for one Project,
-#' \code{\link{entitylist_list}} will fail with incorrect or missing
-#' authentication.
+#' The returned list is useful to retrieve the valid name of an Entity List for
+#' further use by functions of the Entity Management family.
 #'
-#' An Entity List is a named collection of Entities that have the same properties.
-#' An Entity List can be linked to Forms as Attachments.
-#' This will make it available to clients as an automatically-updating CSV.
-#'
-#' ODK Central calls Entity Lists internally Datasets. `ruODK` chooses the term
-#' Entity Lists as it is used in the ODK Central user interface and conveys
-#' its relation to Entities better than the term Dataset.
-#'
-#' This function is supported from ODK Central v2022.3 and will warn if the
-#' given odkc_version is lower.
-#'
+#' @template tpl-def-entitylist
+#' @template tpl-entitylist-dataset
+#' @template tpl-auth-missing
+#' @template tpl-compat-2022-3
 #' @template param-pid
 #' @template param-url
 #' @template param-auth

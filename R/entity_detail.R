@@ -1,4 +1,4 @@
-#' Show details of one Entity.
+#' Show metadata and current data of one Entity.
 #'
 #' `r lifecycle::badge("maturing")`
 #'
@@ -86,15 +86,7 @@ entity_detail <- function(pid = get_default_pid(),
                             "ymd"
                           ),
                           tz = get_default_tz()) {
-  yell_if_missing(url, un, pw, pid = pid)
-
-  if (is.null(did)) {
-    ru_msg_abort("entity_detail requires the Entity List name as 'did=\"name\"'.")
-  }
-
-  if (is.null(eid)) {
-    ru_msg_abort("entity_detail requires the Entity UUID as 'eid=\"uuid\"'.")
-  }
+  yell_if_missing(url, un, pw, pid = pid, did = did, eid = eid)
 
   if (odkc_version |> semver_lt("2022.3")) {
     ru_msg_warn("entity_detail is supported from v2022.3")
@@ -114,7 +106,6 @@ entity_detail <- function(pid = get_default_pid(),
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>
     # purrr::list_transpose() |>
-    #
     # tibble::enframe() |>
     # tibble::as_tibble(.name_repair = "universal") |>
     # tidyr::pivot_wider(names_from = "name", values_from = "value") |>

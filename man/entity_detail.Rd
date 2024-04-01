@@ -2,7 +2,7 @@
 % Please edit documentation in R/entity_detail.R
 \name{entity_detail}
 \alias{entity_detail}
-\title{Show details of one Entity.}
+\title{Show metadata and current data of one Entity.}
 \usage{
 entity_detail(
   pid = get_default_pid(),

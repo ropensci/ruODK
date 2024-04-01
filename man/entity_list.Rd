@@ -28,7 +28,7 @@ See \code{vignette("Setup", package = "ruODK")}.}
 
 \item{did}{(chr) The name of the Entity List, internally called Dataset.}
 
-\item{deleted}{(bool) Whether to get only deleted entities (\code{TRUE}) or not
+\item{deleted}{(lgl) Whether to get only deleted entities (\code{TRUE}) or not
 (\code{FALSE}). Default: \code{FALSE}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
@@ -100,19 +100,19 @@ You can get only deleted entities with \code{deleted=TRUE}.
 # See vignette("setup") for setup and authentication options
 # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
- el <- entitylist_list()
+el <- entitylist_list()
 
- # Entity List name (dataset ID)
- did <- el$name[1]
+# Entity List name (dataset ID)
+did <- el$name[1]
 
- # All Entities of Entity List
- en <- entity_list(did = el$name[1])
+# All Entities of Entity List
+en <- entity_list(did = el$name[1])
 
- # The UUID of the first Entity
- eid <- en$uuid[1]
+# The UUID of the first Entity
+eid <- en$uuid[1]
 
- # The current version of the first Entity
- ev <- en$current_version_version[1]
+# The current version of the first Entity
+ev <- en$current_version_version[1]
 }
 }
 \seealso{

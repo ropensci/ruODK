@@ -55,16 +55,16 @@ default: \code{here::here}.
 If the folder does not exist it will be created.}
 
 \item{filter}{(str) A valid filter string.
-Default: NULL (no filtering, all entities returned).}
+Default: NULL (no filtering, all Entities returned).}
 
 \item{etag}{(str) The etag value from a previous call to
 \code{entitylist_download()}. The value must be stripped of the \verb{W/\\"} and \verb{\\"},
 which is the format of the etag returned by \code{entitylist_download()}.
 If provided, only new entities will be returned.
 If the same \code{local_dir} is chosen and \code{overwrite} is set to \code{TRUE},
-the downloaded CSV will also be overwritte, losing the Entities downloaded
-earlier.
-Default: NULL (no filtering, all entities returned).}
+the downloaded CSV will also be overwritten, losing the previously
+downloaded Entities.
+Default: NULL (no filtering, all Entities returned).}
 
 \item{overwrite}{Whether to overwrite previously downloaded file,
 default: FALSE}
@@ -111,38 +111,42 @@ A list of four items:
 200 if OK, 304 if a given etag finds no new entities created.
 \item etag (str) The ETag to use in subsequent calls to \code{entitylist_download()}
 \item downloaded_to (fs_path) The path to the downloaded CSV file
-\item downloaded_on (POSIXct) The time of download in the local timezome
+\item downloaded_on (POSIXct) The time of download in the local timezone
 }
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 }
 \details{
+\subsection{CSV file}{
+
 The downloaded CSV file is named after the entity list name.
 The download location defaults to the current workdir, but can be modified
 to a different folder path which will be created if it doesn't exist.
 
-An Entity List is a named collection of Entities that have the same
-properties.
-Entity List can be linked to Forms as Attachments.
-This will make it available to clients as an automatically-updating CSV.
-
 Entity Lists can be used as Attachments in other Forms, but they can also be
 downloaded directly as a CSV file.
+
 The CSV format closely matches the OData Dataset (Entity List) Service
 format, with columns for system properties such as \verb{__id} (the Entity UUID),
-\verb{__createdAt}, \verb{__creatorName}, etc., the Entity Label label, and the
-Dataset (Entity List )/Entity Properties themselves.
+\verb{__createdAt}, \verb{__creatorName}, etc., the Entity Label, and the
+Dataset (Entity List) or Entity Properties themselves.
 If any Property for an given Entity is blank (e.g. it was not captured by
 that Form or was left blank), that field of the CSV is blank.
+}
 
-The ODK Central \verb{$filter} querystring parameter can be used to filter on
+\subsection{Filter}{
+
+The ODK Central \verb{$filter} query string parameter can be used to filter on
 system-level properties, similar to how filtering in the OData Dataset
 (Entity List) Service works.
-Of the \href{https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948}{OData filter specs}
+Of the \href{https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948}{OData filter specs }
 ODK Central implements a \href{https://docs.getodk.org/central-api-odata-endpoints/#data-document}{growing set of features }.
 \code{ruODK} provides the parameter \code{filter} (str) which, if set, will be passed
 on to the ODK Central endpoint as is.
+}
+
+\subsection{Resuming downloads through ETag}{
 
 The ODK Central endpoint supports the \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag}{\code{ETag} header }, which can
 be used to avoid downloading the same content more than once.
@@ -157,12 +161,14 @@ data.
 a previous call to \code{entitylist_download()}. \code{ruODK} strips the \verb{W/\\"} and
 \verb{\\"} from the returned etag and expects the stripped etag as parameter.
 }
+}
 \examples{
 \dontrun{
 # See vignette("setup") for setup and authentication options
 # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
 ds <- entitylist_list(pid = get_default_pid())
+
 ds1 <- entitylist_download(pid = get_default_pid(), did = ds$name[1])
 # ds1$entities
 # ds1$etag
