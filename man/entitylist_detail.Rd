@@ -114,6 +114,7 @@ ds1$properties |>
 Other entity-management: 
 \code{\link{entity_detail}()},
 \code{\link{entity_list}()},
+\code{\link{entity_update}()},
 \code{\link{entitylist_download}()},
 \code{\link{entitylist_list}()}
 }

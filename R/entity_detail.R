@@ -43,9 +43,11 @@
 #' @template param-odkcv
 #' @template param-orders
 #' @template param-tz
-#' @return A tibble with exactly one row for each Entity of the given project
-#'   as per ODK Central API docs.
-#'   Column names are renamed from ODK's `camelCase` to `snake_case`.
+#' @return A nested list identical to the return value of `entity_update`.
+#'   See <https://docs.getodk.org/central-api-entity-management/#getting-entity-details>
+#'   for the full schema.
+#'   Top level list elements are renamed from ODK's `camelCase` to `snake_case`.
+#'   Nested list elements have the original `camelCase`.
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-entity-management/#entities-metadata}
 # nolint end

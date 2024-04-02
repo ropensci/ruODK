@@ -99,6 +99,7 @@ ds |> knitr::kable()
 Other entity-management: 
 \code{\link{entity_detail}()},
 \code{\link{entity_list}()},
+\code{\link{entity_update}()},
 \code{\link{entitylist_detail}()},
 \code{\link{entitylist_download}()}
 }

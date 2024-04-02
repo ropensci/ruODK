@@ -27,6 +27,10 @@ yell_if_missing(
 \item{fid}{A form ID (character, optional)}
 
 \item{iid}{A submission instance ID (character, optional)}
+
+\item{did}{An Entity List (dataset) name (character, optional)}
+
+\item{eid}{An Entity UUID (character, optional)}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
