@@ -15,6 +15,8 @@ issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](h
 [![Tests](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml)
 [![Test
 coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/ruODK?branch=main)
+[![pre-commit.ci
+status](https://results.pre-commit.ci/badge/github/ropensci/ruODK/main.svg)](https://results.pre-commit.ci/latest/github/ropensci/ruODK/main)
 [![CodeFactor](https://www.codefactor.io/repository/github/ropensci/ruodk/badge)](https://www.codefactor.io/repository/github/ropensci/ruodk)
 [![Hosted JupyterLab with
 ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=lab)
@@ -91,7 +93,7 @@ Benefits of using the R ecosystem in combination with ODK:
 - Rstudio-as-a-Service (RaaS) at [![Hosted RStudio with
   ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
 
-`ruODK`’s scope:
+`ruODK`'s scope:
 
 - To wrap all ODK Central API endpoints with a focus on **data access**.
 - To provide working examples of interacting with the ODK Central API.
@@ -245,25 +247,25 @@ practices and further readings for code contributions.
 
 ## Attribution
 
-`ruODK` was developed, and is maintained, by Florian Mayer for the
-Western Australian [Department of Biodiversity, Conservation and
-Attractions (DBCA)](https://www.dbca.wa.gov.au/). The development was
-funded both by DBCA core funding and external funds from the [North West
-Shelf Flatback Turtle Conservation
-Program](https://flatbacks.dbca.wa.gov.au/).
+`ruODK` was developed by Florian Mayer for the Western Australian
+[Department of Biodiversity, Conservation and Attractions
+(DBCA)](https://www.dbca.wa.gov.au/). The development was funded both by
+DBCA core funding and external funds from the [North West Shelf Flatback
+Turtle Conservation Program](https://flatbacks.dbca.wa.gov.au/).
+
+ruODK is maintained and extended by Florian Mayer.
 
 To cite package `ruODK` in publications use:
 
 ``` r
 citation("ruODK")
 #> To cite ruODK in publications use (with the respective version number:
-#> 
-#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the
-#>   ODK Central API (Version X.X.X).  Zenodo.
-#>   https://doi.org/10.5281/zenodo.5559164
-#> 
+#>
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK
+#>   Central API (Version X.X.X).  Zenodo. https://doi.org/10.5281/zenodo.5559164
+#>
 #> A BibTeX entry for LaTeX users is
-#> 
+#>
 #>   @Misc{,
 #>     title = {ruODK: Client for the ODK Central API},
 #>     author = {Florian W. Mayer},
