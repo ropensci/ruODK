@@ -108,16 +108,16 @@ form_schema_ext <- function(flatten = FALSE,
                             odkc_version = get_default_odkc_version(),
                             retries = get_retries(),
                             verbose = get_ru_verbose()) {
-  # version warning
-  # nocov start
+# version warning
+# nocov start
   if (semver_lt(odkc_version, "0.8.0")) {
-    # odkc_version < 0.8
+# odkc_version < 0.8
     "Form Schema Extended works better with ODK Central 0.8 and above" %>%
       ru_msg_warn()
   }
-  # nocov end
+# nocov end
 
-  # gets basic schema
+# gets basic schema
   frm_schema <- form_schema(
     flatten = flatten,
     odata = odata,
@@ -132,7 +132,7 @@ form_schema_ext <- function(flatten = FALSE,
     verbose = verbose
   )
 
-  # get xml representation
+# get xml representation
   frm_xml <- form_xml(
     parse = FALSE,
     url = url,
@@ -144,11 +144,11 @@ form_schema_ext <- function(flatten = FALSE,
   ) %>%
     xml2::xml_ns_strip()
 
-  ### parse translations
+### parse translations
   all_translations <- xml2::xml_find_all(frm_xml, "//text")
   all_translations_ids <- xml2::xml_attr(all_translations, "id")
 
-  # initialize dataframe
+# initialize dataframe
   extension <- data.frame(
     path = character(0),
     label = character(0),
@@ -156,34 +156,34 @@ form_schema_ext <- function(flatten = FALSE,
   )
 
 
-  ### PART 1: parse labels
+### PART 1: parse labels
   raw_labels <- xml2::xml_find_all(frm_xml, "//label")
 
-  # iterate through labels
+# iterate through labels
   for (i in seq_along(raw_labels)) {
-    ## read label
+## read label
     this_rawlabel <- raw_labels[i]
 
-    ## path
-    # get ref from parent, without leading "/data"
+## path
+# get ref from parent, without leading "/data"
     this_path <- sub(
       "/data", "",
       xml2::xml_attr(xml2::xml_parent(this_rawlabel), "ref")
     )
 
-    # ensure this is a valid path
+# ensure this is a valid path
     if (!is.na(this_path)) {
-      # add new empty row:
+# add new empty row:
       extension[nrow(extension) + 1, ] <- rep(NA, ncol(extension))
 
-      # add path
+# add path
       extension[nrow(extension), "path"] <- this_path
 
-      # first check if label is mapped with a translation function
+# first check if label is mapped with a translation function
       has_translation <- xml2::xml_has_attr(this_rawlabel, "ref")
 
       if (has_translation) {
-        # find all translations related to this path:
+# find all translations related to this path:
         id <- sub(
           "')",
           "",
@@ -193,36 +193,36 @@ form_schema_ext <- function(flatten = FALSE,
           all_translations_ids == id
         ]
 
-        # iterate through translations
+# iterate through translations
         for (j in seq_along(translations)) {
           this_translation <- translations[j]
 
-          # First check this is a regular text labels.
-          #
-          # Questions in ODK can have video, image and audio "labels",
-          # which will be skipped. This is identified by the presence of
-          # the 'form' attribute:
+# First check this is a regular text labels.
+#
+# Questions in ODK can have video, image and audio "labels",
+# which will be skipped. This is identified by the presence of
+# the 'form' attribute:
           is_regular_label <- !xml2::xml_has_attr(
             xml2::xml_find_first(this_translation, "./value"), "form"
           )
 
           if (is_regular_label) {
-            # read the parent node to identify language:
+# read the parent node to identify language:
             translation_parent <- xml2::xml_parent(this_translation)
             this_lang <- gsub(" ", "_", tolower(xml2::xml_attr(
               translation_parent, "lang"
             )))
 
-            # decide if 'default' language or specific language
+# decide if 'default' language or specific language
             if (this_lang == "default") {
-              # if 'default' language, save under column 'label':
+# if 'default' language, save under column 'label':
               extension[nrow(extension), "label"] <- xml2::xml_text(
                 xml2::xml_find_first(this_translation, "./value")
               )
             } else {
-              # check if language already exists in the datafram
+# check if language already exists in the datafram
               if (!(paste0("label_", this_lang) %in% colnames(extension))) {
-                # if not, create new column
+# if not, create new column
                 extension <- cbind(
                   extension,
                   data.frame(
@@ -234,7 +234,7 @@ form_schema_ext <- function(flatten = FALSE,
                 )
               }
 
-              # add the first value content of the translation
+# add the first value content of the translation
               extension[
                 nrow(extension),
                 paste0("label_", this_lang)
@@ -245,46 +245,46 @@ form_schema_ext <- function(flatten = FALSE,
           }
         }
       } else {
-        # extract content
+# extract content
         extension[nrow(extension), "label"] <- xml2::xml_text(this_rawlabel)
       }
 
-      ### PART 1.1: parse choice labels
-      ## check existence of  choice list:
+### PART 1.1: parse choice labels
+## check existence of  choice list:
       choice_items <- xml2::xml_find_all(
         xml2::xml_parent(this_rawlabel), "./item"
       )
 
       if (length(choice_items) > 0) {
-        # check if 'choices' column already exist
+# check if 'choices' column already exist
         if (!("choices" %in% colnames(extension))) {
-          # if not, create new column
+# if not, create new column
           extension <- cbind(extension, data.frame(
             choices = rep(NA, nrow(extension))
           ))
         }
 
-        # initialize lists
+# initialize lists
         choice_values <- list()
         choice_labels <- list()
 
-        # iterate through choice list:
+# iterate through choice list:
         for (jj in seq_along(choice_items)) {
-          ## read choice item
+## read choice item
           this_choiceitem <- choice_items[jj]
 
-          # value
+# value
           this_choicevalue <- xml2::xml_text(
             xml2::xml_find_first(this_choiceitem, "./value")
           )
           choice_values[jj] <- this_choicevalue
 
-          # raw label
+# raw label
           this_rawchoicelabel <- xml2::xml_find_first(
             this_choiceitem, "./label"
           )
 
-          # first check if choice label is mapped with a translation function
+# first check if choice label is mapped with a translation function
           has_translation_choice <- xml2::xml_has_attr(
             this_rawchoicelabel, "ref"
           )
@@ -305,21 +305,21 @@ form_schema_ext <- function(flatten = FALSE,
             ]
 
 
-            # iterate through choice translations
+# iterate through choice translations
             for (kk in seq_along(choice_translations)) {
-              # read translation
+# read translation
               this_choicetranslation <- choice_translations[kk]
 
-              # first check this is a regular text labels.
-              # Questions in ODK can have video, image and audio "labels",
-              # which will be skipped.
-              # This is identified by the presence of the 'form' attribute:
+# first check this is a regular text labels.
+# Questions in ODK can have video, image and audio "labels",
+# which will be skipped.
+# This is identified by the presence of the 'form' attribute:
               is_regular_choicelabel <- !xml2::xml_has_attr(
                 xml2::xml_find_first(this_choicetranslation, "./value"), "form"
               )
 
               if (is_regular_choicelabel) {
-                # read the parent node to identify language:
+# read the parent node to identify language:
                 choice_translation_parent <- xml2::xml_parent(
                   this_choicetranslation
                 )
@@ -327,17 +327,21 @@ form_schema_ext <- function(flatten = FALSE,
                   choice_translation_parent, "lang"
                 )))
 
-                # decide if 'default' language or specific language
+# decide if 'default' language or specific language
                 if (this_choicelang == "default") {
-                  # if 'default' language, save under 'choice':
+# if 'default' language, save under 'choice':
                   choice_labels[["base"]][jj] <- xml2::xml_text(
                     xml2::xml_find_first(this_choicetranslation, "./value")
                   )
                 } else {
-                  # check if language already exists in the dataframe
-                  if (!(paste0("choices_", this_choicelang) %in%
-                    colnames(extension))) {
-                    # if not, create new column
+# check if language already exists in the dataframe
+                  if (
+                    !(
+                      paste0("choices_", this_choicelang) %in%
+                        colnames(extension)
+                    )
+                  ) {
+# if not, create new column
                     extension <- cbind(extension, data.frame(
                       new_choicelang = rep(NA, nrow(extension))
                     ))
@@ -346,7 +350,7 @@ form_schema_ext <- function(flatten = FALSE,
                     )
                   }
 
-                  # add the first value content of the translation
+# add the first value content of the translation
                   choice_labels[[paste0(
                     "choices_",
                     this_choicelang
@@ -363,7 +367,7 @@ form_schema_ext <- function(flatten = FALSE,
           }
         }
 
-        # add to the extended table
+# add to the extended table
         for (this_choicelang in names(choice_labels)) {
           these_choicelabels <- choice_labels[[this_choicelang]]
 
@@ -380,33 +384,33 @@ form_schema_ext <- function(flatten = FALSE,
         }
       }
 
-      ### PART 1.2: parse complex choice labels,
-      # i.e. in the presence of choice filters
+### PART 1.2: parse complex choice labels,
+# i.e. in the presence of choice filters
 
-      ## check existence of  choice itemset:
+## check existence of  choice itemset:
       choice_itemset <- xml2::xml_find_all(
         xml2::xml_parent(this_rawlabel), "./itemset"
       )
 
 
       if (length(choice_itemset) > 0) {
-        # identify value node
+# identify value node
         choicevalue_node <- xml2::xml_attr(
           xml2::xml_find_first(choice_itemset, "./value"),
           "ref"
         )
 
-        # identify label node
+# identify label node
         choicelabel_node <- xml2::xml_attr(
           xml2::xml_find_first(choice_itemset, "./label"),
           "ref"
         )
 
-        # check if labels have translations
+# check if labels have translations
         has_translation_choice <- grepl("jr:itext", choicelabel_node)
 
         if (has_translation_choice) {
-          # update choicelabel_node
+# update choicelabel_node
           choicelabel_node <- sub(
             ")",
             "",
@@ -418,7 +422,7 @@ form_schema_ext <- function(flatten = FALSE,
           )
         }
 
-        # extract content from the itemset:
+# extract content from the itemset:
         choice_nodeset <- xml2::xml_attr(choice_itemset, "nodeset")
         choice_nodeset_id <- substr(
           choice_nodeset,
@@ -435,24 +439,24 @@ form_schema_ext <- function(flatten = FALSE,
         )
 
 
-        # check if 'choices' column already exist
+# check if 'choices' column already exist
         if (!("choices" %in% colnames(extension))) {
-          # if not, create new column
+# if not, create new column
           extension <- cbind(extension, data.frame(
             choices = rep(NA, nrow(extension))
           ))
         }
 
-        # initialize lists
+# initialize lists
         choice_values <- list()
         choice_labels <- list()
 
-        # iterate through choice list:
+# iterate through choice list:
         for (jj in seq_along(choice_itemset_content)) {
-          ## read choice item
+## read choice item
           this_choiceitem <- choice_itemset_content[jj]
 
-          # value
+# value
           this_choicevalue <- xml2::xml_text(
             xml2::xml_find_first(
               this_choiceitem,
@@ -474,21 +478,21 @@ form_schema_ext <- function(flatten = FALSE,
             ]
 
 
-            # iterate through choice translations
+# iterate through choice translations
             for (kk in seq_along(choice_translations)) {
-              # read translation
+# read translation
               this_choicetranslation <- choice_translations[kk]
 
-              # first check this is a regular text labels.
-              # Questions in ODK can have video, image and audio "labels",
-              # which will be skipped.
-              # This is identified by the presence of the 'form' attribute:
+# first check this is a regular text labels.
+# Questions in ODK can have video, image and audio "labels",
+# which will be skipped.
+# This is identified by the presence of the 'form' attribute:
               is_regular_choicelabel <- !xml2::xml_has_attr(
                 xml2::xml_find_first(this_choicetranslation, "./value"), "form"
               )
 
               if (is_regular_choicelabel) {
-                # read the parent node to identify language:
+# read the parent node to identify language:
                 choice_translation_parent <- xml2::xml_parent(
                   this_choicetranslation
                 )
@@ -496,17 +500,21 @@ form_schema_ext <- function(flatten = FALSE,
                   choice_translation_parent, "lang"
                 )))
 
-                # decide if 'default' language or specific language
+# decide if 'default' language or specific language
                 if (this_choicelang == "default") {
-                  # if 'default' language, save under 'choice':
+# if 'default' language, save under 'choice':
                   choice_labels[["base"]][jj] <- xml2::xml_text(
                     xml2::xml_find_first(this_choicetranslation, "./value")
                   )
                 } else {
-                  # check if language already exists in the dataframe
-                  if (!(paste0("choices_", this_choicelang) %in%
-                    colnames(extension))) {
-                    # if not, create new column
+# check if language already exists in the dataframe
+                  if (
+                    !(
+                      paste0("choices_", this_choicelang) %in%
+                        colnames(extension)
+                    )
+                  ) {
+# if not, create new column
                     extension <- cbind(extension, data.frame(
                       new_choicelang = rep(NA, nrow(extension))
                     ))
@@ -515,7 +523,7 @@ form_schema_ext <- function(flatten = FALSE,
                     )
                   }
 
-                  # add the first value content of the translation
+# add the first value content of the translation
                   choice_labels[[paste0(
                     "choices_",
                     this_choicelang
@@ -537,7 +545,7 @@ form_schema_ext <- function(flatten = FALSE,
           }
         }
 
-        # add to the extended table
+# add to the extended table
         for (this_choicelang in names(choice_labels)) {
           these_choicelabels <- choice_labels[[this_choicelang]]
 
@@ -556,7 +564,7 @@ form_schema_ext <- function(flatten = FALSE,
     }
   }
 
-  # join
+# join
   fs_ext <- frm_schema %>% dplyr::left_join(extension, by = "path")
 
   return(fs_ext)

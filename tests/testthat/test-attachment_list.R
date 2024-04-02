@@ -11,7 +11,7 @@ test_that("attachment_list works", {
     pw = get_test_pw()
   )
 
-  al <- get_one_submission_attachment_list(
+  al <- get_one_submission_att_list(
     sl$instance_id[[1]],
     pid = get_test_pid(),
     fid = get_test_fid(),
@@ -29,10 +29,10 @@ test_that("attachment_list works", {
     pw = get_test_pw()
   )
 
-  # attachment_list returns a tibble
+# attachment_list returns a tibble
   testthat::expect_equal(class(al), c("tbl_df", "tbl", "data.frame"))
 
-  # Attachment attributes are the tibble's columns
+# Attachment attributes are the tibble's columns
   cn <- c("name", "exists")
   testthat::expect_equal(names(al), cn)
 })

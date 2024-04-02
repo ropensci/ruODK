@@ -80,7 +80,7 @@ ruODK::ru_setup(svc = "...")
 sl <- submission_list()
 
 # Step 3a: Get attachment list for first submission
-al <- get_one_submission_attachment_list(sl$instance_id[[1]])
+al <- get_one_submission_att_list(sl$instance_id[[1]])
 
 # Ste 3b: Get all attachments for all submissions
 all <- attachment_list(sl$instance_id)
