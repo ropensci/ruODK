@@ -1,0 +1,49 @@
+exclude: "/migrations/|^venv/|/email/subject/"
+default_stages: [commit]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Drop trailing whitespace
+      - id: end-of-file-fixer
+        name: Fix end of files
+      - id: check-yaml
+        name: Check YAML syntax
+      - id: check-toml
+        name: Check TOML syntax
+      # - id: pretty-format-json
+      #   name: Format JSON
+      - id: check-added-large-files
+        name: Prevent adding large files
+        args: ['--maxkb=1024']
+      - id: check-merge-conflict
+        name: Check for unhandled merge conflicts
+      - id: debug-statements
+        name: Check for debug statements
+      - id: detect-private-key
+        name: Detect private keys
+
+  - repo: https://github.com/lorenzwalthert/precommit
+    rev: v0.3.2
+    hooks:
+      - id: style-files
+        name: Style code to tidyverse conventions
+        args: [--scope=spaces, --reindention=specify_reindention('#')]
+      - id: readme-rmd-rendered
+        name: Ensure README.md is up to date
+      - id: no-debug-statement
+        name: Ensure that no debug() statement is committed
+      - id: no-browser-statement
+        name: Ensure that no browser() statement is committed
+      - id: spell-check
+        name: Spellcheck
+      - id: deps-in-desc
+        name: Ensure that DESCRIPTION lists all dependencies
+      - id: use-tidy-description
+        name: Format DESCRIPTION
+    #   - id: lintr
+    #     name: Lint code but emit only warnings
+    #     args: [--warn_only]
+    #     verbose: true

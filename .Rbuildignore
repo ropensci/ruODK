@@ -11,7 +11,6 @@
 ^CONTRIBUTING\.md$
 ^ISSUE_TEMPLATE\.md$
 ^SUPPORT\.md$
-^\.github$
 ^man-roxygen$
 ^appveyor\.yml$
 codemeta.json
@@ -25,3 +24,8 @@ codemeta.json
 ^tic\.R$
 ^Dockerfile$
 ^codemeta\.json$
+^\.devcontainer
+^\.github
+^\.vscode
+^.lintr
+^\.pre-commit-config\.yaml$
