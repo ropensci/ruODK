@@ -37,12 +37,13 @@ test_that("entity_update works", {
 
   testthat::expect_equal(eu$current_version$data$details, new_details)
 
-  testthat::expect_equal(ed$current_version$version,
-                         eu$current_version$baseVersion)
+  testthat::expect_equal(
+    ed$current_version$version,
+    eu$current_version$baseVersion
+  )
 })
 
 test_that("entitylist_update warns if odkc_version too low", {
-
   ru_setup(
     pid = get_test_pid(),
     url = get_test_url(),
@@ -98,7 +99,6 @@ test_that("entitylist_update warns if odkc_version too low", {
       data = e_data
     )
   )
-
 })
 
 # usethis::use_r("entity_update")  # nolint
