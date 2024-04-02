@@ -7,7 +7,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
     libudunits2-dev libxtst6 libxt6 libmagick++-dev \
-    make git procps locales curl && \
+    libxml2-dev libjq-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev \
+    libicu-dev libv8-dev libjq-dev libprotobuf-dev protobuf-compiler libgit2-dev \
+    rsync mdbtools cargo libavfilter-dev libfontconfig1-dev libopenblas-dev \
+    freetds-common libct4 libsybdb5 freetds-bin freetds-dev libsybdb5 tdsodbc \
+    unixodbc make git procps locales curl && \
     rm -rf /var/lib/apt/lists/*
 
 # generating locales

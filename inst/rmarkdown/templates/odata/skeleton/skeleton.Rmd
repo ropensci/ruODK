@@ -15,13 +15,13 @@ output:
     latex_engine: xelatex
   word_document: default
 ---
-<!--  
-This Rmd template provides an example workflow to access submissions and 
+<!--
+This Rmd template provides an example workflow to access submissions and
 attachments of a given ODK Central form using its OData API and disseminate
 data, attachments, and this report via CKAN or Google Drive.
 
 You will need:
-* An ODK Central form's OData Service URL (ending in .svc), accessed from the 
+* An ODK Central form's OData Service URL (ending in .svc), accessed from the
 "Analyse using OData" button on the form submission tab.
 * Username and password of an ODK Central webuser authorised to view this form.
 * Optional: base URL and write-permitted API key for a CKAN instance.
@@ -30,7 +30,7 @@ You will need:
 
 <!--
 Step 1: Setup ruODK, ckanr
-Secrets are set as environment variables to keep them outside of this document. 
+Secrets are set as environment variables to keep them outside of this document.
 Read vignette("setup") for setup and authentication options.
 -->
 <!-- 1a. Open the .Renviron file:  -->
@@ -50,8 +50,8 @@ CKAN_KEY <- "my-ckan-api-key"
 ```
 <!-- 1c: Restart the R session to load these environment variables. -->
 
-<!-- 
-* Configure ODK Central base URL (url), project ID (pid), and form ID (fid) 
+<!--
+* Configure ODK Central base URL (url), project ID (pid), and form ID (fid)
 in one step using the OData Service URL.
 * Paste your own Service URL over `svc="..."`.
 * Paste your local timezone over `Australia/Perth`.
@@ -99,9 +99,9 @@ ft <- ruODK::odata_service_get()
 ft %>% knitr::kable(.)
 ```
 
-<!-- 
+<!--
 Get and parse submissions.
-Repeat for each form table name in ft$url. 
+Repeat for each form table name in ft$url.
 The `submissions_id` of a nested table links to the main table's `id`.
 Once happy with the parsing results, verbose can be set to FALSE.
 See vignette "spatial" for more operations on geo fields.
@@ -135,8 +135,8 @@ data_sub2 <- ruODK::odata_submission_get(
 ```
 
 # Analyse and visualise data
-<!-- 
-  Summarise, analyse, visualise the tibble(s) data (, data_sub1, data_sub2) 
+<!--
+  Summarise, analyse, visualise the tibble(s) data (, data_sub1, data_sub2)
 -->
 ```{r data_vis}
 skimr::skim(data)
@@ -190,10 +190,10 @@ The form submissions are now extracted and visualised. What's next:
 * Upload these artifacts to a CKAN data catalogue.
 * Upload same artifacts to Google Drive.
 
-Notes: 
+Notes:
 
-* Generate the HTML report once off without the next chunk (`eval=F`), 
-as the chunk refers to the rendered output file (HTML) before the file is 
+* Generate the HTML report once off without the next chunk (`eval=F`),
+as the chunk refers to the rendered output file (HTML) before the file is
 created initially.
 * Run report always twice to generate (run 1) and upload (run 2) the latest HTML.
 -->

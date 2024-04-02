@@ -1,4 +1,4 @@
-# Contributing 
+# Contributing
 This contributing guide has been derived from the `tidyverse` boilerplate.
 Where it seems over the top, common sense is appreciated, and every contribution
 is appreciated.
@@ -31,9 +31,9 @@ If you would like to contribute to the code base, follow the process below.
 *   [Code of Conduct](#code-of-conduct)
 
 This explains how to propose a change to `ruODK` via a pull request using
-Git and GitHub. 
+Git and GitHub.
 
-For more general info about contributing to `ruODK`, see the 
+For more general info about contributing to `ruODK`, see the
 [Resources](#resources) at the end of this document.
 
 ### Naming conventions
@@ -41,24 +41,24 @@ ruODK names functions after ODK Central endpoints. If there are aliases, such as
 "Dataset" and "Entity List", choose the alias that is shown to Central users
 (here, choose "Entity List") over internally used terms.
 
-Function names combine the object name (`project`, `form`, `submission`, 
-`attachment`, `entitylist`, `entity`, etc.) with the action (`list`, `detail`, 
-`patch`) as snake case, e.g. `project_list()`. 
+Function names combine the object name (`project`, `form`, `submission`,
+`attachment`, `entitylist`, `entity`, etc.) with the action (`list`, `detail`,
+`patch`) as snake case, e.g. `project_list()`.
 In case of any uncertainty, discussion is welcome.
 
-In contrast, `pyODK` uses a class based approach with the pluralised object name 
+In contrast, `pyODK` uses a class based approach with the pluralised object name
 separated from the action `client.entity_lists.list()`.
 
-Documentation should capitalise ODK Central object names: Project, Form, 
+Documentation should capitalise ODK Central object names: Project, Form,
 Submission, Entity.
 
 ### Prerequisites
-To test the package, you will need valid credentials for an existing ODK Central 
+To test the package, you will need valid credentials for an existing ODK Central
 instance to be used as a test server.
 
 Before you do a pull request, you should always file an issue and make sure
-the maintainers agree that it is a problem, and is happy with your basic proposal 
-for fixing it. 
+the maintainers agree that it is a problem, and is happy with your basic proposal
+for fixing it.
 If you have found a bug, follow the issue template to create a minimal
 [reprex](https://www.tidyverse.org/help/#reprex) if you can do so without
 revealing sensitive information. Never include credentials in your reprex.
@@ -75,16 +75,16 @@ In the function documentation, include the following components:
 * Title
 * Lifecycle badge
 * Documentation from the official ODK Central API docs
-* Additional paragraphs (see e.g. `entity_detail.R`): Factor out commonly used 
+* Additional paragraphs (see e.g. `entity_detail.R`): Factor out commonly used
   text fragments into `man-roxygen` fragments.
 * Link the relevant ODK Central API docs and surround the link with `# nolint start / end` mufflers for linter warnings about the line length.
-* Link to the correct reference family topic. If adding a new topic, 
+* Link to the correct reference family topic. If adding a new topic,
   update `pkgdown.yml`.
 * List all parameters and export the function as usual.
 * Add examples showing basic usage inside a `\dontrun{}` block. Examples have
   no access to the test server and will only work for internal helpers which
   do not access the ODK Central API.
-  
+
 Inside the function:
 
 * Gatecheck for missing parameters via `yell_if_missing`.
@@ -99,15 +99,15 @@ Link to tests:
 
 #### Adding a dependency
 * Update DESCRIPTION
-* Update GH Actions install workflows - do R package deps have system deps? 
+* Update GH Actions install workflows - do R package deps have system deps?
   Can GHA install them in all environments?
 * Update Dockerfile
 * Update binder install.R
 * Update installation instructions
 
 #### Renaming a vignette
-* Search-replace all links to the vignette throughout 
-  * ruODK, 
+* Search-replace all links to the vignette throughout
+  * ruODK,
   * ODK Central "OData" modal
   * ODK Central docs
 
@@ -133,14 +133,14 @@ Link to tests:
 
 #### Fork, clone, branch
 
-The first thing you'll need to do is to [fork](https://help.github.com/articles/fork-a-repo/) 
-the [`ruODK` GitHub repo](https://github.com/ropensci/ruODK), and 
+The first thing you'll need to do is to [fork](https://help.github.com/articles/fork-a-repo/)
+the [`ruODK` GitHub repo](https://github.com/ropensci/ruODK), and
 then clone it locally. We recommend that you create a branch for each PR.
 
 #### Check
 
 Before changing anything, make sure the package still passes the below listed
-flavours of `R CMD check` locally for you. 
+flavours of `R CMD check` locally for you.
 
 ```r
 goodpractice::goodpractice(quiet = FALSE)
@@ -150,9 +150,9 @@ chk <- rcmdcheck::rcmdcheck(args = c("--as-cran"))
 
 #### Style
 
-Match the existing code style. This means you should follow the tidyverse 
-[style guide](http://style.tidyverse.org). Use the 
-[styler](https://CRAN.R-project.org/package=styler) package to apply the style 
+Match the existing code style. This means you should follow the tidyverse
+[style guide](http://style.tidyverse.org). Use the
+[styler](https://CRAN.R-project.org/package=styler) package to apply the style
 guide automatically.
 
 Be careful to only make style changes to the code you are contributing. If you
@@ -170,15 +170,15 @@ spelling::update_wordlist()
 
 #### Document
 
-We use [roxygen2](https://cran.r-project.org/package=roxygen2), specifically with the 
+We use [roxygen2](https://cran.r-project.org/package=roxygen2), specifically with the
 [Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html),
 to create `NAMESPACE` and all `.Rd` files. All edits to documentation
 should be done in roxygen comments above the associated function or
-object. Then, run `devtools::document()` to rebuild the `NAMESPACE` and `.Rd` 
+object. Then, run `devtools::document()` to rebuild the `NAMESPACE` and `.Rd`
 files.
 
 See the `RoxygenNote` in [DESCRIPTION](DESCRIPTION) for the version of
-roxygen2 being used. 
+roxygen2 being used.
 
 ```r
 spelling::spell_check_package()
@@ -195,9 +195,9 @@ if (fs::file_info("README.md")$modification_time <
 #### Test
 
 We use [testthat](https://cran.r-project.org/package=testthat). Contributions
-with test cases are easier to review and verify. 
+with test cases are easier to review and verify.
 
-To run tests and build the vignettes, you'll need access to the 
+To run tests and build the vignettes, you'll need access to the
 [ruODK test server](https://odkc.dbca.wa.gov.au/).
 If you haven't got an account yet, create an [accont request issue](https://github.com/ropensci/ruODK/issues/new/choose)
 to request access to this ODK Central instance.
@@ -235,7 +235,7 @@ ODKC_UN="..."
 ODKC_PW="..."
 ```
 
-Keep in mind that `ruODK` defaults to use `ODKC_{URL,UN,PW}`, so for everyday 
+Keep in mind that `ruODK` defaults to use `ODKC_{URL,UN,PW}`, so for everyday
 use outside of contributing, you will want to use your own `ODKC_{URL,UN,PW}`
 account credentials.
 
@@ -278,27 +278,27 @@ title) to automatically close the issue when the PR is merged.
 Once you've pushed your commit(s) to a branch in _your_ fork, you're ready to
 make the pull request. Pull requests should have descriptive titles to remind
 reviewers/maintainers what the PR is about. You can easily view what exact
-changes you are proposing using either the [Git diff](http://r-pkgs.had.co.nz/git.html#git-status) 
-view in RStudio, or the [branch comparison view](https://help.github.com/articles/creating-a-pull-request/) 
-you'll be taken to when you go to create a new PR. If the PR is related to an 
-issue, provide the issue number and slug in the _description_ using 
+changes you are proposing using either the [Git diff](http://r-pkgs.had.co.nz/git.html#git-status)
+view in RStudio, or the [branch comparison view](https://help.github.com/articles/creating-a-pull-request/)
+you'll be taken to when you go to create a new PR. If the PR is related to an
+issue, provide the issue number and slug in the _description_ using
 auto-linking syntax (e.g. `#15`).
 
 #### Check the docs
-Double check the output of the 
-[rOpenSci documentation CI](https://dev.ropensci.org/job/ruODK/lastBuild/console) 
+Double check the output of the
+[rOpenSci documentation CI](https://dev.ropensci.org/job/ruODK/lastBuild/console)
 for any breakages or error messages.
 
 #### Review, revise, repeat
 
-The latency period between submitting your PR and its review may vary. 
-When a maintainer does review your contribution, be sure to use the same 
+The latency period between submitting your PR and its review may vary.
+When a maintainer does review your contribution, be sure to use the same
 conventions described here with any revision commits.
 
 ### Resources
 
 *  [Happy Git and GitHub for the useR](http://happygitwithr.com/) by Jenny Bryan.
-*  [Contribute to the tidyverse](https://www.tidyverse.org/contribute/) covers 
+*  [Contribute to the tidyverse](https://www.tidyverse.org/contribute/) covers
    several ways to contribute that _don't_ involve writing code.
 *  [Contributing Code to the Tidyverse](http://www.jimhester.com/2017/08/08/contributing/) by Jim Hester.
 *  [R packages](http://r-pkgs.had.co.nz/) by Hadley Wickham.
@@ -306,11 +306,11 @@ conventions described here with any revision commits.
    *  [Automated checking](http://r-pkgs.had.co.nz/check.html)
    *  [Object documentation](http://r-pkgs.had.co.nz/man.html)
    *  [Testing](http://r-pkgs.had.co.nz/tests.html)
-*  [dplyr’s `NEWS.md`](https://github.com/tidyverse/dplyr/blob/master/NEWS.md) 
+*  [dplyr’s `NEWS.md`](https://github.com/tidyverse/dplyr/blob/master/NEWS.md)
    is a good source of examples for both content and styling.
-*  [Closing issues using keywords](https://help.github.com/articles/closing-issues-using-keywords/) 
+*  [Closing issues using keywords](https://help.github.com/articles/closing-issues-using-keywords/)
    on GitHub.
-*  [Autolinked references and URLs](https://help.github.com/articles/autolinked-references-and-urls/) 
+*  [Autolinked references and URLs](https://help.github.com/articles/autolinked-references-and-urls/)
    on GitHub.
 *  [GitHub Guides: Forking Projects](https://guides.github.com/activities/forking/).
 
