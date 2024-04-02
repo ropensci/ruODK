@@ -26,7 +26,7 @@ repos:
         name: Detect private keys
 
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.3.2
+    rev: v0.4.1
     hooks:
       - id: style-files
         name: Style code to tidyverse conventions
