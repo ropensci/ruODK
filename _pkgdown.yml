@@ -34,6 +34,7 @@ reference:
     developers. Accordingly, ruODK uses the term "entitylist_" for Entity Lists.
   contents:
   - has_concept("entity-management")
+  - entitylist_update
 - title: Forms
   desc: >
     Functions to manage forms.
