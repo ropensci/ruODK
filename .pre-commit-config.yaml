@@ -3,7 +3,7 @@ default_stages: [commit]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: trailing-whitespace
         name: Drop trailing whitespace
@@ -27,7 +27,7 @@ repos:
         name: Detect private keys
 
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.1
+    rev: v0.4.2
     hooks:
       - id: style-files
         name: Style code to tidyverse conventions

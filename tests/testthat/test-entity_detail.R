@@ -20,11 +20,11 @@ test_that("entity_detail works", {
 
   cn <- c(
     "uuid",
-    "created_at",
     "creator_id",
+    "conflict",
+    "created_at",
     "updated_at",
     "deleted_at",
-    "conflict",
     "current_version"
     # not unfolded:
     # "current_version_created_at",

@@ -20,18 +20,18 @@ test_that("entity_list works", {
 
   cn <- c(
     "uuid",
-    "created_at",
     "creator_id",
+    "created_at",
     "updated_at",
     "deleted_at",
-    "current_version_created_at",
     "current_version_current",
     "current_version_label",
     "current_version_creator_id",
     "current_version_user_agent",
     "current_version_version",
     "current_version_base_version",
-    "current_version_conflicting_properties"
+    "current_version_conflicting_properties",
+    "current_version_created_at"
   )
 
   testthat::expect_equal(names(en), cn)

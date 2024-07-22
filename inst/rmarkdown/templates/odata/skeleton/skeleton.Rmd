@@ -66,9 +66,9 @@ library(fs)
 library(ruODK)
 
 # Visualisation
-library(skimr)
+# require(skimr)
 library(knitr)
-library(DT)
+# library(DT)
 
 # Dissemination
 library(readr)
@@ -138,9 +138,17 @@ data_sub2 <- ruODK::odata_submission_get(
 <!--
   Summarise, analyse, visualise the tibble(s) data (, data_sub1, data_sub2)
 -->
-```{r data_vis}
-skimr::skim(data)
+```{r data_vis_dplyr}
 dplyr::glimpse(data)
+```
+
+For the next examples, have `skimr` and `DT` installed.
+
+```{r data_vis_skimr, eval = requireNamespace("skimr")}
+skimr::skim(data)
+```
+
+```{r data_vis_dt, eval = requireNamespace("DT")}
 DT::datatable(head(data))
 ```
 
@@ -219,8 +227,8 @@ zip(zipfile = zip_fn, files = fs::dir_ls(loc))
 # CKAN
 #
 # Upload to a CKAN data catalogue
-# Needs url and API key of a write permitted user
-# See ROpenSci package ckanr
+# Needs CKAN_URL and API CKAN_KEY with org editor permissions
+# See https://docs.ropensci.org/ckanr/
 ckanr::ckanr_setup(url = Sys.getenv("CKAN_URL"), key = Sys.getenv("CKAN_KEY"))
 ckan_ds_name <- "my-ckan-dataset-slug"
 
