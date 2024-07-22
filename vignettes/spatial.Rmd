@@ -212,7 +212,7 @@ ggplot2::ggplot() +
 ### Leaflet using sf and extracted coordinates
 You can show either first extracted coordinate components from plain `tbl_df`
 or show the full polygons using `{leafem}`.
-See the mapview article on [extra functionality](https://r-spatial.github.io/mapview/articles/articles/mapview_06-add.html).
+See the mapview article on [extra functionality](https://r-spatial.github.io/mapview/articles/mapview_06-add.html).
 ```{r, eval=can_run}
 leaflet::leaflet(data = geo_wkt) %>%
   leaflet::addTiles() %>%
@@ -235,7 +235,7 @@ The [sf cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/sf.pdf)
 deserves a spatial mention.
 
 Review the options for
-[mapview popups](https://r-spatial.github.io/mapview/articles/articles/mapview_04-popups.html)
+[mapview popups](https://r-spatial.github.io/mapview/articles/mapview_04-popups.html)
 and the whole [mapview](https://r-spatial.github.io/mapview/index.html) homepage for a
 comprehensive overview of mapview.
 
@@ -251,7 +251,7 @@ including but not limited to:
 * [Geospatial data in R and beyond](https://www.maths.lancs.ac.uk/~rowlings/Teaching/UseR2012/)
   by [Barry Rowlingson](http://barry.rowlingson.com/)
 * [GIS with R](https://www.jessesadler.com/post/gis-with-r-intro/)
-  by [Jesse Sadler](https://www.jessesadler.com/page/cv/)
+  by [Jesse Sadler](https://www.jessesadler.com/about)
 * GIS and mapping by [Olivier Gimenez](https://oliviergimenez.github.io/):
   [Slides](https://oliviergimenez.github.io/intro_spatialR/) and
   [code](https://github.com/oliviergimenez/intro_spatialR)
