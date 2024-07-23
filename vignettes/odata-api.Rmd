@@ -355,7 +355,7 @@ This section provides some examples of standard data visualisations.
 ## Datatable
 The package `DT` provides an interactive (and searchable) datatable.
 
-```{r vis_data}
+```{r vis_data, eval = requireNamespace("DT")}
 DT::datatable(fq_data)
 DT::datatable(fq_data_taxa)
 DT::datatable(fq_data_strata)
