@@ -35,7 +35,7 @@
 # nolint start
 #' @seealso \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 # nolint end
-#' @family dataset-management
+#' @family entity-management
 #' @export
 #' @examples
 #' \dontrun{

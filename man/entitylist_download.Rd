@@ -196,10 +196,12 @@ ds3 <- entitylist_download(
 \url{https://docs.getodk.org/central-api-dataset-management/#datasets}
 
 Other entity-management: 
+\code{\link{entity_create}()},
 \code{\link{entity_detail}()},
 \code{\link{entity_list}()},
 \code{\link{entity_update}()},
 \code{\link{entitylist_detail}()},
-\code{\link{entitylist_list}()}
+\code{\link{entitylist_list}()},
+\code{\link{entitylist_update}()}
 }
 \concept{entity-management}

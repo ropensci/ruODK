@@ -121,10 +121,12 @@ ev <- en$current_version_version[1]
 \url{https://docs.getodk.org/central-api-entity-management/#entities-metadata}
 
 Other entity-management: 
+\code{\link{entity_create}()},
 \code{\link{entity_detail}()},
 \code{\link{entity_update}()},
 \code{\link{entitylist_detail}()},
 \code{\link{entitylist_download}()},
-\code{\link{entitylist_list}()}
+\code{\link{entitylist_list}()},
+\code{\link{entitylist_update}()}
 }
 \concept{entity-management}
