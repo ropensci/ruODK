@@ -183,7 +183,7 @@ ec <- entity_create(
 ec
 
 # Create multiple entities, example: test form "problems"
-label = c(
+label <- c(
   glue::glue(
     "Entity {nrow(en) + 1} created by ruODK package test on {Sys.time()}"
   ),
@@ -191,12 +191,12 @@ label = c(
     "Entity {nrow(en) + 2} created by ruODK package test on {Sys.time()}"
   )
 )
-notes = glue::glue("Two entities created by ruODK package test on {Sys.time()}")
-status = c("needs_followup", "needs_followup")
-details = c("ruODK package test", "ruODK package test")
-geometry = c("-33.2 115.0 0.0 0.0", "-33.2 115.0 0.0 0.0")
-data = data.frame(status, details, geometry, stringsAsFactors = FALSE)
-request_data = list(
+notes <- glue::glue("Two entities created by ruODK package test on {Sys.time()}")
+status <- c("needs_followup", "needs_followup")
+details <- c("ruODK package test", "ruODK package test")
+geometry <- c("-33.2 115.0 0.0 0.0", "-33.2 115.0 0.0 0.0")
+data <- data.frame(status, details, geometry, stringsAsFactors = FALSE)
+request_data <- list(
   "entities" = data.frame(label, data = I(data), stringsAsFactors = FALSE),
   "source" = list("name" = "file.csv", "size" = 100)
 )
@@ -205,10 +205,11 @@ request_data = list(
 # https://docs.getodk.org/central-api-entity-management/#creating-entities
 # jsonlite::toJSON(request_data, pretty = TRUE, auto_unbox = TRUE)
 
-ec <- entity_create(did = did,
-                    notes = notes,
-                    data = request_data)
-
+ec <- entity_create(
+  did = did,
+  notes = notes,
+  data = request_data
+)
 }
 }
 \seealso{
