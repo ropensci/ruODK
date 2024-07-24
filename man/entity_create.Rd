@@ -8,7 +8,7 @@ entity_create(
   pid = get_default_pid(),
   did = "",
   label = "",
-  uuid = NULL,
+  uuid = "",
   notes = "",
   data = list(),
   url = get_default_url(),
@@ -34,7 +34,16 @@ The function will error if this parameter is not given.
 Default: "".}
 
 \item{label}{(character) The Entity label which must be a non-empty string.
+If the label is given, a single entity is created using \code{data}, \code{notes},
+and \code{uuid} if given.
+If the label is kept at the default (or omitted), multiple entities are
+created using \code{data} and \code{notes} and ignoring \code{uuid}.
 Default: \code{""}.}
+
+\item{uuid}{(character) A single UUID to assign to the entity.
+Default: \code{""}. With the default, Central will create and assign a UUID.
+This parameter is only used when creating a single entity (\code{label}
+non-empty) and ignored when creating multiple entities (\code{label} empty).}
 
 \item{notes}{(character) Metadata about the request which can be retrieved
 using the entity audit log.
@@ -42,7 +51,10 @@ Default: \code{""}.}
 
 \item{data}{(list) A named list of Entity properties to create a single
 Entity, or a nested list with an array of Entity data to create multiple
-Entities. See details for the exact format.
+Entities. The nested lists representing individual entities must be valid
+as in they must contain a label, valid data for the respective entity
+properties, and can contain an optional UUID.
+See details and the ODK documentation for the exact format.
 Default: \code{list()}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
@@ -170,19 +182,33 @@ ec <- entity_create(
 )
 ec
 
-# Create multiple entities
-eb <- entity_create(
-  did = did,
-  notes = "Metadata about the created entities",
-  data = list(
-    "entities" = c(
-      list("label" = "Entity 1", "data" = list("field1" = "value1")),
-      list("label" = "Entity 2", "data" = list("field1" = "value2"))
-    ),
-    "source" = list("name" = "file.csv", "size" = 100)
+# Create multiple entities, example: test form "problems"
+label = c(
+  glue::glue(
+    "Entity {nrow(en) + 1} created by ruODK package test on {Sys.time()}"
+  ),
+  glue::glue(
+    "Entity {nrow(en) + 2} created by ruODK package test on {Sys.time()}"
   )
 )
-eb
+notes = glue::glue("Two entities created by ruODK package test on {Sys.time()}")
+status = c("needs_followup", "needs_followup")
+details = c("ruODK package test", "ruODK package test")
+geometry = c("-33.2 115.0 0.0 0.0", "-33.2 115.0 0.0 0.0")
+data = data.frame(status, details, geometry, stringsAsFactors = FALSE)
+request_data = list(
+  "entities" = data.frame(label, data = I(data), stringsAsFactors = FALSE),
+  "source" = list("name" = "file.csv", "size" = 100)
+)
+
+# Compare request_data to the schema expected by Central
+# https://docs.getodk.org/central-api-entity-management/#creating-entities
+# jsonlite::toJSON(request_data, pretty = TRUE, auto_unbox = TRUE)
+
+ec <- entity_create(did = did,
+                    notes = notes,
+                    data = request_data)
+
 }
 }
 \seealso{
