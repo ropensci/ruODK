@@ -13,14 +13,14 @@ test_that("entitylist_update works", {
 
   did <- ds$name[1]
 
-  # Update dataset with opposite approvalRequired
-  ds2 <- entitylist_update(did = did, approval_required = !ds1$approvalRequired)
-  testthat::expect_false(ds1$approvalRequired == ds2$approvalRequired)
+  # Update dataset with opposite approval_required
+  ds2 <- entitylist_update(did = did, approval_required = !ds1$approval_required)
+  testthat::expect_false(ds1$approval_required == ds2$approval_required)
 
-  # Update dataset with opposite approvalRequired again
-  ds3 <- entitylist_update(did = did, approval_required = !ds2$approvalRequired)
-  testthat::expect_false(ds2$approvalRequired == ds3$approvalRequired)
-  testthat::expect_true(ds1$approvalRequired == ds3$approvalRequired)
+  # Update dataset with opposite approval_required again
+  ds3 <- entitylist_update(did = did, approval_required = !ds2$approval_required)
+  testthat::expect_false(ds2$approval_required == ds3$approval_required)
+  testthat::expect_true(ds1$approval_required == ds3$approval_required)
 })
 
 test_that("entitylist_update errors if did is missing", {

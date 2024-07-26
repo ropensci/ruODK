@@ -12,4 +12,3 @@ coverage:
         threshold: 1%
 ignore:
   - "R/utils-lifecycle.R"
-

@@ -1,5 +1,5 @@
 # urODK - You, R, and ODK: A sing-along ruODK workshop
-This document contains the outline of a workshop where within about one hour, 
+This document contains the outline of a workshop where within about one hour,
 we’ll build an electronic data capture pipeline from
 form design to data analysis and dissemination using ODK and `ruODK`.
 
@@ -99,7 +99,7 @@ See the ruODK README for other installation options.
 
 ### Configure ruODK
 
-Add your ODK Central credentials to `.Renviron` via 
+Add your ODK Central credentials to `.Renviron` via
 `usethis::edit_r_environ()` (with your own `un` and `pw`):
 
 ``` r

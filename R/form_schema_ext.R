@@ -335,8 +335,12 @@ form_schema_ext <- function(flatten = FALSE,
                   )
                 } else {
                   # check if language already exists in the dataframe
-                  if (!(paste0("choices_", this_choicelang) %in%
-                    colnames(extension))) {
+                  if (
+                    !(
+                      paste0("choices_", this_choicelang) %in%
+                        colnames(extension)
+                    )
+                  ) {
                     # if not, create new column
                     extension <- cbind(extension, data.frame(
                       new_choicelang = rep(NA, nrow(extension))
@@ -473,7 +477,6 @@ form_schema_ext <- function(flatten = FALSE,
               all_translations_ids == id_choice
             ]
 
-
             # iterate through choice translations
             for (kk in seq_along(choice_translations)) {
               # read translation
@@ -504,8 +507,12 @@ form_schema_ext <- function(flatten = FALSE,
                   )
                 } else {
                   # check if language already exists in the dataframe
-                  if (!(paste0("choices_", this_choicelang) %in%
-                    colnames(extension))) {
+                  if (
+                    !(
+                      paste0("choices_", this_choicelang) %in%
+                        colnames(extension)
+                    )
+                  ) {
                     # if not, create new column
                     extension <- cbind(extension, data.frame(
                       new_choicelang = rep(NA, nrow(extension))

@@ -1,6 +1,7 @@
 home:
   title: An R Client for the ODK Central API
   description: R, you, and ODK - Interact with ODK Central from R
+url: https://docs.ropensci.org/ruODK/
 template:
   opengraph:
     image:

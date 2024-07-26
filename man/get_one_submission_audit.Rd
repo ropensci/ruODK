@@ -111,7 +111,7 @@ Other utilities:
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
 \code{\link{get_one_submission}()},
-\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission_att_list}()},
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_datetimes}()},
 \code{\link{handle_ru_geopoints}()},

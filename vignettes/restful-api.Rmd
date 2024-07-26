@@ -2,7 +2,7 @@
 title: "Accessing the RESTful API"
 description: >
   Accessing submission data via the REST pathway.
-output: 
+output:
   rmarkdown::html_vignette:
     self_contained: false
 vignette: >
@@ -16,42 +16,42 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
 # Scope
-This vignette provides a guided walk-through of the "getting data out" 
+This vignette provides a guided walk-through of the "getting data out"
 functions of the RESTful API endpoints which list and view details.
 
 `ruODK` users would mix and match parts of the demonstrated workflows to build
 their own data pipelines, e.g.:
 
-* to build a quick analysis from all data, freshly downloaded from a smaller 
+* to build a quick analysis from all data, freshly downloaded from a smaller
   project, or
 * to build an interactive ETL pipeline to selectively download only new submissions
   for further processing and upload into downstream data warehouses.
-  
-A typical and more stream-lined workflow is provided in the RMarkdown template 
+
+A typical and more stream-lined workflow is provided in the RMarkdown template
 "ODK Central via OData" which is supplied by `ruODK`.
 
 ## Three ways to happiness
 
 ODK Central offers no less than three different ways to access data:
 
-* viewing ODK Central data in MS PowerBI, MS Excel, Tableau, or `ruODK` 
+* viewing ODK Central data in MS PowerBI, MS Excel, Tableau, or `ruODK`
   through the OData service endpoints, or
-* downloading all submissions including attachments as one (possibly gigantic) 
+* downloading all submissions including attachments as one (possibly gigantic)
   zip archive either through the "Export Submissions" button in the ODK Central
   form submissions page or through `ruODK`, or
 * viewing ODK Central data through `ruODK`'s RESTful API functions.
 
-While the `vignette("odata", package="ruODK")` 
-(online [here](https://docs.ropensci.org/ruODK/articles/odata-api.html)) 
+While the `vignette("odata", package="ruODK")`
+(online [here](https://docs.ropensci.org/ruODK/articles/odata-api.html))
 illustrates the first option, this vignette demonstrates the remaining two.
 
-Not implemented (yet) are the "managing ODK Central" functions which create, 
-update, and delete projects, forms, users, roles, and permissions. 
-We haven't yet found a strong use case to automate those functions - 
+Not implemented (yet) are the "managing ODK Central" functions which create,
+update, and delete projects, forms, users, roles, and permissions.
+We haven't yet found a strong use case to automate those functions -
 ODK Central (driven by humans) does those jobs beautifully on an expected scale.
 
 # Setup ruODK
-See [`vignette("Setup", package = "ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html) 
+See [`vignette("Setup", package = "ruODK")`](https://docs.ropensci.org/ruODK/articles/setup.html)
 for detailed options to configure `ruODK`.
 
 Here, we'll grab the OData service URL from the form used in this vignette,
@@ -91,7 +91,7 @@ data("fq_attachments")
 # Projects
 
 List projects. We see the project ID, a name, the number of forms and app users,
-dates of last form submissions plus project management timestamps (created, 
+dates of last form submissions plus project management timestamps (created,
 updated).
 
 The important bit here is the project ID.
@@ -122,10 +122,10 @@ fq_project_detail %>%
 fq_project_detail$verbs[[1]] %>% unlist(.)
 ```
 
-Nothing apart from the verbs is new compared to the data returned by 
+Nothing apart from the verbs is new compared to the data returned by
 `ruODK::project_list`.
 
-To learn more about the functionality behind the verbs, refer to the interactive 
+To learn more about the functionality behind the verbs, refer to the interactive
 [ODK Central API documentation](https://docs.getodk.org/central-api/).
 
 To retrieve data from ODK Central, the functions shown below will suffice.
@@ -138,7 +138,7 @@ To download form submissions, we need to know project ID and form ID.
 There are several ways of retrieving the form ID:
 
 * Browsing forms in the ODK Central's project overviews,
-* Stealing the form ID from the OData service endpoint URL as shown on 
+* Stealing the form ID from the OData service endpoint URL as shown on
   ODK Central's form submission page,
 * Listing form metadata for a given project ID with `ruODK::form_list()`.
 
@@ -153,7 +153,7 @@ fq_form_list %>% knitr::kable(.)
 Further to the metadata shown here, a column `xml` contains the entire XForms
 definition (originally XML) as nested list.
 
-If the original XML is needed rather than the R equivalent (nested list), 
+If the original XML is needed rather than the R equivalent (nested list),
 we can use `ruODK::form_xml` with parameter `parse=FALSE`:
 
 ```{r form_xml, eval=F}
@@ -172,8 +172,8 @@ if (require(listviewer)) {
 
 The `form_schema` represents all form fields of the XForms definition.
 
-See the 
-[ODK Central API docs](https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields) 
+See the
+[ODK Central API docs](https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields)
 and the examples of `??ruODK::form_schema()` for more detail.
 
 
@@ -273,9 +273,9 @@ head(fq_zip_taxa)
 
 ## List submissions for one form
 Not always is it appropriate to download all submissions and all attachments
-at once. 
+at once.
 
-If forms feed into downstream data warehouses, the typical ETL workflow is to 
+If forms feed into downstream data warehouses, the typical ETL workflow is to
 
 * List all submissions from ODK Central
 * Select the subset of new submissions to download, e.g.
@@ -296,17 +296,17 @@ The list of submissions critically contains each submission's unique ID in
 `instance_id`. If the submissions shall be downloaded and uploaded into another
 data warehouse, the `instance_id` can be used to determine whether a record
 already exists in the downstream warehouse or not.
-This workflow is preferable where the majority of submissions is already 
-imported into another downstream data warehouse, and we only want to add new 
-submissions, as in submissions which are not already imported into the data 
+This workflow is preferable where the majority of submissions is already
+imported into another downstream data warehouse, and we only want to add new
+submissions, as in submissions which are not already imported into the data
 warehouse.
 
-Furthermore, the `instance_id`s can now be used to retrieve the actual 
+Furthermore, the `instance_id`s can now be used to retrieve the actual
 submissions.
 
 ## Get submission data
 
-In order to import each submission, we need to retrieve the data by 
+In order to import each submission, we need to retrieve the data by
 `instance_id`.
 
 ```{r submission_data, eval=F}
@@ -320,9 +320,9 @@ fq_submissions <- ruODK::submission_get(fq_submission_list$instance_id)
 ```
 
 ## Parse submissions
-The data in `sub` is one row of the bulk downloaded submissions in 
+The data in `sub` is one row of the bulk downloaded submissions in
 `data_quadrat`.
-The data in `submissions` represents all (or let's pretend, the selected) 
+The data in `submissions` represents all (or let's pretend, the selected)
 submissions in `data_quadrat`.
 The field `xml` contains the actual submission data including repeating groups.
 
@@ -330,7 +330,7 @@ The structure is different to the output of `ruODK::odata_submission_get`,
 therefore `ruODK::odata_submission_rectangle` does not work for those, as
 here we might have repeating groups included in a submission.
 
-This structure could be used for upload into data warehouses accepting nested 
+This structure could be used for upload into data warehouses accepting nested
 data as e.g. JSON.
 
 ```{r view_submission_data, fig.width=7}
@@ -343,11 +343,11 @@ if (requireNamespace("listviewer")) {
 
 # Outlook
 The approach shown here yields nested and stand-alone records, which is useful
-if the subsequent use requires records in nested JSON or XML format. 
-Complex forms with repeating sub-groups will result in highly nested lists, 
+if the subsequent use requires records in nested JSON or XML format.
+Complex forms with repeating sub-groups will result in highly nested lists,
 whose structure heavily depends on the completeness of the submissions.
 
-The other approach shown in 
-[`vignette("odata-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html) 
-yields rectangled data in several normalised tables, which is useful for 
+The other approach shown in
+[`vignette("odata-api", package="ruODK")`](https://docs.ropensci.org/ruODK/articles/odata-api.html)
+yields rectangled data in several normalised tables, which is useful for
 analysis and visualisation.

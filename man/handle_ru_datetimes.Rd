@@ -7,7 +7,7 @@
 handle_ru_datetimes(
   data,
   form_schema,
-  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  orders = get_default_orders(),
   tz = get_default_tz(),
   verbose = get_ru_verbose()
 )
@@ -72,7 +72,7 @@ Other utilities:
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
 \code{\link{get_one_submission}()},
-\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission_att_list}()},
 \code{\link{get_one_submission_audit}()},
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_geopoints}()},

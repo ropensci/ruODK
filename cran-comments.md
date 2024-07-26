@@ -22,19 +22,19 @@
 
 Resolved NOTE comments:
 * Possibly invalid URLs:
-  * The package comparison section in the README contains Markdown badges with 
+  * The package comparison section in the README contains Markdown badges with
     CRAN links to packages that are not yet or not any more on CRAN. These
-    links are correct, and while they currently do not resolve, they will do so 
+    links are correct, and while they currently do not resolve, they will do so
     once the packages are (re-)submitted to CRAN. Currently removed.
-  * The README contains an ODK Central form OData service URL to illustrate 
+  * The README contains an ODK Central form OData service URL to illustrate
     setting up ruODK. The URL redirects to a login screen if followed directly.
     This is expected behaviour. Currently not appearing as warning.
 * The PDF version of the manual is now included.
-* The example data contains UTF-8 strings. This is a realistic scenario. 
+* The example data contains UTF-8 strings. This is a realistic scenario.
   The note has disappeared after the R version 4 release.
-* Test coverage: All functionality supporting the current ODK Central release is 
-  covered by tests. 
-  The only exception is `form_schema{_parse}`, which supports a breaking 
+* Test coverage: All functionality supporting the current ODK Central release is
+  covered by tests.
+  The only exception is `form_schema{_parse}`, which supports a breaking
   change between ODK Central 0.7 and 0.8. The test server runs ODK Central 0.8,
-  a production server (used by the package author, but not accessible to other 
+  a production server (used by the package author, but not accessible to other
   maintainers) runs 0.7 successfully. The tests for v 0.7 use packaged data.

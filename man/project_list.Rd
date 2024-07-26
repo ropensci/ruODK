@@ -9,7 +9,7 @@ project_list(
   un = get_default_un(),
   pw = get_default_pw(),
   retries = get_retries(),
-  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  orders = get_default_orders(),
   tz = get_default_tz()
 )
 }

@@ -399,6 +399,20 @@ get_default_tz <- function() {
 #' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
+get_default_orders <- function() {
+  c(
+    "YmdHMS",
+    "YmdHMSz",
+    "Ymd HMS",
+    "Ymd HMSz",
+    "Ymd",
+    "ymd"
+  )
+}
+
+#' `r lifecycle::badge("stable")`
+#' @export
+#' @rdname ru_settings
 get_test_url <- function() {
   x <- Sys.getenv("ODKC_TEST_URL")
   if (identical(x, "")) {
@@ -696,6 +710,8 @@ get_retries <- function() {
 #' @param pw A password (character)
 #' @param pid A project ID (numeric, optional)
 #' @param fid A form ID (character, optional)
+#' @param did An Entity List (dataset) name (character, optional)
+#' @param eid An Entity UUID (character, optional)
 #' @details This is a helper function to pat down \code{\link{ruODK}} functions
 #'   for missing credentials and stop with a loud but informative yell.
 #' @param iid A submission instance ID (character, optional)
@@ -710,7 +726,10 @@ get_retries <- function() {
 #' testthat::expect_error(yell_if_missing("", "", "", ""))
 #' testthat::expect_error(yell_if_missing("", "", "", "", ""))
 #' testthat::expect_error(yell_if_missing("", "", "", "", "", ""))
-yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL) {
+#' testthat::expect_error(yell_if_missing("", "", "", "", "", "", ""))
+#' testthat::expect_error(yell_if_missing("", "", "", "", "", "", "", ""))
+yell_if_missing <- function(
+    url, un, pw, pid = NULL, fid = NULL, iid = NULL, did = NULL, eid = NULL) {
   if (is.null(url) || identical(url, "")) {
     ru_msg_abort("Missing ODK Central URL. ru_setup()?")
   }
@@ -728,6 +747,12 @@ yell_if_missing <- function(url, un, pw, pid = NULL, fid = NULL, iid = NULL) {
   }
   if (!is.null(iid) && identical(iid, "")) {
     ru_msg_abort("Missing ODK Central submission instance ID.")
+  }
+  if (!is.null(did) && identical(did, "")) {
+    ru_msg_abort("Missing ODK Central Entity List (dataset) name.")
+  }
+  if (!is.null(eid) && identical(eid, "")) {
+    ru_msg_abort("Missing ODK Central Entity UUID.")
   }
 }
 

@@ -2,21 +2,13 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
-#' While the API endpoint will return all Entity Lists for one Project,
-#' \code{\link{entitylist_list}} will fail with incorrect or missing
-#' authentication.
+#' The returned list is useful to retrieve the valid name of an Entity List for
+#' further use by functions of the Entity Management family.
 #'
-#' An Entity List is a named collection of Entities that have the same properties.
-#' An Entity List can be linked to Forms as Attachments.
-#' This will make it available to clients as an automatically-updating CSV.
-#'
-#' ODK Central calls Entity Lists internally Datasets. `ruODK` chooses the term
-#' Entity Lists as it is used in the ODK Central user interface and conveys
-#' its relation to Entities better than the term Dataset.
-#'
-#' This function is supported from ODK Central v2022.3 and will warn if the
-#' given odkc_version is lower.
-#'
+#' @template tpl-def-entitylist
+#' @template tpl-entitylist-dataset
+#' @template tpl-auth-missing
+#' @template tpl-compat-2022-3
 #' @template param-pid
 #' @template param-url
 #' @template param-auth
@@ -24,9 +16,9 @@
 #' @template param-odkcv
 #' @template param-orders
 #' @template param-tz
-#' @return A tibble with exactly one row for each dataset of the given project
-#'   as per ODK Central API docs.
-#'   Column names are renamed from ODK's `camelCase` to `snake_case`.
+#' @return A tibble with exactly one row for each Entity List of the given
+#'   Project as per ODK Central API docs.
+#'   Column names are renamed from ODK Central's `camelCase` to `snake_case`.
 # nolint start
 #' @seealso \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 # nolint end
@@ -35,7 +27,7 @@
 #' @examples
 #' \dontrun{
 #' # See vignette("setup") for setup and authentication options
-#' # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
+#' # ruODK::ru_setup(svc = "... .svc", un = "me@email.com", pw = "...")
 #'
 #' ds <- entitylist_list(pid = get_default_pid())
 #'
@@ -47,14 +39,7 @@ entitylist_list <- function(pid = get_default_pid(),
                             pw = get_default_pw(),
                             retries = get_retries(),
                             odkc_version = get_default_odkc_version(),
-                            orders = c(
-                              "YmdHMS",
-                              "YmdHMSz",
-                              "Ymd HMS",
-                              "Ymd HMSz",
-                              "Ymd",
-                              "ymd"
-                            ),
+                            orders = get_default_orders(),
                             tz = get_default_tz()) {
   yell_if_missing(url, un, pw, pid = pid)
 

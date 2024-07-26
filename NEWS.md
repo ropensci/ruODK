@@ -1,14 +1,16 @@
 # ruODK 1.5.0
 ## Major changes
 * Support Entities and Entity Lists (Datasets) (#152)
+* Add pre-commit hooks and precommit.ci integration
+* Add devcontainer
 
 # ruODK 1.4.2
-This release migrates the `ruODK` test suite to a new test server 
+This release migrates the `ruODK` test suite to a new test server
 `ruodk.getodk.cloud` which was generously sponsored by GetODK.
 
 This release makes `ruODK` aware of the new ODK Central semantic version format:
 Update your ODK Central version in `.Renviron` or in the credential
-helper of your choice to the new format `ODKC_VERSION="2023.5.1"` (with your 
+helper of your choice to the new format `ODKC_VERSION="2023.5.1"` (with your
 current version). See the updated vignette "setup".
 
 ## Major changes
@@ -16,14 +18,14 @@ current version). See the updated vignette "setup".
 * Migrate to new test server (#149)
 
 # ruODK 1.4.0
-This release fixes a few compatibility issues and bumps dependencies to R (4.1) 
-and imported/suggested packages. 
+This release fixes a few compatibility issues and bumps dependencies to R (4.1)
+and imported/suggested packages.
 Upgrade carefully and revert to 1.3.12 if things go awry.
 
-* Update to new `tidyselect` syntax: Using vectors of names to select makes 
-  `tidyselect` complain (WARN, soon ERROR). We wrap all programmatic selections 
-  of variable names in `dplyr::all_of()` where we expect a single variable to be 
-  selected, and `dplyr::any_of()` where we select using fuzzy matching 
+* Update to new `tidyselect` syntax: Using vectors of names to select makes
+  `tidyselect` complain (WARN, soon ERROR). We wrap all programmatic selections
+  of variable names in `dplyr::all_of()` where we expect a single variable to be
+  selected, and `dplyr::any_of()` where we select using fuzzy matching
   (e.g. `dplyr::starts_with()`). (#146)
 * Make `ruODK::form_list()` robust against `reviewState` missing from outdated
   Central versions. (#145, HT @dpagendam and #143, HT @collinschwantes)
@@ -52,7 +54,7 @@ Upgrade carefully and revert to 1.3.12 if things go awry.
 
 # `ruODK` 1.3.6
 ## Minor fixes
-* `odata_submission_get` supports parameter `expand` to expand all repeat 
+* `odata_submission_get` supports parameter `expand` to expand all repeat
   repetitions.
 
 # `ruODK` 1.3.5
@@ -69,7 +71,7 @@ This release supports ODK Central 1.3.0 and represents an over-due version
 bump to reflect the supported ODK Central version.
 The test server is now updated to ODK Central 1.3.0, and all tests pass.
 
-There are still some newer and as yet unsupported API endpoints in ODK Central, 
+There are still some newer and as yet unsupported API endpoints in ODK Central,
 which serve administrative purposes of the front-end. Contributions are welcome,
 get started on [these issues](https://github.com/ropensci/ruODK/milestone/2)
 and the contributing guide. As ruODK focuses on data retrieval, these
@@ -81,9 +83,9 @@ administrative endpoints are non-critical to ruODK's purpose.
 ## Data
 * Packaged data has been re-created to represent the latest server outputs.
 ## Maintenance
-* All tests pass, GitHub Actions is as per usual brittle at the installation 
+* All tests pass, GitHub Actions is as per usual brittle at the installation
   step.
-  
+
 # `ruODK` 1.2.0.0000
 We are shaping up to a release targetting the ODK Central 1.2 release.
 ODK Central is undergoing some bug fixes and patches, while ruODK's test server
@@ -122,7 +124,7 @@ which create/update/delete entities in ODK Central.
 
 # `ruODK` 0.10.2
 ## Major fixes
-* Fix ODK Central v1.2 time out on NULL query parameters `skip` and `top`. 
+* Fix ODK Central v1.2 time out on NULL query parameters `skip` and `top`.
   ruODK now only supplies non-NULL query parameters and has an additional
   seat-belt to drop any query parameter that is an empty string.
   (#126, thanks @yanokwa, @mtyszler, @thaliehln)
@@ -133,8 +135,8 @@ which create/update/delete entities in ODK Central.
 
 # `ruODK` 0.10.1
 ## Major fixes
-* `submission_export` now terminates immediately if an incorrect passphrase is 
-  given. ODK Central can exceed memory limits if `submission_export` is run 
+* `submission_export` now terminates immediately if an incorrect passphrase is
+  given. ODK Central can exceed memory limits if `submission_export` is run
   repeatedly with an incorrect passphrase. (#30, thanks @Thaliehln)
 ## Minor fixes
 * Add `encryption_key_list`
@@ -159,7 +161,7 @@ which create/update/delete entities in ODK Central.
 # `ruODK` 0.9.11
 ## Major fixes
 ## Minor fixes
-* Add `published_at` to `form_list` and `form_detail`, update examples, tests, 
+* Add `published_at` to `form_list` and `form_detail`, update examples, tests,
   test fixtures to show that draft forms can be detected by a NA `published_at`
   in ODK Central versions having form drafts, and by NA `hash` and `version`
   in ODK Central versions before form drafts.
@@ -168,7 +170,7 @@ which create/update/delete entities in ODK Central.
 ## Maintenance
 
 # `ruODK` 0.9.10
-This is a "everything so far works" release. 
+This is a "everything so far works" release.
 There are a few ODK Central API endpoints waiting to be implemented still.
 
 ## Major fixes
@@ -180,18 +182,18 @@ There are a few ODK Central API endpoints waiting to be implemented still.
 ## Data
 ## Maintenance
 * Updated Zenodo archive at <https://zenodo.org/record/4609910>
-* Updated Docker image at <https://hub.docker.com/u/dbcawa/ruodk> 
+* Updated Docker image at <https://hub.docker.com/u/dbcawa/ruodk>
   (RStudio server with ruODK)
 
 # `ruODK` 0.9.9
 ## Major fixes
 * `submission_export` now supports ODK Central v1.1 features to omit media
   attachments (`media = FALSE`), and to omit repeat data (`include_repeats=FALSE`).
-  Calling `submission_export` on an older version of ODK Central 
+  Calling `submission_export` on an older version of ODK Central
   (as determined through `get_default_odkc_version()`) with these new parameters
   will emit a (verbose only) "noop" message and not act further on them.
 ## Minor fixes
-* Bugfix to `submission_export` on encrypted forms with multiple encryption 
+* Bugfix to `submission_export` on encrypted forms with multiple encryption
   keys. (Thanks @Thaliehln #117 #30)
 
 # `ruODK` 0.9.8
@@ -201,10 +203,10 @@ There are a few ODK Central API endpoints waiting to be implemented still.
 
 # `ruODK` 0.9.7
 ## Major fixes
-* `odata_submission_get()` bugfix: `handle_ru_attachments()` 
-  now finds and downloads media attachments from both main submissions and 
+* `odata_submission_get()` bugfix: `handle_ru_attachments()`
+  now finds and downloads media attachments from both main submissions and
   nested form groups. (#114)
-* `odata_submission_get()` bugfix: missing media attachments (due to upload 
+* `odata_submission_get()` bugfix: missing media attachments (due to upload
   error from ODK Collect to ODK Central) are tolerated without interrupting the
   batch download. A diagnostic warning message will be emitted for each failed
   download. (#114)
@@ -217,15 +219,15 @@ There are a few ODK Central API endpoints waiting to be implemented still.
 ## Major fixes
 * Support encryption (#30 #110, @Thaliehln).
   * Note that `ruODK` only supports one passphrase. When switching between
-    multiple encrypted forms, it would make sense to store the different 
+    multiple encrypted forms, it would make sense to store the different
     passphrases in separate environment variables, and refer to these environment
     variables explicitly in function calls.
-  * The updated ruODK::submission_export should now export data 
+  * The updated ruODK::submission_export should now export data
     from both encrypted projects and non-encrypted projects.
-    The HTTP method is changed from GET to POST and encryption key ID / 
-    passphrase are provided via POST body using a JSON format. 
+    The HTTP method is changed from GET to POST and encryption key ID /
+    passphrase are provided via POST body using a JSON format.
     Encrypted forms can be extracted and inspected like non-encrypted forms:
-    
+
 ```{r, eval=FALSE}
 se <- submission_export()
 t <- tempdir()
@@ -250,7 +252,7 @@ sub %>% knitr::kable(.)
 * `form_schema_ext` performance enhancement (#106, thanks @mtyszler).
 ## Maintenance
 * Tests use vcr to cache server response (#104).
-  Delete the local cache `tests/fixtures` to re-generate the vcr cache, or 
+  Delete the local cache `tests/fixtures` to re-generate the vcr cache, or
   enjoy much faster running tests using cached server response.
 
 # `ruODK` 0.9.3
@@ -259,18 +261,18 @@ This is a point release to create a new RStudio Server image.
 * Form schema now also works on draft forms (#103, HT @dmenne).
 ## Maintenance
 * Automated code reviews by <codefactor.io>.
-* GitHub Actions welcomes Ubuntu 20.04 LTS and MacOS X back to the passing 
+* GitHub Actions welcomes Ubuntu 20.04 LTS and MacOS X back to the passing
   environments.
 
 # `ruODK` 0.9.2
 ## Major fixes
-* `form_schema_ext()` Shows the extended schema of one form, including 
+* `form_schema_ext()` Shows the extended schema of one form, including
   (multi-language) labels and choice lists. (#77, thanks @mtyszler for the PR)
 * Development continues in the default branch `main`.
 ## Minor fixes
-* `form_list` now handles draft forms with `NA` hash and version (#86, 
+* `form_list` now handles draft forms with `NA` hash and version (#86,
   thanks @dmenne for the PR).
-* Migrate package tests to a new ODK Central instance and update contributing 
+* Migrate package tests to a new ODK Central instance and update contributing
   guidelines with new settings. (#14)
 * Drop Import of `tidyselect` in favour of using `dplyr::all_of()`.
 * All calls to `httr::RETRY(times=)` are configurable via setting `retries`. (#94)
@@ -285,22 +287,22 @@ a trailing empty coordinate. `ruODK` removes any trailing empty coordinates from
 both GeoJSON and WKT formats. (#88, HT @TimonWeitkamp for the bug report)
 
 ## Documentation
-A new vignette "Spatial" demonstrates how to parse spatial data into native 
+A new vignette "Spatial" demonstrates how to parse spatial data into native
 formats, such as `sf`, and gives pointers on what to do next with them.
 
- 
+
 # `ruODK` 0.9.0
-This is the release on passing 
+This is the release on passing
 [rOpenSci peer review](https://github.com/ropensci/software-review/issues/335).
 
-Thanks to the rOpenSci editors and reviewers @maelle, @karissawhiting and 
+Thanks to the rOpenSci editors and reviewers @maelle, @karissawhiting and
 @jmt2080ad, as well as to @OdiljonQurbon, @dickoa, @arestrom and @dmenne.
 
 A DOI was minted at <https://doi.org/10.5281/zenodo.3953159>.
 
 # `ruODK` 0.6.6
-This version addresses ROpenSci reviewer comments from @karissawhiting and 
-@jmt2080ad, contributions from @dickoa, as well as ideas and suggestions from 
+This version addresses ROpenSci reviewer comments from @karissawhiting and
+@jmt2080ad, contributions from @dickoa, as well as ideas and suggestions from
 @OdiljonQurbon, @arestrom and @dmenne.
 
 This version supports ODK Central 0.9 while providing backwards compatibility
@@ -309,9 +311,9 @@ for ODK Central <= 0.7.
 ## Major fixes
 * New environment variables `ODKC_(TEST_)VERSION` allow `ruODK` to toggle
   between deprecated/removed and new/added API endpoints, e.g. `form_schema`. (#61)
-* Split and rename WKT POINT (ODK geopoint) fields with 
+* Split and rename WKT POINT (ODK geopoint) fields with
   `odata_submission_get(wkt=T)`. (#31 #7 HT @OdiljonQurbon)
-* `submission_get` now accepts a vector of (all or selected) submission instance 
+* `submission_get` now accepts a vector of (all or selected) submission instance
   IDs (`iid`), similar to `odata_submission_get()`. (#38)
 * All `httr::GET()` are now replaced with `httr::RETRY("GET", ...)` (#48)
 * Refactor `odata_submission_parse()` into `odata_submission_rectangle()`,
@@ -323,12 +325,12 @@ for ODK Central <= 0.7.
 * Drop `. <- NULL` in favour of `utils::globalVariables(".")`. (#35)
 * Print settings now hides passwords but instructs how to show them. (#37)
 * `ru_setup()` now prints settings. (#37)
-* `parse_datetime()` renamed to `ru_datetime()` to avoid naming conflict with 
+* `parse_datetime()` renamed to `ru_datetime()` to avoid naming conflict with
   `readr::parse_datetime()`. (#43)
 * Add a global default for verbosity. (#51 HT @arestrom)
 * Add a global default for time zone. (#53 HT @arestrom)
 * Use `httr::modify_url` to build URLs rather than `glue::glue` (#66)
-* Silenced spurious messages from `tibble::as_tibble()` which is called from 
+* Silenced spurious messages from `tibble::as_tibble()` which is called from
   `odata_submission_rectangle()`. Use `ru_verbose` to toggle useful diagnostic
   messages. (#79 HT @dmenne)
 * Renamed `master` branch to `main`, updated docs (HT @arestrom #81)
@@ -340,11 +342,11 @@ for ODK Central <= 0.7.
   latest bug fixes.
 
 ## Data
-* Use canned data in all vignettes, so they can build without authentication. 
+* Use canned data in all vignettes, so they can build without authentication.
   (#33)
 * Update canned data (and `make-data.R`) to work with CI-built pkgdown site.
   (#52)
-* Remove nested list `form_schema_raw` which is only generated from legacy 
+* Remove nested list `form_schema_raw` which is only generated from legacy
   ODK Central (< 0.8) (#61)
 * Added ODK Central < v0.7 form schema for tests.
 
@@ -352,15 +354,15 @@ for ODK Central <= 0.7.
 * Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK).
 * Rename vignettes to `odata-api` and `restful-api`. (#34)
 * Warn against using plain text credentials in vignette `setup`. (#34)
-* More documentation improvements at 
+* More documentation improvements at
   [#34](https://github.com/ropensci/ruODK/issues/34).
 * Add screencast to the README. HT to asciicast! (#45)
 * Improve logo - more turtles, but questionable photoshopping.
 * Add examples where missing. (#32)
 * Build pkgdown site via GH actions. (#52)
 * Minor typographic changes: end every function title with a full stop.
-* Broken links and other inconsistencies fixed after contributions from the 
-  ODK Forum, @dickoa, @arestrom, @dmenne. 
+* Broken links and other inconsistencies fixed after contributions from the
+  ODK Forum, @dickoa, @arestrom, @dmenne.
   Thanks for the first community feedback! (#76 #74 #79 #80 #81)
 
 ## Docker
@@ -370,7 +372,7 @@ for ODK Central <= 0.7.
   to launch a hosted RStudio instance in Binderhub. (#83)
 
 # `ruODK` 0.6.6
-* The big one has landed: `odata_submission_get()` now defaults to parse 
+* The big one has landed: `odata_submission_get()` now defaults to parse
   submissions from nested lists into a tibble, parse dates and datetimes,
   download and link attachments. (#6)
 
@@ -378,11 +380,11 @@ for ODK Central <= 0.7.
 ## Documentation
 * Use lifecycle badges on functions. Add lifecycle to dependencies, version bump
   `usethis`. (#29)
-  
+
 ## Code
-* Refactor list wrangling code to use `map_*(.default=NA)`, removing some 
+* Refactor list wrangling code to use `map_*(.default=NA)`, removing some
   internal helpers (thanks to @jennybc)
-* Use dummy imports to silence R CMD check NOTES as per [googledrive](https://github.com/tidyverse/googledrive/blob/050a982cba630503702bdde05a77d727baa36d48/R/googledrive-package.R)'s 
+* Use dummy imports to silence R CMD check NOTES as per [googledrive](https://github.com/tidyverse/googledrive/blob/050a982cba630503702bdde05a77d727baa36d48/R/googledrive-package.R)'s
   example (thanks to @jennybc)
 * Drop unused internal helper functions
 
@@ -401,12 +403,12 @@ for ODK Central <= 0.7.
 *  [tidyr 1.0.0](https://www.tidyverse.org/articles/2019/09/tidyr-1-0-0/) is out!
   Move `{tidyr}` dependency from GitHub master to CRAN version (#27)
 *  Add `{usethis}` to Suggests, it is used in the setup step
-  
+
 ## Documentation
-*  Add [David Henry](https://github.com/schemetrica)'s 
-  [Pentaho Kettle tutorial](https://forum.opendatakit.org/t/automating-data-delivery-using-the-odata-endpoint-in-odk-central/22010) 
+*  Add [David Henry](https://github.com/schemetrica)'s
+  [Pentaho Kettle tutorial](https://forum.opendatakit.org/t/automating-data-delivery-using-the-odata-endpoint-in-odk-central/22010)
   to the software review in the README (#28)
-  
+
 ## DIY for workshops
 *  Add inaugural RMarkdown template "odata" (#26)
 *  Add [binder](https://mybinder.org/) launch button (one click start for #26)
@@ -418,25 +420,25 @@ for ODK Central <= 0.7.
   moving project ID (pid) and form ID (fid) to kwargs. This changes all examples,
   tests, vignettes, READMEs.
 *  Reduce installed package size by sharing attachment files. Add new parameter
-  `separate=FALSE` to `attachment_get` to prevent separating attachment files 
+  `separate=FALSE` to `attachment_get` to prevent separating attachment files
   into subfolders named after their submission `uuid` (#22)
-  
+
 ## Documentation
 *  Add a high level overview diagram to README and `inst/joss/paper.md` to
   illustrate `ruODK`'s intended purpose in the ODK ecosystem (#19)
-*  Added link to explain 
-  [environment variables and R startup](https://whattheyforgot.org/r-startup.html) 
+*  Added link to explain
+  [environment variables and R startup](https://whattheyforgot.org/r-startup.html)
   to vignette "setup". @maelle
 *  Add comparison of similar software to README (#25)
 
 # `ruODK` 0.6.1
-*  ROpenSci submission review [milestone](https://github.com/ropensci/ruODK/milestone/3), 
+*  ROpenSci submission review [milestone](https://github.com/ropensci/ruODK/milestone/3),
   [discussion](https://github.com/ropensci/software-review/issues/335).
 *  Updates to documentation (#13 #15 #17)
 *  Group function docs (#18)
 *  Update contribution guidelines and add account request issue template:
   How to run `ruODK` tests and build the vignettes (#15 #20)
-*  Add dedicated `ru_setup()` and `ru_settings()`. 
+*  Add dedicated `ru_setup()` and `ru_settings()`.
   Pat down functions for missing credentials and yell loudly but clearly about
   httr errors. (#16)
 *  Drop `@importFrom` to reduce duplication. All external functions are prefixed
@@ -461,29 +463,29 @@ for ODK Central <= 0.7.
 ## Preparation for ROpenSci pre-submission
 *  Check name with [`available::available("ruODK")`](https://devguide.ropensci.org/building.html#naming-your-package):
   *  Name valid: ✔
-  *  Available on CRAN: ✔ 
+  *  Available on CRAN: ✔
   *  Available on Bioconductor: ✔
-  *  Available on GitHub:  ✔ 
+  *  Available on GitHub:  ✔
   *  Rude misinterpretations: none
   *  In summary: Package name seems to be OK. Well, ODK. OK, ruODK.
-*  Added metadata via 
+*  Added metadata via
   [`codemetar::write_codemeta("ruODK")`](https://devguide.ropensci.org/building.html#creating-metadata-for-your-package).
-*  [Cross-platform](https://devguide.ropensci.org/building.html#platforms): 
+*  [Cross-platform](https://devguide.ropensci.org/building.html#platforms):
   Runs on GNU/Linux (TravisCI) and on Windows (AppVeyor)
 *  [Function naming](https://devguide.ropensci.org/building.html#function-and-argument-naming)
-  follows `object_verb`. 
-  *  `ruODK` uses verb singulars (e.g. `submission_list` to 
+  follows `object_verb`.
+  *  `ruODK` uses verb singulars (e.g. `submission_list` to
   list multiple submissions), while ODK Central's API URLs use verb plurals.
   *  `ruODK` uses `snake_case`.
-  *  Exception to `object_verb`: 
+  *  Exception to `object_verb`:
     Functions operating on the OData endpoints are named `odata_object_verb`.
-    Helper functions not related to API endpoints are named `verb_object`. 
+    Helper functions not related to API endpoints are named `verb_object`.
 *  [Code style](https://devguide.ropensci.org/building.html#code-style) done
   by `styler::style_package()`, see section "Release" in `README.md`.
-*  `ruODK` [has a `README.Rmd`](https://devguide.ropensci.org/building.html#readme) 
-  and has a 
+*  `ruODK` [has a `README.Rmd`](https://devguide.ropensci.org/building.html#readme)
+  and has a
   [website generated by `pkgdown`](https://devguide.ropensci.org/building.html#website).
-*  `ruODK` has documentation 
+*  `ruODK` has documentation
   [generated by `roxygen2`](https://devguide.ropensci.org/building.html#documentation).
 *  [Test coverage](https://devguide.ropensci.org/building.html#testing) 100%, but
   could use more edge cases.
@@ -494,7 +496,7 @@ for ODK Central <= 0.7.
   function names to `inst/WORDLIST`.
 *  Added citation and section in `README`.
 *  Added `inst/joss/paper.md` for submission to JOSS.
-*  Added [examples](https://devguide.ropensci.org/building.html#examples) to 
+*  Added [examples](https://devguide.ropensci.org/building.html#examples) to
   function docs.
 
 ## TODO
@@ -506,12 +508,12 @@ for ODK Central <= 0.7.
 *  Created vignette "Setup"
 *  Add AppVeyor
 *  Refactor storage path of attachments to not contain "uuid:" (for Windows compat)
-*  Started on REST API: `project_list`, `project_detail`, `form_list`, 
-  `form_detail`. Naming scheme is `object_verb`. 
+*  Started on REST API: `project_list`, `project_detail`, `form_list`,
+  `form_detail`. Naming scheme is `object_verb`.
 *  For now, functions related to the OData endpoint
   are named `verb_object`, maybe we should rename them to `odata_object_verb`.
 *  Refactor URLs - build from project and form IDs
-  
+
 # `ruODK` 0.2.4
 *  Cleaned up logo, thanks to @issa-tseng for suggestions
 
@@ -530,7 +532,7 @@ for ODK Central <= 0.7.
   and to handle attachments.
 
 # `ruODK` 0.1.0
-*  Parses metadata, submissions, 
+*  Parses metadata, submissions,
   and handles attachments (retaining already downloaded attachments).
 *  Includes example forms as both `.xml` and `.odbbuild` in `inst/extdata`.
 *  Includes example data as retrieved from ODK Central.

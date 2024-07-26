@@ -2,7 +2,7 @@
 title: "Spatial data"
 description: >
   Examples and conversation starters for spatial data.
-output: 
+output:
   rmarkdown::html_vignette:
     self_contained: false
 vignette: >
@@ -15,34 +15,34 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
-For forms with spatial types, such as geopoint, geotrace, or geoshape, 
+For forms with spatial types, such as geopoint, geotrace, or geoshape,
 `ruODK` gives two options to access the captured spatial data.
 
-Firstly, to make spatial data as simple and accessible as possible, 
-`ruODK` extracts the lat/lon/alt/acc from geopoints, as well as from 
+Firstly, to make spatial data as simple and accessible as possible,
+`ruODK` extracts the lat/lon/alt/acc from geopoints, as well as from
 the first coordinate of geotraces and geoshapes into separate columns.
 This works for both GeoJSON and WKT.
-The extracted columns are named as the original geofield appended with 
+The extracted columns are named as the original geofield appended with
 `_latitude`, `_longitude`, `_altitude`, and `_accuracy`, respectively.
 
-Secondly, this vignette demonstrates how to turn the spatial data types returned 
-from ODK Central into spatially enabled objects. 
+Secondly, this vignette demonstrates how to turn the spatial data types returned
+from ODK Central into spatially enabled objects.
 To do so, we have to address two challenges.
 
 The first challenge is to select which of the potentially many spatial fields
 which an ODK form can capture shall be used as the primary geometry of a native
 spatial object, such as an `sf` SimpleFeature class.
-If several spatial fields are captured, it is up to the user to choose which 
+If several spatial fields are captured, it is up to the user to choose which
 field to use as primary geometry.
 
-The second challenge is that the parsed data from ODK Central is a plain table 
-(`tbl_df`) in which some columns contain spatial data. Well Know Text (WKT) is 
+The second challenge is that the parsed data from ODK Central is a plain table
+(`tbl_df`) in which some columns contain spatial data. Well Know Text (WKT) is
 parsed as text columns, whereas GeoJSON (nested JSON) is parsed as list columns.
 
 Most spatial packages require either atomic coordinates in separate columns,
 which works well for points (latitude, longitude, altitude), or the data to be
 spatially enabled.
-This vignette shows how to transform a `tbl_df` with a column containing (point, 
+This vignette shows how to transform a `tbl_df` with a column containing (point,
 line, or polygon) WKT into a spatially enabled `sf` object.
 
 ```{r, message=FALSE, warning=FALSE}
@@ -75,8 +75,8 @@ if (require(mapview)) {
 
 ## Data
 
-The original data shown in this vignette are hosted on a ODK Central server which 
-is used for the `ruODK` package tests. The form we show here contains every 
+The original data shown in this vignette are hosted on a ODK Central server which
+is used for the `ruODK` package tests. The form we show here contains every
 spatial widget supported by ODK Build for every supported spatial field type.
 
 With working credentials to the ODK Central test server we could download the data directly.
@@ -97,8 +97,8 @@ data_wkt <- ruODK::odata_submission_get(wkt = TRUE)
 data_gj <- ruODK::odata_submission_get(wkt = FALSE)
 ```
 
-To allow users to build this vignette without credentials to the ODK Central 
-test server, `ruODK` provides above form data also as package data. 
+To allow users to build this vignette without credentials to the ODK Central
+test server, `ruODK` provides above form data also as package data.
 
 ```{r}
 data("geo_wkt", package = "ruODK")
@@ -107,11 +107,11 @@ data("geo_gj", package = "ruODK")
 
 
 ## Map geopoints
-We can turn data with a text column containing WKT into an `sf` (SimpleFeatures) 
+We can turn data with a text column containing WKT into an `sf` (SimpleFeatures)
 object.
 
-In addition, we can leave the `tbl_df` as non-spatial object, and instead 
-use the separately extracted latitude, longitude, altitude, and accuracy 
+In addition, we can leave the `tbl_df` as non-spatial object, and instead
+use the separately extracted latitude, longitude, altitude, and accuracy
 individually e.g. to plot a Leaflet map.
 
 ```{r, fig.width=9, fig.height=7, eval=can_run}
@@ -212,7 +212,7 @@ ggplot2::ggplot() +
 ### Leaflet using sf and extracted coordinates
 You can show either first extracted coordinate components from plain `tbl_df`
 or show the full polygons using `{leafem}`.
-See the mapview article on [extra functionality](https://r-spatial.github.io/mapview/articles/articles/mapview_06-add.html).
+See the mapview article on [extra functionality](https://r-spatial.github.io/mapview/articles/mapview_06-add.html).
 ```{r, eval=can_run}
 leaflet::leaflet(data = geo_wkt) %>%
   leaflet::addTiles() %>%
@@ -230,32 +230,32 @@ The above examples show how to turn spatial data into an `sf` object, and give
 very rudimentary visualisation examples to bridge the gap between
 spatial data coming from ODK and creating maps and further spatial analyses in R.
 
-See the [sf homepage](https://r-spatial.github.io/sf/) for more context and examples. 
-The [sf cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/sf.pdf) 
+See the [sf homepage](https://r-spatial.github.io/sf/) for more context and examples.
+The [sf cheatsheet](https://github.com/rstudio/cheatsheets/blob/master/sf.pdf)
 deserves a spatial mention.
 
-Review the options for 
-[mapview popups](https://r-spatial.github.io/mapview/articles/articles/mapview_04-popups.html)
-and the whole [mapview](https://r-spatial.github.io/mapview/index.html) homepage for a 
+Review the options for
+[mapview popups](https://r-spatial.github.io/mapview/articles/mapview_04-popups.html)
+and the whole [mapview](https://r-spatial.github.io/mapview/index.html) homepage for a
 comprehensive overview of mapview.
 
 The powerful visualisation package [`tmap`](https://cran.r-project.org/package=tmap)
 supports `sf` objects and produces both printable and static maps as well as interactive `leaflet` maps.
 See the [vignette "Get started"](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html).
 
-There are several other good entry points for all things R and spatial, 
+There are several other good entry points for all things R and spatial,
 including but not limited to:
 
 * The [R Spatial CRAN Task View](https://cran.r-project.org/view=Spatial)
 * The [RSpatial](https://rspatial.org/) website
-* [Geospatial data in R and beyond](https://www.maths.lancs.ac.uk/~rowlings/Teaching/UseR2012/) 
+* [Geospatial data in R and beyond](https://www.maths.lancs.ac.uk/~rowlings/Teaching/UseR2012/)
   by [Barry Rowlingson](http://barry.rowlingson.com/)
-* [GIS with R](https://www.jessesadler.com/post/gis-with-r-intro/) 
-  by [Jesse Sadler](https://www.jessesadler.com/page/cv/)
-* GIS and mapping by [Olivier Gimenez](https://oliviergimenez.github.io/): 
+* [GIS with R](https://www.jessesadler.com/post/gis-with-r-intro/)
+  by [Jesse Sadler](https://www.jessesadler.com/about)
+* GIS and mapping by [Olivier Gimenez](https://oliviergimenez.github.io/):
   [Slides](https://oliviergimenez.github.io/intro_spatialR/) and
   [code](https://github.com/oliviergimenez/intro_spatialR)
-  
+
 The above list of examples and resources is far from comprehensive.
-Feel free to [contribute or suggest](https://github.com/ropensci/ruODK/issues) 
+Feel free to [contribute or suggest](https://github.com/ropensci/ruODK/issues)
 other working examples for turning data from `ruODK` into spatial formats.

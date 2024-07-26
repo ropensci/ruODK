@@ -24,7 +24,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Florian W. Mayer \email{Florian.Mayer@dbca.wa.gov.au} (\href{https://orcid.org/0000-0003-4269-4242}{ORCID})
+\strong{Maintainer}: Florian W. Mayer \email{Florian.Mayer@dpc.wa.gov.au} (\href{https://orcid.org/0000-0003-4269-4242}{ORCID})
 
 Other contributors:
 \itemize{

@@ -1,0 +1,40 @@
+{
+    "name": "R (rocker/r-ver base)",
+    "dockerFile": "Dockerfile",
+    "features": {
+        "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+            "version": "prerelease"
+        },
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+            "packages": "libudunits2-dev,libxtst6,libxt6,libmagick++-dev"
+        },
+        "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+            "packages": "github::rstudio/renv,tidyverse,git2r,knitr,spelling,languageserver,precommit,clisymbols,crayon,dplyr,fs,glue,httr,httr2,janitor,lifecycle,lubridate,magrittr,purrr,readr,rlang,stringr,semver,tibble,tidyr,xml2,covr,DT,ggplot2,here,knitr,lattice,leaflet,listviewer,leafpop,leafem,mapview,rmarkdown,roxygen2,sf,terra,testthat,tmap,usethis"
+        },
+        "ghcr.io/devcontainers-contrib/features/pre-commit:2": {}
+    },
+    "mounts": [
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=~/.gitconfig,type=bind,consistency=cached"
+    ],
+    "onCreateCommand": "pre-commit install && pre-commit run",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "mechatroner.rainbow-csv",
+                "REditorSupport.r",
+                "RDebugger.r-debugger",
+                "ms-azuretools.vscode-docker",
+                "usernamehw.errorlens",
+                "christian-kohler.path-intellisense",
+                "ms-vscode.live-server"
+            ]
+        },
+        "codespaces": {
+            "openFiles": [
+                "DESCRIPTION",
+                "NEWS.md",
+                "data-raw/make_release.R"
+            ]
+        }
+    }
+}

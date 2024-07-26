@@ -15,14 +15,14 @@ test_that("entitylist_detail works", {
   # entitylist_detail returns a list
   testthat::expect_is(ds1, "list")
 
-  # linkedForms contain form xmlFormId and name
-  lf <- ds1$linkedForms |>
+  # linked_forms contain form xmlFormId and name
+  lf <- ds1$linked_forms |>
     purrr::list_transpose() |>
     tibble::as_tibble()
   testthat::expect_equal(names(lf), c("xmlFormId", "name"))
 
-  # sourceForms contain form xmlFormId and name
-  sf <- ds1$sourceForms |>
+  # source_forms contain form xmlFormId and name
+  sf <- ds1$source_forms |>
     purrr::list_transpose() |>
     tibble::as_tibble()
   testthat::expect_equal(names(sf), c("xmlFormId", "name"))
