@@ -33,14 +33,7 @@
 #' }
 handle_ru_datetimes <- function(data,
                                 form_schema,
-                                orders = c(
-                                  "YmdHMS",
-                                  "YmdHMSz",
-                                  "Ymd HMS",
-                                  "Ymd HMSz",
-                                  "Ymd",
-                                  "ymd"
-                                ),
+                                orders = get_default_orders(),
                                 tz = get_default_tz(),
                                 verbose = get_ru_verbose()) {
   # Find all date/time columns in form_schema

@@ -399,6 +399,20 @@ get_default_tz <- function() {
 #' `r lifecycle::badge("stable")`
 #' @export
 #' @rdname ru_settings
+get_default_orders <- function() {
+  c(
+    "YmdHMS",
+    "YmdHMSz",
+    "Ymd HMS",
+    "Ymd HMSz",
+    "Ymd",
+    "ymd"
+  )
+}
+
+#' `r lifecycle::badge("stable")`
+#' @export
+#' @rdname ru_settings
 get_test_url <- function() {
   x <- Sys.getenv("ODKC_TEST_URL")
   if (identical(x, "")) {

@@ -40,14 +40,7 @@ project_list <- function(url = get_default_url(),
                          un = get_default_un(),
                          pw = get_default_pw(),
                          retries = get_retries(),
-                         orders = c(
-                           "YmdHMS",
-                           "YmdHMSz",
-                           "Ymd HMS",
-                           "Ymd HMSz",
-                           "Ymd",
-                           "ymd"
-                         ),
+                         orders = get_default_orders(),
                          tz = get_default_tz()) {
   yell_if_missing(url, un, pw)
   httr::RETRY(

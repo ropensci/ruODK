@@ -122,14 +122,7 @@ entitylist_download <- function(pid = get_default_pid(),
                                 overwrite = TRUE,
                                 retries = get_retries(),
                                 odkc_version = get_default_odkc_version(),
-                                orders = c(
-                                  "YmdHMS",
-                                  "YmdHMSz",
-                                  "Ymd HMS",
-                                  "Ymd HMSz",
-                                  "Ymd",
-                                  "ymd"
-                                ),
+                                orders = get_default_orders(),
                                 tz = get_default_tz(),
                                 verbose = get_ru_verbose()) {
   # Gatecheck params

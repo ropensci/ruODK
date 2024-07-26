@@ -151,14 +151,7 @@ entity_create <- function(pid = get_default_pid(),
                           pw = get_default_pw(),
                           retries = get_retries(),
                           odkc_version = get_default_odkc_version(),
-                          orders = c(
-                            "YmdHMS",
-                            "YmdHMSz",
-                            "Ymd HMS",
-                            "Ymd HMSz",
-                            "Ymd",
-                            "ymd"
-                          ),
+                          orders = get_default_orders(),
                           tz = get_default_tz()) {
   yell_if_missing(url, un, pw, pid = pid, did = did)
 

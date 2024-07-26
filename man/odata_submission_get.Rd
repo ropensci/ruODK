@@ -15,7 +15,7 @@ odata_submission_get(
   filter = NULL,
   parse = TRUE,
   download = TRUE,
-  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  orders = get_default_orders(),
   local_dir = "media",
   pid = get_default_pid(),
   fid = get_default_fid(),

@@ -41,6 +41,41 @@ test_that("entity_update works", {
     ed$current_version$version,
     eu$current_version$baseVersion
   )
+
+  # Test entity_versions without conflicts flag
+  ev <- entity_versions(did = did, eid = en$uuid[1])
+
+  ev_names <- c(
+    "conflict",
+    "resolved",
+    "base_diff",
+    "server_diff",
+    "last_good_version",
+    "current",
+    "label",
+    "creator_id",
+    "user_agent",
+    "data",
+    "version",
+    "base_version",
+    "data_received",
+    "conflicting_properties",
+    "created_at",
+    "creator",
+    "source",
+    "relevant_to_conflict"
+  )
+
+  testthat::expect_equal(names(ev), ev_names)
+
+  # With conflicts flag
+  # Prove that the entity has no conflicts
+  ed <- entity_detail(did = did, eid = en$uuid[1])
+  testthat::expect_equal(ed$current_version$conflictingProperties, NULL)
+
+  # Expect no records for entity without conflicts
+  ev_conflict <- entity_versions(did = did, eid = en$uuid[1], conflict = TRUE)
+  testthat::expect_equal(nrow(ev_conflict), 0)
 })
 
 test_that("entitylist_update warns if odkc_version too low", {

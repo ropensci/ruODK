@@ -16,7 +16,7 @@ entity_create(
   pw = get_default_pw(),
   retries = get_retries(),
   odkc_version = get_default_odkc_version(),
-  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  orders = get_default_orders(),
   tz = get_default_tz()
 )
 }
@@ -220,6 +220,7 @@ Other entity-management:
 \code{\link{entity_detail}()},
 \code{\link{entity_list}()},
 \code{\link{entity_update}()},
+\code{\link{entity_versions}()},
 \code{\link{entitylist_detail}()},
 \code{\link{entitylist_download}()},
 \code{\link{entitylist_list}()},
