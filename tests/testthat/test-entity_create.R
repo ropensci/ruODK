@@ -46,6 +46,9 @@ test_that("entity_create creates single entities", {
   time_before_create <- lubridate::ymd_hms(time_before_created, tz = "Australia/Perth")
 
   testthat::expect_gte(time_created, time_before_create)
+
+  # Test entity_delete
+  ec_deleted <- entity_delete(did = did, eid = ec$uuid)
 })
 
 test_that("entity_create creates multiple entities", {

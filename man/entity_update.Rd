@@ -181,6 +181,7 @@ eu
 
 Other entity-management: 
 \code{\link{entity_create}()},
+\code{\link{entity_delete}()},
 \code{\link{entity_detail}()},
 \code{\link{entity_list}()},
 \code{\link{entitylist_detail}()},
