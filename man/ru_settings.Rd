@@ -9,6 +9,7 @@
 \alias{get_default_pw}
 \alias{get_default_pp}
 \alias{get_default_tz}
+\alias{get_default_orders}
 \alias{get_test_url}
 \alias{get_test_un}
 \alias{get_test_pw}
@@ -40,6 +41,8 @@ get_default_pw()
 get_default_pp()
 
 get_default_tz()
+
+get_default_orders()
 
 get_test_url()
 

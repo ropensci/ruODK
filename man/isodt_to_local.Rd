@@ -7,7 +7,8 @@
 isodt_to_local(
   datetime_string,
   orders = c("YmdHMS", "YmdHMSz"),
-  tz = get_default_tz()
+  tz = get_default_tz(),
+  quiet = TRUE
 )
 }
 \arguments{
@@ -15,16 +16,20 @@ isodt_to_local(
 XForms exported from ODK Central.}
 
 \item{orders}{(vector of character) Orders of datetime elements for
-lubridate.
+\code{lubridate}.
 Default: \code{c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz")}.}
 
 \item{tz}{A timezone to convert dates and times to.
 
 Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
 timezone can be set globally or per function.}
+
+\item{quiet}{(lgl) Used in \code{lubridate::parse_date_time(quiet=quiet)} to
+suppress warnings from attempting to parse all empty values or columns.
+Run with \code{quiet=FALSE} to show any \code{lubridate} warnings.}
 }
 \value{
-A lubridate PosixCT datetime in the given timezone.
+A \code{lubridate} PosixCT datetime in the given timezone.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
@@ -32,6 +37,8 @@ A lubridate PosixCT datetime in the given timezone.
 \details{
 This function is used internally by \code{ruODK} to parse ISO timestamps
 to timezone-aware local times.
+
+Warnings are suppressed through \code{lubridate::parse_date_time(quiet=TRUE)}.
 }
 \seealso{
 Other utilities: 
@@ -42,7 +49,7 @@ Other utilities:
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
 \code{\link{get_one_submission}()},
-\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission_att_list}()},
 \code{\link{get_one_submission_audit}()},
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_datetimes}()},

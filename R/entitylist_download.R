@@ -2,33 +2,33 @@
 #'
 #' `r lifecycle::badge("maturing")`
 #'
+#' ## CSV file
 #' The downloaded CSV file is named after the entity list name.
 #' The download location defaults to the current workdir, but can be modified
 #' to a different folder path which will be created if it doesn't exist.
 #'
-#' An Entity List is a named collection of Entities that have the same
-#' properties.
-#' Entity List can be linked to Forms as Attachments.
-#' This will make it available to clients as an automatically-updating CSV.
-#'
 #' Entity Lists can be used as Attachments in other Forms, but they can also be
 #' downloaded directly as a CSV file.
+#'
 #' The CSV format closely matches the OData Dataset (Entity List) Service
 #' format, with columns for system properties such as `__id` (the Entity UUID),
-#' `__createdAt`, `__creatorName`, etc., the Entity Label label, and the
-#' Dataset (Entity List )/Entity Properties themselves.
+#' `__createdAt`, `__creatorName`, etc., the Entity Label, and the
+#' Dataset (Entity List) or Entity Properties themselves.
 #' If any Property for an given Entity is blank (e.g. it was not captured by
 #' that Form or was left blank), that field of the CSV is blank.
 #'
-#' The ODK Central `$filter` querystring parameter can be used to filter on
+#' ## Filter
+#' The ODK Central `$filter` query string parameter can be used to filter on
 #' system-level properties, similar to how filtering in the OData Dataset
 #' (Entity List) Service works.
-#' Of the [OData filter specs](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948)
+#' Of the [OData filter specs
+#' ](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948)
 #' ODK Central implements a [growing set of features
 #' ](https://docs.getodk.org/central-api-odata-endpoints/#data-document).
 #' `ruODK` provides the parameter `filter` (str) which, if set, will be passed
 #' on to the ODK Central endpoint as is.
 #'
+#' ## Resuming downloads through ETag
 #' The ODK Central endpoint supports the [`ETag` header
 #' ](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag), which can
 #' be used to avoid downloading the same content more than once.
@@ -44,6 +44,10 @@
 #' a previous call to `entitylist_download()`. `ruODK` strips the `W/\"` and
 #' `\"` from the returned etag and expects the stripped etag as parameter.
 #'
+#' @template tpl-def-entitylist
+#' @template tpl-entitylist-dataset
+#' @template tpl-auth-missing
+#' @template tpl-compat-2022-3
 #' @template param-pid
 #' @template param-did
 #' @template param-url
@@ -56,11 +60,11 @@
 #'   which is the format of the etag returned by `entitylist_download()`.
 #'   If provided, only new entities will be returned.
 #'   If the same `local_dir` is chosen and `overwrite` is set to `TRUE`,
-#'   the downloaded CSV will also be overwritte, losing the Entities downloaded
-#'   earlier.
-#'   Default: NULL (no filtering, all entities returned).
+#'   the downloaded CSV will also be overwritten, losing the previously
+#'   downloaded Entities.
+#'   Default: NULL (no filtering, all Entities returned).
 #' @param filter (str) A valid filter string.
-#'   Default: NULL (no filtering, all entities returned).
+#'   Default: NULL (no filtering, all Entities returned).
 #' @param overwrite Whether to overwrite previously downloaded file,
 #'                 default: FALSE
 #' @template param-retries
@@ -74,7 +78,7 @@
 #'     200 if OK, 304 if a given etag finds no new entities created.
 #'   - etag (str) The ETag to use in subsequent calls to `entitylist_download()`
 #'   - downloaded_to (fs_path) The path to the downloaded CSV file
-#'   - downloaded_on (POSIXct) The time of download in the local timezome
+#'   - downloaded_on (POSIXct) The time of download in the local timezone
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-dataset-management/#datasets}
 # nolint end
@@ -86,6 +90,7 @@
 #' # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 #'
 #' ds <- entitylist_list(pid = get_default_pid())
+#'
 #' ds1 <- entitylist_download(pid = get_default_pid(), did = ds$name[1])
 #' # ds1$entities
 #' # ds1$etag
@@ -107,7 +112,7 @@
 #' )
 #' }
 entitylist_download <- function(pid = get_default_pid(),
-                                did = NULL,
+                                did = "",
                                 url = get_default_url(),
                                 un = get_default_un(),
                                 pw = get_default_pw(),
@@ -117,24 +122,11 @@ entitylist_download <- function(pid = get_default_pid(),
                                 overwrite = TRUE,
                                 retries = get_retries(),
                                 odkc_version = get_default_odkc_version(),
-                                orders = c(
-                                  "YmdHMS",
-                                  "YmdHMSz",
-                                  "Ymd HMS",
-                                  "Ymd HMSz",
-                                  "Ymd",
-                                  "ymd"
-                                ),
+                                orders = get_default_orders(),
                                 tz = get_default_tz(),
                                 verbose = get_ru_verbose()) {
   # Gatecheck params
-  yell_if_missing(url, un, pw, pid = pid)
-
-  if (is.null(did)) {
-    ru_msg_abort(
-      "entitylist_download requires the Entity List name as 'did=\"name\"'."
-    )
-  }
+  yell_if_missing(url, un, pw, pid = pid, did = did)
 
   # Gatecheck ODKC version
   if (odkc_version |> semver_lt("2022.3")) {

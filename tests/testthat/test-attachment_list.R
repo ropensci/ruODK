@@ -11,7 +11,7 @@ test_that("attachment_list works", {
     pw = get_test_pw()
   )
 
-  al <- get_one_submission_attachment_list(
+  al <- get_one_submission_att_list(
     sl$instance_id[[1]],
     pid = get_test_pid(),
     fid = get_test_fid(),

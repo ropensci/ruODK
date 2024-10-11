@@ -284,6 +284,17 @@ test_that("yell_if_missing yells loudly", {
   testthat::expect_error(
     yell_if_missing("x", "x", "x", pid = "x", fid = "x", iid = "")
   )
+  testthat::expect_error(
+    yell_if_missing("x", "x", "x", pid = "x", fid = "x", iid = "x", did = "")
+  )
+  testthat::expect_error(
+    yell_if_missing(
+      "x", "x", "x",
+      pid = "x", fid = "x", iid = "x", did = "x", eid = ""
+    )
+  )
+  testthat::expect_error(yell_if_missing("", "", "", "", "", "", ""))
+  testthat::expect_error(yell_if_missing("", "", "", "", "", "", "", ""))
 })
 
 test_that("odata_svc_parse works", {

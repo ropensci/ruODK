@@ -11,7 +11,7 @@ entitylist_list(
   pw = get_default_pw(),
   retries = get_retries(),
   odkc_version = get_default_odkc_version(),
-  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  orders = get_default_orders(),
   tz = get_default_tz()
 )
 }
@@ -72,33 +72,21 @@ Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
 timezone can be set globally or per function.}
 }
 \value{
-A tibble with exactly one row for each dataset of the given project
-as per ODK Central API docs.
-Column names are renamed from ODK's \code{camelCase} to \code{snake_case}.
+A tibble with exactly one row for each Entity List of the given
+Project as per ODK Central API docs.
+Column names are renamed from ODK Central's \code{camelCase} to \code{snake_case}.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 }
 \details{
-While the API endpoint will return all Entity Lists for one Project,
-\code{\link{entitylist_list}} will fail with incorrect or missing
-authentication.
-
-An Entity List is a named collection of Entities that have the same properties.
-An Entity List can be linked to Forms as Attachments.
-This will make it available to clients as an automatically-updating CSV.
-
-ODK Central calls Entity Lists internally Datasets. \code{ruODK} chooses the term
-Entity Lists as it is used in the ODK Central user interface and conveys
-its relation to Entities better than the term Dataset.
-
-This function is supported from ODK Central v2022.3 and will warn if the
-given odkc_version is lower.
+The returned list is useful to retrieve the valid name of an Entity List for
+further use by functions of the Entity Management family.
 }
 \examples{
 \dontrun{
 # See vignette("setup") for setup and authentication options
-# ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
+# ruODK::ru_setup(svc = "... .svc", un = "me@email.com", pw = "...")
 
 ds <- entitylist_list(pid = get_default_pid())
 
@@ -109,7 +97,16 @@ ds |> knitr::kable()
 \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 
 Other entity-management: 
+\code{\link{entity_audits}()},
+\code{\link{entity_changes}()},
+\code{\link{entity_create}()},
+\code{\link{entity_delete}()},
+\code{\link{entity_detail}()},
+\code{\link{entity_list}()},
+\code{\link{entity_update}()},
+\code{\link{entity_versions}()},
 \code{\link{entitylist_detail}()},
-\code{\link{entitylist_download}()}
+\code{\link{entitylist_download}()},
+\code{\link{entitylist_update}()}
 }
 \concept{entity-management}

@@ -41,7 +41,7 @@
 #'
 #' sl <- submission_list()
 #'
-#' al <- get_one_submission_attachment_list(sl$instance_id[[1]])
+#' al <- get_one_submission_att_list(sl$instance_id[[1]])
 #' al %>% knitr::kable(.)
 #'
 #' # attachment_list returns a tibble
@@ -52,13 +52,13 @@
 #' names(al)
 #' # > "name" "exists"
 #' }
-get_one_submission_attachment_list <- function(iid,
-                                               pid = get_default_pid(),
-                                               fid = get_default_fid(),
-                                               url = get_default_url(),
-                                               un = get_default_un(),
-                                               pw = get_default_pw(),
-                                               retries = get_retries()) {
+get_one_submission_att_list <- function(iid,
+                                        pid = get_default_pid(),
+                                        fid = get_default_fid(),
+                                        url = get_default_url(),
+                                        un = get_default_un(),
+                                        pw = get_default_pw(),
+                                        retries = get_retries()) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
@@ -114,7 +114,7 @@ get_one_submission_attachment_list <- function(iid,
 #' sl <- submission_list()
 #'
 #' # Step 3a: Get attachment list for first submission
-#' al <- get_one_submission_attachment_list(sl$instance_id[[1]])
+#' al <- get_one_submission_att_list(sl$instance_id[[1]])
 #'
 #' # Ste 3b: Get all attachments for all submissions
 #' all <- attachment_list(sl$instance_id)
@@ -136,7 +136,7 @@ attachment_list <- function(iid,
     pw = pw,
     retries = retries
   ) %>%
-    purrr::pmap(ruODK::get_one_submission_attachment_list) %>%
+    purrr::pmap(ruODK::get_one_submission_att_list) %>%
     dplyr::bind_rows()
 }
 

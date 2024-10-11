@@ -2,7 +2,7 @@
 title: "Accessing the OData API"
 description: >
   Accessing submission data via the OData pathway.
-output: 
+output:
   rmarkdown::html_vignette:
     self_contained: false
 vignette: >
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 
 ```{r pkgs}
 # This vignette requires the following packages:
-library(DT)
+# library(DT)
 library(leaflet)
 # library(listviewer)
 library(magrittr)
@@ -54,7 +54,7 @@ as documented (with live examples in multiple programming languages) at the
 
 # Configure ruODK
 The OData service URL is shown in the form's "Submissions" tab >
-"Analyse via OData" on ODK Central. It contains base URL, project ID, and 
+"Analyse via OData" on ODK Central. It contains base URL, project ID, and
 form ID and is used by `ruODK::ru_setup()`.
 
 ```{r ru_setup_demo, eval=FALSE}
@@ -73,7 +73,7 @@ ruODK::ru_setup(
 loc <- fs::path("media")
 ```
 
-This vignette shows how to access data, but under the bonnet uses the 
+This vignette shows how to access data, but under the bonnet uses the
 included package data. This allows to rebuild the vignette offline and without
 credentials to the originating ODK Central server.
 
@@ -111,17 +111,17 @@ fq_svc %>% knitr::kable(.)
 ```
 
 `ruODK` provides the names and urls of the service endpoints as `tibble`.
-We see the main data available under the url `Submissions`, and repeating 
-form groups called `taxon_encounter` and `vegetation_stratum` in the ODK form under 
-the url `Submissions.taxon_encounter` and `Submissions.vegetation_stratum`, 
+We see the main data available under the url `Submissions`, and repeating
+form groups called `taxon_encounter` and `vegetation_stratum` in the ODK form under
+the url `Submissions.taxon_encounter` and `Submissions.vegetation_stratum`,
 respectively.
 
-The main value we get out of the service document are these names of the 
+The main value we get out of the service document are these names of the
 form groups, which can differ between forms.
 
 ## OData metadata document
 Let's inspect the form metadata to review our data schema.
-While we can download the submission data without it, the metadata document 
+While we can download the submission data without it, the metadata document
 contains information about field data types and attachment names.
 
 ```{r load_metadata, eval=FALSE}
@@ -138,7 +138,7 @@ if (requireNamespace("listviewer")) {
 
 As an alternative to the OData metadata document, ODK Central also offers
 form metadata as a much cleaner JSON document, which `ruODK` can read and parse
-into a clean `tibble` of field type, name, and path. 
+into a clean `tibble` of field type, name, and path.
 
 `ruODK` uses this introspection to parse submission data.
 
@@ -162,9 +162,9 @@ With `wkt=TRUE`, we'll receive spatial types as Well Known Text, which `ruODK` p
 as plain text.
 With `wkt=FALSE` (the default), we'll receive spatial types as GeoJSON, which
 `ruODK` parses into a nested list.
-`ruODK` retains the original spatial field, and annotates the data with 
+`ruODK` retains the original spatial field, and annotates the data with
 extracted longitude, latitude, altitude, and (where given) accuracy.
-These additional fields are prefixed with the original field name to prevent 
+These additional fields are prefixed with the original field name to prevent
 name collisions between possibly multiple location fields.
 
 ```{r load_odata, eval=FALSE}
@@ -191,42 +191,42 @@ fq_data_taxa <- ruODK::odata_submission_get(
 <!-- * odata_submission_get(parse=F) -->
 <!-- * odata_submission_rectangle(form_schema=fs) -->
 <!-- * handle_ru_{datetimes, attachments, geopoints, geotraces, geoshapes} -->
-The function `ruODK::odata_submission_get()` received the original XML response 
+The function `ruODK::odata_submission_get()` received the original XML response
 as a nested list of lists.
-To analyse and visualise the data, this nested list of lists must be transformed 
+To analyse and visualise the data, this nested list of lists must be transformed
 into a rectangular shape.
-The function `ruODK::odata_submission_rectangle()` is used internally to 
+The function `ruODK::odata_submission_rectangle()` is used internally to
 recursively un-nest list columns using `tidyr::unnest_wider()`.
-Unnamed columns, notably the anonymous lat/lon/alt coordinates, are named 
-automatically to become unique (a feature of `tidyr::unnest_*()`), and then 
+Unnamed columns, notably the anonymous lat/lon/alt coordinates, are named
+automatically to become unique (a feature of `tidyr::unnest_*()`), and then
 sanitised using the helper `janitor::clean_names()`.
 
-By default, form group names are used as prefix to the field names. 
+By default, form group names are used as prefix to the field names.
 This behaviour can be disabled by handing the argument `names_sep=NULL` to
-`tidyr::unnest_wider()` through running 
+`tidyr::unnest_wider()` through running
 `ruODK::odata_submission_get() %>% ruODK::odata_submission_rectangle(names_sep = NULL)`.
 
-The vectorised function `ruODK::attachment_get()` is then used internally 
-to download and link attachments like photos and other media to a local, 
-relative path. This will take some time during the first run. 
+The vectorised function `ruODK::attachment_get()` is then used internally
+to download and link attachments like photos and other media to a local,
+relative path. This will take some time during the first run.
 Once the files exist locally, the download will be skipped.
 
 When used through `ruODK::odata_submission_get()`, `ruODK` will introspect the
 form schema to detect and then parse media attachment fields automatically.
-When used manually, field names of media attachment fields can be (partially or 
+When used manually, field names of media attachment fields can be (partially or
 fully) specified, see `??ruODK::attachment_get()`.
 
 The date formats are parsed from ISO8601 timestamps into POSIXct objects with
 `ruODK::handle_ru_datetimes()`. We use our local timezone (GMT+08) in this example.
-`ruODK` introspects the form schema to detect and then parse date and datetime 
+`ruODK` introspects the form schema to detect and then parse date and datetime
 fields automatically.
 
 The repeated subgroup `taxon_encounter` is left joined to the main submission data
-to receive a (repeated) copy of the main submission data 
-(such as location, time and habitat description). 
+to receive a (repeated) copy of the main submission data
+(such as location, time and habitat description).
 We will do the same to the other repeated subgroup `vegetation_stratum`.
 
-For clarity, we enable verbose messages from `ruODK::odata_submission_get()` 
+For clarity, we enable verbose messages from `ruODK::odata_submission_get()`
 and preserve the message output in the code chunk options with `message=TRUE`.
 In real-world use cases, messages can be disabled through the chunk option
 `message=FALSE`.
@@ -235,17 +235,17 @@ We use a custom local path for attachments (`loc`). This results in a smaller
 installed package size for `ruODK`, as it shares the attachment files with the
 other vignettes. The default is a local folder `media`.
 
-The raw and unparsed example data is provided as data objects 
-`fq_raw` (main submissions of form Flora Quadrat 0.4), 
+The raw and unparsed example data is provided as data objects
+`fq_raw` (main submissions of form Flora Quadrat 0.4),
 `fq_raw_taxa` (repeated group "Taxon Encounter" within a Flora Quadrat), and
 `fq_raw_strata` (repeated group "Vegetation Stratum" within a Flora Quadrat).
 
-The parsed versions are included as data objects `fq_data`, `fq_data_strata`, 
+The parsed versions are included as data objects `fq_data`, `fq_data_strata`,
 and `fq_data_taxa`. To enable users without ODK Central credentials to build
 this vignette (e.g. on package installation with `build_vignettes=TRUE`),
 we show the real functions (such as `ruODK::odata_submission_get()`), but do not
-evaluate them. Instead, we use "canned data". The `ruODK` test suite ensures 
-that canned data are equivalent to live data. 
+evaluate them. Instead, we use "canned data". The `ruODK` test suite ensures
+that canned data are equivalent to live data.
 
 The result of this code chunk should be exactly the same as the compact version
 with `odata_submission_get(parse=TRUE)`.
@@ -306,7 +306,7 @@ fq_data_strata <- fq_strata %>%
 
 Note: A manually resized version of the original photos in this example live in
 the package source under [`articles/media`
-](https://github.com/ropensci/ruODK/tree/main/vignettes/media). 
+](https://github.com/ropensci/ruODK/tree/main/vignettes/media).
 To minimise package size, they were resized with imagemagick:
 
 ```{sh, eval=FALSE}
@@ -322,7 +322,7 @@ stepwise unnests each list column.
 This requires knowledge of the data structure, which can either be looked up
 from the metadata, or by inspecting the raw data, `fq_raw`.
 
-The following command has been built by stepwise adding `tidyr::unnest_wider()` 
+The following command has been built by stepwise adding `tidyr::unnest_wider()`
 expressions to the pipe until all list columns were eliminated.
 
 The trailing `invisible()` allows us to toggle parts of the pipe by catching the
@@ -355,7 +355,7 @@ This section provides some examples of standard data visualisations.
 ## Datatable
 The package `DT` provides an interactive (and searchable) datatable.
 
-```{r vis_data}
+```{r vis_data, eval = requireNamespace("DT")}
 DT::datatable(fq_data)
 DT::datatable(fq_data_taxa)
 DT::datatable(fq_data_strata)
@@ -431,7 +431,7 @@ leaflet::leaflet(width = 800, height = 600) %>%
 ```
 
 ## Summarising data
-See Hadley Wickam's 
+See Hadley Wickam's
 [R for Data Science](https://r4ds.had.co.nz/exploratory-data-analysis.html)
 for more ideas on data exploration.
 
@@ -486,7 +486,7 @@ fq_data_taxa %>%
 ```
 
 # Export
-The rectangled data can now be exported. e.g. to CSV. Note that all list columns 
+The rectangled data can now be exported. e.g. to CSV. Note that all list columns
 must be either unnested or dropped before exporting to CSV.
 
 ```{r export, eval=F}
@@ -503,10 +503,10 @@ For your convenience, `ruODK` includes a template RMarkdown workbook with the
 essential steps of the above workflow and colour-by-numbers instructions, which
 can be used as a starting point for projects using data from ODK Central.
 
-To create a new RMarkdown document from the `ruODK` template, 
+To create a new RMarkdown document from the `ruODK` template,
 run `rmarkdown::draft("test.Rmd", "odata", package="ruODK")`.
 
-Users of RStudio can alternatively "Create a new RMarkdown document" 
+Users of RStudio can alternatively "Create a new RMarkdown document"
 "From template" and select `ruODK`'s template "ODK Central via OData".
 
 Make sure to install a fresh version of `ruODK` to get the latest and greatest

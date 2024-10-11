@@ -2,25 +2,25 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "ruODK",
-  "description": "Access and tidy up data from the 'ODK Central' API. 'ODK Central' is a clearinghouse for digitally captured data <https://docs.getodk.org/central-intro/>. 'ODK Central' and its API are documented at <https://docs.getodk.org/>.",
+  "description": "Access and tidy up data from the 'ODK Central' API. 'ODK Central' is a clearinghouse for digitally captured data using ODK <https://docs.getodk.org/central-intro/>. It manages user accounts and permissions, stores form definitions, and allows data collection clients like 'ODK Collect' to connect to it for form download and submission upload. The 'ODK Central' API is documented at <https://docs.getodk.org/central-api/>.",
   "name": "ruODK: An R Client for the ODK Central API",
   "relatedLink": "https://docs.ropensci.org/ruODK",
   "codeRepository": "https://github.com/ropensci/ruODK",
   "issueTracker": "https://github.com/ropensci/ruODK/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.2 (2023-10-31 ucrt)",
+  "runtimePlatform": "R version 4.4.1 (2024-06-14 ucrt)",
   "author": [
     {
       "@type": "Person",
       "givenName": ["Florian", "W."],
       "familyName": "Mayer",
-      "email": "Florian.Mayer@dbca.wa.gov.au",
+      "email": "Florian.Mayer@dpc.wa.gov.au",
       "@id": "https://orcid.org/0000-0003-4269-4242"
     }
   ],
@@ -59,7 +59,7 @@
       "@type": "Person",
       "givenName": ["Florian", "W."],
       "familyName": "Mayer",
-      "email": "Florian.Mayer@dbca.wa.gov.au",
+      "email": "Florian.Mayer@dpc.wa.gov.au",
       "@id": "https://orcid.org/0000-0003-4269-4242"
     }
   ],
@@ -144,6 +144,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "leafem",
+      "name": "leafem",
+      "version": ">= 0.2.0.9012",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://github.com/r-spatial/leafem"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "leaflet",
       "name": "leaflet",
       "version": ">= 2.1.1",
@@ -154,19 +167,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=leaflet"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "listviewer",
-      "name": "listviewer",
-      "version": ">= 3.0.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=listviewer"
     },
     {
       "@type": "SoftwareApplication",
@@ -183,16 +183,16 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "leafem",
-      "name": "leafem",
-      "version": ">= 0.2.0.9012",
+      "identifier": "listviewer",
+      "name": "listviewer",
+      "version": ">= 3.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://github.com/r-spatial/leafem"
+      "sameAs": "https://CRAN.R-project.org/package=listviewer"
     },
     {
       "@type": "SoftwareApplication",
@@ -245,6 +245,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=sf"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "skimr",
+      "name": "skimr",
+      "version": ">= 2.1.5",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=skimr"
     },
     {
       "@type": "SoftwareApplication",
@@ -477,19 +490,6 @@
     },
     "15": {
       "@type": "SoftwareApplication",
-      "identifier": "stringr",
-      "name": "stringr",
-      "version": ">= 1.5.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=stringr"
-    },
-    "16": {
-      "@type": "SoftwareApplication",
       "identifier": "semver",
       "name": "semver",
       "version": ">= 0.2.0",
@@ -500,6 +500,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=semver"
+    },
+    "16": {
+      "@type": "SoftwareApplication",
+      "identifier": "stringr",
+      "name": "stringr",
+      "version": ">= 1.5.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=stringr"
     },
     "17": {
       "@type": "SoftwareApplication",
@@ -544,7 +557,7 @@
   },
   "applicationCategory": "DataAccess",
   "keywords": ["database", "open-data", "opendatakit", "odk", "api", "data", "dataset", "odata", "odata-client", "odk-central", "rstats", "r-package"],
-  "fileSize": "16434.814KB",
+  "fileSize": "18980.056KB",
   "citation": [
     {
       "@type": "CreativeWork",

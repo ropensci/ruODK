@@ -17,8 +17,6 @@
 These functions provide tidy eval-compatible ways to capture
 symbols (\code{sym()}, \code{syms()}, \code{ensym()}), expressions (\code{expr()},
 \code{exprs()}, \code{enexpr()}), and quosures (\code{quo()}, \code{quos()}, \code{enquo()}).
-To learn more about tidy eval and how to use these tools, read
-\url{http://rlang.tidyverse.org/articles/tidy-evaluation.html}
 }
 \seealso{
 Other utilities: 
@@ -29,7 +27,7 @@ Other utilities:
 \code{\link{form_schema_parse}()},
 \code{\link{get_one_attachment}()},
 \code{\link{get_one_submission}()},
-\code{\link{get_one_submission_attachment_list}()},
+\code{\link{get_one_submission_att_list}()},
 \code{\link{get_one_submission_audit}()},
 \code{\link{handle_ru_attachments}()},
 \code{\link{handle_ru_datetimes}()},

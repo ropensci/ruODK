@@ -1,7 +1,7 @@
 GNU General Public License
 ==========================
 
-_Version 3, 29 June 2007_  
+_Version 3, 29 June 2007_
 _Copyright © 2007 Free Software Foundation, Inc. &lt;<http://fsf.org/>&gt;_
 
 Everyone is permitted to copy and distribute verbatim copies of this license
@@ -193,7 +193,7 @@ You may convey a work based on the Program, or the modifications to produce it f
 the Program, in the form of source code under the terms of section 4, provided that
 you also meet all of these conditions:
 
-* **a)** The work must carry prominent notices stating that you modified it, and giving a 
+* **a)** The work must carry prominent notices stating that you modified it, and giving a
   relevant date.
 * **b)** The work must carry prominent notices stating that it is released under this
   License and any conditions added under section 7. This requirement modifies the

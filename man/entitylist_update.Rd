@@ -6,14 +6,14 @@
 \usage{
 entitylist_update(
   pid = get_default_pid(),
-  did = NULL,
+  did = "",
   approval_required = FALSE,
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
   retries = get_retries(),
   odkc_version = get_default_odkc_version(),
-  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  orders = get_default_orders(),
   tz = get_default_tz()
 )
 }
@@ -26,13 +26,15 @@ Set default \code{pid} through \code{ru_setup(pid="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{did}{(chr) The name of the Entity List, internally called Dataset.}
+\item{did}{(chr) The name of the Entity List, internally called Dataset.
+The function will error if this parameter is not given.
+Default: "".}
 
-\item{approval_required}{(lgl) The value to set approvalRequired to.
-If TRUE, a submission must be approved before an entity is created,
-if FALSE, an entity is created as soon as the submission is received by
+\item{approval_required}{(lgl) The value to set \code{approvalRequired} to.
+If TRUE, a Submission must be approved before an Entity is created,
+if FALSE, an Entity is created as soon as the Submission is received by
 ODK Central.
-Default: FALSE.}
+Default: \code{FALSE}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
@@ -92,23 +94,13 @@ it is not trivial to rectangle the result into a tibble.
 }
 \details{
 You can only update \code{approvalRequired} using this endpoint.
-The  approvalRequired flag controls the Entity creation flow;
+The  \code{approvalRequired} flag controls the Entity creation flow;
 if it is true then the Submission must be approved before an Entity can be
 created from it and if it is false then an Entity is created as soon as the
 Submission is received by the ODK Central.
 By default \code{approvalRequired} is false for the Entity Lists created after
-v2023.3. Entity Lists created prior to that will have approvalRequired set to
-true.
-
-An Entity List is a named collection of Entities that have the same
-properties.
-An Entity List can be linked to Forms as Attachments.
-This will make it available to clients as an automatically-updating CSV.
-
-This function is supported from ODK Central v2022.3 and will warn if the
-given odkc_version is lower.
-
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
+v2023.3. Entity Lists created prior to that will have \code{approvalRequired} set
+to true.
 }
 \examples{
 \dontrun{
@@ -133,5 +125,18 @@ ds3$approvalRequired # FALSE
 }
 \seealso{
 \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
+
+Other entity-management: 
+\code{\link{entity_audits}()},
+\code{\link{entity_changes}()},
+\code{\link{entity_create}()},
+\code{\link{entity_delete}()},
+\code{\link{entity_detail}()},
+\code{\link{entity_list}()},
+\code{\link{entity_update}()},
+\code{\link{entity_versions}()},
+\code{\link{entitylist_detail}()},
+\code{\link{entitylist_download}()},
+\code{\link{entitylist_list}()}
 }
-\concept{dataset-management}
+\concept{entity-management}

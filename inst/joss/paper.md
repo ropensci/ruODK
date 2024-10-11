@@ -26,7 +26,7 @@ ruODK [@ruodk] is an R Client for the ODK Central API.
 
 # Background
 
-Open Data Kit (ODK, [@odk], [@hartung]) is a suite of open source tools that 
+Open Data Kit (ODK, [@odk], [@hartung]) is a suite of open source tools that
 help organizations collect and manage data.
 
 The core ODK tools are [@odkdocs]:
@@ -40,7 +40,7 @@ The core ODK tools are [@odkdocs]:
 
 The core workflow of ODK is:
 
--  A form for digital data capture is designed, either by hand, or using form 
+-  A form for digital data capture is designed, either by hand, or using form
   builders like ODK Build.
 -  A data clearinghouse like ODK Aggregate or ODK Central disseminates these
   form templates to authorised data collection devices (Android devices running
@@ -71,38 +71,38 @@ automate data access and analysis (ruODK).
 
 `ruODK` aims:
 
--  To wrap all ODK Central API endpoints with a focus on **data access**. 
+-  To wrap all ODK Central API endpoints with a focus on **data access**.
   While this is mostly not a hard task, there is still a small barrier to novice
   R users, and some duplication of code.
 -  To provide working examples of interacting with the ODK Central API.
--  To provide convenience helpers for the day to day tasks when working with 
-  ODK Central data in R: transforming the ODK Central API output into tidy 
+-  To provide convenience helpers for the day to day tasks when working with
+  ODK Central data in R: transforming the ODK Central API output into tidy
   R formats.
-  
+
 ## Out of scope
 
--  To wrap "management" API endpoints. The ODK Central GUI already provides a 
-  highly capable interface for the management of users, roles, permissions, 
+-  To wrap "management" API endpoints. The ODK Central GUI already provides a
+  highly capable interface for the management of users, roles, permissions,
   projects, and forms.
-  ODK Central is a [VueJS application](https://github.com/getodk/central-frontend/) 
+  ODK Central is a [VueJS application](https://github.com/getodk/central-frontend/)
   working on the "management" API endpoints of the ODK Central back-end.
--  To provide extensive data visualisation capability. 
-  We show only minimal examples of data visualisation and presentation, mainly 
+-  To provide extensive data visualisation capability.
+  We show only minimal examples of data visualisation and presentation, mainly
   to illustrate the example data.
-  
+
 # Typical use cases
 
 ## Smaller projects
-Smaller projects, such as ephemeral research projects or proof of concept studies, 
+Smaller projects, such as ephemeral research projects or proof of concept studies,
 may generate a manageable number of form submissions over a limited amount of time.
 
 Here, it may be sufficient to export the entire set of submissions, analyse
 and visualise it, and generate some products such as a CSV export of the data,
 vector or raster figures and maps for publications, and a rendered report.
 
-The vignettes "odata-api" and "restful-api" show examples of this use case. 
-They differ in that the vignette "odata-api" retrieves submissions through the 
-OData API, while the vignette "restful-api" retrieves submissions through the 
+The vignettes "odata-api" and "restful-api" show examples of this use case.
+They differ in that the vignette "odata-api" retrieves submissions through the
+OData API, while the vignette "restful-api" retrieves submissions through the
 RESTful API.
 
 ## Larger projects
@@ -113,11 +113,11 @@ Such projects typically store their data in dedicated databases. There, the data
 can be value-added through QA/QC/review, through integration with other data
 sources, and through further data processing. This requires the data to be
 regularly and incrementally exported from ODK Central, transformed into the target
-data formats (which may differ from ODK Central's output), and loaded into the 
+data formats (which may differ from ODK Central's output), and loaded into the
 target database.
 
-In this case, ruODK assists with the retrieval of data, inspection of new vs. 
-existing submissions, and export into an intermediary format, such as CSV 
-snapshots.  
+In this case, ruODK assists with the retrieval of data, inspection of new vs.
+existing submissions, and export into an intermediary format, such as CSV
+snapshots.
 
 # References

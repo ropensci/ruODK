@@ -6,13 +6,13 @@
 \usage{
 entitylist_detail(
   pid = get_default_pid(),
-  did = NULL,
+  did = "",
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
   retries = get_retries(),
   odkc_version = get_default_odkc_version(),
-  orders = c("YmdHMS", "YmdHMSz", "Ymd HMS", "Ymd HMSz", "Ymd", "ymd"),
+  orders = get_default_orders(),
   tz = get_default_tz()
 )
 }
@@ -25,7 +25,9 @@ Set default \code{pid} through \code{ru_setup(pid="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
 
-\item{did}{(chr) The name of the Entity List, internally called Dataset.}
+\item{did}{(chr) The name of the Entity List, internally called Dataset.
+The function will error if this parameter is not given.
+Default: "".}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
@@ -82,30 +84,25 @@ it is not trivial to rectangle the result into a tibble.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
 }
-\details{
-An Entity List is a named collection of Entities that have the same
-properties.
-Entity List can be linked to Forms as Attachments.
-This will make it available to clients as an automatically-updating CSV.
-
-This function is supported from ODK Central v2022.3 and will warn if the
-given odkc_version is lower.
-}
 \examples{
 \dontrun{
 # See vignette("setup") for setup and authentication options
 # ruODK::ru_setup(svc = "....svc", un = "me@email.com", pw = "...")
 
 ds <- entitylist_list(pid = get_default_pid())
+
 ds1 <- entitylist_detail(pid = get_default_pid(), did = ds$name[1])
 
 ds1 |> listviewer::jsonedit()
-ds1$linkedForms |>
+
+ds1$linked_forms |>
   purrr::list_transpose() |>
   tibble::as_tibble()
-ds1$sourceForms |>
+
+ds1$source_forms |>
   purrr::list_transpose() |>
   tibble::as_tibble()
+
 ds1$properties |>
   purrr::list_transpose() |>
   tibble::as_tibble()
@@ -115,7 +112,16 @@ ds1$properties |>
 \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 
 Other entity-management: 
+\code{\link{entity_audits}()},
+\code{\link{entity_changes}()},
+\code{\link{entity_create}()},
+\code{\link{entity_delete}()},
+\code{\link{entity_detail}()},
+\code{\link{entity_list}()},
+\code{\link{entity_update}()},
+\code{\link{entity_versions}()},
 \code{\link{entitylist_download}()},
-\code{\link{entitylist_list}()}
+\code{\link{entitylist_list}()},
+\code{\link{entitylist_update}()}
 }
 \concept{entity-management}

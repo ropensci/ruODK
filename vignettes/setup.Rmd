@@ -2,13 +2,13 @@
 title: "Setup"
 description: >
   Provide sensitive credentials to ruODK through different pathways.
-output: 
+output:
   rmarkdown::html_vignette:
     self_contained: false
 vignette: >
   %\VignetteIndexEntry{Setup}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}  
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
@@ -92,7 +92,7 @@ sourced at the beginning of a new session at
 `ruODK::get_default_{pid,fid,url,un,pw}()`. These getters in turn look up their
 values from environment variables.
 
-The getters and setters are documented in the "Settings" family of the 
+The getters and setters are documented in the "Settings" family of the
 [ruODK function reference](https://docs.ropensci.org/ruODK/reference/index.html).
 
 A convenient way to have often used environment variables available is to add
@@ -263,9 +263,9 @@ As there is no corresponding API endpoint to determine the ODK Central version,
 `ODKC_TEST_VERSION`. If unset, `ruODK` defaults to the latest ODK Central
 version, which is the version deployed to the ODK Central test server.
 
-`ruODK` gracefully handles both the current semantic versioning version format 
-("year.minor.patch", e.g. "2023.5.1") and the older numeric format (e.g. 0.7, 
-1.2). If the `ODKC_VERSION` needs repair, `ruODK` will emit a helpful warning 
+`ruODK` gracefully handles both the current semantic versioning version format
+("year.minor.patch", e.g. "2023.5.1") and the older numeric format (e.g. 0.7,
+1.2). If the `ODKC_VERSION` needs repair, `ruODK` will emit a helpful warning
 advising the correct format for the given version.
 
 A recent example is the change of the API endpoint for `form_schema`, which
