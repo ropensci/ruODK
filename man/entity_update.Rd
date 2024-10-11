@@ -180,6 +180,7 @@ eu
 \url{https://docs.getodk.org/central-api-entity-management/#updating-an-entity}
 
 Other entity-management: 
+\code{\link{entity_audits}()},
 \code{\link{entity_changes}()},
 \code{\link{entity_create}()},
 \code{\link{entity_delete}()},

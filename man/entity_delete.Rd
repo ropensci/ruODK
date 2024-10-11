@@ -117,6 +117,7 @@ ed_deleted <- entity_delete(did = did, eid = ed$id)
 \url{https://docs.getodk.org/central-api-entity-management/#deleting-an-entity}
 
 Other entity-management: 
+\code{\link{entity_audits}()},
 \code{\link{entity_changes}()},
 \code{\link{entity_create}()},
 \code{\link{entity_detail}()},

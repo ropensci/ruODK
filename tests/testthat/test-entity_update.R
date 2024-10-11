@@ -95,6 +95,28 @@ test_that("entity_update works", {
   # Expect no records for entity without conflicts
   ev_conflict <- entity_versions(did = did, eid = en$uuid[1], conflict = TRUE)
   testthat::expect_equal(nrow(ev_conflict), 0)
+
+  # Interlude 2: server audits
+  ea <- entity_audits(did = did, eid = en$uuid[1])
+  testthat::expect_s3_class(ea, "tbl_df")
+
+  ea_names <- c(
+    "actor_id",
+    "action",
+    "actee_id",
+    "details_source",
+    "details_entity",
+    "details_entity_id",
+    "details_entity_def_id",
+    "logged_at",
+    "actor_id_2",
+    "actor_type",
+    "actor_display_name",
+    "actor_created_at",
+    "actor_updated_at",
+    "actor_deleted_at"
+  )
+  testthat::expect_equal(names(ea), ea_names)
 })
 
 test_that("entitylist_update warns if odkc_version too low", {

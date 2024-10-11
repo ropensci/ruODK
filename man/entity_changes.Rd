@@ -140,6 +140,7 @@ ec
 \url{https://docs.getodk.org/central-api-entity-management/#getting-changes-between-versions}
 
 Other entity-management: 
+\code{\link{entity_audits}()},
 \code{\link{entity_create}()},
 \code{\link{entity_delete}()},
 \code{\link{entity_detail}()},
