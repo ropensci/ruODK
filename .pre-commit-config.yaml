@@ -46,8 +46,8 @@ repos:
       #   args: [--allow_private_imports, --root=R]
       - id: use-tidy-description
         name: Format DESCRIPTION
-      - id: pkgdown
-        name: Validate pkgdown.yml
+      # - id: pkgdown
+      #   name: Validate pkgdown.yml
     #   - id: lintr
     #     name: Lint code but emit only warnings
     #     args: [--warn_only]
