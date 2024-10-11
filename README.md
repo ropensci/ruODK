@@ -85,7 +85,7 @@ Benefits of using the R ecosystem in combination with ODK:
   universities.
 - Automation: The entire data access and analysis workflow can be
   automated through R scripts.
-- Reproducible reporting (e.g. 
+- Reproducible reporting (e.g.
   [Sweave](https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr),
   [RMarkdown](https://rmarkdown.rstudio.com/)), interactive web apps
   ([Shiny](https://shiny.rstudio.com/)), workflow scaling
@@ -93,7 +93,7 @@ Benefits of using the R ecosystem in combination with ODK:
 - Rstudio-as-a-Service (RaaS) at [![Hosted RStudio with
   ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
 
-`ruODK`'s scope:
+`ruODK`’s scope:
 
 - To wrap all ODK Central API endpoints with a focus on **data access**.
 - To provide working examples of interacting with the ODK Central API.
@@ -259,10 +259,10 @@ To cite package `ruODK` in publications use:
 
 ``` r
 citation("ruODK")
-#> To cite ruODK in publications use (with the respective version number:
+#> To cite ruODK in publications use (with the correct version number:
 #>
-#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK
-#>   Central API (Version X.X.X).  Zenodo. https://doi.org/10.5281/zenodo.5559164
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version X.X.X).  Zenodo.
+#>   https://doi.org/10.5281/zenodo.5559164
 #>
 #> A BibTeX entry for LaTeX users is
 #>

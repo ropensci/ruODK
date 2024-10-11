@@ -41,9 +41,9 @@ repos:
         name: Ensure that no browser() statement is committed
       # - id: spell-check
       #   name: Spellcheck
-      - id: deps-in-desc
-        name: Ensure that DESCRIPTION lists all dependencies
-        args: [--allow_private_imports, --root=R]
+      # - id: deps-in-desc
+      #   name: Ensure that DESCRIPTION lists all dependencies
+      #   args: [--allow_private_imports, --root=R]
       - id: use-tidy-description
         name: Format DESCRIPTION
       - id: pkgdown

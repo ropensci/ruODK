@@ -23,8 +23,8 @@
 #' @template param-tz
 #' @return A nested list of lists.
 #'   The first nesting level corresponds to entity updates, the second level
-#'   lists each updated property. Within the nested list, the nales are
-#'   "old" (old value), "new" (new value), "propertyName" (name of changed
+#'   lists each updated property. Within the nested list, the names are
+#'   `old` (old value), `new` (new value), `propertyName` (name of changed
 #'   entity property).
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-entity-management/#getting-changes-between-versions}
@@ -68,22 +68,21 @@
 #' ec
 #' }
 entity_changes <- function(pid = get_default_pid(),
-                            did = "",
-                            eid = "",
-
-                            url = get_default_url(),
-                            un = get_default_un(),
-                            pw = get_default_pw(),
-                            retries = get_retries(),
-                            odkc_version = get_default_odkc_version(),
-                            orders = get_default_orders(),
-                            tz = get_default_tz()) {
+                           did = "",
+                           eid = "",
+                           url = get_default_url(),
+                           un = get_default_un(),
+                           pw = get_default_pw(),
+                           retries = get_retries(),
+                           odkc_version = get_default_odkc_version(),
+                           orders = get_default_orders(),
+                           tz = get_default_tz()) {
   yell_if_missing(url,
-                  un,
-                  pw,
-                  pid = pid,
-                  did = did,
-                  eid = eid
+    un,
+    pw,
+    pid = pid,
+    did = did,
+    eid = eid
   )
 
   if (odkc_version |> semver_lt("2022.3")) {

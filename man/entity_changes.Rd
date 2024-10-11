@@ -85,8 +85,8 @@ timezone can be set globally or per function.}
 \value{
 A nested list of lists.
 The first nesting level corresponds to entity updates, the second level
-lists each updated property. Within the nested list, the nales are
-"old" (old value), "new" (new value), "propertyName" (name of changed
+lists each updated property. Within the nested list, the names are
+\code{old} (old value), \code{new} (new value), \code{propertyName} (name of changed
 entity property).
 }
 \description{

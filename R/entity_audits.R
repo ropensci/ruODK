@@ -70,21 +70,21 @@
 #' ea
 #' }
 entity_audits <- function(pid = get_default_pid(),
-                            did = "",
-                            eid = "",
-                            url = get_default_url(),
-                            un = get_default_un(),
-                            pw = get_default_pw(),
-                            retries = get_retries(),
-                            odkc_version = get_default_odkc_version(),
-                            orders = get_default_orders(),
-                            tz = get_default_tz()) {
+                          did = "",
+                          eid = "",
+                          url = get_default_url(),
+                          un = get_default_un(),
+                          pw = get_default_pw(),
+                          retries = get_retries(),
+                          odkc_version = get_default_odkc_version(),
+                          orders = get_default_orders(),
+                          tz = get_default_tz()) {
   yell_if_missing(url,
-                  un,
-                  pw,
-                  pid = pid,
-                  did = did,
-                  eid = eid
+    un,
+    pw,
+    pid = pid,
+    did = did,
+    eid = eid
   )
 
   if (odkc_version |> semver_lt("2022.3")) {
