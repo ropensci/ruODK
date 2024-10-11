@@ -31,7 +31,10 @@ test_that("entity_list works", {
     "current_version_version",
     "current_version_base_version",
     "current_version_conflicting_properties",
-    "current_version_created_at"
+    "current_version_created_at",
+    "current_version_branch_id",
+    "current_version_trunk_version",
+    "current_version_branch_base_version"
   )
 
   testthat::expect_equal(names(en), cn)

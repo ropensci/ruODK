@@ -61,6 +61,9 @@ test_that("entity_update works", {
     "data_received",
     "conflicting_properties",
     "created_at",
+    "branch_id",
+    "trunk_version",
+    "branch_base_version",
     "creator",
     "source",
     "relevant_to_conflict"

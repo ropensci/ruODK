@@ -16,7 +16,7 @@ test_that("form_list works", {
     "sha", "sha256", "draft_token", "published_at", "name",
     "submissions", "entity_related", "review_states_received",
     "review_states_has_issues", "review_states_edited", "last_submission",
-    "excel_content_type", "created_by_id", "created_by_type",
+    "excel_content_type", "public_links", "created_by_id", "created_by_type",
     "created_by_display_name", "created_by_created_at",
     "created_by_updated_at", "created_by_deleted_at", "fid"
   )
