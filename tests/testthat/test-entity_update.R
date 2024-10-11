@@ -36,6 +36,11 @@ test_that("entity_update works", {
   )
   testthat::expect_equal(eu$current_version$data$details, details_1)
 
+  testthat::expect_equal(
+    ed$current_version$version,
+    eu$current_version$baseVersion
+  )
+
   # Interlude: entity_changes after update 1
   ec_1 <- entity_changes(did = did, eid = en$uuid[1])
   testthat::expect_gt(length(ec_1), 0)
@@ -52,11 +57,6 @@ test_that("entity_update works", {
   # Interlude: entity_changes after update 2
   ec_2 <- entity_changes(did = did, eid = en$uuid[1])
   testthat::expect_gt(length(ec_2), length(ec_1))
-
-  testthat::expect_equal(
-    ed$current_version$version,
-    eu$current_version$baseVersion
-  )
 
   # Test entity_versions without conflicts flag
   ev <- entity_versions(did = did, eid = en$uuid[1])
