@@ -19,23 +19,39 @@ test_that("entity_update works", {
 
   e_label <- ed$current_version$label
 
+
   # Update the field "details".
-  old_details <- ed$current_version$data$details
-  new_details <- paste0(old_details, ". Updated on ", Sys.time())
+  details_0 <- ed$current_version$data$details
+  details_1 <- paste0(details_0, ". Updated on ", Sys.time())
+  details_2 <- paste0(details_0, ". Updated on ", Sys.time())
 
-  e_data <- list(details = new_details)
+  testthat::expect_equal(ed$current_version$data$details, details_0)
 
-  # Update the Entity (implicitly forced update)
+  # Update the Entity (implicitly forced update) - update 1
   eu <- entity_update(
     did = did,
     eid = en$uuid[1],
     label = e_label,
-    data = e_data
+    data = list(details = details_1)
   )
+  testthat::expect_equal(eu$current_version$data$details, details_1)
 
-  testthat::expect_equal(ed$current_version$data$details, old_details)
+  # Interlude: entity_changes after update 1
+  ec_1 <- entity_changes(did = did, eid = en$uuid[1])
+  testthat::expect_gt(length(ec_1), 0)
 
-  testthat::expect_equal(eu$current_version$data$details, new_details)
+  # Update the Entity (implicitly forced update) - update 2
+  eu <- entity_update(
+    did = did,
+    eid = en$uuid[1],
+    label = e_label,
+    data = list(details = details_2)
+  )
+  testthat::expect_equal(eu$current_version$data$details, details_2)
+
+  # Interlude: entity_changes after update 2
+  ec_2 <- entity_changes(did = did, eid = en$uuid[1])
+  testthat::expect_gt(length(ec_2), length(ec_1))
 
   testthat::expect_equal(
     ed$current_version$version,

@@ -140,6 +140,7 @@ ev <- en$current_version_version[1]
 \url{https://docs.getodk.org/central-api-entity-management/#listing-versions}
 
 Other entity-management: 
+\code{\link{entity_changes}()},
 \code{\link{entity_create}()},
 \code{\link{entity_delete}()},
 \code{\link{entity_detail}()},

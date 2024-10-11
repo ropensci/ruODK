@@ -97,6 +97,7 @@ ds |> knitr::kable()
 \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 
 Other entity-management: 
+\code{\link{entity_changes}()},
 \code{\link{entity_create}()},
 \code{\link{entity_delete}()},
 \code{\link{entity_detail}()},

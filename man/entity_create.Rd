@@ -216,6 +216,7 @@ ec <- entity_create(
 \url{https://docs.getodk.org/central-api-entity-management/#creating-entities}
 
 Other entity-management: 
+\code{\link{entity_changes}()},
 \code{\link{entity_delete}()},
 \code{\link{entity_detail}()},
 \code{\link{entity_list}()},
