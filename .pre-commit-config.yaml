@@ -1,9 +1,9 @@
 exclude: "/migrations/|^venv/|/email/subject/"
-default_stages: [commit]
+default_stages: [pre-commit]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
         name: Drop trailing whitespace
@@ -28,7 +28,7 @@ repos:
 
   # https://lorenzwalthert.github.io/precommit/articles/available-hooks.html
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.2
+    rev: v0.4.3.9001
     hooks:
       - id: style-files
         name: Style code to tidyverse conventions
