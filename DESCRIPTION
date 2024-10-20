@@ -1,7 +1,7 @@
 Type: Package
 Package: ruODK
 Title: An R Client for the ODK Central API
-Version: 1.5.0
+Version: 1.5.0.9000
 Authors@R:c(
     person(c("Florian", "W."), "Mayer", , "Florian.Mayer@dpc.wa.gov.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4269-4242")),

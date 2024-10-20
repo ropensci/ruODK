@@ -206,6 +206,7 @@ Other entity-management:
 \code{\link{entity_versions}()},
 \code{\link{entitylist_detail}()},
 \code{\link{entitylist_list}()},
-\code{\link{entitylist_update}()}
+\code{\link{entitylist_update}()},
+\code{\link{odata_entitylist_service_get}()}
 }
 \concept{entity-management}
