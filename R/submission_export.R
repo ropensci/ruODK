@@ -48,6 +48,10 @@
 #'   parameter `media`.
 #'   Setting this feature to FALSE with an odkc_version < 1.1 and will display a
 #'   verbose noop message, but still include all repeat data.
+#' @param deleted_fields Whether to restore all fields previously deleted
+#'   from this form for this export (TRUE).
+#'   All known fields and data for those fields will be merged and exported.
+#'   default: FALSE
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
@@ -88,6 +92,7 @@ submission_export <- function(local_dir = here::here(),
                               overwrite = TRUE,
                               media = TRUE,
                               repeats = TRUE,
+                              deleted_fields = FALSE,
                               pid = get_default_pid(),
                               fid = get_default_fid(),
                               url = get_default_url(),
@@ -101,11 +106,13 @@ submission_export <- function(local_dir = here::here(),
 
   url_ext <- ".csv.zip"
   file_ext <- ".zip"
+  query <- NULL
 
   if (semver_gt(odkc_version, "1.0.0")) {
     # odkc_version >= 1.1
     if (media == FALSE) {
-      url_ext <- ".csv.zip?attachments=false"
+      url_ext <- ".csv.zip"
+      query <- list("attachments" = "false")
     }
     if (repeats == FALSE) {
       url_ext <- ".csv"
@@ -120,6 +127,12 @@ submission_export <- function(local_dir = here::here(),
       "Omitting repeat data requires ODK Central v1.1 or higher" %>%
         ru_msg_noop(verbose = verbose)
     }
+  }
+
+  if (deleted_fields == TRUE) {
+    query <- c(query, list("deletedFields" = "true"))
+  } else {
+    query <- c(query, list("deletedFields" = "false"))
   }
 
   url_pth <- glue::glue(
@@ -180,7 +193,7 @@ submission_export <- function(local_dir = here::here(),
   # Export form submissions to CSV via POST
   httr::RETRY(
     "POST",
-    httr::modify_url(url, path = url_pth),
+    httr::modify_url(url, path = url_pth, query = query),
     body = body,
     encode = "json",
     httr::authenticate(un, pw),

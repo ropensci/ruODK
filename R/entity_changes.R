@@ -21,11 +21,12 @@
 #' @template param-odkcv
 #' @template param-orders
 #' @template param-tz
-#' @return A nested list of lists.
-#'   The first nesting level corresponds to entity updates, the second level
-#'   lists each updated property. Within the nested list, the names are
-#'   `old` (old value), `new` (new value), `propertyName` (name of changed
-#'   entity property).
+#' @return A tibble where rows correspond to each Entity update
+#'   with three columns:
+#'
+#'   - `old` old value
+#'   - `new` new value
+#'   - `propertyName` name of changed entity property
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-entity-management/#getting-changes-between-versions}
 # nolint end
@@ -105,7 +106,8 @@ entity_changes <- function(pid = get_default_pid(),
     times = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr::content(encoding = "utf-8") |>
+    purrr::map_df(~ purrr::map_df(.x, ~ tibble::as_tibble(.x)))
 }
 
 # usethis::use_test("entity_update")  # nolint

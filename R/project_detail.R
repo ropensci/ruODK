@@ -48,9 +48,9 @@ project_detail <- function(pid = get_default_pid(),
     ),
     httr::authenticate(un, pw),
     times = retries
-  ) %>%
-    yell_if_error(., url, un, pw) %>%
-    httr::content(.) %>%
+  ) |>
+    yell_if_error(url, un, pw) |>
+    httr::content() %>%
     { # nolint
       tibble::tibble(
         id = .$id,
