@@ -28,7 +28,7 @@ repos:
 
   # https://lorenzwalthert.github.io/precommit/articles/available-hooks.html
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3.9001
+    rev: v0.4.3.9003
     hooks:
       - id: style-files
         name: Style code to tidyverse conventions
