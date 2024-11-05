@@ -151,6 +151,7 @@ Other entity-management:
 \code{\link{entitylist_download}()},
 \code{\link{entitylist_list}()},
 \code{\link{entitylist_update}()},
+\code{\link{odata_entitylist_data_get}()},
 \code{\link{odata_entitylist_metadata_get}()},
 \code{\link{odata_entitylist_service_get}()}
 }

@@ -1,7 +1,6 @@
-# Test the odata_entitylist_service_get function
-test_that("odata_entitylist_service_get works correctly with valid inputs", {
+test_that("odata_entitylist_data_get works correctly with valid inputs", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-    message = "Test server not configured"
+          message = "Test server not configured"
   )
 
   ru_setup(
@@ -14,26 +13,16 @@ test_that("odata_entitylist_service_get works correctly with valid inputs", {
 
   ds <- entitylist_list()
 
-  ds1 <- odata_entitylist_service_get(did = ds$name[1])
-
-  ctx <- as.character(glue::glue(
-    "{get_test_url()}/v1/projects/{get_test_pid()}/",
-    "datasets/{ds$name[1]}.svc/$metadata"
-  ))
+  ds1 <- odata_entitylist_data_get(did = ds$name[1])
 
   # Check the structure of the result
-  testthat::expect_s3_class(ds1, "odata_entitylist_service_get")
-  expect_equal(
-    ds1$context,
-    ctx
-  )
-  testthat::expect_equal(nrow(ds1$value), 1)
-  testthat::expect_equal(ds1$value$name[1], "Entities")
+  testthat::expect_s3_class(ds1, "odata_entitylist_data_get")
+  testthat::expect_is(ds1$context, "character")
 })
 
-test_that("odata_entitylist_service_get print works", {
+test_that("odata_entitylist_data_get print works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-    message = "Test server not configured"
+          message = "Test server not configured"
   )
 
   ru_setup(
@@ -46,19 +35,19 @@ test_that("odata_entitylist_service_get print works", {
 
   ds <- entitylist_list()
 
-  ds1 <- odata_entitylist_service_get(did = ds$name[1])
+  ds1 <- odata_entitylist_data_get(did = ds$name[1])
 
   # Test print
   out <- testthat::capture_output(print(ds1))
-  testthat::expect_true(any(grepl("<ruODK OData EntityList Service>", out)))
+  testthat::expect_true(any(grepl("<ruODK OData EntityList Data>", out)))
   testthat::expect_true(any(grepl(glue::glue("OData Context"), out)))
   testthat::expect_true(any(grepl(glue::glue("OData Entities"), out)))
 })
 
 
-test_that("odata_entitylist_service_get warns on missing arguments", {
+test_that("odata_entitylist_data_get warns on missing arguments", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-    message = "Test server not configured"
+          message = "Test server not configured"
   )
 
   ru_setup(
@@ -70,18 +59,18 @@ test_that("odata_entitylist_service_get warns on missing arguments", {
   )
 
   testthat::expect_error(
-    odata_entitylist_service_get(pid = "", did = "")
+    odata_entitylist_data_get(pid = "", did = "")
   )
 
   testthat::expect_error(
-    odata_entitylist_service_get(pid = get_test_pid(), did = "")
+    odata_entitylist_data_get(pid = get_test_pid(), did = "")
   )
 })
 
 
 test_that("odata_entitylist_data_get warns if odkc_version too low", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-    message = "Test server not configured"
+          message = "Test server not configured"
   )
 
   ru_setup(
@@ -102,4 +91,4 @@ test_that("odata_entitylist_data_get warns if odkc_version too low", {
   )
 })
 
-# usethis::use_r("odata_entitylist_service_get") # nolint
+# usethis::use_r("odata_entitylist_data_get") # nolint
