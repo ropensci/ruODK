@@ -6,7 +6,7 @@
 * `entity_changes` now returns a tibble instead of nested list.
 * `submission_export` gains a new parameter `deleted_fields` to export all
   known fields of a form, including fields that were deleted in the latest form
-  version. (#129)
+  version. (#129, #161)
 
 
 # ruODK 1.5.0

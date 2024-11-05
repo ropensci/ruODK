@@ -84,7 +84,7 @@ odata_entitylist_service_get <- function(pid = get_default_pid(),
   structure(list(
     context = ds$odata_context,
     value = purrr::map_df(ds$value, ~ tibble::as_tibble(.x))
-  ), class = "odata_entitylist_service_get")
+  ), class = c("odata_entitylist_service_get", "list"))
 }
 
 #' @export
