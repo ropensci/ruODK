@@ -83,11 +83,13 @@ Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
 timezone can be set globally or per function.}
 }
 \value{
-A nested list of lists.
-The first nesting level corresponds to entity updates, the second level
-lists each updated property. Within the nested list, the names are
-\code{old} (old value), \code{new} (new value), \code{propertyName} (name of changed
-entity property).
+A tibble where rows correspond to each Entity update
+with three columns:
+\itemize{
+\item \code{old} old value
+\item \code{new} new value
+\item \code{propertyName} name of changed entity property
+}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -150,6 +152,9 @@ Other entity-management:
 \code{\link{entitylist_detail}()},
 \code{\link{entitylist_download}()},
 \code{\link{entitylist_list}()},
-\code{\link{entitylist_update}()}
+\code{\link{entitylist_update}()},
+\code{\link{odata_entitylist_data_get}()},
+\code{\link{odata_entitylist_metadata_get}()},
+\code{\link{odata_entitylist_service_get}()}
 }
 \concept{entity-management}

@@ -13,6 +13,7 @@ utils::globalVariables(c(
   ".",
   "archived",
   "children",
+  "id",
   "name",
   "path",
   "type",
@@ -20,3 +21,10 @@ utils::globalVariables(c(
   "xx",
   "xml_form_id"
 ))
+
+## usethis namespace: start
+#' @import rlang
+#' @importFrom glue glue
+#' @importFrom lifecycle deprecated
+## usethis namespace: end
+NULL

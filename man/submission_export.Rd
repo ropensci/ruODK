@@ -9,6 +9,7 @@ submission_export(
   overwrite = TRUE,
   media = TRUE,
   repeats = TRUE,
+  deleted_fields = FALSE,
   pid = get_default_pid(),
   fid = get_default_fid(),
   url = get_default_url(),
@@ -38,6 +39,11 @@ Requesting \code{repeats=FALSE} will also omit any media, and override the
 parameter \code{media}.
 Setting this feature to FALSE with an odkc_version < 1.1 and will display a
 verbose noop message, but still include all repeat data.}
+
+\item{deleted_fields}{Whether to restore all fields previously deleted
+from this form for this export (TRUE).
+All known fields and data for those fields will be merged and exported.
+default: FALSE}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 

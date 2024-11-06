@@ -62,7 +62,7 @@ entitylist_detail <- function(pid = get_default_pid(),
     ru_msg_warn("entitylist_detail is supported from v2022.3")
   }
 
-  ds <- httr::RETRY(
+  httr::RETRY(
     "GET",
     httr::modify_url(url,
       path = glue::glue(
