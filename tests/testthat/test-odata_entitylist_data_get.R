@@ -20,6 +20,36 @@ test_that("odata_entitylist_data_get works correctly with valid inputs", {
   testthat::expect_is(ds1$context, "character")
 })
 
+
+test_that("odata_entitylist_data_get filters work", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  ru_setup(
+    pid = get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+
+  ds <- entitylist_list()
+
+  qry <- list(
+    "$filter" = "__system/createdAt le 2024-11-05",
+    "$orderby" = "__system/creatorId ASC, __system/conflict DESC",
+    "$top" = "100",
+    "$skip" = "3",
+    "$count" = "true"
+  )
+  ds1 <- odata_entitylist_data_get(did = ds$name[1], query = qry)
+
+  # Check the structure of the result
+  testthat::expect_s3_class(ds1, "odata_entitylist_data_get")
+  testthat::expect_is(ds1$context, "character")
+})
+
 test_that("odata_entitylist_data_get print works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
