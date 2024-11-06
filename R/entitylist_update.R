@@ -73,7 +73,7 @@ entitylist_update <- function(pid = get_default_pid(),
     ru_msg_warn("entitylist_update is supported from v2022.3")
   }
 
-  ds <- httr::RETRY(
+  httr::RETRY(
     "PATCH",
     httr::modify_url(url,
       path = glue::glue(

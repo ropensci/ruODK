@@ -152,7 +152,7 @@ get_one_attachment <- function(pth,
 
   yell_if_missing(url, un, pw)
 
-  res <- httr::RETRY(
+  httr::RETRY(
     "GET",
     src,
     httr::authenticate(un, pw),
