@@ -1,7 +1,7 @@
 # Test the odata_entitylist_metadata_get function
 test_that("odata_entitylist_metadata_get works correctly with valid inputs", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+    message = "Test server not configured"
   )
 
   ru_setup(
@@ -24,7 +24,7 @@ test_that("odata_entitylist_metadata_get works correctly with valid inputs", {
 
 test_that("odata_entitylist_service_get print works", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+    message = "Test server not configured"
   )
 
   ru_setup(
@@ -50,7 +50,7 @@ test_that("odata_entitylist_service_get print works", {
 
 test_that("odata_entitylist_metadata_get warns on missing arguments", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+    message = "Test server not configured"
   )
 
   ru_setup(
@@ -73,7 +73,7 @@ test_that("odata_entitylist_metadata_get warns on missing arguments", {
 
 test_that("odata_entitylist_metadata_get warns if odkc_version too low", {
   skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+    message = "Test server not configured"
   )
 
   ru_setup(
@@ -91,7 +91,7 @@ test_that("odata_entitylist_metadata_get warns if odkc_version too low", {
 
   testthat::expect_warning(
     ds1 <- odata_entitylist_metadata_get(did = did, odkc_version = "1.5.3")
-      )
+  )
 })
 
 # usethis::use_r("odata_entitylist_metadata_get") # nolint
