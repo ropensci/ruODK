@@ -15,6 +15,8 @@ odata_submission_get(
   filter = NULL,
   parse = TRUE,
   download = TRUE,
+  names_sep = "_",
+  clean_names = TRUE,
   orders = get_default_orders(),
   local_dir = "media",
   pid = get_default_pid(),
@@ -84,6 +86,18 @@ Default: TRUE.}
 If in the future ODK Central supports hot-linking attachments,
 this parameter will replace attachment file names with their fully
 qualified attachment URL.
+Default: TRUE.}
+
+\item{names_sep}{Used internally in
+\code{tidyr::unnest_wider(names_sep=names_sep)} when unnesting form groups.
+By default, nested form fields are prefixed with the group name and
+separated by \code{names_sep}.
+To omit the group name as prefix, use \code{names_sep=NULL}.
+Default: "_"}
+
+\item{clean_names}{Whether to run \code{janitor::clean_names()} after unnesting
+form groups.
+Set \code{clean_names=FALSE} to preserve any non-standard \code{names_sep}.
 Default: TRUE.}
 
 \item{orders}{(vector of character) Orders of datetime elements for

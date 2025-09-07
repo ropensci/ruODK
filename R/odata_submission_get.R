@@ -102,6 +102,16 @@
 #'   this parameter will replace attachment file names with their fully
 #'   qualified attachment URL.
 #'   Default: TRUE.
+#' @param names_sep Used internally in
+#'   `tidyr::unnest_wider(names_sep=names_sep)` when unnesting form groups.
+#'   By default, nested form fields are prefixed with the group name and
+#'   separated by `names_sep`.
+#'   To omit the group name as prefix, use `names_sep=NULL`.
+#'   Default: "_"
+#' @param clean_names Whether to run `janitor::clean_names()` after unnesting
+#'   form groups.
+#'   Set `clean_names=FALSE` to preserve any non-standard `names_sep`.
+#'   Default: TRUE.
 #' @param orders (vector of character) Orders of datetime elements for
 #'   lubridate.
 #'   Default:
@@ -173,6 +183,8 @@ odata_submission_get <- function(table = "Submissions",
                                  filter = NULL,
                                  parse = TRUE,
                                  download = TRUE,
+                                 names_sep = "_",
+                                 clean_names = TRUE,
                                  orders = get_default_orders(),
                                  local_dir = "media",
                                  pid = get_default_pid(),
@@ -277,6 +289,8 @@ odata_submission_get <- function(table = "Submissions",
   sub <- sub %>%
     odata_submission_rectangle(
       form_schema = fs,
+      names_sep = names_sep,
+      clean_names = clean_names,
       verbose = verbose
     ) %>%
     handle_ru_datetimes(

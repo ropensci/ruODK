@@ -78,6 +78,14 @@ unnest_all <- function(nested_tbl,
         glue::glue() %>%
         ru_msg_info(verbose = verbose)
 
+      # If any list elements are unnamed and names_sep=NULL, set safe params
+      if (
+        is.null(names_sep) &&
+        any(vapply(nested_tbl[[colname]], function(x) is.null(names(x)), logical(1)))) {
+        names_sep <- "_"
+      }
+
+
       suppressMessages(
         nested_tbl <- tidyr::unnest_wider(
           nested_tbl,
@@ -126,6 +134,9 @@ unnest_all <- function(nested_tbl,
 #'   column name, separated by \code{names_sep}.
 #'   This avoids unsightly repaired names such as \code{latitude...1}.
 #' @template param-fs
+#' @param clean_names Whether to run `janitor::clean_names()`.
+#'   Set `clean_names=FALSE` to preserve any non-standard `names_sep`.
+#'   Default: TRUE.
 #' @template param-verbose
 #' @return The submissions as un-nested tibble
 #' @family utilities
@@ -147,6 +158,7 @@ odata_submission_rectangle <- function(data,
                                        names_repair = "universal",
                                        names_sep = "_",
                                        form_schema = NULL,
+                                       clean_names = TRUE,
                                        verbose = get_ru_verbose()) {
   data %>%
     {
@@ -159,11 +171,14 @@ odata_submission_rectangle <- function(data,
       form_schema = form_schema,
       verbose = verbose
     ) %>%
-    janitor::clean_names(.) %>%
-    dplyr::rename_at(
-      dplyr::vars(dplyr::starts_with("value_")),
-      ~ stringr::str_remove(., "value_")
-    )
+    {
+      if (clean_names == TRUE)
+        janitor::clean_names(.)
+      else
+        .
+    } %>%
+    dplyr::rename_at(dplyr::vars(dplyr::starts_with("value_")),
+                     ~ stringr::str_remove(., "value_"))
 }
 
 # usethis::use_test("odata_submission_rectangle") # nolint

@@ -1,7 +1,15 @@
-# ruODK 1.5.3
+# ruODK 1.5.2
 ## Minor changes
 * `get_one_attachment` now follows redirects, enabling `odata_submission_get` to
-  download attachments stored in AWS S3 buckets (#167, thanks @baanbapat),
+  download attachments stored in AWS S3 buckets (#167, thanks @baanbapat).
+* `odata_submission_get` now supports `names_sep` and `clean_names`.
+  `odata_submission_get(names_setp="__", clean_names=FALSE)` will separate
+  group names by a double underscore.
+  `odata_submission_get(names_setp=NULL)` will omit group names unless the group
+  is a repeat, in which case the group name is still prefixed to avoid duplicate
+  column names in the resulting tibble (#168, thanks
+  [Nina Brooks](https://forum.getodk.org/u/Nina_Brooks1) and
+  [Guenther Fink](https://forum.getodk.org/u/Guenther_Fink))
 
 ## Maintenance
 * Update tested ODK Central version to 2025.2.2 (Sept 2025) and adjust tests

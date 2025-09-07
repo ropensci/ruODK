@@ -334,4 +334,54 @@ test_that("odata_submission_get expand works", {
   )
 })
 
+test_that("odata_submission_get can exclude group names", {
+  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+          message = "Test server not configured"
+  )
+
+  x_groups <- odata_submission_get(
+    expand = TRUE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    download = FALSE,
+    parse = TRUE,
+    names_sep = "_"
+  )
+  testthat::expect_contains(names(x_groups), "location_area_name")
+
+  x_groups_double <- odata_submission_get(
+    expand = TRUE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    download = FALSE,
+    parse = TRUE,
+    names_sep = "__",
+    clean_names = FALSE
+  )
+  testthat::expect_contains(names(x_groups_double), "_location__area_name")
+
+  x_plain <- odata_submission_get(
+    expand = TRUE,
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    download = FALSE,
+    parse = TRUE,
+    names_sep = NULL,
+    clean_names = TRUE
+  )
+  testthat::expect_contains(names(x_plain), "area_name")
+})
+
 # usethis::use_r("odata_submission_get") # nolint

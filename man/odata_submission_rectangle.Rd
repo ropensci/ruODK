@@ -10,6 +10,7 @@ odata_submission_rectangle(
   names_repair = "universal",
   names_sep = "_",
   form_schema = NULL,
+  clean_names = TRUE,
   verbose = get_ru_verbose()
 )
 }
@@ -31,6 +32,10 @@ like the output of \code{\link{form_schema}}. If a form schema is supplied,
 location fields will not be unnested. While WKT location fields contain
 plain text and will never be unnested, GeoJSON location fields would cause
 errors during unnesting.}
+
+\item{clean_names}{Whether to run \code{janitor::clean_names()}.
+Set \code{clean_names=FALSE} to preserve any non-standard \code{names_sep}.
+Default: TRUE.}
 
 \item{verbose}{Whether to display debug messages or not.
 
