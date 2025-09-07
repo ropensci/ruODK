@@ -33,6 +33,7 @@ test_that("submission_list works", {
     "updated_at",
     "review_state",
     "user_agent",
+    "deleted_at",
     "submitter_id_2",
     "submitter_type",
     "submitter_display_name",

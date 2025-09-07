@@ -24,6 +24,7 @@ test_that("entitylist_list works", {
     "created_at",
     "project_id",
     "approval_required",
+    "owner_only",
     "entities",
     "last_entity",
     "conflicts"

@@ -208,4 +208,27 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   testthat::expect_true(is.na(gg))
 })
 
+
+test_that("attachment_get follows redirects", {
+  tmp <- tempfile(fileext = ".txt")
+
+  # httpbin returns "GET" as text after following redirect
+  src <- "https://httpbin.org/redirect-to?url=https://httpbin.org/get"
+
+  out <- get_one_attachment(
+    pth = tmp,
+    fn = "test.txt",
+    src = src,
+    url = "https://httpbin.org",
+    un = "user", # dummy
+    pw = "pass", # dummy
+    retries = 1,
+    verbose = FALSE
+  )
+
+  expect_true(fs::file_exists(out))
+  content <- readLines(out, warn = FALSE)
+  expect_true(any(grepl("https://httpbin.org/get", content)))
+})
+
 # usethis::use_r("attachment_get") # nolint

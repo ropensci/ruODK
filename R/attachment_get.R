@@ -157,6 +157,7 @@ get_one_attachment <- function(pth,
     src,
     httr::authenticate(un, pw),
     httr::write_disk(pth, overwrite = TRUE),
+    httr::config(followlocation = TRUE),
     times = retries,
     terminate_on = c(404)
   ) %>%

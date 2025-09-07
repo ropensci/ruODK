@@ -1,3 +1,14 @@
+# ruODK 1.5.3
+## Minor changes
+* `get_one_attachment` now follows redirects, enabling `odata_submission_get` to
+  download attachments stored in AWS S3 buckets (#167, thanks @baanbapat),
+
+## Maintenance
+* Update tested ODK Central version to 2025.2.2 (Sept 2025) and adjust tests
+  to expect fields added to the ODK Central API
+  (`entity_list`, `form_list`, `submission_list`).
+* Refresh all packaged example data to contain the added fields.
+
 # ruODK 1.5.1
 ## Major changes
 * Add support for the OData API endpoints for Entities (#152)

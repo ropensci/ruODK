@@ -12,7 +12,7 @@ test_that("form_list works", {
   testthat::expect_equal(class(fl), c("tbl_df", "tbl", "data.frame"))
   cn <- c(
     "project_id", "xml_form_id", "state", "enketo_id", "enketo_once_id",
-    "created_at", "updated_at", "key_id", "version", "hash",
+    "created_at", "updated_at", "webforms_enabled", "key_id", "version", "hash",
     "sha", "sha256", "draft_token", "published_at", "name",
     "submissions", "entity_related", "review_states_received",
     "review_states_has_issues", "review_states_edited", "last_submission",
