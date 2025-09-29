@@ -3,7 +3,7 @@ default_stages: [pre-commit]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
         name: Drop trailing whitespace
@@ -28,7 +28,7 @@ repos:
 
   # https://lorenzwalthert.github.io/precommit/articles/available-hooks.html
   - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3.9003
+    rev: v0.4.3.9015
     hooks:
       - id: style-files
         name: Style code to tidyverse conventions
