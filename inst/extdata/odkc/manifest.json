@@ -1,8 +1,8 @@
 {
   "source": "https://ruodk.getodk.cloud",
-  "dumped_at": "2026-09-22 13:48:21 UTC",
+  "dumped_at": "2026-09-22 14:22:26 UTC",
   "odkc_version_declared": "2023.5.1",
-  "notes": ["Image attachment BYTES are not stored here. See attachments-map.json:", "each image filename maps to a file in vignettes/media/, which is the", "single point of images in this package and must not be modified.", "Non-image attachments are copied under submissions/<pid>/<fid>/<iid>/.", "XLS form sources are not stored; see had_xls per form in this manifest."],
+  "notes": ["Image attachment BYTES are not stored here. See attachments-map.json:", "each image filename maps to a file in vignettes/media/, which is the", "single point of images in this package and must not be modified.", "Non-image attachments are copied under submissions/<pid>/<fid>/<slug>/.", "XLS form sources are not stored; see had_xls per form in this manifest."],
   "projects": {
     "1": {
       "id": 1,
@@ -24,6 +24,7 @@
           "submission_instances": "uuid:3b8849d0-b191-4725-9ab7-8f2fa59c2a75",
           "submissions_detail": {
             "uuid:3b8849d0-b191-4725-9ab7-8f2fa59c2a75": {
+              "slug": "3b8849d0",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": []
@@ -44,6 +45,7 @@
           "submission_instances": "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9",
           "submissions_detail": {
             "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9": {
+              "slug": "c10f1716",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": {
@@ -95,6 +97,7 @@
           "submission_instances": "uuid:a03d2dea-718f-4416-b936-92845d40811b",
           "submissions_detail": {
             "uuid:a03d2dea-718f-4416-b936-92845d40811b": {
+              "slug": "a03d2dea",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": {
@@ -136,6 +139,7 @@
           "submission_instances": "uuid:a2584047-3e33-40fe-a0b3-5f47a8eb2a9e",
           "submissions_detail": {
             "uuid:a2584047-3e33-40fe-a0b3-5f47a8eb2a9e": {
+              "slug": "a2584047",
               "review_state": "approved",
               "newest_first_rank": 1,
               "attachments": []
@@ -156,6 +160,7 @@
           "submission_instances": "uuid:46d3939a-8bc5-4084-9154-d043bc4d3239",
           "submissions_detail": {
             "uuid:46d3939a-8bc5-4084-9154-d043bc4d3239": {
+              "slug": "46d3939a",
               "review_state": "approved",
               "newest_first_rank": 1,
               "attachments": {
@@ -202,6 +207,7 @@
           "submission_instances": "uuid:45bc143a-ef66-4475-818d-d77c8bd1ed8f",
           "submissions_detail": {
             "uuid:45bc143a-ef66-4475-818d-d77c8bd1ed8f": {
+              "slug": "45bc143a",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": []
@@ -222,6 +228,7 @@
           "submission_instances": "uuid:518399e4-c075-438d-93b3-b78078c05030",
           "submissions_detail": {
             "uuid:518399e4-c075-438d-93b3-b78078c05030": {
+              "slug": "518399e4",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": {
@@ -258,6 +265,7 @@
           "submission_instances": "uuid:4934351f-66b1-4cf2-8c34-f15021298d86",
           "submissions_detail": {
             "uuid:4934351f-66b1-4cf2-8c34-f15021298d86": {
+              "slug": "4934351f",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": []
@@ -278,6 +286,7 @@
           "submission_instances": "uuid:d5102337-ba3f-4cde-9182-9ec3958a6f2d",
           "submissions_detail": {
             "uuid:d5102337-ba3f-4cde-9182-9ec3958a6f2d": {
+              "slug": "d5102337",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": []
@@ -298,6 +307,7 @@
           "submission_instances": "uuid:b629a8af-91d4-4fb8-9c5e-057cf104ed42",
           "submissions_detail": {
             "uuid:b629a8af-91d4-4fb8-9c5e-057cf104ed42": {
+              "slug": "b629a8af",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": []
@@ -318,6 +328,7 @@
           "submission_instances": "uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654",
           "submissions_detail": {
             "uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654": {
+              "slug": "e0d018fd",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": {
@@ -328,7 +339,7 @@
                 },
                 "1701678899551.bin": {
                   "source": "fixture",
-                  "path": "inst/extdata/odkc/submissions/1/I8n_no_lang_choicefilter/uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654/1701678899551.bin"
+                  "path": "inst/extdata/odkc/submissions/1/I8n_no_lang_choicefilter/e0d018fd/1701678899551.bin"
                 }
               }
             }
@@ -348,6 +359,7 @@
           "submission_instances": "uuid:2d3dbc0c-70f5-4c99-a812-a8296511c45b",
           "submissions_detail": {
             "uuid:2d3dbc0c-70f5-4c99-a812-a8296511c45b": {
+              "slug": "2d3dbc0c",
               "review_state": "approved",
               "newest_first_rank": 1,
               "attachments": []
@@ -396,11 +408,13 @@
           "submission_instances": ["uuid:a2af79f9-205e-41c1-a258-05b960f44ca5", "uuid:2f7f5cea-067b-43a6-822e-47692ae9dd04"],
           "submissions_detail": {
             "uuid:a2af79f9-205e-41c1-a258-05b960f44ca5": {
+              "slug": "a2af79f9",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": []
             },
             "uuid:2f7f5cea-067b-43a6-822e-47692ae9dd04": {
+              "slug": "2f7f5cea",
               "review_state": "approved",
               "newest_first_rank": 2,
               "attachments": []
@@ -421,16 +435,19 @@
           "submission_instances": ["uuid:7e67b4e4-8c1d-4815-83e9-8c64a98a034f", "uuid:58bd197b-66f6-437a-98b2-bb21e7830713", "uuid:1fc70fde-6cee-4869-95fb-d54592c41981"],
           "submissions_detail": {
             "uuid:7e67b4e4-8c1d-4815-83e9-8c64a98a034f": {
+              "slug": "7e67b4e4",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": []
             },
             "uuid:58bd197b-66f6-437a-98b2-bb21e7830713": {
+              "slug": "58bd197b",
               "review_state": "approved",
               "newest_first_rank": 2,
               "attachments": []
             },
             "uuid:1fc70fde-6cee-4869-95fb-d54592c41981": {
+              "slug": "1fc70fde",
               "review_state": null,
               "newest_first_rank": 3,
               "attachments": []
@@ -517,16 +534,18 @@
           "submission_instances": ["uuid:5ba50a14-2eb3-41ce-840a-fb72f8a22ce4", "uuid:8d486da8-7ee8-47ed-862f-e6b34b30dce0"],
           "submissions_detail": {
             "uuid:5ba50a14-2eb3-41ce-840a-fb72f8a22ce4": {
+              "slug": "5ba50a14",
               "review_state": null,
               "newest_first_rank": 1,
               "attachments": {
                 "submission.xml.enc": {
                   "source": "fixture",
-                  "path": "inst/extdata/odkc/submissions/2/Locations/uuid:5ba50a14-2eb3-41ce-840a-fb72f8a22ce4/submission.xml.enc"
+                  "path": "inst/extdata/odkc/submissions/2/Locations/5ba50a14/submission.xml.enc"
                 }
               }
             },
             "uuid:8d486da8-7ee8-47ed-862f-e6b34b30dce0": {
+              "slug": "8d486da8",
               "review_state": null,
               "newest_first_rank": 2,
               "attachments": []

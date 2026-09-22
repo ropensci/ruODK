@@ -28,7 +28,7 @@
 #
 # Non-image attachments (e.g. the encrypted form's submission.xml.enc, or
 # stray .bin payloads) are NOT images and have no vignette counterpart, so
-# their bytes ARE copied into submissions/<pid>/<fid>/<iid>/.
+# their bytes ARE copied into submissions/<pid>/<fid>/<slug>/.
 #
 # Read-only against the server. Re-run any time the server fixture set drifts.
 
@@ -142,6 +142,13 @@ pick_media <- function(attachment_name) {
   media_names[[((media_cursor - 1L) %% length(media_names)) + 1L]]
 }
 
+# Filesystem slug for a submission instance id. The full instance id is
+# "uuid:" plus 32 hex characters, which makes paths longer than the 100 bytes
+# that tar can store portably. `R CMD build` warns for each one. The first 8
+# hex characters are enough to tell 19 submissions apart, and the full id stays
+# in manifest.json as the key of submissions_detail.
+slug_of <- function(iid) substr(sub("^uuid:", "", iid), 1, 8)
+
 manifest <- list(
   source = cfg$url,
   dumped_at = format(Sys.time(), tz = "UTC", usetz = TRUE),
@@ -150,7 +157,7 @@ manifest <- list(
     "Image attachment BYTES are not stored here. See attachments-map.json:",
     "each image filename maps to a file in vignettes/media/, which is the",
     "single point of images in this package and must not be modified.",
-    "Non-image attachments are copied under submissions/<pid>/<fid>/<iid>/.",
+    "Non-image attachments are copied under submissions/<pid>/<fid>/<slug>/.",
     "XLS form sources are not stored; see had_xls per form in this manifest."
   ),
   projects = list()
@@ -218,6 +225,7 @@ for (pid in pids) {
     subs <- list()
     for (j in seq_len(nrow(sl))) {
       iid <- sl$instance_id[[j]]
+      slug <- slug_of(iid)
       # submission_list() orders by createdAt DESC, so this is newest-first.
       # Recorded so the seed can replay in reverse and preserve the relative
       # submission dates (Central stamps createdAt itself at ingest).
@@ -233,7 +241,7 @@ for (pid in pids) {
       httr::stop_for_status(sxml)
       sxml_text <- httr::content(sxml, as = "text", encoding = "UTF-8")
       sub_dir <- path(fixture_root, "submissions", as.character(pid), fid)
-      writeLines(sxml_text, path(sub_dir, paste0(iid, ".xml")), useBytes = TRUE)
+      writeLines(sxml_text, path(sub_dir, paste0(slug, ".xml")), useBytes = TRUE)
 
       # --- attachments: images -> vignettes/media stand-in; other bytes copied
       al <- tryCatch(
@@ -270,7 +278,7 @@ for (pid in pids) {
             ))
           )
           httr::stop_for_status(payload)
-          att_dir <- path(sub_dir, iid)
+          att_dir <- path(sub_dir, slug)
           dir_create(att_dir)
           writeBin(httr::content(payload, as = "raw"), path(att_dir, nm))
           rel <- path_rel(path(att_dir, nm), start = ".")
@@ -284,6 +292,9 @@ for (pid in pids) {
         }
       }
       subs[[iid]] <- list(
+        # Filesystem slug for this submission. Full instance id is the key of
+        # this entry. See slug_of() above.
+        slug = slug,
         # submission_list() gives review_state; NA on the server means nobody
         # has reviewed it. The seed replays this or class(review_state) comes
         # back logical (all-NA) instead of character, which
@@ -368,6 +379,22 @@ for (pid in pids) {
 # --------------------------------------------------------------------------- #
 # Write manifests
 # --------------------------------------------------------------------------- #
+
+# Fail loudly rather than overwrite one submission with another. Unlikely at
+# 8 hex characters, and the full instance id is still the manifest key.
+all_iids <- unlist(lapply(manifest$projects, function(p) {
+  unlist(lapply(p$forms, function(f) f$submission_instances))
+}))
+all_slugs <- slug_of(all_iids)
+if (anyDuplicated(all_slugs) > 0) {
+  dupes <- unique(all_slugs[duplicated(all_slugs)])
+  stop(
+    "8-character submission slugs collide for: ",
+    paste(all_iids[all_slugs %in% dupes], collapse = ", "),
+    ". Widen slug_of() before re-running."
+  )
+}
+say("submission slugs: %d unique of %d", length(unique(all_slugs)), length(all_slugs))
 
 write_json(
   attachment_map,

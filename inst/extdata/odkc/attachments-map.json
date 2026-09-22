@@ -153,14 +153,14 @@
   },
   "1701678899551.bin": {
     "source": "fixture",
-    "path": "inst/extdata/odkc/submissions/1/I8n_no_lang_choicefilter/uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654/1701678899551.bin",
+    "path": "inst/extdata/odkc/submissions/1/I8n_no_lang_choicefilter/e0d018fd/1701678899551.bin",
     "pid": 1,
     "fid": "I8n_no_lang_choicefilter",
     "instance_id": "uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654"
   },
   "submission.xml.enc": {
     "source": "fixture",
-    "path": "inst/extdata/odkc/submissions/2/Locations/uuid:5ba50a14-2eb3-41ce-840a-fb72f8a22ce4/submission.xml.enc",
+    "path": "inst/extdata/odkc/submissions/2/Locations/5ba50a14/submission.xml.enc",
     "pid": 2,
     "fid": "Locations",
     "instance_id": "uuid:5ba50a14-2eb3-41ce-840a-fb72f8a22ce4"

@@ -144,6 +144,13 @@ exists_at <- function(path) {
 
 urlenc <- function(x) URLencode(x, reserved = TRUE)
 
+# Filesystem slug for a submission instance id. Must match slug_of() in
+# data-raw/dump_odkc_fixtures.R. The full instance id is "uuid:" plus 32 hex
+# characters, which makes paths longer than tar can store portably, so the
+# fixtures use the first 8 hex characters and manifest.json keeps the full id
+# as the key of submissions_detail.
+slug_of <- function(iid) substr(sub("^uuid:", "", iid), 1, 8)
+
 # --------------------------------------------------------------------------- #
 # 1. First admin
 # --------------------------------------------------------------------------- #
@@ -362,7 +369,8 @@ for (p in want_pids) {
 
       # ---- phase 4a: the instance XML alone -----------------------------
       if (!exists_at(probe_path)) {
-        xml_path <- path(fixtures, "submissions", p, fid, paste0(iid, ".xml"))
+        xml_path <- path(fixtures, "submissions", p, fid,
+                         paste0(slug_of(iid), ".xml"))
         if (!file_exists(xml_path)) {
           n_fail <- n_fail + 1L
           say2("  %-28s %-40s MISSING %s", fid, iid, xml_path)
