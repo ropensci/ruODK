@@ -1,0 +1,539 @@
+{
+  "source": "https://ruodk.getodk.cloud",
+  "dumped_at": "2026-09-22 13:48:21 UTC",
+  "odkc_version_declared": "2023.5.1",
+  "notes": ["Image attachment BYTES are not stored here. See attachments-map.json:", "each image filename maps to a file in vignettes/media/, which is the", "single point of images in this package and must not be modified.", "Non-image attachments are copied under submissions/<pid>/<fid>/<iid>/.", "XLS form sources are not stored; see had_xls per form in this manifest."],
+  "projects": {
+    "1": {
+      "id": 1,
+      "name": "ruODK package tests",
+      "description": "Forms and submissions used for [ruODK](https://github.com/ropensci/ruODK/) package tests.",
+      "key_id": "NA",
+      "forms": {
+        "address_problem": {
+          "xml_form_id": "address_problem",
+          "name": "Address a problem",
+          "version": "20240308210648[upgrade]",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2024-12-23 04:54:59",
+          "hash": "73517dac4561f7759b7606d126a3ac2f",
+          "submissions": 1,
+          "entity_related": true,
+          "had_xls": true,
+          "submission_instances": "uuid:3b8849d0-b191-4725-9ab7-8f2fa59c2a75",
+          "submissions_detail": {
+            "uuid:3b8849d0-b191-4725-9ab7-8f2fa59c2a75": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": []
+            }
+          }
+        },
+        "burn_grading_forest": {
+          "xml_form_id": "burn_grading_forest",
+          "name": "Burn Grading Forest",
+          "version": "2023.1.1",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-08-09 11:26:31",
+          "hash": "5be80a0e66f1238ec7ac9a21237a8867",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": true,
+          "submission_instances": "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9",
+          "submissions_detail": {
+            "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": {
+                "1691557455419.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678074209.jpg",
+                  "exact_name_match": false
+                },
+                "1691557501897.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678107041.jpg",
+                  "exact_name_match": false
+                },
+                "1691557557243.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678512568.jpg",
+                  "exact_name_match": false
+                },
+                "1691557629931.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678535420.jpg",
+                  "exact_name_match": false
+                },
+                "1691557709643.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678592627.jpg",
+                  "exact_name_match": false
+                },
+                "1691557774426.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678074209.jpg",
+                  "exact_name_match": false
+                }
+              }
+            }
+          }
+        },
+        "burn_grading_heath": {
+          "xml_form_id": "burn_grading_heath",
+          "name": "Burn Grading Heath",
+          "version": "2023.1.0",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-08-09 11:23:56",
+          "hash": "4f9a8b2d9b3eb1243f158d92567df956",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": true,
+          "submission_instances": "uuid:a03d2dea-718f-4416-b936-92845d40811b",
+          "submissions_detail": {
+            "uuid:a03d2dea-718f-4416-b936-92845d40811b": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": {
+                "1691557833323.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678107041.jpg",
+                  "exact_name_match": false
+                },
+                "1691557864457.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678512568.jpg",
+                  "exact_name_match": false
+                },
+                "1691557927315.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678535420.jpg",
+                  "exact_name_match": false
+                },
+                "1691557966768.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678592627.jpg",
+                  "exact_name_match": false
+                }
+              }
+            }
+          }
+        },
+        "burn_grading_verify": {
+          "xml_form_id": "burn_grading_verify",
+          "name": "Burn Grading Verify",
+          "version": "2023.1.3",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-08-09 15:34:50",
+          "hash": "f3879cdd1087ea3d950dabb3bd91d96f",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": true,
+          "submission_instances": "uuid:a2584047-3e33-40fe-a0b3-5f47a8eb2a9e",
+          "submissions_detail": {
+            "uuid:a2584047-3e33-40fe-a0b3-5f47a8eb2a9e": {
+              "review_state": "approved",
+              "newest_first_rank": 1,
+              "attachments": []
+            }
+          }
+        },
+        "Flora-Quadrat-04": {
+          "xml_form_id": "Flora-Quadrat-04",
+          "name": "Flora Quadrat 0.4",
+          "version": "",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:02:27",
+          "hash": "434ff9e1e33fc8bb35148c0cc6979708",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": false,
+          "submission_instances": "uuid:46d3939a-8bc5-4084-9154-d043bc4d3239",
+          "submissions_detail": {
+            "uuid:46d3939a-8bc5-4084-9154-d043bc4d3239": {
+              "review_state": "approved",
+              "newest_first_rank": 1,
+              "attachments": {
+                "1701678074209.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678074209.jpg",
+                  "exact_name_match": true
+                },
+                "1701678107041.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678107041.jpg",
+                  "exact_name_match": true
+                },
+                "1701678512568.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678512568.jpg",
+                  "exact_name_match": true
+                },
+                "1701678535420.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678535420.jpg",
+                  "exact_name_match": true
+                },
+                "1701678592627.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678592627.jpg",
+                  "exact_name_match": true
+                }
+              }
+            }
+          }
+        },
+        "Flora-Quadrat-04-gap": {
+          "xml_form_id": "Flora-Quadrat-04-gap",
+          "name": "Flora Quadrat 0.4 (gap)",
+          "version": "",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:10:05",
+          "hash": "241c4759564ea039b4404b6892025500",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": false,
+          "submission_instances": "uuid:45bc143a-ef66-4475-818d-d77c8bd1ed8f",
+          "submissions_detail": {
+            "uuid:45bc143a-ef66-4475-818d-d77c8bd1ed8f": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": []
+            }
+          }
+        },
+        "Flora-Quadrat-04-att": {
+          "xml_form_id": "Flora-Quadrat-04-att",
+          "name": "Flora Quadrat 0.4 (one att)",
+          "version": "",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:09:46",
+          "hash": "2cb6a4b3d7f05ab055f3da89d0958b14",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": false,
+          "submission_instances": "uuid:518399e4-c075-438d-93b3-b78078c05030",
+          "submissions_detail": {
+            "uuid:518399e4-c075-438d-93b3-b78078c05030": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": {
+                "1604290006239-15_41_29.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678074209.jpg",
+                  "exact_name_match": false
+                },
+                "1604290049411-15_42_9.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678107041.jpg",
+                  "exact_name_match": false
+                },
+                "1604290499008-15_44_12.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678512568.jpg",
+                  "exact_name_match": false
+                }
+              }
+            }
+          }
+        },
+        "I8n_label_choices": {
+          "xml_form_id": "I8n_label_choices",
+          "name": "I8n label and choices",
+          "version": "",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:03:18",
+          "hash": "14e3449067ec33efd82067a546c6554d",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": false,
+          "submission_instances": "uuid:4934351f-66b1-4cf2-8c34-f15021298d86",
+          "submissions_detail": {
+            "uuid:4934351f-66b1-4cf2-8c34-f15021298d86": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": []
+            }
+          }
+        },
+        "I8n_label_lng": {
+          "xml_form_id": "I8n_label_lng",
+          "name": "I8n label lang",
+          "version": "",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:03:51",
+          "hash": "6932ca6e75078cae86b9eaec119abad0",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": false,
+          "submission_instances": "uuid:d5102337-ba3f-4cde-9182-9ec3958a6f2d",
+          "submissions_detail": {
+            "uuid:d5102337-ba3f-4cde-9182-9ec3958a6f2d": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": []
+            }
+          }
+        },
+        "I8n_lang_choicefilter": {
+          "xml_form_id": "I8n_lang_choicefilter",
+          "name": "I8n label lang with choice filter",
+          "version": "",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:06:36",
+          "hash": "02cc779cbc7ff0a136de77b7f7b8135d",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": true,
+          "submission_instances": "uuid:b629a8af-91d4-4fb8-9c5e-057cf104ed42",
+          "submissions_detail": {
+            "uuid:b629a8af-91d4-4fb8-9c5e-057cf104ed42": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": []
+            }
+          }
+        },
+        "I8n_no_lang_choicefilter": {
+          "xml_form_id": "I8n_no_lang_choicefilter",
+          "name": "I8n label no lang with choice filter",
+          "version": "",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:19:38",
+          "hash": "fc5d8a6c19662445b890a1165bde6810",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": true,
+          "submission_instances": "uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654",
+          "submissions_detail": {
+            "uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": {
+                "1701678871896.jpg": {
+                  "source": "media",
+                  "path": "vignettes/media/1701678535420.jpg",
+                  "exact_name_match": false
+                },
+                "1701678899551.bin": {
+                  "source": "fixture",
+                  "path": "inst/extdata/odkc/submissions/1/I8n_no_lang_choicefilter/uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654/1701678899551.bin"
+                }
+              }
+            }
+          }
+        },
+        "Locations": {
+          "xml_form_id": "Locations",
+          "name": "Locations",
+          "version": "",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:02:48",
+          "hash": "7365cf1fdad8d6c0ae7351bc05ecc2f2",
+          "submissions": 1,
+          "entity_related": false,
+          "had_xls": false,
+          "submission_instances": "uuid:2d3dbc0c-70f5-4c99-a812-a8296511c45b",
+          "submissions_detail": {
+            "uuid:2d3dbc0c-70f5-4c99-a812-a8296511c45b": {
+              "review_state": "approved",
+              "newest_first_rank": 1,
+              "attachments": []
+            }
+          }
+        },
+        "Locations_draft": {
+          "xml_form_id": "Locations_draft",
+          "name": "Locations (draft)",
+          "version": "",
+          "state": "open",
+          "is_draft": true,
+          "published_at": null,
+          "hash": "d1701aad460c192c2fc97eb10241e350",
+          "submissions": 0,
+          "entity_related": false,
+          "had_xls": false,
+          "submission_instances": null,
+          "submissions_detail": []
+        },
+        "Locations_no_submissions": {
+          "xml_form_id": "Locations_no_submissions",
+          "name": "Locations (no submissions)",
+          "version": "",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:10:35",
+          "hash": "eb7caf4e3994b953999165ddfdb6eb3b",
+          "submissions": 0,
+          "entity_related": false,
+          "had_xls": false,
+          "submission_instances": null,
+          "submissions_detail": []
+        },
+        "tech_specs": {
+          "xml_form_id": "tech_specs",
+          "name": "PeopleWA Data Selection",
+          "version": "20250428122609",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2025-04-28 12:26:36",
+          "hash": "74c09eb8bb70fc553da1c7156bfa3356",
+          "submissions": 2,
+          "entity_related": false,
+          "had_xls": true,
+          "submission_instances": ["uuid:a2af79f9-205e-41c1-a258-05b960f44ca5", "uuid:2f7f5cea-067b-43a6-822e-47692ae9dd04"],
+          "submissions_detail": {
+            "uuid:a2af79f9-205e-41c1-a258-05b960f44ca5": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": []
+            },
+            "uuid:2f7f5cea-067b-43a6-822e-47692ae9dd04": {
+              "review_state": "approved",
+              "newest_first_rank": 2,
+              "attachments": []
+            }
+          }
+        },
+        "report_problem": {
+          "xml_form_id": "report_problem",
+          "name": "Report a problem",
+          "version": "20240308210713[upgrade]",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2024-12-23 04:54:59",
+          "hash": "59f6466f54efeacdc0c763ab260ddb94",
+          "submissions": 3,
+          "entity_related": true,
+          "had_xls": true,
+          "submission_instances": ["uuid:7e67b4e4-8c1d-4815-83e9-8c64a98a034f", "uuid:58bd197b-66f6-437a-98b2-bb21e7830713", "uuid:1fc70fde-6cee-4869-95fb-d54592c41981"],
+          "submissions_detail": {
+            "uuid:7e67b4e4-8c1d-4815-83e9-8c64a98a034f": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": []
+            },
+            "uuid:58bd197b-66f6-437a-98b2-bb21e7830713": {
+              "review_state": "approved",
+              "newest_first_rank": 2,
+              "attachments": []
+            },
+            "uuid:1fc70fde-6cee-4869-95fb-d54592c41981": {
+              "review_state": null,
+              "newest_first_rank": 3,
+              "attachments": []
+            }
+          }
+        }
+      },
+      "entity_lists": {
+        "problems": {
+          "name": "problems",
+          "properties": [
+            {
+              "name": "details",
+              "publishedAt": "2024-03-09T05:08:17.432Z",
+              "odataName": "details",
+              "forms": [
+                {
+                  "xmlFormId": "report_problem",
+                  "name": "Report a problem"
+                }
+              ]
+            },
+            {
+              "name": "geometry",
+              "publishedAt": "2024-03-09T05:08:17.432Z",
+              "odataName": "geometry",
+              "forms": [
+                {
+                  "xmlFormId": "report_problem",
+                  "name": "Report a problem"
+                }
+              ]
+            },
+            {
+              "name": "status",
+              "publishedAt": "2024-03-09T05:08:41.277Z",
+              "odataName": "status",
+              "forms": [
+                {
+                  "xmlFormId": "address_problem",
+                  "name": "Address a problem"
+                }
+              ]
+            }
+          ],
+          "linked_forms": [
+            {
+              "name": "Address a problem",
+              "xmlFormId": "address_problem"
+            }
+          ],
+          "source_forms": [
+            {
+              "name": "Address a problem",
+              "xmlFormId": "address_problem"
+            },
+            {
+              "name": "Report a problem",
+              "xmlFormId": "report_problem"
+            }
+          ],
+          "live_entity_count": 354,
+          "entity_columns": ["uuid", "creator_id", "created_at", "updated_at", "deleted_at", "current_version_current", "current_version_label", "current_version_creator_id", "current_version_user_agent", "current_version_version", "current_version_base_version", "current_version_conflicting_properties", "current_version_created_at", "current_version_branch_id", "current_version_trunk_version", "current_version_branch_base_version"]
+        }
+      }
+    },
+    "2": {
+      "id": 2,
+      "name": "ruODK package tests encrypted",
+      "description": null,
+      "key_id": 1,
+      "forms": {
+        "Locations": {
+          "xml_form_id": "Locations",
+          "name": "Locations",
+          "version": "[encrypted:AYwuiMlD]",
+          "state": "open",
+          "is_draft": false,
+          "published_at": "2023-12-03 15:16:06",
+          "hash": "4554b7e9427efbc474d90527964fd486",
+          "submissions": 2,
+          "entity_related": false,
+          "had_xls": false,
+          "submission_instances": ["uuid:5ba50a14-2eb3-41ce-840a-fb72f8a22ce4", "uuid:8d486da8-7ee8-47ed-862f-e6b34b30dce0"],
+          "submissions_detail": {
+            "uuid:5ba50a14-2eb3-41ce-840a-fb72f8a22ce4": {
+              "review_state": null,
+              "newest_first_rank": 1,
+              "attachments": {
+                "submission.xml.enc": {
+                  "source": "fixture",
+                  "path": "inst/extdata/odkc/submissions/2/Locations/uuid:5ba50a14-2eb3-41ce-840a-fb72f8a22ce4/submission.xml.enc"
+                }
+              }
+            },
+            "uuid:8d486da8-7ee8-47ed-862f-e6b34b30dce0": {
+              "review_state": null,
+              "newest_first_rank": 2,
+              "attachments": []
+            }
+          }
+        }
+      }
+    }
+  }
+}
