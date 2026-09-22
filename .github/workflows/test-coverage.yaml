@@ -1,10 +1,12 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+#
+# Measures coverage against a local ODK Central in Docker, so no hosted test
+# server and no ODKC_* secrets are needed. See issue #170.
 on:
   push:
     branches: [main, master]
   pull_request:
-    branches: [main, master]
 
 name: test-coverage
 
@@ -15,34 +17,62 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-      ODKC_TEST_URL: ${{ secrets.ODKC_TEST_URL }}
-      ODKC_TEST_SVC: ${{ secrets.ODKC_TEST_SVC }}
-      ODKC_TEST_PID: ${{ secrets.ODKC_TEST_PID }}
-      ODKC_TEST_PID_ENC: ${{ secrets.ODKC_TEST_PID_ENC }}
-      ODKC_TEST_PP: ${{ secrets.ODKC_TEST_PP }}
-      ODKC_TEST_FID: ${{ secrets.ODKC_TEST_FID }}
-      ODKC_TEST_FID_ZIP: ${{ secrets.ODKC_TEST_FID_ZIP }}
-      ODKC_TEST_FID_ATT: ${{ secrets.ODKC_TEST_FID_ATT }}
-      ODKC_TEST_FID_GAP: ${{ secrets.ODKC_TEST_FID_GAP }}
-      ODKC_TEST_FID_WKT: ${{ secrets.ODKC_TEST_FID_WKT }}
-      ODKC_TEST_FID_I8N0: ${{ secrets.ODKC_TEST_FID_I8N0 }}
-      ODKC_TEST_FID_I8N1: ${{ secrets.ODKC_TEST_FID_I8N1 }}
-      ODKC_TEST_FID_I8N2: ${{ secrets.ODKC_TEST_FID_I8N2 }}
-      ODKC_TEST_FID_ENC: ${{ secrets.ODKC_TEST_FID_ENC }}
-      ODKC_TEST_VERSION: ${{ secrets.ODKC_TEST_VERSION }}
-      RU_VERBOSE: ${{ secrets.RU_VERBOSE }}
-      RU_TIMEZONE: ${{ secrets.RU_TIMEZONE }}
-      RU_RETRIES: ${{ secrets.RU_RETRIES }}
-      ODKC_TEST_UN: ${{ secrets.ODKC_TEST_UN }}
-      ODKC_TEST_PW: ${{ secrets.ODKC_TEST_PW }}
-      ODKC_URL: ${{ secrets.ODKC_TEST_URL }}
-      ODKC_UN: ${{ secrets.ODKC_TEST_UN }}
-      ODKC_PW: ${{ secrets.ODKC_TEST_PW }}
-      ODKC_PP: ${{ secrets.ODKC_TEST_PP }}
-      ODKC_VERSION: ${{ secrets.ODKC_TEST_VERSION }}
+
+      # Target the ODK Central that the steps below start. These credentials
+      # are throwaway values for a loopback-only container. They are not
+      # secrets, and they are not the ruodk.getodk.cloud credentials.
+      ODKC_TEST_URL: https://localhost:8383
+      ODKC_SEED_URL: https://localhost:8383
+      ODKC_TEST_UN: ruodk@example.com
+      ODKC_TEST_PW: ruodk-local-password
+      ODKC_TEST_PP: ThePassphrase
+
+      # Project and form ids. They come from inst/extdata/odkc/manifest.json
+      # and match CONTRIBUTING.md.
+      ODKC_TEST_PID: 1
+      ODKC_TEST_PID_ENC: 2
+      ODKC_TEST_FID: Flora-Quadrat-04
+      ODKC_TEST_FID_ZIP: Locations
+      ODKC_TEST_FID_ATT: Flora-Quadrat-04-att
+      ODKC_TEST_FID_GAP: Flora-Quadrat-04-gap
+      ODKC_TEST_FID_WKT: Locations
+      ODKC_TEST_FID_ENC: Locations
+      ODKC_TEST_FID_I8N0: I8n_no_lang
+      ODKC_TEST_FID_I8N1: I8n_label_lng
+      ODKC_TEST_FID_I8N2: I8n_label_choices
+      ODKC_TEST_FID_I8N3: I8n_no_lang_choicefilter
+      ODKC_TEST_FID_I8N4: I8n_lang_choicefilter
+
+      # Version of the ODK Central image that .devcontainer/.env pins.
+      ODKC_TEST_VERSION: 2026.3.0
+      ODKC_VERSION: 2026.3.0
+
+      # RU_VERBOSE must be TRUE for ru_msg_warn() to emit anything. It returns
+      # NULL silently when FALSE (R/ru_msg.R), and several tests use
+      # expect_warning().
+      RU_VERBOSE: TRUE
+      RU_TIMEZONE: Australia/Perth
+      RU_RETRIES: 3
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Start ODK Central
+        run: |
+          docker compose --env-file .devcontainer/.env \
+            -f .devcontainer/docker-compose.yml up -d --wait
+
+      - name: Trust the local TLS CA
+        # The stack uses a self-signed certificate. Point libcurl at a bundle
+        # that holds the system CAs and the local CA. Do not use the local CA
+        # alone: that replaces the system bundle and breaks other https calls.
+        run: |
+          bundle=".devcontainer/odkc/certs/ca-bundle.pem"
+          .devcontainer/odkc/ca-bundle.sh "$bundle" > /dev/null
+          echo "CURL_CA_BUNDLE=$GITHUB_WORKSPACE/$bundle" >> "$GITHUB_ENV"
+
+      - name: Seed ODK Central
+        run: Rscript data-raw/seed_odkc.R
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -68,6 +98,12 @@ jobs:
           ## --------------------------------------------------------------------
           find '${{ runner.temp }}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
+
+      - name: ODK Central logs
+        if: failure()
+        run: |
+          docker compose --env-file .devcontainer/.env \
+            -f .devcontainer/docker-compose.yml logs --no-log-prefix service nginx
 
       - name: Upload test results
         if: failure()

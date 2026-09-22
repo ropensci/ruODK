@@ -197,12 +197,39 @@ if (fs::file_info("README.md")$modification_time <
 We use [testthat](https://cran.r-project.org/package=testthat). Contributions
 with test cases are easier to review and verify.
 
-To run tests and build the vignettes, you'll need access to the
-[ruODK test server](https://odkc.dbca.wa.gov.au/).
-If you haven't got an account yet, create an [accont request issue](https://github.com/ropensci/ruODK/issues/new/choose)
-to request access to this ODK Central instance.
+The test suite needs a running ODK Central. Do not use a hosted instance. The
+repository ships a local one in Docker, seeded with the fixtures from
+`inst/extdata/odkc/`. This is the setup that CI uses. See issue #170.
 
-The tests require the following additions to your `.Renviron`:
+Start it and seed it:
+
+```sh
+docker compose --env-file .devcontainer/.env \
+  -f .devcontainer/docker-compose.yml up -d --wait
+Rscript data-raw/seed_odkc.R
+```
+
+The seed prints the `ODKC_TEST_*` values to put in your `.Renviron`. The
+credentials it creates are throwaway values for a container on your machine
+(`ruodk@example.com` / `ruodk-local-password`). They are not secrets.
+
+Two details cost time if you miss them:
+
+1. The stack serves TLS with a self-signed certificate. Point `CURL_CA_BUNDLE`
+   at the merged bundle that
+   `.devcontainer/odkc/ca-bundle.sh` builds. Do not point it at `ca.crt` on its
+   own. `CURL_CA_BUNDLE` replaces the CA bundle of libcurl, so the local CA
+   alone breaks every other `https` call from R, including CRAN.
+2. `RU_VERBOSE` must be `TRUE`. `ru_msg_warn()` returns `NULL` without a
+   warning when `RU_VERBOSE` is `FALSE`, so `expect_warning()` fails.
+
+If you open the repository in a dev container or in GitHub Codespaces, step 3
+above runs for you. The dev container starts the same stack and writes
+`.Renviron` for you.
+
+To work against the shared `ruodk.getodk.cloud` instance instead, request an
+account with an [account request issue](https://github.com/ropensci/ruODK/issues/new/choose)
+and use these values in `.Renviron`:
 
 ```r
 # ODK Test server
@@ -243,6 +270,20 @@ account credentials.
 devtools::test()
 devtools::test_coverage()
 ```
+
+##### Refreshing the fixtures
+
+`inst/extdata/odkc/` holds an export of one ODK Central project set. Image
+attachments are not in it. They come from `vignettes/media/`, which is the one
+place this package keeps images and which must not change. Re-export with:
+
+```sh
+Rscript data-raw/dump_odkc_fixtures.R
+```
+
+The dump reads `ODKC_TEST_*` and is read-only. It never writes to
+`vignettes/media/`.
+
 
 #### NEWS
 

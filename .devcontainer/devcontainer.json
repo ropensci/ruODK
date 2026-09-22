@@ -1,6 +1,12 @@
 {
-    "name": "R (rocker/r-ver base)",
-    "dockerFile": "Dockerfile",
+    "name": "ruODK + local ODK Central",
+    "dockerComposeFile": [
+        "docker-compose.yml",
+        "docker-compose-dev.yml"
+    ],
+    "service": "app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
             "version": "prerelease"
@@ -11,12 +17,32 @@
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
             "packages": "github::rstudio/renv,tidyverse,git2r,knitr,spelling,languageserver,precommit,clisymbols,crayon,dplyr,fs,glue,httr,httr2,janitor,lifecycle,lubridate,magrittr,purrr,readr,rlang,stringr,semver,tibble,tidyr,xml2,covr,DT,ggplot2,here,knitr,lattice,leaflet,listviewer,leafpop,leafem,mapview,rmarkdown,roxygen2,sf,terra,testthat,tmap,usethis"
         },
-        "ghcr.io/devcontainers-contrib/features/pre-commit:2": {}
+        "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
+
     "mounts": [
         "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=~/.gitconfig,type=bind,consistency=cached"
     ],
+
+    "remoteEnv": {
+        // Used before postAttachCommand.sh has run, and by R sessions that do
+        // not read ~/.bashrc. The path is the MERGED bundle: system CAs plus
+        // the local test CA. See .devcontainer/odkc/ca-bundle.sh.
+        "CURL_CA_BUNDLE": "${containerWorkspaceFolder}/.devcontainer/odkc/certs/ca-bundle.pem",
+        // Same throwaway values that data-raw/seed_odkc.R creates. Not the
+        // ruodk.getodk.cloud credentials.
+        "ODKC_TEST_URL": "https://localhost:8383",
+        "ODKC_SEED_URL": "https://localhost:8383",
+        "DOCKER_HOST": "unix:///var/run/docker-host.sock",
+        "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+    },
+
+    "forwardPorts": [8383],
+
     "onCreateCommand": "pre-commit install && pre-commit run",
+    "postAttachCommand": ".devcontainer/postAttachCommand.sh",
+
     "customizations": {
         "vscode": {
             "extensions": [
@@ -27,13 +53,18 @@
                 "usernamehw.errorlens",
                 "christian-kohler.path-intellisense",
                 "ms-vscode.live-server"
-            ]
+            ],
+            "settings": {
+                "r.rterm.linux": "/usr/local/bin/radian",
+                "r.bracketedPaste": true,
+                "r.plot.useHttpgd": true
+            }
         },
         "codespaces": {
             "openFiles": [
                 "DESCRIPTION",
                 "NEWS.md",
-                "data-raw/make_release.R"
+                "CONTRIBUTING.md"
             ]
         }
     }
