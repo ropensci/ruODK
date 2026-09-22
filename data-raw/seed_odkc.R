@@ -492,10 +492,10 @@ want <- c(
 checks <- c(
   "a draft form exists (test-form_list.R)" =
     any(map_lgl(fl1, ~ is.null(.x$publishedAt))),
-  "ODKC_TEST_FID present"       = want[["FID"]] %in% fids1,
-  "ODKC_TEST_FID_ATT present"   = want[["FID_ATT"]] %in% fids1,
-  "ODKC_TEST_FID_GAP present"   = want[["FID_GAP"]] %in% fids1,
-  "ODKC_TEST_FID_WKT present"   = want[["FID_WKT"]] %in% fids1,
+  "ODKC_TEST_FID present" = want[["FID"]] %in% fids1,
+  "ODKC_TEST_FID_ATT present" = want[["FID_ATT"]] %in% fids1,
+  "ODKC_TEST_FID_GAP present" = want[["FID_GAP"]] %in% fids1,
+  "ODKC_TEST_FID_WKT present" = want[["FID_WKT"]] %in% fids1,
   "ODKC_TEST_FID_ENC present (pid 2)" =
     Sys.getenv("ODKC_TEST_FID_ENC", "Locations") %in% fids2
 )

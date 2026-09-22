@@ -334,4 +334,3 @@ Verify `#|` syntax and dashes (not dots).
 
 - [Quarto for R Markdown Users](https://quarto.org/docs/faq/rmarkdown.html)
 - [Quarto vs R Markdown](https://quarto.org/docs/faq/rmarkdown.html#quarto-vs.-r-markdown)
-

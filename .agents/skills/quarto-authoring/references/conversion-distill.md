@@ -433,4 +433,3 @@ license:
 - [Quarto HTML Documents](https://quarto.org/docs/output-formats/html-basics.html)
 - [Quarto Websites](https://quarto.org/docs/websites/)
 - [Article Layout](https://quarto.org/docs/authoring/article-layout.html)
-
