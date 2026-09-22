@@ -29,3 +29,7 @@ codemeta.json
 ^\.vscode
 ^.lintr
 ^\.pre-commit-config\.yaml$
+# Agent skills and their lockfile. Agent tooling only, never part of the R
+# package build (see .agents/README.md for upstream licences).
+^\.agents
+^skills-lock\.json$
