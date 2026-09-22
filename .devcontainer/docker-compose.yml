@@ -1,0 +1,201 @@
+# ODK Central test stack for ruODK (issue #170).
+#
+# Slimmed from getodk/central/docker-compose.yml (next branch) to the services
+# ruODK's test suite actually touches: the REST + OData API behind a TLS
+# terminator. Dropped: the frontend, enketo and its two redis instances, mail,
+# and the postgres 9.6 upgrade path.
+#
+# Why TLS at all: ODK Central refuses HTTP Basic auth over plain HTTP
+# (getodk/central-backend lib/http/preprocessors.js -> Problem.user.httpsOnly)
+# and ruODK authenticates with httr::authenticate() -> Basic. nginx terminates
+# a throwaway self-signed cert (see odkc/gen-certs.sh); R trusts it via
+# CURL_CA_BUNDLE pointing at odkc/certs/ca.crt.
+#
+# ruODK talks to https://localhost:${ODKC_PORT} -- no /etc/hosts entry and no
+# dependency on the Codespaces hostname (which would collide with Codespaces
+# SSL tunnelling). In the devcontainer the R session shares the service
+# network namespace, so the same URL works there and on the Actions runner.
+#
+# Image tags are pinned in .env.
+
+services:
+  postgres:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: odk
+      POSTGRES_PASSWORD: odk
+      POSTGRES_DB: odk
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./postgres-init.sql:/docker-entrypoint-initdb.d/01-extensions.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odk -d odk"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  # XLS -> XML on form publish. getodk/central's files/service/config.json.template
+  # hardcodes host "pyxform", port 80, so the service name and port must match.
+  pyxform:
+    image: ghcr.io/getodk/pyxform-http:${ODKC_VERSION_PYXFORM:-v4.5.0}
+    restart: unless-stopped
+
+  # One-shot: mint the self-signed CA + localhost cert nginx needs. Idempotent
+  # (see odkc/gen-certs.sh) so plain `compose up` is safe to repeat.
+  #
+  # The backend image is used purely because it ships the openssl CLI (3.x) and
+  # is pulled for the service below anyway. Neither alpine, nginx:alpine, nor a
+  # given host reliably have openssl -- and installing it at start would mean a
+  # network fetch on every `compose up`.
+  certs:
+    image: ghcr.io/getodk/central-service:${ODKC_VERSION:-v2026.3.0}
+    restart: "no"
+    entrypoint: ["/bin/sh", "/gen-certs.sh"]
+    volumes:
+      - ./odkc/certs:/certs
+      - ./odkc/gen-certs.sh:/gen-certs.sh:ro
+
+  # TLS terminator. This is the only port published to the host: reaching the
+  # backend over plain HTTP would trip its Basic-auth HTTPS gate.
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    depends_on:
+      certs:
+        condition: service_completed_successfully
+      service:
+        condition: service_healthy
+    volumes:
+      - ./odkc/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./odkc/certs:/etc/nginx/certs:ro
+    ports:
+      - "127.0.0.1:${ODKC_PORT:-8383}:8383"
+    healthcheck:
+      test: ["CMD", "wget", "--no-check-certificate", "-qO-", "https://127.0.0.1:8383/healthz"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  # ODK Central backend (getodk/central-backend). Internal only -- reached via
+  # nginx, never published.
+  service:
+    image: ghcr.io/getodk/central-service:${ODKC_VERSION:-v2026.3.0}
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      pyxform:
+        condition: service_started
+
+    # start-odk.sh requires /etc/secrets/enketo-api-key even though we run no
+    # enketo (see getodk/central files/service/scripts/start-odk.sh, which does
+    # `ENKETO_API_KEY=$(cat /etc/secrets/enketo-api-key)`). Generate a throwaway
+    # key: nothing in this stack signs or verifies enketo URLs. Overriding the
+    # entrypoint also skips the node image's npm-install-on-start helper, which
+    # we do not want.
+    entrypoint: ["/bin/sh", "-ec"]
+    command:
+      - |
+        mkdir -p /etc/secrets
+        head -c2048 /dev/urandom | LC_ALL=C tr -dc '[:alnum:]' | head -c128 > /etc/secrets/enketo-api-key
+        exec ./start-odk.sh
+
+    environment:
+      # start-odk.sh runs under `set -u` and expands these unquoted, so both
+      # must be set. It derives BASE_URL as https://DOMAIN when HTTPS_PORT=443,
+      # else https://DOMAIN:HTTPS_PORT -- so with the values below BASE_URL and
+      # therefore env.domain becomes https://localhost:<ODKC_PORT>, matching the
+      # URL nginx serves. NODE_CONFIG restates env.domain explicitly so the
+      # public URL is one obvious line rather than a reverse-engineered one.
+      DOMAIN: localhost
+      HTTPS_PORT: "${ODKC_PORT:-8383}"
+      SYSADMIN_EMAIL: ${ODKC_SYSADMIN_EMAIL:-no-reply@getodk.org}
+
+      # start-odk.sh hard-errors unless DB_SSL is unset or the literal string
+      # "null", then unsets it.
+      DB_SSL: "null"
+
+      # libpq. Wins over the image's baked config/default.json (which points at
+      # localhost/jubilant) -- see central-backend lib/util/load-db-env.js, which
+      # never overrides a PG* variable that is already set.
+      PGHOST: postgres
+      PGUSER: odk
+      PGPASSWORD: odk
+      PGDATABASE: odk
+
+      # Every variable below MUST be defined: files/shared/envsub.awk fails hard
+      # on an undefined ${VAR} while rendering config.json.template. Empty
+      # strings are fine where a feature is off.
+      DB_POOL_SIZE: "10"
+      SESSION_LIFETIME: "86400"
+
+      EMAIL_FROM: ${ODKC_SYSADMIN_EMAIL:-no-reply@getodk.org}
+      EMAIL_HOST: localhost
+      EMAIL_PORT: "25"
+      EMAIL_SECURE: "false"
+      EMAIL_IGNORE_TLS: "true"
+      EMAIL_USER: ""
+      EMAIL_PASSWORD: ""
+
+      OIDC_ENABLED: "false"
+      OIDC_ISSUER_URL: ""
+      OIDC_CLIENT_ID: ""
+      OIDC_CLIENT_SECRET: ""
+
+      # Empty key/project/orgSubdomain makes lib/external/sentry.js _init()
+      # return a noop instead of shipping errors to sentry.io.
+      SENTRY_ORG_SUBDOMAIN: ""
+      SENTRY_KEY: ""
+      SENTRY_PROJECT: ""
+      SENTRY_TRACE_RATE: "0"
+
+      # Empty S3 config: lib/bin/s3.js upload-pending is a no-op.
+      S3_SERVER: ""
+      S3_ACCESS_KEY: ""
+      S3_SECRET_KEY: ""
+      S3_BUCKET_NAME: ""
+
+      # node-config applies this last, over default.json and the generated
+      # config/local.json. Purpose:
+      #   * email.transport "json" -> nodemailer's jsonTransport (mail.js), so
+      #     user-create never needs an SMTP server. Prints to the log instead.
+      #   * blank external.analytics / external.mailingListOptIn URLs, which
+      #     default.json points at data.getodk.cloud; lib/external/odk-reporter.js
+      #     falls back to a noop when the URL is blank. local.json does not
+      #     mention these keys at all, so they survive the file merge untouched.
+      #   * env.domain to the real https:// endpoint, so absolute URLs in OData
+      #     responses (@odata.context, nextLink) and OpenRosa formList resolve.
+      #     It also drives lib/http/sessions.js HTTPS_ENABLED (secure cookies),
+      #     which is correct now that we really do serve TLS.
+      #
+      # NOTE the "default" key is a LITERAL part of the config path, not node
+      # config's default layer: the app reads config.get('default.email') etc,
+      # and both default.json and local.json are shaped {"default": {...}}.
+      # Nested here for the same reason. node-config deep-merges, so each key
+      # must be explicitly blanked to disable it.
+      NODE_CONFIG: >-
+        {"default":{"email":{"transport":"json"},
+         "external":{"sentry":{"key":"","project":"","orgSubdomain":""},
+                     "analytics":{"url":""},
+                     "mailingListOptIn":{"url":""}},
+         "env":{"domain":"https://localhost:${ODKC_PORT:-8383}"}}}
+
+    # Probe the API rather than just the port: migrations run inside
+    # start-odk.sh before pm2 starts serving. Unauthenticated /v1/projects
+    # must answer 401.2 (same check as getodk/central test/test-images.sh).
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://127.0.0.1:8383/v1/projects', (r) => process.exit(r.statusCode === 401 ? 0 : 1)).on('error', () => process.exit(1))",
+        ]
+      interval: 2s
+      timeout: 5s
+      retries: 90
+      start_period: 20s
+
+volumes:
+  pg_data:
