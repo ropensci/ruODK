@@ -44,6 +44,11 @@ services:
   # One-shot: mint the self-signed CA + localhost cert nginx needs. Idempotent
   # (see odkc/gen-certs.sh) so plain `compose up` is safe to repeat.
   #
+  # odkc/ is mounted at /odkc rather than odkc/certs at /certs, so that
+  # gen-certs.sh can read the owner of odkc/ and hand the files to the host
+  # user. Files created here would otherwise be root-owned and the mode 600
+  # keys would be unreadable to the host user, which stops `R CMD build`.
+  #
   # The backend image is used purely because it ships the openssl CLI (3.x) and
   # is pulled for the service below anyway. Neither alpine, nginx:alpine, nor a
   # given host reliably have openssl -- and installing it at start would mean a
@@ -51,10 +56,11 @@ services:
   certs:
     image: ghcr.io/getodk/central-service:${ODKC_VERSION:-v2026.3.0}
     restart: "no"
-    entrypoint: ["/bin/sh", "/gen-certs.sh"]
+    entrypoint: ["/bin/sh", "/odkc/gen-certs.sh"]
+    environment:
+      CERTS_DIR: /odkc/certs
     volumes:
-      - ./odkc/certs:/certs
-      - ./odkc/gen-certs.sh:/gen-certs.sh:ro
+      - ./odkc:/odkc
 
   # TLS terminator. This is the only port published to the host: reaching the
   # backend over plain HTTP would trip its Basic-auth HTTPS gate.
