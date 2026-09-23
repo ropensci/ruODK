@@ -6,8 +6,9 @@
 #' endpoint.
 #' The expected file slots are determined by the Submission XML;
 #' list them with `attachment_list()`.
-#' In plain language: the `filename` must be a slot name from the
-#' attachment listing, and `file` is the local file whose bytes fill it.
+#' `filename` must match a slot name from the attachment listing.
+#' `file` is the local file.
+#' Its bytes fill the slot.
 #'
 #' @template param-iid
 #' @param filename (character) The name of the file as given by the

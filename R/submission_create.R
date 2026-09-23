@@ -14,8 +14,7 @@
 #' your data, Central answers 400.
 #' If a Submission already exists with the given `instanceID`,
 #' Central answers 409.
-#' In plain language: every Submission needs a unique `instanceID` in its
-#' `<meta>` block.
+#' The `<meta>` block holds a unique `instanceID` for each Submission.
 #'
 #' @template param-pid
 #' @template param-fid

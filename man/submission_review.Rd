@@ -80,7 +80,7 @@ Starting with Version 2022.3, changing the \code{reviewState} of a
 Submission to \code{approved} can create an Entity in a Dataset if the
 corresponding Form maps Dataset Properties to Form Fields.
 
-In plain language: this function sets a decision on a Submission.
+This function records a review decision on a Submission.
 Clearing the review state back to unreviewed (\code{received}) is not
 supported by this function.
 }

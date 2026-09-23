@@ -83,8 +83,9 @@ To upload a binary to an expected file slot, POST the binary to its
 endpoint.
 The expected file slots are determined by the Submission XML;
 list them with \code{attachment_list()}.
-In plain language: the \code{filename} must be a slot name from the
-attachment listing, and \code{file} is the local file whose bytes fill it.
+\code{filename} must match a slot name from the attachment listing.
+\code{file} is the local file.
+Its bytes fill the slot.
 }
 \examples{
 \dontrun{

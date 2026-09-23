@@ -10,7 +10,7 @@
 #' Submission to `approved` can create an Entity in a Dataset if the
 #' corresponding Form maps Dataset Properties to Form Fields.
 #'
-#' In plain language: this function sets a decision on a Submission.
+#' This function records a review decision on a Submission.
 #' Clearing the review state back to unreviewed (`received`) is not
 #' supported by this function.
 #'

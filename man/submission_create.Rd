@@ -86,8 +86,7 @@ If the XML is unparseable or there is some other input problem with
 your data, Central answers 400.
 If a Submission already exists with the given \code{instanceID},
 Central answers 409.
-In plain language: every Submission needs a unique \code{instanceID} in its
-\verb{<meta>} block.
+The \verb{<meta>} block holds a unique \code{instanceID} for each Submission.
 }
 \examples{
 \dontrun{

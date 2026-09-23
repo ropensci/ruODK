@@ -74,7 +74,8 @@ survey clients and whether it accepts new Submissions.
 
 Only the properties you supply are changed.
 Anything you do not supply remains untouched.
-In plain language: pass the new \code{state} and nothing else changes.
+This changes only the \code{state}.
+It does not change other properties.
 }
 \examples{
 \dontrun{

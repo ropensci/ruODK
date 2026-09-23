@@ -8,7 +8,8 @@
 #'
 #' Only the properties you supply are changed.
 #' Anything you do not supply remains untouched.
-#' In plain language: pass the new `state` and nothing else changes.
+#' This changes only the `state`.
+#' It does not change other properties.
 #'
 #' @template param-pid
 #' @template param-fid

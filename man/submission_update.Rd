@@ -84,9 +84,9 @@ and current Submission version you are replacing.
 If the \code{deprecatedID} you give is anything other than the identifier of
 the current version of the Submission at the time the server receives
 it, Central answers 409.
-In plain language: read the current version's \code{instanceID} first
-(e.g. via \code{submission_get()}), put it in \code{deprecatedID}, and give the
-new version a fresh \code{instanceID}.
+\code{deprecatedID} must contain the current \code{instanceID}.
+\code{submission_get()} returns the current \code{instanceID}.
+The new version must have a new \code{instanceID}.
 
 The XML data you send replaces the existing data entirely.
 All of the data must be present in the updated XML.

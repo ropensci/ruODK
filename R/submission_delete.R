@@ -6,7 +6,8 @@
 #' during which it can be restored with `submission_restore()`.
 #' After this time, all of its resources and attachments are automatically
 #' purged.
-#' In plain language: deletion is a soft delete with a 30-day grace period.
+#' Deletion is soft.
+#' The Submission stays restorable for 30 days.
 #'
 #' @template param-iid
 #' @template param-pid

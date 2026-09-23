@@ -14,9 +14,9 @@
 #' If the `deprecatedID` you give is anything other than the identifier of
 #' the current version of the Submission at the time the server receives
 #' it, Central answers 409.
-#' In plain language: read the current version's `instanceID` first
-#' (e.g. via `submission_get()`), put it in `deprecatedID`, and give the
-#' new version a fresh `instanceID`.
+#' `deprecatedID` must contain the current `instanceID`.
+#' `submission_get()` returns the current `instanceID`.
+#' The new version must have a new `instanceID`.
 #'
 #' The XML data you send replaces the existing data entirely.
 #' All of the data must be present in the updated XML.

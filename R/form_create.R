@@ -16,8 +16,8 @@
 #' The API will check the XML's structure in order to extract the
 #' information it needs about it, but ODK Central does not run
 #' comprehensive validation on the full contents of the XML.
-#' In plain language: validate your Form with ODK Validate before upload,
-#' and prefer publishing a Draft only after checking it.
+#' ODK Validate finds problems in the Form before upload.
+#' Publish the Draft after the Form passes validation.
 #'
 #' @template param-pid
 #' @param xml (character) The XForms XML definition as a single string.

@@ -104,10 +104,10 @@ different capitalization to be created
 By default, the Dataset will have no properties, but each Entity will
 have a label and a unique ID (uuid).
 
-In plain language: this creates an empty Entity List.
-Add Entity properties afterwards with the Dataset properties endpoint,
-then add Entities with \code{entity_create()}, or publish a Form that
-defines the Entity List schema.
+This creates an empty Entity List.
+Add properties with the Dataset properties endpoint.
+Add Entities with \code{entity_create()}.
+Or publish a Form that defines the Entity List schema.
 }
 \examples{
 \dontrun{
