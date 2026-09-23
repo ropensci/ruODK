@@ -184,9 +184,18 @@ odata_entitylist_data_get <- function(pid = get_default_pid(),
         tibble::as_tibble(c(main_fields, system_fields))
       }
     ) |>
-    janitor::clean_names() |>
-    # Remove duplicate rows by `id`
-    dplyr::distinct(id, .keep_all = TRUE) |>
+    janitor::clean_names()
+
+  # An OData page that matches no Entities yields a 0-row tibble with no
+  # columns, so there is no `id` to deduplicate on and distinct() would abort
+  # with "Must use existing variables". An empty page is a valid answer.
+  if (nrow(entities) > 0) {
+    entities <- entities |>
+      # Remove duplicate rows by `id`
+      dplyr::distinct(id, .keep_all = TRUE)
+  }
+
+  entities <- entities |>
     dplyr::mutate(
       dplyr::across(
         dplyr::matches("created_at|updated_at"),

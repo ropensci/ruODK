@@ -15,17 +15,20 @@ test_that("entitylist_detail works", {
   # entitylist_detail returns a list
   testthat::expect_is(ds1, "list")
 
-  # linked_forms contain form xmlFormId and name
+  # linked_forms contain form xmlFormId and name.
+  # Set equality only: purrr::list_transpose() orders columns by the key order
+  # of the JSON objects ODK Central returns, which is not a contract and has
+  # changed between Central versions.
   lf <- ds1$linked_forms |>
     purrr::list_transpose() |>
     tibble::as_tibble()
-  testthat::expect_equal(names(lf), c("xmlFormId", "name"))
+  testthat::expect_setequal(names(lf), c("xmlFormId", "name"))
 
   # source_forms contain form xmlFormId and name
   sf <- ds1$source_forms |>
     purrr::list_transpose() |>
     tibble::as_tibble()
-  testthat::expect_equal(names(sf), c("xmlFormId", "name"))
+  testthat::expect_setequal(names(sf), c("xmlFormId", "name"))
 
   # properties lists attributes of entities
   pr <- ds1$properties |>

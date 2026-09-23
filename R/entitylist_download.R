@@ -164,7 +164,13 @@ entitylist_download <- function(pid = get_default_pid(),
     if (odkc_version |> semver_lt("2023.3")) {
       ru_msg_warn("entitylist_download ETag is supported from v2023.3")
     }
-    headers <- c(headers, c("If-None-Match" = etag))
+    # If-None-Match must carry the entity-tag in its quoted form (RFC 7232).
+    # This function returns the etag stripped of `W/\"` and `\"` and accepts
+    # that same stripped form back, so re-add the quotes here. Sending the
+    # stripped value yields a plain 200 instead of 304 Not Modified. A value
+    # that is already quoted (or weak) is passed through untouched.
+    if_none_match <- if (grepl('^W?".*"$', etag)) etag else paste0('"', etag, '"')
+    headers <- c(headers, c("If-None-Match" = if_none_match))
   }
 
   # Query: filter
@@ -190,8 +196,15 @@ entitylist_download <- function(pid = get_default_pid(),
   )
   # yell_if_error(url, un, pw)  # allow HTTP 304 for no new submissions
 
+  # 304 Not Modified carries no body and must not clobber the previous
+  # download, so report entities = NULL rather than parsing an empty body into
+  # "" or raw(0).
   list(
-    entities = httr::content(res, encoding = "utf-8"),
+    entities = if (res$status_code == 304L) {
+      NULL
+    } else {
+      httr::content(res, encoding = "utf-8")
+    },
     etag = res$headers$etag |>
       stringr::str_remove_all(stringr::fixed("W/\"")) |>
       stringr::str_remove_all(stringr::fixed("\"")),

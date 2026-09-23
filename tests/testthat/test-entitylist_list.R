@@ -18,13 +18,15 @@ test_that("entitylist_list works", {
   # function returns a tibble
   testthat::expect_s3_class(ds, "tbl_df")
 
-  # Expected column names
+  # Expected column names. `deleted_at` is returned by ODK Central v2026.3.0
+  # under X-Extended-Metadata and is cleaned from `deletedAt`.
   cn <- c(
     "name",
     "created_at",
     "project_id",
     "approval_required",
     "owner_only",
+    "deleted_at",
     "entities",
     "last_entity",
     "conflicts"

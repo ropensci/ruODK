@@ -255,11 +255,22 @@ for (p in want_pids) {
 #
 #    TWO PHASES, on purpose.
 #
-#    Phase 4a posts only xml_submission_file (multipart with a single part).
-#    Sending attachments in the SAME multipart request fails inside ODK
-#    Central with a Postgres 22021 "invalid byte sequence for encoding UTF8"
-#    on the first JPEG byte (getodk/central, reproducible with a 4-byte file).
-#    XML-only uploads work fine.
+#    Phase 4a posts the instance XML as a raw request body with
+#    Content-Type: application/xml.
+#
+#    DO NOT wrap it in multipart/form-data. An earlier version of this script
+#    POSTed a single `xml_submission_file` part. ODK Central accepts that and
+#    creates the Submission -- it even extracts the right instanceID -- but it
+#    stores the ENTIRE multipart request body, envelope and boundaries
+#    included, as the Submission XML. GET .../submissions/{iid}.xml then
+#    returns text starting with "--------------------------", and
+#    submission_get() dies in xml2::read_xml() with "Start tag expected".
+#    A raw application/xml body is stored verbatim and comes back parseable.
+#
+#    Attachments are deliberately NOT sent in the same request: doing so fails
+#    inside ODK Central with a Postgres 22021 "invalid byte sequence for
+#    encoding UTF8" on the first JPEG byte (getodk/central, reproducible with
+#    a 4-byte file).
 #
 #    Phase 4b fills the bytes in through the documented per-attachment upsert,
 #    which takes a raw request body and needs no multipart at all:
@@ -377,18 +388,15 @@ for (p in want_pids) {
           next
         }
         al <- align_submission(xml_path, fver, iid)
-        tmp <- xml_path
-        if (!is.null(al)) {
-          tmp <- tempfile(fileext = ".xml")
-          writeLines(al, tmp, useBytes = TRUE)
+        xml_body <- if (is.null(al)) {
+          paste(readLines(xml_path, warn = FALSE), collapse = "\n")
+        } else {
+          al
         }
-        body_parts <- list(
-          xml_submission_file = upload_file(tmp, type = "application/xml")
-        )
         r <- tryCatch(
           req("POST", paste0(
             "/v1/projects/", p, "/forms/", urlenc(fid), "/submissions"
-          ), body = body_parts, encode = "multipart"),
+          ), body = xml_body, content_type = "application/xml"),
           error = function(e) e
         )
         if (inherits(r, "error")) {
