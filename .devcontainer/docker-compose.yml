@@ -9,7 +9,9 @@
 # (getodk/central-backend lib/http/preprocessors.js -> Problem.user.httpsOnly)
 # and ruODK authenticates with httr::authenticate() -> Basic. nginx terminates
 # a throwaway self-signed cert (see odkc/gen-certs.sh); R trusts it via
-# CURL_CA_BUNDLE pointing at odkc/certs/ca.crt.
+# CURL_CA_BUNDLE pointing at the MERGED bundle odkc/ca-bundle.sh builds from
+# the system CAs plus odkc/certs/ca.crt. Naming certs/ca.crt on its own
+# REPLACES libcurl's bundle and breaks every other https call.
 #
 # ruODK talks to https://localhost:${ODKC_PORT} -- no /etc/hosts entry and no
 # dependency on the Codespaces hostname (which would collide with Codespaces
@@ -54,7 +56,7 @@ services:
   # given host reliably have openssl -- and installing it at start would mean a
   # network fetch on every `compose up`.
   certs:
-    image: ghcr.io/getodk/central-service:${ODKC_VERSION:-v2026.3.0}
+    image: ghcr.io/getodk/central-service:${ODKC_IMAGE_TAG:-v2026.3.0}
     restart: "no"
     entrypoint: ["/bin/sh", "/odkc/gen-certs.sh"]
     environment:
@@ -86,7 +88,11 @@ services:
   # ODK Central backend (getodk/central-backend). Internal only -- reached via
   # nginx, never published.
   service:
-    image: ghcr.io/getodk/central-service:${ODKC_VERSION:-v2026.3.0}
+    # ODKC_IMAGE_TAG, not ODKC_VERSION: the ghcr.io tag is "v"-prefixed while
+    # ruODK's ODKC_VERSION is a bare semver ("2026.3.0"). Compose reads the
+    # shell environment before .env, so sharing the name lets a job-level
+    # ODKC_VERSION override the tag and break the image pull.
+    image: ghcr.io/getodk/central-service:${ODKC_IMAGE_TAG:-v2026.3.0}
     restart: unless-stopped
     depends_on:
       postgres:

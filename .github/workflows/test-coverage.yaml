@@ -43,7 +43,10 @@ jobs:
       ODKC_TEST_FID_I8N3: I8n_no_lang_choicefilter
       ODKC_TEST_FID_I8N4: I8n_lang_choicefilter
 
-      # Version of the ODK Central image that .devcontainer/.env pins.
+      # ruODK's ODK Central semver settings (R/ru_setup.R). Bare "X.Y.Z" with
+      # no "v" prefix -- parse_odkc_version() rejects anything else. These are
+      # NOT the Docker image tag, which lives in .devcontainer/.env as
+      # ODKC_IMAGE_TAG ("v2026.3.0"). Do not rename either to the other.
       ODKC_TEST_VERSION: 2026.3.0
       ODKC_VERSION: 2026.3.0
 
