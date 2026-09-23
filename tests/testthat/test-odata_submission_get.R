@@ -6,10 +6,7 @@ test_that("odata_submission_get skips download", {
   )
 
   # A guaranteed empty download directory
-  t <- tempdir()
-  t %>%
-    fs::dir_ls() %>%
-    fs::file_delete()
+  t <- withr::local_tempdir()
 
   # Get submissions, do not download attachments
   fresh_raw <- odata_submission_get(
@@ -26,7 +23,7 @@ test_that("odata_submission_get skips download", {
   )
 
   # There should be no files in the download dir
-  testthat::expect_equal(t %>% fs::dir_ls(), character(0))
+  testthat::expect_equal(t |> fs::dir_ls(), character(0))
 })
 
 test_that("odata_submission_get works with one known dataset", {
@@ -58,7 +55,7 @@ test_that("odata_submission_get works with one known dataset", {
     local_dir = t,
     download = TRUE
   )
-  fresh_parsed <- fresh_raw %>% odata_submission_rectangle()
+  fresh_parsed <- fresh_raw |> odata_submission_rectangle()
   testthat::expect_gte(nrow(fresh_parsed), length(fresh_raw$value))
   testthat::expect_gte(nrow(fresh_parsed), nrow(fresh_raw_parsed))
 
@@ -67,9 +64,9 @@ test_that("odata_submission_get works with one known dataset", {
     c("POSIXct", "POSIXt")
   )
 
-  local_files <- fresh_raw_parsed %>%
-    dplyr::filter(!is.null(location_quadrat_photo)) %>%
-    magrittr::extract2("location_quadrat_photo") %>%
+  local_files <- fresh_raw_parsed |>
+    dplyr::filter(!is.null(location_quadrat_photo)) |>
+    magrittr::extract2("location_quadrat_photo") |>
     as.character()
   purrr::map(local_files, ~ testthat::expect_true(fs::file_exists(.)))
 })
@@ -161,7 +158,7 @@ test_that("odata_submission_get count returns total number or rows", {
     parse = FALSE,
     download = FALSE
   )
-  x_parsed <- x_raw %>% odata_submission_rectangle()
+  x_parsed <- x_raw |> odata_submission_rectangle()
 
 
   # https://github.com/ropensci/ruODK/issues/65

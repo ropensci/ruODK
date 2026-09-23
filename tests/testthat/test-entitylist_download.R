@@ -59,7 +59,7 @@ test_that("entitylist_download works", {
   testthat::expect_equal(ds1$downloaded_to, ds2$downloaded_to)
 
   # Clean up
-  fs::dir_ls(tempd) %>% fs::file_delete()
+  fs::dir_ls(tempd) |> fs::file_delete()
 })
 
 
