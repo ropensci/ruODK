@@ -185,7 +185,7 @@ get_one_attachment <- function(pth,
     'File saved to "{pth}".\n' |>
       glue::glue() |>
       ru_msg_success(verbose = verbose)
-    return(pth |> as.character())
+    pth |> as.character()
   } else {
     # nocov start
     # nolint start
@@ -195,7 +195,7 @@ get_one_attachment <- function(pth,
     "File not found.\n" |>
       glue::glue() |>
       ru_msg_success(verbose = verbose)
-    return(NA)
+    NA
     # nocov end
   }
 }
