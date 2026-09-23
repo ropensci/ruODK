@@ -11,10 +11,8 @@
 #
 # That subdirectory is deliberate: inst/extdata also holds the hand-maintained
 # form sources (FloraQuadrat04.xml, Locations.xml, ...) whose paths are
-# documented as @source in R/data.R. Six dumped basenames collide with those
-# (Locations.xml, Locations_draft.xml, Locations_no_submissions.xml,
-# I8n_label_choices.xml, I8n_lang_choicefilter.xlsx,
-# I8n_no_lang_choicefilter.xlsx), so the dump must not write over them.
+# documented as @source in R/data.R. The dump writes only inside odkc/, so a
+# dumped Locations.xml can never overwrite the hand-maintained one.
 #
 # FORM XML ONLY. The XLS sources are not dumped: the XML is the compiled form
 # and POST /v1/projects/{pid}/forms accepts it directly, so XLS would add 1.6MB
