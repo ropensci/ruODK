@@ -127,7 +127,10 @@ test_that("handle_ru_* parses geotypes", {
   data("geo_wkt_raw") # parse F, wkt T
   data("geo_wkt") # parse T, wkt T
 
+  t <- withr::local_tempdir()
+
   geo_gj_raw_fresh <- odata_submission_get(
+    local_dir = t,
     pid = get_test_pid(),
     fid = get_test_fid_wkt(),
     url = get_test_url(),
@@ -138,6 +141,7 @@ test_that("handle_ru_* parses geotypes", {
     wkt = FALSE
   )
   geo_gj_fresh <- odata_submission_get(
+    local_dir = t,
     pid = get_test_pid(),
     fid = get_test_fid_wkt(),
     url = get_test_url(),
@@ -148,6 +152,7 @@ test_that("handle_ru_* parses geotypes", {
     wkt = FALSE
   )
   geo_wkt_raw_fresh <- odata_submission_get(
+    local_dir = t,
     pid = get_test_pid(),
     fid = get_test_fid_wkt(),
     url = get_test_url(),
@@ -158,6 +163,7 @@ test_that("handle_ru_* parses geotypes", {
     wkt = TRUE
   )
   geo_wkt_fresh <- odata_submission_get(
+    local_dir = t,
     pid = get_test_pid(),
     fid = get_test_fid_wkt(),
     url = get_test_url(),
