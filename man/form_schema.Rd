@@ -227,9 +227,11 @@ fs \%>\% dplyr::filter(type == "geopoint")
 \url{https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields}
 
 Other form-management: 
+\code{\link{form_create}()},
 \code{\link{form_detail}()},
 \code{\link{form_list}()},
 \code{\link{form_schema_ext}()},
+\code{\link{form_update}()},
 \code{\link{form_xml}()}
 }
 \concept{form-management}

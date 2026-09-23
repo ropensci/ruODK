@@ -128,6 +128,7 @@ Other entity-management:
 \code{\link{entity_detail}()},
 \code{\link{entity_update}()},
 \code{\link{entity_versions}()},
+\code{\link{entitylist_create}()},
 \code{\link{entitylist_detail}()},
 \code{\link{entitylist_download}()},
 \code{\link{entitylist_list}()},

@@ -94,9 +94,11 @@ only_published_forms <- fl \%>\% dplyr::filter(is.na(version) & is.na(hash))
 \url{https://docs.getodk.org/central-api-form-management/#list-all-forms}
 
 Other form-management: 
+\code{\link{form_create}()},
 \code{\link{form_detail}()},
 \code{\link{form_schema}()},
 \code{\link{form_schema_ext}()},
+\code{\link{form_update}()},
 \code{\link{form_xml}()}
 }
 \concept{form-management}

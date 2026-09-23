@@ -1,8 +1,17 @@
 # ruODK (development version)
 ## Major changes
+* `attachment_delete()` clears the uploaded bytes of a Submission attachment.
+* `attachment_upload()` uploads a local file to an expected Submission
+  attachment slot.
 * `entitylist_create()` creates a new Entity List (Dataset) in a Project.
 * `form_create()` creates a new Form from XForms XML or an XLSForm file.
 * `form_update()` modifies a Form's lifecycle state.
+* `submission_create()` creates a new Submission from Submission XML.
+* `submission_delete()` soft-deletes a Submission (30-day restore window).
+* `submission_restore()` restores a deleted Submission.
+* `submission_review()` sets a Submission's review state.
+* `submission_submitters()` lists the Actors that submitted to a Form.
+* `submission_update()` replaces a Submission's data (new version).
 
 # ruODK 1.5.2
 ## Minor changes

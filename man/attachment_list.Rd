@@ -92,11 +92,19 @@ all <- attachment_list(sl$instance_id)
 \url{https://docs.getodk.org/central-api-form-management/#listing-form-attachments}
 
 Other submission-management: 
+\code{\link{attachment_delete}()},
+\code{\link{attachment_upload}()},
 \code{\link{encryption_key_list}()},
 \code{\link{submission_audit_get}()},
+\code{\link{submission_create}()},
+\code{\link{submission_delete}()},
 \code{\link{submission_detail}()},
 \code{\link{submission_export}()},
 \code{\link{submission_get}()},
-\code{\link{submission_list}()}
+\code{\link{submission_list}()},
+\code{\link{submission_restore}()},
+\code{\link{submission_review}()},
+\code{\link{submission_submitters}()},
+\code{\link{submission_update}()}
 }
 \concept{submission-management}

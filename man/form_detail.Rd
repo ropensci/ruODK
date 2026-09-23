@@ -87,9 +87,11 @@ names(f)
 \url{https://docs.getodk.org/central-api-form-management/#getting-form-details}
 
 Other form-management: 
+\code{\link{form_create}()},
 \code{\link{form_list}()},
 \code{\link{form_schema}()},
 \code{\link{form_schema_ext}()},
+\code{\link{form_update}()},
 \code{\link{form_xml}()}
 }
 \concept{form-management}
