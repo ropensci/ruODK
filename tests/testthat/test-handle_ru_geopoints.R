@@ -10,8 +10,8 @@ test_that(
     # nolint end
 
     # Parsed, rectangled, GeoJSON, geopoints handled: geo_gj
-    geo_fields <- geo_fs %>%
-      dplyr::filter(type == "geopoint") %>%
+    geo_fields <- geo_fs |>
+      dplyr::filter(type == "geopoint") |>
       magrittr::extract2("ruodk_name")
 
 
@@ -76,8 +76,8 @@ test_that(
 
     # Parsed, rectangled, WKT, geopoints handled: geo_wkt
 
-    geo_fields <- geo_fs %>%
-      dplyr::filter(type == "geopoint") %>%
+    geo_fields <- geo_fs |>
+      dplyr::filter(type == "geopoint") |>
       magrittr::extract2("ruodk_name")
 
     for (i in seq_len(length(geo_fields))) {

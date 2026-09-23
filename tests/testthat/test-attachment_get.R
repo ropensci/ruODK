@@ -33,8 +33,8 @@ test_that("attachment_get works", {
   # })
 
   # vcr::use_cassette("test_attachment_get1", {  # nolint
-  fresh_parsed <- fresh_raw %>%
-    odata_submission_rectangle() %>%
+  fresh_parsed <- fresh_raw |>
+    odata_submission_rectangle() |>
     dplyr::mutate(
       # HTTPS request downloads a file  # nolint
       quadrat_photo = attachment_get(
@@ -52,8 +52,8 @@ test_that("attachment_get works", {
   # }) # nolint
 
   # vcr::use_cassette("test_attachment_get2", {  # nolint
-  fresh_parsed_sep <- fresh_raw %>%
-    odata_submission_rectangle() %>%
+  fresh_parsed_sep <- fresh_raw |>
+    odata_submission_rectangle() |>
     dplyr::mutate(
       quadrat_photo = attachment_get(
         id,
@@ -132,7 +132,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
 
   t <- tempdir()
   testthat::expect_true(fs::dir_exists(t))
-  fs::dir_ls(t) %>% fs::file_delete()
+  fs::dir_ls(t) |> fs::file_delete()
 
   url <- get_test_url()
   un <- get_test_un()
@@ -207,7 +207,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   testthat::expect_equal(first_dl_time, fs::file_info(pth)$modification_time)
 
   # Now make sure pth doesn't exist
-  pth2 <- fs::path(t, NA) %>% as.character()
+  pth2 <- fs::path(t, NA) |> as.character()
   get_one_attachment(
     pth2,
     NA,

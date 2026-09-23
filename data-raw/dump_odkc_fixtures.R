@@ -106,7 +106,7 @@ say("dumping %s -> %s", cfg$url, fixture_root)
 
 # Refuse to run if anything outside the odkc/ subdirectory would be touched.
 # inst/extdata holds hand-maintained form sources documented in R/data.R.
-protected <- dir_ls(extdata_dir, type = "file") %>% path_file()
+protected <- dir_ls(extdata_dir, type = "file") |> path_file()
 collisions <- intersect(protected, c("manifest.json", "attachments-map.json"))
 if (length(collisions) > 0) {
   stop("dump output would collide with existing inst/extdata files: ",
@@ -134,12 +134,13 @@ say("  vignettes/media has %d image(s): %s",
 # wins; any other image name cycles through media_names in sorted order.
 # Recorded in attachments-map.json so the choice is deterministic and
 # reviewable. Non-image attachments never come from vignettes/media.
-media_cursor <- 0L
+media_state <- new.env(parent = emptyenv())
+media_state$cursor <- 0L
 is_image <- function(name) grepl("\\.(jpg|jpeg|png)$", name, ignore.case = TRUE)
 pick_media <- function(attachment_name) {
   if (attachment_name %in% media_names) return(attachment_name)
-  media_cursor <<- media_cursor + 1L
-  media_names[[((media_cursor - 1L) %% length(media_names)) + 1L]]
+  media_state$cursor <- media_state$cursor + 1L
+  media_names[[((media_state$cursor - 1L) %% length(media_names)) + 1L]]
 }
 
 # Filesystem slug for a submission instance id. The full instance id is
@@ -172,7 +173,7 @@ for (pid in pids) {
   say("\n=== pid %d ===", pid)
   proj_meta <- ruODK::project_list(
     url = cfg$url, un = cfg$un, pw = cfg$pw, retries = cfg$retries
-  ) %>% filter(.data$id == pid)
+  ) |> filter(.data$id == pid)
   proj <- list(
     id = pid,
     name = proj_meta$name[[1]],
@@ -300,7 +301,7 @@ for (pid in pids) {
         # back logical (all-NA) instead of character, which
         # test-submission_list.R asserts against.
         review_state = if (is.null(sl$review_state) ||
-          is.na(sl$review_state[[j]])) {
+                             is.na(sl$review_state[[j]])) {
           NULL
         } else {
           sl$review_state[[j]]
@@ -430,7 +431,7 @@ say("vignettes/media untouched? -> %s",
     if (dir_exists(media_dir)) "yes (write target is fixtures/ only)" else "NO")
 say("inst/extdata (non-odkc/) untouched? -> %s",
     if (length(setdiff(protected, c("manifest.json", "attachments-map.json"))) ==
-        length(protected)) {
+          length(protected)) {
       "yes (dump writes only into odkc/)"
     } else {
       "NO"

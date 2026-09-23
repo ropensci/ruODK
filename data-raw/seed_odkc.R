@@ -54,7 +54,7 @@ base_url <- sub("/+$", "", Sys.getenv("ODKC_SEED_URL", "https://localhost:8383")
 # target is allowed unless the operator explicitly opts in.
 host <- sub("^https?://([^/:]+).*$", "\\1", base_url)
 if (!host %in% c("localhost", "127.0.0.1", "::1") &&
-    !identical(Sys.getenv("ODKC_SEED_ALLOW_REMOTE"), "1")) {
+      !identical(Sys.getenv("ODKC_SEED_ALLOW_REMOTE"), "1")) {
   stop(
     "Refusing to seed non-loopback target '", base_url, "' (host '", host, "').\n",
     "This script writes projects, forms and submissions.\n",

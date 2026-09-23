@@ -40,7 +40,7 @@ project_create <- function(name,
     ru_msg_abort("name must be a single non-empty character string.")
   }
 
-  httr::RETRY(
+  resp <- httr::RETRY(
     "POST",
     httr::modify_url(url, path = "v1/projects"),
     httr::add_headers("Accept" = "application/json"),
@@ -48,16 +48,14 @@ project_create <- function(name,
     body = list(name = name),
     encode = "json",
     times = retries
-  ) %>%
-    yell_if_error(., url, un, pw) %>%
-    httr::content(.) %>%
-    {
-      tibble::tibble(
-        id = .$id,
-        name = .$name,
-        archived = .$archived %||% FALSE
-      )
-    }
+  ) |>
+    yell_if_error(url, un, pw) |>
+    httr::content()
+  tibble::tibble(
+    id = resp$id,
+    name = resp$name,
+    archived = resp$archived %||% FALSE
+  )
 }
 
 # usethis::use_test("project_create")  # nolint

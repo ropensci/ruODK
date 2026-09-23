@@ -144,17 +144,17 @@ entitylist_download <- function(pid = get_default_pid(),
   # Emit message
   if (fs::file_exists(pth)) {
     if (overwrite == TRUE) {
-      "Overwriting previous entity list: \"{pth}\"" %>%
-        glue::glue() %>%
+      "Overwriting previous entity list: \"{pth}\"" |>
+        glue::glue() |>
         ru_msg_success(verbose = verbose)
     } else {
-      "Keeping previous entity list: \"{pth}\"" %>%
-        glue::glue() %>%
+      "Keeping previous entity list: \"{pth}\"" |>
+        glue::glue() |>
         ru_msg_success(verbose = verbose)
     }
   } else {
-    "Downloading entity list \"{did}\" to {pth}" %>%
-      glue::glue() %>%
+    "Downloading entity list \"{did}\" to {pth}" |>
+      glue::glue() |>
       ru_msg_success(verbose = verbose)
   }
 
