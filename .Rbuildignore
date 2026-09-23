@@ -9,6 +9,7 @@
 ^codecov\.yml$
 ^\_pkgdown\.yml$
 ^CONTRIBUTING\.md$
+^AGENTS\.md$
 ^ISSUE_TEMPLATE\.md$
 ^SUPPORT\.md$
 ^man-roxygen$

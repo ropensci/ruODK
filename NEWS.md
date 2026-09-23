@@ -1,3 +1,9 @@
+# ruODK (development version)
+## Major changes
+* `entitylist_create()` creates a new Entity List (Dataset) in a Project.
+* `form_create()` creates a new Form from XForms XML or an XLSForm file.
+* `form_update()` modifies a Form's lifecycle state.
+
 # ruODK 1.5.2
 ## Minor changes
 * `get_one_attachment` now follows redirects, enabling `odata_submission_get` to
