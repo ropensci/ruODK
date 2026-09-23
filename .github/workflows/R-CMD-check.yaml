@@ -44,8 +44,9 @@ jobs:
 
       # ruODK's ODK Central semver settings (R/ru_setup.R). Bare "X.Y.Z" with
       # no "v" prefix -- parse_odkc_version() rejects anything else. These are
-      # NOT the Docker image tag, which lives in .devcontainer/.env as
-      # ODKC_IMAGE_TAG ("v2026.3.0"). Do not rename either to the other.
+      # NOT the Docker image tag, which lives in .devcontainer/.env as the
+      # v-prefixed ODKC_IMAGE_TAG. Do not rename either to the other. Both are
+      # bumped in lockstep by the update-odkc-pins workflow.
       ODKC_TEST_VERSION: 2026.3.0
       ODKC_VERSION: 2026.3.0
 

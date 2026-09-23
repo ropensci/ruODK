@@ -1,0 +1,54 @@
+# Daily check for new ODK Central image tags. When ghcr.io publishes a newer
+# central-service or pyxform-http, this opens a PR that bumps the pins in
+# lockstep (.env, compose fallbacks, workflow R semvers, devcontainer
+# default) via .github/scripts/update-odkc-pins.sh. The PR's own R-CMD-check
+# and test-coverage runs then validate the bump against a freshly seeded
+# stack, so review the upstream release notes and merge on green.
+# See issue #170.
+name: update-odkc-pins
+
+on:
+  schedule:
+    # Daily, 06:00 UTC.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for newer ODK Central images
+        id: pins
+        run: .github/scripts/update-odkc-pins.sh
+
+      - name: Open update PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: bot/update-odkc-pins
+          delete-branch: true
+          commit-message: >-
+            Bump ODK Central image pins
+            (${{ steps.pins.outputs.central_new }},
+            pyxform-http ${{ steps.pins.outputs.pyxform_new }})
+          title: >-
+            Bump ODK Central to ${{ steps.pins.outputs.central_new }}
+            (pyxform-http ${{ steps.pins.outputs.pyxform_new }})
+          body: |
+            The daily pin check found newer ODK Central images:
+
+            - central-service: `${{ steps.pins.outputs.central_old }}` -> `${{ steps.pins.outputs.central_new }}`
+            - pyxform-http: `${{ steps.pins.outputs.pyxform_old }}` -> `${{ steps.pins.outputs.pyxform_new }}`
+
+            Pins are bumped in lockstep (`.devcontainer/.env`, compose
+            fallbacks, workflow `ODKC_*` semvers, devcontainer default).
+            R-CMD-check and test-coverage on this PR validate the bump
+            against a freshly seeded stack.
+
+            Before merging, skim the upstream release notes:
+            https://github.com/getodk/central/compare/${{ steps.pins.outputs.central_old }}...${{ steps.pins.outputs.central_new }}
