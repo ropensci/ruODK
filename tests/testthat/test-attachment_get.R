@@ -86,9 +86,10 @@ test_that("attachment_url works", {
   pid <- get_test_pid()
   fid <- get_test_fid()
 
-  expected_url <- glue::glue(
-    "{url}/v1/projects/{pid}/forms/{fid}/",
-    "submissions/{uuid}/attachments/{fn}"
+  expected_url <- paste0(
+    url, "/v1/projects/", pid, "/forms/", URLencode(fid, reserved = TRUE),
+    "/submissions/", URLencode(uuid, reserved = TRUE),
+    "/attachments/", URLencode(fn, reserved = TRUE)
   )
 
   calculated_url <- ruODK:::attachment_url(uuid,
@@ -99,6 +100,27 @@ test_that("attachment_url works", {
   )
 
   testthat::expect_equal(calculated_url, expected_url)
+})
+
+test_that("attachment_url encodes reserved characters in filename and uuid", {
+  # Filenames come from ODK form submissions and may contain spaces and
+  # reserved characters. Unencoded, these corrupt the URL (issue #66).
+  url <- "https://example.com"
+  pid <- 1
+  fid <- "my form"
+  uuid <- "uuid:abc"
+  fn <- "my photo #1 (final).jpg"
+
+  calculated <- ruODK:::attachment_url(uuid, fn, pid = pid, fid = fid, url = url)
+
+  testthat::expect_equal(
+    calculated,
+    paste0(
+      "https://example.com/v1/projects/1/",
+      "forms/my%20form/submissions/uuid%3Aabc/",
+      "attachments/my%20photo%20%231%20%28final%29.jpg"
+    )
+  )
 })
 
 test_that("get_one_attachment handles repeat download and NA filenames", {

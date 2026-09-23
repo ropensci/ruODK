@@ -8,7 +8,8 @@ project_create(
   name,
   url = get_default_url(),
   un = get_default_un(),
-  pw = get_default_pw()
+  pw = get_default_pw(),
+  retries = get_retries()
 )
 }
 \arguments{
@@ -31,10 +32,16 @@ See \code{vignette("Setup", package = "ruODK")}.}
 Default: \code{\link{get_default_pw}}.
 Set default \code{pw} through \code{ru_setup(pw="...")}.
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{retries}{The number of attempts to retrieve a web resource.
+
+This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
+
+Default: 3.}
 }
 \value{
-A tibble with one row per project and all project metadata
-as columns as per ODK Central API docs.
+A tibble with one row holding the new Project's metadata as columns,
+as per ODK Central API docs.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

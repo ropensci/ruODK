@@ -67,7 +67,7 @@ odata_entitylist_metadata_get <- function(pid = get_default_pid(),
   yell_if_missing(url, un, pw, pid = pid, did = did)
 
   if (odkc_version |> semver_lt("2022.3")) {
-    ru_msg_warn("odata_entitylist_service_get is supported from v2022.3")
+    ru_msg_warn("odata_entitylist_metadata_get is supported from v2022.3")
   }
 
   doc <- httr::RETRY(

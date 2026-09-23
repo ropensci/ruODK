@@ -69,10 +69,15 @@ attachment_url <- function(uuid,
                            pid = get_default_pid(),
                            fid = get_default_fid(),
                            url = get_default_url()) {
+  # Every path segment is URL-encoded. `fn` is an attachment filename as per
+  # ODK form submission and may contain spaces, "#", "?", "&" or non-ASCII;
+  # `uuid` carries a "uuid:" prefix whose ":" is reserved. Left unencoded, both
+  # corrupt the URL (issue #66) and the download 404s or fetches the wrong path.
   glue::glue(
     "{url}/v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
-    "/submissions/{uuid}/attachments/{fn}"
-  )
+    "/submissions/{URLencode(uuid, reserved = TRUE)}",
+    "/attachments/{URLencode(fn, reserved = TRUE)}"
+  ) %>% as.character(.)
   # nolint start
   # See https://github.com/ropensci/ruODK/issues/66
   # This breaks attachment_get tests:

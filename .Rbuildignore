@@ -33,3 +33,8 @@ codemeta.json
 # package build (see .agents/README.md for upstream licences).
 ^\.agents
 ^skills-lock\.json$
+# Seeding fixtures for the local ODK Central test stack (issue #170). Only
+# data-raw/seed_odkc.R and data-raw/dump_odkc_fixtures.R read them; nothing in
+# R/, tests/ or vignettes/ does. Shipping them would add ~600KB to every
+# install for no runtime use.
+^inst/extdata/odkc$

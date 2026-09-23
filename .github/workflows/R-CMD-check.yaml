@@ -70,9 +70,6 @@ jobs:
           .devcontainer/odkc/ca-bundle.sh "$bundle" > /dev/null
           echo "CURL_CA_BUNDLE=$GITHUB_WORKSPACE/$bundle" >> "$GITHUB_ENV"
 
-      - name: Seed ODK Central
-        run: Rscript data-raw/seed_odkc.R
-
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
@@ -81,6 +78,11 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+
+      # After setup-r-dependencies: seed_odkc.R is Rscript and needs the
+      # packages it library()s (httr, jsonlite, purrr, fs, xml2).
+      - name: Seed ODK Central
+        run: Rscript data-raw/seed_odkc.R
 
       - uses: r-lib/actions/check-r-package@v2
         with:
