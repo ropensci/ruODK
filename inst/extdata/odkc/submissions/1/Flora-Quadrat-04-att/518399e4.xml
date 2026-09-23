@@ -1,0 +1,41 @@
+<data xmlns:jr="http://openrosa.org/javarosa" id="Flora-Quadrat-04-att">
+          <meta>
+            <instanceID>uuid:518399e4-c075-438d-93b3-b78078c05030</instanceID>
+          </meta>
+          <encounter_start_datetime>2023-12-03T15:40:24.821+08:00</encounter_start_datetime>
+          <reporter>username not found</reporter>
+          <device_id>ruodk.getodk.cloud:bZu5sekpCEUjblbd</device_id>
+          <location>
+            <area_name>Test1</area_name>
+            <quadrat_photo>1604290006239-15_41_29.jpg</quadrat_photo>
+            <corner1>-31.996239 115.886021 0 0</corner1>
+          </location>
+          <habitat>
+            <morphological_type>flat</morphological_type>
+            <morphological_type_photo>1604290049411-15_42_9.jpg</morphological_type_photo>
+          </habitat>
+          <vegetation_stratum>
+            <nvis_level3_broad_floristic_group>w3.1_heath_shrub</nvis_level3_broad_floristic_group>
+            <max_height_m>2</max_height_m>
+            <foliage_cover>10-5</foliage_cover>
+            <dominant_species_1>Test species 1</dominant_species_1>
+            <dominant_species_2>Test species 2</dominant_species_2>
+            <dominant_species_3>Test species 3</dominant_species_3>
+            <dominant_species_4>Test species 4</dominant_species_4>
+          </vegetation_stratum>
+          <perimeter>
+            <corner2>-31.996002 115.886083 0 0</corner2>
+            <corner3>-31.996103 115.88646 0 0</corner3>
+            <corner4>-31.996589 115.88646 0 0</corner4>
+            <mudmap_photo/>
+          </perimeter>
+          <taxon_encounter>
+            <field_name>Test species 1</field_name>
+            <photo_in_situ>1604290499008-15_44_12.jpg</photo_in_situ>
+            <taxon_encounter_location/>
+            <life_form>w3.0_shrub</life_form>
+            <voucher_specimen_barcode>12345</voucher_specimen_barcode>
+            <voucher_specimen_label>Test Specimen 1</voucher_specimen_label>
+          </taxon_encounter>
+          <encounter_end_datetime>2023-12-03T15:44:59.654+08:00</encounter_end_datetime>
+        </data>

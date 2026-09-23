@@ -12,6 +12,12 @@
   [Guenther Fink](https://forum.getodk.org/u/Guenther_Fink))
 
 ## Maintenance
+* Run the test suite against a local ODK Central in Docker instead of a hosted
+  instance. `data-raw/dump_odkc_fixtures.R` exports the fixtures to
+  `inst/extdata/odkc/`, and `data-raw/seed_odkc.R` loads them into the stack
+  that `.devcontainer/docker-compose.yml` starts. The dev container and both
+  GitHub Actions workflows use this stack, so no `ODKC_TEST_*` secrets and no
+  account on a shared server are needed (#170).
 * Update tested ODK Central version to 2025.2.2 (Sept 2025) and adjust tests
   to expect fields added to the ODK Central API
   (`entity_list`, `form_list`, `submission_list`).

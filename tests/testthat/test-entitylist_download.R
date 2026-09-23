@@ -5,7 +5,7 @@ test_that("entitylist_download works", {
 
   # skip_on_ci()
 
-  tempd <- fs::path(tempdir(), "new_dir")
+  tempd <- fs::path(withr::local_tempdir(), "new_dir")
 
   ru_setup(
     pid = get_test_pid(),
@@ -59,7 +59,7 @@ test_that("entitylist_download works", {
   testthat::expect_equal(ds1$downloaded_to, ds2$downloaded_to)
 
   # Clean up
-  fs::dir_ls(tempd) %>% fs::file_delete()
+  fs::dir_ls(tempd) |> fs::file_delete()
 })
 
 
@@ -70,8 +70,7 @@ test_that("entitylist_download etag works", {
 
   # skip_on_ci()
 
-  tempd <- tempdir()
-  fs::dir_ls(tempd) %>% fs::file_delete()
+  tempd <- withr::local_tempdir()
 
   ru_setup(
     pid = get_test_pid(),
@@ -104,8 +103,7 @@ test_that("entitylist_download filter works", {
 
   # skip_on_ci()
 
-  tempd <- tempdir()
-  fs::dir_ls(tempd) %>% fs::file_delete()
+  tempd <- withr::local_tempdir()
 
   ru_setup(
     pid = get_test_pid(),
@@ -142,8 +140,7 @@ test_that("entitylist_download errors if did is missing", {
 })
 
 test_that("entitylist_download warns if odkc_version too low", {
-  tempd <- tempdir()
-  fs::dir_ls(tempd) %>% fs::file_delete()
+  tempd <- withr::local_tempdir()
 
   ru_setup(
     pid = get_test_pid(),

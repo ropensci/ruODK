@@ -69,6 +69,7 @@ Suggests:
     DT (>= 0.33),
     ggplot2 (>= 3.5.1),
     here (>= 1.0.1),
+    jsonlite (>= 1.8.8),
     knitr (>= 1.48),
     lattice (>= 0.22-6),
     leafem (>= 0.2.3.9007),

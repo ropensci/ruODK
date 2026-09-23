@@ -14,7 +14,7 @@
 #' strip_uuid("uuid:d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
 #' }
 strip_uuid <- function(uuid) {
-  uuid %>% stringr::str_replace_all(., pattern = "uuid:", replacement = "")
+  uuid |> stringr::str_replace_all(pattern = "uuid:", replacement = "")
 }
 
 #' Prepend a leading "uuid:" to any string, e.g. an md5 hash.
@@ -33,7 +33,7 @@ strip_uuid <- function(uuid) {
 #' prepend_uuid("d3bcefea-32a8-4dbc-80ca-4ecb0678e2b0")
 #' }
 prepend_uuid <- function(md5hash) {
-  glue::glue("uuid:{md5hash}") %>% as.character(.)
+  glue::glue("uuid:{md5hash}") |> as.character()
 }
 
 #' Build the download URL for one or many submission UUIDs and filenames.
@@ -69,10 +69,15 @@ attachment_url <- function(uuid,
                            pid = get_default_pid(),
                            fid = get_default_fid(),
                            url = get_default_url()) {
+  # Every path segment is URL-encoded. `fn` is an attachment filename as per
+  # ODK form submission and may contain spaces, "#", "?", "&" or non-ASCII;
+  # `uuid` carries a "uuid:" prefix whose ":" is reserved. Left unencoded, both
+  # corrupt the URL (issue #66) and the download 404s or fetches the wrong path.
   glue::glue(
     "{url}/v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
-    "/submissions/{uuid}/attachments/{fn}"
-  )
+    "/submissions/{URLencode(uuid, reserved = TRUE)}",
+    "/attachments/{URLencode(fn, reserved = TRUE)}"
+  ) |> as.character()
   # nolint start
   # See https://github.com/ropensci/ruODK/issues/66
   # This breaks attachment_get tests:
@@ -136,18 +141,18 @@ get_one_attachment <- function(pth,
                                verbose = get_ru_verbose()) {
   # Early exit if there's nothing to download
   if (is.na(fn)) {
-    "Filename is NA, skipping download.\n" %>%
-      glue::glue() %>%
+    "Filename is NA, skipping download.\n" |>
+      glue::glue() |>
       ru_msg_noop(verbose = verbose)
     return(NA)
   }
 
   # HTTP 404.1 on file download saves the JSON error message as 76B file.
   if (fs::file_exists(pth) && fs::file_size(pth) != 76) {
-    'File already downloaded, keeping "{pth}".\n' %>%
-      glue::glue() %>%
+    'File already downloaded, keeping "{pth}".\n' |>
+      glue::glue() |>
       ru_msg_noop(verbose = verbose)
-    return(pth %>% as.character())
+    return(pth |> as.character())
   }
 
   yell_if_missing(url, un, pw)
@@ -160,7 +165,7 @@ get_one_attachment <- function(pth,
     httr::config(followlocation = TRUE),
     times = retries,
     terminate_on = c(404)
-  ) %>%
+  ) |>
     httr::warn_for_status(
       # If the download fails, inspect src and try to curl the plain API call.
       # nolint start
@@ -177,20 +182,20 @@ get_one_attachment <- function(pth,
     )
 
   if (fs::file_exists(pth)) {
-    'File saved to "{pth}".\n' %>%
-      glue::glue() %>%
+    'File saved to "{pth}".\n' |>
+      glue::glue() |>
       ru_msg_success(verbose = verbose)
-    return(pth %>% as.character())
+    pth |> as.character()
   } else {
     # nocov start
     # nolint start
     # This is hard to test, as it requires a form with a missing attachment.
     # This only ever happens on exotic upload errors.
     # nolint end
-    "File not found.\n" %>%
-      glue::glue() %>%
+    "File not found.\n" |>
+      glue::glue() |>
       ru_msg_success(verbose = verbose)
-    return(NA)
+    NA
     # nocov end
   }
 }
@@ -279,8 +284,8 @@ attachment_get <- function(sid,
   } else {
     dest_dir <- fs::path(local_dir)
   }
-  "Using local directory \"{dest_dir}\".\n" %>%
-    glue::glue() %>%
+  "Using local directory \"{dest_dir}\".\n" |>
+    glue::glue() |>
     ru_msg_info(verbose = verbose)
 
   fs::dir_create(dest_dir)
@@ -300,9 +305,9 @@ attachment_get <- function(sid,
     pw = pw,
     verbose = verbose,
     retries = retries
-  ) %>%
-    purrr::pmap(get_one_attachment) %>%
-    as.character(.)
+  ) |>
+    purrr::pmap(get_one_attachment) |>
+    as.character()
 }
 
 # usethis::use_test("attachment_get") # nolint

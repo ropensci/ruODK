@@ -7,11 +7,10 @@ test_that("handle_ru_attachments downloads files", {
   data("fq_raw")
   data("fq_form_schema")
 
-  t <- tempdir()
-  fs::dir_ls(t) %>% fs::file_delete()
+  t <- withr::local_tempdir()
 
-  fq_with_att <- fq_raw %>%
-    ruODK::odata_submission_rectangle() %>%
+  fq_with_att <- fq_raw |>
+    ruODK::odata_submission_rectangle() |>
     ruODK::handle_ru_attachments(
       form_schema = fq_form_schema,
       local_dir = t,
@@ -24,7 +23,7 @@ test_that("handle_ru_attachments downloads files", {
     )
 
   # There should be files in local_dir
-  testthat::expect_true(fs::dir_ls(t) %>% length() > 0)
+  testthat::expect_true(fs::dir_ls(t) |> length() > 0)
 })
 
 test_that("handle_ru_attachments downloads files from subtables", {
@@ -37,11 +36,10 @@ test_that("handle_ru_attachments downloads files from subtables", {
   data("fq_raw_taxa")
   data("fq_form_schema")
 
-  t <- tempdir()
-  fs::dir_ls(t) %>% fs::file_delete()
+  t <- withr::local_tempdir()
 
-  fq_with_att <- fq_raw_taxa %>%
-    ruODK::odata_submission_rectangle() %>%
+  fq_with_att <- fq_raw_taxa |>
+    ruODK::odata_submission_rectangle() |>
     ruODK::handle_ru_attachments(
       form_schema = fq_form_schema,
       local_dir = t,
@@ -54,7 +52,7 @@ test_that("handle_ru_attachments downloads files from subtables", {
     )
 
   # There should be files in local_dir
-  testthat::expect_true(fs::dir_ls(t) %>% length() > 0)
+  testthat::expect_true(fs::dir_ls(t) |> length() > 0)
 })
 
 # usethis::use_r("handle_ru_attachments") # nolint

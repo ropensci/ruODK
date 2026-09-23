@@ -8,3 +8,10 @@ manual.tex
 manual-concordance.tex
 docs/
 inst/doc
+
+# Throwaway TLS CA + certs for the ODK Central test stack (issue #170).
+# Regenerate with: rm -rf .devcontainer/odkc/certs && docker compose up certs
+.devcontainer/odkc/certs/
+# Merged CA bundle built by .devcontainer/odkc/ca-bundle.sh. Derived from the
+# system bundle plus certs/ca.crt, so it is never committed.
+.devcontainer/odkc/ca-bundle.pem

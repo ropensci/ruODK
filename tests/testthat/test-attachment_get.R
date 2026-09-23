@@ -33,8 +33,8 @@ test_that("attachment_get works", {
   # })
 
   # vcr::use_cassette("test_attachment_get1", {  # nolint
-  fresh_parsed <- fresh_raw %>%
-    odata_submission_rectangle() %>%
+  fresh_parsed <- fresh_raw |>
+    odata_submission_rectangle() |>
     dplyr::mutate(
       # HTTPS request downloads a file  # nolint
       quadrat_photo = attachment_get(
@@ -52,8 +52,8 @@ test_that("attachment_get works", {
   # }) # nolint
 
   # vcr::use_cassette("test_attachment_get2", {  # nolint
-  fresh_parsed_sep <- fresh_raw %>%
-    odata_submission_rectangle() %>%
+  fresh_parsed_sep <- fresh_raw |>
+    odata_submission_rectangle() |>
     dplyr::mutate(
       quadrat_photo = attachment_get(
         id,
@@ -86,9 +86,10 @@ test_that("attachment_url works", {
   pid <- get_test_pid()
   fid <- get_test_fid()
 
-  expected_url <- glue::glue(
-    "{url}/v1/projects/{pid}/forms/{fid}/",
-    "submissions/{uuid}/attachments/{fn}"
+  expected_url <- paste0(
+    url, "/v1/projects/", pid, "/forms/", URLencode(fid, reserved = TRUE),
+    "/submissions/", URLencode(uuid, reserved = TRUE),
+    "/attachments/", URLencode(fn, reserved = TRUE)
   )
 
   calculated_url <- ruODK:::attachment_url(uuid,
@@ -101,6 +102,27 @@ test_that("attachment_url works", {
   testthat::expect_equal(calculated_url, expected_url)
 })
 
+test_that("attachment_url encodes reserved characters in filename and uuid", {
+  # Filenames come from ODK form submissions and may contain spaces and
+  # reserved characters. Unencoded, these corrupt the URL (issue #66).
+  url <- "https://example.com"
+  pid <- 1
+  fid <- "my form"
+  uuid <- "uuid:abc"
+  fn <- "my photo #1 (final).jpg"
+
+  calculated <- ruODK:::attachment_url(uuid, fn, pid = pid, fid = fid, url = url)
+
+  testthat::expect_equal(
+    calculated,
+    paste0(
+      "https://example.com/v1/projects/1/",
+      "forms/my%20form/submissions/uuid%3Aabc/",
+      "attachments/my%20photo%20%231%20%28final%29.jpg"
+    )
+  )
+})
+
 test_that("get_one_attachment handles repeat download and NA filenames", {
   # This test checks behaviour upon multiple downloads of the same file.
   # Uncached, real-life behaviour is preferred here.
@@ -108,9 +130,8 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     message = "Test server not configured"
   )
 
-  t <- tempdir()
+  t <- withr::local_tempdir()
   testthat::expect_true(fs::dir_exists(t))
-  fs::dir_ls(t) %>% fs::file_delete()
 
   url <- get_test_url()
   un <- get_test_un()
@@ -185,7 +206,7 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
   testthat::expect_equal(first_dl_time, fs::file_info(pth)$modification_time)
 
   # Now make sure pth doesn't exist
-  pth2 <- fs::path(t, NA) %>% as.character()
+  pth2 <- fs::path(t, NA) |> as.character()
   get_one_attachment(
     pth2,
     NA,

@@ -63,27 +63,54 @@ test_that("ru_setup resets settings if given empty string", {
     message = "Test server not configured"
   )
 
-  # Keep original test settings
-  url <- get_default_url()
-  un <- get_default_un()
-  pw <- get_default_pw()
-  pp <- get_default_pp()
-  tz <- get_default_tz()
-  odkcv <- get_default_odkc_version()
-  retries <- get_retries()
-  verbose <- get_ru_verbose()
-  retries <- get_retries()
-  test_url <- get_test_url()
-  test_un <- get_test_un()
-  test_pw <- get_test_pw()
-  test_pp <- get_test_pp()
-  test_odkcv <- get_test_odkc_version()
-  test_pid <- get_test_pid()
-  test_fid <- get_test_fid()
-  test_fid_zip <- get_test_fid_zip()
-  test_fid_att <- get_test_fid_att()
-  test_fid_gap <- get_test_fid_gap()
-  test_fid_wkt <- get_test_fid_wkt()
+  # Keep original test settings. The getters warn on unset defaults; those
+  # warnings are asserted below, so silence them for this capture.
+  suppressWarnings({
+    url <- get_default_url()
+    un <- get_default_un()
+    pw <- get_default_pw()
+    pp <- get_default_pp()
+    tz <- get_default_tz()
+    odkcv <- get_default_odkc_version()
+    retries <- get_retries()
+    verbose <- get_ru_verbose()
+    test_url <- get_test_url()
+    test_un <- get_test_un()
+    test_pw <- get_test_pw()
+    test_pp <- get_test_pp()
+    test_odkcv <- get_test_odkc_version()
+    test_pid <- get_test_pid()
+    test_fid <- get_test_fid()
+    test_fid_zip <- get_test_fid_zip()
+    test_fid_att <- get_test_fid_att()
+    test_fid_gap <- get_test_fid_gap()
+    test_fid_wkt <- get_test_fid_wkt()
+  })
+
+  # Restore the original settings even if an expectation below fails.
+  withr::defer(
+    ru_setup(
+      url = url,
+      un = un,
+      pw = pw,
+      pp = pp,
+      tz = tz,
+      odkc_version = odkcv,
+      retries = retries,
+      test_url = test_url,
+      test_un = test_un,
+      test_pw = test_pw,
+      test_pp = test_pp,
+      test_odkc_version = test_odkcv,
+      test_pid = test_pid,
+      test_fid = test_fid,
+      test_fid_zip = test_fid_zip,
+      test_fid_att = test_fid_att,
+      test_fid_gap = test_fid_gap,
+      test_fid_wkt = test_fid_wkt,
+      verbose = TRUE
+    )
+  )
 
   # Hammertime
   ru_setup(
@@ -149,30 +176,6 @@ test_that("ru_setup resets settings if given empty string", {
   testthat::expect_equal(x$test_fid_gap, "")
   testthat::expect_equal(x$test_fid_wkt, "")
   testthat::expect_equal(x$verbose, TRUE)
-
-
-  # Reset
-  ru_setup(
-    url = url,
-    un = un,
-    pw = pw,
-    pp = pp,
-    tz = tz,
-    odkc_version = odkcv,
-    retries = retries,
-    test_url = test_url,
-    test_un = test_un,
-    test_pw = test_pw,
-    test_pp = test_pp,
-    test_odkc_version = test_odkcv,
-    test_pid = test_pid,
-    test_fid = test_fid,
-    test_fid_zip = test_fid_zip,
-    test_fid_att = test_fid_att,
-    test_fid_gap = test_fid_gap,
-    test_fid_wkt = test_fid_wkt,
-    verbose = TRUE
-  )
 })
 
 test_that("get_default_tz warns and defaults to UTC if tz set to ''", {

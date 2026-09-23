@@ -102,7 +102,7 @@ test_that("submission_export works", {
   testthat::expect_true(fid_csv %in% fs::dir_ls(t))
 
   # Clean up
-  fs::dir_ls(t) %>% fs::file_delete()
+  fs::dir_ls(t) |> fs::file_delete()
 })
 
 test_that("submission_export works with encryption", {
@@ -124,8 +124,7 @@ test_that("submission_export works with encryption", {
   # )
   # nolint end
 
-  t <- tempdir()
-  fs::dir_ls(t) %>% fs::file_delete()
+  t <- withr::local_tempdir()
   # vcr::use_cassette("test_submission_export0", {
   se <- submission_export(
     local_dir = t,
@@ -152,7 +151,7 @@ test_that("submission_export works with encryption", {
 #       skip_if(Sys.getenv("ODKC_TEST_URL")=="", message = "Test server not configured")
 #
 #     t <- tempdir()
-#     fs::dir_ls(t) %>% fs::file_delete()
+#     fs::dir_ls(t) |> fs::file_delete()
 #
 #     testthat::expect_error(
 #       leeeeroy_jeeenkins <- submission_export(
@@ -176,8 +175,7 @@ test_that("submission_export warns of missing credentials", {
   )
   skip_on_ci()
 
-  t <- tempdir()
-  fs::dir_ls(t) %>% fs::file_delete()
+  t <- withr::local_tempdir()
 
   testthat::expect_error(
     se <- submission_export(
@@ -257,8 +255,7 @@ test_that("submission_export excludes media", {
   skip_on_ci()
 
   # A fresh litterbox
-  t <- tempdir()
-  fs::dir_ls(t) |> fs::file_delete()
+  t <- withr::local_tempdir()
 
   media_and_repeats <- submission_export(
     local_dir = t,
@@ -399,7 +396,7 @@ test_that("submission_export excludes media", {
     regexp = "Omitting repeat data"
   )
 
-  fs::dir_ls(t) %>% fs::file_delete()
+  fs::dir_ls(t) |> fs::file_delete()
 })
 
 # usethis::use_r("submission_export") # nolint

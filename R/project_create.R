@@ -5,8 +5,9 @@
 #' @param name The desired name of the project. Can contain whitespace.
 #' @template param-url
 #' @template param-auth
-#' @return A tibble with one row per project and all project metadata
-#'         as columns as per ODK Central API docs.
+#' @template param-retries
+#' @return A tibble with one row holding the new Project's metadata as columns,
+#'         as per ODK Central API docs.
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-project-management/#creating-a-project}
 # nolint end
@@ -31,32 +32,30 @@
 project_create <- function(name,
                            url = get_default_url(),
                            un = get_default_un(),
-                           pw = get_default_pw()) {
-  ru_msg_warn("Not implemented.")
+                           pw = get_default_pw(),
+                           retries = get_retries()) {
+  yell_if_missing(url, un, pw)
 
-  # nolint start
-  # has_internet()
-  # glue::glue("{url}/v1/projects/") %>%
-  #   httr::POST(
-  #     config = list(
-  #       httr::add_headers("Content-Type" = "application/json"),
-  #       httr::authenticate(un, pw)
-  #     ),
-  #     body = jsonlite::toJSON(list(name = "x"), auto_unbox = T),
-  #     encode = "json"
-  #   ) %>%
-  #   httr::stop_for_status(
-  #     task = glue::glue("create a project with name {name}")
-  #   ) %>%
-  #   httr::content(.) %>%
-  #   {
-  #     tibble::tibble(
-  #       id = purrr::map_int(., "id"),
-  #       name = purrr::map_chr(., "name"),
-  #       archived = ifelse(is.null(.$archived), FALSE, TRUE)
-  #     )
-  #   }
-  # nolint end
+  if (!is.character(name) || length(name) != 1L || is.na(name) || !nzchar(name)) {
+    ru_msg_abort("name must be a single non-empty character string.")
+  }
+
+  resp <- httr::RETRY(
+    "POST",
+    httr::modify_url(url, path = "v1/projects"),
+    httr::add_headers("Accept" = "application/json"),
+    httr::authenticate(un, pw),
+    body = list(name = name),
+    encode = "json",
+    times = retries
+  ) |>
+    yell_if_error(url, un, pw) |>
+    httr::content()
+  tibble::tibble(
+    id = resp$id,
+    name = resp$name,
+    archived = resp$archived %||% FALSE
+  )
 }
 
-# usethis::use_test("project_create") # nolint
+# usethis::use_test("project_create")  # nolint

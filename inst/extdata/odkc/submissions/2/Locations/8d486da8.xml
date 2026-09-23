@@ -1,0 +1,25 @@
+<data xmlns:jr="http://openrosa.org/javarosa" id="Locations">
+          <meta>
+            <instanceID>uuid:8d486da8-7ee8-47ed-862f-e6b34b30dce0</instanceID>
+          </meta>
+          <device_id>ruodk.getodk.cloud:bZu5sekpCEUjblbd</device_id>
+          <start_time>2023-12-03T15:11:22.382+08:00</start_time>
+          <username>username not found</username>
+          <subscriber_id>subscriberid not found</subscriber_id>
+          <point>
+            <location_point_gps>-32.084927 115.794777 0 13917</location_point_gps>
+            <location_point_map>-32.084927 115.794777 0 13917</location_point_map>
+            <location_point_manual>-32.084927 115.794777 0 13917</location_point_manual>
+          </point>
+          <path>
+            <location_path_gps>-26.104271 -243.158621 0 0;-27.477207 -243.506363 0 0;-27.075787 -242.578943 0 0;-32.084927 115.794777 0 13917</location_path_gps>
+            <location_path_map>-30.818466 116.825807 0 0;-30.834976 116.854683 0 0;-30.833694 116.837528 0 0;-30.830377 116.828768 0 0</location_path_map>
+            <location_path_manual>-32.084043 115.79233 0 0;-32.083389 115.795466 0 0;-32.08446 115.794524 0 0;-32.084669 115.793805 0 0;-32.084823 115.793268 0 0</location_path_manual>
+          </path>
+          <shape>
+            <location_shape_gps>-32.085883 115.790741 0 0;-32.083884 115.79375 0 0;-32.085647 115.793774 0 0;-32.085902 115.792797 0 0;-32.085883 115.790741 0 0</location_shape_gps>
+            <location_shape_map>-32.086331 115.790956 0 0;-32.083531 115.797442 0 0;-32.086907 115.795704 0 0;-32.086331 115.790956 0 0</location_shape_map>
+            <location_shape_manual>-32.085041 115.791042 0 0;-32.086096 115.787437 0 0;-32.086236 115.790158 0 0;-32.085041 115.791042 0 0</location_shape_manual>
+          </shape>
+          <end_time>2023-12-03T15:15:05.516+08:00</end_time>
+        </data>

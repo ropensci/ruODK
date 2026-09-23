@@ -1,0 +1,168 @@
+{
+  "1691557455419.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678074209.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_forest",
+    "instance_id": "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9"
+  },
+  "1691557501897.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678107041.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_forest",
+    "instance_id": "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9"
+  },
+  "1691557557243.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678512568.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_forest",
+    "instance_id": "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9"
+  },
+  "1691557629931.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678535420.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_forest",
+    "instance_id": "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9"
+  },
+  "1691557709643.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678592627.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_forest",
+    "instance_id": "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9"
+  },
+  "1691557774426.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678074209.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_forest",
+    "instance_id": "uuid:c10f1716-2505-4093-a6d9-876d4db55ee9"
+  },
+  "1691557833323.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678107041.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_heath",
+    "instance_id": "uuid:a03d2dea-718f-4416-b936-92845d40811b"
+  },
+  "1691557864457.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678512568.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_heath",
+    "instance_id": "uuid:a03d2dea-718f-4416-b936-92845d40811b"
+  },
+  "1691557927315.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678535420.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_heath",
+    "instance_id": "uuid:a03d2dea-718f-4416-b936-92845d40811b"
+  },
+  "1691557966768.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678592627.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "burn_grading_heath",
+    "instance_id": "uuid:a03d2dea-718f-4416-b936-92845d40811b"
+  },
+  "1701678074209.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678074209.jpg",
+    "exact_name_match": true,
+    "pid": 1,
+    "fid": "Flora-Quadrat-04",
+    "instance_id": "uuid:46d3939a-8bc5-4084-9154-d043bc4d3239"
+  },
+  "1701678107041.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678107041.jpg",
+    "exact_name_match": true,
+    "pid": 1,
+    "fid": "Flora-Quadrat-04",
+    "instance_id": "uuid:46d3939a-8bc5-4084-9154-d043bc4d3239"
+  },
+  "1701678512568.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678512568.jpg",
+    "exact_name_match": true,
+    "pid": 1,
+    "fid": "Flora-Quadrat-04",
+    "instance_id": "uuid:46d3939a-8bc5-4084-9154-d043bc4d3239"
+  },
+  "1701678535420.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678535420.jpg",
+    "exact_name_match": true,
+    "pid": 1,
+    "fid": "Flora-Quadrat-04",
+    "instance_id": "uuid:46d3939a-8bc5-4084-9154-d043bc4d3239"
+  },
+  "1701678592627.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678592627.jpg",
+    "exact_name_match": true,
+    "pid": 1,
+    "fid": "Flora-Quadrat-04",
+    "instance_id": "uuid:46d3939a-8bc5-4084-9154-d043bc4d3239"
+  },
+  "1604290006239-15_41_29.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678074209.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "Flora-Quadrat-04-att",
+    "instance_id": "uuid:518399e4-c075-438d-93b3-b78078c05030"
+  },
+  "1604290049411-15_42_9.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678107041.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "Flora-Quadrat-04-att",
+    "instance_id": "uuid:518399e4-c075-438d-93b3-b78078c05030"
+  },
+  "1604290499008-15_44_12.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678512568.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "Flora-Quadrat-04-att",
+    "instance_id": "uuid:518399e4-c075-438d-93b3-b78078c05030"
+  },
+  "1701678871896.jpg": {
+    "source": "media",
+    "path": "vignettes/media/1701678535420.jpg",
+    "exact_name_match": false,
+    "pid": 1,
+    "fid": "I8n_no_lang_choicefilter",
+    "instance_id": "uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654"
+  },
+  "1701678899551.bin": {
+    "source": "fixture",
+    "path": "inst/extdata/odkc/submissions/1/I8n_no_lang_choicefilter/e0d018fd/1701678899551.bin",
+    "pid": 1,
+    "fid": "I8n_no_lang_choicefilter",
+    "instance_id": "uuid:e0d018fd-cc78-461f-aad8-1fae36cfc654"
+  },
+  "submission.xml.enc": {
+    "source": "fixture",
+    "path": "inst/extdata/odkc/submissions/2/Locations/5ba50a14/submission.xml.enc",
+    "pid": 2,
+    "fid": "Locations",
+    "instance_id": "uuid:5ba50a14-2eb3-41ce-840a-fb72f8a22ce4"
+  }
+}

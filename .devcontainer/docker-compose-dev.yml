@@ -1,0 +1,34 @@
+# ODK Central test stack plus the ruODK dev workspace. See issue #170.
+#
+# Used by devcontainer.json together with docker-compose.yml:
+#   dockerComposeFile: ["docker-compose.yml", "docker-compose-dev.yml"]
+# Compose merges the two files. CI uses docker-compose.yml on its own, because
+# R runs on the runner there instead of in a container.
+
+services:
+  app:
+    build:
+      # .devcontainer/Dockerfile, i.e. the rocker r-ver image ruODK already
+      # used for its devcontainer before this stack existed.
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    command: sleep infinity
+    volumes:
+      # Only this repo at its workspace path. Mounting the parent would leak
+      # sibling checkouts into the container.
+      - ..:/workspaces/ruODK:cached
+
+    # Share nginx's network namespace, not the backend's. The backend listens
+    # on plain HTTP and refuses HTTP Basic auth over it
+    # (getodk/central-backend lib/http/preprocessors.js -> httpsOnly); nginx is
+    # the TLS terminator. Sharing its namespace makes https://localhost:8383
+    # resolve to nginx here and, via the published port, on the GitHub Actions
+    # runner. One URL in both places, and no Codespaces hostname involved.
+    network_mode: service:nginx
+
+    depends_on:
+      nginx:
+        condition: service_healthy
+
+    security_opt:
+      - apparmor=docker-default

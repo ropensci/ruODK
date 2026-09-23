@@ -10,8 +10,8 @@ test_that(
     # nolint end
 
     # Parsed, rectangled, GeoJSON, geopoints handled: geo_gj
-    geo_fields <- geo_fs %>%
-      dplyr::filter(type == "geopoint") %>%
+    geo_fields <- geo_fs |>
+      dplyr::filter(type == "geopoint") |>
       magrittr::extract2("ruodk_name")
 
 
@@ -76,8 +76,8 @@ test_that(
 
     # Parsed, rectangled, WKT, geopoints handled: geo_wkt
 
-    geo_fields <- geo_fs %>%
-      dplyr::filter(type == "geopoint") %>%
+    geo_fields <- geo_fs |>
+      dplyr::filter(type == "geopoint") |>
       magrittr::extract2("ruodk_name")
 
     for (i in seq_len(length(geo_fields))) {
@@ -127,7 +127,10 @@ test_that("handle_ru_* parses geotypes", {
   data("geo_wkt_raw") # parse F, wkt T
   data("geo_wkt") # parse T, wkt T
 
+  t <- withr::local_tempdir()
+
   geo_gj_raw_fresh <- odata_submission_get(
+    local_dir = t,
     pid = get_test_pid(),
     fid = get_test_fid_wkt(),
     url = get_test_url(),
@@ -138,6 +141,7 @@ test_that("handle_ru_* parses geotypes", {
     wkt = FALSE
   )
   geo_gj_fresh <- odata_submission_get(
+    local_dir = t,
     pid = get_test_pid(),
     fid = get_test_fid_wkt(),
     url = get_test_url(),
@@ -148,6 +152,7 @@ test_that("handle_ru_* parses geotypes", {
     wkt = FALSE
   )
   geo_wkt_raw_fresh <- odata_submission_get(
+    local_dir = t,
     pid = get_test_pid(),
     fid = get_test_fid_wkt(),
     url = get_test_url(),
@@ -158,6 +163,7 @@ test_that("handle_ru_* parses geotypes", {
     wkt = TRUE
   )
   geo_wkt_fresh <- odata_submission_get(
+    local_dir = t,
     pid = get_test_pid(),
     fid = get_test_fid_wkt(),
     url = get_test_url(),
@@ -168,8 +174,36 @@ test_that("handle_ru_* parses geotypes", {
     wkt = TRUE
   )
 
-  testthat::expect_equal(geo_gj_raw, geo_gj_raw_fresh)
-  testthat::expect_equal(geo_gj, geo_gj_fresh)
+  # Server-specific and ingest-time metadata cannot be reproduced by seeding
+  # fixtures into a local stack, so exclude it from the comparison:
+  #   * `system_*` / `__system`: submitter, device and timestamps stamped by
+  #     ODK Central at POST time; they differ on every re-ingest.
+  #   * `@odata.context` / `odata_context`: the OData service root URL, which
+  #     embeds the hostname of whichever ODK Central produced the response.
+  # This test is about geotype parsing, so compare the form data only.
+  drop_server_meta <- function(x) {
+    if (is.data.frame(x)) {
+      keep <- !grepl("^system_|^@?odata[._]context$", names(x))
+      return(x[, keep, drop = FALSE])
+    }
+    if (is.list(x)) {
+      nm <- names(x)
+      if (!is.null(nm)) {
+        keep <- !grepl("^__system$|^@?odata[._]context$", nm)
+        x <- x[keep]
+        names(x) <- nm[keep]
+      }
+      return(lapply(x, drop_server_meta))
+    }
+    x
+  }
+
+  testthat::expect_equal(
+    drop_server_meta(geo_gj_raw), drop_server_meta(geo_gj_raw_fresh)
+  )
+  testthat::expect_equal(
+    drop_server_meta(geo_gj), drop_server_meta(geo_gj_fresh)
+  )
   testthat::expect_equal(
     geo_wkt_raw$value[[1]]$meta$instanceID,
     geo_wkt_raw_fresh$value[[1]]$meta$instanceID
