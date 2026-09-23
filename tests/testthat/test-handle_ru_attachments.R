@@ -7,8 +7,7 @@ test_that("handle_ru_attachments downloads files", {
   data("fq_raw")
   data("fq_form_schema")
 
-  t <- tempdir()
-  fs::dir_ls(t) %>% fs::file_delete()
+  t <- withr::local_tempdir()
 
   fq_with_att <- fq_raw %>%
     ruODK::odata_submission_rectangle() %>%
@@ -37,8 +36,7 @@ test_that("handle_ru_attachments downloads files from subtables", {
   data("fq_raw_taxa")
   data("fq_form_schema")
 
-  t <- tempdir()
-  fs::dir_ls(t) %>% fs::file_delete()
+  t <- withr::local_tempdir()
 
   fq_with_att <- fq_raw_taxa %>%
     ruODK::odata_submission_rectangle() %>%

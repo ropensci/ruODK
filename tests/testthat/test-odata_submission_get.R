@@ -181,8 +181,7 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
     message = "Test server not configured"
   )
 
-  t <- tempdir()
-  fs::dir_ls(t) %>% fs::file_delete()
+  t <- withr::local_tempdir()
   se <- odata_submission_get(
     local_dir = t,
     pid = Sys.getenv("ODKC_TEST_PID_ENC"),

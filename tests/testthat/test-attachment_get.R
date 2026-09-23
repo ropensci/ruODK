@@ -130,9 +130,8 @@ test_that("get_one_attachment handles repeat download and NA filenames", {
     message = "Test server not configured"
   )
 
-  t <- tempdir()
+  t <- withr::local_tempdir()
   testthat::expect_true(fs::dir_exists(t))
-  fs::dir_ls(t) |> fs::file_delete()
 
   url <- get_test_url()
   un <- get_test_un()
