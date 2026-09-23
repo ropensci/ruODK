@@ -22,8 +22,8 @@ config/audits/backup largely missing).
    applicable, then add the standard ruODK structure: lifecycle badge,
    `man-roxygen` fragments, `@return`, `@family`, `@seealso` link to the
    exact docs anchor (inside `# nolint start/end`), `\dontrun{}` example.
-   Any extra explanation uses Simple Technical English (ASD-STE100) 
-   and is clearly separated from the ODK wording. 
+   Any extra explanation uses Simple Technical English (ASD-STE100)
+   and is clearly separated from the ODK wording.
    Never prefix with "In plain language:".
 2. **Tests mirror the R function.** `tests/testthat/test-<name>.R` covers
    all feasible use cases and edge cases: happy path against the local
