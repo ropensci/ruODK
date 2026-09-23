@@ -60,6 +60,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Validate ODK Central images
+        # Fail fast with a clear step name if a tag is wrong (e.g. the bare
+        # semver "2026.3.0" instead of the ghcr.io tag "v2026.3.0" yields
+        # "manifest unknown"), instead of surfacing it inside `up --wait`.
+        run: |
+          docker compose --env-file .devcontainer/.env \
+            -f .devcontainer/docker-compose.yml config --images
+          docker compose --env-file .devcontainer/.env \
+            -f .devcontainer/docker-compose.yml pull
+
       - name: Start ODK Central
         run: |
           docker compose --env-file .devcontainer/.env \
