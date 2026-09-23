@@ -18,10 +18,10 @@ ru_msg_abort("This is an error, abort.")
 }
 }
 \seealso{
-Other messaging: 
-\code{\link{ru_msg_info}()},
-\code{\link{ru_msg_noop}()},
-\code{\link{ru_msg_success}()},
-\code{\link{ru_msg_warn}()}
+Other messaging:
+\code{\link[=ru_msg_info]{ru_msg_info()}},
+\code{\link[=ru_msg_noop]{ru_msg_noop()}},
+\code{\link[=ru_msg_success]{ru_msg_success()}},
+\code{\link[=ru_msg_warn]{ru_msg_warn()}}
 }
 \concept{messaging}

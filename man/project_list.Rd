@@ -82,8 +82,8 @@ names(pl)
 \seealso{
 \url{https://docs.getodk.org/central-api-project-management/#listing-projects}
 
-Other project-management: 
-\code{\link{project_create}()},
-\code{\link{project_detail}()}
+Other project-management:
+\code{\link[=project_create]{project_create()}},
+\code{\link[=project_detail]{project_detail()}}
 }
 \concept{project-management}

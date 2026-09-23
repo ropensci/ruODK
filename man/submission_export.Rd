@@ -180,20 +180,20 @@ sub \%>\% knitr::kable(.)
 \seealso{
 \url{https://docs.getodk.org/central-api-submission-management/#exporting-form-submissions-to-csv}
 
-Other submission-management: 
-\code{\link{attachment_delete}()},
-\code{\link{attachment_list}()},
-\code{\link{attachment_upload}()},
-\code{\link{encryption_key_list}()},
-\code{\link{submission_audit_get}()},
-\code{\link{submission_create}()},
-\code{\link{submission_delete}()},
-\code{\link{submission_detail}()},
-\code{\link{submission_get}()},
-\code{\link{submission_list}()},
-\code{\link{submission_restore}()},
-\code{\link{submission_review}()},
-\code{\link{submission_submitters}()},
-\code{\link{submission_update}()}
+Other submission-management:
+\code{\link[=attachment_delete]{attachment_delete()}},
+\code{\link[=attachment_list]{attachment_list()}},
+\code{\link[=attachment_upload]{attachment_upload()}},
+\code{\link[=encryption_key_list]{encryption_key_list()}},
+\code{\link[=submission_audit_get]{submission_audit_get()}},
+\code{\link[=submission_create]{submission_create()}},
+\code{\link[=submission_delete]{submission_delete()}},
+\code{\link[=submission_detail]{submission_detail()}},
+\code{\link[=submission_get]{submission_get()}},
+\code{\link[=submission_list]{submission_list()}},
+\code{\link[=submission_restore]{submission_restore()}},
+\code{\link[=submission_review]{submission_review()}},
+\code{\link[=submission_submitters]{submission_submitters()}},
+\code{\link[=submission_update]{submission_update()}}
 }
 \concept{submission-management}

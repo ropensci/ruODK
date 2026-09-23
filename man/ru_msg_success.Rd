@@ -21,10 +21,10 @@ verbosity can be set globally or per function.}
 ru_msg_success("This is a success message.")
 }
 \seealso{
-Other messaging: 
-\code{\link{ru_msg_abort}()},
-\code{\link{ru_msg_info}()},
-\code{\link{ru_msg_noop}()},
-\code{\link{ru_msg_warn}()}
+Other messaging:
+\code{\link[=ru_msg_abort]{ru_msg_abort()}},
+\code{\link[=ru_msg_info]{ru_msg_info()}},
+\code{\link[=ru_msg_noop]{ru_msg_noop()}},
+\code{\link[=ru_msg_warn]{ru_msg_warn()}}
 }
 \concept{messaging}

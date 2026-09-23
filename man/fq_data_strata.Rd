@@ -33,7 +33,7 @@ The forms used to capture this data are development versions of real-world
 forms.
 }
 \seealso{
-Other included: 
+Other included:
 \code{\link{fq_attachments}},
 \code{\link{fq_data}},
 \code{\link{fq_data_taxa}},

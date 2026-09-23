@@ -23,10 +23,10 @@ ru_msg_warn("This is a warning.")
 }
 }
 \seealso{
-Other messaging: 
-\code{\link{ru_msg_abort}()},
-\code{\link{ru_msg_info}()},
-\code{\link{ru_msg_noop}()},
-\code{\link{ru_msg_success}()}
+Other messaging:
+\code{\link[=ru_msg_abort]{ru_msg_abort()}},
+\code{\link[=ru_msg_info]{ru_msg_info()}},
+\code{\link[=ru_msg_noop]{ru_msg_noop()}},
+\code{\link[=ru_msg_success]{ru_msg_success()}}
 }
 \concept{messaging}

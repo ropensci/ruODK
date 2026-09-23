@@ -31,7 +31,7 @@ credentials to an ODK Central server. The test suite ensures that the
 "canned" data is identical to the "live" data.
 }
 \seealso{
-Other included: 
+Other included:
 \code{\link{fq_attachments}},
 \code{\link{fq_data}},
 \code{\link{fq_data_strata}},

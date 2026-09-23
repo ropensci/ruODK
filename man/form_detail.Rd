@@ -86,12 +86,12 @@ names(f)
 \seealso{
 \url{https://docs.getodk.org/central-api-form-management/#getting-form-details}
 
-Other form-management: 
-\code{\link{form_create}()},
-\code{\link{form_list}()},
-\code{\link{form_schema}()},
-\code{\link{form_schema_ext}()},
-\code{\link{form_update}()},
-\code{\link{form_xml}()}
+Other form-management:
+\code{\link[=form_create]{form_create()}},
+\code{\link[=form_list]{form_list()}},
+\code{\link[=form_schema]{form_schema()}},
+\code{\link[=form_schema_ext]{form_schema_ext()}},
+\code{\link[=form_update]{form_update()}},
+\code{\link[=form_xml]{form_xml()}}
 }
 \concept{form-management}

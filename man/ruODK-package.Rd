@@ -26,6 +26,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Florian W. Mayer \email{Florian.Mayer@dpc.wa.gov.au} (\href{https://orcid.org/0000-0003-4269-4242}{ORCID})
 
+Authors:
+\itemize{
+  \item Florian W. Mayer \email{Florian.Mayer@dpc.wa.gov.au} (\href{https://orcid.org/0000-0003-4269-4242}{ORCID})
+}
+
 Other contributors:
 \itemize{
   \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) [reviewer]

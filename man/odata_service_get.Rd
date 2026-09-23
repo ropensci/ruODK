@@ -73,8 +73,8 @@ svc
 \seealso{
 \url{https://docs.getodk.org/central-api-odata-endpoints/#service-document}
 
-Other odata-api: 
-\code{\link{odata_metadata_get}()},
-\code{\link{odata_submission_get}()}
+Other odata-api:
+\code{\link[=odata_metadata_get]{odata_metadata_get()}},
+\code{\link[=odata_submission_get]{odata_submission_get()}}
 }
 \concept{odata-api}

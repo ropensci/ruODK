@@ -21,7 +21,7 @@ fq_submissions
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \seealso{
-Other included: 
+Other included:
 \code{\link{fq_attachments}},
 \code{\link{fq_data}},
 \code{\link{fq_data_strata}},
