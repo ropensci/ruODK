@@ -1,5 +1,6 @@
 # ruODK (development version)
 ## Major changes
+* `assignment_list()` lists server-wide Role Assignments.
 * `attachment_delete()` clears the uploaded bytes of a Submission attachment.
 * `attachment_upload()` uploads a local file to an expected Submission
   attachment slot.
@@ -14,6 +15,7 @@
 * `entitylist_property_create()` adds a Property to an Entity List.
 * `entitylist_property_delete()` deletes a Property (Central 2026.1+).
 * `entitylist_trash_download()` exports Entities of a deleted Entity List.
+* `form_assignment_list()` summarizes Form Assignments of a Project.
 * `form_attachment_download()` downloads one Form attachment.
 * `form_attachment_list()` lists the expected attachments of a Form.
 * `form_create()` creates a new Form from XForms XML or an XLSForm file.
@@ -41,6 +43,7 @@
 * `form_version_xml()` returns the XML of one published Form version.
 * `form_version_xlsx()` downloads a version's XLSForm spreadsheet.
 * `form_xlsx()` downloads the XLSForm spreadsheet of a Form.
+* `project_assignment_list()` lists Assignments of a Project.
 * `project_delete()` deletes a Project.
 * `project_replace()` replaces top-level Project metadata.
 * `public_link_create()` creates a Public Access Link for a Form.
@@ -48,6 +51,8 @@
 * `public_link_detail()` shows one Public Access Link.
 * `public_link_list()` lists the Public Access Links of a Form.
 * `public_link_update()` sets Actor Property values on a Public Access Link.
+* `role_detail()` shows one Role by ID or system name.
+* `role_list()` lists all Roles.
 * `project_update()` modifies Project name, description and archived flag.
 * `submission_changes()` shows field changes between Submission versions.
 * `submission_comment_create()` posts a comment to a Submission.
@@ -76,6 +81,7 @@
 * `submission_version_detail()` shows one Submission version.
 * `submission_version_geojson()` returns the GeoJSON of one version.
 * `submission_versions()` lists all versions of a Submission.
+* `user_detail()` shows one User, defaulting to the authenticated User.
 
 # ruODK 1.5.2
 ## Minor changes
