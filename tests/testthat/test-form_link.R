@@ -13,6 +13,10 @@ test_that("form_link finds a Form by Link ID", {
   )
 
   fl <- form_list(pid = get_test_pid())
+  testthat::skip_if_not(
+    any(!is.na(fl$enketo_id)),
+    message = "Enketo not configured, no enketo_id to look up"
+  )
   enketo_id <- fl$enketo_id[!is.na(fl$enketo_id)][[1]]
   fid <- fl$fid[!is.na(fl$enketo_id)][[1]]
 
