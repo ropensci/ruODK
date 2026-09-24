@@ -52,8 +52,12 @@
 * `submission_geojson()` returns the GeoJSON of one Submission.
 * `submission_create()` creates a new Submission from Submission XML.
 * `submission_delete()` soft-deletes a Submission (30-day restore window).
+* `submission_draft_attachment_delete()` clears a Draft Submission attachment.
+* `submission_draft_attachment_download()` downloads a Draft attachment.
 * `submission_draft_attachment_list()` lists a Draft Submission's attachments.
+* `submission_draft_attachment_upload()` uploads a Draft attachment.
 * `submission_draft_create()` creates a Submission on a Draft Form.
+* `submission_draft_export()` downloads the Draft Submissions ZIP export.
 * `submission_draft_get()` downloads one Draft Submission.
 * `submission_draft_keys()` lists encryption keys of Draft Submissions.
 * `submission_draft_list()` lists Submissions of a Draft Form.
