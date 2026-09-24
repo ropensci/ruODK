@@ -87,3 +87,32 @@ persist_renv_var "CURL_CA_BUNDLE" "${CA_BUNDLE}" ~/.Renviron
 
 echo "postAttach: done. ruODK now targets ${ODKC_TEST_URL}."
 echo "postAttach: run  devtools::test()  to check the suite."
+
+# 4. opencode CLI for agentic coding inside the container. Installed per user
+#    into ~/.opencode/bin and skipped when already on PATH, so re-attaching
+#    is cheap.
+if ! command -v opencode >/dev/null 2>&1; then
+  echo "postAttach: installing opencode.."
+  curl -fsSL https://opencode.ai/install | bash
+fi
+if [[ ":${PATH}:" != *":${HOME}/.opencode/bin:"* ]]; then
+  export PATH="${HOME}/.opencode/bin:${PATH}"
+fi
+if ! grep -q '\.opencode/bin' ~/.bashrc 2>/dev/null; then
+  printf 'export PATH="$HOME/.opencode/bin:$PATH"\n' >>~/.bashrc
+fi
+if ! opencode --version >/dev/null 2>&1; then
+  echo "postAttach: WARNING opencode is not runnable." >&2
+fi
+
+# 5. Personal OpenCode Zen token. opencode reads OPENCODE_API_KEY straight
+#    from the environment, so exporting it is the whole configuration.
+#    Provide it as a PERSONAL Codespaces secret
+#    (github.com/settings/codespaces, scoped to ropensci/ruODK), never as a
+#    repository secret: anyone opening this repo as a codespace would
+#    otherwise share your billed token. Without the secret this step is a
+#    silent no-op and opencode stays unconfigured for that user.
+if [ -n "${OPENCODE_API_KEY:-}" ]; then
+  persist_shell_var "OPENCODE_API_KEY" "${OPENCODE_API_KEY}" ~/.bashrc
+  echo "postAttach: OPENCODE_API_KEY found, exported for future shells."
+fi
