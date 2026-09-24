@@ -3,7 +3,12 @@
 * `attachment_delete()` clears the uploaded bytes of a Submission attachment.
 * `attachment_upload()` uploads a local file to an expected Submission
   attachment slot.
-* `entitylist_create()` creates a new Entity List (Dataset) in a Project.
+* `entity_creators()` lists the Actors that created Entities in an Entity List.
+* `entity_geodata()` returns Entity geodata as GeoJSON.
+* `entity_restore()` restores a deleted Entity.
+* `entitylist_delete()` deletes an Entity List (Central 2026.1+).
+* `entitylist_property_create()` adds a Property to an Entity List.
+* `entitylist_property_delete()` deletes a Property (Central 2026.1+).
 * `form_create()` creates a new Form from XForms XML or an XLSForm file.
 * `form_update()` modifies a Form's lifecycle state.
 * `project_delete()` deletes a Project.
