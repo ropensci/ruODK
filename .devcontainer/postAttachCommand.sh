@@ -105,9 +105,12 @@ if ! opencode --version >/dev/null 2>&1; then
   echo "postAttach: WARNING opencode is not runnable." >&2
 fi
 
-# 5. Personal OpenCode Zen token. opencode reads OPENCODE_API_KEY straight
-#    from the environment, so exporting it is the whole configuration.
-#    Provide it as a PERSONAL Codespaces secret
+# 5. Personal OpenCode Go token. Both the opencode (Zen) and opencode-go
+#    providers read OPENCODE_API_KEY straight from the environment, so
+#    exporting it is the whole authentication. The config below additionally
+#    defaults opencode to a Go model; change it with /models or by editing
+#    ~/.config/opencode/opencode.json (never overwritten once present).
+#    Provide the key as a PERSONAL Codespaces secret
 #    (github.com/settings/codespaces, scoped to ropensci/ruODK), never as a
 #    repository secret: anyone opening this repo as a codespace would
 #    otherwise share your billed token. Without the secret this step is a
@@ -115,4 +118,10 @@ fi
 if [ -n "${OPENCODE_API_KEY:-}" ]; then
   persist_shell_var "OPENCODE_API_KEY" "${OPENCODE_API_KEY}" ~/.bashrc
   echo "postAttach: OPENCODE_API_KEY found, exported for future shells."
+  if [ ! -f ~/.config/opencode/opencode.json ]; then
+    mkdir -p ~/.config/opencode
+    printf '%s\n' '{"$schema":"https://opencode.ai/config.json","model":"opencode-go/muse-spark-1.3-contributor"}' \
+      >~/.config/opencode/opencode.json
+    echo "postAttach: opencode default model set to Go (muse-spark-1.3-contributor)."
+  fi
 fi

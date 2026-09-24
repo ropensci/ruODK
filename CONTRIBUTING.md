@@ -226,10 +226,14 @@ Two details cost time if you miss them:
 If you open the repository in a dev container or in GitHub Codespaces, step 3
 above runs for you. The dev container starts the same stack and writes
 `.Renviron` for you. It also installs the `opencode` CLI. To let `opencode`
-use your OpenCode Zen token there, add `OPENCODE_API_KEY` as a **personal**
-Codespaces secret (`github.com/settings/codespaces`, scoped to this repo),
-never as a repository secret: the dev container only picks the token up when
-it is present in your own environment, so other contributors are unaffected.
+use your OpenCode Go subscription there, add `OPENCODE_API_KEY` as a
+**personal** Codespaces secret (`github.com/settings/codespaces`, scoped to
+this repo), never as a repository secret: the dev container only picks the
+token up when it is present in your own environment, so other contributors
+are unaffected. With the secret present the container also defaults
+`opencode` to the Go model `opencode-go/muse-spark-1.3-contributor` (unless
+you already have `~/.config/opencode/opencode.json`); pick another model
+with `/models`.
 
 To work against the shared `ruodk.getodk.cloud` instance instead, request an
 account with an [account request issue](https://github.com/ropensci/ruODK/issues/new/choose)
