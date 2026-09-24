@@ -40,7 +40,11 @@
 
     "forwardPorts": [8383],
 
-    "onCreateCommand": "pre-commit install && pre-commit run",
+    // Unset CURL_CA_BUNDLE here: remoteEnv points it at the merged bundle,
+    // which postAttachCommand.sh has not built yet on first create, and pip
+    // (via requests) hard-fails on a nonexistent CA path while installing
+    // hook environments. Nothing at onCreate time talks to the local stack.
+    "onCreateCommand": "env -u CURL_CA_BUNDLE pre-commit install && env -u CURL_CA_BUNDLE pre-commit run",
     "postAttachCommand": ".devcontainer/postAttachCommand.sh",
 
     "customizations": {
