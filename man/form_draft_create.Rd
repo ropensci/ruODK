@@ -114,6 +114,8 @@ form_draft_create(fid = fl$fid[[1]])
 \url{https://docs.getodk.org/central-api-form-management/#creating-a-draft-form}
 
 Other form-management:
+\code{\link[=form_attachment_download]{form_attachment_download()}},
+\code{\link[=form_attachment_list]{form_attachment_list()}},
 \code{\link[=form_create]{form_create()}},
 \code{\link[=form_detail]{form_detail()}},
 \code{\link[=form_draft_delete]{form_draft_delete()}},
@@ -129,6 +131,11 @@ Other form-management:
 \code{\link[=form_version_list]{form_version_list()}},
 \code{\link[=form_version_xml]{form_version_xml()}},
 \code{\link[=form_xlsx]{form_xlsx()}},
-\code{\link[=form_xml]{form_xml()}}
+\code{\link[=form_xml]{form_xml()}},
+\code{\link[=public_link_create]{public_link_create()}},
+\code{\link[=public_link_delete]{public_link_delete()}},
+\code{\link[=public_link_detail]{public_link_detail()}},
+\code{\link[=public_link_list]{public_link_list()}},
+\code{\link[=public_link_update]{public_link_update()}}
 }
 \concept{form-management}

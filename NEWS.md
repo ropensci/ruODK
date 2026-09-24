@@ -9,6 +9,8 @@
 * `entitylist_delete()` deletes an Entity List (Central 2026.1+).
 * `entitylist_property_create()` adds a Property to an Entity List.
 * `entitylist_property_delete()` deletes a Property (Central 2026.1+).
+* `form_attachment_download()` downloads one Form attachment.
+* `form_attachment_list()` lists the expected attachments of a Form.
 * `form_create()` creates a new Form from XForms XML or an XLSForm file.
 * `form_draft_create()` creates or replaces a Draft Form.
 * `form_draft_delete()` deletes a Draft Form.
@@ -24,6 +26,11 @@
 * `form_xlsx()` downloads the XLSForm spreadsheet of a Form.
 * `project_delete()` deletes a Project.
 * `project_replace()` replaces top-level Project metadata.
+* `public_link_create()` creates a Public Access Link for a Form.
+* `public_link_delete()` deletes a Public Access Link.
+* `public_link_detail()` shows one Public Access Link.
+* `public_link_list()` lists the Public Access Links of a Form.
+* `public_link_update()` sets Actor Property values on a Public Access Link.
 * `project_update()` modifies Project name, description and archived flag.
 * `submission_changes()` shows field changes between Submission versions.
 * `submission_comment_create()` posts a comment to a Submission.
