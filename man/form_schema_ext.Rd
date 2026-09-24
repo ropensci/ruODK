@@ -181,8 +181,13 @@ Other form-management:
 \code{\link[=form_draft_publish]{form_draft_publish()}},
 \code{\link[=form_draft_xml]{form_draft_xml()}},
 \code{\link[=form_list]{form_list()}},
+\code{\link[=form_restore]{form_restore()}},
 \code{\link[=form_schema]{form_schema()}},
 \code{\link[=form_update]{form_update()}},
+\code{\link[=form_version_detail]{form_version_detail()}},
+\code{\link[=form_version_list]{form_version_list()}},
+\code{\link[=form_version_xml]{form_version_xml()}},
+\code{\link[=form_xlsx]{form_xlsx()}},
 \code{\link[=form_xml]{form_xml()}}
 }
 \concept{form-management}

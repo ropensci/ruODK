@@ -6,6 +6,7 @@
 \usage{
 form_list(
   pid = get_default_pid(),
+  deleted = FALSE,
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
@@ -22,6 +23,11 @@ Default: \code{\link{get_default_pid}}.
 Set default \code{pid} through \code{ru_setup(pid="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{deleted}{(lgl) If \code{TRUE}, list only deleted Forms with their
+numeric form IDs, which can be used to restore a deleted Form with
+\code{form_restore()}.
+Default: \code{FALSE}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
@@ -64,6 +70,8 @@ Column names are sanitized into \code{snake_case}.
 Nested columns (review start and created by) are flattened and prefixed.
 The column \code{xml_form_id} is replicated as \code{fid} according to \code{ruODK} naming
 standards.
+With \code{deleted = TRUE}, the tibble holds one row per deleted Form with
+its numeric form ID.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
@@ -101,9 +109,14 @@ Other form-management:
 \code{\link[=form_draft_detail]{form_draft_detail()}},
 \code{\link[=form_draft_publish]{form_draft_publish()}},
 \code{\link[=form_draft_xml]{form_draft_xml()}},
+\code{\link[=form_restore]{form_restore()}},
 \code{\link[=form_schema]{form_schema()}},
 \code{\link[=form_schema_ext]{form_schema_ext()}},
 \code{\link[=form_update]{form_update()}},
+\code{\link[=form_version_detail]{form_version_detail()}},
+\code{\link[=form_version_list]{form_version_list()}},
+\code{\link[=form_version_xml]{form_version_xml()}},
+\code{\link[=form_xlsx]{form_xlsx()}},
 \code{\link[=form_xml]{form_xml()}}
 }
 \concept{form-management}
