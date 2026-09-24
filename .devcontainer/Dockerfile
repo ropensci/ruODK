@@ -1,4 +1,4 @@
-FROM ghcr.io/rocker-org/devcontainer/r-ver:4.2
+FROM ghcr.io/rocker-org/devcontainer/r-ver:4.6
 
 # non interactive frontend for locales
 ENV DEBIAN_FRONTEND=noninteractive
