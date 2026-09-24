@@ -1,23 +1,3 @@
-local_test_form_xml <- function(fid) {
-  paste0(
-    '<h:html xmlns="http://www.w3.org/2002/xforms" ',
-    'xmlns:h="http://www.w3.org/1999/xhtml" ',
-    'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ',
-    'xmlns:jr="http://openrosa.org/javarosa">',
-    "<h:head><h:title>ruODK test</h:title><model><instance>",
-    glue::glue('<data id="{fid}" version="1">'),
-    "<meta><instanceID/></meta><name/></data>",
-    "</instance>",
-    '<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" ',
-    'calculate="concat(\'uuid:\', uuid())"/>',
-    '<bind nodeset="/data/name" type="string"/>',
-    "</model></h:head>",
-    "<h:body>",
-    '<input ref="/data/name"><label>What is your name?</label></input>',
-    "</h:body></h:html>"
-  )
-}
-
 test_that("form_create publishes a new Form from XML", {
   skip_if(
     Sys.getenv("ODKC_TEST_URL") == "",
@@ -37,7 +17,7 @@ test_that("form_create publishes a new Form from XML", {
   ) |>
     as.character()
 
-  f <- form_create(xml = local_test_form_xml(fid), publish = TRUE)
+  f <- form_create(xml = ru_test_form_xml(fid), publish = TRUE)
 
   withr::defer(
     httr::DELETE(
@@ -73,7 +53,7 @@ test_that("form_create uploads a new Form from an XML file", {
   ) |>
     as.character()
   path <- withr::local_tempfile(fileext = ".xml")
-  writeLines(local_test_form_xml(fid), path)
+  writeLines(ru_test_form_xml(fid), path)
 
   f <- form_create(file = path, publish = TRUE)
 

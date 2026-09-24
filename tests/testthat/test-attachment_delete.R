@@ -1,10 +1,3 @@
-local_uuid <- function() {
-  hex <- function(n) {
-    paste(sample(c(0:9, letters[1:6]), n, replace = TRUE), collapse = "")
-  }
-  paste0("uuid:", hex(8), "-", hex(4), "-4", hex(3), "-", hex(4), "-", hex(12))
-}
-
 test_that("attachment_delete clears uploaded bytes but keeps the slot", {
   skip_if(
     Sys.getenv("ODKC_TEST_URL") == "",
@@ -24,21 +17,7 @@ test_that("attachment_delete clears uploaded bytes but keeps the slot", {
   ) |>
     as.character()
   form_create(
-    xml = paste0(
-      '<h:html xmlns="http://www.w3.org/2002/xforms" ',
-      'xmlns:h="http://www.w3.org/1999/xhtml">',
-      "<h:head><h:title>ruODK test</h:title><model><instance>",
-      glue::glue('<data id="{fid}" version="1">'),
-      "<meta><instanceID/></meta><name/><photo/></data>",
-      "</instance>",
-      '<bind nodeset="/data/name" type="string"/>',
-      '<bind nodeset="/data/photo" type="binary"/>',
-      "</model></h:head>",
-      "<h:body>",
-      '<input ref="/data/name"><label>What is your name?</label></input>',
-      '<upload ref="/data/photo"><label>Photo</label></upload>',
-      "</h:body></h:html>"
-    ),
+    xml = ru_test_form_xml(fid, photo = TRUE),
     publish = TRUE
   )
 
@@ -49,14 +28,10 @@ test_that("attachment_delete clears uploaded bytes but keeps the slot", {
     )
   )
 
-  iid <- local_uuid()
+  iid <- ru_uuid()
   submission_create(
     fid = fid,
-    xml = paste0(
-      glue::glue('<data id="{fid}" version="1">'),
-      glue::glue("<meta><instanceID>{iid}</instanceID></meta>"),
-      "<name>Jo</name><photo>photo.jpg</photo></data>"
-    )
+    xml = ru_test_submission_xml(fid, iid, photo = TRUE)
   )
 
   path <- withr::local_tempfile(fileext = ".jpg")

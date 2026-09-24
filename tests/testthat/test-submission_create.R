@@ -1,47 +1,3 @@
-local_uuid <- function() {
-  hex <- function(n) {
-    paste(sample(c(0:9, letters[1:6]), n, replace = TRUE), collapse = "")
-  }
-  paste0("uuid:", hex(8), "-", hex(4), "-4", hex(3), "-", hex(4), "-", hex(12))
-}
-
-local_write_form_xml <- function(fid) {
-  paste0(
-    '<h:html xmlns="http://www.w3.org/2002/xforms" ',
-    'xmlns:h="http://www.w3.org/1999/xhtml" ',
-    'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ',
-    'xmlns:jr="http://openrosa.org/javarosa">',
-    "<h:head><h:title>ruODK test</h:title><model><instance>",
-    glue::glue('<data id="{fid}" version="1">'),
-    "<meta><instanceID/></meta><name/><photo/></data>",
-    "</instance>",
-    '<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" ',
-    'calculate="concat(\'uuid:\', uuid())"/>',
-    '<bind nodeset="/data/name" type="string"/>',
-    '<bind nodeset="/data/photo" type="binary"/>',
-    "</model></h:head>",
-    "<h:body>",
-    '<input ref="/data/name"><label>What is your name?</label></input>',
-    '<upload ref="/data/photo" mediatype="image/*"><label>Photo</label></upload>', # nolint
-    "</h:body></h:html>"
-  )
-}
-
-local_write_submission_xml <- function(fid, iid, deprecated_id = NULL) {
-  meta <- glue::glue("<meta><instanceID>{iid}</instanceID>")
-  if (!is.null(deprecated_id)) {
-    meta <- paste0(
-      meta,
-      glue::glue("<deprecatedID>{deprecated_id}</deprecatedID>")
-    ) # nolint
-  }
-  paste0(
-    glue::glue('<data id="{fid}" version="1">'),
-    meta,
-    "</meta><name>Jo</name><photo>photo.jpg</photo></data>"
-  )
-}
-
 test_that("submission_create creates a Submission", {
   skip_if(
     Sys.getenv("ODKC_TEST_URL") == "",
@@ -60,7 +16,7 @@ test_that("submission_create creates a Submission", {
     "ruodk_subc_{format(Sys.time(), '%Y%m%d%H%M%S')}"
   ) |>
     as.character()
-  form_create(xml = local_write_form_xml(fid), publish = TRUE)
+  form_create(xml = ru_test_form_xml(fid, photo = TRUE), publish = TRUE)
 
   withr::defer(
     httr::DELETE(
@@ -69,17 +25,20 @@ test_that("submission_create creates a Submission", {
     )
   )
 
-  iid <- local_uuid()
+  iid <- ru_uuid()
   s <- submission_create(
     fid = fid,
-    xml = local_write_submission_xml(fid, iid)
+    xml = ru_test_submission_xml(fid, iid, photo = TRUE)
   )
 
   testthat::expect_equal(s$instance_id, iid)
 
   # A duplicate instanceID is rejected by Central.
   testthat::expect_error(
-    submission_create(fid = fid, xml = local_write_submission_xml(fid, iid))
+    submission_create(
+      fid = fid,
+      xml = ru_test_submission_xml(fid, iid, photo = TRUE)
+    )
   )
 
   # The new Submission is listed with the same instanceID.

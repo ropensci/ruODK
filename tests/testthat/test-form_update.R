@@ -16,13 +16,7 @@ test_that("form_update changes a Form's state", {
     "ruodk_state_{format(Sys.time(), '%Y%m%d%H%M%S')}"
   ) |>
     as.character()
-  xml <- paste0(
-    '<h:html xmlns="http://www.w3.org/2002/xforms" ',
-    'xmlns:h="http://www.w3.org/1999/xhtml">',
-    "<h:head><h:title>ruODK test</h:title><model><instance>",
-    glue::glue('<data id="{fid}"><meta><instanceID/></meta></data>'),
-    "</instance></model></h:head><h:body></h:body></h:html>"
-  )
+  xml <- ru_test_form_xml(fid)
   form_create(xml = xml, publish = TRUE)
 
   withr::defer(
