@@ -1,3 +1,93 @@
+# ruODK (development version)
+## Major changes
+* `assignment_list()` lists server-wide Role Assignments.
+* `config_public()` shows publicly accessible server configuration.
+* `attachment_delete()` clears the uploaded bytes of a Submission attachment.
+* `attachment_upload()` uploads a local file to an expected Submission
+  attachment slot.
+* `entity_bulk_delete()` soft-deletes multiple Entities at once.
+* `entity_bulk_restore()` restores multiple deleted Entities at once.
+* `entity_creators()` lists the Actors that created Entities in an Entity List.
+* `entity_geodata()` returns Entity geodata as GeoJSON.
+* `entity_geojson()` returns the GeoJSON of one Entity.
+* `entity_restore()` restores a deleted Entity.
+* `entitylist_delete()` deletes an Entity List (Central 2026.1+).
+* `entitylist_list()` gains a `deleted` flag to list deleted Entity Lists.
+* `entitylist_property_create()` adds a Property to an Entity List.
+* `entitylist_property_delete()` deletes a Property (Central 2026.1+).
+* `entitylist_trash_download()` exports Entities of a deleted Entity List.
+* `form_assignment_list()` summarizes Form Assignments of a Project.
+* `form_attachment_download()` downloads one Form attachment.
+* `form_attachment_list()` lists the expected attachments of a Form.
+* `form_create()` creates a new Form from XForms XML or an XLSForm file.
+* `form_dataset_diff()` shows Datasets affected by a Form.
+* `form_draft_attachment_delete()` clears a Draft Form attachment.
+* `form_draft_attachment_download()` downloads a Draft Form attachment.
+* `form_draft_attachment_link()` links a Dataset to a Draft attachment.
+* `form_draft_attachment_list()` lists expected Draft attachments.
+* `form_draft_attachment_upload()` uploads a Draft Form attachment.
+* `form_draft_dataset_diff()` shows pending Dataset changes of a Draft.
+* `form_draft_create()` creates or replaces a Draft Form.
+* `form_draft_delete()` deletes a Draft Form.
+* `form_draft_detail()` shows Draft Form metadata.
+* `form_draft_publish()` publishes a Draft Form.
+* `form_draft_xml()` returns the Draft Form XML.
+* `form_list()` gains a `deleted` flag to list deleted Forms for restore.
+* `form_link()` shows Form details by Form Link ID.
+* `form_restore()` restores a deleted Form by numeric ID.
+* `form_schema()` gains a `version` flag to read a published version's fields.
+* `form_update()` modifies a Form's lifecycle state.
+* `form_version_attachment_download()` downloads a version attachment.
+* `form_version_attachment_list()` lists a published version's attachments.
+* `form_version_detail()` shows one published Form version.
+* `form_version_list()` lists all published versions of a Form.
+* `form_version_xml()` returns the XML of one published Form version.
+* `form_version_xlsx()` downloads a version's XLSForm spreadsheet.
+* `form_xlsx()` downloads the XLSForm spreadsheet of a Form.
+* `project_assignment_list()` lists Assignments of a Project.
+* `project_delete()` deletes a Project.
+* `project_replace()` replaces top-level Project metadata.
+* `public_link_create()` creates a Public Access Link for a Form.
+* `public_link_delete()` deletes a Public Access Link.
+* `public_link_detail()` shows one Public Access Link.
+* `public_link_list()` lists the Public Access Links of a Form.
+* `public_link_update()` sets Actor Property values on a Public Access Link.
+* `role_detail()` shows one Role by ID or system name.
+* `role_list()` lists all Roles.
+* `project_update()` modifies Project name, description and archived flag.
+* `submission_changes()` shows field changes between Submission versions.
+* `submission_comment_create()` posts a comment to a Submission.
+* `submission_comment_list()` lists the comments of a Submission.
+* `submission_csv()` exports the root Submission table to CSV.
+* `submission_geodata()` returns Submissions geodata as GeoJSON.
+* `submission_geojson()` returns the GeoJSON of one Submission.
+* `submission_create()` creates a new Submission from Submission XML.
+* `submission_delete()` soft-deletes a Submission (30-day restore window).
+* `submission_draft_attachment_delete()` clears a Draft Submission attachment.
+* `submission_draft_attachment_download()` downloads a Draft attachment.
+* `submission_draft_attachment_list()` lists a Draft Submission's attachments.
+* `submission_draft_attachment_upload()` uploads a Draft attachment.
+* `submission_draft_create()` creates a Submission on a Draft Form.
+* `submission_draft_export()` downloads the Draft Submissions ZIP export.
+* `submission_draft_get()` downloads one Draft Submission.
+* `submission_draft_keys()` lists encryption keys of Draft Submissions.
+* `submission_draft_list()` lists Submissions of a Draft Form.
+* `submission_restore()` restores a deleted Submission.
+* `submission_review()` sets a Submission's review state.
+* `submission_submitters()` lists the Actors that submitted to a Form.
+* `submission_update()` replaces a Submission's data (new version).
+* `submission_version_attachment_delete()` clears version attachment bytes.
+* `submission_version_attachment_download()` downloads a version attachment.
+* `submission_version_attachment_list()` lists a version's attachments.
+* `submission_version_detail()` shows one Submission version.
+* `submission_version_geojson()` returns the GeoJSON of one version.
+* `submission_versions()` lists all versions of a Submission.
+* `user_detail()` shows one User, defaulting to the authenticated User.
+* `user_preference_project_delete()` deletes a project preference.
+* `user_preference_project_set()` sets a project preference.
+* `user_preference_site_delete()` deletes a sitewide preference.
+* `user_preference_site_set()` sets a sitewide preference.
+
 # ruODK 1.5.2
 ## Minor changes
 * `get_one_attachment` now follows redirects, enabling `odata_submission_get` to

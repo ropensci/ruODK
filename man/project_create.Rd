@@ -66,8 +66,11 @@ names(p)
 \seealso{
 \url{https://docs.getodk.org/central-api-project-management/#creating-a-project}
 
-Other project-management: 
-\code{\link{project_detail}()},
-\code{\link{project_list}()}
+Other project-management:
+\code{\link[=project_delete]{project_delete()}},
+\code{\link[=project_detail]{project_detail()}},
+\code{\link[=project_list]{project_list()}},
+\code{\link[=project_replace]{project_replace()}},
+\code{\link[=project_update]{project_update()}}
 }
 \concept{project-management}

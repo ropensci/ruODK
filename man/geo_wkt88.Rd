@@ -27,7 +27,7 @@ empty coordinates. ruODK has a patch to drop trailing empty coordinates.
 This dataset is used to test the patch in ruODK.
 }
 \seealso{
-Other included: 
+Other included:
 \code{\link{fq_attachments}},
 \code{\link{fq_data}},
 \code{\link{fq_data_strata}},

@@ -33,14 +33,14 @@ This function is used internally but may be useful for debugging and
 \code{\link{ruODK}} development.
 }
 \seealso{
-Other ru_settings: 
-\code{\link{odata_svc_parse}()},
-\code{\link{parse_odkc_version}()},
-\code{\link{ru_settings}()},
-\code{\link{ru_setup}()},
-\code{\link{semver_gt}()},
-\code{\link{semver_lt}()},
-\code{\link{yell_if_missing}()}
+Other ru_settings:
+\code{\link[=odata_svc_parse]{odata_svc_parse()}},
+\code{\link[=parse_odkc_version]{parse_odkc_version()}},
+\code{\link[=ru_settings]{ru_settings()}},
+\code{\link[=ru_setup]{ru_setup()}},
+\code{\link[=semver_gt]{semver_gt()}},
+\code{\link[=semver_lt]{semver_lt()}},
+\code{\link[=yell_if_missing]{yell_if_missing()}}
 }
 \concept{ru_settings}
 \keyword{internal}

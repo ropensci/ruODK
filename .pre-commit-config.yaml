@@ -26,29 +26,12 @@ repos:
       - id: detect-private-key
         name: Detect private keys
 
-  # https://lorenzwalthert.github.io/precommit/articles/available-hooks.html
-  - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3.9003
+  # Posit air R formatter (https://posit-dev.github.io/air/).
+  # Local hook so no extra hook repo is fetched; requires `air` on PATH.
+  - repo: local
     hooks:
-      - id: style-files
-        name: Style code to tidyverse conventions
-        args: [--scope=spaces]
-      - id: readme-rmd-rendered
-        name: Ensure README.md is up to date
-      - id: no-debug-statement
-        name: Ensure that no debug() statement is committed
-      - id: no-browser-statement
-        name: Ensure that no browser() statement is committed
-      # - id: spell-check
-      #   name: Spellcheck
-      # - id: deps-in-desc
-      #   name: Ensure that DESCRIPTION lists all dependencies
-      #   args: [--allow_private_imports, --root=R]
-      - id: use-tidy-description
-        name: Format DESCRIPTION
-      # - id: pkgdown
-      #   name: Validate pkgdown.yml
-    #   - id: lintr
-    #     name: Lint code but emit only warnings
-    #     args: [--warn_only]
-    #     verbose: true
+      - id: air-format
+        name: Format R code with air
+        entry: air format
+        language: system
+        types: [r]

@@ -91,12 +91,41 @@ all <- attachment_list(sl$instance_id)
 
 \url{https://docs.getodk.org/central-api-form-management/#listing-form-attachments}
 
-Other submission-management: 
-\code{\link{encryption_key_list}()},
-\code{\link{submission_audit_get}()},
-\code{\link{submission_detail}()},
-\code{\link{submission_export}()},
-\code{\link{submission_get}()},
-\code{\link{submission_list}()}
+Other submission-management:
+\code{\link[=attachment_delete]{attachment_delete()}},
+\code{\link[=attachment_upload]{attachment_upload()}},
+\code{\link[=encryption_key_list]{encryption_key_list()}},
+\code{\link[=submission_audit_get]{submission_audit_get()}},
+\code{\link[=submission_changes]{submission_changes()}},
+\code{\link[=submission_comment_create]{submission_comment_create()}},
+\code{\link[=submission_comment_list]{submission_comment_list()}},
+\code{\link[=submission_create]{submission_create()}},
+\code{\link[=submission_csv]{submission_csv()}},
+\code{\link[=submission_delete]{submission_delete()}},
+\code{\link[=submission_detail]{submission_detail()}},
+\code{\link[=submission_draft_attachment_delete]{submission_draft_attachment_delete()}},
+\code{\link[=submission_draft_attachment_download]{submission_draft_attachment_download()}},
+\code{\link[=submission_draft_attachment_list]{submission_draft_attachment_list()}},
+\code{\link[=submission_draft_attachment_upload]{submission_draft_attachment_upload()}},
+\code{\link[=submission_draft_create]{submission_draft_create()}},
+\code{\link[=submission_draft_export]{submission_draft_export()}},
+\code{\link[=submission_draft_get]{submission_draft_get()}},
+\code{\link[=submission_draft_keys]{submission_draft_keys()}},
+\code{\link[=submission_draft_list]{submission_draft_list()}},
+\code{\link[=submission_export]{submission_export()}},
+\code{\link[=submission_geodata]{submission_geodata()}},
+\code{\link[=submission_geojson]{submission_geojson()}},
+\code{\link[=submission_get]{submission_get()}},
+\code{\link[=submission_list]{submission_list()}},
+\code{\link[=submission_restore]{submission_restore()}},
+\code{\link[=submission_review]{submission_review()}},
+\code{\link[=submission_submitters]{submission_submitters()}},
+\code{\link[=submission_update]{submission_update()}},
+\code{\link[=submission_version_attachment_delete]{submission_version_attachment_delete()}},
+\code{\link[=submission_version_attachment_download]{submission_version_attachment_download()}},
+\code{\link[=submission_version_attachment_list]{submission_version_attachment_list()}},
+\code{\link[=submission_version_detail]{submission_version_detail()}},
+\code{\link[=submission_version_geojson]{submission_version_geojson()}},
+\code{\link[=submission_versions]{submission_versions()}}
 }
 \concept{submission-management}

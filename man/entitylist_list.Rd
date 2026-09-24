@@ -6,6 +6,7 @@
 \usage{
 entitylist_list(
   pid = get_default_pid(),
+  deleted = FALSE,
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
@@ -23,6 +24,10 @@ Default: \code{\link{get_default_pid}}.
 Set default \code{pid} through \code{ru_setup(pid="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{deleted}{(lgl) If \code{TRUE}, list only deleted Entity Lists with
+their numeric IDs.
+Default: \code{FALSE}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
@@ -75,6 +80,8 @@ timezone can be set globally or per function.}
 A tibble with exactly one row for each Entity List of the given
 Project as per ODK Central API docs.
 Column names are renamed from ODK Central's \code{camelCase} to \code{snake_case}.
+With \code{deleted = TRUE}, the tibble holds one row per deleted Entity
+List with its numeric ID.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}
@@ -82,6 +89,10 @@ Column names are renamed from ODK Central's \code{camelCase} to \code{snake_case
 \details{
 The returned list is useful to retrieve the valid name of an Entity List for
 further use by functions of the Entity Management family.
+
+With \code{deleted = TRUE}, only deleted Entity Lists with their numeric
+IDs are returned, which can be used to export a deleted Entity List
+with \code{entitylist_trash_download()}.
 }
 \examples{
 \dontrun{
@@ -96,20 +107,31 @@ ds |> knitr::kable()
 \seealso{
 \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 
-Other entity-management: 
-\code{\link{entity_audits}()},
-\code{\link{entity_changes}()},
-\code{\link{entity_create}()},
-\code{\link{entity_delete}()},
-\code{\link{entity_detail}()},
-\code{\link{entity_list}()},
-\code{\link{entity_update}()},
-\code{\link{entity_versions}()},
-\code{\link{entitylist_detail}()},
-\code{\link{entitylist_download}()},
-\code{\link{entitylist_update}()},
-\code{\link{odata_entitylist_data_get}()},
-\code{\link{odata_entitylist_metadata_get}()},
-\code{\link{odata_entitylist_service_get}()}
+Other entity-management:
+\code{\link[=entity_audits]{entity_audits()}},
+\code{\link[=entity_bulk_delete]{entity_bulk_delete()}},
+\code{\link[=entity_bulk_restore]{entity_bulk_restore()}},
+\code{\link[=entity_changes]{entity_changes()}},
+\code{\link[=entity_create]{entity_create()}},
+\code{\link[=entity_creators]{entity_creators()}},
+\code{\link[=entity_delete]{entity_delete()}},
+\code{\link[=entity_detail]{entity_detail()}},
+\code{\link[=entity_geodata]{entity_geodata()}},
+\code{\link[=entity_geojson]{entity_geojson()}},
+\code{\link[=entity_list]{entity_list()}},
+\code{\link[=entity_restore]{entity_restore()}},
+\code{\link[=entity_update]{entity_update()}},
+\code{\link[=entity_versions]{entity_versions()}},
+\code{\link[=entitylist_create]{entitylist_create()}},
+\code{\link[=entitylist_delete]{entitylist_delete()}},
+\code{\link[=entitylist_detail]{entitylist_detail()}},
+\code{\link[=entitylist_download]{entitylist_download()}},
+\code{\link[=entitylist_property_create]{entitylist_property_create()}},
+\code{\link[=entitylist_property_delete]{entitylist_property_delete()}},
+\code{\link[=entitylist_trash_download]{entitylist_trash_download()}},
+\code{\link[=entitylist_update]{entitylist_update()}},
+\code{\link[=odata_entitylist_data_get]{odata_entitylist_data_get()}},
+\code{\link[=odata_entitylist_metadata_get]{odata_entitylist_metadata_get()}},
+\code{\link[=odata_entitylist_service_get]{odata_entitylist_service_get()}}
 }
 \concept{entity-management}

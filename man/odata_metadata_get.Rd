@@ -73,8 +73,8 @@ listviewer::jsonedit(meta)
 \seealso{
 \url{https://docs.getodk.org/central-api-odata-endpoints/#metadata-document}
 
-Other odata-api: 
-\code{\link{odata_service_get}()},
-\code{\link{odata_submission_get}()}
+Other odata-api:
+\code{\link[=odata_service_get]{odata_service_get()}},
+\code{\link[=odata_submission_get]{odata_submission_get()}}
 }
 \concept{odata-api}

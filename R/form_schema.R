@@ -31,6 +31,12 @@
 #'   Default: TRUE.
 #' @param draft Whether the form is published (FALSE) or a draft (TRUE).
 #'   Default: TRUE.
+#' @param version (character) The published Form version whose schema
+#'   fields to return, e.g. from `form_version_list()`.
+#'   Pass `___` for a blank version.
+#'   If given, the version path is used instead of the published or
+#'   draft path.
+#'   Default: `NULL`.
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
@@ -64,6 +70,7 @@
 #'   }
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#getting-form-version-schema-fields}
 # nolint end
 #' @family form-management
 #' @export
@@ -149,18 +156,21 @@
 #' # Point location: used by handle_ru_geopoints
 #' fs %>% dplyr::filter(type == "geopoint")
 #' }
-form_schema <- function(flatten = FALSE,
-                        odata = FALSE,
-                        parse = TRUE,
-                        draft = FALSE,
-                        pid = get_default_pid(),
-                        fid = get_default_fid(),
-                        url = get_default_url(),
-                        un = get_default_un(),
-                        pw = get_default_pw(),
-                        odkc_version = get_default_odkc_version(),
-                        retries = get_retries(),
-                        verbose = get_ru_verbose()) {
+form_schema <- function(
+  flatten = FALSE,
+  odata = FALSE,
+  parse = TRUE,
+  draft = FALSE,
+  version = NULL,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  odkc_version = get_default_odkc_version(),
+  retries = get_retries(),
+  verbose = get_ru_verbose()
+) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   ru_msg_info(glue::glue("Form schema v{odkc_version}"), verbose = verbose)
 
@@ -179,9 +189,9 @@ form_schema <- function(flatten = FALSE,
       httr::authenticate(un, pw),
       query = list(flatten = flatten, odata = odata),
       times = retries
-    ) %>%
-      yell_if_error(., url, un, pw) %>%
-      httr::content(.)
+    ) |>
+      yell_if_error(url, un, pw) |>
+      httr::content()
 
     if (parse == TRUE) {
       if (flatten == TRUE) {
@@ -192,14 +202,27 @@ form_schema <- function(flatten = FALSE,
         )
         return(fs)
       }
-      fsp <- form_schema_parse(fs, verbose = verbose) %>%
+      fsp <- form_schema_parse(fs, verbose = verbose) |>
         dplyr::mutate(ruodk_name = predict_ruodk_name(name, path))
       return(fsp)
     }
     return(fs)
   } else {
     # nocov end
-    if (draft == FALSE) {
+    if (!is.null(version)) {
+      if (
+        !is.character(version) ||
+          length(version) != 1L ||
+          is.na(version) ||
+          !nzchar(version)
+      ) {
+        ru_msg_abort("version must be a single non-empty character string.")
+      }
+      pth <- glue::glue(
+        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/",
+        "versions/{URLencode(version, reserved = TRUE)}/fields"
+      )
+    } else if (draft == FALSE) {
       pth <- glue::glue(
         "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/fields"
       )
@@ -216,24 +239,25 @@ form_schema <- function(flatten = FALSE,
       httr::authenticate(un, pw),
       query = list(flatten = flatten, odata = odata),
       times = retries
-    ) %>%
-      yell_if_error(., url, un, pw) %>%
-      httr::content(.) %>%
-      tibble::tibble(xx = .) %>%
-      tidyr::unnest_wider(xx) %>%
-      { # nolint
-        if ("path" %in% names(.)) {
+    ) |>
+      yell_if_error(url, un, pw) |>
+      httr::content() |>
+      (\(content) tibble::tibble(xx = content))() |>
+      tidyr::unnest_wider(xx) |>
+      (\(x) {
+        # nolint
+        if ("path" %in% names(x)) {
           dplyr::mutate(
-            .,
-            ruodk_name = path %>%
-              stringr::str_remove("/") %>%
-              stringr::str_replace_all("/", "_") %>%
+            x,
+            ruodk_name = path |>
+              stringr::str_remove("/") |>
+              stringr::str_replace_all("/", "_") |>
               janitor::make_clean_names()
           )
         } else {
-          .
+          x
         }
-      }
+      })()
 
     # If the form is a draft form, fs is an empty tibble.
     # In this case, fall back to the draft form schema API path.
@@ -244,8 +268,8 @@ form_schema <- function(flatten = FALSE,
         return(NULL)
       }
 
-      "The form \"{fid}\" is an unpublished draft form." %>%
-        glue::glue() %>%
+      "The form \"{fid}\" is an unpublished draft form." |>
+        glue::glue() |>
         ru_msg_info(verbose = verbose)
 
       fs <- form_schema(

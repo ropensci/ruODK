@@ -5,11 +5,18 @@
 #' The returned list is useful to retrieve the valid name of an Entity List for
 #' further use by functions of the Entity Management family.
 #'
+#' With `deleted = TRUE`, only deleted Entity Lists with their numeric
+#' IDs are returned, which can be used to export a deleted Entity List
+#' with `entitylist_trash_download()`.
+#'
 #' @template tpl-def-entitylist
 #' @template tpl-entitylist-dataset
 #' @template tpl-auth-missing
 #' @template tpl-compat-2022-3
 #' @template param-pid
+#' @param deleted (lgl) If `TRUE`, list only deleted Entity Lists with
+#'   their numeric IDs.
+#'   Default: `FALSE`.
 #' @template param-url
 #' @template param-auth
 #' @template param-retries
@@ -19,6 +26,8 @@
 #' @return A tibble with exactly one row for each Entity List of the given
 #'   Project as per ODK Central API docs.
 #'   Column names are renamed from ODK Central's `camelCase` to `snake_case`.
+#'   With `deleted = TRUE`, the tibble holds one row per deleted Entity
+#'   List with its numeric ID.
 # nolint start
 #' @seealso \url{ https://docs.getodk.org/central-api-dataset-management/#datasets}
 # nolint end
@@ -33,23 +42,35 @@
 #'
 #' ds |> knitr::kable()
 #' }
-entitylist_list <- function(pid = get_default_pid(),
-                            url = get_default_url(),
-                            un = get_default_un(),
-                            pw = get_default_pw(),
-                            retries = get_retries(),
-                            odkc_version = get_default_odkc_version(),
-                            orders = get_default_orders(),
-                            tz = get_default_tz()) {
+entitylist_list <- function(
+  pid = get_default_pid(),
+  deleted = FALSE,
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  odkc_version = get_default_odkc_version(),
+  orders = get_default_orders(),
+  tz = get_default_tz()
+) {
   yell_if_missing(url, un, pw, pid = pid)
 
   if (odkc_version |> semver_lt("2022.3")) {
     ru_msg_warn("entitylist_list is supported from v2022.3")
   }
 
-  httr::RETRY(
+  query <- list()
+  if (isTRUE(deleted)) {
+    query$deleted <- "true"
+  }
+
+  resp <- httr::RETRY(
     "GET",
-    httr::modify_url(url, path = glue::glue("v1/projects/{pid}/datasets")),
+    httr::modify_url(
+      url,
+      path = glue::glue("v1/projects/{pid}/datasets"),
+      query = query
+    ),
     httr::add_headers(
       "Accept" = "application/json",
       "X-Extended-Metadata" = "true"
@@ -58,7 +79,17 @@ entitylist_list <- function(pid = get_default_pid(),
     times = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr::content(encoding = "utf-8")
+
+  if (isTRUE(deleted)) {
+    return(
+      tibble::tibble(datasets = resp) |>
+        tidyr::unnest_wider("datasets", names_repair = "universal") |>
+        janitor::clean_names()
+    )
+  }
+
+  resp |>
     purrr::list_transpose() |>
     tibble::as_tibble() |>
     janitor::clean_names() |>

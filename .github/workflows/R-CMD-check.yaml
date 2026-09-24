@@ -12,6 +12,7 @@ name: R-CMD-check
 
 jobs:
   R-CMD-check:
+    timeout-minutes: 45
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -58,7 +59,7 @@ jobs:
       RU_RETRIES: 3
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Validate ODK Central images
         # Fail fast with a clear step name if a tag is wrong (e.g. the bare

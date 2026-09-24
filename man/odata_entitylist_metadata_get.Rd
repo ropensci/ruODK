@@ -123,20 +123,31 @@ dm1$complex_types$metadata$properties
 
 \url{https://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html}
 
-Other entity-management: 
-\code{\link{entity_audits}()},
-\code{\link{entity_changes}()},
-\code{\link{entity_create}()},
-\code{\link{entity_delete}()},
-\code{\link{entity_detail}()},
-\code{\link{entity_list}()},
-\code{\link{entity_update}()},
-\code{\link{entity_versions}()},
-\code{\link{entitylist_detail}()},
-\code{\link{entitylist_download}()},
-\code{\link{entitylist_list}()},
-\code{\link{entitylist_update}()},
-\code{\link{odata_entitylist_data_get}()},
-\code{\link{odata_entitylist_service_get}()}
+Other entity-management:
+\code{\link[=entity_audits]{entity_audits()}},
+\code{\link[=entity_bulk_delete]{entity_bulk_delete()}},
+\code{\link[=entity_bulk_restore]{entity_bulk_restore()}},
+\code{\link[=entity_changes]{entity_changes()}},
+\code{\link[=entity_create]{entity_create()}},
+\code{\link[=entity_creators]{entity_creators()}},
+\code{\link[=entity_delete]{entity_delete()}},
+\code{\link[=entity_detail]{entity_detail()}},
+\code{\link[=entity_geodata]{entity_geodata()}},
+\code{\link[=entity_geojson]{entity_geojson()}},
+\code{\link[=entity_list]{entity_list()}},
+\code{\link[=entity_restore]{entity_restore()}},
+\code{\link[=entity_update]{entity_update()}},
+\code{\link[=entity_versions]{entity_versions()}},
+\code{\link[=entitylist_create]{entitylist_create()}},
+\code{\link[=entitylist_delete]{entitylist_delete()}},
+\code{\link[=entitylist_detail]{entitylist_detail()}},
+\code{\link[=entitylist_download]{entitylist_download()}},
+\code{\link[=entitylist_list]{entitylist_list()}},
+\code{\link[=entitylist_property_create]{entitylist_property_create()}},
+\code{\link[=entitylist_property_delete]{entitylist_property_delete()}},
+\code{\link[=entitylist_trash_download]{entitylist_trash_download()}},
+\code{\link[=entitylist_update]{entitylist_update()}},
+\code{\link[=odata_entitylist_data_get]{odata_entitylist_data_get()}},
+\code{\link[=odata_entitylist_service_get]{odata_entitylist_service_get()}}
 }
 \concept{entity-management}

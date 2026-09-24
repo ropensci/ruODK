@@ -117,5 +117,17 @@ user_list() # If this is empty, you might not have permissions to list users
 \url{https://docs.getodk.org/central-api-accounts-and-users/#listing-all-users}
 
 \url{https://www.postgresql.org/docs/9.6/pgtrgm.html}
+
+Other user-management:
+\code{\link[=assignment_list]{assignment_list()}},
+\code{\link[=form_assignment_list]{form_assignment_list()}},
+\code{\link[=project_assignment_list]{project_assignment_list()}},
+\code{\link[=role_detail]{role_detail()}},
+\code{\link[=role_list]{role_list()}},
+\code{\link[=user_detail]{user_detail()}},
+\code{\link[=user_preference_project_delete]{user_preference_project_delete()}},
+\code{\link[=user_preference_project_set]{user_preference_project_set()}},
+\code{\link[=user_preference_site_delete]{user_preference_site_delete()}},
+\code{\link[=user_preference_site_set]{user_preference_site_set()}}
 }
 \concept{user-management}

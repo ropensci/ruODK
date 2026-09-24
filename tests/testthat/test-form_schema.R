@@ -1,5 +1,6 @@
 test_that("form_schema v8 returns a tibble and ignores flatten and parse", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -85,7 +86,6 @@ test_that("form_schema works with unpublished draft forms", {
 # testthat::expect_equal(fs_nested[[length(fs_nested)]]$type, "dateTime")
 # })
 
-
 # test_that("form_schema_parse works through form_schema", {
 #   fsp <- form_schema(
 #     parse = TRUE,
@@ -116,6 +116,54 @@ test_that("form_schema works with unpublished draft forms", {
 #     )
 #   )
 # })
+
+test_that("form_schema reads fields of a published version", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  fid <- glue::glue(
+    "ruodk_schemav_{format(Sys.time(), '%Y%m%d%H%M%S')}"
+  ) |>
+    as.character()
+  form_create(
+    xml = ru_test_form_xml(fid),
+    publish = TRUE,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
+
+  withr::defer(
+    httr::DELETE(
+      paste0(get_test_url(), "/v1/projects/", get_test_pid(), "/forms/", fid),
+      httr::authenticate(get_test_un(), get_test_pw())
+    )
+  )
+
+  fs <- form_schema(
+    fid = fid,
+    version = "1",
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+  testthat::expect_true(tibble::is_tibble(fs))
+  testthat::expect_true("name" %in% fs$name)
+
+  testthat::expect_error(
+    form_schema(
+      fid = fid,
+      version = "",
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    ),
+    "single non-empty"
+  )
+})
 
 # usethis::use_r("form_schema")
 # nolint end

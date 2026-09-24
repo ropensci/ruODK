@@ -83,10 +83,40 @@ class(fxml)
 \seealso{
 \url{https://docs.getodk.org/central-api-form-management/#retrieving-form-xml}
 
-Other form-management: 
-\code{\link{form_detail}()},
-\code{\link{form_list}()},
-\code{\link{form_schema}()},
-\code{\link{form_schema_ext}()}
+Other form-management:
+\code{\link[=form_attachment_download]{form_attachment_download()}},
+\code{\link[=form_attachment_list]{form_attachment_list()}},
+\code{\link[=form_create]{form_create()}},
+\code{\link[=form_dataset_diff]{form_dataset_diff()}},
+\code{\link[=form_detail]{form_detail()}},
+\code{\link[=form_draft_attachment_delete]{form_draft_attachment_delete()}},
+\code{\link[=form_draft_attachment_download]{form_draft_attachment_download()}},
+\code{\link[=form_draft_attachment_link]{form_draft_attachment_link()}},
+\code{\link[=form_draft_attachment_list]{form_draft_attachment_list()}},
+\code{\link[=form_draft_attachment_upload]{form_draft_attachment_upload()}},
+\code{\link[=form_draft_create]{form_draft_create()}},
+\code{\link[=form_draft_dataset_diff]{form_draft_dataset_diff()}},
+\code{\link[=form_draft_delete]{form_draft_delete()}},
+\code{\link[=form_draft_detail]{form_draft_detail()}},
+\code{\link[=form_draft_publish]{form_draft_publish()}},
+\code{\link[=form_draft_xml]{form_draft_xml()}},
+\code{\link[=form_link]{form_link()}},
+\code{\link[=form_list]{form_list()}},
+\code{\link[=form_restore]{form_restore()}},
+\code{\link[=form_schema]{form_schema()}},
+\code{\link[=form_schema_ext]{form_schema_ext()}},
+\code{\link[=form_update]{form_update()}},
+\code{\link[=form_version_attachment_download]{form_version_attachment_download()}},
+\code{\link[=form_version_attachment_list]{form_version_attachment_list()}},
+\code{\link[=form_version_detail]{form_version_detail()}},
+\code{\link[=form_version_list]{form_version_list()}},
+\code{\link[=form_version_xlsx]{form_version_xlsx()}},
+\code{\link[=form_version_xml]{form_version_xml()}},
+\code{\link[=form_xlsx]{form_xlsx()}},
+\code{\link[=public_link_create]{public_link_create()}},
+\code{\link[=public_link_delete]{public_link_delete()}},
+\code{\link[=public_link_detail]{public_link_detail()}},
+\code{\link[=public_link_list]{public_link_list()}},
+\code{\link[=public_link_update]{public_link_update()}}
 }
 \concept{form-management}

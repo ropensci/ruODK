@@ -182,13 +182,13 @@ ru_setup(
 )
 }
 \seealso{
-Other ru_settings: 
-\code{\link{odata_svc_parse}()},
-\code{\link{parse_odkc_version}()},
-\code{\link{ru_settings}()},
-\code{\link{semver_gt}()},
-\code{\link{semver_lt}()},
-\code{\link{yell_if_error}()},
-\code{\link{yell_if_missing}()}
+Other ru_settings:
+\code{\link[=odata_svc_parse]{odata_svc_parse()}},
+\code{\link[=parse_odkc_version]{parse_odkc_version()}},
+\code{\link[=ru_settings]{ru_settings()}},
+\code{\link[=semver_gt]{semver_gt()}},
+\code{\link[=semver_lt]{semver_lt()}},
+\code{\link[=yell_if_error]{yell_if_error()}},
+\code{\link[=yell_if_missing]{yell_if_missing()}}
 }
 \concept{ru_settings}
