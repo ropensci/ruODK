@@ -10,9 +10,11 @@
 #' @param itemset The filename of a CSV choice list to reference as a
 #'   secondary file instance, or `NULL` for none.
 #'   The instance ID is the filename without extension.
+#' @param geo Whether the form holds a geopoint field.
 #' @param iid The Submission `instanceID`.
 #' @param deprecated_id An optional replaced version's `instanceID`.
 #' @param name The value of the name field.
+#' @param geo The value of the geopoint field, or `NULL` for none.
 #' @return `ru_uuid()` returns a random UUID with `uuid:` prefix.
 #'   `ru_test_form_xml()` and `ru_test_submission_xml()` return XML as a
 #'   single string.
@@ -33,7 +35,8 @@ ru_test_form_xml <- function(
   fid,
   version = "1",
   photo = FALSE,
-  itemset = NULL
+  itemset = NULL,
+  geo = FALSE
 ) {
   photo_fields <- if (photo) "<name/><photo/>" else "<name/>"
   photo_bind <- if (photo) {
@@ -74,6 +77,17 @@ ru_test_form_xml <- function(
   } else {
     '<bind nodeset="/data/city" type="string"/>'
   }
+  geo_field <- if (geo) "<geo/>" else ""
+  geo_bind <- if (geo) {
+    '<bind nodeset="/data/geo" type="geopoint"/>'
+  } else {
+    ""
+  }
+  geo_body <- if (geo) {
+    '<input ref="/data/geo"><label>Point</label></input>'
+  } else {
+    ""
+  }
   paste0(
     '<h:html xmlns="http://www.w3.org/2002/xforms" ',
     'xmlns:h="http://www.w3.org/1999/xhtml" ',
@@ -84,6 +98,7 @@ ru_test_form_xml <- function(
     "<meta><instanceID/></meta>",
     photo_fields,
     city_field,
+    geo_field,
     "</data>",
     "</instance>",
     itemset_instance,
@@ -92,11 +107,13 @@ ru_test_form_xml <- function(
     '<bind nodeset="/data/name" type="string"/>',
     photo_bind,
     city_bind,
+    geo_bind,
     "</model></h:head>",
     "<h:body>",
     '<input ref="/data/name"><label>What is your name?</label></input>',
     photo_body,
     itemset_body,
+    geo_body,
     "</h:body></h:html>"
   )
 }
@@ -107,7 +124,8 @@ ru_test_submission_xml <- function(
   iid,
   deprecated_id = NULL,
   photo = FALSE,
-  name = "Jo"
+  name = "Jo",
+  geo = NULL
 ) {
   meta <- glue::glue("<meta><instanceID>{iid}</instanceID>")
   if (!is.null(deprecated_id)) {
@@ -117,12 +135,14 @@ ru_test_submission_xml <- function(
     )
   }
   photo_el <- if (photo) "<photo>photo.jpg</photo>" else ""
+  geo_el <- if (is.null(geo)) "" else glue::glue("<geo>{geo}</geo>")
   paste0(
     glue::glue('<data id="{fid}" version="1">'),
     meta,
     "</meta>",
     glue::glue("<name>{name}</name>"),
     photo_el,
+    geo_el,
     "</data>"
   )
 }

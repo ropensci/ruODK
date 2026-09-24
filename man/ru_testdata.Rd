@@ -9,14 +9,21 @@
 \usage{
 ru_uuid()
 
-ru_test_form_xml(fid, version = "1", photo = FALSE, itemset = NULL)
+ru_test_form_xml(
+  fid,
+  version = "1",
+  photo = FALSE,
+  itemset = NULL,
+  geo = FALSE
+)
 
 ru_test_submission_xml(
   fid,
   iid,
   deprecated_id = NULL,
   photo = FALSE,
-  name = "Jo"
+  name = "Jo",
+  geo = NULL
 )
 }
 \arguments{
@@ -29,6 +36,8 @@ ru_test_submission_xml(
 \item{itemset}{The filename of a CSV choice list to reference as a
 secondary file instance, or \code{NULL} for none.
 The instance ID is the filename without extension.}
+
+\item{geo}{The value of the geopoint field, or \code{NULL} for none.}
 
 \item{iid}{The Submission \code{instanceID}.}
 

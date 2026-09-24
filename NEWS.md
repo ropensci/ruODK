@@ -47,6 +47,9 @@
 * `submission_changes()` shows field changes between Submission versions.
 * `submission_comment_create()` posts a comment to a Submission.
 * `submission_comment_list()` lists the comments of a Submission.
+* `submission_csv()` exports the root Submission table to CSV.
+* `submission_geodata()` returns Submissions geodata as GeoJSON.
+* `submission_geojson()` returns the GeoJSON of one Submission.
 * `submission_create()` creates a new Submission from Submission XML.
 * `submission_delete()` soft-deletes a Submission (30-day restore window).
 * `submission_restore()` restores a deleted Submission.
