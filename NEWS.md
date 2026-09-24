@@ -56,7 +56,11 @@
 * `submission_review()` sets a Submission's review state.
 * `submission_submitters()` lists the Actors that submitted to a Form.
 * `submission_update()` replaces a Submission's data (new version).
+* `submission_version_attachment_delete()` clears version attachment bytes.
+* `submission_version_attachment_download()` downloads a version attachment.
+* `submission_version_attachment_list()` lists a version's attachments.
 * `submission_version_detail()` shows one Submission version.
+* `submission_version_geojson()` returns the GeoJSON of one version.
 * `submission_versions()` lists all versions of a Submission.
 
 # ruODK 1.5.2

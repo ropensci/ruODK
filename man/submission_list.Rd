@@ -135,7 +135,11 @@ Other submission-management:
 \code{\link[=submission_review]{submission_review()}},
 \code{\link[=submission_submitters]{submission_submitters()}},
 \code{\link[=submission_update]{submission_update()}},
+\code{\link[=submission_version_attachment_delete]{submission_version_attachment_delete()}},
+\code{\link[=submission_version_attachment_download]{submission_version_attachment_download()}},
+\code{\link[=submission_version_attachment_list]{submission_version_attachment_list()}},
 \code{\link[=submission_version_detail]{submission_version_detail()}},
+\code{\link[=submission_version_geojson]{submission_version_geojson()}},
 \code{\link[=submission_versions]{submission_versions()}}
 }
 \concept{submission-management}
