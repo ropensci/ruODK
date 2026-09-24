@@ -84,6 +84,10 @@ Other user-management:
 \code{\link[=project_assignment_list]{project_assignment_list()}},
 \code{\link[=role_detail]{role_detail()}},
 \code{\link[=user_detail]{user_detail()}},
-\code{\link[=user_list]{user_list()}}
+\code{\link[=user_list]{user_list()}},
+\code{\link[=user_preference_project_delete]{user_preference_project_delete()}},
+\code{\link[=user_preference_project_set]{user_preference_project_set()}},
+\code{\link[=user_preference_site_delete]{user_preference_site_delete()}},
+\code{\link[=user_preference_site_set]{user_preference_site_set()}}
 }
 \concept{user-management}

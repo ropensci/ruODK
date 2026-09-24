@@ -112,5 +112,8 @@ names(logs)
 }
 \seealso{
 \url{https://docs.getodk.org/central-api-system-endpoints/#getting-audit-log-entries}
+
+Other server-management:
+\code{\link[=config_public]{config_public()}}
 }
 \concept{server-management}

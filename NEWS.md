@@ -1,6 +1,7 @@
 # ruODK (development version)
 ## Major changes
 * `assignment_list()` lists server-wide Role Assignments.
+* `config_public()` shows publicly accessible server configuration.
 * `attachment_delete()` clears the uploaded bytes of a Submission attachment.
 * `attachment_upload()` uploads a local file to an expected Submission
   attachment slot.
@@ -82,6 +83,10 @@
 * `submission_version_geojson()` returns the GeoJSON of one version.
 * `submission_versions()` lists all versions of a Submission.
 * `user_detail()` shows one User, defaulting to the authenticated User.
+* `user_preference_project_delete()` deletes a project preference.
+* `user_preference_project_set()` sets a project preference.
+* `user_preference_site_delete()` deletes a sitewide preference.
+* `user_preference_site_set()` sets a sitewide preference.
 
 # ruODK 1.5.2
 ## Minor changes
