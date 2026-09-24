@@ -30,11 +30,16 @@
 * `form_draft_publish()` publishes a Draft Form.
 * `form_draft_xml()` returns the Draft Form XML.
 * `form_list()` gains a `deleted` flag to list deleted Forms for restore.
+* `form_link()` shows Form details by Form Link ID.
 * `form_restore()` restores a deleted Form by numeric ID.
+* `form_schema()` gains a `version` flag to read a published version's fields.
 * `form_update()` modifies a Form's lifecycle state.
+* `form_version_attachment_download()` downloads a version attachment.
+* `form_version_attachment_list()` lists a published version's attachments.
 * `form_version_detail()` shows one published Form version.
 * `form_version_list()` lists all published versions of a Form.
 * `form_version_xml()` returns the XML of one published Form version.
+* `form_version_xlsx()` downloads a version's XLSForm spreadsheet.
 * `form_xlsx()` downloads the XLSForm spreadsheet of a Form.
 * `project_delete()` deletes a Project.
 * `project_replace()` replaces top-level Project metadata.

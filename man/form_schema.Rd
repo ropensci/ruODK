@@ -9,6 +9,7 @@ form_schema(
   odata = FALSE,
   parse = TRUE,
   draft = FALSE,
+  version = NULL,
   pid = get_default_pid(),
   fid = get_default_fid(),
   url = get_default_url(),
@@ -39,6 +40,13 @@ Default: TRUE.}
 
 \item{draft}{Whether the form is published (FALSE) or a draft (TRUE).
 Default: TRUE.}
+
+\item{version}{(character) The published Form version whose schema
+fields to return, e.g. from \code{form_version_list()}.
+Pass \verb{___} for a blank version.
+If given, the version path is used instead of the published or
+draft path.
+Default: \code{NULL}.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 
@@ -226,6 +234,8 @@ fs \%>\% dplyr::filter(type == "geopoint")
 \seealso{
 \url{https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields}
 
+\url{https://docs.getodk.org/central-api-form-management/#getting-form-version-schema-fields}
+
 Other form-management:
 \code{\link[=form_attachment_download]{form_attachment_download()}},
 \code{\link[=form_attachment_list]{form_attachment_list()}},
@@ -243,12 +253,16 @@ Other form-management:
 \code{\link[=form_draft_detail]{form_draft_detail()}},
 \code{\link[=form_draft_publish]{form_draft_publish()}},
 \code{\link[=form_draft_xml]{form_draft_xml()}},
+\code{\link[=form_link]{form_link()}},
 \code{\link[=form_list]{form_list()}},
 \code{\link[=form_restore]{form_restore()}},
 \code{\link[=form_schema_ext]{form_schema_ext()}},
 \code{\link[=form_update]{form_update()}},
+\code{\link[=form_version_attachment_download]{form_version_attachment_download()}},
+\code{\link[=form_version_attachment_list]{form_version_attachment_list()}},
 \code{\link[=form_version_detail]{form_version_detail()}},
 \code{\link[=form_version_list]{form_version_list()}},
+\code{\link[=form_version_xlsx]{form_version_xlsx()}},
 \code{\link[=form_version_xml]{form_version_xml()}},
 \code{\link[=form_xlsx]{form_xlsx()}},
 \code{\link[=form_xml]{form_xml()}},
