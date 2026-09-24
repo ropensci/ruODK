@@ -5,6 +5,7 @@
 #' Not part of the public API.
 #'
 #' @param fid The form ID to use in the form definition.
+#' @param version The form version to use in the form definition.
 #' @param photo Whether the form holds a binary photo upload field.
 #' @param iid The Submission `instanceID`.
 #' @param deprecated_id An optional replaced version's `instanceID`.
@@ -25,7 +26,7 @@ ru_uuid <- function() {
 }
 
 #' @rdname ru_testdata
-ru_test_form_xml <- function(fid, photo = FALSE) {
+ru_test_form_xml <- function(fid, version = "1", photo = FALSE) {
   photo_fields <- if (photo) "<name/><photo/>" else "<name/>"
   photo_bind <- if (photo) {
     '<bind nodeset="/data/photo" type="binary"/>'
@@ -43,7 +44,7 @@ ru_test_form_xml <- function(fid, photo = FALSE) {
     'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ',
     'xmlns:jr="http://openrosa.org/javarosa">',
     "<h:head><h:title>ruODK test</h:title><model><instance>",
-    glue::glue('<data id="{fid}" version="1">'),
+    glue::glue('<data id="{fid}" version="{version}">'),
     "<meta><instanceID/></meta>",
     photo_fields,
     "</data>",

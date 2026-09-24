@@ -9,7 +9,7 @@
 \usage{
 ru_uuid()
 
-ru_test_form_xml(fid, photo = FALSE)
+ru_test_form_xml(fid, version = "1", photo = FALSE)
 
 ru_test_submission_xml(
   fid,
@@ -21,6 +21,8 @@ ru_test_submission_xml(
 }
 \arguments{
 \item{fid}{The form ID to use in the form definition.}
+
+\item{version}{The form version to use in the form definition.}
 
 \item{photo}{Whether the form holds a binary photo upload field.}
 

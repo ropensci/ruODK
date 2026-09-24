@@ -99,36 +99,14 @@ form_create <- function(
     ru_msg_abort("Exactly one of 'xml' and 'file' must be given.")
   }
 
-  content_type <- "application/xml"
-  body <- NULL
-  extra_headers <- list()
-  if (has_file) {
-    if (!file.exists(file)) {
-      ru_msg_abort(glue::glue("File not found: {file}"))
-    }
-    ext <- tolower(tools::file_ext(file))
-    if (ext == "xml") {
-      body <- paste(readLines(file, warn = FALSE), collapse = "\n")
-    } else if (ext %in% c("xls", "xlsx")) {
-      content_type <- if (ext == "xlsx") {
-        paste0(
-          "application/vnd.openxmlformats-officedocument.",
-          "spreadsheetml.sheet"
-        )
-      } else {
-        "application/vnd.ms-excel"
-      }
-      body <- readBin(file, "raw", file.info(file)$size)
-      if (!is.null(xls_form_id_fallback)) {
-        extra_headers[["X-XlsForm-FormId-Fallback"]] <-
-          xls_form_id_fallback
-      }
-    } else {
-      ru_msg_abort("file must end in '.xml', '.xls' or '.xlsx'.")
-    }
-  } else {
-    body <- xml
-  }
+  parts <- ru_form_upload(
+    xml = if (has_xml) xml else NULL,
+    file = if (has_file) file else NULL,
+    xls_form_id_fallback = xls_form_id_fallback
+  )
+  content_type <- parts$content_type
+  extra_headers <- parts$extra_headers
+  body <- parts$body
 
   query <- list()
   if (isTRUE(publish)) {

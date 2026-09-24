@@ -10,6 +10,11 @@
 * `entitylist_property_create()` adds a Property to an Entity List.
 * `entitylist_property_delete()` deletes a Property (Central 2026.1+).
 * `form_create()` creates a new Form from XForms XML or an XLSForm file.
+* `form_draft_create()` creates or replaces a Draft Form.
+* `form_draft_delete()` deletes a Draft Form.
+* `form_draft_detail()` shows Draft Form metadata.
+* `form_draft_publish()` publishes a Draft Form.
+* `form_draft_xml()` returns the Draft Form XML.
 * `form_update()` modifies a Form's lifecycle state.
 * `project_delete()` deletes a Project.
 * `project_replace()` replaces top-level Project metadata.

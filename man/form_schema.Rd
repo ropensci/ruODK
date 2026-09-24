@@ -229,6 +229,11 @@ fs \%>\% dplyr::filter(type == "geopoint")
 Other form-management:
 \code{\link[=form_create]{form_create()}},
 \code{\link[=form_detail]{form_detail()}},
+\code{\link[=form_draft_create]{form_draft_create()}},
+\code{\link[=form_draft_delete]{form_draft_delete()}},
+\code{\link[=form_draft_detail]{form_draft_detail()}},
+\code{\link[=form_draft_publish]{form_draft_publish()}},
+\code{\link[=form_draft_xml]{form_draft_xml()}},
 \code{\link[=form_list]{form_list()}},
 \code{\link[=form_schema_ext]{form_schema_ext()}},
 \code{\link[=form_update]{form_update()}},
