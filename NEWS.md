@@ -12,6 +12,13 @@
 * `form_attachment_download()` downloads one Form attachment.
 * `form_attachment_list()` lists the expected attachments of a Form.
 * `form_create()` creates a new Form from XForms XML or an XLSForm file.
+* `form_dataset_diff()` shows Datasets affected by a Form.
+* `form_draft_attachment_delete()` clears a Draft Form attachment.
+* `form_draft_attachment_download()` downloads a Draft Form attachment.
+* `form_draft_attachment_link()` links a Dataset to a Draft attachment.
+* `form_draft_attachment_list()` lists expected Draft attachments.
+* `form_draft_attachment_upload()` uploads a Draft Form attachment.
+* `form_draft_dataset_diff()` shows pending Dataset changes of a Draft.
 * `form_draft_create()` creates or replaces a Draft Form.
 * `form_draft_delete()` deletes a Draft Form.
 * `form_draft_detail()` shows Draft Form metadata.

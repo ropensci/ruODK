@@ -7,6 +7,9 @@
 #' @param fid The form ID to use in the form definition.
 #' @param version The form version to use in the form definition.
 #' @param photo Whether the form holds a binary photo upload field.
+#' @param itemset The filename of a CSV choice list to reference as a
+#'   secondary file instance, or `NULL` for none.
+#'   The instance ID is the filename without extension.
 #' @param iid The Submission `instanceID`.
 #' @param deprecated_id An optional replaced version's `instanceID`.
 #' @param name The value of the name field.
@@ -26,7 +29,12 @@ ru_uuid <- function() {
 }
 
 #' @rdname ru_testdata
-ru_test_form_xml <- function(fid, version = "1", photo = FALSE) {
+ru_test_form_xml <- function(
+  fid,
+  version = "1",
+  photo = FALSE,
+  itemset = NULL
+) {
   photo_fields <- if (photo) "<name/><photo/>" else "<name/>"
   photo_bind <- if (photo) {
     '<bind nodeset="/data/photo" type="binary"/>'
@@ -38,6 +46,34 @@ ru_test_form_xml <- function(fid, version = "1", photo = FALSE) {
   } else {
     ""
   }
+  itemset_instance <- if (is.null(itemset)) {
+    ""
+  } else {
+    paste0(
+      glue::glue(
+        '<instance id="{tools::file_path_sans_ext(itemset)}" ',
+        'src="jr://file/{itemset}">'
+      ),
+      "<root><item><name/><label/></item></root></instance>"
+    )
+  }
+  itemset_body <- if (is.null(itemset)) {
+    ""
+  } else {
+    paste0(
+      '<select1 ref="/data/city"><label>City</label>',
+      glue::glue(
+        '<itemset nodeset="instance(\'{tools::file_path_sans_ext(itemset)}\')/root/item">' # nolint
+      ),
+      '<value ref="name"/><label ref="label"/></itemset></select1>'
+    )
+  }
+  city_field <- if (is.null(itemset)) "" else "<city/>"
+  city_bind <- if (is.null(itemset)) {
+    ""
+  } else {
+    '<bind nodeset="/data/city" type="string"/>'
+  }
   paste0(
     '<h:html xmlns="http://www.w3.org/2002/xforms" ',
     'xmlns:h="http://www.w3.org/1999/xhtml" ',
@@ -47,16 +83,20 @@ ru_test_form_xml <- function(fid, version = "1", photo = FALSE) {
     glue::glue('<data id="{fid}" version="{version}">'),
     "<meta><instanceID/></meta>",
     photo_fields,
+    city_field,
     "</data>",
     "</instance>",
+    itemset_instance,
     '<bind nodeset="/data/meta/instanceID" type="string" readonly="true()" ',
     'calculate="concat(\'uuid:\', uuid())"/>',
     '<bind nodeset="/data/name" type="string"/>',
     photo_bind,
+    city_bind,
     "</model></h:head>",
     "<h:body>",
     '<input ref="/data/name"><label>What is your name?</label></input>',
     photo_body,
+    itemset_body,
     "</h:body></h:html>"
   )
 }

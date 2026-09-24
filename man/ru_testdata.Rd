@@ -9,7 +9,7 @@
 \usage{
 ru_uuid()
 
-ru_test_form_xml(fid, version = "1", photo = FALSE)
+ru_test_form_xml(fid, version = "1", photo = FALSE, itemset = NULL)
 
 ru_test_submission_xml(
   fid,
@@ -25,6 +25,10 @@ ru_test_submission_xml(
 \item{version}{The form version to use in the form definition.}
 
 \item{photo}{Whether the form holds a binary photo upload field.}
+
+\item{itemset}{The filename of a CSV choice list to reference as a
+secondary file instance, or \code{NULL} for none.
+The instance ID is the filename without extension.}
 
 \item{iid}{The Submission \code{instanceID}.}
 
