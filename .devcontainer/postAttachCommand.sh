@@ -92,7 +92,7 @@ if command -v docker >/dev/null 2>&1; then
       -f .devcontainer/docker-compose-dev.yml ps 2>/dev/null || true
     docker compose --env-file .devcontainer/.env \
       -f .devcontainer/docker-compose.yml \
-      -f .devcontainer/docker-compose-dev.yml logs --tail 30 service \
+      -f .devcontainer/docker-compose-dev.yml logs --tail 30 certs service \
       2>/dev/null || true
     exit 0
   fi

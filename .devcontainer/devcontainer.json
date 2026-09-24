@@ -15,7 +15,7 @@
             "packages": "libudunits2-dev,libxtst6,libxt6,libmagick++-dev"
         },
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-            "packages": "github::rstudio/renv,tidyverse,git2r,knitr,spelling,languageserver,precommit,clisymbols,crayon,dplyr,fs,glue,httr,httr2,janitor,lifecycle,lubridate,magrittr,purrr,readr,rlang,stringr,semver,tibble,tidyr,xml2,covr,DT,ggplot2,here,knitr,lattice,leaflet,listviewer,leafpop,leafem,mapview,rmarkdown,roxygen2,sf,terra,testthat,tmap,usethis"
+            "packages": "github::rstudio/renv,tidyverse,git2r,knitr,spelling,languageserver,precommit,cli,clisymbols,crayon,dplyr,fs,glue,httr,httr2,janitor,jsonlite,lifecycle,lubridate,magrittr,purrr,readr,rlang,stringr,semver,tibble,tidyr,withr,xml2,covr,DT,ggplot2,here,lattice,leaflet,listviewer,leafpop,leafem,mapview,rmarkdown,roxygen2,sf,terra,testthat,tmap,usethis"
         },
         "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
@@ -44,7 +44,10 @@
     // which postAttachCommand.sh has not built yet on first create, and pip
     // (via requests) hard-fails on a nonexistent CA path while installing
     // hook environments. Nothing at onCreate time talks to the local stack.
-    "onCreateCommand": "env -u CURL_CA_BUNDLE pre-commit install && env -u CURL_CA_BUNDLE pre-commit run",
+    // Install the git hook only. Hook environments (notably the R renv one)
+    // install lazily on first commit instead of slowing every fresh create
+    // and risking fragile toolchains at create time.
+    "onCreateCommand": "pre-commit install",
     "postAttachCommand": ".devcontainer/postAttachCommand.sh",
 
     "customizations": {

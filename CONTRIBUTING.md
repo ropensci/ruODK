@@ -235,6 +235,12 @@ are unaffected. With the secret present the container also defaults
 you already have `~/.config/opencode/opencode.json`); pick another model
 with `/models`.
 
+The image has no TeX or `qpdf`, so for in-container `R CMD check` runs skip
+what needs them and let CI do the full check: `devtools::check(vignettes =
+FALSE)`. Once commit churn settles, enable Codespaces Prebuilds in the repo
+settings so new codespaces start from a baked image instead of compiling the
+R package stack on every create.
+
 To work against the shared `ruodk.getodk.cloud` instance instead, request an
 account with an [account request issue](https://github.com/ropensci/ruODK/issues/new/choose)
 and use these values in `.Renviron`:

@@ -1,0 +1,10 @@
+# The dev build never COPYs repo files: .devcontainer/Dockerfile installs
+# only remote URLs (apt, cpanm, opencode). Keep the transfer to the daemon
+# at KB by excluding everything except the Dockerfile itself.
+# Invariant: if the Dockerfile ever COPYs from the repo, allowlist those
+# paths here with `!` exceptions.
+*
+!.devcontainer/
+# Generated local-only TLS material must never reach the daemon at all,
+# and skipping it keeps the transfer minimal.
+.devcontainer/odkc/certs

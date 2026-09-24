@@ -20,7 +20,7 @@ CERTS="${CERTS_DIR:-/certs}"
 mkdir -p "$CERTS"
 cd "$CERTS"
 
-if [ -s ca.crt ] && [ -s server.crt ] && [ -s server.key ]; then
+if [ -s ca.crt ] && [ -s ca.key ] && [ -s server.crt ] && [ -s server.key ]; then
   echo "[gen-certs] certs already present in $CERTS, leaving them alone."
 else
   echo "[gen-certs] minting a local CA and a localhost server cert in $CERTS .."
