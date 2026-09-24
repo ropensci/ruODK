@@ -6,12 +6,17 @@
 * `entitylist_create()` creates a new Entity List (Dataset) in a Project.
 * `form_create()` creates a new Form from XForms XML or an XLSForm file.
 * `form_update()` modifies a Form's lifecycle state.
+* `submission_changes()` shows field changes between Submission versions.
+* `submission_comment_create()` posts a comment to a Submission.
+* `submission_comment_list()` lists the comments of a Submission.
 * `submission_create()` creates a new Submission from Submission XML.
 * `submission_delete()` soft-deletes a Submission (30-day restore window).
 * `submission_restore()` restores a deleted Submission.
 * `submission_review()` sets a Submission's review state.
 * `submission_submitters()` lists the Actors that submitted to a Form.
 * `submission_update()` replaces a Submission's data (new version).
+* `submission_version_detail()` shows one Submission version.
+* `submission_versions()` lists all versions of a Submission.
 
 # ruODK 1.5.2
 ## Minor changes

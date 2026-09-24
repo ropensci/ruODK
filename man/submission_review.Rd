@@ -106,6 +106,9 @@ Other submission-management:
 \code{\link[=attachment_upload]{attachment_upload()}},
 \code{\link[=encryption_key_list]{encryption_key_list()}},
 \code{\link[=submission_audit_get]{submission_audit_get()}},
+\code{\link[=submission_changes]{submission_changes()}},
+\code{\link[=submission_comment_create]{submission_comment_create()}},
+\code{\link[=submission_comment_list]{submission_comment_list()}},
 \code{\link[=submission_create]{submission_create()}},
 \code{\link[=submission_delete]{submission_delete()}},
 \code{\link[=submission_detail]{submission_detail()}},
@@ -114,6 +117,8 @@ Other submission-management:
 \code{\link[=submission_list]{submission_list()}},
 \code{\link[=submission_restore]{submission_restore()}},
 \code{\link[=submission_submitters]{submission_submitters()}},
-\code{\link[=submission_update]{submission_update()}}
+\code{\link[=submission_update]{submission_update()}},
+\code{\link[=submission_version_detail]{submission_version_detail()}},
+\code{\link[=submission_versions]{submission_versions()}}
 }
 \concept{submission-management}
