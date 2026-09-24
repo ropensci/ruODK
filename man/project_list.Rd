@@ -84,6 +84,9 @@ names(pl)
 
 Other project-management:
 \code{\link[=project_create]{project_create()}},
-\code{\link[=project_detail]{project_detail()}}
+\code{\link[=project_delete]{project_delete()}},
+\code{\link[=project_detail]{project_detail()}},
+\code{\link[=project_replace]{project_replace()}},
+\code{\link[=project_update]{project_update()}}
 }
 \concept{project-management}

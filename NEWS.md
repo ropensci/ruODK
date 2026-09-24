@@ -6,6 +6,9 @@
 * `entitylist_create()` creates a new Entity List (Dataset) in a Project.
 * `form_create()` creates a new Form from XForms XML or an XLSForm file.
 * `form_update()` modifies a Form's lifecycle state.
+* `project_delete()` deletes a Project.
+* `project_replace()` replaces top-level Project metadata.
+* `project_update()` modifies Project name, description and archived flag.
 * `submission_changes()` shows field changes between Submission versions.
 * `submission_comment_create()` posts a comment to a Submission.
 * `submission_comment_list()` lists the comments of a Submission.
