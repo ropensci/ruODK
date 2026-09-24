@@ -23,3 +23,11 @@ ENV LANGUAGE=en_GB.UTF-8 LANG=en_GB.UTF-8 LC_ALL=en_GB.UTF-8
 # installing cpanm & missing latexindent dependencies
 RUN curl -L http://cpanmin.us | perl - --self-upgrade && \
     cpanm Log::Dispatch::File YAML::Tiny File::HomeDir
+
+# opencode CLI baked in for the rstudio dev user (postAttachCommand.sh keeps
+# a fallback install for images built before this line existed). HOME is
+# overridden for this RUN only so the binary lands in the user's
+# ~/.opencode/bin owned by them (keeps opencode autoupdate working);
+# --no-modify-path because postAttach owns PATH wiring.
+RUN HOME=/home/rstudio curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path && \
+    chown -R rstudio /home/rstudio/.opencode

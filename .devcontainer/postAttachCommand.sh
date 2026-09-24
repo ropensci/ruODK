@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Runs each time a tool attaches to the devcontainer. See issue #170.
 #
-# Seeds the local ODK Central with the fixtures from inst/extdata/odkc, then
+# Installs the opencode CLI and wires a personal OPENCODE_API_KEY when
+# present (first, so opencode works even if the steps below fail), then
+# seeds the local ODK Central with the fixtures from inst/extdata/odkc, then
 # points ruODK at it by writing ~/.Renviron and ~/.bashrc. Idempotent: the seed
 # skips forms and submissions that already exist.
 set -euo pipefail
@@ -9,31 +11,6 @@ set -euo pipefail
 echo "postAttach: wiring ruODK to the local ODK Central test stack.."
 
 cd "${containerWorkspaceFolder:-/workspaces/ruODK}"
-
-# 1. A CA bundle that trusts both the public CAs and the local stack. See the
-#    comment in ca-bundle.sh for why it must be a merge and not the local CA.
-CA_BUNDLE="$PWD/.devcontainer/odkc/certs/ca-bundle.pem"
-if ! .devcontainer/odkc/ca-bundle.sh "$CA_BUNDLE" >/dev/null; then
-  echo "postAttach: WARNING could not build the CA bundle." >&2
-  echo "postAttach: Is the test stack up? Try: docker compose --env-file" \
-       ".devcontainer/.env -f .devcontainer/docker-compose.yml up -d --wait" >&2
-  exit 0
-fi
-echo "postAttach: CA bundle at $CA_BUNDLE"
-
-# 2. Seed. Throws away the throwaway admin if it is missing, and fills in
-#    forms, submissions and attachments that are not there yet.
-if ! Rscript data-raw/seed_odkc.R; then
-  echo "postAttach: WARNING seeding failed. See the output above." >&2
-  exit 0
-fi
-
-# 3. Point ruODK at the seeded stack. These are the local, throwaway
-#    credentials that the seed creates, not the ruodk.getodk.cloud ones.
-ODKC_TEST_URL="${ODKC_SEED_URL:-https://localhost:8383}"
-ODKC_TEST_UN="${ODKC_SEED_UN:-ruodk@example.com}"
-ODKC_TEST_PW="${ODKC_SEED_PW:-ruodk-local-password}"
-ODKC_TEST_VERSION="${ODKC_TEST_VERSION:-2026.3.0}"
 
 persist_shell_var() {
   local var="$1" val="$2" file="$3"
@@ -48,6 +25,106 @@ persist_renv_var() {
   printf "%s='%s'\n" "${var}" "${val}" >> "${file}.tmp"
   mv "${file}.tmp" "${file}"
 }
+
+# 1. opencode CLI for agentic coding inside the container. The dev image
+#    already ships it (see Dockerfile); this fallback install covers images
+#    built before that line existed. Skipped when the binary is already in
+#    place, so re-attaching is cheap. Runs first so opencode works even when
+#    the stack seeding below fails.
+if [ ! -x "${HOME}/.opencode/bin/opencode" ] && ! command -v opencode >/dev/null 2>&1; then
+  echo "postAttach: installing opencode.."
+  curl -fsSL https://opencode.ai/install | bash
+fi
+if [[ ":${PATH}:" != *":${HOME}/.opencode/bin:"* ]]; then
+  export PATH="${HOME}/.opencode/bin:${PATH}"
+fi
+if ! grep -q '\.opencode/bin' ~/.bashrc 2>/dev/null; then
+  printf 'export PATH="$HOME/.opencode/bin:$PATH"\n' >>~/.bashrc
+fi
+if ! opencode --version >/dev/null 2>&1; then
+  echo "postAttach: WARNING opencode is not runnable." >&2
+fi
+
+# 2. Personal OpenCode Go token. Both the opencode (Zen) and opencode-go
+#    providers read OPENCODE_API_KEY straight from the environment, so
+#    exporting it is the whole authentication. The config below additionally
+#    defaults opencode to a Go model; change it with /models or by editing
+#    ~/.config/opencode/opencode.json (never overwritten once present).
+#    Provide the key as a PERSONAL Codespaces secret
+#    (github.com/settings/codespaces, scoped to ropensci/ruODK), never as a
+#    repository secret: anyone opening this repo as a codespace would
+#    otherwise share your billed token. Without the secret this step is a
+#    silent no-op and opencode stays unconfigured for that user. Runs first
+#    so the token lands even when the stack seeding below fails.
+if [ -n "${OPENCODE_API_KEY:-}" ]; then
+  persist_shell_var "OPENCODE_API_KEY" "${OPENCODE_API_KEY}" ~/.bashrc
+  echo "postAttach: OPENCODE_API_KEY found, exported for future shells."
+  if [ ! -f ~/.config/opencode/opencode.json ]; then
+    mkdir -p ~/.config/opencode
+    printf '%s\n' '{"$schema":"https://opencode.ai/config.json","model":"opencode-go/muse-spark-1.3-contributor"}' \
+      >~/.config/opencode/opencode.json
+    echo "postAttach: opencode default model set to Go (muse-spark-1.3-contributor)."
+  fi
+fi
+
+# 3. The seed below shells out to `docker compose exec service`
+#    (ODKC_COMPOSE in data-raw/seed_odkc.R). Two things must hold for that
+#    to reach the running stack: the stack must be up, and compose must
+#    address it by its real project name, which depends on how it was
+#    launched (repo root -> `ruodk`, .devcontainer/ -> `devcontainer`, the
+#    devcontainer CLI -> its own name). A wrong name fails exactly as
+#    `service "service" is not running`. Detect the project from this
+#    container's own compose labels when present, then bring the stack up
+#    (no-op when healthy) before seeding.
+if command -v docker >/dev/null 2>&1; then
+  compose_project="$(docker inspect "$(cat /etc/hostname 2>/dev/null)" \
+    --format '{{ index .Config.Labels "com.docker.compose.project" }}' \
+    2>/dev/null || true)"
+  if [ -n "${compose_project:-}" ]; then
+    export COMPOSE_PROJECT_NAME="${compose_project}"
+  fi
+  if ! docker compose --env-file .devcontainer/.env \
+    -f .devcontainer/docker-compose.yml \
+    -f .devcontainer/docker-compose-dev.yml up -d --wait nginx; then
+    echo "postAttach: WARNING the ODK Central test stack failed to start." >&2
+    docker compose --env-file .devcontainer/.env \
+      -f .devcontainer/docker-compose.yml \
+      -f .devcontainer/docker-compose-dev.yml ps 2>/dev/null || true
+    docker compose --env-file .devcontainer/.env \
+      -f .devcontainer/docker-compose.yml \
+      -f .devcontainer/docker-compose-dev.yml logs --tail 30 service \
+      2>/dev/null || true
+    exit 0
+  fi
+else
+  echo "postAttach: WARNING no docker CLI, cannot start the test stack." >&2
+  exit 0
+fi
+
+# 4. A CA bundle that trusts both the public CAs and the local stack. See the
+#    comment in ca-bundle.sh for why it must be a merge and not the local CA.
+CA_BUNDLE="$PWD/.devcontainer/odkc/certs/ca-bundle.pem"
+if ! .devcontainer/odkc/ca-bundle.sh "$CA_BUNDLE" >/dev/null; then
+  echo "postAttach: WARNING could not build the CA bundle." >&2
+  echo "postAttach: Is the test stack up? Try: docker compose --env-file" \
+       ".devcontainer/.env -f .devcontainer/docker-compose.yml up -d --wait" >&2
+  exit 0
+fi
+echo "postAttach: CA bundle at $CA_BUNDLE"
+
+# 5. Seed. Throws away the throwaway admin if it is missing, and fills in
+#    forms, submissions and attachments that are not there yet.
+if ! Rscript data-raw/seed_odkc.R; then
+  echo "postAttach: WARNING seeding failed. See the output above." >&2
+  exit 0
+fi
+
+# 6. Point ruODK at the seeded stack. These are the local, throwaway
+#    credentials that the seed creates, not the ruodk.getodk.cloud ones.
+ODKC_TEST_URL="${ODKC_SEED_URL:-https://localhost:8383}"
+ODKC_TEST_UN="${ODKC_SEED_UN:-ruodk@example.com}"
+ODKC_TEST_PW="${ODKC_SEED_PW:-ruodk-local-password}"
+ODKC_TEST_VERSION="${ODKC_TEST_VERSION:-2026.3.0}"
 
 touch ~/.bashrc ~/.Renviron
 
@@ -88,40 +165,3 @@ persist_renv_var "CURL_CA_BUNDLE" "${CA_BUNDLE}" ~/.Renviron
 echo "postAttach: done. ruODK now targets ${ODKC_TEST_URL}."
 echo "postAttach: run  devtools::test()  to check the suite."
 
-# 4. opencode CLI for agentic coding inside the container. Installed per user
-#    into ~/.opencode/bin and skipped when already on PATH, so re-attaching
-#    is cheap.
-if ! command -v opencode >/dev/null 2>&1; then
-  echo "postAttach: installing opencode.."
-  curl -fsSL https://opencode.ai/install | bash
-fi
-if [[ ":${PATH}:" != *":${HOME}/.opencode/bin:"* ]]; then
-  export PATH="${HOME}/.opencode/bin:${PATH}"
-fi
-if ! grep -q '\.opencode/bin' ~/.bashrc 2>/dev/null; then
-  printf 'export PATH="$HOME/.opencode/bin:$PATH"\n' >>~/.bashrc
-fi
-if ! opencode --version >/dev/null 2>&1; then
-  echo "postAttach: WARNING opencode is not runnable." >&2
-fi
-
-# 5. Personal OpenCode Go token. Both the opencode (Zen) and opencode-go
-#    providers read OPENCODE_API_KEY straight from the environment, so
-#    exporting it is the whole authentication. The config below additionally
-#    defaults opencode to a Go model; change it with /models or by editing
-#    ~/.config/opencode/opencode.json (never overwritten once present).
-#    Provide the key as a PERSONAL Codespaces secret
-#    (github.com/settings/codespaces, scoped to ropensci/ruODK), never as a
-#    repository secret: anyone opening this repo as a codespace would
-#    otherwise share your billed token. Without the secret this step is a
-#    silent no-op and opencode stays unconfigured for that user.
-if [ -n "${OPENCODE_API_KEY:-}" ]; then
-  persist_shell_var "OPENCODE_API_KEY" "${OPENCODE_API_KEY}" ~/.bashrc
-  echo "postAttach: OPENCODE_API_KEY found, exported for future shells."
-  if [ ! -f ~/.config/opencode/opencode.json ]; then
-    mkdir -p ~/.config/opencode
-    printf '%s\n' '{"$schema":"https://opencode.ai/config.json","model":"opencode-go/muse-spark-1.3-contributor"}' \
-      >~/.config/opencode/opencode.json
-    echo "postAttach: opencode default model set to Go (muse-spark-1.3-contributor)."
-  fi
-fi
