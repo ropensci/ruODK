@@ -3,12 +3,17 @@
 * `attachment_delete()` clears the uploaded bytes of a Submission attachment.
 * `attachment_upload()` uploads a local file to an expected Submission
   attachment slot.
+* `entity_bulk_delete()` soft-deletes multiple Entities at once.
+* `entity_bulk_restore()` restores multiple deleted Entities at once.
 * `entity_creators()` lists the Actors that created Entities in an Entity List.
 * `entity_geodata()` returns Entity geodata as GeoJSON.
+* `entity_geojson()` returns the GeoJSON of one Entity.
 * `entity_restore()` restores a deleted Entity.
 * `entitylist_delete()` deletes an Entity List (Central 2026.1+).
+* `entitylist_list()` gains a `deleted` flag to list deleted Entity Lists.
 * `entitylist_property_create()` adds a Property to an Entity List.
 * `entitylist_property_delete()` deletes a Property (Central 2026.1+).
+* `entitylist_trash_download()` exports Entities of a deleted Entity List.
 * `form_attachment_download()` downloads one Form attachment.
 * `form_attachment_list()` lists the expected attachments of a Form.
 * `form_create()` creates a new Form from XForms XML or an XLSForm file.
