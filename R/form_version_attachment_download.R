@@ -47,7 +47,9 @@
 #'
 #' file.info(path)$size
 #' }
+# nolint start
 form_version_attachment_download <- function(
+  # nolint end
   pid = get_default_pid(),
   fid = get_default_fid(),
   version,

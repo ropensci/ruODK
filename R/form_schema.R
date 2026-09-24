@@ -189,9 +189,9 @@ form_schema <- function(
       httr::authenticate(un, pw),
       query = list(flatten = flatten, odata = odata),
       times = retries
-    ) %>%
-      yell_if_error(., url, un, pw) %>%
-      httr::content(.)
+    ) |>
+      yell_if_error(url, un, pw) |>
+      httr::content()
 
     if (parse == TRUE) {
       if (flatten == TRUE) {
@@ -202,7 +202,7 @@ form_schema <- function(
         )
         return(fs)
       }
-      fsp <- form_schema_parse(fs, verbose = verbose) %>%
+      fsp <- form_schema_parse(fs, verbose = verbose) |>
         dplyr::mutate(ruodk_name = predict_ruodk_name(name, path))
       return(fsp)
     }
@@ -239,25 +239,25 @@ form_schema <- function(
       httr::authenticate(un, pw),
       query = list(flatten = flatten, odata = odata),
       times = retries
-    ) %>%
-      yell_if_error(., url, un, pw) %>%
-      httr::content(.) %>%
-      tibble::tibble(xx = .) %>%
-      tidyr::unnest_wider(xx) %>%
-      {
+    ) |>
+      yell_if_error(url, un, pw) |>
+      httr::content() |>
+      (\(content) tibble::tibble(xx = content))() |>
+      tidyr::unnest_wider(xx) |>
+      (\(x) {
         # nolint
-        if ("path" %in% names(.)) {
+        if ("path" %in% names(x)) {
           dplyr::mutate(
-            .,
-            ruodk_name = path %>%
-              stringr::str_remove("/") %>%
-              stringr::str_replace_all("/", "_") %>%
+            x,
+            ruodk_name = path |>
+              stringr::str_remove("/") |>
+              stringr::str_replace_all("/", "_") |>
               janitor::make_clean_names()
           )
         } else {
-          .
+          x
         }
-      }
+      })()
 
     # If the form is a draft form, fs is an empty tibble.
     # In this case, fall back to the draft form schema API path.
@@ -268,8 +268,8 @@ form_schema <- function(
         return(NULL)
       }
 
-      "The form \"{fid}\" is an unpublished draft form." %>%
-        glue::glue() %>%
+      "The form \"{fid}\" is an unpublished draft form." |>
+        glue::glue() |>
         ru_msg_info(verbose = verbose)
 
       fs <- form_schema(

@@ -37,7 +37,9 @@
 #' # > $success
 #' # > [1] TRUE
 #' }
+# nolint start
 submission_version_attachment_delete <- function(
+  # nolint end
   iid,
   vid,
   filename,

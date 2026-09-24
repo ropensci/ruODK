@@ -42,7 +42,9 @@
 #'
 #' file.info(path)$size
 #' }
+# nolint start
 submission_version_attachment_download <- function(
+  # nolint end
   iid,
   vid,
   filename,

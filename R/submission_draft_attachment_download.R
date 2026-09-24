@@ -40,7 +40,9 @@
 #'
 #' file.info(path)$size
 #' }
+# nolint start
 submission_draft_attachment_download <- function(
+  # nolint end
   iid,
   pid = get_default_pid(),
   fid = get_default_fid(),

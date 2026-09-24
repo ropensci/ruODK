@@ -35,7 +35,9 @@
 #' # > $success
 #' # > [1] TRUE
 #' }
+# nolint start
 submission_draft_attachment_delete <- function(
+  # nolint end
   iid,
   pid = get_default_pid(),
   fid = get_default_fid(),

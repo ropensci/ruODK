@@ -35,7 +35,9 @@
 #'
 #' al |> knitr::kable()
 #' }
+# nolint start
 submission_version_attachment_list <- function(
+  # nolint end
   iid,
   vid,
   pid = get_default_pid(),

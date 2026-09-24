@@ -76,48 +76,48 @@ form_list <- function(
     ),
     httr::authenticate(un, pw),
     times = retries
-  ) %>%
-    yell_if_error(., url, un, pw) %>%
-    httr::content(.)
+  ) |>
+    yell_if_error(url, un, pw) |>
+    httr::content()
 
   if (isTRUE(deleted)) {
     return(
-      tibble::tibble(forms = resp) %>%
-        tidyr::unnest_wider("forms", names_repair = "universal") %>%
-        janitor::clean_names(.)
+      tibble::tibble(forms = resp) |>
+        tidyr::unnest_wider("forms", names_repair = "universal") |>
+        janitor::clean_names()
     )
   }
 
-  resp %>%
-    tibble::tibble(.) %>%
-    tidyr::unnest_wider(".", names_repair = "universal") %>%
-    {
-      if ("reviewStates" %in% colnames(.)) {
+  resp |>
+    (\(r) tibble::tibble(. = r))() |>
+    tidyr::unnest_wider(".", names_repair = "universal") |>
+    (\(x) {
+      if ("reviewStates" %in% colnames(x)) {
         # nolint start
         # https://github.com/ropensci/ruODK/issues/145
         # Older Central versions have no variable reviewStates
         # nolint end
         tidyr::unnest_wider(
-          .,
+          x,
           "reviewStates",
           names_repair = "universal",
           names_sep = "_"
         )
       } else {
-        .
+        x
       }
-    } %>%
+    })() |>
     tidyr::unnest_wider(
       "createdBy",
       names_repair = "universal",
       names_sep = "_"
-    ) %>%
-    janitor::clean_names() %>%
+    ) |>
+    janitor::clean_names() |>
     dplyr::mutate_at(
       dplyr::vars(dplyr::contains("_at")),
       # assume datetimes are named "_at"
       ~ isodt_to_local(., orders = orders, tz = tz)
-    ) %>%
+    ) |>
     dplyr::mutate(fid = xml_form_id)
 }
 

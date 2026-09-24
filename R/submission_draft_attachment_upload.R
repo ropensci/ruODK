@@ -44,7 +44,9 @@
 #'   file = "/path/to/photo.jpg"
 #' )
 #' }
+# nolint start
 submission_draft_attachment_upload <- function(
+  # nolint end
   iid,
   pid = get_default_pid(),
   fid = get_default_fid(),
