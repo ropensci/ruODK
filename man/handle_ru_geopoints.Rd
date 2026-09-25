@@ -80,6 +80,7 @@ Other utilities:
 \code{\link[=odata_submission_rectangle]{odata_submission_rectangle()}},
 \code{\link[=predict_ruodk_name]{predict_ruodk_name()}},
 \code{\link[=prepend_uuid]{prepend_uuid()}},
+\code{\link[=ru_http_request]{ru_http_request()}},
 \code{\link[=split_geopoint]{split_geopoint()}},
 \code{\link[=split_geoshape]{split_geoshape()}},
 \code{\link[=split_geotrace]{split_geotrace()}},

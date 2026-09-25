@@ -94,11 +94,14 @@ user_list <- function(
   # and will receive an empty list without warning from ODK Central.
   # This requires support for roles and assignments.
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = glue::glue("v1/users"), query = list(q = qry)),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/users"),
+    query = list(q = qry),
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

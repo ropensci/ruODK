@@ -34,12 +34,13 @@ assignment_list <- function(
 ) {
   yell_if_missing(url, un, pw)
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = "v1/assignments"),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = "v1/assignments",
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

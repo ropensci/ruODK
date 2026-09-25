@@ -54,17 +54,19 @@ user_detail <- function(
     ru_msg_abort("extended metadata needs actor_id 'current'.")
   }
 
-  headers <- c("Accept" = "application/json")
+  headers <- NULL
   if (isTRUE(extended)) {
-    headers <- c(headers, "X-Extended-Metadata" = "true")
+    headers <- c("X-Extended-Metadata" = "true")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = glue::glue("v1/users/{actor_id}")),
-    httr::add_headers(.headers = headers),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/users/{actor_id}"),
+    headers = headers,
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>
