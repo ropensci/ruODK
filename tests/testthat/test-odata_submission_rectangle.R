@@ -17,10 +17,10 @@ test_that("odata_submission_rectangle works", {
 
 test_that("odata_submission_rectangle parses GeoJSON to nested list", {
   # submission_rectangle calls form_schema and fails without credentials
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
-
 
   # nolint start
   data("geo_fs") # parse T
@@ -48,12 +48,11 @@ test_that("odata_submission_rectangle parses GeoJSON to nested list", {
   # This test requires a form with geo fields
   testthat::expect_true(
     length(geo_fields) > 0,
-    label =
-      glue::glue(
-        "test-handle_ru_geopoints needs test data",
-        "with at least one geo field. Form schema:\n\n",
-        "{knitr::kable(geo_fs)}"
-      )
+    label = glue::glue(
+      "test-handle_ru_geopoints needs test data",
+      "with at least one geo field. Form schema:\n\n",
+      "{knitr::kable(geo_fs)}"
+    )
   )
 
   # GeoJSON should be nested lists
@@ -68,7 +67,8 @@ test_that("odata_submission_rectangle parses GeoJSON to nested list", {
 })
 
 test_that("odata_submission_rectangle parses WKT as text", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -103,7 +103,8 @@ test_that("odata_submission_rectangle parses WKT as text", {
 })
 
 test_that("odata_submission_rectangle works on non-spatial forms", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

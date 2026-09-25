@@ -1,5 +1,6 @@
 test_that("form_schema_ext v8 returns a tibble with defaults", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -41,7 +42,8 @@ test_that("form_schema_ext v8 returns a tibble with defaults", {
 # })
 
 test_that("form_schema_ext v8 in a form with label languages", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
   fsx <- form_schema_ext(
@@ -58,7 +60,8 @@ test_that("form_schema_ext v8 in a form with label languages", {
 })
 
 test_that("form_schema_ext v8 in a form with label and choices languages", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -80,7 +83,8 @@ test_that("form_schema_ext v8 in a form with label and choices languages", {
 })
 
 test_that("form_schema_ext v8 in a form with no languages and choice filter", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -95,9 +99,10 @@ test_that("form_schema_ext v8 in a form with no languages and choice filter", {
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version()
   )
-  question_with_choice_list <- fsx %>% subset(
-    name == "choice_filter_question_2"
-  )
+  question_with_choice_list <- fsx %>%
+    subset(
+      name == "choice_filter_question_2"
+    )
   testthat::expect_true(tibble::is_tibble(fsx))
   testthat::expect_true("label" %in% names(fsx))
   testthat::expect_true("choices" %in% names(fsx))
@@ -105,7 +110,8 @@ test_that("form_schema_ext v8 in a form with no languages and choice filter", {
 })
 
 test_that("form_schema_ext v8 with label, choices, lang, and choice filter", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -117,9 +123,10 @@ test_that("form_schema_ext v8 with label, choices, lang, and choice filter", {
     pw = get_test_pw(),
     odkc_version = get_test_odkc_version()
   )
-  question_with_choice_list <- fsx %>% subset(
-    name == "choice_filter_question_2"
-  )
+  question_with_choice_list <- fsx %>%
+    subset(
+      name == "choice_filter_question_2"
+    )
   testthat::expect_true(tibble::is_tibble(fsx))
   testthat::expect_true("label" %in% names(fsx))
   testthat::expect_true("choices" %in% names(fsx))
@@ -131,6 +138,5 @@ test_that("form_schema_ext v8 with label, choices, lang, and choice filter", {
     question_with_choice_list$`choices_english_(en)`
   ))
 })
-
 
 # usethis::use_r("form_schema_ext") # nolint

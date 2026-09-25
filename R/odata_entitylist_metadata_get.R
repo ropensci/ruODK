@@ -55,15 +55,17 @@
 #' # Get complex type definitions
 #' dm1$complex_types$metadata$properties
 #' }
-odata_entitylist_metadata_get <- function(pid = get_default_pid(),
-                                          did = "",
-                                          url = get_default_url(),
-                                          un = get_default_un(),
-                                          pw = get_default_pw(),
-                                          retries = get_retries(),
-                                          odkc_version = get_default_odkc_version(),
-                                          orders = get_default_orders(),
-                                          tz = get_default_tz()) {
+odata_entitylist_metadata_get <- function(
+  pid = get_default_pid(),
+  did = "",
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  odkc_version = get_default_odkc_version(),
+  orders = get_default_orders(),
+  tz = get_default_tz()
+) {
   yell_if_missing(url, un, pw, pid = pid, did = did)
 
   if (odkc_version |> semver_lt("2022.3")) {
@@ -72,7 +74,8 @@ odata_entitylist_metadata_get <- function(pid = get_default_pid(),
 
   doc <- httr::RETRY(
     "GET",
-    httr::modify_url(url,
+    httr::modify_url(
+      url,
       path = glue::glue(
         "v1/projects/{pid}/datasets/",
         "{URLencode(did, reserved = TRUE)}.svc/$metadata"
@@ -189,12 +192,15 @@ odata_entitylist_metadata_get <- function(pid = get_default_pid(),
   version <- xml2::xml_attr(edmx_root, "Version")
 
   # Create the final structure
-  structure(list(
-    version = version,
-    complex_types = complex_types_list,
-    entity_types = entity_types_list,
-    containers = container_list
-  ), class = c("odata_entitylist_metadata_get", "list"))
+  structure(
+    list(
+      version = version,
+      complex_types = complex_types_list,
+      entity_types = entity_types_list,
+      containers = container_list
+    ),
+    class = c("odata_entitylist_metadata_get", "list")
+  )
 }
 
 #' @export
@@ -207,6 +213,5 @@ print.odata_entitylist_metadata_get <- function(x, ...) {
   cat("  Containers:  ")
   print(names(x$containers))
 }
-
 
 # usethis::use_test("odata_entitylist_metadata_get") # nolint

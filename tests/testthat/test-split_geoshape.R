@@ -145,5 +145,4 @@ test_that("split_geoshape works with ODK Linestrings", {
   expect_equal(odk_v7_split$tx_altitude, 10.9)
 })
 
-
 # usethis::use_r("split_geoshape") # nolint

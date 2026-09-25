@@ -174,28 +174,30 @@
 #' # filter = "__system/submissionDate lt 2020-02-01".
 #' # Instead of timezone UTC ("Z"), you can also filter by any other timezone.
 #' }
-odata_submission_get <- function(table = "Submissions",
-                                 skip = NULL,
-                                 top = NULL,
-                                 count = FALSE,
-                                 wkt = FALSE,
-                                 expand = FALSE,
-                                 filter = NULL,
-                                 parse = TRUE,
-                                 download = TRUE,
-                                 names_sep = "_",
-                                 clean_names = TRUE,
-                                 orders = get_default_orders(),
-                                 local_dir = "media",
-                                 pid = get_default_pid(),
-                                 fid = get_default_fid(),
-                                 url = get_default_url(),
-                                 un = get_default_un(),
-                                 pw = get_default_pw(),
-                                 odkc_version = get_default_odkc_version(),
-                                 tz = get_default_tz(),
-                                 retries = get_retries(),
-                                 verbose = get_ru_verbose()) {
+odata_submission_get <- function(
+  table = "Submissions",
+  skip = NULL,
+  top = NULL,
+  count = FALSE,
+  wkt = FALSE,
+  expand = FALSE,
+  filter = NULL,
+  parse = TRUE,
+  download = TRUE,
+  names_sep = "_",
+  clean_names = TRUE,
+  orders = get_default_orders(),
+  local_dir = "media",
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  odkc_version = get_default_odkc_version(),
+  tz = get_default_tz(),
+  retries = get_retries(),
+  verbose = get_ru_verbose()
+) {
   yell_if_missing(url, un, pw)
 
   #----------------------------------------------------------------------------#
@@ -341,7 +343,5 @@ odata_submission_get <- function(table = "Submissions",
   ru_msg_success("Returning parsed submissions.", verbose = verbose)
   sub
 }
-
-
 
 # usethis::use_test("odata_submission_get") # nolint

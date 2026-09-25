@@ -57,16 +57,18 @@
 #' ds3 <- entitylist_update(pid = pid, did = did, approval_required = FALSE)
 #' ds3$approvalRequired # FALSE
 #' }
-entitylist_update <- function(pid = get_default_pid(),
-                              did = "",
-                              approval_required = FALSE,
-                              url = get_default_url(),
-                              un = get_default_un(),
-                              pw = get_default_pw(),
-                              retries = get_retries(),
-                              odkc_version = get_default_odkc_version(),
-                              orders = get_default_orders(),
-                              tz = get_default_tz()) {
+entitylist_update <- function(
+  pid = get_default_pid(),
+  did = "",
+  approval_required = FALSE,
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  odkc_version = get_default_odkc_version(),
+  orders = get_default_orders(),
+  tz = get_default_tz()
+) {
   yell_if_missing(url, un, pw, pid = pid, did = did)
 
   if (odkc_version |> semver_lt("2022.3")) {
@@ -75,7 +77,8 @@ entitylist_update <- function(pid = get_default_pid(),
 
   httr::RETRY(
     "PATCH",
-    httr::modify_url(url,
+    httr::modify_url(
+      url,
       path = glue::glue(
         "v1/projects/{pid}/datasets/",
         "{URLencode(did, reserved = TRUE)}"

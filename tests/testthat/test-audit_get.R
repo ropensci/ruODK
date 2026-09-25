@@ -1,5 +1,6 @@
 test_that("audit_get works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

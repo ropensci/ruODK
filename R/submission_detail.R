@@ -32,13 +32,15 @@
 #' # > "instance_id" "submitter_id" "submitter_type" "submitter_display_name"
 #' # > "submitter_created_at" "device_id" "created_at"
 #' }
-submission_detail <- function(iid,
-                              pid = get_default_pid(),
-                              fid = get_default_fid(),
-                              url = get_default_url(),
-                              un = get_default_un(),
-                              pw = get_default_pw(),
-                              retries = get_retries()) {
+submission_detail <- function(
+  iid,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   httr::RETRY(
     "GET",
@@ -58,7 +60,8 @@ submission_detail <- function(iid,
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    { # nolint
+    {
+      # nolint
       tibble::tibble(
         instance_id = .$instanceId,
         submitter_id = .$submitter$id,

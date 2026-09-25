@@ -1,6 +1,7 @@
 test_that("submission_export works", {
   # This test downloads files
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -106,7 +107,8 @@ test_that("submission_export works", {
 })
 
 test_that("submission_export works with encryption", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
   skip_on_ci()
@@ -139,7 +141,8 @@ test_that("submission_export works with encryption", {
   )
   # })
 
-  testthat::expect_true(fs::is_file(se),
+  testthat::expect_true(
+    fs::is_file(se),
     label = glue::glue("Submission ZIP must be a file: {se}")
   )
 })
@@ -170,7 +173,8 @@ test_that("submission_export works with encryption", {
 # nolint end
 
 test_that("submission_export warns of missing credentials", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
   skip_on_ci()
@@ -249,7 +253,8 @@ test_that("submission_export warns of missing credentials", {
 
 test_that("submission_export excludes media", {
   # This test downloads files
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
   skip_on_ci()
@@ -292,7 +297,8 @@ test_that("submission_export excludes media", {
   fsize_no_media_and_repeats <-
     fs::file_info(no_media_and_repeats)$size
 
-  testthat::expect_true(fsize_media_and_repeats > fsize_no_media_and_repeats,
+  testthat::expect_true(
+    fsize_media_and_repeats > fsize_no_media_and_repeats,
     label = "submission_export omitting media should result in smaller ZIP"
   )
 
@@ -313,7 +319,8 @@ test_that("submission_export excludes media", {
     )
   )
 
-  testthat::expect_true(tools::file_ext(no_media_no_repeats) == "csv",
+  testthat::expect_true(
+    tools::file_ext(no_media_no_repeats) == "csv",
     label = "submission_export(repeats=FALSE) should return a CSV"
   )
 
@@ -334,7 +341,8 @@ test_that("submission_export excludes media", {
     )
   )
 
-  testthat::expect_true(tools::file_ext(media_no_repeats) == "csv",
+  testthat::expect_true(
+    tools::file_ext(media_no_repeats) == "csv",
     label = "submission_export(repeats=FALSE, media=TRUE) should return a CSV"
   )
 

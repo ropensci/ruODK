@@ -1,9 +1,9 @@
 test_that("submission_export works", {
   # This test downloads files
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
-
 
   # A fresh litterbox
   t <- tempdir()

@@ -42,9 +42,11 @@
 #'
 #' fsp
 #' }
-form_schema_parse <- function(fs,
-                              path = "Submissions",
-                              verbose = get_ru_verbose()) {
+form_schema_parse <- function(
+  fs,
+  path = "Submissions",
+  verbose = get_ru_verbose()
+) {
   # nolint start
   # 0. Recursion airbag
   # if (!(is.list(fs))) {ru_msg_info(glue::glue("Not a list:")); print(fs)}

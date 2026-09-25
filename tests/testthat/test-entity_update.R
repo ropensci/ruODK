@@ -19,7 +19,6 @@ test_that("entity_update works", {
 
   e_label <- ed$current_version$label
 
-
   # Update the field "details".
   details_0 <- ed$current_version$data$details
   details_1 <- paste0(details_0, ". Updated on ", Sys.time())

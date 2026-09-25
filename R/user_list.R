@@ -64,14 +64,16 @@
 #' # Actor not allowed to user.list
 #' user_list() # If this is empty, you might not have permissions to list users
 #' }
-user_list <- function(qry = NULL,
-                      url = get_default_url(),
-                      un = get_default_un(),
-                      pw = get_default_pw(),
-                      retries = get_retries(),
-                      orders = get_default_orders(),
-                      tz = get_default_tz(),
-                      verbose = get_ru_verbose()) {
+user_list <- function(
+  qry = NULL,
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  orders = get_default_orders(),
+  tz = get_default_tz(),
+  verbose = get_ru_verbose()
+) {
   yell_if_missing(url, un, pw)
 
   if (!is.null(qry)) {
@@ -83,7 +85,8 @@ user_list <- function(qry = NULL,
       glue::glue(
         "Short query strings might not return any matches, ",
         "provide a query string containing at least 5 alphanumeric characters."
-      ) %>% ru_msg_warn(verbose = verbose)
+      ) %>%
+        ru_msg_warn(verbose = verbose)
     }
   }
 

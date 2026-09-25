@@ -97,17 +97,19 @@
 #' # view the extended schema:
 #' fsx
 #' }
-form_schema_ext <- function(flatten = FALSE,
-                            odata = FALSE,
-                            parse = TRUE,
-                            pid = get_default_pid(),
-                            fid = get_default_fid(),
-                            url = get_default_url(),
-                            un = get_default_un(),
-                            pw = get_default_pw(),
-                            odkc_version = get_default_odkc_version(),
-                            retries = get_retries(),
-                            verbose = get_ru_verbose()) {
+form_schema_ext <- function(
+  flatten = FALSE,
+  odata = FALSE,
+  parse = TRUE,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  odkc_version = get_default_odkc_version(),
+  retries = get_retries(),
+  verbose = get_ru_verbose()
+) {
   # version warning
   # nocov start
   if (semver_lt(odkc_version, "0.8.0")) {
@@ -155,7 +157,6 @@ form_schema_ext <- function(flatten = FALSE,
     stringsAsFactors = FALSE
   )
 
-
   ### PART 1: parse labels
   raw_labels <- xml2::xml_find_all(frm_xml, "//label")
 
@@ -167,7 +168,8 @@ form_schema_ext <- function(flatten = FALSE,
     ## path
     # get ref from parent, without leading "/data"
     this_path <- sub(
-      "/data", "",
+      "/data",
+      "",
       xml2::xml_attr(xml2::xml_parent(this_rawlabel), "ref")
     )
 
@@ -203,15 +205,21 @@ form_schema_ext <- function(flatten = FALSE,
           # which will be skipped. This is identified by the presence of
           # the 'form' attribute:
           is_regular_label <- !xml2::xml_has_attr(
-            xml2::xml_find_first(this_translation, "./value"), "form"
+            xml2::xml_find_first(this_translation, "./value"),
+            "form"
           )
 
           if (is_regular_label) {
             # read the parent node to identify language:
             translation_parent <- xml2::xml_parent(this_translation)
-            this_lang <- gsub(" ", "_", tolower(xml2::xml_attr(
-              translation_parent, "lang"
-            )))
+            this_lang <- gsub(
+              " ",
+              "_",
+              tolower(xml2::xml_attr(
+                translation_parent,
+                "lang"
+              ))
+            )
 
             # decide if 'default' language or specific language
             if (this_lang == "default") {
@@ -230,7 +238,8 @@ form_schema_ext <- function(flatten = FALSE,
                   )
                 )
                 colnames(extension)[ncol(extension)] <- paste0(
-                  "label_", this_lang
+                  "label_",
+                  this_lang
                 )
               }
 
@@ -252,16 +261,20 @@ form_schema_ext <- function(flatten = FALSE,
       ### PART 1.1: parse choice labels
       ## check existence of  choice list:
       choice_items <- xml2::xml_find_all(
-        xml2::xml_parent(this_rawlabel), "./item"
+        xml2::xml_parent(this_rawlabel),
+        "./item"
       )
 
       if (length(choice_items) > 0) {
         # check if 'choices' column already exist
         if (!("choices" %in% colnames(extension))) {
           # if not, create new column
-          extension <- cbind(extension, data.frame(
-            choices = rep(NA, nrow(extension))
-          ))
+          extension <- cbind(
+            extension,
+            data.frame(
+              choices = rep(NA, nrow(extension))
+            )
+          )
         }
 
         # initialize lists
@@ -281,12 +294,14 @@ form_schema_ext <- function(flatten = FALSE,
 
           # raw label
           this_rawchoicelabel <- xml2::xml_find_first(
-            this_choiceitem, "./label"
+            this_choiceitem,
+            "./label"
           )
 
           # first check if choice label is mapped with a translation function
           has_translation_choice <- xml2::xml_has_attr(
-            this_rawchoicelabel, "ref"
+            this_rawchoicelabel,
+            "ref"
           )
 
           if (has_translation_choice) {
@@ -304,7 +319,6 @@ form_schema_ext <- function(flatten = FALSE,
               all_translations_ids == id_choice
             ]
 
-
             # iterate through choice translations
             for (kk in seq_along(choice_translations)) {
               # read translation
@@ -315,7 +329,8 @@ form_schema_ext <- function(flatten = FALSE,
               # which will be skipped.
               # This is identified by the presence of the 'form' attribute:
               is_regular_choicelabel <- !xml2::xml_has_attr(
-                xml2::xml_find_first(this_choicetranslation, "./value"), "form"
+                xml2::xml_find_first(this_choicetranslation, "./value"),
+                "form"
               )
 
               if (is_regular_choicelabel) {
@@ -323,9 +338,14 @@ form_schema_ext <- function(flatten = FALSE,
                 choice_translation_parent <- xml2::xml_parent(
                   this_choicetranslation
                 )
-                this_choicelang <- gsub(" ", "_", tolower(xml2::xml_attr(
-                  choice_translation_parent, "lang"
-                )))
+                this_choicelang <- gsub(
+                  " ",
+                  "_",
+                  tolower(xml2::xml_attr(
+                    choice_translation_parent,
+                    "lang"
+                  ))
+                )
 
                 # decide if 'default' language or specific language
                 if (this_choicelang == "default") {
@@ -336,17 +356,19 @@ form_schema_ext <- function(flatten = FALSE,
                 } else {
                   # check if language already exists in the dataframe
                   if (
-                    !(
-                      paste0("choices_", this_choicelang) %in%
-                        colnames(extension)
-                    )
+                    !(paste0("choices_", this_choicelang) %in%
+                      colnames(extension))
                   ) {
                     # if not, create new column
-                    extension <- cbind(extension, data.frame(
-                      new_choicelang = rep(NA, nrow(extension))
-                    ))
+                    extension <- cbind(
+                      extension,
+                      data.frame(
+                        new_choicelang = rep(NA, nrow(extension))
+                      )
+                    )
                     colnames(extension)[ncol(extension)] <- paste0(
-                      "choices_", this_choicelang
+                      "choices_",
+                      this_choicelang
                     )
                   }
 
@@ -356,7 +378,8 @@ form_schema_ext <- function(flatten = FALSE,
                     this_choicelang
                   )]][jj] <- xml2::xml_text(
                     xml2::xml_find_first(
-                      this_choicetranslation, "./value"
+                      this_choicetranslation,
+                      "./value"
                     )
                   )
                 }
@@ -389,9 +412,9 @@ form_schema_ext <- function(flatten = FALSE,
 
       ## check existence of  choice itemset:
       choice_itemset <- xml2::xml_find_all(
-        xml2::xml_parent(this_rawlabel), "./itemset"
+        xml2::xml_parent(this_rawlabel),
+        "./itemset"
       )
-
 
       if (length(choice_itemset) > 0) {
         # identify value node
@@ -438,13 +461,15 @@ form_schema_ext <- function(flatten = FALSE,
           )
         )
 
-
         # check if 'choices' column already exist
         if (!("choices" %in% colnames(extension))) {
           # if not, create new column
-          extension <- cbind(extension, data.frame(
-            choices = rep(NA, nrow(extension))
-          ))
+          extension <- cbind(
+            extension,
+            data.frame(
+              choices = rep(NA, nrow(extension))
+            )
+          )
         }
 
         # initialize lists
@@ -487,7 +512,8 @@ form_schema_ext <- function(flatten = FALSE,
               # which will be skipped.
               # This is identified by the presence of the 'form' attribute:
               is_regular_choicelabel <- !xml2::xml_has_attr(
-                xml2::xml_find_first(this_choicetranslation, "./value"), "form"
+                xml2::xml_find_first(this_choicetranslation, "./value"),
+                "form"
               )
 
               if (is_regular_choicelabel) {
@@ -495,9 +521,14 @@ form_schema_ext <- function(flatten = FALSE,
                 choice_translation_parent <- xml2::xml_parent(
                   this_choicetranslation
                 )
-                this_choicelang <- gsub(" ", "_", tolower(xml2::xml_attr(
-                  choice_translation_parent, "lang"
-                )))
+                this_choicelang <- gsub(
+                  " ",
+                  "_",
+                  tolower(xml2::xml_attr(
+                    choice_translation_parent,
+                    "lang"
+                  ))
+                )
 
                 # decide if 'default' language or specific language
                 if (this_choicelang == "default") {
@@ -508,17 +539,19 @@ form_schema_ext <- function(flatten = FALSE,
                 } else {
                   # check if language already exists in the dataframe
                   if (
-                    !(
-                      paste0("choices_", this_choicelang) %in%
-                        colnames(extension)
-                    )
+                    !(paste0("choices_", this_choicelang) %in%
+                      colnames(extension))
                   ) {
                     # if not, create new column
-                    extension <- cbind(extension, data.frame(
-                      new_choicelang = rep(NA, nrow(extension))
-                    ))
+                    extension <- cbind(
+                      extension,
+                      data.frame(
+                        new_choicelang = rep(NA, nrow(extension))
+                      )
+                    )
                     colnames(extension)[ncol(extension)] <- paste0(
-                      "choices_", this_choicelang
+                      "choices_",
+                      this_choicelang
                     )
                   }
 
@@ -528,7 +561,8 @@ form_schema_ext <- function(flatten = FALSE,
                     this_choicelang
                   )]][jj] <- xml2::xml_text(
                     xml2::xml_find_first(
-                      this_choicetranslation, "./value"
+                      this_choicetranslation,
+                      "./value"
                     )
                   )
                 }

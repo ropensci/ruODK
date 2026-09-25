@@ -1,5 +1,6 @@
 test_that("encryption_key_list works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -27,6 +28,5 @@ test_that("encryption_key_list works", {
     )
   )
 })
-
 
 # usethis::use_r("encryption_key_list")  # nolint

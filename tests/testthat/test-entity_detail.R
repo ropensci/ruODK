@@ -54,7 +54,8 @@ test_that("entity_detail errors if did is missing", {
 })
 
 test_that("entity_detail warns if odkc_version too low", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -82,6 +83,5 @@ test_that("entity_detail warns if odkc_version too low", {
     entity_detail(did = el$name[1])
   )
 })
-
 
 # usethis::use_r("entity_detail")  # nolint

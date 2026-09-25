@@ -1,5 +1,6 @@
 test_that("ru_setup does not update settings if given NULL", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -59,7 +60,8 @@ test_that("ru_setup does not update settings if given NULL", {
 })
 
 test_that("ru_setup resets settings if given empty string", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -179,7 +181,8 @@ test_that("ru_setup resets settings if given empty string", {
 })
 
 test_that("get_default_tz warns and defaults to UTC if tz set to ''", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -201,7 +204,8 @@ test_that("get_default_tz warns and defaults to UTC if tz set to ''", {
 })
 
 test_that("ru_setup sets pid, fid, url if given service url", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
   # Save sane state
@@ -227,7 +231,6 @@ test_that("ru_setup sets pid, fid, url if given service url", {
   testthat::expect_equal(x$test_fid, "TESTFORMID")
   testthat::expect_equal(x$verbose, TRUE)
 
-
   # Restore sane state
   ru_setup(
     test_url = test_url,
@@ -239,7 +242,8 @@ test_that("ru_setup sets pid, fid, url if given service url", {
 })
 
 test_that("ru_setup sets individual settings", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -248,7 +252,6 @@ test_that("ru_setup sets individual settings", {
 
   ru_setup(verbose = TRUE)
   testthat::expect_equal(get_ru_verbose(), TRUE)
-
 
   # Keep original test settings
   url <- get_test_url()
@@ -263,7 +266,8 @@ test_that("ru_setup sets individual settings", {
 })
 
 test_that("ru_settings prints nicely", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -292,8 +296,14 @@ test_that("yell_if_missing yells loudly", {
   )
   testthat::expect_error(
     yell_if_missing(
-      "x", "x", "x",
-      pid = "x", fid = "x", iid = "x", did = "x", eid = ""
+      "x",
+      "x",
+      "x",
+      pid = "x",
+      fid = "x",
+      iid = "x",
+      did = "x",
+      eid = ""
     )
   )
   testthat::expect_error(yell_if_missing("", "", "", "", "", "", ""))
@@ -318,7 +328,8 @@ test_that("odata_svc_parse works", {
 })
 
 test_that("ru_settings prints only if verbose", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -331,7 +342,8 @@ test_that("ru_settings prints only if verbose", {
 })
 
 test_that("retries default to 1L if empty or invalid", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

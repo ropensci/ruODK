@@ -1,5 +1,6 @@
 test_that("attachment_get works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
   # nolint start
@@ -87,12 +88,19 @@ test_that("attachment_url works", {
   fid <- get_test_fid()
 
   expected_url <- paste0(
-    url, "/v1/projects/", pid, "/forms/", URLencode(fid, reserved = TRUE),
-    "/submissions/", URLencode(uuid, reserved = TRUE),
-    "/attachments/", URLencode(fn, reserved = TRUE)
+    url,
+    "/v1/projects/",
+    pid,
+    "/forms/",
+    URLencode(fid, reserved = TRUE),
+    "/submissions/",
+    URLencode(uuid, reserved = TRUE),
+    "/attachments/",
+    URLencode(fn, reserved = TRUE)
   )
 
-  calculated_url <- ruODK:::attachment_url(uuid,
+  calculated_url <- ruODK:::attachment_url(
+    uuid,
     fn,
     pid = pid,
     fid = fid,
@@ -111,7 +119,13 @@ test_that("attachment_url encodes reserved characters in filename and uuid", {
   uuid <- "uuid:abc"
   fn <- "my photo #1 (final).jpg"
 
-  calculated <- ruODK:::attachment_url(uuid, fn, pid = pid, fid = fid, url = url)
+  calculated <- ruODK:::attachment_url(
+    uuid,
+    fn,
+    pid = pid,
+    fid = fid,
+    url = url
+  )
 
   testthat::expect_equal(
     calculated,
@@ -126,7 +140,8 @@ test_that("attachment_url encodes reserved characters in filename and uuid", {
 test_that("get_one_attachment handles repeat download and NA filenames", {
   # This test checks behaviour upon multiple downloads of the same file.
   # Uncached, real-life behaviour is preferred here.
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

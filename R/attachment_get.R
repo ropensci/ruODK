@@ -64,11 +64,13 @@ prepend_uuid <- function(md5hash) {
 #'   fid = "form1",
 #'   url = "https://my.odkcentral.org"
 #' )
-attachment_url <- function(uuid,
-                           fn,
-                           pid = get_default_pid(),
-                           fid = get_default_fid(),
-                           url = get_default_url()) {
+attachment_url <- function(
+  uuid,
+  fn,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url()
+) {
   # Every path segment is URL-encoded. `fn` is an attachment filename as per
   # ODK form submission and may contain spaces, "#", "?", "&" or non-ASCII;
   # `uuid` carries a "uuid:" prefix whose ":" is reserved. Left unencoded, both
@@ -77,7 +79,8 @@ attachment_url <- function(uuid,
     "{url}/v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}",
     "/submissions/{URLencode(uuid, reserved = TRUE)}",
     "/attachments/{URLencode(fn, reserved = TRUE)}"
-  ) |> as.character()
+  ) |>
+    as.character()
   # nolint start
   # See https://github.com/ropensci/ruODK/issues/66
   # This breaks attachment_get tests:
@@ -131,14 +134,16 @@ attachment_url <- function(uuid,
 #'
 #' # In real life: done in bulk behind the scenes during odata_submission_get()
 #' }
-get_one_attachment <- function(pth,
-                               fn,
-                               src,
-                               url = get_default_url(),
-                               un = get_default_un(),
-                               pw = get_default_pw(),
-                               retries = get_retries(),
-                               verbose = get_ru_verbose()) {
+get_one_attachment <- function(
+  pth,
+  fn,
+  src,
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  verbose = get_ru_verbose()
+) {
   # Early exit if there's nothing to download
   if (is.na(fn)) {
     "Filename is NA, skipping download.\n" |>
@@ -267,17 +272,19 @@ get_one_attachment <- function(pth,
 #'     # Repeat for all other attachment fields
 #'   )
 #' }
-attachment_get <- function(sid,
-                           fn,
-                           local_dir = "media",
-                           separate = FALSE,
-                           pid = get_default_pid(),
-                           fid = get_default_fid(),
-                           url = get_default_url(),
-                           un = get_default_un(),
-                           pw = get_default_pw(),
-                           retries = get_retries(),
-                           verbose = get_ru_verbose()) {
+attachment_get <- function(
+  sid,
+  fn,
+  local_dir = "media",
+  separate = FALSE,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  verbose = get_ru_verbose()
+) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   if (separate == TRUE) {
     dest_dir <- fs::path(local_dir, strip_uuid(sid))

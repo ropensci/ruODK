@@ -18,7 +18,10 @@
 
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args) < 1) {
-  cat("usage: Rscript generate_checklist.R <new_version> [github_url]\n", file = stderr())
+  cat(
+    "usage: Rscript generate_checklist.R <new_version> [github_url]\n",
+    file = stderr()
+  )
   quit(status = 1)
 }
 

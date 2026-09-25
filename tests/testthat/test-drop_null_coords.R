@@ -51,5 +51,4 @@ test_that("drop_null_coords works on data without empty last coords ", {
   testthat::expect_equal(len_coords_repaired, len_coords)
 })
 
-
 # usethis::use_r("drop_null_coords")  # nolint

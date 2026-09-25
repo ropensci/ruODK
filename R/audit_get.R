@@ -68,15 +68,17 @@
 #' names(logs)
 #' # > "actor_id" "action" "actee_id" "details" "logged_at"
 #' }
-audit_get <- function(action = NULL,
-                      start = NULL,
-                      end = NULL,
-                      limit = NULL,
-                      offset = NULL,
-                      url = Sys.getenv("ODKC_URL"),
-                      un = Sys.getenv("ODKC_UN"),
-                      pw = Sys.getenv("ODKC_PW"),
-                      retries = get_retries()) {
+audit_get <- function(
+  action = NULL,
+  start = NULL,
+  end = NULL,
+  limit = NULL,
+  offset = NULL,
+  url = Sys.getenv("ODKC_URL"),
+  un = Sys.getenv("ODKC_UN"),
+  pw = Sys.getenv("ODKC_PW"),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw)
   qry <- list(
     action = action,
@@ -96,7 +98,8 @@ audit_get <- function(action = NULL,
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    { # nolint
+    {
+      # nolint
       tibble::tibble(
         actor_id = purrr::map_int(., "actorId", .default = NA),
         action = purrr::map_chr(., "action"),

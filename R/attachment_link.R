@@ -44,9 +44,7 @@
 #'   handle_ru_datetimes(fs) %>%
 #'   attachment_link(fs)
 #' }
-attachment_link <- function(data_tbl,
-                            form_schema,
-                            att_path = "media") {
+attachment_link <- function(data_tbl, form_schema, att_path = "media") {
   # Find attachment columns
   # Caveat: if an attachment field has no submissions, it is dropped from data
   att_cols <- form_schema %>%

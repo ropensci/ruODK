@@ -31,11 +31,13 @@
 #'
 #' dplyr::glimpse(fq_with_dates)
 #' }
-handle_ru_datetimes <- function(data,
-                                form_schema,
-                                orders = get_default_orders(),
-                                tz = get_default_tz(),
-                                verbose = get_ru_verbose()) {
+handle_ru_datetimes <- function(
+  data,
+  form_schema,
+  orders = get_default_orders(),
+  tz = get_default_tz(),
+  verbose = get_ru_verbose()
+) {
   # Find all date/time columns in form_schema
   dttm_cols <- form_schema %>%
     dplyr::filter(type %in% c("dateTime", "date")) %>%

@@ -1,6 +1,7 @@
 # Test the odata_entitylist_service_get function
 test_that("odata_entitylist_service_get works correctly with valid inputs", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -32,7 +33,8 @@ test_that("odata_entitylist_service_get works correctly with valid inputs", {
 })
 
 test_that("odata_entitylist_service_get print works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -57,7 +59,8 @@ test_that("odata_entitylist_service_get print works", {
 
 
 test_that("odata_entitylist_service_get warns on missing arguments", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -80,7 +83,8 @@ test_that("odata_entitylist_service_get warns on missing arguments", {
 
 
 test_that("odata_entitylist_data_get warns if odkc_version too low", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

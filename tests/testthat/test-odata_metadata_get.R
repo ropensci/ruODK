@@ -1,7 +1,8 @@
 context("test-odata_metadata_get.R")
 
 test_that("odata_metadata_get works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

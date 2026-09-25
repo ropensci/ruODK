@@ -68,7 +68,9 @@ print.ru_settings <- function(x, ...) {
   cat("  Default ODK Central URL:", x$url, "\n")
   cat("  Default ODK Central Username:", x$un, "\n")
   cat("  Default ODK Central Password: run ruODK::get_default_pw() to show \n")
-  cat("  Default ODK Central Passphrase: run ruODK::get_default_pp() to show \n")
+  cat(
+    "  Default ODK Central Passphrase: run ruODK::get_default_pp() to show \n"
+  )
   cat("  Default Time Zone:", x$tz, "\n")
   cat("  Default ODK Central Version:", x$odkc_version, "\n")
   cat("  Default HTTP GET retries:", x$retries, "\n")
@@ -244,29 +246,31 @@ odata_svc_parse <- function(svc) {
 #'   retries = 3,
 #'   verbose = TRUE
 #' )
-ru_setup <- function(svc = NULL,
-                     pid = NULL,
-                     fid = NULL,
-                     url = NULL,
-                     un = NULL,
-                     pw = NULL,
-                     pp = NULL,
-                     tz = NULL,
-                     odkc_version = NULL,
-                     retries = NULL,
-                     verbose = NULL,
-                     test_svc = NULL,
-                     test_pid = NULL,
-                     test_fid = NULL,
-                     test_fid_zip = NULL,
-                     test_fid_att = NULL,
-                     test_fid_gap = NULL,
-                     test_fid_wkt = NULL,
-                     test_url = NULL,
-                     test_un = NULL,
-                     test_pw = NULL,
-                     test_pp = NULL,
-                     test_odkc_version = NULL) {
+ru_setup <- function(
+  svc = NULL,
+  pid = NULL,
+  fid = NULL,
+  url = NULL,
+  un = NULL,
+  pw = NULL,
+  pp = NULL,
+  tz = NULL,
+  odkc_version = NULL,
+  retries = NULL,
+  verbose = NULL,
+  test_svc = NULL,
+  test_pid = NULL,
+  test_fid = NULL,
+  test_fid_zip = NULL,
+  test_fid_att = NULL,
+  test_fid_gap = NULL,
+  test_fid_wkt = NULL,
+  test_url = NULL,
+  test_un = NULL,
+  test_pw = NULL,
+  test_pp = NULL,
+  test_odkc_version = NULL
+) {
   if (!is.null(svc)) {
     odata_components <- odata_svc_parse(svc)
     Sys.setenv("ODKC_PID" = odata_components$pid)
@@ -277,16 +281,36 @@ ru_setup <- function(svc = NULL,
   # nolint start
   # The linter "undesirable_function_linter" would warn against changing global
   # state, which is exactly how ruODK persists settings and preferences.
-  if (!is.null(pid)) Sys.setenv("ODKC_PID" = as.character(pid))
-  if (!is.null(fid)) Sys.setenv("ODKC_FID" = fid)
-  if (!is.null(url)) Sys.setenv("ODKC_URL" = url)
-  if (!is.null(un)) Sys.setenv("ODKC_UN" = un)
-  if (!is.null(pw)) Sys.setenv("ODKC_PW" = pw)
-  if (!is.null(pp)) Sys.setenv("ODKC_PP" = pp)
-  if (!is.null(tz)) Sys.setenv("RU_TIMEZONE" = tz)
-  if (!is.null(odkc_version)) Sys.setenv("ODKC_VERSION" = odkc_version)
-  if (!is.null(retries)) Sys.setenv("RU_RETRIES" = retries)
-  if (!is.null(verbose)) Sys.setenv("RU_VERBOSE" = verbose)
+  if (!is.null(pid)) {
+    Sys.setenv("ODKC_PID" = as.character(pid))
+  }
+  if (!is.null(fid)) {
+    Sys.setenv("ODKC_FID" = fid)
+  }
+  if (!is.null(url)) {
+    Sys.setenv("ODKC_URL" = url)
+  }
+  if (!is.null(un)) {
+    Sys.setenv("ODKC_UN" = un)
+  }
+  if (!is.null(pw)) {
+    Sys.setenv("ODKC_PW" = pw)
+  }
+  if (!is.null(pp)) {
+    Sys.setenv("ODKC_PP" = pp)
+  }
+  if (!is.null(tz)) {
+    Sys.setenv("RU_TIMEZONE" = tz)
+  }
+  if (!is.null(odkc_version)) {
+    Sys.setenv("ODKC_VERSION" = odkc_version)
+  }
+  if (!is.null(retries)) {
+    Sys.setenv("RU_RETRIES" = retries)
+  }
+  if (!is.null(verbose)) {
+    Sys.setenv("RU_VERBOSE" = verbose)
+  }
 
   if (!is.null(test_svc)) {
     odata_components <- odata_svc_parse(test_svc)
@@ -295,16 +319,36 @@ ru_setup <- function(svc = NULL,
     Sys.setenv("ODKC_TEST_URL" = odata_components$url)
   }
 
-  if (!is.null(test_pid)) Sys.setenv("ODKC_TEST_PID" = as.character(test_pid))
-  if (!is.null(test_fid)) Sys.setenv("ODKC_TEST_FID" = test_fid)
-  if (!is.null(test_fid_zip)) Sys.setenv("ODKC_TEST_FID_ZIP" = test_fid_zip)
-  if (!is.null(test_fid_att)) Sys.setenv("ODKC_TEST_FID_ATT" = test_fid_att)
-  if (!is.null(test_fid_gap)) Sys.setenv("ODKC_TEST_FID_GAP" = test_fid_gap)
-  if (!is.null(test_fid_wkt)) Sys.setenv("ODKC_TEST_FID_WKT" = test_fid_wkt)
-  if (!is.null(test_url)) Sys.setenv("ODKC_TEST_URL" = test_url)
-  if (!is.null(test_un)) Sys.setenv("ODKC_TEST_UN" = test_un)
-  if (!is.null(test_pw)) Sys.setenv("ODKC_TEST_PW" = test_pw)
-  if (!is.null(test_pp)) Sys.setenv("ODKC_TEST_PP" = test_pp)
+  if (!is.null(test_pid)) {
+    Sys.setenv("ODKC_TEST_PID" = as.character(test_pid))
+  }
+  if (!is.null(test_fid)) {
+    Sys.setenv("ODKC_TEST_FID" = test_fid)
+  }
+  if (!is.null(test_fid_zip)) {
+    Sys.setenv("ODKC_TEST_FID_ZIP" = test_fid_zip)
+  }
+  if (!is.null(test_fid_att)) {
+    Sys.setenv("ODKC_TEST_FID_ATT" = test_fid_att)
+  }
+  if (!is.null(test_fid_gap)) {
+    Sys.setenv("ODKC_TEST_FID_GAP" = test_fid_gap)
+  }
+  if (!is.null(test_fid_wkt)) {
+    Sys.setenv("ODKC_TEST_FID_WKT" = test_fid_wkt)
+  }
+  if (!is.null(test_url)) {
+    Sys.setenv("ODKC_TEST_URL" = test_url)
+  }
+  if (!is.null(test_un)) {
+    Sys.setenv("ODKC_TEST_UN" = test_un)
+  }
+  if (!is.null(test_pw)) {
+    Sys.setenv("ODKC_TEST_PW" = test_pw)
+  }
+  if (!is.null(test_pp)) {
+    Sys.setenv("ODKC_TEST_PP" = test_pp)
+  }
   if (!is.null(test_odkc_version)) {
     Sys.setenv("ODKC_TEST_VERSION" = test_odkc_version)
   }
@@ -611,7 +655,8 @@ parse_odkc_version <- function(v, env_var = "ODKC_VERSION") {
   if (decimals_found > 2) {
     v_repaired <- stringr::str_replace(
       v_string,
-      "^(([^.]*\\.){2}[^.]*)\\..*$", "\\1"
+      "^(([^.]*\\.){2}[^.]*)\\..*$",
+      "\\1"
     )
     v_invalid <- TRUE
   }
@@ -729,7 +774,15 @@ get_retries <- function() {
 #' testthat::expect_error(yell_if_missing("", "", "", "", "", "", ""))
 #' testthat::expect_error(yell_if_missing("", "", "", "", "", "", "", ""))
 yell_if_missing <- function(
-    url, un, pw, pid = NULL, fid = NULL, iid = NULL, did = NULL, eid = NULL) {
+  url,
+  un,
+  pw,
+  pid = NULL,
+  fid = NULL,
+  iid = NULL,
+  did = NULL,
+  eid = NULL
+) {
   if (is.null(url) || identical(url, "")) {
     ru_msg_abort("Missing ODK Central URL. ru_setup()?")
   }

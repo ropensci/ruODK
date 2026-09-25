@@ -22,12 +22,14 @@
 #' svc <- odata_service_get()
 #' svc
 #' }
-odata_service_get <- function(pid = get_default_pid(),
-                              fid = get_default_fid(),
-                              url = get_default_url(),
-                              un = get_default_un(),
-                              pw = get_default_pw(),
-                              retries = get_retries()) {
+odata_service_get <- function(
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
@@ -44,7 +46,8 @@ odata_service_get <- function(pid = get_default_pid(),
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
     magrittr::extract2("value") %>%
-    { # nolint
+    {
+      # nolint
       tibble::tibble(
         name = purrr::map_chr(., "name"),
         kind = purrr::map_chr(., "kind"),

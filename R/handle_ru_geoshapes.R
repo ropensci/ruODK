@@ -45,11 +45,13 @@
 #'
 #' dplyr::glimpse(geo_wkt_parsed)
 #' }
-handle_ru_geoshapes <- function(data,
-                                form_schema,
-                                wkt = FALSE,
-                                odkc_version = get_default_odkc_version(),
-                                verbose = get_ru_verbose()) {
+handle_ru_geoshapes <- function(
+  data,
+  form_schema,
+  wkt = FALSE,
+  odkc_version = get_default_odkc_version(),
+  verbose = get_ru_verbose()
+) {
   # Find geoshape columns
   geo_cols <- form_schema %>%
     dplyr::filter(type == "geoshape") %>%
@@ -61,17 +63,17 @@ handle_ru_geoshapes <- function(data,
     glue::glue() %>%
     ru_msg_info(verbose = verbose)
 
-
   for (colname in geo_cols) {
     if (colname %in% names(data)) {
       "Parsing {colname}..." %>%
         glue::glue() %>%
         ru_msg_info(verbose = verbose)
-      data <- data %>% split_geoshape(
-        as.character(colname),
-        wkt = wkt,
-        odkc_version = odkc_version
-      )
+      data <- data %>%
+        split_geoshape(
+          as.character(colname),
+          wkt = wkt,
+          odkc_version = odkc_version
+        )
     }
   }
 

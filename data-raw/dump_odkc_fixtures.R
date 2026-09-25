@@ -56,17 +56,22 @@ cfg <- list(
   odkc_version = ruODK::get_test_odkc_version()
 )
 if (!nzchar(cfg$url) || !nzchar(cfg$un) || !nzchar(cfg$pw)) {
-  stop("ODKC_TEST_URL / ODKC_TEST_UN / ODKC_TEST_PW must be set. See ~/.Renviron.")
+  stop(
+    "ODKC_TEST_URL / ODKC_TEST_UN / ODKC_TEST_PW must be set. See ~/.Renviron."
+  )
 }
 
 api <- function(...) {
-  do.call(httr::RETRY, c(
-    list(
-      ...,
-      httr::authenticate(cfg$un, cfg$pw),
-      times = cfg$retries
+  do.call(
+    httr::RETRY,
+    c(
+      list(
+        ...,
+        httr::authenticate(cfg$un, cfg$pw),
+        times = cfg$retries
+      )
     )
-  ))
+  )
 }
 
 say <- function(...) cat(sprintf(...), "\n", sep = "")
@@ -84,13 +89,20 @@ pids <- c(
 safe_submission_list <- function(pid, fid) {
   tryCatch(
     ruODK::submission_list(
-      pid = pid, fid = fid,
-      url = cfg$url, un = cfg$un, pw = cfg$pw,
+      pid = pid,
+      fid = fid,
+      url = cfg$url,
+      un = cfg$un,
+      pw = cfg$pw,
       retries = cfg$retries
     ),
     error = function(e) {
-      say("      note: submission_list(%s/%s) -> %s (treating as 0 rows)",
-          pid, fid, conditionMessage(e))
+      say(
+        "      note: submission_list(%s/%s) -> %s (treating as 0 rows)",
+        pid,
+        fid,
+        conditionMessage(e)
+      )
       tibble::tibble(instance_id = character(0))
     }
   )
@@ -107,11 +119,15 @@ say("dumping %s -> %s", cfg$url, fixture_root)
 protected <- dir_ls(extdata_dir, type = "file") |> path_file()
 collisions <- intersect(protected, c("manifest.json", "attachments-map.json"))
 if (length(collisions) > 0) {
-  stop("dump output would collide with existing inst/extdata files: ",
-       paste(collisions, collapse = ", "))
+  stop(
+    "dump output would collide with existing inst/extdata files: ",
+    paste(collisions, collapse = ", ")
+  )
 }
-say("  inst/extdata has %d protected file(s); dump writes only into odkc/",
-    length(protected))
+say(
+  "  inst/extdata has %d protected file(s); dump writes only into odkc/",
+  length(protected)
+)
 
 if (dir_exists(fixture_root)) {
   say("  removing previous dump at %s", fixture_root)
@@ -123,10 +139,15 @@ dir_create(path(fixture_root, "submissions"))
 # Snapshot vignettes/media so we can map attachment names onto it without
 # ever writing into it.
 media_files <- dir_ls(media_dir, regexp = "\\.(jpg|jpeg|png)$", type = "file")
-if (length(media_files) == 0) stop("no images found in ", media_dir)
+if (length(media_files) == 0) {
+  stop("no images found in ", media_dir)
+}
 media_names <- path_file(media_files)
-say("  vignettes/media has %d image(s): %s",
-    length(media_names), paste(media_names, collapse = ", "))
+say(
+  "  vignettes/media has %d image(s): %s",
+  length(media_names),
+  paste(media_names, collapse = ", ")
+)
 
 # Image attachment name -> vignettes/media basename. Exact filename match
 # wins; any other image name cycles through media_names in sorted order.
@@ -136,7 +157,9 @@ media_state <- new.env(parent = emptyenv())
 media_state$cursor <- 0L
 is_image <- function(name) grepl("\\.(jpg|jpeg|png)$", name, ignore.case = TRUE)
 pick_media <- function(attachment_name) {
-  if (attachment_name %in% media_names) return(attachment_name)
+  if (attachment_name %in% media_names) {
+    return(attachment_name)
+  }
   media_state$cursor <- media_state$cursor + 1L
   media_names[[((media_state$cursor - 1L) %% length(media_names)) + 1L]]
 }
@@ -170,19 +193,35 @@ attachment_map <- list()
 for (pid in pids) {
   say("\n=== pid %d ===", pid)
   proj_meta <- ruODK::project_list(
-    url = cfg$url, un = cfg$un, pw = cfg$pw, retries = cfg$retries
-  ) |> filter(.data$id == pid)
+    url = cfg$url,
+    un = cfg$un,
+    pw = cfg$pw,
+    retries = cfg$retries
+  ) |>
+    filter(.data$id == pid)
   proj <- list(
     id = pid,
     name = proj_meta$name[[1]],
-    description = if ("description" %in% names(proj_meta)) proj_meta$description[[1]] else NULL,
-    key_id = if ("key_id" %in% names(proj_meta)) proj_meta$key_id[[1]] else NULL,
+    description = if ("description" %in% names(proj_meta)) {
+      proj_meta$description[[1]]
+    } else {
+      NULL
+    },
+    key_id = if ("key_id" %in% names(proj_meta)) {
+      proj_meta$key_id[[1]]
+    } else {
+      NULL
+    },
     forms = list()
   )
   say("  project: %s", proj$name)
 
   fl <- ruODK::form_list(
-    pid = pid, url = cfg$url, un = cfg$un, pw = cfg$pw, retries = cfg$retries
+    pid = pid,
+    url = cfg$url,
+    un = cfg$un,
+    pw = cfg$pw,
+    retries = cfg$retries
   )
   say("  %d form(s)", nrow(fl))
   dir_create(path(fixture_root, "forms", as.character(pid)))
@@ -197,14 +236,22 @@ for (pid in pids) {
     # as an attribute, so replaying the same XML restores the same public key.
     raw <- api(
       "GET",
-      httr::modify_url(cfg$url, path = glue::glue(
-        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.xml"
-      )),
+      httr::modify_url(
+        cfg$url,
+        path = glue::glue(
+          "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.xml"
+        )
+      ),
       httr::add_headers(Accept = "application/xml")
     )
     httr::stop_for_status(raw)
     xml_text <- httr::content(raw, as = "text", encoding = "UTF-8")
-    xml_path <- path(fixture_root, "forms", as.character(pid), paste0(fid, ".xml"))
+    xml_path <- path(
+      fixture_root,
+      "forms",
+      as.character(pid),
+      paste0(fid, ".xml")
+    )
     writeLines(xml_text, xml_path, useBytes = TRUE)
     say("      form.xml %d bytes", nchar(xml_text))
 
@@ -231,22 +278,34 @@ for (pid in pids) {
       created_rank <- j
       sxml <- api(
         "GET",
-        httr::modify_url(cfg$url, path = glue::glue(
-          "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/",
-          "submissions/{URLencode(iid, reserved = TRUE)}.xml"
-        )),
+        httr::modify_url(
+          cfg$url,
+          path = glue::glue(
+            "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/",
+            "submissions/{URLencode(iid, reserved = TRUE)}.xml"
+          )
+        ),
         httr::add_headers(Accept = "application/xml")
       )
       httr::stop_for_status(sxml)
       sxml_text <- httr::content(sxml, as = "text", encoding = "UTF-8")
       sub_dir <- path(fixture_root, "submissions", as.character(pid), fid)
-      writeLines(sxml_text, path(sub_dir, paste0(slug, ".xml")), useBytes = TRUE)
+      writeLines(
+        sxml_text,
+        path(sub_dir, paste0(slug, ".xml")),
+        useBytes = TRUE
+      )
 
       # --- attachments: images -> vignettes/media stand-in; other bytes copied
       al <- tryCatch(
         ruODK::attachment_list(
-          iid = iid, pid = pid, fid = fid,
-          url = cfg$url, un = cfg$un, pw = cfg$pw, retries = cfg$retries
+          iid = iid,
+          pid = pid,
+          fid = fid,
+          url = cfg$url,
+          un = cfg$un,
+          pw = cfg$pw,
+          retries = cfg$retries
         ),
         error = function(e) tibble::tibble(name = character(0))
       )
@@ -264,17 +323,24 @@ for (pid in pids) {
             att[[nm]],
             list(pid = pid, fid = fid, instance_id = iid)
           )
-          say("        img %-34s -> %s%s", nm, stand_in,
-              if (nm == stand_in) "" else "  (name cycled)")
+          say(
+            "        img %-34s -> %s%s",
+            nm,
+            stand_in,
+            if (nm == stand_in) "" else "  (name cycled)"
+          )
         } else {
           # Not an image: no vignette counterpart, so keep the real bytes.
           payload <- api(
             "GET",
-            httr::modify_url(cfg$url, path = glue::glue(
-              "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/",
-              "submissions/{URLencode(iid, reserved = TRUE)}/",
-              "attachments/{URLencode(nm, reserved = TRUE)}"
-            ))
+            httr::modify_url(
+              cfg$url,
+              path = glue::glue(
+                "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/",
+                "submissions/{URLencode(iid, reserved = TRUE)}/",
+                "attachments/{URLencode(nm, reserved = TRUE)}"
+              )
+            )
           )
           httr::stop_for_status(payload)
           att_dir <- path(sub_dir, slug)
@@ -286,8 +352,12 @@ for (pid in pids) {
             att[[nm]],
             list(pid = pid, fid = fid, instance_id = iid)
           )
-          say("        bin %-34s -> copied (%s, %d bytes)", nm, rel,
-              file_size(path(att_dir, nm)))
+          say(
+            "        bin %-34s -> copied (%s, %d bytes)",
+            nm,
+            rel,
+            file_size(path(att_dir, nm))
+          )
         }
       }
       subs[[iid]] <- list(
@@ -298,8 +368,10 @@ for (pid in pids) {
         # has reviewed it. The seed replays this or class(review_state) comes
         # back logical (all-NA) instead of character, which
         # test-submission_list.R asserts against.
-        review_state = if (is.null(sl$review_state) ||
-                             is.na(sl$review_state[[j]])) {
+        review_state = if (
+          is.null(sl$review_state) ||
+            is.na(sl$review_state[[j]])
+        ) {
           NULL
         } else {
           sl$review_state[[j]]
@@ -315,7 +387,11 @@ for (pid in pids) {
       version = if (is.na(fl$version[[i]])) NULL else fl$version[[i]],
       state = fl$state[[i]],
       is_draft = is_draft,
-      published_at = if (is.na(fl$published_at[[i]])) NULL else fl$published_at[[i]],
+      published_at = if (is.na(fl$published_at[[i]])) {
+        NULL
+      } else {
+        fl$published_at[[i]]
+      },
       hash = fl$hash[[i]],
       submissions = nrow(sl),
       entity_related = isTRUE(fl$entity_related[[i]]),
@@ -331,8 +407,12 @@ for (pid in pids) {
   # --- entity lists --------------------------------------------------------
   el <- tryCatch(
     ruODK::entitylist_list(
-      pid = pid, url = cfg$url, un = cfg$un, pw = cfg$pw,
-      retries = cfg$retries, odkc_version = cfg$odkc_version
+      pid = pid,
+      url = cfg$url,
+      un = cfg$un,
+      pw = cfg$pw,
+      retries = cfg$retries,
+      odkc_version = cfg$odkc_version
     ),
     error = function(e) {
       say("  entitylist_list -> %s", conditionMessage(e))
@@ -346,15 +426,25 @@ for (pid in pids) {
       did <- el$name[[i]]
       d <- tryCatch(
         ruODK::entitylist_detail(
-          pid = pid, did = did, url = cfg$url, un = cfg$un, pw = cfg$pw,
-          retries = cfg$retries, odkc_version = cfg$odkc_version
+          pid = pid,
+          did = did,
+          url = cfg$url,
+          un = cfg$un,
+          pw = cfg$pw,
+          retries = cfg$retries,
+          odkc_version = cfg$odkc_version
         ),
         error = function(e) NULL
       )
       en <- tryCatch(
         ruODK::entity_list(
-          pid = pid, did = did, url = cfg$url, un = cfg$un, pw = cfg$pw,
-          retries = cfg$retries, odkc_version = cfg$odkc_version
+          pid = pid,
+          did = did,
+          url = cfg$url,
+          un = cfg$un,
+          pw = cfg$pw,
+          retries = cfg$retries,
+          odkc_version = cfg$odkc_version
         ),
         error = function(e) tibble::tibble()
       )
@@ -393,17 +483,24 @@ if (anyDuplicated(all_slugs) > 0) {
     ". Widen slug_of() before re-running."
   )
 }
-say("submission slugs: %d unique of %d", length(unique(all_slugs)), length(all_slugs))
+say(
+  "submission slugs: %d unique of %d",
+  length(unique(all_slugs)),
+  length(all_slugs)
+)
 
 write_json(
   attachment_map,
   path(fixture_root, "attachments-map.json"),
-  auto_unbox = TRUE, pretty = TRUE
+  auto_unbox = TRUE,
+  pretty = TRUE
 )
 write_json(
   manifest,
   path(fixture_root, "manifest.json"),
-  auto_unbox = TRUE, pretty = TRUE, null = "null"
+  auto_unbox = TRUE,
+  pretty = TRUE,
+  null = "null"
 )
 
 # --------------------------------------------------------------------------- #
@@ -412,26 +509,45 @@ write_json(
 
 files <- dir_ls(fixture_root, recurse = TRUE, type = "file")
 say("\n=================================================")
-say("dumped %d file(s), %s total", length(files), as.character(sum(file_size(files))))
+say(
+  "dumped %d file(s), %s total",
+  length(files),
+  as.character(sum(file_size(files)))
+)
 say("  %s", path_rel(files))
 say("")
 say("attachment sources: %d mapped", length(attachment_map))
 src <- map_chr(attachment_map, "source")
-say("  images -> vignettes/media : %d   (vignettes/media is the single image source)",
-    sum(src == "media"))
-say("  bytes copied to fixtures  : %d   (non-images; no vignette counterpart)",
-    sum(src == "fixture"))
-exact <- map_lgl(attachment_map[src == "media"], function(x) isTRUE(x$exact_name_match))
-say("  of those images, exact filename match: %d, name cycled: %d",
-    sum(exact), sum(!exact))
+say(
+  "  images -> vignettes/media : %d   (vignettes/media is the single image source)",
+  sum(src == "media")
+)
+say(
+  "  bytes copied to fixtures  : %d   (non-images; no vignette counterpart)",
+  sum(src == "fixture")
+)
+exact <- map_lgl(attachment_map[src == "media"], function(x) {
+  isTRUE(x$exact_name_match)
+})
+say(
+  "  of those images, exact filename match: %d, name cycled: %d",
+  sum(exact),
+  sum(!exact)
+)
 say("")
-say("vignettes/media untouched? -> %s",
-    if (dir_exists(media_dir)) "yes (write target is fixtures/ only)" else "NO")
-say("inst/extdata (non-odkc/) untouched? -> %s",
-    if (length(setdiff(protected, c("manifest.json", "attachments-map.json"))) ==
-          length(protected)) {
-      "yes (dump writes only into odkc/)"
-    } else {
-      "NO"
-    })
+say(
+  "vignettes/media untouched? -> %s",
+  if (dir_exists(media_dir)) "yes (write target is fixtures/ only)" else "NO"
+)
+say(
+  "inst/extdata (non-odkc/) untouched? -> %s",
+  if (
+    length(setdiff(protected, c("manifest.json", "attachments-map.json"))) ==
+      length(protected)
+  ) {
+    "yes (dump writes only into odkc/)"
+  } else {
+    "NO"
+  }
+)
 say("done.")

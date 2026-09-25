@@ -51,14 +51,16 @@
 #' nrow(sl) == form_list_nsub
 #' # > TRUE
 #' }
-submission_list <- function(pid = get_default_pid(),
-                            fid = get_default_fid(),
-                            url = get_default_url(),
-                            un = get_default_un(),
-                            pw = get_default_pw(),
-                            retries = get_retries(),
-                            orders = get_default_orders(),
-                            tz = get_default_tz()) {
+submission_list <- function(
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  orders = get_default_orders(),
+  tz = get_default_tz()
+) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   url <- httr::modify_url(
     url,
@@ -82,7 +84,8 @@ submission_list <- function(pid = get_default_pid(),
     tidyr::unnest_wider(".", names_repair = "universal") %>%
     tidyr::unnest_wider(
       "submitter",
-      names_repair = "universal", names_sep = "_"
+      names_repair = "universal",
+      names_sep = "_"
     ) %>%
     janitor::clean_names() %>%
     dplyr::mutate_at(

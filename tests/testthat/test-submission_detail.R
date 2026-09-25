@@ -1,5 +1,6 @@
 test_that("submission_detail works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -23,14 +24,17 @@ test_that("submission_detail works", {
   # submission_detail returns a tibble
   testthat::expect_equal(class(sub), c("tbl_df", "tbl", "data.frame"))
 
-
   # The details for one submission return exactly one row
   testthat::expect_equal(nrow(sub), 1)
 
   # The columns are metadata, plus the submission data in column 'xml`
   # names(sub) # nolint
   cn <- c(
-    "instance_id", "submitter_id", "submitter", "created_at", "updated_at"
+    "instance_id",
+    "submitter_id",
+    "submitter",
+    "created_at",
+    "updated_at"
   )
   testthat::expect_equal(names(sub), cn)
 })

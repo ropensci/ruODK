@@ -5,7 +5,6 @@ test_that("handle_ru_geotraces annotates GeoJSON lines with lon lat alt acc", {
   data("geo_wkt_raw") # parse F, wkt T
   data("geo_wkt") # parse T, wkt T
 
-
   # Parsed, rectangled, GeoJSON, geofields handled: geo_gj
 
   geo_fields <- geo_fs %>%
@@ -66,7 +65,6 @@ test_that("handle_ru_geotraces annotates WKT lines with lon lat alt (no acc)", {
   data("geo_wkt_raw") # parse F, wkt T
   data("geo_wkt") # parse T, wkt T
 
-
   # Parsed, rectangled, WKT, geofields handled: geo_wkt
 
   geo_fields <- geo_fs %>%
@@ -123,7 +121,6 @@ test_that("handle_ru_geotraces annotates WKT lines with lon lat alt (no acc)", {
 test_that("handle_ru_geotraces removes last empty coordinate from GJ", {
   data("geo_fs") # parse T
   data("geo_gj") # parse T, wkt T
-
 
   geo_fields <- geo_fs %>%
     # dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%

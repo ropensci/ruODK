@@ -1,5 +1,6 @@
 test_that("project_create returns a one-row tibble of project metadata", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

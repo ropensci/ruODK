@@ -42,10 +42,12 @@
 #'   ruODK::handle_ru_geopoints(form_schema = geo_fs, wkt = TRUE)
 #'
 #' dplyr::glimpse(geo_wkt_parsed)
-handle_ru_geopoints <- function(data,
-                                form_schema,
-                                wkt = FALSE,
-                                verbose = get_ru_verbose()) {
+handle_ru_geopoints <- function(
+  data,
+  form_schema,
+  wkt = FALSE,
+  verbose = get_ru_verbose()
+) {
   # Find Geopoint columns
   geo_cols <- form_schema %>%
     dplyr::filter(type == "geopoint") %>%

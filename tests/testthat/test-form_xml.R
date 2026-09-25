@@ -1,5 +1,6 @@
 test_that("form_xml returns a nested list with parse defaults", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -14,7 +15,8 @@ test_that("form_xml returns a nested list with parse defaults", {
 })
 
 test_that("form_xml returns a nested list with parse=TRUE", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -30,7 +32,8 @@ test_that("form_xml returns a nested list with parse=TRUE", {
 })
 
 test_that("form_xml returns an xml_document with parse=FALSE", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

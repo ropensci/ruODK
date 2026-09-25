@@ -48,15 +48,17 @@
 #' ds1$context
 #' ds1$value
 #' }
-odata_entitylist_service_get <- function(pid = get_default_pid(),
-                                         did = "",
-                                         url = get_default_url(),
-                                         un = get_default_un(),
-                                         pw = get_default_pw(),
-                                         retries = get_retries(),
-                                         odkc_version = get_default_odkc_version(),
-                                         orders = get_default_orders(),
-                                         tz = get_default_tz()) {
+odata_entitylist_service_get <- function(
+  pid = get_default_pid(),
+  did = "",
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  odkc_version = get_default_odkc_version(),
+  orders = get_default_orders(),
+  tz = get_default_tz()
+) {
   yell_if_missing(url, un, pw, pid = pid, did = did)
 
   if (odkc_version |> semver_lt("2022.3")) {
@@ -65,7 +67,8 @@ odata_entitylist_service_get <- function(pid = get_default_pid(),
 
   ds <- httr::RETRY(
     "GET",
-    httr::modify_url(url,
+    httr::modify_url(
+      url,
       path = glue::glue(
         "v1/projects/{pid}/datasets/",
         "{URLencode(did, reserved = TRUE)}.svc"
@@ -81,10 +84,13 @@ odata_entitylist_service_get <- function(pid = get_default_pid(),
     httr::content(encoding = "utf-8") |>
     janitor::clean_names()
 
-  structure(list(
-    context = ds$odata_context,
-    value = purrr::map_df(ds$value, ~ tibble::as_tibble(.x))
-  ), class = c("odata_entitylist_service_get", "list"))
+  structure(
+    list(
+      context = ds$odata_context,
+      value = purrr::map_df(ds$value, ~ tibble::as_tibble(.x))
+    ),
+    class = c("odata_entitylist_service_get", "list")
+  )
 }
 
 #' @export

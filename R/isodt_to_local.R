@@ -19,10 +19,12 @@
 #' @return A `lubridate` PosixCT datetime in the given timezone.
 #' @family utilities
 #' @keywords internal
-isodt_to_local <- function(datetime_string,
-                           orders = c("YmdHMS", "YmdHMSz"),
-                           tz = get_default_tz(),
-                           quiet = TRUE) {
+isodt_to_local <- function(
+  datetime_string,
+  orders = c("YmdHMS", "YmdHMSz"),
+  tz = get_default_tz(),
+  quiet = TRUE
+) {
   datetime_string %>%
     lubridate::parse_date_time(orders = orders, quiet = quiet) %>%
     lubridate::with_tz(., tzone = tz)

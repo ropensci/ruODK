@@ -1,5 +1,6 @@
 test_that("form_detail works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -27,9 +28,18 @@ test_that("form_detail works", {
   testthat::expect_true("name" %in% names(f))
   testthat::expect_true("fid" %in% names(f))
   cn <- c(
-    "name", "fid", "version", "state", "submissions", "created_at",
-    "created_by_id", "created_by", "updated_at", "published_at",
-    "last_submission", "hash"
+    "name",
+    "fid",
+    "version",
+    "state",
+    "submissions",
+    "created_at",
+    "created_by_id",
+    "created_by",
+    "updated_at",
+    "published_at",
+    "last_submission",
+    "hash"
   )
   testthat::expect_equal(names(f), cn)
 })

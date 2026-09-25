@@ -1,5 +1,6 @@
 test_that("user_list returns list of users", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
   ul <- user_list(
@@ -28,7 +29,8 @@ test_that("user_list returns list of users", {
 })
 
 test_that("user_list returns filtered list of users", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

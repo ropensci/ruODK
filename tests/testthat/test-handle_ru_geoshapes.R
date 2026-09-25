@@ -5,7 +5,6 @@ test_that("handle_ru_geoshapes annotates GeoJSON lines with lon lat alt acc", {
   data("geo_wkt_raw") # parse F, wkt T
   data("geo_wkt") # parse T, wkt T
 
-
   # Parsed, rectangled, GeoJSON, geofields handled: geo_gj
 
   geo_fields <- geo_fs %>%
@@ -65,7 +64,6 @@ test_that("handle_ru_geoshapes annotates WKT lines with lon lat alt (no acc)", {
   data("geo_gj") # parse T, wkt F
   data("geo_wkt_raw") # parse F, wkt T
   data("geo_wkt") # parse T, wkt T
-
 
   # Parsed, rectangled, WKT, geofields handled: geo_wkt
 

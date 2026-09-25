@@ -1,6 +1,10 @@
-options(repos = c(ropensci = "https://ropensci.r-universe.dev",
-                  MRAN = "https://mran.microsoft.com/snapshot/2020-07-16",
-                  CRAN = "https://cloud.r-project.org"))
+options(
+  repos = c(
+    ropensci = "https://ropensci.r-universe.dev",
+    MRAN = "https://mran.microsoft.com/snapshot/2020-07-16",
+    CRAN = "https://cloud.r-project.org"
+  )
+)
 
 # install.packages("remotes")
 # install.packages("rmarkdown")

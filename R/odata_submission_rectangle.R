@@ -38,11 +38,13 @@ listcol_names <- function(tbl) {
 #' @return The un-nested tibble in wide format
 #' @family utilities
 #' @keywords internal
-unnest_all <- function(nested_tbl,
-                       names_repair = "universal",
-                       names_sep = "_",
-                       form_schema = NULL,
-                       verbose = get_ru_verbose()) {
+unnest_all <- function(
+  nested_tbl,
+  names_repair = "universal",
+  names_sep = "_",
+  form_schema = NULL,
+  verbose = get_ru_verbose()
+) {
   if (!is.null(form_schema)) {
     geofield_names <- form_schema %>%
       dplyr::filter(type %in% c("geopoint", "geotrace", "geoshape")) %>%
@@ -81,10 +83,14 @@ unnest_all <- function(nested_tbl,
       # If any list elements are unnamed and names_sep=NULL, set safe params
       if (
         is.null(names_sep) &&
-        any(vapply(nested_tbl[[colname]], function(x) is.null(names(x)), logical(1)))) {
+          any(vapply(
+            nested_tbl[[colname]],
+            function(x) is.null(names(x)),
+            logical(1)
+          ))
+      ) {
         names_sep <- "_"
       }
-
 
       suppressMessages(
         nested_tbl <- tidyr::unnest_wider(
@@ -154,12 +160,14 @@ unnest_all <- function(nested_tbl,
 #' # fq_raw has two submissions
 #' testthat::expect_equal(length(fq_raw$value), nrow(data_parsed))
 #' }
-odata_submission_rectangle <- function(data,
-                                       names_repair = "universal",
-                                       names_sep = "_",
-                                       form_schema = NULL,
-                                       clean_names = TRUE,
-                                       verbose = get_ru_verbose()) {
+odata_submission_rectangle <- function(
+  data,
+  names_repair = "universal",
+  names_sep = "_",
+  form_schema = NULL,
+  clean_names = TRUE,
+  verbose = get_ru_verbose()
+) {
   data %>%
     {
       # nolint
@@ -172,13 +180,16 @@ odata_submission_rectangle <- function(data,
       verbose = verbose
     ) %>%
     {
-      if (clean_names == TRUE)
+      if (clean_names == TRUE) {
         janitor::clean_names(.)
-      else
+      } else {
         .
+      }
     } %>%
-    dplyr::rename_at(dplyr::vars(dplyr::starts_with("value_")),
-                     ~ stringr::str_remove(., "value_"))
+    dplyr::rename_at(
+      dplyr::vars(dplyr::starts_with("value_")),
+      ~ stringr::str_remove(., "value_")
+    )
 }
 
 # usethis::use_test("odata_submission_rectangle") # nolint

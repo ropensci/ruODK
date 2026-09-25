@@ -88,20 +88,22 @@
 #' sub <- fs::path(t, glue::glue("{fid}.csv")) %>% readr::read_csv()
 #' sub %>% knitr::kable(.)
 #' }
-submission_export <- function(local_dir = here::here(),
-                              overwrite = TRUE,
-                              media = TRUE,
-                              repeats = TRUE,
-                              deleted_fields = FALSE,
-                              pid = get_default_pid(),
-                              fid = get_default_fid(),
-                              url = get_default_url(),
-                              un = get_default_un(),
-                              pw = get_default_pw(),
-                              pp = get_default_pp(),
-                              retries = get_retries(),
-                              odkc_version = get_default_odkc_version(),
-                              verbose = get_ru_verbose()) {
+submission_export <- function(
+  local_dir = here::here(),
+  overwrite = TRUE,
+  media = TRUE,
+  repeats = TRUE,
+  deleted_fields = FALSE,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  pp = get_default_pp(),
+  retries = get_retries(),
+  odkc_version = get_default_odkc_version(),
+  verbose = get_ru_verbose()
+) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
 
   url_ext <- ".csv.zip"

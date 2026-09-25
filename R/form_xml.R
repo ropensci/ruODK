@@ -30,13 +30,15 @@
 #' class(fxml)
 #' # > "list"
 #' }
-form_xml <- function(parse = TRUE,
-                     pid = get_default_pid(),
-                     fid = get_default_fid(),
-                     url = get_default_url(),
-                     un = get_default_un(),
-                     pw = get_default_pw(),
-                     retries = get_retries()) {
+form_xml <- function(
+  parse = TRUE,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
   out <- httr::RETRY(
     "GET",

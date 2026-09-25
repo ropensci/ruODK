@@ -41,8 +41,6 @@ test_that("split_geotrace works with GeoJSON", {
     label = "split_geotrace extracts GeoJSON altitude"
   )
 
-
-
   expect_true(
     gj_first_gt %>% magrittr::extract2(geofield_lon_gt) %>% is.numeric(),
     label = "split_geotrace casts extracted GeoJSON longitude to numeric"

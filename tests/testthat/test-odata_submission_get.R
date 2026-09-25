@@ -1,7 +1,8 @@
 context("test-odata_submission_get.R")
 
 test_that("odata_submission_get skips download", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -29,7 +30,8 @@ test_that("odata_submission_get skips download", {
 test_that("odata_submission_get works with one known dataset", {
   # This test downloads files
 
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -73,7 +75,8 @@ test_that("odata_submission_get works with one known dataset", {
 
 
 test_that("odata_submission_get skip omits number of results", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -117,7 +120,8 @@ test_that("odata_submission_get skip omits number of results", {
 })
 
 test_that("odata_submission_get top limits number of results", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -141,7 +145,8 @@ test_that("odata_submission_get top limits number of results", {
 
 
 test_that("odata_submission_get count returns total number or rows", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -160,7 +165,6 @@ test_that("odata_submission_get count returns total number or rows", {
   )
   x_parsed <- x_raw |> odata_submission_rectangle()
 
-
   # https://github.com/ropensci/ruODK/issues/65
   skip_on_travis()
   skip_on_appveyor()
@@ -174,7 +178,8 @@ test_that("odata_submission_get count returns total number or rows", {
 })
 
 test_that("odata_submission_get handles encrypted forms gracefully", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -200,7 +205,8 @@ test_that("odata_submission_get handles encrypted forms gracefully", {
 })
 
 test_that("odata_submission_get filter works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -262,16 +268,19 @@ test_that("odata_submission_get filter works", {
   )
 
   testthat::expect_equal(
-    x_all, x_all_filter_emptystring,
+    x_all,
+    x_all_filter_emptystring,
     label = "filter=\"\" should return unfiltered submissions"
   )
   testthat::expect_equal(
-    x_all, x_all_filter_null,
+    x_all,
+    x_all_filter_null,
     label = "filter=NULL should return unfiltered submissions"
   )
 
   testthat::expect_equal(
-    nrow(x_2020), 0,
+    nrow(x_2020),
+    0,
     label = "Filter for submissions in year 2020 should return one record"
   )
 
@@ -283,14 +292,17 @@ test_that("odata_submission_get filter works", {
   }
   # nolint start
   # TODO: this works locally but not on GHA.
-  testthat::expect_equal(nrow(x_2019), 0,
+  testthat::expect_equal(
+    nrow(x_2019),
+    0,
     label = "Filter for submissions in year 2019 should return no records"
   )
   # nolint end
 })
 
 test_that("odata_submission_get expand works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -331,8 +343,9 @@ test_that("odata_submission_get expand works", {
 })
 
 test_that("odata_submission_get can exclude group names", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
-          message = "Test server not configured"
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
   )
 
   x_groups <- odata_submission_get(

@@ -45,11 +45,13 @@
 #'
 #' dplyr::glimpse(geo_wkt_parsed)
 #' }
-handle_ru_geotraces <- function(data,
-                                form_schema,
-                                wkt = FALSE,
-                                odkc_version = get_default_odkc_version(),
-                                verbose = get_ru_verbose()) {
+handle_ru_geotraces <- function(
+  data,
+  form_schema,
+  wkt = FALSE,
+  odkc_version = get_default_odkc_version(),
+  verbose = get_ru_verbose()
+) {
   # Find Geotrace columns
   geo_cols <- form_schema %>%
     dplyr::filter(type == "geotrace") %>%

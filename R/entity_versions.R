@@ -66,24 +66,20 @@
 #' # The current version of the first Entity
 #' ev <- en$current_version_version[1]
 #' }
-entity_versions <- function(pid = get_default_pid(),
-                            did = "",
-                            eid = "",
-                            conflict = FALSE,
-                            url = get_default_url(),
-                            un = get_default_un(),
-                            pw = get_default_pw(),
-                            retries = get_retries(),
-                            odkc_version = get_default_odkc_version(),
-                            orders = get_default_orders(),
-                            tz = get_default_tz()) {
-  yell_if_missing(url,
-    un,
-    pw,
-    pid = pid,
-    did = did,
-    eid = eid
-  )
+entity_versions <- function(
+  pid = get_default_pid(),
+  did = "",
+  eid = "",
+  conflict = FALSE,
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  odkc_version = get_default_odkc_version(),
+  orders = get_default_orders(),
+  tz = get_default_tz()
+) {
+  yell_if_missing(url, un, pw, pid = pid, did = did, eid = eid)
 
   if (odkc_version |> semver_lt("2022.3")) {
     ru_msg_warn("entity_versions is supported from v2022.3")

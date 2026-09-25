@@ -29,14 +29,18 @@
 #' names(p)
 #' # > "id" "name" "archived"
 #' }
-project_create <- function(name,
-                           url = get_default_url(),
-                           un = get_default_un(),
-                           pw = get_default_pw(),
-                           retries = get_retries()) {
+project_create <- function(
+  name,
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw)
 
-  if (!is.character(name) || length(name) != 1L || is.na(name) || !nzchar(name)) {
+  if (
+    !is.character(name) || length(name) != 1L || is.na(name) || !nzchar(name)
+  ) {
     ru_msg_abort("name must be a single non-empty character string.")
   }
 

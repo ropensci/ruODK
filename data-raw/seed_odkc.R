@@ -48,15 +48,25 @@ ca_file <- path(".devcontainer", "odkc", "certs", "ca.crt")
 # NOTE this is deliberately NOT ODKC_TEST_URL. That variable points at the
 # shared ruodk.getodk.cloud for data-raw/dump_odkc_fixtures.R and for the live
 # test suite; reusing it here would aim a WRITE operation at that server.
-base_url <- sub("/+$", "", Sys.getenv("ODKC_SEED_URL", "https://localhost:8383"))
+base_url <- sub(
+  "/+$",
+  "",
+  Sys.getenv("ODKC_SEED_URL", "https://localhost:8383")
+)
 
 # Fail closed: seeding writes projects, forms and submissions. Only a loopback
 # target is allowed unless the operator explicitly opts in.
 host <- sub("^https?://([^/:]+).*$", "\\1", base_url)
-if (!host %in% c("localhost", "127.0.0.1", "::1") &&
-      !identical(Sys.getenv("ODKC_SEED_ALLOW_REMOTE"), "1")) {
+if (
+  !host %in% c("localhost", "127.0.0.1", "::1") &&
+    !identical(Sys.getenv("ODKC_SEED_ALLOW_REMOTE"), "1")
+) {
   stop(
-    "Refusing to seed non-loopback target '", base_url, "' (host '", host, "').\n",
+    "Refusing to seed non-loopback target '",
+    base_url,
+    "' (host '",
+    host,
+    "').\n",
     "This script writes projects, forms and submissions.\n",
     "Set ODKC_SEED_ALLOW_REMOTE=1 if you really mean it."
   )
@@ -80,13 +90,17 @@ compose <- Sys.getenv(
 for (p in c(fixtures, media_dir)) {
   if (!dir_exists(p)) stop("missing required directory: ", p)
 }
-for (p in c(path(fixtures, "manifest.json"),
-            path(fixtures, "attachments-map.json"),
-            ca_file)) {
+for (p in c(
+  path(fixtures, "manifest.json"),
+  path(fixtures, "attachments-map.json"),
+  ca_file
+)) {
   if (!file_exists(p)) {
     if (p == ca_file) {
       stop(
-        "Local TLS CA not found at ", ca_file, ".\n",
+        "Local TLS CA not found at ",
+        ca_file,
+        ".\n",
         "Start the stack first (the `certs` service mints it):\n",
         "  docker compose --env-file .devcontainer/.env ",
         "-f .devcontainer/docker-compose.yml up -d --wait"
@@ -97,7 +111,10 @@ for (p in c(path(fixtures, "manifest.json"),
 }
 
 manifest <- fromJSON(path(fixtures, "manifest.json"), simplifyVector = FALSE)
-att_map <- fromJSON(path(fixtures, "attachments-map.json"), simplifyVector = FALSE)
+att_map <- fromJSON(
+  path(fixtures, "attachments-map.json"),
+  simplifyVector = FALSE
+)
 
 say("seeding %s", base_url)
 say2("fixtures : %s", fixtures)
@@ -115,7 +132,13 @@ set_config(config(cainfo = ca_file))
 # HTTP helpers
 # --------------------------------------------------------------------------- #
 
-req <- function(method, path, body = NULL, encode = "raw", content_type = NULL) {
+req <- function(
+  method,
+  path,
+  body = NULL,
+  encode = "raw",
+  content_type = NULL
+) {
   url <- paste0(base_url, path)
   auth <- authenticate(seed_un, seed_pw)
   if (is.null(body)) {
@@ -127,7 +150,9 @@ req <- function(method, path, body = NULL, encode = "raw", content_type = NULL) 
   } else {
     # Raw body (form XML, or an attachment's bytes).
     VERB(
-      method, url, auth,
+      method,
+      url,
+      auth,
       add_headers("Content-Type" = content_type %||% "application/xml"),
       body = body
     )
@@ -170,17 +195,37 @@ if (authed) {
   compose_args <- strsplit(trimws(compose), "\\s+")[[1]]
   create <- suppressWarnings(system2(
     compose_args[[1]],
-    c(compose_args[-1], "exec", "-T", "service",
-      "node", "lib/bin/cli.js", "-u", seed_un, "user-create"),
-    stdout = TRUE, stderr = TRUE,
+    c(
+      compose_args[-1],
+      "exec",
+      "-T",
+      "service",
+      "node",
+      "lib/bin/cli.js",
+      "-u",
+      seed_un,
+      "user-create"
+    ),
+    stdout = TRUE,
+    stderr = TRUE,
     input = seed_pw
   ))
   say2("user-create -> %s", paste(create, collapse = " | "))
   promote <- suppressWarnings(system2(
     compose_args[[1]],
-    c(compose_args[-1], "exec", "-T", "service",
-      "node", "lib/bin/cli.js", "-u", seed_un, "user-promote"),
-    stdout = TRUE, stderr = TRUE
+    c(
+      compose_args[-1],
+      "exec",
+      "-T",
+      "service",
+      "node",
+      "lib/bin/cli.js",
+      "-u",
+      seed_un,
+      "user-promote"
+    ),
+    stdout = TRUE,
+    stderr = TRUE
   ))
   say2("user-promote -> %s", paste(promote, collapse = " | "))
 }
@@ -189,7 +234,9 @@ authed <- tryCatch(
   status_code(req("GET", "/v1/projects")) < 300,
   error = function(e) FALSE
 )
-if (!authed) stop("could not authenticate as ", seed_un, " after user-create")
+if (!authed) {
+  stop("could not authenticate as ", seed_un, " after user-create")
+}
 say2("authenticated as %s", seed_un)
 
 # --------------------------------------------------------------------------- #
@@ -203,8 +250,12 @@ for (p in want_pids) {
   if (exists_at(paste0("/v1/projects/", p))) {
     say2("pid %s exists (%s)", p, meta$name)
   } else {
-    r <- req("POST", "/v1/projects",
-             body = list(name = meta$name), encode = "json")
+    r <- req(
+      "POST",
+      "/v1/projects",
+      body = list(name = meta$name),
+      encode = "json"
+    )
     say2("pid %s created '%s' (HTTP %d)", p, meta$name, status_code(r))
   }
 }
@@ -225,7 +276,9 @@ for (p in want_pids) {
   for (fid in names(forms)) {
     meta <- forms[[fid]]
     xml_path <- path(fixtures, "forms", p, paste0(fid, ".xml"))
-    if (!file_exists(xml_path)) stop("missing form XML: ", xml_path)
+    if (!file_exists(xml_path)) {
+      stop("missing form XML: ", xml_path)
+    }
 
     if (exists_at(paste0("/v1/projects/", p, "/forms/", urlenc(fid)))) {
       say2("  %-32s exists (skipped)", fid)
@@ -235,14 +288,21 @@ for (p in want_pids) {
     xml_body <- paste(readLines(xml_path, warn = FALSE), collapse = "\n")
     publish <- !isTRUE(meta$is_draft)
     path_q <- paste0(
-      "/v1/projects/", p, "/forms", if (publish) "?publish=true" else ""
+      "/v1/projects/",
+      p,
+      "/forms",
+      if (publish) "?publish=true" else ""
     )
     r <- tryCatch(req("POST", path_q, body = xml_body), error = function(e) e)
     if (inherits(r, "error")) {
       say2("  %-32s ERROR %s", fid, conditionMessage(r))
     } else {
-      say2("  %-32s %s (HTTP %d)", fid,
-           if (publish) "published" else "draft   ", status_code(r))
+      say2(
+        "  %-32s %s (HTTP %d)",
+        fid,
+        if (publish) "published" else "draft   ",
+        status_code(r)
+      )
       if (status_code(r) >= 300) {
         say2("      %s", substr(content(r, "text", encoding = "UTF-8"), 1, 200))
       }
@@ -317,8 +377,11 @@ align_submission <- function(xml_path, want_version, want_iid) {
   have_v <- xml_attr(root, "version")
   have_v <- if (is.na(have_v)) "" else have_v
   if (!identical(have_v, want_version)) {
-    xml_set_attr(root, "version",
-                 if (want_version == "") NA_character_ else want_version)
+    xml_set_attr(
+      root,
+      "version",
+      if (want_version == "") NA_character_ else want_version
+    )
     changed <- TRUE
   }
 
@@ -332,20 +395,27 @@ align_submission <- function(xml_path, want_version, want_iid) {
     }
   }
 
-  if (!changed) return(NULL)
+  if (!changed) {
+    return(NULL)
+  }
   as.character(doc)
 }
 
 mime_for <- function(name) {
-  switch(tolower(tools::file_ext(name)),
-    jpg = "image/jpeg", jpeg = "image/jpeg", png = "image/png",
+  switch(
+    tolower(tools::file_ext(name)),
+    jpg = "image/jpeg",
+    jpeg = "image/jpeg",
+    png = "image/png",
     "application/octet-stream"
   )
 }
 
 attachment_path <- function(name, entry) {
   q <- path(entry$path)
-  if (!file_exists(q)) stop("attachment source missing for ", name, ": ", q)
+  if (!file_exists(q)) {
+    stop("attachment source missing for ", name, ": ", q)
+  }
   q
 }
 
@@ -360,7 +430,9 @@ for (p in want_pids) {
   for (fid in names(forms)) {
     meta <- forms[[fid]]
     insts <- meta$submission_instances
-    if (length(insts) == 0) next
+    if (length(insts) == 0) {
+      next
+    }
     fver <- form_version_of(p, fid)
 
     # manifest order is newest-first (it comes from submission_list(), which
@@ -374,14 +446,23 @@ for (p in want_pids) {
     for (iid in insts_replayed) {
       detail <- meta$submissions_detail[[iid]]
       probe_path <- paste0(
-        "/v1/projects/", p, "/forms/", urlenc(fid),
-        "/submissions/", urlenc(iid)
+        "/v1/projects/",
+        p,
+        "/forms/",
+        urlenc(fid),
+        "/submissions/",
+        urlenc(iid)
       )
 
       # ---- phase 4a: the instance XML alone -----------------------------
       if (!exists_at(probe_path)) {
-        xml_path <- path(fixtures, "submissions", p, fid,
-                         paste0(slug_of(iid), ".xml"))
+        xml_path <- path(
+          fixtures,
+          "submissions",
+          p,
+          fid,
+          paste0(slug_of(iid), ".xml")
+        )
         if (!file_exists(xml_path)) {
           n_fail <- n_fail + 1L
           say2("  %-28s %-40s MISSING %s", fid, iid, xml_path)
@@ -394,9 +475,18 @@ for (p in want_pids) {
           al
         }
         r <- tryCatch(
-          req("POST", paste0(
-            "/v1/projects/", p, "/forms/", urlenc(fid), "/submissions"
-          ), body = xml_body, content_type = "application/xml"),
+          req(
+            "POST",
+            paste0(
+              "/v1/projects/",
+              p,
+              "/forms/",
+              urlenc(fid),
+              "/submissions"
+            ),
+            body = xml_body,
+            content_type = "application/xml"
+          ),
           error = function(e) e
         )
         if (inherits(r, "error")) {
@@ -406,13 +496,22 @@ for (p in want_pids) {
         }
         if (status_code(r) >= 300) {
           n_fail <- n_fail + 1L
-          say2("  %-28s %-40s XML FAILED HTTP %d: %s", fid, iid, status_code(r),
-               substr(content(r, "text", encoding = "UTF-8"), 1, 160))
+          say2(
+            "  %-28s %-40s XML FAILED HTTP %d: %s",
+            fid,
+            iid,
+            status_code(r),
+            substr(content(r, "text", encoding = "UTF-8"), 1, 160)
+          )
           next
         }
         n_new <- n_new + 1L
-        say2("  %-28s %-40s xml ok%s", fid, iid,
-             if (is.null(al)) "" else " (id/version aligned)")
+        say2(
+          "  %-28s %-40s xml ok%s",
+          fid,
+          iid,
+          if (is.null(al)) "" else " (id/version aligned)"
+        )
       } else {
         n_skip <- n_skip + 1L
         say2("  %-28s %-40s exists (skipped)", fid, iid)
@@ -424,12 +523,23 @@ for (p in want_pids) {
         for (nm in names(atts)) {
           src <- attachment_path(nm, atts[[nm]])
           url <- paste0(
-            "/v1/projects/", p, "/forms/", urlenc(fid),
-            "/submissions/", urlenc(iid), "/attachments/", urlenc(nm)
+            "/v1/projects/",
+            p,
+            "/forms/",
+            urlenc(fid),
+            "/submissions/",
+            urlenc(iid),
+            "/attachments/",
+            urlenc(nm)
           )
           ar <- tryCatch(
-            req("POST", url, body = upload_file(src),
-                encode = "raw", content_type = mime_for(nm)),
+            req(
+              "POST",
+              url,
+              body = upload_file(src),
+              encode = "raw",
+              content_type = mime_for(nm)
+            ),
             error = function(e) e
           )
           # attach() does an unconditional upsert, so re-running is fine.
@@ -437,9 +547,15 @@ for (p in want_pids) {
             n_att_new <- n_att_new + 1L
           } else {
             n_att_fail <- n_att_fail + 1L
-            say2("      att %-30s FAILED %s", nm,
-                 if (inherits(ar, "error")) conditionMessage(ar) else
-                   paste("HTTP", status_code(ar)))
+            say2(
+              "      att %-30s FAILED %s",
+              nm,
+              if (inherits(ar, "error")) {
+                conditionMessage(ar)
+              } else {
+                paste("HTTP", status_code(ar))
+              }
+            )
           }
         }
         say2("      -> %d attachment(s) uploaded for %s", length(atts), iid)
@@ -452,23 +568,37 @@ for (p in want_pids) {
       want_rs <- detail$review_state
       if (!is.null(want_rs)) {
         pr <- tryCatch(
-          req("PATCH", probe_path, encode = "json",
-              body = list(reviewState = want_rs)),
+          req(
+            "PATCH",
+            probe_path,
+            encode = "json",
+            body = list(reviewState = want_rs)
+          ),
           error = function(e) e
         )
         if (!inherits(pr, "error") && status_code(pr) < 300) {
           say2("      reviewState=%s", want_rs)
         } else {
-          say2("      reviewState=%s FAILED %s", want_rs,
-               if (inherits(pr, "error")) conditionMessage(pr) else
-                 paste("HTTP", status_code(pr)))
+          say2(
+            "      reviewState=%s FAILED %s",
+            want_rs,
+            if (inherits(pr, "error")) {
+              conditionMessage(pr)
+            } else {
+              paste("HTTP", status_code(pr))
+            }
+          )
         }
       }
     }
   }
 }
-say2("submissions  new: %d  already present: %d  failed: %d",
-     n_new, n_skip, n_fail)
+say2(
+  "submissions  new: %d  already present: %d  failed: %d",
+  n_new,
+  n_skip,
+  n_fail
+)
 say2("attachments  uploaded: %d  failed: %d", n_att_new, n_att_fail)
 
 # --------------------------------------------------------------------------- #
@@ -479,7 +609,9 @@ say("\n== 5. verify ==")
 
 parsed <- function(path) {
   r <- req("GET", path)
-  if (status_code(r) >= 300) return(NULL)
+  if (status_code(r) >= 300) {
+    return(NULL)
+  }
   content(r, "parsed", simplifyVector = FALSE)
 }
 
@@ -498,20 +630,24 @@ want <- c(
 )
 
 checks <- c(
-  "a draft form exists (test-form_list.R)" =
-    any(map_lgl(fl1, ~ is.null(.x$publishedAt))),
+  "a draft form exists (test-form_list.R)" = any(map_lgl(
+    fl1,
+    ~ is.null(.x$publishedAt)
+  )),
   "ODKC_TEST_FID present" = want[["FID"]] %in% fids1,
   "ODKC_TEST_FID_ATT present" = want[["FID_ATT"]] %in% fids1,
   "ODKC_TEST_FID_GAP present" = want[["FID_GAP"]] %in% fids1,
   "ODKC_TEST_FID_WKT present" = want[["FID_WKT"]] %in% fids1,
-  "ODKC_TEST_FID_ENC present (pid 2)" =
-    Sys.getenv("ODKC_TEST_FID_ENC", "Locations") %in% fids2
+  "ODKC_TEST_FID_ENC present (pid 2)" = Sys.getenv(
+    "ODKC_TEST_FID_ENC",
+    "Locations"
+  ) %in%
+    fids2
 )
 
 # test-entity_*.R does entitylist_list()$name[1]; it needs at least one.
 ds <- parsed("/v1/projects/1/datasets")
-checks <- c(checks, "an entity list exists (test-entity_*.R)" =
-              length(ds) > 0)
+checks <- c(checks, "an entity list exists (test-entity_*.R)" = length(ds) > 0)
 
 # test-attachment_get.R downloads location_quadrat_photo and checks the file
 # exists, so ODKC_TEST_FID must have at least one attachment.
@@ -521,8 +657,11 @@ n_att <- 0L
 if (!is.null(sl)) {
   for (s in sl) {
     a <- parsed(paste0(
-      "/v1/projects/1/forms/", urlenc(fid_main),
-      "/submissions/", urlenc(s$instanceId), "/attachments"
+      "/v1/projects/1/forms/",
+      urlenc(fid_main),
+      "/submissions/",
+      urlenc(s$instanceId),
+      "/attachments"
     ))
     n_att <- n_att + length(a)
   }

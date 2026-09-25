@@ -1,5 +1,6 @@
 test_that("project_detail works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -17,14 +18,22 @@ test_that("project_detail works", {
 
   # Project metadata are the tibble's columns
   cn <- c(
-    "id", "name", "forms", "app_users", "last_submission",
-    "created_at", "updated_at", "archived", "verbs"
+    "id",
+    "name",
+    "forms",
+    "app_users",
+    "last_submission",
+    "created_at",
+    "updated_at",
+    "archived",
+    "verbs"
   )
   testthat::expect_equal(names(p), cn)
 })
 
 test_that("project_detail aborts on missing credentials", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -57,7 +66,8 @@ test_that("project_detail aborts on missing credentials", {
 })
 
 test_that("project_detail warns on wrong credentials", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

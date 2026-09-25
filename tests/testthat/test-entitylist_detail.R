@@ -47,7 +47,8 @@ test_that("entitylist_detail errors if did is missing", {
 })
 
 test_that("entitylist_detail warns if odkc_version too low", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -68,6 +69,5 @@ test_that("entitylist_detail warns if odkc_version too low", {
     ds1 <- entitylist_detail(did = did, odkc_version = "1.5.3")
   )
 })
-
 
 # usethis::use_r("entitylist_detail") # nolint

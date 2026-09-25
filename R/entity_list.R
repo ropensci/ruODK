@@ -49,16 +49,18 @@
 #' # The current version of the first Entity
 #' ev <- en$current_version_version[1]
 #' }
-entity_list <- function(pid = get_default_pid(),
-                        did = "",
-                        deleted = FALSE,
-                        url = get_default_url(),
-                        un = get_default_un(),
-                        pw = get_default_pw(),
-                        retries = get_retries(),
-                        odkc_version = get_default_odkc_version(),
-                        orders = get_default_orders(),
-                        tz = get_default_tz()) {
+entity_list <- function(
+  pid = get_default_pid(),
+  did = "",
+  deleted = FALSE,
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  odkc_version = get_default_odkc_version(),
+  orders = get_default_orders(),
+  tz = get_default_tz()
+) {
   yell_if_missing(url, un, pw, pid = pid, did = did)
 
   if (odkc_version |> semver_lt("2022.3")) {

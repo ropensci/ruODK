@@ -21,7 +21,8 @@ fq_raw_strata <- ruODK::odata_submission_get(
   parse = FALSE
 )
 fq_raw_taxa <- ruODK::odata_submission_get(
-  table = fq_svc$name[3], parse = FALSE
+  table = fq_svc$name[3],
+  parse = FALSE
 )
 
 fq_data <- ruODK::odata_submission_get(
@@ -31,11 +32,15 @@ fq_data <- ruODK::odata_submission_get(
   odkc_version = get_test_odkc_version()
 )
 fq_data_strata <- ruODK::odata_submission_get(
-  table = fq_svc$name[2], wkt = TRUE, odkc_version = get_test_odkc_version()
+  table = fq_svc$name[2],
+  wkt = TRUE,
+  odkc_version = get_test_odkc_version()
 ) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 fq_data_taxa <- ruODK::odata_submission_get(
-  table = fq_svc$name[3], wkt = TRUE, odkc_version = get_test_odkc_version()
+  table = fq_svc$name[3],
+  wkt = TRUE,
+  odkc_version = get_test_odkc_version()
 ) %>%
   dplyr::left_join(fq_data, by = c("submissions_id" = "id"))
 

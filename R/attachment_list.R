@@ -52,13 +52,15 @@
 #' names(al)
 #' # > "name" "exists"
 #' }
-get_one_submission_att_list <- function(iid,
-                                        pid = get_default_pid(),
-                                        fid = get_default_fid(),
-                                        url = get_default_url(),
-                                        un = get_default_un(),
-                                        pw = get_default_pw(),
-                                        retries = get_retries()) {
+get_one_submission_att_list <- function(
+  iid,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw)
   httr::RETRY(
     "GET",
@@ -75,7 +77,8 @@ get_one_submission_att_list <- function(iid,
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%
-    { # nolint
+    {
+      # nolint
       tibble::tibble(
         name = purrr::map_chr(., "name"),
         exists = purrr::map_lgl(., "exists")
@@ -119,13 +122,15 @@ get_one_submission_att_list <- function(iid,
 #' # Ste 3b: Get all attachments for all submissions
 #' all <- attachment_list(sl$instance_id)
 #' }
-attachment_list <- function(iid,
-                            pid = get_default_pid(),
-                            fid = get_default_fid(),
-                            url = get_default_url(),
-                            un = get_default_un(),
-                            pw = get_default_pw(),
-                            retries = get_retries()) {
+attachment_list <- function(
+  iid,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
   tibble::tibble(
     iid = iid,

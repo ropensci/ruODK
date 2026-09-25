@@ -1,5 +1,6 @@
 test_that("entitylist_download works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -64,7 +65,8 @@ test_that("entitylist_download works", {
 
 
 test_that("entitylist_download etag works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -97,7 +99,8 @@ test_that("entitylist_download etag works", {
 })
 
 test_that("entitylist_download filter works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -160,6 +163,5 @@ test_that("entitylist_download warns if odkc_version too low", {
     )
   )
 })
-
 
 # usethis::use_r("entitylist_download")  # nolint

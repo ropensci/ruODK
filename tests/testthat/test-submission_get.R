@@ -1,5 +1,6 @@
 test_that("submission_get works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -32,7 +33,6 @@ test_that("submission_get works", {
   testthat::expect_equal(class(sub), "list")
   testthat::expect_equal(class(subs), "list")
 
-
   # The details for one submission return exactly one row
   testthat::expect_equal(length(sub), 12)
   testthat::expect_equal(length(subs), 1) # number of submissions
@@ -63,7 +63,8 @@ test_that("submission_get works", {
 })
 
 test_that("submission_get handles encrypted forms gracefully", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 

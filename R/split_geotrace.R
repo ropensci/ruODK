@@ -84,10 +84,12 @@
 #'   is.numeric(wkt_first_gt$path_location_path_gps_altitude)
 #' )
 #' }
-split_geotrace <- function(data,
-                           colname,
-                           wkt = FALSE,
-                           odkc_version = get_default_odkc_version()) {
+split_geotrace <- function(
+  data,
+  colname,
+  wkt = FALSE,
+  odkc_version = get_default_odkc_version()
+) {
   if (nrow(data) == 0) {
     # Option 1: Early exit - nothing to do
     return(data)

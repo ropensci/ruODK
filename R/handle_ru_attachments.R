@@ -46,16 +46,18 @@
 #' testthat::expect_true(fs::dir_ls(t) %>% length() > 0)
 #' }
 #'
-handle_ru_attachments <- function(data,
-                                  form_schema,
-                                  local_dir = "media",
-                                  pid = get_default_pid(),
-                                  fid = get_default_fid(),
-                                  url = get_default_url(),
-                                  un = get_default_un(),
-                                  pw = get_default_pw(),
-                                  retries = get_retries(),
-                                  verbose = get_ru_verbose()) {
+handle_ru_attachments <- function(
+  data,
+  form_schema,
+  local_dir = "media",
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries(),
+  verbose = get_ru_verbose()
+) {
   # Find attachment columns
   # Caveat: if an attachment field has no submissions, it is dropped from data
   # This works for the main table "Submissions"

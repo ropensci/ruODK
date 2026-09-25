@@ -33,11 +33,13 @@
 #'   dplyr::select(-"verbs") %>%
 #'   knitr::kable(.)
 #' }
-project_detail <- function(pid = get_default_pid(),
-                           url = get_default_url(),
-                           un = get_default_un(),
-                           pw = get_default_pw(),
-                           retries = get_retries()) {
+project_detail <- function(
+  pid = get_default_pid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw, pid = pid)
   httr::RETRY(
     "GET",
@@ -51,7 +53,8 @@ project_detail <- function(pid = get_default_pid(),
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content() %>%
-    { # nolint
+    {
+      # nolint
       tibble::tibble(
         id = .$id,
         name = .$name,

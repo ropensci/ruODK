@@ -1,5 +1,6 @@
 test_that("project_list works", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -38,7 +39,8 @@ test_that("project_list works", {
 })
 
 test_that("project_list works with missing deleted_at", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
 
@@ -78,88 +80,108 @@ test_that("project_list works with missing deleted_at", {
 })
 
 
-
 # All other functions use the same authentication on the ODK Central side.
 # We test expected of missing authentication here once for all ruODK functions.
 
 test_that("project_list fails on missing crendentials", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
-  testthat::expect_error(p <- project_list(
-    url = NULL,
-    un = NULL,
-    pw = NULL
-  ))
+  testthat::expect_error(
+    p <- project_list(
+      url = NULL,
+      un = NULL,
+      pw = NULL
+    )
+  )
 })
 
 test_that("project_list fails on missing URL", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
-  testthat::expect_error(p <- project_list(
-    url = NULL,
-    un = get_test_un(),
-    pw = get_test_pw()
-  ))
+  testthat::expect_error(
+    p <- project_list(
+      url = NULL,
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  )
 })
 
 test_that("project_list fails on missing username", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
-  testthat::expect_error(p <- project_list(
-    url = get_test_url(),
-    un = NULL,
-    pw = get_test_pw()
-  ))
+  testthat::expect_error(
+    p <- project_list(
+      url = get_test_url(),
+      un = NULL,
+      pw = get_test_pw()
+    )
+  )
 })
 
 test_that("project_list fails on missing password", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
-  testthat::expect_error(p <- project_list(
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = NULL,
-    retries = 1
-  ))
+  testthat::expect_error(
+    p <- project_list(
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = NULL,
+      retries = 1
+    )
+  )
 })
 
 test_that("project_list aborts on missing credentials", {
-  skip_if(Sys.getenv("ODKC_TEST_URL") == "",
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
     message = "Test server not configured"
   )
-  testthat::expect_error(p <- project_list(
-    url = "",
-    un = get_test_un(),
-    pw = get_test_pw(),
-    retries = 1
-  ))
+  testthat::expect_error(
+    p <- project_list(
+      url = "",
+      un = get_test_un(),
+      pw = get_test_pw(),
+      retries = 1
+    )
+  )
 
-  testthat::expect_error(p <- project_list(
-    url = get_test_url(),
-    un = "",
-    pw = get_test_pw(),
-    retries = 1
-  ))
+  testthat::expect_error(
+    p <- project_list(
+      url = get_test_url(),
+      un = "",
+      pw = get_test_pw(),
+      retries = 1
+    )
+  )
 
-  testthat::expect_error(p <- project_list(
-    url = get_test_url(),
-    un = get_test_un(),
-    pw = "",
-    retries = 1
-  ))
+  testthat::expect_error(
+    p <- project_list(
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = "",
+      retries = 1
+    )
+  )
 })
 
 test_that("project_list warns on wrong URL", {
-  testthat::expect_error(p <- project_list(
-    url = "wrong_url",
-    un = get_test_un(),
-    pw = get_test_pw(),
-    retries = 1
-  ))
+  testthat::expect_error(
+    p <- project_list(
+      url = "wrong_url",
+      un = get_test_un(),
+      pw = get_test_pw(),
+      retries = 1
+    )
+  )
 })
 
 # This should error but works

@@ -178,4 +178,3 @@ persist_renv_var "CURL_CA_BUNDLE" "${CA_BUNDLE}" ~/.Renviron
 
 echo "postAttach: done. ruODK now targets ${ODKC_TEST_URL}."
 echo "postAttach: run  devtools::test()  to check the suite."
-

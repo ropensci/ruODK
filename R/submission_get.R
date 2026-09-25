@@ -45,13 +45,15 @@
 #' # > "vegetation_structure"     "perimeter"                "taxon_encounter"
 #' # > "taxon_encounter"          "encounter_end_datetime"
 #' }
-get_one_submission <- function(iid,
-                               pid = get_default_pid(),
-                               fid = get_default_fid(),
-                               url = get_default_url(),
-                               un = get_default_un(),
-                               pw = get_default_pw(),
-                               retries = get_retries()) {
+get_one_submission <- function(
+  iid,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
   httr::RETRY(
     "GET",
@@ -109,13 +111,15 @@ get_one_submission <- function(iid,
 #' # Step 3: Get submissions
 #' subs <- submission_get(sl$instance_id)
 #' }
-submission_get <- function(iid,
-                           pid = get_default_pid(),
-                           fid = get_default_fid(),
-                           url = get_default_url(),
-                           un = get_default_un(),
-                           pw = get_default_pw(),
-                           retries = get_retries()) {
+submission_get <- function(
+  iid,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  retries = get_retries()
+) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
   tibble::tibble(
     iid = iid,

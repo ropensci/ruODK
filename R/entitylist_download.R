@@ -111,20 +111,22 @@
 #'   filter = glue::glue("__createdAt le {newest_entity_date}")
 #' )
 #' }
-entitylist_download <- function(pid = get_default_pid(),
-                                did = "",
-                                url = get_default_url(),
-                                un = get_default_un(),
-                                pw = get_default_pw(),
-                                local_dir = here::here(),
-                                filter = NULL,
-                                etag = NULL,
-                                overwrite = TRUE,
-                                retries = get_retries(),
-                                odkc_version = get_default_odkc_version(),
-                                orders = get_default_orders(),
-                                tz = get_default_tz(),
-                                verbose = get_ru_verbose()) {
+entitylist_download <- function(
+  pid = get_default_pid(),
+  did = "",
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  local_dir = here::here(),
+  filter = NULL,
+  etag = NULL,
+  overwrite = TRUE,
+  retries = get_retries(),
+  odkc_version = get_default_odkc_version(),
+  orders = get_default_orders(),
+  tz = get_default_tz(),
+  verbose = get_ru_verbose()
+) {
   # Gatecheck params
   yell_if_missing(url, un, pw, pid = pid, did = did)
 
@@ -169,7 +171,11 @@ entitylist_download <- function(pid = get_default_pid(),
     # that same stripped form back, so re-add the quotes here. Sending the
     # stripped value yields a plain 200 instead of 304 Not Modified. A value
     # that is already quoted (or weak) is passed through untouched.
-    if_none_match <- if (grepl('^W?".*"$', etag)) etag else paste0('"', etag, '"')
+    if_none_match <- if (grepl('^W?".*"$', etag)) {
+      etag
+    } else {
+      paste0('"', etag, '"')
+    }
     headers <- c(headers, c("If-None-Match" = if_none_match))
   }
 
@@ -213,6 +219,5 @@ entitylist_download <- function(pid = get_default_pid(),
     downloaded_on = isodt_to_local(res$date, orders = orders, tz = tz)
   )
 }
-
 
 # usethis::use_test("entitylist_download")  # nolint

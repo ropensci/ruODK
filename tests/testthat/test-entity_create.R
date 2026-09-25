@@ -19,7 +19,9 @@ test_that("entity_create creates single entities", {
   time_before_create <- lubridate::ymd_hms(Sys.time(), tz = "Australia/Perth")
 
   # Create a single entity
-  lab <- glue::glue("Entity {nrow(en) + 1} created by ruODK package test on {Sys.time()}")
+  lab <- glue::glue(
+    "Entity {nrow(en) + 1} created by ruODK package test on {Sys.time()}"
+  )
   ec <- entity_create(
     did = did,
     label = lab,
@@ -78,7 +80,9 @@ test_that("entity_create creates multiple entities", {
       "Entity {nrow(en) + 2} created by ruODK package test on {Sys.time()}"
     )
   )
-  notes <- glue::glue("Two entities created by ruODK package test on {Sys.time()}")
+  notes <- glue::glue(
+    "Two entities created by ruODK package test on {Sys.time()}"
+  )
   status <- c("needs_followup", "needs_followup")
   details <- c("ruODK package test", "ruODK package test")
   geometry <- c("-33.2 115.0 0.0 0.0", "-33.2 115.0 0.0 0.0")
@@ -120,7 +124,9 @@ test_that("entity_create input gatechecks", {
   time_before_created <- Sys.time()
 
   # Create a single entity
-  lab <- glue::glue("Entity {nrow(en) + 1} created by ruODK package test on {Sys.time()}")
+  lab <- glue::glue(
+    "Entity {nrow(en) + 1} created by ruODK package test on {Sys.time()}"
+  )
 
   # ODKC version not supported
   testthat::expect_warning(entity_create(
