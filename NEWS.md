@@ -1,5 +1,8 @@
 # ruODK (development version)
 
+* `submission_edit()` edits one Submission field and optionally leaves a
+  comment (#132).
+
 * New internal `ru_http_request()` centralises HTTP requests as the first
   step of the `httr` to `httr2` migration (#154).
 
