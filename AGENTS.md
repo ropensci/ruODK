@@ -41,6 +41,12 @@ config/audits/backup largely missing).
    endpoint (or small batch), run the vendored `critical-code-reviewer`
    skill (`.agents/skills/critical-code-reviewer/SKILL.md`), then
    address every finding before moving on.
+5. **Open a pull request for each implementation.** Once the feature is
+   implemented and verified, open a PR against `main` with a comprehensive
+   description: what changed and why, how it was verified (tests, live
+   run), and `Closes #<issue>` for the issue it resolves.
+   Write the description in Simple Technical English (ASD-STE100).
+   Never prefix explanations with "In plain language:".
 
 ## Practical notes
 
