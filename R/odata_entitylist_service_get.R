@@ -87,7 +87,7 @@ odata_entitylist_service_get <- function(
   structure(
     list(
       context = ds$odata_context,
-      value = purrr::map_df(ds$value, ~ tibble::as_tibble(.x))
+      value = purrr::list_transpose(ds$value) |> tibble::as_tibble()
     ),
     class = c("odata_entitylist_service_get", "list")
   )
