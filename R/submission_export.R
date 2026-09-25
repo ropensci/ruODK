@@ -14,6 +14,11 @@
 #' The inclusion of subtables (from repeating form groups) can be toggled
 #' through `repeats`, whereas the inclusion of media attachments can be toggled
 #' through `media`.
+#' The splitting of select multiple answers into one boolean column per option
+#' can be toggled through `split_select_multiples`.
+#' The group path prefixes of field header names can be toggled through
+#' `group_paths`.
+#' The exported rows can be restricted through `filter`.
 #'
 #' ### Download location
 #' The file will be downloaded to the project root unless specified otherwise
@@ -52,6 +57,21 @@
 #'   from this form for this export (TRUE).
 #'   All known fields and data for those fields will be merged and exported.
 #'   default: FALSE
+#' @param split_select_multiples Whether to split select multiple answers
+#'   into columns (TRUE).
+#'   If TRUE, a boolean column is created for every known select multiple
+#'   option in the export.
+#'   The option name is in the field header, and a 0 or a 1 is present in each
+#'   cell indicating whether that option was checked for that row.
+#'   Default: FALSE.
+#' @param group_paths Whether to keep group path prefixes in field header
+#'   names (TRUE, e.g. meta-instanceID) or remove them (FALSE, e.g.
+#'   instanceID).
+#'   Default: TRUE.
+#' @param filter (str) An OData-style `$filter` query to filter the
+#'   Submissions in the export.
+#'   Only a subset of the `$filter` features is available.
+#'   Default: NULL (no filtering, all Submissions exported).
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
@@ -94,6 +114,9 @@ submission_export <- function(
   media = TRUE,
   repeats = TRUE,
   deleted_fields = FALSE,
+  split_select_multiples = FALSE,
+  group_paths = TRUE,
+  filter = NULL,
   pid = get_default_pid(),
   fid = get_default_fid(),
   url = get_default_url(),
@@ -105,6 +128,13 @@ submission_export <- function(
   verbose = get_ru_verbose()
 ) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
+
+  if (
+    !is.null(filter) &&
+      (!is.character(filter) || length(filter) != 1L || is.na(filter))
+  ) {
+    ru_msg_abort("filter must be a single query string.")
+  }
 
   url_ext <- ".csv.zip"
   file_ext <- ".zip"
@@ -135,6 +165,22 @@ submission_export <- function(
     query <- c(query, list("deletedFields" = "true"))
   } else {
     query <- c(query, list("deletedFields" = "false"))
+  }
+
+  if (split_select_multiples == TRUE) {
+    query <- c(query, list("splitSelectMultiples" = "true"))
+  } else {
+    query <- c(query, list("splitSelectMultiples" = "false"))
+  }
+
+  if (group_paths == TRUE) {
+    query <- c(query, list("groupPaths" = "true"))
+  } else {
+    query <- c(query, list("groupPaths" = "false"))
+  }
+
+  if (!is.null(filter)) {
+    query <- c(query, list("$filter" = filter))
   }
 
   url_pth <- glue::glue(

@@ -10,6 +10,9 @@ submission_export(
   media = TRUE,
   repeats = TRUE,
   deleted_fields = FALSE,
+  split_select_multiples = FALSE,
+  group_paths = TRUE,
+  filter = NULL,
   pid = get_default_pid(),
   fid = get_default_fid(),
   url = get_default_url(),
@@ -44,6 +47,24 @@ verbose noop message, but still include all repeat data.}
 from this form for this export (TRUE).
 All known fields and data for those fields will be merged and exported.
 default: FALSE}
+
+\item{split_select_multiples}{Whether to split select multiple answers
+into columns (TRUE).
+If TRUE, a boolean column is created for every known select multiple
+option in the export.
+The option name is in the field header, and a 0 or a 1 is present in each
+cell indicating whether that option was checked for that row.
+Default: FALSE.}
+
+\item{group_paths}{Whether to keep group path prefixes in field header
+names (TRUE, e.g. meta-instanceID) or remove them (FALSE, e.g.
+instanceID).
+Default: TRUE.}
+
+\item{filter}{(str) An OData-style \verb{$filter} query to filter the
+Submissions in the export.
+Only a subset of the \verb{$filter} features is available.
+Default: NULL (no filtering, all Submissions exported).}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 
@@ -136,6 +157,11 @@ filter queries.
 The inclusion of subtables (from repeating form groups) can be toggled
 through \code{repeats}, whereas the inclusion of media attachments can be toggled
 through \code{media}.
+The splitting of select multiple answers into one boolean column per option
+can be toggled through \code{split_select_multiples}.
+The group path prefixes of field header names can be toggled through
+\code{group_paths}.
+The exported rows can be restricted through \code{filter}.
 }
 
 \subsection{Download location}{

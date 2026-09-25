@@ -1,5 +1,8 @@
 # ruODK (development version)
 
+* `submission_export()` gains `split_select_multiples`, `group_paths` and
+  `filter` parameters (#137).
+
 # ruODK 1.6.0
 This version completes coverage for the ODK Central v2026.3.0 API.
 
