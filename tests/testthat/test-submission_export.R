@@ -407,4 +407,82 @@ test_that("submission_export excludes media", {
   fs::dir_ls(t) |> fs::file_delete()
 })
 
+test_that("submission_export supports split multiples, group paths, filter", {
+  # This test downloads files
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  # The I8N choice filter form has select multiples inside a group
+  fid <- Sys.getenv("ODKC_TEST_FID_I8N3")
+  skip_if(fid == "", message = "I8N test form not configured")
+
+  t <- withr::local_tempdir()
+  args <- list(
+    local_dir = t,
+    overwrite = TRUE,
+    verbose = FALSE,
+    pid = get_test_pid(),
+    odkc_version = get_test_odkc_version(),
+    fid = fid,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pp = get_test_pp()
+  )
+
+  read_root_csv <- function(zip) {
+    f <- unzip(zip, exdir = t)
+    csv <- f[tools::file_ext(f) == "csv"]
+    root <- csv[grepl(paste0(fid, "\\.csv$"), csv)]
+    readr::read_csv(root[[1]], show_col_types = FALSE, progress = FALSE)
+  }
+
+  base <- do.call(submission_export, args)
+  testthat::expect_true(fs::is_file(base))
+  base_csv <- read_root_csv(base)
+
+  split <- do.call(
+    submission_export,
+    c(args, list(split_select_multiples = TRUE))
+  )
+  testthat::expect_true(fs::is_file(split))
+  split_csv <- read_root_csv(split)
+
+  testthat::expect_true(
+    ncol(split_csv) > ncol(base_csv),
+    label = paste0(
+      "split_select_multiples=TRUE should add one boolean column ",
+      "per select multiple option"
+    )
+  )
+
+  nogroup <- do.call(
+    submission_export,
+    c(args, list(group_paths = FALSE))
+  )
+  testthat::expect_true(fs::is_file(nogroup))
+  nogroup_csv <- read_root_csv(nogroup)
+
+  testthat::expect_false(
+    identical(names(base_csv), names(nogroup_csv)),
+    label = "group_paths=FALSE should strip group prefixes from headers"
+  )
+
+  filtered <- do.call(
+    submission_export,
+    c(args, list(filter = "__system/submissionDate lt 2000-01-01"))
+  )
+  testthat::expect_true(
+    fs::is_file(filtered),
+    label = "submission_export with filter should return a file"
+  )
+
+  testthat::expect_error(
+    do.call(submission_export, c(args, list(filter = 123))),
+    regexp = "filter must be a single query string"
+  )
+})
+
 # usethis::use_r("submission_export") # nolint
