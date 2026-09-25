@@ -120,6 +120,7 @@ Other submission-management:
 \code{\link[=submission_version_attachment_list]{submission_version_attachment_list()}},
 \code{\link[=submission_version_detail]{submission_version_detail()}},
 \code{\link[=submission_version_geojson]{submission_version_geojson()}},
+\code{\link[=submission_version_xml]{submission_version_xml()}},
 \code{\link[=submission_versions]{submission_versions()}}
 }
 \concept{submission-management}
