@@ -310,10 +310,8 @@ form_schema_ext <- function(
                   xml2::xml_find_first(this_hint_translation, "./value")
                 )
               } else {
-                if (
-                  !(paste0("hint_", this_hintlang) %in%
-                    colnames(extension))
-                ) {
+                hint_col <- paste0("hint_", this_hintlang)
+                if (!(hint_col %in% colnames(extension))) {
                   extension <- cbind(
                     extension,
                     data.frame(
@@ -437,10 +435,8 @@ form_schema_ext <- function(
                   )
                 } else {
                   # check if language already exists in the dataframe
-                  if (
-                    !(paste0("choices_", this_choicelang) %in%
-                      colnames(extension))
-                  ) {
+                  choice_col <- paste0("choices_", this_choicelang)
+                  if (!(choice_col %in% colnames(extension))) {
                     # if not, create new column
                     extension <- cbind(
                       extension,
@@ -620,10 +616,8 @@ form_schema_ext <- function(
                   )
                 } else {
                   # check if language already exists in the dataframe
-                  if (
-                    !(paste0("choices_", this_choicelang) %in%
-                      colnames(extension))
-                  ) {
+                  choice_col <- paste0("choices_", this_choicelang)
+                  if (!(choice_col %in% colnames(extension))) {
                     # if not, create new column
                     extension <- cbind(
                       extension,
