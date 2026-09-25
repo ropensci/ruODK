@@ -7,7 +7,7 @@
 ru_http_request(
   verb,
   url,
-  path,
+  path = NULL,
   query = NULL,
   accept = "application/json",
   headers = NULL,
@@ -24,9 +24,12 @@ ru_http_request(
 \arguments{
 \item{verb}{(character) The HTTP verb, e.g. \code{"GET"}, \code{"POST"}.}
 
-\item{url}{(character) The base URL of the ODK Central server.}
+\item{url}{(character) The base URL of the ODK Central server, or the
+complete request URL if \code{path} is \code{NULL}.}
 
-\item{path}{(character) The request path, e.g. \code{"v1/projects"}.}
+\item{path}{(character) The request path, e.g. \code{"v1/projects"}.
+If \code{NULL}, \code{url} is used as the complete request URL.
+Default: \code{NULL}.}
 
 \item{query}{(list) Optional query string parameters.
 Default: \code{NULL} (no query string).}
@@ -45,11 +48,12 @@ Default: \code{NULL} (no authentication).}
 \item{pw}{(character) The ODK Central password for basic authentication.
 Default: \code{NULL} (no authentication).}
 
-\item{body}{The request body, passed on to \code{httr::RETRY()}.
+\item{body}{The request body.
 Default: \code{NULL} (no body).}
 
-\item{encode}{(character) The body encoding, passed on to \code{httr::RETRY()}.
-Default: \code{NULL} (httr default).}
+\item{encode}{(character) The body encoding: \code{"json"} sends JSON,
+anything else sends raw bytes.
+Default: \code{NULL} (no body).}
 
 \item{dest}{(character) A local file path to stream a download to.
 Default: \code{NULL} (no streaming, the response is kept in memory).}
@@ -80,7 +84,7 @@ It builds an \code{httr2} request from plain data (verb, path, query,
 headers, credentials, body) and returns the \code{httr2} response unchanged,
 so \code{yell_if_error()} and the \verb{httr2::resp_body_*()} parsers keep working
 downstream.
-The full URL keeps \code{httr::modify_url()} semantics on purpose: query
+The full URL keeps the legacy query semantics on purpose: query
 values that callers pre-encode (for example \code{entitylist_download()}'s
 \verb{$filter}) must not be encoded twice.
 }

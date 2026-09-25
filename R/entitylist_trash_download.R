@@ -91,7 +91,7 @@ entitylist_trash_download <- function(
   )
 
   # The response body was streamed straight to disk, so parse the file
-  # like httr::content() did: text/csv parses to a tibble.
+  # as CSV text to a tibble.
   list(
     entities = readr::read_csv(pth),
     http_status = res$status_code,

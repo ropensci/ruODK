@@ -71,14 +71,16 @@ entity_list <- function(
     "v1/projects/{pid}/datasets/{URLencode(did, reserved = TRUE)}/entities"
   )
 
+  qry <- NULL
   if (deleted == TRUE) {
-    pth <- glue::glue("{pth}?deleted=true")
+    qry <- list(deleted = "true")
   }
 
   ru_http_request(
     "GET",
     url,
     path = pth,
+    query = qry,
     un = un,
     pw = pw,
     retries = retries

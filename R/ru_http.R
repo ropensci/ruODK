@@ -7,13 +7,16 @@
 #' headers, credentials, body) and returns the `httr2` response unchanged,
 #' so `yell_if_error()` and the `httr2::resp_body_*()` parsers keep working
 #' downstream.
-#' The full URL keeps `httr::modify_url()` semantics on purpose: query
+#' The full URL keeps the legacy query semantics on purpose: query
 #' values that callers pre-encode (for example `entitylist_download()`'s
 #' `$filter`) must not be encoded twice.
 #'
 #' @param verb (character) The HTTP verb, e.g. `"GET"`, `"POST"`.
-#' @param url (character) The base URL of the ODK Central server.
+#' @param url (character) The base URL of the ODK Central server, or the
+#'   complete request URL if `path` is `NULL`.
 #' @param path (character) The request path, e.g. `"v1/projects"`.
+#'   If `NULL`, `url` is used as the complete request URL.
+#'   Default: `NULL`.
 #' @param query (list) Optional query string parameters.
 #'   Default: `NULL` (no query string).
 #' @param accept (character) The `Accept` header value.
@@ -26,10 +29,11 @@
 #'   Default: `NULL` (no authentication).
 #' @param pw (character) The ODK Central password for basic authentication.
 #'   Default: `NULL` (no authentication).
-#' @param body The request body, passed on to `httr::RETRY()`.
+#' @param body The request body.
 #'   Default: `NULL` (no body).
-#' @param encode (character) The body encoding, passed on to `httr::RETRY()`.
-#'   Default: `NULL` (httr default).
+#' @param encode (character) The body encoding: `"json"` sends JSON,
+#'   anything else sends raw bytes.
+#'   Default: `NULL` (no body).
 #' @param dest (character) A local file path to stream a download to.
 #'   Default: `NULL` (no streaming, the response is kept in memory).
 #' @param overwrite (lgl) Whether to overwrite `dest` if it exists.
@@ -60,7 +64,7 @@
 ru_http_request <- function(
   verb,
   url,
-  path,
+  path = NULL,
   query = NULL,
   accept = "application/json",
   headers = NULL,
@@ -73,9 +77,24 @@ ru_http_request <- function(
   terminate_on = NULL,
   retries = get_retries()
 ) {
-  # httr::modify_url keeps exact legacy query semantics: pre-encoded values
-  # (e.g. entitylist_download()'s $filter) must not be encoded twice.
-  full_url <- httr::modify_url(url, path = path, query = query)
+  # URL building preserves exact legacy semantics: the path is appended
+  # verbatim (httr2::url_modify() would encode `$` in paths like `$metadata`
+  # and `?` in embedded query strings, which httr left alone), while added
+  # query values are encoded exactly like httr::modify_url() did (verified
+  # empirically, including pre-encoded values). NULL query values are
+  # dropped silently, like httr did.
+  if (is.null(path) && !is.null(query)) {
+    ru_msg_abort("ru_http_request needs a path to add a query string.")
+  }
+  full_url <- if (is.null(path)) {
+    url
+  } else {
+    paste0(sub("/+$", "", url), "/", path)
+  }
+  if (!is.null(query)) {
+    query <- Filter(Negate(is.null), query)
+    full_url <- httr2::url_modify(full_url, query = query)
+  }
 
   req <- httr2::request(full_url) |> httr2::req_method(verb)
 

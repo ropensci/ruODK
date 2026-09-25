@@ -206,7 +206,7 @@ entitylist_download <- function(
   # 304 Not Modified carries no body and must not clobber the previous
   # download, so report entities = NULL rather than parsing an empty body.
   # The response body was streamed straight to disk, so parse the file
-  # like httr::content() did: text/csv parses to a tibble.
+  # as CSV text to a tibble.
   list(
     entities = if (res$status_code == 304L) {
       NULL

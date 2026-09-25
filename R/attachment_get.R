@@ -162,29 +162,32 @@ get_one_attachment <- function(
 
   yell_if_missing(url, un, pw)
 
-  httr::RETRY(
+  resp <- ru_http_request(
     "GET",
     src,
-    httr::authenticate(un, pw),
-    httr::write_disk(pth, overwrite = TRUE),
-    httr::config(followlocation = TRUE),
-    times = retries,
-    terminate_on = c(404)
-  ) |>
-    httr::warn_for_status(
-      # If the download fails, inspect src and try to curl the plain API call.
-      # nolint start
-      # https://docs.getodk.org/central-api-submission-management/#downloading-an-attachment
-      # nolint end
-      task = glue::glue(
-        "download media attachment {fn}.\n",
-        "Troubleshooting tips:\n",
-        "* Does the file resource {fn} exist? Run in a Terminal:\n",
-        "  curl -ipu {un} {src} | cat\n",
-        "* Is {fn} an expected attachment of this submission? Run:\n",
-        '  curl -ipu {un} {stringr::str_replace(src, fn, "")}\n',
-      )
-    )
+    accept = NULL,
+    un = un,
+    pw = pw,
+    dest = pth,
+    overwrite = TRUE,
+    terminate_on = c(404),
+    retries = retries
+  )
+
+  if (httr2::resp_is_error(resp)) {
+    # If the download fails, inspect src and try to curl the plain API call.
+    # nolint start
+    # https://docs.getodk.org/central-api-submission-management/#downloading-an-attachment
+    # nolint end
+    rlang::warn(glue::glue(
+      "download media attachment {fn}.\n",
+      "Troubleshooting tips:\n",
+      "* Does the file resource {fn} exist? Run in a Terminal:\n",
+      "  curl -ipu {un} {src} | cat\n",
+      "* Is {fn} an expected attachment of this submission? Run:\n",
+      '  curl -ipu {un} {stringr::str_replace(src, fn, "")}\n',
+    ))
+  }
 
   if (fs::file_exists(pth)) {
     'File saved to "{pth}".\n' |>
