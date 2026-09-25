@@ -87,10 +87,14 @@ names(f)
 \url{https://docs.getodk.org/central-api-form-management/#getting-form-details}
 
 Other form-management:
+\code{\link[=form_assignment_actors]{form_assignment_actors()}},
+\code{\link[=form_assignment_grant]{form_assignment_grant()}},
+\code{\link[=form_assignment_revoke]{form_assignment_revoke()}},
 \code{\link[=form_attachment_download]{form_attachment_download()}},
 \code{\link[=form_attachment_list]{form_attachment_list()}},
 \code{\link[=form_create]{form_create()}},
 \code{\link[=form_dataset_diff]{form_dataset_diff()}},
+\code{\link[=form_delete]{form_delete()}},
 \code{\link[=form_draft_attachment_delete]{form_draft_attachment_delete()}},
 \code{\link[=form_draft_attachment_download]{form_draft_attachment_download()}},
 \code{\link[=form_draft_attachment_link]{form_draft_attachment_link()}},
@@ -101,6 +105,7 @@ Other form-management:
 \code{\link[=form_draft_delete]{form_draft_delete()}},
 \code{\link[=form_draft_detail]{form_draft_detail()}},
 \code{\link[=form_draft_publish]{form_draft_publish()}},
+\code{\link[=form_draft_xlsx]{form_draft_xlsx()}},
 \code{\link[=form_draft_xml]{form_draft_xml()}},
 \code{\link[=form_link]{form_link()}},
 \code{\link[=form_list]{form_list()}},

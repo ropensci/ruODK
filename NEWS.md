@@ -1,5 +1,10 @@
 # ruODK (development version)
 
+* `form_assignment_actors()` lists the Actors assigned a Form Role (#123).
+* `form_assignment_grant()` assigns an Actor to a Form Role (#123).
+* `form_assignment_revoke()` revokes a Form Role from an Actor (#123).
+* `form_delete()` soft-deletes a Form to the Trash (#123).
+* `form_draft_xlsx()` downloads the XLSForm of a Draft Form (#123).
 * `submission_version_xml()` returns the XML of one Submission version
   (#124).
 * `submission_export()` gains `split_select_multiples`, `group_paths` and
