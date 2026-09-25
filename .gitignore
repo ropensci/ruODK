@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.quarto/
 inst/doc/*
 *.RData
 manual.tex
