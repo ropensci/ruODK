@@ -103,7 +103,11 @@ entity_changes <- function(
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>
-    purrr::map_df(~ purrr::map_df(.x, ~ tibble::as_tibble(.x)))
+    purrr::map(
+      ~ purrr::list_transpose(.x) |>
+        tibble::as_tibble()
+    ) |>
+    purrr::list_rbind()
 }
 
 # usethis::use_test("entity_update")  # nolint
