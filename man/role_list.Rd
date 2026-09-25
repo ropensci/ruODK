@@ -79,15 +79,26 @@ rl |> dplyr::select(id, name, system) |> knitr::kable()
 \url{https://docs.getodk.org/central-api-accounts-and-users/#listing-all-roles}
 
 Other user-management:
+\code{\link[=app_user_create]{app_user_create()}},
+\code{\link[=app_user_delete]{app_user_delete()}},
+\code{\link[=app_user_list]{app_user_list()}},
+\code{\link[=assignment_actors]{assignment_actors()}},
+\code{\link[=assignment_grant]{assignment_grant()}},
 \code{\link[=assignment_list]{assignment_list()}},
+\code{\link[=assignment_revoke]{assignment_revoke()}},
 \code{\link[=form_assignment_list]{form_assignment_list()}},
 \code{\link[=project_assignment_list]{project_assignment_list()}},
 \code{\link[=role_detail]{role_detail()}},
+\code{\link[=user_create]{user_create()}},
+\code{\link[=user_delete]{user_delete()}},
 \code{\link[=user_detail]{user_detail()}},
 \code{\link[=user_list]{user_list()}},
 \code{\link[=user_preference_project_delete]{user_preference_project_delete()}},
 \code{\link[=user_preference_project_set]{user_preference_project_set()}},
 \code{\link[=user_preference_site_delete]{user_preference_site_delete()}},
-\code{\link[=user_preference_site_set]{user_preference_site_set()}}
+\code{\link[=user_preference_site_set]{user_preference_site_set()}},
+\code{\link[=user_reset_password]{user_reset_password()}},
+\code{\link[=user_update]{user_update()}},
+\code{\link[=user_update_password]{user_update_password()}}
 }
 \concept{user-management}

@@ -1,5 +1,17 @@
 # ruODK (development version)
 
+* `app_user_create()` creates an App User in a Project (#121).
+* `app_user_delete()` deletes an App User (#121).
+* `app_user_list()` lists the App Users of a Project (#121).
+* `assignment_actors()` lists the Actors assigned a server-wide Role
+  (#121).
+* `assignment_grant()` assigns an Actor to a server-wide Role (#121).
+* `assignment_revoke()` strips a server-wide Role from an Actor (#121).
+* `user_create()` creates a new User (#121).
+* `user_delete()` deletes a User (#121).
+* `user_reset_password()` initiates a User password reset (#121).
+* `user_update()` modifies a User (#121).
+* `user_update_password()` directly updates a User password (#121).
 * `form_assignment_role_list()` lists Role-specific Form Assignments
   (#122).
 * `project_assignment_actors()` lists the Actors assigned a Project Role
