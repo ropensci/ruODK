@@ -755,7 +755,7 @@ get_retries <- function() {
 #' @param pw A password (character)
 #' @param pid A project ID (numeric, optional)
 #' @param fid A form ID (character, optional)
-#' @param did An Entity List (dataset) name (character, optional)
+#' @param did An Entity List (Dataset) name (character, optional)
 #' @param eid An Entity UUID (character, optional)
 #' @details This is a helper function to pat down \code{\link{ruODK}} functions
 #'   for missing credentials and stop with a loud but informative yell.

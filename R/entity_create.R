@@ -22,8 +22,8 @@
 #' ### Creating multiple Entities
 #'
 #' For creating multiple Entities in bulk, the request body takes an array
-#' entities containing a list of Entity objects as described above.
-#' The bulk entity version also takes a source property with a required name
+#' `entities` containing a list of Entity objects as described above.
+#' The bulk Entity version also takes a source property with a required name
 #' field and optional size, for example to capture the file name and size of a
 #' bulk upload source (in MB).
 #'
@@ -54,22 +54,22 @@
 #' @template param-pid
 #' @template param-did
 #' @param label (character) The Entity label which must be a non-empty string.
-#'   If the label is given, a single entity is created using `data`, `notes`,
+#'   If the label is given, a single Entity is created using `data`, `notes`,
 #'   and `uuid` if given.
-#'   If the label is kept at the default (or omitted), multiple entities are
+#'   If the label is kept at the default (or omitted), multiple Entities are
 #'   created using `data` and `notes` and ignoring `uuid`.
 #'   Default: `""`.
-#' @param uuid (character) A single UUID to assign to the entity.
+#' @param uuid (character) A single UUID to assign to the Entity.
 #'   Default: `""`. With the default, Central will create and assign a UUID.
-#'   This parameter is only used when creating a single entity (`label`
-#'   non-empty) and ignored when creating multiple entities (`label` empty).
+#'   This parameter is only used when creating a single Entity (`label`
+#'   non-empty) and ignored when creating multiple Entities (`label` empty).
 #' @param notes (character) Metadata about the request which can be retrieved
-#'   using the entity audit log.
+#'   using the Entity audit log.
 #'   Default: `""`.
 #' @param data (list) A named list of Entity properties to create a single
 #'    Entity, or a nested list with an array of Entity data to create multiple
-#'    Entities. The nested lists representing individual entities must be valid
-#'    as in they must contain a label, valid data for the respective entity
+#'    Entities. The nested lists representing individual Entities must be valid
+#'    as in they must contain a label, valid data for the respective Entity
 #'    properties, and can contain an optional UUID.
 #'    See details and the ODK documentation for the exact format.
 #'    Default: `list()`.
@@ -96,22 +96,22 @@
 #'
 #' el <- entitylist_list()
 #'
-#' # Entity List name (dataset ID, did)
+#' # Entity List name (Dataset ID, did)
 #' did <- el$name[1]
 #'
 #' # All Entities of Entity List
 #' en <- entity_list(did = did)
 #'
-#' # Create a single entity
+#' # Create a single Entity
 #' ec <- entity_create(
 #'   did = did,
 #'   label = "Entity label",
-#'   notes = "Metadata about the created entity",
+#'   notes = "Metadata about the created Entity",
 #'   data = list("field1" = "value1", "field2" = "value1")
 #' )
 #' ec
 #'
-#' # Create multiple entities, example: test form "problems"
+#' # Create multiple Entities, example: test form "problems"
 #' label <- c(
 #'   glue::glue(
 #'     "Entity {nrow(en) + 1} created by ruODK package test on {Sys.time()}"
@@ -120,7 +120,7 @@
 #'     "Entity {nrow(en) + 2} created by ruODK package test on {Sys.time()}"
 #'   )
 #' )
-#' notes <- glue::glue("Two entities created by ruODK package test on {Sys.time()}")
+#' notes <- glue::glue("Two Entities created by ruODK package test on {Sys.time()}")
 #' status <- c("needs_followup", "needs_followup")
 #' details <- c("ruODK package test", "ruODK package test")
 #' geometry <- c("-33.2 115.0 0.0 0.0", "-33.2 115.0 0.0 0.0")

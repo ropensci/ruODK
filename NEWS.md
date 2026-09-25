@@ -235,7 +235,7 @@ administrative endpoints are non-critical to ruODK's purpose.
 We are shaping up to a release targetting the ODK Central 1.2 release.
 ODK Central is undergoing some bug fixes and patches, while ruODK's test server
 will be migrated to another instance. The latter is required to enable tests
-which create/update/delete entities in ODK Central.
+which create/update/delete Entities in ODK Central.
 
 ## Major fixes
 ## Minor fixes

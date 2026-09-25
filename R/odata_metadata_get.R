@@ -7,7 +7,7 @@
 #' @template param-url
 #' @template param-auth
 #' @template param-retries
-#' @return A nested list containing Edmx (dataset schema definition) and
+#' @return A nested list containing Edmx (Dataset schema definition) and
 #'   .attrs (Version).
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-odata-endpoints/#metadata-document}

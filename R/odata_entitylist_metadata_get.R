@@ -46,7 +46,7 @@
 #' # Overview
 #' print(dm1)
 #'
-#' # Get all property names for an entity type
+#' # Get all property names for an Entity type
 #' names(dm1$entity_types$Entities$properties)
 #'
 #' # Check what properties are non-filterable

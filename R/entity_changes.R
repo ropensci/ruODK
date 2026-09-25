@@ -26,7 +26,7 @@
 #'
 #'   - `old` old value
 #'   - `new` new value
-#'   - `propertyName` name of changed entity property
+#'   - `propertyName` name of changed Entity property
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-entity-management/#getting-changes-between-versions}
 # nolint end
@@ -39,7 +39,7 @@
 #'
 #' el <- entitylist_list()
 #'
-#' # Entity List name (dataset ID, did)
+#' # Entity List name (Dataset ID, did)
 #' did <- el$name[1]
 #'
 #' # All Entities of Entity List

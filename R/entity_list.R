@@ -4,17 +4,17 @@
 #'
 #' This function returns a list of the Entities of a kind (belonging to an
 #' Entity List or Dataset).
-#' Please note that this endpoint only returns metadata of the entities, not the
-#' data. If you want to get the data of all entities then please refer to the
+#' Please note that this endpoint only returns metadata of the Entities, not the
+#' data. If you want to get the data of all Entities then please refer to the
 #' OData Dataset Service.
 #'
-#' You can get only deleted entities with `deleted=TRUE`.
+#' You can get only deleted Entities with `deleted=TRUE`.
 #'
 #' @template tpl-auth-missing
 #' @template tpl-compat-2022-3
 #' @template param-pid
 #' @template param-did
-#' @param deleted (lgl) Whether to get only deleted entities (`TRUE`) or not
+#' @param deleted (lgl) Whether to get only deleted Entities (`TRUE`) or not
 #'   (`FALSE`). Default: `FALSE`.
 #' @template param-url
 #' @template param-auth
@@ -37,7 +37,7 @@
 #'
 #' el <- entitylist_list()
 #'
-#' # Entity List name (dataset ID)
+#' # Entity List name (Dataset ID)
 #' did <- el$name[1]
 #'
 #' # All Entities of Entity List

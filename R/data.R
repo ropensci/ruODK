@@ -386,7 +386,7 @@
 #' This issue was fixed in #88.
 #' ODK Central versions 0.7 - 0.9 export geotraces and geoshapes with trailing
 #' empty coordinates. ruODK has a patch to drop trailing empty coordinates.
-#' This dataset is used to test the patch in ruODK.
+#' This Dataset is used to test the patch in ruODK.
 #'
 #' @source \code{\link{odata_submission_get}(wkt=FALSE, parse=TRUE)}
 #' run on the test form
@@ -425,7 +425,7 @@
 #' This issue was fixed in #88.
 #' ODK Central versions 0.7 - 0.9 export geotraces and geoshapes with trailing
 #' empty coordinates. ruODK has a patch to drop trailing empty coordinates.
-#' This dataset is used to test the patch in ruODK.
+#' This Dataset is used to test the patch in ruODK.
 #'
 #' @source \code{\link{odata_submission_get}(wkt=TRUE, parse=TRUE)}
 #' run on the test form

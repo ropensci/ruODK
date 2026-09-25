@@ -30,7 +30,7 @@ See \code{vignette("Setup", package = "ruODK")}.}
 The function will error if this parameter is not given.
 Default: "".}
 
-\item{deleted}{(lgl) Whether to get only deleted entities (\code{TRUE}) or not
+\item{deleted}{(lgl) Whether to get only deleted Entities (\code{TRUE}) or not
 (\code{FALSE}). Default: \code{FALSE}.}
 
 \item{url}{The ODK Central base URL without trailing slash.
@@ -91,11 +91,11 @@ Column names are renamed from ODK's \code{camelCase} to \code{snake_case}.
 \details{
 This function returns a list of the Entities of a kind (belonging to an
 Entity List or Dataset).
-Please note that this endpoint only returns metadata of the entities, not the
-data. If you want to get the data of all entities then please refer to the
+Please note that this endpoint only returns metadata of the Entities, not the
+data. If you want to get the data of all Entities then please refer to the
 OData Dataset Service.
 
-You can get only deleted entities with \code{deleted=TRUE}.
+You can get only deleted Entities with \code{deleted=TRUE}.
 }
 \examples{
 \dontrun{
@@ -104,7 +104,7 @@ You can get only deleted entities with \code{deleted=TRUE}.
 
 el <- entitylist_list()
 
-# Entity List name (dataset ID)
+# Entity List name (Dataset ID)
 did <- el$name[1]
 
 # All Entities of Entity List

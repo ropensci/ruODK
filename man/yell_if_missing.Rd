@@ -28,7 +28,7 @@ yell_if_missing(
 
 \item{iid}{A submission instance ID (character, optional)}
 
-\item{did}{An Entity List (dataset) name (character, optional)}
+\item{did}{An Entity List (Dataset) name (character, optional)}
 
 \item{eid}{An Entity UUID (character, optional)}
 }

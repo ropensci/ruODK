@@ -31,8 +31,8 @@
 #'
 #' Note that `createdAt` and `updatedAt` are time components.
 #' This means that any comparisons you make need to account for the full time
-#' of the entity. It might seem like `$filter=__system/createdAt le 2020-01-31`
-#' would return all results on or before 31 Jan 2020, but in fact only entities
+#' of the Entity. It might seem like `$filter=__system/createdAt le 2020-01-31`
+#' would return all results on or before 31 Jan 2020, but in fact only Entities
 #' made before midnight of that day would be accepted.
 #' To include all of the month of January, you need to filter by either
 #' `$filter=__system/createdAt le 2020-01-31T23:59:59.999Z` or
@@ -94,7 +94,7 @@
 #' @template param-tz
 #' @return An S3 class `odata_entitylist_data_get` with two list items:
 #'  * `context` The URL for the OData metadata document
-#'  * `value` A tibble of EntitySets available in this EntityList, with names
+#'  * `value` A tibble of EntitySets available in this Entity List, with names
 #'    cleaned by `janitor::clean_names()` and unnested list columns
 #'    (`__system`).
 #' @seealso \url{https://docs.getodk.org/central-api-odata-endpoints/#id3}

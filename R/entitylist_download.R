@@ -3,7 +3,7 @@
 #' `r lifecycle::badge("maturing")`
 #'
 #' ## CSV file
-#' The downloaded CSV file is named after the entity list name.
+#' The downloaded CSV file is named after the Entity List name.
 #' The download location defaults to the current workdir, but can be modified
 #' to a different folder path which will be created if it doesn't exist.
 #'
@@ -58,7 +58,7 @@
 #' @param etag (str) The etag value from a previous call to
 #'   `entitylist_download()`. The value must be stripped of the `W/\"` and `\"`,
 #'   which is the format of the etag returned by `entitylist_download()`.
-#'   If provided, only new entities will be returned.
+#'   If provided, only new Entities will be returned.
 #'   If the same `local_dir` is chosen and `overwrite` is set to `TRUE`,
 #'   the downloaded CSV will also be overwritten, losing the previously
 #'   downloaded Entities.
@@ -75,7 +75,7 @@
 #' @return A list of four items:
 #'   - entities (tbl_df) The Entity List as tibble
 #'   - http_status (int) The HTTP status code of the response.
-#'     200 if OK, 304 if a given etag finds no new entities created.
+#'     200 if OK, 304 if a given etag finds no new Entities created.
 #'   - etag (str) The ETag to use in subsequent calls to `entitylist_download()`
 #'   - downloaded_to (fs_path) The path to the downloaded CSV file
 #'   - downloaded_on (POSIXct) The time of download in the local timezone

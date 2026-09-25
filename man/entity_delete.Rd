@@ -83,7 +83,7 @@ Read \code{vignette("setup", package = "ruODK")} to learn how \code{ruODK}'s
 timezone can be set globally or per function.}
 }
 \value{
-A list with the key "success" (lgl) indicating whether the entity
+A list with the key "success" (lgl) indicating whether the Entity
 was deleted.
 }
 \description{
@@ -100,7 +100,7 @@ database and you can retrieve it via \code{entity_list(deleted=TRUE)}.
 
 el <- entitylist_list()
 
-# Entity List name (dataset ID, did)
+# Entity List name (Dataset ID, did)
 did <- el$name[1]
 
 # All Entities of Entity List

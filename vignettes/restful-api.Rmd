@@ -202,7 +202,7 @@ We are getting closer to the actual data! This section shows two of the options
 for data access: dump all submissions, or extract a subset.
 
 ## Get all submissions for one form
-Smaller datasets lend themselves to be exported in one go.
+Smaller Datasets lend themselves to be exported in one go.
 ODK Central offers one giant zip file containing all submissions, any
 repeating groups, and any attachments both on the form submission page, and as
 API endpoint which is provided as `ruODK::submission_export()`.

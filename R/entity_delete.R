@@ -19,7 +19,7 @@
 #' @template param-odkcv
 #' @template param-orders
 #' @template param-tz
-#' @return A list with the key "success" (lgl) indicating whether the entity
+#' @return A list with the key "success" (lgl) indicating whether the Entity
 #'   was deleted.
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-entity-management/#deleting-an-entity}
@@ -33,7 +33,7 @@
 #'
 #' el <- entitylist_list()
 #'
-#' # Entity List name (dataset ID, did)
+#' # Entity List name (Dataset ID, did)
 #' did <- el$name[1]
 #'
 #' # All Entities of Entity List

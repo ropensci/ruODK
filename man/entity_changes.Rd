@@ -88,7 +88,7 @@ with three columns:
 \itemize{
 \item \code{old} old value
 \item \code{new} new value
-\item \code{propertyName} name of changed entity property
+\item \code{propertyName} name of changed Entity property
 }
 }
 \description{
@@ -108,7 +108,7 @@ as the property name.
 
 el <- entitylist_list()
 
-# Entity List name (dataset ID, did)
+# Entity List name (Dataset ID, did)
 did <- el$name[1]
 
 # All Entities of Entity List

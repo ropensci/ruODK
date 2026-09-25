@@ -60,7 +60,7 @@
 #'
 #' el <- entitylist_list()
 #'
-#' # Entity List name (dataset ID, did)
+#' # Entity List name (Dataset ID, did)
 #' did <- el$name[1]
 #'
 #' # All Entities of Entity List

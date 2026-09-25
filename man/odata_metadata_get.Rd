@@ -55,7 +55,7 @@ This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
 Default: 3.}
 }
 \value{
-A nested list containing Edmx (dataset schema definition) and
+A nested list containing Edmx (Dataset schema definition) and
 .attrs (Version).
 }
 \description{

@@ -62,7 +62,7 @@ Default: NULL (no filtering, all Entities returned).}
 \item{etag}{(str) The etag value from a previous call to
 \code{entitylist_download()}. The value must be stripped of the \verb{W/\\"} and \verb{\\"},
 which is the format of the etag returned by \code{entitylist_download()}.
-If provided, only new entities will be returned.
+If provided, only new Entities will be returned.
 If the same \code{local_dir} is chosen and \code{overwrite} is set to \code{TRUE},
 the downloaded CSV will also be overwritten, losing the previously
 downloaded Entities.
@@ -110,7 +110,7 @@ A list of four items:
 \itemize{
 \item entities (tbl_df) The Entity List as tibble
 \item http_status (int) The HTTP status code of the response.
-200 if OK, 304 if a given etag finds no new entities created.
+200 if OK, 304 if a given etag finds no new Entities created.
 \item etag (str) The ETag to use in subsequent calls to \code{entitylist_download()}
 \item downloaded_to (fs_path) The path to the downloaded CSV file
 \item downloaded_on (POSIXct) The time of download in the local timezone
@@ -122,7 +122,7 @@ A list of four items:
 \details{
 \subsection{CSV file}{
 
-The downloaded CSV file is named after the entity list name.
+The downloaded CSV file is named after the Entity List name.
 The download location defaults to the current workdir, but can be modified
 to a different folder path which will be created if it doesn't exist.
 

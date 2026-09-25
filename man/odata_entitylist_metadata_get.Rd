@@ -108,7 +108,7 @@ dm1 <- odata_entitylist_metadata_get(pid = get_default_pid(), did = ds$name[1])
 # Overview
 print(dm1)
 
-# Get all property names for an entity type
+# Get all property names for an Entity type
 names(dm1$entity_types$Entities$properties)
 
 # Check what properties are non-filterable
