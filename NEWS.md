@@ -1,5 +1,8 @@
 # ruODK (development version)
 
+* `form_schema_ext()` also parses question hints in all languages
+  (`hint`, `hint_<lang>`) (#107).
+
 * `app_user_create()` creates an App User in a Project (#121).
 * `app_user_delete()` deletes an App User (#121).
 * `app_user_list()` lists the App Users of a Project (#121).
