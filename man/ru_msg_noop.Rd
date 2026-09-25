@@ -2,7 +2,7 @@
 % Please edit documentation in R/ru_msg.R
 \name{ru_msg_noop}
 \alias{ru_msg_noop}
-\title{Print a green noop message with a filled circle symbol.}
+\title{Print a noop message.}
 \usage{
 ru_msg_noop(message, verbose = get_ru_verbose())
 }
@@ -16,6 +16,10 @@ verbosity can be set globally or per function.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+}
+\details{
+Set \code{options(ruODK.quiet = TRUE)} to silence this message
+regardless of \code{verbose}.
 }
 \examples{
 ru_msg_noop("This is a noop message.")

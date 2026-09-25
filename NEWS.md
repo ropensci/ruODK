@@ -1,5 +1,9 @@
 # ruODK (development version)
 
+* Messages now use `usethis::ui_*()`, honour `options(ruODK.quiet = TRUE)`
+  to silence messages, and drop the `cli`, `crayon` and `clisymbols`
+  dependencies (#169).
+
 * `form_schema_ext()` also parses question hints in all languages
   (`hint`, `hint_<lang>`) (#107).
 

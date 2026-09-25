@@ -2,7 +2,7 @@
 % Please edit documentation in R/ru_msg.R
 \name{ru_msg_warn}
 \alias{ru_msg_warn}
-\title{rlang::warn() with a yellow warning message with a warning symbol.}
+\title{Signal a warning message.}
 \usage{
 ru_msg_warn(message, verbose = get_ru_verbose())
 }
@@ -16,6 +16,9 @@ verbosity can be set globally or per function.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+}
+\details{
+Warnings are never silenced by \code{options(ruODK.quiet = TRUE)}.
 }
 \examples{
 \dontrun{
