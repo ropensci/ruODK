@@ -1,5 +1,7 @@
-exclude: "/migrations/|^venv/|/email/subject/"
 default_stages: [pre-commit]
+
+ci:
+  skip: [air-format]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
