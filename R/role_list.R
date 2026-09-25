@@ -50,7 +50,7 @@ role_list <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr2::resp_body_json()
 
   tibble::tibble(roles = resp) |>
     tidyr::unnest_wider("roles", names_repair = "universal") |>

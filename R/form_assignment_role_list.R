@@ -57,7 +57,7 @@ form_assignment_role_list <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) {
       tibble::tibble(
         actor_id = purrr::map_dbl(resp, "actorId"),

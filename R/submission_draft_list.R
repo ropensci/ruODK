@@ -55,7 +55,7 @@ submission_draft_list <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) tibble::tibble(submissions = resp))() |>
     tidyr::unnest_wider("submissions", names_repair = "universal")
 

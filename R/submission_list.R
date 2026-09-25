@@ -74,7 +74,7 @@ submission_list <- function(
     retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.) %>%
+    httr2::resp_body_json() %>%
     tibble::tibble(.) %>%
     tidyr::unnest_wider(".", names_repair = "universal") %>%
     tidyr::unnest_wider(

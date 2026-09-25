@@ -57,7 +57,7 @@ public_link_list <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr2::resp_body_json()
 
   tibble::tibble(links = resp) |>
     tidyr::unnest_wider("links", names_repair = "universal") |>

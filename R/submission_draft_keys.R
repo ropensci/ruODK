@@ -54,7 +54,7 @@ submission_draft_keys <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) tibble::tibble(keys = resp))() |>
     tidyr::unnest_wider("keys", names_repair = "universal") |>
     janitor::clean_names() |>

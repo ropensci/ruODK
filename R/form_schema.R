@@ -189,7 +189,7 @@ form_schema <- function(
       retries = retries
     ) |>
       yell_if_error(url, un, pw) |>
-      httr::content()
+      httr2::resp_body_json()
 
     if (parse == TRUE) {
       if (flatten == TRUE) {
@@ -240,7 +240,7 @@ form_schema <- function(
       retries = retries
     ) |>
       yell_if_error(url, un, pw) |>
-      httr::content() |>
+      httr2::resp_body_json() |>
       (\(content) tibble::tibble(xx = content))() |>
       tidyr::unnest_wider(xx) |>
       (\(x) {

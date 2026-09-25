@@ -204,20 +204,21 @@ entitylist_download <- function(
   # yell_if_error(url, un, pw)  # allow HTTP 304 for no new submissions
 
   # 304 Not Modified carries no body and must not clobber the previous
-  # download, so report entities = NULL rather than parsing an empty body into
-  # "" or raw(0).
+  # download, so report entities = NULL rather than parsing an empty body.
+  # The response body was streamed straight to disk, so parse the file
+  # like httr::content() did: text/csv parses to a tibble.
   list(
     entities = if (res$status_code == 304L) {
       NULL
     } else {
-      httr::content(res, encoding = "utf-8")
+      readr::read_csv(pth)
     },
-    etag = res$headers$etag |>
+    etag = res$headers[["etag"]] |>
       stringr::str_remove_all(stringr::fixed("W/\"")) |>
       stringr::str_remove_all(stringr::fixed("\"")),
     http_status = res$status_code,
     downloaded_to = pth,
-    downloaded_on = isodt_to_local(res$date, orders = orders, tz = tz)
+    downloaded_on = isodt_to_local(Sys.time(), orders = orders, tz = tz)
   )
 }
 

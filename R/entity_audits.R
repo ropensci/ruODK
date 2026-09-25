@@ -102,7 +102,7 @@ entity_audits <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     purrr::list_transpose() |>
     tibble::as_tibble(.name_repair = "universal") |>
     tidyr::unnest_wider("details", names_sep = "_") |>

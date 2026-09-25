@@ -66,7 +66,7 @@ entity_creators <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr2::resp_body_json()
 
   tibble::tibble(creators = resp) |>
     tidyr::unnest_wider("creators", names_repair = "universal") |>

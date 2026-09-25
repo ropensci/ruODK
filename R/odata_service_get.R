@@ -42,7 +42,7 @@ odata_service_get <- function(
     retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.) %>%
+    httr2::resp_body_json() %>%
     magrittr::extract2("value") %>%
     {
       # nolint

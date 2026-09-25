@@ -257,11 +257,9 @@ submission_export <- function(
     dest = pth,
     overwrite = overwrite,
     terminate_on = c(500),
-    quiet = verbose,
     retries = retries
   ) %>%
-    yell_if_error(., url, un, pw) %>%
-    httr::content(.)
+    yell_if_error(., url, un, pw)
   pth
 }
 

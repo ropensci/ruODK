@@ -67,7 +67,7 @@ entity_geodata <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr2::resp_body_json()
 }
 
 # usethis::use_test("entity_geodata")  # nolint

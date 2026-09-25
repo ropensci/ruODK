@@ -52,7 +52,7 @@ form_xml <- function(
     retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.)
+    httr2::resp_body_xml()
 
   if (parse == FALSE) {
     return(out)

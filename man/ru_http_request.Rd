@@ -15,6 +15,9 @@ ru_http_request(
   pw = NULL,
   body = NULL,
   encode = NULL,
+  dest = NULL,
+  overwrite = TRUE,
+  terminate_on = NULL,
   retries = get_retries()
 )
 }
@@ -29,7 +32,8 @@ ru_http_request(
 Default: \code{NULL} (no query string).}
 
 \item{accept}{(character) The \code{Accept} header value.
-Default: \code{"application/json"}.}
+Default: \code{"application/json"}.
+Set to \code{NULL} to send no \code{Accept} header.}
 
 \item{headers}{(character) Optional extra headers as a named character
 vector, e.g. \code{c("X-Extended-Metadata" = "true")}.
@@ -47,6 +51,17 @@ Default: \code{NULL} (no body).}
 \item{encode}{(character) The body encoding, passed on to \code{httr::RETRY()}.
 Default: \code{NULL} (httr default).}
 
+\item{dest}{(character) A local file path to stream a download to.
+Default: \code{NULL} (no streaming, the response is kept in memory).}
+
+\item{overwrite}{(lgl) Whether to overwrite \code{dest} if it exists.
+Only used with \code{dest}.
+Default: \code{TRUE}.}
+
+\item{terminate_on}{(numeric) HTTP status codes that stop retries
+immediately.
+Default: \code{NULL} (only non-transient statuses stop retries).}
+
 \item{retries}{The number of attempts to retrieve a web resource.
 
 This parameter is given to \code{\link[httr]{RETRY}(times = retries)}.
@@ -61,11 +76,13 @@ The \code{httr} response object, unmodified.
 }
 \details{
 This is the centralised request helper for ruODK.
-It builds an \code{httr::RETRY()} call from plain data (verb, path, query,
-headers, credentials, body) and returns the \code{httr} response unchanged,
-so \code{yell_if_error()} and \code{httr::content()} keep working downstream.
-Future work (issue #154) replaces the \code{httr} engine inside this single
-function with \code{httr2}, without touching the callers.
+It builds an \code{httr2} request from plain data (verb, path, query,
+headers, credentials, body) and returns the \code{httr2} response unchanged,
+so \code{yell_if_error()} and the \verb{httr2::resp_body_*()} parsers keep working
+downstream.
+The full URL keeps \code{httr::modify_url()} semantics on purpose: query
+values that callers pre-encode (for example \code{entitylist_download()}'s
+\verb{$filter}) must not be encoded twice.
 }
 \examples{
 \dontrun{
@@ -80,7 +97,7 @@ resp <- ruODK:::ru_http_request(
   pw = get_test_pw()
 )
 
-httr::status_code(resp)
+httr2::resp_status(resp)
 }
 }
 \seealso{

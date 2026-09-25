@@ -55,7 +55,7 @@ submission_comment_list <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) {
       tibble::tibble(
         body = purrr::map_chr(resp, "body"),

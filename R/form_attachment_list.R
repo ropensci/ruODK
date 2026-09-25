@@ -57,7 +57,7 @@ form_attachment_list <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr2::resp_body_json()
 
   tibble::tibble(attachments = resp) |>
     tidyr::unnest_wider("attachments", names_repair = "universal") |>

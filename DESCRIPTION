@@ -48,6 +48,7 @@ Imports:
     fs (>= 1.6.5),
     glue (>= 1.8.0),
     httr (>= 1.4.7),
+    httr2 (>= 1.0.0),
     janitor (>= 2.2.0),
     lifecycle (>= 1.0.4),
     lubridate (>= 1.9.3),

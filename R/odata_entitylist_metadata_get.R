@@ -85,7 +85,7 @@ odata_entitylist_metadata_get <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr2::resp_body_xml()
 
   # Convert EDMX XML Document to structured R object
 

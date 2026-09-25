@@ -3,11 +3,13 @@
 #' `r lifecycle::badge("experimental")`
 #'
 #' This is the centralised request helper for ruODK.
-#' It builds an `httr::RETRY()` call from plain data (verb, path, query,
-#' headers, credentials, body) and returns the `httr` response unchanged,
-#' so `yell_if_error()` and `httr::content()` keep working downstream.
-#' Future work (issue #154) replaces the `httr` engine inside this single
-#' function with `httr2`, without touching the callers.
+#' It builds an `httr2` request from plain data (verb, path, query,
+#' headers, credentials, body) and returns the `httr2` response unchanged,
+#' so `yell_if_error()` and the `httr2::resp_body_*()` parsers keep working
+#' downstream.
+#' The full URL keeps `httr::modify_url()` semantics on purpose: query
+#' values that callers pre-encode (for example `entitylist_download()`'s
+#' `$filter`) must not be encoded twice.
 #'
 #' @param verb (character) The HTTP verb, e.g. `"GET"`, `"POST"`.
 #' @param url (character) The base URL of the ODK Central server.
@@ -34,10 +36,8 @@
 #'   Only used with `dest`.
 #'   Default: `TRUE`.
 #' @param terminate_on (numeric) HTTP status codes that stop retries
-#'   immediately, passed on to `httr::RETRY()`.
-#'   Default: `NULL` (httr default).
-#' @param quiet (lgl) Whether to suppress `httr::RETRY()` progress output.
-#'   Default: `FALSE`.
+#'   immediately.
+#'   Default: `NULL` (only non-transient statuses stop retries).
 #' @template param-retries
 #' @return The `httr` response object, unmodified.
 #' @family utilities
@@ -55,7 +55,7 @@
 #'   pw = get_test_pw()
 #' )
 #'
-#' httr::status_code(resp)
+#' httr2::resp_status(resp)
 #' }
 ru_http_request <- function(
   verb,
@@ -71,23 +71,48 @@ ru_http_request <- function(
   dest = NULL,
   overwrite = TRUE,
   terminate_on = NULL,
-  quiet = FALSE,
   retries = get_retries()
 ) {
-  httr::RETRY(
-    verb,
-    httr::modify_url(url, path = path, query = query),
-    if (length(c(Accept = accept, headers)) > 0) {
-      httr::add_headers(.headers = c(Accept = accept, headers))
-    },
-    if (!is.null(un) && !is.null(pw)) httr::authenticate(un, pw),
-    body = body,
-    encode = encode,
-    if (!is.null(dest)) httr::write_disk(dest, overwrite = overwrite),
-    terminate_on = terminate_on,
-    quiet = quiet,
-    times = retries
+  # httr::modify_url keeps exact legacy query semantics: pre-encoded values
+  # (e.g. entitylist_download()'s $filter) must not be encoded twice.
+  full_url <- httr::modify_url(url, path = path, query = query)
+
+  req <- httr2::request(full_url) |> httr2::req_method(verb)
+
+  all_headers <- c(Accept = accept, headers)
+  if (length(all_headers) > 0) {
+    req <- httr2::req_headers(req, !!!all_headers)
+  }
+  if (!is.null(un) && !is.null(pw)) {
+    req <- httr2::req_auth_basic(req, un, pw)
+  }
+  if (!is.null(body)) {
+    if (identical(encode, "json")) {
+      req <- httr2::req_body_json(req, body)
+    } else {
+      req <- httr2::req_body_raw(req, body)
+    }
+  } else if (verb %in% c("POST", "PUT", "PATCH")) {
+    # httr sends Content-Length: 0 on bodiless writes; Central rejects
+    # the request without it.
+    req <- httr2::req_body_raw(req, raw(0))
+  }
+
+  transient_codes <- c(429L, setdiff(500:599, terminate_on %||% integer(0)))
+  req <- httr2::req_retry(
+    req,
+    max_tries = max(retries, 1L),
+    is_transient = function(resp) httr2::resp_status(resp) %in% transient_codes
   )
+
+  if (!is.null(dest)) {
+    if (!overwrite && file.exists(dest)) {
+      ru_msg_abort(glue::glue('File "{dest}" already exists.'))
+    }
+    httr2::req_perform(req, path = dest)
+  } else {
+    httr2::req_perform(req)
+  }
 }
 
 # usethis::use_test("ru_http")  # nolint

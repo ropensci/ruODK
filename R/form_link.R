@@ -56,7 +56,7 @@ form_link <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) {
       tibble::tibble(
         forms = if (is.null(names(resp))) resp else list(resp)

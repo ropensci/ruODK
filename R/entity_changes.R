@@ -101,7 +101,7 @@ entity_changes <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     purrr::map(
       ~ purrr::list_transpose(.x) |>
         tibble::as_tibble()

@@ -57,7 +57,7 @@ user_preference_site_delete <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) {
       if (is.list(resp) && !is.null(names(resp))) {
         janitor::clean_names(resp)
