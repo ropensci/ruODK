@@ -1,4 +1,23 @@
 # ruODK (development version)
+
+# ruODK 1.6.0
+This version completes coverage for the ODK Central v2026.3.0 API.
+
+The developer experience now includes:
+
+- A devcontainer for a single-click to working development environment.
+  This takes the "ow" out of the "how" of setting up a working development
+  environment.
+- The devcontainer provides a slimmed down local ODK Central instance
+  to run tests against. This makes development and CI independent of
+  access to a hosted ODK Central.
+- Opencode pre-installed. Follow the contributing guide to add your own
+  Opencode API key to your GitHub profile codespaces secrets
+  or paste it into opencode (per session) and off you go.
+  Alternatively you can use GitHub Copilot, or if developing locally,
+  any (or none) of the other AI harnesses.
+- Agentic skills and agent instructions as guardrails.
+
 ## Major changes
 * `assignment_list()` lists server-wide Role Assignments.
 * `config_public()` shows publicly accessible server configuration.
