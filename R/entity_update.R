@@ -137,27 +137,30 @@ entity_update <- function(
 
   pth <- glue::glue(
     "v1/projects/{pid}/datasets/{URLencode(did, reserved = TRUE)}/",
-    "entities/{eid}?force={force_val}&resolve={resolve_val}"
+    "entities/{eid}"
   )
+  qry <- list(force = force_val, resolve = resolve_val)
 
   if (!is.null(base_version)) {
     if (!is.integer(as.integer(base_version))) {
       ru_msg_abort("base_version must be an integer.")
     }
-    pth <- glue::glue("{pth}&baseVersion={as.integer(base_version)}")
+    qry$baseVersion <- as.integer(base_version)
   }
 
-  httr::RETRY(
+  ru_http_request(
     "PATCH",
-    httr::modify_url(url, path = pth),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    url,
+    path = pth,
+    query = qry,
+    un = un,
+    pw = pw,
     body = list(label = as.character(label), data = data),
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     # purrr::list_transpose() |>
     # tibble::enframe() |>
     # tibble::as_tibble(.name_repair = "universal") |>

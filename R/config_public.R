@@ -42,20 +42,22 @@ config_public <- function(
     ru_msg_abort("Missing ODK Central URL. ru_setup()?")
   }
 
-  auth <- NULL
-  if (!is.null(un) && !is.null(pw) && nzchar(un) && nzchar(pw)) {
-    auth <- httr::authenticate(un, pw)
+  # Authenticate only with usable credentials; empty strings stay anonymous
+  if (is.null(un) || is.null(pw) || !nzchar(un) || !nzchar(pw)) {
+    un <- NULL
+    pw <- NULL
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = "v1/config/public"),
-    httr::add_headers("Accept" = "application/json"),
-    auth,
-    times = retries
+    url,
+    path = "v1/config/public",
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr2::resp_body_json()
 }
 
 # usethis::use_test("config_public")  # nolint

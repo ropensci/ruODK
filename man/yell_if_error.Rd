@@ -26,7 +26,7 @@ The response object
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
 \details{
-A wrapper around \code{httr::stop_for_status} with a more helpful error
+A wrapper around response error checks with a more helpful error
 message.
 Examples: see tests for \code{\link{project_list}}.
 This function is used internally but may be useful for debugging and

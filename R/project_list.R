@@ -45,18 +45,18 @@ project_list <- function(
   tz = get_default_tz()
 ) {
   yell_if_missing(url, un, pw)
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = glue::glue("v1/projects")),
-    httr::add_headers(
-      "Accept" = "application/xml",
-      "X-Extended-Metadata" = "true"
-    ),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/projects"),
+    accept = "application/xml",
+    headers = c("X-Extended-Metadata" = "true"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.) %>%
+    httr2::resp_body_json() %>%
     tibble::tibble(.) %>%
     tidyr::unnest_wider(".", names_repair = "universal") %>%
     # tidyr::unnest_wider(

@@ -31,21 +31,20 @@ odata_metadata_get <- function(
   retries = get_retries()
 ) {
   yell_if_missing(url, un, pw)
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}.svc/$metadata"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}.svc/$metadata"
     ),
-    httr::add_headers(Accept = "application/xml"),
-    httr::authenticate(un, pw),
-    times = retries
+    accept = "application/xml",
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.) %>%
+    httr2::resp_body_xml() %>%
     xml2::as_list(.)
 }
 

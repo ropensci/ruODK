@@ -245,21 +245,19 @@ odata_submission_get <- function(
   # Thanks @mtyszler
   qry <- qry[qry != ""]
 
-  sub <- httr::RETRY(
+  sub <- ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.svc/{table}"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}.svc/{table}"
     ),
     query = qry,
-    times = retries,
-    httr::add_headers(Accept = "application/json"),
-    httr::authenticate(un, pw)
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.)
+    httr2::resp_body_json()
 
   ru_msg_success("Downloaded submissions.", verbose = verbose)
 

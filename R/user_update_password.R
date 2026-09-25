@@ -56,17 +56,18 @@ user_update_password <- function(
     }
   }
 
-  httr::RETRY(
+  ru_http_request(
     "PUT",
-    httr::modify_url(url, path = glue::glue("v1/users/{actor_id}/password")),
-    httr::add_headers("Accept" = "application/json"),
+    url,
+    path = glue::glue("v1/users/{actor_id}/password"),
+    un = un,
+    pw = pw,
     body = list(old = old_password, new = new_password),
     encode = "json",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     janitor::clean_names()
 }
 

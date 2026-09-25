@@ -81,17 +81,18 @@ project_update <- function(
     ru_msg_abort("Supply at least one of 'name', 'description' or 'archived'.")
   }
 
-  resp <- httr::RETRY(
+  resp <- ru_http_request(
     "PATCH",
-    httr::modify_url(url, path = glue::glue("v1/projects/{pid}")),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    url,
+    path = glue::glue("v1/projects/{pid}"),
+    un = un,
+    pw = pw,
     body = body,
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content()
+    httr2::resp_body_json()
   tibble::tibble(
     id = resp$id,
     name = resp$name,

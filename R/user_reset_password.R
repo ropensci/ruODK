@@ -59,17 +59,19 @@ user_reset_password <- function(
     query <- list("invalidate" = "true")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(url, path = "v1/users/reset/initiate", query = query),
-    httr::add_headers("Accept" = "application/json"),
+    url,
+    path = "v1/users/reset/initiate",
+    query = query,
+    un = un,
+    pw = pw,
     body = list(email = email),
     encode = "json",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     janitor::clean_names()
 }
 

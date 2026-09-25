@@ -71,19 +71,22 @@ entity_list <- function(
     "v1/projects/{pid}/datasets/{URLencode(did, reserved = TRUE)}/entities"
   )
 
+  qry <- NULL
   if (deleted == TRUE) {
-    pth <- glue::glue("{pth}?deleted=true")
+    qry <- list(deleted = "true")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = pth),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = pth,
+    query = qry,
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     purrr::list_transpose() |>
     tibble::as_tibble() |>
     janitor::clean_names() |>

@@ -43,21 +43,19 @@ form_draft_attachment_list <- function(
 ) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
 
-  resp <- httr::RETRY(
+  resp <- ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/draft/attachments"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/draft/attachments"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr2::resp_body_json()
 
   tibble::tibble(attachments = resp) |>
     tidyr::unnest_wider("attachments", names_repair = "universal") |>

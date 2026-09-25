@@ -44,17 +44,18 @@ project_create <- function(
     ru_msg_abort("name must be a single non-empty character string.")
   }
 
-  resp <- httr::RETRY(
+  resp <- ru_http_request(
     "POST",
-    httr::modify_url(url, path = "v1/projects"),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
+    url,
+    path = "v1/projects",
+    un = un,
+    pw = pw,
     body = list(name = name),
     encode = "json",
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content()
+    httr2::resp_body_json()
   tibble::tibble(
     id = resp$id,
     name = resp$name,

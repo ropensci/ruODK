@@ -54,21 +54,19 @@ entity_creators <- function(
     ru_msg_warn("entity_creators is supported from v2022.3")
   }
 
-  resp <- httr::RETRY(
+  resp <- ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/datasets/",
-        "{URLencode(did, reserved = TRUE)}/entities/creators"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/datasets/",
+      "{URLencode(did, reserved = TRUE)}/entities/creators"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8")
+    httr2::resp_body_json()
 
   tibble::tibble(creators = resp) |>
     tidyr::unnest_wider("creators", names_repair = "universal") |>

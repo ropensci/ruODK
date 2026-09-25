@@ -76,22 +76,24 @@ entitylist_trash_download <- function(
   }
   pth <- fs::path(local_dir, glue::glue("dataset-{dataset_id}-deleted.csv"))
 
-  res <- httr::RETRY(
+  res <- ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/trash/datasets/{dataset_id}/entities.csv"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/trash/datasets/{dataset_id}/entities.csv"
     ),
-    httr::add_headers("Accept" = "text/csv; charset=utf-8"),
-    httr::authenticate(un, pw),
-    httr::write_disk(pth, overwrite = TRUE),
-    times = retries
+    accept = "text/csv; charset=utf-8",
+    un = un,
+    pw = pw,
+    dest = pth,
+    overwrite = TRUE,
+    retries = retries
   )
 
+  # The response body was streamed straight to disk, so parse the file
+  # as CSV text to a tibble.
   list(
-    entities = httr::content(res, encoding = "utf-8"),
+    entities = readr::read_csv(pth),
     http_status = res$status_code,
     downloaded_to = pth
   )

@@ -41,15 +41,16 @@ role_detail <- function(
     ru_msg_abort("role_id must be a single Role ID or system name.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = glue::glue("v1/roles/{role_id}")),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/roles/{role_id}"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) {
       tibble::tibble(
         id = resp$id,

@@ -1,5 +1,8 @@
 # ruODK (development version)
 
+* New internal `ru_http_request()` centralises HTTP requests as the first
+  step of the `httr` to `httr2` migration (#154).
+
 * Messages now use `usethis::ui_*()`, honour `options(ruODK.quiet = TRUE)`
   to silence messages, and drop the `cli`, `crayon` and `clisymbols`
   dependencies (#169).

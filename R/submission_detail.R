@@ -42,24 +42,21 @@ submission_detail <- function(
   retries = get_retries()
 ) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/submissions/{iid}"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/submissions/{iid}"
     ),
-    httr::add_headers(
-      "Accept" = "application/json; extended",
-      "X-Extended-Metadata" = "true"
-    ),
-    httr::authenticate(un, pw),
-    times = retries
+    accept = "application/json; extended",
+    headers = c("X-Extended-Metadata" = "true"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.) %>%
+    httr2::resp_body_json() %>%
     {
       # nolint
       tibble::tibble(

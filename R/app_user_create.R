@@ -52,17 +52,18 @@ app_user_create <- function(
     ru_msg_abort("display_name must be a single non-empty character string.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(url, path = glue::glue("v1/projects/{pid}/app-users")),
-    httr::add_headers("Accept" = "application/json"),
+    url,
+    path = glue::glue("v1/projects/{pid}/app-users"),
+    un = un,
+    pw = pw,
     body = list(displayName = display_name),
     encode = "json",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) {
       tibble::tibble(
         id = resp$id,

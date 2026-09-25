@@ -47,18 +47,16 @@ form_link <- function(
     ru_msg_abort("form_link_id must be a single non-empty character string.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue("v1/form-links/{form_link_id}/form")
-    ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/form-links/{form_link_id}/form"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) {
       tibble::tibble(
         forms = if (is.null(names(resp))) resp else list(resp)

@@ -83,26 +83,22 @@ submission_update <- function(
     ru_msg_abort("xml must be a single non-empty character string.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "PUT",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/submissions/{iid}"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/submissions/{iid}"
     ),
-    httr::add_headers(
-      "Accept" = "application/json",
-      "Content-Type" = "application/xml"
-    ),
+    headers = c("Content-Type" = "application/xml"),
+    un = un,
+    pw = pw,
     body = xml,
     encode = "raw",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     janitor::clean_names()
 }
 

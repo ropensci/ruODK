@@ -176,22 +176,20 @@ form_schema <- function(
 
   if (semver_lt(odkc_version, "0.8.0")) {
     # nocov start
-    fs <- httr::RETRY(
+    fs <- ru_http_request(
       "GET",
-      httr::modify_url(
-        url,
-        path = glue::glue(
-          "v1/projects/{pid}/forms/",
-          "{URLencode(fid, reserved = TRUE)}.schema.json"
-        )
+      url,
+      path = glue::glue(
+        "v1/projects/{pid}/forms/",
+        "{URLencode(fid, reserved = TRUE)}.schema.json"
       ),
-      httr::add_headers("Accept" = "application/json"),
-      httr::authenticate(un, pw),
       query = list(flatten = flatten, odata = odata),
-      times = retries
+      un = un,
+      pw = pw,
+      retries = retries
     ) |>
       yell_if_error(url, un, pw) |>
-      httr::content()
+      httr2::resp_body_json()
 
     if (parse == TRUE) {
       if (flatten == TRUE) {
@@ -232,16 +230,17 @@ form_schema <- function(
       )
     }
 
-    fs <- httr::RETRY(
+    fs <- ru_http_request(
       "GET",
-      httr::modify_url(url, path = pth),
-      httr::add_headers("Accept" = "application/json"),
-      httr::authenticate(un, pw),
+      url,
+      path = pth,
       query = list(flatten = flatten, odata = odata),
-      times = retries
+      un = un,
+      pw = pw,
+      retries = retries
     ) |>
       yell_if_error(url, un, pw) |>
-      httr::content() |>
+      httr2::resp_body_json() |>
       (\(content) tibble::tibble(xx = content))() |>
       tidyr::unnest_wider(xx) |>
       (\(x) {

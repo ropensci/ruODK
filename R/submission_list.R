@@ -62,24 +62,19 @@ submission_list <- function(
   tz = get_default_tz()
 ) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid)
-  url <- httr::modify_url(
+  ru_http_request(
+    "GET",
     url,
     path = glue::glue(
       "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/submissions"
-    )
-  )
-  httr::RETRY(
-    "GET",
-    url,
-    httr::add_headers(
-      "Accept" = "application/json",
-      "X-Extended-Metadata" = "true"
     ),
-    httr::authenticate(un, pw),
-    times = retries
+    headers = c("X-Extended-Metadata" = "true"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.) %>%
+    httr2::resp_body_json() %>%
     tibble::tibble(.) %>%
     tidyr::unnest_wider(".", names_repair = "universal") %>%
     tidyr::unnest_wider(

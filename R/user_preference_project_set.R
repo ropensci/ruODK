@@ -52,23 +52,21 @@ user_preference_project_set <- function(
     ru_msg_abort("value must be given.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "PUT",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/user-preferences/project/{pid}/",
-        "{URLencode(name, reserved = TRUE)}"
-      )
+    url,
+    path = glue::glue(
+      "v1/user-preferences/project/{pid}/",
+      "{URLencode(name, reserved = TRUE)}"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    un = un,
+    pw = pw,
     body = list(propertyValue = value),
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     janitor::clean_names()
 }
 

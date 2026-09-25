@@ -161,7 +161,7 @@ entitylist_download <- function(
   }
 
   # Headers: accept CSV, set ETag if given
-  headers <- c(Accept = "text/csv; charset=utf-8")
+  extra_headers <- NULL
   if (!is.null(etag)) {
     if (odkc_version |> semver_lt("2023.3")) {
       ru_msg_warn("entitylist_download ETag is supported from v2023.3")
@@ -176,7 +176,7 @@ entitylist_download <- function(
     } else {
       paste0('"', etag, '"')
     }
-    headers <- c(headers, c("If-None-Match" = if_none_match))
+    extra_headers <- c("If-None-Match" = if_none_match)
   }
 
   # Query: filter
@@ -185,38 +185,40 @@ entitylist_download <- function(
     query <- list("$filter" = utils::URLencode(filter, reserved = TRUE))
   }
 
-  res <- httr::RETRY(
+  res <- ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/datasets/",
-        "{utils::URLencode(did, reserved = TRUE)}/entities.csv"
-      ),
-      query = query
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/datasets/",
+      "{utils::URLencode(did, reserved = TRUE)}/entities.csv"
     ),
-    httr::add_headers(.headers = headers),
-    httr::authenticate(un, pw),
-    httr::write_disk(pth, overwrite = overwrite),
-    times = retries
+    query = query,
+    accept = "text/csv; charset=utf-8",
+    headers = extra_headers,
+    un = un,
+    pw = pw,
+    dest = pth,
+    overwrite = overwrite,
+    retries = retries
   )
   # yell_if_error(url, un, pw)  # allow HTTP 304 for no new submissions
 
   # 304 Not Modified carries no body and must not clobber the previous
-  # download, so report entities = NULL rather than parsing an empty body into
-  # "" or raw(0).
+  # download, so report entities = NULL rather than parsing an empty body.
+  # The response body was streamed straight to disk, so parse the file
+  # as CSV text to a tibble.
   list(
     entities = if (res$status_code == 304L) {
       NULL
     } else {
-      httr::content(res, encoding = "utf-8")
+      readr::read_csv(pth)
     },
-    etag = res$headers$etag |>
+    etag = res$headers[["etag"]] |>
       stringr::str_remove_all(stringr::fixed("W/\"")) |>
       stringr::str_remove_all(stringr::fixed("\"")),
     http_status = res$status_code,
     downloaded_to = pth,
-    downloaded_on = isodt_to_local(res$date, orders = orders, tz = tz)
+    downloaded_on = isodt_to_local(Sys.time(), orders = orders, tz = tz)
   )
 }
 

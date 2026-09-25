@@ -83,20 +83,21 @@ submission_version_attachment_download <- function(
     ru_msg_abort("dest must be a single file path.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/submissions/{iid}/",
-        "versions/{vid}/attachments/",
-        "{URLencode(filename, reserved = TRUE)}"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/submissions/{iid}/",
+      "versions/{vid}/attachments/",
+      "{URLencode(filename, reserved = TRUE)}"
     ),
-    httr::write_disk(dest, overwrite = TRUE),
-    httr::authenticate(un, pw),
-    times = retries
+    accept = NULL,
+    un = un,
+    pw = pw,
+    dest = dest,
+    overwrite = TRUE,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw)
 

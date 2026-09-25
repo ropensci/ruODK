@@ -61,17 +61,18 @@ user_update <- function(
     ru_msg_abort("One of display_name or email must be given.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "PATCH",
-    httr::modify_url(url, path = glue::glue("v1/users/{actor_id}")),
-    httr::add_headers("Accept" = "application/json"),
+    url,
+    path = glue::glue("v1/users/{actor_id}"),
+    un = un,
+    pw = pw,
     body = body,
     encode = "json",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) {
       tibble::tibble(
         id = resp$id,

@@ -54,18 +54,16 @@ project_assignment_actors <- function(
     ru_msg_abort("role_id must be a single Role ID.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue("v1/projects/{pid}/assignments/{role_id}")
-    ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/projects/{pid}/assignments/{role_id}"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     purrr::list_transpose() |>
     tibble::as_tibble() |>
     janitor::clean_names() |>

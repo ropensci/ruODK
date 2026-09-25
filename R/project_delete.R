@@ -38,15 +38,16 @@ project_delete <- function(
 ) {
   yell_if_missing(url, un, pw, pid = pid)
 
-  httr::RETRY(
+  ru_http_request(
     "DELETE",
-    httr::modify_url(url, path = glue::glue("v1/projects/{pid}")),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/projects/{pid}"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     janitor::clean_names()
 }
 

@@ -48,18 +48,16 @@ form_assignment_role_list <- function(
     ru_msg_abort("role_id must be a single Role ID.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue("v1/projects/{pid}/assignments/forms/{role_id}")
-    ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/projects/{pid}/assignments/forms/{role_id}"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     (\(resp) {
       tibble::tibble(
         actor_id = purrr::map_dbl(resp, "actorId"),

@@ -60,21 +60,20 @@ form_version_xml <- function(
     ru_msg_abort("version must be a single non-empty character string.")
   }
 
-  out <- httr::RETRY(
+  out <- ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/",
-        "versions/{URLencode(version, reserved = TRUE)}.xml"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/{URLencode(fid, reserved = TRUE)}/",
+      "versions/{URLencode(version, reserved = TRUE)}.xml"
     ),
-    httr::add_headers("Accept" = "application/xml"),
-    httr::authenticate(un, pw),
-    times = retries
+    accept = "application/xml",
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content()
+    httr2::resp_body_xml()
 
   if (parse == FALSE) {
     return(out)

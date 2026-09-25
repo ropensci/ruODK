@@ -75,25 +75,21 @@ entitylist_update <- function(
     ru_msg_warn("entitylist_update is supported from v2022.3")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "PATCH",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/datasets/",
-        "{URLencode(did, reserved = TRUE)}"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/datasets/",
+      "{URLencode(did, reserved = TRUE)}"
     ),
-    httr::add_headers(
-      "Accept" = "application/json"
-    ),
-    encode = "json",
+    un = un,
+    pw = pw,
     body = list(approvalRequired = approval_required),
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     janitor::clean_names()
 }
 

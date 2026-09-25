@@ -76,17 +76,18 @@ project_replace <- function(
     ru_msg_abort("archived must be TRUE or FALSE.")
   }
 
-  resp <- httr::RETRY(
+  resp <- ru_http_request(
     "PUT",
-    httr::modify_url(url, path = glue::glue("v1/projects/{pid}")),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    url,
+    path = glue::glue("v1/projects/{pid}"),
+    un = un,
+    pw = pw,
     body = list(name = name, description = description, archived = archived),
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content()
+    httr2::resp_body_json()
   tibble::tibble(
     id = resp$id,
     name = resp$name,

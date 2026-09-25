@@ -58,17 +58,19 @@ get_one_submission_audit <- function(
   retries = get_retries()
 ) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    glue::glue(
-      "{url}/v1/projects/{pid}/forms/",
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
       "{URLencode(fid, reserved = TRUE)}/submissions/{iid}/audits"
     ),
-    httr::authenticate(un, pw),
-    times = retries
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
-    httr::content(.)
+    httr2::resp_body_json()
   # %>%
   #   tibble::as_tibble() %>%
   #   tidyr::unnest_wider()

@@ -116,27 +116,23 @@ form_create <- function(
     query$ignoreWarnings <- "true"
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(
-      url,
-      path = glue::glue("v1/projects/{pid}/forms"),
-      query = query
+    url,
+    path = glue::glue("v1/projects/{pid}/forms"),
+    query = query,
+    headers = c(
+      "Content-Type" = content_type,
+      unlist(extra_headers)
     ),
-    httr::add_headers(
-      .headers = c(
-        "Accept" = "application/json",
-        "Content-Type" = content_type,
-        unlist(extra_headers)
-      )
-    ),
+    un = un,
+    pw = pw,
     body = body,
     encode = "raw",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     janitor::clean_names()
 }
 

@@ -149,24 +149,20 @@ odata_entitylist_data_get <- function(
     ru_msg_warn("odata_entitylist_data_get is supported from v2022.3")
   }
 
-  ds <- httr::RETRY(
+  ds <- ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/datasets/",
-        "{URLencode(did, reserved = TRUE)}.svc/Entities"
-      ),
-      query = query
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/datasets/",
+      "{URLencode(did, reserved = TRUE)}.svc/Entities"
     ),
-    httr::add_headers(
-      "Accept" = "application/json"
-    ),
-    httr::authenticate(un, pw),
-    times = retries
+    query = query,
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     janitor::clean_names()
 
   entities <- ds$value |>

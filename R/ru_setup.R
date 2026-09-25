@@ -109,8 +109,10 @@ print.ru_settings <- function(x, ...) {
 #'  \item\code{fid} The form ID.
 #'  }
 odata_svc_parse <- function(svc) {
-  parts <- httr::parse_url(svc)
-  pth <- parts$path %>% stringr::str_split("/")
+  parts <- httr2::url_parse(svc)
+  pth <- parts$path %>%
+    stringr::str_remove("^/") %>%
+    stringr::str_split("/")
   list(
     url = glue::glue("{parts$scheme}://{parts$hostname}"),
     pid = pth[[1]][[3]],
@@ -813,7 +815,7 @@ yell_if_missing <- function(
 #'
 #' `r lifecycle::badge("stable")`
 #'
-#' A wrapper around \code{httr::stop_for_status} with a more helpful error
+#' A wrapper around response error checks with a more helpful error
 #' message.
 #' Examples: see tests for \code{\link{project_list}}.
 #' This function is used internally but may be useful for debugging and
@@ -828,18 +830,19 @@ yell_if_missing <- function(
 #' @family ru_settings
 #' @keywords internal
 yell_if_error <- function(response, url, un, pw, pid = NULL, fid = NULL) {
-  response %>%
-    httr::stop_for_status(
-      task = glue::glue(
-        "get desired response from server {url} as user \"{un}\".\n\n",
-        "Troubleshooting tips:\n",
-        "* Is the server online at {url}? Is the internet flaky? Retry!\n",
-        "* Check ruODK::ru_settings() - credentials and defaults correct?\n",
-        "* Run ru_setup() with working credentials and defaults.\n",
-        '* Read the vignette("setup", package = "ruODK") how to set up ruODK.\n',
-        "* If an encrypted form returns HTTP 500: Wrong passphrase?",
-      )
-    )
+  if (!httr2::resp_is_error(response)) {
+    return(response)
+  }
+  ru_msg_abort(glue::glue(
+    "get desired response from server {url} as user \"{un}\".\n\n",
+    "HTTP {httr2::resp_status(response)} error.\n\n",
+    "Troubleshooting tips:\n",
+    "* Is the server online at {url}? Is the internet flaky? Retry!\n",
+    "* Check ruODK::ru_settings() - credentials and defaults correct?\n",
+    "* Run ru_setup() with working credentials and defaults.\n",
+    '* Read the vignette("setup", package = "ruODK") how to set up ruODK.\n',
+    "* If an encrypted form returns HTTP 500: Wrong passphrase?",
+  ))
 }
 
 # usethis::use_test("ru_setup")  # nolint

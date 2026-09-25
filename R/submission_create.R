@@ -74,27 +74,23 @@ submission_create <- function(
     query$deviceID <- device_id
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/submissions"
-      ),
-      query = query
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/submissions"
     ),
-    httr::add_headers(
-      "Accept" = "application/json",
-      "Content-Type" = "application/xml"
-    ),
+    query = query,
+    headers = c("Content-Type" = "application/xml"),
+    un = un,
+    pw = pw,
     body = xml,
     encode = "raw",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     janitor::clean_names()
 }
 

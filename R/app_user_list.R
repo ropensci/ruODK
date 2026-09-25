@@ -40,15 +40,16 @@ app_user_list <- function(
 ) {
   yell_if_missing(url, un, pw, pid = pid)
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = glue::glue("v1/projects/{pid}/app-users")),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/projects/{pid}/app-users"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr::content(encoding = "utf-8") |>
+    httr2::resp_body_json() |>
     purrr::list_transpose() |>
     tibble::as_tibble() |>
     janitor::clean_names() |>
