@@ -45,6 +45,32 @@ if ! opencode --version >/dev/null 2>&1; then
   echo "postAttach: WARNING opencode is not runnable." >&2
 fi
 
+# 1b. Posit air R formatter for the `air-format` pre-commit hook, which needs
+#    `air` on PATH. The dev image already ships it (see Dockerfile); this
+#    fallback install covers images built before that line existed. Skipped
+#    when the binary is already in place, so re-attaching is cheap. Installs
+#    flat into ~/.local/bin (this installer creates no `bin/` subdir, so the
+#    directory itself must be the install prefix) without touching shell rc
+#    files; PATH is wired below. Pinned to the same version as the Dockerfile.
+#    The `||` keeps a failed fallback install from aborting the stack seeding
+#    below under `set -e`.
+if ! command -v air >/dev/null 2>&1; then
+  echo "postAttach: installing air.."
+  export AIR_INSTALL_DIR="${HOME}/.local/bin" AIR_NO_MODIFY_PATH=1
+  curl -LsSf https://github.com/posit-dev/air/releases/download/0.11.0/air-installer.sh | sh \
+    || echo "postAttach: WARNING air install failed." >&2
+  unset AIR_INSTALL_DIR AIR_NO_MODIFY_PATH
+fi
+if [[ ":${PATH}:" != *":${HOME}/.local/bin:"* ]]; then
+  export PATH="${HOME}/.local/bin:${PATH}"
+fi
+if ! grep -q 'export PATH="$HOME/.local/bin:$PATH"' ~/.bashrc 2>/dev/null; then
+  printf 'export PATH="$HOME/.local/bin:$PATH"\n' >>~/.bashrc
+fi
+if ! air --version >/dev/null 2>&1; then
+  echo "postAttach: WARNING air is not runnable." >&2
+fi
+
 # 2. Personal OpenCode Go token. Both the opencode (Zen) and opencode-go
 #    providers read OPENCODE_API_KEY straight from the environment, so
 #    exporting it is the whole authentication. The config below additionally

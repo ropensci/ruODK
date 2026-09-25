@@ -61,6 +61,26 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Install Air
+        # The `air-format` pre-commit hook needs `air` on PATH. Pinned to the
+        # same version as .devcontainer/Dockerfile and postAttachCommand.sh.
+        uses: posit-dev/setup-air@v1
+        with:
+          version: "0.11.0"
+
+      - name: Set up Python for pre-commit
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Run pre-commit on all files
+        # Lint and format the whole repo (including `air format` on R files).
+        # Runs first so style failures fail fast, before the ODK Central
+        # stack and the R toolchain are set up below.
+        run: |
+          python -m pip install pre-commit
+          pre-commit run --all-files --show-diff-on-failure --color=always
+
       - name: Validate ODK Central images
         # Fail fast with a clear step name if a tag is wrong (e.g. the bare
         # semver "2026.3.0" instead of the ghcr.io tag "v2026.3.0" yields

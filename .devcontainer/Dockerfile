@@ -32,3 +32,13 @@ RUN curl -L https://cpanmin.us | perl - --self-upgrade && \
 # --no-modify-path because postAttach owns PATH wiring.
 RUN export HOME=/home/rstudio && curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path && \
     chown -R rstudio /home/rstudio/.opencode
+
+# Posit air R formatter (https://posit-dev.github.io/air/cli.html), pinned so
+# image builds stay reproducible. Keep in sync with the fallback install in
+# postAttachCommand.sh and the "air >= 0.11" note in AGENTS.md.
+# AIR_INSTALL_DIR points at /usr/local/bin because this cargo-dist installer
+# lays binaries out flat (no `bin/` subdir is created); AIR_NO_MODIFY_PATH
+# skips shell-rc edits, which are meaningless at build time.
+RUN export AIR_INSTALL_DIR=/usr/local/bin AIR_NO_MODIFY_PATH=1 && \
+    curl -LsSf https://github.com/posit-dev/air/releases/download/0.11.0/air-installer.sh | sh && \
+    air --version
