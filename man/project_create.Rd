@@ -67,8 +67,13 @@ names(p)
 \url{https://docs.getodk.org/central-api-project-management/#creating-a-project}
 
 Other project-management:
+\code{\link[=form_assignment_role_list]{form_assignment_role_list()}},
+\code{\link[=project_assignment_actors]{project_assignment_actors()}},
+\code{\link[=project_assignment_grant]{project_assignment_grant()}},
+\code{\link[=project_assignment_revoke]{project_assignment_revoke()}},
 \code{\link[=project_delete]{project_delete()}},
 \code{\link[=project_detail]{project_detail()}},
+\code{\link[=project_enable_encryption]{project_enable_encryption()}},
 \code{\link[=project_list]{project_list()}},
 \code{\link[=project_replace]{project_replace()}},
 \code{\link[=project_update]{project_update()}}
