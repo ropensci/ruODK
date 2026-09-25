@@ -7,12 +7,13 @@
 #' form schema which is challenging to parse. This list is returned
 #' by \code{\link{form_schema}}.
 #'
-#' However this still misses important elements, in particular \code{labels} and
-#' \code{choice_lists}.
+#' However this still misses important elements, in particular \code{labels},
+#' \code{hints} and \code{choice_lists}.
 #'
 #' \code{\link{form_schema_ext}} returns the same object as
 #' \code{\link{form_schema}}
-#' adding \code{labels} and \code{choice lists} in all languages available.
+#' adding \code{labels}, \code{hints} and \code{choice lists} in all languages
+#' available.
 #' This is done by using the return object from \code{\link{form_xml}}.
 #'
 #' It has the exact function signature as \code{\link{form_schema}}.
@@ -61,7 +62,13 @@
 #'     If specific languages are available,
 #'     this column will return the \code{default} language or it will be empty
 #'     if this is not specified.
-#'   \item \code{label_lang} The field label in languange \emph{_lang} as
+#'   \item \code{label_lang} The field label in language \emph{_lang} as
+#'     given in the form schema.
+#'   \item \code{hint} The field hint as given in the form schema.
+#'     If specific languages are available,
+#'     this column will return the \code{default} language or it will be empty
+#'     if this is not specified.
+#'   \item \code{hint_lang} The field hint in language \emph{_lang} as
 #'     given in the form schema.
 #'   \item \code{choices} A list of lists containing at least \code{values} and,
 #'     if available, \code{labels} of the choices as given in the form schema.
@@ -154,6 +161,7 @@ form_schema_ext <- function(
   extension <- data.frame(
     path = character(0),
     label = character(0),
+    hint = character(0),
     stringsAsFactors = FALSE
   )
 
@@ -258,6 +266,78 @@ form_schema_ext <- function(
         extension[nrow(extension), "label"] <- xml2::xml_text(this_rawlabel)
       }
 
+      ### PART 1.3: parse hints
+      # A question carries at most one hint, either as inline text or as
+      # a translation reference, resolved per language like labels.
+      hint_nodes <- xml2::xml_find_all(
+        xml2::xml_parent(this_rawlabel),
+        "./hint"
+      )
+
+      if (length(hint_nodes) > 0) {
+        this_hint <- hint_nodes[[1]]
+
+        if (xml2::xml_has_attr(this_hint, "ref")) {
+          hint_id <- sub(
+            "')",
+            "",
+            sub("jr:itext\\('", "", xml2::xml_attr(this_hint, "ref"))
+          )
+          hint_translations <- all_translations[
+            all_translations_ids == hint_id
+          ]
+
+          for (hi in seq_along(hint_translations)) {
+            this_hint_translation <- hint_translations[hi]
+
+            is_regular_hint <- !xml2::xml_has_attr(
+              xml2::xml_find_first(this_hint_translation, "./value"),
+              "form"
+            )
+
+            if (is_regular_hint) {
+              hint_translation_parent <- xml2::xml_parent(
+                this_hint_translation
+              )
+              this_hintlang <- gsub(
+                " ",
+                "_",
+                tolower(xml2::xml_attr(hint_translation_parent, "lang"))
+              )
+
+              if (this_hintlang == "default") {
+                extension[nrow(extension), "hint"] <- xml2::xml_text(
+                  xml2::xml_find_first(this_hint_translation, "./value")
+                )
+              } else {
+                hint_col <- paste0("hint_", this_hintlang)
+                if (!(hint_col %in% colnames(extension))) {
+                  extension <- cbind(
+                    extension,
+                    data.frame(
+                      new_hintlang = rep(NA, nrow(extension))
+                    )
+                  )
+                  colnames(extension)[ncol(extension)] <- paste0(
+                    "hint_",
+                    this_hintlang
+                  )
+                }
+
+                extension[
+                  nrow(extension),
+                  paste0("hint_", this_hintlang)
+                ] <- xml2::xml_text(
+                  xml2::xml_find_first(this_hint_translation, "./value")
+                )
+              }
+            }
+          }
+        } else {
+          extension[nrow(extension), "hint"] <- xml2::xml_text(this_hint)
+        }
+      }
+
       ### PART 1.1: parse choice labels
       ## check existence of  choice list:
       choice_items <- xml2::xml_find_all(
@@ -355,10 +435,8 @@ form_schema_ext <- function(
                   )
                 } else {
                   # check if language already exists in the dataframe
-                  if (
-                    !(paste0("choices_", this_choicelang) %in%
-                      colnames(extension))
-                  ) {
+                  choice_col <- paste0("choices_", this_choicelang)
+                  if (!(choice_col %in% colnames(extension))) {
                     # if not, create new column
                     extension <- cbind(
                       extension,
@@ -538,10 +616,8 @@ form_schema_ext <- function(
                   )
                 } else {
                   # check if language already exists in the dataframe
-                  if (
-                    !(paste0("choices_", this_choicelang) %in%
-                      colnames(extension))
-                  ) {
+                  choice_col <- paste0("choices_", this_choicelang)
+                  if (!(choice_col %in% colnames(extension))) {
                     # if not, create new column
                     extension <- cbind(
                       extension,

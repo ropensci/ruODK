@@ -111,7 +111,13 @@ cleaned column names from \code{\link{odata_submission_rectangle}}.
 If specific languages are available,
 this column will return the \code{default} language or it will be empty
 if this is not specified.
-\item \code{label_lang} The field label in languange \emph{_lang} as
+\item \code{label_lang} The field label in language \emph{_lang} as
+given in the form schema.
+\item \code{hint} The field hint as given in the form schema.
+If specific languages are available,
+this column will return the \code{default} language or it will be empty
+if this is not specified.
+\item \code{hint_lang} The field hint in language \emph{_lang} as
 given in the form schema.
 \item \code{choices} A list of lists containing at least \code{values} and,
 if available, \code{labels} of the choices as given in the form schema.
@@ -136,12 +142,13 @@ returns a parsed and flattened list of fields. This replaces the nested
 form schema which is challenging to parse. This list is returned
 by \code{\link{form_schema}}.
 
-However this still misses important elements, in particular \code{labels} and
-\code{choice_lists}.
+However this still misses important elements, in particular \code{labels},
+\code{hints} and \code{choice_lists}.
 
 \code{\link{form_schema_ext}} returns the same object as
 \code{\link{form_schema}}
-adding \code{labels} and \code{choice lists} in all languages available.
+adding \code{labels}, \code{hints} and \code{choice lists} in all languages
+available.
 This is done by using the return object from \code{\link{form_xml}}.
 
 It has the exact function signature as \code{\link{form_schema}}.

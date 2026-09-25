@@ -139,4 +139,56 @@ test_that("form_schema_ext v8 with label, choices, lang, and choice filter", {
   ))
 })
 
+test_that("form_schema_ext v8 parses hints", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  fsx <- form_schema_ext(
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+  testthat::expect_true(tibble::is_tibble(fsx))
+  testthat::expect_true("hint" %in% names(fsx))
+  testthat::expect_true("hint_english" %in% names(fsx))
+
+  corner2 <- fsx |> subset(path == "/perimeter/corner2")
+  testthat::expect_true(!is.na(corner2$hint_english))
+  testthat::expect_true(nzchar(corner2$hint_english))
+})
+
+test_that("form_schema_ext v8 parses translated hints", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  fsx <- form_schema_ext(
+    pid = get_test_pid(),
+    fid = Sys.getenv("ODKC_TEST_FID_I8N4", unset = "I8n_lang_choicefilter"),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+  testthat::expect_true(tibble::is_tibble(fsx))
+  testthat::expect_true("hint_english_(en)" %in% names(fsx))
+  testthat::expect_true("hint_french_(fr)" %in% names(fsx))
+
+  filtered <- fsx |> subset(path == "/select_example_filter")
+  testthat::expect_equal(
+    filtered$`hint_english_(en)`,
+    "\"maybe\" is filtered out"
+  )
+  testthat::expect_equal(
+    filtered$`hint_french_(fr)`,
+    "\"maybe\" is filtered out"
+  )
+})
+
 # usethis::use_r("form_schema_ext") # nolint
