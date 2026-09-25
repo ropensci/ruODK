@@ -53,6 +53,30 @@ The GUI paradigm of Pentaho Kettle addresses a different audience to the scripti
 paradigm of `ruODK`. It should be mentioned that Kettle's composable data
 manipulation steps can be used for many other use cases apart from ODK Central.
 
+## Related tools beyond R
+
+Two non-R tools cover the same ODK Central API and deserve a mention.
+
+[`pyODK`](https://getodk.github.io/pyodk/) is the official ODK Python client
+for the ODK Central API (`pip install pyodk`, targets Central v2026.2.0).
+It offers a `Client` with `projects`, `forms`, `submissions`, `entities` and
+`entity_lists` helpers, plus generic HTTP verb methods that expose the full
+API without a dedicated helper.
+`pyODK` is the Python counterpart to `ruODK`: scripted, reproducible
+pipelines, with tabular Submission data via `get_table()`.
+Choose between them by pipeline language, not by capability.
+
+[`bruno-API-ODKCentral`](https://github.com/CEN-Nouvelle-Aquitaine/bruno-API-ODKCentral)
+is a ready-made collection for [Bruno](https://github.com/usebruno/bruno),
+the open source offline API client, by CEN Nouvelle-Aquitaine
+(tested against Central v2024.3.1).
+It groups requests into folders for authentication, instance, Projects,
+Forms and Datasets (Entity Lists), with an environment file for the server
+URL and credentials.
+Like the Pentaho tutorial above, it addresses the GUI audience: click through
+requests to explore the REST API interactively, test endpoints, and inspect
+raw responses before scripting them with `ruODK` or `pyODK`.
+
 ## Comparison of OData related R packages
 
 | Package                         | [`ruODK`](https://docs.ropensci.org/ruODK/) | [`odataR`](https://github.com/HanOostdijk/odataR) | [`cbsodataR`](https://github.com/edwindj/cbsodataR) | [`OData`](https://cran.r-project.org/package=OData) | [OData JDBC R tutorial](https://www.cdata.com/kb/tech/odata-jdbc-r.rst)
