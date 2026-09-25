@@ -1,5 +1,7 @@
 # ruODK (development version)
 
+* `submission_version_xml()` returns the XML of one Submission version
+  (#124).
 * `submission_export()` gains `split_select_multiples`, `group_paths` and
   `filter` parameters (#137).
 
