@@ -46,7 +46,7 @@ config/audits/backup largely missing).
 
 - Format touched R files with `air format` (Posit air ≥ 0.11, on PATH);
   the `air-format` pre-commit hook enforces this.
-- Run `pre-commit run --files <files>` before committing.
+- Run `pre-commit run --all-files` before committing.
 - Test stack: `docker compose --env-file .devcontainer/.env -f
   .devcontainer/docker-compose.yml up -d --wait`, then
   `Rscript data-raw/seed_odkc.R`; `RU_VERBOSE=TRUE`.
