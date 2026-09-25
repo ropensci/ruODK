@@ -93,6 +93,44 @@ if [ -n "${OPENCODE_API_KEY:-}" ]; then
   fi
 fi
 
+# 2b. ODK Docs MCP server for opencode (https://odk-docs.mcp.kapa.ai).
+#    The server requires a Bearer token: without one opencode lists the
+#    server but its tools fail at call time. Provide the token as a PERSONAL
+#    Codespaces secret named KAPA_API_KEY (same scoping rules as
+#    OPENCODE_API_KEY above, never a repository secret).
+#    The entry is merged into ~/.config/opencode/opencode.json with python3
+#    so an existing config (model, providers, other servers) is preserved;
+#    the file is created with the default Go model when missing. Idempotent:
+#    re-attaching only refreshes the token header (an emptied secret removes
+#    it), and a deliberately removed server is re-added.
+mkdir -p ~/.config/opencode
+KAPA_API_KEY="${KAPA_API_KEY:-}" python3 - <<'EOF'
+import json, os
+cfg_path = os.path.expanduser("~/.config/opencode/opencode.json")
+try:
+    with open(cfg_path) as f:
+        cfg = json.load(f)
+except (OSError, ValueError):
+    cfg = {
+        "$schema": "https://opencode.ai/config.json",
+        "model": "opencode-go/muse-spark-1.3-contributor",
+    }
+cfg.setdefault("mcp", {})["odk-docs"] = {
+    "type": "remote",
+    "url": "https://odk-docs.mcp.kapa.ai",
+    "enabled": True,
+}
+token = os.environ.get("KAPA_API_KEY", "")
+if token:
+    cfg["mcp"]["odk-docs"]["headers"] = {"Authorization": f"Bearer {token}"}
+else:
+    cfg["mcp"]["odk-docs"].pop("headers", None)
+with open(cfg_path, "w") as f:
+    json.dump(cfg, f, indent=2)
+    f.write("\n")
+EOF
+echo "postAttach: opencode ODK Docs MCP server configured."
+
 # 3. The seed below shells out to `docker compose exec service`
 #    (ODKC_COMPOSE in data-raw/seed_odkc.R). Two things must hold for that
 #    to reach the running stack: the stack must be up, and compose must
