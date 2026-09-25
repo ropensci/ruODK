@@ -26,6 +26,7 @@ codemeta.json
 ^Dockerfile$
 ^codemeta\.json$
 ^\.devcontainer
+^\.dockerignore
 ^\.github
 ^\.vscode
 ^.lintr
