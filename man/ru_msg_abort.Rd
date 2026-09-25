@@ -2,7 +2,7 @@
 % Please edit documentation in R/ru_msg.R
 \name{ru_msg_abort}
 \alias{ru_msg_abort}
-\title{rlang::abort() with a red error message with a cross symbol.}
+\title{Abort with an error message.}
 \usage{
 ru_msg_abort(message)
 }
@@ -11,6 +11,10 @@ ru_msg_abort(message)
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+}
+\details{
+Errors are never silenced, neither by \code{verbose} nor by
+\code{options(ruODK.quiet = TRUE)}.
 }
 \examples{
 \dontrun{

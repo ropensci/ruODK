@@ -2,7 +2,7 @@
 % Please edit documentation in R/ru_msg.R
 \name{ru_msg_success}
 \alias{ru_msg_success}
-\title{Print a green success message with a tick symbol.}
+\title{Print a success message.}
 \usage{
 ru_msg_success(message, verbose = get_ru_verbose())
 }
@@ -16,6 +16,10 @@ verbosity can be set globally or per function.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+}
+\details{
+Set \code{options(ruODK.quiet = TRUE)} to silence this message
+regardless of \code{verbose}.
 }
 \examples{
 ru_msg_success("This is a success message.")

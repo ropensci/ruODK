@@ -1,68 +1,81 @@
-#' Print a blue info message with an info symbol.
+#' Print an info message.
 #'
 #' `r lifecycle::badge("stable")`
 #'
 #' @param message (chr) A message to print
 #' @template param-verbose
+#' @details Set `options(ruODK.quiet = TRUE)` to silence this message
+#'   regardless of `verbose`.
 #' @return NULL
 #' @export
 #' @family messaging
 #' @examples
 #' ru_msg_info("This is an info message.")
 ru_msg_info <- function(message, verbose = get_ru_verbose()) {
+  if (isTRUE(getOption("ruODK.quiet", default = FALSE))) {
+    return(NULL)
+  }
   if (verbose == FALSE) {
     return(NULL)
   }
-  x <- clisymbols::symbol$info # nolint
-  message(crayon::cyan(glue::glue("{x} {message}\n")))
+  usethis::ui_info(message)
 }
 
-#' Print a green success message with a tick symbol.
+#' Print a success message.
 #'
 #' `r lifecycle::badge("stable")`
 #'
 #' @param message (chr) A message to print
 #' @template param-verbose
+#' @details Set `options(ruODK.quiet = TRUE)` to silence this message
+#'   regardless of `verbose`.
 #' @return NULL
 #' @export
 #' @family messaging
 #' @examples
 #' ru_msg_success("This is a success message.")
 ru_msg_success <- function(message, verbose = get_ru_verbose()) {
+  if (isTRUE(getOption("ruODK.quiet", default = FALSE))) {
+    return(NULL)
+  }
   if (verbose == FALSE) {
     return(NULL)
   }
-  x <- clisymbols::symbol$tick # nolint
-  message(crayon::green(glue::glue("{x} {message}\n")))
+  usethis::ui_done(message)
 }
 
 
-#' Print a green noop message with a filled circle symbol.
+#' Print a noop message.
 #'
 #' `r lifecycle::badge("stable")`
 #'
 #' @param message (chr) A message to print
 #' @template param-verbose
+#' @details Set `options(ruODK.quiet = TRUE)` to silence this message
+#'   regardless of `verbose`.
 #' @return NULL
 #' @export
 #' @family messaging
 #' @examples
 #' ru_msg_noop("This is a noop message.")
 ru_msg_noop <- function(message, verbose = get_ru_verbose()) {
+  if (isTRUE(getOption("ruODK.quiet", default = FALSE))) {
+    return(NULL)
+  }
   if (verbose == FALSE) {
     return(NULL)
   }
-  x <- clisymbols::symbol$circle_filled # nolint
-  message(crayon::green(glue::glue("{x} {message}\n")))
+  usethis::ui_todo(message)
 }
 
 
-#' rlang::warn() with a yellow warning message with a warning symbol.
+#' Signal a warning message.
 #'
 #' `r lifecycle::badge("stable")`
 #'
 #' @param message (chr) A message to print
 #' @template param-verbose
+#' @details Warnings are never silenced by `options(ruODK.quiet = TRUE)`.
 #' @return NULL
 #' @export
 #' @family messaging
@@ -74,14 +87,16 @@ ru_msg_warn <- function(message, verbose = get_ru_verbose()) {
   if (verbose == FALSE) {
     return(NULL)
   }
-  x <- clisymbols::symbol$warning # nolint
-  rlang::warn(crayon::yellow(glue::glue("{x} {message}\n")))
+  usethis::ui_warn(message)
 }
 
 
-#' rlang::abort() with a red error message with a cross symbol.
+#' Abort with an error message.
 #'
 #' `r lifecycle::badge("stable")`
+#'
+#' Errors are never silenced, neither by `verbose` nor by
+#' `options(ruODK.quiet = TRUE)`.
 #'
 #' @param message (chr) A message to print
 #' @return NULL
@@ -92,8 +107,7 @@ ru_msg_warn <- function(message, verbose = get_ru_verbose()) {
 #' ru_msg_abort("This is an error, abort.")
 #' }
 ru_msg_abort <- function(message) {
-  x <- clisymbols::symbol$cross # nolint
-  rlang::abort(crayon::red(glue::glue("{x} {message}\n")))
+  usethis::ui_stop(message)
 }
 
 # usethis::use_test("ru_msg") # nolint
