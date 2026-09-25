@@ -103,7 +103,10 @@ entity_changes <- function(
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>
-    purrr::map(~ purrr::list_transpose(.x) |> tibble::as_tibble()) |>
+    purrr::map(
+      ~ purrr::list_transpose(.x) |>
+        tibble::as_tibble()
+    ) |>
     purrr::list_rbind()
 }
 
