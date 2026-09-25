@@ -74,8 +74,8 @@ fi
 #    launched (repo root -> `ruodk`, .devcontainer/ -> `devcontainer`, the
 #    devcontainer CLI -> its own name). A wrong name fails exactly as
 #    `service "service" is not running`. Detect the project from this
-#    container's own compose labels when present, then bring the stack up
-#    (no-op when healthy) before seeding.
+#    container's own compose labels when present, then start the stack if it
+#    is down (start-only, never recreate: see below) before seeding.
 if command -v docker >/dev/null 2>&1; then
   compose_project="$(docker inspect "$(cat /etc/hostname 2>/dev/null)" \
     --format '{{ index .Config.Labels "com.docker.compose.project" }}' \
@@ -85,7 +85,7 @@ if command -v docker >/dev/null 2>&1; then
   fi
   if ! docker compose --env-file .devcontainer/.env \
     -f .devcontainer/docker-compose.yml \
-    -f .devcontainer/docker-compose-dev.yml up -d --wait nginx; then
+    -f .devcontainer/docker-compose-dev.yml up -d --no-recreate --wait nginx; then
     echo "postAttach: WARNING the ODK Central test stack failed to start." >&2
     docker compose --env-file .devcontainer/.env \
       -f .devcontainer/docker-compose.yml \
@@ -95,6 +95,20 @@ if command -v docker >/dev/null 2>&1; then
       -f .devcontainer/docker-compose-dev.yml logs --tail 30 certs service \
       2>/dev/null || true
     exit 0
+  fi
+  # --no-recreate above is load-bearing, not just speed: app shares nginx's
+  # network namespace (network_mode: service:nginx in docker-compose-dev.yml),
+  # so recreating nginx under this live container orphans our network and DNS
+  # dies (git: "Could not resolve host"). Image/config upgrades arrive via
+  # Rebuild Container, never via postAttach.
+  #
+  # Self-check for that orphaned state (e.g. nginx was recreated by other
+  # means while we stayed up): external DNS is the canary. This only warns;
+  # recovery is recreating this container (VS Code: Rebuild Container).
+  if command -v getent >/dev/null 2>&1 && ! getent hosts github.com >/dev/null 2>&1; then
+    echo "postAttach: WARNING external DNS fails from this container." >&2
+    echo "postAttach: If nginx was recreated while app stayed up, our shared" >&2
+    echo "postAttach: network namespace is stale. Rebuild Container to recover." >&2
   fi
 else
   echo "postAttach: WARNING no docker CLI, cannot start the test stack." >&2
