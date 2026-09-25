@@ -63,19 +63,16 @@ form_list <- function(
     query$deleted <- "true"
   }
 
-  resp <- httr::RETRY(
+  resp <- ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue("v1/projects/{pid}/forms"),
-      query = query
-    ),
-    httr::add_headers(
-      "Accept" = "application/xml",
-      "X-Extended-Metadata" = "true"
-    ),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/projects/{pid}/forms"),
+    query = query,
+    accept = "application/xml",
+    headers = c("X-Extended-Metadata" = "true"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content()

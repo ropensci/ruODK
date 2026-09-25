@@ -47,18 +47,16 @@ public_link_detail <- function(
     ru_msg_abort("link_id must be a single Link ID.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/public-links/{link_id}"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/public-links/{link_id}"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

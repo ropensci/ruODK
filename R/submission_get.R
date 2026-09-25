@@ -55,14 +55,16 @@ get_one_submission <- function(
   retries = get_retries()
 ) {
   yell_if_missing(url, un, pw, pid = pid, fid = fid, iid = iid)
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    glue::glue(
-      "{url}/v1/projects/{pid}/forms/",
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
       "{URLencode(fid, reserved = TRUE)}/submissions/{iid}.xml"
     ),
-    httr::authenticate(un, pw),
-    times = retries
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

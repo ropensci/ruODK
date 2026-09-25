@@ -50,17 +50,16 @@ encryption_key_list <- function(
   tz = get_default_tz()
 ) {
   yell_if_missing(url, un, pw)
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/submissions/keys"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/submissions/keys"
     ),
-    httr::authenticate(un, pw),
-    times = retries
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

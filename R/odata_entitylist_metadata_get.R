@@ -72,20 +72,17 @@ odata_entitylist_metadata_get <- function(
     ru_msg_warn("odata_entitylist_metadata_get is supported from v2022.3")
   }
 
-  doc <- httr::RETRY(
+  doc <- ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/datasets/",
-        "{URLencode(did, reserved = TRUE)}.svc/$metadata"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/datasets/",
+      "{URLencode(did, reserved = TRUE)}.svc/$metadata"
     ),
-    httr::add_headers(
-      "Accept" = "application/xml"
-    ),
-    httr::authenticate(un, pw),
-    times = retries
+    accept = "application/xml",
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8")

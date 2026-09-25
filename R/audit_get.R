@@ -88,13 +88,14 @@ audit_get <- function(
     offset = offset
   ) %>%
     Filter(Negate(is.null), .)
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = glue::glue("v1/audits")),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
+    url,
+    path = glue::glue("v1/audits"),
     query = qry,
-    times = retries
+    un = un,
+    pw = pw,
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.) %>%

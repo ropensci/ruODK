@@ -92,16 +92,15 @@ entity_versions <- function(
 
   qry <- list(relevantToConflict = ifelse(conflict == TRUE, "True", "False"))
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = pth),
-    httr::add_headers(
-      "Accept" = "application/json",
-      "X-Extended-Metadata" = "true"
-    ),
-    httr::authenticate(un, pw),
+    url,
+    path = pth,
     query = qry,
-    times = retries
+    headers = c("X-Extended-Metadata" = "true"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

@@ -68,19 +68,17 @@ submission_geodata <- function(
     query$fieldpath <- fieldpath
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/submissions.geojson"
-      ),
-      query = query
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/submissions.geojson"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    query = query,
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8")

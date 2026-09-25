@@ -56,19 +56,17 @@ form_version_attachment_list <- function(
     ru_msg_abort("version must be a single non-empty character string.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/versions/",
-        "{URLencode(version, reserved = TRUE)}/attachments"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/versions/",
+      "{URLencode(version, reserved = TRUE)}/attachments"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

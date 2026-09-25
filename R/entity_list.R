@@ -75,12 +75,13 @@ entity_list <- function(
     pth <- glue::glue("{pth}?deleted=true")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(url, path = pth),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = pth,
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>
