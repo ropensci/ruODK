@@ -52,14 +52,15 @@ user_create <- function(
   ) {
     ru_msg_abort("email must be a single non-empty character string.")
   }
-  if (
-    !is.null(password) &&
-      (!is.character(password) ||
+  if (!is.null(password)) {
+    if (
+      !is.character(password) ||
         length(password) != 1L ||
         is.na(password) ||
-        !nzchar(password))
-  ) {
-    ru_msg_abort("password must be a single non-empty character string.")
+        !nzchar(password)
+    ) {
+      ru_msg_abort("password must be a single non-empty character string.")
+    }
   }
 
   body <- list(email = email)
