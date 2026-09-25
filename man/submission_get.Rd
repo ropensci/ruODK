@@ -115,6 +115,7 @@ Other submission-management:
 \code{\link[=submission_draft_get]{submission_draft_get()}},
 \code{\link[=submission_draft_keys]{submission_draft_keys()}},
 \code{\link[=submission_draft_list]{submission_draft_list()}},
+\code{\link[=submission_edit]{submission_edit()}},
 \code{\link[=submission_export]{submission_export()}},
 \code{\link[=submission_geodata]{submission_geodata()}},
 \code{\link[=submission_geojson]{submission_geojson()}},
