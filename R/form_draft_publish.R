@@ -62,19 +62,17 @@ form_draft_publish <- function(
     query$version <- version
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/draft/publish"
-      ),
-      query = query
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/draft/publish"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    query = query,
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

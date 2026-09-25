@@ -81,24 +81,22 @@ submission_draft_attachment_upload <- function(
     ru_msg_abort(glue::glue("File not found: {file}"))
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/draft/submissions/{iid}/",
-        "attachments/{URLencode(filename, reserved = TRUE)}"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/draft/submissions/{iid}/",
+      "attachments/{URLencode(filename, reserved = TRUE)}"
     ),
-    httr::add_headers(
-      "Accept" = "application/json",
+    headers = c(
       "Content-Type" = content_type %||% "application/octet-stream"
     ),
+    un = un,
+    pw = pw,
     body = readBin(file, "raw", file.info(file)$size),
     encode = "raw",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

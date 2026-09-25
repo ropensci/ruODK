@@ -147,14 +147,15 @@ entity_update <- function(
     pth <- glue::glue("{pth}&baseVersion={as.integer(base_version)}")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "PATCH",
-    httr::modify_url(url, path = pth),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    url,
+    path = pth,
+    un = un,
+    pw = pw,
     body = list(label = as.character(label), data = data),
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

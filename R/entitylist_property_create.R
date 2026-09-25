@@ -68,20 +68,18 @@ entitylist_property_create <- function(
     ru_msg_warn("entitylist_property_create is supported from v2022.3")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/datasets/",
-        "{URLencode(did, reserved = TRUE)}/properties"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/datasets/",
+      "{URLencode(did, reserved = TRUE)}/properties"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    un = un,
+    pw = pw,
     body = list(name = property),
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

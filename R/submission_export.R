@@ -239,21 +239,26 @@ submission_export <- function(
   }
 
   # Export form submissions to CSV via POST
-  httr::RETRY(
+  # See discussion at https://github.com/ropensci/ruODK/issues/30
+  # Sending multiple RETRY requests with incorrect passphrase can exceed
+  # server memory limits.
+  # Terminate retries immediately if ODK Central returns HTTP status 500
+  # on wrong passphrases.
+  ru_http_request(
     "POST",
-    httr::modify_url(url, path = url_pth, query = query),
+    url,
+    path = url_pth,
+    query = query,
+    accept = NULL,
+    un = un,
+    pw = pw,
     body = body,
     encode = "json",
-    httr::authenticate(un, pw),
-    httr::write_disk(pth, overwrite = overwrite),
-    times = retries,
+    dest = pth,
+    overwrite = overwrite,
+    terminate_on = c(500),
     quiet = verbose,
-    # See discussion at https://github.com/ropensci/ruODK/issues/30
-    # Sending multiple RETRY requests with incorrect passphrase can exceed
-    # server memory limits.
-    # Terminate retries immediately if ODK Central returns HTTP status 500
-    # on wrong passphrases.
-    terminate_on = c(500)
+    retries = retries
   ) %>%
     yell_if_error(., url, un, pw) %>%
     httr::content(.)

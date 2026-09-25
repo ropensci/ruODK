@@ -80,14 +80,15 @@ project_enable_encryption <- function(
     body$hint <- hint
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(url, path = glue::glue("v1/projects/{pid}/key")),
-    httr::add_headers("Accept" = "application/json"),
+    url,
+    path = glue::glue("v1/projects/{pid}/key"),
+    un = un,
+    pw = pw,
     body = body,
     encode = "json",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

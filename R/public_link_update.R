@@ -66,20 +66,18 @@ public_link_update <- function(
     ru_msg_abort("properties must be a named list of character strings.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "PATCH",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/public-links/{link_id}"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/public-links/{link_id}"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    un = un,
+    pw = pw,
     body = list(properties = properties),
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

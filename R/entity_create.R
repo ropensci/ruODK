@@ -188,14 +188,16 @@ entity_create <- function(
     "entities/"
   )
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(url, path = pth),
-    httr::add_headers("Accept" = "application/json", "X-Action-Notes" = notes),
-    encode = "json",
+    url,
+    path = pth,
+    headers = c("X-Action-Notes" = notes),
+    un = un,
+    pw = pw,
     body = body,
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

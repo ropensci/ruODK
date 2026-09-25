@@ -48,18 +48,19 @@ submission_draft_export <- function(
     ru_msg_abort("dest must be a single file path.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "GET",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/draft/submissions.csv.zip"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/draft/submissions.csv.zip"
     ),
-    httr::write_disk(dest, overwrite = TRUE),
-    httr::authenticate(un, pw),
-    times = retries
+    accept = NULL,
+    un = un,
+    pw = pw,
+    dest = dest,
+    overwrite = TRUE,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw)
 

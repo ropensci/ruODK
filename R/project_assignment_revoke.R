@@ -54,17 +54,15 @@ project_assignment_revoke <- function(
     ru_msg_abort("actor_id must be a single Actor ID.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "DELETE",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/assignments/{role_id}/{actor_id}"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/assignments/{role_id}/{actor_id}"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

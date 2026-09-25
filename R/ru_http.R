@@ -16,6 +16,7 @@
 #'   Default: `NULL` (no query string).
 #' @param accept (character) The `Accept` header value.
 #'   Default: `"application/json"`.
+#'   Set to `NULL` to send no `Accept` header.
 #' @param headers (character) Optional extra headers as a named character
 #'   vector, e.g. `c("X-Extended-Metadata" = "true")`.
 #'   Default: `NULL` (no extra headers).
@@ -27,6 +28,16 @@
 #'   Default: `NULL` (no body).
 #' @param encode (character) The body encoding, passed on to `httr::RETRY()`.
 #'   Default: `NULL` (httr default).
+#' @param dest (character) A local file path to stream a download to.
+#'   Default: `NULL` (no streaming, the response is kept in memory).
+#' @param overwrite (lgl) Whether to overwrite `dest` if it exists.
+#'   Only used with `dest`.
+#'   Default: `TRUE`.
+#' @param terminate_on (numeric) HTTP status codes that stop retries
+#'   immediately, passed on to `httr::RETRY()`.
+#'   Default: `NULL` (httr default).
+#' @param quiet (lgl) Whether to suppress `httr::RETRY()` progress output.
+#'   Default: `FALSE`.
 #' @template param-retries
 #' @return The `httr` response object, unmodified.
 #' @family utilities
@@ -57,15 +68,24 @@ ru_http_request <- function(
   pw = NULL,
   body = NULL,
   encode = NULL,
+  dest = NULL,
+  overwrite = TRUE,
+  terminate_on = NULL,
+  quiet = FALSE,
   retries = get_retries()
 ) {
   httr::RETRY(
     verb,
     httr::modify_url(url, path = path, query = query),
-    httr::add_headers(.headers = c(Accept = accept, headers)),
+    if (length(c(Accept = accept, headers)) > 0) {
+      httr::add_headers(.headers = c(Accept = accept, headers))
+    },
     if (!is.null(un) && !is.null(pw)) httr::authenticate(un, pw),
     body = body,
     encode = encode,
+    if (!is.null(dest)) httr::write_disk(dest, overwrite = overwrite),
+    terminate_on = terminate_on,
+    quiet = quiet,
     times = retries
   )
 }

@@ -68,14 +68,15 @@ user_create <- function(
     body$password <- password
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(url, path = "v1/users"),
-    httr::add_headers("Accept" = "application/json"),
+    url,
+    path = "v1/users",
+    un = un,
+    pw = pw,
     body = body,
     encode = "json",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

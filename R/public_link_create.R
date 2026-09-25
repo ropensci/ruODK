@@ -74,20 +74,18 @@ public_link_create <- function(
     body$properties <- properties
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/public-links"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/public-links"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    un = un,
+    pw = pw,
     body = body,
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

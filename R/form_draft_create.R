@@ -88,28 +88,26 @@ form_draft_create <- function(
   }
 
   headers <- c(
-    "Accept" = "application/json",
     unlist(parts$extra_headers)
   )
   if (!is.null(parts$body)) {
     headers <- c(headers, "Content-Type" = parts$content_type)
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/forms/",
-        "{URLencode(fid, reserved = TRUE)}/draft"
-      ),
-      query = query
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/forms/",
+      "{URLencode(fid, reserved = TRUE)}/draft"
     ),
-    httr::add_headers(.headers = headers),
+    query = query,
+    headers = headers,
+    un = un,
+    pw = pw,
     body = parts$body,
     encode = "raw",
-    httr::authenticate(un, pw),
-    times = retries
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

@@ -41,15 +41,13 @@ app_user_delete <- function(
     ru_msg_abort("id must be a single App User ID.")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "DELETE",
-    httr::modify_url(
-      url,
-      path = glue::glue("v1/projects/{pid}/app-users/{id}")
-    ),
-    httr::add_headers("Accept" = "application/json"),
-    httr::authenticate(un, pw),
-    times = retries
+    url,
+    path = glue::glue("v1/projects/{pid}/app-users/{id}"),
+    un = un,
+    pw = pw,
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

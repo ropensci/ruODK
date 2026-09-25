@@ -61,20 +61,18 @@ entity_bulk_restore <- function(
     ru_msg_warn("entity_bulk_restore is supported from v2022.3")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(
-      url,
-      path = glue::glue(
-        "v1/projects/{pid}/datasets/{URLencode(did, reserved = TRUE)}/",
-        "entities/bulk-restore"
-      )
+    url,
+    path = glue::glue(
+      "v1/projects/{pid}/datasets/{URLencode(did, reserved = TRUE)}/",
+      "entities/bulk-restore"
     ),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    un = un,
+    pw = pw,
     body = list(ids = as.list(eids)),
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>

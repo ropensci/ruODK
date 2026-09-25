@@ -86,14 +86,15 @@ entitylist_create <- function(
     ru_msg_warn("entitylist_create is supported from v2022.3")
   }
 
-  httr::RETRY(
+  ru_http_request(
     "POST",
-    httr::modify_url(url, path = glue::glue("v1/projects/{pid}/datasets")),
-    httr::add_headers("Accept" = "application/json"),
-    encode = "json",
+    url,
+    path = glue::glue("v1/projects/{pid}/datasets"),
+    un = un,
+    pw = pw,
     body = list(name = name, approvalRequired = approval_required),
-    httr::authenticate(un, pw),
-    times = retries
+    encode = "json",
+    retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
     httr::content(encoding = "utf-8") |>
