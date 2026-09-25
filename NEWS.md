@@ -1,5 +1,13 @@
 # ruODK (development version)
 
+* `form_assignment_role_list()` lists Role-specific Form Assignments
+  (#122).
+* `project_assignment_actors()` lists the Actors assigned a Project Role
+  (#122).
+* `project_assignment_grant()` assigns an Actor to a Project Role (#122).
+* `project_assignment_revoke()` revokes a Project Role from an Actor
+  (#122).
+* `project_enable_encryption()` enables Project Managed Encryption (#122).
 * `form_assignment_actors()` lists the Actors assigned a Form Role (#123).
 * `form_assignment_grant()` assigns an Actor to a Form Role (#123).
 * `form_assignment_revoke()` revokes a Form Role from an Actor (#123).
