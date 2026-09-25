@@ -52,6 +52,10 @@ config/audits/backup largely missing).
 
 - Format touched R files with `air format` (Posit air ≥ 0.11, on PATH);
   the `air-format` pre-commit hook enforces this.
+- Lint touched R files with `lintr::lint()` and fix all findings before
+  committing. `air format` does not catch everything (e.g. continuation
+  indentation); lint is the backstop. If `air format` and lint disagree on
+  a construct, restructure the code so both agree.
 - Run `pre-commit run --all-files` before committing.
 - Test stack: `docker compose --env-file .devcontainer/.env -f
   .devcontainer/docker-compose.yml up -d --wait`, then
