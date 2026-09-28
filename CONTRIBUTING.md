@@ -3,13 +3,16 @@ This contributing guide has been derived from the `tidyverse` boilerplate.
 Where it seems over the top, common sense is appreciated, and every contribution
 is appreciated.
 
+`AGENTS.md` is authoritative for the per-endpoint implementation standard
+(docstrings, tests, review gate, PR flow) and the practical notes
+(formatter, lint, pre-commit). Where this document conflicts with
+`AGENTS.md` on those points, `AGENTS.md` wins.
+
 ## Non-technical contributions to ruODK
 Feel free to [report issues](https://github.com/ropensci/ruODK/issues):
 
 * Bug reports are for unplanned malfunctions.
 * Feature requests are for ideas and new features.
-* Account requests are for getting access to the ODK Central instances run by DBCA
-  (DBCA campaigns only) or the CI server (contributors, to run tests).
 
 ## Technical contributions to `ruODK`
 
@@ -72,14 +75,18 @@ Discuss and agree on function naming with the `pyODK` developers.
 
 In the function documentation, include the following components:
 
-* Title
+* Title, description, and parameter semantics from the official ODK Central
+  API docs first and verbatim where applicable
 * Lifecycle badge
-* Documentation from the official ODK Central API docs
 * Additional paragraphs (see e.g. `entity_detail.R`): Factor out commonly used
-  text fragments into `man-roxygen` fragments.
-* Link the relevant ODK Central API docs and surround the link with `# nolint start / end` mufflers for linter warnings about the line length.
+  text fragments into `man-roxygen` fragments. Any extra explanation uses
+  Simple Technical English (ASD-STE100), clearly separated from the ODK
+  wording. Never prefix with "In plain language:".
+* `@return` value
+* Link the relevant ODK Central API docs and surround the link with `# nolint start / end`
+  mufflers for linter warnings about the line length.
 * Link to the correct reference family topic. If adding a new topic,
-  update `pkgdown.yml`.
+  update `_pkgdown.yml`.
 * List all parameters and export the function as usual.
 * Add examples showing basic usage inside a `\dontrun{}` block. Examples have
   no access to the test server and will only work for internal helpers which
@@ -95,7 +102,9 @@ Inside the function:
 * Clean column names with `janitor::clean_names()`.
 
 Link to tests:
-* Add a commented out `# usethis::use_test("entity_detail")  # nolint` to functions and a commented out `# usethis::use_r("entity_detail")  # nolint` to tests. This serves both to create the correct files and as a convenient shortcut between both.
+* Add a commented out `# usethis::use_test("entity_detail")  # nolint` to functions
+  and a commented out `# usethis::use_r("entity_detail")  # nolint` to tests.
+  This serves both to create the correct files and as a convenient shortcut between both.
 
 #### Adding a dependency
 * Update DESCRIPTION
@@ -115,7 +124,10 @@ Link to tests:
 * Update tests
 * Update examples
 * Update packaged data if test form submissions are included
-* Add new cassette to vcr cache for each test using the test form
+* Tests run live against the local Docker Central stack below; there are no
+  recorded (vcr) cassettes to update. If the fixture set itself must change,
+  re-export it with `Rscript data-raw/dump_odkc_fixtures.R` (see
+  [Refreshing the fixtures](#refreshing-the-fixtures)).
 
 #### Adding or updating package data
 * Update tests using the package data
@@ -139,30 +151,33 @@ then clone it locally. We recommend that you create a branch for each PR.
 
 #### Check
 
-Before changing anything, make sure the package still passes the below listed
-flavours of `R CMD check` locally for you.
+Before changing anything, make sure the package still passes `R CMD check`
+locally for you.
 
 ```r
-goodpractice::goodpractice(quiet = FALSE)
-devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)
-chk <- rcmdcheck::rcmdcheck(args = c("--as-cran"))
+devtools::check()
 ```
+
+The full release-grade suite (`devtools::check(cran = TRUE, remote = TRUE,
+incoming = TRUE)`, `rcmdcheck::rcmdcheck(args = c("--as-cran"))`,
+`goodpractice::goodpractice()`, `pkgdown::build_site()`) runs at release
+time via `data-raw/make_release.R`, not on every PR.
 
 #### Style
 
 Match the existing code style. This means you should follow the tidyverse
-[style guide](http://style.tidyverse.org). Use the
-[styler](https://CRAN.R-project.org/package=styler) package to apply the style
-guide automatically.
+[style guide](http://style.tidyverse.org). Format touched R files with
+`air format` (Posit air ≥ 0.11, on PATH; the `air-format` pre-commit hook
+enforces this), then lint them with `lintr::lint()` and fix all findings
+before committing. `air format` does not catch everything (e.g. continuation
+indentation); lint is the backstop. If `air format` and lint disagree on a
+construct, restructure the code so both agree.
 
 Be careful to only make style changes to the code you are contributing. If you
 find that there is a lot of code that doesn't meet the style guide, it would be
 better to file an issue or a separate PR to fix that first.
 
 ```r
-styler::style_pkg()
-lintr:::addin_lint_package()
-devtools::document(roclets = c("rd", "collate", "namespace"))
 spelling::spell_check_package()
 spelling::spell_check_files("README.Rmd", lang = "en_AU")
 spelling::update_wordlist()
@@ -178,7 +193,14 @@ object. Then, run `devtools::document()` to rebuild the `NAMESPACE` and `.Rd`
 files.
 
 See the `RoxygenNote` in [DESCRIPTION](DESCRIPTION) for the version of
-roxygen2 being used.
+roxygen2 being used. Keep roxygen comments in Markdown at 80 columns.
+
+For endpoint functions, the per-endpoint standard in `AGENTS.md` governs:
+ODK docs wording first and verbatim where applicable, lifecycle badge,
+`man-roxygen` fragments, `@return`, `@family`, `@seealso` link to the exact
+docs anchor (inside `# nolint start/end`), `\dontrun{}` example. Any extra
+explanation uses Simple Technical English (ASD-STE100), clearly separated
+from the ODK wording. Never prefix with "In plain language:".
 
 ```r
 spelling::spell_check_package()
@@ -196,6 +218,12 @@ if (fs::file_info("README.md")$modification_time <
 
 We use [testthat](https://cran.r-project.org/package=testthat). Contributions
 with test cases are easier to review and verify.
+
+For endpoint functions, the test standard in `AGENTS.md` governs:
+`tests/testthat/test-<name>.R` covers happy path against the local Docker
+Central, missing/invalid parameters (`yell_if_missing`), version gates,
+empty and paged results, and error responses, following `testthat` 3e and
+the vendored `testing-r-packages` skill.
 
 The test suite needs a running ODK Central. Do not use a hosted instance. The
 repository ships a local one in Docker, seeded with the fixtures from
@@ -318,26 +346,28 @@ as a result of your edits.
 
 ```r
 devtools::check()
-goodpractice::goodpractice(quiet = FALSE)
 ```
 
 #### Commit
 
-When you've made your changes, write a clear commit message describing what
-you've done. If you've fixed or closed an issue, make sure to include keywords
-(e.g. `fixes #101`) at the end of your commit message (not in its
-title) to automatically close the issue when the PR is merged.
+When you've made your changes, format touched R files with `air format`,
+fix all `lintr::lint()` findings, then run `pre-commit run --all-files`
+before committing. Write a clear commit message describing what you've
+done. Closing keywords (`Closes #<issue>`) go in the pull request
+description, not the commit title; a `fixes #101` trailer at the end of
+the commit message is also fine and closes the issue when the PR merges.
 
 #### Push and pull
 
 Once you've pushed your commit(s) to a branch in _your_ fork, you're ready to
-make the pull request. Pull requests should have descriptive titles to remind
-reviewers/maintainers what the PR is about. You can easily view what exact
+make the pull request. Open one PR per endpoint (or small batch), with a
+descriptive title and a comprehensive description in Simple Technical
+English (ASD-STE100): what changed and why, how it was verified (tests,
+live run), and `Closes #<issue>` for the issue it resolves. Never prefix
+explanations with "In plain language:". You can easily view what exact
 changes you are proposing using either the [Git diff](http://r-pkgs.had.co.nz/git.html#git-status)
 view in RStudio, or the [branch comparison view](https://help.github.com/articles/creating-a-pull-request/)
-you'll be taken to when you go to create a new PR. If the PR is related to an
-issue, provide the issue number and slug in the _description_ using
-auto-linking syntax (e.g. `#15`).
+you'll be taken to when you go to create a new PR.
 
 #### Check the docs
 Double check the output of the
@@ -345,6 +375,11 @@ Double check the output of the
 for any breakages or error messages.
 
 #### Review, revise, repeat
+
+After implementing each endpoint (or small batch) and before opening the
+PR, run the vendored `critical-code-reviewer` skill
+(`.agents/skills/critical-code-reviewer/SKILL.md`) and address every
+finding.
 
 The latency period between submitting your PR and its review may vary.
 When a maintainer does review your contribution, be sure to use the same
@@ -376,7 +411,8 @@ Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to
 abide by its terms.
 
 ## Maintaining `ruODK`
-The steps to prepare a new `ruODK` release are in `data-raw/make_release.R`.
+The steps to prepare a new `ruODK` release are in `data-raw/make_release.R`,
+summarised in `AGENTS.md#release`.
 It is not necessary to run them as a contributor, but immensely convenient for
 the maintainer to have them there in one place.
 

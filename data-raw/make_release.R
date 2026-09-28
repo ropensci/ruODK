@@ -29,7 +29,7 @@ source(here::here("data-raw/make_data.R"))
 # \SweaveOpts{concordance=TRUE}
 # \includepdf[pages=-, fitpaper=true]{../inst/extdoc/ruODK.pdf}
 # \end{document}
-fs::dir_ls("inst/extdoc/", glob = "*.pdf") %>% fs::file_delete()
+fs::dir_ls("inst/extdoc/", glob = "*.pdf") |> fs::file_delete()
 devtools::build_manual(path = "inst/extdoc")
 tools::compactPDF(fs::dir_ls("inst/extdoc/"), gs_quality = "ebook")
 purrr::map(
@@ -40,11 +40,13 @@ purrr::map(
 # -----------------------------------------------------------------------------#
 # Style, lint, spell check
 # -----------------------------------------------------------------------------#
-styler::style_pkg()
-lintr:::addin_lint_package()
+# Format with `air format` on the CLI (or the `air-format` pre-commit hook),
+# then lint with `lintr::lint()` and fix all findings. Release keeps the
+# `vignette` roclet so vignette headers rebuild; day-to-day work uses bare
+# `devtools::document()` (see AGENTS.md).
 devtools::document(roclets = c("rd", "collate", "namespace", "vignette"))
 spelling::spell_check_package()
-spelling::spell_check_files("README.Rmd", lang = "en-AU")
+spelling::spell_check_files("README.Rmd", lang = "en_AU")
 spelling::update_wordlist()
 codemetar::write_codemeta("../ruODK", write_minimeta = TRUE)
 if (
@@ -55,10 +57,8 @@ if (
   if (fs::file_exists("README.html")) fs::file_delete("README.html")
 }
 #
-# Wipe cached server responses (vcr cassettes)
-# If tests are run against outdated vcr cassettes, new server behaviour
-# may not be detected
-fs::dir_ls(here::here("tests/fixtures/"), glob = "*.yml") %>% fs::file_delete()
+# Tests run live against the local Docker Central stack; there are no
+# recorded (vcr) cassettes to wipe.
 # Checks
 pkgdown::build_site() # Simulate
 goodpractice::goodpractice(quiet = FALSE)

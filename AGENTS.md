@@ -48,6 +48,21 @@ config/audits/backup largely missing).
    Write the description in Simple Technical English (ASD-STE100).
    Never prefix explanations with "In plain language:".
 
+## Release
+
+Releases follow `data-raw/make_release.R` (maintainer only, not per-PR).
+In order: `usethis::use_version("patch")`, regenerate packaged data
+(`data-raw/make_data.R`), rebuild and compact the PDF manual into
+`inst/extdoc/ruODK.pdf`, format with `air format`, `lintr::lint()`,
+`devtools::document()` with the `vignette` roclet, spelling check
+(`en_AU`), `codemetar::write_codemeta()`, re-render `README.Rmd` when
+stale, then the full suite (`pkgdown::build_site()`,
+`goodpractice::goodpractice()`,
+`devtools::check(cran = TRUE, remote = TRUE, incoming = TRUE)`,
+`rcmdcheck::rcmdcheck(args = c("--as-cran"))`). Then bump version, edit
+`NEWS.md` and `inst/CITATION`, `git tag -a v<ver>` and push with tags.
+Pushing a `v*` tag builds and pushes the Docker image.
+
 ## Practical notes
 
 - Format touched R files with `air format` (Posit air ≥ 0.11, on PATH);
