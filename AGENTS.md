@@ -72,7 +72,7 @@ Pushing a `v*` tag builds and pushes the Docker image.
   indentation); lint is the backstop. If `air format` and lint disagree on
   a construct, restructure the code so both agree.
 - Run `pre-commit run --all-files` before committing.
-- Test stack: `docker compose --env-file .devcontainer/.env -f
-  .devcontainer/docker-compose.yml up -d --wait`, then
-  `Rscript data-raw/seed_odkc.R`; `RU_VERBOSE=TRUE`.
+- Test stack: `just bootstrap` (up, CA bundle, seed; `just
+  stack_status` to check). Run tests with `just test`, coverage with
+  `just coverage`; `RU_VERBOSE=TRUE`. Run bare `just` to list all recipes.
 - Vendored skills live in `.agents/skills/`; see `skills-lock.json`.

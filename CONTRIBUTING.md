@@ -229,11 +229,15 @@ The test suite needs a running ODK Central. Do not use a hosted instance. The
 repository ships a local one in Docker, seeded with the fixtures from
 `inst/extdata/odkc/`. This is the setup that CI uses. See issue #170.
 
-Start it and seed it:
+Start it and seed it with `just bootstrap` (starts the stack, builds the
+merged CA bundle, seeds the fixtures; `just stack_status` checks it).
+Without `just`, the manual equivalent is:
 
 ```sh
 docker compose --env-file .devcontainer/.env \
-  -f .devcontainer/docker-compose.yml up -d --wait
+  -f .devcontainer/docker-compose.yml \
+  -f .devcontainer/docker-compose-dev.yml up -d --no-recreate --wait nginx
+.devcontainer/odkc/ca-bundle.sh .devcontainer/odkc/certs/ca-bundle.pem
 Rscript data-raw/seed_odkc.R
 ```
 
@@ -307,6 +311,8 @@ ODKC_PW="..."
 Keep in mind that `ruODK` defaults to use `ODKC_{URL,UN,PW}`, so for everyday
 use outside of contributing, you will want to use your own `ODKC_{URL,UN,PW}`
 account credentials.
+
+Run the suite with `just test` (coverage: `just coverage`), or directly:
 
 ```r
 devtools::test()
