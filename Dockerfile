@@ -1,8 +1,9 @@
 FROM rocker/binder:4.1.3 as base
 LABEL maintainer=Florian.Mayer@dbca.wa.gov.au
 LABEL description="rocker/binder:4.1.3 with ruODK"
+LABEL org.opencontainers.image.source="https://github.com/ropensci/ruODK"
 # Build this image with
-# docker build . -t dbcawa/ruodk:latest --build-arg GITHUB_PAT="..."
+# docker build . -t ropensci/ruodk:latest --build-arg GITHUB_PAT="..."
 # Run this image as Jupyter Notebook with
 # docker run -p 8888:8888 dbcawa/ruodk:latest
 # Open URL, then select New > Rstudio

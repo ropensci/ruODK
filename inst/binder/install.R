@@ -1,7 +1,7 @@
 options(
   repos = c(
     ropensci = "https://ropensci.r-universe.dev",
-    MRAN = "https://mran.microsoft.com/snapshot/2020-07-16",
+    MRAN = "https://posit.co",
     CRAN = "https://cloud.r-project.org"
   )
 )
