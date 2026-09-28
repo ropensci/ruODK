@@ -15,8 +15,6 @@ issues](https://img.shields.io/github/issues/ropensci/ruodk.svg?style=popout)](h
 [![Tests](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/ruODK/actions/workflows/R-CMD-check.yaml)
 [![Test
 coverage](https://codecov.io/gh/ropensci/ruODK/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/ruODK?branch=main)
-[![pre-commit.ci
-status](https://results.pre-commit.ci/badge/github/ropensci/ruODK/main.svg)](https://results.pre-commit.ci/latest/github/ropensci/ruODK/main)
 [![CodeFactor](https://www.codefactor.io/repository/github/ropensci/ruodk/badge)](https://www.codefactor.io/repository/github/ropensci/ruodk)
 [![Hosted JupyterLab with
 ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=lab)
@@ -88,14 +86,15 @@ Benefits of using the R ecosystem in combination with ODK:
 - Reproducible reporting (e.g.
   [Sweave](https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr),
   [RMarkdown](https://rmarkdown.rstudio.com/)), interactive web apps
-  ([Shiny](https://shiny.rstudio.com/)), workflow scaling
-  ([drake](https://docs.ropensci.org/drake/)).
+  ([Shiny](https://shiny.rstudio.com/)), workflow orchestration
+  ([targets](https://docs.ropensci.org/targets/) ).
 - Rstudio-as-a-Service (RaaS) at [![Hosted RStudio with
   ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
 
 `ruODK`’s scope:
 
-- To wrap all ODK Central API endpoints with a focus on **data access**.
+- To wrap all ODK Central API endpoints, including writing operations
+  and management endpoints.
 - To provide working examples of interacting with the ODK Central API.
 - To provide convenience helpers for the day to day tasks when working
   with ODK Central data in R: **data munging** the ODK Central API
@@ -124,10 +123,6 @@ Benefits of using the R ecosystem in combination with ODK:
 
 Out of scope:
 
-- To wrap “management” API endpoints. ODK Central is a [VueJS/NodeJS
-  application](https://github.com/getodk/central-frontend/) which
-  provides a comprehensive graphical user interface for the management
-  of users, roles, permissions, projects, and forms.
 - To provide extensive data visualisation. We show only minimal examples
   of data visualisation and presentation, mainly to illustrate the
   example data. Once the data is in your hands as tidy tibbles… urODK!
@@ -241,9 +236,16 @@ ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci
 Contributions through [issues](https://github.com/ropensci/ruODK/issues)
 and PRs are welcome!
 
-See the [contributing
-guide](https://docs.ropensci.org/ruODK/CONTRIBUTING.html) on best
-practices and further readings for code contributions.
+The best way to get started is to read the [contributing
+guide](https://docs.ropensci.org/ruODK/CONTRIBUTING.html) and launch a
+GitHub Codespace.
+
+`ruODK` also provides agentic skills, guardrails, and a devcontainer
+with an Opencode client pre-installed (BYO token, see contributing
+guidelines). You may also use GitHub Copilot or any other LLMs to assist
+you in your contributions. Please read the
+[AGENTS.md](https://docs.ropensci.org/ruODK/AGENTS.html) for more
+information.
 
 ## Attribution
 
@@ -261,8 +263,7 @@ To cite package `ruODK` in publications use:
 citation("ruODK")
 #> To cite ruODK in publications use (with the correct version number:
 #>
-#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version X.X.X).  Zenodo.
-#>   https://doi.org/10.5281/zenodo.5559164
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version X.X.X).  Zenodo. https://doi.org/10.5281/zenodo.5559164
 #>
 #> A BibTeX entry for LaTeX users is
 #>
