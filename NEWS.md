@@ -4,6 +4,8 @@
   (#129).
 * `form_schema_ext()` gains a `version` flag to read a published version's
   extended schema (#129).
+* `form_schema_ext()` tolerates blank Select One or Select Multiple option
+  labels, recording `NA` labels instead of erroring (#139).
 * `odata_submission_get()` warns when previous published Form versions hold
   fields at paths absent from the current version, as the OData feed uses
   only the current Form definition. The warning points at
