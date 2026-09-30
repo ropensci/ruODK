@@ -1,5 +1,15 @@
 # ruODK (development version)
 
+* `form_xml()` gains a `version` flag to read a published version's XML
+  (#129).
+* `form_schema_ext()` gains a `version` flag to read a published version's
+  extended schema (#129).
+* `odata_submission_get()` warns when previous published Form versions hold
+  fields at paths absent from the current version, as the OData feed uses
+  only the current Form definition. The warning points at
+  `submission_export(deleted_fields = TRUE)` to include fields from all
+  versions (#161).
+
 * `submission_edit()` edits one Submission field and optionally leaves a
   comment (#132).
 

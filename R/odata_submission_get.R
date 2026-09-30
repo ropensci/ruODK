@@ -34,6 +34,15 @@
 #' Submitting at least one complete form instance will prevent the accidental
 #' exclusion of an otherwise mostly empty form field.
 #'
+#' Submissions keep the values entered under the Form version used at entry.
+#' The OData feed, however, uses only the current Form definition.
+#' Fields that a previous version held at another path (removed, renamed, or
+#' moved to another group or repeat) do not appear in the download.
+#' \code{\link{odata_submission_get}} warns when previous published versions
+#' hold such fields.
+#' To include fields from all versions, use \code{\link{submission_export}}
+#' with \code{deleted_fields = TRUE}.
+#'
 #' The only remaining manual step is to optionally join any sub-tables to the
 #' master table.
 #'
@@ -282,6 +291,22 @@ odata_submission_get <- function(
   )
 
   #----------------------------------------------------------------------------#
+  # Warn when previous Form versions hold fields at paths absent from the
+  # current version. The OData feed uses only the current Form definition,
+  # so such values do not appear in the download. See
+  # https://docs.getodk.org/central-forms/#updating-forms-to-a-new-version
+  warn_on_schema_drift(
+    current_schema = fs,
+    pid = pid,
+    fid = fid,
+    url = url,
+    un = un,
+    pw = pw,
+    odkc_version = odkc_version,
+    retries = retries
+  )
+
+  #----------------------------------------------------------------------------#
   # Parse submission data
   ru_msg_info("Parsing submissions...", verbose = verbose)
 
@@ -340,6 +365,110 @@ odata_submission_get <- function(
   #----------------------------------------------------------------------------#
   ru_msg_success("Returning parsed submissions.", verbose = verbose)
   sub
+}
+
+#' Warn when previous Form versions hold fields missing from the current one.
+#'
+#' `r lifecycle::badge("experimental")`
+#'
+#' Central's OData feed uses only the current Form definition: fields that a
+#' previous published version held at another path (removed, renamed, or
+#' moved to another group or repeat) do not appear in the download, while the
+#' stored Submission XML keeps their values.
+#' This helper compares the paths of every published Form version against the
+#' current schema and warns about paths that have no current equivalent.
+#' To include fields from all versions, use \code{\link{submission_export}}
+#' with \code{deleted_fields = TRUE}.
+#'
+#' Failures while listing versions or reading a version schema are ignored:
+#' the check must never break a download.
+#'
+#' The warning is unconditional: it is not gated by `verbose`, as lost
+#' values must never pass silently.
+#'
+#' @param current_schema The current form schema as returned by
+#'   \code{\link{form_schema}}.
+#' @template param-pid
+#' @template param-fid
+#' @template param-url
+#' @template param-auth
+#' @template param-odkcv
+#' @template param-retries
+#' @return `NULL`, invisibly.
+#' @family odata-api
+#' @keywords internal
+warn_on_schema_drift <- function(
+  current_schema,
+  pid = get_default_pid(),
+  fid = get_default_fid(),
+  url = get_default_url(),
+  un = get_default_un(),
+  pw = get_default_pw(),
+  odkc_version = get_default_odkc_version(),
+  retries = get_retries()
+) {
+  vl <- tryCatch(
+    form_version_list(
+      pid = pid,
+      fid = fid,
+      url = url,
+      un = un,
+      pw = pw,
+      retries = retries
+    ),
+    error = function(e) NULL
+  )
+  if (is.null(vl) || nrow(vl) <= 1L) {
+    return(invisible(NULL))
+  }
+
+  current_paths <- current_schema$path
+  missing_paths <- character(0)
+  for (v in vl$version) {
+    if (is.na(v)) {
+      next
+    }
+    # The XForms specification allows blank strings as versions, which
+    # Central addresses as `___`.
+    vv <- if (identical(v, "")) "___" else v
+    fsv <- tryCatch(
+      form_schema(
+        version = vv,
+        pid = pid,
+        fid = fid,
+        url = url,
+        un = un,
+        pw = pw,
+        odkc_version = odkc_version,
+        retries = retries,
+        verbose = FALSE
+      ),
+      error = function(e) NULL
+    )
+    if (is.null(fsv)) {
+      next
+    }
+    missing_paths <- union(missing_paths, setdiff(fsv$path, current_paths))
+  }
+
+  if (length(missing_paths) == 0L) {
+    return(invisible(NULL))
+  }
+
+  paths <- paste(missing_paths, collapse = ", ")
+  warning(
+    glue::glue(
+      "The form has {nrow(vl)} published versions. ",
+      "{length(missing_paths)} field path(s) from previous versions ",
+      "are absent from the current version: {paths}. ",
+      "The OData feed uses only the current form definition, ",
+      "so submissions made under previous versions can miss values. ",
+      "To include fields from all versions, use ",
+      "submission_export(deleted_fields = TRUE)."
+    ),
+    call. = FALSE
+  )
+  invisible(NULL)
 }
 
 # usethis::use_test("odata_submission_get") # nolint
