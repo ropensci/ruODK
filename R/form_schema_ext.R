@@ -214,9 +214,11 @@ form_schema_ext <- function(
           "",
           sub("jr:itext\\('", "", xml2::xml_attr(this_rawlabel, "ref"))
         )
-        translations <- all_translations[
-          all_translations_ids == id
-        ]
+        translations <- lookup_translations(
+          all_translations,
+          all_translations_ids,
+          id
+        )
 
         # iterate through translations
         for (j in seq_along(translations)) {
@@ -298,9 +300,11 @@ form_schema_ext <- function(
             "",
             sub("jr:itext\\('", "", xml2::xml_attr(this_hint, "ref"))
           )
-          hint_translations <- all_translations[
-            all_translations_ids == hint_id
-          ]
+          hint_translations <- lookup_translations(
+            all_translations,
+            all_translations_ids,
+            hint_id
+          )
 
           for (hi in seq_along(hint_translations)) {
             this_hint_translation <- hint_translations[hi]
@@ -410,9 +414,11 @@ form_schema_ext <- function(
               )
             )
 
-            choice_translations <- all_translations[
-              all_translations_ids == id_choice
-            ]
+            choice_translations <- lookup_translations(
+              all_translations,
+              all_translations_ids,
+              id_choice
+            )
 
             # iterate through choice translations
             for (kk in seq_along(choice_translations)) {
@@ -483,6 +489,10 @@ form_schema_ext <- function(
           }
         }
 
+        # Blank labels leave gaps in choice_labels; pad with NA so that
+        # labels stay aligned with values. See #139.
+        choice_labels <- align_choice_labels(choice_values, choice_labels)
+
         # add to the extended table
         for (this_choicelang in names(choice_labels)) {
           these_choicelabels <- choice_labels[[this_choicelang]]
@@ -523,7 +533,10 @@ form_schema_ext <- function(
         )
 
         # check if labels have translations
-        has_translation_choice <- grepl("jr:itext", choicelabel_node)
+        # Blank or missing label refs yield NA from xml_attr();
+        # treat those as untranslated rather than erroring in grepl/if.
+        # See https://github.com/ropensci/ruODK/issues/139
+        has_translation_choice <- isTRUE(grepl("jr:itext", choicelabel_node))
 
         if (has_translation_choice) {
           # update choicelabel_node
@@ -591,9 +604,11 @@ form_schema_ext <- function(
               )
             )
 
-            choice_translations <- all_translations[
-              all_translations_ids == id_choice
-            ]
+            choice_translations <- lookup_translations(
+              all_translations,
+              all_translations_ids,
+              id_choice
+            )
 
             # iterate through choice translations
             for (kk in seq_along(choice_translations)) {
@@ -669,6 +684,10 @@ form_schema_ext <- function(
           }
         }
 
+        # Blank labels leave gaps in choice_labels; pad with NA so that
+        # labels stay aligned with values. See #139.
+        choice_labels <- align_choice_labels(choice_values, choice_labels)
+
         # add to the extended table
         for (this_choicelang in names(choice_labels)) {
           these_choicelabels <- choice_labels[[this_choicelang]]
@@ -692,6 +711,40 @@ form_schema_ext <- function(
   fs_ext <- frm_schema %>% dplyr::left_join(extension, by = "path")
 
   return(fs_ext)
+}
+
+# Find translation nodes for one itext id without erroring on blank labels.
+# xml2 subsetting with NA (missing id, or a <text> node without id)
+# errors with "Expecting an external pointer: [type=NULL]".
+# Return an empty nodeset instead, so callers record NA labels.
+# See https://github.com/ropensci/ruODK/issues/139
+lookup_translations <- function(all_translations, all_translations_ids, id) {
+  if (length(id) == 0 || is.na(id)) {
+    return(all_translations[0])
+  }
+  keep <- all_translations_ids == id & !is.na(all_translations_ids)
+  keep[is.na(keep)] <- FALSE
+  all_translations[keep]
+}
+
+# Pad choice label vectors to the number of choice values.
+# Missing (blank) labels are skipped during parsing, which leaves gaps.
+# R auto-fills gaps only when a later index is assigned, so a trailing
+# blank would shorten the vector and misalign values and labels.
+# If no labels were found at all, keep values with NA labels.
+align_choice_labels <- function(choice_values, choice_labels) {
+  n_choices <- length(choice_values)
+  if (n_choices == 0) {
+    return(choice_labels)
+  }
+  if (length(choice_labels) == 0) {
+    choice_labels[["base"]] <- rep(NA_character_, n_choices)
+    return(choice_labels)
+  }
+  for (nm in names(choice_labels)) {
+    length(choice_labels[[nm]]) <- n_choices
+  }
+  choice_labels
 }
 
 # usethis::use_test("form_schema_ext") # nolint
