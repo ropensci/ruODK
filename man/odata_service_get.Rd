@@ -75,6 +75,7 @@ svc
 
 Other odata-api:
 \code{\link[=odata_metadata_get]{odata_metadata_get()}},
-\code{\link[=odata_submission_get]{odata_submission_get()}}
+\code{\link[=odata_submission_get]{odata_submission_get()}},
+\code{\link[=warn_on_schema_drift]{warn_on_schema_drift()}}
 }
 \concept{odata-api}

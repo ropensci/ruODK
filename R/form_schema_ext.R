@@ -38,6 +38,12 @@
 #'   a warning and return the unparsed, flattened form schema.
 #'   Only applies to ODK Central version < 0.8.
 #'   Default: TRUE.
+#' @param version (character) The published Form version whose schema
+#'   fields to return, e.g. from `form_version_list()`.
+#'   Pass `___` for a blank version.
+#'   If given, the version path is used instead of the published or
+#'   draft path.
+#'   Default: `NULL`.
 #' @template param-pid
 #' @template param-fid
 #' @template param-url
@@ -85,7 +91,9 @@
 #'   }
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#getting-form-version-schema-fields}
 #' @seealso \url{https://docs.getodk.org/central-api-form-management/#retrieving-form-xml}
+#' @seealso \url{https://docs.getodk.org/central-api-form-management/#retrieving-form-version-xml}
 # nolint end
 #' @family form-management
 #' @export
@@ -103,11 +111,16 @@
 #'
 #' # view the extended schema:
 #' fsx
+#'
+#' # The extended schema of one published Form version:
+#' vl <- form_version_list()
+#' fsx_v1 <- form_schema_ext(version = vl$version[[1]])
 #' }
 form_schema_ext <- function(
   flatten = FALSE,
   odata = FALSE,
   parse = TRUE,
+  version = NULL,
   pid = get_default_pid(),
   fid = get_default_fid(),
   url = get_default_url(),
@@ -131,6 +144,7 @@ form_schema_ext <- function(
     flatten = flatten,
     odata = odata,
     parse = parse,
+    version = version,
     url = url,
     pid = pid,
     fid = fid,
@@ -147,6 +161,7 @@ form_schema_ext <- function(
     url = url,
     pid = pid,
     fid = fid,
+    version = version,
     un = un,
     pw = pw,
     retries = retries

@@ -191,4 +191,48 @@ test_that("form_schema_ext v8 parses translated hints", {
   )
 })
 
+test_that("form_schema_ext reads a published version (#129)", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  s <- setup_moved_field_form(submit = FALSE)
+
+  fsx_v1 <- form_schema_ext(
+    pid = get_test_pid(),
+    fid = s$fid,
+    version = "grp1",
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+  testthat::expect_true(tibble::is_tibble(fsx_v1))
+  testthat::expect_true("/mygroup/myfield" %in% fsx_v1$path)
+
+  fsx_latest <- form_schema_ext(
+    pid = get_test_pid(),
+    fid = s$fid,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+  testthat::expect_true("/myfield" %in% fsx_latest$path)
+  testthat::expect_false("/mygroup/myfield" %in% fsx_latest$path)
+
+  testthat::expect_error(
+    form_schema_ext(
+      pid = get_test_pid(),
+      fid = s$fid,
+      version = "",
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    ),
+    "single non-empty"
+  )
+})
+
 # usethis::use_r("form_schema_ext") # nolint

@@ -213,6 +213,15 @@ excluded from the resulting tibble.
 Submitting at least one complete form instance will prevent the accidental
 exclusion of an otherwise mostly empty form field.
 
+Submissions keep the values entered under the Form version used at entry.
+The OData feed, however, uses only the current Form definition.
+Fields that a previous version held at another path (removed, renamed, or
+moved to another group or repeat) do not appear in the download.
+\code{\link{odata_submission_get}} warns when previous published versions
+hold such fields.
+To include fields from all versions, use \code{\link{submission_export}}
+with \code{deleted_fields = TRUE}.
+
 The only remaining manual step is to optionally join any sub-tables to the
 master table.
 
@@ -273,6 +282,7 @@ data <- odata_submission_get(
 
 Other odata-api:
 \code{\link[=odata_metadata_get]{odata_metadata_get()}},
-\code{\link[=odata_service_get]{odata_service_get()}}
+\code{\link[=odata_service_get]{odata_service_get()}},
+\code{\link[=warn_on_schema_drift]{warn_on_schema_drift()}}
 }
 \concept{odata-api}

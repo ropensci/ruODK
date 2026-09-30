@@ -8,6 +8,7 @@ form_schema_ext(
   flatten = FALSE,
   odata = FALSE,
   parse = TRUE,
+  version = NULL,
   pid = get_default_pid(),
   fid = get_default_fid(),
   url = get_default_url(),
@@ -35,6 +36,13 @@ If used together with \code{flatten=TRUE}, \code{\link{form_schema}} will raise
 a warning and return the unparsed, flattened form schema.
 Only applies to ODK Central version < 0.8.
 Default: TRUE.}
+
+\item{version}{(character) The published Form version whose schema
+fields to return, e.g. from \code{form_version_list()}.
+Pass \verb{___} for a blank version.
+If given, the version path is used instead of the published or
+draft path.
+Default: \code{NULL}.}
 
 \item{pid}{The numeric ID of the project, e.g.: 2.
 
@@ -172,12 +180,20 @@ fsx[fsx$name == "test_yn", "choices_english_(en)"][[1]]
 
 # view the extended schema:
 fsx
+
+# The extended schema of one published Form version:
+vl <- form_version_list()
+fsx_v1 <- form_schema_ext(version = vl$version[[1]])
 }
 }
 \seealso{
 \url{https://docs.getodk.org/central-api-form-management/#getting-form-schema-fields}
 
+\url{https://docs.getodk.org/central-api-form-management/#getting-form-version-schema-fields}
+
 \url{https://docs.getodk.org/central-api-form-management/#retrieving-form-xml}
+
+\url{https://docs.getodk.org/central-api-form-management/#retrieving-form-version-xml}
 
 Other form-management:
 \code{\link[=form_assignment_actors]{form_assignment_actors()}},

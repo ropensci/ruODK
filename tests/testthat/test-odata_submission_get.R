@@ -393,4 +393,63 @@ test_that("odata_submission_get can exclude group names", {
   testthat::expect_contains(names(x_plain), "area_name")
 })
 
+test_that("odata_submission_get warns on fields moved out of groups (#161)", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  s <- setup_moved_field_form(submit = TRUE)
+
+  # The OData feed uses only the current Form definition, so the value
+  # entered under v1 at /mygroup/myfield does not appear in the download.
+  # ruODK warns about the drift (even with verbose = FALSE) and points at
+  # the docs-compliant export.
+  testthat::expect_warning(
+    parsed <- odata_submission_get(
+      pid = get_test_pid(),
+      fid = s$fid,
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw(),
+      odkc_version = get_test_odkc_version(),
+      parse = TRUE,
+      download = FALSE,
+      verbose = FALSE
+    ),
+    "previous versions"
+  )
+  testthat::expect_true(s$val_v2 %in% flatten_test_chars(parsed))
+
+  # The stored Submission XML keeps both values.
+  x1 <- submission_get(
+    pid = get_test_pid(),
+    fid = s$fid,
+    iid = s$iid1,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
+  testthat::expect_true(s$val_v1 %in% flatten_test_chars(x1))
+
+  # The CSV export with deleted fields restores the v1 value.
+  t <- withr::local_tempdir()
+  se <- submission_export(
+    local_dir = t,
+    pid = get_test_pid(),
+    fid = s$fid,
+    deleted_fields = TRUE,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pp = get_test_pp()
+  )
+  f <- unzip(se, exdir = t)
+  root_csv <- fs::path(t, glue::glue("{s$fid}.csv"))
+  testthat::expect_true(fs::file_exists(root_csv))
+  csv_lines <- readLines(root_csv, warn = FALSE)
+  testthat::expect_true(any(grepl(s$val_v1, csv_lines, fixed = TRUE)))
+  testthat::expect_true(any(grepl(s$val_v2, csv_lines, fixed = TRUE)))
+})
+
 # usethis::use_r("odata_submission_get") # nolint

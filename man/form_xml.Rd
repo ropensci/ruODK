@@ -8,6 +8,7 @@ form_xml(
   parse = TRUE,
   pid = get_default_pid(),
   fid = get_default_fid(),
+  version = NULL,
   url = get_default_url(),
   un = get_default_un(),
   pw = get_default_pw(),
@@ -32,6 +33,11 @@ Default: \code{\link{get_default_fid}}.
 Set default \code{fid} through \code{ru_setup(fid="...")}.
 
 See \code{vignette("Setup", package = "ruODK")}.}
+
+\item{version}{(character) The version of the Form version being
+referenced.
+Pass \verb{___} for a blank version.
+If \code{NULL} (default), the published Form XML is returned.}
 
 \item{url}{The ODK Central base URL without trailing slash.
 
@@ -63,6 +69,14 @@ The form XML as a nested list.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 }
+\details{
+To get the XML of the Form, add \code{.xml} to the end of the request URL.
+To get the XML of one published Form version, request the version
+resource with \code{.xml} appended.
+Since the XForms specification allows blank strings as versions, pass
+the special value \verb{___} (three underscores) as the version to
+retrieve the blank version.
+}
 \examples{
 \dontrun{
 # See vignette("setup") for setup and authentication options
@@ -78,10 +92,16 @@ listviewer::jsonedit(fxml)
 # form_xml returns a nested list
 class(fxml)
 # > "list"
+
+# The XML of one published Form version
+vl <- form_version_list()
+fxml_v1 <- form_xml(version = vl$version[[1]], parse = FALSE)
 }
 }
 \seealso{
 \url{https://docs.getodk.org/central-api-form-management/#retrieving-form-xml}
+
+\url{https://docs.getodk.org/central-api-form-management/#retrieving-form-version-xml}
 
 Other form-management:
 \code{\link[=form_assignment_actors]{form_assignment_actors()}},
