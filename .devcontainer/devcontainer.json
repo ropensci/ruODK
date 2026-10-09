@@ -15,7 +15,7 @@
             "packages": "libudunits2-dev,libxtst6,libxt6,libmagick++-dev"
         },
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-            "packages": "github::rstudio/renv,tidyverse,git2r,knitr,spelling,languageserver,precommit,cli,clisymbols,crayon,dplyr,fs,glue,httr,httr2,janitor,jsonlite,lifecycle,lubridate,magrittr,purrr,readr,rlang,stringr,semver,tibble,tidyr,withr,xml2,covr,DT,ggplot2,here,lattice,leaflet,listviewer,leafpop,leafem,mapview,rmarkdown,roxygen2,sf,terra,testthat,tmap,usethis"
+            "packages": "github::rstudio/renv,tidyverse,git2r,knitr,spelling,languageserver,precommit,cli,clisymbols,crayon,dplyr,fs,glue,httr,httr2,janitor,jsonlite,lifecycle,lubridate,magrittr,purrr,readr,rlang,stringr,semver,tibble,tidyr,withr,xml2,covr,DT,ggplot2,here,lattice,leaflet,listviewer,leafpop,leafem,mapview,rmarkdown,roxygen2,sf,skimr,terra,testthat,tmap,usethis,devtools,pkgdown,rcmdcheck,goodpractice,styler,lintr"
         },
         "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
         "ghcr.io/guiyomh/features/just:0": {},
@@ -23,7 +23,7 @@
     },
 
     "mounts": [
-        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=~/.gitconfig,type=bind,consistency=cached"
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=${containerEnv:HOME}/.gitconfig,type=bind,consistency=cached,readonly=true"
     ],
 
     "remoteEnv": {
@@ -57,6 +57,7 @@
                 "mechatroner.rainbow-csv",
                 "REditorSupport.r",
                 "RDebugger.r-debugger",
+                "ryanluker.vscode-coverage-gutters",
                 "ms-azuretools.vscode-docker",
                 "usernamehw.errorlens",
                 "christian-kohler.path-intellisense",
