@@ -22,8 +22,13 @@
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
 
+    // The gitconfig bind target hardcodes the remote user's home on purpose:
+    // mounts only substitute localEnv variables (${containerEnv:...} is
+    // valid in remoteEnv only), so a ${containerEnv:HOME} target reaches
+    // Docker literally and fails with "mount path must be absolute".
+    // remoteUser is rstudio via the base image's devcontainer.metadata label.
     "mounts": [
-        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=${containerEnv:HOME}/.gitconfig,type=bind,consistency=cached,readonly=true"
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/rstudio/.gitconfig,type=bind,consistency=cached,readonly=true"
     ],
 
     "remoteEnv": {
