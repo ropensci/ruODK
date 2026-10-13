@@ -152,8 +152,9 @@ odata_entitylist_metadata_get <- function(
             capability = "batch_supported",
             value = as.logical(xml2::xml_attr(anno, "Bool"))
           )
-        } else if (grepl("FilterRestrictions$", term)) {
-          # Extract non-filterable properties
+        } else if (grepl("Filter(Restrictions|Functions)$", term)) {
+          # Extract non-filterable properties. ODK Central serves these
+          # under FilterFunctions rather than FilterRestrictions.
           non_filterable <- xml2::xml_find_all(anno, ".//edm:PropertyPath", ns)
           if (length(non_filterable) > 0) {
             list(

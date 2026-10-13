@@ -205,4 +205,24 @@ test_that("project_list warns on wrong URL", {
 #   )
 # })
 
+test_that("project_list handles Projects without archived flag", {
+  no_archived <- function(...) {
+    httr2::response(
+      200,
+      headers = list(`Content-Type` = "application/json"),
+      body = charToRaw(paste0(
+        '[{"id":1,"name":"No archived flag",',
+        '"createdAt":"2024-01-01T00:00:00.000Z",',
+        '"updatedAt":"2024-01-02T00:00:00.000Z",',
+        '"deletedAt":null}]'
+      ))
+    )
+  }
+  testthat::local_mocked_bindings(ru_http_request = no_archived)
+
+  pl <- project_list(url = "http://example.com", un = "u", pw = "p")
+  testthat::expect_s3_class(pl, "tbl_df")
+  testthat::expect_equal(pl$name, "No archived flag")
+})
+
 # usethis::use_r("project_list") # nolint

@@ -48,6 +48,17 @@ test_that("user_update_password changes a password", {
 test_that("user_update_password rejects missing passwords", {
   testthat::expect_error(
     user_update_password(
+      actor_id = NA,
+      old_password = "old",
+      new_password = "new",
+      url = "http://localhost",
+      un = "user",
+      pw = "password"
+    ),
+    "single Actor ID"
+  )
+  testthat::expect_error(
+    user_update_password(
       actor_id = 1,
       old_password = "",
       new_password = "new",

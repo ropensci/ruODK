@@ -65,4 +65,31 @@ test_that("entitylist_property_delete rejects a missing or empty property", {
   )
 })
 
+test_that("entitylist_property_delete warns if odkc_version too low", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  ru_setup(
+    pid = get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+
+  # Unknown objects fail with 404, after the version gate warning
+  testthat::expect_warning(
+    testthat::expect_error(
+      entitylist_property_delete(
+        did = "no-such-list",
+        property = "no-such-property",
+        odkc_version = "2026.0"
+      )
+    ),
+    "supported from v2026.1"
+  )
+})
+
 # usethis::use_r("entitylist_property_delete")  # nolint

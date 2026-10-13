@@ -31,6 +31,10 @@ test_that("user_reset_password initiates a reset", {
   # Without invalidate the account keeps working
   rs <- user_reset_password(email = email)
   testthat::expect_true(rs$success)
+
+  # With invalidate the reset still initiates
+  rsi <- user_reset_password(email = email, invalidate = TRUE)
+  testthat::expect_true(rsi$success)
 })
 
 test_that("user_reset_password rejects a missing email", {

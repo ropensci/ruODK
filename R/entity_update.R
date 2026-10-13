@@ -142,10 +142,11 @@ entity_update <- function(
   qry <- list(force = force_val, resolve = resolve_val)
 
   if (!is.null(base_version)) {
-    if (!is.integer(as.integer(base_version))) {
+    base_version <- suppressWarnings(as.integer(base_version))
+    if (length(base_version) != 1L || is.na(base_version)) {
       ru_msg_abort("base_version must be an integer.")
     }
-    qry$baseVersion <- as.integer(base_version)
+    qry$baseVersion <- base_version
   }
 
   ru_http_request(

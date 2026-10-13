@@ -75,4 +75,38 @@ test_that("entitylist_create rejects a missing or invalid name", {
   )
 })
 
+test_that("entitylist_create warns if odkc_version too low", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  ru_setup(
+    pid = get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+
+  dname <- glue::glue(
+    "ruodk_test_gate_{format(Sys.time(), '%Y%m%d%H%M%S')}"
+  ) |>
+    as.character()
+
+  # Creation succeeds, after the version gate warning; remove it again
+  testthat::expect_warning(
+    entitylist_create(name = dname, odkc_version = "2022.2"),
+    "supported from v2022.3"
+  )
+  withr::defer(
+    entitylist_delete(
+      did = dname,
+      url = get_test_url(),
+      un = get_test_un(),
+      pw = get_test_pw()
+    )
+  )
+})
+
 # usethis::use_r("entitylist_create")  # nolint

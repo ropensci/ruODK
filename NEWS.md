@@ -1,5 +1,15 @@
 # ruODK (development version)
 
+* `odata_entitylist_metadata_get()` now reports non-filterable properties:
+  ODK Central serves them under the `FilterFunctions` annotation, which the
+  parser previously ignored while looking only for `FilterRestrictions`.
+* `entity_update()` rejects non-integer `base_version` values with a clear
+  error instead of sending them to the server.
+* `ru_http_request()` honours `terminate_on`: those statuses are returned
+  as responses instead of thrown, so missing attachments warn with
+  troubleshooting tips and wrong encryption passphrases report through
+  `yell_if_error()` rather than surfacing raw `httr2` errors.
+
 * `form_xml()` gains a `version` flag to read a published version's XML
   (#129).
 * `form_schema_ext()` gains a `version` flag to read a published version's

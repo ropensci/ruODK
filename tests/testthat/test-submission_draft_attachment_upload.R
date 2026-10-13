@@ -74,6 +74,18 @@ test_that("submission_draft_attachment_upload rejects missing input", {
     ),
     "File not found"
   )
+  testthat::expect_error(
+    submission_draft_attachment_upload(
+      iid = "uuid:1",
+      fid = "f",
+      filename = "a.jpg",
+      file = NA,
+      url = url,
+      un = un,
+      pw = pw
+    ),
+    "single file path"
+  )
 })
 
 # usethis::use_r("submission_draft_attachment_upload")  # nolint

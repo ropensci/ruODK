@@ -34,6 +34,15 @@ test_that("site preferences reject missing input", {
     "single non-empty"
   )
   testthat::expect_error(
+    user_preference_site_set(
+      name = "x",
+      url = url,
+      un = un,
+      pw = pw
+    ),
+    "value must be given"
+  )
+  testthat::expect_error(
     user_preference_site_delete(name = "x", url = "", un = un, pw = pw),
     "Missing ODK Central"
   )

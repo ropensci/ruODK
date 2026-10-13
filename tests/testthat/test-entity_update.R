@@ -147,6 +147,16 @@ test_that("entitylist_update warns if odkc_version too low", {
 
   testthat::expect_error(entity_update())
 
+  testthat::expect_error(
+    entity_update(
+      did = did,
+      eid = en$uuid[1],
+      label = "",
+      data = e_data
+    ),
+    "non-empty string"
+  )
+
   testthat::expect_warning(
     entity_update(
       did = did,
@@ -173,6 +183,49 @@ test_that("entitylist_update warns if odkc_version too low", {
       label = e_label,
       data = e_data
     )
+  )
+
+  # force=TRUE with base_version warns, then updates all the same
+  ed_now <- entity_detail(did = did, eid = en$uuid[1])
+  testthat::expect_warning(
+    eu_forced <- entity_update(
+      did = did,
+      eid = en$uuid[1],
+      label = e_label,
+      data = e_data,
+      force = TRUE,
+      base_version = ed_now$current_version$version
+    ),
+    "force=TRUE"
+  )
+  testthat::expect_equal(
+    eu_forced$current_version$data$details,
+    e_data$details
+  )
+
+  # base_version reaches the request query string
+  eu_based <- entity_update(
+    did = did,
+    eid = en$uuid[1],
+    label = e_label,
+    data = e_data,
+    base_version = eu_forced$current_version$version
+  )
+  testthat::expect_equal(
+    eu_based$current_version$baseVersion,
+    eu_forced$current_version$version
+  )
+
+  # A non-integer base_version is rejected before any request
+  testthat::expect_error(
+    entity_update(
+      did = did,
+      eid = en$uuid[1],
+      label = e_label,
+      data = e_data,
+      base_version = "not-a-version"
+    ),
+    "must be an integer"
   )
 })
 

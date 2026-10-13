@@ -124,6 +124,19 @@ ru_http_request <- function(
     is_transient = function(resp) httr2::resp_status(resp) %in% transient_codes
   )
 
+  # Statuses in terminate_on skip retries (above) and are returned as
+  # responses instead of thrown, so callers can inspect them: for example
+  # get_one_attachment() warns on 404s, and submission_export() reports
+  # wrong passphrases through yell_if_error(). All other statuses keep
+  # httr2's default: error at 400 and above.
+  req <- httr2::req_error(
+    req,
+    is_error = function(resp) {
+      status <- httr2::resp_status(resp)
+      status >= 400L && !status %in% (terminate_on %||% integer(0))
+    }
+  )
+
   if (!is.null(dest)) {
     if (!overwrite && file.exists(dest)) {
       ru_msg_abort(glue::glue('File "{dest}" already exists.'))

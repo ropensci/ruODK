@@ -267,4 +267,26 @@ test_that("attachment_get follows redirects", {
   expect_true(any(grepl("https://httpbin.org/get", content)))
 })
 
+
+test_that("attachment_get warns on failed downloads", {
+  tmp <- tempfile(fileext = ".txt")
+
+  # httpbin answers 404 with an empty body
+  src <- "https://httpbin.org/status/404"
+
+  testthat::expect_warning(
+    get_one_attachment(
+      pth = tmp,
+      fn = "test.txt",
+      src = src,
+      url = "https://httpbin.org",
+      un = "user", # dummy
+      pw = "pass", # dummy
+      retries = 1,
+      verbose = FALSE
+    ),
+    "Troubleshooting tips"
+  )
+})
+
 # usethis::use_r("attachment_get") # nolint

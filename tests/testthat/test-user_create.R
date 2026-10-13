@@ -47,6 +47,16 @@ test_that("user_create rejects a missing email", {
   testthat::expect_error(
     user_create(
       email = "a@example.com",
+      password = "",
+      url = "http://localhost",
+      un = "user",
+      pw = "password"
+    ),
+    "single non-empty"
+  )
+  testthat::expect_error(
+    user_create(
+      email = "a@example.com",
       url = "",
       un = "user",
       pw = "password"

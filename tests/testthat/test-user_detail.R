@@ -21,6 +21,14 @@ test_that("user_detail shows the authenticated User", {
   )
   testthat::expect_equal(by_id$id, me$id)
   testthat::expect_equal(by_id$email, me$email)
+
+  ext <- user_detail(
+    extended = TRUE,
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw()
+  )
+  testthat::expect_equal(ext$id, me$id)
 })
 
 test_that("user_detail rejects invalid input", {
@@ -38,6 +46,10 @@ test_that("user_detail rejects invalid input", {
   testthat::expect_error(
     user_detail(actor_id = 1, extended = TRUE, url = url, un = un, pw = pw),
     "needs actor_id 'current'"
+  )
+  testthat::expect_error(
+    user_detail(extended = "yes", url = url, un = un, pw = pw),
+    "TRUE or FALSE"
   )
 })
 

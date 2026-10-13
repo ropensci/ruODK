@@ -31,6 +31,17 @@ test_that("user_update modifies a User", {
   uu <- user_update(actor_id = u$id, display_name = "RuODK Test User")
   testthat::expect_equal(uu$display_name, "RuODK Test User")
   testthat::expect_equal(uu$email, email)
+
+  email2 <- glue::glue(
+    "ruodk_uu2_{format(Sys.time(), '%Y%m%d%H%M%S')}@example.com"
+  ) |>
+    as.character()
+  uu2 <- user_update(
+    actor_id = u$id,
+    display_name = "RuODK Test User",
+    email = email2
+  )
+  testthat::expect_equal(uu2$email, email2)
 })
 
 test_that("user_update needs one field to change", {

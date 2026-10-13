@@ -70,6 +70,17 @@ test_that("form_draft_attachment_upload rejects missing input", {
     ),
     "File not found"
   )
+  testthat::expect_error(
+    form_draft_attachment_upload(
+      fid = "f",
+      filename = "a.csv",
+      file = NA,
+      url = url,
+      un = un,
+      pw = pw
+    ),
+    "single file path"
+  )
 })
 
 # usethis::use_r("form_draft_attachment_upload")  # nolint

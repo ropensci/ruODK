@@ -31,6 +31,40 @@ test_that("form_version_xlsx fails for XML-created versions", {
   )
 })
 
+test_that("form_version_xlsx downloads to dest", {
+  fake_download <- function(...) {
+    args <- list(...)
+    if (!is.null(args$dest)) {
+      writeBin(charToRaw("fake-xlsx-bytes"), args$dest)
+    }
+    httr2::response(
+      200,
+      headers = list(
+        `Content-Type` = paste0(
+          "application/vnd.openxmlformats-officedocument.",
+          "spreadsheetml.sheet"
+        )
+      ),
+      body = charToRaw("")
+    )
+  }
+  testthat::local_mocked_bindings(ru_http_request = fake_download)
+
+  # No spreadsheet source exists in the test stack, so the download
+  # itself is faked; the dest plumbing is real
+  dest <- withr::local_tempfile(fileext = ".xlsx")
+  out <- form_version_xlsx(
+    fid = "f",
+    version = "1",
+    dest = dest,
+    url = "http://example.com",
+    un = "u",
+    pw = "p"
+  )
+  testthat::expect_equal(out, dest)
+  testthat::expect_true(fs::file_exists(out))
+})
+
 test_that("form_version_xlsx rejects a missing version", {
   url <- "http://localhost"
   un <- "user"

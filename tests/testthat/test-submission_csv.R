@@ -33,6 +33,13 @@ test_that("submission_csv exports the root table", {
   testthat::expect_gte(nrow(csv), 1)
   testthat::expect_true("meta-instanceID" %in% names(csv))
   testthat::expect_true(iid %in% csv$`meta-instanceID`)
+
+  csvf <- submission_csv(
+    fid = fid,
+    filter = "__system/submissionDate gt 2020-01-01T00:00:00Z"
+  )
+  testthat::expect_gte(nrow(csvf), 1)
+  testthat::expect_true(iid %in% csvf$`meta-instanceID`)
 })
 
 test_that("submission_csv rejects missing input", {

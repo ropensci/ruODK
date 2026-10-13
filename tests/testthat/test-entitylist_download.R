@@ -162,6 +162,50 @@ test_that("entitylist_download warns if odkc_version too low", {
       odkc_version = "1.5.3"
     )
   )
+
+  # A quoted ETag passes through untouched, after the ETag version warning
+  testthat::expect_warning(
+    ds_etag <- entitylist_download(
+      did = ds$name[1],
+      local_dir = tempd,
+      overwrite = TRUE,
+      etag = '"already-quoted-etag"',
+      odkc_version = "2023.2"
+    ),
+    "ETag"
+  )
+  testthat::expect_true(ds_etag$http_status %in% c(200, 304))
+})
+
+test_that("entitylist_download sends filters", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  tempd <- withr::local_tempdir()
+
+  ru_setup(
+    pid = get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+
+  ds <- entitylist_list()
+
+  # Central answers 501 to $filter on entities.csv; the filter still
+  # reaches the request query string before the request fails
+  testthat::expect_error(
+    entitylist_download(
+      did = ds$name[1],
+      local_dir = tempd,
+      filter = glue::glue("__createdAt le {Sys.Date()}"),
+      retries = 1
+    ),
+    "HTTP 501"
+  )
 })
 
 # usethis::use_r("entitylist_download")  # nolint

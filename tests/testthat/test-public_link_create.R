@@ -43,6 +43,17 @@ test_that("public_link_create creates a Link", {
   withr::defer(
     public_link_delete(fid = fid, link_id = once$id)
   )
+
+  # Unregistered Actor properties are rejected by Central,
+  # after the properties reach the request body
+  testthat::expect_error(
+    public_link_create(
+      fid = fid,
+      display_name = "Properties test link",
+      properties = list("no-such-property" = "x")
+    ),
+    "HTTP 400"
+  )
 })
 
 test_that("public_link_create rejects missing or invalid input", {

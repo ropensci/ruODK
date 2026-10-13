@@ -58,4 +58,23 @@ test_that("form_list works", {
     testthat::expect_gt(0)
 })
 
+test_that("form_list handles Forms without reviewStates", {
+  no_review_states <- function(...) {
+    httr2::response(
+      200,
+      headers = list(`Content-Type` = "application/json"),
+      body = charToRaw(paste0(
+        '[{"xmlFormId":"noreview","name":"No reviewStates",',
+        '"createdBy":{"id":1,"displayName":"A"},',
+        '"createdAt":"2024-01-01T00:00:00.000Z"}]'
+      ))
+    )
+  }
+  testthat::local_mocked_bindings(ru_http_request = no_review_states)
+
+  fl <- form_list(pid = 1, url = "http://example.com", un = "u", pw = "p")
+  testthat::expect_s3_class(fl, "tbl_df")
+  testthat::expect_equal(fl$fid, "noreview")
+})
+
 # usethis::use_r("form_list") # nolint

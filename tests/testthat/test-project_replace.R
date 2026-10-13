@@ -59,6 +59,17 @@ test_that("project_replace rejects missing or invalid input", {
     ),
     "TRUE or FALSE"
   )
+  testthat::expect_error(
+    project_replace(
+      pid = 1,
+      name = "x",
+      description = 123,
+      url = url,
+      un = un,
+      pw = pw
+    ),
+    "single character string"
+  )
 })
 
 # usethis::use_r("project_replace")  # nolint

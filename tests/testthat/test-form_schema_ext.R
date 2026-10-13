@@ -360,4 +360,11 @@ test_that("align_choice_labels pads blank labels with NA (#139)", {
   )
 })
 
+test_that("align_choice_labels keeps labels without choices", {
+  testthat::expect_equal(
+    align_choice_labels(list(), list(base = "Yes")),
+    list(base = "Yes")
+  )
+})
+
 # usethis::use_r("form_schema_ext") # nolint

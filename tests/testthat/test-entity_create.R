@@ -55,6 +55,36 @@ test_that("entity_create creates single entities", {
   ec_deleted <- entity_delete(did = did, eid = ec$uuid)
 })
 
+test_that("entity_create accepts an explicit uuid", {
+  ru_setup(
+    pid = get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+
+  el <- entitylist_list()
+  did <- el$name[1]
+  uuid <- sub("^uuid:", "", ru_uuid())
+
+  ec <- entity_create(
+    did = did,
+    label = glue::glue("Entity with uuid {uuid}"),
+    uuid = uuid,
+    notes = glue::glue("Entity with uuid {uuid}"),
+    data = list(
+      "status" = "needs_followup",
+      "details" = "ruODK package test",
+      "geometry" = "-33.2 115.0 0.0 0.0"
+    )
+  )
+  testthat::expect_equal(ec$uuid, uuid)
+
+  ec_deleted <- entity_delete(did = did, eid = ec$uuid)
+  testthat::expect_true(ec_deleted$success)
+})
+
 test_that("entity_create creates multiple entities", {
   ru_setup(
     pid = get_test_pid(),

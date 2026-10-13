@@ -142,4 +142,10 @@ test_that("split_geopoint works with WKT", {
   )
 })
 
+test_that("split_geopoint skips non-character columns with wkt=TRUE", {
+  df <- tibble::tibble(stuff = c("asd", "sdf"), loc = c(1, 2))
+  out <- split_geopoint(df, "loc", wkt = TRUE)
+  testthat::expect_identical(out, df)
+})
+
 # usethis::use_r("split_geopoint") # nolint

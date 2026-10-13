@@ -60,6 +60,30 @@ test_that("submission_version_attachment_download rejects missing input", {
     ),
     "single non-empty"
   )
+  testthat::expect_error(
+    submission_version_attachment_download(
+      iid = "uuid:1",
+      fid = "f",
+      vid = NA,
+      url = url,
+      un = un,
+      pw = pw
+    ),
+    "single non-empty"
+  )
+  testthat::expect_error(
+    submission_version_attachment_download(
+      iid = "uuid:1",
+      fid = "f",
+      vid = "uuid:2",
+      filename = "a.jpg",
+      dest = NA,
+      url = url,
+      un = un,
+      pw = pw
+    ),
+    "single file path"
+  )
 })
 
 # usethis::use_r("submission_version_attachment_download")  # nolint

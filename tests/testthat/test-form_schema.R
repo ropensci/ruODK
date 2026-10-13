@@ -165,5 +165,43 @@ test_that("form_schema reads fields of a published version", {
   )
 })
 
+test_that("form_schema falls back to drafts for empty schemas", {
+  empty_fields <- function(...) {
+    httr2::response(
+      200,
+      headers = list(`Content-Type` = "application/json"),
+      body = charToRaw("[]")
+    )
+  }
+  testthat::local_mocked_bindings(ru_http_request = empty_fields)
+
+  # A draft without fields warns and returns NULL
+  testthat::expect_warning(
+    fs_draft <- form_schema(
+      pid = 1,
+      fid = "draft-without-fields",
+      draft = TRUE,
+      url = "http://example.com",
+      un = "u",
+      pw = "p"
+    ),
+    "draft without any fields"
+  )
+  testthat::expect_null(fs_draft)
+
+  # A published form without fields falls back to the draft path
+  testthat::expect_warning(
+    fs_pub <- form_schema(
+      pid = 1,
+      fid = "unpublished-draft",
+      url = "http://example.com",
+      un = "u",
+      pw = "p"
+    ),
+    "draft without any fields"
+  )
+  testthat::expect_null(fs_pub)
+})
+
 # usethis::use_r("form_schema")
 # nolint end

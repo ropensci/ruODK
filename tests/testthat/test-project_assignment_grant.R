@@ -117,6 +117,17 @@ test_that("project_assignment functions reject missing IDs", {
   testthat::expect_error(
     project_assignment_grant(
       pid = 1,
+      role_id = NA,
+      actor_id = 1,
+      url = url,
+      un = un,
+      pw = pw
+    ),
+    "single Role ID"
+  )
+  testthat::expect_error(
+    project_assignment_grant(
+      pid = 1,
       role_id = "manager",
       actor_id = NA,
       url = url,

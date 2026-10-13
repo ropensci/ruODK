@@ -339,6 +339,9 @@ test_that("ru_settings prints only if verbose", {
     testthat::capture_output(ru_setup(verbose = FALSE)),
     ""
   )
+
+  # Restore law and order: later tests need warnings switched on
+  ru_setup(verbose = TRUE)
 })
 
 test_that("retries default to 1L if empty or invalid", {
@@ -388,6 +391,71 @@ testthat::test_that("semver_lt compares ODKC versions", {
   testthat::expect_false("2024.1.1" |> semver_lt("2020.1.1"))
   testthat::expect_true("2024.1.1" |> semver_lt("2024.1.2"))
   testthat::expect_false(get_default_odkc_version() |> semver_lt("0.8.0"))
+})
+
+testthat::test_that("parse_odkc_version repairs version strings", {
+  # Warnings need verbose switched on, independent of test order
+  ru_setup(verbose = TRUE)
+
+  # Valid semvers pass through unchanged
+  testthat::expect_equal(
+    as.character(parse_odkc_version("2023.5.1")),
+    "2023.5.1"
+  )
+
+  # Parsed semvers pass through untouched
+  v <- parse_odkc_version("2023.5.1")
+  testthat::expect_equal(
+    as.character(parse_odkc_version(v, env_var = "")),
+    "2023.5.1"
+  )
+
+  # Missing leading digit is repaired with a warning
+  testthat::expect_warning(
+    v_start <- parse_odkc_version(".2.3"),
+    "Please update"
+  )
+  testthat::expect_equal(as.character(v_start), "0.2.3")
+
+  # Missing trailing digit is repaired with a warning
+  testthat::expect_warning(
+    v_end <- parse_odkc_version("1.2."),
+    "Please update"
+  )
+  testthat::expect_equal(as.character(v_end), "1.2.0")
+
+  # Surplus components are discarded with a warning
+  testthat::expect_warning(
+    v_long <- parse_odkc_version("1.2.3.4"),
+    "Please update"
+  )
+  testthat::expect_equal(as.character(v_long), "1.2.3")
+
+  # Too short, without warning when silenced
+  v_short <- parse_odkc_version("1", env_var = "")
+  testthat::expect_equal(as.character(v_short), "1.0.0")
+})
+
+testthat::test_that("yell_if_error aborts on error responses", {
+  resp <- httr2::response(
+    404,
+    headers = list(`Content-Type` = "application/json"),
+    body = charToRaw('{"message":"Not found."}')
+  )
+  testthat::expect_error(
+    yell_if_error(resp, "http://localhost", "user", "password"),
+    "HTTP 404"
+  )
+
+  ok <- httr2::response(
+    200,
+    headers = list(`Content-Type` = "application/json"),
+    body = charToRaw("{}")
+  )
+  testthat::expect_identical(
+    yell_if_error(ok, "http://localhost", "user", "password"),
+    ok
+  )
 })
 
 # usethis::use_r("ru_setup") # nolint

@@ -485,4 +485,37 @@ test_that("submission_export supports split multiples, group paths, filter", {
   )
 })
 
+test_that("submission_export without media works on old versions", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  ru_setup(
+    pid = get_test_pid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version()
+  )
+
+  t <- fs::path(withr::local_tempdir(), "new_dir")
+
+  # Omitting media on Central below v1.1 notes the version requirement,
+  # then downloads all the same
+  se <- submission_export(
+    local_dir = t,
+    overwrite = FALSE,
+    media = FALSE,
+    pid = get_test_pid(),
+    fid = get_test_fid_zip(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    pp = get_test_pp(),
+    odkc_version = "1.0.0"
+  )
+  testthat::expect_true(fs::is_file(se))
+})
+
 # usethis::use_r("submission_export") # nolint

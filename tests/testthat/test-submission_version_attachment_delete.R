@@ -59,6 +59,17 @@ test_that("submission_version_attachment_delete rejects missing input", {
     ),
     "single non-empty"
   )
+  testthat::expect_error(
+    submission_version_attachment_delete(
+      iid = "uuid:1",
+      fid = "f",
+      vid = NA,
+      url = "http://localhost",
+      un = "user",
+      pw = "password"
+    ),
+    "single non-empty"
+  )
 })
 
 # usethis::use_r("submission_version_attachment_delete")  # nolint

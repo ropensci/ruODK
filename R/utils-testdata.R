@@ -27,7 +27,22 @@ ru_uuid <- function() {
   hex <- function(n) {
     paste(sample(c(0:9, letters[1:6]), n, replace = TRUE), collapse = "")
   }
-  paste0("uuid:", hex(8), "-", hex(4), "-4", hex(3), "-", hex(4), "-", hex(12))
+  # Version nibble "4" and variant nibble 8/9/a/b: valid version 4 UUIDs,
+  # which ODK Central requires for client-supplied Entity UUIDs.
+  paste0(
+    "uuid:",
+    hex(8),
+    "-",
+    hex(4),
+    "-",
+    "4",
+    hex(3),
+    "-",
+    sample(c("8", "9", "a", "b"), 1),
+    hex(3),
+    "-",
+    hex(12)
+  )
 }
 
 #' @rdname ru_testdata

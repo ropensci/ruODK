@@ -33,6 +33,15 @@ test_that("submission_create creates a Submission", {
 
   testthat::expect_equal(s$instance_id, iid)
 
+  # device_id is sent as a query string
+  iid2 <- ru_uuid()
+  s2 <- submission_create(
+    fid = fid,
+    xml = ru_test_submission_xml(fid, iid2, photo = TRUE),
+    device_id = "ruodk-test-device"
+  )
+  testthat::expect_equal(s2$instance_id, iid2)
+
   # A duplicate instanceID is rejected by Central.
   testthat::expect_error(
     submission_create(

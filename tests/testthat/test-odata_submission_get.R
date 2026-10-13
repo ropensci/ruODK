@@ -1,5 +1,38 @@
 context("test-odata_submission_get.R")
 
+test_that("odata_submission_get ignores unresolvable versions", {
+  skip_if(
+    Sys.getenv("ODKC_TEST_URL") == "",
+    message = "Test server not configured"
+  )
+
+  # The drift check skips NA versions and versions without schemas,
+  # then the download proceeds all the same
+  testthat::local_mocked_bindings(
+    form_version_list = function(...) {
+      tibble::tibble(version = c(NA_character_, "no-such-version"))
+    }
+  )
+
+  t <- withr::local_tempdir()
+
+  fresh_raw <- odata_submission_get(
+    pid = get_test_pid(),
+    fid = get_test_fid(),
+    url = get_test_url(),
+    un = get_test_un(),
+    pw = get_test_pw(),
+    odkc_version = get_test_odkc_version(),
+    parse = TRUE,
+    download = FALSE,
+    local_dir = t,
+    verbose = FALSE
+  )
+
+  testthat::expect_equal(t |> fs::dir_ls(), character(0))
+  testthat::expect_true(nrow(fresh_raw) >= 1)
+})
+
 test_that("odata_submission_get skips download", {
   skip_if(
     Sys.getenv("ODKC_TEST_URL") == "",

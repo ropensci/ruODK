@@ -73,6 +73,17 @@ test_that("form_assignment functions reject missing IDs", {
   testthat::expect_error(
     form_assignment_grant(
       fid = "f",
+      role_id = NA,
+      actor_id = 1,
+      url = url,
+      un = un,
+      pw = pw
+    ),
+    "single Role ID"
+  )
+  testthat::expect_error(
+    form_assignment_grant(
+      fid = "f",
       role_id = "manager",
       actor_id = NA,
       url = url,

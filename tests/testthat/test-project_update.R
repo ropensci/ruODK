@@ -69,6 +69,17 @@ test_that("project_update rejects missing or invalid input", {
     "TRUE or FALSE"
   )
   testthat::expect_error(
+    project_update(
+      pid = 1,
+      name = "x",
+      description = 123,
+      url = url,
+      un = un,
+      pw = pw
+    ),
+    "single character string"
+  )
+  testthat::expect_error(
     project_update(pid = 1, name = "x", url = "", un = un, pw = pw),
     "Missing ODK Central"
   )

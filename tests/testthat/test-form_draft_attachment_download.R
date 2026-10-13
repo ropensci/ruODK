@@ -47,6 +47,17 @@ test_that("form_draft_attachment_download rejects missing input", {
     ),
     "single non-empty"
   )
+  testthat::expect_error(
+    form_draft_attachment_download(
+      fid = "f",
+      filename = "a.csv",
+      dest = NA,
+      url = "http://localhost",
+      un = "user",
+      pw = "password"
+    ),
+    "single file path"
+  )
 })
 
 # usethis::use_r("form_draft_attachment_download")  # nolint

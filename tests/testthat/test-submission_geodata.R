@@ -37,6 +37,15 @@ test_that("submission_geodata returns Submission geodata", {
 
   gl <- submission_geodata(fid = fid, limit = 1)
   testthat::expect_lte(length(gl$features), 1)
+
+  gf <- submission_geodata(
+    fid = fid,
+    filter = "__system/submissionDate gt 2020-01-01T00:00:00Z"
+  )
+  testthat::expect_equal(gf$type, "FeatureCollection")
+
+  gp <- submission_geodata(fid = fid, fieldpath = "geo")
+  testthat::expect_equal(gp$type, "FeatureCollection")
 })
 
 test_that("submission_geodata rejects missing input", {
