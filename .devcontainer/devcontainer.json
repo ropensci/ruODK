@@ -62,6 +62,7 @@
                 "mechatroner.rainbow-csv",
                 "REditorSupport.r",
                 "RDebugger.r-debugger",
+                "sst-dev.opencode",
                 "ryanluker.vscode-coverage-gutters",
                 "ms-azuretools.vscode-docker",
                 "usernamehw.errorlens",

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Runs each time a tool attaches to the devcontainer. See issue #170.
 #
-# Installs the opencode CLI and wires a personal OPENCODE_API_KEY when
-# present (first, so opencode works even if the steps below fail), then
+# Verifies the system-wide opencode CLI and wires a personal OPENCODE_API_KEY
+# when present (first, so opencode works even if the steps below fail), then
 # seeds the local ODK Central with the fixtures from inst/extdata/odkc, then
 # points ruODK at it by writing ~/.Renviron and ~/.bashrc. Idempotent: the seed
 # skips forms and submissions that already exist.
@@ -27,47 +27,25 @@ persist_renv_var() {
 }
 
 # 1. opencode CLI for agentic coding inside the container. The dev image
-#    already ships it (see Dockerfile); this fallback install covers images
-#    built before that line existed. Skipped when the binary is already in
-#    place, so re-attaching is cheap. Runs first so opencode works even when
-#    the stack seeding below fails.
-if [ ! -x "${HOME}/.opencode/bin/opencode" ] && ! command -v opencode >/dev/null 2>&1; then
-  echo "postAttach: installing opencode.."
-  curl -fsSL https://opencode.ai/install | bash
-fi
-if [[ ":${PATH}:" != *":${HOME}/.opencode/bin:"* ]]; then
-  export PATH="${HOME}/.opencode/bin:${PATH}"
-fi
-if ! grep -q '\.opencode/bin' ~/.bashrc 2>/dev/null; then
-  printf 'export PATH="$HOME/.opencode/bin:$PATH"\n' >>~/.bashrc
-fi
-if ! opencode --version >/dev/null 2>&1; then
+#    ships it system-wide in /usr/local/bin (see Dockerfile; pattern mirrors
+#    ropensci/ckanr), so every shell (bash, zsh, non-interactive) and the
+#    VS Code server find it with no PATH wiring. Only verified here: a
+#    missing binary means an old image, fixed by Rebuild Container. Runs
+#    first so the check lands even when the stack seeding below fails.
+if ! command -v opencode >/dev/null 2>&1; then
+  echo "postAttach: WARNING opencode is not installed. Rebuild the container." >&2
+elif ! opencode --version >/dev/null 2>&1; then
   echo "postAttach: WARNING opencode is not runnable." >&2
 fi
 
 # 1b. Posit air R formatter for the `air-format` pre-commit hook, which needs
-#    `air` on PATH. The dev image already ships it (see Dockerfile); this
-#    fallback install covers images built before that line existed. Skipped
-#    when the binary is already in place, so re-attaching is cheap. Installs
-#    flat into ~/.local/bin (this installer creates no `bin/` subdir, so the
-#    directory itself must be the install prefix) without touching shell rc
-#    files; PATH is wired below. Pinned to the same version as the Dockerfile.
-#    The `||` keeps a failed fallback install from aborting the stack seeding
-#    below under `set -e`.
+#    `air` on PATH. The dev image ships it system-wide in /usr/local/bin
+#    (see Dockerfile), so every shell finds it with no PATH wiring. Only
+#    verified here: a missing binary means an old image, fixed by Rebuild
+#    Container.
 if ! command -v air >/dev/null 2>&1; then
-  echo "postAttach: installing air.."
-  export AIR_INSTALL_DIR="${HOME}/.local/bin" AIR_NO_MODIFY_PATH=1
-  curl -LsSf https://github.com/posit-dev/air/releases/download/0.11.0/air-installer.sh | sh \
-    || echo "postAttach: WARNING air install failed." >&2
-  unset AIR_INSTALL_DIR AIR_NO_MODIFY_PATH
-fi
-if [[ ":${PATH}:" != *":${HOME}/.local/bin:"* ]]; then
-  export PATH="${HOME}/.local/bin:${PATH}"
-fi
-if ! grep -q 'export PATH="$HOME/.local/bin:$PATH"' ~/.bashrc 2>/dev/null; then
-  printf 'export PATH="$HOME/.local/bin:$PATH"\n' >>~/.bashrc
-fi
-if ! air --version >/dev/null 2>&1; then
+  echo "postAttach: WARNING air is not installed. Rebuild the container." >&2
+elif ! air --version >/dev/null 2>&1; then
   echo "postAttach: WARNING air is not runnable." >&2
 fi
 
@@ -241,4 +219,4 @@ persist_shell_var "CURL_CA_BUNDLE" "${CA_BUNDLE}" ~/.bashrc
 persist_renv_var "CURL_CA_BUNDLE" "${CA_BUNDLE}" ~/.Renviron
 
 echo "postAttach: done. ruODK now targets ${ODKC_TEST_URL}."
-echo "postAttach: run  devtools::test()  to check the suite."
+echo "postAttach: run `just test` to check the suite."

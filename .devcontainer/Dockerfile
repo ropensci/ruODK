@@ -1,4 +1,6 @@
-FROM ghcr.io/rocker-org/devcontainer/r-ver:4.6
+# Pinned by digest for reproducible, tamper-evident builds (tag documents the
+# intent: R 4.6). Same pin as ropensci/ckanr; verified against a local pull.
+FROM ghcr.io/rocker-org/devcontainer/r-ver:4.6@sha256:1660ee0beba698f16c84b9bdeba7014c09c9e9588ee307174f6b9f53a6276c4f
 
 # non interactive frontend for locales
 ENV DEBIAN_FRONTEND=noninteractive
@@ -24,14 +26,21 @@ ENV LANGUAGE=en_GB.UTF-8 LANG=en_GB.UTF-8 LC_ALL=en_GB.UTF-8
 RUN curl -L https://cpanmin.us | perl - --self-upgrade && \
     cpanm Log::Dispatch::File YAML::Tiny File::HomeDir
 
-# opencode CLI baked in for the rstudio dev user (postAttachCommand.sh keeps
-# a fallback install for images built before this line existed). HOME is
-# exported first so both sides of the pipe see it (a VAR=x prefix would
-# reach only curl, installing to /root instead); the binary lands in the
-# user's ~/.opencode/bin owned by them (keeps opencode autoupdate working);
-# --no-modify-path because postAttach owns PATH wiring.
-RUN export HOME=/home/rstudio && curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path && \
-    chown -R rstudio /home/rstudio/.opencode
+# Install OpenCode (https://opencode.ai) system-wide so it is on PATH for all
+# users and shells (bash, zsh, non-interactive) without PATH wiring.
+# Pattern mirrors ropensci/ckanr: the installer always lands in
+# $HOME/.opencode/bin (no prefix option), so move the binary to
+# /usr/local/bin and drop the per-user dir. Build runs as root, hence
+# /root/.opencode. Unpinned on purpose: the fork's release tags (latest
+# v1.19.0) do not match its binary version strings (running v2.0.28, and no
+# such tag exists), so a --version pin cannot be verified here; the trailing
+# --version call fails the build if the install breaks. Hardened curl flags
+# (--proto/--tlsv1.2) as in ckanr.
+RUN curl --proto '=https' --tlsv1.2 -fsSL https://opencode.ai/install | \
+    bash -s -- --no-modify-path && \
+    mv /root/.opencode/bin/opencode /usr/local/bin/opencode && \
+    rmdir -p /root/.opencode/bin 2>/dev/null || true; \
+    opencode --version
 
 # Posit air R formatter (https://posit-dev.github.io/air/cli.html), pinned so
 # image builds stay reproducible. Keep in sync with the fallback install in
