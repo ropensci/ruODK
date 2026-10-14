@@ -17,7 +17,7 @@
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
             "packages": "github::rstudio/renv,tidyverse,git2r,knitr,spelling,languageserver,precommit,cli,clisymbols,crayon,dplyr,fs,glue,httr,httr2,janitor,jsonlite,lifecycle,lubridate,magrittr,purrr,readr,rlang,stringr,semver,tibble,tidyr,withr,xml2,covr,DT,ggplot2,here,lattice,leaflet,listviewer,leafpop,leafem,mapview,rmarkdown,roxygen2,sf,skimr,terra,testthat,tmap,usethis,devtools,pkgdown,rcmdcheck,goodpractice,styler,lintr"
         },
-        "ghcr.io/devcontainers-contrib/features/pre-commit:2": {},
+        "ghcr.io/devcontainers-extra/features/pre-commit:2": {},
         "ghcr.io/guiyomh/features/just:0": {},
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
