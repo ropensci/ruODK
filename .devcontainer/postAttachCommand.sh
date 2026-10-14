@@ -112,30 +112,16 @@ echo "postAttach: opencode ODK Docs MCP server configured."
 # 3. The seed below shells out to `docker compose exec service`
 #    (ODKC_COMPOSE in data-raw/seed_odkc.R). Two things must hold for that
 #    to reach the running stack: the stack must be up, and compose must
-#    address it by its real project name, which depends on how it was
-#    launched (repo root -> `ruodk`, .devcontainer/ -> `devcontainer`, the
-#    devcontainer CLI -> its own name). A wrong name fails exactly as
-#    `service "service" is not running`. Detect the project from this
-#    container's own compose labels when present, then start the stack if it
-#    is down (start-only, never recreate: see below) before seeding.
+#    address it by its real project name. .devcontainer/odkc/dc.sh wraps
+#    both (project detection plus the shared DOCKER_HOST socket), so this
+#    script and the justfile recipes cannot drift apart. Start the stack
+#    if it is down (start-only, never recreate: see below) before seeding.
+DC=".devcontainer/odkc/dc.sh"
 if command -v docker >/dev/null 2>&1; then
-  compose_project="$(docker inspect "$(cat /etc/hostname 2>/dev/null)" \
-    --format '{{ index .Config.Labels "com.docker.compose.project" }}' \
-    2>/dev/null || true)"
-  if [ -n "${compose_project:-}" ]; then
-    export COMPOSE_PROJECT_NAME="${compose_project}"
-  fi
-  if ! docker compose --env-file .devcontainer/.env \
-    -f .devcontainer/docker-compose.yml \
-    -f .devcontainer/docker-compose-dev.yml up -d --no-recreate --wait nginx; then
+  if ! "$DC" up -d --no-recreate --wait nginx; then
     echo "postAttach: WARNING the ODK Central test stack failed to start." >&2
-    docker compose --env-file .devcontainer/.env \
-      -f .devcontainer/docker-compose.yml \
-      -f .devcontainer/docker-compose-dev.yml ps 2>/dev/null || true
-    docker compose --env-file .devcontainer/.env \
-      -f .devcontainer/docker-compose.yml \
-      -f .devcontainer/docker-compose-dev.yml logs --tail 30 certs service \
-      2>/dev/null || true
+    "$DC" ps 2>/dev/null || true
+    "$DC" logs --tail 30 certs service 2>/dev/null || true
     exit 0
   fi
   # --no-recreate above is load-bearing, not just speed: app shares nginx's
@@ -162,8 +148,7 @@ fi
 CA_BUNDLE="$PWD/.devcontainer/odkc/certs/ca-bundle.pem"
 if ! .devcontainer/odkc/ca-bundle.sh "$CA_BUNDLE" >/dev/null; then
   echo "postAttach: WARNING could not build the CA bundle." >&2
-  echo "postAttach: Is the test stack up? Try: docker compose --env-file" \
-       ".devcontainer/.env -f .devcontainer/docker-compose.yml up -d --wait" >&2
+  echo "postAttach: Is the test stack up? Try: just stack_up" >&2
   exit 0
 fi
 echo "postAttach: CA bundle at $CA_BUNDLE"
@@ -219,4 +204,4 @@ persist_shell_var "CURL_CA_BUNDLE" "${CA_BUNDLE}" ~/.bashrc
 persist_renv_var "CURL_CA_BUNDLE" "${CA_BUNDLE}" ~/.Renviron
 
 echo "postAttach: done. ruODK now targets ${ODKC_TEST_URL}."
-echo "postAttach: run `just test` to check the suite."
+echo 'postAttach: run just test to check the suite.'

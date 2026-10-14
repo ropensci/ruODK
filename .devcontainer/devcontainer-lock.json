@@ -1,6 +1,6 @@
 {
   "features": {
-    "ghcr.io/devcontainers-contrib/features/pre-commit:2": {
+    "ghcr.io/devcontainers-extra/features/pre-commit:2": {
       "version": "2.0.18",
       "resolved": "ghcr.io/devcontainers-extra/features/pre-commit@sha256:6e0bb2ce80caca1d94f44dab5d0653d88a1c00984e590adb7c6bce012d0ade6e",
       "integrity": "sha256:6e0bb2ce80caca1d94f44dab5d0653d88a1c00984e590adb7c6bce012d0ade6e"
@@ -14,11 +14,6 @@
       "version": "0.1.0",
       "resolved": "ghcr.io/guiyomh/features/just@sha256:8311dff976bd153a54a879021353a7e149963e580022b25af49c45cfc5f13bec",
       "integrity": "sha256:8311dff976bd153a54a879021353a7e149963e580022b25af49c45cfc5f13bec"
-    },
-    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-      "version": "1.0.2",
-      "resolved": "ghcr.io/rocker-org/devcontainer-features/apt-packages@sha256:87a4d7750a596a5db034ba8508782f31aebdc2ffe955c66aaecb33d9de2ecdae",
-      "integrity": "sha256:87a4d7750a596a5db034ba8508782f31aebdc2ffe955c66aaecb33d9de2ecdae"
     },
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
       "version": "1.1.5",

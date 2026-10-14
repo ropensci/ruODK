@@ -2,6 +2,8 @@
 
 Source of truth for humans and coding agents. `CONTRIBUTING.md` governs
 process; this file states the non-negotiable per-endpoint workflow.
+This file is the single agent-instruction source, GitHub Copilot
+included: do not create parallel instruction files.
 
 ## ODK Central API coverage
 
@@ -9,11 +11,11 @@ API reference: <https://docs.getodk.org/central-api/> (plus
 `central-api-{accounts-and-users,project-management,form-management,submission-management,dataset-management,entity-management,system-endpoints}/`).
 Function names follow ODK endpoints using the end-user alias
 (`entitylist_*`, not `dataset_*`), as `object_action` snake case
-(`CONTRIBUTING.md#naming-conventions`). Current coverage: ~50 of ~150
-REST endpoints (Projects, Forms, Submissions, Entity Lists/Entities,
-OData basics covered; Users/App Users/Assignments, Form drafts and
-versions, Submission review and versions, Dataset properties, System
-config/audits/backup largely missing).
+(`CONTRIBUTING.md#naming-conventions`). Current coverage: ~190 exported
+functions at 100% test coverage (covr): Projects, Forms (incl. drafts
+and versions), Submissions (incl. review and versions), Entity
+Lists/Entities, Users/App Users, Assignments, OData basics; Dataset
+properties, System config/audits/backup still largely missing.
 
 ## Per-endpoint implementation standard
 

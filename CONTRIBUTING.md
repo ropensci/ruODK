@@ -234,9 +234,7 @@ merged CA bundle, seeds the fixtures; `just stack_status` checks it).
 Without `just`, the manual equivalent is:
 
 ```sh
-docker compose --env-file .devcontainer/.env \
-  -f .devcontainer/docker-compose.yml \
-  -f .devcontainer/docker-compose-dev.yml up -d --no-recreate --wait nginx
+.devcontainer/odkc/dc.sh up -d --no-recreate --wait nginx
 .devcontainer/odkc/ca-bundle.sh .devcontainer/odkc/certs/ca-bundle.pem
 Rscript data-raw/seed_odkc.R
 ```

@@ -11,9 +11,8 @@
         "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
             "version": "prerelease"
         },
-        "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-            "packages": "libudunits2-dev,libxtst6,libxt6,libmagick++-dev"
-        },
+        // System libraries live in .devcontainer/Dockerfile (single place,
+        // baked layer); do not re-add the apt-packages feature here.
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
             "packages": "github::rstudio/renv,tidyverse,git2r,knitr,spelling,languageserver,precommit,cli,clisymbols,crayon,dplyr,fs,glue,httr,httr2,janitor,jsonlite,lifecycle,lubridate,magrittr,purrr,readr,rlang,stringr,semver,tibble,tidyr,withr,xml2,covr,DT,ggplot2,here,lattice,leaflet,listviewer,leafpop,leafem,mapview,rmarkdown,roxygen2,sf,skimr,terra,testthat,tmap,usethis,devtools,pkgdown,rcmdcheck,goodpractice,styler,lintr"
         },

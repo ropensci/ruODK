@@ -13,21 +13,18 @@ default:
 alias bs := bootstrap
 
 # ---------------------------------------------------------------------------#
-# Local ODK Central test stack (mirrors .devcontainer/postAttachCommand.sh)
+# Local ODK Central test stack (all compose traffic goes through
+# .devcontainer/odkc/dc.sh, shared with postAttachCommand.sh)
 # ---------------------------------------------------------------------------#
 
 # Full bootstrap: start stack, build CA bundle, seed fixtures
 bootstrap: stack_up ca_bundle stack_seed
 
-# Start the local ODK Central stack (never recreate: app shares nginx netns)
+# Start the local ODK Central stack (never recreate: shared nginx netns)
 stack_up:
-  #!/usr/bin/env bash
-  set -euo pipefail
-  # Never recreate: app shares nginx's network namespace, so recreating nginx
-  # orphans our network. Project detection mirrors postAttachCommand.sh.
-  compose_project="$(docker inspect "$(cat /etc/hostname 2>/dev/null)" --format '{{{{ index .Config.Labels "com.docker.compose.project" }}' 2>/dev/null || true)"
-  if [ -n "${compose_project:-}" ]; then export COMPOSE_PROJECT_NAME="${compose_project}"; fi
-  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose --env-file .devcontainer/.env -f .devcontainer/docker-compose.yml -f .devcontainer/docker-compose-dev.yml up -d --no-recreate --wait nginx
+  # Never recreate: app shares nginx's network namespace, so recreating
+  # nginx under this live container orphans our network and DNS dies.
+  .devcontainer/odkc/dc.sh up -d --no-recreate --wait nginx
 
 # Build the merged CA bundle (public CAs + local test CA)
 ca_bundle:
@@ -41,30 +38,42 @@ stack_seed:
 
 # Show stack status and prove the API serves HTTPS (public endpoint, no auth)
 stack_status:
-  #!/usr/bin/env bash
-  set -euo pipefail
-  compose_project="$(docker inspect "$(cat /etc/hostname 2>/dev/null)" --format '{{{{ index .Config.Labels "com.docker.compose.project" }}' 2>/dev/null || true)"
-  if [ -n "${compose_project:-}" ]; then export COMPOSE_PROJECT_NAME="${compose_project}"; fi
-  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose --env-file .devcontainer/.env -f .devcontainer/docker-compose.yml -f .devcontainer/docker-compose-dev.yml ps
+  .devcontainer/odkc/dc.sh ps
   curl -sk https://localhost:8383/v1/config/public | head -c 500; echo
 
 # Tail stack logs
 stack_logs:
-  #!/usr/bin/env bash
-  set -euo pipefail
-  compose_project="$(docker inspect "$(cat /etc/hostname 2>/dev/null)" --format '{{{{ index .Config.Labels "com.docker.compose.project" }}' 2>/dev/null || true)"
-  if [ -n "${compose_project:-}" ]; then export COMPOSE_PROJECT_NAME="${compose_project}"; fi
-  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose --env-file .devcontainer/.env -f .devcontainer/docker-compose.yml -f .devcontainer/docker-compose-dev.yml logs --tail 100
+  .devcontainer/odkc/dc.sh logs --tail 100
 
 # Stop the local ODK Central stack
 stack_stop:
-  #!/usr/bin/env bash
-  set -euo pipefail
   # Stop all dev services; app shares nginx's network namespace, so stopping
   # nginx alone would leave this container broken.
-  compose_project="$(docker inspect "$(cat /etc/hostname 2>/dev/null)" --format '{{{{ index .Config.Labels "com.docker.compose.project" }}' 2>/dev/null || true)"
-  if [ -n "${compose_project:-}" ]; then export COMPOSE_PROJECT_NAME="${compose_project}"; fi
-  DOCKER_HOST=unix:///var/run/docker-host.sock docker compose --env-file .devcontainer/.env -f .devcontainer/docker-compose.yml -f .devcontainer/docker-compose-dev.yml stop
+  .devcontainer/odkc/dc.sh stop
+
+# Delete stray ruodk_* test junk from the local stack (asks first)
+scrub:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  # Seed fixtures never use the ruodk_ prefix (Flora-Quadrat-04, Locations,
+  # problems, ...), and confirmation is required, but double-check anyway.
+  read -r -p "Delete all ruodk_* test forms and Entity Lists on the local stack? [y/N] " ok
+  if [ "${ok}" != "y" ]; then echo "scrub aborted"; exit 0; fi
+  Rscript -e '
+  devtools::load_all(quiet = TRUE)
+  ru_setup(pid = Sys.getenv("ODKC_TEST_PID"), url = Sys.getenv("ODKC_TEST_URL"), un = Sys.getenv("ODKC_TEST_UN"), pw = Sys.getenv("ODKC_TEST_PW"), odkc_version = Sys.getenv("ODKC_TEST_VERSION"), verbose = FALSE)
+  fl <- form_list()
+  for (f in fl$xml_form_id[startsWith(fl$xml_form_id, "ruodk_")]) {
+    cat("del form", f, "\n")
+    try(form_delete(fid = f), silent = TRUE)
+  }
+  el <- entitylist_list()
+  for (d in el$name[startsWith(el$name, "ruodk_")]) {
+    cat("del list", d, "\n")
+    try(entitylist_delete(did = d), silent = TRUE)
+  }
+  cat("scrub done\n")
+  '
 
 # ---------------------------------------------------------------------------#
 # R tooling (alternative to VS Code tasks via Ctrl-Shift-B)

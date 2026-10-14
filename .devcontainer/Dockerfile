@@ -43,8 +43,8 @@ RUN curl --proto '=https' --tlsv1.2 -fsSL https://opencode.ai/install | \
     opencode --version
 
 # Posit air R formatter (https://posit-dev.github.io/air/cli.html), pinned so
-# image builds stay reproducible. Keep in sync with the fallback install in
-# postAttachCommand.sh and the "air >= 0.11" note in AGENTS.md.
+# image builds stay reproducible. Keep in sync with the "air >= 0.11" note
+# in AGENTS.md.
 # AIR_INSTALL_DIR points at /usr/local/bin because this cargo-dist installer
 # lays binaries out flat (no `bin/` subdir is created); AIR_NO_MODIFY_PATH
 # skips shell-rc edits, which are meaningless at build time.
