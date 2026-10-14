@@ -84,6 +84,8 @@ timezone can be set globally or per function.}
 A tibble with exactly one row for each Entity of the given project
 as per ODK Central API docs.
 Column names are renamed from ODK's \code{camelCase} to \code{snake_case}.
+An empty Dataset answers \verb{[]}, which returns the documented columns
+with no rows.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#maturing}{\figure{lifecycle-maturing.svg}{options: alt='[Maturing]'}}}{\strong{[Maturing]}}

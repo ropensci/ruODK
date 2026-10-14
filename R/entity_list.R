@@ -25,6 +25,8 @@
 #' @return A tibble with exactly one row for each Entity of the given project
 #'   as per ODK Central API docs.
 #'   Column names are renamed from ODK's `camelCase` to `snake_case`.
+#'   An empty Dataset answers `[]`, which returns the documented columns
+#'   with no rows.
 # nolint start
 #' @seealso \url{https://docs.getodk.org/central-api-entity-management/#entities-metadata}
 # nolint end
@@ -76,7 +78,7 @@ entity_list <- function(
     qry <- list(deleted = "true")
   }
 
-  ru_http_request(
+  entities <- ru_http_request(
     "GET",
     url,
     path = pth,
@@ -86,7 +88,34 @@ entity_list <- function(
     retries = retries
   ) |>
     yell_if_error(url, un, pw) |>
-    httr2::resp_body_json() |>
+    httr2::resp_body_json()
+
+  # An empty Dataset answers `[]`. Return the documented columns with no
+  # rows (see the entities-metadata docs), so downstream code (nrow(),
+  # `$` access, dplyr::bind_rows()) keeps working. Column order and types
+  # match the non-empty result below.
+  if (length(entities) == 0L) {
+    return(tibble::tibble(
+      uuid = character(),
+      creator_id = integer(),
+      created_at = as.POSIXct(character(), tz = tz),
+      updated_at = as.POSIXct(character(), tz = tz),
+      deleted_at = as.POSIXct(character(), tz = tz),
+      current_version_current = logical(),
+      current_version_label = character(),
+      current_version_creator_id = integer(),
+      current_version_user_agent = character(),
+      current_version_version = integer(),
+      current_version_base_version = integer(),
+      current_version_conflicting_properties = logical(),
+      current_version_created_at = as.POSIXct(character(), tz = tz),
+      current_version_branch_id = logical(),
+      current_version_trunk_version = logical(),
+      current_version_branch_base_version = logical()
+    ))
+  }
+
+  entities |>
     purrr::list_transpose() |>
     tibble::as_tibble() |>
     janitor::clean_names() |>

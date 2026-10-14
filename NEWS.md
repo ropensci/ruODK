@@ -1,5 +1,8 @@
 # ruODK (development version)
 
+* `entity_list()` no longer errors on empty Datasets: an empty Dataset
+  answers `[]`, which returns the documented columns with no rows, so the
+  result combines row-wise with non-empty results.
 * `odata_entitylist_metadata_get()` now reports non-filterable properties:
   ODK Central serves them under the `FilterFunctions` annotation, which the
   parser previously ignored while looking only for `FilterRestrictions`.
