@@ -89,7 +89,22 @@ odata_entitylist_service_get <- function(
   )
 }
 
+#' Print an OData EntityList service object.
+#'
+#' Prints a short summary (OData context URL and Entity count) of an
+#' object as returned by \code{\link{odata_entitylist_service_get}}.
+#'
+#' @param x An `odata_entitylist_service_get` object.
+#' @param ... Ignored.
+#' @return `NULL`, invisibly. Called for its side effect.
+#' @family entity-management
 #' @export
+#' @examples
+#' x <- structure(
+#'   list(context = "https://example.com", value = tibble::tibble()),
+#'   class = c("odata_entitylist_service_get", "list")
+#' )
+#' print(x)
 print.odata_entitylist_service_get <- function(x, ...) {
   cat("<ruODK OData EntityList Service>", sep = "\n")
   cat("  OData Context: ", x$context, "\n")

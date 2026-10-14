@@ -148,8 +148,8 @@ To include all of the month of January, you need to filter by either
 Remember also that you can query by a specific timezone.
 
 Please see the OData documentation on \verb{$filter}
-\href{http://docs.oasis-open.org/odata/odata/v4.01/cs01/part1-protocol/odata-v4.01-cs01-part1-protocol.html#sec_BuiltinFilterOperations}{operations}
-and \href{http://docs.oasis-open.org/odata/odata/v4.01/cs01/part1-protocol/odata-v4.01-cs01-part1-protocol.html#sec_BuiltinQueryFunctions}{functions}
+\href{https://docs.oasis-open.org/odata/odata/v4.01/cs01/part1-protocol/odata-v4.01-cs01-part1-protocol.html#sec_BuiltinFilterOperations}{operations}
+and \href{https://docs.oasis-open.org/odata/odata/v4.01/cs01/part1-protocol/odata-v4.01-cs01-part1-protocol.html#sec_BuiltinQueryFunctions}{functions}
 for more information.
 
 The \verb{$select} query parameter will return just the fields you specify and is
@@ -198,7 +198,7 @@ ds2
 \seealso{
 \url{https://docs.getodk.org/central-api-odata-endpoints/#id3}
 
-\url{http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948}
+\url{https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html}
 
 Other entity-management:
 \code{\link[=entity_audits]{entity_audits()}},
@@ -225,6 +225,9 @@ Other entity-management:
 \code{\link[=entitylist_trash_download]{entitylist_trash_download()}},
 \code{\link[=entitylist_update]{entitylist_update()}},
 \code{\link[=odata_entitylist_metadata_get]{odata_entitylist_metadata_get()}},
-\code{\link[=odata_entitylist_service_get]{odata_entitylist_service_get()}}
+\code{\link[=odata_entitylist_service_get]{odata_entitylist_service_get()}},
+\code{\link[=print.odata_entitylist_data_get]{print.odata_entitylist_data_get()}},
+\code{\link[=print.odata_entitylist_metadata_get]{print.odata_entitylist_metadata_get()}},
+\code{\link[=print.odata_entitylist_service_get]{print.odata_entitylist_service_get()}}
 }
 \concept{entity-management}

@@ -24,6 +24,7 @@ codemeta.json
 ^gfortran.*
 ^tic\.R$
 ^Dockerfile$
+^justfile$
 ^codemeta\.json$
 ^\.devcontainer
 ^\.dockerignore

@@ -85,8 +85,8 @@ ruODK::submission_list()
 ## Permanent defaults: Environment variables
 
 Read a great overview of R's startup process, and how environment variables are
-sourced at the beginning of a new session at
-[whattheyforgot.org](https://whattheyforgot.org/r-startup.html).
+sourced at the beginning of a new session, in
+[R's Startup documentation](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html).
 
 `ruODK`'s functions default to the getters
 `ruODK::get_default_{pid,fid,url,un,pw}()`. These getters in turn look up their
@@ -110,7 +110,7 @@ usethis::edit_r_environ(scope = "user")
 ```{eval=FALSE}
 ODKC_PID=1
 ODKC_FID="form_id"
-ODKC_URL="https://my-instance.getodk.cloud"
+ODKC_URL="https://example.com"
 ODKC_UN="me@email.com"
 ODKC_PW="..."
 ODKC_PP="..."
@@ -143,7 +143,7 @@ As an alternative to setting environment variables through `~/.Renviron`, you
 can set them through `Sys.setenv()` or through `ruODK::ru_setup()`:
 
 ```{r setenv, eval=FALSE}
-Sys.setenv(ODKC_URL = "https://my-instance.getodk.cloud")
+Sys.setenv(ODKC_URL = "https://example.com")
 Sys.setenv(ODKC_UN = "me@mail.com")
 Sys.setenv(ODKC_PW = "...")
 Sys.setenv(ODKC_PP = "...")
@@ -206,7 +206,7 @@ URL and a web user's username and password, subsequent functions can omit `pid`,
 ```{r, eval=FALSE}
 # Server 1, Project 1, Form 1
 ruODK::ru_setup(
-  svc = "https://central1.org/v1/projects/1/forms/form1.svc",
+  svc = "https://example.com/v1/projects/1/forms/form1.svc",
   un = Sys.getenv("ODKC_UN"),
   pw = Sys.getenv("ODKC_PW")
 )
@@ -216,14 +216,14 @@ ruODK::form_detail()
 ruODK::submission_list()
 
 # Server 1, Project 1, Form 3
-ruODK::ru_setup(svc = "https://central1.org/v1/projects/1/forms/form3.svc")
+ruODK::ru_setup(svc = "https://example.com/v1/projects/1/forms/form3.svc")
 
 ruODK::project_detail()
 ruODK::form_detail()
 ruODK::submission_list()
 
 # Server 1, Project 5, Form 4
-ruODK::ru_setup(svc = "https://central1.org/v1/projects/5/forms/form4.svc")
+ruODK::ru_setup(svc = "https://example.com/v1/projects/5/forms/form4.svc")
 
 ruODK::project_detail()
 ruODK::form_detail()
@@ -231,7 +231,7 @@ ruODK::submission_list()
 
 # Server 2, Project 11, Form 12
 ruODK::ru_setup(
-  svc = "https://central2.org/v1/projects/11/forms/form12.svc",
+  svc = "https://example.net/v1/projects/11/forms/form12.svc",
   un = Sys.getenv("ODKC_UN2"),
   pw = Sys.getenv("ODKC_PW2")
 )
@@ -241,7 +241,7 @@ ruODK::form_detail()
 ruODK::submission_list()
 
 # Server 2, Project 11, Form 13
-ruODK::ru_setup(svc = "https://central2.org/v1/projects/11/forms/form13.svc")
+ruODK::ru_setup(svc = "https://example.net/v1/projects/11/forms/form13.svc")
 
 ruODK::project_detail()
 ruODK::form_detail()

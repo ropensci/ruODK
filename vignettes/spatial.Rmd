@@ -241,7 +241,7 @@ comprehensive overview of mapview.
 
 The powerful visualisation package [`tmap`](https://cran.r-project.org/package=tmap)
 supports `sf` objects and produces both printable and static maps as well as interactive `leaflet` maps.
-See the [vignette "Get started"](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html).
+See the [vignettes](https://r-tmap.github.io/tmap/).
 
 There are several other good entry points for all things R and spatial,
 including but not limited to:

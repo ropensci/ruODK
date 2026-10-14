@@ -112,6 +112,7 @@ ru_settings()
 Other ru_settings:
 \code{\link[=odata_svc_parse]{odata_svc_parse()}},
 \code{\link[=parse_odkc_version]{parse_odkc_version()}},
+\code{\link[=print.ru_settings]{print.ru_settings()}},
 \code{\link[=ru_setup]{ru_setup()}},
 \code{\link[=semver_gt]{semver_gt()}},
 \code{\link[=semver_lt]{semver_lt()}},

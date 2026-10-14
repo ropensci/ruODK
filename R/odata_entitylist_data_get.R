@@ -41,8 +41,8 @@
 #'
 #' Please see the OData documentation on `$filter`
 #  nolint start
-#' [operations](http://docs.oasis-open.org/odata/odata/v4.01/cs01/part1-protocol/odata-v4.01-cs01-part1-protocol.html#sec_BuiltinFilterOperations)
-#' and [functions](http://docs.oasis-open.org/odata/odata/v4.01/cs01/part1-protocol/odata-v4.01-cs01-part1-protocol.html#sec_BuiltinQueryFunctions)
+#' [operations](https://docs.oasis-open.org/odata/odata/v4.01/cs01/part1-protocol/odata-v4.01-cs01-part1-protocol.html#sec_BuiltinFilterOperations)
+#' and [functions](https://docs.oasis-open.org/odata/odata/v4.01/cs01/part1-protocol/odata-v4.01-cs01-part1-protocol.html#sec_BuiltinQueryFunctions)
 #  nolint end
 #' for more information.
 #'
@@ -99,7 +99,7 @@
 #'    (`__system`).
 #' @seealso \url{https://docs.getodk.org/central-api-odata-endpoints/#id3}
 # nolint start
-#' @seealso \url{http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#_Toc31358948}
+#' @seealso \url{https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html}
 # nolint end
 #' @family entity-management
 #' @export
@@ -208,7 +208,22 @@ odata_entitylist_data_get <- function(
   )
 }
 
+#' Print an OData EntityList data object.
+#'
+#' Prints a short summary (OData context URL and Entity count) of an
+#' object as returned by \code{\link{odata_entitylist_data_get}}.
+#'
+#' @param x An `odata_entitylist_data_get` object.
+#' @param ... Ignored.
+#' @return `NULL`, invisibly. Called for its side effect.
+#' @family entity-management
 #' @export
+#' @examples
+#' x <- structure(
+#'   list(context = "https://example.com", value = tibble::tibble()),
+#'   class = c("odata_entitylist_data_get", "list")
+#' )
+#' print(x)
 print.odata_entitylist_data_get <- function(x, ...) {
   cat("<ruODK OData EntityList Data>", sep = "\n")
   cat("  OData Context: ", x$context, "\n")

@@ -60,7 +60,18 @@ ru_settings <- function() {
   structure(ops, class = "ru_settings")
 }
 
+#' Print ruODK settings.
+#'
+#' Prints the default and test settings as returned by
+#' \code{\link{ru_settings}}, without revealing passwords.
+#'
+#' @param x A `ru_settings` object.
+#' @param ... Ignored.
+#' @return `NULL`, invisibly. Called for its side effect.
+#' @family ru_settings
 #' @export
+#' @examples
+#' print(ru_settings())
 print.ru_settings <- function(x, ...) {
   cat("<ruODK settings>", sep = "\n")
   cat("  Default ODK Central Project ID:", x$pid, "\n")

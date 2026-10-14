@@ -27,10 +27,10 @@ Especially in these trying times, it is important to ask “r u ODK?”.
 `ruODK` is an R client to access and parse data from ODK Central.
 
 [OpenDataKit](https://getodk.org/) (ODK) is [free-and open-source
-software](https://getodk.org/software/) that helps millions of people
-collect data quickly, accurately, offline, and at scale. The software is
-in active use in every country in the world and is supported by a large
-and helpful community.
+software](https://getodk.org/) that helps millions of people collect
+data quickly, accurately, offline, and at scale. The software is in
+active use in every country in the world and is supported by a large and
+helpful community.
 
 `ruODK` is a community contribution to the ODK ecosystem, but not
 directly affiliated with ODK.
@@ -57,7 +57,7 @@ Collect, and ruODK</figcaption>
 </figure>
 
 A typical [ODK workflow](https://docs.getodk.org/#how-is-odk-used): An
-XForm is designed e.g. in [ODK Build](https://build.getodk.org/),
+XForm is designed e.g. as an [XLSForm](https://xlsform.org/en/),
 [published to ODK Central](https://docs.getodk.org/central-forms/), and
 downloaded onto an Android device running ODK Collect. After data have
 been captured digitally using [ODK
@@ -84,9 +84,9 @@ Benefits of using the R ecosystem in combination with ODK:
 - Automation: The entire data access and analysis workflow can be
   automated through R scripts.
 - Reproducible reporting (e.g.
-  [Sweave](https://support.rstudio.com/hc/en-us/articles/200552056-Using-Sweave-and-knitr),
+  [Sweave](https://support.posit.co/hc/en-us/articles/200552056-Using-Sweave-and-knitr),
   [RMarkdown](https://rmarkdown.rstudio.com/)), interactive web apps
-  ([Shiny](https://shiny.rstudio.com/)), workflow orchestration
+  ([Shiny](https://shiny.posit.co/)), workflow orchestration
   ([targets](https://docs.ropensci.org/targets/) ).
 - Rstudio-as-a-Service (RaaS) at [![Hosted RStudio with
   ruODK](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ropensci/ruODK/main?urlpath=rstudio)
@@ -263,7 +263,9 @@ To cite package `ruODK` in publications use:
 citation("ruODK")
 #> To cite ruODK in publications use (with the correct version number:
 #>
-#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the ODK Central API (Version X.X.X).  Zenodo. https://doi.org/10.5281/zenodo.5559164
+#>   Mayer, Florian Wendelin. (2020, Nov 19).  ruODK: An R Client for the
+#>   ODK Central API (Version X.X.X).  Zenodo.
+#>   https://doi.org/10.5281/zenodo.5559164
 #>
 #> A BibTeX entry for LaTeX users is
 #>

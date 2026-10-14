@@ -201,7 +201,27 @@ odata_entitylist_metadata_get <- function(
   )
 }
 
+#' Print an OData EntityList metadata object.
+#'
+#' Prints a short summary (complex type, Entity type and container names)
+#' of an object as returned by
+#' \code{\link{odata_entitylist_metadata_get}}.
+#'
+#' @param x An `odata_entitylist_metadata_get` object.
+#' @param ... Ignored.
+#' @return `NULL`, invisibly. Called for its side effect.
+#' @family entity-management
 #' @export
+#' @examples
+#' x <- structure(
+#'   list(
+#'     complex_types = list(trees = TRUE),
+#'     entity_types = list(Entities = TRUE),
+#'     containers = list(trees = TRUE)
+#'   ),
+#'   class = c("odata_entitylist_metadata_get", "list")
+#' )
+#' print(x)
 print.odata_entitylist_metadata_get <- function(x, ...) {
   cat("<ruODK OData EntityList Metadata>", sep = "\n")
   cat("  Complex Types:  ")

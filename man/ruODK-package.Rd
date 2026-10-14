@@ -4,7 +4,7 @@
 \name{ruODK-package}
 \alias{ruODK}
 \alias{ruODK-package}
-\title{ruODK: An R Client for the ODK Central API}
+\title{ruODK: An 'R' Client for the 'ODK Central' API}
 \description{
 \code{\link{ruODK}} is an R Client for the ODK Central API.
 

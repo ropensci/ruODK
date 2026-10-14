@@ -25,6 +25,7 @@ A named list with three components (all of type character):
 \seealso{
 Other ru_settings:
 \code{\link[=parse_odkc_version]{parse_odkc_version()}},
+\code{\link[=print.ru_settings]{print.ru_settings()}},
 \code{\link[=ru_settings]{ru_settings()}},
 \code{\link[=ru_setup]{ru_setup()}},
 \code{\link[=semver_gt]{semver_gt()}},

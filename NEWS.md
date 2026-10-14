@@ -395,7 +395,7 @@ There are a few ODK Central API endpoints waiting to be implemented still.
 ## Data
 ## Maintenance
 * Updated Zenodo archive at <https://zenodo.org/record/4609910>
-* Updated Docker image at <https://hub.docker.com/u/dbcawa/ruodk>
+* Updated Docker image at <https://github.com/ropensci/ruODK/pkgs/container/ruodk>
   (RStudio server with ruODK)
 
 # `ruODK` 0.9.9
@@ -564,7 +564,7 @@ for ODK Central <= 0.7.
 * Added ODK Central < v0.7 form schema for tests.
 
 ## Documentation
-* Updated workshop companion package [urODK](https://github.com/dbca-wa/urODK).
+* Updated workshop companion package `urODK`.
 * Rename vignettes to `odata-api` and `restful-api`. (#34)
 * Warn against using plain text credentials in vignette `setup`. (#34)
 * More documentation improvements at
@@ -581,7 +581,7 @@ for ODK Central <= 0.7.
 ## Docker
 * Added Dockerfile to build an RStudio Server image based on `rocker/geospatial`
   with `ruODK` and dependencies installed.
-* Build a separate Dockerfile for [`urODK`](https://github.com/dbca-wa/urODK)
+* Build a separate Dockerfile for `urODK`
   to launch a hosted RStudio instance in Binderhub. (#83)
 
 # `ruODK` 0.6.6
@@ -613,13 +613,13 @@ for ODK Central <= 0.7.
 
 # `ruODK` 0.6.3
 ## Dependencies
-*  [tidyr 1.0.0](https://www.tidyverse.org/articles/2019/09/tidyr-1-0-0/) is out!
+*  [tidyr 1.0.0](https://tidyverse.org/blog/2019/09/tidyr-1-0-0/) is out!
   Move `{tidyr}` dependency from GitHub master to CRAN version (#27)
 *  Add `{usethis}` to Suggests, it is used in the setup step
 
 ## Documentation
 *  Add [David Henry](https://github.com/schemetrica)'s
-  [Pentaho Kettle tutorial](https://forum.opendatakit.org/t/automating-data-delivery-using-the-odata-endpoint-in-odk-central/22010)
+  [Pentaho Kettle tutorial](https://forum.getodk.org/t/automating-data-delivery-using-the-odata-endpoint-in-odk-central/22010)
   to the software review in the README (#28)
 
 ## DIY for workshops
@@ -640,7 +640,7 @@ for ODK Central <= 0.7.
 *  Add a high level overview diagram to README and `inst/joss/paper.md` to
   illustrate `ruODK`'s intended purpose in the ODK ecosystem (#19)
 *  Added link to explain
-  [environment variables and R startup](https://whattheyforgot.org/r-startup.html)
+  [environment variables and R startup](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html)
   to vignette "setup". @maelle
 *  Add comparison of similar software to README (#25)
 

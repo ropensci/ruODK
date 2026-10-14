@@ -129,6 +129,9 @@ Other entity-management:
 \code{\link[=entitylist_update]{entitylist_update()}},
 \code{\link[=odata_entitylist_data_get]{odata_entitylist_data_get()}},
 \code{\link[=odata_entitylist_metadata_get]{odata_entitylist_metadata_get()}},
-\code{\link[=odata_entitylist_service_get]{odata_entitylist_service_get()}}
+\code{\link[=odata_entitylist_service_get]{odata_entitylist_service_get()}},
+\code{\link[=print.odata_entitylist_data_get]{print.odata_entitylist_data_get()}},
+\code{\link[=print.odata_entitylist_metadata_get]{print.odata_entitylist_metadata_get()}},
+\code{\link[=print.odata_entitylist_service_get]{print.odata_entitylist_service_get()}}
 }
 \concept{entity-management}
