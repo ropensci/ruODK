@@ -1,9 +1,11 @@
 # Daily check for new ODK Central image tags. When ghcr.io publishes a newer
-# central-service or pyxform-http, this opens a PR that bumps the pins in
-# lockstep (.env, compose fallbacks, workflow R semvers, devcontainer
-# default) via .github/scripts/update-odkc-pins.sh. The PR's own R-CMD-check
-# and test-coverage runs then validate the bump against a freshly seeded
-# stack, so review the upstream release notes and merge on green.
+# central-service or pyxform-http, this opens a PR that bumps the pins
+# (.env, compose fallbacks, devcontainer default) via
+# .github/scripts/update-odkc-pins.sh. CI reads the version from .devcontainer
+# .env at runtime, so this workflow never edits workflow files (GITHUB_TOKEN
+# cannot push them). The PR's own R-CMD-check and test-coverage runs then
+# validate the bump against a freshly seeded stack, so review the upstream
+# release notes and merge on green.
 # See issue #170.
 name: update-odkc-pins
 
@@ -16,7 +18,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  workflows: write
 
 jobs:
   check:
@@ -47,10 +48,11 @@ jobs:
             - central-service: `${{ steps.pins.outputs.central_old }}` -> `${{ steps.pins.outputs.central_new }}`
             - pyxform-http: `${{ steps.pins.outputs.pyxform_old }}` -> `${{ steps.pins.outputs.pyxform_new }}`
 
-            Pins are bumped in lockstep (`.devcontainer/.env`, compose
-            fallbacks, workflow `ODKC_*` semvers, devcontainer default).
-            R-CMD-check and test-coverage on this PR validate the bump
-            against a freshly seeded stack.
+            Pins are bumped in `.devcontainer/.env` (the single source of
+            truth), compose fallbacks, and the devcontainer default.
+            R-CMD-check and test-coverage on this PR read the version from
+            `.devcontainer/.env` at runtime and validate the bump against a
+            freshly seeded stack.
 
             Before merging, skim the upstream release notes:
             https://github.com/getodk/central/compare/${{ steps.pins.outputs.central_old }}...${{ steps.pins.outputs.central_new }}

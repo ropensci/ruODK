@@ -47,10 +47,11 @@ jobs:
       # ruODK's ODK Central semver settings (R/ru_setup.R). Bare "X.Y.Z" with
       # no "v" prefix -- parse_odkc_version() rejects anything else. These are
       # NOT the Docker image tag, which lives in .devcontainer/.env as the
-      # v-prefixed ODKC_IMAGE_TAG. Do not rename either to the other. Both are
-      # bumped in lockstep by the update-odkc-pins workflow.
-      ODKC_TEST_VERSION: 2026.3.0
-      ODKC_VERSION: 2026.3.0
+      # v-prefixed ODKC_IMAGE_TAG. Do not set either here: the "Load ODKC
+      # pins" step below derives both from .devcontainer/.env at runtime, so
+      # the pin bot never edits this workflow file (GITHUB_TOKEN cannot push
+      # workflow files). A job-level ODKC_VERSION here would also silently
+      # override the compose image tag (see .devcontainer/.env).
 
       # RU_VERBOSE must be TRUE for ru_msg_warn() to emit anything. It returns
       # NULL silently when FALSE (R/ru_msg.R), and several tests use
@@ -61,6 +62,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+
+      - name: Load ODKC pins
+        # Single source of truth for the ODK Central version is
+        # .devcontainer/.env (ODKC_IMAGE_TAG, v-prefixed ghcr.io tag).
+        # Derive the bare semver the R package expects and export it for
+        # the steps below (seed, coverage).
+        run: |
+          tag="$(grep -E '^ODKC_IMAGE_TAG=' .devcontainer/.env | cut -d= -f2)"
+          bare="${tag#v}"
+          echo "ODKC_TEST_VERSION=${bare}" >> "$GITHUB_ENV"
+          echo "ODKC_VERSION=${bare}" >> "$GITHUB_ENV"
 
       - name: Validate ODK Central images
         # Fail fast with a clear step name if a tag is wrong (e.g. the bare

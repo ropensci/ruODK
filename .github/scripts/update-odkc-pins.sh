@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Check ghcr.io for newer ODK Central images and bump the pins in lockstep.
+# Check ghcr.io for newer ODK Central images and bump the pins.
 #
 # Usage: update-odkc-pins.sh [ROOT]   (default: git toplevel)
 #
@@ -9,13 +9,14 @@
 # newer tag exists, rewrites every place that names the version:
 #   .devcontainer/.env                  ODKC_IMAGE_TAG / ODKC_VERSION_PYXFORM
 #   .devcontainer/docker-compose.yml    the ${VAR:-v...} fallbacks
-#   .github/workflows/{R-CMD-check,test-coverage}.yaml
-#                                       ODKC_TEST_VERSION / ODKC_VERSION
-#                                       (bare semver for R/ru_setup.R)
 #   .devcontainer/postAttachCommand.sh  the ODKC_TEST_VERSION default
 #
-# The image tag and the R semver must move together: the workflows declare
-# the bare semver ("2026.3.0") while compose needs the v-prefixed ghcr.io tag
+# CI workflows read the version from .devcontainer/.env at runtime (the
+# "Load ODKC pins" step), so this script deliberately edits no workflow
+# files: GITHUB_TOKEN cannot push them.
+#
+# The image tag and the R semver must move together: R code reads the bare
+# semver ("2026.3.0") while compose needs the v-prefixed ghcr.io tag
 # ("v2026.3.0"), and mixing them up is exactly the "manifest unknown" failure
 # the ODKC_IMAGE_TAG split was created to prevent. Never downgrades.
 #
@@ -32,10 +33,6 @@ ROOT="${1:-$(git rev-parse --show-toplevel)}"
 ENV_FILE="$ROOT/.devcontainer/.env"
 COMPOSE_FILE="$ROOT/.devcontainer/docker-compose.yml"
 POST_ATTACH="$ROOT/.devcontainer/postAttachCommand.sh"
-WORKFLOWS=(
-  "$ROOT/.github/workflows/R-CMD-check.yaml"
-  "$ROOT/.github/workflows/test-coverage.yaml"
-)
 
 need() {
   command -v "$1" >/dev/null 2>&1 || {
@@ -137,13 +134,6 @@ if [ "$changed" = true ]; then
   sed -i "s/ODKC_IMAGE_TAG:-v[^}]*/ODKC_IMAGE_TAG:-${latest_central}/" "$COMPOSE_FILE"
   sed -i "s/ODKC_VERSION_PYXFORM:-v[^}]*/ODKC_VERSION_PYXFORM:-${latest_pyxform}/" "$COMPOSE_FILE"
 
-  # Workflow R semvers (bare X.Y.Z; the trailing ": " keeps
-  # ODKC_VERSION_PYXFORM-style names out of the match).
-  for wf in "${WORKFLOWS[@]}"; do
-    sed -i -E "s/^([[:space:]]*ODKC_TEST_VERSION: ).*/\1${bare_central}/" "$wf"
-    sed -i -E "s/^([[:space:]]*ODKC_VERSION: ).*/\1${bare_central}/" "$wf"
-  done
-
   # Devcontainer default.
   sed -i "s/ODKC_TEST_VERSION:-[^}]*/ODKC_TEST_VERSION:-${bare_central}/" "$POST_ATTACH"
 
@@ -152,10 +142,6 @@ if [ "$changed" = true ]; then
   grep -q "^ODKC_VERSION_PYXFORM=${latest_pyxform}$" "$ENV_FILE"
   grep -q "ODKC_IMAGE_TAG:-${latest_central}}" "$COMPOSE_FILE"
   grep -q "ODKC_VERSION_PYXFORM:-${latest_pyxform}}" "$COMPOSE_FILE"
-  for wf in "${WORKFLOWS[@]}"; do
-    grep -qE "^[[:space:]]*ODKC_TEST_VERSION: ${bare_central}$" "$wf"
-    grep -qE "^[[:space:]]*ODKC_VERSION: ${bare_central}$" "$wf"
-  done
   grep -q "ODKC_TEST_VERSION:-${bare_central}}" "$POST_ATTACH"
   echo "update-odkc-pins: pins updated and verified"
 fi
