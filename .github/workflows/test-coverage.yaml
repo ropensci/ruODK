@@ -14,7 +14,9 @@ jobs:
   test-coverage:
     timeout-minutes: 45
     runs-on: ubuntu-latest
-    environment: ci
+    # No `environment:` key on purpose: attaching one subjects this job to
+    # that environment's protection rules (required reviewers), which stalls
+    # bot PRs awaiting approval. This job needs no environment secrets.
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
