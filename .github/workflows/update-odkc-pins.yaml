@@ -1,11 +1,19 @@
 # Daily check for new ODK Central image tags. When ghcr.io publishes a newer
 # central-service or pyxform-http, this opens a PR that bumps the pins
 # (.env, compose fallbacks, devcontainer default) via
-# .github/scripts/update-odkc-pins.sh. CI reads the version from .devcontainer
-# .env at runtime, so this workflow never edits workflow files (GITHUB_TOKEN
+# .github/scripts/update-odkc-pins.sh, then runs Copilot CLI
+# (https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/automate-with-actions)
+# on a deterministic changelog digest and posts the resulting API-change
+# advisory as a PR comment. Auth uses GITHUB_TOKEN, which needs the
+# `copilot-requests: write` permission below and the org policy "Allow use of
+# Copilot CLI billed to the organization". If that policy is off, set
+# COPILOT_GITHUB_TOKEN from a fine-grained PAT with the "Copilot Requests"
+# permission instead. Advisory steps never fail the job: a missing advisory
+# must not block the pin bump. CI reads the version from .devcontainer/.env
+# at runtime, so this workflow never edits workflow files (GITHUB_TOKEN
 # cannot push them). The PR's own R-CMD-check and test-coverage runs then
-# validate the bump against a freshly seeded stack, so review the upstream
-# release notes and merge on green.
+# validate the bump against a freshly seeded stack, so review the advisory
+# and the upstream release notes and merge on green.
 # See issue #170.
 name: update-odkc-pins
 
@@ -18,10 +26,11 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  copilot-requests: write
 
 jobs:
   check:
-    timeout-minutes: 10
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -31,6 +40,7 @@ jobs:
         run: .github/scripts/update-odkc-pins.sh
 
       - name: Open update PR
+        id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
           branch: bot/update-odkc-pins
@@ -56,3 +66,134 @@ jobs:
 
             Before merging, skim the upstream release notes:
             https://github.com/getodk/central/compare/${{ steps.pins.outputs.central_old }}...${{ steps.pins.outputs.central_new }}
+
+            ## Automated API-change advisory
+
+            This workflow runs Copilot CLI on the release notes in range and
+            posts the verdict as a comment below ("API changes affecting
+            ruODK: yes/no", with endpoint and field changes when yes).
+            If that comment is missing, any agent reviewing this PR should
+            read the release notes in range plus
+            https://docs.getodk.org/central-api-changelog/ and post the same
+            verdict before merge.
+
+      - name: Build changelog digest
+        # Deterministic input for the Copilot CLI step: release notes for
+        # every versioned getodk/central release in (old, new], plus links.
+        # Saved to the workspace, not posted yet. Fails soft: a missing
+        # digest must not block the pin bump.
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CENTRAL_OLD: ${{ steps.pins.outputs.central_old }}
+          CENTRAL_NEW: ${{ steps.pins.outputs.central_new }}
+        run: |
+          {
+            echo "## ODK Central changelog digest"
+            echo
+            echo "Range: \`${CENTRAL_OLD}\` -> \`${CENTRAL_NEW}\`"
+            echo
+            releases="$(gh api repos/getodk/central/releases --paginate -q '.[].tag_name' 2>/dev/null || true)"
+            # Version-sort old, new, and all stable tags together, then take
+            # the tags strictly after old through new inclusive. String
+            # comparison would misorder v2026.3.10 vs v2026.3.9; sort -V
+            # does not.
+            old_re="${CENTRAL_OLD//./\\.}"
+            new_re="${CENTRAL_NEW//./\\.}"
+            all="$(printf '%s\n%s\n%s\n' "$CENTRAL_OLD" "$releases" "$CENTRAL_NEW" | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -Vu)"
+            in_range="$(printf '%s\n' "$all" | sed -n "/^${old_re}$/,/^${new_re}$/p" | sed '1d' || true)"
+            if [ -z "$in_range" ]; then
+              echo "No versioned getodk/central releases found in range; use the compare link below."
+              echo
+            else
+              printf '%s\n' "$in_range" | while IFS= read -r tag; do
+                echo "### ${tag}"
+                echo
+                gh api "repos/getodk/central/releases/tags/${tag}" -q '.body' 2>/dev/null | head -c 3000 || true
+                echo
+              done
+            fi
+            echo "### Links for the API-change advisory"
+            echo
+            echo "- Compare: https://github.com/getodk/central/compare/${CENTRAL_OLD}...${CENTRAL_NEW}"
+            echo "- API changelog: https://docs.getodk.org/central-api-changelog/"
+            echo "- Backend API spec diff: https://github.com/getodk/central-backend/compare/${CENTRAL_OLD}...${CENTRAL_NEW} -- docs/api.yaml"
+            echo "- Ops changelog: https://github.com/getodk/central/blob/master/CHANGELOG.md"
+          } >odkc-digest.md
+
+      - name: Set up Node.js
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        continue-on-error: true
+        uses: actions/setup-node@v7
+
+      - name: Install Copilot CLI
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        continue-on-error: true
+        run: npm install -g @github/copilot
+
+      - name: Run Copilot CLI advisory
+        # The agent reads odkc-digest.md and writes its verdict to
+        # api-advisory.md. Tools are limited to file read/write and the
+        # changelog URL sources. Fails soft.
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        continue-on-error: true
+        timeout-minutes: 10
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CENTRAL_OLD: ${{ steps.pins.outputs.central_old }}
+          CENTRAL_NEW: ${{ steps.pins.outputs.central_new }}
+        run: |
+          prompt="$(cat <<EOF
+          You review an ODK Central upgrade for the R package ruODK in this repository.
+          Central image tags: ${CENTRAL_OLD} -> ${CENTRAL_NEW} (strip the leading v for the R version).
+          Context: read odkc-digest.md in the working directory. It holds the release notes for every release in range, plus links.
+          When you need more detail, fetch https://docs.getodk.org/central-api-changelog/ and the getodk/central-backend api.yaml diff for the same range.
+          Rules: work with files only. Change no file except api-advisory.md. Open no pull requests. Push nothing. Ask no questions.
+          Write api-advisory.md as short Markdown. Its first line is exactly one of:
+          API changes affecting ruODK: yes
+          API changes affecting ruODK: no
+          When yes, list each new, changed, or removed endpoint, request or response field, status code, and auth change, and name the ruODK R/ functions that may need updates. When no, give one sentence of evidence.
+          When a source is unreachable, name it and base the verdict on the rest.
+          EOF
+          )"
+          copilot -p "$prompt" -s \
+            --allow-tool='read, write' \
+            --allow-url='docs.getodk.org, github.com, raw.githubusercontent.com' \
+            --no-ask-user
+
+      - name: Post advisory comment
+        # Digest plus the agent verdict in one comment. When Copilot CLI
+        # produced nothing (auth off, install failed), the digest still lands
+        # with a fallback task for any reviewing agent. Fails soft.
+        if: steps.cpr.outputs.pull-request-operation == 'created' || steps.cpr.outputs.pull-request-operation == 'updated'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          comment="$(mktemp)"
+          {
+            if [ -s odkc-digest.md ]; then
+              cat odkc-digest.md
+            else
+              echo "## ODK Central changelog digest"
+              echo
+              echo "Digest build failed; use the compare link in the PR body."
+            fi
+            echo
+            echo "---"
+            echo
+            if [ -s api-advisory.md ]; then
+              cat api-advisory.md
+            else
+              echo "## API-change advisory"
+              echo
+              echo "Copilot CLI produced no advisory (auth or run failed)."
+              echo "Any agent reviewing this PR should read the digest above"
+              echo "plus https://docs.getodk.org/central-api-changelog/ and"
+              echo "reply with \"API changes affecting ruODK: yes/no\"."
+            fi
+          } >"$comment"
+          gh pr comment "$PR_NUMBER" --body-file "$comment"
+          rm -f "$comment"
