@@ -56,7 +56,7 @@ services:
   # given host reliably have openssl -- and installing it at start would mean a
   # network fetch on every `compose up`.
   certs:
-    image: ghcr.io/getodk/central-service:${ODKC_IMAGE_TAG:-v2026.3.0}
+    image: ghcr.io/getodk/central-service:${ODKC_IMAGE_TAG:-v2026.3.1}
     restart: "no"
     entrypoint: ["/bin/sh", "/odkc/gen-certs.sh"]
     environment:
@@ -92,7 +92,7 @@ services:
     # ruODK's ODKC_VERSION is a bare semver ("2026.3.0"). Compose reads the
     # shell environment before .env, so sharing the name lets a job-level
     # ODKC_VERSION override the tag and break the image pull.
-    image: ghcr.io/getodk/central-service:${ODKC_IMAGE_TAG:-v2026.3.0}
+    image: ghcr.io/getodk/central-service:${ODKC_IMAGE_TAG:-v2026.3.1}
     restart: unless-stopped
     depends_on:
       postgres:

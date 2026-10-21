@@ -165,7 +165,7 @@ fi
 ODKC_TEST_URL="${ODKC_SEED_URL:-https://localhost:8383}"
 ODKC_TEST_UN="${ODKC_SEED_UN:-ruodk@example.com}"
 ODKC_TEST_PW="${ODKC_SEED_PW:-ruodk-local-password}"
-ODKC_TEST_VERSION="${ODKC_TEST_VERSION:-2026.3.0}"
+ODKC_TEST_VERSION="${ODKC_TEST_VERSION:-2026.3.1}"
 
 touch ~/.bashrc ~/.Renviron
 
