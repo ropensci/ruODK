@@ -83,7 +83,10 @@ test_that("form_version_attachment_download downloads version bytes", {
   )
 
   ts <- format(Sys.time(), "%Y%m%d%H%M%S")
-  fid <- glue::glue("ruodk_vattd_{ts}") |> as.character()
+  # Own prefix: the test above deletes ruodk_vattd_<ts>, and Central keeps
+  # that ID reserved. Reusing it in the same second fails with HTTP 400
+  # (code 400.16, deletedFormExists).
+  fid <- glue::glue("ruodk_vattddl_{ts}") |> as.character()
   csv <- glue::glue("cities_{ts}.csv") |> as.character()
   form_create(xml = ru_test_form_xml(fid, itemset = csv), publish = TRUE)
 
