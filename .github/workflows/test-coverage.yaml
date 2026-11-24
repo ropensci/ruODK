@@ -114,13 +114,21 @@ jobs:
       - name: Seed ODK Central
         run: Rscript data-raw/seed_odkc.R
 
+      # package_coverage() stops the step when a test fails, so the suite stays
+      # the gate. The upload is separate: Codecov rejects tokenless uploads
+      # for PR branches (HTTP 400, "Token required because branch is
+      # protected"), which used to fail this job after all tests passed.
       - name: Test coverage
         run: |
-          covr::codecov(
+          cov <- covr::package_coverage(
             quiet = FALSE,
             clean = FALSE,
             install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
           )
+          token <- Sys.getenv("CODECOV_TOKEN")
+          if (nzchar(token) || identical(Sys.getenv("GITHUB_EVENT_NAME"), "push")) {
+            covr::codecov(coverage = cov, token = token, quiet = FALSE)
+          }
         shell: Rscript {0}
 
       - name: Show testthat output
