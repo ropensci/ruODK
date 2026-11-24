@@ -13,7 +13,11 @@ test_that("form_draft_attachment_list lists expected files", {
   )
 
   ts <- format(Sys.time(), "%Y%m%d%H%M%S")
-  fid <- glue::glue("ruodk_dattl_{ts}") |> as.character()
+  # Own prefix: test-form_draft_attachment_link.R runs just before this file
+  # and deletes ruodk_dattl_<ts>, which Central keeps reserved. Reusing the
+  # ID in the same second fails with HTTP 400 (code 400.16,
+  # deletedFormExists).
+  fid <- glue::glue("ruodk_dattlst_{ts}") |> as.character()
   csv <- glue::glue("cities_{ts}.csv") |> as.character()
   form_create(xml = ru_test_form_xml(fid, itemset = csv), publish = TRUE)
 
